@@ -1,0 +1,41 @@
+{
+  "purpose": "LLM guardrail file. Claude must read this before file operations and refuse unsafe edits unless Albert explicitly overrides.",
+  "version": "1.0",
+  "protected_paths": [
+    {
+      "path": "Active Campaign Liste/",
+      "level": "forbidden",
+      "reason": "Sensible E-Mail-Daten / Datenschutz. Niemals lesen, ändern, verschieben oder in Git aufnehmen."
+    },
+    {
+      "path": "Theme/.git/",
+      "level": "forbidden",
+      "reason": "Deployment-Git des Ghost-Themes. Nicht verschieben, löschen oder umkonfigurieren."
+    },
+    {
+      "path": "Theme/.gitignore",
+      "level": "protected",
+      "reason": "Git-Scope und Datenschutz. Änderungen nur nach expliziter Begründung."
+    },
+    {
+      "path": ".gitignore",
+      "level": "protected",
+      "reason": "Projektweiter Datenschutz und Sync-Schutz. Änderungen nur nach expliziter Begründung."
+    },
+    {
+      "path": "Theme/assets/js/fw-chart-engine/core/FinanzwesirData.js",
+      "level": "protected",
+      "reason": "Layer 1 / Datenfundament. Änderungen nur mit expliziter Begründung."
+    },
+    {
+      "path": "Theme/assets/js/fw-chart-engine/core/CSVParser.js",
+      "level": "protected",
+      "reason": "Layer 1 / CSV-Ingestion. Änderungen nur mit expliziter Begründung."
+    },
+    {
+      "path": "Theme/assets/js/fw-chart-engine/utils/FwDateUtils.js",
+      "level": "protected",
+      "reason": "Zentrale Zeit-Erkennung. Änderungen nur mit expliziter Begründung."
+    }
+  ]
+}

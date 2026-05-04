@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="de" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Finanzwesir - Passiv investieren. Finanziell frei werden.</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Source+Sans+Pro:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        blau: '#0071BF',
+                        petrol: {
+                            DEFAULT: '#218380',
+                            50: '#90C1BF',
+                            80: '#4D9C99',
+                            20: '#D3E6E6',
+                            tint: 'rgba(33, 131, 128, 0.08)',
+                        },
+                        gelb: {
+                            DEFAULT: '#DFC805',
+                            80: '#F9EF9E',
+                            tint: 'rgba(223, 200, 5, 0.08)',
+                        },
+                        purpur: {
+                            DEFAULT: '#8D0267',
+                            80: '#C57EB2',
+                            tint: 'rgba(141, 2, 103, 0.08)',
+                            'gradient-light': 'rgba(141, 2, 103, 0.03)',
+                            'gradient-medium': 'rgba(197, 126, 178, 0.03)',
+                        },
+                        text: {
+                            DEFAULT: '#272727',
+                            secondary: '#4C4C4C',
+                        },
+                        background: '#FFFFFF',
+                        border: '#E7ECEF',
+                    },
+                    fontFamily: {
+                        display: ['"Archivo Black"', 'sans-serif'],
+                        body: ['"Source Sans Pro"', 'sans-serif'],
+                    },
+                    boxShadow: {
+                        'soft': '0 4px 20px -2px rgba(39, 39, 39, 0.05)',
+                        'hover': '0 10px 25px -5px rgba(39, 39, 39, 0.1)',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Base styles for content links (in text cards) */
+        .ci-link {
+            text-decoration: underline;
+            text-decoration-color: #0071BF;
+            text-decoration-thickness: 1px;
+            text-underline-offset: 4px;
+            transition: all 0.2s ease-in-out;
+            position: relative; 
+            z-index: 20; 
+        }
+        
+        .ci-link:hover {
+            color: #218380;
+            text-decoration-color: #218380;
+            text-decoration-thickness: 3px;
+        }
+
+        /* Hard Edge Shadow für maximalen Kontrast bei Icons (Variante F) */
+        .hard-rim {
+            filter: drop-shadow(1px 1px 0px rgba(0,0,0,0.25));
+        }
+
+        /* Focus styles for accessibility */
+        *:focus-visible {
+            outline: 2px solid #218380;
+            outline-offset: 2px;
+        }
+    </style>
+</head>
+<body class="font-body text-text-secondary bg-background antialiased leading-relaxed">
+
+    <header id="mainHeader" class="sticky top-0 bg-white/95 backdrop-blur-sm border-b border-border z-50 transition-all duration-300 h-[72px] md:h-[82px] flex items-center">
+        <div class="w-full max-w-[1400px] mx-auto px-6 md:px-8 flex justify-between items-center">
+            
+            <a href="/" class="flex items-center gap-3 md:gap-4 no-underline group relative z-50 shrink-0">
+                <img src="./Kopf_Finazwesir_BigCircle.svg" alt="Finanzwesir" class="w-[40px] h-[40px] md:w-[50px] md:h-[50px]">
+                <span class="font-display text-xl md:text-2xl text-petrol tracking-tight">FINANZWESIR</span>
+            </a>
+            
+            <button class="xl:hidden text-3xl text-petrol p-2 relative z-50" id="navToggle" aria-label="Menü öffnen" aria-expanded="false" aria-controls="mainNav">☰</button>
+            
+            <nav id="mainNav" class="hidden xl:block absolute xl:static top-[72px] md:top-[82px] left-0 right-0 bg-white xl:bg-transparent border-b xl:border-none border-border p-6 xl:p-0 shadow-soft xl:shadow-none z-40 opacity-0 xl:opacity-100 transition-opacity duration-300">
+                <ul class="flex flex-col xl:flex-row gap-2 xl:gap-6 list-none m-0 p-0 flex-wrap justify-center">
+                    <li><a href="#" class="font-semibold text-text visited:text-purpur block w-full py-3 xl:py-1 xl:w-auto border-b border-gray-100 xl:border-b-2 xl:border-transparent hover:text-petrol xl:hover:border-petrol transition-colors text-[0.95rem] xl:text-lg">Der Weg</a></li>
+                    <li><a href="#" class="font-semibold text-text visited:text-purpur block w-full py-3 xl:py-1 xl:w-auto border-b border-gray-100 xl:border-b-2 xl:border-transparent hover:text-petrol xl:hover:border-petrol transition-colors text-[0.95rem] xl:text-lg">Weltportfolio</a></li>
+                    <li><a href="#" class="font-semibold text-text visited:text-purpur block w-full py-3 xl:py-1 xl:w-auto border-b border-gray-100 xl:border-b-2 xl:border-transparent hover:text-petrol xl:hover:border-petrol transition-colors text-[0.95rem] xl:text-lg">Geldmarkt</a></li>
+                    <li><a href="#" class="font-semibold text-text visited:text-purpur block w-full py-3 xl:py-1 xl:w-auto border-b border-gray-100 xl:border-b-2 xl:border-transparent hover:text-petrol xl:hover:border-petrol transition-colors text-[0.95rem] xl:text-lg">Aktienquote</a></li>
+                    <li><a href="#" class="font-semibold text-text visited:text-purpur block w-full py-3 xl:py-1 xl:w-auto border-b border-gray-100 xl:border-b-2 xl:border-transparent hover:text-petrol xl:hover:border-petrol transition-colors text-[0.95rem] xl:text-lg">Sparquote</a></li>
+                    <li><a href="#" class="font-semibold text-text visited:text-purpur block w-full py-3 xl:py-1 xl:w-auto border-b border-gray-100 xl:border-b-2 xl:border-transparent hover:text-petrol xl:hover:border-petrol transition-colors text-[0.95rem] xl:text-lg">Kaufen</a></li>
+                    <li><a href="#" class="font-semibold text-text visited:text-purpur block w-full py-3 xl:py-1 xl:w-auto border-b border-gray-100 xl:border-b-2 xl:border-transparent hover:text-petrol xl:hover:border-petrol transition-colors text-[0.95rem] xl:text-lg">Dranbleiben</a></li>
+                    <li><a href="#" class="font-semibold text-text visited:text-purpur block w-full py-3 xl:py-1 xl:w-auto border-b border-gray-100 xl:border-b-2 xl:border-transparent hover:text-petrol xl:hover:border-petrol transition-colors text-[0.95rem] xl:text-lg">Fehler</a></li>
+                    <li><a href="#" class="font-semibold text-text visited:text-purpur block w-full py-3 xl:py-1 xl:w-auto border-b border-gray-100 xl:border-b-2 xl:border-transparent hover:text-petrol xl:hover:border-petrol transition-colors text-[0.95rem] xl:text-lg">ETF-Ära</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <div id="navBackdrop" class="fixed inset-0 bg-black/20 z-30 hidden xl:hidden backdrop-blur-[2px] transition-opacity"></div>
+
+    <section class="bg-gradient-to-b from-petrol/10 to-white py-20 md:py-28 px-6 text-center">
+        <div class="max-w-[1000px] mx-auto">
+            <h1 class="font-display text-4xl md:text-6xl text-petrol mb-6 leading-[1.1] tracking-tight">
+                Passiv investieren.<br>Finanziell frei werden.
+            </h1>
+            <p class="text-xl md:text-2xl text-text-secondary max-w-[700px] mx-auto mb-10 font-normal">
+                Der Weg zum ETF-Portfolio – simpel, verständlich, ohne Schnörkel.
+            </p>
+            <a href="#stickyNav" class="inline-block bg-petrol text-white py-4 px-10 rounded-lg no-underline font-semibold text-lg shadow-soft transition-all duration-200 hover:bg-petrol-80 hover:scale-[1.05] active:scale-[0.95]">
+                Jetzt starten
+            </a>
+        </div>
+    </section>
+
+    <div class="max-w-[1100px] mx-auto px-6 -mt-8 relative z-10">
+        <div class="bg-gradient-to-r from-petrol-50 to-petrol-80 rounded-xl p-6 md:p-8 shadow-hover flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+            <div>
+                <h2 class="font-display text-lg text-text mb-1">Neu hier?</h2>
+                <p class="text-sm font-semibold text-text m-0">Wählen Sie Ihren Einstieg:</p>
+            </div>
+            <div class="flex flex-wrap gap-3 w-full md:w-auto">
+                <a href="#" class="flex-1 md:flex-none text-center bg-white/90 text-petrol font-semibold py-3 md:py-2 px-5 rounded-md text-sm transition-all hover:bg-white hover:text-blau hover:scale-[1.05] active:scale-[0.95] shadow-sm visited:text-purpur">Ich habe Ahnung</a>
+                <a href="#" class="flex-1 md:flex-none text-center bg-white/90 text-petrol font-semibold py-3 md:py-2 px-5 rounded-md text-sm transition-all hover:bg-white hover:text-blau hover:scale-[1.05] active:scale-[0.95] shadow-sm visited:text-purpur">Keine Ahnung</a>
+                <a href="#" class="flex-1 md:flex-none text-center bg-white/90 text-petrol font-semibold py-3 md:py-2 px-5 rounded-md text-sm transition-all hover:bg-white hover:text-blau hover:scale-[1.05] active:scale-[0.95] shadow-sm visited:text-purpur">Schnellstart</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="sticky top-[71px] md:top-[81px] bg-white/95 backdrop-blur-sm border-b border-border z-40 mt-16" id="stickyNav">
+        <div class="max-w-[1200px] mx-auto px-6 flex justify-center md:gap-12 gap-4 overflow-x-auto snap-x">
+            <button class="group relative py-4 px-2 bg-none border-none cursor-pointer font-semibold text-text-secondary transition-colors hover:text-petrol active-nav snap-center" data-target="fundament">
+                <span class="text-sm md:text-base tracking-wide whitespace-nowrap">I. FUNDAMENT</span>
+                <span class="absolute bottom-0 left-0 w-full h-[3px] bg-petrol opacity-0 transition-opacity duration-300 group-[.active-nav]:opacity-100"></span>
+            </button>
+            <button class="group relative py-4 px-2 bg-none border-none cursor-pointer font-semibold text-text-secondary transition-colors hover:text-petrol snap-center" data-target="bausteine">
+                <span class="text-sm md:text-base tracking-wide whitespace-nowrap">II. BAUSTEINE</span>
+                <span class="absolute bottom-0 left-0 w-full h-[3px] bg-gelb opacity-0 transition-opacity duration-300 group-[.active-nav]:opacity-100"></span>
+            </button>
+            <button class="group relative py-4 px-2 bg-none border-none cursor-pointer font-semibold text-text-secondary transition-colors hover:text-petrol snap-center" data-target="umsetzung">
+                <span class="text-sm md:text-base tracking-wide whitespace-nowrap">III. UMSETZUNG</span>
+                <span class="absolute bottom-0 left-0 w-full h-[3px] bg-purpur opacity-0 transition-opacity duration-300 group-[.active-nav]:opacity-100"></span>
+            </button>
+        </div>
+    </div>
+
+    <main class="max-w-[1000px] mx-auto px-6 py-20">
+        
+        <div class="mb-24 scroll-mt-[180px]" id="fundament">
+            <div class="text-center mb-16">
+                <h2 class="font-display text-3xl md:text-4xl text-petrol mb-2 uppercase tracking-wide">Fundament</h2>
+                <p class="text-lg text-text-secondary font-normal">Philosophie & Strategie</p>
+            </div>
+
+            <div class="relative">
+                <div class="absolute left-[32px] md:left-[36px] top-0 bottom-0 w-[2px] bg-petrol/20 -translate-x-1/2"></div>
+
+                <div class="space-y-12 md:space-y-16">
+                    <div class="relative group">
+                        <div class="absolute left-[32px] md:left-[36px] top-0 w-[22px] h-[22px] bg-petrol rounded-full border-[4px] border-white shadow-sm z-10 -translate-x-1/2"></div>
+                        
+                        <article class="relative ml-24 md:ml-28 bg-white rounded-xl p-6 md:p-8 shadow-soft transition-all duration-300 hover:shadow-hover hover:-translate-y-1 flex flex-row gap-4 md:gap-8 items-start cursor-pointer">
+                            <div class="w-16 h-16 md:w-[72px] md:h-[72px] shrink-0 flex items-center justify-center rounded-2xl p-1 bg-petrol/30">
+                                <img src="./tuer.svg" alt="Symbol" class="w-full h-full object-contain hard-rim">
+                            </div>
+                            <div class="flex-1">
+                                <h3 class="font-bold text-lg md:text-xl text-text mb-2 md:mb-3">1. Der Weg</h3>
+                                <p class="text-[0.95rem] md:text-lg text-text-secondary mb-4 md:mb-6 leading-relaxed">Verstehe die Philosophie hinter passivem Investieren. Warum Prognosen nicht funktionieren und wie du Ruhe bewahrst.</p>
+                                <a href="#" class="ci-link static font-semibold text-blau visited:text-purpur inline-flex items-center gap-2 before:absolute before:inset-0 before:z-10 text-sm md:text-base">Mehr erfahren →</a>
+                            </div>
+                        </article>
+                    </div>
+
+                    <div class="relative group">
+                        <div class="absolute left-[32px] md:left-[36px] top-0 w-[22px] h-[22px] bg-petrol rounded-full border-[4px] border-white shadow-sm z-10 -translate-x-1/2"></div>
+                        
+                        <article class="relative ml-24 md:ml-28 bg-white rounded-xl p-6 md:p-8 shadow-soft transition-all duration-300 hover:shadow-hover hover:-translate-y-1 flex flex-row gap-4 md:gap-8 items-start cursor-pointer">
+                            <div class="w-16 h-16 md:w-[72px] md:h-[72px] shrink-0 flex items-center justify-center rounded-2xl p-1 bg-petrol/30">
+                                <img src="./Pferd.svg" alt="Symbol" class="w-full h-full object-contain hard-rim">
+                            </div>
+                            <div class="flex-1">
+                                <h3 class="font-bold text-lg md:text-xl text-text mb-2 md:mb-3">2. Weltportfolio</h3>
+                                <p class="text-[0.95rem] md:text-lg text-text-secondary mb-4 md:mb-6 leading-relaxed">Lerne die einfache 3-Säulen-Strategie kennen. Diversifikation ist der einzige "Free Lunch" an der Börse.</p>
+                                <a href="#" class="ci-link static font-semibold text-blau visited:text-purpur inline-flex items-center gap-2 before:absolute before:inset-0 before:z-10 text-sm md:text-base">Mehr erfahren →</a>
+                            </div>
+                        </article>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="mb-24 scroll-mt-[180px]" id="bausteine">
+            <div class="text-center mb-16">
+                <h2 class="font-display text-3xl md:text-4xl text-gelb mb-2 uppercase tracking-wide">Bausteine</h2>
+                <p class="text-lg text-text-secondary font-normal">Rahmenbedingungen</p>
+            </div>
+
+            <div class="relative">
+                <div class="absolute left-[32px] md:left-[36px] top-0 bottom-0 w-[2px] bg-gelb/30 -translate-x-1/2"></div>
+
+                <div class="space-y-12 md:space-y-16">
+                    <div class="relative group">
+                        <div class="absolute left-[32px] md:left-[36px] top-0 w-[22px] h-[22px] bg-gelb rounded-full border-[4px] border-white shadow-sm z-10 -translate-x-1/2"></div>
+                        <article class="relative ml-24 md:ml-28 bg-white rounded-xl p-6 md:p-8 shadow-soft transition-all duration-300 hover:shadow-hover hover:-translate-y-1 flex flex-row gap-4 md:gap-8 items-start cursor-pointer">
+                            <div class="w-16 h-16 md:w-[72px] md:h-[72px] shrink-0 flex items-center justify-center rounded-2xl p-1 bg-gelb/30">
+                                <img src="./Kaffee.svg" alt="Symbol" class="w-full h-full object-contain hard-rim">
+                            </div>
+                            <div class="flex-1">
+                                <h3 class="font-bold text-lg md:text-xl text-text mb-2 md:mb-3">3. Geldmarkt</h3>
+                                <p class="text-[0.95rem] md:text-lg text-text-secondary mb-4 md:mb-6 leading-relaxed">Bestimme deine sichere Geldmarkt-Quote. Liquidität ist der Sauerstoff deines Portfolios.</p>
+                                <a href="#" class="ci-link static font-semibold text-blau visited:text-purpur inline-flex items-center gap-2 before:absolute before:inset-0 before:z-10 text-sm md:text-base">Mehr erfahren →</a>
+                            </div>
+                        </article>
+                    </div>
+
+                    <div class="relative group">
+                        <div class="absolute left-[32px] md:left-[36px] top-0 w-[22px] h-[22px] bg-gelb rounded-full border-[4px] border-white shadow-sm z-10 -translate-x-1/2"></div>
+                        <article class="relative ml-24 md:ml-28 bg-white rounded-xl p-6 md:p-8 shadow-soft transition-all duration-300 hover:shadow-hover hover:-translate-y-1 flex flex-row gap-4 md:gap-8 items-start cursor-pointer">
+                            <div class="w-16 h-16 md:w-[72px] md:h-[72px] shrink-0 flex items-center justify-center rounded-2xl p-1 bg-gelb/30">
+                                <img src="./Schwert.svg" alt="Symbol" class="w-full h-full object-contain hard-rim">
+                            </div>
+                            <div class="flex-1">
+                                <h3 class="font-bold text-lg md:text-xl text-text mb-2 md:mb-3">4. Aktienquote</h3>
+                                <p class="text-[0.95rem] md:text-lg text-text-secondary mb-4 md:mb-6 leading-relaxed">Berechne deine optimale Aktienquote. Wieviel Schwankung hältst du nachts wirklich aus?</p>
+                                <a href="#" class="ci-link static font-semibold text-blau visited:text-purpur inline-flex items-center gap-2 before:absolute before:inset-0 before:z-10 text-sm md:text-base">Mehr erfahren →</a>
+                            </div>
+                        </article>
+                    </div>
+
+                    <div class="relative group">
+                        <div class="absolute left-[32px] md:left-[36px] top-0 w-[22px] h-[22px] bg-gelb rounded-full border-[4px] border-white shadow-sm z-10 -translate-x-1/2"></div>
+                        <article class="relative ml-24 md:ml-28 bg-white rounded-xl p-6 md:p-8 shadow-soft transition-all duration-300 hover:shadow-hover hover:-translate-y-1 flex flex-row gap-4 md:gap-8 items-start cursor-pointer">
+                            <div class="w-16 h-16 md:w-[72px] md:h-[72px] shrink-0 flex items-center justify-center rounded-2xl p-1 bg-gelb/30">
+                                <img src="./Schuh.svg" alt="Symbol" class="w-full h-full object-contain hard-rim">
+                            </div>
+                            <div class="flex-1">
+                                <h3 class="font-bold text-lg md:text-xl text-text mb-2 md:mb-3">5. Sparquote</h3>
+                                <p class="text-[0.95rem] md:text-lg text-text-secondary mb-4 md:mb-6 leading-relaxed">Definiere deine persönliche Sparquote. Der wichtigste Hebel für deinen Vermögensaufbau.</p>
+                                <a href="#" class="ci-link static font-semibold text-blau visited:text-purpur inline-flex items-center gap-2 before:absolute before:inset-0 before:z-10 text-sm md:text-base">Mehr erfahren →</a>
+                            </div>
+                        </article>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="mb-24 scroll-mt-[180px]" id="umsetzung">
+            <div class="text-center mb-16">
+                <h2 class="font-display text-3xl md:text-4xl text-purpur mb-2 uppercase tracking-wide">Umsetzung</h2>
+                <p class="text-lg text-text-secondary font-normal">Handlung & Realität</p>
+            </div>
+
+            <div class="relative">
+                <div class="absolute left-[32px] md:left-[36px] top-0 bottom-0 w-[2px] bg-purpur/20 -translate-x-1/2"></div>
+
+                <div class="space-y-12 md:space-y-16">
+                    <div class="relative group">
+                        <div class="absolute left-[32px] md:left-[36px] top-0 w-[22px] h-[22px] bg-purpur rounded-full border-[4px] border-white shadow-sm z-10 -translate-x-1/2"></div>
+                        <article class="relative ml-24 md:ml-28 bg-white rounded-xl p-6 md:p-8 shadow-soft transition-all duration-300 hover:shadow-hover hover:-translate-y-1 flex flex-row gap-4 md:gap-8 items-start cursor-pointer">
+                            <div class="w-16 h-16 md:w-[72px] md:h-[72px] shrink-0 flex items-center justify-center rounded-2xl p-1 bg-purpur/30">
+                                <img src="./Wasserpfeife.svg" alt="Symbol" class="w-full h-full object-contain hard-rim">
+                            </div>
+                            <div class="flex-1">
+                                <h3 class="font-bold text-lg md:text-xl text-text mb-2 md:mb-3">6. Kaufen</h3>
+                                <p class="text-[0.95rem] md:text-lg text-text-secondary mb-4 md:mb-6 leading-relaxed">Wähle deinen Broker und kaufe deine ETFs. Einmalanlage oder Sparplan? Wir klären das.</p>
+                                <a href="#" class="ci-link static font-semibold text-blau visited:text-purpur inline-flex items-center gap-2 before:absolute before:inset-0 before:z-10 text-sm md:text-base">Mehr erfahren →</a>
+                            </div>
+                        </article>
+                    </div>
+
+                    <div class="relative group">
+                        <div class="absolute left-[32px] md:left-[36px] top-0 w-[22px] h-[22px] bg-purpur rounded-full border-[4px] border-white shadow-sm z-10 -translate-x-1/2"></div>
+                        <article class="relative ml-24 md:ml-28 bg-white rounded-xl p-6 md:p-8 shadow-soft transition-all duration-300 hover:shadow-hover hover:-translate-y-1 flex flex-row gap-4 md:gap-8 items-start cursor-pointer">
+                            <div class="w-16 h-16 md:w-[72px] md:h-[72px] shrink-0 flex items-center justify-center rounded-2xl p-1 bg-purpur/30">
+                                <img src="./Gitarre.svg" alt="Symbol" class="w-full h-full object-contain hard-rim">
+                            </div>
+                            <div class="flex-1">
+                                <h3 class="font-bold text-lg md:text-xl text-text mb-2 md:mb-3">7. Dranbleiben</h3>
+                                <p class="text-[0.95rem] md:text-lg text-text-secondary mb-4 md:mb-6 leading-relaxed">Halte deine Strategie durch. Langeweile ist gut. Aktionismus kostet Rendite.</p>
+                                <a href="#" class="ci-link static font-semibold text-blau visited:text-purpur inline-flex items-center gap-2 before:absolute before:inset-0 before:z-10 text-sm md:text-base">Mehr erfahren →</a>
+                            </div>
+                        </article>
+                    </div>
+
+                    <div class="relative group">
+                        <div class="absolute left-[32px] md:left-[36px] top-0 w-[22px] h-[22px] bg-purpur rounded-full border-[4px] border-white shadow-sm z-10 -translate-x-1/2"></div>
+                        <article class="relative ml-24 md:ml-28 bg-white rounded-xl p-6 md:p-8 shadow-soft transition-all duration-300 hover:shadow-hover hover:-translate-y-1 flex flex-row gap-4 md:gap-8 items-start cursor-pointer">
+                            <div class="w-16 h-16 md:w-[72px] md:h-[72px] shrink-0 flex items-center justify-center rounded-2xl p-1 bg-purpur/30">
+                                <img src="./Blume.svg" alt="Symbol" class="w-full h-full object-contain hard-rim">
+                            </div>
+                            <div class="flex-1">
+                                <h3 class="font-bold text-lg md:text-xl text-text mb-2 md:mb-3">8. Häufige Fehler</h3>
+                                <p class="text-[0.95rem] md:text-lg text-text-secondary mb-4 md:mb-6 leading-relaxed">Vermeide die Top-Anfängerfehler. Lerne aus den Fehlern anderer, das ist billiger.</p>
+                                <a href="#" class="ci-link static font-semibold text-blau visited:text-purpur inline-flex items-center gap-2 before:absolute before:inset-0 before:z-10 text-sm md:text-base">Mehr erfahren →</a>
+                            </div>
+                        </article>
+                    </div>
+
+                    <div class="relative group">
+                        <div class="absolute left-[32px] md:left-[36px] top-0 w-[22px] h-[22px] bg-purpur rounded-full border-[4px] border-white shadow-sm z-10 -translate-x-1/2"></div>
+                        <article class="relative ml-24 md:ml-28 bg-white rounded-xl p-6 md:p-8 shadow-soft transition-all duration-300 hover:shadow-hover hover:-translate-y-1 flex flex-row gap-4 md:gap-8 items-start cursor-pointer">
+                            <div class="w-16 h-16 md:w-[72px] md:h-[72px] shrink-0 flex items-center justify-center rounded-2xl p-1 bg-purpur/30">
+                                <img src="./Feder.svg" alt="Symbol" class="w-full h-full object-contain hard-rim">
+                            </div>
+                            <div class="flex-1">
+                                <h3 class="font-bold text-lg md:text-xl text-text mb-2 md:mb-3">9. Die ETF-Ära</h3>
+                                <p class="text-[0.95rem] md:text-lg text-text-secondary mb-4 md:mb-6 leading-relaxed">Verstehe die Geschichte von ETFs. Warum sie das fairste Finanzprodukt für Privatanleger sind.</p>
+                                <a href="#" class="ci-link static font-semibold text-blau visited:text-purpur inline-flex items-center gap-2 before:absolute before:inset-0 before:z-10 text-sm md:text-base">Mehr erfahren →</a>
+                            </div>
+                        </article>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="bg-gray-100 border-t-2 border-petrol pt-16 pb-8 text-center mt-16">
+        <div class="max-w-[1000px] mx-auto px-6">
+            <nav class="mb-8 flex justify-center flex-wrap gap-x-8 gap-y-4">
+                <a href="#" class="ci-link text-blau font-semibold visited:text-purpur">Neu hier?</a>
+                <a href="#" class="ci-link text-blau font-semibold visited:text-purpur">Manifest</a>
+                <a href="#" class="ci-link text-blau font-semibold visited:text-purpur">Über mich</a>
+                <a href="#" class="ci-link text-blau font-semibold visited:text-purpur">Ich bin bullish</a>
+            </nav>
+            <nav class="mb-8 flex justify-center flex-wrap gap-x-8 gap-y-4 text-sm">
+                <a href="#" class="ci-link text-blau font-semibold visited:text-purpur">Impressum & Kontakt</a>
+                <a href="#" class="ci-link text-blau font-semibold visited:text-purpur">Datenschutz</a>
+            </nav>
+            <p class="text-xs text-[#999]">
+                Diese Seite nutzt <a href="#" class="ci-link text-blau hover:text-petrol visited:text-purpur">Clicky (anonymisiert)</a> und VG Wort
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        const navToggle = document.getElementById('navToggle');
+        const mainNav = document.getElementById('mainNav');
+        const navBackdrop = document.getElementById('navBackdrop');
+        const mainHeader = document.getElementById('mainHeader');
+
+        function toggleMenu() {
+            const isClosed = mainNav.classList.contains('hidden');
+            if (isClosed) {
+                mainNav.classList.remove('hidden');
+                navBackdrop.classList.remove('hidden');
+                navToggle.setAttribute('aria-expanded', 'true');
+                setTimeout(() => {
+                    mainNav.classList.remove('opacity-0');
+                    mainNav.classList.add('opacity-100');
+                    navBackdrop.classList.remove('opacity-0');
+                    navBackdrop.classList.add('opacity-100');
+                }, 10);
+            } else {
+                mainNav.classList.remove('opacity-100');
+                mainNav.classList.add('opacity-0');
+                navBackdrop.classList.remove('opacity-100');
+                navBackdrop.classList.add('opacity-0');
+                navToggle.setAttribute('aria-expanded', 'false');
+                setTimeout(() => {
+                    mainNav.classList.add('hidden');
+                    navBackdrop.classList.add('hidden');
+                }, 300);
+            }
+        }
+
+        navToggle.addEventListener('click', toggleMenu);
+        navBackdrop.addEventListener('click', toggleMenu);
+
+        const stickyNavItems = document.querySelectorAll('[data-target]');
+        const sections = {
+            fundament: document.getElementById('fundament'),
+            bausteine: document.getElementById('bausteine'),
+            umsetzung: document.getElementById('umsetzung')
+        };
+
+        function updateActiveState() {
+            const headerHeight = mainHeader ? mainHeader.offsetHeight : 80;
+            const triggerOffset = headerHeight + 100;
+            const scrollPos = window.scrollY + triggerOffset;
+
+            stickyNavItems.forEach(item => {
+                item.classList.remove('active-nav', 'text-petrol');
+                item.classList.add('text-text-secondary');
+            });
+
+            let activeId = 'fundament';
+            if (scrollPos >= sections.umsetzung.offsetTop) activeId = 'umsetzung';
+            else if (scrollPos >= sections.bausteine.offsetTop) activeId = 'bausteine';
+
+            const activeBtn = document.querySelector(`[data-target="${activeId}"]`);
+            if (activeBtn) {
+                activeBtn.classList.add('active-nav', 'text-petrol');
+                activeBtn.classList.remove('text-text-secondary');
+            }
+        }
+
+        window.addEventListener('scroll', updateActiveState);
+        updateActiveState();
+
+        stickyNavItems.forEach(item => {
+            item.addEventListener('click', (e) => {
+                e.preventDefault();
+                const targetId = item.dataset.target;
+                const target = document.getElementById(targetId);
+                if (target) {
+                    if (!mainNav.classList.contains('hidden')) toggleMenu();
+                    const headerHeight = mainHeader ? mainHeader.offsetHeight : 80;
+                    const stickyNavEl = document.getElementById('stickyNav');
+                    const stickyNavHeight = stickyNavEl ? stickyNavEl.offsetHeight : 60;
+                    const totalOffset = headerHeight + stickyNavHeight + 20;
+                    const elementPosition = target.getBoundingClientRect().top;
+                    const offsetPosition = elementPosition + window.pageYOffset - totalOffset;
+                    window.scrollTo({
+                        top: offsetPosition,
+                        behavior: "smooth"
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>

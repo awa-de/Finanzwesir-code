@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="de" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Impressum & Kontakt – Finanzwesir</title>
+    <meta name="description" content="Impressum, Kontaktmöglichkeiten und rechtliche Hinweise des Finanzwesir.">
+    
+    <link rel="stylesheet" href="../../../assets/css/screen.css">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        blau: '#0071BF',
+                        petrol: {
+                            DEFAULT: '#218380',
+                            50: '#90C1BF',
+                            80: '#4D9C99',
+                            20: '#D3E6E6',
+                            tint: 'rgba(33, 131, 128, 0.08)',
+                        },
+                        gelb: {
+                            DEFAULT: '#DFC805',
+                            80: '#F9EF9E',
+                            tint: 'rgba(223, 200, 5, 0.08)',
+                        },
+                        purpur: {
+                            DEFAULT: '#8D0267',
+                            80: '#C57EB2',
+                            tint: 'rgba(141, 2, 103, 0.08)',
+                            'gradient-light': 'rgba(141, 2, 103, 0.03)',
+                            'gradient-medium': 'rgba(197, 126, 178, 0.03)',
+                        },
+                        text: {
+                            DEFAULT: '#272727',
+                            secondary: '#4C4C4C',
+                        },
+                        background: '#FFFFFF',
+                        border: '#E7ECEF',
+                    },
+                    fontFamily: {
+                        display: ['"Archivo Black"', 'sans-serif'],
+                        body: ['"Source Sans Pro"', 'sans-serif'],
+                    },
+                    boxShadow: {
+                        'soft': '0 4px 20px -2px rgba(39, 39, 39, 0.05)',
+                        'hover': '0 10px 25px -5px rgba(39, 39, 39, 0.1)',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        .ci-link {
+            text-decoration: underline;
+            text-decoration-color: #0071BF;
+            text-decoration-thickness: 1px;
+            text-underline-offset: 4px;
+            transition: all 0.2s ease-in-out;
+        }
+        
+        .ci-link:hover {
+            color: #218380;
+            text-decoration-color: #218380;
+            text-decoration-thickness: 3px;
+        }
+
+        *:focus-visible {
+            outline: 2px solid #218380;
+            outline-offset: 2px;
+        }
+    </style>
+</head>
+<body class="font-body text-text bg-background antialiased leading-relaxed flex flex-col min-h-screen">
+
+    <header id="mainHeader" class="sticky top-0 bg-white/95 backdrop-blur-sm border-b border-border z-50 transition-all duration-300 h-[72px] md:h-[82px] flex items-center">
+        <div class="w-full max-w-[1400px] mx-auto px-6 md:px-8 flex justify-between items-center">
+            
+            <a href="/" class="flex items-center gap-3 md:gap-4 no-underline group relative z-50 shrink-0">
+                <img src="./Kopf_Finazwesir_BigCircle.svg" alt="Finanzwesir" class="w-[40px] h-[40px] md:w-[50px] md:h-[50px]">
+                <span class="font-display text-xl md:text-2xl text-petrol tracking-tight">FINANZWESIR</span>
+            </a>
+            
+            <button class="xl:hidden text-3xl text-petrol p-2 relative z-50" id="navToggle" aria-label="Menü öffnen" aria-expanded="false" aria-controls="mainNav">☰</button>
+            
+            <nav id="mainNav" class="hidden xl:block absolute xl:static top-[72px] md:top-[82px] left-0 right-0 bg-white xl:bg-transparent border-b xl:border-none border-border p-6 xl:p-0 shadow-soft xl:shadow-none z-40 opacity-0 xl:opacity-100 transition-opacity duration-300">
+                <ul class="flex flex-col xl:flex-row gap-2 xl:gap-6 list-none m-0 p-0 flex-wrap justify-center">
+                    <li><a href="/der-weg" class="font-semibold text-text visited:text-purpur block w-full py-3 xl:py-1 xl:w-auto border-b border-gray-100 xl:border-b-2 xl:border-transparent hover:text-petrol xl:hover:border-petrol transition-colors text-[0.95rem] xl:text-lg">Der Weg</a></li>
+                    <li><a href="/weltportfolio" class="font-semibold text-text visited:text-purpur block w-full py-3 xl:py-1 xl:w-auto border-b border-gray-100 xl:border-b-2 xl:border-transparent hover:text-petrol xl:hover:border-petrol transition-colors text-[0.95rem] xl:text-lg">Weltportfolio</a></li>
+                    <li><a href="/geldmarkt" class="font-semibold text-text visited:text-purpur block w-full py-3 xl:py-1 xl:w-auto border-b border-gray-100 xl:border-b-2 xl:border-transparent hover:text-petrol xl:hover:border-petrol transition-colors text-[0.95rem] xl:text-lg">Geldmarkt</a></li>
+                    <li><a href="/aktienquote" class="font-semibold text-text visited:text-purpur block w-full py-3 xl:py-1 xl:w-auto border-b border-gray-100 xl:border-b-2 xl:border-transparent hover:text-petrol xl:hover:border-petrol transition-colors text-[0.95rem] xl:text-lg">Aktienquote</a></li>
+                    <li><a href="/sparquote" class="font-semibold text-text visited:text-purpur block w-full py-3 xl:py-1 xl:w-auto border-b border-gray-100 xl:border-b-2 xl:border-transparent hover:text-petrol xl:hover:border-petrol transition-colors text-[0.95rem] xl:text-lg">Sparquote</a></li>
+                    <li><a href="/kaufen" class="font-semibold text-text visited:text-purpur block w-full py-3 xl:py-1 xl:w-auto border-b border-gray-100 xl:border-b-2 xl:border-transparent hover:text-petrol xl:hover:border-petrol transition-colors text-[0.95rem] xl:text-lg">Kaufen</a></li>
+                    <li><a href="/dranbleiben" class="font-semibold text-text visited:text-purpur block w-full py-3 xl:py-1 xl:w-auto border-b border-gray-100 xl:border-b-2 xl:border-transparent hover:text-petrol xl:hover:border-petrol transition-colors text-[0.95rem] xl:text-lg">Dranbleiben</a></li>
+                    <li><a href="/fehler" class="font-semibold text-text visited:text-purpur block w-full py-3 xl:py-1 xl:w-auto border-b border-gray-100 xl:border-b-2 xl:border-transparent hover:text-petrol xl:hover:border-petrol transition-colors text-[0.95rem] xl:text-lg">Fehler</a></li>
+                    <li><a href="/etf-aera" class="font-semibold text-text visited:text-purpur block w-full py-3 xl:py-1 xl:w-auto border-b border-gray-100 xl:border-b-2 xl:border-transparent hover:text-petrol xl:hover:border-petrol transition-colors text-[0.95rem] xl:text-lg">ETF-Ära</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <div id="navBackdrop" class="fixed inset-0 bg-black/20 z-30 hidden xl:hidden backdrop-blur-[2px] transition-opacity"></div>
+
+    <main class="flex-grow w-full max-w-[800px] mx-auto px-6 py-12 md:py-20">
+        
+        <h1 class="font-display text-4xl md:text-5xl text-petrol mb-12 tracking-tight border-b-2 border-gelb pb-6">
+            Impressum & Kontakt
+        </h1>
+
+        <div class="space-y-16">
+            
+            <section class="grid md:grid-cols-2 gap-8">
+                <div>
+                    <h2 class="font-display text-2xl text-text mb-4">Angaben gemäß § 5 TMG</h2>
+                    <address class="not-italic text-lg text-text-secondary leading-relaxed border-l-4 border-petrol pl-4">
+                        <strong>Albert Warnecke</strong><br>
+                        [Straße und Hausnummer]<br>
+                        [PLZ Ort]<br>
+                        Deutschland
+                    </address>
+                </div>
+                <div>
+                    <h2 class="font-display text-2xl text-text mb-4">Verantwortlich nach § 18 MStV</h2>
+                    <p class="text-lg text-text-secondary leading-relaxed border-l-4 border-petrol pl-4">
+                        <strong>Albert Warnecke</strong><br>
+                        [Adresse wie nebenstehend]
+                    </p>
+                </div>
+            </section>
+
+            <section class="bg-petrol-tint p-6 md:p-8 rounded-lg border border-petrol-20 relative overflow-hidden">
+                <div class="absolute top-0 left-0 w-2 h-full bg-purpur"></div>
+                <h2 class="font-display text-2xl text-petrol mb-4 flex items-center gap-3">
+                    <span class="text-3xl">⚠️</span> Keine Anlageberatung
+                </h2>
+                <div class="prose prose-lg text-text-secondary">
+                    <p class="font-bold text-text">Wichtiger Hinweis:</p>
+                    <p>
+                        Alle erwähnten Aktien, ETFs, Fonds, Staatsanleihen oder sonstige Anlageprodukte sind mit Risiken behaftet. Alle Texte sowie Hinweise und Informationen stellen <strong>keine Anlageberatung oder Empfehlung dar</strong>. Sie wurden nach bestem Wissen und Gewissen aus öffentlich zugänglichen Quellen übernommen.
+                    </p>
+                    <p>
+                        Alle Informationen dienen allein der Weiterbildung. Für Vermögensaufbau und -verwaltung sollte ein Fachmann konsultiert werden. Ich übernehme keine Haftung für die Richtigkeit der Angaben.
+                    </p>
+                </div>
+            </section>
+
+            <section>
+                <h2 class="font-display text-3xl text-text mb-8">Kontakt</h2>
+                
+                <div class="bg-white border border-border rounded-xl p-6 md:p-8 shadow-soft mb-12">
+                    <p class="mb-6 text-lg">Sie haben Fragen oder Anregungen? Schreiben Sie mir gerne eine E-Mail.</p>
+                    
+                    <div class="flex flex-col md:flex-row gap-8 mb-8">
+                        <div class="flex-1">
+                            <h3 class="text-sm font-bold text-petrol uppercase tracking-wider mb-2">E-Mail</h3>
+                            <a href="mailto:[ihre-email@example.com]" class="text-2xl font-bold text-blau hover:underline">[ihre-email@example.com]</a>
+                        </div>
+                        <div class="flex-1">
+                            <h3 class="text-sm font-bold text-petrol uppercase tracking-wider mb-2">Telefon</h3>
+                            <p class="text-text-secondary">[Optional: Telefonnummer]</p>
+                        </div>
+                    </div>
+
+                    <div class="text-sm text-text-secondary bg-gray-50 p-4 rounded border border-gray-100">
+                        <p class="mb-2"><strong>Hinweis:</strong> Ich beantworte E-Mails in der Regel innerhalb von 3-5 Werktagen.</p>
+                        <p class="m-0">Ich biete <strong>keine telefonische Beratung</strong> oder Support an. Bitte nutzen Sie ausschließlich E-Mail für Ihre Anfragen.</p>
+                    </div>
+                </div>
+
+                <div class="space-y-6">
+                    <h3 class="font-display text-xl text-text mb-4">Häufig gestellte Fragen vor der Kontaktaufnahme</h3>
+                    
+                    <details class="group bg-white border border-border rounded-lg open:shadow-sm transition-all duration-200" open>
+                        <summary class="list-none flex justify-between items-center cursor-pointer p-5 font-bold text-lg text-text group-hover:text-petrol">
+                            "Welchen ETF soll ich kaufen?"
+                            <span class="text-petrol transition-transform group-open:rotate-180">▼</span>
+                        </summary>
+                        <div class="px-5 pb-5 text-text-secondary leading-relaxed border-t border-gray-100 pt-4">
+                            Ich kann und darf keine individuelle Anlageberatung geben. Die Informationen auf dieser Website dienen ausschließlich der allgemeinen Weiterbildung. Für konkrete Anlageentscheidungen konsultieren Sie bitte einen zugelassenen Finanzberater.
+                        </div>
+                    </details>
+
+                    <details class="group bg-white border border-border rounded-lg open:shadow-sm transition-all duration-200">
+                        <summary class="list-none flex justify-between items-center cursor-pointer p-5 font-bold text-lg text-text group-hover:text-petrol">
+                            "Ich habe einen Fehler auf der Seite gefunden"
+                            <span class="text-petrol transition-transform group-open:rotate-180">▼</span>
+                        </summary>
+                        <div class="px-5 pb-5 text-text-secondary leading-relaxed border-t border-gray-100 pt-4">
+                            <p class="mb-2">Danke für den Hinweis! Schreiben Sie mir gerne eine E-Mail mit:</p>
+                            <ul class="list-disc pl-5 space-y-1">
+                                <li>URL der betroffenen Seite</li>
+                                <li>Kurze Beschreibung des Fehlers</li>
+                                <li>Optional: Screenshot</li>
+                            </ul>
+                            <p class="mt-2">Ich werde mich bemühen, Fehler zeitnah zu korrigieren.</p>
+                        </div>
+                    </details>
+
+                    <details class="group bg-white border border-border rounded-lg open:shadow-sm transition-all duration-200">
+                        <summary class="list-none flex justify-between items-center cursor-pointer p-5 font-bold text-lg text-text group-hover:text-petrol">
+                            "Kann ich Gastbeiträge veröffentlichen?"
+                            <span class="text-petrol transition-transform group-open:rotate-180">▼</span>
+                        </summary>
+                        <div class="px-5 pb-5 text-text-secondary leading-relaxed border-t border-gray-100 pt-4">
+                            Diese Website ist als persönliches Vermächtnis konzipiert und nimmt keine Gastbeiträge an.
+                        </div>
+                    </details>
+                </div>
+            </section>
+
+            <hr class="border-t border-border">
+
+            <section class="text-text-secondary space-y-8 text-base">
+                <h2 class="font-display text-2xl text-text">Rechtliche Hinweise</h2>
+
+                <article>
+                    <h3 class="font-bold text-text mb-2">Haftung für Inhalte</h3>
+                    <p class="leading-relaxed">
+                        Die Inhalte dieser Seiten wurden mit größter Sorgfalt erstellt. Für die Richtigkeit, Vollständigkeit und Aktualität der Inhalte kann jedoch keine Gewähr übernommen werden. Als Diensteanbieter bin ich gemäß § 7 Abs. 1 TMG für eigene Inhalte auf diesen Seiten nach den allgemeinen Gesetzen verantwortlich. Nach §§ 8 bis 10 TMG bin ich als Diensteanbieter jedoch nicht verpflichtet, übermittelte oder gespeicherte fremde Informationen zu überwachen oder nach Umständen zu forschen, die auf eine rechtswidrige Tätigkeit hinweisen.
+                    </p>
+                </article>
+
+                <article>
+                    <h3 class="font-bold text-text mb-2">Haftung für Links</h3>
+                    <p class="leading-relaxed">
+                        Diese Website enthält Links zu externen Webseiten Dritter, auf deren Inhalte ich keinen Einfluss habe. Deshalb kann für diese fremden Inhalte auch keine Gewähr übernommen werden. Für die Inhalte der verlinkten Seiten ist stets der jeweilige Anbieter oder Betreiber der Seiten verantwortlich. Die verlinkten Seiten wurden zum Zeitpunkt der Verlinkung auf mögliche Rechtsverstöße überprüft. Rechtswidrige Inhalte waren zum Zeitpunkt der Verlinkung nicht erkennbar.
+                    </p>
+                </article>
+
+                <article>
+                    <h3 class="font-bold text-text mb-2">Urheberrecht</h3>
+                    <p class="leading-relaxed">
+                        Die durch den Seitenbetreiber erstellten Inhalte und Werke auf diesen Seiten unterliegen dem deutschen Urheberrecht. Die Vervielfältigung, Bearbeitung, Verbreitung und jede Art der Verwertung außerhalb der Grenzen des Urheberrechtes bedürfen der schriftlichen Zustimmung des jeweiligen Autors bzw. Erstellers. Downloads und Kopien dieser Seite sind nur für den privaten, nicht kommerziellen Gebrauch gestattet.
+                    </p>
+                </article>
+
+                <article>
+                    <h3 class="font-bold text-text mb-2">Hinweis zur Streitbeilegung</h3>
+                    <p class="leading-relaxed mb-2">
+                        Die Europäische Kommission stellt eine Plattform zur Online-Streitbeilegung (OS) bereit: 
+                        <a href="https://ec.europa.eu/consumers/odr" target="_blank" rel="noopener noreferrer" class="ci-link text-blau">https://ec.europa.eu/consumers/odr</a>
+                    </p>
+                    <p>Ich bin nicht bereit oder verpflichtet, an Streitbeilegungsverfahren vor einer Verbraucherschlichtungsstelle teilzunehmen.</p>
+                </article>
+
+                <article>
+                    <h3 class="font-bold text-text mb-2">Datenschutz</h3>
+                    <p class="leading-relaxed">
+                        Ihre E-Mail-Adresse wird ausschließlich zur Beantwortung Ihrer Anfrage verwendet und nicht an Dritte weitergegeben. Weitere Informationen finden Sie in der <a href="/datenschutz" class="ci-link text-blau">Datenschutzerklärung</a>.
+                    </p>
+                </article>
+            </section>
+
+            <div class="text-sm text-gray-400 pt-8">
+                Stand: November 2025
+            </div>
+
+        </div>
+    </main>
+
+    <footer class="bg-gray-100 border-t-2 border-petrol pt-16 pb-8 text-center mt-auto">
+        <div class="max-w-[1000px] mx-auto px-6">
+            <nav class="mb-8 flex justify-center flex-wrap gap-x-8 gap-y-4">
+                <a href="/neu-hier" class="ci-link text-blau font-semibold visited:text-purpur">Neu hier?</a>
+                <a href="/manifest" class="ci-link text-blau font-semibold visited:text-purpur">Manifest</a>
+                <a href="/ueber-mich" class="ci-link text-blau font-semibold visited:text-purpur">Über mich</a>
+                <a href="/ich-bin-bullish" class="ci-link text-blau font-semibold visited:text-purpur">Ich bin bullish</a>
+            </nav>
+            <nav class="mb-8 flex justify-center flex-wrap gap-x-8 gap-y-4 text-sm">
+                <a href="/impressum" class="ci-link text-blau font-semibold visited:text-purpur">Impressum & Kontakt</a>
+                <a href="/datenschutz" class="ci-link text-blau font-semibold visited:text-purpur">Datenschutz</a>
+            </nav>
+            <p class="text-xs text-[#999]">
+                Diese Seite nutzt <a href="#" class="ci-link text-blau hover:text-petrol visited:text-purpur">Clicky (anonymisiert)</a> und VG Wort
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        const navToggle = document.getElementById('navToggle');
+        const mainNav = document.getElementById('mainNav');
+        const navBackdrop = document.getElementById('navBackdrop');
+
+        function toggleMenu() {
+            const isClosed = mainNav.classList.contains('hidden');
+            
+            if (isClosed) {
+                // Open
+                mainNav.classList.remove('hidden');
+                navBackdrop.classList.remove('hidden');
+                navToggle.setAttribute('aria-expanded', 'true');
+                
+                setTimeout(() => {
+                    mainNav.classList.remove('opacity-0');
+                    mainNav.classList.add('opacity-100');
+                    navBackdrop.classList.remove('opacity-0');
+                    navBackdrop.classList.add('opacity-100');
+                }, 10);
+            } else {
+                // Close
+                mainNav.classList.remove('opacity-100');
+                mainNav.classList.add('opacity-0');
+                navBackdrop.classList.remove('opacity-100');
+                navBackdrop.classList.add('opacity-0');
+                navToggle.setAttribute('aria-expanded', 'false');
+                
+                setTimeout(() => {
+                    mainNav.classList.add('hidden');
+                    navBackdrop.classList.add('hidden');
+                }, 300);
+            }
+        }
+
+        navToggle.addEventListener('click', toggleMenu);
+        navBackdrop.addEventListener('click', toggleMenu);
+    </script>
+</body>
+</html>

@@ -1,0 +1,453 @@
+/**
+ * assets/css/screen.css
+ * Finanzwesir Ghost Theme — Consolidated Styles
+ *
+ * Sieben Abschnitte in bindender Reihenfolge (E4):
+ *   1. TOKENS        — Einzige Stelle mit Hex-Werten
+ *   2. FONTS         — @font-face, lokal, DSGVO-konform
+ *   3. BASE          — Body, HTML, globale Resets
+ *   4. GHOST CONTENT — Alles unter .gh-content
+ *   5. CHART HOST    — .financial-chart-module
+ *   6. COMPONENTS    — ci-link, hover-lift, Boxen, Listen
+ *   7. JANITOR FALLBACK — Nur ohne Tailwind
+ */
+
+
+/* ==========================================================================
+   1. TOKENS — Einzige Stelle mit Hex-Werten
+   ========================================================================== */
+
+:root {
+    /* Brand Colors */
+    --color-petrol: #218380;
+    --color-petrol-80: #4D9C99;
+    --color-petrol-50: #90C1BF;
+    --color-petrol-20: #D3E6E6;
+    --color-petrol-tint: rgba(33, 131, 128, 0.08);
+    --color-petrol-30: rgba(33, 131, 128, 0.3);
+
+    --color-blau: #0071BF;
+
+    --color-gelb: #DFC805;
+    --color-gelb-80: #F9EF9E;
+    --color-gelb-tint: rgba(223, 200, 5, 0.08);
+    --color-gelb-30: rgba(223, 200, 5, 0.3);
+
+    --color-purpur: #8D0267;
+    --color-purpur-80: #C57EB2;
+    --color-purpur-tint: rgba(141, 2, 103, 0.08);
+    --color-purpur-30: rgba(141, 2, 103, 0.3);
+
+    /* UI Colors */
+    --color-text: #272727;
+    --color-text-sec: #4C4C4C;
+    --color-text-muted: #666666;
+    --color-text-disabled: #888888;
+    --color-bg: #FFFFFF;
+    --color-bg-faint: #FAFAFA;
+    --color-border: #E7ECEF;
+    --color-grid: #E7ECEF;
+    --color-zero-line: #999999;
+    --color-loader-bg: #F3F3F3;
+
+    /* Shadows */
+    --shadow-soft: 0 4px 20px -2px rgba(39, 39, 39, 0.05);
+    --shadow-hover: 0 10px 25px -5px rgba(39, 39, 39, 0.1);
+}
+
+
+/* ==========================================================================
+   2. FONTS — @font-face, lokal, DSGVO-konform
+   ========================================================================== */
+
+/* Archivo Black — Display-Schrift für H1/H2
+   WICHTIG: font-family MUSS 'Archivo Black' heißen, nicht 'ArchivoBlack-Regular'.
+   Der alte Name in assets/fonts/styles.css war falsch und brach die Headline-Schrift
+   sobald Google Fonts wegfällt. */
+@font-face {
+    font-family: 'Archivo Black';
+    src: url('../fonts/ArchivoBlack-Regular.woff2') format('woff2');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+
+/* Source Sans Pro — Body-Schrift
+   Nur die drei genutzten Gewichte: Regular (400), SemiBold (600), Bold (700).
+   Keine Italic-Varianten (werden im Theme nicht genutzt).
+   Nur WOFF2 (kein EOT/WOFF/TTF — Legacy-Formate für IE, wird nicht unterstützt). */
+@font-face {
+    font-family: 'Source Sans Pro';
+    src: url('../fonts/SourceSansPro-Regular.woff2') format('woff2');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Source Sans Pro';
+    src: url('../fonts/SourceSansPro-SemiBold.woff2') format('woff2');
+    font-weight: 600;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Source Sans Pro';
+    src: url('../fonts/SourceSansPro-Bold.woff2') format('woff2');
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+}
+
+
+/* ==========================================================================
+   3. BASE — Body, HTML, globale Resets
+   ========================================================================== */
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Source Sans Pro', sans-serif;
+    color: var(--color-text-sec);
+    background-color: var(--color-bg);
+    line-height: 1.625;
+    -webkit-font-smoothing: antialiased;
+}
+
+/* Focus States for Accessibility */
+*:focus-visible {
+    outline: 2px solid var(--color-petrol);
+    outline-offset: 2px;
+}
+
+
+/* ==========================================================================
+   4. GHOST CONTENT — Alles unter .gh-content
+   ========================================================================== */
+
+/* --- Headings --- */
+
+.gh-content h1,
+.gh-content h2 {
+    font-family: 'Archivo Black', sans-serif;
+    letter-spacing: -0.02em;
+    color: var(--color-petrol);
+}
+
+.gh-content h3,
+.gh-content h4,
+.gh-content h5 {
+    font-family: 'Source Sans Pro', sans-serif;
+    font-weight: 700;
+    letter-spacing: normal;
+    color: var(--color-text);
+}
+
+/* --- Blockquotes --- */
+
+.gh-content blockquote {
+    border-left: 4px solid var(--color-gelb);
+    padding-left: 1.5rem;
+    margin: 2rem 0;
+    font-style: italic;
+    color: var(--color-text);
+    background: transparent;
+    font-size: 1.125rem;
+    line-height: 1.6;
+}
+
+@media (min-width: 768px) {
+    .gh-content blockquote {
+        font-size: 1.25rem;
+        margin: 2.5rem 0;
+    }
+}
+
+/* --- Tables --- */
+
+.gh-content table {
+    width: 100%;
+    min-width: 600px; /* Prevents squishing on mobile, triggers scroll */
+    border-collapse: separate;
+    border-spacing: 0;
+    margin-bottom: 2rem;
+    border: 1px solid var(--color-border);
+    border-radius: 0.5rem;
+    overflow: hidden;
+    font-size: 0.875rem;
+}
+
+@media (min-width: 768px) {
+    .gh-content table {
+        font-size: 1rem;
+    }
+}
+
+.gh-content th {
+    background-color: var(--color-petrol);
+    color: white;
+    padding: 0.75rem;
+    text-align: left;
+    font-family: 'Source Sans Pro', sans-serif;
+    font-weight: 700;
+}
+
+@media (min-width: 768px) {
+    .gh-content th { padding: 1rem; }
+}
+
+.gh-content td {
+    padding: 0.75rem;
+    border-bottom: 1px solid var(--color-border);
+    color: var(--color-text-sec);
+    vertical-align: top;
+}
+
+@media (min-width: 768px) {
+    .gh-content td { padding: 1rem; }
+}
+
+.gh-content tr:nth-child(even) {
+    background-color: #f9fafb;
+}
+
+/* --- Images & Captions --- */
+
+.gh-content img {
+    display: block;
+    margin: 2.5rem auto 1rem auto;
+    max-width: 100%;
+    height: auto;
+    border-radius: 0.75rem;
+    box-shadow: 0 4px 20px -2px rgba(39, 39, 39, 0.1);
+}
+
+/* Reset for Icons inside Box-Components */
+.gh-content img.hard-rim {
+    box-shadow: none !important;
+    margin: 0 !important;
+    border-radius: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+}
+
+/* Auto-Caption Styling */
+.gh-content img + em {
+    display: block;
+    text-align: center;
+    font-size: 0.9rem;
+    color: #666;
+    font-family: 'Source Sans Pro', sans-serif;
+    margin-bottom: 2.5rem;
+    font-style: normal;
+}
+
+.gh-content img + em::before {
+    content: "Abb.: ";
+    font-weight: bold;
+    color: var(--color-petrol);
+}
+
+/* --- Video Wrapper --- */
+
+.video-wrapper {
+    position: relative;
+    padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+    height: 0;
+    overflow: hidden;
+    border-radius: 0.75rem;
+    background-color: #f3f4f6;
+    margin-bottom: 2rem;
+    box-shadow: var(--shadow-soft);
+}
+
+.video-wrapper iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+/* --- Lists --- */
+
+.gh-content ul:not(.fw-checklist):not(.fw-warnlist) {
+    list-style-type: disc;
+    padding-left: 1.5rem;
+    margin-bottom: 2rem;
+    color: var(--color-text-sec);
+}
+
+.gh-content ul:not(.fw-checklist):not(.fw-warnlist) li {
+    margin-bottom: 0.5rem;
+}
+
+.gh-content ul li::marker {
+    color: var(--color-petrol);
+}
+
+.gh-content ol {
+    list-style-type: decimal;
+    padding-left: 1.5rem;
+    margin-bottom: 2rem;
+    color: var(--color-text-sec);
+}
+
+.gh-content ol li {
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+}
+
+.gh-content ol li span {
+    font-weight: 400;
+}
+
+/* --- Legal Content (Privacy / Impressum) --- */
+
+.legal-content h2 {
+    margin-top: 3rem;
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--color-border);
+}
+
+.legal-content h3 {
+    margin-top: 1.5rem;
+    margin-bottom: 0.75rem;
+}
+
+.legal-content p {
+    margin-bottom: 1rem;
+}
+
+.legal-content ul {
+    margin-bottom: 1rem;
+    padding-left: 1.5rem;
+    list-style-type: disc;
+}
+
+
+/* ==========================================================================
+   5. CHART HOST — .financial-chart-module
+   ========================================================================== */
+
+/*
+ * Container für die Finanzwesir Chart-Engine.
+ *
+ * container-type: inline-size  → Aktiviert Container Queries für die Engine.
+ *   Die Engine nutzt @container-Queries für Responsive-Zonen (S/M/L).
+ *
+ * min-height: 400px  → CLS-Schutz (Cumulative Layout Shift).
+ *   Reserviert Platz bevor Chart.js den Canvas rendert.
+ *
+ * KEIN contain: layout  → Würde Container Queries der Engine brechen.
+ *   contain: content enthält contain: layout — deshalb auch verboten.
+ *   Siehe: KNOWN-ISSUES.md, CLS Prevention Korrektur (2026-02-19).
+ */
+.financial-chart-module {
+    container-type: inline-size;
+    container-name: fw-chart;
+    min-height: 400px;
+}
+
+
+/* ==========================================================================
+   6. COMPONENTS — ci-link, hover-lift, Boxen, Navigation
+   ========================================================================== */
+
+/* --- The Signature "Finanzwesir" Link Style --- */
+
+.ci-link {
+    color: var(--color-blau);
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 4px;
+    font-weight: 600;
+    transition: all 0.2s ease-in-out;
+}
+
+.ci-link:hover {
+    color: var(--color-petrol);
+    text-decoration-color: var(--color-petrol);
+    text-decoration-thickness: 3px;
+}
+
+/* --- Hard Edge Shadow for Icons --- */
+
+.hard-rim {
+    filter: drop-shadow(1px 1px 0px rgba(0,0,0,0.25));
+}
+
+/* --- Hover Effects --- */
+
+.hover-lift {
+    transition: all 0.3s ease;
+}
+
+.hover-lift:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-hover);
+}
+
+/* --- Header & Navigation --- */
+
+#mainHeader {
+    transition: all 0.3s ease-in-out;
+}
+
+#mainNav.hidden {
+    display: none;
+}
+
+@media (max-width: 1279px) {
+    #mainNav {
+        opacity: 0;
+        transition: opacity 0.3s ease-in-out;
+    }
+    #mainNav:not(.hidden) {
+        opacity: 1;
+    }
+}
+
+.active-nav span:last-child {
+    opacity: 1 !important;
+}
+
+/* --- Checklist / Warnlist SVG Sizing --- */
+
+.fw-checklist li svg,
+.fw-warnlist li svg {
+    flex-shrink: 0;
+    margin-top: 0.25rem;
+}
+
+/* --- Info/Warn Box Backgrounds --- */
+
+.box-petrol {
+    background-color: var(--color-petrol-tint);
+    border: 1px solid var(--color-petrol-20);
+}
+
+.box-purpur {
+    background-color: var(--color-purpur-tint);
+    border-left: 4px solid var(--color-purpur);
+}
+
+
+/* ==========================================================================
+   7. JANITOR FALLBACK — Nur ohne Tailwind
+   ========================================================================== */
+
+/*
+ * Dieser Abschnitt enthält Styles, die normalerweise von Tailwind-Klassen
+ * erzeugt werden. Sie dienen als Fallback für den Fall, dass der Tailwind-
+ * Build nicht läuft (z.B. in Standalone-Demos oder während der Entwicklung).
+ *
+ * Wenn Tailwind aktiv ist, werden diese Regeln von den generierten
+ * Utility-Klassen überschrieben (höhere Spezifität durch Tailwind-Preflight).
+ *
+ * Aktuell leer — wird bei Bedarf befüllt wenn Fallback-Styles identifiziert werden.
+ */

@@ -1,0 +1,10 @@
+/*
+ * DEPRECATED (2026-02-19) — Nicht mehr verwenden.
+ *
+ * Diese Datei ist durch assets/css/screen.css Abschnitt 2 (FONTS) ersetzt.
+ * Grund: 12 @font-face Blöcke mit Legacy-Formaten (EOT, WOFF, TTF) und
+ * ungenutzten Gewichten (200, 300, 900, Italic-Varianten).
+ * Das Theme nutzt nur 3 Gewichte (400, 600, 700) in WOFF2.
+ *
+ * Wird beim nächsten Aufräumen (AP-8) gelöscht.
+ */

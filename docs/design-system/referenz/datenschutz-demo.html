@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="de" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Datenschutzerklärung - Finanzwesir</title>
+    
+    <link rel="stylesheet" href="../../../assets/css/screen.css">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        blau: '#0071BF',
+                        petrol: {
+                            DEFAULT: '#218380',
+                            50: '#90C1BF',
+                            80: '#4D9C99',
+                            20: '#D3E6E6',
+                            tint: 'rgba(33, 131, 128, 0.08)',
+                        },
+                        gelb: {
+                            DEFAULT: '#DFC805',
+                            80: '#F9EF9E',
+                            tint: 'rgba(223, 200, 5, 0.08)',
+                        },
+                        purpur: {
+                            DEFAULT: '#8D0267',
+                            80: '#C57EB2',
+                            tint: 'rgba(141, 2, 103, 0.08)',
+                        },
+                        text: {
+                            DEFAULT: '#272727',
+                            secondary: '#4C4C4C',
+                        },
+                        background: '#FFFFFF',
+                        border: '#E7ECEF',
+                    },
+                    fontFamily: {
+                        display: ['"Archivo Black"', 'sans-serif'],
+                        body: ['"Source Sans Pro"', 'sans-serif'],
+                    },
+                    boxShadow: {
+                        'soft': '0 4px 20px -2px rgba(39, 39, 39, 0.05)',
+                        'hover': '0 10px 25px -5px rgba(39, 39, 39, 0.1)',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Base styles for content links */
+        .ci-link {
+            text-decoration: underline;
+            text-decoration-color: #0071BF;
+            text-decoration-thickness: 1px;
+            text-underline-offset: 4px;
+            transition: all 0.2s ease-in-out;
+            color: #0071BF;
+        }
+        
+        .ci-link:hover {
+            color: #218380;
+            text-decoration-color: #218380;
+            text-decoration-thickness: 3px;
+        }
+
+        /* Focus styles for accessibility */
+        *:focus-visible {
+            outline: 2px solid #218380;
+            outline-offset: 2px;
+        }
+        
+        /* Specific Styles for Legal Text readability */
+        .legal-content h2 {
+            margin-top: 3rem;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid #E7ECEF;
+        }
+        .legal-content h3 {
+            margin-top: 1.5rem;
+            margin-bottom: 0.75rem;
+        }
+        .legal-content p {
+            margin-bottom: 1rem;
+        }
+        .legal-content ul {
+            margin-bottom: 1rem;
+            padding-left: 1.5rem;
+            list-style-type: disc;
+        }
+        .legal-content li {
+            margin-bottom: 0.5rem;
+        }
+    </style>
+</head>
+<body class="font-body text-text-secondary bg-background antialiased leading-relaxed flex flex-col min-h-screen">
+
+    <header id="mainHeader" class="sticky top-0 bg-white/95 backdrop-blur-sm border-b border-border z-50 transition-all duration-300 h-[72px] md:h-[82px] flex items-center">
+        <div class="w-full max-w-[1400px] mx-auto px-6 md:px-8 flex justify-between items-center">
+            
+            <a href="/" class="flex items-center gap-3 md:gap-4 no-underline group relative z-50 shrink-0">
+                <svg width="40" height="40" viewBox="0 0 50 50" class="md:w-[50px] md:h-[50px] text-petrol fill-current">
+                     <circle cx="25" cy="25" r="25" fill="#218380"/>
+                     <text x="50%" y="50%" text-anchor="middle" dy=".3em" fill="white" font-family="sans-serif" font-weight="bold" font-size="24">F</text>
+                </svg>
+                <span class="font-display text-xl md:text-2xl text-petrol tracking-tight">FINANZWESIR</span>
+            </a>
+            
+            <button class="xl:hidden text-3xl text-petrol p-2 relative z-50" id="navToggle" aria-label="Menü öffnen" aria-expanded="false" aria-controls="mainNav">☰</button>
+            
+            <nav id="mainNav" class="hidden xl:block absolute xl:static top-[72px] md:top-[82px] left-0 right-0 bg-white xl:bg-transparent border-b xl:border-none border-border p-6 xl:p-0 shadow-soft xl:shadow-none z-40 opacity-0 xl:opacity-100 transition-opacity duration-300">
+                <ul class="flex flex-col xl:flex-row gap-2 xl:gap-6 list-none m-0 p-0 flex-wrap justify-center">
+                    <li><a href="/der-weg" class="font-semibold text-text hover:text-petrol block w-full py-3 xl:py-1 xl:w-auto border-b border-gray-100 xl:border-b-2 xl:border-transparent xl:hover:border-petrol transition-colors text-[0.95rem] xl:text-lg">Der Weg</a></li>
+                    <li><a href="/weltportfolio" class="font-semibold text-text hover:text-petrol block w-full py-3 xl:py-1 xl:w-auto border-b border-gray-100 xl:border-b-2 xl:border-transparent xl:hover:border-petrol transition-colors text-[0.95rem] xl:text-lg">Weltportfolio</a></li>
+                    <li><a href="/geldmarkt" class="font-semibold text-text hover:text-petrol block w-full py-3 xl:py-1 xl:w-auto border-b border-gray-100 xl:border-b-2 xl:border-transparent xl:hover:border-petrol transition-colors text-[0.95rem] xl:text-lg">Geldmarkt</a></li>
+                    <li><a href="/aktienquote" class="font-semibold text-text hover:text-petrol block w-full py-3 xl:py-1 xl:w-auto border-b border-gray-100 xl:border-b-2 xl:border-transparent xl:hover:border-petrol transition-colors text-[0.95rem] xl:text-lg">Aktienquote</a></li>
+                    <li><a href="/sparquote" class="font-semibold text-text hover:text-petrol block w-full py-3 xl:py-1 xl:w-auto border-b border-gray-100 xl:border-b-2 xl:border-transparent xl:hover:border-petrol transition-colors text-[0.95rem] xl:text-lg">Sparquote</a></li>
+                    <li><a href="/kaufen" class="font-semibold text-text hover:text-petrol block w-full py-3 xl:py-1 xl:w-auto border-b border-gray-100 xl:border-b-2 xl:border-transparent xl:hover:border-petrol transition-colors text-[0.95rem] xl:text-lg">Kaufen</a></li>
+                    <li><a href="/dranbleiben" class="font-semibold text-text hover:text-petrol block w-full py-3 xl:py-1 xl:w-auto border-b border-gray-100 xl:border-b-2 xl:border-transparent xl:hover:border-petrol transition-colors text-[0.95rem] xl:text-lg">Dranbleiben</a></li>
+                    <li><a href="/haeufige-fehler" class="font-semibold text-text hover:text-petrol block w-full py-3 xl:py-1 xl:w-auto border-b border-gray-100 xl:border-b-2 xl:border-transparent xl:hover:border-petrol transition-colors text-[0.95rem] xl:text-lg">Fehler</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <div id="navBackdrop" class="fixed inset-0 bg-black/20 z-30 hidden xl:hidden backdrop-blur-[2px] transition-opacity"></div>
+
+    <main class="flex-grow w-full max-w-3xl mx-auto px-6 py-12 md:py-16">
+        
+        <div class="mb-12 border-b-2 border-petrol pb-6">
+            <h1 class="font-display text-3xl md:text-5xl text-petrol mb-4 tracking-tight">Datenschutzerklärung</h1>
+            <p class="text-lg text-text-secondary">Stand: November 2025</p>
+        </div>
+
+        <article class="legal-content text-text-secondary">
+            
+            <div class="bg-gray-50 p-6 rounded-lg border border-gray-200 mb-8">
+                <h3 class="font-display text-lg text-text mt-0 mb-4">Verantwortlich für die Datenverarbeitung:</h3>
+                <p class="font-bold bg-yellow-100 inline-block px-1 mb-1">[IHR NAME / FIRMENNAME]</p><br>
+                <p class="bg-yellow-100 inline-block px-1 mb-1">[Straße und Hausnummer]</p><br>
+                <p class="bg-yellow-100 inline-block px-1 mb-4">[PLZ Ort]</p>
+                <p>Deutschland</p>
+                <p class="mt-4"><strong>Kontakt:</strong><br>
+                E-Mail: <span class="bg-yellow-100 px-1">[ihre-email@example.com]</span></p>
+            </div>
+
+            <h2 class="font-display text-2xl md:text-3xl text-petrol">1. Allgemeines zur Datenverarbeitung</h2>
+            <p>Ich nehme den Schutz Ihrer persönlichen Daten sehr ernst. Ich behandle Ihre personenbezogenen Daten vertraulich und entsprechend der gesetzlichen Datenschutzvorschriften sowie dieser Datenschutzerklärung.</p>
+            <p>Diese Website nutzt aus Sicherheitsgründen und zum Schutz der Übertragung vertraulicher Inhalte eine SSL- bzw. TLS-Verschlüsselung. Eine verschlüsselte Verbindung erkennen Sie daran, dass die Adresszeile des Browsers von "http://" auf "https://" wechselt.</p>
+
+            <h2 class="font-display text-2xl md:text-3xl text-petrol">2. Zugriffsdaten und Hosting</h2>
+            <p>Bei jedem Aufruf dieser Website werden automatisch Informationen erfasst, die Ihr Browser an unseren Server übermittelt (sogenannte Server-Logfiles):</p>
+            <ul>
+                <li>Browsertyp und Browserversion</li>
+                <li>Verwendetes Betriebssystem</li>
+                <li>Referrer URL (zuvor besuchte Seite)</li>
+                <li>Hostname des zugreifenden Rechners</li>
+                <li>Uhrzeit der Serveranfrage</li>
+                <li>IP-Adresse (anonymisiert)</li>
+            </ul>
+            <p>Diese Daten werden ausschließlich zur Sicherstellung eines störungsfreien Betriebs der Website und zur Verbesserung unseres Angebots verwendet. Eine Zusammenführung dieser Daten mit anderen Datenquellen wird nicht vorgenommen.</p>
+            <p><strong>Rechtsgrundlage:</strong> Art. 6 Abs. 1 lit. f DSGVO (Berechtigtes Interesse an der Sicherstellung des technischen Betriebs)</p>
+            <p><strong>Speicherdauer:</strong> 30 Tage</p>
+
+            <h2 class="font-display text-2xl md:text-3xl text-petrol">3. Web Analytics: Clicky</h2>
+            <p>Diese Website nutzt <strong>Clicky Web Analytics</strong> (Roxr Software Ltd., Boise, Idaho, USA) zur anonymisierten Analyse der Websitenutzung.</p>
+            
+            <h3 class="font-display text-xl text-text">Was wird erfasst?</h3>
+            <ul>
+                <li>Seitenaufrufe</li>
+                <li>Verweildauer auf Seiten</li>
+                <li>Referrer (Herkunft des Traffics)</li>
+                <li>Verwendetes Gerät, Browser, Betriebssystem</li>
+                <li><strong>Anonymisierte IP-Adresse</strong> (letztes Oktett wird entfernt)</li>
+                <li>Geografische Region (Land/Bundesland, KEINE Stadt)</li>
+            </ul>
+
+            <h3 class="font-display text-xl text-text">Keine personenbezogenen Profile</h3>
+            <p>Clicky wird von mir so konfiguriert, dass <strong>IP-Adressen anonymisiert</strong> werden. Es werden keine Nutzerprofile erstellt oder Daten mit anderen Diensten verknüpft.</p>
+
+            <h3 class="font-display text-xl text-text">Rechtsgrundlage</h3>
+            <p>Art. 6 Abs. 1 lit. f DSGVO (Berechtigtes Interesse an der Analyse des Nutzerverhaltens zur Optimierung der Website)</p>
+
+            <h3 class="font-display text-xl text-text">Widerspruchsrecht (Opt-out)</h3>
+            <p>Sie können der Datenerfassung durch Clicky jederzeit widersprechen:</p>
+            
+            <div class="my-6">
+                <a href="#" class="inline-block bg-petrol text-white py-3 px-6 rounded-lg font-semibold shadow-soft hover:bg-petrol-80 transition-colors no-underline">
+                    Clicky deaktivieren (Opt-out)
+                </a>
+                <p class="text-sm text-gray-500 mt-2 bg-yellow-100 inline-block px-1">Link anpassen: https://clicky.com/optout?site_id=[IHRE_SITE_ID]</p>
+            </div>
+            
+            <p>Nach dem Opt-out wird ein Cookie gesetzt, das Clicky mitteilt, Ihre Besuche nicht mehr zu erfassen.</p>
+            <p>Mehr zu Clicky und Datenschutz: <a href="https://clicky.com/terms/privacy" target="_blank" rel="noopener noreferrer" class="ci-link">https://clicky.com/terms/privacy</a></p>
+
+            <h2 class="font-display text-2xl md:text-3xl text-petrol">4. VG Wort Zählpixel</h2>
+            <p>Zur Ermittlung der Zugriffszahlen für die Vergütung von Autoren durch die <strong>Verwertungsgesellschaft Wort (VG Wort)</strong> wird auf dieser Website ein Zählpixel eingebunden.</p>
+            
+            <h3 class="font-display text-xl text-text">Was wird erfasst?</h3>
+            <ul>
+                <li><strong>Anonyme Zugriffszählung</strong> pro Seite</li>
+                <li><strong>Keine personenbezogenen Daten</strong></li>
+                <li><strong>Keine Cookies</strong></li>
+            </ul>
+            <p>Das Zählpixel dient ausschließlich der statistischen Erfassung von Seitenabrufen zur Vergütung von Autoren. Es werden keine Nutzerprofile erstellt.</p>
+            <p><strong>Rechtsgrundlage:</strong> Art. 6 Abs. 1 lit. f DSGVO (Berechtigtes Interesse an der Vergütung urheberrechtlich geschützter Werke)</p>
+            <p>Mehr zur VG Wort und Datenschutz: <a href="https://www.vgwort.de/hilfsseiten/datenschutz.html" target="_blank" rel="noopener noreferrer" class="ci-link">https://www.vgwort.de/hilfsseiten/datenschutz.html</a></p>
+
+            <h2 class="font-display text-2xl md:text-3xl text-petrol">5. Cookies</h2>
+            <p>Diese Website nutzt <strong>keine technisch unnötigen Cookies</strong>. Die einzigen Cookies, die gesetzt werden können, sind:</p>
+            <ul>
+                <li><strong>Clicky Opt-out Cookie</strong> (falls Sie der Analyse widersprochen haben)</li>
+                <li><strong>Session-Cookies</strong> (technisch notwendig für die Websitenutzung)</li>
+            </ul>
+            <p>Sie können Ihren Browser so einstellen, dass Sie über das Setzen von Cookies informiert werden und Cookies nur im Einzelfall erlauben, die Annahme von Cookies für bestimmte Fälle oder generell ausschließen sowie das automatische Löschen der Cookies beim Schließen des Browsers aktivieren.</p>
+
+            <h2 class="font-display text-2xl md:text-3xl text-petrol">6. Ihre Rechte als betroffene Person</h2>
+            <p>Sie haben gegenüber mir folgende Rechte hinsichtlich der Sie betreffenden personenbezogenen Daten:</p>
+            <ul>
+                <li><strong>Recht auf Auskunft</strong> (Art. 15 DSGVO)</li>
+                <li><strong>Recht auf Berichtigung</strong> (Art. 16 DSGVO)</li>
+                <li><strong>Recht auf Löschung</strong> (Art. 17 DSGVO)</li>
+                <li><strong>Recht auf Einschränkung der Verarbeitung</strong> (Art. 18 DSGVO)</li>
+                <li><strong>Recht auf Datenübertragbarkeit</strong> (Art. 20 DSGVO)</li>
+                <li><strong>Widerspruchsrecht</strong> (Art. 21 DSGVO)</li>
+            </ul>
+            <p>Zur Ausübung dieser Rechte kontaktieren Sie mich bitte unter: <br><strong>E-Mail:</strong> <span class="bg-yellow-100 px-1">[ihre-email@example.com]</span></p>
+
+            <h2 class="font-display text-2xl md:text-3xl text-petrol">7. Beschwerderecht bei einer Aufsichtsbehörde</h2>
+            <p>Sie haben zudem das Recht, sich bei einer Datenschutz-Aufsichtsbehörde über die Verarbeitung Ihrer personenbezogenen Daten zu beschweren.</p>
+            <p><strong>Zuständige Aufsichtsbehörde in Deutschland:</strong><br>Die für Ihren Wohnort oder Bundesland zuständige Datenschutzbehörde.</p>
+            <p>Eine Liste der Aufsichtsbehörden finden Sie hier: <a href="https://www.bfdi.bund.de/DE/Infothek/Anschriften_Links/anschriften_links-node.html" target="_blank" rel="noopener noreferrer" class="ci-link">BFDI Anschriften</a></p>
+
+            <h2 class="font-display text-2xl md:text-3xl text-petrol">8. Speicherdauer</h2>
+            <p>Ich speichere personenbezogene Daten nur so lange, wie dies für die jeweilige Zweckerfüllung erforderlich ist oder gesetzliche Aufbewahrungsfristen bestehen.</p>
+            <p><strong>Konkret:</strong></p>
+            <ul>
+                <li><strong>Clicky Analytics:</strong> 30 Tage (anonymisiert)</li>
+                <li><strong>VG Wort:</strong> Keine Speicherung personenbezogener Daten</li>
+                <li><strong>Server-Logfiles:</strong> 30 Tage</li>
+            </ul>
+
+            <h2 class="font-display text-2xl md:text-3xl text-petrol">9. Weitergabe von Daten an Dritte</h2>
+            <p>Eine Weitergabe Ihrer personenbezogenen Daten an Dritte erfolgt nicht, außer:</p>
+            <ul>
+                <li>Sie haben ausdrücklich eingewilligt (Art. 6 Abs. 1 lit. a DSGVO)</li>
+                <li>Die Weitergabe ist zur Erfüllung gesetzlicher Verpflichtungen erforderlich (Art. 6 Abs. 1 lit. c DSGVO)</li>
+            </ul>
+            <p><strong>Clicky und VG Wort</strong> verarbeiten Daten im Rahmen einer Auftragsverarbeitung bzw. anonymisiert. Es werden keine Daten für kommerzielle Zwecke an Dritte weitergegeben.</p>
+
+            <h2 class="font-display text-2xl md:text-3xl text-petrol">10. Keine automatisierte Entscheidungsfindung</h2>
+            <p>Ich nutze keine automatisierte Entscheidungsfindung einschließlich Profiling gemäß Art. 22 DSGVO.</p>
+
+            <h2 class="font-display text-2xl md:text-3xl text-petrol">11. Änderungen dieser Datenschutzerklärung</h2>
+            <p>Ich behalte mir vor, diese Datenschutzerklärung anzupassen, damit sie stets den aktuellen rechtlichen Anforderungen entspricht oder um Änderungen unserer Leistungen in der Datenschutzerklärung umzusetzen. Für Ihren erneuten Besuch gilt dann die neue Datenschutzerklärung.</p>
+
+        </article>
+
+    </main>
+
+    <footer class="bg-gray-100 border-t-2 border-petrol pt-16 pb-8 text-center mt-auto">
+        <div class="max-w-[1000px] mx-auto px-6">
+            <nav class="mb-8 flex justify-center flex-wrap gap-x-8 gap-y-4">
+                <a href="/neu-hier" class="ci-link text-blau font-semibold visited:text-purpur">Neu hier?</a>
+                <a href="/manifest" class="ci-link text-blau font-semibold visited:text-purpur">Manifest</a>
+                <a href="/ueber-mich" class="ci-link text-blau font-semibold visited:text-purpur">Über mich</a>
+                <a href="/ich-bin-bullish" class="ci-link text-blau font-semibold visited:text-purpur">Ich bin bullish</a>
+            </nav>
+            <nav class="mb-8 flex justify-center flex-wrap gap-x-8 gap-y-4 text-sm">
+                <a href="/impressum" class="ci-link text-blau font-semibold visited:text-purpur">Impressum & Kontakt</a>
+                <a href="/datenschutz" class="ci-link text-blau font-semibold visited:text-purpur">Datenschutz</a>
+            </nav>
+            <p class="text-xs text-[#999]">
+                Diese Seite nutzt <a href="#" class="ci-link text-blau hover:text-petrol visited:text-purpur">Clicky (anonymisiert)</a> und VG Wort
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        const navToggle = document.getElementById('navToggle');
+        const mainNav = document.getElementById('mainNav');
+        const navBackdrop = document.getElementById('navBackdrop');
+
+        function toggleMenu() {
+            const isClosed = mainNav.classList.contains('hidden');
+            
+            if (isClosed) {
+                // Open Menu
+                mainNav.classList.remove('hidden');
+                navBackdrop.classList.remove('hidden');
+                navToggle.setAttribute('aria-expanded', 'true');
+                
+                setTimeout(() => {
+                    mainNav.classList.remove('opacity-0');
+                    mainNav.classList.add('opacity-100');
+                    navBackdrop.classList.remove('opacity-0');
+                    navBackdrop.classList.add('opacity-100');
+                }, 10);
+            } else {
+                // Close Menu
+                mainNav.classList.remove('opacity-100');
+                mainNav.classList.add('opacity-0');
+                navBackdrop.classList.remove('opacity-100');
+                navBackdrop.classList.add('opacity-0');
+                navToggle.setAttribute('aria-expanded', 'false');
+                
+                setTimeout(() => {
+                    mainNav.classList.add('hidden');
+                    navBackdrop.classList.add('hidden');
+                }, 300);
+            }
+        }
+
+        navToggle.addEventListener('click', toggleMenu);
+        navBackdrop.addEventListener('click', toggleMenu);
+    </script>
+</body>
+</html>

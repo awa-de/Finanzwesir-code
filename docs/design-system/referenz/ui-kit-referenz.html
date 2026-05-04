@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="de" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Finanzwesir UI Kit Reference (Final V5)</title>
+    
+    <link rel="stylesheet" href="../../../assets/css/screen.css">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        blau: 'var(--color-blau)',
+                        petrol: { 
+                            DEFAULT: 'var(--color-petrol)', 
+                            50: 'var(--color-petrol-50)', 
+                            80: 'var(--color-petrol-80)', 
+                            20: 'var(--color-petrol-20)', 
+                            tint: 'var(--color-petrol-tint)',
+                            30: 'var(--color-petrol-30)' 
+                        },
+                        gelb: { 
+                            DEFAULT: 'var(--color-gelb)', 
+                            80: 'var(--color-gelb-80)', 
+                            tint: 'var(--color-gelb-tint)',
+                            30: 'var(--color-gelb-30)'
+                        },
+                        purpur: { 
+                            DEFAULT: 'var(--color-purpur)', 
+                            80: 'var(--color-purpur-80)', 
+                            tint: 'var(--color-purpur-tint)',
+                            30: 'var(--color-purpur-30)'
+                        },
+                        text: { 
+                            DEFAULT: 'var(--color-text)', 
+                            secondary: 'var(--color-text-sec)' 
+                        },
+                        background: 'var(--color-bg)',
+                        border: 'var(--color-border)',
+                    },
+                    fontFamily: {
+                        display: ['"Archivo Black"', 'sans-serif'],
+                        body: ['"Source Sans Pro"', 'sans-serif'],
+                    },
+                    boxShadow: {
+                        'soft': '0 4px 20px -2px rgba(39, 39, 39, 0.05)',
+                        'hover': '0 10px 25px -5px rgba(39, 39, 39, 0.1)',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        :root {
+            /* Basisfarben */
+            --color-petrol: #218380; --color-petrol-80: #4D9C99; --color-petrol-50: #90C1BF; --color-petrol-20: #D3E6E6; --color-petrol-tint: rgba(33, 131, 128, 0.08); --color-petrol-30: rgba(33, 131, 128, 0.3);
+            --color-blau: #0071BF;
+            --color-gelb: #DFC805; --color-gelb-80: #F9EF9E; --color-gelb-tint: rgba(223, 200, 5, 0.08); --color-gelb-30: rgba(223, 200, 5, 0.3);
+            --color-purpur: #8D0267; --color-purpur-80: #C57EB2; --color-purpur-tint: rgba(141, 2, 103, 0.08); --color-purpur-30: rgba(141, 2, 103, 0.3);
+            --color-text: #272727; --color-text-sec: #4C4C4C; --color-bg: #FFFFFF; --color-border: #E7ECEF;
+        }
+
+        .ci-link { color: var(--color-blau); text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 4px; font-weight: 600; transition: all 0.2s ease-in-out; }
+        .ci-link:hover { color: var(--color-petrol); text-decoration-color: var(--color-petrol); text-decoration-thickness: 3px; }
+        .hard-rim { filter: drop-shadow(1px 1px 0px rgba(0,0,0,0.25)); }
+        
+        /* Visualisierungshilfen für die Referenz-Seite */
+        .ref-label { 
+            font-family: monospace; font-size: 0.75rem; background: #eee; 
+            padding: 2px 6px; border-radius: 4px; color: #666; display: inline-block; margin-bottom: 0.5rem; 
+        }
+
+        /* SIMULATION GHOST STYLES (Synchronisiert mit Master V5) */
+        
+        /* Typo */
+        h1.ref, h2.ref { font-family: 'Archivo Black', sans-serif; letter-spacing: -0.02em; }
+        h3.ref { font-family: 'Source Sans Pro', sans-serif; font-weight: 700; letter-spacing: normal; } /* H3 Fix */
+
+        /* Zitat */
+        .quote-sim {
+            border-left: 4px solid var(--color-gelb); 
+            padding-left: 1.25rem; margin: 1.5rem 0;
+            font-style: italic; color: var(--color-text); font-size: 1.125rem; line-height: 1.6;
+        }
+        @media (min-width: 768px) { .quote-sim { padding-left: 1.5rem; font-size: 1.25rem; } }
+
+        /* Tabellen */
+        .table-sim table { 
+            width: 100%; min-width: 600px; /* Mobile Scroll Fix */
+            border-collapse: separate; border-spacing: 0; border: 1px solid var(--color-border); border-radius: 0.5rem; overflow: hidden; font-size: 0.875rem; 
+        }
+        @media (min-width: 768px) { .table-sim table { font-size: 1rem; } }
+        
+        .table-sim th { background-color: var(--color-petrol); color: white; padding: 0.75rem; text-align: left; font-family: 'Source Sans Pro'; font-weight: 700; }
+        .table-sim td { padding: 0.75rem; border-bottom: 1px solid var(--color-border); color: var(--color-text-sec); }
+        @media (min-width: 768px) { .table-sim th, .table-sim td { padding: 1rem; } }
+    </style>
+</head>
+<body class="font-body text-text-secondary bg-background antialiased leading-relaxed flex flex-col min-h-screen">
+
+    <header id="mainHeader" class="sticky top-0 bg-white/95 backdrop-blur-sm border-b border-border z-50 h-[72px] md:h-[82px] flex items-center">
+        <div class="w-full max-w-[1400px] mx-auto px-6 md:px-8 flex justify-between items-center">
+            
+            <a href="/" class="flex items-center gap-3 md:gap-4 no-underline group relative z-50 shrink-0">
+                <img src="./Kopf_Finazwesir_BigCircle.svg" alt="Finanzwesir" class="w-[40px] h-[40px] md:w-[50px] md:h-[50px]">
+                <span class="font-display text-xl md:text-2xl text-petrol tracking-tight">FINANZWESIR</span>
+            </a>
+            
+            <button class="xl:hidden text-3xl text-petrol p-2 relative z-50" id="navToggle" aria-label="Menü öffnen">☰</button>
+            
+            <nav id="mainNav" class="hidden xl:block absolute xl:static top-[72px] md:top-[82px] left-0 right-0 bg-white xl:bg-transparent border-b xl:border-none border-border p-6 xl:p-0 shadow-soft xl:shadow-none z-40">
+                <ul class="flex flex-col xl:flex-row gap-2 xl:gap-6 list-none m-0 p-0 flex-wrap justify-center">
+                    <li><a href="#" class="font-semibold text-text hover:text-petrol block w-full py-3 xl:py-1 xl:w-auto border-b border-gray-100 xl:border-b-2 xl:border-transparent hover:text-petrol transition-colors">Der Weg</a></li>
+                    <li><a href="#" class="font-semibold text-text hover:text-petrol block w-full py-3 xl:py-1 xl:w-auto border-b border-gray-100 xl:border-b-2 xl:border-transparent hover:text-petrol transition-colors">Weltportfolio</a></li>
+                    <li><a href="#" class="font-semibold text-text hover:text-petrol block w-full py-3 xl:py-1 xl:w-auto border-b border-gray-100 xl:border-b-2 xl:border-transparent hover:text-petrol transition-colors">Geldmarkt</a></li>
+                    <li><a href="#" class="font-semibold text-text hover:text-petrol block w-full py-3 xl:py-1 xl:w-auto border-b border-gray-100 xl:border-b-2 xl:border-transparent hover:text-petrol transition-colors">...</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <div id="navBackdrop" class="fixed inset-0 bg-black/20 z-30 hidden xl:hidden backdrop-blur-[2px] transition-opacity"></div>
+
+    <main class="flex-grow w-full max-w-[800px] mx-auto px-4 md:px-6 py-12 md:py-20">
+
+        <div class="mb-12 border-b border-gray-200 pb-4">
+            <span class="bg-petrol text-white text-xs font-bold px-2 py-1 rounded uppercase tracking-wider">UI Kit Reference V5</span>
+            <h1 class="font-display text-3xl text-petrol mt-2">Design Elemente</h1>
+        </div>
+
+        <section class="mb-16 border-b border-gray-100 pb-8">
+            <h6 class="text-xs font-bold text-gray-400 uppercase mb-4 tracking-wider">1. Typografie</h6>
+            
+            <span class="ref-label">H1 (Archivo Black)</span>
+            <h1 class="ref text-4xl md:text-5xl text-petrol mb-6 tracking-tight border-b-2 border-gelb pb-4 break-words">H1 Seitentitel</h1>
+            
+            <span class="ref-label">Lead Paragraph</span>
+            <p class="text-xl md:text-2xl text-text font-normal mb-6 leading-normal">Dies ist der Lead-Absatz (Intro) in 24px.</p>
+            
+            <span class="ref-label">H2 (Archivo Black)</span>
+            <h2 class="ref text-2xl md:text-3xl text-text mt-4 mb-4">H2 Kapitelüberschrift</h2>
+            
+            <span class="ref-label">Body Text (Source Sans 18px)</span>
+            <p class="text-lg text-text-secondary leading-relaxed mb-4">Das ist der Standard-Fließtext. Gut lesbar und entspannt. Enthält manchmal einen <a href="#" class="ci-link">Text-Link</a>.</p>
+            
+            <span class="ref-label">H3 (Source Sans Pro BOLD)</span>
+            <h3 class="ref text-xl text-text mt-4 mb-2">H3 Zwischenüberschrift</h3>
+            <p class="text-lg text-text-secondary leading-relaxed">Die H3 ist nun ruhiger und nutzt die Body-Schrift in Fett.</p>
+        </section>
+
+        <section class="mb-16 border-b border-gray-100 pb-8">
+            <h6 class="text-xs font-bold text-gray-400 uppercase mb-4 tracking-wider">2. Listen</h6>
+            
+            <div class="grid md:grid-cols-2 gap-8 mb-6">
+                <div>
+                    <span class="ref-label">Standard</span>
+                    <ul class="list-disc pl-6 text-lg space-y-1 marker:text-petrol text-text-secondary">
+                        <li>Listenpunkt Eins</li>
+                        <li>Listenpunkt Zwei</li>
+                    </ul>
+                </div>
+                <div>
+                    <span class="ref-label">Nummeriert</span>
+                    <ol class="list-decimal pl-6 text-lg space-y-1 font-bold text-secondary marker:text-text"><li class="pl-2"><span class="font-normal">Erster Schritt</span></li><li class="pl-2"><span class="font-normal">Zweiter Schritt</span></li></ol>
+                </div>
+            </div>
+
+            <div class="mb-6">
+                <span class="ref-label">Checkliste</span>
+                <ul class="space-y-2 text-lg text-text-secondary">
+                    <li class="flex items-start gap-3">
+                        <svg class="w-6 h-6 text-petrol shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
+                        <span>Vorteil: Geringe Kosten</span>
+                    </li>
+                </ul>
+            </div>
+
+            <div>
+                <span class="ref-label">Warnliste</span>
+                <ul class="space-y-2 text-lg text-text-secondary">
+                    <li class="flex items-start gap-3">
+                        <svg class="w-6 h-6 text-purpur shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M6 18L18 6M6 6l12 12"></path></svg>
+                        <span>Nachteil: Hohes Risiko</span>
+                    </li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="mb-16 border-b border-gray-100 pb-8">
+            <h6 class="text-xs font-bold text-gray-400 uppercase mb-4 tracking-wider">3. Boxen (Variant F)</h6>
+
+            <span class="ref-label">Info Box</span>
+            <div class="bg-petrol-tint border border-petrol-20 rounded-xl p-6 flex flex-col md:flex-row gap-4 md:gap-8 items-start mb-6">
+                <div class="w-16 h-16 md:w-[72px] md:h-[72px] shrink-0 flex items-center justify-center rounded-2xl bg-petrol-30 p-1">
+                    <img src="Feder.svg" alt="Info" class="w-full h-full object-contain hard-rim">
+                </div>
+                <div class="flex-1">
+                    <h4 class="ref text-lg md:text-xl text-petrol mb-1 mt-1">Wissenswert</h4>
+                    <p class="text-text-secondary m-0 text-lg">Icon: 72px (Desktop) / 64px (Mobile). Hintergrund 30%. Schatten.</p>
+                </div>
+            </div>
+
+            <span class="ref-label">Warn Box</span>
+            <div class="bg-white border-l-4 border-purpur shadow-soft p-6 flex flex-col md:flex-row gap-4 md:gap-8 items-start mb-6">
+                <div class="w-16 h-16 md:w-[72px] md:h-[72px] shrink-0 flex items-center justify-center rounded-2xl bg-purpur-30 p-1">
+                    <img src="Schwert.svg" alt="Achtung" class="w-full h-full object-contain hard-rim">
+                </div>
+                <div class="flex-1">
+                    <h4 class="ref text-lg md:text-xl text-purpur mb-1 mt-1">Achtung</h4>
+                    <p class="text-text-secondary m-0 text-lg">Warn Box mit Schwert-Icon.</p>
+                </div>
+            </div>
+
+            <span class="ref-label">Fazit Box</span>
+            <div class="bg-gray-50 rounded-xl p-6 md:p-8 border border-gray-200 shadow-sm">
+                <h4 class="ref text-xl text-petrol mb-2">Fazit</h4>
+                <p class="text-text-secondary m-0 text-lg">Zusammenfassung ohne Icon.</p>
+            </div>
+        </section>
+
+        <section class="mb-16">
+            <h6 class="text-xs font-bold text-gray-400 uppercase mb-4 tracking-wider">4. Zitate & Tabellen</h6>
+
+            <span class="ref-label">Zitat (Premium Standard)</span>
+            <blockquote class="quote-sim">
+                <p>"Hin und her macht Taschen leer. Dieses Design wird automatisch angewendet."</p>
+                <p class="text-base mt-2 font-bold not-italic">— Börsenweisheit</p>
+            </blockquote>
+
+            <span class="ref-label block mt-8 mb-2">Tabelle (min-width: 600px)</span>
+            <div class="overflow-x-auto table-sim">
+                <table>
+                    <thead><tr><th>Anlageklasse</th><th>Rendite</th><th>Risiko</th></tr></thead>
+                    <tbody><tr><td>Aktien</td><td>Hoch</td><td>Hoch</td></tr><tr><td>Tagesgeld</td><td>Niedrig</td><td>Niedrig</td></tr></tbody>
+                </table>
+            </div>
+        </section>
+        
+        <section class="mb-16">
+            <h6 class="text-xs font-bold text-gray-400 uppercase mb-4 tracking-wider">5. Interaktion</h6>
+            
+            <div class="flex flex-wrap gap-4 p-6 bg-gray-100 rounded-xl">
+                <div>
+                    <span class="ref-label">Primary</span><br>
+                    <button class="bg-petrol text-white px-6 py-4 rounded-lg font-semibold shadow-soft transition-all hover:bg-petrol/90 hover:scale-105 active:scale-95">Jetzt starten</button>
+                </div>
+                <div>
+                    <span class="ref-label">Secondary</span><br>
+                    <button class="bg-white/90 text-petrol px-6 py-4 rounded-lg font-semibold shadow-sm transition-all hover:bg-white hover:text-petrol hover:scale-105 active:scale-95">Mehr Infos</button>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="bg-gray-100 border-t-2 border-petrol pt-16 pb-8 text-center mt-auto">
+        <div class="max-w-[1000px] mx-auto px-6">
+            <p class="text-text font-bold mb-4">Finanzwesir Footer</p>
+        </div>
+    </footer>
+
+    <script>
+        const navToggle = document.getElementById('navToggle');
+        const mainNav = document.getElementById('mainNav');
+        const navBackdrop = document.getElementById('navBackdrop');
+        navToggle.addEventListener('click', () => {
+            mainNav.classList.toggle('hidden');
+            navBackdrop.classList.toggle('hidden');
+        });
+        navBackdrop.addEventListener('click', () => {
+            mainNav.classList.add('hidden');
+            navBackdrop.classList.add('hidden');
+        });
+    </script>
+</body>
+</html>

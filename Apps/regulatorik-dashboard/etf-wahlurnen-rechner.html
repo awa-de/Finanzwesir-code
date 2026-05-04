@@ -1,0 +1,961 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ETF-Wahlurnen-Rechner</title>
+<link rel="preconnect" href="https://api.fontshare.com">
+<link href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700&display=swap" rel="stylesheet">
+<style>
+.etf-rechner {
+  --bg:           #FAF8F5;
+  --surface:      #FFFFFF;
+  --teal:         #0D9488;
+  --teal-dark:    #0F766E;
+  --teal-light:   #CCFBF1;
+  --blue:         #2563EB;
+  --amber:        #D97706;
+  --red:          #DC2626;
+  --text:         #1C1917;
+  --muted:        #57534E;
+  --border:       #E7E5E4;
+  --border-s:     #A8A29E;
+  --r-sm:         6px;
+  --r-md:         10px;
+  --r-lg:         16px;
+  --font:         'Satoshi', system-ui, -apple-system, sans-serif;
+  --mono:         'Courier New', Courier, monospace;
+
+  font-family: var(--font);
+  color: var(--text);
+  background: var(--bg);
+  max-width: 780px;
+  margin: 0 auto;
+  padding: 2rem 1.25rem 4rem;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+}
+.etf-rechner *, .etf-rechner *::before, .etf-rechner *::after { box-sizing: border-box; }
+.etf-rechner h1, .etf-rechner h2, .etf-rechner h3,
+.etf-rechner p, .etf-rechner ul, .etf-rechner ol { margin: 0; }
+
+/* ─── Intro ─── */
+.er-intro { text-align: center; margin-bottom: 1.75rem; }
+.er-intro h1 {
+  font-size: clamp(1.5rem, 4vw, 2.1rem);
+  font-weight: 700; line-height: 1.2; margin-bottom: .45rem;
+}
+.er-intro p { color: var(--muted); font-size: .95rem; max-width: 520px; margin: 0 auto; }
+
+/* ─── Kassenbon ─── */
+.er-bon {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--r-lg);
+  padding: 1.75rem 2rem;
+  max-width: 460px;
+  margin: 0 auto 1.25rem;
+  font-family: var(--mono);
+  font-size: .88rem;
+}
+.er-bon__hd {
+  font-family: var(--font);
+  font-size: .7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .1em;
+  color: var(--muted);
+  text-align: center;
+  padding-bottom: .75rem;
+  border-bottom: 1px dashed var(--border-s);
+  margin-bottom: 1rem;
+}
+.er-bon-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding: .28rem 0;
+  gap: .75rem;
+}
+.er-bon-row--sep {
+  padding-bottom: .55rem;
+  border-bottom: 1px dashed var(--border);
+  margin-bottom: .3rem;
+}
+.er-bon-lbl { flex: 1; }
+.er-bon-sub { display: block; font-size: .68rem; color: var(--muted); font-family: var(--font); }
+.er-bon-amt { white-space: nowrap; font-weight: 600; }
+.er-bon-amt--red  { color: var(--red); }
+.er-bon-amt--teal { color: var(--teal); font-size: 1.15rem; }
+.er-bon-hr { border: none; border-top: 1px solid var(--border-s); margin: .65rem 0; }
+.er-bon__note {
+  font-family: var(--font);
+  font-size: .78rem;
+  color: var(--muted);
+  text-align: center;
+  margin-top: .9rem;
+  padding-top: .7rem;
+  border-top: 1px dashed var(--border);
+  line-height: 1.55;
+}
+.er-bon__note strong { color: var(--teal); }
+
+/* ─── CTA ─── */
+.er-cta {
+  display: block;
+  width: fit-content;
+  margin: 0 auto 3rem;
+  background: var(--teal);
+  color: #fff;
+  border: none;
+  border-radius: var(--r-md);
+  padding: .65rem 1.6rem;
+  font-family: var(--font);
+  font-size: .9rem;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background .15s;
+}
+.er-cta:hover { background: var(--teal-dark); }
+
+/* ─── Sim header ─── */
+.er-sim-hd { text-align: center; margin-bottom: 1.5rem; }
+.er-sim-hd h2 { font-size: clamp(1.2rem, 3vw, 1.65rem); font-weight: 700; margin-bottom: .3rem; }
+.er-sim-hd p  { color: var(--muted); font-size: .875rem; }
+
+/* ─── Szenario-Karten ─── */
+.er-sc-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: .55rem;
+  margin-bottom: 1.25rem;
+}
+@media (max-width: 500px) { .er-sc-grid { grid-template-columns: 1fr; } }
+
+.er-sc-btn {
+  display: flex;
+  align-items: center;
+  gap: .6rem;
+  background: var(--surface);
+  border: 2px solid var(--border);
+  border-radius: var(--r-md);
+  padding: .7rem .9rem;
+  cursor: pointer;
+  text-align: left;
+  font-family: var(--font);
+  transition: border-color .15s, background .15s;
+  width: 100%;
+}
+.er-sc-btn:hover { border-color: var(--border-s); }
+.er-sc-btn.is-active[data-sc="S0"] { border-color: var(--teal);  background: #F0FDFA; }
+.er-sc-btn.is-active[data-sc="S1"] { border-color: var(--blue);  background: #EFF6FF; }
+.er-sc-btn.is-active[data-sc="S2"] { border-color: var(--amber); background: #FFFBEB; }
+.er-sc-btn.is-active[data-sc="S3"] { border-color: var(--red);   background: #FEF2F2; }
+
+.er-sc-icon { font-size: 1.2rem; flex-shrink: 0; }
+.er-sc-body { flex: 1; min-width: 0; }
+.er-sc-name {
+  font-weight: 600; font-size: .82rem; color: var(--text);
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.er-sc-val  { font-size: 1.05rem; font-weight: 700; font-variant-numeric: tabular-nums; }
+.er-sc-val[data-sc="S0"] { color: var(--teal); }
+.er-sc-val[data-sc="S1"] { color: var(--blue); }
+.er-sc-val[data-sc="S2"] { color: var(--amber); }
+.er-sc-val[data-sc="S3"] { color: var(--red); }
+.er-sc-hint { font-size: .68rem; color: var(--muted); margin-top: .08rem; }
+
+/* ─── Headline ─── */
+.er-hl {
+  border-left: 4px solid var(--blue);
+  background: var(--surface);
+  border-radius: 0 var(--r-md) var(--r-md) 0;
+  padding: .85rem 1.1rem;
+  margin-bottom: 1.25rem;
+  transition: border-color .3s;
+}
+.er-hl[data-sc="S0"] { border-color: var(--teal); }
+.er-hl[data-sc="S1"] { border-color: var(--blue); }
+.er-hl[data-sc="S2"] { border-color: var(--amber); }
+.er-hl[data-sc="S3"] { border-color: var(--red); }
+.er-hl p { font-size: clamp(.95rem, 2.3vw, 1.1rem); font-weight: 500; line-height: 1.45; }
+
+/* ─── Chart ─── */
+.er-chart-box {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--r-lg);
+  padding: 1.1rem 1rem .9rem;
+  margin-bottom: 1.25rem;
+}
+.er-legend {
+  display: flex; gap: .85rem; flex-wrap: wrap;
+  font-size: .74rem; margin-bottom: .65rem;
+}
+.er-legend-item { display: flex; align-items: center; gap: .3rem; color: var(--muted); }
+.er-legend-dot  { width: 9px; height: 9px; border-radius: 50%; flex-shrink: 0; }
+.er-chart-canvas { position: relative; height: 270px; }
+@media (max-width: 500px) { .er-chart-canvas { height: 210px; } }
+
+/* ─── Controls ─── */
+.er-controls {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--r-lg);
+  padding: 1.4rem;
+  margin-bottom: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.15rem;
+}
+.er-ctrl { display: flex; flex-direction: column; gap: .35rem; }
+.er-ctrl-lbl {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  font-size: .85rem;
+}
+.er-ctrl-lbl span:first-child { font-weight: 500; }
+.er-ctrl-val { font-weight: 700; color: var(--teal); font-variant-numeric: tabular-nums; }
+.er-range-ends { display: flex; justify-content: space-between; font-size: .68rem; color: var(--muted); margin-top: .15rem; }
+
+input[type=range].er-sl {
+  -webkit-appearance: none; appearance: none;
+  width: 100%; height: 5px;
+  background: var(--border); border-radius: 3px;
+  outline: none; cursor: pointer;
+}
+input[type=range].er-sl::-webkit-slider-thumb {
+  -webkit-appearance: none; appearance: none;
+  width: 21px; height: 21px;
+  border-radius: 50%;
+  background: var(--teal);
+  border: 2px solid #fff;
+  box-shadow: 0 1px 4px rgba(0,0,0,.18);
+  cursor: pointer;
+  transition: transform .1s;
+}
+input[type=range].er-sl::-webkit-slider-thumb:active { transform: scale(1.15); }
+input[type=range].er-sl::-moz-range-thumb {
+  width: 21px; height: 21px; border-radius: 50%;
+  background: var(--teal); border: 2px solid #fff;
+  box-shadow: 0 1px 4px rgba(0,0,0,.18); cursor: pointer;
+}
+
+/* Mode Toggle */
+.er-toggle {
+  display: flex; background: var(--bg);
+  border: 1px solid var(--border); border-radius: var(--r-md);
+  padding: 3px; gap: 2px;
+}
+.er-tog-btn {
+  flex: 1; background: none; border: none;
+  border-radius: calc(var(--r-md) - 3px);
+  padding: .4rem .5rem;
+  font-family: var(--font); font-size: .78rem; font-weight: 500;
+  color: var(--muted); cursor: pointer;
+  transition: background .15s, color .15s; text-align: center;
+}
+.er-tog-btn.is-active {
+  background: var(--surface); color: var(--text);
+  box-shadow: 0 1px 3px rgba(0,0,0,.1);
+}
+
+/* S3 panel */
+.er-s3 {
+  background: #FEF2F2; border: 1px solid #FECACA;
+  border-radius: var(--r-md); padding: .9rem;
+  display: none; flex-direction: column; gap: .65rem;
+}
+.er-s3.is-on { display: flex; }
+.er-s3-hd { font-size: .73rem; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; color: var(--muted); }
+.er-s3-row { display: flex; align-items: center; gap: .65rem; }
+.er-s3-row .er-sl { flex: 1; }
+.er-s3-num {
+  width: 56px; text-align: center;
+  font-size: .95rem; font-weight: 700; color: var(--red);
+  border: 1px solid #FECACA; border-radius: var(--r-sm);
+  padding: .3rem .35rem; font-family: var(--font); background: #fff;
+}
+.er-s3-eff { font-size: .78rem; color: var(--muted); }
+.er-s3-eff strong { color: var(--red); }
+.er-s3-note { font-size: .71rem; color: var(--muted); font-style: italic; }
+
+/* Divider label */
+.er-divlbl {
+  font-size: .7rem; font-weight: 700;
+  text-transform: uppercase; letter-spacing: .08em;
+  color: var(--muted);
+  display: flex; align-items: center; gap: .5rem;
+}
+.er-divlbl::before, .er-divlbl::after {
+  content: ''; flex: 1; height: 1px; background: var(--border);
+}
+
+/* Disclaimer */
+.er-disc {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--r-lg);
+  overflow: hidden;
+}
+.er-disc summary {
+  padding: .9rem 1.15rem;
+  font-size: .82rem; font-weight: 600;
+  cursor: pointer; color: var(--muted);
+  list-style: none;
+  display: flex; align-items: center; gap: .45rem;
+  user-select: none;
+}
+.er-disc summary::-webkit-details-marker { display: none; }
+.er-disc summary::before { content: 'ℹ️'; font-size: .95rem; }
+.er-disc summary::after { content: '▸'; margin-left: auto; transition: transform .2s; }
+.er-disc[open] summary::after { transform: rotate(90deg); }
+.er-disc-body {
+  padding: 0 1.15rem 1.15rem;
+  border-top: 1px solid var(--border);
+}
+.er-disc-body h4 {
+  font-size: .76rem; font-weight: 700;
+  margin: .9rem 0 .4rem; color: var(--text);
+}
+.er-disc-body ul { list-style: none; padding: 0; display: flex; flex-direction: column; gap: .2rem; }
+.er-disc-body li {
+  font-size: .76rem; color: var(--muted);
+  padding-left: 1.3em; position: relative;
+}
+.er-disc-body li::before { position: absolute; left: 0; }
+.ok::before   { content: '✓'; color: var(--teal); }
+.ap::before   { content: '~'; color: var(--amber); }
+.no::before   { content: '✗'; color: var(--red); }
+.er-disc-qt {
+  font-size: .75rem; color: var(--muted);
+  margin-top: .9rem; padding: .65rem .8rem;
+  background: var(--bg); border-radius: var(--r-sm);
+  font-style: italic; line-height: 1.5;
+}
+
+/* Utils */
+.er-hidden { display: none !important; }
+</style>
+</head>
+<body>
+<div class="etf-rechner">
+
+<!-- ══ BLOCK 1: KASSENBON ══ -->
+<div class="er-intro">
+  <h1>Was passiert mit einem Euro?</h1>
+  <p>Der Markt arbeitet für dich. Drei Kräfte nehmen sich ihren Anteil. Nur eine davon entscheidest du an der Wahlurne.</p>
+</div>
+
+<div class="er-bon">
+  <div class="er-bon__hd">Kassenbon · 1 Euro · 30 Jahre · Deutschland heute</div>
+
+  <div class="er-bon-row er-bon-row--sep">
+    <span class="er-bon-lbl">Eingezahlt 2026</span>
+    <span class="er-bon-amt">1,00&nbsp;€</span>
+  </div>
+
+  <div class="er-bon-row">
+    <span class="er-bon-lbl">
+      Bruttowachstum
+      <span class="er-bon-sub">7&nbsp;% p.a. historisch · MSCI World nominal · 30 Jahre</span>
+    </span>
+    <span class="er-bon-amt">× 7,61</span>
+  </div>
+
+  <hr class="er-bon-hr">
+
+  <div class="er-bon-row">
+    <span class="er-bon-lbl">
+      Fondsanbieter
+      <span class="er-bon-sub">TER 0,20&nbsp;% p.a. · Zinseszins-Effekt über 30 Jahre</span>
+    </span>
+    <span class="er-bon-amt er-bon-amt--red">−&nbsp;0,42&nbsp;€</span>
+  </div>
+
+  <div class="er-bon-row">
+    <span class="er-bon-lbl">
+      Broker
+      <span class="er-bon-sub">Transaktionskosten – de facto Null (Neobroker)</span>
+    </span>
+    <span class="er-bon-amt er-bon-amt--red">−&nbsp;0,00&nbsp;€</span>
+  </div>
+
+  <div class="er-bon-row">
+    <span class="er-bon-lbl">
+      Finanzamt
+      <span class="er-bon-sub">Aktuelles deutsches Recht: 18,46&nbsp;% eff. nach Teilfreistellung</span>
+    </span>
+    <span class="er-bon-amt er-bon-amt--red">−&nbsp;1,14&nbsp;€</span>
+  </div>
+
+  <hr class="er-bon-hr">
+
+  <div class="er-bon-row">
+    <span class="er-bon-lbl" style="font-weight:700">Gehört dir 2056</span>
+    <span class="er-bon-amt er-bon-amt--teal">6,05&nbsp;€</span>
+  </div>
+
+  <div class="er-bon__note">
+    Von jedem Euro Zuwachs nimmst du <strong>76 Cent</strong> mit nach Hause.<br>
+    Der Staat holt sich <strong>2,8× mehr</strong> als alle Produktkosten zusammen.<br><br>
+    Vor 2009 wären es <strong>6,17&nbsp;€</strong> gewesen – Kursgewinne nach einem Jahr: steuerfrei.<br>
+    Was wäre, wenn sich das in die falsche Richtung ändert?
+  </div>
+</div>
+
+<a class="er-cta" href="#er-sim" onclick="document.getElementById('er-sim').scrollIntoView({behavior:'smooth'});return false;">
+  → Zur Simulation: Was bedeutet das für deinen Sparplan?
+</a>
+
+<!-- ══ BLOCK 2: SIMULATION ══ -->
+<div id="er-sim">
+  <div class="er-sim-hd">
+    <h2>Dein Sparplan unter vier Steuerregimen</h2>
+    <p>25 Jahre ansparen, 30 Jahre entnehmen. Stell deine Parameter ein.</p>
+  </div>
+
+  <!-- Szenario-Karten -->
+  <div class="er-sc-grid">
+    <button class="er-sc-btn" data-sc="S0" onclick="setSzenario('S0')">
+      <span class="er-sc-icon">🕰️</span>
+      <div class="er-sc-body">
+        <div class="er-sc-name">DE vor 2009</div>
+        <div class="er-sc-val" data-sc="S0" id="scv-S0">–</div>
+        <div class="er-sc-hint">Kursgewinne steuerfrei</div>
+      </div>
+    </button>
+    <button class="er-sc-btn is-active" data-sc="S1" onclick="setSzenario('S1')">
+      <span class="er-sc-icon">🇩🇪</span>
+      <div class="er-sc-body">
+        <div class="er-sc-name">Deutschland heute</div>
+        <div class="er-sc-val" data-sc="S1" id="scv-S1">–</div>
+        <div class="er-sc-hint">Aktuelles Recht</div>
+      </div>
+    </button>
+    <button class="er-sc-btn" data-sc="S2" onclick="setSzenario('S2')">
+      <span class="er-sc-icon">⚠️</span>
+      <div class="er-sc-body">
+        <div class="er-sc-name">Vergünstigungen weg</div>
+        <div class="er-sc-val" data-sc="S2" id="scv-S2">–</div>
+        <div class="er-sc-hint">TF + Pauschbetrag abgeschafft</div>
+      </div>
+    </button>
+    <button class="er-sc-btn" data-sc="S3" onclick="setSzenario('S3')">
+      <span class="er-sc-icon">📊</span>
+      <div class="er-sc-body">
+        <div class="er-sc-name" id="sc-name-S3">Einkommensteuer [42 %]</div>
+        <div class="er-sc-val" data-sc="S3" id="scv-S3">–</div>
+        <div class="er-sc-hint">Dein Grenzsteuersatz</div>
+      </div>
+    </button>
+  </div>
+
+  <!-- Headline -->
+  <div class="er-hl" id="er-hl" data-sc="S1">
+    <p id="er-hl-txt">Wird berechnet…</p>
+  </div>
+
+  <!-- Chart -->
+  <div class="er-chart-box">
+    <div class="er-legend">
+      <span class="er-legend-item"><span class="er-legend-dot" style="background:#0D9488"></span>DE vor 2009</span>
+      <span class="er-legend-item"><span class="er-legend-dot" style="background:#2563EB"></span>Deutschland heute</span>
+      <span class="er-legend-item"><span class="er-legend-dot" style="background:#D97706"></span>Vergünstigungen weg</span>
+      <span class="er-legend-item"><span class="er-legend-dot" style="background:#DC2626"></span>Einkommensteuer</span>
+    </div>
+    <div class="er-chart-canvas"><canvas id="er-chart"></canvas></div>
+  </div>
+
+  <!-- Controls -->
+  <div class="er-controls">
+
+    <div class="er-ctrl">
+      <div class="er-ctrl-lbl">
+        <span>Monatliche Sparrate</span>
+        <span class="er-ctrl-val" id="v-sparrate">200 €/Mo</span>
+      </div>
+      <input type="range" class="er-sl" id="sl-sparrate" min="50" max="1000" step="50" value="200">
+      <div class="er-range-ends"><span>50 €</span><span>1.000 €</span></div>
+    </div>
+
+    <div class="er-ctrl">
+      <div class="er-ctrl-lbl">
+        <span>Ansparzeit</span>
+        <span class="er-ctrl-val" id="v-anspar">25 Jahre</span>
+      </div>
+      <input type="range" class="er-sl" id="sl-anspar" min="5" max="40" step="1" value="25">
+      <div class="er-range-ends"><span>5 J.</span><span>40 J.</span></div>
+    </div>
+
+    <div class="er-divlbl">Entsparphase</div>
+
+    <div class="er-ctrl">
+      <div class="er-ctrl-lbl"><span>Modus</span></div>
+      <div class="er-toggle">
+        <button class="er-tog-btn" id="btn-A" onclick="setModus('A')">Modus A – Wie lange reicht das Depot?</button>
+        <button class="er-tog-btn is-active" id="btn-B" onclick="setModus('B')">Modus B – Wie viel kann ich entnehmen?</button>
+      </div>
+    </div>
+
+    <div class="er-ctrl" id="row-entspar">
+      <div class="er-ctrl-lbl">
+        <span>Depot soll halten</span>
+        <span class="er-ctrl-val" id="v-entspar">30 Jahre</span>
+      </div>
+      <input type="range" class="er-sl" id="sl-entspar" min="10" max="40" step="1" value="30">
+      <div class="er-range-ends"><span>10 J.</span><span>40 J.</span></div>
+    </div>
+
+    <div class="er-ctrl er-hidden" id="row-entnahme">
+      <div class="er-ctrl-lbl">
+        <span>Gewünschte Monats-Entnahme</span>
+        <span class="er-ctrl-val" id="v-entnahme">800 €/Mo</span>
+      </div>
+      <input type="range" class="er-sl" id="sl-entnahme" min="100" max="2000" step="50" value="800">
+      <div class="er-range-ends"><span>100 €</span><span>2.000 €</span></div>
+    </div>
+
+    <!-- S3 -->
+    <div class="er-s3" id="er-s3">
+      <div class="er-s3-hd">Dein persönlicher Einkommensteuersatz</div>
+      <div class="er-s3-row">
+        <input type="range" class="er-sl" id="sl-s3" min="14" max="45" step="1" value="42">
+        <input type="number" class="er-s3-num" id="inp-s3" min="14" max="45" value="42">
+        <span style="font-size:.85rem;font-weight:600;color:var(--red)">%</span>
+      </div>
+      <div class="er-s3-eff" id="s3-eff">Effektiv: <strong>44,31 %</strong> (inkl. Solidaritätszuschlag 5,5 %)</div>
+      <div class="er-range-ends">
+        <span>14 % Eingang</span><span>42 % Spitze</span><span>45 % Reichen</span>
+      </div>
+      <div class="er-s3-note">Kirchensteuer (+8–9 %) ist nicht modelliert.</div>
+    </div>
+
+  </div>
+
+  <!-- Disclaimer -->
+  <details class="er-disc">
+    <summary>Wie haben wir gerechnet?</summary>
+    <div class="er-disc-body">
+
+      <h4>„Deutschland heute" (S1)</h4>
+      <ul>
+        <li class="ok">Teilfreistellung 30 % (§ 20 InvStG, seit 2018)</li>
+        <li class="ok">Sparerpauschbetrag 1.000 €/Jahr (25 Jahre = 25.000 € über Laufzeit)</li>
+        <li class="ok">Thesaurierender ETF – Steuer hauptsächlich beim Verkauf (Exit-Steuer)</li>
+        <li class="ok">Bruttorendite 7 % p.a. · TER 0,20 % · Nettorendite 6,80 %</li>
+        <li class="ap">Vorabpauschale vereinfacht (im Pauschbetrag enthalten)</li>
+        <li class="ap">Inflation nicht modelliert (Nominalrendite)</li>
+        <li class="ap">Sequence-of-Returns-Risiko nicht modelliert</li>
+      </ul>
+
+      <h4>„DE vor 2009" (S0)</h4>
+      <ul>
+        <li class="ok">0 % Steuer auf Kursgewinne nach &gt; 1 Jahr Haltedauer</li>
+        <li class="ok">Entspricht deutschem Recht bis 31.12.2008</li>
+        <li class="ap">Dividendenbesteuerung vereinfacht (marginaler Effekt)</li>
+      </ul>
+
+      <h4>„Vergünstigungen weg" (S2)</h4>
+      <ul>
+        <li class="ok">26,375 % auf alle Kapitalerträge jährlich</li>
+        <li class="no">Keine Teilfreistellung</li>
+        <li class="no">Kein Sparerpauschbetrag</li>
+      </ul>
+
+      <h4>„Einkommensteuer" (S3)</h4>
+      <ul>
+        <li class="ok">Persönlicher Grenzsteuersatz (einstellbar, Default 42 %)</li>
+        <li class="ok">+ Solidaritätszuschlag 5,5 % automatisch addiert</li>
+        <li class="no">Keine Teilfreistellung</li>
+        <li class="no">Kein Sparerpauschbetrag</li>
+        <li class="ap">Kirchensteuer nicht modelliert</li>
+      </ul>
+
+      <div class="er-disc-qt">
+        „Alle Modelle sind falsch – manche sind nützlich. Dieses zeigt den politischen Hebel
+        bei stabilen Marktbedingungen. Für die volle Wahrheit braucht es Monte-Carlo-Simulation,
+        Inflationsmodellierung und individuelle Steuerberatung."
+      </div>
+    </div>
+  </details>
+
+</div><!-- /er-sim -->
+</div><!-- /etf-rechner -->
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4/dist/chart.umd.min.js"></script>
+<script>
+/* ═══════════════════════════════════════════
+   KONSTANTEN
+═══════════════════════════════════════════ */
+const R_BRUTTO    = 0.07;
+const TER         = 0.002;
+const R_NETTO     = R_BRUTTO - TER;          // 0.068
+const KEST_SOLI   = 0.25 * 1.055;           // 0.26375
+const TF          = 0.30;                    // Teilfreistellung
+const PAUSCHBET   = 1000;                    // €/Jahr
+
+/* ═══════════════════════════════════════════
+   ZUSTAND
+═══════════════════════════════════════════ */
+const st = {
+  sparrate:    200,
+  anspar:      25,
+  entspar:     30,
+  entnahme:    800,
+  modus:       'B',
+  szenario:    'S1',
+  s3Rate:      0.42,
+};
+
+/* ═══════════════════════════════════════════
+   ANSPARPHASE
+   Gibt { depot, kb, jahreswerte[] }
+   Alle Szenarien:
+     S0 – kein Tax
+     S1 – kein Annual-Tax, Exit-Steuer am Ende (gains − jahre×Pauschbet) × 70% × 26,375%
+          dann KB = depot (Reset)
+     S2 – Annual-Tax 26,375% auf Jahresgewinn
+          dann KB = depot (Reset für saubere Entspar)
+     S3 – Annual-Tax (estRate×1.055) auf Jahresgewinn
+          dann KB = depot (Reset)
+═══════════════════════════════════════════ */
+function anspar(sparrate, jahre, szenario, s3Rate) {
+  const jb = sparrate * 12;
+  let d = 0, kb = 0;
+  const werte = [0];
+
+  for (let j = 0; j < jahre; j++) {
+    const d0 = d;
+    // Jahreswachstum + Beiträge (Beiträge mid-year: × (1+r/2))
+    d = d0 * (1 + R_NETTO) + jb * (1 + R_NETTO / 2);
+    kb += jb;
+
+    if (szenario === 'S2') {
+      const g = Math.max(0, d - d0 - jb);
+      d -= g * KEST_SOLI;
+    } else if (szenario === 'S3') {
+      const g = Math.max(0, d - d0 - jb);
+      d -= g * (s3Rate * 1.055);
+    }
+
+    werte.push(Math.max(0, d));
+  }
+
+  // S1: Exit-Steuer beim Verkauf
+  if (szenario === 'S1') {
+    const gewinn = d - kb;
+    if (gewinn > 0) {
+      const kredit = jahre * PAUSCHBET;           // genutzter Pauschbetrag über Laufzeit
+      const stpfl  = Math.max(0, gewinn - kredit) * (1 - TF);
+      d -= stpfl * KEST_SOLI;
+      werte[werte.length - 1] = Math.max(0, d);
+    }
+  }
+
+  // KB-Reset: alle Szenarien starten die Entsparphase ohne vorbelastete Gewinne
+  // → monatliche Entnahme skaliert linear mit Depotgröße (korrekte Referenzwerte)
+  return { depot: Math.max(0, d), kb: Math.max(0, d), jahreswerte: werte };
+}
+
+/* ═══════════════════════════════════════════
+   ENTSPARPHASE – ANTEILSMETHODE
+   Gibt Jahreswerte [] des Depots (ohne 1. Eintrag = Depot nach Anspar)
+═══════════════════════════════════════════ */
+function entspar(depot, kb, jahresEntnahme, jahre, szenario, s3Rate) {
+  const werte = [];
+  let d = depot, k = kb;
+
+  for (let j = 0; j < jahre; j++) {
+    if (d <= 0) { werte.push(0); continue; }
+
+    // Wachstum
+    d *= (1 + R_NETTO);
+
+    // Entnehmen (max was da ist)
+    const brutto = Math.min(jahresEntnahme, d);
+    const gr = d > 0 ? Math.max(0, (d - k) / d) : 0; // Gewinnanteil
+
+    let steuer = 0;
+    if (szenario === 'S1') {
+      const taxb = brutto * gr * (1 - TF);
+      steuer = Math.max(0, taxb - PAUSCHBET) * KEST_SOLI;
+    } else if (szenario === 'S2') {
+      steuer = brutto * gr * KEST_SOLI;
+    } else if (szenario === 'S3') {
+      steuer = brutto * gr * (s3Rate * 1.055);
+    }
+
+    // KB anteilig reduzieren
+    const ant = d > 0 ? brutto / d : 1;
+    k = k * (1 - ant);
+    d -= brutto;
+    werte.push(Math.max(0, d));
+  }
+  return werte;
+}
+
+/* ═══════════════════════════════════════════
+   MODUS B – Binary Search für Monats-Entnahme
+═══════════════════════════════════════════ */
+function findeEntnahme(depot, kb, entsparJahre, szenario, s3Rate) {
+  if (depot <= 0) return 0;
+  let lo = 0, hi = depot / entsparJahre / 12 * 4, res = 0;
+  for (let i = 0; i < 64; i++) {
+    const mid = (lo + hi) / 2;
+    const werte = entspar(depot, kb, mid * 12, entsparJahre, szenario, s3Rate);
+    const end = werte[werte.length - 1];
+    if (Math.abs(end) < 5) { res = mid; break; }
+    if (end > 0) lo = mid; else hi = mid;
+    res = mid;
+  }
+  return res;
+}
+
+/* ═══════════════════════════════════════════
+   MODUS A – Wie viele Jahre reicht das Depot?
+═══════════════════════════════════════════ */
+function findeLaufzeit(depot, kb, monatsEntnahme, szenario, s3Rate) {
+  const werte = entspar(depot, kb, monatsEntnahme * 12, 65, szenario, s3Rate);
+  const idx = werte.findIndex(v => v <= 0);
+  return idx === -1 ? 65 : idx;
+}
+
+/* ═══════════════════════════════════════════
+   ALLE 4 SZENARIEN
+═══════════════════════════════════════════ */
+function rechneAlle() {
+  const { sparrate, anspar: aj, entspar: ej, entnahme, modus, s3Rate } = st;
+  const res = {};
+  for (const sc of ['S0','S1','S2','S3']) {
+    const { depot, kb, jahreswerte: aw } = anspar(sparrate, aj, sc, s3Rate);
+    let monat, laufzeit, ew;
+    if (modus === 'B') {
+      monat    = findeEntnahme(depot, kb, ej, sc, s3Rate);
+      laufzeit = ej;
+      ew       = entspar(depot, kb, monat * 12, ej, sc, s3Rate);
+    } else {
+      monat    = entnahme;
+      laufzeit = findeLaufzeit(depot, kb, entnahme, sc, s3Rate);
+      ew       = entspar(depot, kb, entnahme * 12, Math.max(ej, laufzeit + 2), sc, s3Rate);
+    }
+    // Gesamtlinie: Anspar + Entspar
+    const gesamt = [...aw, ...ew];
+    res[sc] = { depot, monat, laufzeit, gesamt };
+  }
+  return res;
+}
+
+/* ═══════════════════════════════════════════
+   CHART
+═══════════════════════════════════════════ */
+let chart = null;
+const FARBE = { S0:'#0D9488', S1:'#2563EB', S2:'#D97706', S3:'#DC2626' };
+
+function initChart() {
+  const ctx = document.getElementById('er-chart').getContext('2d');
+  chart = new Chart(ctx, {
+    type: 'line',
+    data: { labels: [], datasets: [] },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      animation: { duration: 350, easing: 'easeInOutQuad' },
+      interaction: { mode: 'index', intersect: false },
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          callbacks: {
+            title: items => `Jahr ${items[0].label}`,
+            label: item => `${item.dataset.label}: ${fmt(item.parsed.y)}`,
+          }
+        }
+      },
+      scales: {
+        x: {
+          grid: { color: '#F5F5F4' },
+          ticks: {
+            font: { size: 10 },
+            maxTicksLimit: 12,
+            callback: (_, i, ticks) => {
+              // Zeige nur jeden 5. Tick
+              return i % 5 === 0 ? `J. ${i}` : '';
+            }
+          }
+        },
+        y: {
+          grid: { color: '#F5F5F4' },
+          ticks: {
+            font: { size: 10 },
+            callback: v => v >= 1000 ? `${(v/1000).toFixed(0)}k €` : `${v} €`
+          }
+        }
+      }
+    }
+  });
+}
+
+function updateChart(res) {
+  const maxLen = Math.max(...Object.values(res).map(r => r.gesamt.length));
+  const labels  = Array.from({ length: maxLen }, (_, i) => i);
+
+  const pad = (arr) => {
+    const a = [...arr];
+    while (a.length < maxLen) a.push(0);
+    return a;
+  };
+
+  const ds = [
+    { label:'DE vor 2009',       data: pad(res.S0.gesamt), borderColor: FARBE.S0, borderWidth: 2.5, pointRadius: 0, tension: 0.3, backgroundColor:'transparent' },
+    { label:'Deutschland heute',  data: pad(res.S1.gesamt), borderColor: FARBE.S1, borderWidth: 2.5, pointRadius: 0, tension: 0.3, backgroundColor:'rgba(37,99,235,.05)', fill:'+2' },
+    { label:'Vergünstigungen weg',data: pad(res.S2.gesamt), borderColor: FARBE.S2, borderWidth: 2,   pointRadius: 0, tension: 0.3, backgroundColor:'transparent', borderDash:[4,3] },
+    { label:'Einkommensteuer',    data: pad(res.S3.gesamt), borderColor: FARBE.S3, borderWidth: 2,   pointRadius: 0, tension: 0.3, backgroundColor:'rgba(220,38,38,.04)' },
+  ];
+
+  // Annotation: vertikale Linie bei Übergang Anspar→Entspar
+  const splitX = st.anspar;
+  if (!chart.options.plugins.annotation) {
+    chart.options.plugins.annotation = {};
+  }
+
+  chart.data.labels   = labels;
+  chart.data.datasets = ds;
+  chart.update();
+}
+
+/* ═══════════════════════════════════════════
+   UI UPDATE
+═══════════════════════════════════════════ */
+function fmt(v) {
+  return new Intl.NumberFormat('de-DE', {
+    style: 'currency', currency: 'EUR', maximumFractionDigits: 0
+  }).format(v);
+}
+
+function updateUI(res) {
+  const { szenario: sc, modus, entspar: ej, s3Rate } = st;
+
+  // Karten-Werte
+  for (const s of ['S0','S1','S2','S3']) {
+    const el = document.getElementById(`scv-${s}`);
+    if (!el) continue;
+    if (modus === 'B') {
+      el.textContent = `${fmt(res[s].monat)}/Mo`;
+    } else {
+      const lz = res[s].laufzeit;
+      el.textContent = lz >= 65 ? '> 65 J.' : `${lz} Jahre`;
+    }
+  }
+
+  // S3-Label
+  const pct = Math.round(s3Rate * 100);
+  document.getElementById('sc-name-S3').textContent = `Einkommensteuer [${pct} %]`;
+
+  // Aktive Karte
+  document.querySelectorAll('.er-sc-btn').forEach(b =>
+    b.classList.toggle('is-active', b.dataset.sc === sc)
+  );
+
+  // Headline
+  const hl   = document.getElementById('er-hl');
+  const hlTx = document.getElementById('er-hl-txt');
+  hl.dataset.sc = sc;
+  const r = res[sc];
+
+  if (modus === 'B') {
+    const betrag = fmt(r.monat);
+    const hl_map = {
+      S0: `<strong>${betrag} monatlich</strong> – so war es. Kursgewinne waren bis 2008 nach einem Jahr steuerfrei.`,
+      S1: `<strong>${betrag} monatlich</strong> – das Depot hält ${ej} Jahre. So ist es nach aktuellem deutschem Recht.`,
+      S2: `<strong>${betrag} monatlich</strong> – wenn Teilfreistellung und Pauschbetrag politisch gestrichen werden.`,
+      S3: `<strong>${betrag} monatlich</strong> – mit persönlichem Steuersatz ${pct} % (+ Soli ${(pct*1.055).toFixed(1).replace('.',',')} %).`,
+    };
+    hlTx.innerHTML = hl_map[sc];
+  } else {
+    const lz = r.laufzeit;
+    const lzTxt = lz >= 65 ? 'mehr als 65 Jahre' : `${lz} Jahre`;
+    const hl_map = {
+      S0: `Das Depot reicht <strong>${lzTxt}</strong> – ohne Steuer auf Kursgewinne.`,
+      S1: `Das Depot reicht <strong>${lzTxt}</strong> nach aktuellem deutschem Recht.`,
+      S2: `Das Depot reicht nur <strong>${lzTxt}</strong> wenn Vergünstigungen wegfallen.`,
+      S3: `Das Depot reicht nur <strong>${lzTxt}</strong> mit ${pct} % Grenzsteuersatz.`,
+    };
+    hlTx.innerHTML = hl_map[sc];
+  }
+
+  updateChart(res);
+}
+
+/* ═══════════════════════════════════════════
+   DEBOUNCE + HAUPT-UPDATE
+═══════════════════════════════════════════ */
+let debTimer = null;
+function update(fast) {
+  if (fast) { _update(); return; }
+  clearTimeout(debTimer);
+  debTimer = setTimeout(_update, 150);
+}
+function _update() { updateUI(rechneAlle()); }
+
+/* ═══════════════════════════════════════════
+   ACTIONS
+═══════════════════════════════════════════ */
+function setSzenario(sc) {
+  st.szenario = sc;
+  document.getElementById('er-s3').classList.toggle('is-on', sc === 'S3');
+  update(true);
+}
+
+function setModus(m) {
+  st.modus = m;
+  document.getElementById('btn-A').classList.toggle('is-active', m === 'A');
+  document.getElementById('btn-B').classList.toggle('is-active', m === 'B');
+  document.getElementById('row-entspar').classList.toggle('er-hidden', m === 'A');
+  document.getElementById('row-entnahme').classList.toggle('er-hidden', m === 'B');
+  update(true);
+}
+
+function bindSlider(id, key, labelId, fmtFn) {
+  document.getElementById(id).addEventListener('input', e => {
+    st[key] = parseFloat(e.target.value);
+    document.getElementById(labelId).textContent = fmtFn(st[key]);
+    update();
+  });
+}
+
+function bindS3() {
+  const sl  = document.getElementById('sl-s3');
+  const inp = document.getElementById('inp-s3');
+  const eff = document.getElementById('s3-eff');
+
+  function setS3(pct) {
+    const c = Math.min(45, Math.max(14, Math.round(pct)));
+    st.s3Rate  = c / 100;
+    sl.value   = c;
+    inp.value  = c;
+    const ep = (c * 1.055).toFixed(2).replace('.', ',');
+    eff.innerHTML = `Effektiv: <strong>${ep} %</strong> (inkl. Solidaritätszuschlag 5,5 %)`;
+    update();
+  }
+
+  sl.addEventListener('input',  () => setS3(+sl.value));
+  inp.addEventListener('change',() => setS3(+inp.value));
+}
+
+/* ═══════════════════════════════════════════
+   INIT
+═══════════════════════════════════════════ */
+document.addEventListener('DOMContentLoaded', () => {
+  initChart();
+  bindSlider('sl-sparrate', 'sparrate', 'v-sparrate', v => `${v} €/Mo`);
+  bindSlider('sl-anspar',   'anspar',   'v-anspar',   v => `${v} Jahre`);
+  bindSlider('sl-entspar',  'entspar',  'v-entspar',  v => `${v} Jahre`);
+  bindSlider('sl-entnahme', 'entnahme', 'v-entnahme', v => `${v} €/Mo`);
+  bindS3();
+  update(true);
+});
+</script>
+</body>
+</html>

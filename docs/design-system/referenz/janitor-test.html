@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Janitor Script Test</title>
+
+    <link rel="stylesheet" href="../../../assets/css/screen.css">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        blau: '#0071BF',
+                        petrol: { DEFAULT: '#218380', 50: '#90C1BF', 80: '#4D9C99', 20: '#D3E6E6', tint: 'rgba(33, 131, 128, 0.08)', 30: 'rgba(33, 131, 128, 0.3)' },
+                        gelb: { DEFAULT: '#DFC805', 80: '#F9EF9E', tint: 'rgba(223, 200, 5, 0.08)', 30: 'rgba(223, 200, 5, 0.3)' },
+                        purpur: { DEFAULT: '#8D0267', 80: '#C57EB2', tint: 'rgba(141, 2, 103, 0.08)', 30: 'rgba(141, 2, 103, 0.3)' },
+                        text: { DEFAULT: '#272727', secondary: '#4C4C4C' },
+                        background: '#FFFFFF',
+                        border: '#E7ECEF',
+                    },
+                    fontFamily: {
+                        display: ['"Archivo Black"', 'sans-serif'],
+                        body: ['"Source Sans Pro"', 'sans-serif'],
+                    },
+                    boxShadow: {
+                        'soft': '0 4px 20px -2px rgba(39, 39, 39, 0.05)',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        .hard-rim { filter: drop-shadow(1px 1px 0px rgba(0,0,0,0.25)); }
+
+        /* Ghost default blockquote style (what Janitor should replace) */
+        .gh-content blockquote {
+            border-left: 4px solid #DFC805;
+            padding-left: 1.5rem;
+            margin: 2rem 0;
+            font-style: italic;
+            color: #272727;
+            font-size: 1.125rem;
+            line-height: 1.6;
+        }
+
+        /* Ghost default list styles */
+        .gh-content ul:not(.fw-checklist):not(.fw-warnlist) {
+            list-style-type: disc;
+            padding-left: 1.5rem;
+            margin-bottom: 2rem;
+            color: #4C4C4C;
+        }
+
+        /* Ghost default ordered list styles */
+        .gh-content ol {
+            list-style-type: decimal;
+            padding-left: 1.5rem;
+            margin-bottom: 2rem;
+            color: #4C4C4C;
+        }
+
+        /* Ghost image icon reset */
+        .gh-content img.hard-rim {
+            box-shadow: none !important;
+            margin: 0 !important;
+            border-radius: 0 !important;
+            width: 100% !important;
+            height: 100% !important;
+        }
+
+        /* Test labels */
+        .test-label {
+            display: inline-block;
+            background: #272727;
+            color: #fff;
+            padding: 4px 8px;
+            font-size: 12px;
+            border-radius: 4px;
+            margin: 24px 0 8px 0;
+            font-family: monospace;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        .test-label.pass { background: #218380; }
+        .test-label.fail { background: #8D0267; }
+    </style>
+</head>
+<body class="font-body text-text-secondary bg-gray-50 antialiased leading-relaxed p-8">
+
+    <div class="max-w-[800px] mx-auto">
+
+        <h1 class="font-display text-3xl text-petrol mb-2">Janitor Script Test</h1>
+        <p class="text-text-secondary mb-8">Diese Seite simuliert Ghost-gerendertes Markdown. Das Janitor-Script sollte die Patterns automatisch transformieren.</p>
+
+        <div class="bg-white rounded-xl p-8 shadow-sm gh-content">
+
+            <h2 class="font-display text-2xl text-text mb-6">Test 1: Info-Box [!NOTE]</h2>
+
+            <span class="test-label">Input: Ghost-Blockquote mit [!NOTE]</span>
+            <blockquote>
+                <p>[!NOTE] Wissenswert: Der Zinseszinseffekt</p>
+                <p>Albert Einstein soll ihn als das achte Weltwunder bezeichnet haben. Wer ihn versteht, verdient daran.</p>
+            </blockquote>
+
+            <h2 class="font-display text-2xl text-text mt-12 mb-6">Test 2: Warn-Box [!WARNING]</h2>
+
+            <span class="test-label">Input: Ghost-Blockquote mit [!WARNING]</span>
+            <blockquote>
+                <p>[!WARNING] Achtung: Market Timing</p>
+                <p>Versuchen Sie niemals, den richtigen Zeitpunkt zu finden. Es funktioniert nicht.</p>
+                <p>Studien zeigen immer wieder, dass Anleger die rein und raus springen, Rendite verlieren.</p>
+            </blockquote>
+
+            <h2 class="font-display text-2xl text-text mt-12 mb-6">Test 3: Fazit-Box [!TIP]</h2>
+
+            <span class="test-label">Input: Ghost-Blockquote mit [!TIP]</span>
+            <blockquote>
+                <p>[!TIP] Fazit: Einfach anfangen</p>
+                <p>Der beste Zeitpunkt zum Investieren war vor 20 Jahren. Der zweitbeste ist heute.</p>
+            </blockquote>
+
+            <h2 class="font-display text-2xl text-text mt-12 mb-6">Test 4: Normale Blockquote (NICHT transformieren!)</h2>
+
+            <span class="test-label">Input: Normales Zitat — muss Zitat bleiben</span>
+            <blockquote>
+                <p>"Hin und her macht Taschen leer."</p>
+            </blockquote>
+
+            <h2 class="font-display text-2xl text-text mt-12 mb-6">Test 5: Checkliste [+]</h2>
+
+            <span class="test-label">Input: Ghost-Liste mit [+] Prefix</span>
+            <ul>
+                <li>[+] Geringe Kosten (TER unter 0,3%)</li>
+                <li>[+] Breite Streuung ueber 1.600 Aktien</li>
+                <li>[+] Automatische Wiederanlage</li>
+            </ul>
+
+            <h2 class="font-display text-2xl text-text mt-12 mb-6">Test 6: Warnliste [-]</h2>
+
+            <span class="test-label">Input: Ghost-Liste mit [-] Prefix</span>
+            <ul>
+                <li>[-] Hohe Volatilitaet (bis -50% in Krisen)</li>
+                <li>[-] Keine Kapitalgarantie</li>
+            </ul>
+
+            <h2 class="font-display text-2xl text-text mt-12 mb-6">Test 7: Normale Liste (NICHT transformieren!)</h2>
+
+            <span class="test-label">Input: Normale Liste — muss Liste bleiben</span>
+            <ul>
+                <li>Erster Punkt ohne Prefix</li>
+                <li>Zweiter Punkt ohne Prefix</li>
+            </ul>
+
+            <h2 class="font-display text-2xl text-text mt-12 mb-6">Test 8: Nummerierte Liste (NICHT transformieren!)</h2>
+
+            <span class="test-label">Input: Normale nummerierte Liste — muss Liste bleiben</span>
+            <ol>
+                <li>Depot eroeffnen</li>
+                <li>Sparplan einrichten</li>
+                <li>Dranbleiben</li>
+            </ol>
+
+            <h2 class="font-display text-2xl text-text mt-12 mb-6">Test 9: Idempotenz</h2>
+
+            <span class="test-label">Klick den Button — erneutes init() darf nichts kaputt machen</span>
+            <p class="mb-4">
+                <button onclick="runIdempotencyTest()" class="bg-petrol text-white px-4 py-2 rounded-lg font-semibold">
+                    FwJanitor.init() nochmal ausfuehren
+                </button>
+                <span id="idempotency-feedback" class="ml-3 text-sm font-semibold text-petrol opacity-0 transition-opacity duration-300"></span>
+            </p>
+
+        </div>
+    </div>
+
+    <script>
+        function runIdempotencyTest() {
+            window.FwJanitor.init();
+            var el = document.getElementById('idempotency-feedback');
+            el.textContent = 'init() ausgefuehrt — keine Aenderung sichtbar = OK';
+            el.style.opacity = '1';
+            setTimeout(function() { el.style.opacity = '0'; }, 3000);
+        }
+    </script>
+
+    <!--
+        Janitor Script — Pfad-Kontext:
+        Lokal (diese Testseite): Relative Pfade zum Repo-Root (3 Ebenen hoch).
+        Ghost-Produktion: {{asset "js/fw-janitor.js"}} + data-icon-base="{{asset 'images/'}}"
+    -->
+    <script src="../../../assets/js/fw-janitor.js" data-icon-base="../templates/assets/"></script>
+
+</body>
+</html>

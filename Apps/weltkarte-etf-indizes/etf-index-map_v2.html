@@ -1,0 +1,793 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ETF Index Weltkarte – 16 Indizes</title>
+  <link href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
+  <script src="https://cdn.jsdelivr.net/npm/topojson-client@3"></script>
+  <style>
+    .etf-app, .etf-app * { box-sizing: border-box; }
+    .etf-app {
+      --color-bg: #f7f6f2;
+      --color-surface: #f9f8f5;
+      --color-surface-2: #fbfbf9;
+      --color-surface-offset: #f0ede8;
+      --color-divider: #dcd9d5;
+      --color-border: #d4d1ca;
+      --color-text: #28251d;
+      --color-text-muted: #7a7974;
+      --color-text-faint: #bab9b4;
+      --color-primary: #01696f;
+      --shadow-sm: 0 1px 2px rgba(0,0,0,.06);
+      --shadow-md: 0 4px 12px rgba(0,0,0,.10);
+      --radius-sm: .375rem;
+      --radius-md: .5rem;
+      --radius-lg: .75rem;
+      --radius-xl: 1rem;
+      --space-1: .25rem; --space-2: .5rem; --space-3: .75rem; --space-4: 1rem; --space-5: 1.25rem; --space-6: 1.5rem; --space-8: 2rem;
+      --text-xs: clamp(.74rem, .7rem + .2vw, .85rem);
+      --text-sm: clamp(.86rem, .82rem + .25vw, .96rem);
+      --text-base: clamp(.96rem, .92rem + .25vw, 1.08rem);
+      --text-lg: clamp(1.05rem, .95rem + .45vw, 1.28rem);
+      --text-xl: clamp(1.3rem, 1rem + 1vw, 1.8rem);
+      --map-land: #dad6ce;
+      --map-dim: #ebe7df;
+      --map-border: #ffffff;
+      --map-ocean: #d7e8ec;
+      --overlap-color: #d19900;
+      --idx-msci-acwi: #006494;
+      --idx-ftse-all-world: #da7101;
+      --idx-msci-world: #01696f;
+      --idx-ftse-developed-world: #008b8b;
+      --idx-msci-em: #437a22;
+      --idx-ftse-em: #6b8e23;
+      --idx-msci-europe: #7a39bb;
+      --idx-ftse-developed-europe: #9250d0;
+      --idx-stoxx-europe-600: #a12c7b;
+      --idx-msci-north-america: #a13544;
+      --idx-ftse-north-america: #c24a59;
+      --idx-msci-usa: #964219;
+      --idx-sp-500: #da7101;
+      --idx-msci-pacific: #006e5f;
+      --idx-msci-japan: #006494;
+      --idx-ftse-japan: #4d8f25;
+      font-family: 'Satoshi', system-ui, sans-serif;
+      color: var(--color-text);
+      background: var(--color-bg);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-xl);
+      overflow: hidden;
+      width: 100%;
+      min-height: 760px;
+      display: grid;
+      grid-template-rows: 56px 1fr;
+      position: relative;
+    }
+    .etf-app[data-theme="dark"] {
+      --color-bg: #171614;
+      --color-surface: #1c1b19;
+      --color-surface-2: #201f1d;
+      --color-surface-offset: #2a2927;
+      --color-divider: #2a2927;
+      --color-border: #393836;
+      --color-text: #cdccca;
+      --color-text-muted: #8d8b88;
+      --color-text-faint: #5f5d5a;
+      --map-land: #2d2c2a;
+      --map-dim: #232220;
+      --map-border: #171614;
+      --map-ocean: #1c2629;
+      --overlap-color: #e8af34;
+      --idx-msci-acwi: #5591c7;
+      --idx-ftse-all-world: #fdab43;
+      --idx-msci-world: #4f98a3;
+      --idx-ftse-developed-world: #57b8b8;
+      --idx-msci-em: #6daa45;
+      --idx-ftse-em: #8dbb47;
+      --idx-msci-europe: #a86fdf;
+      --idx-ftse-developed-europe: #be8bf0;
+      --idx-stoxx-europe-600: #d163a7;
+      --idx-msci-north-america: #dd6974;
+      --idx-ftse-north-america: #f08b95;
+      --idx-msci-usa: #bb653b;
+      --idx-sp-500: #fdab43;
+      --idx-msci-pacific: #4aa08f;
+      --idx-msci-japan: #70acd8;
+      --idx-ftse-japan: #7ebb5b;
+      --shadow-sm: 0 1px 2px rgba(0,0,0,.18);
+      --shadow-md: 0 4px 12px rgba(0,0,0,.30);
+    }
+    .etf-app button { font: inherit; color: inherit; background: none; border: none; cursor: pointer; }
+    .etf-app svg { display: block; max-width: 100%; }
+
+    .etf-header {
+      display:flex; align-items:center; justify-content:space-between;
+      padding: var(--space-3) var(--space-5);
+      background: var(--color-surface);
+      border-bottom: 1px solid var(--color-divider);
+      z-index: 3;
+    }
+    .etf-header-left { display:flex; align-items:center; gap: var(--space-3); min-width:0; }
+    .etf-title-wrap { min-width:0; }
+    .etf-title { font-size: var(--text-lg); font-weight:700; line-height:1.1; }
+    .etf-subtitle { font-size: var(--text-xs); color: var(--color-text-muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .theme-btn, .sheet-open-btn {
+      min-height: 34px; border-radius: var(--radius-md);
+      display:flex; align-items:center; justify-content:center;
+    }
+    .theme-btn { width:34px; }
+    .theme-btn:hover, .sheet-open-btn:hover { background: var(--color-surface-offset); }
+
+    .etf-body {
+      display:grid;
+      grid-template-columns: 300px minmax(0,1fr);
+      min-height:0;
+    }
+
+    .index-panel {
+      background: var(--color-surface);
+      border-right: 1px solid var(--color-divider);
+      padding: var(--space-3);
+      overflow:auto;
+      min-height:0;
+    }
+    .panel-head { display:flex; align-items:center; justify-content:space-between; gap: var(--space-2); margin-bottom: var(--space-2); }
+    .panel-label {
+      font-size: var(--text-xs); font-weight:700; letter-spacing:.08em; text-transform:uppercase;
+      color: var(--color-text-faint); padding: var(--space-2);
+    }
+    .panel-note {
+      font-size: var(--text-xs); color: var(--color-text-muted); line-height:1.5; padding: 0 var(--space-2) var(--space-3);
+    }
+    .group-block + .group-block { margin-top: var(--space-3); }
+    .group-title {
+      font-size: var(--text-xs); font-weight:700; color: var(--color-text-muted);
+      padding: 0 var(--space-2) var(--space-2);
+      text-transform: uppercase; letter-spacing: .04em;
+    }
+    .group-list { display:flex; flex-direction:column; gap: 6px; }
+    .idx-row {
+      width:100%; text-align:left; padding: 10px 12px; min-height: 48px;
+      border-radius: var(--radius-lg); border:1px solid transparent; background: transparent;
+      display:grid; grid-template-columns: 12px minmax(0,1fr) auto; gap: 10px; align-items:center;
+      transition: .18s ease;
+    }
+    .idx-row:hover { background: var(--color-surface-offset); }
+    .idx-row.active {
+      background: color-mix(in srgb, var(--btn-color) 10%, var(--color-surface));
+      border-color: color-mix(in srgb, var(--btn-color) 35%, transparent);
+    }
+    .idx-dot { width:10px; height:10px; border-radius:50%; background: var(--btn-color); }
+    .idx-main { min-width:0; }
+    .idx-name { font-size: var(--text-sm); font-weight:700; line-height:1.2; }
+    .idx-sub { font-size: var(--text-xs); color: var(--color-text-muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .idx-provider { font-size: 10px; font-weight:700; color: var(--btn-color); }
+
+    .content-panel {
+      display:grid;
+      grid-template-rows: auto auto auto;
+      min-height:0;
+      background: var(--color-bg);
+    }
+
+    .mobile-controls {
+      display:none;
+      padding: var(--space-3) var(--space-3) 0;
+      gap: var(--space-2);
+      background: var(--color-bg);
+    }
+    .active-chips-bar {
+      display:flex; gap: var(--space-2); overflow-x:auto; padding-bottom: 2px;
+    }
+    .active-chips-bar::-webkit-scrollbar { height: 4px; }
+    .active-chip {
+      display:inline-flex; align-items:center; gap: 8px; white-space:nowrap;
+      border-radius: 999px; padding: 6px 10px; font-size: var(--text-xs); font-weight:700;
+      background: color-mix(in srgb, var(--chip-color) 14%, transparent); color: var(--chip-color);
+      border: 1px solid color-mix(in srgb, var(--chip-color) 25%, transparent);
+    }
+    .active-chip .dot { width:10px; height:10px; border-radius:50%; background: var(--chip-color); }
+    .active-chip .remove { opacity:.8; }
+    .sheet-open-btn {
+      justify-content:space-between; width:100%; padding: 10px 12px; min-height:44px;
+      border:1px solid var(--color-divider); background: var(--color-surface); box-shadow: var(--shadow-sm);
+    }
+    .sheet-open-btn strong { font-size: var(--text-sm); }
+    .sheet-open-btn span { font-size: var(--text-xs); color: var(--color-text-muted); }
+
+    .map-section { padding: var(--space-4); min-height:0; }
+    .map-card {
+      background: var(--color-surface);
+      border:1px solid var(--color-divider);
+      border-radius: var(--radius-xl);
+      box-shadow: var(--shadow-sm);
+      overflow:hidden;
+    }
+    .map-card-head {
+      display:flex; justify-content:space-between; align-items:center; gap: var(--space-3);
+      padding: var(--space-3) var(--space-4);
+      border-bottom:1px solid var(--color-divider);
+      background: var(--color-surface-2);
+      flex-wrap: wrap;
+    }
+    .map-title { font-size: var(--text-sm); font-weight:700; }
+    .map-legend { display:flex; gap: var(--space-3); flex-wrap: wrap; }
+    .legend-item { display:flex; align-items:center; gap: 6px; font-size: var(--text-xs); color: var(--color-text-muted); }
+    .legend-dot { width: 10px; height: 10px; border-radius: 999px; background: var(--dot-color); }
+
+    .map-stage {
+      width: 100%; aspect-ratio: 2 / 1; min-height: 260px; position: relative; background: var(--map-ocean);
+    }
+    #map-svg-container { width:100%; height:100%; }
+    #map-svg-container svg { width:100%; height:100%; }
+    .map-hint {
+      position:absolute; inset:0; display:flex; align-items:center; justify-content:center;
+      color: var(--color-text-muted); font-size: var(--text-sm); pointer-events:none; gap: var(--space-2);
+    }
+    .country {
+      fill: var(--map-land);
+      stroke: var(--map-border);
+      stroke-width: .45px;
+      transition: fill .28s ease, opacity .28s ease;
+    }
+    .country.dim-country { fill: var(--map-dim); opacity: .58; }
+
+    .limit-note {
+      display:none; margin: 0 var(--space-4) var(--space-3); padding: var(--space-2) var(--space-3);
+      background: color-mix(in srgb, var(--overlap-color) 10%, var(--color-surface));
+      color: var(--color-text); border: 1px solid color-mix(in srgb, var(--overlap-color) 35%, transparent);
+      border-radius: var(--radius-md); font-size: var(--text-xs);
+    }
+    .limit-note.show { display:block; }
+
+    .info-section { padding: 0 var(--space-4) var(--space-4); min-height:0; }
+    .info-card {
+      background: var(--color-surface); border:1px solid var(--color-divider); border-radius: var(--radius-xl);
+      box-shadow: var(--shadow-sm); min-height: 220px; padding: var(--space-4); overflow:auto;
+    }
+    .placeholder {
+      min-height: 180px; display:flex; align-items:center; justify-content:center; text-align:center;
+      color: var(--color-text-muted); font-size: var(--text-sm); padding: var(--space-6);
+    }
+    .selection-badges { display:flex; gap: var(--space-2); flex-wrap: wrap; margin-bottom: var(--space-3); }
+    .selection-pill {
+      display:inline-flex; align-items:center; gap: 8px; padding: 4px 10px; border-radius:999px;
+      font-size: var(--text-xs); background: color-mix(in srgb, var(--pill-color) 14%, transparent); color: var(--pill-color); font-weight:700;
+    }
+    .selection-pill .dot { width:10px; height:10px; border-radius:50%; background: var(--pill-color); }
+    .info-head { display:flex; justify-content:space-between; align-items:flex-start; gap: var(--space-3); flex-wrap: wrap; margin-bottom: var(--space-3); }
+    .info-name { font-size: var(--text-xl); font-weight:700; line-height:1.1; }
+    .info-note { font-size: var(--text-xs); color: var(--color-text-muted); }
+    .kpi-row { display:grid; grid-template-columns: repeat(4, 1fr); gap: var(--space-3); margin-bottom: var(--space-3); }
+    .kpi-card { background: var(--color-surface-2); border:1px solid var(--color-divider); border-radius: var(--radius-lg); padding: var(--space-3); text-align:center; }
+    .kpi-val { font-size: var(--text-xl); font-weight:700; line-height:1.05; color: var(--accent-color, var(--color-primary)); font-variant-numeric: tabular-nums; }
+    .kpi-lbl { font-size: var(--text-xs); color: var(--color-text-muted); margin-top: 4px; line-height:1.35; }
+    .info-meta { display:flex; flex-wrap:wrap; gap: var(--space-2) var(--space-5); }
+    .meta-chip { font-size: var(--text-xs); color: var(--color-text-muted); }
+    .meta-chip strong { color: var(--color-text); font-weight:600; }
+    .data-note { font-size: 11px; color: var(--color-text-faint); margin-top: var(--space-3); }
+
+    .compare-grid { display:grid; grid-template-columns: repeat(auto-fit, minmax(210px,1fr)); gap: var(--space-3); margin-bottom: var(--space-4); }
+    .compare-card { border:1px solid var(--color-divider); border-radius: var(--radius-lg); padding: var(--space-3); background: var(--color-surface-2); }
+    .compare-title { display:flex; align-items:center; gap:8px; font-size: var(--text-sm); font-weight:700; margin-bottom: var(--space-2); }
+    .compare-dot { width:10px; height:10px; border-radius:50%; background: var(--compare-color); }
+    .mini-stats { display:grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
+    .mini-stat { font-size: var(--text-xs); color: var(--color-text-muted); }
+    .mini-stat strong { display:block; font-size: var(--text-base); color: var(--color-text); line-height:1.2; margin-bottom:2px; }
+    .overlap-box {
+      border:1px solid color-mix(in srgb, var(--overlap-color) 40%, var(--color-divider));
+      background: color-mix(in srgb, var(--overlap-color) 8%, var(--color-surface));
+      border-radius: var(--radius-lg); padding: var(--space-4);
+    }
+    .overlap-title { display:flex; align-items:center; gap:8px; font-size: var(--text-sm); font-weight:700; margin-bottom: var(--space-2); }
+    .overlap-dot { width:10px; height:10px; border-radius:50%; background: var(--overlap-color); }
+    .overlap-text { font-size: var(--text-sm); color: var(--color-text-muted); line-height:1.55; }
+
+    .tooltip {
+      position: fixed; z-index: 9999; pointer-events:none; opacity:0; transition: opacity .12s ease;
+      background: var(--color-text); color: var(--color-bg); padding: 4px 8px; border-radius: var(--radius-sm);
+      font-size: 11px; box-shadow: var(--shadow-md); white-space: nowrap;
+    }
+    .tooltip.show { opacity:1; }
+
+    .sheet-overlay {
+      position:absolute; inset:0; background: rgba(0,0,0,.34); opacity:0; pointer-events:none; transition: opacity .2s ease; z-index: 8;
+    }
+    .sheet-overlay.open { opacity:1; pointer-events:auto; }
+    .bottom-sheet {
+      position:absolute; left:0; right:0; bottom:0; z-index: 9; background: var(--color-surface);
+      border-top-left-radius: var(--radius-xl); border-top-right-radius: var(--radius-xl);
+      border-top:1px solid var(--color-divider); box-shadow: 0 -10px 30px rgba(0,0,0,.16);
+      transform: translateY(100%); transition: transform .24s ease; pointer-events:none;
+      max-height: 82%; display:flex; flex-direction:column;
+    }
+    .bottom-sheet.open { transform: translateY(0); pointer-events:auto; }
+    .sheet-handle { width: 40px; height: 4px; border-radius: 999px; background: var(--color-divider); margin: 10px auto 8px; }
+    .sheet-head { display:flex; align-items:flex-start; justify-content:space-between; gap: var(--space-3); padding: 0 var(--space-4) var(--space-3); }
+    .sheet-title { font-size: var(--text-lg); font-weight:700; }
+    .sheet-sub { font-size: var(--text-xs); color: var(--color-text-muted); }
+    .sheet-close { min-width: 34px; min-height: 34px; border-radius: var(--radius-md); }
+    .sheet-close:hover { background: var(--color-surface-offset); }
+    .sheet-body { overflow:auto; padding: 0 var(--space-4) var(--space-4); }
+
+    @media (max-width: 1023px) {
+      .etf-body { grid-template-columns: 1fr; }
+      .index-panel { display:none; }
+      .mobile-controls { display:grid; }
+      .content-panel { grid-template-rows: auto auto; }
+      .map-section { padding-top: var(--space-3); }
+    }
+    @media (min-width: 1024px) {
+      .bottom-sheet, .sheet-overlay { display:none; }
+    }
+    @media (max-width: 720px) {
+      .etf-app { min-height: 0; }
+      .etf-subtitle { display:none; }
+      .map-section { padding: var(--space-3); }
+      .info-section { padding: 0 var(--space-3) var(--space-3); }
+      .kpi-row { grid-template-columns: repeat(2, 1fr); }
+      .map-stage { min-height: 220px; }
+    }
+    @media (max-width: 520px) {
+      .etf-header { padding: var(--space-3); }
+      .etf-title { font-size: var(--text-base); }
+      .mobile-controls { padding: var(--space-2) var(--space-2) 0; }
+      .map-stage { min-height: 190px; }
+      .compare-grid { grid-template-columns: 1fr; }
+      .mini-stats { grid-template-columns: 1fr 1fr; }
+      .sheet-body { padding: 0 var(--space-3) var(--space-3); }
+      .sheet-head { padding: 0 var(--space-3) var(--space-3); }
+    }
+  </style>
+</head>
+<body>
+  <div class="etf-app" id="etf-app" data-theme="light">
+    <div class="etf-header">
+      <div class="etf-header-left">
+        <svg width="28" height="28" viewBox="0 0 28 28" fill="none" aria-label="ETF Index Weltkarte Logo">
+          <circle cx="14" cy="14" r="12" stroke="var(--color-primary)" stroke-width="1.5"/>
+          <ellipse cx="14" cy="14" rx="6" ry="12" stroke="var(--color-primary)" stroke-width="1.5"/>
+          <path d="M2 14 Q10 10 14 14 Q18 18 26 14" stroke="var(--color-primary)" stroke-width="1.5" fill="none"/>
+        </svg>
+        <div class="etf-title-wrap">
+          <div class="etf-title">ETF Index Weltkarte</div>
+          <div class="etf-subtitle">16 Indizes · bis zu 3 aktiv · Ghost-ready und hier testbar</div>
+        </div>
+      </div>
+      <button class="theme-btn" id="theme-toggle" aria-label="Farbschema wechseln"></button>
+    </div>
+
+    <div class="etf-body">
+      <aside class="index-panel">
+        <div class="panel-head">
+          <div class="panel-label">Indexauswahl</div>
+        </div>
+        <div class="panel-note">Gruppiert nach Region und Universum. Maximal 3 Indizes gleichzeitig. Überlappungen erscheinen in Gold.</div>
+        <div id="desktop-groups"></div>
+      </aside>
+
+      <section class="content-panel">
+        <div class="mobile-controls">
+          <div class="active-chips-bar" id="active-chips-mobile"></div>
+          <button class="sheet-open-btn" id="sheet-open-btn">
+            <strong>Indizes auswählen</strong>
+            <span id="selection-count-mobile">0/3 aktiv</span>
+          </button>
+        </div>
+
+        <div class="map-section">
+          <div class="limit-note" id="limit-note">Maximal 3 Indizes gleichzeitig auswählbar.</div>
+          <div class="map-card">
+            <div class="map-card-head">
+              <div class="map-title">Länderabdeckung der ausgewählten Indizes</div>
+              <div class="map-legend" id="map-legend"></div>
+            </div>
+            <div class="map-stage">
+              <div id="map-svg-container"></div>
+              <div class="map-hint" id="map-hint">Wähle einen oder mehrere Indizes aus</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="info-section">
+          <div class="info-card" id="info-card">
+            <div class="placeholder">Noch kein Index ausgewählt. Die Info-Box zeigt bei Einzelauswahl die Kennzahlen des Index und bei Mehrfachauswahl zusätzlich die Überlappung der Länderabdeckung.</div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <div class="sheet-overlay" id="sheet-overlay"></div>
+    <div class="bottom-sheet" id="bottom-sheet" aria-hidden="true">
+      <div class="sheet-handle"></div>
+      <div class="sheet-head">
+        <div>
+          <div class="sheet-title">Indizes auswählen</div>
+          <div class="sheet-sub">Maximal 3 gleichzeitig · gruppiert nach Region und Universum</div>
+        </div>
+        <button class="sheet-close" id="sheet-close" aria-label="Auswahl schließen">✕</button>
+      </div>
+      <div class="sheet-body" id="mobile-groups"></div>
+    </div>
+
+    <div class="tooltip" id="tooltip"></div>
+  </div>
+
+  <script>
+    const INDEX_DATA = [
+      { id:'msci-acwi', name:'MSCI ACWI', provider:'MSCI', universe:'Global', inception:'1987-12-31', countries:47, constituents:2515, return10y:11.50, returnCurrency:'EUR', methodology:'Large- & Mid-Cap; Developed + Emerging', dataDate:'03/2026' },
+      { id:'ftse-all-world', name:'FTSE All-World', provider:'FTSE Russell', universe:'Global', inception:'1986-12-31', countries:49, constituents:4264, return10y:11.00, returnCurrency:'EUR', methodology:'Large- & Mid-Cap; global investierbarer Markt', dataDate:'03/2026' },
+      { id:'msci-world', name:'MSCI World', provider:'MSCI', universe:'Developed World', inception:'1969-12-31', countries:23, constituents:1311, return10y:13.50, returnCurrency:'EUR', methodology:'Large- & Mid-Cap; ~85 % je Land', dataDate:'03/2026' },
+      { id:'ftse-developed-world', name:'FTSE Developed World', provider:'FTSE Russell', universe:'Developed World', inception:'1986-12-31', countries:25, constituents:2200, return10y:12.90, returnCurrency:'EUR', methodology:'Large- & Mid-Cap; entwickelte Märkte', dataDate:'03/2026' },
+      { id:'msci-em', name:'MSCI Emerging Markets', provider:'MSCI', universe:'Emerging Markets', inception:'1987-12-31', countries:24, constituents:1430, return10y:4.50, returnCurrency:'EUR', methodology:'Large- & Mid-Cap; 24 Emerging Markets', dataDate:'03/2026' },
+      { id:'ftse-em', name:'FTSE Emerging Markets', provider:'FTSE Russell', universe:'Emerging Markets', inception:'1987-12-31', countries:24, constituents:1900, return10y:4.20, returnCurrency:'EUR', methodology:'Large- & Mid-Cap; Emerging Markets', dataDate:'03/2026' },
+      { id:'msci-europe', name:'MSCI Europe', provider:'MSCI', universe:'Europe', inception:'1969-12-31', countries:15, constituents:414, return10y:8.70, returnCurrency:'EUR', methodology:'Large- & Mid-Cap; entwickelte Märkte Europa', dataDate:'03/2026' },
+      { id:'ftse-developed-europe', name:'FTSE Developed Europe', provider:'FTSE Russell', universe:'Europe', inception:'1986-12-31', countries:16, constituents:600, return10y:8.60, returnCurrency:'EUR', methodology:'Developed Europe; Large- & Mid-Cap', dataDate:'03/2026' },
+      { id:'stoxx-europe-600', name:'STOXX Europe 600', provider:'STOXX', universe:'Europe', inception:'1998-12-31', countries:17, constituents:600, return10y:8.50, returnCurrency:'EUR', methodology:'Large-, Mid- & Small-Cap; feste 600 Komponenten', dataDate:'03/2026' },
+      { id:'msci-north-america', name:'MSCI North America', provider:'MSCI', universe:'North America / USA', inception:'1969-12-31', countries:2, constituents:680, return10y:14.00, returnCurrency:'EUR', methodology:'USA + Kanada; Large- & Mid-Cap', dataDate:'03/2026' },
+      { id:'ftse-north-america', name:'FTSE North America', provider:'FTSE Russell', universe:'North America / USA', inception:'1986-12-31', countries:2, constituents:750, return10y:13.80, returnCurrency:'EUR', methodology:'USA + Kanada; Developed North America', dataDate:'03/2026' },
+      { id:'msci-usa', name:'MSCI USA', provider:'MSCI', universe:'North America / USA', inception:'1969-12-31', countries:1, constituents:590, return10y:14.40, returnCurrency:'EUR', methodology:'USA; Large- & Mid-Cap', dataDate:'03/2026' },
+      { id:'sp-500', name:'S&P 500', provider:'S&P Dow Jones', universe:'North America / USA', inception:'1957-03-04', countries:1, constituents:500, return10y:14.20, returnCurrency:'EUR', methodology:'500 führende US-Aktien', dataDate:'03/2026' },
+      { id:'msci-pacific', name:'MSCI Pacific', provider:'MSCI', universe:'Pacific / Japan', inception:'1969-12-31', countries:5, constituents:500, return10y:9.10, returnCurrency:'EUR', methodology:'Developed Pacific ohne Nordamerika', dataDate:'03/2026' },
+      { id:'msci-japan', name:'MSCI Japan', provider:'MSCI', universe:'Pacific / Japan', inception:'1969-12-31', countries:1, constituents:200, return10y:8.30, returnCurrency:'EUR', methodology:'Japan; Large- & Mid-Cap', dataDate:'03/2026' },
+      { id:'ftse-japan', name:'FTSE Japan', provider:'FTSE Russell', universe:'Pacific / Japan', inception:'1986-12-31', countries:1, constituents:500, return10y:8.10, returnCurrency:'EUR', methodology:'Japan; FTSE Developed', dataDate:'03/2026' }
+    ];
+
+    const INDEX_GROUPS = [
+      { key:'global', title:'Global', ids:['msci-acwi','ftse-all-world'] },
+      { key:'developed', title:'Developed World', ids:['msci-world','ftse-developed-world'] },
+      { key:'em', title:'Emerging Markets', ids:['msci-em','ftse-em'] },
+      { key:'europe', title:'Europe', ids:['msci-europe','ftse-developed-europe','stoxx-europe-600'] },
+      { key:'na', title:'North America / USA', ids:['msci-north-america','ftse-north-america','msci-usa','sp-500'] },
+      { key:'pacific', title:'Pacific / Japan', ids:['msci-pacific','msci-japan','ftse-japan'] }
+    ];
+
+    const DM = [36,40,56,124,208,246,250,276,344,372,376,380,392,528,554,578,620,702,724,752,756,826,840];
+    const EM = [76,152,156,158,170,203,300,348,356,360,410,414,458,484,604,608,616,634,682,710,764,784,792,818];
+    const EUROPE15 = [40,56,208,246,250,276,372,380,528,578,620,724,752,756,826];
+    const EUROPE16 = [...EUROPE15, 442];
+    const STOXX600 = [40,56,208,246,250,276,372,380,442,528,578,616,620,724,752,756,826];
+    const NORTH_AMERICA = [124,840];
+    const PACIFIC = [36,344,392,554,702];
+
+    const COUNTRY_MAP = {
+      'msci-acwi': [...DM, ...EM],
+      'ftse-all-world': [...new Set([...DM, ...EM, 352, 410])],
+      'msci-world': DM,
+      'ftse-developed-world': [...new Set([...DM, 352, 410])],
+      'msci-em': EM,
+      'ftse-em': EM,
+      'msci-europe': EUROPE15,
+      'ftse-developed-europe': EUROPE16,
+      'stoxx-europe-600': STOXX600,
+      'msci-north-america': NORTH_AMERICA,
+      'ftse-north-america': NORTH_AMERICA,
+      'msci-usa': [840],
+      'sp-500': [840],
+      'msci-pacific': PACIFIC,
+      'msci-japan': [392],
+      'ftse-japan': [392]
+    };
+
+    const ISO_NAMES = {
+      36:'Australien',40:'Österreich',56:'Belgien',76:'Brasilien',124:'Kanada',152:'Chile',156:'China',158:'Taiwan',170:'Kolumbien',203:'Tschechien',208:'Dänemark',246:'Finnland',250:'Frankreich',276:'Deutschland',300:'Griechenland',344:'Hongkong',348:'Ungarn',352:'Island',356:'Indien',360:'Indonesien',372:'Irland',376:'Israel',380:'Italien',392:'Japan',410:'Südkorea',414:'Kuwait',442:'Luxemburg',458:'Malaysia',484:'Mexiko',528:'Niederlande',554:'Neuseeland',578:'Norwegen',604:'Peru',608:'Philippinen',616:'Polen',620:'Portugal',634:'Katar',682:'Saudi-Arabien',702:'Singapur',710:'Südafrika',724:'Spanien',752:'Schweden',756:'Schweiz',764:'Thailand',784:'VAE',792:'Türkei',818:'Ägypten',826:'Vereinigtes Königreich',840:'USA'
+    };
+
+    const INDEX_COLORS = {
+      'msci-acwi':'var(--idx-msci-acwi)',
+      'ftse-all-world':'var(--idx-ftse-all-world)',
+      'msci-world':'var(--idx-msci-world)',
+      'ftse-developed-world':'var(--idx-ftse-developed-world)',
+      'msci-em':'var(--idx-msci-em)',
+      'ftse-em':'var(--idx-ftse-em)',
+      'msci-europe':'var(--idx-msci-europe)',
+      'ftse-developed-europe':'var(--idx-ftse-developed-europe)',
+      'stoxx-europe-600':'var(--idx-stoxx-europe-600)',
+      'msci-north-america':'var(--idx-msci-north-america)',
+      'ftse-north-america':'var(--idx-ftse-north-america)',
+      'msci-usa':'var(--idx-msci-usa)',
+      'sp-500':'var(--idx-sp-500)',
+      'msci-pacific':'var(--idx-msci-pacific)',
+      'msci-japan':'var(--idx-msci-japan)',
+      'ftse-japan':'var(--idx-ftse-japan)'
+    };
+
+    const app = document.getElementById('etf-app');
+    const desktopGroups = document.getElementById('desktop-groups');
+    const mobileGroups = document.getElementById('mobile-groups');
+    const activeChipsMobile = document.getElementById('active-chips-mobile');
+    const selectionCountMobile = document.getElementById('selection-count-mobile');
+    const infoCard = document.getElementById('info-card');
+    const mapLegend = document.getElementById('map-legend');
+    const limitNote = document.getElementById('limit-note');
+    const tooltip = document.getElementById('tooltip');
+    const bottomSheet = document.getElementById('bottom-sheet');
+    const sheetOverlay = document.getElementById('sheet-overlay');
+    const selectedIds = [];
+    let mapReady = false;
+
+    function colorFor(id) { return INDEX_COLORS[id] || 'var(--color-primary)'; }
+    function getIndex(id) { return INDEX_DATA.find(x => x.id === id); }
+    function fmtNum(n) { return n.toLocaleString('de-DE'); }
+    function fmtPct(n) { return n.toFixed(2).replace('.', ',') + ' %'; }
+    function calcAge(dateStr) { return Math.floor((Date.now() - new Date(dateStr)) / (365.25 * 864e5)); }
+    function fmtStart(dateStr) { return new Date(dateStr).toLocaleDateString('de-DE', { month:'2-digit', year:'numeric' }); }
+
+    function renderThemeButton() {
+      const btn = document.getElementById('theme-toggle');
+      const dark = app.getAttribute('data-theme') === 'dark';
+      btn.innerHTML = dark
+        ? '<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>'
+        : '<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>';
+    }
+    document.getElementById('theme-toggle').addEventListener('click', () => {
+      app.setAttribute('data-theme', app.getAttribute('data-theme') === 'dark' ? 'light' : 'dark');
+      renderThemeButton();
+      paintMap();
+      renderLegend();
+      renderInfo();
+      renderActiveChips();
+    });
+    renderThemeButton();
+
+    function createIndexRow(id) {
+      const idx = getIndex(id);
+      const row = document.createElement('button');
+      row.className = 'idx-row';
+      row.dataset.id = id;
+      row.style.setProperty('--btn-color', colorFor(id));
+      row.innerHTML = `
+        <span class="idx-dot"></span>
+        <span class="idx-main">
+          <span class="idx-name">${idx.name}</span>
+          <span class="idx-sub">${idx.provider} · ${idx.universe}</span>
+        </span>
+        <span class="idx-provider">${idx.provider}</span>`;
+      row.addEventListener('click', () => toggleSelection(id));
+      return row;
+    }
+
+    function renderGroups(targetEl) {
+      targetEl.innerHTML = '';
+      INDEX_GROUPS.forEach(group => {
+        const wrap = document.createElement('div');
+        wrap.className = 'group-block';
+        const title = document.createElement('div');
+        title.className = 'group-title';
+        title.textContent = group.title;
+        const list = document.createElement('div');
+        list.className = 'group-list';
+        group.ids.forEach(id => list.appendChild(createIndexRow(id)));
+        wrap.appendChild(title);
+        wrap.appendChild(list);
+        targetEl.appendChild(wrap);
+      });
+      syncButtonStates();
+    }
+
+    function syncButtonStates() {
+      document.querySelectorAll('.idx-row').forEach(btn => {
+        btn.classList.toggle('active', selectedIds.includes(btn.dataset.id));
+      });
+    }
+
+    function renderActiveChips() {
+      activeChipsMobile.innerHTML = '';
+      selectionCountMobile.textContent = `${selectedIds.length}/3 aktiv`;
+      if (!selectedIds.length) return;
+      selectedIds.forEach(id => {
+        const idx = getIndex(id);
+        const chip = document.createElement('button');
+        chip.className = 'active-chip';
+        chip.style.setProperty('--chip-color', colorFor(id));
+        chip.innerHTML = `<span class="dot"></span>${idx.name}<span class="remove">✕</span>`;
+        chip.addEventListener('click', () => toggleSelection(id));
+        activeChipsMobile.appendChild(chip);
+      });
+    }
+
+    function openSheet() {
+      bottomSheet.classList.add('open');
+      sheetOverlay.classList.add('open');
+      bottomSheet.setAttribute('aria-hidden', 'false');
+    }
+    function closeSheet() {
+      bottomSheet.classList.remove('open');
+      sheetOverlay.classList.remove('open');
+      bottomSheet.setAttribute('aria-hidden', 'true');
+    }
+    document.getElementById('sheet-open-btn').addEventListener('click', openSheet);
+    document.getElementById('sheet-close').addEventListener('click', closeSheet);
+    sheetOverlay.addEventListener('click', closeSheet);
+
+    function toggleSelection(id) {
+      const i = selectedIds.indexOf(id);
+      if (i >= 0) {
+        selectedIds.splice(i, 1);
+        limitNote.classList.remove('show');
+      } else {
+        if (selectedIds.length >= 3) {
+          limitNote.classList.add('show');
+          return;
+        }
+        selectedIds.push(id);
+        limitNote.classList.remove('show');
+      }
+      syncButtonStates();
+      renderActiveChips();
+      renderLegend();
+      renderInfo();
+      paintMap();
+      document.getElementById('map-hint').style.display = selectedIds.length ? 'none' : 'flex';
+    }
+
+    function renderLegend() {
+      mapLegend.innerHTML = '';
+      if (!selectedIds.length) {
+        mapLegend.innerHTML = '<div class="legend-item"><span class="legend-dot" style="--dot-color: var(--map-land)"></span>Keine Auswahl</div>';
+        return;
+      }
+      selectedIds.forEach(id => {
+        const idx = getIndex(id);
+        const el = document.createElement('div');
+        el.className = 'legend-item';
+        el.innerHTML = `<span class="legend-dot" style="--dot-color:${colorFor(id)}"></span>${idx.name}`;
+        mapLegend.appendChild(el);
+      });
+      if (selectedIds.length > 1) {
+        const over = document.createElement('div');
+        over.className = 'legend-item';
+        over.innerHTML = `<span class="legend-dot" style="--dot-color:var(--overlap-color)"></span>Überlappung`;
+        mapLegend.appendChild(over);
+      }
+    }
+
+    function renderInfo() {
+      if (!selectedIds.length) {
+        infoCard.innerHTML = '<div class="placeholder">Noch kein Index ausgewählt. Die Info-Box zeigt bei Einzelauswahl die Kennzahlen des Index und bei Mehrfachauswahl zusätzlich die Überlappung der Länderabdeckung.</div>';
+        return;
+      }
+      if (selectedIds.length === 1) {
+        const idx = getIndex(selectedIds[0]);
+        infoCard.style.setProperty('--accent-color', colorFor(idx.id));
+        infoCard.innerHTML = `
+          <div class="info-head">
+            <div>
+              <div class="info-name">${idx.name}</div>
+              <div class="info-note">${idx.provider} · Rendite: ${idx.returnCurrency} · Net Total Return</div>
+            </div>
+          </div>
+          <div class="kpi-row">
+            <div class="kpi-card"><div class="kpi-val">${calcAge(idx.inception)}</div><div class="kpi-lbl">Jahre alt<br>seit ${fmtStart(idx.inception)}</div></div>
+            <div class="kpi-card"><div class="kpi-val">${idx.countries}</div><div class="kpi-lbl">Länder</div></div>
+            <div class="kpi-card"><div class="kpi-val">${fmtNum(idx.constituents)}</div><div class="kpi-lbl">Firmen</div></div>
+            <div class="kpi-card"><div class="kpi-val">${fmtPct(idx.return10y)}</div><div class="kpi-lbl">10 J. p.a.<br>${idx.returnCurrency}</div></div>
+          </div>
+          <div class="info-meta">
+            <span class="meta-chip"><strong>Universum:</strong> ${idx.universe}</span>
+            <span class="meta-chip"><strong>Methodik:</strong> ${idx.methodology}</span>
+          </div>
+          <div class="data-note">Datenstand: ${idx.dataDate} · Maßgeblich für Länderzahl ist das jeweilige Factsheet des Indexanbieters.</div>`;
+        return;
+      }
+
+      const sets = selectedIds.map(id => new Set(COUNTRY_MAP[id] || []));
+      const union = new Set([...sets.flatMap(s => [...s])]);
+      const overlapAll = [...union].filter(code => sets.every(s => s.has(code)));
+      const compareCards = selectedIds.map(id => {
+        const idx = getIndex(id);
+        const ownSet = new Set(COUNTRY_MAP[id] || []);
+        const exclusive = [...ownSet].filter(code => selectedIds.every(otherId => otherId === id || !(COUNTRY_MAP[otherId] || []).includes(code))).length;
+        const shared = [...ownSet].filter(code => selectedIds.some(otherId => otherId !== id && (COUNTRY_MAP[otherId] || []).includes(code))).length;
+        return `
+          <div class="compare-card">
+            <div class="compare-title" style="--compare-color:${colorFor(id)}"><span class="compare-dot"></span>${idx.name}</div>
+            <div class="mini-stats">
+              <div class="mini-stat"><strong>${idx.countries}</strong>Länder lt. Factsheet</div>
+              <div class="mini-stat"><strong>${fmtNum(idx.constituents)}</strong>Firmen</div>
+              <div class="mini-stat"><strong>${shared}</strong>davon mit Überschneidung</div>
+              <div class="mini-stat"><strong>${exclusive}</strong>exklusiv in Auswahl</div>
+            </div>
+          </div>`;
+      }).join('');
+
+      let pairLines = '';
+      for (let i = 0; i < selectedIds.length; i++) {
+        for (let j = i + 1; j < selectedIds.length; j++) {
+          const a = getIndex(selectedIds[i]);
+          const b = getIndex(selectedIds[j]);
+          const aSet = new Set(COUNTRY_MAP[a.id] || []);
+          const bSet = new Set(COUNTRY_MAP[b.id] || []);
+          const inter = [...aSet].filter(code => bSet.has(code));
+          pairLines += `<div class="overlap-text"><strong style="color:var(--color-text)">${a.name} ∩ ${b.name}:</strong> ${inter.length} Länder in beiden Indizes.</div>`;
+        }
+      }
+
+      infoCard.innerHTML = `
+        <div class="selection-badges">
+          ${selectedIds.map(id => `<span class="selection-pill" style="--pill-color:${colorFor(id)}"><span class="dot"></span>${getIndex(id).name}</span>`).join('')}
+          <span class="selection-pill" style="--pill-color:var(--overlap-color)"><span class="dot"></span>Überlappung</span>
+        </div>
+        <div class="compare-grid">${compareCards}</div>
+        <div class="overlap-box">
+          <div class="overlap-title"><span class="overlap-dot"></span>Überlappungsanalyse</div>
+          <div class="overlap-text">Ausgewählt: ${selectedIds.length} Indizes · Gesamtabdeckung der Auswahl: ${union.size} kartierte Länder.</div>
+          <div class="overlap-text">In allen ausgewählten Indizes enthalten: <strong style="color:var(--color-text)">${overlapAll.length}</strong> Länder.</div>
+          ${pairLines}
+          <div class="data-note">Hinweis: Die Kartenüberlappung basiert auf den hinterlegten Länderzuordnungen. Maßgeblich für die offizielle Länderzahl bleibt das Factsheet des jeweiligen Indexanbieters.</div>
+        </div>`;
+    }
+
+    async function initMap() {
+      const container = document.getElementById('map-svg-container');
+      const rect = container.getBoundingClientRect();
+      const W = Math.max(640, Math.floor(rect.width || 900));
+      const H = Math.max(320, Math.floor(rect.height || 450));
+      const world = await d3.json('https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json');
+      const projection = d3.geoNaturalEarth1().scale(W / 6.2).translate([W / 2, H / 2]);
+      const path = d3.geoPath().projection(projection);
+      const svg = d3.select(container).append('svg').attr('viewBox', `0 0 ${W} ${H}`).attr('preserveAspectRatio', 'xMidYMid meet');
+      svg.append('rect').attr('width', W).attr('height', H).style('fill', 'var(--map-ocean)');
+      const countries = topojson.feature(world, world.objects.countries);
+
+      svg.append('g')
+        .selectAll('path')
+        .data(countries.features)
+        .join('path')
+        .attr('class', 'country')
+        .attr('d', path)
+        .attr('data-id', d => d.id)
+        .on('mouseenter', function(event, d) {
+          if (!selectedIds.length) return;
+          const code = +d.id;
+          const membership = selectedIds.filter(id => (COUNTRY_MAP[id] || []).includes(code));
+          if (!membership.length) return;
+          const label = ISO_NAMES[code] || ('Code ' + code);
+          tooltip.innerHTML = membership.length > 1 ? `${label} · Überlappung` : `${label} · ${getIndex(membership[0]).name}`;
+          tooltip.classList.add('show');
+        })
+        .on('mousemove', function(event) {
+          tooltip.style.left = (event.clientX + 14) + 'px';
+          tooltip.style.top = (event.clientY - 10) + 'px';
+        })
+        .on('mouseleave', function() { tooltip.classList.remove('show'); });
+
+      svg.append('path')
+        .datum(topojson.mesh(world, world.objects.countries, (a,b) => a !== b))
+        .attr('fill', 'none').style('stroke', 'var(--map-border)').attr('stroke-width', .35).attr('d', path);
+
+      mapReady = true;
+      paintMap();
+    }
+
+    function paintMap() {
+      if (!mapReady) return;
+      d3.selectAll('.country').each(function(d) {
+        const code = +d.id;
+        const membership = selectedIds.filter(id => (COUNTRY_MAP[id] || []).includes(code));
+        const el = d3.select(this);
+        if (!selectedIds.length) {
+          el.classed('dim-country', false).style('fill', null);
+          return;
+        }
+        if (!membership.length) {
+          el.classed('dim-country', true).style('fill', 'var(--map-dim)');
+        } else if (membership.length === 1) {
+          el.classed('dim-country', false).style('fill', colorFor(membership[0]));
+        } else {
+          el.classed('dim-country', false).style('fill', 'var(--overlap-color)');
+        }
+      });
+    }
+
+    renderGroups(desktopGroups);
+    renderGroups(mobileGroups);
+    renderActiveChips();
+    renderLegend();
+    renderInfo();
+    initMap();
+  </script>
+</body>
+</html>

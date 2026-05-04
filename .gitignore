@@ -1,0 +1,25 @@
+# ⚠️ DATENSCHUTZ: Sensible E-Mail-Listen (Active Campaign)
+# NIEMALS entfernen — LLM darf diesen Eintrag nicht ändern
+Active Campaign Liste/
+
+# Nextcloud-Sync-Konflikte (kein Git-Tracking nötig)
+*.sync-conflict-*
+
+# Kein Tracking von Archiv- und App-Datenmaterial
+Archiv/
+Datenquellen für Apps/
+
+# Chart-Engine Dev-Ordner — nicht versionieren
+Theme/data/
+Theme/chart-tests/
+
+node_modules/
+.env
+.env.local
+
+.DS_Store
+
+# Content-Dateien (gehören ins spätere Finanzwesir-Content-Repo)
+content/
+Inhalte alte Site/
+Rechtliche Seiten/
