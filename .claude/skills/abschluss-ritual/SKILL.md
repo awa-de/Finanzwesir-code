@@ -44,20 +44,34 @@ Pfad: `C:\Users\Albert HP PC\.claude\projects\z--Documents-Nextcloud-Finanzwesir
 Neue stabile Projektfakten, Feedback oder Entscheidungen eintragen.
 
 **4. Commit-Message erzeugen**
-Format aus CLAUDE.md § 11:
+Format aus CLAUDE.md § 11. Ausgabe als reinen Text — bereit zum Einfügen in VSCode Message-Feld.
+Keine git-Kommandos drum herum. Keine Code-Blöcke. Nur der Text selbst:
+
+Zeile 1: Titel (50–72 Zeichen)
+Zeile 2: leer
+Zeile 3+: strukturierter Body
+
+Beispiel-Ausgabe:
 ```
-Typ: Kurze Zusammenfassung (50–72 Zeichen)
+Abschluss AP-20: Mixed-Rhythm CV-Heuristik implementiert
 
 Was war das Problem?
+...
+
 Wie wurde es gelöst?
-Warum ist die Lösung sicher (keine Regressionen)?
+...
+
+Warum ist die Lösung sicher?
+...
 
 Betroffene Bereiche:
-  Datei (Methode)
+  ChartEngine.js (detectRhythm)
 
 Kontext:
-  Issue / Spec / Tested
+  AP-20-DETAIL.md / Tested: scenario_3_short_14m.csv
 ```
+
+Albert committed via VSCode Git Extension (Message-Feld). Keine Terminal-Befehle liefern.
 
 **5. CLAUDE.md** — nur wenn eine neue fundamentale, universelle Verhaltensregel entstanden ist.
 Regelaufnahme-Schutz aus CLAUDE.md § 8 beachten.
