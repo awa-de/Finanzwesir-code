@@ -1,6 +1,6 @@
 # PROJECT STATUS — Finanzwesir 2.0
 
-Stand: 2026-05-03 19:15 | Session: Infrastruktur-Session-Start | Geändert von: Claude
+Stand: 2026-05-04 | Session: Git-Migration | Geändert von: Claude
 
 **Zweck:** Schneller Wiedereinstieg nach Pausen.
 **Zielgruppe:** Albert und Claude.
@@ -13,18 +13,19 @@ Stand: 2026-05-03 19:15 | Session: Infrastruktur-Session-Start | Geändert von: 
 
 ## 1. Aktueller Fokus
 
-Design-System holistisch analysiert (2026-05-03). Architektur-Entscheidungen getroffen, drei neue APs im Backlog (DS-012, DS-013, DS-014).
-DS-014 (Design-API Baukasten) ist Blocker für alle 18+ App-Entwicklungen — höchste Priorität neben AP-20/21.
+Git-Migration abgeschlossen (2026-05-04). Programmier-Git läuft, GitHub verbunden.
+Nächste Prioritäten: DS-012 → DS-014 (Design-API, Blocker für App-Entwicklung) + AP-20/21 (Chart-Engine).
 
 ---
 
 ## 2. Letzter stabiler Stand
 
-- Masterplan vollständig abgeschlossen (2026-05-03): Projekt-Gehirn gehärtet.
+- Git-Migration abgeschlossen (2026-05-04): Programmier-Git an Root, GitHub verbunden.
+  - Branch: `master`, Remote: `git@github.com:awa-de/Finanzwesir-code.git`
+  - Sauber: keine PDFs, keine Dev-Daten (Theme/data, chart-tests) in History
+  - git config: `core.sshCommand = C:/Windows/System32/OpenSSH/ssh.exe`
+- CL-01 + CL-02 abgeschlossen. CL-03 (Vermächtnis überführen) jetzt ungeblockt.
 - Design-System-Analyse abgeschlossen (2026-05-03): Architektur klar, Lücken identifiziert.
-- `01-FARBEN-UND-TYPOGRAFIE.md`: Font-Loading korrigiert (lokal statt Google CDN).
-- `DESIGN-SYSTEM.md`: Tech-Stack aktualisiert (v1.1).
-- Neue APs: DS-012 (Tailwind-Config kanonisch), DS-013 (Ghost-Einbindung klären), DS-014 (Design-API Baukasten).
 - Chart-Engine: stabil, offene APs in BACKLOG.md (AP-20/21 🟡 Aktiv, AP-6c 🟡 Aktiv).
 - Ghost-Theme: in Entwicklung, noch kein Deploy.
 

@@ -1,5 +1,5 @@
 # BACKLOG – Finanzwesir 2.0
-Stand: 2026-05-03 17:00 | Session: Design-System-Analyse | Geändert von: Claude
+Stand: 2026-05-04 | Session: Git-Migration | Geändert von: Claude
 
 **Regeln:**
 - ✅-Zeilen werden sofort nach `BACKLOG-ARCHIV.md` verschoben (append), dann hier gelöscht.
@@ -22,8 +22,6 @@ Stand: 2026-05-03 17:00 | Session: Design-System-Analyse | Geändert von: Claude
 
 | ID       | Bereich | Titel                                          | Prio | Dep          | Detail                                            |
 |----------|---------|------------------------------------------------|------|--------------|---------------------------------------------------|
-| CL-01    | Cleanup | Git-Repo-Ort entscheiden                       | H    | —            | —                                                 |
-| CL-02    | Cleanup | git init ausführen                             | H    | CL-01        | —                                                 |
 | DS-003   | Design  | Tastatur-Navigation testen (Safari/Firefox/Chrome) | H | —          | —                                                 |
 | DS-004   | Design  | WCAG Kontrast-Tabelle dokumentieren            | H    | —            | —                                                 |
 | TMPL-1   | Theme   | Ghost-Template bauen (Phase 2, 14 Items)       | H    | —            | theme-build/THEME-ASSEMBLY-CHECKLIST.md           |
@@ -43,7 +41,7 @@ Stand: 2026-05-03 17:00 | Session: Design-System-Analyse | Geändert von: Claude
 | CSS-6    | CSS     | Tailwind Production-Build (< 30 KB)            | H    | CSS-5        | —                                                 |
 | CSS-7    | CSS     | Asset-Einbindung verifizieren                  | H    | TMPL-1       | —                                                 |
 | TH-03    | Theme   | Integration & QA (Phase 3, 16 Items)           | H    | TMPL-1       | theme-build/THEME-ASSEMBLY-CHECKLIST.md           |
-| CL-03    | Cleanup | Vermächtnis-Inhalte überführen                 | M    | CL-01, CL-02 | —                                                 |
+| CL-03    | Cleanup | Vermächtnis-Inhalte überführen                 | M    | —            | —                                                 |
 | TH-04A   | Theme   | Performance-Audit (Phase 4A, 18 Items)         | H    | TH-03        | theme-build/THEME-ASSEMBLY-CHECKLIST.md           |
 | TH-04B   | Theme   | Sicherheits-Audit (Phase 4B, 18 Items)         | H    | TH-03        | theme-build/THEME-ASSEMBLY-CHECKLIST.md           |
 | TH-05    | Theme   | Deployment (Phase 5, 5 Items)                  | H    | TH-04A, TH-04B | theme-build/THEME-ASSEMBLY-CHECKLIST.md         |
