@@ -39,6 +39,14 @@ Nur gezielte Edits, kein Vollrewrite.
 - Zeile aus `docs/steering/BACKLOG.md` löschen
 - `docs/steering/engine/WORKING-FEATURES.md` nur bei Engine-APs aktualisieren
 
+**2b. Scope-Check**
+Während der Arbeit an diesem AP neuen Scope entdeckt?
+Beobachtungen, die nicht zum AP gehörten?
+→ Jeden Fund explizit behandeln:
+   - Als neuen AP in BACKLOG anlegen (mit Prio + Abhängigkeiten), ODER
+   - Explizit verwerfen mit Begründung
+→ Kein stilles Verschwinden — was nicht festgehalten wird, existiert nicht.
+
 **3. MEMORY aktualisieren**
 Pfad: `C:\Users\Albert HP PC\.claude\projects\z--Documents-Nextcloud-Finanzwesir-2-0\memory\`
 Neue stabile Projektfakten, Feedback oder Entscheidungen eintragen.

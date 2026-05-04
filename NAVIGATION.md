@@ -1,5 +1,5 @@
 # NAVIGATION.md – Finanzwesir 2.0
-Stand: 2026-05-03 18:30 | Session: Infrastruktur-Session-Start | Geändert von: Claude
+Stand: 2026-05-04 | Session: Kontroll-System | Geändert von: Claude
 
 Für Claude: **Routing-Dokument.** Wird beim Session-Start (Schritt 2) gelesen.
 Gibt Pfade und Lese-Reihenfolgen vor — KEINE Verhaltensregeln (die stehen in CLAUDE.md).
@@ -15,7 +15,7 @@ Für Albert: Index aller Projektdokumente — was wo liegt und wann gelesen werd
 | `NAVIGATION.md` | Router: Pfade, Lese-Reihenfolgen — KEINE Verhaltensregeln |
 | `docs/spec/` | Bindende technische und fachliche Spezifikationen |
 | `docs/steering/` | Backlog, Status, Entscheidungen, QA, Regression |
-| `.claude/skills/` | Detailprozeduren (4 aktive Skills — siehe § Skills) |
+| `.claude/skills/` | Detailprozeduren (aktive Skills — siehe § Skills) |
 | `PROJECT-STATUS.md` | Tageslage: Fokus, Blocker, nächster Schritt |
 | `MEMORY.md` | Stabile Projektfakten, Arbeitskontext |
 
@@ -33,6 +33,8 @@ Albert kann sie auch explizit aufrufen.
 | `/manual-test-plan [AP-N]` | Bei komplexen visuellen Testfällen | Claude schlägt vor; oder Albert ruft explizit auf |
 | `/spec-rewrite-guard [Datei]` | Vor Änderungen an `docs/spec/`-Dateien | Claude startet automatisch bei Spec-Edits |
 | `/start` | Pflichtstart jedes Fadens — liest 4 Dateien, lädt Kommunikationsstil | Albert tippt es als erstes in jeden neuen Faden |
+| `/kassensturz` | Wöchentlicher Trend-Check (Backlog-Entwicklung, Blocker, Tendenz) | Montags automatisch in `/start`; oder manuell |
+| `/patch-quittung` | Quittung nach jedem Patch (Zählung, Tabu-Check, Testfall) | Automatisch nach jedem Patch; oder manuell |
 
 ---
 

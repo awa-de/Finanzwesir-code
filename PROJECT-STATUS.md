@@ -1,6 +1,6 @@
 # PROJECT STATUS — Finanzwesir 2.0
 
-Stand: 2026-05-04 | Session: Git-Migration | Geändert von: Claude
+Stand: 2026-05-04 | Session: Kontroll-System | Geändert von: Claude
 
 **Zweck:** Schneller Wiedereinstieg nach Pausen.
 **Zielgruppe:** Albert und Claude.
@@ -20,6 +20,8 @@ Nächste Prioritäten: DS-012 → DS-014 (Design-API, Blocker für App-Entwicklu
 
 ## 2. Letzter stabiler Stand
 
+- Kontroll-Rückkopplungs-System implementiert (2026-05-04): 4 neue Skills + 3 Upgrades aktiv.
+  QA-Review (check-mode-gatekeeper) abgeschlossen. Pilot-Session ausstehend.
 - Git-Migration abgeschlossen (2026-05-04): Programmier-Git an Root, GitHub verbunden.
   - Branch: `master`, Remote: `git@github.com:awa-de/Finanzwesir-code.git`
   - Sauber: keine PDFs, keine Dev-Daten (Theme/data, chart-tests) in History
@@ -33,10 +35,19 @@ Nächste Prioritäten: DS-012 → DS-014 (Design-API, Blocker für App-Entwicklu
 
 ## 3. Nächster sinnvoller Schritt
 
+- **Pilot-Session** — Kontroll-Rückkopplungs-System verifizieren (vor allen anderen Tasks)
+  7 Checks, der Reihe nach:
+  1. `/start` → SESSION-START mit Layer-1-Fingerabdruck ✓ + Zählprüfung (N aktive APs) ✓
+  2. Wenn Montag: Kassensturz erscheint automatisch danach
+  3. Kleinen Test-Patch machen → Patch-Quittung erscheint automatisch ✓
+  4. AP abschließen → abschluss-ritual Schritt 2b (Scope-Check) erscheint ✓
+  5. Task mit ≥ 2 Dateien → Aufgaben-Echo erscheint vor Code ✓
+  6. Technische Behauptung ohne Spec → spec-quote-Marking erscheint inline ✓
+  7. fwContext-nahes AP → chain-of-custody nach Full-Gate ✓
+  Erst wenn alle 7 ✓: System gilt als produktiv.
 - **DS-014** (Design-API Baukasten — 07-APP-KOMPONENTEN.md) — Blocker für alle App-Entwicklung
 - **DS-012** (Tailwind-Config kanonisch) — Voraussetzung für DS-014
 - **AP-20/21** (Mixed-Rhythm CV-Heuristik) — bereits 🟡 Aktiv, Chart-Engine
-- **CL-01 → CL-02** (Git-Repo einrichten) — Blocker für CL-03
 
 ---
 
@@ -84,6 +95,11 @@ Vollständig im DECISION-LOG dokumentiert (`docs/steering/DECISION-LOG.md`):
 
 ## 8. Letzte Session
 
+2026-05-04 — Kontroll-Rückkopplungs-System implementiert.
+4 neue Skills (kassensturz, patch-quittung, chain-of-custody, spec-quote) + 3 Upgrades
+(start G1/G2/G3, abschluss-ritual Scope-Check 2b, CLAUDE.md A1/A2).
+QA-Review per check-mode-gatekeeper + 5 Korrekturen. Pilot-Session ausstehend.
+
 2026-05-03 (nachmittags) — Design-System holistisch analysiert.
 Spec 01- Font-Loading korrigiert (Google → lokal). DESIGN-SYSTEM.md v1.1.
 Architektur-Entscheidungen: zwei Rendering-Welten, FwTheme als CSS-Bridge, Dark Mode = Ghost Theme.
@@ -95,6 +111,11 @@ Neue APs: DS-012, DS-013, DS-014.
 ---
 
 ## 9. Einstieg für nächste Session
+
+**PILOT-SESSION — vor allen anderen Tasks:**
+Das Kontroll-Rückkopplungs-System wurde implementiert aber noch nicht getestet.
+Die 7 Checks stehen in Abschnitt 3 (Nächster sinnvoller Schritt → Pilot-Session).
+Erst wenn alle 7 ✓: System gilt als produktiv. Dann weiter mit DS-014 / AP-20/21.
 
 Claude soll zuerst lesen:
 

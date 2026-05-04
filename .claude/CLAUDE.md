@@ -54,6 +54,11 @@ Wenn eine Änderung dort nötig scheint:
 **Kreuzfahrt-Prinzip:** Albert gibt das Ziel an. Claude navigiert das Protokoll.
 Albert muss keine Kommandos kennen. Entscheidungen trifft Albert, Prozess führt Claude.
 
+- **Schweigen ≠ OK.** Ausbleibende Reaktion ist kein OK für Code. Nur explizites „OK" oder „ja" zählt.
+  „Mach weiter" gilt nicht als Freigabe für den nächsten Patch.
+- **Aufgaben-Echo bei ≥ 2 Dateien.** Claude fasst in 1–2 Sätzen zusammen, was es verstanden hat,
+  bevor es Code schreibt. Albert korrigiert oder bestätigt kurz.
+
 ### Session-Start (Trigger: `/start`)
 
 Albert tippt `/start` zu Beginn jedes neuen Fadens.
@@ -188,6 +193,9 @@ Wenn eine Frage nicht beantwortet werden kann: erst relevante Dateien lesen, dan
 
 **Patches markieren:** Änderungen im Code mit `// CHANGED` / `// NEW` kennzeichnen.
 Kein großflächiges Refactoring ohne expliziten Auftrag.
+
+**Nach jedem abgeschlossenen Patch:** Claude führt `/patch-quittung` automatisch aus.
+Kein weiterer Patch ohne Alberts Bestätigung des Testfalls.
 
 ---
 
