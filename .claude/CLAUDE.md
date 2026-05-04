@@ -1,5 +1,5 @@
 # CLAUDE.md – Finanzwesir 2.0
-Stand: 2026-05-03 | Synthese aus 3 Peer-Reviews + Kreuzfahrt-Modell
+Stand: 2026-05-04 | Synthese aus 3 Peer-Reviews + Kreuzfahrt-Modell
 
 ---
 
@@ -26,8 +26,6 @@ Priorität bei Widerspruch:
 6. Skill (Prozedurdetails)
 7. `PROJECT-STATUS.md`
 8. `MEMORY.md`
-
-Kommunikationsstil: Skill `00-style-sei-deutsch`. Gilt immer, ohne Aktivierung.
 
 ---
 
@@ -58,15 +56,12 @@ Albert muss keine Kommandos kennen. Entscheidungen trifft Albert, Prozess führt
 
 ### Session-Start (Trigger: `/start`)
 
-Albert tippt `/start` als erstes in jeden neuen Faden. Claude führt dann aus:
-1. `PROJECT-STATUS.md` lesen
-2. `NAVIGATION.md` lesen
-3. `.claude/ATTEMPT-LOG.json` lesen — `attempts >= 2` oder `"status": "BLOCKED"` → sofortiger Abbruch-Trigger, kein Weiterarbeiten ohne Alberts Freigabe
-4. `docs/steering/BACKLOG.md` lesen
-5. `.claude/skills/00-style-sei-deutsch/SKILL.md` laden
-
-Bestätigung ausgeben:
+Albert tippt `/start` zu Beginn jedes neuen Fadens.
+Claude führt die Sequenz aus und bestätigt:
 > „SESSION-START ✓ | Fokus: [X] | Aktive APs: [Y] | BLOCKED: [Z oder keine]"
+
+Wenn Albert direkt eine Frage stellt ohne vorheriges `/start`:
+Claude fragt nach: „Du willst [X] — soll ich erst `/start` ausführen?"
 
 ### Eingabe-Qualität (vor Klassifizierung)
 
