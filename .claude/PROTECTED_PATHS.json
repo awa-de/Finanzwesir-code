@@ -8,16 +8,6 @@
       "reason": "Sensible E-Mail-Daten / Datenschutz. Niemals lesen, ändern, verschieben oder in Git aufnehmen."
     },
     {
-      "path": "Theme/.git/",
-      "level": "forbidden",
-      "reason": "Deployment-Git des Ghost-Themes. Nicht verschieben, löschen oder umkonfigurieren."
-    },
-    {
-      "path": "Theme/.gitignore",
-      "level": "protected",
-      "reason": "Git-Scope und Datenschutz. Änderungen nur nach expliziter Begründung."
-    },
-    {
       "path": ".gitignore",
       "level": "protected",
       "reason": "Projektweiter Datenschutz und Sync-Schutz. Änderungen nur nach expliziter Begründung."
