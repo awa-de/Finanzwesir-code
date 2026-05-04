@@ -13,7 +13,7 @@ Ausgangslage:
 - Root `z:\Documents\Nextcloud\Finanzwesir 2.0\` ist KEIN Git-Repo
 - `Theme\.git\` ist ein altes lokales Git mit Remote `git@github.com:awa-de/finanzwesir-chart-engine.git`
 - Dieses alte Git wird stillgelegt — GitHub-Repo bleibt als Archiv erhalten
-- Neues GitHub-Repo heißt: `Finanzwesir-Code` (unter awa-de), privat
+- Neues GitHub-Repo heißt: `Finanzwesir-code` (unter awa-de), privat
 - Neues Repo wird NACH dem ersten lokalen Commit eingerichtet (kein Blocker jetzt)
 
 ---
@@ -83,7 +83,7 @@ Alles andere in `.claude/` (CLAUDE.md, Skills, Hooks) kommt ins Git.
 
 ```powershell
 cd "z:\Documents\Nextcloud\Finanzwesir 2.0"
-git init -b main
+git init -b master
 ```
 
 Erwartete Ausgabe: `Initialized empty Git repository in ...`
@@ -135,12 +135,12 @@ Erwartete Ausgabe: 1 Zeile mit dem Commit.
 ## Schritt 8 — GitHub-Repo anlegen und verbinden
 
 1. github.com → einloggen → "New repository"
-2. Name: `Finanzwesir-Code` → Private → KEIN README, KEIN .gitignore → Anlegen
+2. Name: `Finanzwesir-code` → Private → KEIN README, KEIN .gitignore → Anlegen
 3. GitHub zeigt danach Befehle — diese zwei ausführen:
 
 ```powershell
-git remote add origin git@github.com:awa-de/Finanzwesir-Code.git
-git push -u origin main
+git remote add origin git@github.com:awa-de/Finanzwesir-code.git
+git push -u origin master
 ```
 
 Verifikation: GitHub-Seite neu laden → Dateien sichtbar.
@@ -171,4 +171,4 @@ Entfernen oder anpassen: Eintrag `Theme/.gitignore` (protected).
 2. Test: Zeile in Theme/assets/js/ ändern + Zeile in docs/ ändern
    → beide Dateien erscheinen zusammen in VSCode Source Control
 3. content/ und Active Campaign Liste/ erscheinen nicht in `git status`
-4. github.com/awa-de/Finanzwesir-Code zeigt alle Dateien
+4. github.com/awa-de/Finanzwesir-code zeigt alle Dateien
