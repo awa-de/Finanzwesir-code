@@ -1,6 +1,11 @@
 # Session-Log — Finanzwesir 2.0
 Wird geleert nach /distill. Einträge: [FRICTION] [WIN] [PREF] [QUESTION] [OK]
 
+## 2026-05-08 – Selftest-Perplexity Iteration 2 + CLAUDE.md v2.0.1 Fixes
+
+- [WIN] Iteration 2 (Live-Datei-Vergleich) entdeckte Invarianten-Listen-Inkonsistenz (L-NEU-1/2) — Iteration 1 (Gedankenexperiment ohne Datei-Lesen) konnte diese strukturell nicht sehen
+- [WIN] 3 offene Punkte in 5 chirurgischen Edits geschlossen: PROTECTED_PATHS in Lastabwurf-Gruppe 1 aufgenommen, Fallback-Regel für fehlende Schutzdatei, Rekursionsverbot für Subagenten
+
 ## 2026-05-08 – Selbstlernendes System — Implementierung (Schritte 1–8)
 
 - [PREF] Schritt 3 Nummerierung: Albert bevorzugte Buchstaben-Suffix (0→0a) statt Neunummerierung → geringster Kollateralschaden bei bestehenden Querverweisen

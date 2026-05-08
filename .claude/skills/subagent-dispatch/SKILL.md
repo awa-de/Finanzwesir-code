@@ -53,3 +53,5 @@ Wenn ein Subagent urteilen, gewichten, priorisieren oder riskant entscheiden mü
 
 Interpretation, Risikoabwägung, Gate, Kommunikation mit Albert,
 finaler Patchplan, finale Antwort.
+
+Subagenten spawnen keine weiteren Subagenten. Nur die Hauptinstanz spawnt.

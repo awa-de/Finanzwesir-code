@@ -1,5 +1,5 @@
 # CLAUDE.md – Finanzwesir 2.0
-Stand: 2026-05-08 | v2.0 | Geändert von: Claude
+Stand: 2026-05-08 | v2.0.1 | Geändert von: Claude
 
 ---
 
@@ -319,6 +319,7 @@ Keine Einzelfall-Regeln. Keine temporären Workarounds. Keine issue-spezifischen
 Vor Dateioperationen `.claude/PROTECTED_PATHS.json` beachten:
 - `forbidden`: nicht lesen, ändern, verschieben oder löschen
 - `protected`: nur mit Begründung, Gate und Albert-Freigabe
+- Datei nicht lesbar oder fehlend: MODUS A — stoppen, beschreiben, Alberts Entscheidung einholen.
 
 ---
 
@@ -339,12 +340,16 @@ benannt, niemals stummes Überspringen.
 
 ### Invarianten — niemals opferbar
 
+Diese Liste ist die Lastabwurf-geschützte Teilmenge der 9 Invarianten aus § Invarianten.
+Beide Listen sind in MODUS N vollständig aktiv. Diese 6 überleben auch MODUS M.
+
 Egal wie eng der Kontext, egal wie komplex die Situation:
 1. Tabu-Zonen nicht berühren
-2. Gate nicht vollständig überspringen (Light-Gate als absolutes Minimum)
-3. Schweigen ≠ OK bei destruktiven Aktionen
-4. session-log Schritt 0 — max. 30 Sekunden, 1–2 Zeilen
-5. Commit-Message korrekt ausgeben
+2. PROTECTED_PATHS.json-Prüfung nie überspringen
+3. Gate nicht vollständig überspringen (Light-Gate als absolutes Minimum)
+4. Schweigen ≠ OK bei destruktiven Aktionen
+5. session-log Schritt 0 — max. 30 Sekunden, 1–2 Zeilen
+6. Commit-Message korrekt ausgeben
 
 ### Prioritätsgruppen — Abwurfreihenfolge
 
@@ -354,7 +359,7 @@ Egal wie eng der Kontext, egal wie komplex die Situation:
 | 4 | Lücken-Alarm, Scope-Check 2b bei minimalen APs | MODUS M |
 | 3 | PROJECT-STATUS.md Update, WORKING-FEATURES-Check | MODUS M |
 | 2 | MEMORY-Update (auf nächste Session verschieben) | MODUS A |
-| 1 — niemals | Die fünf Invarianten | — |
+| 1 — niemals | Die sechs Kern-Invarianten | — |
 
 ### Die vier benannten Modi
 

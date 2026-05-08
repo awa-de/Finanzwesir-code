@@ -1,6 +1,6 @@
 # PROJECT STATUS — Finanzwesir 2.0
 
-Stand: 2026-05-08 | Session: CLAUDE.md v2.0 Neubau | Geändert von: Claude
+Stand: 2026-05-08 | Session: Selftest-Iteration 2 + CLAUDE.md v2.0.1 | Geändert von: Claude
 
 **Zweck:** Schneller Wiedereinstieg nach Pausen.
 **Zielgruppe:** Albert und Claude.
@@ -13,17 +13,18 @@ Stand: 2026-05-08 | Session: CLAUDE.md v2.0 Neubau | Geändert von: Claude
 
 ## 1. Aktueller Fokus
 
-CLAUDE.md v2.0 Neubau abgeschlossen (2026-05-08). Alle 6 Phasen umgesetzt.
-Nächste Priorität: Verifikation im nächsten /start-Faden (TEST: SESSION-START-Zeile, Gate-Verweise, /intake).
+CLAUDE.md v2.0.1 stabil (2026-05-08). Selftest-Perplexity Iteration 2 abgeschlossen, 3 Lücken geschlossen.
+SESSION-START und Gate-Verweise ✓ verifiziert. Offen: /intake, /uebergabe, /distill im neuen Faden testen.
 Danach: DS-014 (Design-API, Blocker für App-Entwicklung) + AP-20/21 (Chart-Engine).
 
 ---
 
 ## 2. Letzter stabiler Stand
 
+- CLAUDE.md v2.0.1 stabil (2026-05-08): Selftest-Iteration 2 schloss 3 Lücken — PROTECTED_PATHS
+  in Lastabwurf-Gruppe 1, MODUS-A-Fallback bei fehlender Schutzdatei, Subagenten-Rekursionsverbot.
 - CLAUDE.md v2.0 Neubau abgeschlossen (2026-05-08): 6 Phasen. Grundmodell, Invarianten,
   Freigabeprinzip neu. §11 entfernt, semantische Namen, /pre-code-gate + /intake + /subagent-dispatch neu.
-  Verifikation im nächsten /start-Faden ausstehend.
 - Selbstlernendes System implementiert (2026-05-08): 8 Schritte, alle von Albert bestätigt.
   session-log, patterns, /distill, /uebergabe, Lastabwurf-System. Pilot-Test: nächster Faden.
 - Kontroll-Rückkopplungs-System implementiert (2026-05-04): 4 neue Skills + 3 Upgrades aktiv.
@@ -97,6 +98,10 @@ Vollständig im DECISION-LOG dokumentiert (`docs/steering/DECISION-LOG.md`):
 
 ## 8. Letzte Session
 
+2026-05-08 — Selftest-Perplexity Iteration 2 + CLAUDE.md v2.0.1 Fixes.
+3 Lücken geschlossen (L-NEU-1+2, OP-1, OP-2). 5 chirurgische Edits in CLAUDE.md + subagent-dispatch.
+SESSION-START ✓, Gate-Verweise ✓ verifiziert.
+
 2026-05-08 — CLAUDE.md v2.0 Neubau (6 Phasen abgeschlossen).
 Grundmodell, Invarianten, Freigabeprinzip (neu). §11 entfernt → abschluss-ritual.
 commands/pre-code-gate.md + intake.md (neu). skills/subagent-dispatch (neu).
@@ -122,10 +127,13 @@ Neue APs: DS-012, DS-013, DS-014.
 
 ## 9. Einstieg für nächste Session
 
-**VERIFIKATION — vor allen anderen Tasks:**
-CLAUDE.md v2.0 + Selbstlernendes System implementiert, aber noch nicht im neuen Faden getestet.
-Verifikations-Checks stehen in Abschnitt 3.
-Erst wenn ✓: Systeme gelten als produktiv. Dann weiter mit DS-014 / AP-20/21.
+**Restliche Verifikation (optional, vor DS-014):**
+/intake, /uebergabe, /distill einmal durchspielen — Lern-Loop komplett testen.
+Erst dann: System gilt als vollständig produktiv.
+
+**Hauptaufgaben:**
+- DS-014 (Design-API Baukasten) — Blocker für alle App-Entwicklung
+- AP-20/21 (Mixed-Rhythm CV-Heuristik) — bereits aktiv
 
 Claude soll zuerst lesen:
 1. `PROJECT-STATUS.md` (diese Datei)
