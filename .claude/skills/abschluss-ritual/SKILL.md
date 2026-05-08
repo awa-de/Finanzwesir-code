@@ -17,7 +17,37 @@ Argumente: $ARGUMENTS (AP-ID oder Aufgabenbeschreibung)
 
 ## Voll-Abschluss (Reihenfolge einhalten)
 
-**0. NAVIGATION.md prüfen**
+**0. Session-Log befüllen — PFLICHT, ZUERST, kein Ermessen**
+Eintrag schreiben in `.claude/learning/session-log.md` mit Datum + AP-Titel als Header.
+Jetzt schreiben, nicht bewerten — /distill bewertet später.
+
+Challenge-Response (Kernkraftwerk-Prinzip):
+"Gab es eine Korrektur oder Abweichung vom Plan?"   → j/n
+"Gab es eine Überraschung oder neue Erkenntnis?"    → j/n
+
+Beide nein:
+- [OK] Keine Vorkommnisse
+
+Mindestens eines ja — Tag nach Kriterium wählen, kein Freitext-Urteil:
+
+Tag-Kriterien (NASA ASRS-Prinzip — Trigger, nicht Einschätzung):
+[FRICTION]  Albert hat eine Richtung korrigiert / ein Schritt wurde nachgeholt /
+            ein Missverständnis trat auf
+[WIN]       Etwas lief schneller oder sicherer als erwartet — messbar oder von Albert bestätigt
+[PREF]      Albert hat eine Formulierung, Reihenfolge oder Darstellung explizit bevorzugt
+[QUESTION]  Claude hat eine Annahme getroffen ohne Alberts Bestätigung
+
+Sprach-Prinzip: beschreibend, nicht evaluativ (HRO: Signal, kein Blame)
+Richtig:   "[FRICTION] Gate-Schritt 7 übersprungen → manuell nachgeholt"
+Falsch:    "[FRICTION] Claude hat versagt"
+
+Kein AP ohne Eintrag. Fehlendes Log = Anomalie (HRO-Prinzip).
+Abbruch-Format (wenn Ritual unterbrochen — 1 Zeile genügt):
+
+    ## YYYY-MM-DD – [AP-ID] (Abbruch bei Schritt [N])
+    - [OK] Abbruch ohne Vorkommnis  /  [FRICTION] Grund: ...
+
+**0a. NAVIGATION.md prüfen**
 Hat sich die Verzeichnisstruktur geändert? Neue Steering-, Spec- oder Template-Datei angelegt?
 Datei verschoben oder umbenannt? → Sofort aktualisieren.
 

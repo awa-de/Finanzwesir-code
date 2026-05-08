@@ -1,5 +1,5 @@
 # NAVIGATION.md – Finanzwesir 2.0
-Stand: 2026-05-04 | Session: Kontroll-System | Geändert von: Claude
+Stand: 2026-05-08 | Session: Selbstlernendes System | Geändert von: Claude
 
 Für Claude: **Routing-Dokument.** Wird beim Session-Start (Schritt 2) gelesen.
 Gibt Pfade und Lese-Reihenfolgen vor — KEINE Verhaltensregeln (die stehen in CLAUDE.md).
@@ -35,6 +35,8 @@ Albert kann sie auch explizit aufrufen.
 | `/start` | Pflichtstart jedes Fadens — liest 4 Dateien, lädt Kommunikationsstil | Albert tippt es als erstes in jeden neuen Faden |
 | `/kassensturz` | Wöchentlicher Trend-Check (Backlog-Entwicklung, Blocker, Tendenz) | Montags automatisch in `/start`; oder manuell |
 | `/patch-quittung` | Quittung nach jedem Patch (Zählung, Tabu-Check, Testfall) | Automatisch nach jedem Patch; oder manuell |
+| `/distill` | Destilliert session-log zu Mustern in patterns.md | Von /start empfohlen (Schwellen-basiert); oder manuell |
+| `/uebergabe` | Strukturierter Übergabeprompt + session-log Breadcrumb | Albert sagt „Übergabe/neuer Thread"; oder MODUS M |
 
 ---
 
@@ -47,6 +49,7 @@ Session-Start läuft automatisch (→ CLAUDE.md § 2):
 1. PROJECT-STATUS.md
 2. NAVIGATION.md
 3. .claude/ATTEMPT-LOG.json          ← BLOCKED prüfen
+3c. .claude/learning/session-log.md + patterns.md  ← Learning-Pipeline (Lücken-Alarm, Distill-Empfehlung)
 4. docs/steering/BACKLOG.md
 ```
 
@@ -168,6 +171,7 @@ Manuelle Aktivierung: `/spec-rewrite-guard docs/spec/[Dateiname]`
 | Regression-Matrix | `docs/steering/engine/REGRESSION-MATRIX.md` |
 | Fonts | `Theme/assets/fonts/` |
 | SVGs + Favicons | `Theme/assets/images/` |
+| Learning-Pipeline (session-log, patterns) | `.claude/learning/` |
 
 ## Testdaten und Content
 

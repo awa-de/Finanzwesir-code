@@ -1,5 +1,5 @@
 # BACKLOG – Finanzwesir 2.0
-Stand: 2026-05-04 | Session: Git-Migration | Geändert von: Claude
+Stand: 2026-05-08 | Session: Selbstlernendes System | Geändert von: Claude
 
 **Regeln:**
 - ✅-Zeilen werden sofort nach `BACKLOG-ARCHIV.md` verschoben (append), dann hier gelöscht.
@@ -38,6 +38,7 @@ Stand: 2026-05-04 | Session: Git-Migration | Geändert von: Claude
 | CL-07    | Cleanup | Skill style-finanzwesir-duktus erstellen       | M    | CL-06        | —                                                 |
 | CL-12    | Cleanup | VG Wort Pixel ins Theme einbinden              | M    | TMPL-1       | —                                                 |
 | CL-13    | Cleanup | Clicky Analytics einbinden                     | M    | —            | —                                                 |
+| CL-14    | Cleanup | Abschluss-Ritual: Schritte semantisch benennen (kein Nummern-Drift) | L | — | —           |
 | CSS-6    | CSS     | Tailwind Production-Build (< 30 KB)            | H    | CSS-5        | —                                                 |
 | CSS-7    | CSS     | Asset-Einbindung verifizieren                  | H    | TMPL-1       | —                                                 |
 | TH-03    | Theme   | Integration & QA (Phase 3, 16 Items)           | H    | TMPL-1       | theme-build/THEME-ASSEMBLY-CHECKLIST.md           |

@@ -324,3 +324,73 @@ Betroffene Bereiche:
 Kontext:
   Issue / Spec / Tested
 ```
+
+---
+
+## 12. Lastabwurf-System: Claudes abgesicherter Modus
+
+Quelle: Stromnetz (priorisierter Lastabwurf), Luftfahrt (MEL), Circuit Breaker Pattern,
+ETTO-Prinzip (Hollnagel). Gemeinsames Prinzip: Entscheidungen im Voraus, Modus immer
+benannt, niemals stummes Überspringen.
+
+### Invarianten — niemals opferbar
+
+Egal wie eng der Kontext, egal wie komplex die Situation:
+1. Tabu-Zonen nicht berühren
+2. Gate nicht vollständig überspringen (Light-Gate als absolutes Minimum)
+3. Schweigen ≠ OK bei destruktiven Aktionen
+4. session-log Schritt 0 — max. 30 Sekunden, 1–2 Zeilen
+5. Commit-Message korrekt ausgeben
+
+### Prioritätsgruppen — Abwurfreihenfolge
+
+| Gruppe | Was wird abgeworfen | Ab welchem Modus |
+|---|---|---|
+| 5 — zuerst | Kassensturz-Lernabschnitt, patterns.md-Lesen bei /start | MODUS R |
+| 4 | Lücken-Alarm, Scope-Check 2b bei minimalen APs | MODUS M |
+| 3 | PROJECT-STATUS.md Update, WORKING-FEATURES-Check | MODUS M |
+| 2 | MEMORY-Update (auf nächste Session verschieben) | MODUS A |
+| 1 — niemals | Die fünf Invarianten | — |
+
+### Die vier benannten Modi
+
+```
+MODUS N — NORMALBETRIEB
+Alle Schichten aktiv. Standard.
+
+MODUS R — REDUZIERT
+Trigger (eines davon — beobachtbar, nicht geschätzt):
+  - Full-Gate: mehr als 3 Dateien betroffen
+  - AP läuft seit mehr als einem Faden (Übergabe war bereits nötig)
+  - Claude kann frühere Details nicht reproduzieren (Kontext-Verlust erkennbar)
+Abgeworfen: Gruppe 5.
+Ausgabe: "[MODUS R] Kassensturz-Lernabschnitt und patterns.md-Lesen entfallen."
+
+MODUS M — MINIMAL
+Trigger (eines davon):
+  - /uebergabe wurde bereits einmal in diesem AP ausgeführt
+  - Claude kann den eigenen Schritt-0-Eintrag nicht mehr vollständig reproduzieren
+Abgeworfen: Gruppen 4 + 5.
+Ausgabe: "[MODUS M] Nur Invarianten aktiv — /uebergabe wird jetzt ausgeführt."
+Kopplung: MODUS M deklarieren = /uebergabe anbieten. Immer beides, nie eines ohne das andere.
+
+MODUS A — ABGESICHERT
+Trigger: Widerspruch zwischen Regeln / Konfusion ob Tabu-Zone betroffen /
+         unklar welche Regel gilt.
+Abgeworfen: alle Schicht-2-Regeln.
+Ausgabe: "[MODUS A] Ich stoppe. Ich beschreibe was ich weiß und was nicht.
+         Bitte explizite Anweisung geben."
+Kein Code ohne Alberts explizite Freigabe aus MODUS A.
+```
+
+### Wiederherstellung
+
+Nach /uebergabe oder Alberts „weiter normal":
+`[MODUS N] Normalbetrieb wiederhergestellt.`
+
+### Das Eidechsen-Prinzip
+
+Schicht 2 (Lernregeln) = Schwanz — opferbar, wächst nach.
+Schicht 1 (Strukturregeln) + eigentliche Arbeit = Eidechse — niemals.
+Geopferte Lernschleifen werden beim nächsten Abschluss-Ritual nachgeholt.
+Nichts geht verloren — es wird verschoben.
