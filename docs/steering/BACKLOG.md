@@ -32,7 +32,7 @@ Stand: 2026-05-08 | Session: Selftest-Durchlauf | Geändert von: Claude
 | CSS-5    | CSS     | Farb-Audit + screen.css Verifikation           | M    | CSS-3 ✅     | —                                                 |
 | AP-DOC-1 | Engine  | Basis/Prompts/ bereinigen (5 Dateien)          | H    | —            | engine/detail/AP-DOC-1-DETAIL.md                  |
 | AP-SEC-1 | Engine  | Domain-Lock Validierungsfunktion implementieren| M    | AP-DOC-1     | —                                                 |
-| ST-01    | System  | Selftest: Szenario „Scope wächst" ergänzen — Pfad 14, emergenter Zustand mid-work, Abbruchregel 4 | H | — | — |
+| ST-01    | System  | Scope-Creep-Erkennung stärken — proaktiver Mid-Work-Check nach jedem Patch + Selftest-Szenario Pfad 14 | H | — | — |
 | ST-02    | System  | Selftest: Szenario „Protected Path direkt" ergänzen — Pfad 11, PROTECTED_PATHS.json-Protokoll vs. CLAUDE.md-Tabu-Regel | H | — | — |
 | CL-04    | Cleanup | theme/CLAUDE.md schreiben                      | M    | —            | —                                                 |
 | CL-05    | Cleanup | apps/CLAUDE.md schreiben                       | M    | —            | —                                                 |
