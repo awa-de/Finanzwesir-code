@@ -14,13 +14,13 @@
     },
     {
       "path": "Theme/assets/js/fw-chart-engine/core/FinanzwesirData.js",
-      "level": "protected",
-      "reason": "Layer 1 / Datenfundament. Änderungen nur mit expliziter Begründung."
+      "level": "forbidden",
+      "reason": "Layer 1 / TABU — Datenfundament. Niemals ändern."
     },
     {
       "path": "Theme/assets/js/fw-chart-engine/core/CSVParser.js",
-      "level": "protected",
-      "reason": "Layer 1 / CSV-Ingestion. Änderungen nur mit expliziter Begründung."
+      "level": "forbidden",
+      "reason": "Layer 1 / TABU — CSV-Ingestion. Niemals ändern."
     },
     {
       "path": "Theme/assets/js/fw-chart-engine/utils/FwDateUtils.js",

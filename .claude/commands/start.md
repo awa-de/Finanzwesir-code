@@ -1,5 +1,8 @@
 Führe die vollständige Session-Start-Sequenz aus:
 
+0. Schreibe in `.claude/learning/session-log.md` einen Session-Start-Eintrag (Kern-Invariante 5 — überlebt jeden Lastabwurf, max. 30 Sekunden):
+   `## YYYY-MM-DD – SESSION START | Fokus: [aktives AP oder „unbekannt"]`
+
 1. Lies `PROJECT-STATUS.md`
 2. Lies `NAVIGATION.md`
 3. Lies `.claude/ATTEMPT-LOG.json` — prüfe auf `attempts >= 2` oder `"status": "BLOCKED"` → sofortiger Abbruch-Trigger

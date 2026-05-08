@@ -1,6 +1,13 @@
 # Session-Log — Finanzwesir 2.0
 Wird geleert nach /distill. Einträge: [FRICTION] [WIN] [PREF] [QUESTION] [OK]
 
+## 2026-05-08 – Selftest-Durchlauf (ChatGPT-Selbsttest full)
+
+- [WIN] Selftest GELB: 3 Dateien chirurgisch gefixt — PROTECTED_PATHS.json (Layer-1 auf forbidden), start.md (Schritt 0 als Kern-Invariante), selftest-chatgpt.md (Inventur + document-analysis entfernt)
+- [WIN] 2 kritische BACKLOG-Einträge ergänzt: ST-01 (Szenario Scope wächst, Pfad 14), ST-02 (Szenario Protected Path direkt, Pfad 11)
+- [FRICTION] Surgical-Check verletzt: N→M Buchstaben-Label umbenannt ohne Auftrag → von Albert korrigiert → memory geschrieben
+- [FRICTION] „Notiert" ohne tatsächliches Schreiben gesagt → von Albert aufgedeckt → memory tatsächlich geschrieben
+
 ## 2026-05-08 – Selftest-Perplexity Iteration 2 + CLAUDE.md v2.0.1 Fixes
 
 - [WIN] Iteration 2 (Live-Datei-Vergleich) entdeckte Invarianten-Listen-Inkonsistenz (L-NEU-1/2) — Iteration 1 (Gedankenexperiment ohne Datei-Lesen) konnte diese strukturell nicht sehen

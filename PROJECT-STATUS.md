@@ -1,6 +1,6 @@
 # PROJECT STATUS — Finanzwesir 2.0
 
-Stand: 2026-05-08 | Session: Selftest-Iteration 2 + CLAUDE.md v2.0.1 | Geändert von: Claude
+Stand: 2026-05-08 | Session: Selftest-Durchlauf | Geändert von: Claude
 
 **Zweck:** Schneller Wiedereinstieg nach Pausen.
 **Zielgruppe:** Albert und Claude.
@@ -13,9 +13,9 @@ Stand: 2026-05-08 | Session: Selftest-Iteration 2 + CLAUDE.md v2.0.1 | Geändert
 
 ## 1. Aktueller Fokus
 
-CLAUDE.md v2.0.1 stabil (2026-05-08). Selftest-Perplexity Iteration 2 abgeschlossen, 3 Lücken geschlossen.
-SESSION-START und Gate-Verweise ✓ verifiziert. Offen: /intake, /uebergabe, /distill im neuen Faden testen.
-Danach: DS-014 (Design-API, Blocker für App-Entwicklung) + AP-20/21 (Chart-Engine).
+ChatGPT-Selbsttest full durchgelaufen: GELB, keine Chaos-Pfade. PROTECTED_PATHS.json gehärtet,
+start.md Schritt 0 ergänzt, Selftest-Inventur bereinigt. ST-01 + ST-02 als neue APs eingetragen.
+Offen: /intake, /uebergabe, /distill im neuen Faden testen. Danach: DS-014 + AP-20/21.
 
 ---
 
@@ -78,7 +78,7 @@ Keine akuten Blocker.
 
 - `Active Campaign Liste/` — Datenschutz, niemals in Git
 - `Theme/.git/` — Deployment-Git, nicht umkonfigurieren
-- Layer 1: `FinanzwesirData.js`, `CSVParser.js` — nur mit expliziter Begründung
+- Layer 1: `FinanzwesirData.js`, `CSVParser.js` — TABU, niemals ändern (forbidden in PROTECTED_PATHS.json)
 - `FwDateUtils.js` — zentrale Zeit-Erkennung, nur mit expliziter Begründung
 
 Vollständige Liste: `.claude/PROTECTED_PATHS.json`
@@ -97,6 +97,10 @@ Vollständig im DECISION-LOG dokumentiert (`docs/steering/DECISION-LOG.md`):
 ---
 
 ## 8. Letzte Session
+
+2026-05-08 — ChatGPT-Selbsttest full: Gesamtstatus GELB, keine Chaos-Pfade.
+PROTECTED_PATHS.json Layer-1 auf forbidden, start.md Schritt 0, selftest-chatgpt.md Inventur bereinigt.
+ST-01 (Szenario Scope wächst) + ST-02 (Szenario Protected Path) als neue APs H eingetragen.
 
 2026-05-08 — Selftest-Perplexity Iteration 2 + CLAUDE.md v2.0.1 Fixes.
 3 Lücken geschlossen (L-NEU-1+2, OP-1, OP-2). 5 chirurgische Edits in CLAUDE.md + subagent-dispatch.

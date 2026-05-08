@@ -71,19 +71,14 @@ Claude liest, soweit vorhanden:
 * `.claude/PROTECTED\_PATHS.json`
 * `.claude/commands/start.md`
 * `.claude/commands/pre-code-gate.md`
-* `.claude/commands/patch-quittung.md`
 * `.claude/commands/intake.md`
-* `.claude/commands/decompose.md`
-* `.claude/commands/uebergabe.md`
 * `.claude/commands/selftest-chatgpt.md`
-* `.claude/skills/subagent-delegation.md`
-* `.claude/skills/manual-test-plan.md`
-* `.claude/skills/spec-rewrite-guard.md`
-* `.claude/skills/document-analysis.md`
-* `.claude/skills/app-work.md`
-* `.claude/skills/css-design-work.md`
-* `.claude/skills/attempt-log.md`
-* `.claude/skills/regression-risk-check.md`
+* `.claude/skills/patch-quittung/SKILL.md`
+* `.claude/skills/decompose/SKILL.md`
+* `.claude/skills/uebergabe/SKILL.md`
+* `.claude/skills/subagent-dispatch/SKILL.md`
+* `.claude/skills/manual-test-plan/SKILL.md`
+* `.claude/skills/spec-rewrite-guard/SKILL.md`
 
 Wenn eine Datei fehlt:
 
@@ -183,8 +178,7 @@ Claude prüft mindestens diese Eingangstypen:
 |16|Kontextverlust|MODUS R/M oder Übergabe|UEBERGABE\_ERFORDERLICH|
 |17|Subagent-geeignete Suche|Haiku-Zuarbeit|REGELKONFORM\_WEITER|
 |18|Subagent müsste entscheiden|Eskalation an Parent|REGELKONFORM\_WEITER|
-|19|XLSX-/Dokumentenfall|document-analysis Skill|REGELKONFORM\_WEITER|
-|20|Test ohne Testpipeline|manual-test-plan|WARTET\_AUF\_ALBERT\_TEST|
+|19|Test ohne Testpipeline|manual-test-plan|WARTET\_AUF\_ALBERT\_TEST|
 
 Für jeden Pfad beantwortet Claude:
 
@@ -430,28 +424,7 @@ Claude prüft:
 
 \---
 
-### Szenario L – Dokument/XLSX
-
-User sagt:
-
-> „Analysiere diese XLSX und baue daraus eine Infografik.“
-
-Erwartung:
-
-* document-analysis Skill
-* erst Workbook-Inventur
-* relevante Sheets
-* nicht alles blind in Hauptkontext
-* Hauptagent synthetisiert
-
-Claude prüft:
-
-* Ist XLSX wichtiger als PDF?
-* Ist der Pfad vorhanden?
-
-\---
-
-### Szenario M – Regelkonflikt
+### Szenario L – Regelkonflikt
 
 Annahme:
 
@@ -470,7 +443,7 @@ Claude prüft:
 
 \---
 
-### Szenario N – Kontextverlust
+### Szenario M – Kontextverlust
 
 Annahme:
 
