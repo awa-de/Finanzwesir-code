@@ -82,12 +82,16 @@ Pfad: `C:\Users\Albert HP PC\.claude\projects\z--Documents-Nextcloud-Finanzwesir
 Neue stabile Projektfakten, Feedback oder Entscheidungen eintragen.
 
 **4. Commit-Message erzeugen**
-Format aus CLAUDE.md § 11. Ausgabe als reinen Text — bereit zum Einfügen in VSCode Message-Feld.
-Keine git-Kommandos drum herum. Keine Code-Blöcke. Nur der Text selbst:
+Format (eigenständig — kein externer Verweis nötig): Ausgabe als reinen Text, bereit zum Einfügen in VSCode Message-Feld.
+Keine git-Kommandos drum herum. Keine Code-Blöcke. Nur der Text selbst.
 
-Zeile 1: Titel (50–72 Zeichen)
-Zeile 2: leer
-Zeile 3+: strukturierter Body
+Pflichtfelder:
+- Zeile 1: Typ + Zusammenfassung (50–72 Zeichen)
+- Was war das Problem?
+- Wie wurde es gelöst?
+- Warum ist die Lösung sicher (keine Regressionen)?
+- Betroffene Bereiche: Datei (Methode)
+- Kontext: Issue / Spec / Tested
 
 Beispiel-Ausgabe:
 ```
@@ -99,7 +103,7 @@ Was war das Problem?
 Wie wurde es gelöst?
 ...
 
-Warum ist die Lösung sicher?
+Warum ist die Lösung sicher (keine Regressionen)?
 ...
 
 Betroffene Bereiche:
@@ -112,7 +116,7 @@ Kontext:
 Albert committed via VSCode Git Extension (Message-Feld). Keine Terminal-Befehle liefern.
 
 **5. CLAUDE.md** — nur wenn eine neue fundamentale, universelle Verhaltensregel entstanden ist.
-Regelaufnahme-Schutz aus CLAUDE.md § 8 beachten.
+[Regelaufnahme-Schutz] beachten.
 
 **6. PROJECT-STATUS.md** — nach längeren Sessions oder Meilensteinen aktualisieren.
 

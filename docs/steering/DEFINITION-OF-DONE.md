@@ -23,7 +23,7 @@ Eine Aufgabe ist nur fertig, wenn:
 - Tests durchgeführt oder bewusst als nicht möglich markiert wurden
 - Regressionen geprüft wurden
 - betroffene Dokumentation aktualisiert wurde
-- Abschlussritual gemäß `CLAUDE.md` §7 durchgeführt wurde
+- Abschlussritual gemäß `/abschluss-ritual` durchgeführt wurde
 
 Wenn unklar ist, ob Mini oder Voll-Ritual gilt: **Voll gilt.**
 

@@ -76,7 +76,7 @@ Kein Eintrag wird unilateral gelöscht.
 |---|---|
 | Präferenz / Kommunikation / Arbeitsweise | `memory/feedback_*.md` (neue Datei je Thema) |
 | Projektfakt / Entscheidung | `memory/project_*.md` |
-| Universelle Verhaltensregel | `CLAUDE.md` — nur via §8-Gate (alle 7 Bedingungen!) |
+| Universelle Verhaltensregel | `CLAUDE.md` — nur via [Regelaufnahme-Schutz]-Gate (alle 7 Bedingungen!) |
 | Wiederholbarer Workflow | `.claude/skills/[name]/SKILL.md` |
 
 ---
@@ -85,4 +85,4 @@ Kein Eintrag wird unilateral gelöscht.
 
 - Kein stilles Clustering, kein stilles Archivieren, kein stilles Löschen.
 - Jede Promotion braucht Alberts j.
-- CLAUDE.md-Promotions: §8-Gate bleibt — alle 7 Bedingungen müssen erfüllt sein.
+- CLAUDE.md-Promotions: [Regelaufnahme-Schutz]-Gate bleibt — alle 7 Bedingungen müssen erfüllt sein.

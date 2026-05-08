@@ -37,6 +37,9 @@ Albert kann sie auch explizit aufrufen.
 | `/patch-quittung` | Quittung nach jedem Patch (Zählung, Tabu-Check, Testfall) | Automatisch nach jedem Patch; oder manuell |
 | `/distill` | Destilliert session-log zu Mustern in patterns.md | Von /start empfohlen (Schwellen-basiert); oder manuell |
 | `/uebergabe` | Strukturierter Übergabeprompt + session-log Breadcrumb | Albert sagt „Übergabe/neuer Thread"; oder MODUS M |
+| `/intake` | Aufnahme-Protokoll für neue Aufgaben (5 Fragen → BACKLOG-Eintrag) | Claude startet bei NEUE AUFGABE; oder Albert ruft explizit auf |
+| `/pre-code-gate [light\|full]` | Gate-Checklisten ausführen (Light: 3 Fragen / Full: 9 Fragen) | Claude startet automatisch vor Code; oder manuell |
+| `/subagent-dispatch` | Entscheidungshilfe Subagenten (Tiering, Eskalationsregel) | BUG/FIX Schritt 7; oder manuell |
 
 ---
 
@@ -44,7 +47,7 @@ Albert kann sie auch explizit aufrufen.
 
 ### Wiedereinstieg / neue Session
 
-Session-Start läuft automatisch (→ CLAUDE.md § 2):
+Session-Start läuft automatisch (→ /start):
 ```
 1. PROJECT-STATUS.md
 2. NAVIGATION.md
@@ -67,7 +70,7 @@ Session-Start läuft automatisch (→ CLAUDE.md § 2):
 6. docs/steering/engine/REGRESSION-MATRIX.md      ← vor Abschluss relevante Tests
 ```
 
-Pre-Code-Gate läuft automatisch (→ CLAUDE.md § 3).
+Pre-Code-Gate läuft automatisch (→ /pre-code-gate).
 Nach Abschluss: Claude bietet `/abschluss-ritual AP-N` an.
 
 ---

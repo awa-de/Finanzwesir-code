@@ -1,6 +1,6 @@
 # PROJECT STATUS — Finanzwesir 2.0
 
-Stand: 2026-05-08 | Session: Selbstlernendes System | Geändert von: Claude
+Stand: 2026-05-08 | Session: CLAUDE.md v2.0 Neubau | Geändert von: Claude
 
 **Zweck:** Schneller Wiedereinstieg nach Pausen.
 **Zielgruppe:** Albert und Claude.
@@ -13,16 +13,19 @@ Stand: 2026-05-08 | Session: Selbstlernendes System | Geändert von: Claude
 
 ## 1. Aktueller Fokus
 
-Selbstlernendes System implementiert (2026-05-08). Alle 8 Schritte abgeschlossen.
-Nächste Priorität: Pilot-Test (7 Checks) — erst dann gilt das System als produktiv.
-Danach: DS-012 → DS-014 (Design-API, Blocker für App-Entwicklung) + AP-20/21 (Chart-Engine).
+CLAUDE.md v2.0 Neubau abgeschlossen (2026-05-08). Alle 6 Phasen umgesetzt.
+Nächste Priorität: Verifikation im nächsten /start-Faden (TEST: SESSION-START-Zeile, Gate-Verweise, /intake).
+Danach: DS-014 (Design-API, Blocker für App-Entwicklung) + AP-20/21 (Chart-Engine).
 
 ---
 
 ## 2. Letzter stabiler Stand
 
+- CLAUDE.md v2.0 Neubau abgeschlossen (2026-05-08): 6 Phasen. Grundmodell, Invarianten,
+  Freigabeprinzip neu. §11 entfernt, semantische Namen, /pre-code-gate + /intake + /subagent-dispatch neu.
+  Verifikation im nächsten /start-Faden ausstehend.
 - Selbstlernendes System implementiert (2026-05-08): 8 Schritte, alle von Albert bestätigt.
-  session-log, patterns, /distill, /uebergabe, CLAUDE.md §12 Lastabwurf. Pilot-Test ausstehend.
+  session-log, patterns, /distill, /uebergabe, Lastabwurf-System. Pilot-Test: nächster Faden.
 - Kontroll-Rückkopplungs-System implementiert (2026-05-04): 4 neue Skills + 3 Upgrades aktiv.
   QA-Review (check-mode-gatekeeper) abgeschlossen.
 - Git-Migration abgeschlossen (2026-05-04): Programmier-Git an Root, GitHub verbunden.
@@ -38,14 +41,12 @@ Danach: DS-012 → DS-014 (Design-API, Blocker für App-Entwicklung) + AP-20/21 
 
 ## 3. Nächster sinnvoller Schritt
 
-- **Pilot-Test Selbstlernendes System** — vor allen anderen Tasks (System implementiert aber ungetestet)
-  5 Pilot-Tests aus PLAN-Synthese.md, Abschnitt „Verifikation":
-  1. AP abschließen → Abschluss-Ritual → Erscheint Schritt 0 (session-log)? Eintrag korrekt?
-  2. `/start` → prüft er session-log + patterns.md? SESSION-START-Zeile: „Log: X Einträge"?
-  3. Kassensturz → erscheint Lern-Loop-Abschnitt?
-  4. `/distill` ausführen → Kandidaten korrekt erkannt? j/n/anpassen funktioniert?
-  5. Übergabeprompt anfordern → strukturierter Delta-Prompt (~10 Zeilen)? Breadcrumb gesetzt?
-  Erst wenn alle 5 ✓: Selbstlernendes System gilt als produktiv.
+- **Verifikation CLAUDE.md v2.0** — nächster /start-Faden:
+  1. SESSION-START-Zeile erscheint korrekt?
+  2. Gate-Verweise zeigen semantische Namen ([Gate-Prinzip] statt §3)?
+  3. `/intake` trigger bei NEUE AUFGABE funktioniert?
+  4. /distill + /uebergabe + /kassensturz: Lern-Loop-Abschnitt erscheint?
+  Erst wenn ✓: System gilt als produktiv.
 - **DS-014** (Design-API Baukasten — 07-APP-KOMPONENTEN.md) — Blocker für alle App-Entwicklung
 - **DS-012** (Tailwind-Config kanonisch) — Voraussetzung für DS-014
 - **AP-20/21** (Mixed-Rhythm CV-Heuristik) — bereits 🟡 Aktiv, Chart-Engine
@@ -96,10 +97,15 @@ Vollständig im DECISION-LOG dokumentiert (`docs/steering/DECISION-LOG.md`):
 
 ## 8. Letzte Session
 
+2026-05-08 — CLAUDE.md v2.0 Neubau (6 Phasen abgeschlossen).
+Grundmodell, Invarianten, Freigabeprinzip (neu). §11 entfernt → abschluss-ritual.
+commands/pre-code-gate.md + intake.md (neu). skills/subagent-dispatch (neu).
+Semantische Namen systemweit. CL-14 erledigt. Verifikation ausstehend.
+
 2026-05-08 — Selbstlernendes System implementiert (Faden 3, alle 8 Schritte).
 session-log + patterns (neu), abschluss-ritual Schritt 0 + Challenge-Response (erweitert),
 /start Schritt 3c Learning-Pipeline (erweitert), kassensturz Lern-Loop (erweitert),
-/distill + /uebergabe (neu), CLAUDE.md §12 Lastabwurf-System (neu). Pilot-Test ausstehend.
+/distill + /uebergabe (neu), Lastabwurf-System (neu). Pilot-Test: nächster Faden.
 
 2026-05-04 — Kontroll-Rückkopplungs-System implementiert.
 4 neue Skills (kassensturz, patch-quittung, chain-of-custody, spec-quote) + 3 Upgrades.
@@ -116,10 +122,10 @@ Neue APs: DS-012, DS-013, DS-014.
 
 ## 9. Einstieg für nächste Session
 
-**PILOT-TEST — vor allen anderen Tasks:**
-Das Selbstlernende System wurde implementiert aber noch nicht getestet.
-Die 5 Pilot-Tests stehen in Abschnitt 3 (Nächster sinnvoller Schritt → Pilot-Test).
-Erst wenn alle 5 ✓: System gilt als produktiv. Dann weiter mit DS-014 / AP-20/21.
+**VERIFIKATION — vor allen anderen Tasks:**
+CLAUDE.md v2.0 + Selbstlernendes System implementiert, aber noch nicht im neuen Faden getestet.
+Verifikations-Checks stehen in Abschnitt 3.
+Erst wenn ✓: Systeme gelten als produktiv. Dann weiter mit DS-014 / AP-20/21.
 
 Claude soll zuerst lesen:
 1. `PROJECT-STATUS.md` (diese Datei)
