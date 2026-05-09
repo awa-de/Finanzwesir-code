@@ -1,6 +1,6 @@
 # Offene Fragen — App-Fabrik
 
-Stand: 2026-05-09 | Arbeitsstand | Geändert von: Claude
+Stand: 2026-05-09 | App-Fabrik Scope-Funde | Geändert von: Claude
 
 **Status-Codes:** ❓ offen | ⏳ in Klärung | ✅ geklärt (→ 01_DECISION_LOG.md)
 
@@ -177,3 +177,17 @@ Option C: Redakteur konfiguriert CTA-Text und -URL in Ghost-Card
 **Status:** ❓  
 **Frage:** Welche Tests sind Pflicht vor Release einer App?  
 Kandidaten: manuelle Testmatrix (Claude erstellt, Albert testet), automatische Komponenten-Tests, Ghost-Integration-Test, Viewport-Test (375/768/1280)
+
+---
+
+## Redaktion / Doku
+
+### Red-01 — AUTHOR_GUIDE: `data-app` vs. `data-fw-app`
+**Status:** ⬜ → BACKLOG AF-04  
+Erkannt in AF-03. Kein Blocker für Standard V0.1. Klärung nach Pilot-1, wenn App-Card-Vertrag validiert.
+
+---
+
+### Red-02 — Redakteurs-Cheat-Sheet für fw-apps
+**Status:** ⬜ → BACKLOG AF-05  
+Erkannt in AF-03. Kein Blocker für Standard V0.1. Erstellung nach Pilot-1.

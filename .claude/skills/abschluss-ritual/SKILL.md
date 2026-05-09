@@ -1,7 +1,7 @@
 ---
 name: abschluss-ritual
 description: Abschluss-Ritual nach Fertigstellung einer Aufgabe in Finanzwesir 2.0. Aktualisiert Docs, Backlog, Memory und erzeugt Commit-Message.
-argument-hint: "[AP-ID, z.B. AP-20]"
+argument-hint: "[AP-ID, z.B. AP-20] — oder Aufgabenbeschreibung wenn kein BACKLOG-Eintrag vorhanden (Sofort-erledigt-Pfad)"
 ---
 
 # Skill: abschluss-ritual
@@ -65,9 +65,19 @@ Betroffene Dateien in `docs/spec/` auf Aktualität prüfen.
 Nur gezielte Edits, kein Vollrewrite.
 
 **2. BACKLOG bereinigen**
+
+War diese Aufgabe im BACKLOG registriert?
+
+**Ja (Normalfall):**
 - Abgeschlossene Zeile als ✅ in `docs/steering/BACKLOG-ARCHIV.md` verschieben (append mit Datum + Session)
 - Zeile aus `docs/steering/BACKLOG.md` löschen
 - `docs/steering/engine/WORKING-FEATURES.md` nur bei Engine-APs aktualisieren
+
+**Nein (Sofort-erledigt-Pfad):**
+- `docs/steering/BACKLOG-ARCHIV.md` lesen → letzten Eintrag mit passendem Domänen-Prefix finden → ID vergeben (Prefix + nächste freie Nummer). Kein passender Prefix vorhanden: bei 01 beginnen.
+- Eintrag direkt in `docs/steering/BACKLOG-ARCHIV.md` schreiben (append, gleiche Tabellenzeile wie Normalfall)
+- Format: `| [ID] | [Bereich] | [kurze Ergebnisbeschreibung] *(sofort erledigt)* | [Datum] | [Session] |`
+- Nicht in `docs/steering/BACKLOG.md` schreiben.
 
 **2b. Scope-Check**
 Während der Arbeit an diesem AP neuen Scope entdeckt?

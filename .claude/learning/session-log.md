@@ -18,3 +18,13 @@ Wird geleert nach /distill. Einträge: [FRICTION] [WIN] [PREF] [QUESTION] [OK]
 - [FRICTION] P3 (Distill) — Formulierung "Buchstaben-Suffix bevorzugt" von Albert korrigiert zu "knappe, konstante, sprechende Namen" — eigene Interpretation lag daneben
 - [WIN] AF-01 — docs/App-Fabrik Vollstruktur (9 Dateien, 2 Verzeichnisse, V0.3 Produktlandkarte) in einer Session ohne Nacharbeit fertiggestellt; 21-Zählmodell (18+3) sauber durchgehalten
 - [FRICTION] Kontext-Überlauf vor Abschluss-Ritual — Session musste mit Zusammenfassung fortgesetzt werden; Abschluss-Ritual läuft erst im Anschlusskontex
+
+## 2026-05-09 – SESSION START | Fokus: App-Fabrik | 04_CLAUDE_WORKFLOW_DRAFT.md → Pilot-1
+
+## 2026-05-09 – AF-06 | Scope-Funde AF-03 als BACKLOG-APs dokumentiert
+- [WIN] AF-04 (AUTHOR_GUIDE harmonisieren) + AF-05 (Cheat-Sheet fw-apps) in einem Pass in BACKLOG + 02_OPEN_QUESTIONS.md eingetragen — kein Lückenrest
+- [OK] Klärung Pre-Launch/Pilot-1-Timeline von Albert mid-Session: Pilot-1 weit vor Launch — Einordnung Pre-Launch war korrekt
+
+## 2026-05-09 – ST-05 | Sofort-erledigt-Pfad in abschluss-ritual eingeführt
+- [WIN] Option A (3 Optionen vorgeschlagen) direkt akzeptiert und in einem chirurgischen Edit umgesetzt — Schritt 2 mit Sofort-Pfad, Normalfall unberührt
+- [WIN] Erster Testfall (AF-06 + ST-05) direkt in dieser Session — Mechanik hat sich selbst bewiesen
