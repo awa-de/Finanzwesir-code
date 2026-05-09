@@ -62,6 +62,14 @@ Stand: 2026-05-09 | Arbeitsstand | Geändert von: Claude
 
 ---
 
+### A-08 — D3/TopoJSON lokal bundeln
+**Status:** 🟢 ENTSCHIEDEN  
+**Entscheidung:** TopoJSON, Karten- und Kartenbibliotheks-Abhängigkeiten werden lokal gebundelt. Keine CDN-Sonderregel für die Weltkarte oder andere Nicht-Chart.js-Abhängigkeiten.  
+**Begründung:** Konsistenz mit bestehender lokaler Chart.js-Strategie. Reduziert externe Abhängigkeiten, ist DSGVO-freundlicher und vermeidet Sonderlogik für einen Einzelfall.  
+**Quelle:** Entschieden: 2026-05-09
+
+---
+
 ## Datenformate
 
 ### D-01 — CSV für Tabellen, JSON für Konfiguration, Inline-Options nur klein
@@ -100,7 +108,31 @@ Stand: 2026-05-09 | Arbeitsstand | Geändert von: Claude
 ### Z-02 — Multi-Modul-Master-Apps
 **Status:** 🟢 ENTSCHIEDEN  
 **Entscheidung:** B2 (Geburtsjahrlos) und C1 (Diversifikations-Detektor) sind Multi-Modul-Master-Apps. Ihre Zusatz-Module sind eigenständig entwickelbar, aber fachlich und navigatorisch verbunden.  
+**Rollen-Zuordnungen und Kopplungslogik:** → Z-03 (B2) und Z-04 (C1)  
 **Quelle:** Arbeitsauftrag 2026-05-09
+
+---
+
+### Z-03 — B2 Rollen-Zuordnung: Geburtsjahrlos + Rollierende Sparpläne
+**Status:** 🟡 ARBEITSANNAHME  
+**Entscheidung:** `geburtsjahrlos` ist die Haupt-App (Startjahr-Schicksal), `rollierende-sparplaene` ist das Erweiterungsmodul (rollierender Startjahrvergleich). Beide bleiben separate App-Ordner, werden aber fachlich als zwei Modi / Perspektiven derselben Master-App behandelt.  
+**Rollen:**
+- `geburtsjahrlos`: Haupt-App / historischer Fächer, Startjahr-Schicksal
+- `rollierende-sparplaene`: Erweiterungsmodul / rollierender Kohorten-Vergleich  
+**Weiterhin offen:** Ob beide später in einer gemeinsamen UI als Modi zusammengeführt werden oder eigenständig einbettbar bleiben — Entscheidung nach Prüfung von Datenbedarf, UX-Komplexität und Chartbedarf.  
+**Quelle:** 2026-05-09
+
+---
+
+### Z-04 — C1 Rollen-Zuordnung: Diversifikations-Familie
+**Status:** 🟡 ARBEITSANNAHME  
+**Entscheidung:** C1 ist eine App-Familie mit drei lose gekoppelten Modulen. Technisch sollen die Module lose gekoppelt bleiben und einzeln einbettbar sein. Begriffe, Datenlogik und Designsemantik sollen konsistent sein.  
+**Rollen:**
+- `diversifikations-detektor`: Master-App / Diagnose, Nutzerportfolio
+- `investment-universum`: Gegenperspektive / globaler Anlagekuchen
+- `weltkarte-etf-indizes`: Visuelles Lernmodul / Index-Länder-Karte  
+**Weiterhin offen:** Konkrete technische Kopplung und Navigation zwischen den drei Modulen — Entscheidung wenn Datenbedarf und UX-Flow für C1 spezifiziert werden.  
+**Quelle:** 2026-05-09
 
 ---
 
@@ -145,7 +177,7 @@ Stand: 2026-05-09 | Arbeitsstand | Geändert von: Claude
 
 ### T-01 — Perplexity-Demo ist Labor, nicht Produktionsstandard
 **Status:** 🟢 ENTSCHIEDEN  
-**Entscheidung:** Das Perplexity-Demo-Template (`Vorschläge Perplexity/`) ist Prüflabor und visuelle Referenz, kein produktiver App-Code. Ideen übernehmen, Implementierung härten.  
+**Entscheidung:** Das Perplexity-Demo-Template (`_input/perplexity/`) ist Prüflabor und visuelle Referenz, kein produktiver App-Code. Ideen übernehmen, Implementierung härten.  
 **Quelle:** App-Fabrik_Zusatzpaket-Integration_V0-1.md §2
 
 ---
@@ -153,7 +185,18 @@ Stand: 2026-05-09 | Arbeitsstand | Geändert von: Claude
 ## Pilot
 
 ### P-01 — Pilot-Reihenfolge nach Template-Nutzen, nicht nach Wichtigkeit
+**Status:** 🟢 ENTSCHIEDEN  
+**Entscheidung:** Pilot 1: `prokrastinations-preis`. Pilot 2: `risiko-uebersetzer`.  
+**Begründung:** `prokrastinations-preis` ist als erster Factory-Pilot besser geeignet, weil die App voraussichtlich ein klarer Rechner mit einfachen Eingaben, klarer Ausgabe und wenig Sonderlogik ist. Ziel ist nicht die inhaltlich wichtigste App zuerst, sondern das Fließband an einer überschaubaren App zu härten.  
+**Quelle:** ETF-App-Fabrik_Produktlandkarte_V0-2.md §10 | Entschieden: 2026-05-09
+
+---
+
+## App-Familien
+
+### Fam-01 — G3 Passiv-Paradox: eigenständige App
 **Status:** 🟡 ARBEITSANNAHME  
-**Entscheidung:** Erste Pilot-App wird nicht nach strategischer Wichtigkeit gewählt, sondern nach dem Wiederverwendungswert des entstehenden Templates. Empfehlung: `prokrastinations-preis` → `risiko-uebersetzer` → `etf-namensdecoder`.  
-**Offen:** Alberts finale Entscheidung zur Pilot-App ausstehend.  
-**Quelle:** ETF-App-Fabrik_Produktlandkarte_V0-2.md §10
+**Entscheidung:** `passiv-paradox` bleibt vorerst eigenständige Funnel-Master-App, wird aber fachlich eng mit G2 `rendite-kalibrierung` gekoppelt.  
+**Begründung:** G2 und G3 gehören zur gleichen App-Familie, beantworten aber unterschiedliche Nutzerfragen. Keine Zusammenlegung.  
+**Weiterhin offen:** Keine — Eigenständigkeit ist für den aktuellen Planungshorizont ausreichend geklärt.  
+**Quelle:** 2026-05-09

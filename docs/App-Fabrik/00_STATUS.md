@@ -62,7 +62,7 @@ Hinreichend gesichert — gelten als Basis für weitere Entscheidungen:
 | Produktlandkarte V0.3 | `ETF-App-Fabrik_Produktlandkarte_V0-3.md` | Neu: Zählmodell + Multi-Modul-Master-Apps |
 | App-Fabrik-Konsolidierung | `App-Fabrik_Konsolidierung_Naechste-Schritte_V0-1.md` | Strategisches Leitdokument |
 | Zusatzpaket-Bewertung | `App-Fabrik_Zusatzpaket-Integration_V0-1.md` | Demo vs. Produktion klar getrennt |
-| Demo-Template (Perplexity) | `Vorschläge Perplexity/` | Input-Material, nicht bindend |
+| Demo-Template (Perplexity) | `_input/perplexity/` | Input-Material, nicht bindend |
 | Prototyp: Regulatorik | `/Apps/regulatorik-dashboard/` | Vollständig, Single-HTML, factory-Migration ausstehend |
 | Prototyp: Rollierende Sparpläne | `/Apps/rollierende-sparplaene/` | MSCI Sparplan v2 + annotiert, starke Vorarbeit |
 | Prototyp: Weltkarte v2 | `/Apps/weltkarte-etf-indizes/` | Bester Explorer-Prototyp im Repo |

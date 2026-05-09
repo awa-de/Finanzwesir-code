@@ -1,6 +1,6 @@
 # PROJECT STATUS — Finanzwesir 2.0
 
-Stand: 2026-05-09 | Session: App-Fabrik | Geändert von: Claude
+Stand: 2026-05-09 | Session: App-Fabrik Entscheidungen | Geändert von: Claude
 
 **Zweck:** Schneller Wiedereinstieg nach Pausen.
 **Zielgruppe:** Albert und Claude.
@@ -13,9 +13,8 @@ Stand: 2026-05-09 | Session: App-Fabrik | Geändert von: Claude
 
 ## 1. Aktueller Fokus
 
-App-Fabrik Konsolidierung abgeschlossen: docs/App-Fabrik Vollstruktur angelegt (9 Dateien, 21-Zählmodell, V0.3 Produktlandkarte).
-Offen: Pilot-Entscheidung P-01 (prokrastinations-preis oder risiko-uebersetzer) — in 01_DECISION_LOG.md eintragen.
-Danach: ersten App-Piloten bauen (04_CLAUDE_WORKFLOW_DRAFT.md als Prozess-Leitfaden).
+App-Fabrik Entscheidungen abgeschlossen: P-01 entschieden (Pilot 1 = prokrastinations-preis), A-08 (D3/TopoJSON lokal), Fam-01/Z-03/Z-04 als Arbeitsannahmen dokumentiert.
+Nächster Schritt: BACKLOG-AP anlegen und ersten App-Piloten bauen (04_CLAUDE_WORKFLOW_DRAFT.md als Prozess-Leitfaden).
 
 ---
 
@@ -98,6 +97,10 @@ Vollständig im DECISION-LOG dokumentiert (`docs/steering/DECISION-LOG.md`):
 
 ## 8. Letzte Session
 
+2026-05-09 — App-Fabrik Entscheidungsdokumentation (AF-02).
+P-01 (Pilot-Reihenfolge), A-08 (D3/TopoJSON lokal), Fam-01 (G3 eigenständig), Z-03 (B2 Rollen), Z-04 (C1 Rollen) dokumentiert.
+Kollisionsprüfung: kein Duplikat BACKLOG/App-Fabrik-Docs. BACKLOG-AP bei Pilot-Start erforderlich.
+
 2026-05-09 — App-Fabrik Konsolidierung + Distill.
 Distill: 8 session-log-Einträge destilliert, 5 Patterns promoted, 2 retired, 5 neue Memory-Dateien.
 App-Fabrik: docs/App-Fabrik Vollstruktur angelegt — 00_STATUS, 01_DECISION_LOG (15 Einträge),
@@ -143,11 +146,12 @@ Neue APs: DS-012, DS-013, DS-014.
 
 ## 9. Einstieg für nächste Session
 
-**Entscheidung offen (Albert):**
-- P-01: Welche App wird der erste Pilot? Empfehlung: `prokrastinations-preis`. → in `docs/App-Fabrik/01_DECISION_LOG.md` unter P-01 eintragen.
+**Pilot-Entscheidung gefallen:**
+- P-01: Pilot 1 = `prokrastinations-preis`, Pilot 2 = `risiko-uebersetzer` — eingetragen in `docs/App-Fabrik/01_DECISION_LOG.md`
 
-**Danach: ersten App-Piloten bauen.**
-Prozess: `docs/App-Fabrik/04_CLAUDE_WORKFLOW_DRAFT.md` (Intake → Spec → Gate → Build → Release).
+**Nächster Schritt: ersten App-Piloten bauen.**
+1. BACKLOG-AP anlegen (z.B. AP-23 | App | prokrastinations-preis Pilot 1 bauen)
+2. Prozess: `docs/App-Fabrik/04_CLAUDE_WORKFLOW_DRAFT.md` (Intake → Spec → Gate → Build → Release)
 
 **Parallel weiter offen:**
 - AP-20/21 (Mixed-Rhythm CV-Heuristik) — Chart-Engine

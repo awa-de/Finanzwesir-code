@@ -36,7 +36,7 @@ docs/App-Fabrik/
   ETF-App-Fabrik_Produktlandkarte_V0-1.md
   ETF-App-Fabrik_Produktlandkarte_V0-2.md
   ETF-Apps-Hauptdokument.md
-  Vorschläge Perplexity/
+  _input/perplexity/
     APP-ARCHITEKTUR.md
     README.md
     fw-app-template.html
@@ -51,10 +51,10 @@ docs/App-Fabrik/
 | `ETF-App-Fabrik_Produktlandkarte_V0-1.md` | Erste Produktlandkarte | Historisch nützlich, von V0.2 überholt |
 | `ETF-App-Fabrik_Produktlandkarte_V0-2.md` | Aktuelle Produktlandkarte mit App-Familien, Prototypen, Factory-Lücken | Aktueller Arbeitsstand |
 | `App-Fabrik_Zusatzpaket-Integration_V0-1.md` | Bewertung des Zusatzpakets | Sehr wichtig als Entscheidungsbrücke |
-| `Vorschläge Perplexity/README.md` | Übergabe zum Demo-Paket | Input, nicht bindend |
-| `Vorschläge Perplexity/APP-ARCHITEKTUR.md` | Architekturvorschlag | Teilweise übernehmen, aber nicht 1:1 |
-| `Vorschläge Perplexity/fw-app-template.html` | Demo-Template | Als Design-/Komponentenlabor wertvoll |
-| `Vorschläge Perplexity/fw-apps/_template.js` | JS-Kopiervorlage | Als Inspirationsquelle wertvoll, produktiv zu grob |
+| `_input/perplexity/README.md` | Übergabe zum Demo-Paket | Input, nicht bindend |
+| `_input/perplexity/APP-ARCHITEKTUR.md` | Architekturvorschlag | Teilweise übernehmen, aber nicht 1:1 |
+| `_input/perplexity/fw-app-template.html` | Demo-Template | Als Design-/Komponentenlabor wertvoll |
+| `_input/perplexity/fw-apps/_template.js` | JS-Kopiervorlage | Als Inspirationsquelle wertvoll, produktiv zu grob |
 
 ---
 
@@ -454,7 +454,7 @@ Erstelle diese Arbeitsstruktur:
 - _archive/
 
 Verschiebe:
-- Vorschläge Perplexity/* nach _input/perplexity/
+- _input/perplexity/* nach _input/perplexity/
 - ETF-App-Fabrik_Produktlandkarte_V0-1.md nach _archive/
 
 Lösche nichts.

@@ -6,4 +6,4 @@ Dieses Verzeichnis enthält externe Vorschläge, die als ernsthafte Unterstützu
 **Bewertung:** Alle Vorschläge in diesem Verzeichnis wurden in `App-Fabrik_Zusatzpaket-Integration_V0-1.md` bewertet.
 
 Vorhandenes Input-Material:
-- `../Vorschläge Perplexity/` — Demo-Template, APP-ARCHITEKTUR.md, JS-Template (Bewertung: Demo-Qualität, nicht Produktionsstandard)
+- `_input/perplexity/` — Demo-Template, APP-ARCHITEKTUR.md, JS-Template (Bewertung: Demo-Qualität, nicht Produktionsstandard)

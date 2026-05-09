@@ -32,10 +32,10 @@ App-Familien, Factory-Lücken, Pilotstrategie: `ETF-App-Fabrik_Produktlandkarte_
 | 8 | Market-Timing-Simulator | `market-timing-simulator` | B3 | Challenge / Decision + Reveal Chart | Offen |
 | 9 | 1 ETF vs. 5 ETFs / Komplexitätsentlarver | `komplexitaets-entlarver` | C2 | Compare / Complexity Reducer | Offen |
 | 10 | TER-Rechner / Kostenkiller | `kostenkiller-ter` | D3 | Calculator + Cost Scenario Chart | Offen |
-| 11 | Prokrastinations-Preis | `prokrastinations-preis` | B1 | Calculator + Live Counter | Offen — Pilot-Kandidat |
+| 11 | Prokrastinations-Preis | `prokrastinations-preis` | B1 | Calculator + Live Counter | Pilot 1 🟢 (P-01 entschieden) |
 | 12 | ESG-Spiegel | `esg-spiegel` | E1 | Explorer / Compare | Offen |
 | 13 | Renditekiller Volatilität | `renditekiller-volatilitaet` | F1 | Calculator / Simulation | Offen |
-| 14 | Passiv-Paradox | `passiv-paradox` | G3 | Interactive Explainer | Offen — Eigenständigkeit unklar |
+| 14 | Passiv-Paradox | `passiv-paradox` | G3 | Interactive Explainer | 🟡 Eigenständige App (Arbeitsannahme) |
 | 15 | Replizierer vs. Swapper | `replizierer-swapper` | D2 | Explainer / Animation | Offen |
 | 16 | Thesaurierer vs. Ausschütter | `thesaurierer-rennen` | F2 | Calculator / Comparison Race | Offen |
 | 17 | Weltdepot-Baukasten | `weltdepot-baukasten` | C3 | Configurator / Portfolio Compare | Offen |
@@ -106,7 +106,7 @@ Die Chart-Engine ist **kein App-Unterverzeichnis** und **kein Funnel-Slot**.
 **Modulrolle:** Analysemodus — zeigt quantitativ, wie stark die Rendite vom Startjahr abhängt  
 **Fachliche Aussage:** Starte denselben Sparplan mit X Euro und Laufzeit Y im Jahr Z, dann denselben in Z+1, Z+2 usw. — die Streuung der Ergebnisse macht die Startjahrabhängigkeit sichtbar.
 
-**Verbindung:** Beide Apps teilen dieselbe historische Datenbasis (MSCI NTR + CPI). Technisch können sie getrennt bleiben und sich per Verlinkung ergänzen. Offene Frage: Modi vs. separate Apps (→ 02_OPEN_QUESTIONS.md Fam-02).
+**Verbindung:** Beide Apps teilen dieselbe historische Datenbasis (MSCI NTR + CPI). Technisch können sie getrennt bleiben und sich per Verlinkung ergänzen. 🟡 Arbeitsannahme: separate Ordner, fachlich als zwei Perspektiven behandelt (→ Z-03 in 01_DECISION_LOG.md). Weiterhin offen: gemeinsame UI mit Modi — Klärung nach Pilot.
 
 ---
 
@@ -123,7 +123,7 @@ Die Chart-Engine ist **kein App-Unterverzeichnis** und **kein Funnel-Slot**.
 **Modulrolle:** Zeigt die konstante Grundstruktur des Investment-Universums  
 **Fachliche Aussage:** Egal wie kleinteilig man ETFs schneidet — das Investment-Universum bleibt in Summe konstant: Industrieländer plus Schwellenländer. Wer viele ETFs kauft, kauft dasselbe Universum in verschiedenen Verpackungen.
 
-**Verbindung:** Alle drei teilen den Explorer/Compare-Ansatz. Gemeinsames Datenmodell (Indexhierarchie, Länder-/Gewichtungsdaten) sinnvoll. Offene Frage: technische Kopplung und Navigation (→ 02_OPEN_QUESTIONS.md Fam-03).
+**Verbindung:** Alle drei teilen den Explorer/Compare-Ansatz. Gemeinsames Datenmodell (Indexhierarchie, Länder-/Gewichtungsdaten) sinnvoll. 🟡 Arbeitsannahme: lose Kopplung, einzeln einbettbar (→ Z-04 in 01_DECISION_LOG.md). Weiterhin offen: konkrete technische Kopplung und Navigation — Klärung bei C1-Spezifikation.
 
 ---
 
@@ -134,3 +134,4 @@ Die Chart-Engine ist **kein App-Unterverzeichnis** und **kein Funnel-Slot**.
 | V0.1 | 2026-05-09 | Erste Produktlandkarte aus ETF-Apps-Hauptdokument. 18 Apps, App-Familien, Datenbedarf, Chartbedarf. |
 | V0.2 | 2026-05-09 | Repo-Abgleich, vorhandene Prototypen dokumentiert, Factory-Lücken identifiziert, Pilotstrategie. |
 | V0.3 | 2026-05-09 | Sauberes Zählmodell (18+3=21), Multi-Modul-Master-Apps B2+C1, Chart-Engine als Infrastruktur, vollständige App-Ordner-Liste. |
+| V0.3.1 | 2026-05-09 | Entscheidungen eingetragen: P-01 (Pilot-Reihenfolge), A-08 (D3/TopoJSON lokal), Fam-01 (G3 eigenständig), Z-03/Z-04 (B2/C1 Rollen-Zuordnung). Statuszeilen aktualisiert. |

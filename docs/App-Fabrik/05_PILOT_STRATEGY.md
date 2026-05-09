@@ -65,11 +65,9 @@ Richtige Reihenfolge: Erst kleine Templates härten, dann Regulatorik in diese S
 
 ---
 
-## Offene Entscheidung für Albert
+## Entschiedene Pilot-Reihenfolge (P-01)
 
-**Welche App soll der erste Pilot sein?**
+**Pilot 1:** `prokrastinations-preis` — entschieden 2026-05-09  
+**Pilot 2:** `risiko-uebersetzer`
 
-Empfehlung: `prokrastinations-preis`  
-Alternative: `risiko-uebersetzer` (mehr Fachlogik, stärkerer emotionaler Hebel)
-
-→ Bitte in `01_DECISION_LOG.md` unter P-01 eintragen, wenn entschieden.
+Begründung: Fließband an einer überschaubaren App härten, nicht die inhaltlich wichtigste App zuerst. → 01_DECISION_LOG.md P-01

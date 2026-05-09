@@ -1,11 +1,12 @@
 # BACKLOG-ARCHIV – Finanzwesir 2.0
-Stand: 2026-05-09 | Session: App-Fabrik | Geändert von: Claude
+Stand: 2026-05-09 | Session: App-Fabrik Entscheidungen | Geändert von: Claude
 
 Abgeschlossene Items, neueste zuerst (append-only).
 Archivierungs-Trigger: wenn > 200 Zeilen → neue Datei `BACKLOG-ARCHIV-YYYY.md` anlegen.
 
 | ID | Bereich | Titel | Abgeschlossen | Session |
 |----|---------|-------|---------------|---------|
+| AF-02 | App-Fabrik | Entscheidungsdokumentation — P-01 (Pilot 1: prokrastinations-preis, Pilot 2: risiko-uebersetzer), A-08 (D3/TopoJSON lokal), Fam-01 (G3 eigenständig), Z-03 (B2 Rollen-Zuordnung), Z-04 (C1 Rollen-Zuordnung). Kollisionsprüfung BACKLOG/App-Fabrik-Docs: kein Duplikat, Empfehlung BACKLOG-AP bei Pilot-Start. 5 Dateien aktualisiert (01_DECISION_LOG, 02_OPEN_QUESTIONS, 05_PILOT_STRATEGY, APP_INVENTORY, Produktlandkarte V0.3.1) | 2026-05-09 | App-Fabrik Entscheidungen |
 | AF-01 | App-Fabrik | docs/App-Fabrik Arbeitsstruktur angelegt — 9 neue Dateien (00_STATUS, 01_DECISION_LOG, 02_OPEN_QUESTIONS, 03_APP_FACTORY_STANDARD_DRAFT, 04_CLAUDE_WORKFLOW_DRAFT, 05_PILOT_STRATEGY, APP_INVENTORY, V0.3 Produktlandkarte) + 2 Verzeichnisse (_input, _archive) mit README | 2026-05-09 | App-Fabrik |
 | DIST-01 | System | Distill-Lauf — 8 session-log-Einträge destilliert: 3 Kandidaten promoted (Kein „notiert" ohne Write, Strukturannahmen erst nach Lesen, Audit-Trail als kommentierte Datei), 2 PREFs promoted (Review-als-Datei, sprechende Namen statt Nummern), 2 retired; 5 neue memory-Dateien; session-log.md geleert | 2026-05-09 | App-Fabrik |
 | ST-04 | System | /finde-skills Skill erstellt — tiered Suche (4 Stufen), Security-Review mit Audit-Trail, Haiku/Sonnet-Aufgabenteilung | 2026-05-09 | Skill-Infrastruktur |

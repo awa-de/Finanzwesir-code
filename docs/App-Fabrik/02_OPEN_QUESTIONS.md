@@ -40,7 +40,8 @@ Option C: Hybrid (Registry mit dynamischen Imports)
 ---
 
 ### Arch-05 — D3/TopoJSON für Weltkarte: lokal bundeln oder CDN zulassen?
-**Status:** ❓  
+**Status:** ✅ Geklärt → A-08 in 01_DECISION_LOG.md  
+**Entscheidung:** Lokal bundeln. Keine CDN-Sonderregel. Konsistent mit Chart.js-Strategie.  
 **Frage:** Weltkarte v2 nutzt D3 + TopoJSON vom CDN. Für Produktion: lokale Assets oder speziell gemanagtes CDN?  
 **Kontext:** DSGVO, Performance, Konsistenz mit Theme-Build. Gilt auch für alle anderen Nicht-Chart.js-Dependencies.  
 **Blockiert:** Factory-Migration `weltkarte-etf-indizes`
@@ -123,21 +124,26 @@ Option C: Redakteur konfiguriert CTA-Text und -URL in Ghost-Card
 ## App-Familien
 
 ### Fam-01 — G3 Passiv-Paradox: eigene App oder G2-Section?
-**Status:** ❓  
+**Status:** ✅ In Arbeitsannahme überführt → Fam-01 in 01_DECISION_LOG.md  
+**Arbeitsannahme:** Eigenständige App, fachlich eng mit G2 gekoppelt. Keine Zusammenlegung.  
 **Frage:** Ist G3 (passiv-paradox) eine eigenständige App oder ein eingebetteter Abschnitt von G2 (rendite-kalibrierung)?  
 **Kontext:** G3 hat niedrigen Implementierungsaufwand, passt inhaltlich zu G2.
 
 ---
 
 ### Fam-02 — B2 Multi-Modul: wie werden Geburtsjahrlos + Rollierende Sparpläne verbunden?
-**Status:** ❓  
+**Status:** ✅ In Arbeitsannahme überführt → Z-03 in 01_DECISION_LOG.md  
+**Arbeitsannahme:** Separate App-Ordner, fachlich als zwei Perspektiven der Master-App behandelt. `geburtsjahrlos` = Haupt-App, `rollierende-sparplaene` = Erweiterungsmodul.  
+**Weiterhin offen:** Ob später eine gemeinsame UI mit Modi entsteht — Klärungsschritt: nach Pilot-Abschluss, basierend auf Datenbedarf, UX-Komplexität und Chartbedarf.  
 **Frage:** Werden sie als separate Apps mit Verlinkung oder als Modi einer App (`data-fw-mode="geburtsjahrlos"` / `"rollierende"`) implementiert?  
 **Kontext:** Fachlich ergänzen sie sich, technisch könnten sie separat bleiben.
 
 ---
 
 ### Fam-03 — C1 Multi-Modul: wie werden Diversifikations-Detektor + Investment-Universum + Weltkarte verbunden?
-**Status:** ❓  
+**Status:** ✅ In Arbeitsannahme überführt → Z-04 in 01_DECISION_LOG.md  
+**Arbeitsannahme:** Lose Kopplung, einzeln einbettbar. Begriffe, Datenlogik und Designsemantik konsistent halten.  
+**Weiterhin offen:** Konkrete technische Kopplung und Navigation — Klärungsschritt: wenn Datenbedarf und UX-Flow für C1 spezifiziert werden.  
 **Frage:** Wie stark ist die technische Kopplung? Gemeinsame Datenbasis? Navigation zwischen den drei Apps?  
 **Kontext:** Drei separate Prototypen/Konzepte, die fachlich dieselbe Welt zeigen.
 
