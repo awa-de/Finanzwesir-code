@@ -1,6 +1,15 @@
 # Session-Log — Finanzwesir 2.0
 Wird geleert nach /distill. Einträge: [FRICTION] [WIN] [PREF] [QUESTION] [OK]
 
+## 2026-05-09 – ST-03 + ST-04: Design-Ressourcen + /finde-skills Skill
+
+- [QUESTION] Initiale Marktplatz-Liste (5 Quellen) ohne Qualitätseinschätzung präsentiert → Albert fragte nach (warum diese 5, sind das die besten?) → strategische Klärung vor Implementierung
+- [WIN] Option A (Vercel find-skills) durch Evaluation ausgeschlossen — Architektur-Inkompatibilität erkannt vor Code-Bau, kein Rückbau nötig
+- [PREF] Audit-Trail in docs/steering/audits/skills-review/ — Albert: „extrem wertvoll für selbstlernend"
+- [PREF] Review als eigenständige kommentierte Datei — Albert liest selbst, entscheidet selbst; kein direkter Claude-Beschluss
+
+## 2026-05-09 – SESSION START | Fokus: App-Fabrik (ETF-App-Fabrik_Produktlandkarte_V0-1.md geöffnet)
+
 ## 2026-05-08 – Selftest-Durchlauf (ChatGPT-Selbsttest full)
 
 - [WIN] Selftest GELB: 3 Dateien chirurgisch gefixt — PROTECTED_PATHS.json (Layer-1 auf forbidden), start.md (Schritt 0 als Kern-Invariante), selftest-chatgpt.md (Inventur + document-analysis entfernt)

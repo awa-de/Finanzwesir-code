@@ -40,6 +40,7 @@ Albert kann sie auch explizit aufrufen.
 | `/intake` | Aufnahme-Protokoll für neue Aufgaben (5 Fragen → BACKLOG-Eintrag) | Claude startet bei NEUE AUFGABE; oder Albert ruft explizit auf |
 | `/pre-code-gate [light\|full]` | Gate-Checklisten ausführen (Light: 3 Fragen / Full: 9 Fragen) | Claude startet automatisch vor Code; oder manuell |
 | `/subagent-dispatch` | Entscheidungshilfe Subagenten (Tiering, Eskalationsregel) | BUG/FIX Schritt 7; oder manuell |
+| `/finde-skills` | Skill aus externen Marktplätzen suchen, sicherheitsgeprüft integrieren | Manuell wenn neuer Skill gesucht wird |
 
 ---
 
@@ -103,6 +104,10 @@ Regeln (nie brechen):
 - Hex-Werte nur im Token-Abschnitt
 - Keine externen Font-Quellen
 
+**Design-Ressourcen (bei Styling-Entscheidungen prüfen):**
+- https://styles.refero.design/ — Komponenten-Galerie, Stil-Referenzen
+- https://refero.design/mcp — MCP-Integration für Design-Referenzen
+
 Nach Abschluss: `/abschluss-ritual`.
 
 ---
@@ -121,6 +126,10 @@ Nach Abschluss: `/abschluss-ritual`.
 Claude gibt Bestätigung aus bevor es weitergeht: „APP-INTERFACE.md ✓, SECURITY-BASELINE.md ✓."
 Apps sind security-relevant sobald sie HTML, Nutzerparameter, externe URLs, CSV oder Script-Tags berühren.
 Relative Pfade in `Apps/` können gebrochen sein — beim ersten Start prüfen.
+
+**Design-Ressourcen (bei App-Styling-Entscheidungen prüfen):**
+- https://styles.refero.design/ — Komponenten-Galerie, Stil-Referenzen
+- https://refero.design/mcp — MCP-Integration für Design-Referenzen
 
 Nach Abschluss: `/abschluss-ritual`.
 

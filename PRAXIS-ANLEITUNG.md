@@ -1,5 +1,5 @@
 # Praxis-Anleitung: Arbeiten mit der Finanzwesir-Projektsteuerung
-Stand: 2026-05-03
+Stand: 2026-05-09
 
 ---
 
@@ -143,6 +143,7 @@ Claude schlägt diese von sich aus vor — aber Albert kann sie auch direkt akti
 | `/manual-test-plan AP-20` | Wenn Albert einen strukturierten Testplan braucht bevor er testet |
 | `/spec-rewrite-guard docs/spec/X.md` | Wenn Albert selbst eine Spec bearbeiten will |
 | `/start` | **Pflicht am Anfang jedes Fadens** — startet Session-Start-Sequenz (4 Dateien + Kommunikationsstil) |
+| `/finde-skills` | Wenn ein neuer Skill gesucht wird — sucht, prüft sicherheitstechnisch, integriert nach Alberts OK |
 
 ---
 
@@ -200,6 +201,7 @@ Claude erledigt das. Albert fokussiert auf Inhalt und Entscheidungen.
 | Theme-Build | TH-N | TH-07 |
 | Cleanup | CL-N | CL-14 |
 | App | APP-N | APP-01, APP-02 |
+| System / Infrastruktur | ST-N | ST-03, ST-04 |
 
 ### Prioritätsdefinitionen
 

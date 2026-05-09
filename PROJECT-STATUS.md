@@ -1,6 +1,6 @@
 # PROJECT STATUS — Finanzwesir 2.0
 
-Stand: 2026-05-08 | Session: Selftest-Durchlauf | Geändert von: Claude
+Stand: 2026-05-09 | Session: Skill-Infrastruktur | Geändert von: Claude
 
 **Zweck:** Schneller Wiedereinstieg nach Pausen.
 **Zielgruppe:** Albert und Claude.
@@ -13,9 +13,9 @@ Stand: 2026-05-08 | Session: Selftest-Durchlauf | Geändert von: Claude
 
 ## 1. Aktueller Fokus
 
-ChatGPT-Selbsttest full durchgelaufen: GELB, keine Chaos-Pfade. PROTECTED_PATHS.json gehärtet,
-start.md Schritt 0 ergänzt, Selftest-Inventur bereinigt. ST-01 + ST-02 als neue APs eingetragen.
-Offen: /intake, /uebergabe, /distill im neuen Faden testen. Danach: DS-014 + AP-20/21.
+Skill-Infrastruktur aufgebaut: Refero.design Ressourcen verankert (NAVIGATION.md + Memory),
+/finde-skills Skill erstellt (tiered Suche, Security-Review, Audit-Trail in docs/steering/audits/skills-review/).
+Offen: /finde-skills im neuen Faden testen. Danach: DS-014 + AP-20/21.
 
 ---
 
@@ -97,6 +97,11 @@ Vollständig im DECISION-LOG dokumentiert (`docs/steering/DECISION-LOG.md`):
 ---
 
 ## 8. Letzte Session
+
+2026-05-09 — Skill-Infrastruktur: Refero.design Ressourcen verankert (NAVIGATION.md CSS/Design + App + Memory).
+/finde-skills Skill erstellt: tiered Suche (4 Stufen), Security-Review als kommentierte Datei, Audit-Trail
+in docs/steering/audits/skills-review/, Haiku/Sonnet-Aufgabenteilung. PRAXIS-ANLEITUNG.md + BACKLOG-ARCHIV.md aktualisiert.
+Test von /finde-skills ausstehend (neuer Faden).
 
 2026-05-08 — ChatGPT-Selbsttest full: Gesamtstatus GELB, keine Chaos-Pfade.
 PROTECTED_PATHS.json Layer-1 auf forbidden, start.md Schritt 0, selftest-chatgpt.md Inventur bereinigt.
