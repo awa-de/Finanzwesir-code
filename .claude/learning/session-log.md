@@ -1,6 +1,13 @@
 # Session-Log — Finanzwesir 2.0
 Wird geleert nach /distill. Einträge: [FRICTION] [WIN] [PREF] [QUESTION] [OK]
 
+## 2026-05-09 – AF-03 | App-Fabrik-Standard V0.1 ausgearbeitet
+- [WIN] 03_APP_FACTORY_STANDARD_DRAFT.md: 13 Abschnitte aus 10+ Quellen in einer Runde ohne Nacharbeit; Zwei-Vertrags-Modell (fw-app + financial-chart-module) klar getrennt — kein Kollisionsrisiko
+- [QUESTION] AUTHOR_GUIDE-v3.md nutzt `data-app` als Attribut-Name, neuer Standard nutzt `data-fw-app` — Namenskonflikt beim Quellenlesen entdeckt; da Entscheidung (data-fw-app) von Albert explizit vorgegeben war, als offene Frage F-01 dokumentiert statt eskaliert
+- [WIN] Alberts Briefing "Backlog-Eintrag auch ohne BACKLOG-Eintrag schreiben" → Prinzip: voller Audit-Trail unabhängig von formaler BACKLOG-Registrierung
+
+## 2026-05-09 – SESSION START | Fokus: App-Pilot (P-01 prokrastinations-preis) / BACKLOG-AP anlegen
+
 ## 2026-05-09 – SESSION START | Fokus: P-01 Pilot-Entscheidung / App-Fabrik
 
 ## 2026-05-09 – AF-02 | App-Fabrik Entscheidungsdokumentation

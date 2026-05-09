@@ -1,6 +1,6 @@
 # PROJECT STATUS — Finanzwesir 2.0
 
-Stand: 2026-05-09 | Session: App-Fabrik Entscheidungen | Geändert von: Claude
+Stand: 2026-05-09 | Session: App-Fabrik Standard V0.1 | Geändert von: Claude
 
 **Zweck:** Schneller Wiedereinstieg nach Pausen.
 **Zielgruppe:** Albert und Claude.
@@ -13,8 +13,8 @@ Stand: 2026-05-09 | Session: App-Fabrik Entscheidungen | Geändert von: Claude
 
 ## 1. Aktueller Fokus
 
-App-Fabrik Entscheidungen abgeschlossen: P-01 entschieden (Pilot 1 = prokrastinations-preis), A-08 (D3/TopoJSON lokal), Fam-01/Z-03/Z-04 als Arbeitsannahmen dokumentiert.
-Nächster Schritt: BACKLOG-AP anlegen und ersten App-Piloten bauen (04_CLAUDE_WORKFLOW_DRAFT.md als Prozess-Leitfaden).
+App-Fabrik-Standard V0.1 fertig (AF-03): 03_APP_FACTORY_STANDARD_DRAFT.md vollständig ausgearbeitet — 7 App-Familien, Ghost-Card-Vertrag (fw-app + financial-chart-module), DoD, Sicherheitsregeln, 11 offene Fragen.
+Nächster Schritt: 04_CLAUDE_WORKFLOW_DRAFT.md ausarbeiten → dann APP_SPEC für prokrastinations-preis (Pilot 1) erstellen → Pilot bauen.
 
 ---
 
@@ -41,15 +41,10 @@ Nächster Schritt: BACKLOG-AP anlegen und ersten App-Piloten bauen (04_CLAUDE_WO
 
 ## 3. Nächster sinnvoller Schritt
 
-- **Verifikation CLAUDE.md v2.0** — nächster /start-Faden:
-  1. SESSION-START-Zeile erscheint korrekt?
-  2. Gate-Verweise zeigen semantische Namen ([Gate-Prinzip] statt §3)?
-  3. `/intake` trigger bei NEUE AUFGABE funktioniert?
-  4. /distill + /uebergabe + /kassensturz: Lern-Loop-Abschnitt erscheint?
-  Erst wenn ✓: System gilt als produktiv.
-- **DS-014** (Design-API Baukasten — 07-APP-KOMPONENTEN.md) — Blocker für alle App-Entwicklung
-- **DS-012** (Tailwind-Config kanonisch) — Voraussetzung für DS-014
-- **AP-20/21** (Mixed-Rhythm CV-Heuristik) — bereits 🟡 Aktiv, Chart-Engine
+- **04_CLAUDE_WORKFLOW_DRAFT.md ausarbeiten** — Orchestrierung der vorhandenen Skills für App-Entwicklung (Intake → Spec → Gate → Build → Release)
+- **APP_SPEC prokrastinations-preis erstellen** — nach Workflow-Draft, per `spec-mode-architecture`
+- **Pilot 1 bauen** — `prokrastinations-preis`, Calculator-Familie, kein externer Datenbedarf
+- **AP-20/21** (Mixed-Rhythm CV-Heuristik) — 🟡 Aktiv, Chart-Engine, parallel möglich
 
 ---
 
@@ -61,7 +56,7 @@ Nächster Schritt: BACKLOG-AP anlegen und ersten App-Piloten bauen (04_CLAUDE_WO
 | Chart-Engine | Stabil, offene APs | Siehe `docs/steering/BACKLOG.md` |
 | Theme | In Entwicklung | `THEME-ASSEMBLY-CHECKLIST.md` |
 | CSS | Stabil | Siehe `docs/steering/BACKLOG.md` (CSS-N Items) |
-| Apps | Architektur beschlossen | DS-014 (Design-API) zuerst, dann App-Entwicklung |
+| Apps | Standard V0.1 fertig ✅ | 04_CLAUDE_WORKFLOW_DRAFT → APP_SPEC Pilot-1 → Pilot bauen |
 | Content | Laufend | Redaktionsleitfaden aktiv |
 | Security | Baseline dokumentiert | `SECURITY-BASELINE.md` |
 
@@ -96,6 +91,13 @@ Vollständig im DECISION-LOG dokumentiert (`docs/steering/DECISION-LOG.md`):
 ---
 
 ## 8. Letzte Session
+
+2026-05-09 — App-Fabrik-Standard V0.1 ausgearbeitet (AF-03).
+03_APP_FACTORY_STANDARD_DRAFT.md: 13 Abschnitte, 7 App-Familien (je Zweck/Muster/Bausteine),
+Ghost-HTML-Card-Vertrag vollständig (fw-app-Namespace + Chart-Engine-Sonderfall, Zwei-Vertrags-Tabelle),
+CSV/JSON/data-options-Matrix, Code-Prinzipien, Sicherheitsregeln, DoD (8 Kategorien), 11 offene Fragen.
+Scope-Funde: AUTHOR_GUIDE nutzt `data-app` (nicht `data-fw-app`) — Konflikt als F-01 dokumentiert;
+kein fw-app-Cheat-Sheet für Redakteure — als F-02 dokumentiert. Beide als BACKLOG-Kandidaten gemeldet.
 
 2026-05-09 — App-Fabrik Entscheidungsdokumentation (AF-02).
 P-01 (Pilot-Reihenfolge), A-08 (D3/TopoJSON lokal), Fam-01 (G3 eigenständig), Z-03 (B2 Rollen), Z-04 (C1 Rollen) dokumentiert.
@@ -146,16 +148,21 @@ Neue APs: DS-012, DS-013, DS-014.
 
 ## 9. Einstieg für nächste Session
 
-**Pilot-Entscheidung gefallen:**
-- P-01: Pilot 1 = `prokrastinations-preis`, Pilot 2 = `risiko-uebersetzer` — eingetragen in `docs/App-Fabrik/01_DECISION_LOG.md`
+**App-Fabrik-Standard V0.1 fertig.**  
+Alle 6 Vorbereitungsschritte (AF-01 bis AF-03 + 04/05/00_STATUS) abgeschlossen.
 
-**Nächster Schritt: ersten App-Piloten bauen.**
-1. BACKLOG-AP anlegen (z.B. AP-23 | App | prokrastinations-preis Pilot 1 bauen)
-2. Prozess: `docs/App-Fabrik/04_CLAUDE_WORKFLOW_DRAFT.md` (Intake → Spec → Gate → Build → Release)
+**Nächster Schritt: Workflow-Draft ausarbeiten, dann Pilot bauen.**
+1. `docs/App-Fabrik/04_CLAUDE_WORKFLOW_DRAFT.md` ausarbeiten (analog zu 03: vollständig ausarbeiten, Quellen nutzen)
+2. APP_SPEC für `prokrastinations-preis` erstellen (per `spec-mode-architecture`)
+3. BACKLOG-AP anlegen (App | prokrastinations-preis Pilot 1 bauen)
+4. Pilot 1 bauen — Calculator-Familie, kein externer Datenbedarf
+
+**Scope-Funde die noch offen sind:**
+- AUTHOR_GUIDE-v3.md: `data-app` → `data-fw-app` Update (nach Pilot-1, wenn Vertrag stabil)
+- Redakteurs-Cheat-Sheet für `fw-apps` analog zum Chart-Cheat-Sheet (nach Pilot-1)
 
 **Parallel weiter offen:**
 - AP-20/21 (Mixed-Rhythm CV-Heuristik) — Chart-Engine
-- DS-014 (Design-API Baukasten) — Blocker für alle App-Entwicklung
 
 Claude soll zuerst lesen:
 1. `PROJECT-STATUS.md` (diese Datei)
