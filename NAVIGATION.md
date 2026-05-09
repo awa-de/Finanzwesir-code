@@ -1,5 +1,5 @@
 # NAVIGATION.md – Finanzwesir 2.0
-Stand: 2026-05-08 | Session: Selbstlernendes System | Geändert von: Claude
+Stand: 2026-05-09 | Session: App-Fabrik | Geändert von: Claude
 
 Für Claude: **Routing-Dokument.** Wird beim Session-Start (Schritt 2) gelesen.
 Gibt Pfade und Lese-Reihenfolgen vor — KEINE Verhaltensregeln (die stehen in CLAUDE.md).
@@ -119,8 +119,11 @@ Nach Abschluss: `/abschluss-ritual`.
 2. docs/steering/audits/SECURITY-BASELINE.md      ← Pflicht vor App-Arbeit
 3. docs/steering/design/CSS-KONVENTIONEN.md       ← Klassen-Naming
 4. docs/design-system/                            ← Tokens, bestehende Komponenten
-5. Apps/[App-Name]/                               ← App-spezifischer Brief + Backlog
-6. bei Chart-Nutzung: relevante Chart-Engine-Spec + WORKING-FEATURES.md
+5. docs/App-Fabrik/APP_INVENTORY.md               ← Alle 21 App-Ordner, Datenbedarf, offene Klärungen
+6. docs/App-Fabrik/03_APP_FACTORY_STANDARD_DRAFT.md ← Dateistruktur-Standard, Ghost-Card-Vertrag, DoD
+7. docs/App-Fabrik/04_CLAUDE_WORKFLOW_DRAFT.md    ← Skills-Mapping, Phasen Intake→Spec→Gate→Release
+8. Apps/[App-Name]/                               ← App-spezifischer Code + Prototypen
+9. bei Chart-Nutzung: relevante Chart-Engine-Spec + WORKING-FEATURES.md
 ```
 
 Claude gibt Bestätigung aus bevor es weitergeht: „APP-INTERFACE.md ✓, SECURITY-BASELINE.md ✓."
@@ -193,6 +196,7 @@ Manuelle Aktivierung: `/spec-rewrite-guard docs/spec/[Dateiname]`
 | Statische Seiten | `content/pages/` |
 | Rechtliches | `content/legal/` |
 | App-Ordner | `Apps/` |
+| App-Fabrik Steuerung | `docs/App-Fabrik/` (00_STATUS, APP_INVENTORY, 01–05_*.md, V0.3 Produktlandkarte) |
 
 ## Archiv
 

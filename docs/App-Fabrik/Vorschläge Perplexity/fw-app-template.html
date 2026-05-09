@@ -1,0 +1,854 @@
+<!DOCTYPE html>
+<html lang="de" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Finanzwesir — App Template</title>
+
+  <!--
+  ================================================================
+  fw-app-template.html — Version 1.1
+  ================================================================
+
+  ZWECK
+  -----
+  Dieses Dokument ist das generische Fundament aller 21 ETF-Apps.
+  Es definiert alles, was Apps gemeinsam haben:
+    · CI-Farben und Typografie (aus screen.css übernommen)
+    · Alle erlaubten App-UI-Elemente (vollständig, keine weiteren)
+    · State-Logik: Loading → Content | Error
+    · Config-Reader: liest data-* Attribute aus Ghost HTML-Card
+    · CSV-Loader: lädt externe Daten sicher (Domain-Lock)
+    · window.FwApp API: wird von app-spezifischen JS-Dateien genutzt
+
+  WAS HIER NICHT IST
+  ------------------
+  · Content-Komponenten (Info-Box, Warn-Box, Fazit-Box, Tabelle etc.)
+    → die gehören ins Content-Design-System (02-KOMPONENTEN.md)
+    → nicht in Apps
+  · Chart-Engine (fw-chart-engine/index.js)
+    → wird von der app-spezifischen JS-Datei geladen
+    → hier nur Dummy-Chart zum Visualisieren des Layouts
+  · Ghost-Rahmen (Header, Nav, Footer)
+    → liefert screen.css des Ghost-Themes
+
+  ERLAUBTE APP-UI-ELEMENTE (vollständige Liste, keine weiteren)
+  -------------------------------------------------------------
+  1. App-Header       : Titel (h2) + Untertitel (p)
+  2. Range-Buttons    : Zeitraum-Auswahl (5J / 10J / 20J / Max)
+  3. Chart-Canvas     : Diagramme via Chart-Engine
+  4. KPI-Cards        : Kennzahlen (Wert + Label)
+  5. Slider           : Numerische Eingabe mit Live-Anzeige
+  6. States           : Skeleton-Loader, Error-Box
+  7. CTA-Button       : Genau einer pro App, immer am Ende
+
+  IN GHOST EINBETTEN (HTML-Card)
+  ------------------------------
+  <div class="fw-app"
+       data-type="APP-SLUG"
+       data-title="Optionaler Titel"
+       data-csv="https://www.finanzwesir.com/data/datei.csv?v=2026-05"
+       data-options='{"defaultRange":"20y","showLegend":"true"}'
+  ></div>
+  <script src="{{asset "js/fw-apps/APP-SLUG.js"}}" defer></script>
+
+  NEUE APP BAUEN
+  --------------
+  1. Diese Datei strukturell unverändert lassen
+  2. fw-apps/_template.js kopieren → fw-apps/APP-SLUG.js
+  3. window.FW_APP_OPTIONS_WHITELIST und window.FwAppInit() füllen
+  4. Ghost-HTML-Card aus dem Snippet oben erstellen
+
+  ================================================================
+  -->
+
+  <!-- Tailwind CDN (in Ghost: bereits im Theme geladen) -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!--
+  TAILWIND-CONFIG
+  Spiegelt exakt die Konfiguration aus master-template.html.
+  In Ghost: diese Config steht einmalig im Theme-Head, nicht in jeder App.
+  -->
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            petrol:     { DEFAULT: 'var(--color-petrol)', 80: 'var(--color-petrol-80)', 50: 'var(--color-petrol-50)', 20: 'var(--color-petrol-20)', tint: 'var(--color-petrol-tint)', 30: 'var(--color-petrol-30)' },
+            blau:       { DEFAULT: 'var(--color-blau)' },
+            gelb:       { DEFAULT: 'var(--color-gelb)', 80: 'var(--color-gelb-80)', tint: 'var(--color-gelb-tint)', 30: 'var(--color-gelb-30)' },
+            purpur:     { DEFAULT: 'var(--color-purpur)', 80: 'var(--color-purpur-80)', tint: 'var(--color-purpur-tint)', 30: 'var(--color-purpur-30)' },
+            text:       { DEFAULT: 'var(--color-text)', secondary: 'var(--color-text-sec)' },
+            background: 'var(--color-bg)',
+            border:     'var(--color-border)',
+          },
+          fontFamily: {
+            display: ['Archivo Black', 'sans-serif'],
+            body:    ['Source Sans Pro', 'sans-serif'],
+          },
+          boxShadow: {
+            soft:  '0 4px 20px -2px rgba(39,39,39,0.05)',
+            hover: '0 10px 25px -5px rgba(39,39,39,0.1)',
+          },
+        }
+      }
+    }
+  </script>
+
+  <!-- Chart.js — nur im Template für Dummy-Chart. In echter App: fw-chart-engine/index.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+
+  <style>
+    /*
+    ── CI-FARBEN ────────────────────────────────────────────────────
+    Single Source of Truth. Jede Farbe genau einmal, hier.
+    Tailwind referenziert via var(). Nirgendwo sonst Hex-Werte.
+    In Ghost: diese :root-Definitionen stehen in screen.css.
+    */
+    :root {
+      /* Primärfarbe */
+      --color-petrol:      #218380;
+      --color-petrol-80:   #4D9C99;  /* Button-Hover */
+      --color-petrol-50:   #90C1BF;  /* Dekorativ */
+      --color-petrol-20:   #D3E6E6;  /* Info-Box Border */
+      --color-petrol-tint: rgba(33,131,128,0.08);   /* Info-Box Hintergrund */
+      --color-petrol-30:   rgba(33,131,128,0.3);    /* Icon-Hintergrund */
+
+      /* Akzente */
+      --color-blau:        #0071BF;  /* Text-Links */
+      --color-gelb:        #DFC805;  /* Highlights — NUR dekorativ, nie für Text */
+      --color-gelb-80:     #F9EF9E;
+      --color-gelb-tint:   rgba(223,200,5,0.08);
+      --color-gelb-30:     rgba(223,200,5,0.3);
+      --color-purpur:      #8D0267;  /* Warnungen, Visited Links */
+      --color-purpur-80:   #C57EB2;
+      --color-purpur-tint: rgba(141,2,103,0.08);
+      --color-purpur-30:   rgba(141,2,103,0.3);
+
+      /* Neutral */
+      --color-text:        #272727;  /* Haupttext */
+      --color-text-sec:    #4C4C4C;  /* Fließtext, Tabellenzellen */
+      --color-bg:          #FFFFFF;
+      --color-border:      #E7ECEF;
+    }
+
+    /*
+    ── SKELETON-LOADER ──────────────────────────────────────────────
+    Wird angezeigt während Daten geladen werden.
+    Shimmer-Richtung: links → rechts, 1.5s, CI-Farben.
+    prefers-reduced-motion: statisch ohne Animation.
+    */
+    @keyframes fw-shimmer {
+      0%   { background-position: -200% 0; }
+      100% { background-position:  200% 0; }
+    }
+    .fw-skeleton {
+      background: linear-gradient(
+        90deg,
+        var(--color-petrol-tint) 25%,
+        var(--color-petrol-20)   50%,
+        var(--color-petrol-tint) 75%
+      );
+      background-size: 200% 100%;
+      animation: fw-shimmer 1.5s ease-in-out infinite;
+      border-radius: 4px;
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .fw-skeleton { animation: none; background: var(--color-petrol-tint); }
+    }
+
+    /*
+    ── RANGE-BUTTONS ────────────────────────────────────────────────
+    Zeitraum-Auswahl: 5J / 10J / 20J / Max
+    States: default (Outline) | hover (Petrol-Border) | active (Petrol-Fill)
+    Min-Height 36px + vertikales Padding → Touch-Target ≥ 44px
+    */
+    .fw-range-btn {
+      font-family: 'Source Sans Pro', sans-serif;
+      font-size: 0.875rem;
+      font-weight: 600;
+      padding: 0.375rem 0.875rem;
+      border-radius: 9999px;
+      border: 1px solid var(--color-border);
+      background: var(--color-bg);
+      color: var(--color-text-sec);
+      cursor: pointer;
+      transition: all 0.18s ease;
+      min-height: 36px;
+    }
+    .fw-range-btn:hover       { border-color: var(--color-petrol); color: var(--color-petrol); }
+    .fw-range-btn.active      { background: var(--color-petrol); border-color: var(--color-petrol); color: #fff; }
+    .fw-range-btn:focus-visible { outline: 2px solid var(--color-petrol); outline-offset: 2px; }
+
+    /*
+    ── CHART-CONTAINER ──────────────────────────────────────────────
+    Feste Höhe, volle Breite. Chart-Engine füllt den Canvas.
+    In echter App: Höhe kann per data-options überschrieben werden.
+    */
+    .fw-chart-container {
+      position: relative;
+      width: 100%;
+    }
+
+    /*
+    ── KPI-CARDS ────────────────────────────────────────────────────
+    Kennzahlen-Kacheln. Archivo Black für die Zahl (Eyecatcher),
+    Source Sans Pro für das Label.
+    fw-kpi-value: clamp skaliert zwischen 28px (mobile) und 40px (desktop).
+    */
+    .fw-kpi-value {
+      font-family: 'Archivo Black', sans-serif;
+      font-size: clamp(1.75rem, 4vw, 2.5rem);
+      color: var(--color-petrol);
+      line-height: 1.1;
+    }
+    .fw-kpi-label {
+      font-size: 0.875rem;
+      color: var(--color-text-sec);
+      margin-top: 0.25rem;
+    }
+
+    /*
+    ── SLIDER ───────────────────────────────────────────────────────
+    Numerische Eingabe. Thumb: Petrol-Kreis mit weißem Border.
+    Track: Petrol-20 (hellblau-grün). Unterstützt Webkit + Firefox.
+    */
+    .fw-slider {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 100%;
+      height: 6px;
+      border-radius: 3px;
+      background: var(--color-petrol-20);
+      outline: none;
+      cursor: pointer;
+    }
+    .fw-slider::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      width: 22px; height: 22px;
+      border-radius: 50%;
+      background: var(--color-petrol);
+      border: 2px solid #fff;
+      box-shadow: 0 2px 6px rgba(33,131,128,0.35);
+      cursor: pointer;
+    }
+    .fw-slider::-moz-range-thumb {
+      width: 22px; height: 22px;
+      border-radius: 50%;
+      background: var(--color-petrol);
+      border: 2px solid #fff;
+      cursor: pointer;
+    }
+    .fw-slider:focus-visible { outline: 2px solid var(--color-petrol); outline-offset: 4px; }
+
+    /*
+    ── CTA-BUTTON ───────────────────────────────────────────────────
+    Primär-Aktion. Genau EINER pro App, immer am Ende.
+    Hover: Petrol-80 + Schatten. Pfeil-Icon inline.
+    Min-Height 44px = Touch-Target-Minimum.
+    */
+    .fw-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-family: 'Source Sans Pro', sans-serif;
+      font-weight: 700;
+      font-size: 1rem;
+      padding: 0.75rem 1.5rem;
+      min-height: 44px;
+      background: var(--color-petrol);
+      color: #ffffff;
+      border-radius: 0.375rem;
+      text-decoration: none;
+      border: none;
+      cursor: pointer;
+      transition: background 0.18s ease, box-shadow 0.18s ease;
+    }
+    .fw-cta:hover       { background: var(--color-petrol-80); box-shadow: 0 4px 12px rgba(33,131,128,0.3); }
+    .fw-cta:focus-visible { outline: 2px solid var(--color-petrol); outline-offset: 3px; }
+  </style>
+</head>
+
+<body class="font-body text-text bg-background antialiased">
+
+<!--
+================================================================
+APP-CONTAINER
+Ghost liest data-* Attribute und übergibt sie an FwApp.readConfig().
+Alle Steuerparameter kommen von hier — niemals aus dem JS hartcodiert.
+================================================================
+-->
+<div class="fw-app max-w-2xl mx-auto px-4 md:px-6 py-8 md:py-12"
+     data-type="APP-SLUG"
+     data-title="Prokrastinations-Preis"
+     data-csv=""
+     data-colors="default"
+     data-options='{"defaultRange":"20y","showLegend":"true"}'>
+
+
+  <!-- ── 1. APP-HEADER ──────────────────────────────────────────
+       Immer gleich. Titel und Untertitel.
+       data-title überschreibt den h2-Text per JS beim Init.
+  -->
+  <header class="mb-6 md:mb-8">
+    <h2 id="fw-app-title"
+        class="font-display text-2xl md:text-3xl text-petrol tracking-tight mb-2">
+      5 Jahre Warten kosten dich 47.000 €
+    </h2>
+    <p id="fw-app-subtitle"
+       class="text-lg text-text-secondary leading-relaxed">
+      Das ist keine Mahnung — das ist Mathematik.
+    </p>
+  </header>
+
+
+  <!-- ── 2. STATES ──────────────────────────────────────────────
+       Genau drei States. Immer nur einer sichtbar.
+       Übergänge NUR via FwApp.state.showLoading/showContent/showError()
+  -->
+
+  <!-- STATE A: SKELETON-LOADER (beim Seitenaufruf sofort sichtbar) -->
+  <div id="fw-state-loading">
+    <!-- Platzhalter für Range-Buttons -->
+    <div class="flex gap-2 mb-6">
+      <div class="fw-skeleton h-8 w-16 rounded-full"></div>
+      <div class="fw-skeleton h-8 w-16 rounded-full"></div>
+      <div class="fw-skeleton h-8 w-20 rounded-full"></div>
+      <div class="fw-skeleton h-8 w-12 rounded-full"></div>
+    </div>
+    <!-- Platzhalter für Chart -->
+    <div class="fw-skeleton mb-6" style="height:300px;"></div>
+    <!-- Platzhalter für KPI-Zeile -->
+    <div class="grid grid-cols-2 gap-4 mb-6">
+      <div class="fw-skeleton h-20 rounded-xl"></div>
+      <div class="fw-skeleton h-20 rounded-xl"></div>
+    </div>
+    <!-- Platzhalter für Slider -->
+    <div class="fw-skeleton h-6 w-3/4 mb-2"></div>
+    <div class="fw-skeleton h-6 mb-8"></div>
+  </div>
+
+  <!-- STATE B: CONTENT (nach erfolgreichem Laden) -->
+  <div id="fw-state-content" class="hidden">
+
+    <!-- ── 3. RANGE-BUTTONS ─────────────────────────────────────
+         Zeitraum-Auswahl. Optional — nur wenn die App Zeiträume hat.
+         data-range-Wert wird an ChartEngine.setRange() weitergegeben.
+         ARIA: role="group" + aria-pressed pro Button.
+    -->
+    <div class="flex flex-wrap gap-2 mb-6"
+         role="group"
+         aria-label="Zeitraum wählen">
+      <button class="fw-range-btn active" data-range="5y"  aria-pressed="true" >5 Jahre</button>
+      <button class="fw-range-btn"        data-range="10y" aria-pressed="false">10 Jahre</button>
+      <button class="fw-range-btn"        data-range="20y" aria-pressed="false">20 Jahre</button>
+      <button class="fw-range-btn"        data-range="all" aria-pressed="false">Max</button>
+    </div>
+
+    <!-- ── 4. CHART-CANVAS ──────────────────────────────────────
+         Chart-Engine rendert in diesen Canvas.
+         Höhe: 300px Standard. aria-label wird per JS auf Dateninhalte gesetzt.
+         fw-a11y-table: barrierefreie Tabelle, von FwRenderer befüllt.
+    -->
+    <div class="fw-chart-container mb-6" style="height:300px;">
+      <canvas id="fw-chart"
+              role="img"
+              aria-label="Liniendiagramm: Vermögensentwicklung bei sofortigem vs. verzögertem Start">
+      </canvas>
+      <div id="fw-a11y-table" class="sr-only" aria-live="polite"></div>
+    </div>
+
+    <!-- ── 5. KPI-CARDS ─────────────────────────────────────────
+         Kennzahlen. fw-kpi-value: Archivo Black, Petrol, clamp-Größe.
+         IDs fw-kpi-1 bis fw-kpi-N — Werte per FwApp.setKpi() setzen.
+         Grid: 2 Spalten mobile, 4 Spalten desktop (flex nach Bedarf).
+    -->
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-3 mb-8">
+      <div class="bg-petrol-tint border border-petrol-20 rounded-xl p-4">
+        <div class="fw-kpi-value" id="fw-kpi-1">134.000 €</div>
+        <div class="fw-kpi-label">Sofort starten</div>
+      </div>
+      <div class="bg-petrol-tint border border-petrol-20 rounded-xl p-4">
+        <div class="fw-kpi-value" id="fw-kpi-2">87.000 €</div>
+        <div class="fw-kpi-label">5 Jahre warten</div>
+      </div>
+      <div class="bg-petrol-tint border border-petrol-20 rounded-xl p-4">
+        <div class="fw-kpi-value text-purpur" id="fw-kpi-3">47.000 €</div>
+        <div class="fw-kpi-label">Dein Verzögerungs-Preis</div>
+      </div>
+      <div class="bg-petrol-tint border border-petrol-20 rounded-xl p-4">
+        <div class="fw-kpi-value" id="fw-kpi-4">7,0 %</div>
+        <div class="fw-kpi-label">Angenommene Rendite</div>
+      </div>
+    </div>
+
+    <!-- ── 6. SLIDER ────────────────────────────────────────────
+         Numerische Eingabe mit Live-Anzeige.
+         Label zeigt aktuellen Wert via id="fw-slider-value".
+         aria-valuemin/max/now werden per JS aktualisiert.
+         Sichtbar/unsichtbar per App-Logik (class hidden entfernen).
+    -->
+    <div class="mb-8">
+      <label for="fw-slider-input"
+             class="flex justify-between items-baseline mb-3">
+        <span class="text-base font-semibold text-text">
+          Ich fange in
+          <span id="fw-slider-value"
+                class="text-petrol font-display text-xl mx-1">0</span>
+          Jahren an
+        </span>
+        <span class="text-sm text-text-secondary">0 – 10 Jahre</span>
+      </label>
+      <input type="range"
+             id="fw-slider-input"
+             class="fw-slider"
+             min="0" max="10" value="0" step="1"
+             aria-valuemin="0" aria-valuemax="10" aria-valuenow="0">
+    </div>
+
+  </div><!-- /fw-state-content -->
+
+  <!-- STATE C: ERROR (bei Ladefehler oder ungültiger Config) -->
+  <div id="fw-state-error"
+       class="hidden"
+       role="alert"
+       aria-live="assertive">
+    <!--
+    Warn-Box aus Content-Design-System (02-KOMPONENTEN.md, 1.2).
+    Kein Stacktrace für Endnutzer. Nur textContent, nie innerHTML.
+    -->
+    <div class="bg-white border-l-4 border-purpur shadow-soft p-6 md:p-8 rounded-r-xl">
+      <h4 class="font-display text-lg text-purpur mb-2">
+        Daten konnten nicht geladen werden
+      </h4>
+      <p id="fw-error-message" class="text-text-secondary text-lg leading-relaxed">
+        Bitte CSV-Pfad und Format prüfen.
+      </p>
+    </div>
+  </div>
+
+
+  <!-- ── 7. CTA-BUTTON ──────────────────────────────────────────
+       Genau EINER pro App. Immer am Ende. Immer Petrol.
+       Text und href werden per FwApp.setCTA() gesetzt.
+       target="_blank": Apps laufen in Ghost-iframe-Kontext.
+  -->
+  <footer class="mt-10 pt-8 border-t border-border">
+    <a href="https://www.finanzwesir.com/sparplan"
+       id="fw-cta-button"
+       class="fw-cta"
+       target="_blank"
+       rel="noopener noreferrer">
+      Jetzt Sparplan starten
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none"
+           stroke="currentColor" stroke-width="2.5"
+           stroke-linecap="round" stroke-linejoin="round"
+           aria-hidden="true">
+        <path d="M5 12h14M12 5l7 7-7 7"/>
+      </svg>
+    </a>
+  </footer>
+
+</div><!-- /fw-app -->
+
+
+<!--
+================================================================
+FWTHEME-BRIDGE
+Muss VOR dem Chart-Engine-Load stehen.
+Überbrückt KDR-14 (CSS-Variables-Bridge in FwTheme.js).
+Sobald KDR-14 implementiert ist, diesen Block entfernen.
+
+Einzubauende Änderung in FwTheme.js (3 Zeilen am Anfang):
+  const override = window.FW_THEME_OVERRIDE;
+  const COLORS = (override?.colors) ? override.colors : COLORS_DEFAULT;
+  const FONTS  = (override?.fonts)  ? override.fonts  : FONTS_DEFAULT;
+================================================================
+-->
+<script>
+window.FW_THEME_OVERRIDE = {
+  colors: {
+    // Reihenfolge: Hauptlinie, Vergleich, Dritte, Vierte, Fünfte
+    series:     ['#218380', '#0071BF', '#8D0267', '#4D9C99', '#DFC805'],
+    grid:       'rgba(231,236,239,0.8)',
+    text:       '#4C4C4C',
+    background: '#FFFFFF',
+  },
+  fonts: {
+    family: "'Source Sans Pro', sans-serif",
+    size:   13,
+    weight: '600',
+  }
+};
+</script>
+
+
+<!--
+================================================================
+FW-APP BOOTSTRAP
+Gemeinsame Logik für alle Apps. Einmal schreiben, überall nutzen.
+Stellt window.FwApp bereit — wird von APP-SLUG.js konsumiert.
+================================================================
+-->
+<script>
+(function () {
+  'use strict';
+
+  const ALLOWED_CSV_DOMAINS = ['https://www.finanzwesir.com'];
+  const ALLOWED_COLORS      = ['default', 'inverted'];
+
+  const $app     = document.querySelector('.fw-app');
+  const $loading = document.getElementById('fw-state-loading');
+  const $content = document.getElementById('fw-state-content');
+  const $error   = document.getElementById('fw-state-error');
+  const $errMsg  = document.getElementById('fw-error-message');
+  const $title   = document.getElementById('fw-app-title');
+
+  /* State-Übergänge: NUR diese drei Funktionen schalten States um */
+  const FwAppState = {
+    showLoading() {
+      $loading.classList.remove('hidden');
+      $content.classList.add('hidden');
+      $error.classList.add('hidden');
+    },
+    showContent() {
+      $loading.classList.add('hidden');
+      $content.classList.remove('hidden');
+      $error.classList.add('hidden');
+    },
+    showError(msg) {
+      $loading.classList.add('hidden');
+      $content.classList.add('hidden');
+      $error.classList.remove('hidden');
+      if ($errMsg && msg) $errMsg.textContent = msg; // textContent — NIEMALS innerHTML
+    }
+  };
+
+  /* Config-Reader: liest data-* aus Ghost HTML-Card */
+  function readConfig(el) {
+    const raw = {
+      type:    el.dataset.type    || '',
+      title:   el.dataset.title   || '',
+      csv:     el.dataset.csv     || '',
+      colors:  el.dataset.colors  || 'default',
+      options: el.dataset.options || '{}',
+    };
+    if (raw.title && $title) $title.textContent = raw.title;
+    if (raw.csv) {
+      const ok = ALLOWED_CSV_DOMAINS.some(d => raw.csv.startsWith(d));
+      if (!ok) return { error: `CSV-Domain nicht erlaubt: ${raw.csv.split('?')[0]}` };
+    }
+    if (!ALLOWED_COLORS.includes(raw.colors)) raw.colors = 'default';
+    let options = {};
+    try {
+      const parsed = JSON.parse(raw.options);
+      const wl = window.FW_APP_OPTIONS_WHITELIST || null;
+      options = wl ? Object.fromEntries(Object.entries(parsed).filter(([k]) => wl.includes(k))) : parsed;
+    } catch { /* ungültiges JSON → leere Options */ }
+    return { type: raw.type, title: raw.title, csv: raw.csv, colors: raw.colors, options };
+  }
+
+  /* CSV-Loader */
+  async function loadCSV(url) {
+    if (!url) return null;
+    const r = await fetch(url);
+    if (!r.ok) throw new Error(`HTTP ${r.status}`);
+    return r.text();
+  }
+
+  /* Range-Buttons verdrahten */
+  function initRangeButtons(cb) {
+    document.querySelectorAll('.fw-range-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.fw-range-btn').forEach(b => {
+          b.classList.remove('active');
+          b.setAttribute('aria-pressed', 'false');
+        });
+        btn.classList.add('active');
+        btn.setAttribute('aria-pressed', 'true');
+        if (typeof cb === 'function') cb(btn.dataset.range);
+      });
+    });
+  }
+
+  /* Slider verdrahten */
+  function initSlider(id, cb) {
+    const s = document.getElementById(id);
+    const d = document.getElementById('fw-slider-value');
+    if (!s) return;
+    s.addEventListener('input', () => {
+      if (d) d.textContent = s.value;
+      s.setAttribute('aria-valuenow', s.value);
+      if (typeof cb === 'function') cb(Number(s.value));
+    });
+  }
+
+  /* Öffentliche API — wird von APP-SLUG.js genutzt */
+  window.FwApp = {
+    state:           FwAppState,
+    readConfig:      () => readConfig($app),
+    loadCSV,
+    initRangeButtons,
+    initSlider,
+    getElement:      id  => document.getElementById(id),
+    setKpi:          (id, v) => { const el = document.getElementById(id); if (el) el.textContent = v; },
+    setCTA:          (text, href) => {
+      const btn = document.getElementById('fw-cta-button');
+      if (!btn) return;
+      if (text) btn.firstChild.textContent = text + ' ';
+      if (href) btn.href = href;
+    },
+  };
+
+  /* Auto-Init: Skeleton → CSV laden → FwAppInit() aufrufen */
+  document.addEventListener('DOMContentLoaded', async () => {
+    FwAppState.showLoading();
+    const config = readConfig($app);
+    if (config.error) { FwAppState.showError(config.error); return; }
+    let csvText = null;
+    if (config.csv) {
+      try { csvText = await loadCSV(config.csv); }
+      catch { FwAppState.showError('CSV-Daten konnten nicht geladen werden.'); return; }
+    }
+    if (typeof window.FwAppInit === 'function') {
+      try { await window.FwAppInit(config, csvText, FwAppState); }
+      catch (e) { FwAppState.showError('Die App konnte nicht gestartet werden.'); console.error('[FwApp]', e); }
+    } else {
+      FwAppState.showContent(); // Demo-Modus ohne FwAppInit
+    }
+  });
+})();
+</script>
+
+
+<!--
+================================================================
+DUMMY-APPIINIT
+Nur in diesem Template — zeigt alle UI-Elemente mit Beispieldaten.
+In echter App: diese Sektion ersetzen durch:
+  <script src="{{asset "js/fw-apps/APP-SLUG.js"}}" defer></script>
+================================================================
+-->
+<script>
+window.FW_APP_OPTIONS_WHITELIST = ['defaultRange', 'showLegend'];
+
+window.FwAppInit = async function (config, csvText, state) {
+
+  /* 1. Dummy-Daten generieren (ersetzt echte CSV/ChartEngine) */
+  const labels = ['2014','2015','2016','2017','2018','2019','2020','2021','2022','2023','2024'];
+
+  function compound(start, rate, years) {
+    return Array.from({length: years}, (_, i) => Math.round(start * Math.pow(1 + rate, i)));
+  }
+
+  let sofort   = compound(100, 0.07, 11);
+  let spaeter  = [100, 100, 100, 100, 100, ...compound(100, 0.07, 6)];
+
+  /* 2. Chart zeichnen (direkt Chart.js — in echter App: ChartEngine) */
+  const ctx = document.getElementById('fw-chart').getContext('2d');
+  const chart = new Chart(ctx, {
+    type: 'line',
+    data: {
+      labels,
+      datasets: [
+        {
+          label: 'Sofort starten',
+          data: sofort,
+          borderColor: '#218380',
+          backgroundColor: 'rgba(33,131,128,0.08)',
+          borderWidth: 2.5,
+          tension: 0.3,
+          fill: true,
+          pointRadius: 3,
+          pointBackgroundColor: '#218380',
+        },
+        {
+          label: '5 Jahre warten',
+          data: spaeter,
+          borderColor: '#8D0267',
+          backgroundColor: 'rgba(141,2,103,0.05)',
+          borderWidth: 2,
+          tension: 0.3,
+          fill: true,
+          pointRadius: 3,
+          pointBackgroundColor: '#8D0267',
+          borderDash: [5, 3],
+        }
+      ]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: { position: 'top', labels: { font: { family: 'Source Sans Pro', size: 13, weight: '600' }, color: '#4C4C4C', boxWidth: 16 } },
+        tooltip: { callbacks: { label: ctx => ` ${ctx.dataset.label}: ${ctx.parsed.y.toLocaleString('de-DE')} €` } }
+      },
+      scales: {
+        x: { grid: { color: 'rgba(231,236,239,0.8)' }, ticks: { font: { family: 'Source Sans Pro', size: 12 }, color: '#4C4C4C' } },
+        y: { grid: { color: 'rgba(231,236,239,0.8)' }, ticks: { font: { family: 'Source Sans Pro', size: 12 }, color: '#4C4C4C', callback: v => v.toLocaleString('de-DE') + ' €' } }
+      }
+    }
+  });
+
+  /* 3. Range-Buttons: filtern die angezeigten Datenpunkte */
+  FwApp.initRangeButtons((range) => {
+    const slices = { '5y': 5, '10y': 10, '20y': 11, 'all': 11 };
+    const n = slices[range] || 11;
+    chart.data.labels   = labels.slice(-n);
+    chart.data.datasets[0].data = sofort.slice(-n);
+    chart.data.datasets[1].data = spaeter.slice(-n);
+    chart.update();
+  });
+
+  /* 4. Slider: verschiebt den Startzeitpunkt und aktualisiert Chart + KPIs */
+  FwApp.initSlider('fw-slider-input', (jahre) => {
+    const verspaetet = [
+      ...Array(jahre).fill(100),
+      ...compound(100, 0.07, 11 - jahre)
+    ];
+    chart.data.datasets[1].data = verspaetet;
+    chart.update();
+    // KPI aktualisieren
+    const endSofort   = sofort[sofort.length - 1];
+    const endSpaeter  = verspaetet[verspaetet.length - 1];
+    const diff        = endSofort - endSpaeter;
+    FwApp.setKpi('fw-kpi-2', endSpaeter.toLocaleString('de-DE') + ' €');
+    FwApp.setKpi('fw-kpi-3', diff.toLocaleString('de-DE') + ' €');
+    // Titel aktualisieren
+    const t = document.getElementById('fw-app-title');
+    if (t) t.textContent = jahre === 0
+      ? 'Sofort starten zahlt sich aus'
+      : `${jahre} Jahr${jahre > 1 ? 'e' : ''} Warten kosten dich ${diff.toLocaleString('de-DE')} €`;
+  });
+
+  /* 5. Content anzeigen — IMMER letzter Schritt */
+  state.showContent();
+};
+</script>
+
+
+<!--
+================================================================
+EINGABE-ELEMENTE — NICHT IM DESIGN-SYSTEM DEFINIERT
+DS-NEU: Checkbox, Radio, Select, Text/Zahl-Input fehlen in
+06-INTERAKTION.md vollständig. Kein Styling vorhanden.
+
+Diese Elemente werden hier absichtlich UNSTYLED dargestellt —
+reines Browser-Default. So ist der Fehlstand sofort sichtbar.
+
+NÄCHSTER SCHRITT: Design-Entscheidung treffen und in
+06-INTERAKTION.md dokumentieren, dann hier implementieren.
+================================================================
+-->
+<div class="max-w-2xl mx-auto px-4 md:px-6 py-8 border-t-2 border-gelb mt-4">
+
+  <h2 class="font-display text-2xl text-purpur tracking-tight mb-2">
+    ⚠ Ungeklärte Eingabe-Elemente
+  </h2>
+  <p class="text-lg text-text-secondary mb-8">
+    Nicht im Design-System definiert (06-INTERAKTION.md).
+    Browser-Default — kein eigenes Styling.
+  </p>
+
+  <!-- CHECKBOX -->
+  <div class="mb-8">
+    <p class="text-sm font-bold text-text-secondary uppercase tracking-wider mb-3">
+      Checkbox — Browser-Default
+    </p>
+    <label class="flex items-center gap-3 text-lg text-text cursor-pointer mb-2">
+      <input type="checkbox" checked>
+      MSCI World ETF auswählen
+    </label>
+    <label class="flex items-center gap-3 text-lg text-text cursor-pointer mb-2">
+      <input type="checkbox">
+      S&amp;P 500 ETF auswählen
+    </label>
+    <label class="flex items-center gap-3 text-lg text-text cursor-pointer">
+      <input type="checkbox" disabled>
+      Deaktiviert
+    </label>
+  </div>
+
+  <!-- RADIO -->
+  <div class="mb-8">
+    <p class="text-sm font-bold text-text-secondary uppercase tracking-wider mb-3">
+      Radio-Buttons — Browser-Default
+    </p>
+    <div role="radiogroup" aria-label="Anlagestrategie">
+      <label class="flex items-center gap-3 text-lg text-text cursor-pointer mb-2">
+        <input type="radio" name="strategie" value="1etf" checked>
+        1 ETF (ACWI)
+      </label>
+      <label class="flex items-center gap-3 text-lg text-text cursor-pointer mb-2">
+        <input type="radio" name="strategie" value="2etf">
+        2 ETFs (80/20)
+      </label>
+      <label class="flex items-center gap-3 text-lg text-text cursor-pointer">
+        <input type="radio" name="strategie" value="komplex" disabled>
+        Komplex (deaktiviert)
+      </label>
+    </div>
+  </div>
+
+  <!-- SELECT / DROPDOWN -->
+  <div class="mb-8">
+    <p class="text-sm font-bold text-text-secondary uppercase tracking-wider mb-3">
+      Dropdown / Select — Browser-Default
+    </p>
+    <label for="fw-select-demo" class="block text-lg text-text mb-2">
+      Anlagezeitraum wählen
+    </label>
+    <select id="fw-select-demo">
+      <option value="">Bitte wählen …</option>
+      <option value="10">10 Jahre</option>
+      <option value="20" selected>20 Jahre</option>
+      <option value="30">30 Jahre</option>
+      <option value="40">40 Jahre</option>
+    </select>
+  </div>
+
+  <!-- TEXT INPUT -->
+  <div class="mb-8">
+    <p class="text-sm font-bold text-text-secondary uppercase tracking-wider mb-3">
+      Text-Eingabe — Browser-Default
+    </p>
+    <label for="fw-input-text" class="block text-lg text-text mb-2">
+      Name
+    </label>
+    <input type="text"
+           id="fw-input-text"
+           placeholder="Dein Name"
+           value="">
+  </div>
+
+  <!-- NUMBER INPUT -->
+  <div class="mb-8">
+    <p class="text-sm font-bold text-text-secondary uppercase tracking-wider mb-3">
+      Zahl-Eingabe — Browser-Default
+    </p>
+    <label for="fw-input-number" class="block text-lg text-text mb-2">
+      Monatliche Sparrate (€)
+    </label>
+    <input type="number"
+           id="fw-input-number"
+           placeholder="z.B. 200"
+           min="1" max="10000" step="50"
+           value="200">
+  </div>
+
+  <!-- HINWEIS-BOX -->
+  <div class="bg-purpur-tint border border-l-4 border-purpur rounded-r-xl p-6">
+    <p class="text-lg text-text leading-relaxed">
+      <strong class="text-purpur">Design-Lücke:</strong>
+      Diese vier Elemente sind in <code>06-INTERAKTION.md</code> nicht spezifiziert.
+      Entscheidung nötig: Browser-Default beibehalten (einfach, konsistent)
+      oder CI-styled (mehr Aufwand, mehr Kontrolle)?
+      Issue anlegen: <strong>DS-012</strong>.
+    </p>
+  </div>
+
+</div>
+
+</body>
+</html>

@@ -1,6 +1,6 @@
 # PROJECT STATUS — Finanzwesir 2.0
 
-Stand: 2026-05-09 | Session: Skill-Infrastruktur | Geändert von: Claude
+Stand: 2026-05-09 | Session: App-Fabrik | Geändert von: Claude
 
 **Zweck:** Schneller Wiedereinstieg nach Pausen.
 **Zielgruppe:** Albert und Claude.
@@ -13,9 +13,9 @@ Stand: 2026-05-09 | Session: Skill-Infrastruktur | Geändert von: Claude
 
 ## 1. Aktueller Fokus
 
-Skill-Infrastruktur aufgebaut: Refero.design Ressourcen verankert (NAVIGATION.md + Memory),
-/finde-skills Skill erstellt (tiered Suche, Security-Review, Audit-Trail in docs/steering/audits/skills-review/).
-Offen: /finde-skills im neuen Faden testen. Danach: DS-014 + AP-20/21.
+App-Fabrik Konsolidierung abgeschlossen: docs/App-Fabrik Vollstruktur angelegt (9 Dateien, 21-Zählmodell, V0.3 Produktlandkarte).
+Offen: Pilot-Entscheidung P-01 (prokrastinations-preis oder risiko-uebersetzer) — in 01_DECISION_LOG.md eintragen.
+Danach: ersten App-Piloten bauen (04_CLAUDE_WORKFLOW_DRAFT.md als Prozess-Leitfaden).
 
 ---
 
@@ -98,10 +98,17 @@ Vollständig im DECISION-LOG dokumentiert (`docs/steering/DECISION-LOG.md`):
 
 ## 8. Letzte Session
 
+2026-05-09 — App-Fabrik Konsolidierung + Distill.
+Distill: 8 session-log-Einträge destilliert, 5 Patterns promoted, 2 retired, 5 neue Memory-Dateien.
+App-Fabrik: docs/App-Fabrik Vollstruktur angelegt — 00_STATUS, 01_DECISION_LOG (15 Einträge),
+02_OPEN_QUESTIONS (20 Fragen), 03_APP_FACTORY_STANDARD_DRAFT, 04_CLAUDE_WORKFLOW_DRAFT,
+05_PILOT_STRATEGY, APP_INVENTORY (21 App-Ordner), V0.3 Produktlandkarte, _input/, _archive/.
+Zählmodell beschlossen: 18 Master-Apps + 3 Zusatz-Module = 21 reale App-Ordner.
+NAVIGATION.md um App-Fabrik-Routing erweitert.
+
 2026-05-09 — Skill-Infrastruktur: Refero.design Ressourcen verankert (NAVIGATION.md CSS/Design + App + Memory).
 /finde-skills Skill erstellt: tiered Suche (4 Stufen), Security-Review als kommentierte Datei, Audit-Trail
 in docs/steering/audits/skills-review/, Haiku/Sonnet-Aufgabenteilung. PRAXIS-ANLEITUNG.md + BACKLOG-ARCHIV.md aktualisiert.
-Test von /finde-skills ausstehend (neuer Faden).
 
 2026-05-08 — ChatGPT-Selbsttest full: Gesamtstatus GELB, keine Chaos-Pfade.
 PROTECTED_PATHS.json Layer-1 auf forbidden, start.md Schritt 0, selftest-chatgpt.md Inventur bereinigt.
@@ -136,24 +143,17 @@ Neue APs: DS-012, DS-013, DS-014.
 
 ## 9. Einstieg für nächste Session
 
-**Restliche Verifikation (optional, vor DS-014):**
-/intake, /uebergabe, /distill einmal durchspielen — Lern-Loop komplett testen.
-Erst dann: System gilt als vollständig produktiv.
+**Entscheidung offen (Albert):**
+- P-01: Welche App wird der erste Pilot? Empfehlung: `prokrastinations-preis`. → in `docs/App-Fabrik/01_DECISION_LOG.md` unter P-01 eintragen.
 
-**Hauptaufgaben:**
+**Danach: ersten App-Piloten bauen.**
+Prozess: `docs/App-Fabrik/04_CLAUDE_WORKFLOW_DRAFT.md` (Intake → Spec → Gate → Build → Release).
+
+**Parallel weiter offen:**
+- AP-20/21 (Mixed-Rhythm CV-Heuristik) — Chart-Engine
 - DS-014 (Design-API Baukasten) — Blocker für alle App-Entwicklung
-- AP-20/21 (Mixed-Rhythm CV-Heuristik) — bereits aktiv
 
 Claude soll zuerst lesen:
-1. `PROJECT-STATUS.md` (diese Datei)
-2. `NAVIGATION.md`
-3. aufgabenspezifische Steering-Dateien
-4. relevante Specs
-
-Nicht direkt mit Code beginnen.
-
-Claude soll zuerst lesen:
-
 1. `PROJECT-STATUS.md` (diese Datei)
 2. `NAVIGATION.md`
 3. aufgabenspezifische Steering-Dateien
