@@ -1,6 +1,6 @@
 # PROJECT STATUS — Finanzwesir 2.0
 
-Stand: 2026-05-10 | Session: heldenreise prokrastinations-preis | Geändert von: Claude
+Stand: 2026-05-10 | Session: Spec-Gate-Nachschärfung prokrastinations-preis | Geändert von: Claude
 
 **Zweck:** Schneller Wiedereinstieg nach Pausen.
 **Zielgruppe:** Albert und Claude.
@@ -13,7 +13,7 @@ Stand: 2026-05-10 | Session: heldenreise prokrastinations-preis | Geändert von:
 
 ## 1. Aktueller Fokus
 
-APP_SPEC.md `prokrastinations-preis` V0.3 Spec-Gate-reif (APP-01-heldenreise abgeschlossen): Beweisdramaturgie-Schicht ergänzt (§18 + §13.1 + §17 UX-Gate). Technische und UX-Spec vollständig. Alle UX-Gate-Punkte bestätigt.
+APP_SPEC.md `prokrastinations-preis` V0.3 final (APP-01-nachschaerfung abgeschlossen): Peer-Review-Nachschärfungen eingearbeitet — AssumptionsBox-Inhalt verbindlich, vergleichsAnker optional, KpiCard-Reihenfolge positiv-zuerst, 3 neue Gate-Prüfpunkte. Technische + UX-Schicht + Ehrlichkeitsregeln vollständig.
 Nächster Schritt: **Spec-Gate** — Albert gibt explizites OK → Pre-Code-Gate (Full) → Implementierung Pilot-1.
 
 ---
@@ -90,6 +90,9 @@ Vollständig im DECISION-LOG dokumentiert (`docs/steering/DECISION-LOG.md`):
 ---
 
 ## 8. Letzte Session
+
+2026-05-10 — APP_SPEC prokrastinations-preis V0.3 final — Peer-Review-Nachschärfung (APP-01-nachschaerfung).
+AssumptionsBox verbindlich (Pflichtzeile + expandierbare Hinweise), vergleichsAnker optional, KpiCard-Reihenfolge positiv-zuerst, 3 neue Spec-Gate-Prüfpunkte. Spec-Gate-reif.
 
 2026-05-10 — APP_SPEC prokrastinations-preis V0.3 — heldenreise-Ergänzung (APP-01-heldenreise).
 §18 Beweisdramaturgie (10 Unterabschnitte), §13.1 Label-Konventionen (Krug), §17 UX-Gate (5 Punkte). Alle technischen Entscheidungen unverändert. Spec vollständig: technische + UX-Schicht.
@@ -188,7 +191,7 @@ Neue APs: DS-012, DS-013, DS-014.
 
 ## 9. Einstieg für nächste Session
 
-**APP_SPEC.md V0.3 Spec-Gate-reif (technische + UX-Schicht vollständig). Nächster Schritt: Spec-Gate.**
+**APP_SPEC.md V0.3 final (technische + UX-Schicht + Ehrlichkeitsregeln vollständig). Nächster Schritt: Spec-Gate.**
 
 1. Albert gibt explizites OK auf `Apps/prokrastinations-preis/APP_SPEC.md` → Spec-Gate ✅
 2. Pre-Code-Gate (Full) ausführen → Implementierung Pilot-1 Calculator-Template
