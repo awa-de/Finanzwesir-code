@@ -1,11 +1,12 @@
 # BACKLOG-ARCHIV – Finanzwesir 2.0
-Stand: 2026-05-10 | Session: Mini-Specs App-Fabrik | Geändert von: Claude
+Stand: 2026-05-10 | Session: Spec-Gate APP-01 / Abgleich | Geändert von: Claude
 
 Abgeschlossene Items, neueste zuerst (append-only).
 Archivierungs-Trigger: wenn > 200 Zeilen → neue Datei `BACKLOG-ARCHIV-YYYY.md` anlegen.
 
 | ID | Bereich | Titel | Abgeschlossen | Session |
 |----|---------|-------|---------------|---------|
+| APP-01-abgleich | App | APP_SPEC.md prokrastinations-preis — Abgleich gegen MINI_SPEC_FROM_HAUPTDOKUMENT.md: drittes ResultTemplate „mathematik" aus Hauptdokument-Kernbotschaft ergänzt (§6 Config-JSON); Range-Begründung prokrastinationsJahre 1–20 vs. 0–10 dokumentiert (§4); alle 6 Prüfdimensionen (Zweck, UX, Microcopy, Inputs/Outputs, Scope, AppContext/A11y) ohne Blocker; Spec-Gate-reif bestätigt. APP-01 bleibt aktiv (Implementierung nach Spec-Gate). *(sofort erledigt)* | 2026-05-10 | Spec-Gate APP-01 / Pilot-1 |
 | AF-10 | App-Fabrik | MINI_SPEC_FROM_HAUPTDOKUMENT.md für alle 21 App-Ordner erstellt — vollständiger Originalinhalt aus ETF-Apps-Hauptdokument.md extrahiert, 18 Haupt-Apps + 3 Multi-Modul-Module (rollierende-sparplaene/B2, investment-universum/C1, weltkarte-etf-indizes/C1+C3); MINI_SPEC_MAPPING.md als Gesamt-Index angelegt; APP_SPEC.md prokrastinations-preis unberührt *(sofort erledigt)* | 2026-05-10 | Mini-Specs App-Fabrik |
 | ST-06 | System | CLAUDE.md Punkt 7 um Bulk-Write-Trigger erweitert — Haiku als Default für rein mechanische Bulk-Writes (>5 gleichartige neue Dateien) mit vollständigem Briefing; chirurgischer Ein-Satz-Edit *(sofort erledigt)* | 2026-05-10 | Mini-Specs App-Fabrik |
 | APP-01-spec | App | Pilot-1 prokrastinations-preis — APP_SPEC.md V0.2 Spec-Gate-reif: 17 Pflichtabschnitte (Ghost-Card-Vertrag, AppContext-Schema Calculator-Familie, A11y-Vertrag, Input-Reise P-10, 5 Entscheidungen), Bereinigung §4/§5/§6/§9/§10/§11/§13/§14/§15/§16/§17, Clamp/Empty-State-Trennung explizit, Testliste Pilot-1-bereinigt + „Nicht in Pilot-1"-Abschnitt. APP-01 bleibt aktiv (Implementierung nach Spec-Gate). *(sofort erledigt)* | 2026-05-10 | Pilot-1 APP_SPEC Spec-Gate-reif |

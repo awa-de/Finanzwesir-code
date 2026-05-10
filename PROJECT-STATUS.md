@@ -1,6 +1,6 @@
 # PROJECT STATUS — Finanzwesir 2.0
 
-Stand: 2026-05-10 | Session: Mini-Specs App-Fabrik | Geändert von: Claude
+Stand: 2026-05-10 | Session: Spec-Gate APP-01 / Abgleich | Geändert von: Claude
 
 **Zweck:** Schneller Wiedereinstieg nach Pausen.
 **Zielgruppe:** Albert und Claude.
@@ -13,8 +13,8 @@ Stand: 2026-05-10 | Session: Mini-Specs App-Fabrik | Geändert von: Claude
 
 ## 1. Aktueller Fokus
 
-APP_SPEC.md `prokrastinations-preis` V0.2 fertig und Spec-Gate-reif (APP-01-spec): 17 Pflichtabschnitte, alle 5 Pilot-1-Entscheidungen verankert, Clamp/Empty-State-Trennung explizit, Testliste bereinigt.
-Nächster Schritt: **Spec-Gate** — Albert prüft APP_SPEC.md und gibt explizites OK → dann Pre-Code-Gate → Implementierung Pilot-1.
+APP_SPEC.md `prokrastinations-preis` V0.2 Spec-Gate-reif (APP-01-abgleich abgeschlossen): Abgleich gegen MINI_SPEC_FROM_HAUPTDOKUMENT.md ohne Blocker. Drittes ResultTemplate „mathematik" + Range-Begründung prokrastinationsJahre ergänzt. Alle Pilot-1-Entscheidungen bestätigt.
+Nächster Schritt: **Spec-Gate** — Albert gibt explizites OK → Pre-Code-Gate (Full) → Implementierung Pilot-1.
 
 ---
 
@@ -90,6 +90,9 @@ Vollständig im DECISION-LOG dokumentiert (`docs/steering/DECISION-LOG.md`):
 ---
 
 ## 8. Letzte Session
+
+2026-05-10 — APP_SPEC prokrastinations-preis gegen MINI_SPEC abgeglichen (APP-01-abgleich).
+Drittes ResultTemplate „mathematik" aus Hauptdokument-Kernbotschaft ergänzt (§6 Config-JSON). Range-Entscheidung prokrastinationsJahre 1–20 dokumentiert (§4). Keine Blocker. Spec-Gate-reif bestätigt.
 
 2026-05-10 — Mini-Specs für alle 21 App-Ordner angelegt (AF-10).
 MINI_SPEC_FROM_HAUPTDOKUMENT.md in jedem App-Unterordner: 18 Haupt-Apps 1:1 aus ETF-Apps-Hauptdokument.md, 3 Multi-Modul-Module (rollierende-sparplaene/B2, investment-universum/C1, weltkarte-etf-indizes/C1+C3).
@@ -171,11 +174,10 @@ Neue APs: DS-012, DS-013, DS-014.
 
 ## 9. Einstieg für nächste Session
 
-**APP_SPEC.md V0.2 Spec-Gate-reif. Nächster Schritt: Spec-Gate.**
+**APP_SPEC.md V0.2 Spec-Gate-reif (Abgleich abgeschlossen). Nächster Schritt: Spec-Gate.**
 
-1. Albert prüft `Apps/prokrastinations-preis/APP_SPEC.md` (17 Abschnitte, 5 Entscheidungen)
-2. Albert gibt explizites OK → Spec-Gate ✅
-3. Pre-Code-Gate (Full) ausführen → Implementierung Pilot-1 Calculator-Template
+1. Albert gibt explizites OK auf `Apps/prokrastinations-preis/APP_SPEC.md` → Spec-Gate ✅
+2. Pre-Code-Gate (Full) ausführen → Implementierung Pilot-1 Calculator-Template
 
 Workflow-Leitfaden: `docs/App-Fabrik/04_CLAUDE_WORKFLOW_DRAFT.md` (V0.2) Phase 4+
 

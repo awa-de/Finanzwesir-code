@@ -64,3 +64,10 @@ Wird geleert nach /distill. Einträge: [FRICTION] [WIN] [PREF] [QUESTION] [OK]
 - [WIN] Zwei-Vertrags-Modell (fw-app / financial-chart-module) sauber in einer kanonischen Spec-Datei verankert — alle bestehenden Sicherheitsregeln erhalten, 5 neue Regeln ergänzt (Slug-Whitelist, URL-Validierung, CSV/JSON-Validierung), kein produktiver Code berührt
 - [PREF] Status-Formulierung: Albert bevorzugte „Arbeitsfassung für Pilot-1" über „Freigegeben für App-Fabrik-Pilot" — vorsichtigere Abstufung (Pilot-1-Freigabe ≠ vollständige Kanonisierung)
 - [PREF] data-fw-theme: Albert wollte explizites Nutzungsverbot in Ghost-Cards statt nur „noch nicht implementiert" — präzisere Abgrenzung für Redakteure
+
+## 2026-05-10 – SESSION START | Fokus: Spec-Gate APP-01 / Pilot-1 prokrastinations-preis
+
+## 2026-05-10 – APP-01-abgleich | APP_SPEC gegen MINI_SPEC — Abgleich + Ergänzungen
+- [WIN] Abgleich in einem Durchgang vollständig: alle 6 Dimensionen geprüft, Spec-Gate-reif bestätigt, keine Blocker gefunden
+- [WIN] Fehlendes drittes ResultTemplate „mathematik" aus Hauptdokument-Kernbotschaft als konkreten Spec-Fund identifiziert und direkt ergänzt — prägnanteste Formulierung der App lag im Quelldokument, fehlte in der Spec
+- [WIN] Range-Entscheidung prokrastinationsJahre (1–20 statt 0–10 aus Mini-Spec) war undokumentiert — in einem chirurgischen Edit nachgeholt, Fachlogik klar nachvollziehbar
