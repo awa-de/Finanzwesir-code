@@ -1,6 +1,6 @@
 # APP_SPEC — prokrastinations-preis
 
-Stand: 2026-05-10 | Pilot-1 Spec-Bereinigung V0.2 | Geändert von: Claude
+Stand: 2026-05-10 | heldenreise-Ergänzung V0.3 | Geändert von: Claude
 
 ---
 
@@ -514,6 +514,21 @@ slider.setAttribute('aria-valuetext', '300 Euro pro Monat');
 
 ✅ Entschieden (O-02): Kein Chart in Pilot-1 — Option A (KPIs + LiveCounter als primäre Ausgabe). ChartAdapter/API-Frage bleibt offen (APP-INTERFACE.md §4). Chart-Implementierung nach Pilot-1 als eigener AP.
 
+### 13.1 Label-Konventionen (Krug) // NEW
+
+UI-Labels verwenden Alltagssprache — keine Fachbegriffe als Primärlabels.
+
+| Interner Name | UI-Label | Begründung |
+|---|---|---|
+| `prokrastinationsJahre` | „Wartezeit" / „Ich warte noch … Jahre" | „Prokrastination" ist Fachbegriff — nicht selbsterklärend |
+| `monatlicheRate` | „Monatsrate" | kurz, handlungsbezogen |
+| `gesamtlaufzeit` | „Anlagedauer" | Alltagssprache statt „Gesamtlaufzeit" |
+| `prokrastinationsPreis` | „Warten kostet dich" (Headline) / „Prokrastinations-Preis" (KpiCard-Label) | im Ergebnissatz umgangssprachlich rahmen |
+| `jahresrendite` | „Angenommene Rendite: 7 % p.a." | nur in AssumptionsBox, transparent erklärt |
+| `endwertSofort` | „Bei sofortigem Start" | handlungsbezogen, positiv formuliert |
+| `endwertSpaeter` | „Bei {N} Jahren Wartezeit" | konkret auf Slider-Wert bezogen |
+| `verloreneEinzahlungen` | „Nicht eingezahlte Beiträge" | konkret, wertneutral |
+
 ---
 
 ## 14. Sicherheitsregeln
@@ -641,4 +656,121 @@ Vor Implementierungsbeginn müssen alle Punkte erfüllt sein. Führt Claude durc
 | A11y-Vertrag für Calculator-Familie definiert? | ✅ §11 |
 | Reise eines Inputs vollständig beschrieben? | ✅ §12 |
 | Keine offenen Fragen stillschweigend entschieden? | ✅ §16 — alle Annahmen sichtbar markiert |
+| UX-Gate (heldenreise): Beweisdramaturgie-Abschnitt vollständig? (Gewohnte Welt, Aha-Moment, Erkenntnishierarchie, UI-Reihenfolge, Ehrlichkeitsregeln, Funnel-Anschluss) | ✅ §18 |
+| UX-Gate: Genau eine Hauptzahl / Hauptvisualisierung dominant? | ✅ §18.6 |
+| UX-Gate: Keine Dark Patterns (keine Fake-Urgency, kein Confirmshaming, keine Beschämung)? | ✅ §18.5, §18.8 |
+| UX-Gate: Labels in Alltagssprache (Krug)? | ✅ §13.1 |
+| UX-Gate: Funnel-Anschluss logisch und benannt? | ✅ §18.10 |
 | Alberts explizites OK? | ⬜ AUSSTEHEND |
+
+---
+
+## 18. Beweisdramaturgie / Entscheidungspsychologie // NEW
+
+Pflichtabschnitt nach `/heldenreise`-Skill. Ergänzt die technische Spec um die UX-Wirkungsschicht: nicht nur was gebaut wird, sondern welche Erkenntnisbewegung die App im Kopf des Nutzers erzeugt.
+
+### 18.1 Gewohnte Welt / Vorannahme
+
+Der Nutzer denkt: „Ich kann später anfangen. Erst muss ich mehr wissen. Fünf Jahre machen wahrscheinlich keinen so großen Unterschied."
+
+Bequeme Illusion: Warten ist eine neutrale Option, solange man noch nichts konkret verloren hat.
+
+### 18.2 Nutzerwiderstand
+
+- **Perfektionismus:** Der perfekte Einstiegszeitpunkt wird abgewartet — Korrektur, mehr Wissen, stabile Lage.
+- **Angst vor falscher Entscheidung:** „Was, wenn die Rendite nicht stimmt? Was, wenn ich falsch liege?"
+- **Unterschätzte Zeitwirkung:** Zinseszins ist schwer intuitiv zu erfassen — lineare Intuition trifft auf exponentielle Realität.
+- **Überschätzte Bedeutung des Einstiegspunkts:** „Ich warte noch auf die nächste Korrektur."
+- **Prokrastination als Komfort:** Nicht-Entscheiden vermeidet das Risiko des Scheiterns — scheinbar.
+
+### 18.3 Interaktiver Beweis
+
+Drei Slider verändern den Prokrastinations-Preis in Echtzeit:
+- „Wie viele Jahre warte ich noch?" (primärer Slider — steht zuerst)
+- „Wie viel lege ich monatlich an?"
+- „Wie lange lege ich insgesamt an?"
+
+Die Hauptzahl (`prokrastinationsPreis`) reagiert sofort auf jeden Slider. Der Nutzer sieht live, wie Wartezeit in Euro übersetzt wird — kein abstraktes Prozent, sondern ein konkreter Betrag, der wächst, wenn er wartet.
+
+**Was die Interaktion beweist:** Warten ist keine neutrale Position. Jeder Monat Verzögerung hat einen messbaren, in Euro ausdrückbaren Preis.
+
+### 18.4 Aha-Moment
+
+**Primär:** „Warten ist nicht neutral."
+
+**Sekundär:** „Zeit ist der Teil der Rendite, den du nicht nachkaufen kannst."
+
+Kein Fachbegriff. Alltagssprache. Ein Satz. (Quelle: Kernbotschaft aus MINI_SPEC_FROM_HAUPTDOKUMENT.md)
+
+### 18.5 Emotionale Zielreaktion
+
+**Erwünscht:**
+- „Oh. Das hätte ich nicht gedacht." — Überraschung über die Größe des Betrags
+- „Ich muss nicht perfekt sein. Ich muss anfangen." — Handlungsfähigkeit
+- „Jetzt sehe ich, warum Warten teuer ist." — Klarheit
+- Neugier: „Was ändert sich, wenn ich die Wartezeit auf 2 Jahre reduziere?"
+
+**Unerwünscht (Dark-Pattern-Grenze):**
+- Scham: „Ich hätte schon vor Jahren anfangen sollen."
+- Panik: „Jetzt ist es sowieso zu spät."
+- Druck: „Sofort handeln, sonst verlierst du alles."
+- Überforderung durch konkurrierende Hauptaussagen.
+
+### 18.6 Erkenntnishierarchie
+
+| Ebene | Element | Darstellung |
+|---|---|---|
+| Hauptaussage | `prokrastinationsPreis` — der Preis des Wartens in € | groß, animiert (LiveCounter), visuell dominant |
+| Nebeninformation | `endwertSofort`, `endwertSpaeter`, `verloreneEinzahlungen` | KpiCards — erklären die Hauptzahl, konkurrieren nicht |
+| Kontextualisierung | ResultSentence, AssumptionsBox | unterstützen, dominieren nicht |
+| Handlungsimpuls | PrimaryCta | klar, nach Ergebnis positioniert |
+
+**Tufte-Regel:** Immer genau eine Hauptzahl sichtbar dominierend — `prokrastinationsPreis`. Nebenwerte erklären; sie konkurrieren nicht.
+
+### 18.7 Dramaturgische UI-Reihenfolge
+
+1. **Einstiegsfrage** — „Was kostet Warten?" — sichtbar vor den Slidern, nicht im Tab-Title versteckt
+2. **Hauptzahl** — LiveCounter: „Warten kostet dich etwa {prokrastinationsPreis}" — sofort sichtbar, ohne Scrollen (above the fold)
+3. **Primärer Slider** — Wartezeit: verkörpert die Kernfrage, steht zuerst
+4. **Weitere Slider** — Monatsrate, Anlagedauer
+5. **Ergebnissatz** — ResultSentence: „Unter diesen Annahmen verzichtest du auf ca. {prokrastinationsPreis}."
+6. **Nebenwerte** — KpiCards: endwertSofort, endwertSpaeter, verloreneEinzahlungen
+7. **Annahmenbox** — AssumptionsBox: Rendite-Annahme, nominal, Beratungshinweis
+8. **CTA** — PrimaryCta: „Weiter: Risiko verstehen →" (→ `risiko-uebersetzer`)
+
+**Wartezeit-Slider steht zuerst**, weil er die Kernfrage der App verkörpert — nicht Monatsrate oder Laufzeit.
+
+### 18.8 Ehrlichkeitsregeln
+
+- Renditeannahme (7 % nominal) explizit in AssumptionsBox — kein Kleingedrucktes, sondern sichtbarer App-Bestandteil.
+- Nominalrechnung (nicht inflationsbereinigt) explizit sichtbar.
+- ResultSentence: „unter diesen Annahmen" — kein deterministisches „du wirst" oder „du verlierst garantiert".
+- Keine Finanzberatung (P-06, §14 Sicherheitsregel 7): Beratungshinweis in AssumptionsBox Pflicht.
+- `resultTone` bleibt `'neutral'` in Pilot-1 (O-01 ✅) — kein `'warning'`, kein künstlicher Alarm.
+- Defaults sichtbar erklärt und im Nutzerinteresse (kein manipulativer Default gegen Nutzerinteresse).
+
+**Offenlegungs-Test:** Wenn dem Nutzer erklärt würde, warum die App so gestaltet ist — würde er sich geholfen oder manipuliert fühlen? Die Antwort muss „geholfen" sein.
+
+### 18.9 Bewusst nicht in dieser App (Pilot-1)
+
+| Weggelassen | Grund |
+|---|---|
+| Chart | KPI + LiveCounter tragen den Beweis besser (Tufte); ChartAdapter offen (O-02 ✅, SF-01) |
+| Rendite-Slider | Fachliche Entscheidung, kein Nutzer-Parameter (O-03 ✅); verhindert Scheingenauigkeit |
+| Szenario-Matrix | Erhöht kognitive Last ohne Aha-Mehrwert in Pilot-1 |
+| Tickende Echtzeit-Uhr | Kein persönlicher Startpunkt bekannt; würde künstlichen Druck erzeugen (AA-04, Dark-Pattern-Grenze) |
+| Share-Feature | Nach Pilot-1 (SF-04) |
+| NumericInput neben Slider | Nach Pilot-1 (SF-02) |
+| `resultTone: 'warning'` | Keine Alarmstufe in Pilot-1 — erst Wirkung verstehen, dann Schwelle kalibrieren (O-01 ✅) |
+
+### 18.10 Funnel-Anschluss
+
+**Was der Nutzer nach dieser App weiß:** Warten ist teuer. Früher anfangen lohnt sich. Der genaue Betrag ist konkret erfahrbar.
+
+**Nächste logische Frage:** „Wie viel Risiko halte ich aus — und was bedeutet das für meine Anlageentscheidung?"
+
+**Nächste App im Funnel:** `risiko-uebersetzer` (Pilot-2)
+
+**CTA-Label:** „Weiter: Risiko verstehen →"
+
+**Warum dieser Anschluss funktioniert:** Der Nutzer hat verstanden, dass er anfangen soll. Die nächste emotionale Hürde ist Risiko-Angst — genau das adressiert `risiko-uebersetzer`.

@@ -1,6 +1,6 @@
 # PROJECT STATUS — Finanzwesir 2.0
 
-Stand: 2026-05-10 | Session: Subagenten-Setup v2.1.1 | Geändert von: Claude
+Stand: 2026-05-10 | Session: heldenreise prokrastinations-preis | Geändert von: Claude
 
 **Zweck:** Schneller Wiedereinstieg nach Pausen.
 **Zielgruppe:** Albert und Claude.
@@ -13,7 +13,7 @@ Stand: 2026-05-10 | Session: Subagenten-Setup v2.1.1 | Geändert von: Claude
 
 ## 1. Aktueller Fokus
 
-APP_SPEC.md `prokrastinations-preis` V0.2 Spec-Gate-reif (APP-01-abgleich abgeschlossen): Abgleich gegen MINI_SPEC_FROM_HAUPTDOKUMENT.md ohne Blocker. Drittes ResultTemplate „mathematik" + Range-Begründung prokrastinationsJahre ergänzt. Alle Pilot-1-Entscheidungen bestätigt.
+APP_SPEC.md `prokrastinations-preis` V0.3 Spec-Gate-reif (APP-01-heldenreise abgeschlossen): Beweisdramaturgie-Schicht ergänzt (§18 + §13.1 + §17 UX-Gate). Technische und UX-Spec vollständig. Alle UX-Gate-Punkte bestätigt.
 Nächster Schritt: **Spec-Gate** — Albert gibt explizites OK → Pre-Code-Gate (Full) → Implementierung Pilot-1.
 
 ---
@@ -90,6 +90,9 @@ Vollständig im DECISION-LOG dokumentiert (`docs/steering/DECISION-LOG.md`):
 ---
 
 ## 8. Letzte Session
+
+2026-05-10 — APP_SPEC prokrastinations-preis V0.3 — heldenreise-Ergänzung (APP-01-heldenreise).
+§18 Beweisdramaturgie (10 Unterabschnitte), §13.1 Label-Konventionen (Krug), §17 UX-Gate (5 Punkte). Alle technischen Entscheidungen unverändert. Spec vollständig: technische + UX-Schicht.
 
 2026-05-10 — Subagenten-Setup v2.1.1 installiert (ST-10).
 CLAUDE.md auf v2.1.1: `.claude/agents/` in Autoritäten-Tabelle, Subagent-Check geschärft (beobachtbare Kriterien, Urteilsschritte bleiben in Hauptinstanz). subagent-dispatch.md: Token-Schätzung entfernt, codebase-scout/spec-scout/regression-scout als bevorzugte Agenten. 3 Haiku-Agenten-Dateien angelegt.
@@ -185,16 +188,12 @@ Neue APs: DS-012, DS-013, DS-014.
 
 ## 9. Einstieg für nächste Session
 
-**APP_SPEC.md V0.2 Spec-Gate-reif (Abgleich abgeschlossen). Nächster Schritt: Spec-Gate.**
+**APP_SPEC.md V0.3 Spec-Gate-reif (technische + UX-Schicht vollständig). Nächster Schritt: Spec-Gate.**
 
 1. Albert gibt explizites OK auf `Apps/prokrastinations-preis/APP_SPEC.md` → Spec-Gate ✅
 2. Pre-Code-Gate (Full) ausführen → Implementierung Pilot-1 Calculator-Template
 
 Workflow-Leitfaden: `docs/App-Fabrik/04_CLAUDE_WORKFLOW_DRAFT.md` (V0.2) Phase 4+
-
-Workflow-Leitfaden: `docs/App-Fabrik/04_CLAUDE_WORKFLOW_DRAFT.md` (V0.2)
-
-Neu verfügbar: `/app-spec-create {slug}` — orchestriert tech-spec-app + heldenreise + Spec-Gate (5 Phasen).
 
 Lesen vor App-Arbeit: CHART_ENGINE_ROLE_AND_INTEGRATION.md (Prinzipien P-01–P-10) + 03_APP_FACTORY_STANDARD_DRAFT.md §10
 

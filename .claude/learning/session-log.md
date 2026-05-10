@@ -1,6 +1,11 @@
 # Session-Log — Finanzwesir 2.0
 Wird geleert nach /distill. Einträge: [FRICTION] [WIN] [PREF] [QUESTION] [OK]
 
+## 2026-05-10 – APP-01-heldenreise | Beweisdramaturgie-Ergänzung APP_SPEC V0.3
+- [OK] Keine Vorkommnisse
+
+## 2026-05-10 – SESSION START | Fokus: APP-01 Pilot-1 prokrastinations-preis (Spec-Gate → Implementierung)
+
 ## 2026-05-10 – ST-11 | abschluss-ritual + abschluss-scout installiert
 - [OK] Keine Vorkommnisse
 
