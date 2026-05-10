@@ -1,11 +1,12 @@
 # BACKLOG-ARCHIV – Finanzwesir 2.0
-Stand: 2026-05-10 | Session: Subagenten-Setup v2.1.1 | Geändert von: Claude
+Stand: 2026-05-10 | Session: abschluss-ritual + abschluss-scout | Geändert von: Claude
 
 Abgeschlossene Items, neueste zuerst (append-only).
 Archivierungs-Trigger: wenn > 200 Zeilen → neue Datei `BACKLOG-ARCHIV-YYYY.md` anlegen.
 
 | ID | Bereich | Titel | Abgeschlossen | Session |
 |----|---------|-------|---------------|---------|
+| ST-11 | System | abschluss-ritual Skill um Haiku-Abschluss-Scout ergänzt — SKILL.md: feste Pfade hardcodiert (9-Pfad-Tabelle), Subagent-Nutzungskriterien (6 Bedingungen), Scout-Dispatch-Protokoll mit sichtbarer Meldepflicht vor Aufruf, Mini/Voll-Unterschied, Challenge-Response. abschluss-scout.md (neu): read-only Haiku-Agent, definiertes Rückgabeformat (7 Abschnitte), Erlaubt/Nicht-erlaubt-Grenze explizit. NAVIGATION.md + MEMORY aktualisiert *(sofort erledigt)* | 2026-05-10 | abschluss-ritual + abschluss-scout |
 | ST-10 | System | Subagenten-Setup v2.1.1 installiert — CLAUDE.md v2.1.1 (agents/ in Autoritäten-Tabelle, Subagent-Check geschärft: beobachtbare Kriterien, Urteilsschritte in Hauptinstanz), subagent-dispatch.md (Token-Schätzung entfernt, 3 neue bevorzugte Agenten), 3 Haiku-Agenten angelegt (codebase-scout, spec-scout, regression-scout), CHANGELOG-v2.1.1.md + SUBAGENT-DISPATCH-INSTALLATION.md erstellt *(sofort erledigt)* | 2026-05-10 | Subagenten-Setup v2.1.1 |
 | ST-09 | System | Command app-spec-create angelegt — .claude/commands/app-spec-create.md: orchestriert 5 Phasen (Intake / Mini-Spec-Auswertung / tech-spec-app / heldenreise / Spec-Gate-Vorbereitung); Pflichtpfade + Abbruchbedingungen (kein Ordner / keine Mini-Spec); Technik-Gate (11 Punkte) + UX-Gate (10 Punkte); Sonderregeln Multi-Modul B2/C1 + prokrastinations-preis; strikte Verbotsliste (kein Code / keine app.js / kein CSS); Abschlussregel: kein Code vor Spec-Gate *(sofort erledigt)* | 2026-05-10 | tech-spec-app + app-spec-create |
 | ST-08 | System | Skill tech-spec-app angelegt — .claude/skills/tech-spec-app/SKILL.md: 18 Pflichtabschnitte (Status, Zweck/Nutzerfrage, App-Familie, Multi-Modul-Bezug, Inputs, Outputs, Datenbedarf, Ghost-Card-Vertrag, data-fw-options-Whitelist, State-Modell, AppContext-Schema, A11y-Vertrag, Reise eines Inputs, UX/UI-Primitiven, Sicherheitsregeln, Testfälle, Offene Fragen, Spec-Gate-Checkliste); 3 Ausgangsfälle (A: Spec existiert / B: nur Mini-Spec / C: Abbruch); Quellenhierarchie 6 Stufen; Nie-tun-Liste; Abschlussregel *(sofort erledigt)* | 2026-05-10 | tech-spec-app + app-spec-create |

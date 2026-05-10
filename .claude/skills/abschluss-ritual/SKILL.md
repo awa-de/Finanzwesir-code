@@ -15,13 +15,70 @@ Argumente: $ARGUMENTS (AP-ID oder Aufgabenbeschreibung)
 
 ---
 
+## Feste Pfade — keine Suche, wenn hier angegeben
+
+Claude verwendet diese Pfade direkt. Nicht im Root raten, außer der Pfad ist ausdrücklich Root.
+
+| Zweck | Pfad |
+|---|---|
+| NAVIGATION | `NAVIGATION.md` |
+| Praxis-Anleitung | `PRAXIS-ANLEITUNG.md` |
+| Definition of Done | `docs/steering/DEFINITION-OF-DONE.md` |
+| BACKLOG | `docs/steering/BACKLOG.md` |
+| BACKLOG-Archiv | `docs/steering/BACKLOG-ARCHIV.md` |
+| Working Features | `docs/steering/engine/WORKING-FEATURES.md` |
+| Regression-Matrix | `docs/steering/engine/REGRESSION-MATRIX.md` |
+| Session-Log | `.claude/learning/session-log.md` |
+| Memory-Verzeichnis | `C:\Users\Albert HP PC\.claude\projects\z--Documents-Nextcloud-Finanzwesir-2-0\memory\` |
+
+Wenn ein Pfad nicht existiert:
+1. Nicht im Root raten.
+2. `NAVIGATION.md` prüfen.
+3. Wenn weiterhin unklar: Albert fragen oder MODUS A, falls der Abschluss dadurch blockiert ist.
+
+---
+
+## Subagent-Nutzung im Voll-Abschluss
+
+Nur im Voll-Abschluss. Kein Scout bei Mini-Abschluss.
+
+Einmaliger Scout-Dispatch ist erlaubt, wenn mindestens eines gilt:
+- Engine-Änderung
+- Spec-/Doku-Änderung
+- AP im BACKLOG unklar
+- Sofort-erledigt-Pfad mit ID-Vergabe
+- NAVIGATION-Relevanz unklar
+- Praxis-Anleitung potenziell relevant
+- mehr als 3 Steuerungsdateien müssen gelesen werden
+
+Dann `abschluss-scout` verwenden.
+
+Claude meldet den Aufruf sichtbar, bevor der Agent startet:
+
+> `Abschluss-Scout (Haiku) wird gestartet: mechanische Fundstellenrecherche, keine Änderungen.`
+
+Der Scout liefert nur Fundstellen. Die Hauptinstanz bleibt verantwortlich für:
+- DoD-Bewertung
+- BACKLOG-Archivierung
+- MEMORY-Update
+- Commit-Message
+- PROJECT-STATUS
+- CLAUDE.md-Regelaufnahme
+- alle Dateiänderungen
+
+Wenn kein Scout nötig ist, meldet Claude kurz:
+
+> `Abschluss-Scout nicht nötig: Mini-Abschluss oder kein mechanischer Recherche-Scope.`
+
+---
+
 ## Voll-Abschluss (Reihenfolge einhalten)
 
 **0. Session-Log befüllen — PFLICHT, ZUERST, kein Ermessen**
 Eintrag schreiben in `.claude/learning/session-log.md` mit Datum + AP-Titel als Header.
 Jetzt schreiben, nicht bewerten — /distill bewertet später.
 
-Challenge-Response (Kernkraftwerk-Prinzip):
+Challenge-Response:
 "Gab es eine Korrektur oder Abweichung vom Plan?"   → j/n
 "Gab es eine Überraschung oder neue Erkenntnis?"    → j/n
 
@@ -30,34 +87,46 @@ Beide nein:
 
 Mindestens eines ja — Tag nach Kriterium wählen, kein Freitext-Urteil:
 
-Tag-Kriterien (NASA ASRS-Prinzip — Trigger, nicht Einschätzung):
+Tag-Kriterien:
 [FRICTION]  Albert hat eine Richtung korrigiert / ein Schritt wurde nachgeholt /
             ein Missverständnis trat auf
 [WIN]       Etwas lief schneller oder sicherer als erwartet — messbar oder von Albert bestätigt
 [PREF]      Albert hat eine Formulierung, Reihenfolge oder Darstellung explizit bevorzugt
 [QUESTION]  Claude hat eine Annahme getroffen ohne Alberts Bestätigung
 
-Sprach-Prinzip: beschreibend, nicht evaluativ (HRO: Signal, kein Blame)
+Sprach-Prinzip: beschreibend, nicht evaluativ.
 Richtig:   "[FRICTION] Gate-Schritt 7 übersprungen → manuell nachgeholt"
 Falsch:    "[FRICTION] Claude hat versagt"
 
-Kein AP ohne Eintrag. Fehlendes Log = Anomalie (HRO-Prinzip).
+Kein AP ohne Eintrag. Fehlendes Log = Anomalie.
 Abbruch-Format (wenn Ritual unterbrochen — 1 Zeile genügt):
 
     ## YYYY-MM-DD – [AP-ID] (Abbruch bei Schritt [N])
     - [OK] Abbruch ohne Vorkommnis  /  [FRICTION] Grund: ...
 
-**0a. NAVIGATION.md prüfen**
+**0a. Optionaler Abschluss-Scout (Haiku) — nur wenn Kriterien erfüllt**
+Wenn die Kriterien aus „Subagent-Nutzung im Voll-Abschluss" erfüllt sind:
+1. Sichtbar melden: `Abschluss-Scout (Haiku) wird gestartet: mechanische Fundstellenrecherche, keine Änderungen.`
+2. `abschluss-scout` mit AP-ID/Aufgabenbeschreibung, betroffenen Dateien und bekanntem Scope beauftragen.
+3. Scout-Befund lesen.
+4. Nur als Zuarbeit verwenden; Bewertung und Änderungen bleiben bei der Hauptinstanz.
+
+Wenn Kriterien nicht erfüllt sind:
+- Sichtbar melden: `Abschluss-Scout nicht nötig: Mini-Abschluss oder kein mechanischer Recherche-Scope.`
+
+**0b. NAVIGATION.md prüfen**
+Pfad: `NAVIGATION.md`
 Hat sich die Verzeichnisstruktur geändert? Neue Steering-, Spec- oder Template-Datei angelegt?
 Datei verschoben oder umbenannt? → Sofort aktualisieren.
 
-**0b. Definition of Done prüfen**
-`docs/steering/DEFINITION-OF-DONE.md` lesen.
+**0c. Definition of Done prüfen**
+Pfad: `docs/steering/DEFINITION-OF-DONE.md`
 Sind alle Fertig-Kriterien für diesen Aufgabentyp erfüllt?
-Falls nicht: stoppen und Albert informieren was noch fehlt.
+Falls nicht: stoppen und Albert informieren, was noch fehlt.
 
-**0c. Regression-Matrix** (nur bei Engine-Änderungen)
-`docs/steering/engine/REGRESSION-MATRIX.md` — relevante Testfälle nennen.
+**0d. Regression-Matrix** (nur bei Engine-Änderungen)
+Pfad: `docs/steering/engine/REGRESSION-MATRIX.md`
+Relevante Testfälle nennen.
 Sind diese visuell geprüft? Falls nicht: Albert darauf hinweisen.
 
 **1. Specs aktualisieren**
@@ -104,7 +173,7 @@ Pflichtfelder:
 - Kontext: Issue / Spec / Tested
 
 Beispiel-Ausgabe:
-```
+
 Abschluss AP-20: Mixed-Rhythm CV-Heuristik implementiert
 
 Was war das Problem?
@@ -121,7 +190,6 @@ Betroffene Bereiche:
 
 Kontext:
   AP-20-DETAIL.md / Tested: scenario_3_short_14m.csv
-```
 
 Albert committed via VSCode Git Extension (Message-Feld). Keine Terminal-Befehle liefern.
 
@@ -132,9 +200,18 @@ Albert committed via VSCode Git Extension (Message-Feld). Keine Terminal-Befehle
 
 ---
 
+## Mini-Abschluss
+
+Nur Stand-Datum der berührten Steering-Dateien aktualisieren und Commit-Message erzeugen.
+Kein Abschluss-Scout.
+Kein BACKLOG-/MEMORY-/PROJECT-STATUS-Update, außer Albert verlangt es ausdrücklich.
+
+---
+
 ## Pflicht bei jeder berührten Steering-Datei
 
 Erste Zeile aktualisieren:
+
 ```
 Stand: YYYY-MM-DD HH:MM | Session: [Name] | Geändert von: Claude
 ```

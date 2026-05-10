@@ -1,5 +1,5 @@
 # NAVIGATION.md – Finanzwesir 2.0
-Stand: 2026-05-10 | Session: tech-spec-app + app-spec-create | Geändert von: Claude
+Stand: 2026-05-10 | Session: abschluss-ritual + abschluss-scout | Geändert von: Claude
 
 Für Claude: **Routing-Dokument.** Wird beim Session-Start (Schritt 2) gelesen.
 Gibt Pfade und Lese-Reihenfolgen vor — KEINE Verhaltensregeln (die stehen in CLAUDE.md).
@@ -16,7 +16,7 @@ Für Albert: Index aller Projektdokumente — was wo liegt und wann gelesen werd
 | `docs/spec/` | Bindende technische und fachliche Spezifikationen |
 | `docs/steering/` | Backlog, Status, Entscheidungen, QA, Regression |
 | `.claude/skills/` | Detailprozeduren (aktive Skills — siehe § Skills) |
-| `.claude/agents/` | Modellgebundene Haiku-Subagenten für mechanische Zuarbeit (codebase-scout, spec-scout, regression-scout) |
+| `.claude/agents/` | Modellgebundene Haiku-Subagenten für mechanische Zuarbeit (codebase-scout, spec-scout, regression-scout, abschluss-scout) |
 | `PROJECT-STATUS.md` | Tageslage: Fokus, Blocker, nächster Schritt |
 | `MEMORY.md` | Stabile Projektfakten, Arbeitskontext |
 
