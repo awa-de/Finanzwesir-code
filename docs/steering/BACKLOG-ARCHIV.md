@@ -1,11 +1,12 @@
 # BACKLOG-ARCHIV – Finanzwesir 2.0
-Stand: 2026-05-10 | Session: rfc-workflow-integration | Geändert von: Claude
+Stand: 2026-05-10 | Session: APP-01-spec-gate | Geändert von: Claude
 
 Abgeschlossene Items, neueste zuerst (append-only).
 Archivierungs-Trigger: wenn > 200 Zeilen → neue Datei `BACKLOG-ARCHIV-YYYY.md` anlegen.
 
 | ID | Bereich | Titel | Abgeschlossen | Session |
 |----|---------|-------|---------------|---------|
+| APP-01-spec-gate | App | Spec-Gate prokrastinations-preis: bestanden mit Nicht-Blockern — SPEC_GATE_REPORT.md + DECISION_LOG SG-01 angelegt; 4 RFC-§11-Grundsatzbestätigungen von Albert dokumentiert (Bootstrapper, lokale test.html, Core-Extraktion, Fallback-Tokens); SECURITY-BASELINE.md vollständig gecheckt (9 Regeln abgedeckt). APP-01 bleibt aktiv (Pre-Code-Gate Full folgt). *(sofort erledigt)* | 2026-05-10 | APP-01-spec-gate |
 | ST-12 | System | APP_FACTORY_IMPLEMENTATION_RFC.md als Pflichtquelle in App-Fabrik-Workflow eingehängt — 04_CLAUDE_WORKFLOW_DRAFT.md Phase 3 (Schritt 3.2: RFC lesen + Slice-Regeln), Phase 4 (4.1/4.2: Vertical-Slice-Planung), Phase 5 (5.1: Slice-für-Slice), Pre-Code-Gate-Tabelle (Input: Slice-Plan); tech-spec-app/SKILL.md: RFC in Pflichtquellen + Grenzziehungs-Abschnitt; app-spec-create.md: RFC in Pflichtquellen + Abschlussregel. Kein Code, keine neuen Dateien. *(sofort erledigt)* | 2026-05-10 | rfc-workflow-integration |
 | AF-11 | App-Fabrik | RFC-Dateien in docs/App-Fabrik/ eingeräumt (RFC war bereits dort), APP_FOLDER_STRUCTURE.md als kanonische App-Ordner-Referenz angelegt (Phase 0/1/2), NAVIGATION.md Item 9 ergänzt, _input/ Tippfehler „rokrastinations" → „prokrastinations" behoben, ChatGPT-Zwischenstand nach _working/implementation-rfc/ verschoben *(sofort erledigt)* | 2026-05-10 | rfc-einraeumen |
 | APP-01-nachschaerfung | App | APP_SPEC.md prokrastinations-preis V0.3 — Peer-Review-Nachschärfungen: Status V0.3/Phase 3, alle `// NEW`-Marker entfernt (JSON nun syntaktisch gültig), AssumptionsBox-Inhalt verbindlich spezifiziert (Pflichtzeile immer sichtbar + expandierbare Hinweise), vergleichsAnker als optionales AppContext-Feld ergänzt (§6 context-Template + §10.2 + §10.3), KpiCard-Reihenfolge positiv-zuerst dokumentiert (§5 + §18.6), 3 neue Spec-Gate-Prüfpunkte (§17). Kein Code, keine Architekturwirkung, keine neuen Dateien. APP-01 bleibt aktiv. *(sofort erledigt)* | 2026-05-10 | Spec-Gate-Nachschärfung prokrastinations-preis |

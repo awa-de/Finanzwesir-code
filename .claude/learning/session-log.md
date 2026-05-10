@@ -19,6 +19,8 @@ Wird geleert nach /distill. Einträge: [FRICTION] [WIN] [PREF] [QUESTION] [OK]
 ## 2026-05-10 – ST-11 | abschluss-ritual + abschluss-scout installiert
 - [OK] Keine Vorkommnisse
 
+## 2026-05-10 – SESSION START | Fokus: unbekannt
+
 ## 2026-05-10 – SESSION START | Fokus: APP-01 Pilot-1 prokrastinations-preis (Spec-Gate → Implementierung)
 
 ## 2026-05-10 – SESSION START | Fokus: APP-01 Pilot-1 prokrastinations-preis (Spec-Gate → Implementierung)
@@ -44,3 +46,6 @@ Wird geleert nach /distill. Einträge: [FRICTION] [WIN] [PREF] [QUESTION] [OK]
 
 ## 2026-05-10 – rfc-workflow-integration | Implementation-RFC in Workflow, Skill und Command eingehängt
 - [OK] Keine Vorkommnisse
+
+## 2026-05-10 – APP-01-spec-gate | Spec-Gate prokrastinations-preis + SPEC_GATE_REPORT.md + DECISION_LOG SG-01
+- [FRICTION] SECURITY-BASELINE.md zunächst nicht gelesen (Glob-Timeout bei bekanntem Pfad) → Albert korrigiert → via Read direkt nachgeholt

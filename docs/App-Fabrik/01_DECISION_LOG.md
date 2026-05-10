@@ -1,6 +1,6 @@
 # Decision Log — App-Fabrik
 
-Stand: 2026-05-10 | Chart-Engine-Architekturprinzipien | Geändert von: Claude
+Stand: 2026-05-10 | Spec-Gate prokrastinations-preis | Geändert von: Claude
 
 **Legende:**
 - 🟢 ENTSCHIEDEN — robuste Entscheidung, Grundlage für weitere Schritte
@@ -274,6 +274,16 @@ Stand: 2026-05-10 | Chart-Engine-Architekturprinzipien | Geändert von: Claude
 ---
 
 ## App-Familien
+
+## Spec-Gates
+
+### SG-01 — Pilot-1 prokrastinations-preis: Spec-Gate bestanden
+**Status:** 🟢 ENTSCHIEDEN  
+**Entscheidung:** APP_SPEC.md V0.3 für `prokrastinations-preis` hat das Spec-Gate bestanden (bestanden mit Nicht-Blockern). Keine echten Blocker. Vier Nicht-Blocker mit definierten Klärungszeitpunkten (NB-1 vor Release, NB-2 Phase 4, NB-3 Slice 6, NB-4 vor Ghost-Deploy). Alberts vier Grundsatzbestätigungen für Pre-Code-Gate erteilt (globaler Bootstrapper, lokale Testseite ausreichend für Slices 0–6, Core-Extraktion nach Pilot 2, Fallback-Tokens erlaubt).  
+**Nächster Schritt:** Pre-Code-Gate Full mit Slice-Plan aus RFC §8.  
+**Quelle:** `/Apps/prokrastinations-preis/SPEC_GATE_REPORT.md` | 2026-05-10
+
+---
 
 ### Fam-01 — G3 Passiv-Paradox: eigenständige App
 **Status:** 🟡 ARBEITSANNAHME  

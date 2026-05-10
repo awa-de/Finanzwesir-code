@@ -1,6 +1,6 @@
 # PROJECT STATUS — Finanzwesir 2.0
 
-Stand: 2026-05-10 | Session: rfc-workflow-integration | Geändert von: Claude
+Stand: 2026-05-10 | Session: APP-01-spec-gate | Geändert von: Claude
 
 **Zweck:** Schneller Wiedereinstieg nach Pausen.
 **Zielgruppe:** Albert und Claude.
@@ -13,8 +13,8 @@ Stand: 2026-05-10 | Session: rfc-workflow-integration | Geändert von: Claude
 
 ## 1. Aktueller Fokus
 
-APP_SPEC.md `prokrastinations-preis` V0.3 final (APP-01-nachschaerfung abgeschlossen): Peer-Review-Nachschärfungen eingearbeitet — AssumptionsBox-Inhalt verbindlich, vergleichsAnker optional, KpiCard-Reihenfolge positiv-zuerst, 3 neue Gate-Prüfpunkte. Technische + UX-Schicht + Ehrlichkeitsregeln vollständig.
-Nächster Schritt: **Spec-Gate** — Albert gibt explizites OK → Pre-Code-Gate (Full) → Implementierung Pilot-1.
+**Spec-Gate prokrastinations-preis ✅ bestanden** (APP-01-spec-gate abgeschlossen): APP_SPEC.md V0.3 gegen alle 9 Prüfbereiche geprüft — keine echten Blocker, 4 Nicht-Blocker mit definierten Klärungszeitpunkten. SPEC_GATE_REPORT.md und DECISION_LOG SG-01 angelegt. Alberts 4 RFC-§11-Grundsatzbestätigungen dokumentiert.
+Nächster Schritt: **Pre-Code-Gate Full** mit dokumentiertem Slice-Plan aus `APP_FACTORY_IMPLEMENTATION_RFC.md` §8 (Slices 0–7b).
 
 ---
 
@@ -55,7 +55,7 @@ Nächster Schritt: **Spec-Gate** — Albert gibt explizites OK → Pre-Code-Gate
 | Chart-Engine | Stabil, offene APs | Siehe `docs/steering/BACKLOG.md` |
 | Theme | In Entwicklung | `THEME-ASSEMBLY-CHECKLIST.md` |
 | CSS | Stabil | Siehe `docs/steering/BACKLOG.md` (CSS-N Items) |
-| Apps | APP_SPEC V0.2 Spec-Gate-reif ✅ | Spec-Gate Albert → Pre-Code-Gate → Implementierung |
+| Apps | Spec-Gate prokrastinations-preis ✅ | Pre-Code-Gate Full + Slice-Plan → Implementierung Pilot-1 |
 | Content | Laufend | Redaktionsleitfaden aktiv |
 | Security | Baseline dokumentiert | `SECURITY-BASELINE.md` |
 
@@ -90,6 +90,9 @@ Vollständig im DECISION-LOG dokumentiert (`docs/steering/DECISION-LOG.md`):
 ---
 
 ## 8. Letzte Session
+
+2026-05-10 — Spec-Gate prokrastinations-preis bestanden (APP-01-spec-gate).
+APP_SPEC.md V0.3 gegen alle 9 Prüfbereiche geprüft (Ghost-Card-Vertrag, AppContext, State-Modell, A11y, SECURITY-BASELINE.md 9 Regeln, UX/Heldenreise, RFC-Kompatibilität). Keine echten Blocker. 4 Nicht-Blocker (CTA-URL, Config-Form, Theme-Tokens, Bootstrapper) mit definierten Klärungszeitpunkten. SPEC_GATE_REPORT.md neu angelegt. DECISION_LOG SG-01 eingetragen. Alberts 4 RFC-§11-Bestätigungen formalisiert (Bootstrapper, lokale test.html, Core-Extraktion nach Pilot 2, Fallback-Tokens). Memory-Regel Glob-vs-Read ergänzt.
 
 2026-05-10 — Implementation-RFC in App-Fabrik-Workflow eingehängt (ST-12).
 APP_FACTORY_IMPLEMENTATION_RFC.md ist jetzt Pflichtquelle für Pre-Code-Gate: Slice-Plan Pflicht, Vertical Slicing Pflicht, keine stillen Framework-/Build-Entscheidungen. 04_CLAUDE_WORKFLOW_DRAFT.md Phase 3/4/5, tech-spec-app/SKILL.md und app-spec-create.md aktualisiert.
@@ -197,14 +200,20 @@ Neue APs: DS-012, DS-013, DS-014.
 
 ## 9. Einstieg für nächste Session
 
-**APP_SPEC.md V0.3 final (technische + UX-Schicht + Ehrlichkeitsregeln vollständig). Nächster Schritt: Spec-Gate.**
+**Spec-Gate bestanden ✅. Nächster Schritt: Pre-Code-Gate Full mit Slice-Plan.**
 
-1. Albert gibt explizites OK auf `Apps/prokrastinations-preis/APP_SPEC.md` → Spec-Gate ✅
-2. Pre-Code-Gate (Full) ausführen → Implementierung Pilot-1 Calculator-Template
+1. Pre-Code-Gate Full ausführen (→ `/pre-code-gate full`)
+2. Slice-Plan aus `docs/App-Fabrik/APP_FACTORY_IMPLEMENTATION_RFC.md` §8 (Slices 0–7b) dokumentieren
+3. Alberts explizites OK → Implementierung Slice 0 (App-Shell + Ghost-Card-Bootstrap)
 
-Workflow-Leitfaden: `docs/App-Fabrik/04_CLAUDE_WORKFLOW_DRAFT.md` (V0.2) Phase 4+
+Pflichtquellen vor Implementierung:
+- `docs/spec/APP-INTERFACE.md` — Ghost-Card-Vertrag
+- `docs/steering/audits/SECURITY-BASELINE.md` — Sicherheitsregeln
+- `docs/App-Fabrik/APP_FACTORY_IMPLEMENTATION_RFC.md` — Slice-Plan, D1–D11
+- `Apps/prokrastinations-preis/APP_SPEC.md` V0.3 — bindende Spec
+- `Apps/prokrastinations-preis/SPEC_GATE_REPORT.md` — Nicht-Blocker, Bestätigungen
 
-Lesen vor App-Arbeit: CHART_ENGINE_ROLE_AND_INTEGRATION.md (Prinzipien P-01–P-10) + 03_APP_FACTORY_STANDARD_DRAFT.md §10
+Workflow-Leitfaden: `docs/App-Fabrik/04_CLAUDE_WORKFLOW_DRAFT.md` Phase 4+
 
 **Scope-Funde die noch offen sind:**
 - AUTHOR_GUIDE-v3.md: `data-app` → `data-fw-app` Update (nach Pilot-1, wenn Vertrag stabil)
