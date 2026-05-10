@@ -28,3 +28,9 @@ Wird geleert nach /distill. Einträge: [FRICTION] [WIN] [PREF] [QUESTION] [OK]
 ## 2026-05-09 – ST-05 | Sofort-erledigt-Pfad in abschluss-ritual eingeführt
 - [WIN] Option A (3 Optionen vorgeschlagen) direkt akzeptiert und in einem chirurgischen Edit umgesetzt — Schritt 2 mit Sofort-Pfad, Normalfall unberührt
 - [WIN] Erster Testfall (AF-06 + ST-05) direkt in dieser Session — Mechanik hat sich selbst bewiesen
+
+## 2026-05-10 – SESSION START | Fokus: 04_CLAUDE_WORKFLOW_DRAFT.md → Pilot-1 (prokrastinations-preis)
+
+## 2026-05-10 – AF-07 | Chart-Engine-Architekturprinzipien in App-Fabrik dokumentiert
+- [FRICTION] „In zwei Dateien:" gesagt, dann 4 Dateien gelistet — Albert hat die Inkonsistenz direkt benannt; Zählung hätte vor der Antwort geprüft werden müssen
+- [WIN] 10 Prinzipien aus Architecture Strategy Paper VX (KDR 1–14 + Appendix A) in einem Durchgang vollständig in 4 Dateien + 1 neue Referenzdatei dokumentiert; Trennung chart-spezifisch / direkt übernommen / adaptiert war aus dem Paper eindeutig ableitbar

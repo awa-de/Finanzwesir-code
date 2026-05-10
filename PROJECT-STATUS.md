@@ -1,6 +1,6 @@
 # PROJECT STATUS — Finanzwesir 2.0
 
-Stand: 2026-05-09 | Session: App-Fabrik Standard V0.1 | Geändert von: Claude
+Stand: 2026-05-10 | Session: Chart-Engine-Architekturprinzipien | Geändert von: Claude
 
 **Zweck:** Schneller Wiedereinstieg nach Pausen.
 **Zielgruppe:** Albert und Claude.
@@ -13,8 +13,8 @@ Stand: 2026-05-09 | Session: App-Fabrik Standard V0.1 | Geändert von: Claude
 
 ## 1. Aktueller Fokus
 
-App-Fabrik-Standard V0.1 fertig (AF-03): 03_APP_FACTORY_STANDARD_DRAFT.md vollständig ausgearbeitet — 7 App-Familien, Ghost-Card-Vertrag (fw-app + financial-chart-module), DoD, Sicherheitsregeln, 11 offene Fragen.
-Nächster Schritt: 04_CLAUDE_WORKFLOW_DRAFT.md ausarbeiten → dann APP_SPEC für prokrastinations-preis (Pilot 1) erstellen → Pilot bauen.
+App-Fabrik-Standard erweitert (AF-07): 10 Architekturprinzipien aus dem Architecture Strategy Paper VX in App-Fabrik dokumentiert — CHART_ENGINE_ROLE_AND_INTEGRATION.md (neu), §10 im Standard-Draft (P-01–P-10), A-09–A-18 im Decision Log, Arch-06/07 in offenen Fragen.
+Nächster Schritt: APP_SPEC für prokrastinations-preis (Pilot 1) erstellen → Pilot bauen. 04_CLAUDE_WORKFLOW_DRAFT.md ist bereits vorhanden.
 
 ---
 
@@ -92,6 +92,12 @@ Vollständig im DECISION-LOG dokumentiert (`docs/steering/DECISION-LOG.md`):
 
 ## 8. Letzte Session
 
+2026-05-10 — Chart-Engine-Architekturprinzipien dokumentiert (AF-07).
+CHART_ENGINE_ROLE_AND_INTEGRATION.md (neu): Rolle der Chart-Engine, was chart-spezifisch bleibt, Prinzipien-Tabelle P-01–P-10.
+03_APP_FACTORY_STANDARD_DRAFT.md §10 (neu): alle 10 Prinzipien vollständig beschrieben (🟢 direkt übernommen / 🟡 adaptiert).
+01_DECISION_LOG.md: A-09–A-18 hinzugefügt. 02_OPEN_QUESTIONS.md: Arch-06 (AppContext-Schema), Arch-07 (A11y-Vertrag pro Familie).
+NAVIGATION.md App-Routing um CHART_ENGINE_ROLE_AND_INTEGRATION.md erweitert.
+
 2026-05-09 — App-Fabrik-Standard V0.1 ausgearbeitet (AF-03).
 03_APP_FACTORY_STANDARD_DRAFT.md: 13 Abschnitte, 7 App-Familien (je Zweck/Muster/Bausteine),
 Ghost-HTML-Card-Vertrag vollständig (fw-app-Namespace + Chart-Engine-Sonderfall, Zwei-Vertrags-Tabelle),
@@ -148,14 +154,15 @@ Neue APs: DS-012, DS-013, DS-014.
 
 ## 9. Einstieg für nächste Session
 
-**App-Fabrik-Standard V0.1 fertig.**  
-Alle 6 Vorbereitungsschritte (AF-01 bis AF-03 + 04/05/00_STATUS) abgeschlossen.
+**App-Fabrik-Standard V0.1 vollständig (AF-01–AF-07).**  
+Architekturprinzipien P-01–P-10 aus Chart-Engine dokumentiert. Pilot-1 kann starten.
 
-**Nächster Schritt: Workflow-Draft ausarbeiten, dann Pilot bauen.**
-1. `docs/App-Fabrik/04_CLAUDE_WORKFLOW_DRAFT.md` ausarbeiten (analog zu 03: vollständig ausarbeiten, Quellen nutzen)
-2. APP_SPEC für `prokrastinations-preis` erstellen (per `spec-mode-architecture`)
-3. BACKLOG-AP anlegen (App | prokrastinations-preis Pilot 1 bauen)
-4. Pilot 1 bauen — Calculator-Familie, kein externer Datenbedarf
+**Nächster Schritt: Pilot 1 APP_SPEC erstellen, dann bauen.**
+1. APP_SPEC für `prokrastinations-preis` erstellen (per `spec-mode-architecture`) — inkl. AppContext-Schema (Arch-06) und A11y-Vertrag Calculator (Arch-07) als Pflichtabschnitte
+2. BACKLOG-AP anlegen (App | prokrastinations-preis Pilot 1 bauen)
+3. Pilot 1 bauen — Calculator-Familie, kein externer Datenbedarf
+
+Lesen vor App-Arbeit: CHART_ENGINE_ROLE_AND_INTEGRATION.md (Prinzipien P-01–P-10) + 03_APP_FACTORY_STANDARD_DRAFT.md §10
 
 **Scope-Funde die noch offen sind:**
 - AUTHOR_GUIDE-v3.md: `data-app` → `data-fw-app` Update (nach Pilot-1, wenn Vertrag stabil)

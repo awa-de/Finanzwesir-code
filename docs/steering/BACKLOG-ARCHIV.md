@@ -1,11 +1,12 @@
 # BACKLOG-ARCHIV – Finanzwesir 2.0
-Stand: 2026-05-09 | Session: Prozess-Verbesserung | Geändert von: Claude
+Stand: 2026-05-10 | Session: Chart-Engine-Architekturprinzipien | Geändert von: Claude
 
 Abgeschlossene Items, neueste zuerst (append-only).
 Archivierungs-Trigger: wenn > 200 Zeilen → neue Datei `BACKLOG-ARCHIV-YYYY.md` anlegen.
 
 | ID | Bereich | Titel | Abgeschlossen | Session |
 |----|---------|-------|---------------|---------|
+| AF-07 | App-Fabrik | Chart-Engine-Architekturprinzipien in App-Fabrik dokumentiert — CHART_ENGINE_ROLE_AND_INTEGRATION.md (neu), 03_APP_FACTORY_STANDARD_DRAFT.md §10 (10 Prinzipien P-01–P-10), 01_DECISION_LOG.md A-09–A-18, 02_OPEN_QUESTIONS.md Arch-06+Arch-07; NAVIGATION.md App-Routing ergänzt *(sofort erledigt)* | 2026-05-10 | Chart-Engine-Architekturprinzipien |
 | ST-05 | System | Sofort-erledigt-Pfad in abschluss-ritual eingeführt — Schritt 2 mit ID-Vergabe aus ARCHIV und Direkt-Append erweitert; Normalfall unberührt *(sofort erledigt)* | 2026-05-09 | Prozess-Verbesserung |
 | AF-06 | App-Fabrik | Scope-Funde AF-03 als BACKLOG-APs dokumentiert — AF-04 (AUTHOR_GUIDE data-app → data-fw-app), AF-05 (Cheat-Sheet fw-apps); Verweis in 02_OPEN_QUESTIONS.md *(sofort erledigt)* | 2026-05-09 | App-Fabrik Scope-Funde |
 | AF-03 | App-Fabrik | 03_APP_FACTORY_STANDARD_DRAFT.md ausgearbeitet — V0.1 mit 13 Abschnitten: Zweck, Begriffe, Zählmodell, 7 App-Familien (je Zweck/Muster/Eingaben/Ausgaben/Datenbedarf/Chartbedarf/Risiken/Bausteine), Draft-Dateistruktur pro App (README/APP_SPEC/config/data/js/test/NOTES), Ghost-HTML-Card-Vertrag vollständig (fw-app-Namespace + Chart-Sonderfall, Zwei-Vertrags-Tabelle), CSV/JSON/data-options-Matrix, Design-System-Vertrag, Code-Prinzipien, Sicherheitsregeln, Definition of Done (8 Kategorien), 11 offene Fragen (inkl. 5 neue: data-app-Migration, Cheat-Sheet fw-apps, Verbindlichkeit Dateistruktur, JSON-Validator, Chart-Engine-Grenze), Nächster Schritt. Quellen: 10 Dateien aus docs/App-Fabrik, AUTHOR_GUIDE-v3.md, Cheat-Sheet HTML-Karten.md. Kein produktiver Code, keine Änderungen außerhalb docs/App-Fabrik. | 2026-05-09 | App-Fabrik Standard V0.1 |

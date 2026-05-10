@@ -1,6 +1,6 @@
 # Decision Log — App-Fabrik
 
-Stand: 2026-05-09 | Arbeitsstand | Geändert von: Claude
+Stand: 2026-05-10 | Chart-Engine-Architekturprinzipien | Geändert von: Claude
 
 **Legende:**
 - 🟢 ENTSCHIEDEN — robuste Entscheidung, Grundlage für weitere Schritte
@@ -67,6 +67,87 @@ Stand: 2026-05-09 | Arbeitsstand | Geändert von: Claude
 **Entscheidung:** TopoJSON, Karten- und Kartenbibliotheks-Abhängigkeiten werden lokal gebundelt. Keine CDN-Sonderregel für die Weltkarte oder andere Nicht-Chart.js-Abhängigkeiten.  
 **Begründung:** Konsistenz mit bestehender lokaler Chart.js-Strategie. Reduziert externe Abhängigkeiten, ist DSGVO-freundlicher und vermeidet Sonderlogik für einen Einzelfall.  
 **Quelle:** Entschieden: 2026-05-09
+
+---
+
+### A-09 — Read-only AppData nach Ingestion
+**Status:** 🟢 ENTSCHIEDEN  
+**Entscheidung:** Alle Eingaben (CSV, JSON, `data-fw-options`, User Input) werden nach Parsing und Validierung in einem read-only AppData-Objekt abgelegt (`Object.freeze()` oder äquivalentes Schutzmuster). App-Strategien dürfen lesen, nicht mutieren. Transformationen erfolgen auf Kopien oder abgeleiteten ViewModels.  
+**Quelle:** Architecture Strategy Paper VX, KDR 1 / Layer 1 Vault | Übernommen: 2026-05-10
+
+---
+
+### A-10 — Two-Step Parsing
+**Status:** 🟢 ENTSCHIEDEN  
+**Entscheidung:** Jeder Parser läuft in zwei Phasen: (1) syntaktisches Parsing — Struktur, Typen, Pflichtfelder prüfen. (2) semantische Analyse / Normalisierung — Bedeutung extrahieren, Defaults setzen, Wertebereiche validieren. Kein Parser überspringt Phase 1, um direkt in Phase 2 zu springen.  
+**Quelle:** Architecture Strategy Paper VX, Layer 1 Parser-Vertrag | Übernommen: 2026-05-10
+
+---
+
+### A-11 — Async-fähige öffentliche APIs
+**Status:** 🟡 ARBEITSANNAHME  
+**Entscheidung:** Öffentliche Loader-, Parser- und Init-Methoden werden als `async` designt, auch wenn sie intern zunächst synchron arbeiten. Konkret: `async init()`, `async loadData()`, `async parseConfig()`.  
+**Begründung:** Nachträgliche API-Änderung von sync → async bricht alle Aufrufer. Wer von Anfang an `async` designt, ermöglicht spätere Datenquellen (Remote-Fetch, Web Worker) ohne API-Bruch.  
+**Offen:** Konkretes Implementierungsmuster für die App-Shell (wird in Pilot-1 festgelegt).  
+**Quelle:** Architecture Strategy Paper VX, Layer 1 API | Adaptiert: 2026-05-10
+
+---
+
+### A-12 — AppContext als semantischer Rucksack
+**Status:** 🟡 ARBEITSANNAHME  
+**Entscheidung:** Jede App-Strategie erzeugt neben Ergebnisdaten einen AppContext mit semantischen Informationen für Renderer, Formatierung, A11y, Copy und Layout. Renderer interpretieren nicht selbst Rohdaten — sie lesen den AppContext. Rohdaten verbleiben in AppData.  
+**Offen:** Konkretes AppContext-Schema pro App-Familie → `02_OPEN_QUESTIONS.md` Arch-06.  
+**Quelle:** Architecture Strategy Paper VX, KDR 9 (`fwContext`) | Adaptiert (kein Chart.js): 2026-05-10
+
+---
+
+### A-13 — Unit Sovereignty
+**Status:** 🟢 ENTSCHIEDEN  
+**Entscheidung:** Mathematik arbeitet mit reinen Zahlen (`42000`, nicht `"42.000 €"`). Einheiten, Währungen, Prozent und Zeitbezüge reisen als Metadaten im AppContext. Renderer rehydriert die Einheit erst bei Anzeige.  
+**Merksatz:** Wert und Einheit nie als formatierter String durch die Berechnungsschicht ziehen.  
+**Quelle:** Architecture Strategy Paper VX, KDR 10 | Übernommen: 2026-05-10
+
+---
+
+### A-14 — Truthful UX
+**Status:** 🟢 ENTSCHIEDEN  
+**Entscheidung:** Keine erfundenen Datenpunkte, keine versteckte Interpolation, keine Scheingenauigkeit. Fehlende Daten, Annahmen und Grenzen werden sichtbar gemacht. Kein Rechner zeigt Nachkommastellen, die durch die Eingabegenauigkeit nicht gedeckt sind.  
+**Konsequenz:** Fachliche Begründung für die Pflicht-AssumptionsBox in Calculator-Apps.  
+**Quelle:** Architecture Strategy Paper VX, KDR 7 | Übernommen: 2026-05-10
+
+---
+
+### A-15 — Constraint Dominance
+**Status:** 🟢 ENTSCHIEDEN  
+**Entscheidung:** Wenn Informationsmenge, Screen-Größe und Verständlichkeit kollidieren, gewinnt Verständlichkeit. Mobile darf Details reduzieren, aber nie die Kernaussage verfälschen oder andere Zahlen zeigen als Desktop.  
+**Nicht erlaubt:** Mobile-Version zeigt vereinfachte Zahlen, weil es einfacher wirkt.  
+**Quelle:** Architecture Strategy Paper VX, KDR 8 (Constraint Dominance) | Adaptiert (ohne Density-Matrix-Algorithmus): 2026-05-10
+
+---
+
+### A-16 — A11y als Strategie-Vertrag
+**Status:** 🟢 ENTSCHIEDEN  
+**Entscheidung:** Barrierefreiheit ist kein nachträgliches Audit. Jede App-Strategie liefert eine A11y-Repräsentation (Tabelle, ARIA Live Region oder Ergebnis-Summary). Der Renderer erfindet keine Barrierefreiheit nachträglich.  
+**Mindeststandard:** WCAG 2.1 AA, Tastatur-Navigation, ARIA-Labels für alle interaktiven Elemente.  
+**Offen:** Konkrete A11y-Spezifikation pro App-Familie → `02_OPEN_QUESTIONS.md` Arch-07.  
+**Quelle:** Architecture Strategy Paper VX, KDR 13 | Übernommen: 2026-05-10
+
+---
+
+### A-17 — Theme-Hoheit: semantische Rollen statt Hex-Werte
+**Status:** 🟢 ENTSCHIEDEN  
+**Entscheidung:** App-Strategien liefern semantische Rollen (`resultTone: "warning"`), keine freien Hex-Werte oder Inline-Styles. Das Ghost-Theme hat Design-Hoheit. Farbänderungen erfordern nur eine `screen.css`-Änderung, kein App-Code wird angefasst.  
+**Erweiterung von:** A-04 (Design-System-Bridge via CSS Custom Properties) — ergänzt die Anforderung, dass semantische Rollen von der Strategie, nicht vom Renderer vergeben werden.  
+**Quelle:** Architecture Strategy Paper VX, KDR 14 | Übernommen: 2026-05-10
+
+---
+
+### A-18 — Reise eines Inputs als Pflichtabschnitt in APP_SPEC.md
+**Status:** 🟡 ARBEITSANNAHME  
+**Entscheidung:** Jede `APP_SPEC.md` enthält einen Abschnitt „Reise eines Inputs / Datenpunkts". Er zeigt am Beispiel eines konkreten Werts, wie ein Input durch alle Schichten läuft: Eingang → Two-Step Parsing → AppData (read-only) → Strategie → AppContext → Renderer (Rehydrierung).  
+**Begründung:** Wer diesen Pfad nicht beschreiben kann, hat die App-Architektur nicht vollständig durchdacht.  
+**Vorlage:** Appendix A im Architecture Strategy Paper VX.  
+**Quelle:** Architecture Strategy Paper VX, Appendix A | Übernommen: 2026-05-10
 
 ---
 

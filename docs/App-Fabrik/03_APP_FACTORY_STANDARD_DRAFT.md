@@ -1,6 +1,6 @@
 # App-Fabrik-Standard — Draft V0.1
 
-Stand: 2026-05-09 | Draft — noch nicht bindend | Geändert von: Claude  
+Stand: 2026-05-10 | Chart-Engine-Architekturprinzipien | Geändert von: Claude  
 Ziel-Pfad wenn bindend: `docs/spec/APP-FACTORY-STANDARD.md`
 
 **Alle Inhalte hier sind Arbeitsstände.**  
@@ -17,6 +17,8 @@ Quellen für diesen Draft:
 - `_input/perplexity/APP-ARCHITEKTUR.md` — Architekturvorschlag (Input, nicht bindend)
 - `docs/editorial/AUTHOR_GUIDE-v3.md` — redaktioneller Workflow
 - `docs/editorial/Cheat-Sheet HTML-Karten.md` — Chart-Vertrag für Redakteure
+- `docs/spec/ARCHITECTURE STRATEGY PAPER VX.md` — Chart-Engine-Architekturprinzipien (P-01–P-10)
+- `CHART_ENGINE_ROLE_AND_INTEGRATION.md` — Zuordnung: was übertragen, was chart-spezifisch
 
 ---
 
@@ -565,7 +567,170 @@ Loading → Content
 
 ---
 
-## 10. Sicherheitsregeln
+## 10. Architekturprinzipien (Chart-Engine-Referenzmodell)
+
+🟢/🟡 Quelle: `docs/spec/ARCHITECTURE STRATEGY PAPER VX.md` | Zuordnung: `CHART_ENGINE_ROLE_AND_INTEGRATION.md`
+
+Die Chart-Engine ist kein App-Fabrik-Produkt, aber ihre Architekturprinzipien sind erprobt genug, um als Referenzmuster zu dienen. Die folgenden 10 Prinzipien (P-01–P-10) gelten für alle neuen App-Fabrik-Apps.
+
+Chart-spezifisch bleiben und werden **nicht** übertragen: Linear Time Scale, Explicit Tick Injection, `forceGenerator`, Unified Density Matrix in konkreter Form, Chart.js-Plugin-Struktur, Canvas-Pixel-Logik, Legend Toggle via `meta.hidden`. Das Prinzip dahinter (Truthful UX, Constraint Dominance) ist trotzdem übertragbar.
+
+---
+
+### P-01 — Read-only AppData nach Ingestion
+
+🟢 DIREKT ÜBERNOMMEN — Quelle: Architecture Strategy Paper VX, KDR 1 / Layer 1 Vault
+
+Alle externen und redaktionellen Eingaben (CSV, JSON, `data-fw-options`, User Input) werden nach Parsing und Validierung in einem read-only AppData-Objekt abgelegt (`Object.freeze()` oder äquivalentes Schutzmuster). App-Strategien dürfen AppData lesen, aber nicht mutieren. Transformationen erfolgen auf Kopien oder abgeleiteten ViewModels.
+
+**Merksatz:** Der Datentopf wird einmal befüllt, dann versiegelt.
+
+---
+
+### P-02 — Two-Step Parsing
+
+🟢 DIREKT ÜBERNOMMEN — Quelle: Architecture Strategy Paper VX, Layer 1 Parser-Vertrag
+
+Jeder Parser läuft in zwei Phasen:
+1. **Syntaktisches Parsing** — Struktur prüfen: gültiges Format? Pflichtfelder vorhanden? Korrekte Typen?
+2. **Semantische Analyse / Normalisierung** — Bedeutung extrahieren: Felder zuordnen, Defaults setzen, Wertebereiche validieren
+
+| Eingabe | Syntaktisch | Semantisch |
+|---|---|---|
+| CSV | Header, Zeilen, Typen | Zeitreihe/Snapshot, Einheiten |
+| JSON Config | Gültiges JSON, Pflichtfelder | App-Familie, Defaults, Slider-Grenzen, Texte |
+| `data-fw-options` | `key:value`-Syntax | Whitelist-Check, Typen, Wertebereiche |
+| User Input | Zahl/Text/Choice | Domänenlogik, Min/Max, Kontext |
+
+---
+
+### P-03 — Async-fähige öffentliche APIs
+
+🟡 ADAPTIERT — Quelle: Architecture Strategy Paper VX, Layer 1 API
+
+Öffentliche Loader-, Parser- und Init-Methoden werden als `async` designt, auch wenn sie intern zunächst synchron arbeiten.
+
+**Warum:** Wer von Anfang an `async` designt, macht den späteren Bruch von sync → async unmöglich. Zukünftige Datenquellen (Remote-Fetch, Web Worker, größere Datasets) können ohne API-Änderung eingebaut werden.
+
+**Konkret:** `async init()`, `async loadData()`, `async parseConfig()` — auch wenn Pilot-1 intern synchron rechnet.
+
+---
+
+### P-04 — AppContext als semantischer Rucksack
+
+🟡 ADAPTIERT (kein Chart.js, kein `fwContext`) — Quelle: Architecture Strategy Paper VX, KDR 9
+
+Jede App-Strategie erzeugt neben Ergebnisdaten einen AppContext mit semantischen Informationen für Renderer, Formatierung, A11y, Copy und Layout.
+
+**Was in AppContext gehört:** Einheiten und Modi (`valueMode: 'currency'`), Ergebnis-Semantik (`resultTone: 'warning'`), A11y-Texte (`a11ySummary: '42.000 €'`), Layout-Hinweise.
+
+**Was nicht hineingehört:** Rohdaten (bleiben in AppData), Rendering-Details (liegen im Renderer), Hex-Werte.
+
+Renderer interpretieren nicht selbst Rohdaten — sie lesen den AppContext.
+
+**Offen:** Konkretes AppContext-Schema pro App-Familie → `02_OPEN_QUESTIONS.md` Arch-06
+
+---
+
+### P-05 — Unit Sovereignty
+
+🟢 DIREKT ÜBERNOMMEN — Quelle: Architecture Strategy Paper VX, KDR 10
+
+Werte und Einheiten werden strikt getrennt:
+- Mathematik arbeitet mit reinen Zahlen (`42000`, nicht `"42.000 €"`).
+- Einheiten, Währungen, Prozent und Zeitbezüge reisen als Metadaten im AppContext.
+- Renderer rehydriert die Einheit erst bei Anzeige: `42000` + `EUR` → `"42.000 €"`.
+
+**Merksatz:** Wert und Einheit nie als formatierter String durch die Berechnungsschicht ziehen.
+
+---
+
+### P-06 — Truthful UX
+
+🟢 DIREKT ÜBERNOMMEN — Quelle: Architecture Strategy Paper VX, KDR 7
+
+Keine erfundenen Datenpunkte, keine versteckte Interpolation, keine Scheingenauigkeit.
+
+- Fehlende oder unsichere Daten werden als solche angezeigt — kein stilles Auffüllen.
+- Annahmen (Rendite, Inflation, Zeitraum) sind sichtbar für den Nutzer (Annahmenbox).
+- Grenzen des Modells werden kommuniziert, nicht verschwiegen.
+- Kein Rechner zeigt Nachkommastellen, die durch die Eingabegenauigkeit nicht gedeckt sind.
+
+Dies ist die fachliche Begründung für die Pflicht-`AssumptionsBox` in Calculator-Apps und für `02_OPEN_QUESTIONS.md` UX-05.
+
+---
+
+### P-07 — Constraint Dominance
+
+🟡 ADAPTIERT (kein Density-Matrix-Algorithmus) — Quelle: Architecture Strategy Paper VX, KDR 8
+
+Wenn Informationsmenge, Screen-Größe und Verständlichkeit kollidieren, gewinnt Verständlichkeit.
+
+- Mobile darf Details reduzieren, aber nie die Kernaussage verfälschen.
+- Weniger Daten zeigen ist besser als unlesbares Rauschen.
+- Komplexe Szenarien dürfen auf Mobile vereinfacht werden — solange die fachliche Wahrheit erhalten bleibt.
+
+**Nicht erlaubt:** Mobile zeigt andere Zahlen als Desktop, weil es einfacher wirkt.
+
+---
+
+### P-08 — A11y als Strategie-Vertrag
+
+🟢 DIREKT ÜBERNOMMEN — Quelle: Architecture Strategy Paper VX, KDR 13
+
+Barrierefreiheit ist kein nachträgliches Audit — sie ist ein Vertrag zwischen Strategie und Renderer. Jede App-Strategie liefert eine A11y-Repräsentation.
+
+| App-Familie | A11y-Minimalanforderung |
+|---|---|
+| Calculator | Ergebnis-Summary als Text + ARIA Live Region bei Neuberechnung |
+| Scenario Chart | Tabellarische Darstellung der wichtigsten Szenarien |
+| Chart-App (via Chart-Engine) | Chart-Engine-eigene A11y-Tabelle (`_renderA11yTable()`) |
+| Quiz / Decision | Fragenstatus + Ergebnissummary |
+| Explorer / Karte | Tabellarische Alternative zur Visualisierung |
+
+Der Renderer erfindet keine Barrierefreiheit nachträglich — die Strategie liefert die Daten.
+
+**Offen:** Konkrete A11y-Spezifikation pro App-Familie → `02_OPEN_QUESTIONS.md` Arch-07
+
+---
+
+### P-09 — Theme-Hoheit: semantische Rollen statt Hex-Werte
+
+🟢 DIREKT ÜBERNOMMEN — Quelle: Architecture Strategy Paper VX, KDR 14
+
+Das Ghost-Theme hat Design-Hoheit. Apps liefern semantische Rollen, keine freien Farbwerte.
+
+| Richtig ✓ | Falsch ✗ |
+|---|---|
+| `resultTone: "warning"` | `resultColor: "#ff0000"` |
+| CSS Custom Property via `FwTheme.js` | Hardcoded Hex-Wert in JS |
+
+Farbänderungen erfordern nur eine Änderung in `screen.css :root`. Kein App-Code wird für Design-Anpassungen angefasst.
+
+Erweitert `01_DECISION_LOG.md` A-04 (Design-System-Bridge) um die Anforderung: semantische Rollen werden von der Strategie vergeben, nicht vom Renderer.
+
+---
+
+### P-10 — Reise eines Inputs als Pflichtabschnitt in APP_SPEC.md
+
+🟢 DIREKT ÜBERNOMMEN — Quelle: Architecture Strategy Paper VX, Appendix A
+
+Jede `APP_SPEC.md` enthält einen Abschnitt „Reise eines Inputs / Datenpunkts". Er zeigt am Beispiel eines konkreten Werts, wie ein Input durch alle Schichten läuft:
+
+1. Eingang (Ghost-Card, CSV, JSON, User Input)
+2. Parsing und Validierung (Two-Step, P-02)
+3. Freezing in AppData (P-01)
+4. Transformation in der Strategie
+5. Verpackung im AppContext (P-04)
+6. Rehydrierung und Rendering (Unit Sovereignty, P-05)
+
+**Warum:** Wer diesen Pfad nicht beschreiben kann, hat die App-Architektur nicht vollständig durchdacht. Dieser Abschnitt ist Spec-Pflicht, kein Doku-Bonus.
+
+**Vorlage:** Appendix A im Architecture Strategy Paper VX.
+
+---
+
+## 11. Sicherheitsregeln
 
 🟢 ENTSCHIEDEN — Quelle: `01_DECISION_LOG.md` Q-01, Q-02; `docs/steering/audits/SECURITY-BASELINE.md`
 
@@ -595,7 +760,7 @@ Vor App-Arbeit: `docs/steering/audits/SECURITY-BASELINE.md` lesen — Pflicht, k
 
 ---
 
-## 11. Definition of Done für eine App
+## 12. Definition of Done für eine App
 
 Gegliedert nach Verantwortungsbereich. Alle Punkte müssen vor Release erfüllt sein.
 
@@ -656,7 +821,7 @@ Gegliedert nach Verantwortungsbereich. Alle Punkte müssen vor Release erfüllt 
 
 ---
 
-## 12. Offene Fragen
+## 13. Offene Fragen
 
 Nur die für den App-Fabrik-Standard relevanten Fragen. Vollständige Liste: `02_OPEN_QUESTIONS.md`.
 
@@ -716,7 +881,7 @@ Jede App mit Renditeannahmen braucht eine sichtbare Annahmenbox. Ist das Pflicht
 
 ---
 
-## 13. Nächster Schritt
+## 14. Nächster Schritt
 
 Nach Freigabe dieser V0.1 durch Albert:
 

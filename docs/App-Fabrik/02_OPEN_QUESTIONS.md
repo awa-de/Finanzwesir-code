@@ -1,12 +1,30 @@
 # Offene Fragen — App-Fabrik
 
-Stand: 2026-05-09 | App-Fabrik Scope-Funde | Geändert von: Claude
+Stand: 2026-05-10 | Chart-Engine-Architekturprinzipien | Geändert von: Claude
 
 **Status-Codes:** ❓ offen | ⏳ in Klärung | ✅ geklärt (→ 01_DECISION_LOG.md)
 
 ---
 
 ## Architektur
+
+### Arch-06 — AppContext-Schema: Welche Pflichtfelder pro App-Familie?
+**Status:** ❓  
+**Frage:** Welche Felder muss jeder AppContext mindestens enthalten, damit Renderer, Formatierung und A11y einheitlich funktionieren? Was ist pro App-Familie vorgeschrieben, was optional?  
+Kandidaten: `valueMode`, `currency`, `resultTone`, `a11ySummary`, `layout`  
+**Kontext:** A-12 legt das Prinzip (AppContext als semantischer Rucksack) fest. Das konkrete Schema fehlt noch. Blockiert saubere Strategie-Implementierung.  
+**Klärungsschritt:** Bei APP_SPEC für Pilot-1 (prokrastinations-preis) erstmalig definieren; nach 2 Apps verallgemeinern und als Standard festschreiben.
+
+---
+
+### Arch-07 — A11y-Strategie-Vertrag: Konkrete Darstellung pro App-Familie?
+**Status:** ❓  
+**Frage:** Wie sieht die A11y-Repräsentation konkret aus, die jede App-Strategie liefern muss?  
+Kandidaten: Calculator = ARIA Live Region + Ergebnis-Text, Quiz = Fragenstatus + Summary, Explorer = Tabellarische Alternative, Scenario Chart = Tabelle wichtiger Szenarien  
+**Kontext:** A-16 legt das Prinzip (A11y als Strategie-Vertrag) fest. Die familien-spezifische Umsetzung fehlt noch.  
+**Klärungsschritt:** Bei Pilot-1 (Calculator-Familie) erstmalig spezifizieren; dann familien-weise erweitern.
+
+---
 
 ### Arch-01 — AppRegistry-Implementierung: ES-Module oder globale Registry?
 **Status:** ❓  
