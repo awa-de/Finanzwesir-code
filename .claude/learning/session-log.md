@@ -37,6 +37,13 @@ Wird geleert nach /distill. Einträge: [FRICTION] [WIN] [PREF] [QUESTION] [OK]
 - [FRICTION] „In zwei Dateien:" gesagt, dann 4 Dateien gelistet — Albert hat die Inkonsistenz direkt benannt; Zählung hätte vor der Antwort geprüft werden müssen
 - [WIN] 10 Prinzipien aus Architecture Strategy Paper VX (KDR 1–14 + Appendix A) in einem Durchgang vollständig in 4 Dateien + 1 neue Referenzdatei dokumentiert; Trennung chart-spezifisch / direkt übernommen / adaptiert war aus dem Paper eindeutig ableitbar
 
+## 2026-05-10 – SESSION START | Fokus: Pilot-1 APP_SPEC prokrastinations-preis bauen
+
+## 2026-05-10 – AF-09 | Claude-Workflow App-Fabrik V0.2 erstellt
+- [OK] Keine Vorkommnisse
+- [WIN] 04_CLAUDE_WORKFLOW_DRAFT.md in einem Durchgang von V0.1 (144 Zeilen, 4 grobe Blöcke) auf V0.2 (721 Zeilen, 12 Abschnitte, 5 benannte Gates, 8 konkrete Phasen) ausgearbeitet — alle Quellen vollständig eingearbeitet, kein Nacharbeitsschritt nötig
+- [WIN] Surgical Amendment §12 (BACKLOG-AP-Formulierung) direkt im Anschluss sauber auf eine Zeile begrenzt — keine Kollateraländerungen
+
 ## 2026-05-10 – AF-08 | APP-INTERFACE.md auf App-Fabrik-Stand aktualisiert
 - [WIN] Zwei-Vertrags-Modell (fw-app / financial-chart-module) sauber in einer kanonischen Spec-Datei verankert — alle bestehenden Sicherheitsregeln erhalten, 5 neue Regeln ergänzt (Slug-Whitelist, URL-Validierung, CSV/JSON-Validierung), kein produktiver Code berührt
 - [PREF] Status-Formulierung: Albert bevorzugte „Arbeitsfassung für Pilot-1" über „Freigegeben für App-Fabrik-Pilot" — vorsichtigere Abstufung (Pilot-1-Freigabe ≠ vollständige Kanonisierung)

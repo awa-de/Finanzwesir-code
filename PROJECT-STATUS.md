@@ -1,6 +1,6 @@
 # PROJECT STATUS — Finanzwesir 2.0
 
-Stand: 2026-05-10 | Session: APP-INTERFACE Update fw-app-Namespace | Geändert von: Claude
+Stand: 2026-05-10 | Session: App-Fabrik-Workflow V0.2 | Geändert von: Claude
 
 **Zweck:** Schneller Wiedereinstieg nach Pausen.
 **Zielgruppe:** Albert und Claude.
@@ -13,8 +13,8 @@ Stand: 2026-05-10 | Session: APP-INTERFACE Update fw-app-Namespace | Geändert v
 
 ## 1. Aktueller Fokus
 
-APP-INTERFACE.md auf App-Fabrik-Stand aktualisiert (AF-08): Zwei-Vertrags-Modell (fw-app / financial-chart-module) kanonisch verankert, Sicherheitsregeln auf 10 erweitert, Übergang/offene Punkte dokumentiert.
-Nächster Schritt: APP_SPEC für prokrastinations-preis (Pilot 1) erstellen → Pilot bauen. 04_CLAUDE_WORKFLOW_DRAFT.md ist bereits vorhanden.
+04_CLAUDE_WORKFLOW_DRAFT.md zu operativem App-Fabrik-Workflow V0.2 ausgearbeitet (AF-09): 8 Phasen, 5 benannte Gates, APP-INTERFACE.md als Pflichtreferenz verankert, AppContext/A11y-Vertrag/Reise-eines-Inputs als Spec-Pflicht, Pilot-1-Sonderregeln.
+Nächster Schritt: BACKLOG-AP für Pilot 1 prüfen/anlegen → APP_SPEC prokrastinations-preis erstellen → Pilot bauen.
 
 ---
 
@@ -41,8 +41,7 @@ Nächster Schritt: APP_SPEC für prokrastinations-preis (Pilot 1) erstellen → 
 
 ## 3. Nächster sinnvoller Schritt
 
-- **04_CLAUDE_WORKFLOW_DRAFT.md ausarbeiten** — Orchestrierung der vorhandenen Skills für App-Entwicklung (Intake → Spec → Gate → Build → Release)
-- **APP_SPEC prokrastinations-preis erstellen** — nach Workflow-Draft, per `spec-mode-architecture`
+- **APP_SPEC prokrastinations-preis erstellen** — per `spec-mode-architecture`, inkl. AppContext-Schema (Arch-06) und A11y-Vertrag Calculator (Arch-07)
 - **Pilot 1 bauen** — `prokrastinations-preis`, Calculator-Familie, kein externer Datenbedarf
 - **AP-20/21** (Mixed-Rhythm CV-Heuristik) — 🟡 Aktiv, Chart-Engine, parallel möglich
 
@@ -56,7 +55,7 @@ Nächster Schritt: APP_SPEC für prokrastinations-preis (Pilot 1) erstellen → 
 | Chart-Engine | Stabil, offene APs | Siehe `docs/steering/BACKLOG.md` |
 | Theme | In Entwicklung | `THEME-ASSEMBLY-CHECKLIST.md` |
 | CSS | Stabil | Siehe `docs/steering/BACKLOG.md` (CSS-N Items) |
-| Apps | Standard V0.1 fertig ✅ | 04_CLAUDE_WORKFLOW_DRAFT → APP_SPEC Pilot-1 → Pilot bauen |
+| Apps | Workflow V0.2 fertig ✅ | APP_SPEC Pilot-1 erstellen → Pilot bauen |
 | Content | Laufend | Redaktionsleitfaden aktiv |
 | Security | Baseline dokumentiert | `SECURITY-BASELINE.md` |
 
@@ -91,6 +90,9 @@ Vollständig im DECISION-LOG dokumentiert (`docs/steering/DECISION-LOG.md`):
 ---
 
 ## 8. Letzte Session
+
+2026-05-10 — App-Fabrik-Workflow V0.2 erstellt (AF-09).
+04_CLAUDE_WORKFLOW_DRAFT.md: 8 Phasen (Intake → Briefing → Spec → Spec-Gate → Impl-Planung → Umsetzung → Review → Pilot-Auswertung), 5 Gates (Intake/Spec/Pre-Code/Review/Release), APP-INTERFACE.md als Pflichtreferenz, AppContext/A11y/Reise-eines-Inputs als Spec-Pflicht, Pilot-1-Sonderregeln. §12 Nächster Schritt: BACKLOG-AP prüfen vor anlegen.
 
 2026-05-10 — APP-INTERFACE.md auf App-Fabrik-Stand aktualisiert (AF-08).
 Zwei-Vertrags-Modell (fw-app / financial-chart-module) kanonisch in docs/spec/ verankert.
@@ -159,13 +161,15 @@ Neue APs: DS-012, DS-013, DS-014.
 
 ## 9. Einstieg für nächste Session
 
-**App-Fabrik-Standard V0.1 vollständig (AF-01–AF-07). APP-INTERFACE.md kanonisch aktualisiert (AF-08).**  
-Zwei-Vertrags-Modell verankert. Pilot-1 kann starten.
+**App-Fabrik-Standard V0.1 vollständig (AF-01–AF-08). Workflow V0.2 fertig (AF-09).**  
+Zwei-Vertrags-Modell verankert. Operativer Workflow mit 8 Phasen und 5 Gates bereit. Pilot-1 kann starten.
 
-**Nächster Schritt: Pilot 1 APP_SPEC erstellen, dann bauen.**
-1. APP_SPEC für `prokrastinations-preis` erstellen (per `spec-mode-architecture`) — inkl. AppContext-Schema (Arch-06) und A11y-Vertrag Calculator (Arch-07) als Pflichtabschnitte
-2. BACKLOG-AP anlegen (App | prokrastinations-preis Pilot 1 bauen)
+**Nächster Schritt: Pilot 1 starten.**
+1. BACKLOG-AP prüfen: Existiert `prokrastinations-preis` bereits in BACKLOG.md? Falls nein: anlegen.
+2. APP_SPEC für `prokrastinations-preis` erstellen (per `spec-mode-architecture`) — inkl. AppContext-Schema (Arch-06) und A11y-Vertrag Calculator (Arch-07) als Pflichtabschnitte
 3. Pilot 1 bauen — Calculator-Familie, kein externer Datenbedarf
+
+Workflow-Leitfaden: `docs/App-Fabrik/04_CLAUDE_WORKFLOW_DRAFT.md` (V0.2)
 
 Lesen vor App-Arbeit: CHART_ENGINE_ROLE_AND_INTEGRATION.md (Prinzipien P-01–P-10) + 03_APP_FACTORY_STANDARD_DRAFT.md §10
 

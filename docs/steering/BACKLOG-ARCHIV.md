@@ -1,11 +1,12 @@
 # BACKLOG-ARCHIV – Finanzwesir 2.0
-Stand: 2026-05-10 | Session: APP-INTERFACE Update fw-app-Namespace | Geändert von: Claude
+Stand: 2026-05-10 | Session: App-Fabrik-Workflow V0.2 | Geändert von: Claude
 
 Abgeschlossene Items, neueste zuerst (append-only).
 Archivierungs-Trigger: wenn > 200 Zeilen → neue Datei `BACKLOG-ARCHIV-YYYY.md` anlegen.
 
 | ID | Bereich | Titel | Abgeschlossen | Session |
 |----|---------|-------|---------------|---------|
+| AF-09 | App-Fabrik | 04_CLAUDE_WORKFLOW_DRAFT.md zu operativem Workflow V0.2 ausgearbeitet — 12 Abschnitte: Zweck, Rollen, 8 Workflow-Phasen (Intake → Briefing → Spec → Spec-Gate → Implementierungsplanung → Umsetzung → Review → Pilot-Auswertung), 5 benannte Gates (Intake/Spec/Pre-Code/Review/Release) jeweils mit Input/Output/Entscheider/Blocker/Darf/Darf-nicht, Artefakte pro App inkl. APP_SPEC-Pflichtabschnitte, Umgang mit offenen Fragen / APP-INTERFACE.md / Chart-Engine, Pilot-1-Sonderregeln, Do/Don't, Skills-Übersicht; §12 Nächster Schritt mit vorsichtigerer BACKLOG-AP-Formulierung (prüfen vor anlegen) *(sofort erledigt)* | 2026-05-10 | App-Fabrik-Workflow V0.2 |
 | AF-08 | App-Fabrik | APP-INTERFACE.md auf App-Fabrik-Stand aktualisiert — Zwei-Vertrags-Modell (fw-app / financial-chart-module), §2 Grundsatz, §3 Öffentliche Redakteursverträge (Attribut-Tabellen + HTML-Beispiele für beide Verträge), §4 Interner Entwicklervertrag, §5 data-options / data-fw-options, §6 Datenquellen, §7 Sicherheitsregeln (10 Regeln, 5 neu), §8 Empty-State, §9 Cache-Busting, §10 Übergang/offene Punkte, §11 Verhältnis zu anderen Dokumenten; Status als Arbeitsfassung, data-fw-theme explizit als reserviert mit Nutzungsverbot markiert *(sofort erledigt)* | 2026-05-10 | APP-INTERFACE Update fw-app-Namespace |
 | AF-07 | App-Fabrik | Chart-Engine-Architekturprinzipien in App-Fabrik dokumentiert — CHART_ENGINE_ROLE_AND_INTEGRATION.md (neu), 03_APP_FACTORY_STANDARD_DRAFT.md §10 (10 Prinzipien P-01–P-10), 01_DECISION_LOG.md A-09–A-18, 02_OPEN_QUESTIONS.md Arch-06+Arch-07; NAVIGATION.md App-Routing ergänzt *(sofort erledigt)* | 2026-05-10 | Chart-Engine-Architekturprinzipien |
 | ST-05 | System | Sofort-erledigt-Pfad in abschluss-ritual eingeführt — Schritt 2 mit ID-Vergabe aus ARCHIV und Direkt-Append erweitert; Normalfall unberührt *(sofort erledigt)* | 2026-05-09 | Prozess-Verbesserung |
