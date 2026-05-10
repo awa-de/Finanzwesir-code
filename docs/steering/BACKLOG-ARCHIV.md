@@ -1,11 +1,12 @@
 # BACKLOG-ARCHIV – Finanzwesir 2.0
-Stand: 2026-05-10 | Session: Spec-Gate-Nachschärfung prokrastinations-preis | Geändert von: Claude
+Stand: 2026-05-10 | Session: rfc-einraeumen | Geändert von: Claude
 
 Abgeschlossene Items, neueste zuerst (append-only).
 Archivierungs-Trigger: wenn > 200 Zeilen → neue Datei `BACKLOG-ARCHIV-YYYY.md` anlegen.
 
 | ID | Bereich | Titel | Abgeschlossen | Session |
 |----|---------|-------|---------------|---------|
+| AF-11 | App-Fabrik | RFC-Dateien in docs/App-Fabrik/ eingeräumt (RFC war bereits dort), APP_FOLDER_STRUCTURE.md als kanonische App-Ordner-Referenz angelegt (Phase 0/1/2), NAVIGATION.md Item 9 ergänzt, _input/ Tippfehler „rokrastinations" → „prokrastinations" behoben, ChatGPT-Zwischenstand nach _working/implementation-rfc/ verschoben *(sofort erledigt)* | 2026-05-10 | rfc-einraeumen |
 | APP-01-nachschaerfung | App | APP_SPEC.md prokrastinations-preis V0.3 — Peer-Review-Nachschärfungen: Status V0.3/Phase 3, alle `// NEW`-Marker entfernt (JSON nun syntaktisch gültig), AssumptionsBox-Inhalt verbindlich spezifiziert (Pflichtzeile immer sichtbar + expandierbare Hinweise), vergleichsAnker als optionales AppContext-Feld ergänzt (§6 context-Template + §10.2 + §10.3), KpiCard-Reihenfolge positiv-zuerst dokumentiert (§5 + §18.6), 3 neue Spec-Gate-Prüfpunkte (§17). Kein Code, keine Architekturwirkung, keine neuen Dateien. APP-01 bleibt aktiv. *(sofort erledigt)* | 2026-05-10 | Spec-Gate-Nachschärfung prokrastinations-preis |
 | APP-01-heldenreise | App | APP_SPEC.md prokrastinations-preis V0.3 — heldenreise-Ergänzung: §18 Beweisdramaturgie/Entscheidungspsychologie (10 Unterabschnitte: Gewohnte Welt, Nutzerwiderstand, Interaktiver Beweis, Aha-Moment, Emotionale Zielreaktion, Erkenntnishierarchie, Dramaturgische UI-Reihenfolge, Ehrlichkeitsregeln, Bewusst nicht in Pilot-1, Funnel-Anschluss); §13.1 Label-Konventionen (Krug, 8 Feldnamen auf Alltagssprache gemappt); §17 Spec-Gate-Checkliste um 5 UX-Gate-Zeilen erweitert. Alle bestehenden technischen Entscheidungen (kein Chart, kein Rendite-Slider, neutral-Ton, intern gebündelte Config) intakt. APP-01 bleibt aktiv. *(sofort erledigt)* | 2026-05-10 | heldenreise prokrastinations-preis |
 | ST-11 | System | abschluss-ritual Skill um Haiku-Abschluss-Scout ergänzt — SKILL.md: feste Pfade hardcodiert (9-Pfad-Tabelle), Subagent-Nutzungskriterien (6 Bedingungen), Scout-Dispatch-Protokoll mit sichtbarer Meldepflicht vor Aufruf, Mini/Voll-Unterschied, Challenge-Response. abschluss-scout.md (neu): read-only Haiku-Agent, definiertes Rückgabeformat (7 Abschnitte), Erlaubt/Nicht-erlaubt-Grenze explizit. NAVIGATION.md + MEMORY aktualisiert *(sofort erledigt)* | 2026-05-10 | abschluss-ritual + abschluss-scout |

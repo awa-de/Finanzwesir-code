@@ -1,6 +1,11 @@
 # Session-Log — Finanzwesir 2.0
 Wird geleert nach /distill. Einträge: [FRICTION] [WIN] [PREF] [QUESTION] [OK]
 
+## 2026-05-10 – rfc-einraeumen | App-Fabrik RFC-Dateien eingeräumt, APP_FOLDER_STRUCTURE.md angelegt
+- [FRICTION] RFC + ChatGPT-Datei waren beim Prüfen schon verschoben; Albert hatte parallel aufgeräumt → rm-Befehl schlug fehl (Datei bereits weg)
+
+## 2026-05-10 – SESSION START | Fokus: unbekannt
+
 ## 2026-05-10 – APP-01-nachschaerfung | Spec-Gate-Nachschärfung APP_SPEC V0.3 (Peer-Review)
 - [OK] Keine Vorkommnisse
 

@@ -1,6 +1,6 @@
 # PROJECT STATUS — Finanzwesir 2.0
 
-Stand: 2026-05-10 | Session: Spec-Gate-Nachschärfung prokrastinations-preis | Geändert von: Claude
+Stand: 2026-05-10 | Session: rfc-einraeumen | Geändert von: Claude
 
 **Zweck:** Schneller Wiedereinstieg nach Pausen.
 **Zielgruppe:** Albert und Claude.
@@ -90,6 +90,9 @@ Vollständig im DECISION-LOG dokumentiert (`docs/steering/DECISION-LOG.md`):
 ---
 
 ## 8. Letzte Session
+
+2026-05-10 — App-Fabrik RFC-Dateien eingeräumt (AF-11).
+APP_FOLDER_STRUCTURE.md neu angelegt (kanonische Dateiliste Phase 0/1/2), NAVIGATION.md Item 9 ergänzt, _working/implementation-rfc/ konsolidiert.
 
 2026-05-10 — APP_SPEC prokrastinations-preis V0.3 final — Peer-Review-Nachschärfung (APP-01-nachschaerfung).
 AssumptionsBox verbindlich (Pflichtzeile + expandierbare Hinweise), vergleichsAnker optional, KpiCard-Reihenfolge positiv-zuerst, 3 neue Spec-Gate-Prüfpunkte. Spec-Gate-reif.

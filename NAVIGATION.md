@@ -1,5 +1,5 @@
 # NAVIGATION.md – Finanzwesir 2.0
-Stand: 2026-05-10 | Session: abschluss-ritual + abschluss-scout | Geändert von: Claude
+Stand: 2026-05-10 | Session: App-Fabrik RFC-Einräumen | Geändert von: Claude
 
 Für Claude: **Routing-Dokument.** Wird beim Session-Start (Schritt 2) gelesen.
 Gibt Pfade und Lese-Reihenfolgen vor — KEINE Verhaltensregeln (die stehen in CLAUDE.md).
@@ -127,8 +127,9 @@ Nach Abschluss: `/abschluss-ritual`.
 6. docs/App-Fabrik/03_APP_FACTORY_STANDARD_DRAFT.md ← Dateistruktur-Standard, Ghost-Card-Vertrag, DoD
 7. docs/App-Fabrik/04_CLAUDE_WORKFLOW_DRAFT.md    ← Skills-Mapping, Phasen Intake→Spec→Gate→Release
 8. docs/App-Fabrik/CHART_ENGINE_ROLE_AND_INTEGRATION.md ← Architekturprinzipien P-01–P-10 (bei Daten/Kontext/A11y-Fragen)
-9. Apps/[App-Name]/                               ← App-spezifischer Code + Prototypen
-10. bei Chart-Nutzung: relevante Chart-Engine-Spec + WORKING-FEATURES.md
+9. docs/App-Fabrik/APP_FOLDER_STRUCTURE.md        ← Kanonische Dateiliste pro App-Ordner (Phase 0/1/2)
+10. Apps/[App-Name]/                              ← App-spezifischer Code + Prototypen
+11. bei Chart-Nutzung: relevante Chart-Engine-Spec + WORKING-FEATURES.md
 ```
 
 Claude gibt Bestätigung aus bevor es weitergeht: „APP-INTERFACE.md ✓, SECURITY-BASELINE.md ✓."
