@@ -1,6 +1,6 @@
 # PROJECT STATUS — Finanzwesir 2.0
 
-Stand: 2026-05-10 | Session: Chart-Engine-Architekturprinzipien | Geändert von: Claude
+Stand: 2026-05-10 | Session: APP-INTERFACE Update fw-app-Namespace | Geändert von: Claude
 
 **Zweck:** Schneller Wiedereinstieg nach Pausen.
 **Zielgruppe:** Albert und Claude.
@@ -13,7 +13,7 @@ Stand: 2026-05-10 | Session: Chart-Engine-Architekturprinzipien | Geändert von:
 
 ## 1. Aktueller Fokus
 
-App-Fabrik-Standard erweitert (AF-07): 10 Architekturprinzipien aus dem Architecture Strategy Paper VX in App-Fabrik dokumentiert — CHART_ENGINE_ROLE_AND_INTEGRATION.md (neu), §10 im Standard-Draft (P-01–P-10), A-09–A-18 im Decision Log, Arch-06/07 in offenen Fragen.
+APP-INTERFACE.md auf App-Fabrik-Stand aktualisiert (AF-08): Zwei-Vertrags-Modell (fw-app / financial-chart-module) kanonisch verankert, Sicherheitsregeln auf 10 erweitert, Übergang/offene Punkte dokumentiert.
 Nächster Schritt: APP_SPEC für prokrastinations-preis (Pilot 1) erstellen → Pilot bauen. 04_CLAUDE_WORKFLOW_DRAFT.md ist bereits vorhanden.
 
 ---
@@ -92,6 +92,11 @@ Vollständig im DECISION-LOG dokumentiert (`docs/steering/DECISION-LOG.md`):
 
 ## 8. Letzte Session
 
+2026-05-10 — APP-INTERFACE.md auf App-Fabrik-Stand aktualisiert (AF-08).
+Zwei-Vertrags-Modell (fw-app / financial-chart-module) kanonisch in docs/spec/ verankert.
+§7 Sicherheitsregeln auf 10 erweitert. §10 Übergang (AF-04, AF-05, ChartAdapter). §11 Verhältnis zu Nachbardateien.
+Status als Arbeitsfassung; data-fw-theme explizit mit Nutzungsverbot markiert.
+
 2026-05-10 — Chart-Engine-Architekturprinzipien dokumentiert (AF-07).
 CHART_ENGINE_ROLE_AND_INTEGRATION.md (neu): Rolle der Chart-Engine, was chart-spezifisch bleibt, Prinzipien-Tabelle P-01–P-10.
 03_APP_FACTORY_STANDARD_DRAFT.md §10 (neu): alle 10 Prinzipien vollständig beschrieben (🟢 direkt übernommen / 🟡 adaptiert).
@@ -154,8 +159,8 @@ Neue APs: DS-012, DS-013, DS-014.
 
 ## 9. Einstieg für nächste Session
 
-**App-Fabrik-Standard V0.1 vollständig (AF-01–AF-07).**  
-Architekturprinzipien P-01–P-10 aus Chart-Engine dokumentiert. Pilot-1 kann starten.
+**App-Fabrik-Standard V0.1 vollständig (AF-01–AF-07). APP-INTERFACE.md kanonisch aktualisiert (AF-08).**  
+Zwei-Vertrags-Modell verankert. Pilot-1 kann starten.
 
 **Nächster Schritt: Pilot 1 APP_SPEC erstellen, dann bauen.**
 1. APP_SPEC für `prokrastinations-preis` erstellen (per `spec-mode-architecture`) — inkl. AppContext-Schema (Arch-06) und A11y-Vertrag Calculator (Arch-07) als Pflichtabschnitte

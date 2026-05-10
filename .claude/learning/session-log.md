@@ -31,6 +31,13 @@ Wird geleert nach /distill. Einträge: [FRICTION] [WIN] [PREF] [QUESTION] [OK]
 
 ## 2026-05-10 – SESSION START | Fokus: 04_CLAUDE_WORKFLOW_DRAFT.md → Pilot-1 (prokrastinations-preis)
 
+## 2026-05-10 – SESSION START | Fokus: APP_SPEC prokrastinations-preis → Pilot 1 bauen
+
 ## 2026-05-10 – AF-07 | Chart-Engine-Architekturprinzipien in App-Fabrik dokumentiert
 - [FRICTION] „In zwei Dateien:" gesagt, dann 4 Dateien gelistet — Albert hat die Inkonsistenz direkt benannt; Zählung hätte vor der Antwort geprüft werden müssen
 - [WIN] 10 Prinzipien aus Architecture Strategy Paper VX (KDR 1–14 + Appendix A) in einem Durchgang vollständig in 4 Dateien + 1 neue Referenzdatei dokumentiert; Trennung chart-spezifisch / direkt übernommen / adaptiert war aus dem Paper eindeutig ableitbar
+
+## 2026-05-10 – AF-08 | APP-INTERFACE.md auf App-Fabrik-Stand aktualisiert
+- [WIN] Zwei-Vertrags-Modell (fw-app / financial-chart-module) sauber in einer kanonischen Spec-Datei verankert — alle bestehenden Sicherheitsregeln erhalten, 5 neue Regeln ergänzt (Slug-Whitelist, URL-Validierung, CSV/JSON-Validierung), kein produktiver Code berührt
+- [PREF] Status-Formulierung: Albert bevorzugte „Arbeitsfassung für Pilot-1" über „Freigegeben für App-Fabrik-Pilot" — vorsichtigere Abstufung (Pilot-1-Freigabe ≠ vollständige Kanonisierung)
+- [PREF] data-fw-theme: Albert wollte explizites Nutzungsverbot in Ghost-Cards statt nur „noch nicht implementiert" — präzisere Abgrenzung für Redakteure
