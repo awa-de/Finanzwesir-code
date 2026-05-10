@@ -1,6 +1,6 @@
 # PROJECT STATUS — Finanzwesir 2.0
 
-Stand: 2026-05-10 | Session: rfc-einraeumen | Geändert von: Claude
+Stand: 2026-05-10 | Session: rfc-workflow-integration | Geändert von: Claude
 
 **Zweck:** Schneller Wiedereinstieg nach Pausen.
 **Zielgruppe:** Albert und Claude.
@@ -90,6 +90,9 @@ Vollständig im DECISION-LOG dokumentiert (`docs/steering/DECISION-LOG.md`):
 ---
 
 ## 8. Letzte Session
+
+2026-05-10 — Implementation-RFC in App-Fabrik-Workflow eingehängt (ST-12).
+APP_FACTORY_IMPLEMENTATION_RFC.md ist jetzt Pflichtquelle für Pre-Code-Gate: Slice-Plan Pflicht, Vertical Slicing Pflicht, keine stillen Framework-/Build-Entscheidungen. 04_CLAUDE_WORKFLOW_DRAFT.md Phase 3/4/5, tech-spec-app/SKILL.md und app-spec-create.md aktualisiert.
 
 2026-05-10 — App-Fabrik RFC-Dateien eingeräumt (AF-11).
 APP_FOLDER_STRUCTURE.md neu angelegt (kanonische Dateiliste Phase 0/1/2), NAVIGATION.md Item 9 ergänzt, _working/implementation-rfc/ konsolidiert.

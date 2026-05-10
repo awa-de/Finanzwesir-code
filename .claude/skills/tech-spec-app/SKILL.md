@@ -49,6 +49,7 @@ App-Fabrik-Standard:
 - docs/App-Fabrik/03_APP_FACTORY_STANDARD_DRAFT.md
 - docs/spec/APP-INTERFACE.md
 - docs/App-Fabrik/CHART_ENGINE_ROLE_AND_INTEGRATION.md
+- docs/App-Fabrik/APP_FACTORY_IMPLEMENTATION_RFC.md (Pflicht vor Übergabe an Pre-Code-Gate)
 - docs/App-Fabrik/01_DECISION_LOG.md
 - docs/App-Fabrik/02_OPEN_QUESTIONS.md
 - docs/App-Fabrik/APP_INVENTORY.md
@@ -58,6 +59,11 @@ App-Fabrik-Standard:
 UX-/Wirkung:
 - Skill heldenreise wird nach diesem Skill angewendet.
 - tech-spec-app darf die Heldenreise nicht ersetzen.
+
+Grenzziehung Implementation-RFC:
+- tech-spec-app erzeugt die APP_SPEC (fachliche + technische Spec, Ghost-Card-Vertrag, AppContext, A11y).
+- APP_FACTORY_IMPLEMENTATION_RFC.md regelt Build-System, Framework, CSS-Isolation, Teststrategie, Code-Ablage, Vertical Slicing.
+- Diese Entscheidungen gelten projektübergreifend für alle App-Fabrik-Apps — sie werden nicht app-lokal neu erfunden.
 
 ## Quellenhierarchie
 

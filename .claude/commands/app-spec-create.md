@@ -81,6 +81,9 @@ Zusätzlich anwenden:
 - Skill tech-spec-app
 - Skill heldenreise
 
+Für Pre-Code-Gate nach diesem Command lesen:
+- docs/App-Fabrik/APP_FACTORY_IMPLEMENTATION_RFC.md
+
 ## Ablauf
 
 ### Phase 0 — Intake
@@ -274,11 +277,13 @@ Am Ende berichten:
 
 Nach diesem Command darf noch kein Code existieren.
 
+/app-spec-create erzeugt die APP_SPEC — keinen produktiven Code.
+
 Nächster Schritt ist:
 Spec-Gate
 
 Danach erst:
-Pre-Code-Gate
+Pre-Code-Gate — mit Pflichtlektüre docs/App-Fabrik/APP_FACTORY_IMPLEMENTATION_RFC.md
 
 Danach erst:
-Implementierungsplanung
+Implementierungsplanung — als Vertical Slices gemäß Implementation-RFC

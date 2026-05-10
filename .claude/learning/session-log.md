@@ -39,3 +39,8 @@ Wird geleert nach /distill. Einträge: [FRICTION] [WIN] [PREF] [QUESTION] [OK]
 
 ## 2026-05-10 – DIST-02 | Distill-Lauf — 3 Patterns promoted
 - [OK] Keine Vorkommnisse
+
+## 2026-05-10 – SESSION START | Fokus: APP-01 Pilot-1 prokrastinations-preis (Spec-Gate → Implementierung)
+
+## 2026-05-10 – rfc-workflow-integration | Implementation-RFC in Workflow, Skill und Command eingehängt
+- [OK] Keine Vorkommnisse

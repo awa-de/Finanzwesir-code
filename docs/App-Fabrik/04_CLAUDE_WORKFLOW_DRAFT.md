@@ -1,6 +1,6 @@
 # Claude-Workflow für App-Fabrik — V0.2
 
-Stand: 2026-05-10 | Überarbeitung zu operativem Workflow | Geändert von: Claude  
+Stand: 2026-05-10 | rfc-workflow-integration | Geändert von: Claude  
 Status: Arbeitsfassung. Bindend für Pilot-1 nach Alberts expliziter Freigabe.
 
 **Leitprinzip:** Vorhandenes Claude-Betriebssystem nutzen — kein Parallelsystem, keine neuen Commands vor dem Piloten.
@@ -217,10 +217,18 @@ Ohne Spec ist kein Gate möglich. Ohne Gate schreibt Claude keinen App-Code.
     Offene Blocker markieren — App wartet auf Klärung.
     Kein Gate ohne klare Antworten auf alle Pflichtfragen.
 
-3.2 /pre-code-gate full ausführen:
+3.2 APP_FACTORY_IMPLEMENTATION_RFC.md lesen (docs/App-Fabrik/):
+    Pflicht vor /pre-code-gate full bei jeder App-Fabrik-Implementierung.
+    - keine Implementierung ohne dokumentierten Slice-Plan
+    - Vertical Slicing ist Pflicht — kein horizontaler Vorab-Aufbau
+    - Slice 0 (App-Shell + Ghost-Card-Bootstrap) ist immer erster Implementierungsschritt
+    - keine Framework-/Build-System-/Shadow-DOM-/Core-Entscheidung still treffen
+    Status RFC: noch Draft, noch nicht docs/spec/ — dennoch Pflichtquelle.
+
+3.3 /pre-code-gate full ausführen:
     App-Arbeit ist immer Full-Gate (CLAUDE.md — keine Ausnahme).
 
-3.3 Albert gibt explizit OK.
+3.4 Albert gibt explizit OK.
     Schweigen ≠ Freigabe.
 ```
 
@@ -233,19 +241,24 @@ Ohne Spec ist kein Gate möglich. Ohne Gate schreibt Claude keinen App-Code.
 **Werkzeug:** `impl-mode-workpackages`
 
 ```
-4.1 Workpackages ableiten:
-    Reihenfolge:
-    a) README.md + app.config.json (Grundstruktur + Config-JSON)
-    b) APP_SPEC.md Ghost-Card-Beispiel (als ghost-card.example.html)
-    c) app.test.html (Grundstruktur mit allen vier States)
-    d) app.js (dünne app-spezifische Logik, kein Shell-Code)
-    e) NOTES.md (Entwicklungsnotizen, Prototypen-Verweise)
+4.1 Workpackages als Vertical Slices planen:
+    Implementierung erfolgt in Vertical Slices gemäß APP_FACTORY_IMPLEMENTATION_RFC.md §7+§8.
+    Kein horizontaler Vorbau — kein "erst Core/CSS/Testinfrastruktur bauen".
+    Reihenfolge startet mit Slice 0 (App-Shell + Ghost-Card-Bootstrap).
 
-4.2 Für jedes Workpackage festlegen:
-    - Welche Dateien werden geändert?
-    - Was bleibt geschützt? (PROTECTED_PATHS.json prüfen)
-    - Welcher Testfall bestätigt diesen Schritt?
-    - Welche Risiken trägt dieser Schritt?
+    Dateiperspektive (ergibt sich aus den Slices):
+    a) app.js, app.css, app.test.html (Slice 0 — App-Shell)
+    b) app.js erweitern (folgende Slices — Berechnung, Inputs, States)
+    c) README.md, NOTES.md (begleitend)
+
+4.2 Für jeden Slice festlegen:
+    - Ziel des Slices
+    - Nutzerwert / Erkenntniswert (was kann Albert nach diesem Slice sehen und prüfen?)
+    - Betroffene Layer
+    - Geänderte Dateien
+    - Akzeptanzkriterien (wie ist "fertig" definiert?)
+    - Nicht-Ziele dieses Slices
+    - Risiken
 
 4.3 Keine ungeplanten Refactorings:
     Fremder Mess (bestehender Code, schlechter Stil) → melden, nicht anfassen.
@@ -264,6 +277,8 @@ Ohne Spec ist kein Gate möglich. Ohne Gate schreibt Claude keinen App-Code.
 
 ```
 5.1 Nur nach Alberts explizitem OK aus dem Gate.
+    Implementierung erfolgt Slice für Slice gemäß Slice-Plan aus Phase 4.
+    Kein nächster Slice ohne: lokalen Test, /patch-quittung und Alberts Bestätigung.
 
 5.2 App-Fabrik-Standard einhalten (03_APP_FACTORY_STANDARD_DRAFT.md):
     - Vanilla JS, clientseitig, kein Backend (A-03)
@@ -457,7 +472,7 @@ Ohne Spec ist kein Gate möglich. Ohne Gate schreibt Claude keinen App-Code.
 
 | | |
 |---|---|
-| **Input** | Spec Gate bestanden, Implementierungsplanung abgeschlossen |
+| **Input** | Spec Gate bestanden, APP_FACTORY_IMPLEMENTATION_RFC.md gelesen, Slice-Plan dokumentiert |
 | **Output** | Freigabe zum ersten Workpackage |
 | **Entscheidet** | Albert — explizites OK |
 | **Blocker** | Tabu-Zone betroffen / Spec-Lücke / Sicherheitsregel verletzt / Mehr als 3 zentrale Dateien ohne Freigabe |
