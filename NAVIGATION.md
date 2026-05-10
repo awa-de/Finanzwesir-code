@@ -16,6 +16,7 @@ Für Albert: Index aller Projektdokumente — was wo liegt und wann gelesen werd
 | `docs/spec/` | Bindende technische und fachliche Spezifikationen |
 | `docs/steering/` | Backlog, Status, Entscheidungen, QA, Regression |
 | `.claude/skills/` | Detailprozeduren (aktive Skills — siehe § Skills) |
+| `.claude/agents/` | Modellgebundene Haiku-Subagenten für mechanische Zuarbeit (codebase-scout, spec-scout, regression-scout) |
 | `PROJECT-STATUS.md` | Tageslage: Fokus, Blocker, nächster Schritt |
 | `MEMORY.md` | Stabile Projektfakten, Arbeitskontext |
 

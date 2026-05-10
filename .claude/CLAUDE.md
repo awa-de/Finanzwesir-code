@@ -1,5 +1,5 @@
 # CLAUDE.md – Finanzwesir 2.0
-Stand: 2026-05-08 | v2.0.1 | Geändert von: Claude
+Stand: 2026-05-10 | v2.1.1 | Geändert von: Claude
 
 ---
 
@@ -37,6 +37,7 @@ Detailprozeduren für Spezialfälle stehen in `.claude/skills/`.
 | `docs/spec/` | fachlich-technisch bindend; Spec schlägt Code |
 | `.claude/commands/` | Gate-Checklisten und Rituale (auf Abruf) |
 | `.claude/skills/` | Detailprozeduren für Spezialfälle |
+| `.claude/agents/` | Modellgebundene Subagenten für mechanische Zuarbeit |
 | `PROJECT-STATUS.md` | Tageslage: Fokus, Blocker, nächster Schritt |
 | `MEMORY.md` | stabile Projektfakten |
 | `.claude/PROTECTED_PATHS.json` | harte Schutzliste für Dateioperationen |
@@ -49,8 +50,9 @@ Priorität bei Widerspruch:
 5. `NAVIGATION.md`
 6. `.claude/commands/`
 7. `.claude/skills/`
-8. `PROJECT-STATUS.md`
-9. `MEMORY.md`
+8. `.claude/agents/`
+9. `PROJECT-STATUS.md`
+10. `MEMORY.md`
 
 Wenn unklar ist, welche Regel gilt: stoppen, Widerspruch benennen, Entscheidung von Albert einholen.
 
@@ -124,7 +126,6 @@ Max. 2 Präzisionsfragen, dann weiter. Schlechte Briefings nicht durchwinken.
 4. Pre-Code-Gate automatisch ausführen (→ [Gate-Prinzip])
 5. Albert: „OK" → Code
 6. Nach Code proaktiv anbieten: „Abschluss-Ritual für AP-N jetzt?"
-7. Bei Datei-Suche, Bulk-Read, Bulk-Write (>5 gleichartige neue Dateien) oder parallelen Teilaufgaben: `/subagent-dispatch` prüfen. Für rein mechanische Bulk-Writes mit vollständigem Briefing: Haiku als Default.
 
 ---
 
@@ -176,6 +177,31 @@ Direkt antworten. Kein Gate.
 **UNKLAR**
 
 Eine Frage: „Bug, neue Aufgabe, oder Idee erkunden?"
+
+---
+
+### Universeller Subagent-Check
+
+Gilt nach jeder Klassifizierung, vor Gate, Planung oder Antwort.
+
+1. Aufgabe grob schneiden:
+   - Ziel?
+   - fehlende Informationen?
+   - mechanische Teilschritte?
+   - Urteilsschritte?
+
+2. Delegieren:
+   - Mechanisch, überprüfbar, isolierbar → Subagent-Kandidat.
+   - Urteil, Risiko, Synthese, Gate, Patchplan → Hauptinstanz.
+
+3. Dispatch nur wenn:
+   - > 3 Dateien ODER > 5 Fundstellen ODER Bulk > 5
+   - Briefing in 1 Satz möglich
+   - Ergebnis direkt verwertbar
+   - Subagent kann ohne Projekturteil arbeiten
+
+Ja → `/subagent-dispatch`.
+Nein → direkt weiter.
 
 ---
 

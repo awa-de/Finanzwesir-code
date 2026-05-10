@@ -1,5 +1,5 @@
 # Praxis-Anleitung: Arbeiten mit der Finanzwesir-Projektsteuerung
-Stand: 2026-05-09
+Stand: 2026-05-10
 
 ---
 
@@ -144,6 +144,7 @@ Claude schlägt diese von sich aus vor — aber Albert kann sie auch direkt akti
 | `/spec-rewrite-guard docs/spec/X.md` | Wenn Albert selbst eine Spec bearbeiten will |
 | `/start` | **Pflicht am Anfang jedes Fadens** — startet Session-Start-Sequenz (4 Dateien + Kommunikationsstil) |
 | `/finde-skills` | Wenn ein neuer Skill gesucht wird — sucht, prüft sicherheitstechnisch, integriert nach Alberts OK |
+| `/subagent-dispatch` | Claude startet das automatisch wenn mechanische Teilschritte vorliegen (Suche, Inventur, Extraktion) — Albert muss das nicht aufrufen |
 
 ---
 
