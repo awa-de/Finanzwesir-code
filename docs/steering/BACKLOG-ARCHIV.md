@@ -1,11 +1,13 @@
 # BACKLOG-ARCHIV – Finanzwesir 2.0
-Stand: 2026-05-10 | Session: heldenreise + DIST-02 | Geändert von: Claude
+Stand: 2026-05-10 | Session: tech-spec-app + app-spec-create | Geändert von: Claude
 
 Abgeschlossene Items, neueste zuerst (append-only).
 Archivierungs-Trigger: wenn > 200 Zeilen → neue Datei `BACKLOG-ARCHIV-YYYY.md` anlegen.
 
 | ID | Bereich | Titel | Abgeschlossen | Session |
 |----|---------|-------|---------------|---------|
+| ST-09 | System | Command app-spec-create angelegt — .claude/commands/app-spec-create.md: orchestriert 5 Phasen (Intake / Mini-Spec-Auswertung / tech-spec-app / heldenreise / Spec-Gate-Vorbereitung); Pflichtpfade + Abbruchbedingungen (kein Ordner / keine Mini-Spec); Technik-Gate (11 Punkte) + UX-Gate (10 Punkte); Sonderregeln Multi-Modul B2/C1 + prokrastinations-preis; strikte Verbotsliste (kein Code / keine app.js / kein CSS); Abschlussregel: kein Code vor Spec-Gate *(sofort erledigt)* | 2026-05-10 | tech-spec-app + app-spec-create |
+| ST-08 | System | Skill tech-spec-app angelegt — .claude/skills/tech-spec-app/SKILL.md: 18 Pflichtabschnitte (Status, Zweck/Nutzerfrage, App-Familie, Multi-Modul-Bezug, Inputs, Outputs, Datenbedarf, Ghost-Card-Vertrag, data-fw-options-Whitelist, State-Modell, AppContext-Schema, A11y-Vertrag, Reise eines Inputs, UX/UI-Primitiven, Sicherheitsregeln, Testfälle, Offene Fragen, Spec-Gate-Checkliste); 3 Ausgangsfälle (A: Spec existiert / B: nur Mini-Spec / C: Abbruch); Quellenhierarchie 6 Stufen; Nie-tun-Liste; Abschlussregel *(sofort erledigt)* | 2026-05-10 | tech-spec-app + app-spec-create |
 | DIST-02 | System | Distill-Lauf — 20 session-log-Einträge destilliert: 3 Patterns promoted (Zahlen/Referenzen verifizieren, Pilot-Status-Sprache, Verbote explizit formulieren), 2 PREFs promoted, 2 neue observing-Einträge; session-log.md geleert *(sofort erledigt)* | 2026-05-10 | heldenreise + DIST-02 |
 | ST-07 | System | heldenreise Skill in NAVIGATION.md registriert — Skills-Tabelle + App-Abschnitt, Trigger explizit als „nur manuell (Albert)" dokumentiert; CLAUDE.md nicht berührt (kein Auto-Trigger) *(sofort erledigt)* | 2026-05-10 | heldenreise + DIST-02 |
 | APP-01-abgleich | App | APP_SPEC.md prokrastinations-preis — Abgleich gegen MINI_SPEC_FROM_HAUPTDOKUMENT.md: drittes ResultTemplate „mathematik" aus Hauptdokument-Kernbotschaft ergänzt (§6 Config-JSON); Range-Begründung prokrastinationsJahre 1–20 vs. 0–10 dokumentiert (§4); alle 6 Prüfdimensionen (Zweck, UX, Microcopy, Inputs/Outputs, Scope, AppContext/A11y) ohne Blocker; Spec-Gate-reif bestätigt. APP-01 bleibt aktiv (Implementierung nach Spec-Gate). *(sofort erledigt)* | 2026-05-10 | Spec-Gate APP-01 / Pilot-1 |
