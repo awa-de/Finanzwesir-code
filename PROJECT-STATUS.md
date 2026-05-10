@@ -1,6 +1,6 @@
 # PROJECT STATUS — Finanzwesir 2.0
 
-Stand: 2026-05-10 | Session: App-Fabrik-Workflow V0.2 | Geändert von: Claude
+Stand: 2026-05-10 | Session: Pilot-1 APP_SPEC Spec-Gate-reif | Geändert von: Claude
 
 **Zweck:** Schneller Wiedereinstieg nach Pausen.
 **Zielgruppe:** Albert und Claude.
@@ -13,8 +13,8 @@ Stand: 2026-05-10 | Session: App-Fabrik-Workflow V0.2 | Geändert von: Claude
 
 ## 1. Aktueller Fokus
 
-04_CLAUDE_WORKFLOW_DRAFT.md zu operativem App-Fabrik-Workflow V0.2 ausgearbeitet (AF-09): 8 Phasen, 5 benannte Gates, APP-INTERFACE.md als Pflichtreferenz verankert, AppContext/A11y-Vertrag/Reise-eines-Inputs als Spec-Pflicht, Pilot-1-Sonderregeln.
-Nächster Schritt: BACKLOG-AP für Pilot 1 prüfen/anlegen → APP_SPEC prokrastinations-preis erstellen → Pilot bauen.
+APP_SPEC.md `prokrastinations-preis` V0.2 fertig und Spec-Gate-reif (APP-01-spec): 17 Pflichtabschnitte, alle 5 Pilot-1-Entscheidungen verankert, Clamp/Empty-State-Trennung explizit, Testliste bereinigt.
+Nächster Schritt: **Spec-Gate** — Albert prüft APP_SPEC.md und gibt explizites OK → dann Pre-Code-Gate → Implementierung Pilot-1.
 
 ---
 
@@ -55,7 +55,7 @@ Nächster Schritt: BACKLOG-AP für Pilot 1 prüfen/anlegen → APP_SPEC prokrast
 | Chart-Engine | Stabil, offene APs | Siehe `docs/steering/BACKLOG.md` |
 | Theme | In Entwicklung | `THEME-ASSEMBLY-CHECKLIST.md` |
 | CSS | Stabil | Siehe `docs/steering/BACKLOG.md` (CSS-N Items) |
-| Apps | Workflow V0.2 fertig ✅ | APP_SPEC Pilot-1 erstellen → Pilot bauen |
+| Apps | APP_SPEC V0.2 Spec-Gate-reif ✅ | Spec-Gate Albert → Pre-Code-Gate → Implementierung |
 | Content | Laufend | Redaktionsleitfaden aktiv |
 | Security | Baseline dokumentiert | `SECURITY-BASELINE.md` |
 
@@ -90,6 +90,9 @@ Vollständig im DECISION-LOG dokumentiert (`docs/steering/DECISION-LOG.md`):
 ---
 
 ## 8. Letzte Session
+
+2026-05-10 — APP_SPEC prokrastinations-preis V0.2 Spec-Gate-reif (APP-01-spec).
+17 Pflichtabschnitte nach App-Fabrik-Workflow V0.2: Ghost-Card-Vertrag, AppContext-Schema Calculator-Familie (Arch-06), A11y-Vertrag (Arch-07), Input-Reise (P-10), 5 Pilot-1-Entscheidungen (kein Chart, Festwert-Rendite, neutral-Ton, intern gebündelte Config, Slug→Error-State). Bereinigung: falsche O-Verweise, JSON-Komma, Clamp/Empty-State-Trennung, Testliste. APP-01 bleibt aktiv bis Implementierung.
 
 2026-05-10 — App-Fabrik-Workflow V0.2 erstellt (AF-09).
 04_CLAUDE_WORKFLOW_DRAFT.md: 8 Phasen (Intake → Briefing → Spec → Spec-Gate → Impl-Planung → Umsetzung → Review → Pilot-Auswertung), 5 Gates (Intake/Spec/Pre-Code/Review/Release), APP-INTERFACE.md als Pflichtreferenz, AppContext/A11y/Reise-eines-Inputs als Spec-Pflicht, Pilot-1-Sonderregeln. §12 Nächster Schritt: BACKLOG-AP prüfen vor anlegen.
@@ -161,13 +164,13 @@ Neue APs: DS-012, DS-013, DS-014.
 
 ## 9. Einstieg für nächste Session
 
-**App-Fabrik-Standard V0.1 vollständig (AF-01–AF-08). Workflow V0.2 fertig (AF-09).**  
-Zwei-Vertrags-Modell verankert. Operativer Workflow mit 8 Phasen und 5 Gates bereit. Pilot-1 kann starten.
+**APP_SPEC.md V0.2 Spec-Gate-reif. Nächster Schritt: Spec-Gate.**
 
-**Nächster Schritt: Pilot 1 starten.**
-1. BACKLOG-AP prüfen: Existiert `prokrastinations-preis` bereits in BACKLOG.md? Falls nein: anlegen.
-2. APP_SPEC für `prokrastinations-preis` erstellen (per `spec-mode-architecture`) — inkl. AppContext-Schema (Arch-06) und A11y-Vertrag Calculator (Arch-07) als Pflichtabschnitte
-3. Pilot 1 bauen — Calculator-Familie, kein externer Datenbedarf
+1. Albert prüft `Apps/prokrastinations-preis/APP_SPEC.md` (17 Abschnitte, 5 Entscheidungen)
+2. Albert gibt explizites OK → Spec-Gate ✅
+3. Pre-Code-Gate (Full) ausführen → Implementierung Pilot-1 Calculator-Template
+
+Workflow-Leitfaden: `docs/App-Fabrik/04_CLAUDE_WORKFLOW_DRAFT.md` (V0.2) Phase 4+
 
 Workflow-Leitfaden: `docs/App-Fabrik/04_CLAUDE_WORKFLOW_DRAFT.md` (V0.2)
 

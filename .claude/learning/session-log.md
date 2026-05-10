@@ -1,6 +1,8 @@
 # Session-Log — Finanzwesir 2.0
 Wird geleert nach /distill. Einträge: [FRICTION] [WIN] [PREF] [QUESTION] [OK]
 
+## 2026-05-10 – SESSION START | Fokus: Pilot-1 / APP_SPEC prokrastinations-preis
+
 ## 2026-05-09 – AF-03 | App-Fabrik-Standard V0.1 ausgearbeitet
 - [WIN] 03_APP_FACTORY_STANDARD_DRAFT.md: 13 Abschnitte aus 10+ Quellen in einer Runde ohne Nacharbeit; Zwei-Vertrags-Modell (fw-app + financial-chart-module) klar getrennt — kein Kollisionsrisiko
 - [QUESTION] AUTHOR_GUIDE-v3.md nutzt `data-app` als Attribut-Name, neuer Standard nutzt `data-fw-app` — Namenskonflikt beim Quellenlesen entdeckt; da Entscheidung (data-fw-app) von Albert explizit vorgegeben war, als offene Frage F-01 dokumentiert statt eskaliert
@@ -36,6 +38,13 @@ Wird geleert nach /distill. Einträge: [FRICTION] [WIN] [PREF] [QUESTION] [OK]
 ## 2026-05-10 – AF-07 | Chart-Engine-Architekturprinzipien in App-Fabrik dokumentiert
 - [FRICTION] „In zwei Dateien:" gesagt, dann 4 Dateien gelistet — Albert hat die Inkonsistenz direkt benannt; Zählung hätte vor der Antwort geprüft werden müssen
 - [WIN] 10 Prinzipien aus Architecture Strategy Paper VX (KDR 1–14 + Appendix A) in einem Durchgang vollständig in 4 Dateien + 1 neue Referenzdatei dokumentiert; Trennung chart-spezifisch / direkt übernommen / adaptiert war aus dem Paper eindeutig ableitbar
+
+## 2026-05-10 – APP-01-spec | APP_SPEC prokrastinations-preis V0.2 Spec-Gate-reif
+
+- [FRICTION] Falsche O-Verweise in §4/§5 eingetragen — NumericInput verwies auf O-02 (Chart-Entscheidung), PrimaryCta auf O-03 (Rendite-Slider-Entscheidung); beide semantisch falsch. Ursache: Nummern beim Eintippen nicht gegen §16-Inhalt geprüft.
+- [FRICTION] Fehlendes Komma nach `_note`-Feld im Config-JSON — durch eigenen vorherigen Edit eingeführt; syntaktisch ungültiges JSON blieb unbemerkt bis Albert explizit benannte.
+- [WIN] T-08-Widerspruch erkannt und behoben — Clamp-Regel in §4 Punkt 3 implizierte dass T-08 (Empty-State bei Slider-Maximum) nicht mehr stimmen kann; konsistent nachgezogen ohne Rückfrage.
+- [WIN] APP_SPEC.md V0.2 Spec-Gate-reif in zwei Sessions ohne Architektur-Änderungen: alle 5 Entscheidungen konsistent durch §4, §5, §6, §9, §10, §11, §13, §14, §15, §16 durchgezogen.
 
 ## 2026-05-10 – SESSION START | Fokus: Pilot-1 APP_SPEC prokrastinations-preis bauen
 

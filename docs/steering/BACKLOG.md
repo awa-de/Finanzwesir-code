@@ -1,5 +1,5 @@
 # BACKLOG – Finanzwesir 2.0
-Stand: 2026-05-09 | Session: App-Fabrik Scope-Funde | Geändert von: Claude
+Stand: 2026-05-10 | Session: Pilot-1 prokrastinations-preis APP_SPEC | Geändert von: Claude
 
 **Regeln:**
 - ✅-Zeilen werden sofort nach `BACKLOG-ARCHIV.md` verschoben (append), dann hier gelöscht.
@@ -12,6 +12,7 @@ Stand: 2026-05-09 | Session: App-Fabrik Scope-Funde | Geändert von: Claude
 
 | ID       | Bereich | Titel                                     | Prio | Dep | Detail                              |
 |----------|---------|-------------------------------------------|------|-----|-------------------------------------|
+| APP-01   | App     | Pilot-1: prokrastinations-preis — Calculator-Template bauen | H | — | Apps/prokrastinations-preis/APP_SPEC.md |
 | AP-20/21 | Engine  | Mixed-Rhythm CV-Heuristik (T5→T3→T6→T7)  | H    | —   | engine/detail/AP-20-DETAIL.md       |
 | AP-6c    | Engine  | Touch-Tooltip Smartphone-Test             | M    | —   | engine/detail/AP-6c-DETAIL.md       |
 | AP-22    | Engine  | Zero-Line lineWidth (~3 Zeilen Fix)       | L    | —   | —                                   |
