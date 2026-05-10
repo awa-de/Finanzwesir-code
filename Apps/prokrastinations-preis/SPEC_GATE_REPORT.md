@@ -76,3 +76,11 @@ Spec-Gate freigegeben.
 
 Nächster Schritt: **Pre-Code-Gate Full** ausführen mit dokumentiertem Slice-Plan aus
 `docs/App-Fabrik/APP_FACTORY_IMPLEMENTATION_RFC.md` §8 (Slices 0–7b).
+
+---
+
+## Nachtrag Security-Baseline-Sync
+
+`SECURITY-BASELINE.md` wurde nach diesem Spec-Gate aktualisiert und um App-Fabrik- / fw-app-Regeln ergänzt (Session: security-baseline-sync, 2026-05-10).
+
+Kurz-Re-Check: APP_SPEC V0.3 bleibt gegen die aktualisierte Security Baseline bestanden. Keine neuen Blocker. Security-Sync-Status: **synchron mit Nicht-Blockern** (unverändert — NB-2 und NB-4 aus diesem Report).

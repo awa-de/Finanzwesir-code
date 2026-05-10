@@ -54,7 +54,7 @@ App-Fabrik-Standard:
 - docs/App-Fabrik/02_OPEN_QUESTIONS.md
 - docs/App-Fabrik/APP_INVENTORY.md
 - docs/App-Fabrik/05_PILOT_STRATEGY.md
-- docs/steering/audits/SECURITY-BASELINE.md, falls vorhanden
+- docs/steering/audits/SECURITY-BASELINE.md (Pflicht)
 
 UX-/Wirkung:
 - Skill heldenreise wird nach diesem Skill angewendet.
@@ -68,7 +68,8 @@ Grenzziehung Implementation-RFC:
 ## Quellenhierarchie
 
 Bei Konflikten gilt:
-1. docs/spec/APP-INTERFACE.md ist kanonisch für Schnittstellen, Ghost-Cards, data-fw-*, Datenquellen, data-options, Sicherheitsregeln, Empty-State und Cache-Busting.
+0. docs/steering/audits/SECURITY-BASELINE.md ist übergeordnet für Sicherheitsprinzipien, Security-Sync und Gate-Prüfpunkte.
+1. docs/spec/APP-INTERFACE.md ist kanonisch für Schnittstellen, Ghost-Cards, data-fw-*, Datenquellen, data-options, Schnittstellen-Sicherheitsregeln, Empty-State und Cache-Busting.
 2. 03_APP_FACTORY_STANDARD_DRAFT.md ist maßgeblich für App-Fabrik-Prinzipien, App-Familien, 5-Layer-Modell und Definition of Done.
 3. CHART_ENGINE_ROLE_AND_INTEGRATION.md ist maßgeblich für Chart-Engine-Einordnung.
 4. MINI_SPEC_FROM_HAUPTDOKUMENT.md ist maßgeblich für den fachlichen Rohkern der App.
@@ -87,6 +88,9 @@ Immer tun:
 - App-Familie bestimmen.
 - Systemarchitektur nach App-Fabrik-Standard aufbauen.
 - APP-INTERFACE.md für Ghost-Card und Datenquellen anwenden.
+- SECURITY-BASELINE.md lesen (Pflicht — gilt auch für nicht-Code-Änderungen an der APP_SPEC).
+- Security-Sync-Check durchführen (→ SECURITY-BASELINE.md §8): Sind Baseline, APP-INTERFACE.md und APP_SPEC synchron?
+- Neue Sicherheitsregeln in APP_SPEC als Scope-Fund markieren — nicht still als globalen Standard setzen.
 - Entscheidungen, Arbeitsannahmen und offene Fragen trennen.
 - Scope-Funde sichtbar machen.
 - Keine Code-Arbeit vor Spec-Gate.
@@ -463,6 +467,7 @@ Am Ende muss Claude melden:
 - Welche Nicht-Blocker / Scope-Funde offen?
 - Ob heldenreise noch angewendet werden muss.
 - Ob die Spec technisch gate-nah ist.
+- Security-Sync-Status: synchron / synchron mit Nicht-Blockern / nicht synchron (→ SECURITY-BASELINE.md §10).
 - Git-Diff zeigen.
 
 ## Abschlussregel

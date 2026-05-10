@@ -1,6 +1,14 @@
 # Session-Log — Finanzwesir 2.0
 Wird geleert nach /distill. Einträge: [FRICTION] [WIN] [PREF] [QUESTION] [OK]
 
+## 2026-05-10 – SESSION START | Fokus: APP-01 Pre-Code-Gate Full → Implementierung Pilot-1 prokrastinations-preis
+
+## 2026-05-10 – security-baseline-sync | SECURITY-BASELINE.md App-Fabrik-gatefähig gemacht + Security-Sync-Mechanismus verankert
+- [OK] Keine Vorkommnisse
+
+## 2026-05-10 – konsistenz-korrektur | 4 Konsistenz-Nachbesserungen nach security-baseline-sync
+- [OK] Keine Vorkommnisse
+
 ## 2026-05-10 – rfc-einraeumen | App-Fabrik RFC-Dateien eingeräumt, APP_FOLDER_STRUCTURE.md angelegt
 - [FRICTION] RFC + ChatGPT-Datei waren beim Prüfen schon verschoben; Albert hatte parallel aufgeräumt → rm-Befehl schlug fehl (Datei bereits weg)
 

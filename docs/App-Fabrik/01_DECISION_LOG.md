@@ -1,6 +1,6 @@
 # Decision Log — App-Fabrik
 
-Stand: 2026-05-10 | Spec-Gate prokrastinations-preis | Geändert von: Claude
+Stand: 2026-05-10 | konsistenz-korrektur | Geändert von: Claude
 
 **Legende:**
 - 🟢 ENTSCHIEDEN — robuste Entscheidung, Grundlage für weitere Schritte
@@ -46,9 +46,10 @@ Stand: 2026-05-10 | Spec-Gate prokrastinations-preis | Geändert von: Claude
 
 ---
 
-### A-06 — Gemeinsame App-Shell, kein Global-Initialisierer
+### A-06 — Gemeinsame App-Shell, keine globale Window-API als App-Vertrag
 **Status:** 🟡 ARBEITSANNAHME  
-**Entscheidung:** Gemeinsame App-Shell macht Container finden, Config lesen, Daten laden, States verwalten. App-spezifische Datei enthält nur Fachlogik. Kein `window.FwAppInit` / globale Window-API.  
+**Entscheidung:** Gemeinsame App-Shell macht Container finden, Config lesen, Daten laden, States verwalten. App-spezifische Datei enthält nur Fachlogik. Kein `window.FwAppInit` oder gleichwertige freie globale Window-API als App-Vertrag für app-spezifische Logik.  
+**Nicht verboten:** Ein zentral eingebundener Bootstrapper oder eine gemeinsame Runtime, die alle `fw-app`-Container initialisiert — sofern er nicht als freie globale Window-API für app-spezifische Logik missbraucht wird. Siehe A-07 (Langfrist-Bootstrapper) und SECURITY-BASELINE.md §6.9 (Bootstrapper als Sicherheitsperimeter).  
 **Offen:** AppRegistry-Implementierung (`AppRegistry.register(slug, factory)` oder ES-Module) noch nicht entschieden.  
 **Quelle:** App-Fabrik_Zusatzpaket-Integration_V0-1.md §3.2
 
@@ -291,3 +292,29 @@ Stand: 2026-05-10 | Spec-Gate prokrastinations-preis | Geändert von: Claude
 **Begründung:** G2 und G3 gehören zur gleichen App-Familie, beantworten aber unterschiedliche Nutzerfragen. Keine Zusammenlegung.  
 **Weiterhin offen:** Keine — Eigenständigkeit ist für den aktuellen Planungshorizont ausreichend geklärt.  
 **Quelle:** 2026-05-09
+
+---
+
+## Security
+
+### SEC-01 — SECURITY-BASELINE.md um App-Fabrik / fw-app Regeln erweitert
+**Status:** 🟢 ENTSCHIEDEN  
+**Entscheidung:** `docs/steering/audits/SECURITY-BASELINE.md` wurde um App-Fabrik-spezifische Sicherheitsregeln (§6.1–§6.12) sowie Quellenhierarchie (§2), Security-Sync-Regel (§8), Decision-Log-Pflicht (§9), Gate-Prüffrage (§10), Testpflicht (§11) und App-Fabrik-Pflegepflicht (§12) ergänzt.  
+**Begründung:** SECURITY-BASELINE.md war 2026-05-03 entstanden — vor App-Fabrik-Start (2026-05-09). Sie enthielt allgemeine Sicherheitsregeln, aber keine `fw-app` / Ghost-HTML-Card / `data-*`-spezifischen Regeln. Als amtliche Gate-Bezugsgröße war sie für App-Fabrik-Apps unvollständig. Spec-Gate für `prokrastinations-preis` stellte die Lücke fest.  
+**Quelle:** Arbeitsauftrag security-baseline-sync | 2026-05-10
+
+---
+
+### SEC-02 — Security-Sync-Regel eingeführt
+**Status:** 🟢 ENTSCHIEDEN  
+**Entscheidung:** Bei jeder sicherheitsrelevanten Spec-, Interface- oder App-Änderung müssen `SECURITY-BASELINE.md`, `APP-INTERFACE.md` und `APP_SPEC.md` auf Konsistenz geprüft werden. Die sechs Pflichtfragen sind in `SECURITY-BASELINE.md §8` definiert. Gate-Prüffrage und Sync-Ergebnis-Kategorien sind in `§10` definiert. Die Regel ist in `04_CLAUDE_WORKFLOW_DRAFT.md`, `tech-spec-app/SKILL.md` und `app-spec-create.md` verankert.  
+**Begründung:** Ohne Sync-Regel können `SECURITY-BASELINE.md` und `APP-INTERFACE.md` divergieren, ohne dass es sichtbar wird. Bei 21 geplanten Apps würde die Divergenz unkontrolliert wachsen.  
+**Quelle:** Arbeitsauftrag security-baseline-sync | 2026-05-10
+
+---
+
+### SEC-03 — Decision-Log-Pflicht für sicherheitsrelevante Architekturentscheidungen
+**Status:** 🟢 ENTSCHIEDEN  
+**Entscheidung:** Jede sicherheitsrelevante Architekturentscheidung (neue Domain, neue `data-*` Semantik, Bootstrapper-Strategie, Shadow DOM, externe Scripts, neue Abhängigkeiten, SafeDOM-Regeländerungen, Slug-Whitelist-Änderungen) bekommt einen Eintrag in `01_DECISION_LOG.md`. Detailregeln: → `SECURITY-BASELINE.md §9`.  
+**Begründung:** Sicherheitsentscheidungen müssen nachvollziehbar und auditierbar sein, auch über Sessions hinweg.  
+**Quelle:** Arbeitsauftrag security-baseline-sync | 2026-05-10

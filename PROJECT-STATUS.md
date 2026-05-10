@@ -1,6 +1,6 @@
 # PROJECT STATUS — Finanzwesir 2.0
 
-Stand: 2026-05-10 | Session: APP-01-spec-gate | Geändert von: Claude
+Stand: 2026-05-10 | Session: konsistenz-korrektur | Geändert von: Claude
 
 **Zweck:** Schneller Wiedereinstieg nach Pausen.
 **Zielgruppe:** Albert und Claude.
@@ -57,7 +57,7 @@ Nächster Schritt: **Pre-Code-Gate Full** mit dokumentiertem Slice-Plan aus `APP
 | CSS | Stabil | Siehe `docs/steering/BACKLOG.md` (CSS-N Items) |
 | Apps | Spec-Gate prokrastinations-preis ✅ | Pre-Code-Gate Full + Slice-Plan → Implementierung Pilot-1 |
 | Content | Laufend | Redaktionsleitfaden aktiv |
-| Security | Baseline dokumentiert | `SECURITY-BASELINE.md` |
+| Security | SECURITY-BASELINE.md App-Fabrik-gatefähig ✅ | Security-Sync-Regel + Gate-Prüffrage verankert (ST-13/ST-14) |
 
 ---
 
@@ -90,6 +90,13 @@ Vollständig im DECISION-LOG dokumentiert (`docs/steering/DECISION-LOG.md`):
 ---
 
 ## 8. Letzte Session
+
+2026-05-10 — SECURITY-BASELINE.md App-Fabrik-gatefähig gemacht (ST-13, security-baseline-sync).
+75 → 286 Zeilen. Quellenhierarchie (§2), App-Fabrik-Regeln §6.1–§6.12, Security-Sync-Regel (§8), Gate-Prüffrage (§10) neu.
+04_CLAUDE_WORKFLOW_DRAFT.md, tech-spec-app/SKILL.md, app-spec-create.md und 01_DECISION_LOG.md (SEC-01–SEC-03) synchronisiert.
+
+2026-05-10 — 4 Konsistenz-Korrekturen (ST-14, konsistenz-korrektur).
+Phase-7-Testfall Empty→Error, A-06-Titel präzisiert (Bootstrapper nicht verboten), §6.11 A-08-Verweis getrennt, SPEC_GATE_REPORT Nachtrag.
 
 2026-05-10 — Spec-Gate prokrastinations-preis bestanden (APP-01-spec-gate).
 APP_SPEC.md V0.3 gegen alle 9 Prüfbereiche geprüft (Ghost-Card-Vertrag, AppContext, State-Modell, A11y, SECURITY-BASELINE.md 9 Regeln, UX/Heldenreise, RFC-Kompatibilität). Keine echten Blocker. 4 Nicht-Blocker (CTA-URL, Config-Form, Theme-Tokens, Bootstrapper) mit definierten Klärungszeitpunkten. SPEC_GATE_REPORT.md neu angelegt. DECISION_LOG SG-01 eingetragen. Alberts 4 RFC-§11-Bestätigungen formalisiert (Bootstrapper, lokale test.html, Core-Extraktion nach Pilot 2, Fallback-Tokens). Memory-Regel Glob-vs-Read ergänzt.

@@ -75,7 +75,7 @@ Vor Erstellung oder Aktualisierung lesen:
 - docs/App-Fabrik/02_OPEN_QUESTIONS.md
 - docs/App-Fabrik/APP_INVENTORY.md
 - docs/App-Fabrik/05_PILOT_STRATEGY.md
-- docs/steering/audits/SECURITY-BASELINE.md, falls vorhanden
+- docs/steering/audits/SECURITY-BASELINE.md
 
 Zusätzlich anwenden:
 - Skill tech-spec-app
@@ -221,6 +221,14 @@ UX-Gate:
 - Tufte / Krug / FAANG berücksichtigt?
 - Ethikgrenzen eingehalten?
 
+Security-Sync-Check (→ SECURITY-BASELINE.md §10):
+- Sind SECURITY-BASELINE.md, APP-INTERFACE.md und APP_SPEC.md synchron?
+- Ergebnis:
+  - synchron
+  - synchron mit Nicht-Blockern
+  - nicht synchron / Blocker → kein Spec-Gate möglich
+- Keine Code-Freigabe durch /app-spec-create.
+
 ## Umgang mit Multi-Modul-Apps
 
 Wenn {slug} Teil einer Multi-Modul-Struktur ist:
@@ -271,6 +279,7 @@ Am Ende berichten:
 - Welche echten Blocker offen sind.
 - Welche Nicht-Blocker / Scope-Funde offen sind.
 - Ob die Spec aus Claude-Sicht Spec-Gate-reif ist.
+- Security-Sync-Status: synchron / synchron mit Nicht-Blockern / nicht synchron.
 - Git-Diff zeigen.
 
 ## Abschlussregel

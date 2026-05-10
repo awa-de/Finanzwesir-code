@@ -1,6 +1,6 @@
 # Claude-Workflow für App-Fabrik — V0.2
 
-Stand: 2026-05-10 | rfc-workflow-integration | Geändert von: Claude  
+Stand: 2026-05-10 | konsistenz-korrektur | Geändert von: Claude  
 Status: Arbeitsfassung. Bindend für Pilot-1 nach Alberts expliziter Freigabe.
 
 **Leitprinzip:** Vorhandenes Claude-Betriebssystem nutzen — kein Parallelsystem, keine neuen Commands vor dem Piloten.
@@ -164,6 +164,14 @@ Ohne Spec ist kein Gate möglich. Ohne Gate schreibt Claude keinen App-Code.
     - Werden alle data-* Attribute als untrusted input behandelt?
     - Ist data-fw-theme explizit ausgeschlossen? (reserviert, nicht produktiv)
 
+2.3b Security-Sync prüfen:
+    - Enthält APP_SPEC neue Sicherheitsannahmen, die über APP-INTERFACE.md §7
+      oder SECURITY-BASELINE.md §5/§6 hinausgehen?
+    - APP_SPEC darf Sicherheitsdetails nicht still erfinden, die SECURITY-BASELINE.md
+      oder APP-INTERFACE.md widersprechen.
+    - Neue Sicherheitsregel entdeckt → als Scope-Fund melden, nicht still einbauen.
+    - Widerspruch → stoppen, melden, nicht implementieren.
+
 2.4 AppContext-Schema prüfen (P-04 / Arch-06):
     Jede App-Strategie erzeugt einen AppContext — den semantischen Rucksack
     (Context Object Pattern, docs/spec/Der Rucksack.md).
@@ -213,6 +221,9 @@ Ohne Spec ist kein Gate möglich. Ohne Gate schreibt Claude keinen App-Code.
     □ Ist der A11y-Vertrag für diese App-Familie definiert?
     □ Reise eines Inputs vollständig beschrieben?
     □ Keine offenen Fragen stillschweigend entschieden?
+    □ Security-Sync (→ SECURITY-BASELINE.md §10):
+      Sind SECURITY-BASELINE.md, APP-INTERFACE.md und APP_SPEC.md synchron?
+      Ergebnis: synchron / synchron mit Nicht-Blockern / nicht synchron = Blocker
 
     Offene Blocker markieren — App wartet auf Klärung.
     Kein Gate ohne klare Antworten auf alle Pflichtfragen.
@@ -335,6 +346,7 @@ Ohne Spec ist kein Gate möglich. Ohne Gate schreibt Claude keinen App-Code.
     □ Alle data-* Attribute als untrusted input behandelt?
     □ CSV/JSON validiert vor Verwendung?
     □ Keine externen CDN-Abhängigkeiten ohne DECISION-LOG-Eintrag?
+    □ Neue Sicherheitsregeln entstanden? → SECURITY-BASELINE.md und 01_DECISION_LOG.md aktualisiert?
 
 6.3 Design-System-Check (03_APP_FACTORY_STANDARD_DRAFT.md §8):
     □ Keine Hex-Werte hardcoded?
@@ -369,7 +381,7 @@ Ohne Spec ist kein Gate möglich. Ohne Gate schreibt Claude keinen App-Code.
     Ghost-Card:
     - Minimal-Card (nur data-fw-app) lädt korrekt
     - Card mit data-fw-options lädt Overrides korrekt
-    - Ungültiger data-fw-app-Slug → Empty-State, kein Crash
+    - Ungültiger data-fw-app-Slug → Error-State, kein Crash
     - data-fw-data mit gültiger URL → Daten laden
     - data-fw-data mit ungültiger URL → Error-State, nutzerfreundliche Meldung
     - data-fw-data mit Domain außerhalb Whitelist → blockiert, Error-State
@@ -472,7 +484,7 @@ Ohne Spec ist kein Gate möglich. Ohne Gate schreibt Claude keinen App-Code.
 
 | | |
 |---|---|
-| **Input** | Spec Gate bestanden, APP_FACTORY_IMPLEMENTATION_RFC.md gelesen, Slice-Plan dokumentiert |
+| **Input** | Spec Gate bestanden, SECURITY-BASELINE.md gelesen, APP_FACTORY_IMPLEMENTATION_RFC.md gelesen, Slice-Plan dokumentiert |
 | **Output** | Freigabe zum ersten Workpackage |
 | **Entscheidet** | Albert — explizites OK |
 | **Blocker** | Tabu-Zone betroffen / Spec-Lücke / Sicherheitsregel verletzt / Mehr als 3 zentrale Dateien ohne Freigabe |
