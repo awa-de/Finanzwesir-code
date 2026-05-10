@@ -1,5 +1,5 @@
 # NAVIGATION.md – Finanzwesir 2.0
-Stand: 2026-05-10 | Session: Chart-Engine-Architekturprinzipien | Geändert von: Claude
+Stand: 2026-05-10 | Session: heldenreise Skill registriert | Geändert von: Claude
 
 Für Claude: **Routing-Dokument.** Wird beim Session-Start (Schritt 2) gelesen.
 Gibt Pfade und Lese-Reihenfolgen vor — KEINE Verhaltensregeln (die stehen in CLAUDE.md).
@@ -41,6 +41,7 @@ Albert kann sie auch explizit aufrufen.
 | `/pre-code-gate [light\|full]` | Gate-Checklisten ausführen (Light: 3 Fragen / Full: 9 Fragen) | Claude startet automatisch vor Code; oder manuell |
 | `/subagent-dispatch` | Entscheidungshilfe Subagenten (Tiering, Eskalationsregel) | BUG/FIX Schritt 7; oder manuell |
 | `/finde-skills` | Skill aus externen Marktplätzen suchen, sicherheitsgeprüft integrieren | Manuell wenn neuer Skill gesucht wird |
+| `/heldenreise` | Beweisdramaturgie für APP_SPEC.md: Heldenreise, Tufte, Krug, FAANG, Ethik-Gate — Pflicht bei App-Fabrik-Apps | Nur manuell (Albert) — Claude startet nie automatisch |
 
 ---
 
@@ -136,6 +137,7 @@ Relative Pfade in `Apps/` können gebrochen sein — beim ersten Start prüfen.
 - https://refero.design/mcp — MCP-Integration für Design-Referenzen
 
 Nach Abschluss: `/abschluss-ritual`.
+Beweisdramaturgie prüfen: `/heldenreise` verfügbar (nur manuell).
 
 ---
 

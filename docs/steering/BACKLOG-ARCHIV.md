@@ -1,11 +1,13 @@
 # BACKLOG-ARCHIV – Finanzwesir 2.0
-Stand: 2026-05-10 | Session: Spec-Gate APP-01 / Abgleich | Geändert von: Claude
+Stand: 2026-05-10 | Session: heldenreise + DIST-02 | Geändert von: Claude
 
 Abgeschlossene Items, neueste zuerst (append-only).
 Archivierungs-Trigger: wenn > 200 Zeilen → neue Datei `BACKLOG-ARCHIV-YYYY.md` anlegen.
 
 | ID | Bereich | Titel | Abgeschlossen | Session |
 |----|---------|-------|---------------|---------|
+| DIST-02 | System | Distill-Lauf — 20 session-log-Einträge destilliert: 3 Patterns promoted (Zahlen/Referenzen verifizieren, Pilot-Status-Sprache, Verbote explizit formulieren), 2 PREFs promoted, 2 neue observing-Einträge; session-log.md geleert *(sofort erledigt)* | 2026-05-10 | heldenreise + DIST-02 |
+| ST-07 | System | heldenreise Skill in NAVIGATION.md registriert — Skills-Tabelle + App-Abschnitt, Trigger explizit als „nur manuell (Albert)" dokumentiert; CLAUDE.md nicht berührt (kein Auto-Trigger) *(sofort erledigt)* | 2026-05-10 | heldenreise + DIST-02 |
 | APP-01-abgleich | App | APP_SPEC.md prokrastinations-preis — Abgleich gegen MINI_SPEC_FROM_HAUPTDOKUMENT.md: drittes ResultTemplate „mathematik" aus Hauptdokument-Kernbotschaft ergänzt (§6 Config-JSON); Range-Begründung prokrastinationsJahre 1–20 vs. 0–10 dokumentiert (§4); alle 6 Prüfdimensionen (Zweck, UX, Microcopy, Inputs/Outputs, Scope, AppContext/A11y) ohne Blocker; Spec-Gate-reif bestätigt. APP-01 bleibt aktiv (Implementierung nach Spec-Gate). *(sofort erledigt)* | 2026-05-10 | Spec-Gate APP-01 / Pilot-1 |
 | AF-10 | App-Fabrik | MINI_SPEC_FROM_HAUPTDOKUMENT.md für alle 21 App-Ordner erstellt — vollständiger Originalinhalt aus ETF-Apps-Hauptdokument.md extrahiert, 18 Haupt-Apps + 3 Multi-Modul-Module (rollierende-sparplaene/B2, investment-universum/C1, weltkarte-etf-indizes/C1+C3); MINI_SPEC_MAPPING.md als Gesamt-Index angelegt; APP_SPEC.md prokrastinations-preis unberührt *(sofort erledigt)* | 2026-05-10 | Mini-Specs App-Fabrik |
 | ST-06 | System | CLAUDE.md Punkt 7 um Bulk-Write-Trigger erweitert — Haiku als Default für rein mechanische Bulk-Writes (>5 gleichartige neue Dateien) mit vollständigem Briefing; chirurgischer Ein-Satz-Edit *(sofort erledigt)* | 2026-05-10 | Mini-Specs App-Fabrik |
