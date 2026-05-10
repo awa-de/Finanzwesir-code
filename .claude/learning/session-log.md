@@ -53,6 +53,13 @@ Wird geleert nach /distill. Einträge: [FRICTION] [WIN] [PREF] [QUESTION] [OK]
 - [WIN] 04_CLAUDE_WORKFLOW_DRAFT.md in einem Durchgang von V0.1 (144 Zeilen, 4 grobe Blöcke) auf V0.2 (721 Zeilen, 12 Abschnitte, 5 benannte Gates, 8 konkrete Phasen) ausgearbeitet — alle Quellen vollständig eingearbeitet, kein Nacharbeitsschritt nötig
 - [WIN] Surgical Amendment §12 (BACKLOG-AP-Formulierung) direkt im Anschluss sauber auf eine Zeile begrenzt — keine Kollateraländerungen
 
+## 2026-05-10 – SESSION START | Fokus: Spec-Gate APP-01 / Pilot-1 prokrastinations-preis
+
+## 2026-05-10 – AF-10 + ST-06 | Mini-Specs 21 App-Ordner + CLAUDE.md Bulk-Write-Trigger
+- [FRICTION] Haiku nicht proaktiv für Bulk-Write eingesetzt — Albert hat es angemerkt und explizit vorgeschlagen; Trigger fehlte in CLAUDE.md Punkt 7
+- [WIN] Haiku mit vollständigem Briefing: 22 Dateien (21 MINI_SPEC + 1 Mapping) korrekt erstellt; Stichproben-Verifikation ohne Nacharbeit
+- [WIN] Erkenntnisschleife geschlossen: FRICTION direkt in neue CLAUDE.md-Regel überführt — Bulk-Write-Trigger + Haiku-Default in einem Faden verankert
+
 ## 2026-05-10 – AF-08 | APP-INTERFACE.md auf App-Fabrik-Stand aktualisiert
 - [WIN] Zwei-Vertrags-Modell (fw-app / financial-chart-module) sauber in einer kanonischen Spec-Datei verankert — alle bestehenden Sicherheitsregeln erhalten, 5 neue Regeln ergänzt (Slug-Whitelist, URL-Validierung, CSV/JSON-Validierung), kein produktiver Code berührt
 - [PREF] Status-Formulierung: Albert bevorzugte „Arbeitsfassung für Pilot-1" über „Freigegeben für App-Fabrik-Pilot" — vorsichtigere Abstufung (Pilot-1-Freigabe ≠ vollständige Kanonisierung)

@@ -124,7 +124,7 @@ Max. 2 Präzisionsfragen, dann weiter. Schlechte Briefings nicht durchwinken.
 4. Pre-Code-Gate automatisch ausführen (→ [Gate-Prinzip])
 5. Albert: „OK" → Code
 6. Nach Code proaktiv anbieten: „Abschluss-Ritual für AP-N jetzt?"
-7. Bei Datei-Suche, Bulk-Read oder parallelen Teilaufgaben: `/subagent-dispatch` prüfen.
+7. Bei Datei-Suche, Bulk-Read, Bulk-Write (>5 gleichartige neue Dateien) oder parallelen Teilaufgaben: `/subagent-dispatch` prüfen. Für rein mechanische Bulk-Writes mit vollständigem Briefing: Haiku als Default.
 
 ---
 
