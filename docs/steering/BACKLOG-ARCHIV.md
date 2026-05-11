@@ -1,11 +1,12 @@
 # BACKLOG-ARCHIV – Finanzwesir 2.0
-Stand: 2026-05-10 | Session: APP-01-spec-gate | Geändert von: Claude
+Stand: 2026-05-11 | Session: session-start-finalisierung | Geändert von: Claude
 
 Abgeschlossene Items, neueste zuerst (append-only).
 Archivierungs-Trigger: wenn > 200 Zeilen → neue Datei `BACKLOG-ARCHIV-YYYY.md` anlegen.
 
 | ID | Bereich | Titel | Abgeschlossen | Session |
 |----|---------|-------|---------------|---------|
+| ST-15 | System | SessionStart-Hook finalisiert: HOOK-META-Block in PROJECT-STATUS.md eingeführt (maschinenlesbare SSoT); session-start.ps1 auf HOOK-META umgestellt (DEGRADED-Erkennung, UTF-8, ATTEMPT-LOG-Parser korrigiert); start.md um Hook-Status-Check + spec-scout-Benennung erweitert; NAVIGATION.md Wiedereinstieg auf Zwei-Stufen-Modell; abschluss-ritual HOOK-META-Sync-Pflicht; abschluss-scout tools auf Read/Grep/Glob/LS beschränkt. *(sofort erledigt)* | 2026-05-11 | session-start-finalisierung |
 | ST-14 | System | 4 Konsistenz-Korrekturen nach ST-13: Phase-7-Testfall Empty→Error (04_CLAUDE_WORKFLOW_DRAFT.md Zeile 384); A-06-Titel „keine globale Window-API als App-Vertrag" + Nicht-verboten-Klarstellung Bootstrapper/Runtime mit Verweis auf A-07/§6.9 (01_DECISION_LOG.md); §6.11 Details-Zeile in allgemeine Regel + A-08-Spezialfall aufgetrennt (SECURITY-BASELINE.md); Nachtrag Security-Baseline-Sync angehängt (SPEC_GATE_REPORT.md). *(sofort erledigt)* | 2026-05-10 | konsistenz-korrektur |
 | ST-13 | System | SECURITY-BASELINE.md App-Fabrik-gatefähig gemacht: von 75 auf 286 Zeilen erweitert — Quellenhierarchie (§2), App-Fabrik-Sicherheitsregeln §6.1–§6.12 (data-*-Attribute, Slug-Whitelist, SafeDOM, Bootstrapper, CSS-Isolation, CDN-Lock, Secrets), Security-Sync-Regel (§8), Decision-Log-Pflicht (§9), Gate-Prüffrage (§10), Testpflicht (§11) neu. Workflow-Sync in 04_CLAUDE_WORKFLOW_DRAFT.md (Schritt 2.3b, Phase 3 Security-Sync, Pre-Code-Gate-Input, Review-Gate §6.2), tech-spec-app/SKILL.md (Quellenhierarchie §0, 3 neue Grundregeln, Abschluss-Output), app-spec-create.md (Security-Sync-Check Phase 5, Abschluss-Output), 01_DECISION_LOG.md (SEC-01–SEC-03). *(sofort erledigt)* | 2026-05-10 | security-baseline-sync |
 | APP-01-spec-gate | App | Spec-Gate prokrastinations-preis: bestanden mit Nicht-Blockern — SPEC_GATE_REPORT.md + DECISION_LOG SG-01 angelegt; 4 RFC-§11-Grundsatzbestätigungen von Albert dokumentiert (Bootstrapper, lokale test.html, Core-Extraktion, Fallback-Tokens); SECURITY-BASELINE.md vollständig gecheckt (9 Regeln abgedeckt). APP-01 bleibt aktiv (Pre-Code-Gate Full folgt). *(sofort erledigt)* | 2026-05-10 | APP-01-spec-gate |

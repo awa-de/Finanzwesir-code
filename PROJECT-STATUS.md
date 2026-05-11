@@ -1,6 +1,14 @@
+<!-- HOOK-META
+Version: 1
+Stand: 2026-05-11
+Fokus-AP: APP-01 — prokrastinations-preis
+Nächster-Schritt: Pre-Code-Gate Full, Slice-Plan §8 aus APP_FACTORY_IMPLEMENTATION_RFC.md
+Blocker: keine
+-->
+
 # PROJECT STATUS — Finanzwesir 2.0
 
-Stand: 2026-05-10 | Session: konsistenz-korrektur | Geändert von: Claude
+Stand: 2026-05-11 | Session: session-start-finalisierung | Geändert von: Claude
 
 **Zweck:** Schneller Wiedereinstieg nach Pausen.
 **Zielgruppe:** Albert und Claude.
@@ -90,6 +98,9 @@ Vollständig im DECISION-LOG dokumentiert (`docs/steering/DECISION-LOG.md`):
 ---
 
 ## 8. Letzte Session
+
+2026-05-11 — SessionStart-Hook finalisiert, Projektsteuerung synchronisiert (ST-15, session-start-finalisierung).
+HOOK-META-Block in PROJECT-STATUS.md eingeführt; session-start.ps1 auf HOOK-META umgestellt (DEGRADED-Erkennung, UTF-8, ATTEMPT-LOG-Parser korrigiert); start.md um Hook-Status-Check und spec-scout-Benennung erweitert; NAVIGATION.md Wiedereinstieg auf Zwei-Stufen-Modell; abschluss-ritual HOOK-META-Sync-Pflicht; abschluss-scout auf Read/Grep/Glob/LS beschränkt.
 
 2026-05-10 — SECURITY-BASELINE.md App-Fabrik-gatefähig gemacht (ST-13, security-baseline-sync).
 75 → 286 Zeilen. Quellenhierarchie (§2), App-Fabrik-Regeln §6.1–§6.12, Security-Sync-Regel (§8), Gate-Prüffrage (§10) neu.

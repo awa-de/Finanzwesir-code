@@ -1,5 +1,5 @@
 # Praxis-Anleitung: Arbeiten mit der Finanzwesir-Projektsteuerung
-Stand: 2026-05-10
+Stand: 2026-05-11 | Session: session-start-finalisierung | Geändert von: Claude
 
 ---
 
@@ -32,8 +32,8 @@ Albert entscheidet an echten Entscheidungspunkten. Claude führt alles andere au
 ### Session starten
 
 Albert tippt `/start` als erstes in jeden neuen Faden.
-Claude liest dann PROJECT-STATUS.md, NAVIGATION.md, ATTEMPT-LOG.json, BACKLOG.md
-und gibt aus:
+Der `SessionStart`-Hook bereitet automatisch Fakten vor: Fokus-AP, Blocker, Log-Stand — aus `PROJECT-STATUS.md` (HOOK-META-Block) und den Zustandsdateien.
+Claude synthetisiert den Hook-Output und gibt aus:
 
 > „SESSION-START ✓ | Fokus: CSS-5 Font-Integration | Aktive APs: AP-20, AP-21 | BLOCKED: keine"
 

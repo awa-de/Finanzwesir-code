@@ -2,6 +2,7 @@
 name: abschluss-scout
 description: Mechanische Abschluss-Recherche für Finanzwesir 2.0: relevante Specs, Regression-Matrix, Navigation- und Backlog-Fundstellen sammeln. Keine Änderungen, keine Bewertung.
 model: haiku
+tools: Read, Grep, Glob, LS
 ---
 
 # Abschluss-Scout – Finanzwesir 2.0

@@ -1,5 +1,5 @@
 # NAVIGATION.md – Finanzwesir 2.0
-Stand: 2026-05-10 | Session: App-Fabrik RFC-Einräumen | Geändert von: Claude
+Stand: 2026-05-11 | Session: session-start-finalisierung | Geändert von: Claude
 
 Für Claude: **Routing-Dokument.** Wird beim Session-Start (Schritt 2) gelesen.
 Gibt Pfade und Lese-Reihenfolgen vor — KEINE Verhaltensregeln (die stehen in CLAUDE.md).
@@ -52,14 +52,31 @@ Albert kann sie auch explizit aufrufen.
 
 ### Wiedereinstieg / neue Session
 
-Session-Start läuft automatisch (→ /start):
+Session-Start läuft über zwei Stufen:
+
+**Stufe 1 — `SessionStart`-Hook** liefert maschinenlesbaren Kontext aus `PROJECT-STATUS.md` (HOOK-META) und den Zustandsdateien:
 ```
-1. PROJECT-STATUS.md
-2. NAVIGATION.md
-3. .claude/ATTEMPT-LOG.json          ← BLOCKED prüfen
-3c. .claude/learning/session-log.md + patterns.md  ← Learning-Pipeline (Lücken-Alarm, Distill-Empfehlung)
-4. docs/steering/BACKLOG.md
+Fokus-AP | Nächster-Schritt | Blocker       ← HOOK-META in PROJECT-STATUS.md
+BLOCKED-APs                                  ← .claude/ATTEMPT-LOG.json
+Log-Zählung | letzter Distill                ← .claude/learning/session-log.md
+Pattern-Kandidaten                           ← .claude/learning/patterns.md
+Subagent-Modellstatus | Wochentag
 ```
+
+**Stufe 2 — `/start` synthetisiert:**
+```
+0. session-log Eintrag schreiben (Kern-Invariante 5)
+1. BLOCKED-Check (aus Hook-Output)
+2. spec-scout-Dispatch für Backlog-/Archiv-/AP-ID-Abgleich
+3. Hauptinstanz urteilt (Lücken-Alarm, Distill-Empfehlung)
+4. Kommunikationsstil laden
+5. SESSION-START-Zeile ausgeben
+```
+
+Mechanische Zuarbeit läuft über Subagenten (`spec-scout` für NAVIGATION/BACKLOG-Arbeit).
+Subagent-Modell: `CLAUDE_CODE_SUBAGENT_MODEL=haiku` (gesetzt in `.claude/settings.local.json`).
+Urteile, Gates, Freigaben und Synthese bleiben bei der Hauptinstanz.
+Bei `Hook-Status: DEGRADED` → sichtbar melden, nicht still fortfahren (→ `/start` § Hook-Status-Check).
 
 ---
 

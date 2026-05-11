@@ -1,6 +1,11 @@
 # Session-Log — Finanzwesir 2.0
 Wird geleert nach /distill. Einträge: [FRICTION] [WIN] [PREF] [QUESTION] [OK]
 
+## 2026-05-11 – ST-15 | SessionStart-Hook finalisiert + Projektsteuerung synchronisiert
+- [WIN] ATTEMPT-LOG-Parser-Bug im alten Skript entdeckt und behoben (Root-Objekt statt .issues-Property — aktuell kein Schaden, da issues leer)
+
+## 2026-05-11 – SESSION START | Fokus: unbekannt (Hook) → APP-01 Pre-Code-Gate Full Slices 0-7b
+
 ## 2026-05-10 – SESSION START | Fokus: APP-01 Pre-Code-Gate Full → Implementierung Pilot-1 prokrastinations-preis
 
 ## 2026-05-10 – security-baseline-sync | SECURITY-BASELINE.md App-Fabrik-gatefähig gemacht + Security-Sync-Mechanismus verankert

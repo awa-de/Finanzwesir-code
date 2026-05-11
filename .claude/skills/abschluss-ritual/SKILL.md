@@ -197,6 +197,9 @@ Albert committed via VSCode Git Extension (Message-Feld). Keine Terminal-Befehle
 [Regelaufnahme-Schutz] beachten.
 
 **6. PROJECT-STATUS.md** — nach längeren Sessions oder Meilensteinen aktualisieren.
+Bei jeder Änderung an Fokus, nächstem Schritt oder Blockern HOOK-META synchronisieren:
+- `Stand`, `Fokus-AP`, `Nächster-Schritt`, `Blocker` im HOOK-META-Block aktualisieren.
+- Sichtbarer Fließtext und HOOK-META dürfen nicht widersprechen — kein Widerspruch erlaubt.
 
 ---
 
