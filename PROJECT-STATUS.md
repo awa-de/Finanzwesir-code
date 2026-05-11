@@ -8,7 +8,7 @@ Blocker: keine
 
 # PROJECT STATUS — Finanzwesir 2.0
 
-Stand: 2026-05-11 | Session: session-start-finalisierung | Geändert von: Claude
+Stand: 2026-05-11 | Session: subagent-policy-konsolidierung | Geändert von: Claude
 
 **Zweck:** Schneller Wiedereinstieg nach Pausen.
 **Zielgruppe:** Albert und Claude.
@@ -98,6 +98,9 @@ Vollständig im DECISION-LOG dokumentiert (`docs/steering/DECISION-LOG.md`):
 ---
 
 ## 8. Letzte Session
+
+2026-05-11 — Subagent-Policy als SSoT konsolidiert (ST-16, subagent-policy-konsolidierung).
+`subagent-dispatch/SKILL.md` zentralisiert; Dispatch-Quittung + Rückfall-Regel als Pflicht verankert; Anti-Drift in 8 Commands/Skills; NAVIGATION.md + PRAXIS-ANLEITUNG.md mit `SUBAGENT-POLICY-PRAXIS.md`-Referenz. CLAUDE.md unverändert.
 
 2026-05-11 — SessionStart-Hook finalisiert, Projektsteuerung synchronisiert (ST-15, session-start-finalisierung).
 HOOK-META-Block in PROJECT-STATUS.md eingeführt; session-start.ps1 auf HOOK-META umgestellt (DEGRADED-Erkennung, UTF-8, ATTEMPT-LOG-Parser korrigiert); start.md um Hook-Status-Check und spec-scout-Benennung erweitert; NAVIGATION.md Wiedereinstieg auf Zwei-Stufen-Modell; abschluss-ritual HOOK-META-Sync-Pflicht; abschluss-scout auf Read/Grep/Glob/LS beschränkt.

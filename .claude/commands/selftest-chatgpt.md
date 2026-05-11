@@ -23,6 +23,28 @@ Wenn kein Modus genannt wird, gilt:
 
 \---
 
+## Subagent-Zuarbeit
+
+Bei `full` und `redteam` Subagent-Policy anwenden:
+`.claude/skills/subagent-dispatch/SKILL.md`
+
+Typisch:
+- Regel-/Command-/Skill-Konsistenz → `spec-scout`
+- referenzierte Pfade, Hooks, Agents, Datei-Existenz → `codebase-scout`
+
+Die Hauptinstanz simuliert Szenarien, bewertet Systemgesundheit und priorisiert Risiken.
+Subagent-Aufruf und Rückfall müssen sichtbar quittiert werden (→ `.claude/skills/subagent-dispatch/SKILL.md`).
+
+## Subagent-Policy-Drift prüfen
+
+Im Rahmen des Selftests suchen in allen `.claude/`-Dateien außer `subagent-dispatch/SKILL.md`:
+- Vorkommen von `Universeller Subagent-Check`
+- vollständige Agentenmatrizen (Tabellen mit allen 4 Scout-Namen)
+- vollständige Nicht-Delegationslisten außerhalb der zentralen Policy
+- veraltete Agentennamen oder fehlende Agenten
+
+Fund → als Befund dokumentieren, nicht still bereinigen.
+
 ## Strikte Grenzen
 
 Während `/selftest-chatgpt` gilt:
@@ -551,6 +573,35 @@ Empfohlene Anpassung:
 ```
 
 \---
+
+### Subagent-Nutzung sichtbar?
+
+Prüfe an einem simulierten Full-Gate mit vielen Pflichtquellen:
+
+Erwartet:
+- Dispatch-Meldung vor Scout-Aufruf
+- Agentenname sichtbar
+- Haiku-Hinweis sichtbar
+- mechanischer Scope sichtbar
+- Scout-Ergebnis vom Urteil der Hauptinstanz getrennt
+- bei Nichtnutzung trotz Policy: `Subagent übersprungen: [Grund]`
+- kein stilles Selbstlesen aller Pflichtquellen
+
+Fehler:
+- keine Dispatch-Meldung
+- Agent unklar
+- Haiku-Hinweis fehlt
+- Scout urteilt
+- Hauptinstanz wiederholt mechanische Extraktion vollständig
+- Subagent übersprungen ohne Begründung
+
+Prüffragen:
+1. Welche Subagenten wurden in der simulierten Aufgabe gestartet?
+2. Für welchen mechanischen Scope?
+3. Welche Entscheidungen blieben bei der Hauptinstanz?
+4. Gab es einen stillen Rückfall auf Hauptinstanz-Lesen?
+
+---
 
 # Lastabwurf-Prüfung
 

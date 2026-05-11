@@ -222,6 +222,12 @@ Manuelle Aktivierung: `/spec-rewrite-guard docs/spec/[Dateiname]`
 | App-Ordner | `Apps/` |
 | App-Fabrik Steuerung | `docs/App-Fabrik/` (00_STATUS, APP_INVENTORY, 01–05_*.md, V0.3 Produktlandkarte) |
 
+## Steuerungsdokumente (Auswahl)
+
+| Dokument | Pfad | Beschreibung |
+|---|---|---|
+| Subagent-Policy Praxisnotiz | `docs/steering/SUBAGENT-POLICY-PRAXIS.md` | Warum und wie Haiku-Scouts zentral genutzt werden |
+
 ## Archiv
 
 | Was | Pfad |

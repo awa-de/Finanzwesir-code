@@ -39,6 +39,25 @@ Beispiele:
 - Keine neuen Skills oder Commands.
 - Keine Implementierung vor Spec-Gate und Pre-Code-Gate.
 
+## Subagent-Zuarbeit
+
+Dieses Command betrifft viele Pflichtquellen.
+Vor der fachlichen/technischen Bewertung Subagent-Policy anwenden:
+`.claude/skills/subagent-dispatch/SKILL.md`
+
+Standard-Agent: `spec-scout`
+
+`spec-scout` extrahiert mechanisch:
+- Mini-Spec-Kern, APP_SPEC-Bestand, APP_INVENTORY-Bezüge
+- APP-INTERFACE-Regeln, SECURITY-BASELINE-Regeln, App-Fabrik-Standards
+- Decision-Log- und Open-Questions-Einträge
+- mögliche Widersprüche und fehlende Pflichtinformationen
+
+Die Hauptinstanz bleibt verantwortlich für:
+technische APP_SPEC, tech-spec-app, heldenreise, Security-Sync-Status,
+Spec-Gate-Reife, alle Dateiänderungen.
+Subagent-Aufruf und Rückfall müssen sichtbar quittiert werden (→ `.claude/skills/subagent-dispatch/SKILL.md`).
+
 ## Pflichtpfade
 
 Für {slug} gelten:

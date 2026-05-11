@@ -230,3 +230,9 @@ Claude erledigt das. Albert fokussiert auf Inhalt und Entscheidungen.
 | Wissenslücke | → Spike-Aufgabe: „X recherchieren und entscheiden" |
 | Daueraufgabe: „Immer wenn X passiert, Y tun" | → CLAUDE.md-Regel, kein BACKLOG-Eintrag |
 | Post-Launch-Idee ohne Dringlichkeit | → Abschnitt 📋 Post-Launch |
+
+### Weiterführende Dokumente
+
+| Dokument | Inhalt |
+|---|---|
+| `docs/steering/SUBAGENT-POLICY-PRAXIS.md` | Praxisnotiz: Warum und wie Haiku-Scouts zentral genutzt werden |

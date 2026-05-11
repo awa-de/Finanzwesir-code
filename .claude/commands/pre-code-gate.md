@@ -66,4 +66,22 @@ Claude beantwortet diese 9 Fragen sichtbar, dann wartet er auf Alberts explizite
    Könnte dieselbe Funktion mit weniger als der Hälfte erreicht werden?
    Wenn ja: Was wird weggelassen — und warum ist das richtig?
 
+### Subagent-Zuarbeit bei umfangreichen Full-Gates
+
+Subagent-Policy: `.claude/skills/subagent-dispatch/SKILL.md`
+
+Dispatch prüfen wenn:
+- mehr als 5 Pflichtquellen, oder
+- mehr als 3 Dateien nur zum Lesen/Extrahieren, oder
+- App-Arbeit mit mehreren Spec-/Steering-Dateien, oder
+- Security-, Regression- oder Architekturbezug.
+
+Typisch:
+- Pflichtquellen, Spec-Regeln, Security-/App-Fabrik-Regeln → `spec-scout`
+- Regressionsflächen, Testfälle, betroffene Call-Sites → `regression-scout`
+
+Die Hauptinstanz beantwortet danach die 9 Gate-Fragen und entscheidet Blocker,
+Nicht-Blocker, kleinste sichere Änderung, Teststrategie und ggf. Slice-Plan.
+Subagent-Aufruf und Rückfall müssen sichtbar quittiert werden (→ `.claude/skills/subagent-dispatch/SKILL.md`).
+
 → Full-Gate: Claude wartet auf Alberts explizites „OK". Kein Code ohne Freigabe.

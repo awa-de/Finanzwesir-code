@@ -21,6 +21,24 @@ Trigger: Automatisch wenn /start an einem Montag ausgeführt wird, ODER manuell 
 
 ---
 
+## Subagent-Zuarbeit
+
+Für mechanische Projektinventur Subagent-Policy anwenden:
+`.claude/skills/subagent-dispatch/SKILL.md`
+
+Standard-Agent: `abschluss-scout`
+
+`abschluss-scout` liefert:
+- AP-Zählung nach Priorität, neu hinzugekommene und abgeschlossene APs
+- BLOCKED-APs, ältester offener AP
+- relevante session-log- / patterns-Signale
+- PROJECT-STATUS- / HOOK-META-Fundstellen
+
+Die Hauptinstanz formuliert Trend, Abweichung, Risiko und Empfehlung.
+Subagent-Aufruf und Rückfall müssen sichtbar quittiert werden (→ `.claude/skills/subagent-dispatch/SKILL.md`).
+
+---
+
 ## Output-Format
 
 ```

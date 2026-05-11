@@ -52,3 +52,21 @@ Claude schreibt die Änderung erst nach Alberts expliziter Freigabe.
 - Bei Abschnittsersatz immer Diff zeigen — nie einfach überschreiben
 - Alte Version vor Löschen gegen neue prüfen
 - Im Zweifel: lieber zu viel zeigen als zu wenig
+
+---
+
+## Subagent-Zuarbeit bei größeren Rewrites
+
+Bei Abschnittsersatz, Vollrewrite oder mehr als ca. 80 geänderten Zeilen
+Subagent-Policy anwenden:
+`.claude/skills/subagent-dispatch/SKILL.md`
+
+Standard-Agent: `spec-scout`
+
+`spec-scout` erstellt mechanische Alt/Neu-Fundstellenliste:
+- entfernte / hinzugefügte Abschnitte
+- mögliche verlorene Prinzipien, Constraints oder Sicherheitsregeln
+- mögliche Widerspruchskandidaten zu CLAUDE.md, NAVIGATION.md, docs/spec/
+
+Die Hauptinstanz entscheidet, ob Prinzipienverlust vorliegt, und wartet auf Alberts OK.
+Subagent-Aufruf und Rückfall müssen sichtbar quittiert werden (→ `.claude/skills/subagent-dispatch/SKILL.md`).

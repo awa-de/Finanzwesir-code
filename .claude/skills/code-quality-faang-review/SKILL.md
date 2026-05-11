@@ -59,6 +59,21 @@ APPROVED wenn: kein BLOCKER, kein MAJOR.
 
 ---
 
+## Subagent-Zuarbeit
+
+Bei Reviews über mehr als 2 Dateien oder bei Architekturverdacht
+Subagent-Policy anwenden:
+`.claude/skills/subagent-dispatch/SKILL.md`
+
+Typisch:
+- Code-Fundstellen, Parallelstrukturen, Imports, CSS-Klassen → `codebase-scout`
+- Regressionsflächen und Testfallbezüge → `regression-scout`
+
+Die Hauptinstanz bewertet Severity, Architekturwirkung und Review-Urteil.
+Subagent-Aufruf und Rückfall müssen sichtbar quittiert werden (→ `.claude/skills/subagent-dispatch/SKILL.md`).
+
+---
+
 ## Verhalten bei Anti-Pattern-Verdacht
 STOPP — nichts umbauen ohne Rückfrage.
 ⚠️ Anti-Pattern erkannt: [Name]

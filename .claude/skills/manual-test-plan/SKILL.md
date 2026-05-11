@@ -48,6 +48,22 @@ Dieser Plan gibt Albert eine konkrete Checkliste — kein Raten, kein Vergessen.
 
 ---
 
+## Subagent-Zuarbeit bei komplexen Regressionen
+
+Bei komplexen visuellen oder regressionsrelevanten Testfällen Subagent-Policy anwenden:
+`.claude/skills/subagent-dispatch/SKILL.md`
+
+Standard-Agent: `regression-scout`
+
+`regression-scout` sammelt:
+- relevante Regression-Matrix-Fälle, Working-Features-Fundstellen
+- Test-HTMLs, CSV-/Datenfälle, mögliche Viewport-/A11y-Testflächen
+
+Die Hauptinstanz erstellt den manuellen Testplan.
+Subagent-Aufruf und Rückfall müssen sichtbar quittiert werden (→ `.claude/skills/subagent-dispatch/SKILL.md`).
+
+---
+
 ## Hinweis
 
 Claude wartet nach diesem Plan auf Alberts Rückmeldung.

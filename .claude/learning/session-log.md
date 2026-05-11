@@ -1,6 +1,12 @@
 # Session-Log — Finanzwesir 2.0
 Wird geleert nach /distill. Einträge: [FRICTION] [WIN] [PREF] [QUESTION] [OK]
 
+## 2026-05-11 – SESSION START | Fokus: APP-01 — prokrastinations-preis
+FinanzwesirData.js, CSVParser.js, FwDateUtils.js — diese Session nicht berühren. ✓
+
+## 2026-05-11 – ST-16 | Subagent-Policy als SSoT konsolidiert (Anti-Drift, Dispatch-Quittung, Rückfall-Regel)
+- [OK] Keine Vorkommnisse
+
 ## 2026-05-11 – ST-15 | SessionStart-Hook finalisiert + Projektsteuerung synchronisiert
 - [WIN] ATTEMPT-LOG-Parser-Bug im alten Skript entdeckt und behoben (Root-Objekt statt .issues-Property — aktuell kein Schaden, da issues leer)
 

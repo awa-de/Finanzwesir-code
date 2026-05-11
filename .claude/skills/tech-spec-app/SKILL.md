@@ -65,6 +65,21 @@ Grenzziehung Implementation-RFC:
 - APP_FACTORY_IMPLEMENTATION_RFC.md regelt Build-System, Framework, CSS-Isolation, Teststrategie, Code-Ablage, Vertical Slicing.
 - Diese Entscheidungen gelten projektübergreifend für alle App-Fabrik-Apps — sie werden nicht app-lokal neu erfunden.
 
+## Subagent-Zuarbeit bei Pflichtquellen
+
+Bei mehr als 5 Pflichtquellen Subagent-Policy anwenden:
+`.claude/skills/subagent-dispatch/SKILL.md`
+
+Standard-Agent: `spec-scout`
+
+`spec-scout` extrahiert:
+- relevante Abschnitte aus Mini-Spec, APP_SPEC und Standards
+- fehlende Pflichtabschnitte, mögliche Widersprüche, offene Fragen / Scope-Funde
+- Security- und APP-INTERFACE-Pflichten
+
+Die Hauptinstanz erstellt oder prüft danach die APP_SPEC.
+Subagent-Aufruf und Rückfall müssen sichtbar quittiert werden (→ `.claude/skills/subagent-dispatch/SKILL.md`).
+
 ## Quellenhierarchie
 
 Bei Konflikten gilt:
