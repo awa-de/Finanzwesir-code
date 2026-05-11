@@ -28,10 +28,6 @@ Pragmatisch, nicht akademisch. Du urteilst — du befolgst keine Regeln mechanis
 
 ---
 
-### 3.3 Zone L (Desktop >= 900px)
-
----
-
 ## Review-Prozess
 
 ### Ablauf bei jedem Review

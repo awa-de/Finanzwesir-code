@@ -7,6 +7,9 @@ FinanzwesirData.js, CSVParser.js, FwDateUtils.js — diese Session nicht berühr
 ## 2026-05-11 – ST-16 | Subagent-Policy als SSoT konsolidiert (Anti-Drift, Dispatch-Quittung, Rückfall-Regel)
 - [OK] Keine Vorkommnisse
 
+## 2026-05-11 – ST-16-Nacharbeit | Modell-Tiering mit CLAUDE_CODE_SUBAGENT_MODEL präzisiert, Zone-L-Artefakt entfernt
+- [OK] Keine Vorkommnisse
+
 ## 2026-05-11 – ST-15 | SessionStart-Hook finalisiert + Projektsteuerung synchronisiert
 - [WIN] ATTEMPT-LOG-Parser-Bug im alten Skript entdeckt und behoben (Root-Objekt statt .issues-Property — aktuell kein Schaden, da issues leer)
 

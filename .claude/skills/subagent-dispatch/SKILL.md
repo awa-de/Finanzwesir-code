@@ -160,9 +160,10 @@ Keine Bewertung, keine Entscheidung, keine Änderung.
 | Sonnet | Hauptinstanz: Synthese, Gate, Codeplan, Kommunikation mit Albert |
 | Opus | Reserve: besonders schwierige Architektur-, Sicherheits- oder Tradeoff-Fragen |
 
-Wichtig:
-Subagenten nutzen Haiku nur dann verlässlich, wenn die jeweilige Agent-Datei in `.claude/agents/`
-`model: haiku` setzt. Ohne Modellfeld kann der Subagent das Modell der Hauptinstanz erben.
+In diesem Projekt: `CLAUDE_CODE_SUBAGENT_MODEL=haiku` ist in `.claude/settings.local.json` gesetzt
+und erzwingt Haiku für alle Subagenten zentral.
+Agent-Dateien in `.claude/agents/` setzen trotzdem `model: haiku` — damit die Absicht lokal sichtbar bleibt.
+Wenn beides fehlt, kann ein Subagent das Modell der Hauptinstanz erben.
 
 ---
 
