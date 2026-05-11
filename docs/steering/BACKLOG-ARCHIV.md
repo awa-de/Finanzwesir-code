@@ -1,11 +1,12 @@
 # BACKLOG-ARCHIV – Finanzwesir 2.0
-Stand: 2026-05-11 | Session: subagent-policy-konsolidierung | Geändert von: Claude
+Stand: 2026-05-11 | Session: pre-code-gate-sliceplan | Geändert von: Claude
 
 Abgeschlossene Items, neueste zuerst (append-only).
 Archivierungs-Trigger: wenn > 200 Zeilen → neue Datei `BACKLOG-ARCHIV-YYYY.md` anlegen.
 
 | ID | Bereich | Titel | Abgeschlossen | Session |
 |----|---------|-------|---------------|---------|
+| APP-01-pre-code-gate | App | Pre-Code-Gate Full prokrastinations-preis bestanden — SLICE_PLAN.md mit Slices 0–7b erstellt + 4 Korrekturen eingearbeitet (Container-Selektor, Testszenarien C–E, Kein-Container-Codeverhalten, Loading-State-Formulierung); NB-2 entschieden: internes Config-Objekt (RFC §D5); Security-Sync synchron. APP-01 bleibt aktiv bis Slice-0-Implementierung. *(sofort erledigt)* | 2026-05-11 | pre-code-gate-sliceplan |
 | ST-16 | System | Subagent-Policy als SSoT konsolidiert — `subagent-dispatch/SKILL.md` zentralisiert (Agentenmatrix 4 Agenten, Faustregel spec-scout vs. codebase-scout, Nicht-Delegationsliste 14 Punkte, Standard-Rückgabeformat, Dispatch-Quittung-Pflicht, Rückfall-Regel, Anti-Drift); Referenz-Einzeiler in 8 Commands/Skills (pre-code-gate, app-spec-create, selftest-chatgpt, tech-spec-app, kassensturz, spec-rewrite-guard, manual-test-plan, code-quality-faang-review); `### Subagent-Nutzung sichtbar?`-Prüfpunkt in selftest-chatgpt; NAVIGATION.md + PRAXIS-ANLEITUNG.md mit `SUBAGENT-POLICY-PRAXIS.md`-Referenz ergänzt. *(sofort erledigt)* | 2026-05-11 | subagent-policy-konsolidierung |
 | ST-15 | System | SessionStart-Hook finalisiert: HOOK-META-Block in PROJECT-STATUS.md eingeführt (maschinenlesbare SSoT); session-start.ps1 auf HOOK-META umgestellt (DEGRADED-Erkennung, UTF-8, ATTEMPT-LOG-Parser korrigiert); start.md um Hook-Status-Check + spec-scout-Benennung erweitert; NAVIGATION.md Wiedereinstieg auf Zwei-Stufen-Modell; abschluss-ritual HOOK-META-Sync-Pflicht; abschluss-scout tools auf Read/Grep/Glob/LS beschränkt. *(sofort erledigt)* | 2026-05-11 | session-start-finalisierung |
 | ST-14 | System | 4 Konsistenz-Korrekturen nach ST-13: Phase-7-Testfall Empty→Error (04_CLAUDE_WORKFLOW_DRAFT.md Zeile 384); A-06-Titel „keine globale Window-API als App-Vertrag" + Nicht-verboten-Klarstellung Bootstrapper/Runtime mit Verweis auf A-07/§6.9 (01_DECISION_LOG.md); §6.11 Details-Zeile in allgemeine Regel + A-08-Spezialfall aufgetrennt (SECURITY-BASELINE.md); Nachtrag Security-Baseline-Sync angehängt (SPEC_GATE_REPORT.md). *(sofort erledigt)* | 2026-05-10 | konsistenz-korrektur |

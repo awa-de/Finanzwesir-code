@@ -4,6 +4,12 @@ Wird geleert nach /distill. Einträge: [FRICTION] [WIN] [PREF] [QUESTION] [OK]
 ## 2026-05-11 – SESSION START | Fokus: APP-01 — prokrastinations-preis
 FinanzwesirData.js, CSVParser.js, FwDateUtils.js — diese Session nicht berühren. ✓
 
+## 2026-05-11 – SESSION START | Fokus: APP-01 — prokrastinations-preis
+FinanzwesirData.js, CSVParser.js, FwDateUtils.js — diese Session nicht berühren. ✓
+
+## 2026-05-11 – APP-01 | Pre-Code-Gate Full + SLICE_PLAN.md erstellt und korrigiert
+- [FRICTION] Slice-Plan-Entwurf hatte 4 Präzisierungslücken (Container-Selektor .fw-app[data-fw-app] zu eng, fehlende Testszenarien C/D/E, Kein-Container-Fall als Pflichtszenario statt Codeverhalten, Loading-State-Formulierung implizierte künstlichen Delay) → 4 Korrekturen auf Alberts Anweisung
+
 ## 2026-05-11 – ST-16 | Subagent-Policy als SSoT konsolidiert (Anti-Drift, Dispatch-Quittung, Rückfall-Regel)
 - [OK] Keine Vorkommnisse
 

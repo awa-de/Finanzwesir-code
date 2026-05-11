@@ -2,13 +2,13 @@
 Version: 1
 Stand: 2026-05-11
 Fokus-AP: APP-01 — prokrastinations-preis
-Nächster-Schritt: Pre-Code-Gate Full, Slice-Plan §8 aus APP_FACTORY_IMPLEMENTATION_RFC.md
+Nächster-Schritt: Slice 0 implementieren — app.js, app.css, app.test.html
 Blocker: keine
 -->
 
 # PROJECT STATUS — Finanzwesir 2.0
 
-Stand: 2026-05-11 | Session: subagent-policy-konsolidierung | Geändert von: Claude
+Stand: 2026-05-11 | Session: pre-code-gate-sliceplan | Geändert von: Claude
 
 **Zweck:** Schneller Wiedereinstieg nach Pausen.
 **Zielgruppe:** Albert und Claude.
@@ -21,8 +21,8 @@ Stand: 2026-05-11 | Session: subagent-policy-konsolidierung | Geändert von: Cla
 
 ## 1. Aktueller Fokus
 
-**Spec-Gate prokrastinations-preis ✅ bestanden** (APP-01-spec-gate abgeschlossen): APP_SPEC.md V0.3 gegen alle 9 Prüfbereiche geprüft — keine echten Blocker, 4 Nicht-Blocker mit definierten Klärungszeitpunkten. SPEC_GATE_REPORT.md und DECISION_LOG SG-01 angelegt. Alberts 4 RFC-§11-Grundsatzbestätigungen dokumentiert.
-Nächster Schritt: **Pre-Code-Gate Full** mit dokumentiertem Slice-Plan aus `APP_FACTORY_IMPLEMENTATION_RFC.md` §8 (Slices 0–7b).
+**Pre-Code-Gate Full prokrastinations-preis ✅ bestanden** (APP-01-pre-code-gate): SLICE_PLAN.md mit Slices 0–7b erstellt + 4 Korrekturen eingearbeitet (Container-Selektor, Testszenarien C–E, Loading-State-Formulierung, Kein-Container-Codeverhalten). NB-2 entschieden: internes Config-Objekt (RFC §D5). Security-Sync synchron.
+Nächster Schritt: **Slice 0 implementieren** — `app.js`, `app.css`, `app.test.html` (Alberts explizites OK ausstehend).
 
 ---
 
@@ -49,8 +49,7 @@ Nächster Schritt: **Pre-Code-Gate Full** mit dokumentiertem Slice-Plan aus `APP
 
 ## 3. Nächster sinnvoller Schritt
 
-- **APP_SPEC prokrastinations-preis erstellen** — per `spec-mode-architecture`, inkl. AppContext-Schema (Arch-06) und A11y-Vertrag Calculator (Arch-07)
-- **Pilot 1 bauen** — `prokrastinations-preis`, Calculator-Familie, kein externer Datenbedarf
+- **Slice 0 implementieren** — `Apps/prokrastinations-preis/app.js`, `app.css`, `app.test.html` (alle NEU) — App-Shell + Ghost-Card-Bootstrap
 - **AP-20/21** (Mixed-Rhythm CV-Heuristik) — 🟡 Aktiv, Chart-Engine, parallel möglich
 
 ---
@@ -63,7 +62,7 @@ Nächster Schritt: **Pre-Code-Gate Full** mit dokumentiertem Slice-Plan aus `APP
 | Chart-Engine | Stabil, offene APs | Siehe `docs/steering/BACKLOG.md` |
 | Theme | In Entwicklung | `THEME-ASSEMBLY-CHECKLIST.md` |
 | CSS | Stabil | Siehe `docs/steering/BACKLOG.md` (CSS-N Items) |
-| Apps | Spec-Gate prokrastinations-preis ✅ | Pre-Code-Gate Full + Slice-Plan → Implementierung Pilot-1 |
+| Apps | Pre-Code-Gate Full ✅ + SLICE_PLAN.md | Slice 0 implementieren (app.js, app.css, app.test.html) |
 | Content | Laufend | Redaktionsleitfaden aktiv |
 | Security | SECURITY-BASELINE.md App-Fabrik-gatefähig ✅ | Security-Sync-Regel + Gate-Prüffrage verankert (ST-13/ST-14) |
 
@@ -98,6 +97,9 @@ Vollständig im DECISION-LOG dokumentiert (`docs/steering/DECISION-LOG.md`):
 ---
 
 ## 8. Letzte Session
+
+2026-05-11 — Pre-Code-Gate Full bestanden, SLICE_PLAN.md erstellt (APP-01-pre-code-gate, pre-code-gate-sliceplan).
+Slices 0–7b dokumentiert; 4 Korrekturen (Container-Selektor, Szenarien C–E, Kein-Container-Codeverhalten, Loading-State-Formulierung); NB-2 entschieden: internes Config-Objekt (RFC §D5). NAVIGATION.md: SLICE_PLAN.md als Pflichtlektüre Item 11 ergänzt. Security-Sync synchron.
 
 2026-05-11 — Subagent-Policy als SSoT konsolidiert (ST-16, subagent-policy-konsolidierung).
 `subagent-dispatch/SKILL.md` zentralisiert; Dispatch-Quittung + Rückfall-Regel als Pflicht verankert; Anti-Drift in 8 Commands/Skills; NAVIGATION.md + PRAXIS-ANLEITUNG.md mit `SUBAGENT-POLICY-PRAXIS.md`-Referenz. CLAUDE.md unverändert.
@@ -221,20 +223,18 @@ Neue APs: DS-012, DS-013, DS-014.
 
 ## 9. Einstieg für nächste Session
 
-**Spec-Gate bestanden ✅. Nächster Schritt: Pre-Code-Gate Full mit Slice-Plan.**
+**Pre-Code-Gate Full bestanden ✅. Nächster Schritt: Slice 0 implementieren.**
 
-1. Pre-Code-Gate Full ausführen (→ `/pre-code-gate full`)
-2. Slice-Plan aus `docs/App-Fabrik/APP_FACTORY_IMPLEMENTATION_RFC.md` §8 (Slices 0–7b) dokumentieren
-3. Alberts explizites OK → Implementierung Slice 0 (App-Shell + Ghost-Card-Bootstrap)
+1. `Apps/prokrastinations-preis/SLICE_PLAN.md` lesen (Slice 0 Scope, Akzeptanzkriterien A0-1–A0-6)
+2. Alberts explizites OK geben
+3. Implementierung Slice 0 — `app.js`, `app.css`, `app.test.html` (alle NEU)
+4. `app.test.html` im VSCode Live Server öffnen — alle 5 Szenarien (A–E) prüfen
 
-Pflichtquellen vor Implementierung:
+Pflichtquellen (bereits gelesen, bleiben bindend):
 - `docs/spec/APP-INTERFACE.md` — Ghost-Card-Vertrag
 - `docs/steering/audits/SECURITY-BASELINE.md` — Sicherheitsregeln
-- `docs/App-Fabrik/APP_FACTORY_IMPLEMENTATION_RFC.md` — Slice-Plan, D1–D11
 - `Apps/prokrastinations-preis/APP_SPEC.md` V0.3 — bindende Spec
-- `Apps/prokrastinations-preis/SPEC_GATE_REPORT.md` — Nicht-Blocker, Bestätigungen
-
-Workflow-Leitfaden: `docs/App-Fabrik/04_CLAUDE_WORKFLOW_DRAFT.md` Phase 4+
+- `Apps/prokrastinations-preis/SLICE_PLAN.md` — Slice-Scope + Akzeptanzkriterien
 
 **Scope-Funde die noch offen sind:**
 - AUTHOR_GUIDE-v3.md: `data-app` → `data-fw-app` Update (nach Pilot-1, wenn Vertrag stabil)
