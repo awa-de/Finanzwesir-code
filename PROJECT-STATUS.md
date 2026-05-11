@@ -2,13 +2,13 @@
 Version: 1
 Stand: 2026-05-11
 Fokus-AP: APP-01 — prokrastinations-preis
-Nächster-Schritt: Slice 0 implementieren — app.js, app.css, app.test.html
+Nächster-Schritt: Slice 0 implementieren — SLICE_0_KICKOFF.md lesen (Grundlage), Freigabe erteilt 2026-05-11
 Blocker: keine
 -->
 
 # PROJECT STATUS — Finanzwesir 2.0
 
-Stand: 2026-05-11 | Session: pre-code-gate-sliceplan | Geändert von: Claude
+Stand: 2026-05-11 | Session: slice0-kickoff | Geändert von: Claude
 
 **Zweck:** Schneller Wiedereinstieg nach Pausen.
 **Zielgruppe:** Albert und Claude.
@@ -22,7 +22,7 @@ Stand: 2026-05-11 | Session: pre-code-gate-sliceplan | Geändert von: Claude
 ## 1. Aktueller Fokus
 
 **Pre-Code-Gate Full prokrastinations-preis ✅ bestanden** (APP-01-pre-code-gate): SLICE_PLAN.md mit Slices 0–7b erstellt + 4 Korrekturen eingearbeitet (Container-Selektor, Testszenarien C–E, Loading-State-Formulierung, Kein-Container-Codeverhalten). NB-2 entschieden: internes Config-Objekt (RFC §D5). Security-Sync synchron.
-Nächster Schritt: **Slice 0 implementieren** — `app.js`, `app.css`, `app.test.html` (Alberts explizites OK ausstehend).
+**SLICE_0_KICKOFF.md erstellt ✅** (Anti-Agreeableness-Gate bestanden, Alberts Freigabe erteilt 2026-05-11). Nächster Schritt: **Slice 0 implementieren** — `app.js`, `app.css`, `app.test.html`.
 
 ---
 
@@ -97,6 +97,9 @@ Vollständig im DECISION-LOG dokumentiert (`docs/steering/DECISION-LOG.md`):
 ---
 
 ## 8. Letzte Session
+
+2026-05-11 — SLICE_0_KICKOFF.md erstellt + Alberts Freigabe (APP-01-slice0-kickoff, slice0-kickoff).
+Anti-Agreeableness-Gate bestanden: 18 Annahmen, 11 Failure Cases, 8-Regret-Risiken. 3 Kickoff-Ergänzungen zu SLICE_PLAN: A0-7 (double-init Guard), A0-8 (XSS-Schutz), A0-9 (CSS-Leak-Check).
 
 2026-05-11 — Pre-Code-Gate Full bestanden, SLICE_PLAN.md erstellt (APP-01-pre-code-gate, pre-code-gate-sliceplan).
 Slices 0–7b dokumentiert; 4 Korrekturen (Container-Selektor, Szenarien C–E, Kein-Container-Codeverhalten, Loading-State-Formulierung); NB-2 entschieden: internes Config-Objekt (RFC §D5). NAVIGATION.md: SLICE_PLAN.md als Pflichtlektüre Item 11 ergänzt. Security-Sync synchron.

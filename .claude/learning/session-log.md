@@ -77,3 +77,6 @@ FinanzwesirData.js, CSVParser.js, FwDateUtils.js — diese Session nicht berühr
 
 ## 2026-05-10 – APP-01-spec-gate | Spec-Gate prokrastinations-preis + SPEC_GATE_REPORT.md + DECISION_LOG SG-01
 - [FRICTION] SECURITY-BASELINE.md zunächst nicht gelesen (Glob-Timeout bei bekanntem Pfad) → Albert korrigiert → via Read direkt nachgeholt
+
+## 2026-05-11 – APP-01 | SLICE_0_KICKOFF.md erstellt + Alberts Slice-0-Freigabe notiert
+- [WIN] Kickoff identifizierte 3 Lücken im SLICE_PLAN vor Code-Beginn: doppelter Initialisierungs-Guard (A0-7), XSS-Schutz Szenario E (A0-8), CSS-Leak-Check (A0-9) — alle in SLICE_0_KICKOFF.md dokumentiert
