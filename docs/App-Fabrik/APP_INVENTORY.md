@@ -1,7 +1,7 @@
 # App-Inventar — App-Fabrik
 
-Stand: 2026-05-09 | Arbeitsstand | Geändert von: Claude
-Quelle: Repo-Stand 2026-05-09 | ETF-Apps-Hauptdokument.md | ETF-App-Fabrik_Produktlandkarte_V0-2.md
+Stand: 2026-05-18 | Arbeitsstand | Geändert von: Claude
+Quelle: Repo-Stand 2026-05-18 | ETF-Apps-Hauptdokument.md | ETF-App-Fabrik_Produktlandkarte_V0-2.md
 
 **Alle Verweise auf Arbeitsordner zeigen auf `/Apps/[slug]/`.**
 In `docs/App-Fabrik` liegt nur diese Inventar-Tabelle, kein produktiver Code.
@@ -23,7 +23,7 @@ In `docs/App-Fabrik` liegt nur diese Inventar-Tabelle, kein produktiver Code.
 
 ---
 
-## Vollständige Inventar-Tabelle (21 App-Ordner)
+## Vollständige Inventar-Tabelle (22 App-Ordner)
 
 | App-Ordner | Master-Zuordnung | Modulrolle | Eigenständigkeit | Factory-Familie | Datenbedarf | Chartbedarf | Offene Klärung |
 |---|---|---|---|---|---|---|---|
@@ -37,6 +37,7 @@ In `docs/App-Fabrik` liegt nur diese Inventar-Tabelle, kein produktiver Code.
 | `komplexitaets-entlarver` | C2 Komplexitätsentlarver | Master-App | vollständig eigenständig | Compare / Complexity Reducer | Portfolio-/Vergleichsdaten | Mittel — Kachelgrid + Kollaps-Animation | Echte oder didaktische Performancedaten? Kollaps-Komponente |
 | `kostenkiller-ter` | D3 TER-Rechner / Kostenkiller | Master-App | vollständig eigenständig | Calculator + Cost Scenario Chart | Formeln + Beispielwerte (Config-JSON) | Mittel — drei Kurven + Vergleichstabelle | Formelstandard, monatl. vs. jährl. Verzinsung, Defaults |
 | `market-timing-simulator` | B3 Market-Timing-Simulator | Master-App | vollständig eigenständig | Challenge / Decision + Reveal Chart | Historische Kursdaten (CSV) | Hoch — interaktiver Zeitreihen-Chart | Reveal-Chart-Komponente, Erfolgskriterium, Börsenuhr-Variante ja/nein |
+| `markt-kam-zurueck` | A3 Der Markt kam zurück. Du nicht. | Master-App / Companion im A-Trio | vollständig eigenständig; dramaturgisch eng mit A1/A2 | Scenario Chart + Decision Threshold + Translator | Historische MSCI-World-Daten (CSV), optional CPI/Realwerte; Nutzereingaben Startjahr, Verlusttoleranz, optional Depotwert/Sparrate | Hoch — historische Linie, Ausstiegsmarker, weiterlaufende Marktkurve, verpasste Erholung | Datenbasis MSCI World definieren, Startjahr-Range, Verlustschwellen-Logik, A1-Ankerliste wiederverwenden |
 | `passiv-paradox` | G3 Passiv-Paradox | Master-App | 🟡 Arbeitsannahme: eigenständig, fachlich eng mit G2 | Interactive Explainer | Textzustände/Annahmen (JSON) | Niedrig bis mittel | Eigenständige App, keine Zusammenlegung (→ Fam-01 in Decision Log) |
 | `prokrastinations-preis` | B1 Prokrastinations-Preis | Master-App | vollständig eigenständig | Calculator + Live Counter | Keine externen Daten; Config-JSON | Mittel — zwei Linien + animierter Counter | Default-Rendite, real/nominal, Formelstandard |
 | `regulatorik-dashboard` | G1 Regulatorisches Risiko Dashboard | Master-App | vollständig eigenständig; Prototyp vorhanden | Dashboard + Scenario Calculator | Szenarien/Annahmen (Config-JSON) | Mittel bis hoch — KPI-Grid + Szenariomatrix | Factory-Migration, CDN entfernen, Tests, Tonalität Block G |
@@ -56,7 +57,7 @@ In `docs/App-Fabrik` liegt nur diese Inventar-Tabelle, kein produktiver Code.
 | Factory-Familie | Apps |
 |---|---|
 | Calculator | risiko-uebersetzer, prokrastinations-preis, kostenkiller-ter, rendite-kalibrierung (teil), thesaurierer-rennen, renditekiller-volatilitaet |
-| Scenario Chart | geburtsjahrlos, rollierende-sparplaene, crash-reaktions-test, market-timing-simulator, regulatorik-dashboard (teil) |
+| Scenario Chart | geburtsjahrlos, rollierende-sparplaene, crash-reaktions-test, markt-kam-zurueck, market-timing-simulator, regulatorik-dashboard (teil) |
 | Decision / Quiz | crash-reaktions-test, market-timing-simulator, etf-reifegrad-finale |
 | Explorer / Compare | diversifikations-detektor, investment-universum, weltkarte-etf-indizes, esg-spiegel, komplexitaets-entlarver, weltdepot-baukasten |
 | Parser / Explainer | etf-namensdecoder, replizierer-swapper, passiv-paradox |
@@ -66,6 +67,14 @@ In `docs/App-Fabrik` liegt nur diese Inventar-Tabelle, kein produktiver Code.
 ---
 
 ## Multi-Modul-Master-Apps
+
+### A — Risiko überleben (Durchhalte-Trio)
+
+| Ordner | Rolle | Fachliche Aussage |
+|---|---|---|
+| `/Apps/risiko-uebersetzer/` | A1 Dosis-App | Verlust muss in Euro und konkrete Dinge übersetzt werden, damit der Nutzer seine tragbare ETF-Dosis findet |
+| `/Apps/crash-reaktions-test/` | A2 Feuerprobe-App | Im Crash entscheidet Verhalten, nicht Wissen |
+| `/Apps/markt-kam-zurueck/` | A3 Ausstiegsfolgen-App | Der teuerste Verlust ist oft nicht der Crash, sondern die verpasste Erholung nach dem Ausstieg |
 
 ### B2 — Geburtsjahrlos-Simulator (Multi-Modul)
 
@@ -92,6 +101,7 @@ In `docs/App-Fabrik` liegt nur diese Inventar-Tabelle, kein produktiver Code.
 | `rollierende-sparplaene` | Stark (msci-sparplan_v2 + annotated) | Mittel — nach B2-Template |
 | `weltkarte-etf-indizes` | Stark (etf-index-map_v2, 16 Indizes, Mobile Bottom Sheet) | Mittel — nach Explorer-Template |
 | `investment-universum` | Konzept-Fragment (Prompt-Dokument, kein Code) | Niedrig — erst nach C1 |
+| `markt-kam-zurueck` | Kein Code vorhanden; Ordner bereits angelegt; Mini-Spec neu | Nach A1/A2 als Block-A-Trio spezifizieren |
 | `prokrastinations-preis` | Kein Code vorhanden | **Pilot 1 (P-01 entschieden 2026-05-09)** |
 | `risiko-uebersetzer` | Kein Code vorhanden | Pilot 2 |
 | Alle anderen | Kein Code vorhanden | Gemäß Pilot-Strategie (05_PILOT_STRATEGY.md) |

@@ -1,12 +1,12 @@
 # ETF-App-Fabrik – Produktlandkarte V0.3
 
-Stand: 2026-05-09 | Arbeitsstand | Geändert von: Claude
+Stand: 2026-05-18 | Arbeitsstand | Geändert von: Claude
 
 **Neu in V0.3 gegenüber V0.2:**
-- Sauberes Zählmodell (18 Master-Apps + 3 Zusatz-Module = 21 App-Ordner)
+- Sauberes Zählmodell (19 Master-Apps + 3 Zusatz-Module = 22 App-Ordner)
 - Multi-Modul-Master-Apps explizit dokumentiert (B2 + C1)
 - Chart-Engine als Infrastruktur separat ausgewiesen
-- Abschnitt B: vollständige Liste aller 21 realen App-Ordner mit Verweisen
+- Abschnitt B: vollständige Liste aller 22 realen App-Ordner mit Verweisen
 
 **Was V0.3 nicht wiederholt:**
 - Detaillierte App-Briefings → weiterhin in `ETF-Apps-Hauptdokument.md`
@@ -15,7 +15,7 @@ Stand: 2026-05-09 | Arbeitsstand | Geändert von: Claude
 
 ---
 
-## A — 18 Funnel-Master-Apps
+## A — 19 Funnel-Master-Apps
 
 Vollständige Briefings: `ETF-Apps-Hauptdokument.md` (Blöcke A–H)
 App-Familien, Factory-Lücken, Pilotstrategie: `ETF-App-Fabrik_Produktlandkarte_V0-2.md`
@@ -25,29 +25,30 @@ App-Familien, Factory-Lücken, Pilotstrategie: `ETF-App-Fabrik_Produktlandkarte_
 | 1 | Risiko-Übersetzer / Dacia-Test | `risiko-uebersetzer` | A1 | Calculator + Translator | Offen |
 | 2 | Geburtsjahrlos-Simulator | `geburtsjahrlos` | B2 | Scenario Chart | Offen — Multi-Modul |
 | 3 | Crash-Reaktions-Test | `crash-reaktions-test` | A2 | Decision + Scenario Chart | Offen |
-| 4 | Diversifikations-Detektor | `diversifikations-detektor` | C1 | Explorer / Compare | Offen — Multi-Modul |
-| 5 | ETF-Namensdecoder | `etf-namensdecoder` | D1 | Parser / Explainer | Offen |
-| 6 | Regulatorisches Risiko Dashboard | `regulatorik-dashboard` | G1 | Dashboard + Scenario Calculator | Prototyp vorhanden |
-| 7 | Rendite-Kalibrierung / ETF-Ära | `rendite-kalibrierung` | G2 | Scenario Calculator + Compare | Offen |
-| 8 | Market-Timing-Simulator | `market-timing-simulator` | B3 | Challenge / Decision + Reveal Chart | Offen |
-| 9 | 1 ETF vs. 5 ETFs / Komplexitätsentlarver | `komplexitaets-entlarver` | C2 | Compare / Complexity Reducer | Offen |
-| 10 | TER-Rechner / Kostenkiller | `kostenkiller-ter` | D3 | Calculator + Cost Scenario Chart | Offen |
-| 11 | Prokrastinations-Preis | `prokrastinations-preis` | B1 | Calculator + Live Counter | Pilot 1 🟢 (P-01 entschieden) |
-| 12 | ESG-Spiegel | `esg-spiegel` | E1 | Explorer / Compare | Offen |
-| 13 | Renditekiller Volatilität | `renditekiller-volatilitaet` | F1 | Calculator / Simulation | Offen |
-| 14 | Passiv-Paradox | `passiv-paradox` | G3 | Interactive Explainer | 🟡 Eigenständige App (Arbeitsannahme) |
-| 15 | Replizierer vs. Swapper | `replizierer-swapper` | D2 | Explainer / Animation | Offen |
-| 16 | Thesaurierer vs. Ausschütter | `thesaurierer-rennen` | F2 | Calculator / Comparison Race | Offen |
-| 17 | Weltdepot-Baukasten | `weltdepot-baukasten` | C3 | Configurator / Portfolio Compare | Offen |
-| 18 | ETF-Reifegrad-Test + Start-Konfigurator | `etf-reifegrad-finale` | H1 | Quiz + Configurator | Offen |
+| 4 | Der Markt kam zurück. Du nicht. | `markt-kam-zurueck` | A3 | Scenario Chart + Decision Threshold | Offen |
+| 5 | Diversifikations-Detektor | `diversifikations-detektor` | C1 | Explorer / Compare | Offen — Multi-Modul |
+| 6 | ETF-Namensdecoder | `etf-namensdecoder` | D1 | Parser / Explainer | Offen |
+| 7 | Regulatorisches Risiko Dashboard | `regulatorik-dashboard` | G1 | Dashboard + Scenario Calculator | Prototyp vorhanden |
+| 8 | Rendite-Kalibrierung / ETF-Ära | `rendite-kalibrierung` | G2 | Scenario Calculator + Compare | Offen |
+| 9 | Market-Timing-Simulator | `market-timing-simulator` | B3 | Challenge / Decision + Reveal Chart | Offen |
+| 10 | 1 ETF vs. 5 ETFs / Komplexitätsentlarver | `komplexitaets-entlarver` | C2 | Compare / Complexity Reducer | Offen |
+| 11 | TER-Rechner / Kostenkiller | `kostenkiller-ter` | D3 | Calculator + Cost Scenario Chart | Offen |
+| 12 | Prokrastinations-Preis | `prokrastinations-preis` | B1 | Calculator + Live Counter | Pilot 1 🟢 (P-01 entschieden) |
+| 13 | ESG-Spiegel | `esg-spiegel` | E1 | Explorer / Compare | Offen |
+| 14 | Renditekiller Volatilität | `renditekiller-volatilitaet` | F1 | Calculator / Simulation | Offen |
+| 15 | Passiv-Paradox | `passiv-paradox` | G3 | Interactive Explainer | 🟡 Eigenständige App (Arbeitsannahme) |
+| 16 | Replizierer vs. Swapper | `replizierer-swapper` | D2 | Explainer / Animation | Offen |
+| 17 | Thesaurierer vs. Ausschütter | `thesaurierer-rennen` | F2 | Calculator / Comparison Race | Offen |
+| 18 | Weltdepot-Baukasten | `weltdepot-baukasten` | C3 | Configurator / Portfolio Compare | Offen |
+| 19 | ETF-Reifegrad-Test + Start-Konfigurator | `etf-reifegrad-finale` | H1 | Quiz + Configurator | Offen |
 
 ---
 
-## B — 21 reale App-Ordner in /Apps
+## B — 22 reale App-Ordner in /Apps
 
 Alle realen Arbeitsordner. In `docs/App-Fabrik` nur Verweise, kein Code.
 
-**18 Master-Apps** (vollständige Inventar-Tabelle: `APP_INVENTORY.md`):
+**19 Master-Apps** (vollständige Inventar-Tabelle: `APP_INVENTORY.md`):
 
 | App-Ordner | Zugehöriger Funnel-Block | Prototyp-Stand |
 |---|---|---|
@@ -59,6 +60,7 @@ Alle realen Arbeitsordner. In `docs/App-Fabrik` nur Verweise, kein Code.
 | `/Apps/geburtsjahrlos/` | B2 | Kein Code |
 | `/Apps/komplexitaets-entlarver/` | C2 | Kein Code |
 | `/Apps/kostenkiller-ter/` | D3 | Kein Code |
+| `/Apps/markt-kam-zurueck/` | A3 | Kein Code — Mini-Spec vorhanden |
 | `/Apps/market-timing-simulator/` | B3 | Kein Code |
 | `/Apps/passiv-paradox/` | G3 | Kein Code |
 | `/Apps/prokrastinations-preis/` | B1 | Kein Code — Pilot-Kandidat |
@@ -135,3 +137,4 @@ Die Chart-Engine ist **kein App-Unterverzeichnis** und **kein Funnel-Slot**.
 | V0.2 | 2026-05-09 | Repo-Abgleich, vorhandene Prototypen dokumentiert, Factory-Lücken identifiziert, Pilotstrategie. |
 | V0.3 | 2026-05-09 | Sauberes Zählmodell (18+3=21), Multi-Modul-Master-Apps B2+C1, Chart-Engine als Infrastruktur, vollständige App-Ordner-Liste. |
 | V0.3.1 | 2026-05-09 | Entscheidungen eingetragen: P-01 (Pilot-Reihenfolge), A-08 (D3/TopoJSON lokal), Fam-01 (G3 eigenständig), Z-03/Z-04 (B2/C1 Rollen-Zuordnung). Statuszeilen aktualisiert. |
+| V0.4 | 2026-05-18 | + A3 „Der Markt kam zurück. Du nicht." (markt-kam-zurueck). Zählmodell 18+3=21 → 19+3=22. |

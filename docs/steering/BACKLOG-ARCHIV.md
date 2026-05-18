@@ -1,11 +1,12 @@
 # BACKLOG-ARCHIV – Finanzwesir 2.0
-Stand: 2026-05-11 | Session: slice0-kickoff | Geändert von: Claude
+Stand: 2026-05-18 | Session: A3-Dokumentation | Geändert von: Claude
 
 Abgeschlossene Items, neueste zuerst (append-only).
 Archivierungs-Trigger: wenn > 200 Zeilen → neue Datei `BACKLOG-ARCHIV-YYYY.md` anlegen.
 
 | ID | Bereich | Titel | Abgeschlossen | Session |
 |----|---------|-------|---------------|---------|
+| AF-12 | App-Fabrik | A3 „Der Markt kam zurück. Du nicht." zur App-Fabrik-Dokumentation hinzugefügt — Block A zur Durchhalte-Kette umgerahmt (A1 Dosis finden → A2 Feuerprobe → A3 Ausstiegsfolge); MINI_SPEC_FROM_HAUPTDOKUMENT.md angelegt; Zählmodell 18+3=21 → 19+3=22 in 00_STATUS, 03_APP_FACTORY_STANDARD_DRAFT, APP_INVENTORY, ETF-Apps-Hauptdokument, Produktlandkarte V0.2 + V0.3, NAVIGATION.md konsistent aktualisiert. *(sofort erledigt)* | 2026-05-18 | A3-Dokumentation |
 | APP-01-slice0-kickoff | App | SLICE_0_KICKOFF.md erstellt — Anti-Agreeableness-Gate: 18 Annahmen, 11 Failure Cases, 8-Regret-Risiken, Umsetzungsvorschlag, 9 Akzeptanzkriterien (inkl. 3 Kickoff-Ergänzungen zu SLICE_PLAN: A0-7 double-init Guard, A0-8 XSS-Schutz Szenario E, A0-9 CSS-Leak-Check); Alberts Freigabe für Slice-0-Implementierung notiert. APP-01 bleibt aktiv. *(sofort erledigt)* | 2026-05-11 | slice0-kickoff |
 | APP-01-pre-code-gate | App | Pre-Code-Gate Full prokrastinations-preis bestanden — SLICE_PLAN.md mit Slices 0–7b erstellt + 4 Korrekturen eingearbeitet (Container-Selektor, Testszenarien C–E, Kein-Container-Codeverhalten, Loading-State-Formulierung); NB-2 entschieden: internes Config-Objekt (RFC §D5); Security-Sync synchron. APP-01 bleibt aktiv bis Slice-0-Implementierung. *(sofort erledigt)* | 2026-05-11 | pre-code-gate-sliceplan |
 | ST-16 | System | Subagent-Policy als SSoT konsolidiert — `subagent-dispatch/SKILL.md` zentralisiert (Agentenmatrix 4 Agenten, Faustregel spec-scout vs. codebase-scout, Nicht-Delegationsliste 14 Punkte, Standard-Rückgabeformat, Dispatch-Quittung-Pflicht, Rückfall-Regel, Anti-Drift); Referenz-Einzeiler in 8 Commands/Skills (pre-code-gate, app-spec-create, selftest-chatgpt, tech-spec-app, kassensturz, spec-rewrite-guard, manual-test-plan, code-quality-faang-review); `### Subagent-Nutzung sichtbar?`-Prüfpunkt in selftest-chatgpt; NAVIGATION.md + PRAXIS-ANLEITUNG.md mit `SUBAGENT-POLICY-PRAXIS.md`-Referenz ergänzt. *(sofort erledigt)* | 2026-05-11 | subagent-policy-konsolidierung |

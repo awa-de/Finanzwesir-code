@@ -67,7 +67,7 @@ Jede Familie hat einen eigenen Shell-Code. Die App-spezifische Datei enthält nu
 
 | Begriff | Definition |
 |---|---|
-| **Funnel-Master-App** | Eine der 18 im ETF-Apps-Hauptdokument beschriebenen Apps. Hat einen eigenen Funnel-Slot (A1–H1), eine Zielgruppe und eine Kernaussage. Entspricht immer einem realen App-Ordner in `/Apps/`. |
+| **Funnel-Master-App** | Eine der 19 im ETF-Apps-Hauptdokument beschriebenen Apps. Hat einen eigenen Funnel-Slot (A1–H1), eine Zielgruppe und eine Kernaussage. Entspricht immer einem realen App-Ordner in `/Apps/`. |
 | **Realer App-Ordner** | Ein Ordner unter `/Apps/[slug]/`. Enthält Code, Prototypen, Daten und Prompts. Der reale Arbeitsort einer App. |
 | **App-Modul** | Eigenständige Funktionseinheit innerhalb einer Multi-Modul-Master-App (z.B. `geburtsjahrlos` innerhalb von B2). Kann separat eingebettet werden. |
 | **Companion-App** | Eigenständig einbettbares Modul, das fachlich zu einer Master-App gehört, aber auch ohne sie verständlich ist. Beispiel: `weltkarte-etf-indizes` als Companion zu C1. |
@@ -85,8 +85,8 @@ Jede Familie hat einen eigenen Shell-Code. Die App-spezifische Datei enthält nu
 
 | Kategorie | Anzahl | Quelle |
 |---|---|---|
-| Funnel-Master-Apps | 18 | ETF-Apps-Hauptdokument.md (Blöcke A–H) |
-| Reale App-Ordner in /Apps | 21 | Repo-Stand 2026-05-09 |
+| Funnel-Master-Apps | 19 | ETF-Apps-Hauptdokument.md (Blöcke A–H) |
+| Reale App-Ordner in /Apps | 22 | Repo-Stand 2026-05-09; +1 markt-kam-zurueck (2026-05-18) |
 | Differenz | 3 | Korrekt zugeordnete Zusatz-Module |
 | Chart-Engine | 1 | Gemeinsame Infrastruktur — kein App-Ordner, kein Funnel-Slot |
 

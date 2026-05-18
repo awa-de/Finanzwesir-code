@@ -80,3 +80,11 @@ FinanzwesirData.js, CSVParser.js, FwDateUtils.js — diese Session nicht berühr
 
 ## 2026-05-11 – APP-01 | SLICE_0_KICKOFF.md erstellt + Alberts Slice-0-Freigabe notiert
 - [WIN] Kickoff identifizierte 3 Lücken im SLICE_PLAN vor Code-Beginn: doppelter Initialisierungs-Guard (A0-7), XSS-Schutz Szenario E (A0-8), CSS-Leak-Check (A0-9) — alle in SLICE_0_KICKOFF.md dokumentiert
+
+## 2026-05-18 – SESSION START | Fokus: APP-01 — prokrastinations-preis
+FinanzwesirData.js, CSVParser.js, FwDateUtils.js — diese Session nicht berühren. ✓
+
+## 2026-05-18 – AF-12 | A3 „Der Markt kam zurück. Du nicht." zur App-Fabrik-Doku hinzugefügt
+- [FRICTION] Edit bei A3-Einfügung in ETF-Apps-Hauptdokument.md fehlgeschlagen — Whitespace-Pattern geraten (zwei Leerzeilen erwartet, eine vorhanden) → Read bei Offset 225, dann Retry erfolgreich
+- [FRICTION] Bash-Tool mit Add-Content (PowerShell-Syntax) aufgerufen → falscher Shell; PowerShell-Tool korrekt verwendet
+- [FRICTION] Kontext-Komprimierung mitten in der Session — Abschlussphase aus Zusammenfassung wiederaufgenommen

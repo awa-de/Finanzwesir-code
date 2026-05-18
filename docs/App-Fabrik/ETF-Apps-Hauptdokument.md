@@ -22,8 +22,10 @@ HOOK
 [B] TIMING ZERSTÖREN
     B1 Prokrastinations-Preis · B2 Geburtsjahrlos · B3 Market-Timing-Simulator
   ↓
-[A] CRASH-ANGST AUFLÖSEN
-    A2 Crash-Reaktions-Test
+[A] RISIKO ÜBERLEBEN
+    A1 Risiko-Übersetzer (Dosis finden)
+    A2 Crash-Reaktions-Test (Feuerprobe erleben)
+    A3 Der Markt kam zurück. Du nicht. (Ausstiegsfolge sehen)
   ↓
 [C] KOMPLEXITÄT ENTLARVEN
     C1 Diversifikations-Detektor · C2 1 ETF vs. 5 ETFs · C3 Weltdepot-Baukasten
@@ -31,8 +33,8 @@ HOOK
 [D/E] ETF-AUSWAHL & TECHNIK
     D1 Namensdecoder · D2 Replizierer/Swapper · D3 TER-Rechner · E1 ESG-Spiegel
   ↓
-[A/F] RISIKO KLÄREN
-    A1 Dacia-Test (Verlusttoleranz) · F1 Renditekiller · F2 Thesaurierer/Ausschütter
+[F] MECHANISMEN VERSTEHEN
+    F1 Renditekiller · F2 Thesaurierer/Ausschütter
   ↓
 ══════════════════════════════════════════════════
 [G] SYSTEMKRITISCHE EINWÄNDE  ← NEU IN VERSION 2
@@ -44,6 +46,8 @@ HOOK
 [H] PLAN GEBEN & CTA
     H1 ETF-Reifegrad-Test + Start-Konfigurator
 ```
+
+> A1, A2 und A3 werden künftig als zusammenhängender Block „Risiko überleben" geführt. A1 bleibt inhaltlich „Risiko klären", rückt aber dramaturgisch vor A2/A3, weil die Dosis vor der Feuerprobe festgelegt werden muss. F1 und F2 bilden nun einen eigenständigen Block F „Mechanismen verstehen".
 
 ### Warum Block G am Ende steht
 
@@ -60,27 +64,42 @@ Block G muss **anders klingen** als der Rest: nicht motivierend, nicht vereinfac
 | 1 | Risiko-Übersetzer (Dacia-Test) | A1 | ★★★★ | 🔥🔥 Sehr hoch | Gering | 🟨 offen |
 | 2 | Geburtsjahrlos-Simulator | B2 | ★★★★ | 🔥🔥 Sehr hoch | Mittel | 🟨 offen |
 | 3 | Crash-Reaktions-Test | A2 | ★★★ | 🔥🔥 Sehr hoch | Mittel | 🟨 offen |
-| 4 | Diversifikations-Detektor | C1 | ★★★ | 🔥 Hoch | Mittel | 🟨 offen |
-| 5 | ETF-Namensdecoder | D1 | ★★★ | 🔥 Hoch | Gering | 🟨 offen |
-| 6 | Regulatorisches Risiko Dashboard | G1 | ★★ | 🔥 Hoch | — | ✅ gebaut |
-| 7 | Rendite-Kalibrierung (ETF-Ära) | G2 | ★★ | 🔥 Hoch | Mittel | 🟨 offen |
-| 8 | Market-Timing-Simulator | B3 | ★★ | 🔥 Hoch | Mittel | 🟨 offen |
-| 9 | 1 ETF vs. 5 ETFs | C2 | ★★ | Mittel | Gering | 🟨 offen |
-| 10 | TER-Rechner (Kostenkiller) | D3 | ★★ | Mittel | Mittel | 🟨 offen |
-| 11 | Prokrastinations-Preis | B1 | ★★ | 🔥 Hoch | Gering | 🟨 offen |
-| 12 | ESG-Spiegel | E1 | ★★ | Mittel | Mittel | 🟨 offen |
-| 13 | Renditekiller (Volatilität) | F1 | ★ | Mittel | Gering | 🟨 offen |
-| 14 | Passiv-Paradox | G3 | ★ | Mittel | Gering | 🟨 offen |
-| 15 | Replizierer vs. Swapper | D2 | ★★ | Mittel | Hoch | 🟨 offen |
-| 16 | Thesaurierer vs. Ausschütter | F2 | ★ | Gering | Gering | 🟨 offen |
-| 17 | Weltdepot-Baukasten | C3 | ★ | Mittel | Mittel | 🟨 offen |
-| 18 | ETF-Reifegrad-Test + Konfigurator | H1 | ★ | 🔥 Hoch | Hoch | 🟨 offen |
+| 4 | Der Markt kam zurück. Du nicht. | A3 | ★★★ | 🔥🔥 Sehr hoch | Mittel | 🟨 offen |
+| 5 | Diversifikations-Detektor | C1 | ★★★ | 🔥 Hoch | Mittel | 🟨 offen |
+| 6 | ETF-Namensdecoder | D1 | ★★★ | 🔥 Hoch | Gering | 🟨 offen |
+| 7 | Regulatorisches Risiko Dashboard | G1 | ★★ | 🔥 Hoch | — | ✅ gebaut |
+| 8 | Rendite-Kalibrierung (ETF-Ära) | G2 | ★★ | 🔥 Hoch | Mittel | 🟨 offen |
+| 9 | Market-Timing-Simulator | B3 | ★★ | 🔥 Hoch | Mittel | 🟨 offen |
+| 10 | 1 ETF vs. 5 ETFs | C2 | ★★ | Mittel | Gering | 🟨 offen |
+| 11 | TER-Rechner (Kostenkiller) | D3 | ★★ | Mittel | Mittel | 🟨 offen |
+| 12 | Prokrastinations-Preis | B1 | ★★ | 🔥 Hoch | Gering | 🟨 offen |
+| 13 | ESG-Spiegel | E1 | ★★ | Mittel | Mittel | 🟨 offen |
+| 14 | Renditekiller (Volatilität) | F1 | ★ | Mittel | Gering | 🟨 offen |
+| 15 | Passiv-Paradox | G3 | ★ | Mittel | Gering | 🟨 offen |
+| 16 | Replizierer vs. Swapper | D2 | ★★ | Mittel | Hoch | 🟨 offen |
+| 17 | Thesaurierer vs. Ausschütter | F2 | ★ | Gering | Gering | 🟨 offen |
+| 18 | Weltdepot-Baukasten | C3 | ★ | Mittel | Mittel | 🟨 offen |
+| 19 | ETF-Reifegrad-Test + Konfigurator | H1 | ★ | 🔥 Hoch | Hoch | 🟨 offen |
 
 > **Weltkarte der 16 Indizes:** Bereits in Arbeit. Ergänzt App C1 (Diversifikations-Detektor).
 > **Status-Codes:** ✅ fertig · 🟨 in Planung · 🟦 in Entwicklung · ❌ verworfen
 
 ---
-# Block A: Psychologie & Verhalten
+# Block A: Psychologie, Risikodosis und Durchhalten
+
+Block A ist künftig kein loser Block aus „Crash-Angst"-Apps, sondern eine Durchhalte-Kette:
+
+> **A1 Dosis finden → A2 Feuerprobe erleben → A3 Ausstiegsfolge sehen**
+
+Die gemeinsame Botschaft lautet:
+
+> **Du musst nicht den Durchschnitt aushalten. Du musst deinen schlimmsten Abschnitt aushalten.**
+
+A1 verhindert Überdosierung.  
+A2 zeigt die Entscheidung unter Stress.  
+A3 zeigt den Preis des dauerhaften Ausstiegs.
+
+Damit wird Risiko nicht als Volatilität erklärt, sondern als Verhaltensproblem gezeigt: Langfristige Rendite gehört nur denen, die am schlimmsten Punkt noch dabei sind.
 
 ---
 
@@ -99,6 +118,20 @@ Block G muss **anders klingen** als der Rest: nicht motivierend, nicht vereinfac
 ### Kernbotschaft
 
 > „Kannst du ruhig schlafen, wenn deine Küche plötzlich weg ist? Wenn nicht – reduziere deinen ETF-Anteil."
+
+### Rolle im A-Trio
+
+A1 ist die **Dosis-App**.
+
+Sie beantwortet nicht allgemein „Was ist Risiko?", sondern konkret:
+
+> „Wie viel ETF-Anteil kann ich so tragen, dass mich ein echter Crash nicht aus dem Markt wirft?"
+
+A1 bleibt eigenständig. Die Dacia-/Küchen-/Urlaubs-Anker sind kein Gimmick, sondern der psychologische Kern: Prozentwerte bleiben abstrakt, Eurobeträge werden ernster, konkrete Dinge und Erlebnisse werden körperlich.
+
+A1 liefert damit die Vorbereitung für A2 und A3:
+- A2 testet, was im Crash mit dieser Dosis passiert.
+- A3 zeigt, was der Ausstieg kostet, wenn die Dosis zu hoch war.
 
 ### Interaktion (UX-Flow)
 
@@ -162,6 +195,16 @@ Die größte Hürde beim Investieren ist nicht fehlendes Wissen, sondern die unb
 
 > „Dein Verhalten ist wichtiger als dein ETF."
 
+### Rolle im A-Trio
+
+A2 ist die **Feuerprobe-App**.
+
+Sie beantwortet:
+
+> „Was tue ich, wenn es wirklich kracht?"
+
+A2 bleibt eigenständig, weil sie den Stressmoment simuliert. A1 kalibriert die Dosis vor dem Crash, A2 zwingt zur Entscheidung im Crash, A3 zeigt danach die langfristigen Kosten des Verkaufs.
+
 ### Interaktion (UX-Flow)
 
 **Screen 1 – Einstieg (Animation):**
@@ -199,6 +242,72 @@ Die größte Hürde beim Investieren ist nicht fehlendes Wissen, sondern die unb
 - Historische Daten: MSCI World 2020 Crash + Recovery (öffentlich verfügbar)
 - Animierter Zähler für den Depot-Wertverlust (emotionaler als statische Zahl)
 - Chart.js für Liniendiagramm
+
+---
+
+## A3 – Der Markt kam zurück. Du nicht.
+
+**Slug:** `markt-kam-zurueck`
+**KI-Konsens:** ★★★ (neue Ergänzung; noch kein Alt-Konsens aus der ersten App-Liste)
+**Folienbezug:** Psychologie, Crash-Angst, Positionsgrößenmanagement, Durchhalten
+**Funnel-Position:** Risiko überleben / Ausstiegsfolgen
+**Priorität:** #4
+
+### Problem, das gelöst wird
+
+Viele Anleger glauben: *„Wenn es schlimm wird, verkaufe ich halt. Später kann ich ja wieder einsteigen."* Diese App zeigt, warum dieser Satz gefährlich ist. Wer im Verlust verkauft, kommt psychologisch oft nicht zurück. Der Crash ist dann nicht das eigentliche Problem — das eigentliche Problem ist die verpasste Erholung danach.
+
+### Kernbotschaft
+
+> „Der Markt kam zurück. Du nicht."
+
+Strategischer Rahmen:
+
+> „Langfristige Rendite gehört nur denen, die am schlimmsten Punkt noch dabei sind."
+
+### Rolle im A-Trio
+
+A3 ist die **Ausstiegsfolgen-App**.
+
+Sie beantwortet:
+
+> „Was kostet es, wenn ich einmal mit Verlust aussteige und nie wieder zurückkomme?"
+
+A1 kalibriert die tragbare Dosis. A2 zwingt zur Entscheidung im Crash. A3 zeigt die langfristigen Kosten des Verkaufs — und zerstört damit die Illusion des „einfachen Wiedereinstiegs".
+
+### Interaktion (UX-Flow)
+
+**Eingaben:**
+- Startjahr (Schieberegler oder Jahresauswahl)
+- Verlusttoleranz in Prozent (z. B. –10 % bis –60 %)
+- Optional: Depotwert oder monatliche Sparrate
+
+**Screen 1 – Einstieg:** Headline „Der Markt kam zurück. Du nicht." + Eingaben + CTA „Reise starten"
+
+**Screen 2 – Historische Reise:** MSCI-World-Kurve ab Startjahr. Berechnung des maximalen zwischenzeitlichen Verlusts. Ausstiegsmarker wenn Verlusttoleranz gerissen.
+
+**Screen 3 – Ergebnis:**
+- Fall A (ausgestiegen): Ausstiegsdatum, Ausstiegswert, heutiger Marktwert, verpasste Erholung in Euro und Alltagsankern aus A1.
+  Punchline: „Der Verlust war schmerzhaft. Der Ausstieg war teurer."
+- Fall B (dringeblieben): „Du wärst dringeblieben. Aber nicht jedes Startjahr war so gnädig." → CTA Härtetest
+
+**Screen 4 – Härtetest (optional):** Erst nach dem persönlichen Ergebnis. Zeigt das härteste Startjahr für die eigene Verlusttoleranz. Kein direkter Einstieg mit Crashjahr.
+
+### Microcopy
+
+- Headline: „Der Markt kam zurück. Du nicht."
+- Subline: „Teste, ob du deinen eigenen Anlageweg durchgehalten hättest."
+- Startjahr-Label: „Wann wärst du gestartet?"
+- Verlusttoleranz-Label: „Bei welchem Verlust wärst du raus?"
+- CTA: „Reise starten" / „Zeig mir den Härtetest"
+
+### Implementierungshinweise
+
+- Historische MSCI-World-Zeitreihe (lokal/statisch, kein Backend, Monatsdaten reichen)
+- Keine Drawdown-Kurve, keine Fachbegriffe im UI (kein Drawdown, Tail Risk, Volatilität)
+- Nutzer wählt zuerst sein eigenes Startjahr — keine Manipulation durch direkten Crashjahr-Einstieg
+- A1-Ankerliste kann für Ergebnisübersetzung (verpasste Erholung → Dacia, Küche etc.) wiederverwendet werden
+- **Offene Klärung:** MSCI World Preisindex oder Net Total Return, Startjahr-Range, nominal/real, Sparplan vs. Einmalanlage
 
 ---
 
@@ -874,4 +983,5 @@ Jede App muss:
 |---|---|---|
 | 1.0 | 28.04.2026 | Initiales Hauptdokument aus 4 KI-Quellen (15 Apps, Blöcke A–H) |
 | 2.0 | 28.04.2026 | + Block G (Systemkritische Einwände) mit G1 (✅ bereits gebaut), G2 (Rendite-Kalibrierung), G3 (Passiv-Paradox). Funnel-Architektur aktualisiert. Entwicklungs-Reihenfolge hinzugefügt. Master-Prioritätsliste auf 18 Apps erweitert. |
+| 3.0 | 2026-05-18 | + A3 „Der Markt kam zurück. Du nicht." als Ausstiegsfolgen-App. Block A zur Durchhalte-Kette umgerahmt (A1 Dosis finden → A2 Feuerprobe → A3 Ausstiegsfolge). Funnel-Struktur aktualisiert ([A/F] aufgelöst, [F] MECHANISMEN eigenständig). Master-Prioritätsliste auf 19 Apps erweitert. |
 
