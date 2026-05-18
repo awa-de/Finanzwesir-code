@@ -1,16 +1,16 @@
-# ETF-App-Fabrik – Produktlandkarte V0.3
+# ETF-App-Fabrik – App-Register
 
-Stand: 2026-05-18 | Arbeitsstand | Geändert von: Claude
+Stand: 2026-05-18 | Umbenannt von Produktlandkarte V0.3 | Geändert von: Claude
 
-**Neu in V0.3 gegenüber V0.2:**
-- Sauberes Zählmodell (19 Master-Apps + 3 Zusatz-Module = 22 App-Ordner)
-- Multi-Modul-Master-Apps explizit dokumentiert (B2 + C1)
-- Chart-Engine als Infrastruktur separat ausgewiesen
-- Abschnitt B: vollständige Liste aller 22 realen App-Ordner mit Verweisen
+**Dieses Dokument enthält:**
+- Schlanke Master-App-Liste (19 Apps: #, Slug, Block, Factory-Familie, Status)
+- Vollständige Liste aller 22 realen App-Ordner in /Apps
+- Chart-Engine als gemeinsame Infrastruktur
+- Multi-Modul-Master-Apps (B2, C1)
 
-**Was V0.3 nicht wiederholt:**
-- Detaillierte App-Briefings → weiterhin in `ETF-Apps-Hauptdokument.md`
-- App-Familien-Details, Factory-Lücken, Pilotstrategie → weiterhin in V0.2
+**Was dieses Dokument nicht wiederholt:**
+- Detaillierte App-Briefings → `ETF-Apps-Hauptdokument.md`
+- App-Familien-Details, Factory-Lücken, Pilotstrategie → `ETF-App-Fabrik_Factory-Analyse.md`
 - Vollständige Inventar-Tabelle → `APP_INVENTORY.md`
 
 ---
@@ -18,7 +18,7 @@ Stand: 2026-05-18 | Arbeitsstand | Geändert von: Claude
 ## A — 19 Funnel-Master-Apps
 
 Vollständige Briefings: `ETF-Apps-Hauptdokument.md` (Blöcke A–H)
-App-Familien, Factory-Lücken, Pilotstrategie: `ETF-App-Fabrik_Produktlandkarte_V0-2.md`
+App-Familien, Factory-Lücken, Pilotstrategie: `ETF-App-Fabrik_Factory-Analyse.md`
 
 | # | App | Slug | Block | Factory-Familie | Status |
 |---:|---|---|---|---|---|

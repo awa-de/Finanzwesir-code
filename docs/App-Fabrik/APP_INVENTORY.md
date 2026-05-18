@@ -1,7 +1,7 @@
 # App-Inventar — App-Fabrik
 
 Stand: 2026-05-18 | Arbeitsstand | Geändert von: Claude
-Quelle: Repo-Stand 2026-05-18 | ETF-Apps-Hauptdokument.md | ETF-App-Fabrik_Produktlandkarte_V0-2.md
+Quelle: Repo-Stand 2026-05-18 | ETF-Apps-Hauptdokument.md | ETF-App-Fabrik_Factory-Analyse.md
 
 **Alle Verweise auf Arbeitsordner zeigen auf `/Apps/[slug]/`.**
 In `docs/App-Fabrik` liegt nur diese Inventar-Tabelle, kein produktiver Code.

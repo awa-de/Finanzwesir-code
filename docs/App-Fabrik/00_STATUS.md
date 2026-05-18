@@ -57,9 +57,8 @@ Hinreichend gesichert — gelten als Basis für weitere Entscheidungen:
 | Was | Wo | Zustand |
 |---|---|---|
 | Funnel-Architektur + 18 App-Briefings | `ETF-Apps-Hauptdokument.md` | Primärquelle, inhaltlich stark |
-| Produktlandkarte V0.1 | `ETF-App-Fabrik_Produktlandkarte_V0-1.md` | Historisch, von V0.2 überholt |
-| Produktlandkarte V0.2 | `ETF-App-Fabrik_Produktlandkarte_V0-2.md` | App-Familien + Factory-Lücken |
-| Produktlandkarte V0.3 | `ETF-App-Fabrik_Produktlandkarte_V0-3.md` | Neu: Zählmodell + Multi-Modul-Master-Apps |
+| Factory-Analyse | `ETF-App-Fabrik_Factory-Analyse.md` | App-Familien-Zielmodell, Repo-Abgleich, Factory-Lücken |
+| App-Register | `ETF-App-Fabrik_App-Register.md` | Schlanker Index: 19 Master-Apps + 22 reale Ordner |
 | App-Fabrik-Konsolidierung | `App-Fabrik_Konsolidierung_Naechste-Schritte_V0-1.md` | Strategisches Leitdokument |
 | Zusatzpaket-Bewertung | `App-Fabrik_Zusatzpaket-Integration_V0-1.md` | Demo vs. Produktion klar getrennt |
 | Demo-Template (Perplexity) | `_input/perplexity/` | Input-Material, nicht bindend |
@@ -74,7 +73,7 @@ Hinreichend gesichert — gelten als Basis für weitere Entscheidungen:
 
 ## Was fehlt (kritische Factory-Lücken)
 
-Detaillierte Lücken-Analyse: `ETF-App-Fabrik_Produktlandkarte_V0-2.md` §7
+Detaillierte Lücken-Analyse: `ETF-App-Fabrik_Factory-Analyse.md` §7
 
 | Kategorie | Kritischste Lücke |
 |---|---|

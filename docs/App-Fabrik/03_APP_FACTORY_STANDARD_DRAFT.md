@@ -12,7 +12,7 @@ Quellen für diesen Draft:
 - `02_OPEN_QUESTIONS.md` — offene Fragen
 - `APP_INVENTORY.md` — alle 21 App-Ordner mit Zuordnung
 - `05_PILOT_STRATEGY.md` — Pilot-Reihenfolge
-- `ETF-App-Fabrik_Produktlandkarte_V0-3.md` — Zählmodell
+- `ETF-App-Fabrik_App-Register.md` — Zählmodell
 - `App-Fabrik_Zusatzpaket-Integration_V0-1.md` — Demo-Template-Bewertung
 - `_input/perplexity/APP-ARCHITEKTUR.md` — Architekturvorschlag (Input, nicht bindend)
 - `docs/editorial/AUTHOR_GUIDE-v3.md` — redaktioneller Workflow

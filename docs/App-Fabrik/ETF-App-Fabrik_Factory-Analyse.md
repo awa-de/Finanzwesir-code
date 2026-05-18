@@ -1,8 +1,8 @@
-# ETF-App-Fabrik – Produktlandkarte V0.2
+# ETF-App-Fabrik – Factory-Analyse
 
-**Stand:** 2026-05-09  
+**Stand:** 2026-05-09 | Umbenannt: 2026-05-18  
 **Quelle:** lokaler Repo-Abgleich mit `Finanzwesir-code-master.zip`, insbesondere `Apps/ETF-Apps-Hauptdokument-v2.md`, vorhandene App-Prototypen unter `Apps/`, Theme/Chart-Engine unter `Theme/`, Design-System unter `docs/design-system/`, Steuerungsdokumente unter `.claude/` und `docs/steering/`.  
-**Zweck:** Arbeitsdokument für die App-Fabrik. V0.2 ergänzt V0.1 um App-Familien, vorhandene Prototypen und konkrete Factory-Lücken.
+**Zweck:** Repo-Abgleich, App-Familien-Zielmodell (7 Familien), Factory-Lücken-Analyse, Mini-Briefings. Ergänzung zu `ETF-App-Fabrik_App-Register.md` (schlanker Index) und `APP_INVENTORY.md` (vollständige Inventar-Tabelle).
 
 ---
 
