@@ -222,6 +222,8 @@ Manuelle Aktivierung: `/spec-rewrite-guard docs/spec/[Dateiname]`
 | Rechtliches | `content/legal/` |
 | App-Ordner | `Apps/` |
 | App-Fabrik Steuerung | `docs/App-Fabrik/` (00_STATUS, APP_INVENTORY, 01–05_*.md, App-Register, Factory-Analyse) |
+| App-Intake-Prompts | `docs/App-Fabrik/_prompts/` — Prompt-Vorlagen für Intake-Interview (Claude, ChatGPT, Master) |
+| Markenpositionierung | `docs/Marke/` — Elevator Pitch, Manifest, KI-Analyse-Runden (Erste/Zweite Runde) |
 
 ## Steuerungsdokumente (Auswahl)
 

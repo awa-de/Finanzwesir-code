@@ -1,6 +1,6 @@
 <!-- HOOK-META
 Version: 1
-Stand: 2026-05-11
+Stand: 2026-05-18
 Fokus-AP: APP-01 — prokrastinations-preis
 Nächster-Schritt: Slice 0 implementieren — SLICE_0_KICKOFF.md lesen (Grundlage), Freigabe erteilt 2026-05-11
 Blocker: keine
@@ -8,7 +8,7 @@ Blocker: keine
 
 # PROJECT STATUS — Finanzwesir 2.0
 
-Stand: 2026-05-11 | Session: slice0-kickoff | Geändert von: Claude
+Stand: 2026-05-18 | Session: distill-3 | Geändert von: Claude
 
 **Zweck:** Schneller Wiedereinstieg nach Pausen.
 **Zielgruppe:** Albert und Claude.
@@ -97,6 +97,9 @@ Vollständig im DECISION-LOG dokumentiert (`docs/steering/DECISION-LOG.md`):
 ---
 
 ## 8. Letzte Session
+
+2026-05-18 — Kassensturz KW 21 + Distill 3 (distill-3).
+7 FRICTION-Einträge destilliert. 4 neue Observing-Einträge (Whitespace vor Edit, falsches Shell-Tool, Kontext-Komprimierung, Slice-Plan-Lücken). Reoccurrence feedback_glob_vs_read vermerkt. NAVIGATION.md: docs/Marke/ + docs/App-Fabrik/_prompts/ eingetragen. BACKLOG-ARCHIV DIST-03 ergänzt. Commit-Messages für _prompts/, Marke/, App-Fabrik-Querverweise erzeugt.
 
 2026-05-11 — SLICE_0_KICKOFF.md erstellt + Alberts Freigabe (APP-01-slice0-kickoff, slice0-kickoff).
 Anti-Agreeableness-Gate bestanden: 18 Annahmen, 11 Failure Cases, 8-Regret-Risiken. 3 Kickoff-Ergänzungen zu SLICE_PLAN: A0-7 (double-init Guard), A0-8 (XSS-Schutz), A0-9 (CSS-Leak-Check).
