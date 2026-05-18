@@ -73,6 +73,8 @@ Alle realen Arbeitsordner. In `docs/App-Fabrik` nur Verweise, kein Code.
 | `/Apps/risiko-uebersetzer/` | A1 | Kein Code |
 | `/Apps/thesaurierer-rennen/` | F2 | Kein Code |
 | `/Apps/weltdepot-baukasten/` | C3 | Kein Code |
+| `/Apps/der-alte-euro/` | B4 | Kein Code — Mini-Spec vorhanden |
+| `/Apps/depot-kipppunkt/` | B5 | Kein Code — Mini-Spec vorhanden |
 
 **3 Zusatz-Module** (kein eigener Funnel-Slot):
 
@@ -81,8 +83,6 @@ Alle realen Arbeitsordner. In `docs/App-Fabrik` nur Verweise, kein Code.
 | `/Apps/investment-universum/` | C1 Diversifikations-Detektor | Gegenperspektive / Grundmodell | Konzept-Fragment (Prompt-Dokument, kein Code) |
 | `/Apps/rollierende-sparplaene/` | B2 Geburtsjahrlos-Simulator | Erweiterungsmodul / Analysemodus | Starker Prototyp (msci-sparplan_v2.html + annotated) |
 | `/Apps/weltkarte-etf-indizes/` | C1 Diversifikations-Familie | Visuelles Lernmodul / Companion-App | Starker Prototyp (etf-index-map_v2.html, 16 Indizes, Mobile Bottom Sheet) |
-| `/Apps/der-alte-euro/` | B4 Der alte Euro | Master-App | Kein Code — Mini-Spec vorhanden |
-| `/Apps/depot-kipppunkt/` | B5 Depot-Kipppunkt | Master-App | Kein Code — Mini-Spec vorhanden |
 
 ---
 
@@ -106,11 +106,11 @@ Die Chart-Engine ist **kein App-Unterverzeichnis** und **kein Funnel-Slot**.
 ### D.1 — B2: Geburtsjahrlos-Simulator (Multi-Modul)
 
 **Master-App:** `/Apps/geburtsjahrlos/`  
-**Fachliche Aussage:** Du kontrollierst weder die Börse noch dein Geburtsjahr — aber du kontrollierst, wann du anfängst.
+**Fachliche Aussage:** Du kontrollierst nicht deine Börsenepoche. Du kontrollierst nur, ob deine Strategie robust genug ist.
 
 **Erweiterungsmodul:** `/Apps/rollierende-sparplaene/`  
-**Modulrolle:** Analysemodus — zeigt quantitativ, wie stark die Rendite vom Startjahr abhängt  
-**Fachliche Aussage:** Starte denselben Sparplan mit X Euro und Laufzeit Y im Jahr Z, dann denselben in Z+1, Z+2 usw. — die Streuung der Ergebnisse macht die Startjahrabhängigkeit sichtbar.
+**Modulrolle:** Companion-/Detailmodul — rollierende 30-Jahres-Sparplanzeiträume mit inflationsbereinigten Realwerten  
+**Fachliche Aussage:** Dieselbe Strategie, unterschiedliche Börsenepoche — zeigt schlechtesten, Median- und besten 30-Jahres-Zeitraum aus realen MSCI-World-Daten.
 
 **Verbindung:** Beide Apps teilen dieselbe historische Datenbasis (MSCI NTR + CPI). Technisch können sie getrennt bleiben und sich per Verlinkung ergänzen. 🟡 Arbeitsannahme: separate Ordner, fachlich als zwei Perspektiven behandelt (→ Z-03 in 01_DECISION_LOG.md). Weiterhin offen: gemeinsame UI mit Modi — Klärung nach Pilot.
 

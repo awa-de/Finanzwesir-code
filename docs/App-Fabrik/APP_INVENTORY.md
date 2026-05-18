@@ -84,8 +84,8 @@ In `docs/App-Fabrik` liegt nur diese Inventar-Tabelle, kein produktiver Code.
 
 | Ordner | Rolle | Fachliche Aussage |
 |---|---|---|
-| `/Apps/geburtsjahrlos/` | Master-App | Timing-Illusion zerstören — historischer Fächer zeigt Renditeabhängigkeit vom Startjahr |
-| `/Apps/rollierende-sparplaene/` | Erweiterungsmodul / Analysemodus | Dieselben Sparpläne aus verschiedenen Startjahren — macht Startjahrabhängigkeit quantifizierbar |
+| `/Apps/geburtsjahrlos/` | Master-App | Epochen-/Kohortenstreuung zeigen — dieselbe 30-Jahres-Strategie, gleiche Sparrate, gleiche Laufzeit, unterschiedliche reale Endwerte je nach Börsenepoche |
+| `/Apps/rollierende-sparplaene/` | Companion-/Detailmodul | Rollierende 30-Jahres-Sparplanzeiträume mit inflationsbereinigten Realwerten — zeigt schlechtesten, Median- und besten Zeitraum |
 
 ### C1 — Diversifikations-Detektor + Familie (Multi-Modul)
 

@@ -147,6 +147,11 @@ Nach Abschluss: `/abschluss-ritual`.
 9. docs/App-Fabrik/APP_FOLDER_STRUCTURE.md        ← Kanonische Dateiliste pro App-Ordner (Phase 0/1/2)
 10. Apps/[App-Name]/                              ← App-spezifischer Code + Prototypen
 11. Apps/[App-Name]/SLICE_PLAN.md (wenn vorhanden) ← Slice-Struktur + freigegebener Umfang (vor Implementierung lesen)
+
+> [!warning] Ausnahme B1 / prokrastinations-preis
+> `Apps/prokrastinations-preis/APP_SPEC.md`, `SLICE_0_KICKOFF.md` und `SLICE_PLAN.md` sind VERALTET und dürfen nicht als Implementierungsgrundlage verwendet werden.
+> Bis zum B1 Slice-0-Reboot ist die operative fachliche Quelle nur:
+> `Apps/prokrastinations-preis/MINI_SPEC_FROM_HAUPTDOKUMENT.md`
 12. bei Chart-Nutzung: relevante Chart-Engine-Spec + WORKING-FEATURES.md
 ```
 

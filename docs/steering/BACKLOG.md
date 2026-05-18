@@ -1,5 +1,5 @@
 # BACKLOG – Finanzwesir 2.0
-Stand: 2026-05-18 | Session: Block-B-Umbau-B4-B5 | Geändert von: Claude
+Stand: 2026-05-18 | Session: Block-B-Restinkonsistenzen | Geändert von: Claude
 
 **Regeln:**
 - ✅-Zeilen werden sofort nach `BACKLOG-ARCHIV.md` verschoben (append), dann hier gelöscht.
@@ -12,7 +12,7 @@ Stand: 2026-05-18 | Session: Block-B-Umbau-B4-B5 | Geändert von: Claude
 
 | ID       | Bereich | Titel                                     | Prio | Dep | Detail                              |
 |----------|---------|-------------------------------------------|------|-----|-------------------------------------|
-| APP-01   | App     | Pilot-1: prokrastinations-preis — Calculator-Template bauen | H | — | Apps/prokrastinations-preis/APP_SPEC.md |
+| APP-01   | App     | B1 Slice-0-Reboot: neue APP_SPEC für Marktzeit-Mechanik erstellen | H | — | Apps/prokrastinations-preis/MINI_SPEC_FROM_HAUPTDOKUMENT.md |
 | AP-20/21 | Engine  | Mixed-Rhythm CV-Heuristik (T5→T3→T6→T7)  | H    | —   | engine/detail/AP-20-DETAIL.md       |
 | AP-6c    | Engine  | Touch-Tooltip Smartphone-Test             | M    | —   | engine/detail/AP-6c-DETAIL.md       |
 | AP-22    | Engine  | Zero-Line lineWidth (~3 Zeilen Fix)       | L    | —   | —                                   |
@@ -49,7 +49,7 @@ Stand: 2026-05-18 | Session: Block-B-Umbau-B4-B5 | Geändert von: Claude
 | TH-04B   | Theme   | Sicherheits-Audit (Phase 4B, 18 Items)         | H    | TH-03        | theme-build/THEME-ASSEMBLY-CHECKLIST.md           |
 | TH-05    | Theme   | Deployment (Phase 5, 5 Items)                  | H    | TH-04A, TH-04B | theme-build/THEME-ASSEMBLY-CHECKLIST.md         |
 | TH-06    | Theme   | Ghost-Instanz konfigurieren (Phase 6)          | H    | TH-05        | theme-build/THEME-ASSEMBLY-CHECKLIST.md           |
-| AF-15    | App-Fabrik | App-Register + MINI_SPEC_MAPPING Konsistenz: B4/B5 in Zusatz-Module-Tabelle statt Master-Apps-Tabelle (App-Register); A3 markt-kam-zurueck fehlt in MINI_SPEC_MAPPING.md (seit AF-12) | L | — | — |
+| AF-15    | App-Fabrik | MINI_SPEC_MAPPING Konsistenz: A3 markt-kam-zurueck fehlt in MINI_SPEC_MAPPING.md (seit AF-12) | L | — | — |
 | AF-04    | App     | AUTHOR_GUIDE harmonisieren — `data-app` → `data-fw-app` | M    | Pilot-1      | —                                                 |
 | AF-05    | App     | Redakteurs-Cheat-Sheet fw-apps erstellen        | M    | Pilot-1      | —                                                 |
 

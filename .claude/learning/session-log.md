@@ -17,3 +17,9 @@ Wird geleert nach /distill. Einträge: [FRICTION] [WIN] [PREF] [QUESTION] [OK]
 
 ## 2026-05-18 – DIST-03 | Distill 3 + Kassensturz KW 21 + Commit-Message-Support
 - [OK] Keine Vorkommnisse
+
+## 2026-05-18 – SESSION START | Fokus: APP-01 — prokrastinations-preis
+- FinanzwesirData.js, CSVParser.js, FwDateUtils.js — diese Session nicht berühren. ✓
+
+## 2026-05-18 – Block-B-Restinkonsistenzen: 5 Dateien bereinigt
+- [OK] Keine Vorkommnisse — Aufgabe 6 Suchlauf fand 2 weitere aktive Treffer (18 Master-Apps in 00_STATUS, D.1 Startjahrabhängigkeit in App-Register) und korrigierte sie planmäßig

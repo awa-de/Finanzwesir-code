@@ -8,7 +8,7 @@ Blocker: keine
 
 # PROJECT STATUS — Finanzwesir 2.0
 
-Stand: 2026-05-18 | Session: Block-B-Umbau-B4-B5 | Geändert von: Claude
+Stand: 2026-05-18 | Session: Block-B-Restinkonsistenzen | Geändert von: Claude
 
 **Zweck:** Schneller Wiedereinstieg nach Pausen.
 **Zielgruppe:** Albert und Claude.
@@ -100,6 +100,9 @@ Vollständig im DECISION-LOG dokumentiert (`docs/steering/DECISION-LOG.md`):
 ---
 
 ## 8. Letzte Session
+
+2026-05-18 — Block-B-Restinkonsistenzen bereinigt (Block-B-Restinkonsistenzen).
+App-Register B4/B5 aus Zusatz-Modul-Tabelle → Master-App-Ordner-Tabelle (21 Einträge). APP_INVENTORY + App-Register D.1 auf Epochen-/30-Jahres-Logik. BACKLOG APP-01 → B1 Slice-0-Reboot. NAVIGATION [!warning]-Block B1-Ausnahme. 00_STATUS Zählung 19→21 / 22→24 + Nächste Schritte + Robuste Arbeitsannahmen. AF-16 archiviert, AF-15 auf MINI_SPEC_MAPPING-Rest reduziert.
 
 2026-05-18 — Kassensturz KW 21 + Distill 3 (distill-3).
 7 FRICTION-Einträge destilliert. 4 neue Observing-Einträge (Whitespace vor Edit, falsches Shell-Tool, Kontext-Komprimierung, Slice-Plan-Lücken). Reoccurrence feedback_glob_vs_read vermerkt. NAVIGATION.md: docs/Marke/ + docs/App-Fabrik/_prompts/ eingetragen. BACKLOG-ARCHIV DIST-03 ergänzt. Commit-Messages für _prompts/, Marke/, App-Fabrik-Querverweise erzeugt.
