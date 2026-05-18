@@ -43,7 +43,7 @@ Mapping aller 21 Haupt-App-Abschnitte aus dem Hauptdokument auf die 24 realen Ap
 - `/Apps/geburtsjahrlos/` — Haupt-App (B2 direkt)
 - `/Apps/rollierende-sparplaene/` — Erweiterungsmodul (B2-Familie)
 
-Fachlicher Zusammenhang: Der Geburtsjahrlos-Simulator zeigt Startjahr-Abhängigkeit über ein Ganzes Leben (30 Jahre). Das Erweiterungsmodul „Rollierende Sparpläne" untersucht denselben Effekt im Mehrjahrs-Rhythmus und macht die Timing-Abhängigkeit noch greifbarer.
+Fachlicher Zusammenhang: Der Geburtsjahrlos-Simulator zeigt historische Epochen-/Kohortenstreuung: dieselbe 30-Jahres-Strategie, gleiche Sparrate und gleiche Laufzeit konnten je nach Börsenepoche sehr unterschiedliche reale Endwerte liefern. Das Erweiterungsmodul „Rollierende Sparpläne" vertieft diese Perspektive mit allen rollierenden 30-Jahres-Sparplanzeiträumen und inflationsbereinigten Realwerten.
 
 ### C1 (Diversifikations-Detektor) → 3 Ordner:
 - `/Apps/diversifikations-detektor/` — Haupt-App (C1 direkt)
