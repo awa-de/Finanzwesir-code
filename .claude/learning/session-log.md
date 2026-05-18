@@ -23,3 +23,6 @@ Wird geleert nach /distill. Einträge: [FRICTION] [WIN] [PREF] [QUESTION] [OK]
 
 ## 2026-05-18 – Block-B-Restinkonsistenzen: 5 Dateien bereinigt
 - [OK] Keine Vorkommnisse — Aufgabe 6 Suchlauf fand 2 weitere aktive Treffer (18 Master-Apps in 00_STATUS, D.1 Startjahrabhängigkeit in App-Register) und korrigierte sie planmäßig
+
+## 2026-05-19 – AF-15-Abschluss: MINI_SPEC_MAPPING + 00_STATUS
+- [OK] Keine Vorkommnisse — Kontext-Komprimierung zwischen Freigabe und Ausführung; Edits nach Wiederaufnahme sauber abgeschlossen

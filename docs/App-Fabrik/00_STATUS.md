@@ -29,7 +29,7 @@ Verzeichnis: `docs/App-Fabrik` — temporärer Konsolidierungsraum, kein produkt
 
 | App-Ordner | Gehört zu | Modulrolle | Fachliche Aussage |
 |---|---|---|---|
-| `/Apps/rollierende-sparplaene/` | B2 Geburtsjahrlos-Simulator | Erweiterungsmodul / Analysemodus | Starte denselben Sparplan in Jahr Z, Z+1, Z+2 — zeigt Renditabhängigkeit vom Startjahr |
+| `/Apps/rollierende-sparplaene/` | B2 Geburtsjahrlos-Simulator | Erweiterungsmodul / Analysemodus | Rollierende 30-Jahres-Sparplanzeiträume mit inflationsbereinigten Realwerten; zeigt schlechtesten, Median- und besten Zeitraum je Börsenepoche. |
 | `/Apps/investment-universum/` | C1 Diversifikations-Detektor | Gegenperspektive / Grundmodell | Egal wie kleinteilig man ETFs schneidet: Industrieländer plus Schwellenländer bleiben das konstante Universum |
 | `/Apps/weltkarte-etf-indizes/` | C1 Diversifikations-Familie | Visuelles Lernmodul / Companion-App | Nutzer klickt Index; enthaltene Länder werden auf Weltkarte farblich hervorgehoben |
 

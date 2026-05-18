@@ -1,17 +1,18 @@
 # MINI_SPEC_MAPPING — Apps / ETF-Apps-Hauptdokument
 
-Stand: 2026-05-18 | Quelle: docs/App-Fabrik/ETF-Apps-Hauptdokument.md
+Stand: 2026-05-19 | Quelle: docs/App-Fabrik/ETF-Apps-Hauptdokument.md
 
-Mapping aller 21 Haupt-App-Abschnitte aus dem Hauptdokument auf die 23 realen App-Ordner unter `/Apps/`.
+Mapping aller 21 Haupt-App-Abschnitte aus dem Hauptdokument auf die 24 realen App-Ordner unter `/Apps/`.
 
 ---
 
-## Tabelle: Alle 23 App-Ordner
+## Tabelle: Alle 24 App-Ordner
 
 | Block | App-ID | App-Titel | Slug | App-Ordner | Mini-Spec vorhanden | Modulrolle | Status |
 |-------|--------|-----------|------|------------|---------------------|------------|--------|
 | A | A1 | Risiko-Übersetzer (Dacia-Test) | `risiko-uebersetzer` | `/Apps/risiko-uebersetzer/` | ✅ | Haupt-App | Dokumentiert |
 | A | A2 | Crash-Reaktions-Test | `crash-reaktions-test` | `/Apps/crash-reaktions-test/` | ✅ | Haupt-App | Dokumentiert |
+| A | A3 | Der Markt kam zurück. Du nicht. | `markt-kam-zurueck` | `/Apps/markt-kam-zurueck/` | ✅ | Haupt-App | Dokumentiert |
 | B | B1 | Marktzeit schlägt Timing / Lieber heute als morgen | `prokrastinations-preis` | `/Apps/prokrastinations-preis/` | ✅ | Haupt-App | Dokumentiert |
 | B | B2 | Geburtsjahrlos-Simulator | `geburtsjahrlos` | `/Apps/geburtsjahrlos/` | ✅ | Haupt-App | Dokumentiert |
 | B | B2 (Erw.) | Rollierende Sparpläne | `geburtsjahrlos` | `/Apps/rollierende-sparplaene/` | ✅ | Erweiterungsmodul | Dokumentiert |
@@ -56,7 +57,7 @@ Fachlicher Zusammenhang:
 
 ---
 
-## Status aller 23 MINI_SPEC_FROM_HAUPTDOKUMENT.md
+## Status aller 24 MINI_SPEC_FROM_HAUPTDOKUMENT.md
 
 | App-Ordner | MINI_SPEC-Status | Notizen |
 |---|---|---|
@@ -70,6 +71,7 @@ Fachlicher Zusammenhang:
 | `komplexitaets-entlarver` | ✅ Erstellt | Haupt-App C2 |
 | `kostenkiller-ter` | ✅ Erstellt | Haupt-App D3 |
 | `market-timing-simulator` | ✅ Erstellt | Haupt-App B3 |
+| `markt-kam-zurueck` | ✅ Erstellt | Haupt-App A3 |
 | `passiv-paradox` | ✅ Erstellt | Haupt-App G3 |
 | `prokrastinations-preis` | ✅ Erstellt | Haupt-App B1; APP_SPEC.md vorhanden (nicht überschrieben) |
 | `regulatorik-dashboard` | ✅ Erstellt | Haupt-App G1 |
@@ -90,6 +92,6 @@ Fachlicher Zusammenhang:
 
 - **21 Haupt-App-Abschnitte** aus ETF-Apps-Hauptdokument dokumentiert (inkl. B4 Der alte Euro, B5 Depot-Kipppunkt)
 - **3 Multi-Modul-Abschnitte** mit Zugehörigkeit zur Master-App dokumentiert
-- **23 MINI_SPEC_FROM_HAUPTDOKUMENT.md Dateien** erstellt (keine Überschreibung bestehender Dateien)
+- **24 MINI_SPEC_FROM_HAUPTDOKUMENT.md Dateien** erstellt (keine Überschreibung bestehender Dateien)
 - **1 APP_SPEC.md** vorhanden (`prokrastinations-preis`) — nicht berührt
 - **Alle Umlaute** (ä, ö, ü, ß) korrekt geschrieben
