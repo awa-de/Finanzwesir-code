@@ -19,8 +19,9 @@ Die Apps sind **keine isolierten Widgets**, sondern Stationen eines psychologisc
 ```
 HOOK
   ↓
-[B] TIMING ZERSTÖREN
+[B] MARKTZEIT STATT TIMING
     B1 Marktzeit schlägt Timing · B2 Geburtsjahrlos · B3 Market-Timing-Simulator
+    B4 Der alte Euro · B5 Depot-Kipppunkt
   ↓
 [A] RISIKO ÜBERLEBEN
     A1 Risiko-Übersetzer (Dosis finden)
@@ -34,7 +35,7 @@ HOOK
     D1 Namensdecoder · D2 Replizierer/Swapper · D3 TER-Rechner · E1 ESG-Spiegel
   ↓
 [F] MECHANISMEN VERSTEHEN
-    F1 Renditekiller · F2 Thesaurierer/Ausschütter · F3 Der alte Euro · F4 Depot-Kipppunkt
+    F1 Renditekiller · F2 Thesaurierer/Ausschütter
   ↓
 ══════════════════════════════════════════════════
 [G] SYSTEMKRITISCHE EINWÄNDE  ← NEU IN VERSION 2
@@ -47,7 +48,7 @@ HOOK
     H1 ETF-Reifegrad-Test + Start-Konfigurator
 ```
 
-> A1, A2 und A3 werden künftig als zusammenhängender Block „Risiko überleben" geführt. A1 bleibt inhaltlich „Risiko klären", rückt aber dramaturgisch vor A2/A3, weil die Dosis vor der Feuerprobe festgelegt werden muss. F1 und F2 bilden nun einen eigenständigen Block F „Mechanismen verstehen".
+> A1, A2 und A3 werden als zusammenhängender Block „Risiko überleben" geführt. A1 bleibt inhaltlich „Risiko klären", rückt aber dramaturgisch vor A2/A3. F1 und F2 bilden den Block F „Mechanismen verstehen". Block B ist als „Marktzeit statt Timing" mit 5 Apps (B1–B5) gefasst; B4 „Der alte Euro" und B5 „Depot-Kipppunkt" sind aus dem früheren Block F in Block B verschoben.
 
 ### Warum Block G am Ende steht
 
@@ -80,8 +81,8 @@ Block G muss **anders klingen** als der Rest: nicht motivierend, nicht vereinfac
 | 17 | Thesaurierer vs. Ausschütter | F2 | ★ | Gering | Gering | 🟨 offen |
 | 18 | Weltdepot-Baukasten | C3 | ★ | Mittel | Mittel | 🟨 offen |
 | 19 | ETF-Reifegrad-Test + Konfigurator | H1 | ★ | 🔥 Hoch | Hoch | 🟨 offen |
-| 20 | Der alte Euro | F3 | — | Mittel | Gering | 🟨 offen |
-| 21 | Depot-Kipppunkt | F4 | — | 🔥 Hoch | Gering | 🟨 offen |
+| 20 | Der alte Euro | B4 | — | Mittel | Gering | 🟨 offen |
+| 21 | Depot-Kipppunkt | B5 | — | 🔥 Hoch | Gering | 🟨 offen |
 
 > **Weltkarte der 16 Indizes:** Bereits in Arbeit. Ergänzt App C1 (Diversifikations-Detektor).
 > **Status-Codes:** ✅ fertig · 🟨 in Planung · 🟦 in Entwicklung · ❌ verworfen
@@ -315,7 +316,15 @@ A1 kalibriert die tragbare Dosis. A2 zwingt zur Entscheidung im Crash. A3 zeigt 
 
 ---
 
-# Block B: Timing & Prokrastination
+# Block B: Marktzeit statt Timing
+
+Block B zerstört nicht nur die Illusion des perfekten Einstiegs. Er zeigt, warum Marktzeit der eigentliche Rohstoff des langfristigen Investierens ist.
+
+> B3 zeigt: Den perfekten Einstieg findest du nicht.  
+> B1 zeigt: Also verliere heute nicht wieder Marktzeit.  
+> B2 zeigt: Deine Börsenepoche ist ein Los, keine Leistung.  
+> B4 zeigt: Zeit baut im einzelnen Euro den Motor.  
+> B5 zeigt: Viele alte Euros werden irgendwann zum Mitverdiener.
 
 ---
 
@@ -324,7 +333,7 @@ A1 kalibriert die tragbare Dosis. A2 zwingt zur Entscheidung im Crash. A3 zeigt 
 **Slug:** `prokrastinations-preis`
 **KI-Konsens:** ★★ (Perplexity, ChatGPT)
 **Folienbezug:** Slides 4–7 (Großwetterlage, 100 USD monatlich)
-**Funnel-Position:** Timing zerstören
+**Funnel-Position:** Marktzeit statt Timing
 **Priorität:** #12
 
 ### Problem, das gelöst wird
@@ -371,7 +380,7 @@ B1 arbeitet mit echten MSCI-World-Monatsdaten. Letzter verfügbarer Monatswert =
 **Slug:** `geburtsjahrlos`
 **KI-Konsens:** ★★★★ (Perplexity, Claude, Gemini, ChatGPT)
 **Folienbezug:** Slides 4–6, 8–10, 60 (Großwetterlage, historische Renditen)
-**Funnel-Position:** Timing zerstören / historische Robustheit
+**Funnel-Position:** Marktzeit statt Timing / historische Robustheit
 **Priorität:** #2
 
 ### Problem, das gelöst wird
@@ -430,7 +439,7 @@ Bei 30-Jahres-Zeiträumen müssen die Hauptwerte inflationsbereinigt sein. Nomin
 **Slug:** `market-timing-simulator`
 **KI-Konsens:** ★★ (ChatGPT, Gemini)
 **Folienbezug:** Slides 43–45, 51 (Kaufzeitpunkt)
-**Funnel-Position:** Timing zerstören
+**Funnel-Position:** Marktzeit statt Timing
 **Priorität:** #8
 
 ### Problem, das gelöst wird
@@ -456,6 +465,80 @@ Fast jeder wartet auf „den richtigen Zeitpunkt". Diese App lässt den User es 
 - Klick zwischen 15:30–17:30 Uhr: grünes Licht (US-Liquidität)
 
 **CTA:** „Ich starte jetzt"
+
+---
+
+## B4 – Der alte Euro
+
+**Slug:** `der-alte-euro`
+**Funnel-Position:** Marktzeit statt Timing / Mechanik der Marktzeit
+**Modulrolle:** Mechanik-Mini-App
+**Priorität:** #20
+
+### Problem, das gelöst wird
+
+„Früh anfangen" klingt wie eine moralische Mahnung. Diese App zeigt, warum frühes Geld tatsächlich mächtiger wird: Nicht der eine Euro wird magisch größer, sondern seine Erträge erzeugen wieder Erträge.
+
+### Kernbotschaft
+
+> „Ein alter Euro arbeitet mit Familie."
+
+Ausführlicher: „Ein früher Euro wird nicht größer, weil er besonders ist. Er wird größer, weil seine Erträge wieder Erträge erzeugen."
+
+### Interaktion
+
+Vier gestapelte Balken zeigen, was aus 1 € nach 10, 20, 30 und 40 Jahren wird. Jeder Balken: ursprünglicher Euro · Ertrag auf den ursprünglichen Euro · Ertrag auf frühere Erträge. Eingabe: nur Renditewahl (4 %, 6 % oder 8 %), keine freie Eingabe.
+
+Punchline: „Nach 40 Jahren ist der ursprüngliche Euro nicht der Held. Er ist der Großvater."
+
+### Was die App nicht tut
+
+- kein Heute-vs.-Später-Vergleich · keine Opportunitätskosten · keine historische MSCI-Simulation · keine Sparrate, kein Depot, kein Einkommen, keine Steuer, keine Inflation
+
+### CTA
+
+> „Wann arbeitet dein Depot mit?" → Übergang zu B5 Depot-Kipppunkt
+
+### Implementierungshinweise
+
+- Reine JS-Berechnung, kein Backend, keine historischen Daten, Formelmodell reicht
+
+---
+
+## B5 – Depot-Kipppunkt
+
+**Slug:** `depot-kipppunkt`
+**Funnel-Position:** Marktzeit statt Timing / Statuswechsel
+**Modulrolle:** Motivations- und Statuswechsel-App
+**Priorität:** #21
+
+### Problem, das gelöst wird
+
+Sparen fühlt sich wie Konsumverzicht an. Diese App zeigt: Aus Sparen wird mit der Zeit eine zweite Einkommensquelle. Irgendwann kann das Depot rechnerisch mehr pro Jahr erwirtschaften als der heutige Job.
+
+### Kernbotschaft
+
+> „Irgendwann bringt dein Depot pro Jahr mehr ein als dein Job."
+
+### Interaktion
+
+Vier Eingaben: monatliches Nettoarbeitseinkommen · monatliche Sparrate · heutiger Depotwert · Renditeannahme (4 %, 6 %, 8 %).
+
+Visualisierung: Job-Netto-Linie (konstant) vs. Depot-Ertragslinie (wächst). Schnittpunkt = Depot-Kipppunkt. Fortschrittsmarken bei 25 %, 50 %, 75 %, 100 % des heutigen Job-Netto.
+
+Transparenzsatz (Pflicht): „Wir vergleichen dein heutiges Job-Netto mit dem rechnerischen Depot-Ertrag vor Steuern. Das ist keine Prognose, keine Steuerplanung und keine Rentenplanung, sondern eine Standortbestimmung."
+
+### Was die App nicht tut
+
+- keine Finanzfreiheit, keine Entnahmerate, keine Steuerdetails, keine Gehaltssteigerung, keine Sparratendynamik, keine Inflation, keine historischen MSCI-Pfade, kein „Wann kannst du aufhören zu arbeiten?" — Version 1 bleibt radikal schlank.
+
+### CTA
+
+Im Hauptpfad: „Welche Dosis hältst du aus?" → A1 Risiko-Übersetzer
+
+### Implementierungshinweise
+
+- Reine JS-Berechnung, kein Backend, keine historischen Daten, Formelmodell reicht
 
 ---
 
@@ -737,84 +820,6 @@ Animiertes Wettrennen über 10/20/30 Jahre. Ausschütter: kleiner animierter Gel
 
 ---
 
-## F3 – Der alte Euro
-
-**Slug:** `der-alte-euro`
-**Funnel-Position:** Mechanismen verstehen / nach Timing-Block
-**Modulrolle:** Mechanik-Mini-App
-**Priorität:** #20
-
-### Problem, das gelöst wird
-
-„Früh anfangen" klingt wie eine moralische Mahnung. Diese App zeigt, warum frühes Geld tatsächlich mächtiger wird: Nicht der eine Euro wird magisch größer, sondern seine Erträge erzeugen wieder Erträge.
-
-### Kernbotschaft
-
-> „Ein alter Euro arbeitet mit Familie."
-
-Ausführlicher: „Ein früher Euro wird nicht größer, weil er besonders ist. Er wird größer, weil seine Erträge wieder Erträge erzeugen."
-
-### Rolle im App-Universum
-
-„Der alte Euro" zeigt den Motor. Steht nach den Timing-Apps und vor `Depot-Kipppunkt`.
-
-### Interaktion
-
-Vier gestapelte Balken zeigen, was aus 1 € nach 10, 20, 30 und 40 Jahren wird. Jeder Balken: ursprünglicher Euro · Ertrag auf den ursprünglichen Euro · Ertrag auf frühere Erträge. Eingabe: nur Renditewahl (4 %, 6 % oder 8 %), keine freie Eingabe.
-
-Punchline: „Nach 40 Jahren ist der ursprüngliche Euro nicht der Held. Er ist der Großvater."
-
-### Was die App nicht tut
-
-- kein Heute-vs.-Später-Vergleich · keine Opportunitätskosten · keine historische MSCI-Simulation · keine Sparrate, kein Depot, kein Einkommen, keine Steuer, keine Inflation
-
-### CTA
-
-> „Wann arbeitet dein Depot mit?" → Übergang zu Depot-Kipppunkt
-
-### Implementierungshinweise
-
-- Reine JS-Berechnung, kein Backend, keine historischen Daten, Formelmodell reicht
-
----
-
-## F4 – Depot-Kipppunkt
-
-**Slug:** `depot-kipppunkt`
-**Funnel-Position:** Statuswechsel / nach „Der alte Euro", vor Plan-Generator
-**Modulrolle:** Motivations- und Statuswechsel-App
-**Priorität:** #21
-
-### Problem, das gelöst wird
-
-Sparen fühlt sich wie Konsumverzicht an. Diese App zeigt: Aus Sparen wird mit der Zeit eine zweite Einkommensquelle. Irgendwann kann das Depot rechnerisch mehr pro Jahr erwirtschaften als der heutige Job.
-
-### Kernbotschaft
-
-> „Irgendwann bringt dein Depot pro Jahr mehr ein als dein Job."
-
-### Interaktion
-
-Vier Eingaben: monatliches Nettoarbeitseinkommen · monatliche Sparrate · heutiger Depotwert · Renditeannahme (4 %, 6 %, 8 %).
-
-Visualisierung: Job-Netto-Linie (konstant) vs. Depot-Ertragslinie (wächst). Schnittpunkt = Depot-Kipppunkt. Fortschrittsmarken bei 25 %, 50 %, 75 %, 100 % des heutigen Job-Netto.
-
-Transparenzsatz (Pflicht): „Wir vergleichen dein heutiges Job-Netto mit dem rechnerischen Depot-Ertrag vor Steuern. Das ist keine Prognose, keine Steuerplanung und keine Rentenplanung, sondern eine Standortbestimmung."
-
-### Was die App nicht tut
-
-- keine Finanzfreiheit, keine Entnahmerate, keine Steuerdetails, keine Gehaltssteigerung, keine Sparratendynamik, keine Inflation, keine historischen MSCI-Pfade, kein „Wann kannst du aufhören zu arbeiten?" — Version 1 bleibt radikal schlank.
-
-### CTA
-
-> „Startplan bauen"
-
-### Implementierungshinweise
-
-- Reine JS-Berechnung, kein Backend, keine historischen Daten, Formelmodell reicht
-
----
-
 ---
 
 # Block G: Systemkritische Einwände ← NEU IN VERSION 2
@@ -1075,8 +1080,8 @@ Jede App muss:
 
 | App | Slug | Warum |
 |---|---|---|
-| F3 Der alte Euro | `der-alte-euro` | Geringer Aufwand, schließt Mechanismus-Kette nach B1/B2 |
-| F4 Depot-Kipppunkt | `depot-kipppunkt` | Geringer Aufwand, motivierender Übergang zu H1 |
+| B4 Der alte Euro | `der-alte-euro` | Geringer Aufwand, schließt Marktzeit-Block nach B1–B3 |
+| B5 Depot-Kipppunkt | `depot-kipppunkt` | Geringer Aufwand, motivierender Übergang zu A1/H1 |
 
 ## Phase 4 – Abschluss & Feinschliff
 
@@ -1099,4 +1104,5 @@ Jede App muss:
 | 2.0 | 28.04.2026 | + Block G (Systemkritische Einwände) mit G1 (✅ bereits gebaut), G2 (Rendite-Kalibrierung), G3 (Passiv-Paradox). Funnel-Architektur aktualisiert. Entwicklungs-Reihenfolge hinzugefügt. Master-Prioritätsliste auf 18 Apps erweitert. |
 | 3.0 | 2026-05-18 | + A3 „Der Markt kam zurück. Du nicht." als Ausstiegsfolgen-App. Block A zur Durchhalte-Kette umgerahmt (A1 Dosis finden → A2 Feuerprobe → A3 Ausstiegsfolge). Funnel-Struktur aktualisiert ([A/F] aufgelöst, [F] MECHANISMEN eigenständig). Master-Prioritätsliste auf 19 Apps erweitert. |
 | 4.0 | 2026-05-18 | B1 von Verlustzähler zu Marktzeit-App umgerahmt (neu: „Marktzeit schlägt Timing / Lieber heute als morgen", MSCI-World-Monatsdaten, 4-Screen-Flow). B2 bereinigt: Kindersparplan, vor-10-Jahren-Motiv und Warte-Button entfernt, Fokus auf rollierende 30-Jahres-Zeiträume mit inflationsbereinigten Realwerten. + F3 „Der alte Euro" (Mechanik-Mini-App, Slug: der-alte-euro). + F4 „Depot-Kipppunkt" (Statuswechsel-App, Slug: depot-kipppunkt). Rollenformel verankert: B1→B2→Der alte Euro→Depot-Kipppunkt. 1-Million-App verworfen. Master-Prioritätsliste auf 21 Apps erweitert. |
+| 5.0 | 2026-05-18 | Block B umbenannt zu „Marktzeit statt Timing". F3 „Der alte Euro" → B4, F4 „Depot-Kipppunkt" → B5; beide aus Block F in Block B verschoben. Block-B-Intro-Text und dramaturgische Rollenformel ergänzt. Funnel-Diagramm, Master-Prioritätsliste, Entwicklungsreihenfolge und alle Funnel-Positionen in B1–B3 aktualisiert. Block F enthält jetzt nur noch F1/F2. B1-APP_SPEC.md, SLICE_0_KICKOFF.md und SLICE_PLAN.md mit VERALTET-Header versehen (alte Mechanik, kein Code ohne neue APP_SPEC). MINI_SPECs aller betroffenen Apps konsistent aktualisiert. |
 

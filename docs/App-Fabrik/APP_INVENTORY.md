@@ -1,7 +1,7 @@
 # App-Inventar — App-Fabrik
 
 Stand: 2026-05-18 | Arbeitsstand | Geändert von: Claude
-Quelle: Repo-Stand 2026-05-18 | ETF-Apps-Hauptdokument.md v4.0 | ETF-App-Fabrik_Factory-Analyse.md
+Quelle: Repo-Stand 2026-05-18 | ETF-Apps-Hauptdokument.md v5.0 | ETF-App-Fabrik_Factory-Analyse.md
 
 **Alle Verweise auf Arbeitsordner zeigen auf `/Apps/[slug]/`.**
 In `docs/App-Fabrik` liegt nur diese Inventar-Tabelle, kein produktiver Code.
@@ -49,8 +49,8 @@ In `docs/App-Fabrik` liegt nur diese Inventar-Tabelle, kein produktiver Code.
 | `thesaurierer-rennen` | F2 Thesaurierer vs. Ausschütter | Master-App | vollständig eigenständig | Calculator / Comparison Race | Annahmen (Config-JSON) | Mittel — Wettrennen / zwei Linien | Steuerlogik vereinfachen oder bewusst ausklammern |
 | `weltdepot-baukasten` | C3 Weltdepot-Baukasten | Master-App | vollständig eigenständig | Configurator / Portfolio Compare | Portfolio-Templates (JSON) | Hoch — Tortendiagramme + Vergleich | Baukasten-Datenmodell, Varianten-Renderer, Performancedaten |
 | `weltkarte-etf-indizes` | C1 Diversifikations-Familie | Visuelles Lernmodul / Companion-App | eigenständig nutzbar; Prototyp v2 vorhanden | Explorer / Visual | Index-/Geo-Daten (JSON) | Hoch — interaktive Weltkarte (D3) | D3/TopoJSON lokal gebundelt 🟢 (→ A-08). Verbindung zu C1 🟡 Arbeitsannahme (→ Z-04) |
-| `der-alte-euro` | F3 Der alte Euro | Master-App | vollständig eigenständig | Calculator-Visualisierung / Mechanik-Mini-App | Keine externen Daten; Formelmodell | Niedrig bis mittel — vier gestapelte Balken | Renditewahl 4/6/8 %, keine freie Eingabe |
-| `depot-kipppunkt` | F4 Depot-Kipppunkt | Master-App | vollständig eigenständig | Calculator / Scenario-Chart | Keine externen Daten; Formeleingaben Nutzer | Mittel — Job-Netto-Linie vs. Depot-Ertragslinie | Transparenzsatz Pflicht; Version 1 radikal schlank |
+| `der-alte-euro` | B4 Der alte Euro | Master-App | vollständig eigenständig | Calculator-Visualisierung / Mechanik-Mini-App | Keine externen Daten; Formelmodell | Niedrig bis mittel — vier gestapelte Balken | Renditewahl 4/6/8 %, keine freie Eingabe |
+| `depot-kipppunkt` | B5 Depot-Kipppunkt | Master-App | vollständig eigenständig | Calculator / Scenario-Chart | Keine externen Daten; Formeleingaben Nutzer | Mittel — Job-Netto-Linie vs. Depot-Ertragslinie | Transparenzsatz Pflicht; Version 1 radikal schlank |
 
 ---
 

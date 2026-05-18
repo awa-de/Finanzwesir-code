@@ -9,8 +9,8 @@
 ## B1 – Marktzeit schlägt Timing / Lieber heute als morgen
 
 **Slug:** `prokrastinations-preis`
-**Funnel-Position:** Timing zerstören
-**Modulrolle:** Haupt-App im Timing-Block
+**Funnel-Position:** Marktzeit statt Timing
+**Modulrolle:** Haupt-App im Marktzeit-Block
 
 ---
 
@@ -170,7 +170,7 @@ oder:
 ## Mini-Spec-Metadaten
 
 - Quelle: `docs/App-Fabrik/ETF-Apps-Hauptdokument.md` + `aktuelles Projekt/04_ZUSATZTEXT_B1_REWRITE_MARKTZEIT.md`
-- Block: B – Timing zerstören
+- Block: B – Marktzeit statt Timing
 - App-ID: B1
 - App-Titel: Marktzeit schlägt Timing / Lieber heute als morgen
 - Slug laut Hauptdokument: `prokrastinations-preis`

@@ -1,5 +1,5 @@
 # BACKLOG – Finanzwesir 2.0
-Stand: 2026-05-10 | Session: Pilot-1 prokrastinations-preis APP_SPEC | Geändert von: Claude
+Stand: 2026-05-18 | Session: Block-B-Umbau-B4-B5 | Geändert von: Claude
 
 **Regeln:**
 - ✅-Zeilen werden sofort nach `BACKLOG-ARCHIV.md` verschoben (append), dann hier gelöscht.
@@ -49,6 +49,7 @@ Stand: 2026-05-10 | Session: Pilot-1 prokrastinations-preis APP_SPEC | Geändert
 | TH-04B   | Theme   | Sicherheits-Audit (Phase 4B, 18 Items)         | H    | TH-03        | theme-build/THEME-ASSEMBLY-CHECKLIST.md           |
 | TH-05    | Theme   | Deployment (Phase 5, 5 Items)                  | H    | TH-04A, TH-04B | theme-build/THEME-ASSEMBLY-CHECKLIST.md         |
 | TH-06    | Theme   | Ghost-Instanz konfigurieren (Phase 6)          | H    | TH-05        | theme-build/THEME-ASSEMBLY-CHECKLIST.md           |
+| AF-15    | App-Fabrik | App-Register + MINI_SPEC_MAPPING Konsistenz: B4/B5 in Zusatz-Module-Tabelle statt Master-Apps-Tabelle (App-Register); A3 markt-kam-zurueck fehlt in MINI_SPEC_MAPPING.md (seit AF-12) | L | — | — |
 | AF-04    | App     | AUTHOR_GUIDE harmonisieren — `data-app` → `data-fw-app` | M    | Pilot-1      | —                                                 |
 | AF-05    | App     | Redakteurs-Cheat-Sheet fw-apps erstellen        | M    | Pilot-1      | —                                                 |
 

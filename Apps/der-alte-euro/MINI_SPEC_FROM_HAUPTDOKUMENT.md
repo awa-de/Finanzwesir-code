@@ -1,14 +1,15 @@
 # MINI_SPEC_FROM_HAUPTDOKUMENT — Der alte Euro
 
-> Quelle: `aktuelles Projekt/02_ZUSATZTEXT_MINI_SPEC_DER_ALTE_EURO.md`
-> Status: Roh-Mini-Spec aus App-Intake, noch nicht APP_SPEC
+> Quelle: `docs/App-Fabrik/ETF-Apps-Hauptdokument.md`
+> Status: Roh-Mini-Spec aus Hauptdokument, noch nicht APP_SPEC
+> Letzte Änderung: 2026-05-18 — Von F? zu B4 verschoben; Block B „Marktzeit statt Timing"
 
 ---
 
-## F? – Der alte Euro
+## B4 – Der alte Euro
 
 **Slug:** `der-alte-euro`
-**Funnel-Position:** Mechanismen verstehen / nach Timing-Block
+**Funnel-Position:** Marktzeit statt Timing / Mechanik der Marktzeit
 **Modulrolle:** Mechanik-Mini-App
 **App-Familie:** Calculator-Visualisierung / Mechanik-Mini-App
 
@@ -40,13 +41,13 @@ Ausführlicher:
 
 ---
 
-## Rolle im App-Universum
+## Rolle im Block B
 
-„Der alte Euro" zeigt den Motor.
+„Der alte Euro" zeigt den Motor. Zeit baut im einzelnen Euro die Wirkung auf, die Block B insgesamt zeigt.
 
-Die App steht nach den Timing-Apps und vor `Depot-Kipppunkt`.
+Rollenformel: **Zeit baut den Motor.**
 
-Rollenformel:
+Block-B-Kette:
 
 ```text
 B1 Marktzeit schlägt Timing
@@ -55,10 +56,10 @@ B1 Marktzeit schlägt Timing
 B2 Geburtsjahrlos
 → Deine Börsenepoche ist ein Los.
 
-Der alte Euro
+B4 Der alte Euro
 → So arbeitet Zeit im einzelnen Euro.
 
-Depot-Kipppunkt
+B5 Depot-Kipppunkt
 → So wird daraus irgendwann ein Mitverdiener.
 ```
 
@@ -163,8 +164,9 @@ Alternativer Wesir-Satz:
 
 ## Mini-Spec-Metadaten
 
-- Quelle: `aktuelles Projekt/02_ZUSATZTEXT_MINI_SPEC_DER_ALTE_EURO.md`
-- Block: F – Mechanismen verstehen
+- Quelle: `docs/App-Fabrik/ETF-Apps-Hauptdokument.md`
+- Block: B – Marktzeit statt Timing
+- App-ID: B4
 - App-Titel: Der alte Euro
 - Slug: `der-alte-euro`
 - Zugeordneter App-Ordner: `/Apps/der-alte-euro/`

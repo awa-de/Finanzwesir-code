@@ -31,8 +31,8 @@ Mapping aller 21 Haupt-App-Abschnitte aus dem Hauptdokument auf die 23 realen Ap
 | G | G2 | Rendite-Kalibrierung | `rendite-kalibrierung` | `/Apps/rendite-kalibrierung/` | ✅ | Haupt-App | Dokumentiert |
 | G | G3 | Das Passiv-Paradox | `passiv-paradox` | `/Apps/passiv-paradox/` | ✅ | Haupt-App | Dokumentiert |
 | H | H1 | ETF-Reifegrad-Test & Start-Konfigurator | `etf-reifegrad-finale` | `/Apps/etf-reifegrad-finale/` | ✅ | Haupt-App | Dokumentiert |
-| F | F3 | Der alte Euro | `der-alte-euro` | `/Apps/der-alte-euro/` | ✅ | Mechanik-Mini-App | Dokumentiert |
-| F/H | F4 | Depot-Kipppunkt | `depot-kipppunkt` | `/Apps/depot-kipppunkt/` | ✅ | Statuswechsel-App | Dokumentiert |
+| B | B4 | Der alte Euro | `der-alte-euro` | `/Apps/der-alte-euro/` | ✅ | Mechanik-Mini-App | Dokumentiert |
+| B | B5 | Depot-Kipppunkt | `depot-kipppunkt` | `/Apps/depot-kipppunkt/` | ✅ | Statuswechsel-App | Dokumentiert |
 
 ---
 
@@ -81,14 +81,14 @@ Fachlicher Zusammenhang:
 | `thesaurierer-rennen` | ✅ Erstellt | Haupt-App F2 |
 | `weltdepot-baukasten` | ✅ Erstellt | Haupt-App C3 |
 | `weltkarte-etf-indizes` | ✅ Erstellt | Companion-App zu C1/C3 |
-| `der-alte-euro` | ✅ Erstellt | Mechanik-Mini-App F3 |
-| `depot-kipppunkt` | ✅ Erstellt | Statuswechsel-App F4 |
+| `der-alte-euro` | ✅ Erstellt | Mechanik-Mini-App B4 |
+| `depot-kipppunkt` | ✅ Erstellt | Statuswechsel-App B5 |
 
 ---
 
 ## Zusammenfassung
 
-- **21 Haupt-App-Abschnitte** aus ETF-Apps-Hauptdokument dokumentiert (inkl. F3 Der alte Euro, F4 Depot-Kipppunkt)
+- **21 Haupt-App-Abschnitte** aus ETF-Apps-Hauptdokument dokumentiert (inkl. B4 Der alte Euro, B5 Depot-Kipppunkt)
 - **3 Multi-Modul-Abschnitte** mit Zugehörigkeit zur Master-App dokumentiert
 - **23 MINI_SPEC_FROM_HAUPTDOKUMENT.md Dateien** erstellt (keine Überschreibung bestehender Dateien)
 - **1 APP_SPEC.md** vorhanden (`prokrastinations-preis`) — nicht berührt

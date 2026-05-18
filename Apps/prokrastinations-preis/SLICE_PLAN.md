@@ -1,3 +1,29 @@
+> [!warning] VERALTET — NICHT MEHR ALS IMPLEMENTIERUNGSANLEITUNG VERWENDEN
+>
+> Diese Datei beschreibt die alte B1-Mechanik „Prokrastinations-Preis" mit Verlustzähler, Wartezeit-Slider, Festrendite/Zukunftsprojektion und alter Slice-Logik.
+>
+> Diese Mechanik ist durch die neue B1-Richtung ersetzt:
+>
+> **B1 – Marktzeit schlägt Timing / Lieber heute als morgen**
+>
+> Neue B1-Mechanik:
+> - echte MSCI-World-Monatsdaten
+> - letzter verfügbarer Monatswert = „heute"
+> - Startpunkt = 120 Monate davor
+> - monatlicher Sparplan
+> - echte historische Strecke inklusive Einbrüche
+> - keine Tagesdaten
+> - keine glatte Zukunftsprojektion
+> - keine animierte Verlustzähler-Strafzettel-Logik
+>
+> Gültige fachliche Quelle bis zur neuen APP_SPEC:
+>
+> `Apps/prokrastinations-preis/MINI_SPEC_FROM_HAUPTDOKUMENT.md`
+>
+> Eine neue `APP_SPEC.md` und neue Slice-Dateien für die Marktzeit-Mechanik sind ein eigener Folge-Task („B1 Slice-0-Reboot").
+
+---
+
 # SLICE_PLAN — prokrastinations-preis
 
 Stand: 2026-05-11 | Pre-Code-Gate Full | Geändert von: Claude

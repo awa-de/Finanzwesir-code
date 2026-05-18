@@ -2,13 +2,13 @@
 Version: 1
 Stand: 2026-05-18
 Fokus-AP: APP-01 — prokrastinations-preis
-Nächster-Schritt: Entscheidung: APP_SPEC.md beschreibt noch alte B1-Mechanik (Verlustzähler). Vor Slice 0: klären, ob APP_SPEC auf neue Marktzeit-Mechanik umgeschrieben wird oder ob Slice 0 mit altem Konzept startet.
+Nächster-Schritt: B1 Slice-0-Reboot — neue APP_SPEC für Marktzeit-Mechanik erstellen (alte APP_SPEC/Slice-Dateien mit VERALTET-Header versehen, nicht mehr operative Spezifikation)
 Blocker: keine
 -->
 
 # PROJECT STATUS — Finanzwesir 2.0
 
-Stand: 2026-05-18 | Session: App-Landschaft-Bereinigung | Geändert von: Claude
+Stand: 2026-05-18 | Session: Block-B-Umbau-B4-B5 | Geändert von: Claude
 
 **Zweck:** Schneller Wiedereinstieg nach Pausen.
 **Zielgruppe:** Albert und Claude.
@@ -21,11 +21,11 @@ Stand: 2026-05-18 | Session: App-Landschaft-Bereinigung | Geändert von: Claude
 
 ## 1. Aktueller Fokus
 
-**App-Landschaft bereinigt ✅** (AF-13, 2026-05-18): B1 von Verlustzähler zu Marktzeit-App umgerahmt, B2 auf Epochen-Fokus reduziert, neue Apps Der alte Euro (F3) + Depot-Kipppunkt (F4) angelegt, 1-Million-App verworfen. 21 Master-Apps / 24 Ordner.
+**App-Landschaft bereinigt + Block B umgebaut ✅** (AF-13 + 2026-05-18): B1 von Verlustzähler zu Marktzeit-App umgerahmt, B2 auf Epochen-Fokus reduziert, Block B zu „Marktzeit statt Timing" umbenannt, Der alte Euro (B4) + Depot-Kipppunkt (B5) in Block B integriert (vorher F3/F4), 1-Million-App verworfen. 21 Master-Apps / 24 Ordner.
 
-**Pre-Code-Gate Full prokrastinations-preis ✅ bestanden** (APP-01-pre-code-gate): SLICE_PLAN.md mit Slices 0–7b erstellt. SLICE_0_KICKOFF.md erstellt, Alberts Freigabe erteilt 2026-05-11.
+**B1 operative Dateien VERALTET ✅** (2026-05-18): APP_SPEC.md, SLICE_0_KICKOFF.md und SLICE_PLAN.md mit hartem VERALTET-Header versehen. Nicht mehr als Implementierungsanleitung verwenden. Operative Quelle für B1: MINI_SPEC_FROM_HAUPTDOKUMENT.md.
 
-⚠️ **Offene Entscheidung vor Slice-0-Start:** APP_SPEC.md und SLICE_0_KICKOFF.md beschreiben noch die alte B1-Mechanik (Verlustzähler). Vor dem ersten Code klären: Wird APP_SPEC auf die neue Marktzeit-Mechanik umgeschrieben, oder startet Slice 0 mit dem alten Konzept?
+⚙️ **Nächster Schritt B1:** B1 Slice-0-Reboot — neue APP_SPEC für die Marktzeit-Mechanik erstellen (eigener Task).
 
 ---
 
@@ -52,7 +52,7 @@ Stand: 2026-05-18 | Session: App-Landschaft-Bereinigung | Geändert von: Claude
 
 ## 3. Nächster sinnvoller Schritt
 
-- **Slice 0 implementieren** — `Apps/prokrastinations-preis/app.js`, `app.css`, `app.test.html` (alle NEU) — App-Shell + Ghost-Card-Bootstrap
+- **B1 Slice-0-Reboot** — neue APP_SPEC für Marktzeit-Mechanik erstellen (eigener Task). Basis: `Apps/prokrastinations-preis/MINI_SPEC_FROM_HAUPTDOKUMENT.md`. Alte APP_SPEC/Slice-Dateien sind VERALTET, kein Code ohne neue APP_SPEC.
 - **AP-20/21** (Mixed-Rhythm CV-Heuristik) — 🟡 Aktiv, Chart-Engine, parallel möglich
 
 ---
@@ -65,7 +65,7 @@ Stand: 2026-05-18 | Session: App-Landschaft-Bereinigung | Geändert von: Claude
 | Chart-Engine | Stabil, offene APs | Siehe `docs/steering/BACKLOG.md` |
 | Theme | In Entwicklung | `THEME-ASSEMBLY-CHECKLIST.md` |
 | CSS | Stabil | Siehe `docs/steering/BACKLOG.md` (CSS-N Items) |
-| Apps | Pre-Code-Gate Full ✅ + SLICE_PLAN.md | Slice 0 implementieren (app.js, app.css, app.test.html) |
+| Apps | Block B umgebaut ✅ + VERALTET-Header gesetzt | B1 Slice-0-Reboot: neue APP_SPEC für Marktzeit-Mechanik |
 | Content | Laufend | Redaktionsleitfaden aktiv |
 | Security | SECURITY-BASELINE.md App-Fabrik-gatefähig ✅ | Security-Sync-Regel + Gate-Prüffrage verankert (ST-13/ST-14) |
 
@@ -232,18 +232,20 @@ Neue APs: DS-012, DS-013, DS-014.
 
 ## 9. Einstieg für nächste Session
 
-**Pre-Code-Gate Full bestanden ✅. Nächster Schritt: Slice 0 implementieren.**
+**Nächster Schritt: B1 Slice-0-Reboot — neue APP_SPEC für Marktzeit-Mechanik erstellen.**
 
-1. `Apps/prokrastinations-preis/SLICE_0_KICKOFF.md` lesen (Annahmen A-1–A-18, Failure Cases FC-1–FC-11, Akzeptanzkriterien A0-1–A0-9)
-2. `Apps/prokrastinations-preis/SLICE_PLAN.md` lesen (Slice 0 Scope, Struktur app.js / app.css / app.test.html)
-3. Implementierung Slice 0 — `app.js`, `app.css`, `app.test.html` (alle NEU) — Freigabe ✅ erteilt 2026-05-11
-4. `app.test.html` im VSCode Live Server öffnen — alle 5 Szenarien (A–E) prüfen
+⚠️ NICHT mehr lesen / verwenden:
+- `Apps/prokrastinations-preis/APP_SPEC.md` — VERALTET (alte Mechanik: Verlustzähler)
+- `Apps/prokrastinations-preis/SLICE_0_KICKOFF.md` — VERALTET (alte Mechanik)
+- `Apps/prokrastinations-preis/SLICE_PLAN.md` — VERALTET (alte Mechanik)
 
-Pflichtquellen (bereits gelesen, bleiben bindend):
+Operative Quelle für B1-Reboot:
+- `Apps/prokrastinations-preis/MINI_SPEC_FROM_HAUPTDOKUMENT.md` — neue B1-Richtung (Marktzeit-Mechanik, MSCI-World-Monatsdaten)
+- `docs/App-Fabrik/ETF-Apps-Hauptdokument.md` — B1-Abschnitt im Block B
+
+Pflichtquellen weiterhin bindend:
 - `docs/spec/APP-INTERFACE.md` — Ghost-Card-Vertrag
 - `docs/steering/audits/SECURITY-BASELINE.md` — Sicherheitsregeln
-- `Apps/prokrastinations-preis/APP_SPEC.md` V0.3 — bindende Spec
-- `Apps/prokrastinations-preis/SLICE_PLAN.md` — Slice-Scope + Akzeptanzkriterien
 
 **Scope-Funde die noch offen sind:**
 - AUTHOR_GUIDE-v3.md: `data-app` → `data-fw-app` Update (nach Pilot-1, wenn Vertrag stabil)

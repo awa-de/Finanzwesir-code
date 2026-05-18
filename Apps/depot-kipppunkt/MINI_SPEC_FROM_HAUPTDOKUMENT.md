@@ -1,14 +1,15 @@
 # MINI_SPEC_FROM_HAUPTDOKUMENT — Depot-Kipppunkt
 
-> Quelle: `aktuelles Projekt/03_ZUSATZTEXT_MINI_SPEC_DEPOT_KIPPPUNKT.md`
-> Status: Roh-Mini-Spec aus App-Intake, noch nicht APP_SPEC
+> Quelle: `docs/App-Fabrik/ETF-Apps-Hauptdokument.md`
+> Status: Roh-Mini-Spec aus Hauptdokument, noch nicht APP_SPEC
+> Letzte Änderung: 2026-05-18 — Von F?/H? zu B5 verschoben; Block B „Marktzeit statt Timing"; CTA auf A1-Hauptpfad aktualisiert
 
 ---
 
-## F?/H? – Depot-Kipppunkt
+## B5 – Depot-Kipppunkt
 
 **Slug:** `depot-kipppunkt`
-**Funnel-Position:** Statuswechsel / nach „Der alte Euro", vor Plan-Generator
+**Funnel-Position:** Marktzeit statt Timing / Statuswechsel
 **Modulrolle:** Motivations- und Statuswechsel-App
 **App-Familie:** Calculator / Scenario-Chart
 
@@ -38,20 +39,25 @@ Diese Formulierung ist zentral und soll nicht verwässert werden.
 
 ---
 
-## Rolle im App-Universum
+## Rolle im Block B
 
 „Depot-Kipppunkt" zeigt, wann der Motor das Auto zieht.
 
-Die App steht nach „Der alte Euro" und vor dem Plan-Generator oder als Übergang zum finalen Startplan.
+Die App steht nach B4 „Der alte Euro" und führt im Hauptpfad zu A1 Risiko-Übersetzer.
 
-Rollenformel:
+Rollenformel: **Der Motor wird Mitverdiener.**
+
+Block-B-Kette:
 
 ```text
-Der alte Euro
+B4 Der alte Euro
 → So arbeitet Zeit im einzelnen Euro.
 
-Depot-Kipppunkt
+B5 Depot-Kipppunkt
 → Viele produktive Euros werden irgendwann ein Mitverdiener.
+
+A1 Risiko-Übersetzer
+→ Bevor du losrennst: Erst die Dosis klären.
 ```
 
 ---
@@ -146,7 +152,17 @@ Wichtig: Keine optionale zweite Ebene mit Sparratendynamik oder Steuerschätzung
 
 ## CTA
 
+Im Hauptpfad:
+
+> „Welche Dosis hältst du aus?"
+
+Ziel: A1 Risiko-Übersetzer.
+
+Standalone optional:
+
 > „Startplan bauen"
+
+Funnel-CTA priorisiert A1.
 
 Übergangssatz:
 
@@ -166,8 +182,9 @@ Wichtig: Keine optionale zweite Ebene mit Sparratendynamik oder Steuerschätzung
 
 ## Mini-Spec-Metadaten
 
-- Quelle: `aktuelles Projekt/03_ZUSATZTEXT_MINI_SPEC_DEPOT_KIPPPUNKT.md`
-- Block: Übergang F/H oder F – Mechanismen/Motivation
+- Quelle: `docs/App-Fabrik/ETF-Apps-Hauptdokument.md`
+- Block: B – Marktzeit statt Timing
+- App-ID: B5
 - App-Titel: Depot-Kipppunkt
 - Slug: `depot-kipppunkt`
 - Zugeordneter App-Ordner: `/Apps/depot-kipppunkt/`

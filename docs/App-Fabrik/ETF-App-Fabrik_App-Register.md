@@ -1,6 +1,6 @@
 # ETF-App-Fabrik – App-Register
 
-Stand: 2026-05-18 | V0.5 | Geändert von: Claude
+Stand: 2026-05-18 | V0.6 | Geändert von: Claude
 
 **Dieses Dokument enthält:**
 - Schlanke Master-App-Liste (21 Apps: #, Slug, Block, Factory-Familie, Status)
@@ -41,8 +41,8 @@ App-Familien, Factory-Lücken, Pilotstrategie: `ETF-App-Fabrik_Factory-Analyse.m
 | 17 | Thesaurierer vs. Ausschütter | `thesaurierer-rennen` | F2 | Calculator / Comparison Race | Offen |
 | 18 | Weltdepot-Baukasten | `weltdepot-baukasten` | C3 | Configurator / Portfolio Compare | Offen |
 | 19 | ETF-Reifegrad-Test + Start-Konfigurator | `etf-reifegrad-finale` | H1 | Quiz + Configurator | Offen |
-| 20 | Der alte Euro | `der-alte-euro` | F3 | Calculator-Visualisierung / Mechanik-Mini-App | Offen |
-| 21 | Depot-Kipppunkt | `depot-kipppunkt` | F4 | Calculator / Scenario-Chart | Offen |
+| 20 | Der alte Euro | `der-alte-euro` | B4 | Calculator-Visualisierung / Mechanik-Mini-App | Offen |
+| 21 | Depot-Kipppunkt | `depot-kipppunkt` | B5 | Calculator / Scenario-Chart | Offen |
 
 ---
 
@@ -81,8 +81,8 @@ Alle realen Arbeitsordner. In `docs/App-Fabrik` nur Verweise, kein Code.
 | `/Apps/investment-universum/` | C1 Diversifikations-Detektor | Gegenperspektive / Grundmodell | Konzept-Fragment (Prompt-Dokument, kein Code) |
 | `/Apps/rollierende-sparplaene/` | B2 Geburtsjahrlos-Simulator | Erweiterungsmodul / Analysemodus | Starker Prototyp (msci-sparplan_v2.html + annotated) |
 | `/Apps/weltkarte-etf-indizes/` | C1 Diversifikations-Familie | Visuelles Lernmodul / Companion-App | Starker Prototyp (etf-index-map_v2.html, 16 Indizes, Mobile Bottom Sheet) |
-| `/Apps/der-alte-euro/` | F3 Der alte Euro | Master-App | Kein Code — Mini-Spec vorhanden |
-| `/Apps/depot-kipppunkt/` | F4 Depot-Kipppunkt | Master-App | Kein Code — Mini-Spec vorhanden |
+| `/Apps/der-alte-euro/` | B4 Der alte Euro | Master-App | Kein Code — Mini-Spec vorhanden |
+| `/Apps/depot-kipppunkt/` | B5 Depot-Kipppunkt | Master-App | Kein Code — Mini-Spec vorhanden |
 
 ---
 
@@ -143,3 +143,4 @@ Die Chart-Engine ist **kein App-Unterverzeichnis** und **kein Funnel-Slot**.
 | V0.3.1 | 2026-05-09 | Entscheidungen eingetragen: P-01 (Pilot-Reihenfolge), A-08 (D3/TopoJSON lokal), Fam-01 (G3 eigenständig), Z-03/Z-04 (B2/C1 Rollen-Zuordnung). Statuszeilen aktualisiert. |
 | V0.4 | 2026-05-18 | + A3 „Der Markt kam zurück. Du nicht." (markt-kam-zurueck). Zählmodell 18+3=21 → 19+3=22. |
 | V0.5 | 2026-05-18 | B1 umgerahmt (Marktzeit schlägt Timing). B2 bereinigt (Epochen-Fokus, Realwerte). + F3 Der alte Euro + F4 Depot-Kipppunkt. Master-Apps 19→21, reale Ordner 22→24. |
+| V0.6 | 2026-05-18 | F3/F4 → B4/B5: Der alte Euro und Depot-Kipppunkt in Block B (Marktzeit statt Timing) verschoben. Block-B-Umbau abgeschlossen. |

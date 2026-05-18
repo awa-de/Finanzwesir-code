@@ -11,7 +11,7 @@
 **Slug:** `geburtsjahrlos`
 **KI-Konsens:** ★★★★ (Perplexity, Claude, Gemini, ChatGPT)
 **Folienbezug:** Slides 4–6, 8–10, 60 (Großwetterlage, historische Renditen)
-**Funnel-Position:** Timing zerstören / historische Robustheit
+**Funnel-Position:** Marktzeit statt Timing / historische Robustheit
 **Modulrolle:** Haupt-App im Timing-Block
 
 ---
@@ -149,7 +149,7 @@ B2 zeigt historisch, dass echte 30-Jahres-Zeiträume sehr unterschiedlich ausgin
 ## Mini-Spec-Metadaten
 
 - Quelle: `docs/App-Fabrik/ETF-Apps-Hauptdokument.md` + `aktuelles Projekt/05_ZUSATZTEXT_B2_REWRITE_GEBURTSJAHRENLOS.md`
-- Block: B – Timing zerstören
+- Block: B – Marktzeit statt Timing
 - App-ID: B2
 - App-Titel: Geburtsjahrlos
 - Slug laut Hauptdokument: `geburtsjahrlos`
