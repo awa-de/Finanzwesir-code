@@ -221,7 +221,7 @@ Manuelle Aktivierung: `/spec-rewrite-guard docs/spec/[Dateiname]`
 | Statische Seiten | `content/pages/` |
 | Rechtliches | `content/legal/` |
 | App-Ordner | `Apps/` |
-| App-Fabrik Steuerung | `docs/App-Fabrik/` (00_STATUS, APP_INVENTORY, 01–05_*.md, V0.3 Produktlandkarte) |
+| App-Fabrik Steuerung | `docs/App-Fabrik/` (00_STATUS, APP_INVENTORY, 01–05_*.md, App-Register, Factory-Analyse) |
 
 ## Steuerungsdokumente (Auswahl)
 
