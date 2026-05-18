@@ -228,9 +228,9 @@ Neue APs: DS-012, DS-013, DS-014.
 
 **Pre-Code-Gate Full bestanden ✅. Nächster Schritt: Slice 0 implementieren.**
 
-1. `Apps/prokrastinations-preis/SLICE_PLAN.md` lesen (Slice 0 Scope, Akzeptanzkriterien A0-1–A0-6)
-2. Alberts explizites OK geben
-3. Implementierung Slice 0 — `app.js`, `app.css`, `app.test.html` (alle NEU)
+1. `Apps/prokrastinations-preis/SLICE_0_KICKOFF.md` lesen (Annahmen A-1–A-18, Failure Cases FC-1–FC-11, Akzeptanzkriterien A0-1–A0-9)
+2. `Apps/prokrastinations-preis/SLICE_PLAN.md` lesen (Slice 0 Scope, Struktur app.js / app.css / app.test.html)
+3. Implementierung Slice 0 — `app.js`, `app.css`, `app.test.html` (alle NEU) — Freigabe ✅ erteilt 2026-05-11
 4. `app.test.html` im VSCode Live Server öffnen — alle 5 Szenarien (A–E) prüfen
 
 Pflichtquellen (bereits gelesen, bleiben bindend):

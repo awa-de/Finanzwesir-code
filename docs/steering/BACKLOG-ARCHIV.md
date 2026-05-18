@@ -1,5 +1,5 @@
 # BACKLOG-ARCHIV – Finanzwesir 2.0
-Stand: 2026-05-11 | Session: pre-code-gate-sliceplan | Geändert von: Claude
+Stand: 2026-05-11 | Session: slice0-kickoff | Geändert von: Claude
 
 Abgeschlossene Items, neueste zuerst (append-only).
 Archivierungs-Trigger: wenn > 200 Zeilen → neue Datei `BACKLOG-ARCHIV-YYYY.md` anlegen.
