@@ -20,7 +20,7 @@ Die Apps sind **keine isolierten Widgets**, sondern Stationen eines psychologisc
 HOOK
   ↓
 [B] TIMING ZERSTÖREN
-    B1 Prokrastinations-Preis · B2 Geburtsjahrlos · B3 Market-Timing-Simulator
+    B1 Marktzeit schlägt Timing · B2 Geburtsjahrlos · B3 Market-Timing-Simulator
   ↓
 [A] RISIKO ÜBERLEBEN
     A1 Risiko-Übersetzer (Dosis finden)
@@ -34,7 +34,7 @@ HOOK
     D1 Namensdecoder · D2 Replizierer/Swapper · D3 TER-Rechner · E1 ESG-Spiegel
   ↓
 [F] MECHANISMEN VERSTEHEN
-    F1 Renditekiller · F2 Thesaurierer/Ausschütter
+    F1 Renditekiller · F2 Thesaurierer/Ausschütter · F3 Der alte Euro · F4 Depot-Kipppunkt
   ↓
 ══════════════════════════════════════════════════
 [G] SYSTEMKRITISCHE EINWÄNDE  ← NEU IN VERSION 2
@@ -72,7 +72,7 @@ Block G muss **anders klingen** als der Rest: nicht motivierend, nicht vereinfac
 | 9 | Market-Timing-Simulator | B3 | ★★ | 🔥 Hoch | Mittel | 🟨 offen |
 | 10 | 1 ETF vs. 5 ETFs | C2 | ★★ | Mittel | Gering | 🟨 offen |
 | 11 | TER-Rechner (Kostenkiller) | D3 | ★★ | Mittel | Mittel | 🟨 offen |
-| 12 | Prokrastinations-Preis | B1 | ★★ | 🔥 Hoch | Gering | 🟨 offen |
+| 12 | Marktzeit schlägt Timing | B1 | ★★ | 🔥 Hoch | Gering | 🟨 offen |
 | 13 | ESG-Spiegel | E1 | ★★ | Mittel | Mittel | 🟨 offen |
 | 14 | Renditekiller (Volatilität) | F1 | ★ | Mittel | Gering | 🟨 offen |
 | 15 | Passiv-Paradox | G3 | ★ | Mittel | Gering | 🟨 offen |
@@ -80,6 +80,8 @@ Block G muss **anders klingen** als der Rest: nicht motivierend, nicht vereinfac
 | 17 | Thesaurierer vs. Ausschütter | F2 | ★ | Gering | Gering | 🟨 offen |
 | 18 | Weltdepot-Baukasten | C3 | ★ | Mittel | Mittel | 🟨 offen |
 | 19 | ETF-Reifegrad-Test + Konfigurator | H1 | ★ | 🔥 Hoch | Hoch | 🟨 offen |
+| 20 | Der alte Euro | F3 | — | Mittel | Gering | 🟨 offen |
+| 21 | Depot-Kipppunkt | F4 | — | 🔥 Hoch | Gering | 🟨 offen |
 
 > **Weltkarte der 16 Indizes:** Bereits in Arbeit. Ergänzt App C1 (Diversifikations-Detektor).
 > **Status-Codes:** ✅ fertig · 🟨 in Planung · 🟦 in Entwicklung · ❌ verworfen
@@ -317,80 +319,107 @@ A1 kalibriert die tragbare Dosis. A2 zwingt zur Entscheidung im Crash. A3 zeigt 
 
 ---
 
-## B1 – Prokrastinations-Preis
+## B1 – Marktzeit schlägt Timing / Lieber heute als morgen
 
 **Slug:** `prokrastinations-preis`
 **KI-Konsens:** ★★ (Perplexity, ChatGPT)
 **Folienbezug:** Slides 4–7 (Großwetterlage, 100 USD monatlich)
 **Funnel-Position:** Timing zerstören
-**Priorität:** #11
+**Priorität:** #12
 
 ### Problem, das gelöst wird
 
-„Ich fange nächstes Jahr an" ist die häufigste Ausrede. Diese App zeigt nicht abstrakt entgangene Prozente, sondern Euro-Verluste in Echtzeit – als animierter Countdown.
+Viele Anleger denken: „Vor zehn Jahren hätte es sich gelohnt. Jetzt ist der Zug abgefahren." Oder: „Ich warte noch. Vielleicht wird es günstiger." B1 zeigt: Der verpasste Startpunkt ist weg. Aber heute ist noch da.
 
 ### Kernbotschaft
 
-> „5 Jahre Warten kostet dich 47.000 €. Das ist keine Mahnung – das ist Mathematik."
+> „Du kannst nicht mehr vor 10 Jahren starten. Aber du kannst verhindern, dass heute in 10 Jahren wieder ‚vor 10 Jahren' heißt."
 
-### Interaktion (UX-Flow)
+Kurzform: „Warten nimmt dir Marktzeit." — die verständliche Finanzwesir-Version von: „Time in the market beats timing the market."
 
-- Eingabe: Monatliche Sparrate, Anlagedauer (30 Jahre), Rendite (7 %)
-- Slider: „Ich fange in X Jahren an" (0–10)
-- Zwei animierte Linien: „Heute starten" vs. „In X Jahren starten"
-- Animierter Zähler für die Differenz in Euro (wächst beim Schieben)
+### Datenlogik
+
+B1 arbeitet mit echten MSCI-World-Monatsdaten. Letzter verfügbarer Monatswert = „heute", Startpunkt = 120 Monate vorher. Keine glatte 6–8-%-Zukunftsprojektion, keine monotone Modellkurve — die App braucht echte Einbrüche.
+
+### Interaktion (UX-Flow, 4 Screens)
+
+- Screen 1: Headline „Vor 10 Jahren wäre besser gewesen. Was ist mit heute?" · Eingabe: monatliche Sparrate, optional Startbetrag, Zeitraum fix 10 Jahre
+- Screen 2: Echte historische Sparplanstrecke (eingezahlt / heutiger Depotwert / Gewinn-Verlust) · Microcopy: „Das wäre kein gerader Weg gewesen. Aber es wäre Marktzeit gewesen."
+- Screen 3: Heute als vertikale Linie · Text: „Vor 10 Jahren ist weg. Heute nicht."
+- Screen 4: Keine Zukunftsprognose als glatte Kurve · „Wenn du jetzt wieder wartest, wird heute in zehn Jahren wieder der verpasste Zeitpunkt sein."
+
+### Was die App nicht tut
+
+- keine rollierenden 30-Jahres-Zeiträume (→ B2)
+- kein Kindersparplan
+- kein animierter Verlustzähler als Hauptmechanik
+- keine glatte Zukunftsprojektion
+
+### CTA
+
+> „Heute Marktzeit sammeln" / „Ich starte jetzt"
 
 ### Implementierungshinweise
 
-- Reine JS-Berechnung, kein Backend
-- Animierter Zähler: requestAnimationFrame
-- Formel: Zukunftswert = Rate × [((1+r)^n – 1) / r]
+- Historische MSCI-World-Monatsdaten lokal/statisch
+- Kein Backend, keine Tagesdaten, keine modellierte Zukunftskurve
 
 ---
 
-## B2 – Geburtsjahrlos-Simulator
+## B2 – Geburtsjahrlos
 
 **Slug:** `geburtsjahrlos`
 **KI-Konsens:** ★★★★ (Perplexity, Claude, Gemini, ChatGPT)
 **Folienbezug:** Slides 4–6, 8–10, 60 (Großwetterlage, historische Renditen)
-**Funnel-Position:** Timing zerstören / Hook
+**Funnel-Position:** Timing zerstören / historische Robustheit
 **Priorität:** #2
 
 ### Problem, das gelöst wird
 
-Dieselbe Strategie – 100 € monatlich, 30 Jahre, MSCI World – lieferte historisch zwischen 102.000 € und 402.000 €. Nicht wegen Fehlern, sondern wegen Zufall. Die einzige rationale Antwort darauf: sofort anfangen.
+Viele Anleger glauben unbewusst, langfristiges Investieren liefere ein planbares Standardergebnis. B2 zeigt: Selbst 30 Jahre ETF-Sparen sind keine Einheitsstrecke. Dieselbe Strategie, dieselbe Sparrate und dieselbe Laufzeit führten historisch zu sehr unterschiedlichen realen Endwerten — nicht wegen Fehlern, sondern wegen Börsenepoche.
 
 ### Kernbotschaft
 
-> „Du kontrollierst weder die Börse noch dein Geburtsjahr. Aber du kontrollierst, wann du anfängst."
+> „Du kontrollierst nicht deine Börsenepoche. Du kontrollierst nur, ob deine Strategie robust genug ist."
 
-### Interaktion (UX-Flow, 3 Szenarien)
+Kurzform: „Epoche ist Los."
 
-**Eingaben:** Geburtsjahr oder Startjahr (ab 1972), Sparrate, Laufzeit
+### Neue Rolle
 
-**Szenario 1 – Historischer Fächer:**
-Fächer-Diagramm mit bestem / Median / schlechtestem historischen MSCI-World-Verlauf.
-→ Selbst das schlechteste Szenario liegt über dem eingezahlten Kapital.
+B2 zeigt nicht mehr, wie wichtig frühes Anfangen ist (→ B1 und „Der alte Euro"). B2 zeigt: Wie unterschiedlich dieselbe 30-Jahres-Strategie je nach Börsenepoche ausging.
 
-**Szenario 2 – Kindersparplan:**
-Eltern starten bei Geburt mit 50 € monatlich.
-→ Was wurde eingezahlt, was erwirtschaftet (bis heute)?
+### Interaktion (UX-Flow)
 
-**Szenario 3 – „Hätte ich damals...":**
-„Der beste Zeitpunkt war vor 10 Jahren. Was hättest du heute?"
-→ Opportunitätskosten des Zögerns in Euro.
+**Eingaben:** monatliche Sparrate · Laufzeit: standardmäßig 30 Jahre · optional: Startmonat/Startjahr markieren
 
-**Button: „Was passiert, wenn ich 3 Jahre warte?"**
-→ Differenz direkt in Euro sichtbar.
+**Visualisierung:**
+- historischer Fächer aller rollierenden 30-Jahres-Zeiträume
+- schlechtester Zeitraum · Median-Zeitraum · bester Zeitraum
+- alle Hauptwerte inflationsbereinigt in heutiger Kaufkraft
 
-**Auto-generierter Output:**
-> „Du kannst das Timing nicht wählen – aber du kannst anfangen."
+**Ergebniswerte:** real eingezahlt · realer Endwert schlechtester / Median / bester Zeitraum
 
-**CTA:** „Sparplan starten – egal wann"
+### Methodische Schutzplanke
+
+Bei 30-Jahres-Zeiträumen müssen die Hauptwerte inflationsbereinigt sein. Nominale Werte dürfen höchstens als Nebenwert oder Tooltip erscheinen.
+
+### Was die App nicht tut
+
+- kein „Der beste Zeitpunkt war vor 10 Jahren" (→ B1)
+- keine Opportunitätskosten des Zögerns (→ B1)
+- kein Button „Was passiert, wenn ich 3 Jahre warte?" (→ B1)
+- kein Kindersparplan
+- keine Startalter-App
+- keine glatte Zukunftsprojektion
+
+### CTA
+
+> „Robust starten, statt perfekte Epoche suchen."
 
 ### Implementierungshinweise
 
-- Historische MSCI-World-Renditedaten als statisches JSON (Quelle: MSCI.com)
+- Historische MSCI-World-Monatsdaten lokal/statisch
+- Inflationsdaten erforderlich, Hauptwerte real
 - D3.js oder Chart.js für Fächer-Diagramm
 - Kein Backend nötig
 
@@ -708,6 +737,84 @@ Animiertes Wettrennen über 10/20/30 Jahre. Ausschütter: kleiner animierter Gel
 
 ---
 
+## F3 – Der alte Euro
+
+**Slug:** `der-alte-euro`
+**Funnel-Position:** Mechanismen verstehen / nach Timing-Block
+**Modulrolle:** Mechanik-Mini-App
+**Priorität:** #20
+
+### Problem, das gelöst wird
+
+„Früh anfangen" klingt wie eine moralische Mahnung. Diese App zeigt, warum frühes Geld tatsächlich mächtiger wird: Nicht der eine Euro wird magisch größer, sondern seine Erträge erzeugen wieder Erträge.
+
+### Kernbotschaft
+
+> „Ein alter Euro arbeitet mit Familie."
+
+Ausführlicher: „Ein früher Euro wird nicht größer, weil er besonders ist. Er wird größer, weil seine Erträge wieder Erträge erzeugen."
+
+### Rolle im App-Universum
+
+„Der alte Euro" zeigt den Motor. Steht nach den Timing-Apps und vor `Depot-Kipppunkt`.
+
+### Interaktion
+
+Vier gestapelte Balken zeigen, was aus 1 € nach 10, 20, 30 und 40 Jahren wird. Jeder Balken: ursprünglicher Euro · Ertrag auf den ursprünglichen Euro · Ertrag auf frühere Erträge. Eingabe: nur Renditewahl (4 %, 6 % oder 8 %), keine freie Eingabe.
+
+Punchline: „Nach 40 Jahren ist der ursprüngliche Euro nicht der Held. Er ist der Großvater."
+
+### Was die App nicht tut
+
+- kein Heute-vs.-Später-Vergleich · keine Opportunitätskosten · keine historische MSCI-Simulation · keine Sparrate, kein Depot, kein Einkommen, keine Steuer, keine Inflation
+
+### CTA
+
+> „Wann arbeitet dein Depot mit?" → Übergang zu Depot-Kipppunkt
+
+### Implementierungshinweise
+
+- Reine JS-Berechnung, kein Backend, keine historischen Daten, Formelmodell reicht
+
+---
+
+## F4 – Depot-Kipppunkt
+
+**Slug:** `depot-kipppunkt`
+**Funnel-Position:** Statuswechsel / nach „Der alte Euro", vor Plan-Generator
+**Modulrolle:** Motivations- und Statuswechsel-App
+**Priorität:** #21
+
+### Problem, das gelöst wird
+
+Sparen fühlt sich wie Konsumverzicht an. Diese App zeigt: Aus Sparen wird mit der Zeit eine zweite Einkommensquelle. Irgendwann kann das Depot rechnerisch mehr pro Jahr erwirtschaften als der heutige Job.
+
+### Kernbotschaft
+
+> „Irgendwann bringt dein Depot pro Jahr mehr ein als dein Job."
+
+### Interaktion
+
+Vier Eingaben: monatliches Nettoarbeitseinkommen · monatliche Sparrate · heutiger Depotwert · Renditeannahme (4 %, 6 %, 8 %).
+
+Visualisierung: Job-Netto-Linie (konstant) vs. Depot-Ertragslinie (wächst). Schnittpunkt = Depot-Kipppunkt. Fortschrittsmarken bei 25 %, 50 %, 75 %, 100 % des heutigen Job-Netto.
+
+Transparenzsatz (Pflicht): „Wir vergleichen dein heutiges Job-Netto mit dem rechnerischen Depot-Ertrag vor Steuern. Das ist keine Prognose, keine Steuerplanung und keine Rentenplanung, sondern eine Standortbestimmung."
+
+### Was die App nicht tut
+
+- keine Finanzfreiheit, keine Entnahmerate, keine Steuerdetails, keine Gehaltssteigerung, keine Sparratendynamik, keine Inflation, keine historischen MSCI-Pfade, kein „Wann kannst du aufhören zu arbeiten?" — Version 1 bleibt radikal schlank.
+
+### CTA
+
+> „Startplan bauen"
+
+### Implementierungshinweise
+
+- Reine JS-Berechnung, kein Backend, keine historischen Daten, Formelmodell reicht
+
+---
+
 ---
 
 # Block G: Systemkritische Einwände ← NEU IN VERSION 2
@@ -944,7 +1051,7 @@ Jede App muss:
 |---|---|---|
 | A1 Risiko-Übersetzer | `risiko-uebersetzer` | Höchster emotionaler Hebel, 4/4 KI-Konsens, geringer Aufwand |
 | D1 ETF-Namensdecoder | `etf-namensdecoder` | Niedrigste Einstiegshürde beseitigt, geringer Aufwand |
-| B1 Prokrastinations-Preis | `prokrastinations-preis` | Geringer Aufwand, starke Botschaft |
+| B1 Marktzeit schlägt Timing | `prokrastinations-preis` | Geringer Aufwand, starke Botschaft |
 
 ## Phase 2 – Kernapps (mittlerer Aufwand, sehr hohe Wirkung)
 
@@ -963,6 +1070,13 @@ Jede App muss:
 | D3 TER-Rechner | `kostenkiller-ter` |
 | E1 ESG-Spiegel | `esg-spiegel` |
 | G3 Passiv-Paradox | `passiv-paradox` |
+
+## Phase 3b – Mechanismus-Kette (nach Phase 3, vor Abschluss)
+
+| App | Slug | Warum |
+|---|---|---|
+| F3 Der alte Euro | `der-alte-euro` | Geringer Aufwand, schließt Mechanismus-Kette nach B1/B2 |
+| F4 Depot-Kipppunkt | `depot-kipppunkt` | Geringer Aufwand, motivierender Übergang zu H1 |
 
 ## Phase 4 – Abschluss & Feinschliff
 
@@ -984,4 +1098,5 @@ Jede App muss:
 | 1.0 | 28.04.2026 | Initiales Hauptdokument aus 4 KI-Quellen (15 Apps, Blöcke A–H) |
 | 2.0 | 28.04.2026 | + Block G (Systemkritische Einwände) mit G1 (✅ bereits gebaut), G2 (Rendite-Kalibrierung), G3 (Passiv-Paradox). Funnel-Architektur aktualisiert. Entwicklungs-Reihenfolge hinzugefügt. Master-Prioritätsliste auf 18 Apps erweitert. |
 | 3.0 | 2026-05-18 | + A3 „Der Markt kam zurück. Du nicht." als Ausstiegsfolgen-App. Block A zur Durchhalte-Kette umgerahmt (A1 Dosis finden → A2 Feuerprobe → A3 Ausstiegsfolge). Funnel-Struktur aktualisiert ([A/F] aufgelöst, [F] MECHANISMEN eigenständig). Master-Prioritätsliste auf 19 Apps erweitert. |
+| 4.0 | 2026-05-18 | B1 von Verlustzähler zu Marktzeit-App umgerahmt (neu: „Marktzeit schlägt Timing / Lieber heute als morgen", MSCI-World-Monatsdaten, 4-Screen-Flow). B2 bereinigt: Kindersparplan, vor-10-Jahren-Motiv und Warte-Button entfernt, Fokus auf rollierende 30-Jahres-Zeiträume mit inflationsbereinigten Realwerten. + F3 „Der alte Euro" (Mechanik-Mini-App, Slug: der-alte-euro). + F4 „Depot-Kipppunkt" (Statuswechsel-App, Slug: depot-kipppunkt). Rollenformel verankert: B1→B2→Der alte Euro→Depot-Kipppunkt. 1-Million-App verworfen. Master-Prioritätsliste auf 21 Apps erweitert. |
 

@@ -1,0 +1,172 @@
+# Zusatztext — B1 Rewrite: Marktzeit schlägt Timing / Lieber heute als morgen
+
+> Ziel: Dieser Text ersetzt die bisherige B1-Logik „Prokrastinations-Preis / Verlustzähler“ in Hauptdokument und Mini-Spec.  
+> Bitte an die bestehende Dokumentstruktur anpassen.
+
+---
+
+## B1 – Marktzeit schlägt Timing / Lieber heute als morgen
+
+**Slug:** `prokrastinations-preis` oder künftig optional `lieber-heute-als-morgen`  
+**Funnel-Position:** Timing zerstören  
+**Modulrolle:** Haupt-App im Timing-Block
+
+---
+
+## Problem, das gelöst wird
+
+Viele Anleger denken:
+
+> „Vor zehn Jahren hätte es sich gelohnt. Jetzt ist der Zug abgefahren.“
+
+Oder:
+
+> „Ich warte noch. Vielleicht wird es günstiger.“
+
+B1 zeigt: Der verpasste Startpunkt ist weg. Aber heute ist noch da.
+
+---
+
+## Kernbotschaft
+
+> „Du kannst nicht mehr vor 10 Jahren starten. Aber du kannst verhindern, dass heute in 10 Jahren wieder ‚vor 10 Jahren‘ heißt.“
+
+Kurzform:
+
+> „Warten nimmt dir Marktzeit.“
+
+Das ist die verständliche Finanzwesir-Version von:
+
+> „Time in the market beats timing the market.“
+
+---
+
+## Neue Rolle
+
+B1 wird von einer reinen Verlustzähler-App zu einer Marktzeit-App umgebaut.
+
+Die App macht den Satz erlebbar:
+
+> „Der beste Zeitpunkt zu investieren war vor 10 Jahren. Der zweitbeste ist heute.“
+
+Aber nicht als glatte Renditeprojektion und nicht als moralischer Strafzettel.
+
+---
+
+## Datenlogik
+
+B1 arbeitet mit echten MSCI-World-Monatsdaten.
+
+- letzter verfügbarer Monatswert = „heute“
+- Startpunkt = 120 Monate vorher
+- monatliche Sparrate
+- Monatsdaten, keine Tagesdaten
+- keine glatte 6–8-%-Zukunftsprojektion
+- keine monotone Modellkurve
+
+Warum:
+
+Die App braucht echte Einbrüche. Eine monotone Modellkurve wäre dramaturgisch und fachlich falsch.
+
+---
+
+## Interaktion
+
+### Screen 1 — Frage
+
+Headline:
+
+> „Vor 10 Jahren wäre besser gewesen. Was ist mit heute?“
+
+Subline:
+
+> „Wir rechnen nicht mit Wunschwerten. Wir nehmen echte MSCI-World-Monatsdaten.“
+
+Eingabe:
+
+- monatliche Sparrate
+- optional Startbetrag
+- Zeitraum fix: 10 Jahre
+
+### Screen 2 — Echte Vergangenheit
+
+Visual:
+
+```text
+Vor 10 Jahren gestartet → heute
+```
+
+Die App zeigt eine echte historische Sparplanstrecke.
+
+Dazu:
+
+- eingezahlt
+- heutiger Depotwert
+- Gewinn/Verlust gegenüber Einzahlung
+
+Microcopy:
+
+> „Das wäre kein gerader Weg gewesen. Aber es wäre Marktzeit gewesen.“
+
+### Screen 3 — Heute als Entscheidungspunkt
+
+Die Vergangenheit endet bei heute. Heute wird als vertikale Linie markiert.
+
+Text:
+
+> „Vor 10 Jahren ist weg. Heute nicht.“
+
+### Screen 4 — Nicht weiter warten
+
+Keine Zukunftsprognose als glatte Kurve.
+
+Kernaussage:
+
+> „Wenn du jetzt wieder wartest, wird heute in zehn Jahren wieder der verpasste Zeitpunkt sein.“
+
+---
+
+## Was die App nicht tut
+
+- keine rollierenden 30-Jahres-Zeiträume
+- keine Geburtsjahr-/Kohortenanalyse
+- kein historischer Fächer wie B2
+- keine glatte Zukunftsprojektion
+- kein Strafzettel-Verlustzähler als Hauptton
+- kein Kindersparplan
+- keine Renditedebatte
+
+---
+
+## Abgrenzung zu B2
+
+B1 beantwortet:
+
+> „Was mache ich mit dem verpassten Gestern und dem verfügbaren Heute?“
+
+B2 beantwortet:
+
+> „Wie unterschiedlich liefen 30 Jahre ETF-Sparen je nach Börsenepoche?“
+
+B1 ist die Entscheidungspunkt-/Marktzeit-App.  
+B2 ist die Kohorten-/Epochen-App.
+
+---
+
+## CTA
+
+> „Heute Marktzeit sammeln“
+
+oder:
+
+> „Ich starte jetzt“
+
+---
+
+## Implementierungshinweise
+
+- Historische MSCI-World-Monatsdaten lokal/statisch.
+- Kein Backend.
+- Kein Tagesdatenrauschen.
+- Keine modellierte Zukunftskurve.
+- Fokus auf echte 10-Jahres-Vergangenheit und heutigen Entscheidungspunkt.

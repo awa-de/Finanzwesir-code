@@ -140,7 +140,7 @@ Nach Abschluss: `/abschluss-ritual`.
 2. docs/steering/audits/SECURITY-BASELINE.md      ← Pflicht vor App-Arbeit
 3. docs/steering/design/CSS-KONVENTIONEN.md       ← Klassen-Naming
 4. docs/design-system/                            ← Tokens, bestehende Komponenten
-5. docs/App-Fabrik/APP_INVENTORY.md               ← Alle 22 App-Ordner, Datenbedarf, offene Klärungen
+5. docs/App-Fabrik/APP_INVENTORY.md               ← Alle 24 App-Ordner, Datenbedarf, offene Klärungen
 6. docs/App-Fabrik/03_APP_FACTORY_STANDARD_DRAFT.md ← Dateistruktur-Standard, Ghost-Card-Vertrag, DoD
 7. docs/App-Fabrik/04_CLAUDE_WORKFLOW_DRAFT.md    ← Skills-Mapping, Phasen Intake→Spec→Gate→Release
 8. docs/App-Fabrik/CHART_ENGINE_ROLE_AND_INTEGRATION.md ← Architekturprinzipien P-01–P-10 (bei Daten/Kontext/A11y-Fragen)

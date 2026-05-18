@@ -2,13 +2,13 @@
 Version: 1
 Stand: 2026-05-18
 Fokus-AP: APP-01 — prokrastinations-preis
-Nächster-Schritt: Slice 0 implementieren — SLICE_0_KICKOFF.md lesen (Grundlage), Freigabe erteilt 2026-05-11
+Nächster-Schritt: Entscheidung: APP_SPEC.md beschreibt noch alte B1-Mechanik (Verlustzähler). Vor Slice 0: klären, ob APP_SPEC auf neue Marktzeit-Mechanik umgeschrieben wird oder ob Slice 0 mit altem Konzept startet.
 Blocker: keine
 -->
 
 # PROJECT STATUS — Finanzwesir 2.0
 
-Stand: 2026-05-18 | Session: distill-3 | Geändert von: Claude
+Stand: 2026-05-18 | Session: App-Landschaft-Bereinigung | Geändert von: Claude
 
 **Zweck:** Schneller Wiedereinstieg nach Pausen.
 **Zielgruppe:** Albert und Claude.
@@ -21,8 +21,11 @@ Stand: 2026-05-18 | Session: distill-3 | Geändert von: Claude
 
 ## 1. Aktueller Fokus
 
-**Pre-Code-Gate Full prokrastinations-preis ✅ bestanden** (APP-01-pre-code-gate): SLICE_PLAN.md mit Slices 0–7b erstellt + 4 Korrekturen eingearbeitet (Container-Selektor, Testszenarien C–E, Loading-State-Formulierung, Kein-Container-Codeverhalten). NB-2 entschieden: internes Config-Objekt (RFC §D5). Security-Sync synchron.
-**SLICE_0_KICKOFF.md erstellt ✅** (Anti-Agreeableness-Gate bestanden, Alberts Freigabe erteilt 2026-05-11). Nächster Schritt: **Slice 0 implementieren** — `app.js`, `app.css`, `app.test.html`.
+**App-Landschaft bereinigt ✅** (AF-13, 2026-05-18): B1 von Verlustzähler zu Marktzeit-App umgerahmt, B2 auf Epochen-Fokus reduziert, neue Apps Der alte Euro (F3) + Depot-Kipppunkt (F4) angelegt, 1-Million-App verworfen. 21 Master-Apps / 24 Ordner.
+
+**Pre-Code-Gate Full prokrastinations-preis ✅ bestanden** (APP-01-pre-code-gate): SLICE_PLAN.md mit Slices 0–7b erstellt. SLICE_0_KICKOFF.md erstellt, Alberts Freigabe erteilt 2026-05-11.
+
+⚠️ **Offene Entscheidung vor Slice-0-Start:** APP_SPEC.md und SLICE_0_KICKOFF.md beschreiben noch die alte B1-Mechanik (Verlustzähler). Vor dem ersten Code klären: Wird APP_SPEC auf die neue Marktzeit-Mechanik umgeschrieben, oder startet Slice 0 mit dem alten Konzept?
 
 ---
 

@@ -1,10 +1,10 @@
 # ETF-App-Fabrik – App-Register
 
-Stand: 2026-05-18 | Umbenannt von Produktlandkarte V0.3 | Geändert von: Claude
+Stand: 2026-05-18 | V0.5 | Geändert von: Claude
 
 **Dieses Dokument enthält:**
-- Schlanke Master-App-Liste (19 Apps: #, Slug, Block, Factory-Familie, Status)
-- Vollständige Liste aller 22 realen App-Ordner in /Apps
+- Schlanke Master-App-Liste (21 Apps: #, Slug, Block, Factory-Familie, Status)
+- Vollständige Liste aller 24 realen App-Ordner in /Apps
 - Chart-Engine als gemeinsame Infrastruktur
 - Multi-Modul-Master-Apps (B2, C1)
 
@@ -15,7 +15,7 @@ Stand: 2026-05-18 | Umbenannt von Produktlandkarte V0.3 | Geändert von: Claude
 
 ---
 
-## A — 19 Funnel-Master-Apps
+## A — 21 Funnel-Master-Apps
 
 Vollständige Briefings: `ETF-Apps-Hauptdokument.md` (Blöcke A–H)
 App-Familien, Factory-Lücken, Pilotstrategie: `ETF-App-Fabrik_Factory-Analyse.md`
@@ -33,7 +33,7 @@ App-Familien, Factory-Lücken, Pilotstrategie: `ETF-App-Fabrik_Factory-Analyse.m
 | 9 | Market-Timing-Simulator | `market-timing-simulator` | B3 | Challenge / Decision + Reveal Chart | Offen |
 | 10 | 1 ETF vs. 5 ETFs / Komplexitätsentlarver | `komplexitaets-entlarver` | C2 | Compare / Complexity Reducer | Offen |
 | 11 | TER-Rechner / Kostenkiller | `kostenkiller-ter` | D3 | Calculator + Cost Scenario Chart | Offen |
-| 12 | Prokrastinations-Preis | `prokrastinations-preis` | B1 | Calculator + Live Counter | Pilot 1 🟢 (P-01 entschieden) |
+| 12 | Marktzeit schlägt Timing / Lieber heute als morgen | `prokrastinations-preis` | B1 | Scenario Chart (historische Monatsdaten) | Pilot 1 🟢 (P-01 entschieden) |
 | 13 | ESG-Spiegel | `esg-spiegel` | E1 | Explorer / Compare | Offen |
 | 14 | Renditekiller Volatilität | `renditekiller-volatilitaet` | F1 | Calculator / Simulation | Offen |
 | 15 | Passiv-Paradox | `passiv-paradox` | G3 | Interactive Explainer | 🟡 Eigenständige App (Arbeitsannahme) |
@@ -41,14 +41,16 @@ App-Familien, Factory-Lücken, Pilotstrategie: `ETF-App-Fabrik_Factory-Analyse.m
 | 17 | Thesaurierer vs. Ausschütter | `thesaurierer-rennen` | F2 | Calculator / Comparison Race | Offen |
 | 18 | Weltdepot-Baukasten | `weltdepot-baukasten` | C3 | Configurator / Portfolio Compare | Offen |
 | 19 | ETF-Reifegrad-Test + Start-Konfigurator | `etf-reifegrad-finale` | H1 | Quiz + Configurator | Offen |
+| 20 | Der alte Euro | `der-alte-euro` | F3 | Calculator-Visualisierung / Mechanik-Mini-App | Offen |
+| 21 | Depot-Kipppunkt | `depot-kipppunkt` | F4 | Calculator / Scenario-Chart | Offen |
 
 ---
 
-## B — 22 reale App-Ordner in /Apps
+## B — 24 reale App-Ordner in /Apps
 
 Alle realen Arbeitsordner. In `docs/App-Fabrik` nur Verweise, kein Code.
 
-**19 Master-Apps** (vollständige Inventar-Tabelle: `APP_INVENTORY.md`):
+**21 Master-Apps** (vollständige Inventar-Tabelle: `APP_INVENTORY.md`):
 
 | App-Ordner | Zugehöriger Funnel-Block | Prototyp-Stand |
 |---|---|---|
@@ -79,6 +81,8 @@ Alle realen Arbeitsordner. In `docs/App-Fabrik` nur Verweise, kein Code.
 | `/Apps/investment-universum/` | C1 Diversifikations-Detektor | Gegenperspektive / Grundmodell | Konzept-Fragment (Prompt-Dokument, kein Code) |
 | `/Apps/rollierende-sparplaene/` | B2 Geburtsjahrlos-Simulator | Erweiterungsmodul / Analysemodus | Starker Prototyp (msci-sparplan_v2.html + annotated) |
 | `/Apps/weltkarte-etf-indizes/` | C1 Diversifikations-Familie | Visuelles Lernmodul / Companion-App | Starker Prototyp (etf-index-map_v2.html, 16 Indizes, Mobile Bottom Sheet) |
+| `/Apps/der-alte-euro/` | F3 Der alte Euro | Master-App | Kein Code — Mini-Spec vorhanden |
+| `/Apps/depot-kipppunkt/` | F4 Depot-Kipppunkt | Master-App | Kein Code — Mini-Spec vorhanden |
 
 ---
 
@@ -138,3 +142,4 @@ Die Chart-Engine ist **kein App-Unterverzeichnis** und **kein Funnel-Slot**.
 | V0.3 | 2026-05-09 | Sauberes Zählmodell (18+3=21), Multi-Modul-Master-Apps B2+C1, Chart-Engine als Infrastruktur, vollständige App-Ordner-Liste. |
 | V0.3.1 | 2026-05-09 | Entscheidungen eingetragen: P-01 (Pilot-Reihenfolge), A-08 (D3/TopoJSON lokal), Fam-01 (G3 eigenständig), Z-03/Z-04 (B2/C1 Rollen-Zuordnung). Statuszeilen aktualisiert. |
 | V0.4 | 2026-05-18 | + A3 „Der Markt kam zurück. Du nicht." (markt-kam-zurueck). Zählmodell 18+3=21 → 19+3=22. |
+| V0.5 | 2026-05-18 | B1 umgerahmt (Marktzeit schlägt Timing). B2 bereinigt (Epochen-Fokus, Realwerte). + F3 Der alte Euro + F4 Depot-Kipppunkt. Master-Apps 19→21, reale Ordner 22→24. |

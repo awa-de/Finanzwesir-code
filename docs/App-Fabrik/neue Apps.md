@@ -1,4 +1,4 @@
-## Neue Apps
+## Neue Apps\
 
 ### Klären
 
@@ -6,7 +6,11 @@
 2. bereits vorhanden? Wenn nein
 3. Wo einsortieren in den Trichter? Zu welcher Familie gehört die neue App
 
-### App Kursverlust
+### App Kursverlust\
+
+\
+**18.05.2026 => erledigt, als A3 neu eingeführt**
+
 Wir zeigen die historische Kurve des MSCI WOrld über die Jahrzehnte. Der Nutzer sagt, bei welchem Verlust (hier diskutieren, prozentual oder in echten Euro) er aussteigt. Das gibt er als Parameter ein.\
 Daraufhin zeigen wir eine zweite Kurve: Sie hört da auf, wo der Nutzer ausgestiegen wäre. \
 Dann sage wir: Weil Du nicht durchgehalten hast, hast Du X € Verloren. => Opportunitätskosten sichtbar machen. Entweder als reine Zahlen, oder umgerechnet als Sachwert (Dacia, Küche, etc..)
@@ -16,10 +20,12 @@ Ich will zeigen, wie viele ganz "entsetzliche" Drawdowns es gab, die relativ sch
 Alternativ machen wir folgendes: Wir zeigen die superlange Zeitachse des MSCI World, der Nutzer sagt, Drawdown X % mehr nicht, wir zeichnen die Kurve neu. Immer dann, wenn die Kurve den Verkaufstrigger schneidet, weird sie gestrichelt, sie ist unter Wasser, wenn sie wieder über  Wasser ist, ist es wieder eine durchgezogene Linie. Alternativ machen wir unterschiedliche Farben, blau = unter Wasser, grün = über Wasser.
 Das macht das "unter Wasser", "über Wasser" Konzept sichtbar.
 Eine Drawdown-Kurve will ich nicht zeigen, das kapieren die Leute nicht. Das ist zu erklärungsbedürftig.
-Beim Investieren gilt der Boxer-Spruch: They never come back. Wer einmal mit Verlust ausgestiegen ist, kommt fast nie wieder zurück zur Börse. Wer erinnert sich nicht an die Telekomfolklore: Ich habe damals T-Aktien gekauft und viel verloren, deshalb ist das alles Zockerei. 
+Beim Investieren gilt der Boxer-Spruch: They never come back. Wer einmal mit Verlust ausgestiegen ist, kommt fast nie wieder zurück zur Börse. Wer erinnert sich nicht an die Telekomfolklore: Ich habe damals T-Aktien gekauft und viel verloren, deshalb ist das alles Zockerei.
 
+### App Zinseszins\
 
-### App Zinseszins
+**18.05.2026 => erledigt, als Kipppunkt neu eingeführt**
+
 Ziel: Zeigen, ab wann das Depot mehr Geld verdient, als man selbst mit abhängiger Arbeit. Wo ist der Kipppunkt? Das Oberthema: Nur mit Assets verlasse ich das Universum "Zeit gegen Geld". Unabhängig davon, ob ich bei McDonalds arbeite oder hochbezahlter Jurist bin. Unterschwellig auch: In Deutschland wird Kapitel weniger besteuert und belastet als Kapital. Das mag sich uin Zukunft ändern, aber aktuell ist es so.
 
 Inhalte der App
@@ -34,8 +40,13 @@ Könnte im Tandem mit App "Lieber heute als morgen" arbeiten.
 So etwas ähnliches haben wir schon mit der App, in der es darum geht zu zeigen, dass ein "alter" Euro, der früh im Sparplan angelegt wurde, viel wertvoller ist, als ein frischer Euro, der noch nicht viel Zinseszins produziert hat.
 
 ### App Lieber heute als morgen
+
+**Grundmotiv aufgegangen in B1 „Marktzeit schlägt Timing" (Slug: prokrastinations-preis)**
+
 Visualisiert den Spruch "Der beste Anlagezeitpunkt war vor 10 Jahren, der zweitbeste ist heute". Ich glaube diese App haben wir schon.
 Hier eine Ergänzung: 
+
+**❌ 1-Million-App: verworfen (2026-05-18)** — zu viele Freiheitsgrade, Lotterie-/Lebenszeit-Charakter, vermischt Kapitalstock/Cashflow/Konsumdisziplin. Kein sauberer Finanzwesir-App-Kern. Nicht aufnehmen.
 
 Lieber 1 Million Euro jetzt bar auf die Hand und dann im MSCI World anlegen oder 1.000 € jeden Montag bis zum Tod? 
 Der Nutzer gibt sein Alter an, wir rechnen mit der durchschnittlichen Lebenszeit (oder er gibt sein Todesalter selbst an) 
@@ -52,5 +63,8 @@ Könnte im Tandem mit App "Zinseszins" arbeiten.
 So etwas ähnliches haben wir schon mit der App, in der es darum geht zu zeigen, dass ein "alter" Euro, der früh im Sparplan angelegt wurde, viel wertvoller ist, als ein frischer Euro, der noch nicht viel Zinseszins produziert hat.
 
 ### App 1 Euro nach 10, 20, 30, 40 Jahren
+
+**erledigt, integriert als "Alter Euro"**
+
 Diese Apps zeigt 3 gestapelte Balken. Der Wert eines Euros nach 10, 20, 30, 40 Jahren
 Basis ist immer 1 Euro, der eingezahlt wurde,darüber gestapelt die Rendite, die Rendite ist wiederum aufgeteilt in Wert des Rendite-Anteils, der im ersten Jahr generiert wurde. Sagen wir 7%, dann sind das 7 Cent, diese 7 Cent bringen dann wieder 7 % im nächsten Jahr, und so zinst sich das auf. Die Frage ist, ob wir das pro Jahr oder pro Dekade machen?

@@ -1,7 +1,7 @@
 # App-Inventar — App-Fabrik
 
 Stand: 2026-05-18 | Arbeitsstand | Geändert von: Claude
-Quelle: Repo-Stand 2026-05-18 | ETF-Apps-Hauptdokument.md | ETF-App-Fabrik_Factory-Analyse.md
+Quelle: Repo-Stand 2026-05-18 | ETF-Apps-Hauptdokument.md v4.0 | ETF-App-Fabrik_Factory-Analyse.md
 
 **Alle Verweise auf Arbeitsordner zeigen auf `/Apps/[slug]/`.**
 In `docs/App-Fabrik` liegt nur diese Inventar-Tabelle, kein produktiver Code.
@@ -23,7 +23,7 @@ In `docs/App-Fabrik` liegt nur diese Inventar-Tabelle, kein produktiver Code.
 
 ---
 
-## Vollständige Inventar-Tabelle (22 App-Ordner)
+## Vollständige Inventar-Tabelle (24 App-Ordner)
 
 | App-Ordner | Master-Zuordnung | Modulrolle | Eigenständigkeit | Factory-Familie | Datenbedarf | Chartbedarf | Offene Klärung |
 |---|---|---|---|---|---|---|---|
@@ -39,7 +39,7 @@ In `docs/App-Fabrik` liegt nur diese Inventar-Tabelle, kein produktiver Code.
 | `market-timing-simulator` | B3 Market-Timing-Simulator | Master-App | vollständig eigenständig | Challenge / Decision + Reveal Chart | Historische Kursdaten (CSV) | Hoch — interaktiver Zeitreihen-Chart | Reveal-Chart-Komponente, Erfolgskriterium, Börsenuhr-Variante ja/nein |
 | `markt-kam-zurueck` | A3 Der Markt kam zurück. Du nicht. | Master-App / Companion im A-Trio | vollständig eigenständig; dramaturgisch eng mit A1/A2 | Scenario Chart + Decision Threshold + Translator | Historische MSCI-World-Daten (CSV), optional CPI/Realwerte; Nutzereingaben Startjahr, Verlusttoleranz, optional Depotwert/Sparrate | Hoch — historische Linie, Ausstiegsmarker, weiterlaufende Marktkurve, verpasste Erholung | Datenbasis MSCI World definieren, Startjahr-Range, Verlustschwellen-Logik, A1-Ankerliste wiederverwenden |
 | `passiv-paradox` | G3 Passiv-Paradox | Master-App | 🟡 Arbeitsannahme: eigenständig, fachlich eng mit G2 | Interactive Explainer | Textzustände/Annahmen (JSON) | Niedrig bis mittel | Eigenständige App, keine Zusammenlegung (→ Fam-01 in Decision Log) |
-| `prokrastinations-preis` | B1 Prokrastinations-Preis | Master-App | vollständig eigenständig | Calculator + Live Counter | Keine externen Daten; Config-JSON | Mittel — zwei Linien + animierter Counter | Default-Rendite, real/nominal, Formelstandard |
+| `prokrastinations-preis` | B1 Marktzeit schlägt Timing | Master-App | vollständig eigenständig | Scenario Chart (historische Monatsdaten) | Historische MSCI-World-Monatsdaten (JSON) | Mittel — historische Linie + Entscheidungspunkt | MSCI-Datenbasis, Startpunkt = heute − 120 Monate |
 | `regulatorik-dashboard` | G1 Regulatorisches Risiko Dashboard | Master-App | vollständig eigenständig; Prototyp vorhanden | Dashboard + Scenario Calculator | Szenarien/Annahmen (Config-JSON) | Mittel bis hoch — KPI-Grid + Szenariomatrix | Factory-Migration, CDN entfernen, Tests, Tonalität Block G |
 | `rendite-kalibrierung` | G2 Rendite-Kalibrierung | Master-App | vollständig eigenständig | Scenario Calculator + Compare Chart | Annahmen zu Renditen/Kosten (Config-JSON) | Mittel — Szenarien + Balkenvergleich | Annahmen definieren, Unsicherheitsmarkierung, CAPE-Kontext |
 | `renditekiller-volatilitaet` | F1 Renditekiller Volatilität | Master-App | vollständig eigenständig | Calculator / Simulation | Modellannahmen | Mittel — zwei animierte Linien | Fachliches Modell (Pfad-/Volatilitätsmodell) sauber definieren |
@@ -49,10 +49,14 @@ In `docs/App-Fabrik` liegt nur diese Inventar-Tabelle, kein produktiver Code.
 | `thesaurierer-rennen` | F2 Thesaurierer vs. Ausschütter | Master-App | vollständig eigenständig | Calculator / Comparison Race | Annahmen (Config-JSON) | Mittel — Wettrennen / zwei Linien | Steuerlogik vereinfachen oder bewusst ausklammern |
 | `weltdepot-baukasten` | C3 Weltdepot-Baukasten | Master-App | vollständig eigenständig | Configurator / Portfolio Compare | Portfolio-Templates (JSON) | Hoch — Tortendiagramme + Vergleich | Baukasten-Datenmodell, Varianten-Renderer, Performancedaten |
 | `weltkarte-etf-indizes` | C1 Diversifikations-Familie | Visuelles Lernmodul / Companion-App | eigenständig nutzbar; Prototyp v2 vorhanden | Explorer / Visual | Index-/Geo-Daten (JSON) | Hoch — interaktive Weltkarte (D3) | D3/TopoJSON lokal gebundelt 🟢 (→ A-08). Verbindung zu C1 🟡 Arbeitsannahme (→ Z-04) |
+| `der-alte-euro` | F3 Der alte Euro | Master-App | vollständig eigenständig | Calculator-Visualisierung / Mechanik-Mini-App | Keine externen Daten; Formelmodell | Niedrig bis mittel — vier gestapelte Balken | Renditewahl 4/6/8 %, keine freie Eingabe |
+| `depot-kipppunkt` | F4 Depot-Kipppunkt | Master-App | vollständig eigenständig | Calculator / Scenario-Chart | Keine externen Daten; Formeleingaben Nutzer | Mittel — Job-Netto-Linie vs. Depot-Ertragslinie | Transparenzsatz Pflicht; Version 1 radikal schlank |
 
 ---
 
 ## Zusammenfassung: App-Familien
+<!-- Stand 2026-05-18: 22 Ordner (Ausgangslage) + 2 neue (der-alte-euro, depot-kipppunkt) = 24 App-Ordner gesamt -->
+
 
 | Factory-Familie | Apps |
 |---|---|

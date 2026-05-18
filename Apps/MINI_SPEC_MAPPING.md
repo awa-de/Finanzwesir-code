@@ -1,18 +1,18 @@
 # MINI_SPEC_MAPPING — Apps / ETF-Apps-Hauptdokument
 
-Stand: 2026-05-10 | Quelle: docs/App-Fabrik/ETF-Apps-Hauptdokument.md
+Stand: 2026-05-18 | Quelle: docs/App-Fabrik/ETF-Apps-Hauptdokument.md
 
-Mapping aller 18 Haupt-App-Abschnitte aus dem Hauptdokument auf die 21 realen App-Ordner unter `/Apps/`.
+Mapping aller 21 Haupt-App-Abschnitte aus dem Hauptdokument auf die 23 realen App-Ordner unter `/Apps/`.
 
 ---
 
-## Tabelle: Alle 21 App-Ordner
+## Tabelle: Alle 23 App-Ordner
 
 | Block | App-ID | App-Titel | Slug | App-Ordner | Mini-Spec vorhanden | Modulrolle | Status |
 |-------|--------|-----------|------|------------|---------------------|------------|--------|
 | A | A1 | Risiko-Übersetzer (Dacia-Test) | `risiko-uebersetzer` | `/Apps/risiko-uebersetzer/` | ✅ | Haupt-App | Dokumentiert |
 | A | A2 | Crash-Reaktions-Test | `crash-reaktions-test` | `/Apps/crash-reaktions-test/` | ✅ | Haupt-App | Dokumentiert |
-| B | B1 | Prokrastinations-Preis | `prokrastinations-preis` | `/Apps/prokrastinations-preis/` | ✅ | Haupt-App | Dokumentiert |
+| B | B1 | Marktzeit schlägt Timing / Lieber heute als morgen | `prokrastinations-preis` | `/Apps/prokrastinations-preis/` | ✅ | Haupt-App | Dokumentiert |
 | B | B2 | Geburtsjahrlos-Simulator | `geburtsjahrlos` | `/Apps/geburtsjahrlos/` | ✅ | Haupt-App | Dokumentiert |
 | B | B2 (Erw.) | Rollierende Sparpläne | `geburtsjahrlos` | `/Apps/rollierende-sparplaene/` | ✅ | Erweiterungsmodul | Dokumentiert |
 | B | B3 | Market-Timing-Fail-Simulator | `market-timing-simulator` | `/Apps/market-timing-simulator/` | ✅ | Haupt-App | Dokumentiert |
@@ -31,6 +31,8 @@ Mapping aller 18 Haupt-App-Abschnitte aus dem Hauptdokument auf die 21 realen Ap
 | G | G2 | Rendite-Kalibrierung | `rendite-kalibrierung` | `/Apps/rendite-kalibrierung/` | ✅ | Haupt-App | Dokumentiert |
 | G | G3 | Das Passiv-Paradox | `passiv-paradox` | `/Apps/passiv-paradox/` | ✅ | Haupt-App | Dokumentiert |
 | H | H1 | ETF-Reifegrad-Test & Start-Konfigurator | `etf-reifegrad-finale` | `/Apps/etf-reifegrad-finale/` | ✅ | Haupt-App | Dokumentiert |
+| F | F3 | Der alte Euro | `der-alte-euro` | `/Apps/der-alte-euro/` | ✅ | Mechanik-Mini-App | Dokumentiert |
+| F/H | F4 | Depot-Kipppunkt | `depot-kipppunkt` | `/Apps/depot-kipppunkt/` | ✅ | Statuswechsel-App | Dokumentiert |
 
 ---
 
@@ -54,7 +56,7 @@ Fachlicher Zusammenhang:
 
 ---
 
-## Status aller 21 MINI_SPEC_FROM_HAUPTDOKUMENT.md
+## Status aller 23 MINI_SPEC_FROM_HAUPTDOKUMENT.md
 
 | App-Ordner | MINI_SPEC-Status | Notizen |
 |---|---|---|
@@ -79,13 +81,15 @@ Fachlicher Zusammenhang:
 | `thesaurierer-rennen` | ✅ Erstellt | Haupt-App F2 |
 | `weltdepot-baukasten` | ✅ Erstellt | Haupt-App C3 |
 | `weltkarte-etf-indizes` | ✅ Erstellt | Companion-App zu C1/C3 |
+| `der-alte-euro` | ✅ Erstellt | Mechanik-Mini-App F3 |
+| `depot-kipppunkt` | ✅ Erstellt | Statuswechsel-App F4 |
 
 ---
 
 ## Zusammenfassung
 
-- **18 Haupt-App-Abschnitte** aus ETF-Apps-Hauptdokument dokumentiert
+- **21 Haupt-App-Abschnitte** aus ETF-Apps-Hauptdokument dokumentiert (inkl. F3 Der alte Euro, F4 Depot-Kipppunkt)
 - **3 Multi-Modul-Abschnitte** mit Zugehörigkeit zur Master-App dokumentiert
-- **21 MINI_SPEC_FROM_HAUPTDOKUMENT.md Dateien** erstellt (keine Überschreibung bestehender Dateien)
+- **23 MINI_SPEC_FROM_HAUPTDOKUMENT.md Dateien** erstellt (keine Überschreibung bestehender Dateien)
 - **1 APP_SPEC.md** vorhanden (`prokrastinations-preis`) — nicht berührt
 - **Alle Umlaute** (ä, ö, ü, ß) korrekt geschrieben

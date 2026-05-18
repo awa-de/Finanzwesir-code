@@ -1,11 +1,12 @@
 # BACKLOG-ARCHIV – Finanzwesir 2.0
-Stand: 2026-05-18 | Session: A3-Dokumentation | Geändert von: Claude
+Stand: 2026-05-18 | Session: App-Landschaft-Bereinigung | Geändert von: Claude
 
 Abgeschlossene Items, neueste zuerst (append-only).
 Archivierungs-Trigger: wenn > 200 Zeilen → neue Datei `BACKLOG-ARCHIV-YYYY.md` anlegen.
 
 | ID | Bereich | Titel | Abgeschlossen | Session |
 |----|---------|-------|---------------|---------|
+| AF-13 | App-Fabrik | App-Landschaft bereinigt — B1 von Verlustzähler zu Marktzeit-App umgerahmt (neue Mini-Spec: MSCI-World-Monatsdaten, 4-Screen-Flow, kein Countdown); B2 auf rollierende 30-Jahres-Zeiträume fokussiert (Kindersparplan, vor-10-Jahren-Motiv, Warte-Button entfernt, Realwert-Schutzplanke verankert); neue App F3 „Der alte Euro" (Slug: der-alte-euro) und F4 „Depot-Kipppunkt" (Slug: depot-kipppunkt) angelegt mit Mini-Specs; 1-Million-App als verworfen markiert; Rollenformel B1→B2→Der alte Euro→Depot-Kipppunkt verankert; App-Zählung 19→21 Master-Apps / 22→24 Ordner in Hauptdokument v4.0, App-Register v0.5, APP_INVENTORY, MINI_SPEC_MAPPING, 00_STATUS, NAVIGATION.md konsistent aktualisiert. *(sofort erledigt)* | 2026-05-18 | App-Landschaft-Bereinigung |
 | DIST-03 | System | Distill 3 — 7 FRICTION-Einträge aus session-log analysiert; 4 neue Observing-Einträge in patterns.md (Whitespace vor Edit geraten, falsches Shell-Tool, Kontext-Komprimierung vor Abschluss, Slice-Plan ohne vollständige Testszenarien); Reoccurrence feedback_glob_vs_read vermerkt; 0 promoted, 0 retired; session-log.md geleert. Kassensturz KW 21 + Commit-Message-Support. *(sofort erledigt)* | 2026-05-18 | distill-3 |
 | AF-12 | App-Fabrik | A3 „Der Markt kam zurück. Du nicht." zur App-Fabrik-Dokumentation hinzugefügt — Block A zur Durchhalte-Kette umgerahmt (A1 Dosis finden → A2 Feuerprobe → A3 Ausstiegsfolge); MINI_SPEC_FROM_HAUPTDOKUMENT.md angelegt; Zählmodell 18+3=21 → 19+3=22 in 00_STATUS, 03_APP_FACTORY_STANDARD_DRAFT, APP_INVENTORY, ETF-Apps-Hauptdokument, Produktlandkarte V0.2 + V0.3, NAVIGATION.md konsistent aktualisiert. *(sofort erledigt)* | 2026-05-18 | A3-Dokumentation |
 | APP-01-slice0-kickoff | App | SLICE_0_KICKOFF.md erstellt — Anti-Agreeableness-Gate: 18 Annahmen, 11 Failure Cases, 8-Regret-Risiken, Umsetzungsvorschlag, 9 Akzeptanzkriterien (inkl. 3 Kickoff-Ergänzungen zu SLICE_PLAN: A0-7 double-init Guard, A0-8 XSS-Schutz Szenario E, A0-9 CSS-Leak-Check); Alberts Freigabe für Slice-0-Implementierung notiert. APP-01 bleibt aktiv. *(sofort erledigt)* | 2026-05-11 | slice0-kickoff |
