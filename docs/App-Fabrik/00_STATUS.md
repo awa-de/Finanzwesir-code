@@ -20,7 +20,7 @@ Verzeichnis: `docs/App-Fabrik` — temporärer Konsolidierungsraum, kein produkt
 
 | Kategorie | Anzahl | Quelle |
 |---|---|---|
-| Funnel-Master-Apps | 22 | ETF-Apps-Hauptdokument.md v5.0 + D4 ETF-Vergleich (2026-05-19) |
+| Funnel-Master-Apps | 22 | ETF-Apps-Hauptdokument.md aktueller Stand 2026-05-19 |
 | Reale App-Ordner in /Apps | 25 | Repo-Stand 2026-05-19; +etf-vergleich |
 | Differenz | 3 | Keine unklaren Apps — korrekte Zuordnung bekannt |
 | Chart-Engine | 1 | Gemeinsame Infrastruktur — kein App-Ordner, kein Funnel-Slot |
