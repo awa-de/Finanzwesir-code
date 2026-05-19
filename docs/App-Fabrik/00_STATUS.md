@@ -39,8 +39,8 @@ Verzeichnis: `docs/App-Fabrik` — temporärer Konsolidierungsraum, kein produkt
 
 Hinreichend gesichert — gelten als Basis für weitere Entscheidungen:
 
-1. Die App-Fabrik baut keine 21 Einzelanfertigungen — sie baut App-Familien mit gemeinsamen Templates.
-2. 21 Master-Apps → 5–7 App-Familien (Calculator, Scenario Chart, Decision/Quiz, Explorer/Compare, Parser/Explainer, Dashboard, Configurator).
+1. Die App-Fabrik baut keine Einzelanfertigungen — sie baut App-Familien mit gemeinsamen Templates.
+2. Funnel-Master-Apps → 5–7 App-Familien (Calculator, Scenario Chart, Decision/Quiz, Explorer/Compare, Parser/Explainer, Dashboard, Configurator).
 3. Die 3 Zusatz-Module sind Erweiterungen definierter Master-Apps, keine isolierten Projekte.
 4. Ghost bleibt CMS; Apps werden über HTML-Cards eingebettet.
 5. JavaScript läuft clientseitig; kein Backend.
@@ -56,9 +56,9 @@ Hinreichend gesichert — gelten als Basis für weitere Entscheidungen:
 
 | Was | Wo | Zustand |
 |---|---|---|
-| Funnel-Architektur + 18 App-Briefings | `ETF-Apps-Hauptdokument.md` | Primärquelle, inhaltlich stark |
+| Funnel-Architektur + 22 App-Briefings | `ETF-Apps-Hauptdokument.md` | Primärquelle, inhaltlich stark |
 | Factory-Analyse | `ETF-App-Fabrik_Factory-Analyse.md` | App-Familien-Zielmodell, Repo-Abgleich, Factory-Lücken |
-| App-Register | `ETF-App-Fabrik_App-Register.md` | Schlanker Index: 21 Master-Apps + 24 reale Ordner |
+| App-Register | `ETF-App-Fabrik_App-Register.md` | Schlanker Index: 22 Master-Apps + 25 reale Ordner |
 | App-Fabrik-Konsolidierung | `App-Fabrik_Konsolidierung_Naechste-Schritte_V0-1.md` | Strategisches Leitdokument |
 | Zusatzpaket-Bewertung | `App-Fabrik_Zusatzpaket-Integration_V0-1.md` | Demo vs. Produktion klar getrennt |
 | Demo-Template (Perplexity) | `_input/perplexity/` | Input-Material, nicht bindend |

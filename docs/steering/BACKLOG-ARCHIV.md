@@ -1,11 +1,12 @@
 # BACKLOG-ARCHIV – Finanzwesir 2.0
-Stand: 2026-05-19 | Session: D4-Einpflege | Geändert von: Claude
+Stand: 2026-05-19 | Session: D4-Konsistenzpatch | Geändert von: Claude
 
 Abgeschlossene Items, neueste zuerst (append-only).
 Archivierungs-Trigger: wenn > 200 Zeilen → neue Datei `BACKLOG-ARCHIV-YYYY.md` anlegen.
 
 | ID | Bereich | Titel | Abgeschlossen | Session |
 |----|---------|-------|---------------|---------|
+| AF-18 | App-Fabrik | D4-Doku-Konsistenzpatch — Zähltexte, Überschriften und Metadaten nach AF-17 bereinigt: 21→22 / 24→25 in 5 Dateien (App-Register, 00_STATUS, DECISION_LOG, APP_INVENTORY, Hauptdokument); Z-01 als historisches Ausgangsmodell markiert (Hinweis auf Z-05 als SSoT); Z-05 nach Z-04 verschoben. *(sofort erledigt)* | 2026-05-19 | D4-Konsistenzpatch |
 | AF-17 | App-Fabrik | D4 ETF-Vergleich / ETF-Feinschliff-Entgifter ins Steuerungssystem eingepflegt — 6 Dateien aktualisiert (00_STATUS, APP_INVENTORY, App-Register V0.7, Hauptdokument v6.0, Decision-Log Z-05, NAVIGATION); Zählmodell 21→22 Master-Apps / 24→25 App-Ordner. *(sofort erledigt)* | 2026-05-19 | D4-Einpflege |
 | AF-15 | App-Fabrik | MINI_SPEC_MAPPING Konsistenz abgeschlossen — A3 markt-kam-zurueck in Haupt-Mapping-Tabelle und Status-Liste ergänzt; 00_STATUS rollierende-sparplaene auf 30-Jahres-Realwert-Logik aktualisiert; Zählungen 23→24. *(sofort erledigt)* | 2026-05-19 | AF-15-Abschluss |
 | AF-16 | App-Fabrik | Block-B-Restinkonsistenzen bereinigt — App-Register B4/B5 aus Zusatz-Modul-Tabelle entfernt → Master-App-Ordner-Tabelle (21 Einträge); APP_INVENTORY B2-Multi-Modul auf Epochen-/30-Jahres-Realwert-Logik; App-Register D.1 Epochen-Framing für geburtsjahrlos + rollierende-sparplaene; BACKLOG APP-01 → B1 Slice-0-Reboot (MINI_SPEC als Detail-Verweis); NAVIGATION [!warning]-Block B1-Ausnahme nach Item 11; 00_STATUS Zählung (19→21 / 22→24), Nächste Schritte, Robuste Arbeitsannahmen (18→21). AF-15 auf verbleibende MINI_SPEC_MAPPING-Aufgabe reduziert. *(sofort erledigt)* | 2026-05-18 | Block-B-Restinkonsistenzen |

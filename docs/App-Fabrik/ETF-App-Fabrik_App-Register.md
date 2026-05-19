@@ -3,8 +3,8 @@
 Stand: 2026-05-19 | V0.7 | Geändert von: Claude
 
 **Dieses Dokument enthält:**
-- Schlanke Master-App-Liste (21 Apps: #, Slug, Block, Factory-Familie, Status)
-- Vollständige Liste aller 24 realen App-Ordner in /Apps
+- Schlanke Master-App-Liste (22 Apps: #, Slug, Block, Factory-Familie, Status)
+- Vollständige Liste aller 25 realen App-Ordner in /Apps
 - Chart-Engine als gemeinsame Infrastruktur
 - Multi-Modul-Master-Apps (B2, C1)
 
@@ -15,7 +15,7 @@ Stand: 2026-05-19 | V0.7 | Geändert von: Claude
 
 ---
 
-## A — 21 Funnel-Master-Apps
+## A — 22 Funnel-Master-Apps
 
 Vollständige Briefings: `ETF-Apps-Hauptdokument.md` (Blöcke A–H)
 App-Familien, Factory-Lücken, Pilotstrategie: `ETF-App-Fabrik_Factory-Analyse.md`
@@ -47,11 +47,11 @@ App-Familien, Factory-Lücken, Pilotstrategie: `ETF-App-Fabrik_Factory-Analyse.m
 
 ---
 
-## B — 24 reale App-Ordner in /Apps
+## B — 25 reale App-Ordner in /Apps
 
 Alle realen Arbeitsordner. In `docs/App-Fabrik` nur Verweise, kein Code.
 
-**21 Master-Apps** (vollständige Inventar-Tabelle: `APP_INVENTORY.md`):
+**22 Master-Apps** (vollständige Inventar-Tabelle: `APP_INVENTORY.md`):
 
 | App-Ordner | Zugehöriger Funnel-Block | Prototyp-Stand |
 |---|---|---|

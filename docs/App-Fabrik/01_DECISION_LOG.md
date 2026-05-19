@@ -177,13 +177,15 @@ Stand: 2026-05-19 | D4-Einpflege | Geändert von: Claude
 
 ## Zählmodell und App-Struktur
 
-### Z-01 — 18 Funnel-Master-Apps + 3 Zusatz-Module = 21 App-Ordner
+### Z-01 — Historisches Ausgangsmodell: 18 Funnel-Master-Apps + 3 Zusatz-Module = 21 App-Ordner
 **Status:** 🟢 ENTSCHIEDEN  
 **Entscheidung:** Die Differenz zwischen 18 geplanten Master-Apps und 21 realen App-Ordnern erklärt sich durch 3 korrekt zugeordnete Zusatz-Module. Keine unklaren Apps.  
 **Zuordnung:**  
 - `rollierende-sparplaene` → B2 (Erweiterungsmodul)  
 - `investment-universum` → C1 (Gegenperspektive/Grundmodell)  
 - `weltkarte-etf-indizes` → C1 (Companion-App)
+
+**Hinweis 2026-05-19:** Das aktuelle Zählmodell wurde durch spätere Ergänzungen erweitert. Maßgeblich für den aktuellen Stand ist Z-05: 22 Funnel-Master-Apps, 25 reale App-Ordner, 3 Zusatz-Module. Die Differenz bleibt 3.
 
 ---
 
@@ -192,19 +194,6 @@ Stand: 2026-05-19 | D4-Einpflege | Geändert von: Claude
 **Entscheidung:** B2 (Geburtsjahrlos) und C1 (Diversifikations-Detektor) sind Multi-Modul-Master-Apps. Ihre Zusatz-Module sind eigenständig entwickelbar, aber fachlich und navigatorisch verbunden.  
 **Rollen-Zuordnungen und Kopplungslogik:** → Z-03 (B2) und Z-04 (C1)  
 **Quelle:** Arbeitsauftrag 2026-05-09
-
----
-
-### Z-05 — D4 ETF-Vergleich als Funnel-Master-App
-**Status:** 🟢 ENTSCHIEDEN
-
-**Entscheidung:** `etf-vergleich` wird als D4 im Block D geführt. Die App ist keine D3-Erweiterung und kein Zusatzmodul, sondern das Exit-Gate aus der ETF-Auswahl. D1–D3 erklären ETF-Details, D4 entgiftet die Fixierung auf diese Details und führt Richtung H1 Start-Konfigurator. E1 ESG bleibt eigenständiger Spezialpfad, keine Pflichtstation nach D4.
-
-**Begründung:** Die App löst eine eigene Blockade: „Ich kann noch nicht starten, weil ich erst den optimalen ETF finden muss." Sie behandelt TER, Ausschüttung, Replikation, Fondsgröße und Produktvertrauen gemeinsam und kalibriert diese gegen Starten, Sparrate und früher loslegen. Merksatz: D1–D3 erklären die Bäume. D4 zeigt den Wald.
-
-**Konsequenz Zählmodell:** Funnel-Master-Apps 21 → 22, reale App-Ordner 24 → 25, Differenz bleibt 3.
-
-**Quelle:** App-Intake-Diskussion | 2026-05-19
 
 ---
 
@@ -228,6 +217,19 @@ Stand: 2026-05-19 | D4-Einpflege | Geändert von: Claude
 - `weltkarte-etf-indizes`: Visuelles Lernmodul / Index-Länder-Karte  
 **Weiterhin offen:** Konkrete technische Kopplung und Navigation zwischen den drei Modulen — Entscheidung wenn Datenbedarf und UX-Flow für C1 spezifiziert werden.  
 **Quelle:** 2026-05-09
+
+---
+
+### Z-05 — D4 ETF-Vergleich als Funnel-Master-App
+**Status:** 🟢 ENTSCHIEDEN
+
+**Entscheidung:** `etf-vergleich` wird als D4 im Block D geführt. Die App ist keine D3-Erweiterung und kein Zusatzmodul, sondern das Exit-Gate aus der ETF-Auswahl. D1–D3 erklären ETF-Details, D4 entgiftet die Fixierung auf diese Details und führt Richtung H1 Start-Konfigurator. E1 ESG bleibt eigenständiger Spezialpfad, keine Pflichtstation nach D4.
+
+**Begründung:** Die App löst eine eigene Blockade: „Ich kann noch nicht starten, weil ich erst den optimalen ETF finden muss." Sie behandelt TER, Ausschüttung, Replikation, Fondsgröße und Produktvertrauen gemeinsam und kalibriert diese gegen Starten, Sparrate und früher loslegen. Merksatz: D1–D3 erklären die Bäume. D4 zeigt den Wald.
+
+**Konsequenz Zählmodell:** Funnel-Master-Apps 21 → 22, reale App-Ordner 24 → 25, Differenz bleibt 3.
+
+**Quelle:** App-Intake-Diskussion | 2026-05-19
 
 ---
 

@@ -1,6 +1,13 @@
 # Session-Log — Finanzwesir 2.0
 Wird geleert nach /distill. Einträge: [FRICTION] [WIN] [PREF] [QUESTION] [OK]
 
+## 2026-05-19 – D4-Doku-Konsistenzpatch: Zähltexte, Überschriften, Z-05-Reihenfolge bereinigt
+- [OK] 5 Dateien, 11 Textstellen — kein Vorkommnis. Gate + Umsetzung ohne Abweichung.
+- [WIN] ETF-Apps-Hauptdokument.md Changelog bestätigte v6.0 sofort → kein Raten bei APP_INVENTORY Quellenzeile nötig.
+
+## 2026-05-19 – SESSION START | Fokus: APP-01 — prokrastinations-preis
+- Layer-1-Fingerabdruck: FinanzwesirData.js, CSVParser.js, FwDateUtils.js — diese Session nicht berühren. ✓
+
 ## 2026-05-19 – AF-17 D4 ETF-Vergleich einpflegen
 - [OK] Doku-Patch sauber durchgeführt, 6 Dateien, kein Code berührt
 - [WIN] Full-Gate und Abschluss-Ritual vollständig ohne Unterbrechung durchlaufen
