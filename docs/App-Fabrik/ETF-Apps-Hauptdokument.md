@@ -32,7 +32,7 @@ HOOK
     C1 Diversifikations-Detektor · C2 1 ETF vs. 5 ETFs · C3 Weltdepot-Baukasten
   ↓
 [D/E] ETF-AUSWAHL & TECHNIK
-    D1 Namensdecoder · D2 Replizierer/Swapper · D3 TER-Rechner · E1 ESG-Spiegel
+    D1 Namensdecoder · D2 Replizierer/Swapper · D3 TER-Rechner · D4 ETF-Vergleich · E1 ESG-Spiegel
   ↓
 [F] MECHANISMEN VERSTEHEN
     F1 Renditekiller · F2 Thesaurierer/Ausschütter
@@ -83,6 +83,7 @@ Block G muss **anders klingen** als der Rest: nicht motivierend, nicht vereinfac
 | 19 | ETF-Reifegrad-Test + Konfigurator | H1 | ★ | 🔥 Hoch | Hoch | 🟨 offen |
 | 20 | Der alte Euro | B4 | — | Mittel | Gering | 🟨 offen |
 | 21 | Depot-Kipppunkt | B5 | — | 🔥 Hoch | Gering | 🟨 offen |
+| 22 | ETF-Vergleich / ETF-Feinschliff-Entgifter | D4 | — | Mittel | Mittel | 🟨 offen |
 
 > **Weltkarte der 16 Indizes:** Bereits in Arbeit. Ergänzt App C1 (Diversifikations-Detektor).
 > **Status-Codes:** ✅ fertig · 🟨 in Planung · 🟦 in Entwicklung · ❌ verworfen
@@ -748,6 +749,67 @@ Zwei parallele Animationen: Replizierer (kauft echte Aktien, verleiht sie) vs. S
 
 ---
 
+## D4 – ETF-Vergleich / ETF-Feinschliff-Entgifter
+
+**Slug:** `etf-vergleich`
+**Funnel-Position:** ETF-Auswahl / Exit-Gate aus Block D
+**Modulrolle:** Master-App / Aktivierungs-App gegen ETF-Perfektionismus
+**Priorität:** #22
+
+### Problem, das gelöst wird
+
+Viele Anfänger bleiben vor dem Start im ETF-Produktvergleich stecken. Sie vergleichen TER, Ausschüttungsart, Replikationsmethode, Fondsgröße und Anbieter, weil diese Kriterien sichtbar und kontrollierbar wirken.
+
+Blockade: *„Ich kann noch nicht starten, weil ich erst den optimalen ETF finden muss."*
+
+### Kernbotschaft
+
+> „ETF-Details sind nicht bedeutungslos — aber sie sind innerhalb solider MSCI-World-ETFs nicht der Haupthebel. Der Haupthebel ist, dass der Sparplan läuft."
+
+Merksatz: **D1–D3 erklären die Bäume. D4 zeigt den Wald.**
+
+### Rolle im D-Block
+
+D4 ist das **Exit-Gate aus der ETF-Auswahl**.
+
+D1 → Ich verstehe, was auf dem Etikett steht.  
+D2 → Ich verstehe, dass die Replikationsmethode kein Panikgrund ist.  
+D3 → Ich verstehe, dass Kosten real sind.  
+D4 → Ich erkenne, dass diese Details nicht mein Startgrund sein dürfen.  
+H1 → Ich baue meinen konkreten Startplan.
+
+E1 ESG-Spiegel bleibt Spezialpfad (Block E), keine Pflichtstation nach D4.
+
+### Interaktion (Mechanik)
+
+- Blindverkostung von vier anonymisierten MSCI-World-ETFs
+- Nutzer wählt nach sichtbaren Produktdetails (TER, Ausschüttung, Replikation, Fondsgröße, Anbieter)
+- Auflösung über denselben längsten gemeinsamen Zeitraum: 25.09.2009 bis Datenstand
+- Annualisierte Einordnung statt dominant kumulierter Performance
+- Persönlicher Wald-vs.-Bäume-Zoom mit eigener Monatsrate (Default 150 €)
+
+**Vergleichsbalken (fix):**
+- bester vs. schwächster ETF
+- +25 € Monatsrate
+- 6 Monate früher starten
+
+### Schutzplanken (V1, bindend)
+
+- 4 ETFs, nicht 5
+- Max-Zeitraum dominant: 25.09.2009 bis Datenstand; 5J/10J nur Kontrollblick
+- Keine freie Zeitraumwahl
+- Keine ETF-Namen und ISINs vor der Auflösung im Hauptflow
+- Kein Crash-Szenario
+- Keine Produktempfehlung
+- Keine Aussage „TER ist egal" oder „alle ETFs sind gleich"
+- E1 ESG nicht als Pflichtstation nach D4 setzen
+
+### Offene Klärungen
+
+- Finale Performancewerte 5J/10J/Max, Datenstand, Quelle, Datenformat
+
+---
+
 ---
 
 # Block E: ESG & Nachhaltigkeit
@@ -1105,4 +1167,5 @@ Jede App muss:
 | 3.0 | 2026-05-18 | + A3 „Der Markt kam zurück. Du nicht." als Ausstiegsfolgen-App. Block A zur Durchhalte-Kette umgerahmt (A1 Dosis finden → A2 Feuerprobe → A3 Ausstiegsfolge). Funnel-Struktur aktualisiert ([A/F] aufgelöst, [F] MECHANISMEN eigenständig). Master-Prioritätsliste auf 19 Apps erweitert. |
 | 4.0 | 2026-05-18 | B1 von Verlustzähler zu Marktzeit-App umgerahmt (neu: „Marktzeit schlägt Timing / Lieber heute als morgen", MSCI-World-Monatsdaten, 4-Screen-Flow). B2 bereinigt: Kindersparplan, vor-10-Jahren-Motiv und Warte-Button entfernt, Fokus auf rollierende 30-Jahres-Zeiträume mit inflationsbereinigten Realwerten. + F3 „Der alte Euro" (Mechanik-Mini-App, Slug: der-alte-euro). + F4 „Depot-Kipppunkt" (Statuswechsel-App, Slug: depot-kipppunkt). Rollenformel verankert: B1→B2→Der alte Euro→Depot-Kipppunkt. 1-Million-App verworfen. Master-Prioritätsliste auf 21 Apps erweitert. |
 | 5.0 | 2026-05-18 | Block B umbenannt zu „Marktzeit statt Timing". F3 „Der alte Euro" → B4, F4 „Depot-Kipppunkt" → B5; beide aus Block F in Block B verschoben. Block-B-Intro-Text und dramaturgische Rollenformel ergänzt. Funnel-Diagramm, Master-Prioritätsliste, Entwicklungsreihenfolge und alle Funnel-Positionen in B1–B3 aktualisiert. Block F enthält jetzt nur noch F1/F2. B1-APP_SPEC.md, SLICE_0_KICKOFF.md und SLICE_PLAN.md mit VERALTET-Header versehen (alte Mechanik, kein Code ohne neue APP_SPEC). MINI_SPECs aller betroffenen Apps konsistent aktualisiert. |
+| 6.0 | 2026-05-19 | + D4 ETF-Vergleich / ETF-Feinschliff-Entgifter (`etf-vergleich`). Exit-Gate aus Block D. Funnel-Diagramm D/E-Zeile ergänzt. D4-Abschnitt nach D3 eingefügt. Master-Prioritätsliste auf 22 Apps erweitert. E1 ESG bleibt Spezialpfad, keine Pflichtstation. |
 

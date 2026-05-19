@@ -1,6 +1,6 @@
 # Status — App-Fabrik
 
-Stand: 2026-05-18 | Arbeitsstand | Geändert von: Claude
+Stand: 2026-05-19 | D4-Einpflege | Geändert von: Claude
 Verzeichnis: `docs/App-Fabrik` — temporärer Konsolidierungsraum, kein produktiver Code
 
 ---
@@ -20,8 +20,8 @@ Verzeichnis: `docs/App-Fabrik` — temporärer Konsolidierungsraum, kein produkt
 
 | Kategorie | Anzahl | Quelle |
 |---|---|---|
-| Funnel-Master-Apps | 21 | ETF-Apps-Hauptdokument.md v5.0 (Blöcke A–H, B4/B5 in Block B) |
-| Reale App-Ordner in /Apps | 24 | Repo-Stand 2026-05-18; +der-alte-euro, +depot-kipppunkt |
+| Funnel-Master-Apps | 22 | ETF-Apps-Hauptdokument.md v5.0 + D4 ETF-Vergleich (2026-05-19) |
+| Reale App-Ordner in /Apps | 25 | Repo-Stand 2026-05-19; +etf-vergleich |
 | Differenz | 3 | Keine unklaren Apps — korrekte Zuordnung bekannt |
 | Chart-Engine | 1 | Gemeinsame Infrastruktur — kein App-Ordner, kein Funnel-Slot |
 

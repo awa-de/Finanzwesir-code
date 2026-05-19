@@ -1,6 +1,6 @@
 # Decision Log — App-Fabrik
 
-Stand: 2026-05-10 | konsistenz-korrektur | Geändert von: Claude
+Stand: 2026-05-19 | D4-Einpflege | Geändert von: Claude
 
 **Legende:**
 - 🟢 ENTSCHIEDEN — robuste Entscheidung, Grundlage für weitere Schritte
@@ -192,6 +192,19 @@ Stand: 2026-05-10 | konsistenz-korrektur | Geändert von: Claude
 **Entscheidung:** B2 (Geburtsjahrlos) und C1 (Diversifikations-Detektor) sind Multi-Modul-Master-Apps. Ihre Zusatz-Module sind eigenständig entwickelbar, aber fachlich und navigatorisch verbunden.  
 **Rollen-Zuordnungen und Kopplungslogik:** → Z-03 (B2) und Z-04 (C1)  
 **Quelle:** Arbeitsauftrag 2026-05-09
+
+---
+
+### Z-05 — D4 ETF-Vergleich als Funnel-Master-App
+**Status:** 🟢 ENTSCHIEDEN
+
+**Entscheidung:** `etf-vergleich` wird als D4 im Block D geführt. Die App ist keine D3-Erweiterung und kein Zusatzmodul, sondern das Exit-Gate aus der ETF-Auswahl. D1–D3 erklären ETF-Details, D4 entgiftet die Fixierung auf diese Details und führt Richtung H1 Start-Konfigurator. E1 ESG bleibt eigenständiger Spezialpfad, keine Pflichtstation nach D4.
+
+**Begründung:** Die App löst eine eigene Blockade: „Ich kann noch nicht starten, weil ich erst den optimalen ETF finden muss." Sie behandelt TER, Ausschüttung, Replikation, Fondsgröße und Produktvertrauen gemeinsam und kalibriert diese gegen Starten, Sparrate und früher loslegen. Merksatz: D1–D3 erklären die Bäume. D4 zeigt den Wald.
+
+**Konsequenz Zählmodell:** Funnel-Master-Apps 21 → 22, reale App-Ordner 24 → 25, Differenz bleibt 3.
+
+**Quelle:** App-Intake-Diskussion | 2026-05-19
 
 ---
 

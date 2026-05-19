@@ -1,4 +1,4 @@
-## Neue Apps\
+## Neue Apps
 
 ### Klären
 
@@ -22,7 +22,7 @@ Das macht das "unter Wasser", "über Wasser" Konzept sichtbar.
 Eine Drawdown-Kurve will ich nicht zeigen, das kapieren die Leute nicht. Das ist zu erklärungsbedürftig.
 Beim Investieren gilt der Boxer-Spruch: They never come back. Wer einmal mit Verlust ausgestiegen ist, kommt fast nie wieder zurück zur Börse. Wer erinnert sich nicht an die Telekomfolklore: Ich habe damals T-Aktien gekauft und viel verloren, deshalb ist das alles Zockerei.
 
-### App Zinseszins\
+### App Zinseszins
 
 **18.05.2026 => erledigt, als Kipppunkt neu eingeführt**
 
@@ -68,3 +68,12 @@ So etwas ähnliches haben wir schon mit der App, in der es darum geht zu zeigen,
 
 Diese Apps zeigt 3 gestapelte Balken. Der Wert eines Euros nach 10, 20, 30, 40 Jahren
 Basis ist immer 1 Euro, der eingezahlt wurde,darüber gestapelt die Rendite, die Rendite ist wiederum aufgeteilt in Wert des Rendite-Anteils, der im ersten Jahr generiert wurde. Sagen wir 7%, dann sind das 7 Cent, diese 7 Cent bringen dann wieder 7 % im nächsten Jahr, und so zinst sich das auf. Die Frage ist, ob wir das pro Jahr oder pro Dekade machen?
+
+### ETF-Vergleich
+**erledigt, als D4 - ETF-Vergleich integriert**
+
+Sinn der App: Erlebbar machen, das es egal ist, wie hoch die TER ist, ob der ETF thesauriert oder ausschüttet und wie er konstruiert ist (Swap / vollständige Replikation, Teil-Replikation). Der ETF verspricht die Index-Rendite und die liefert er.
+Die Kostenquote sehen alle und daran beißen die Leute sich fest, dabei ist diese Größe vollkommen belanglos. Der ETF muss es schaffen so viel zu erwirtschaften, dass seine Kostenquote nicht zu einem Tracking Error führt. Das Einzige Kriterium , an dem der ETF gemessen wird, ist seine Performance. Die TER ist eine Vanity Metric. Prominent platziert, für alle verständlich (glauben die Leute zumindest, wenn man sie dann fragt, aus welchen Kosten konkret sich denn die Kostenquote zusammensetzt kommt das große Stottern). Aber es ist eine Größe, an der sich gerade Anfänger krampfhaft festhalten, weil sie hier endlich einmal etwas haben, bei dem sie nicht dem Kontrollverlust ausgesetzt sind. Kosten, das ist ein Konzept, dass sie verstehen. Weil sie den Rest schwer verstehen, konzentrieren sie ihre Optimierungsbemühungen auf die TER, verzetteln sich, verlieren Momentum und brechen dann ohne Investment ab.
+
+Umsetzung: 4 ETF auswählen und die Kurse vergleichen scheitert, weil ich die Ausschüttungen beachten muss. Die Frage ist: Kann ich diese Total-Return Daten irgendwo herunterladen? Wie wird das berechnet, letztlich bin ich dann unterwegs wie Finanzfluss, ExtraETF oder JustETF. Macht das nicht zu viel Mühe? 
+Welche andere psychologisch wirksame Art gibt es, dass den Lesern klar zu machen? Wie könnte die App das umsetzen? 

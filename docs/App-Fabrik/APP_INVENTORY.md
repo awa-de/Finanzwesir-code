@@ -1,7 +1,7 @@
 # App-Inventar — App-Fabrik
 
-Stand: 2026-05-18 | Arbeitsstand | Geändert von: Claude
-Quelle: Repo-Stand 2026-05-18 | ETF-Apps-Hauptdokument.md v5.0 | ETF-App-Fabrik_Factory-Analyse.md
+Stand: 2026-05-19 | D4-Einpflege | Geändert von: Claude
+Quelle: Repo-Stand 2026-05-19 | ETF-Apps-Hauptdokument.md v5.0 + D4 | ETF-App-Fabrik_Factory-Analyse.md
 
 **Alle Verweise auf Arbeitsordner zeigen auf `/Apps/[slug]/`.**
 In `docs/App-Fabrik` liegt nur diese Inventar-Tabelle, kein produktiver Code.
@@ -23,7 +23,7 @@ In `docs/App-Fabrik` liegt nur diese Inventar-Tabelle, kein produktiver Code.
 
 ---
 
-## Vollständige Inventar-Tabelle (24 App-Ordner)
+## Vollständige Inventar-Tabelle (25 App-Ordner)
 
 | App-Ordner | Master-Zuordnung | Modulrolle | Eigenständigkeit | Factory-Familie | Datenbedarf | Chartbedarf | Offene Klärung |
 |---|---|---|---|---|---|---|---|
@@ -51,19 +51,20 @@ In `docs/App-Fabrik` liegt nur diese Inventar-Tabelle, kein produktiver Code.
 | `weltkarte-etf-indizes` | C1 Diversifikations-Familie | Visuelles Lernmodul / Companion-App | eigenständig nutzbar; Prototyp v2 vorhanden | Explorer / Visual | Index-/Geo-Daten (JSON) | Hoch — interaktive Weltkarte (D3) | D3/TopoJSON lokal gebundelt 🟢 (→ A-08). Verbindung zu C1 🟡 Arbeitsannahme (→ Z-04) |
 | `der-alte-euro` | B4 Der alte Euro | Master-App | vollständig eigenständig | Calculator-Visualisierung / Mechanik-Mini-App | Keine externen Daten; Formelmodell | Niedrig bis mittel — vier gestapelte Balken | Renditewahl 4/6/8 %, keine freie Eingabe |
 | `depot-kipppunkt` | B5 Depot-Kipppunkt | Master-App | vollständig eigenständig | Calculator / Scenario-Chart | Keine externen Daten; Formeleingaben Nutzer | Mittel — Job-Netto-Linie vs. Depot-Ertragslinie | Transparenzsatz Pflicht; Version 1 radikal schlank |
+| `etf-vergleich` | D4 ETF-Vergleich / ETF-Feinschliff-Entgifter | Master-App | vollständig eigenständig; Exit-Gate aus Block D | Decision + Explorer/Compare + Calculator-Vergleich | händisch kuratierte ETF-Performancewerte (statische JSON/CSV) | Niedrig bis mittel — Reveal, Ranking, Vergleichsbalken | finale Performancewerte 5J/10J/Max, Datenstand, Quelle, Datenformat |
 
 ---
 
 ## Zusammenfassung: App-Familien
-<!-- Stand 2026-05-18: 22 Ordner (Ausgangslage) + 2 neue (der-alte-euro, depot-kipppunkt) = 24 App-Ordner gesamt -->
+<!-- Stand 2026-05-19: 22 Ordner (Ausgangslage) + 2 neue (der-alte-euro, depot-kipppunkt) + 1 neu (etf-vergleich) = 25 App-Ordner gesamt -->
 
 
 | Factory-Familie | Apps |
 |---|---|
 | Calculator | risiko-uebersetzer, prokrastinations-preis, kostenkiller-ter, rendite-kalibrierung (teil), thesaurierer-rennen, renditekiller-volatilitaet |
 | Scenario Chart | geburtsjahrlos, rollierende-sparplaene, crash-reaktions-test, markt-kam-zurueck, market-timing-simulator, regulatorik-dashboard (teil) |
-| Decision / Quiz | crash-reaktions-test, market-timing-simulator, etf-reifegrad-finale |
-| Explorer / Compare | diversifikations-detektor, investment-universum, weltkarte-etf-indizes, esg-spiegel, komplexitaets-entlarver, weltdepot-baukasten |
+| Decision / Quiz | crash-reaktions-test, market-timing-simulator, etf-reifegrad-finale, etf-vergleich |
+| Explorer / Compare | diversifikations-detektor, investment-universum, weltkarte-etf-indizes, esg-spiegel, komplexitaets-entlarver, weltdepot-baukasten, etf-vergleich |
 | Parser / Explainer | etf-namensdecoder, replizierer-swapper, passiv-paradox |
 | Dashboard | regulatorik-dashboard |
 | Configurator / Quiz | etf-reifegrad-finale |

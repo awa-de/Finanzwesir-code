@@ -1,11 +1,12 @@
 # BACKLOG-ARCHIV – Finanzwesir 2.0
-Stand: 2026-05-19 | Session: AF-15-Abschluss | Geändert von: Claude
+Stand: 2026-05-19 | Session: D4-Einpflege | Geändert von: Claude
 
 Abgeschlossene Items, neueste zuerst (append-only).
 Archivierungs-Trigger: wenn > 200 Zeilen → neue Datei `BACKLOG-ARCHIV-YYYY.md` anlegen.
 
 | ID | Bereich | Titel | Abgeschlossen | Session |
 |----|---------|-------|---------------|---------|
+| AF-17 | App-Fabrik | D4 ETF-Vergleich / ETF-Feinschliff-Entgifter ins Steuerungssystem eingepflegt — 6 Dateien aktualisiert (00_STATUS, APP_INVENTORY, App-Register V0.7, Hauptdokument v6.0, Decision-Log Z-05, NAVIGATION); Zählmodell 21→22 Master-Apps / 24→25 App-Ordner. *(sofort erledigt)* | 2026-05-19 | D4-Einpflege |
 | AF-15 | App-Fabrik | MINI_SPEC_MAPPING Konsistenz abgeschlossen — A3 markt-kam-zurueck in Haupt-Mapping-Tabelle und Status-Liste ergänzt; 00_STATUS rollierende-sparplaene auf 30-Jahres-Realwert-Logik aktualisiert; Zählungen 23→24. *(sofort erledigt)* | 2026-05-19 | AF-15-Abschluss |
 | AF-16 | App-Fabrik | Block-B-Restinkonsistenzen bereinigt — App-Register B4/B5 aus Zusatz-Modul-Tabelle entfernt → Master-App-Ordner-Tabelle (21 Einträge); APP_INVENTORY B2-Multi-Modul auf Epochen-/30-Jahres-Realwert-Logik; App-Register D.1 Epochen-Framing für geburtsjahrlos + rollierende-sparplaene; BACKLOG APP-01 → B1 Slice-0-Reboot (MINI_SPEC als Detail-Verweis); NAVIGATION [!warning]-Block B1-Ausnahme nach Item 11; 00_STATUS Zählung (19→21 / 22→24), Nächste Schritte, Robuste Arbeitsannahmen (18→21). AF-15 auf verbleibende MINI_SPEC_MAPPING-Aufgabe reduziert. *(sofort erledigt)* | 2026-05-18 | Block-B-Restinkonsistenzen |
 | AF-14 | App-Fabrik | Block-B-Umbau abgeschlossen — Der alte Euro und Depot-Kipppunkt von F3/F4 nach B4/B5 verschoben; Block B umbenannt in „Marktzeit statt Timing"; ETF-Apps-Hauptdokument.md v5.0 (Block-B-Header, B4/B5-Vollabschnitte, F3/F4 aus Block F entfernt); MINI_SPECs der-alte-euro, depot-kipppunkt, geburtsjahrlos, rollierende-sparplaene, prokrastinations-preis aktualisiert; VERALTET-Header in APP_SPEC.md, SLICE_0_KICKOFF.md, SLICE_PLAN.md (Option A); F3/F4→B4/B5 in 00_STATUS.md, APP_INVENTORY.md, ETF-App-Fabrik_App-Register.md (v0.6), MINI_SPEC_MAPPING.md; PROJECT-STATUS.md: Nächster-Schritt B1 Slice-0-Reboot. *(sofort erledigt)* | 2026-05-18 | Block-B-Umbau-B4-B5 |
