@@ -39,6 +39,7 @@ FinanzwesirData.js, CSVParser.js, FwDateUtils.js — diese Session nicht berühr
 - [WIN] B-03 entschieden: Button-getriebener Screen-Flow V1 — kein Autoplay, kein Scroll-Trigger
 - [OK] APP_SPEC.md V1.3: §7.4, §13, §14.3, §17, §18 aktualisiert
 - [OK] DECISION-LOG.md: D-APP-01-B02 + D-APP-01-B03 eingetragen
+- [OK] Scope-Fund AF-19 angelegt: docs/App-Fabrik/01_DECISION_LOG.md veraltet (letzter Stand 2026-05-19)
 
 ## 2026-05-28 – APP-01 | B1 Slice-0-Reboot: APP_SPEC V1.0 + heldenreise
 - [WIN] Alle 3 VERALTET-Header waren bereits gesetzt — Teil-1 ohne Mehraufwand abgehakt

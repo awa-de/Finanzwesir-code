@@ -1,5 +1,5 @@
 # BACKLOG – Finanzwesir 2.0
-Stand: 2026-05-28 | Session: APP-01-B01-Spec-V1.2 | Geändert von: Claude
+Stand: 2026-05-28 | Session: APP-01-B02-B03-Entscheidung | Geändert von: Claude
 
 **Regeln:**
 - ✅-Zeilen werden sofort nach `BACKLOG-ARCHIV.md` verschoben (append), dann hier gelöscht.
@@ -12,8 +12,8 @@ Stand: 2026-05-28 | Session: APP-01-B01-Spec-V1.2 | Geändert von: Claude
 
 | ID       | Bereich | Titel                                     | Prio | Dep | Detail                              |
 |----------|---------|-------------------------------------------|------|-----|-------------------------------------|
-| APP-01   | App     | B1 Slice-0: Entscheidungen klären → dann Slice-0 implementieren   | H | — | Apps/prokrastinations-preis/APP_SPEC.md (V1.2) |
-| APP-01-B01 | App   | B1 Blocker: MSCI-Datenbasis klären (Quelle + CSV-Beschaffung)     | H | APP-01 | APP_SPEC §17; entschieden: MSCI World Index, CSV-Format; offen: B-01-A Indexvariante, B-01-B Währung, B-01-C Datenquelle, B-01-D CSV-Erstellung; blockiert Chart + Berechnung |
+| APP-01   | App     | B1 Slice-0: Entscheidungen klären → dann Slice-0 implementieren   | H | — | Apps/prokrastinations-preis/APP_SPEC.md (V1.3) |
+| APP-01-B01 | App   | B1 Blocker: MSCI-Datenbasis klären (Quelle + CSV-Beschaffung)     | H | APP-01 | APP_SPEC §17; entschieden: MSCI World Index, CSV-Format, B-02 Anteilslogik, B-03 Button-Flow; offen: B-01-A Indexvariante, B-01-B Währung, B-01-C Datenquelle, B-01-D CSV-Erstellung; blockiert Chart |
 | AP-20/21 | Engine  | Mixed-Rhythm CV-Heuristik (T5→T3→T6→T7)  | H    | —   | engine/detail/AP-20-DETAIL.md       |
 | AP-6c    | Engine  | Touch-Tooltip Smartphone-Test             | M    | —   | engine/detail/AP-6c-DETAIL.md       |
 | AP-22    | Engine  | Zero-Line lineWidth (~3 Zeilen Fix)       | L    | —   | —                                   |
@@ -50,6 +50,7 @@ Stand: 2026-05-28 | Session: APP-01-B01-Spec-V1.2 | Geändert von: Claude
 | TH-04B   | Theme   | Sicherheits-Audit (Phase 4B, 18 Items)         | H    | TH-03        | theme-build/THEME-ASSEMBLY-CHECKLIST.md           |
 | TH-05    | Theme   | Deployment (Phase 5, 5 Items)                  | H    | TH-04A, TH-04B | theme-build/THEME-ASSEMBLY-CHECKLIST.md         |
 | TH-06    | Theme   | Ghost-Instanz konfigurieren (Phase 6)          | H    | TH-05        | theme-build/THEME-ASSEMBLY-CHECKLIST.md           |
+| AF-19    | App-Fabrik | docs/App-Fabrik/01_DECISION_LOG.md synchronisieren — E-01, E-02, B-02, B-03 einpflegen (letzter Stand: 2026-05-19, A-12) | L | — | docs/App-Fabrik/01_DECISION_LOG.md |
 | AF-04    | App     | AUTHOR_GUIDE harmonisieren — `data-app` → `data-fw-app` | M    | Pilot-1      | —                                                 |
 | AF-05    | App     | Redakteurs-Cheat-Sheet fw-apps erstellen        | M    | Pilot-1      | —                                                 |
 
