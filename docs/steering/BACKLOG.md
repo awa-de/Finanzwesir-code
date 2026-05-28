@@ -1,5 +1,5 @@
 # BACKLOG – Finanzwesir 2.0
-Stand: 2026-05-28 | Session: APP-01-E02-Entscheidung | Geändert von: Claude
+Stand: 2026-05-28 | Session: APP-01-B01-Spec-V1.2 | Geändert von: Claude
 
 **Regeln:**
 - ✅-Zeilen werden sofort nach `BACKLOG-ARCHIV.md` verschoben (append), dann hier gelöscht.
@@ -12,8 +12,8 @@ Stand: 2026-05-28 | Session: APP-01-E02-Entscheidung | Geändert von: Claude
 
 | ID       | Bereich | Titel                                     | Prio | Dep | Detail                              |
 |----------|---------|-------------------------------------------|------|-----|-------------------------------------|
-| APP-01   | App     | B1 Slice-0: Entscheidungen klären → dann Slice-0 implementieren   | H | — | Apps/prokrastinations-preis/APP_SPEC.md (V1.0 fertig) |
-| APP-01-B01 | App   | B1 Blocker: MSCI-Datenbasis klären (Quelle, JSON-Format)          | H | APP-01 | 02_OPEN_QUESTIONS.md Data-01; blockiert Chart + Berechnung |
+| APP-01   | App     | B1 Slice-0: Entscheidungen klären → dann Slice-0 implementieren   | H | — | Apps/prokrastinations-preis/APP_SPEC.md (V1.2) |
+| APP-01-B01 | App   | B1 Blocker: MSCI-Datenbasis klären (Quelle + CSV-Beschaffung)     | H | APP-01 | APP_SPEC §17; entschieden: MSCI World Index, CSV-Format; offen: B-01-A Indexvariante, B-01-B Währung, B-01-C Datenquelle, B-01-D CSV-Erstellung; blockiert Chart + Berechnung |
 | AP-20/21 | Engine  | Mixed-Rhythm CV-Heuristik (T5→T3→T6→T7)  | H    | —   | engine/detail/AP-20-DETAIL.md       |
 | AP-6c    | Engine  | Touch-Tooltip Smartphone-Test             | M    | —   | engine/detail/AP-6c-DETAIL.md       |
 | AP-22    | Engine  | Zero-Line lineWidth (~3 Zeilen Fix)       | L    | —   | —                                   |

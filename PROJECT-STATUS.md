@@ -2,13 +2,13 @@
 Version: 1
 Stand: 2026-05-28
 Fokus-AP: APP-01 — prokrastinations-preis
-Nächster-Schritt: B-01 MSCI-Datenbasis klären (Quelle + JSON-Format) → dann Slice-0 implementieren
+Nächster-Schritt: B-01-A/B/C/D klären (Indexvariante, Währung, Quelle, CSV-Erstellung) → dann Slice-0 implementieren
 Blocker: keine
 -->
 
 # PROJECT STATUS — Finanzwesir 2.0
 
-Stand: 2026-05-28 | Session: APP-01-E02-Entscheidung | Geändert von: Claude
+Stand: 2026-05-28 | Session: APP-01-B01-Spec-V1.2 | Geändert von: Claude
 
 **Zweck:** Schneller Wiedereinstieg nach Pausen.
 **Zielgruppe:** Albert und Claude.
@@ -25,12 +25,12 @@ Stand: 2026-05-28 | Session: APP-01-E02-Entscheidung | Geändert von: Claude
 
 **B1 operative Dateien VERALTET ✅** (2026-05-18): APP_SPEC.md, SLICE_0_KICKOFF.md und SLICE_PLAN.md mit hartem VERALTET-Header versehen. Nicht mehr als Implementierungsanleitung verwenden. Operative Quelle für B1: MINI_SPEC_FROM_HAUPTDOKUMENT.md.
 
-✅ **B1 Slice-0-Reboot abgeschlossen (2026-05-28):** APP_SPEC V1.0 (Marktzeit-Mechanik, 19 Abschnitte inkl. heldenreise) fertig. NAVIGATION.md Ausnahme-Warnung auf Reboot-Notiz aktualisiert.
+✅ **B1 Slice-0-Reboot abgeschlossen (2026-05-28):** APP_SPEC V1.2 (Marktzeit-Mechanik, 19 Abschnitte inkl. heldenreise) fertig. Datenbasis MSCI World Index, Format CSV entschieden. NAVIGATION.md Ausnahme-Warnung auf Reboot-Notiz aktualisiert.
 
 ✅ **E-01 entschieden (2026-05-28):** prokrastinations-preis ist Szenario-/Vergleichs-App mit Storytelling-Elementen. Kein Calculator.
 ✅ **E-02 entschieden (2026-05-28):** Neue Pilot-Reihenfolge — risiko-uebersetzer = Pilot-1 (Calculator-Pilot), prokrastinations-preis = Pilot-2 (Daten-/Chart-/Story-Pilot). 05_PILOT_STRATEGY.md aktualisiert.
 
-⚙️ **Nächster Schritt B1:** B-01 MSCI-Datenbasis klären (Quelle + JSON-Format) → dann Slice-0 implementieren.
+⚙️ **Nächster Schritt B1:** B-01-A/B/C/D klären (Indexvariante, Währung, Quelle, CSV-Erstellung) → dann Slice-0 implementieren.
 
 ---
 
@@ -57,7 +57,7 @@ Stand: 2026-05-28 | Session: APP-01-E02-Entscheidung | Geändert von: Claude
 
 ## 3. Nächster sinnvoller Schritt
 
-- **B1 Slice-0: B-01 MSCI-Datenbasis klären** — Quelle + JSON-Format (02_OPEN_QUESTIONS.md Data-01). E-01 (App-Familie) und E-02 (Pilot-Reihenfolge) sind entschieden. APP_SPEC V1.0 fertig. Danach: Slice-0 implementieren.
+- **B1 Slice-0: B-01-A/B/C/D klären** — Indexvariante, Währung, Quelle, CSV-Erstellung (02_OPEN_QUESTIONS.md Data-01). E-01/E-02 entschieden. Datenbasis (MSCI World Index) + Format (CSV) entschieden. APP_SPEC V1.2 fertig. Danach: Slice-0 implementieren.
 - **AP-20/21** (Mixed-Rhythm CV-Heuristik) — 🟡 Aktiv, Chart-Engine, parallel möglich
 
 ---
@@ -105,6 +105,9 @@ Vollständig im DECISION-LOG dokumentiert (`docs/steering/DECISION-LOG.md`):
 ---
 
 ## 8. Letzte Session
+
+2026-05-28 — B-01 Spec-Konsolidierung (APP-01-B01-Spec-V1.2).
+Datenbasis = MSCI World Index, monatliche Indexwerte (kein ETF-Proxy). Format = CSV (Semikolon, Komma-Dezimal). APP_SPEC §7.1–§7.5, §8, §10, §13, §16, §17, §18, §19.8 umgestellt. Neue §7.3 README-Pflichtfelder. B-01-A/B/C/D offen bis CSV-Beschaffung. BACKLOG, NAVIGATION, 02_OPEN_QUESTIONS.md Data-01 synchronisiert.
 
 2026-05-28 — E-01 + E-02 entschieden (APP-01-E02-Entscheidung).
 E-01: prokrastinations-preis = Szenario-/Vergleichs-App mit Storytelling-Elementen (kein Calculator). E-02: neue Pilot-Reihenfolge — risiko-uebersetzer Pilot-1 (Calculator-Pilot), prokrastinations-preis Pilot-2 (Daten-/Chart-/Story-Pilot). 05_PILOT_STRATEGY.md, APP_SPEC §1/§3/§17/§19.10, NAVIGATION.md, DECISION-LOG (D-APP-01-E01 + E02) aktualisiert.
@@ -246,17 +249,21 @@ Neue APs: DS-012, DS-013, DS-014.
 
 ## 9. Einstieg für nächste Session
 
-**Nächster Schritt: B-01 MSCI-Datenbasis klären → Slice-0 implementieren.**
+**Nächster Schritt: B-01-A/B/C/D klären (Indexvariante, Währung, Quelle, CSV-Erstellung) → Slice-0 implementieren.**
 
 Entschieden (nicht mehr offen):
 - E-01 ✅: prokrastinations-preis ist Szenario-/Vergleichs-App mit Storytelling-Elementen
 - E-02 ✅: Pilot-1 = risiko-uebersetzer (Calculator-Pilot), Pilot-2 = prokrastinations-preis (Daten-/Chart-/Story-Pilot)
+- B-01 ✅: Datenbasis = MSCI World Index, monatliche Indexwerte; Format = CSV (Semikolon, Komma-Dezimal); kein ETF-Proxy
 
 Noch offen (Blocker vor Implementierung):
-- B-01: MSCI-Datenbasis (Quelle + JSON-Format) — 02_OPEN_QUESTIONS.md Data-01
+- B-01-A: Indexvariante (Price / Net Return / Gross Return) — APP_SPEC §17
+- B-01-B: Währung (USD / EUR) — APP_SPEC §17
+- B-01-C: Datenquelle — APP_SPEC §17
+- B-01-D: Wer erstellt und gibt CSV frei — APP_SPEC §17
 
 Operative Quelle:
-- `Apps/prokrastinations-preis/APP_SPEC.md` — V1.0 Marktzeit-Mechanik ✅ (operativ)
+- `Apps/prokrastinations-preis/APP_SPEC.md` — V1.2 Marktzeit-Mechanik ✅ (operativ)
 - `Apps/prokrastinations-preis/MINI_SPEC_FROM_HAUPTDOKUMENT.md` — Hintergrundquelle
 
 ⚠️ NOCH NICHT VERWENDEN:

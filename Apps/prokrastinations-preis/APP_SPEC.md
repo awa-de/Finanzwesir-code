@@ -1,6 +1,6 @@
 # APP_SPEC — prokrastinations-preis
 
-Stand: 2026-05-28 | Slice-0-Reboot V1.0 | Geändert von: Claude
+Stand: 2026-05-28 | Slice-0-Reboot V1.2 | Geändert von: Claude
 
 ---
 
@@ -104,7 +104,7 @@ Abwägung nach 03_APP_FACTORY_STANDARD_DRAFT.md:
 |---|---|---|
 | Slider (primär) | `monatlicheRate` | laufend bei Nutzerinteraktion |
 | `data-fw-options` | `defaultRate`, `startBetrag` | einmalig beim Initialisieren |
-| `data-fw-data` | JSON-Datei (MSCI-Monatsdaten) | einmalig beim Laden |
+| `data-fw-data` | CSV-Datei (MSCI-Monatsdaten) | einmalig beim Laden |
 
 ### 5.3 Validierungsregeln (Two-Step-Parsing, P-02)
 
@@ -137,28 +137,56 @@ Abwägung nach 03_APP_FACTORY_STANDARD_DRAFT.md:
 
 | Feld | Wert |
 |---|---|
-| Format | JSON-Array |
+| Datenbasis | MSCI World Index, monatliche Indexwerte — kein ETF-Proxy, keine Produktnennung |
+| Format | CSV — Separator: `;` — Dezimalzeichen: `,` |
+| Datum-Spalte | `month` (Format `YYYY-MM`) oder `date` (Format `YYYY-MM-DD`) |
+| Wert-Spalte | `indexValue` (Komma-Dezimal) |
+| Lokaler Pfad | `Apps/prokrastinations-preis/data/msci-world-monthly.csv` |
+| Dokumentation | `Apps/prokrastinations-preis/data/msci-world-monthly.README.md` |
 | Einbindung | `data-fw-data` (Ghost-Card-Attribut) |
-| URL (Ziel) | `https://www.finanzwesir.com/content/files/2026/msci-world-monthly.json` [endgültige URL nach Upload] |
-| Datenbasis-Quelle | **[TBD — Blocker B-01: Quelle und Normierungsformat offen → 02_OPEN_QUESTIONS.md Data-01]** |
-| Zeitraum | Mindestens 120 Monate; letzter Eintrag = „heute" |
+| URL (Ziel) | `https://www.finanzwesir.com/content/files/2026/msci-world-monthly.csv` [endgültige URL nach Upload] |
+| Zeitraum | Mindestens 120 Monate; letzter Eintrag = letzter vollständig verfügbarer Monat |
+| Indexvariante | **[TBD B-01-A]** Price / Net Return / Gross Return |
+| Währung | **[TBD B-01-B]** |
+| Quelle | **[TBD B-01-C]** |
+| CSV erstellt durch | **[TBD B-01-D]** |
 
-### 7.2 Erwartetes JSON-Schema (Arbeitsannahme AA-01)
+### 7.2 Erwartetes CSV-Format
 
-```json
-[
-  { "month": "2016-01", "indexValue": 1234.56 },
-  { "month": "2016-02", "indexValue": 1245.78 },
-  ...
-  { "month": "2026-04", "indexValue": 2567.89 }
-]
+Datei: `Apps/prokrastinations-preis/data/msci-world-monthly.csv`
+Separator: `;` (Semikolon)
+Dezimalzeichen: `,` (Komma)
+Header-Zeile: Pflicht
+
+Beispiel:
+```
+month;indexValue
+2016-05;1234,56
+2016-06;1241,22
+2016-07;1258,90
 ```
 
-Pflichtfelder pro Eintrag: `month` (String, Format `YYYY-MM`), `indexValue` (Number)
-Mindestlänge: 120 Datenpunkte
-Validierung: Felder vorhanden? Typen korrekt? ≥ 120 Punkte? → sonst Empty-State
+Pflicht-Spalten: `month` (String `YYYY-MM` oder `YYYY-MM-DD`) und `indexValue` (Komma-Dezimal)
+Mindestlänge: 120 Datenzeilen (ohne Header)
+Validierung: Header vorhanden? Pflicht-Spalten vorhanden? ≥ 120 Zeilen? Werte parsebar? → sonst Empty-State oder Error-State (b)
 
-### 7.3 Berechnungslogik — Arbeitsannahme (TBD B-02)
+### 7.3 README-Pflichtfelder
+
+Datei: `Apps/prokrastinations-preis/data/msci-world-monthly.README.md`
+
+| Feld | Beschreibung |
+|---|---|
+| `indexName` | z. B. „MSCI World Index" |
+| `indexVariant` | Price / Net Return / Gross Return — TBD B-01-A |
+| `currency` | z. B. USD oder EUR — TBD B-01-B |
+| `frequency` | monthly |
+| `source` | z. B. „MSCI Inc." — TBD B-01-C |
+| `sourceUrl` | URL oder manueller Quellenhinweis |
+| `downloadDate` / `lastUpdated` | Datum des Downloads oder letzten Aktualisierung |
+| `transformation` | Rohwert oder normiert auf 100 (erster Datenpunkt) |
+| Hinweis | Keine ETF-Produktempfehlung — nur indexbasierte Prinzip-Demonstration |
+
+### 7.4 Berechnungslogik — Arbeitsannahme (TBD B-02)
 
 Anteilslogik (Arbeitsannahme — muss Albert bestätigen):
 
@@ -171,7 +199,7 @@ Für jeden Monat t:
 
 Alternative: vereinfachte Annuität mit durchschnittlicher Monatsrendite. Entscheidung B-02 (→ §17) vor Implementierung erforderlich.
 
-### 7.4 Cache-Busting
+### 7.5 Cache-Busting
 
 Versionsparameter in URL: `?v=2026-05` oder versionierter Dateiname.
 Dev-Ausnahme: `localhost`/`127.0.0.1` erlaubt, als Dev-Ausnahme dokumentiert.
@@ -187,7 +215,7 @@ Gemäß `docs/spec/APP-INTERFACE.md` §3.1.
 ```html
 <div class="fw-app"
      data-fw-app="prokrastinations-preis"
-     data-fw-data="https://www.finanzwesir.com/content/files/2026/msci-world-monthly.json">
+     data-fw-data="https://www.finanzwesir.com/content/files/2026/msci-world-monthly.csv">
 </div>
 ```
 
@@ -196,7 +224,7 @@ Gemäß `docs/spec/APP-INTERFACE.md` §3.1.
 ```html
 <div class="fw-app"
      data-fw-app="prokrastinations-preis"
-     data-fw-data="https://www.finanzwesir.com/content/files/2026/msci-world-monthly.json"
+     data-fw-data="https://www.finanzwesir.com/content/files/2026/msci-world-monthly.csv"
      data-fw-options="defaultRate:500">
 </div>
 ```
@@ -207,7 +235,7 @@ Gemäß `docs/spec/APP-INTERFACE.md` §3.1.
 - Kein freies JSON in `data-fw-options`
 - Keine URLs außerhalb erlaubter Domains
 
-**Unterschied zur alten Spec:** Die neue Card hat zwingend `data-fw-data` für die JSON-Datendatei. Die alte Calculator-App hatte keine externe Datenquelle.
+**Unterschied zur alten Spec:** Die neue Card hat zwingend `data-fw-data` für die CSV-Datendatei. Die alte Calculator-App hatte keine externe Datenquelle.
 
 ---
 
@@ -230,8 +258,8 @@ Init
   ├─ Slug-Prüfung: ungültig            → Error (a)
   └─ loadData(data-fw-data) → Loading
                                → Content    (≥ 120 valide Datenpunkte)
-                               → Error (b)  (URL ungültig / Domain-Lock / JSON nicht parsebar)
-                               → Empty      (JSON valide aber < 120 Punkte oder Pflichtfelder fehlen)
+                               → Error (b)  (URL ungültig / Domain-Lock / CSV nicht parsebar)
+                               → Empty      (CSV valide aber < 120 Zeilen oder Pflichtfelder fehlen)
 ```
 
 | State | Bedingung | Ausgabe für Nutzer |
@@ -239,8 +267,8 @@ Init
 | Loading | Daten werden geladen | Lade-Indikator (Skeleton oder Spinner), kein leerer Container |
 | Content | Daten geladen und valide | Screen-Flow 1→2→3→4 mit Chart, KpiCards, CTA |
 | Error (a) | Ungültiger `data-fw-app`-Slug | „Diese App konnte nicht geladen werden. Bitte App-Konfiguration prüfen." — `textContent`, kein Stacktrace |
-| Error (b) | URL ungültig / Domain-Lock / JSON nicht parsebar | „Daten konnten nicht geladen werden. Bitte Seite neu laden." — `textContent`, kein Stacktrace |
-| Empty | JSON valide, aber < 120 Datenpunkte oder Pflichtfelder fehlen | „Nicht genug Daten für die Berechnung. Bitte Datenquelle prüfen." — `textContent`, kein Stacktrace |
+| Error (b) | URL ungültig / Domain-Lock / CSV nicht parsebar | „Daten konnten nicht geladen werden. Bitte Seite neu laden." — `textContent`, kein Stacktrace |
+| Empty | CSV valide, aber < 120 Datenzeilen oder Pflichtfelder fehlen | „Nicht genug Daten für die Berechnung. Bitte Datenquelle prüfen." — `textContent`, kein Stacktrace |
 
 **Ungültige `data-fw-options`-Werte:** Fallback auf internen Default, kein Error-State.
 
@@ -375,11 +403,13 @@ String `"defaultRate:300"` → geparst zu `{ defaultRate: 300 }`, gegen Whitelis
 
 ### Schritt 2 — Parsing und Validierung
 
-**JSON-Daten:**
+**CSV-Daten:**
 ```js
-const raw = await fetch(validatedUrl).then(r => r.json());
-// Ist es ein Array? Hat es ≥ 120 Einträge?
-// Hat jeder Eintrag 'month' (string) und 'indexValue' (number)?
+const csvText = await fetch(validatedUrl).then(r => r.text());
+// Hat csvText eine Header-Zeile mit 'month' und 'indexValue'?
+// Hat es ≥ 120 Datenzeilen (ohne Header)?
+// Ist jeder indexValue-Wert als Komma-Dezimal parsebar?
+//   parseFloat(v.replace(',', '.'))
 // Fehler → Error-State (b) oder Empty-State
 ```
 
@@ -520,9 +550,9 @@ Begründung: Die Erweiterung auf externe JSON-Daten via `data-fw-data` ist in AP
 | T-02 | Ungültiger `data-fw-app`-Slug | Error-State (a), nutzerfreundliche Meldung auf Deutsch |
 | T-03 | `data-fw-data`-URL mit ungültiger Domain | Error-State (b) |
 | T-04 | `data-fw-data`-URL unerreichbar (404, Netzwerkfehler) | Error-State (b) |
-| T-05 | JSON syntaktisch ungültig | Error-State (b) |
-| T-06 | JSON < 120 Datenpunkte | Empty-State |
-| T-07 | JSON mit fehlenden `indexValue`-Feldern | Empty-State |
+| T-05 | CSV nicht parsebar (fehlende Header / ungültige Struktur) | Error-State (b) |
+| T-06 | CSV < 120 Datenzeilen | Empty-State |
+| T-07 | CSV mit fehlender oder leerer `indexValue`-Spalte | Empty-State |
 | T-08 | Unbekannter Key in `data-fw-options` | Ignoriert, App normal |
 | T-09 | `defaultRate:abc` (ungültiger Typ) | Fallback auf Default (300) |
 | T-10 | XSS-Versuch in `data-fw-options` (`defaultRate:<script>`) | NaN → Fallback; kein Script-Aufruf |
@@ -576,7 +606,12 @@ Begründung: Die Erweiterung auf externe JSON-Daten via `data-fw-data` ist in AP
 
 | ID | Frage | Konsequenz wenn nicht geklärt |
 |---|---|---|
-| B-01 | **MSCI-Daten: Quelle und Normierungsformat?** (02_OPEN_QUESTIONS.md Data-01) — Woher kommen die historischen MSCI-World-Monatsdaten? Welches JSON-Schema? Absoluter Indexwert oder normiert? | Keine Datenpipeline, kein Chart, keine Berechnung |
+| B-01 | **Datenbasis:** MSCI World Index, monatliche Indexwerte — kein ETF-Proxy | ✅ entschieden 2026-05-28 |
+| B-01 | **Format:** CSV, Semikolon-Separator, Komma-Dezimal | ✅ entschieden 2026-05-28 |
+| B-01-A | **Indexvariante:** Price, Net Return oder Gross Return? | ⬜ offen — Konsequenz: falsches Renditebild |
+| B-01-B | **Währung:** USD oder EUR? | ⬜ offen — Konsequenz: Skalierung und Metadokumentation unklar |
+| B-01-C | **Datenquelle:** MSCI direkt, Stooq, Investing.com, manuell…? | ⬜ offen — Konsequenz: keine CSV, keine Datenpipeline |
+| B-01-D | **Wer erstellt und gibt die CSV frei?** | ⬜ offen — Konsequenz: kein Chart, keine Berechnung |
 | B-02 | **Berechnungsformel für simulierten Sparplan:** Anteilslogik (kaufe monatlich Anteile) oder vereinfachte Annuität mit Durchschnittsrendite? | Falsche oder irreführende Zahlen in Chart und KpiCards |
 | B-03 | **Screen-Flow-Mechanismus:** Scroll-triggered, Button-triggered oder Autoplay? | UX-Struktur unklar — direkte Auswirkung auf Implementierung |
 
@@ -612,7 +647,7 @@ Begründung: Die Erweiterung auf externe JSON-Daten via `data-fw-data` ist in AP
 | Kein data-app? | ✅ §8 |
 | Kein produktives data-fw-theme? | ✅ §15 |
 | data-fw-options whitelistbar? (Whitelist dokumentiert) | ✅ §9 |
-| Datenquellen und Cache-Busting geklärt? | ⚠️ Schema definiert (AA-01), Datenbasis-Quelle TBD (B-01) |
+| Datenquellen und Cache-Busting geklärt? | ⚠️ Datenbasis (MSCI World Index) und Format (CSV) entschieden; B-01-A/B/C/D offen |
 | AppContext definiert? | ✅ §11 |
 | Pflichtfelder und Fallback-Felder unterschieden? | ✅ §11.3 |
 | A11y-Vertrag definiert? | ✅ §12 |
@@ -741,7 +776,7 @@ Ein Satz. Alltagssprache. Kein Fachbegriff. Kein Vorwurf.
 6. **Offenlegungs-Test:** Wenn dem Nutzer erklärt wird, warum die App so gestaltet ist — würde er sich geholfen oder manipuliert fühlen? Antwort muss „geholfen" sein.
 
 **AssumptionsBox (immer sichtbar, Screen 2 oder 3):**
-> „Basis: MSCI World, monatliche Daten, letzter verfügbarer Monat = heute, 10 Jahre rückwärts. Vergangene Wertentwicklungen sind keine Garantie für die Zukunft. Keine Finanzberatung."
+> „Basis: MSCI World Index, monatliche Indexwerte, 10 Jahre rückwärts bis zum letzten vollständig verfügbaren Monat. Die Werte zeigen das Marktprinzip, keine konkrete ETF-Produktempfehlung. Vergangene Wertentwicklungen sind keine Garantie für die Zukunft. Keine Finanzberatung."
 
 ### 19.9 Bewusst nicht in dieser App
 
