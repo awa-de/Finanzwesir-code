@@ -1,11 +1,13 @@
 # BACKLOG-ARCHIV – Finanzwesir 2.0
-Stand: 2026-05-28 | Session: APP-01-E01-Entscheidung | Geändert von: Claude
+Stand: 2026-05-28 | Session: APP-01-B02-B03-Entscheidung | Geändert von: Claude
 
 Abgeschlossene Items, neueste zuerst (append-only).
 Archivierungs-Trigger: wenn > 200 Zeilen → neue Datei `BACKLOG-ARCHIV-YYYY.md` anlegen.
 
 | ID | Bereich | Titel | Abgeschlossen | Session |
 |----|---------|-------|---------------|---------|
+| APP-01-B03 | App | B1 Entscheidung Screen-Flow: Button-getrieben V1 (Screens 1→2→3→4 per sichtbarem Button/Tastatur). Kein Autoplay, kein Scroll-Trigger. prefers-reduced-motion respektiert. APP_SPEC §14.3 aktualisiert. D-APP-01-B03 im DECISION-LOG. *(sofort erledigt)* | 2026-05-28 | APP-01-B02-B03-Entscheidung |
+| APP-01-B02 | App | B1 Entscheidung Berechnungsformel: Anteilslogik (monatlicher Anteilskauf). Keine Annuität, keine Durchschnittsrendite. APP_SPEC §7.4 + §13 aktualisiert. D-APP-01-B02 im DECISION-LOG. *(sofort erledigt)* | 2026-05-28 | APP-01-B02-B03-Entscheidung |
 | APP-01-E02 | App | B1 Pilot-Reihenfolge: risiko-uebersetzer = Pilot-1 (Calculator-Pilot), prokrastinations-preis = Pilot-2 (Daten-/Chart-/Story-Pilot). 05_PILOT_STRATEGY.md + APP_SPEC §1/§3/§17/§19.10 aktualisiert. D-APP-01-E02 im DECISION-LOG. | 2026-05-28 | APP-01-E02-Entscheidung |
 | APP-01-E01 | App | B1 Entscheidung App-Familie: prokrastinations-preis ist Szenario-/Vergleichs-App mit Storytelling-Elementen. Kein Calculator. APP_SPEC §3 gültig. Alle Folge-Dokumente dürfen als entschieden behandeln. D-APP-01-E01 im DECISION-LOG. | 2026-05-28 | APP-01-E01-Entscheidung |
 | AF-18 | App-Fabrik | D4-Doku-Konsistenzpatch — Zähltexte, Überschriften und Metadaten nach AF-17 bereinigt: 21→22 / 24→25 in 5 Dateien (App-Register, 00_STATUS, DECISION_LOG, APP_INVENTORY, Hauptdokument); Z-01 als historisches Ausgangsmodell markiert (Hinweis auf Z-05 als SSoT); Z-05 nach Z-04 verschoben. *(sofort erledigt)* | 2026-05-19 | D4-Konsistenzpatch |

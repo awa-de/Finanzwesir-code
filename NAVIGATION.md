@@ -149,7 +149,7 @@ Nach Abschluss: `/abschluss-ritual`.
 11. Apps/[App-Name]/SLICE_PLAN.md (wenn vorhanden) ← Slice-Struktur + freigegebener Umfang (vor Implementierung lesen)
 
 > [!note] B1 / prokrastinations-preis — Slice-0-Reboot abgeschlossen (2026-05-28)
-> `Apps/prokrastinations-preis/APP_SPEC.md` V1.2 (Marktzeit-Mechanik) ist jetzt die operative Spec-Quelle.
+> `Apps/prokrastinations-preis/APP_SPEC.md` V1.3 (Marktzeit-Mechanik) ist jetzt die operative Spec-Quelle.
 > `Apps/prokrastinations-preis/MINI_SPEC_FROM_HAUPTDOKUMENT.md` bleibt als fachliche Hintergrundquelle.
 > `SLICE_0_KICKOFF.md` und `SLICE_PLAN.md` sind VERALTET (alte Mechanik) — neue Slice-Dateien ausstehend.
 > B1 ist Pilot-2 (Daten-/Chart-/Story-Pilot). Pilot-1 ist `risiko-uebersetzer` (Calculator-Pilot) — entschieden E-02, 2026-05-28.

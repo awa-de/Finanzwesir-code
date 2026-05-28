@@ -1,4 +1,4 @@
-**Stand:** 2026-05-28 | **Session:** APP-01-E02-Entscheidung | **Geändert von:** Claude
+**Stand:** 2026-05-28 | **Session:** APP-01-B02-B03-Entscheidung | **Geändert von:** Claude
 
 # Decision Log — Finanzwesir 2.0
 
@@ -45,6 +45,77 @@ TBD
 #### Revisit
 
 TBD
+
+---
+
+## D-APP-01-B03: Screen-Flow — Button-getrieben
+
+Datum: 2026-05-28
+Status: beschlossen
+
+#### Problem
+
+Drei mögliche Screen-Flow-Mechanismen für die 4-Screen-Narration: Autoplay, Scroll-triggered oder Button-triggered.
+
+#### Entscheidung
+
+Button-getriebener Screen-Flow für V1. Screens 1→2→3→4 per sichtbarem Button oder Tastatur (Enter/Space). Kein Autoplay. Kein Scroll-Trigger.
+
+#### Begründung
+
+Kontrollierbar, testbar, barriereärmer und einfacher zu implementieren. Für den ersten Daten-/Chart-/Story-Pilot wichtiger als cineastische Eleganz. prefers-reduced-motion wird respektiert: Übergänge deaktiviert, direkt Zielzustand.
+
+#### Alternativen
+
+Scroll-triggered (nicht für V1): Höherer Implementierungsaufwand, schwerer testbar, Barrierefreiheit komplexer — für V2+ nicht ausgeschlossen.
+Autoplay (verworfen): Nicht kontrollierbar, nicht barrierefrei.
+
+#### Konsequenzen
+
+§14.3 und §12.5 APP_SPEC aktualisiert. Scroll-triggered ist kein V1-Scope.
+
+#### Invariante
+
+Kein Autoplay ohne erneute explizite Entscheidung.
+
+#### Revisit
+
+Wenn V1 produktiv ist und cineastischer Flow als Verbesserung evaluiert wird.
+
+---
+
+## D-APP-01-B02: Berechnungsformel — Anteilslogik
+
+Datum: 2026-05-28
+Status: beschlossen
+
+#### Problem
+
+Zwei mögliche Berechnungsansätze für den simulierten Sparplan: (a) monatliche Anteilslogik oder (b) vereinfachte Annuität mit Durchschnittsrendite.
+
+#### Entscheidung
+
+Anteilslogik. Für jeden Monat t: `Anteile += monatlicheRate / indexValue[t]`; `depotwert[t] = Anteile × indexValue[t]`. startBetrag bleibt optional (Default 0); für V1 kann er in der UI entfernt werden.
+
+#### Begründung
+
+Die App lebt davon, echte Einbrüche sichtbar zu machen. Eine Durchschnittsrendite würde genau den historischen Beweis zerstören — sie mittelt Einbrüche heraus und produziert eine geglättete Kurve statt der echten Strecke.
+
+#### Alternativen
+
+Annuität mit Durchschnittsrendite (verworfen): Einfacher zu implementieren, aber inhaltlich falsch für den Zweck dieser App.
+
+#### Konsequenzen
+
+§7.4 und §13 Schritt 4 APP_SPEC aktualisiert. Annuität und Durchschnittsrendite sind für diese App dauerhaft ausgeschlossen.
+
+#### Invariante
+
+Keine Durchschnittsrendite-Formel ohne erneute explizite Entscheidung.
+
+#### Revisit
+
+Nicht vorgesehen.
 
 ---
 

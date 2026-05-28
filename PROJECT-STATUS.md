@@ -8,7 +8,7 @@ Blocker: keine
 
 # PROJECT STATUS — Finanzwesir 2.0
 
-Stand: 2026-05-28 | Session: APP-01-B01-Spec-V1.2 | Geändert von: Claude
+Stand: 2026-05-28 | Session: APP-01-B02-B03-Entscheidung | Geändert von: Claude
 
 **Zweck:** Schneller Wiedereinstieg nach Pausen.
 **Zielgruppe:** Albert und Claude.
@@ -29,6 +29,8 @@ Stand: 2026-05-28 | Session: APP-01-B01-Spec-V1.2 | Geändert von: Claude
 
 ✅ **E-01 entschieden (2026-05-28):** prokrastinations-preis ist Szenario-/Vergleichs-App mit Storytelling-Elementen. Kein Calculator.
 ✅ **E-02 entschieden (2026-05-28):** Neue Pilot-Reihenfolge — risiko-uebersetzer = Pilot-1 (Calculator-Pilot), prokrastinations-preis = Pilot-2 (Daten-/Chart-/Story-Pilot). 05_PILOT_STRATEGY.md aktualisiert.
+✅ **B-02 entschieden (2026-05-28):** Berechnungsformel = Anteilslogik (monatlicher Anteilskauf). Keine Annuität, keine Durchschnittsrendite.
+✅ **B-03 entschieden (2026-05-28):** Screen-Flow = Button-getrieben V1. Kein Autoplay, kein Scroll-Trigger.
 
 ⚙️ **Nächster Schritt B1:** B-01-A/B/C/D klären (Indexvariante, Währung, Quelle, CSV-Erstellung) → dann Slice-0 implementieren.
 
@@ -105,6 +107,9 @@ Vollständig im DECISION-LOG dokumentiert (`docs/steering/DECISION-LOG.md`):
 ---
 
 ## 8. Letzte Session
+
+2026-05-28 — B-02 + B-03 entschieden (APP-01-B02-B03-Entscheidung).
+B-02: Berechnungsformel = Anteilslogik (monatlicher Anteilskauf) — keine Annuität, keine Durchschnittsrendite. B-03: Screen-Flow = Button-getrieben V1 — kein Autoplay, kein Scroll-Trigger, prefers-reduced-motion wird respektiert. APP_SPEC V1.3, DECISION-LOG (D-APP-01-B02 + D-APP-01-B03), PROJECT-STATUS aktualisiert.
 
 2026-05-28 — B-01 Spec-Konsolidierung (APP-01-B01-Spec-V1.2).
 Datenbasis = MSCI World Index, monatliche Indexwerte (kein ETF-Proxy). Format = CSV (Semikolon, Komma-Dezimal). APP_SPEC §7.1–§7.5, §8, §10, §13, §16, §17, §18, §19.8 umgestellt. Neue §7.3 README-Pflichtfelder. B-01-A/B/C/D offen bis CSV-Beschaffung. BACKLOG, NAVIGATION, 02_OPEN_QUESTIONS.md Data-01 synchronisiert.
@@ -255,6 +260,8 @@ Entschieden (nicht mehr offen):
 - E-01 ✅: prokrastinations-preis ist Szenario-/Vergleichs-App mit Storytelling-Elementen
 - E-02 ✅: Pilot-1 = risiko-uebersetzer (Calculator-Pilot), Pilot-2 = prokrastinations-preis (Daten-/Chart-/Story-Pilot)
 - B-01 ✅: Datenbasis = MSCI World Index, monatliche Indexwerte; Format = CSV (Semikolon, Komma-Dezimal); kein ETF-Proxy
+- B-02 ✅: Berechnungsformel = Anteilslogik (monatlicher Anteilskauf); keine Annuität, keine Durchschnittsrendite
+- B-03 ✅: Screen-Flow = Button-getrieben V1; kein Autoplay, kein Scroll-Trigger
 
 Noch offen (Blocker vor Implementierung):
 - B-01-A: Indexvariante (Price / Net Return / Gross Return) — APP_SPEC §17
@@ -263,7 +270,7 @@ Noch offen (Blocker vor Implementierung):
 - B-01-D: Wer erstellt und gibt CSV frei — APP_SPEC §17
 
 Operative Quelle:
-- `Apps/prokrastinations-preis/APP_SPEC.md` — V1.2 Marktzeit-Mechanik ✅ (operativ)
+- `Apps/prokrastinations-preis/APP_SPEC.md` — V1.3 Marktzeit-Mechanik ✅ (operativ)
 - `Apps/prokrastinations-preis/MINI_SPEC_FROM_HAUPTDOKUMENT.md` — Hintergrundquelle
 
 ⚠️ NOCH NICHT VERWENDEN:

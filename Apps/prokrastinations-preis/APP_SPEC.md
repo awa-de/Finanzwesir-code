@@ -1,6 +1,6 @@
 # APP_SPEC — prokrastinations-preis
 
-Stand: 2026-05-28 | Slice-0-Reboot V1.2 | Geändert von: Claude
+Stand: 2026-05-28 | Slice-0-Reboot V1.3 | Geändert von: Claude
 
 ---
 
@@ -186,9 +186,9 @@ Datei: `Apps/prokrastinations-preis/data/msci-world-monthly.README.md`
 | `transformation` | Rohwert oder normiert auf 100 (erster Datenpunkt) |
 | Hinweis | Keine ETF-Produktempfehlung — nur indexbasierte Prinzip-Demonstration |
 
-### 7.4 Berechnungslogik — Arbeitsannahme (TBD B-02)
+### 7.4 Berechnungslogik [entschieden — B-02, 2026-05-28]
 
-Anteilslogik (Arbeitsannahme — muss Albert bestätigen):
+Anteilslogik:
 
 ```
 Startanteile = startBetrag / indexValue[0]
@@ -196,8 +196,6 @@ Für jeden Monat t:
   Anteile += monatlicheRate / indexValue[t]   // monatlicher Anteilskauf
   depotwert[t] = Anteile × indexValue[t]
 ```
-
-Alternative: vereinfachte Annuität mit durchschnittlicher Monatsrendite. Entscheidung B-02 (→ §17) vor Implementierung erforderlich.
 
 ### 7.5 Cache-Busting
 
@@ -432,7 +430,7 @@ const appData = Object.freeze({
 ### Schritt 4 — MarktzetStrategy (reine Zahlen, P-05)
 
 ```js
-// Anteilslogik (Arbeitsannahme AA-01, TBD B-02)
+// Anteilslogik (entschieden — B-02, 2026-05-28)
 let anteile = appData.startBetrag / appData.msciData[0].indexValue;
 const chartSeries = appData.msciData.map(p => {
   anteile += appData.monatlicheRate / p.indexValue;
@@ -505,7 +503,8 @@ Die App ist kein Single-Screen-Calculator. Sie führt den Nutzer durch 4 sequent
 
 ### 14.3 Screen-Übergänge
 
-Mechanismus: [TBD — Scroll-triggered, Button-triggered oder Autoplay? → B-03]
+Mechanismus: Button-getrieben [entschieden — B-03, 2026-05-28]
+Screens 1→2→3→4 per sichtbarem Button oder Tastatur (Enter/Space). Kein Autoplay. Kein Scroll-Trigger in V1.
 prefers-reduced-motion: Übergänge deaktiviert, direkt Zielzustand.
 
 ### 14.4 Label-Konventionen (Krug — Alltagssprache)
@@ -612,8 +611,8 @@ Begründung: Die Erweiterung auf externe JSON-Daten via `data-fw-data` ist in AP
 | B-01-B | **Währung:** USD oder EUR? | ⬜ offen — Konsequenz: Skalierung und Metadokumentation unklar |
 | B-01-C | **Datenquelle:** MSCI direkt, Stooq, Investing.com, manuell…? | ⬜ offen — Konsequenz: keine CSV, keine Datenpipeline |
 | B-01-D | **Wer erstellt und gibt die CSV frei?** | ⬜ offen — Konsequenz: kein Chart, keine Berechnung |
-| B-02 | **Berechnungsformel für simulierten Sparplan:** Anteilslogik (kaufe monatlich Anteile) oder vereinfachte Annuität mit Durchschnittsrendite? | Falsche oder irreführende Zahlen in Chart und KpiCards |
-| B-03 | **Screen-Flow-Mechanismus:** Scroll-triggered, Button-triggered oder Autoplay? | UX-Struktur unklar — direkte Auswirkung auf Implementierung |
+| B-02 | **Berechnungsformel:** Anteilslogik — monatlicher Anteilskauf | ✅ entschieden 2026-05-28 |
+| B-03 | **Screen-Flow-Mechanismus:** Button-getrieben, kein Autoplay | ✅ entschieden 2026-05-28 |
 
 ### Entscheidungsfragen für Albert
 
@@ -656,7 +655,7 @@ Begründung: Die Erweiterung auf externe JSON-Daten via `data-fw-data` ist in AP
 | Sicherheitsregeln erfüllt? Security-Sync synchron? | ✅ §15 — synchron mit Nicht-Blockern |
 | Keine offenen Blocker stillschweigend entschieden? | ✅ §17 — alle Blocker explizit markiert |
 | Mini-Spec vollständig berücksichtigt? | ✅ alle Screens, Microcopy, Datenlogik, Abgrenzungen übernommen |
-| Offene Blocker für Spec-Gate? | ⚠️ B-01 / B-02 / B-03 sind Implementierungsblocker, kein Spec-Gate-Blocker |
+| Offene Blocker für Spec-Gate? | ⚠️ B-01-A/B/C/D offen (Indexvariante, Währung, Quelle, CSV) — B-02 + B-03 entschieden |
 | Alberts explizites OK? | ⬜ AUSSTEHEND |
 
 **UX-Gate (heldenreise):** ✅ angewendet → §19
