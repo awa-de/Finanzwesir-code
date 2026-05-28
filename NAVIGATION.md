@@ -1,5 +1,5 @@
 # NAVIGATION.md – Finanzwesir 2.0
-Stand: 2026-05-28 | Session: APP-01-Slice-0-Reboot | Geändert von: Claude
+Stand: 2026-05-28 | Session: APP-01-E02-Entscheidung | Geändert von: Claude
 
 Für Claude: **Routing-Dokument.** Wird beim Session-Start (Schritt 2) gelesen.
 Gibt Pfade und Lese-Reihenfolgen vor — KEINE Verhaltensregeln (die stehen in CLAUDE.md).
@@ -152,6 +152,7 @@ Nach Abschluss: `/abschluss-ritual`.
 > `Apps/prokrastinations-preis/APP_SPEC.md` V1.0 (Marktzeit-Mechanik) ist jetzt die operative Spec-Quelle.
 > `Apps/prokrastinations-preis/MINI_SPEC_FROM_HAUPTDOKUMENT.md` bleibt als fachliche Hintergrundquelle.
 > `SLICE_0_KICKOFF.md` und `SLICE_PLAN.md` sind VERALTET (alte Mechanik) — neue Slice-Dateien ausstehend.
+> B1 ist Pilot-2 (Daten-/Chart-/Story-Pilot). Pilot-1 ist `risiko-uebersetzer` (Calculator-Pilot) — entschieden E-02, 2026-05-28.
 12. bei Chart-Nutzung: relevante Chart-Engine-Spec + WORKING-FEATURES.md
 ```
 

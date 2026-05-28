@@ -9,7 +9,7 @@ Stand: 2026-05-28 | Slice-0-Reboot V1.0 | Geändert von: Claude
 | Feld | Wert |
 |---|---|
 | Version | Draft V1.0 — Slice-0-Reboot (Marktzeit-Mechanik) |
-| Phase | Pilot-1, Phase 2 — Spec |
+| Phase | Daten-/Chart-/Story-Pilot (Pilot-2), Phase 2 — Spec |
 | Nächster Schritt | `/heldenreise` anwenden → Spec-Gate → Pre-Code-Gate → Slice-0 |
 | Kein Code-Freigabe-Dokument | Implementierung erst nach Spec-Gate + Pre-Code-Gate |
 | Grundlage | `Apps/prokrastinations-preis/MINI_SPEC_FROM_HAUPTDOKUMENT.md` |
@@ -40,7 +40,7 @@ Kurzform: „Warten nimmt dir Marktzeit."
 
 ## 3. App-Familie
 
-**Klassifizierung: Szenario-/Vergleichs-App mit Storytelling-Elementen [Arbeitsannahme — Entscheidung E-01 → §17]**
+**Klassifizierung: Szenario-/Vergleichs-App mit Storytelling-Elementen [entschieden — E-01, 2026-05-28]**
 
 Die neue B1-Mechanik (Marktzeit) ist kein reiner Calculator mehr. Sie kombiniert:
 - Nutzer-Eingabe (monatliche Sparrate) — wie Calculator
@@ -55,9 +55,9 @@ Abwägung nach 03_APP_FACTORY_STANDARD_DRAFT.md:
 | Szenario-/Vergleichs-App | Daten laden → Chart → Erklärung → CTA; historische Strecke ist Kern | Kein Zeitraum-Slider; kein klassischer Szenario-Vergleich |
 | Storytelling-Dashboard | Sequentielle Screens; narrativer Flow; Entscheidungspunkt | Kein reines Dashboard; Nutzer gibt Sparrate aktiv ein |
 
-**Arbeitsannahme:** Szenario-/Vergleichs-App (historische Daten) mit Storytelling-Elementen (4 Screens).
+**Entschieden (E-01, 2026-05-28):** Szenario-/Vergleichs-App (historische Daten) mit Storytelling-Elementen (4 Screens).
 
-**Konsequenz für Pilot-1-Strategie:** 05_PILOT_STRATEGY.md beschreibt B1 noch als „einfachsten Calculator ohne externe Daten". Die Marktzeit-Mechanik hat externe Daten, Chart und 4-Screen-Flow — die Komplexität steigt. Entscheidung E-02 (→ §17) erforderlich.
+**Pilot-Rolle (E-02, 2026-05-28):** Daten-/Chart-/Story-Pilot (Pilot-2). Pilot-1 ist `risiko-uebersetzer` (Calculator-Pilot). 05_PILOT_STRATEGY.md aktualisiert.
 
 **Wiederverwendbare Bausteine, die dieser Pilot erzwingt:**
 - JSON-Datenpipeline für historische Monatsdaten
@@ -584,19 +584,14 @@ Begründung: Die Erweiterung auf externe JSON-Daten via `data-fw-data` ist in AP
 
 | ID | Frage | Arbeitsannahme |
 |---|---|---|
-| E-01 | **App-Familie:** Szenario-/Vergleichs-App oder Hybrid? | Szenario-/Vergleichs-App mit Storytelling-Elementen |
-| E-02 | **Pilot-1-Scope:** Die Marktzeit-Mechanik ist komplexer als der alte Calculator (externe Daten, Chart, 4 Screens). Bleibt B1 Pilot-1, oder wird ein einfacherer App (z. B. `risiko-uebersetzer`) vorgezogen? | B1 bleibt Pilot-1 — Marktzeit ist die zentrale Botschaft |
+| E-01 | **App-Familie:** Szenario-/Vergleichs-App oder Hybrid? | ✅ entschieden 2026-05-28: Szenario-/Vergleichs-App mit Storytelling-Elementen |
+| E-02 | **Pilot-Scope:** Bleibt B1 Pilot-1? | ✅ entschieden 2026-05-28: B1 ist Pilot-2 (Daten-/Chart-/Story-Pilot). Pilot-1 ist `risiko-uebersetzer` (Calculator-Pilot). |
 | E-03 | **Startbetrag als Eingabe:** Ja (Optional-Slider/Eingabe) oder nein (zu viel UX-Aufwand)? | Ja, optional mit Default 0 |
 | E-04 | **CTA-Text:** „Heute Marktzeit sammeln" oder „Ich starte jetzt"? | TBD — nach `/heldenreise` entscheiden |
 
-### Pilot-Strategie-Konflikt (explizit sichtbar)
+### Pilot-Strategie-Synchronisation
 
-05_PILOT_STRATEGY.md beschreibt B1 noch als:
-> „Einfachster Calculator, keine externen Daten, erzwingt Slider/KPI/Counter/CTA-Standard"
-
-Die neue Marktzeit-Mechanik hat: externe JSON-Daten (MSCI-World), Chart mit historischer Linie, 4-Screen-Flow.
-
-→ 05_PILOT_STRATEGY.md muss nach Alberts Entscheid zu E-02 aktualisiert werden.
+→ gelöst: E-02 entschieden 2026-05-28. 05_PILOT_STRATEGY.md aktualisiert.
 
 ### Nicht-Blocker / Scope-Funde
 
@@ -768,7 +763,7 @@ Warten ist keine neutrale Position. Die vergangene Marktzeit ist unwiederbringli
 **Welche Frage entsteht danach logisch:**
 > „Verstanden. Aber ich habe Angst vor Einbrüchen. Wie viel Risiko halte ich eigentlich aus?"
 
-**Nächste App:** `risiko-uebersetzer` (Pilot-2)
+**Nächste App:** `risiko-uebersetzer` (Pilot-1)
 
 **CTA-Text-Empfehlung:** „Heute Marktzeit sammeln →"
 

@@ -1,4 +1,4 @@
-**Stand:** 2026-05-03 12:00 | **Session:** Masterplan-Abschluss | **Geändert von:** Claude
+**Stand:** 2026-05-28 | **Session:** APP-01-E02-Entscheidung | **Geändert von:** Claude
 
 # Decision Log — Finanzwesir 2.0
 
@@ -45,6 +45,77 @@ TBD
 #### Revisit
 
 TBD
+
+---
+
+## D-APP-01-E02: Pilot-Reihenfolge
+
+Datum: 2026-05-28
+Status: beschlossen
+
+#### Problem
+
+APP_SPEC §17 E-02 hatte offen gelassen, ob B1 (prokrastinations-preis) technischer Pilot-1 bleibt oder ob ein einfacherer Calculator vorgeschaltet wird. Die Marktzeit-Mechanik hat externe Datenpipeline, Chart und 4-Screen-Flow — deutlich komplexer als der ursprüngliche Calculator-Pilot.
+
+#### Entscheidung
+
+1. `risiko-uebersetzer` = technischer Calculator-Pilot (Pilot-1): App-Shell, Slider, Formel, KPI, CTA, State-Modell, A11y, Ghost-Card-Vertrag validieren.
+2. `prokrastinations-preis` = erster Daten-/Chart-/Story-Pilot (Pilot-2): JSON-Datenpipeline, historischer Chart, Screen-Flow, Entscheidungspunkt-Marker, AssumptionsBox validieren.
+
+#### Begründung
+
+Calculator-Mechanik zuerst härten (keine externe Datenpipeline, geringere Komplexität), dann historische Datenpipeline und Chart als zweiter Komplexitätsschritt.
+
+#### Alternativen
+
+B1 bleibt Pilot-1 (verworfen): Die Marktzeit-Mechanik wäre als erster Pilot zu komplex — externe Daten, Chart-Engine-Entscheidung, 4-Screen-Flow gleichzeitig in einem ungetesteten Factory-Setup.
+
+#### Konsequenzen
+
+05_PILOT_STRATEGY.md aktualisiert. APP_SPEC §1/§3/§17/§19.10 aktualisiert. risiko-uebersetzer rückt in Pilot-1-Position.
+
+#### Invariante
+
+Kein Tausch der Pilot-Reihenfolge ohne erneute explizite Entscheidung von Albert.
+
+#### Revisit
+
+Nur wenn risiko-uebersetzer als Pilot ungeeignet erscheint oder prokrastinations-preis vorgezogen werden soll.
+
+---
+
+## D-APP-01-E01: App-Familie prokrastinations-preis
+
+Datum: 2026-05-28
+Status: beschlossen
+
+#### Problem
+
+APP_SPEC §17 E-01 hatte offen gelassen, ob prokrastinations-preis als Szenario-/Vergleichs-App oder als Calculator/Eingabe-Tool konzipiert wird. Beide Ansätze wären technisch umsetzbar, aber architektonisch unterschiedlich.
+
+#### Entscheidung
+
+Szenario-/Vergleichs-App mit Storytelling-Elementen. Kein Calculator.
+
+#### Begründung
+
+Albert hat explizit entschieden. APP_SPEC §3 (Kernkonzept Szenario-Vergleich) bleibt inhaltlich gültig und bildet weiterhin die Grundlage.
+
+#### Alternativen
+
+Calculator-Ansatz (verworfen): Nutzereingaben statt vorberechnete Szenarien — inhaltlich möglich, aber nicht der gewählte Weg.
+
+#### Konsequenzen
+
+Slice-0-Implementierung und alle Folge-Slices folgen dem Szenario-Modell. Alle Folge-Dokumente dürfen E-01 als entschieden behandeln.
+
+#### Invariante
+
+Kein Calculator-Element ohne erneute explizite Entscheidung von Albert.
+
+#### Revisit
+
+Nur wenn Storytelling-Ansatz nachweislich scheitert.
 
 ---
 

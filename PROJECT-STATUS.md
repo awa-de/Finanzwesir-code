@@ -2,13 +2,13 @@
 Version: 1
 Stand: 2026-05-28
 Fokus-AP: APP-01 — prokrastinations-preis
-Nächster-Schritt: B1 Entscheidungen klären (E-01 App-Familie, E-02 Pilot-Scope, B-01 MSCI-Datenbasis) → dann Slice-0 implementieren
+Nächster-Schritt: B-01 MSCI-Datenbasis klären (Quelle + JSON-Format) → dann Slice-0 implementieren
 Blocker: keine
 -->
 
 # PROJECT STATUS — Finanzwesir 2.0
 
-Stand: 2026-05-28 | Session: APP-01-Slice-0-Reboot | Geändert von: Claude
+Stand: 2026-05-28 | Session: APP-01-E02-Entscheidung | Geändert von: Claude
 
 **Zweck:** Schneller Wiedereinstieg nach Pausen.
 **Zielgruppe:** Albert und Claude.
@@ -27,7 +27,10 @@ Stand: 2026-05-28 | Session: APP-01-Slice-0-Reboot | Geändert von: Claude
 
 ✅ **B1 Slice-0-Reboot abgeschlossen (2026-05-28):** APP_SPEC V1.0 (Marktzeit-Mechanik, 19 Abschnitte inkl. heldenreise) fertig. NAVIGATION.md Ausnahme-Warnung auf Reboot-Notiz aktualisiert.
 
-⚙️ **Nächster Schritt B1:** E-01 App-Familie + E-02 Pilot-Scope + B-01 MSCI-Datenbasis klären (BACKLOG APP-01-E01/E02/B01) → dann Slice-0 implementieren.
+✅ **E-01 entschieden (2026-05-28):** prokrastinations-preis ist Szenario-/Vergleichs-App mit Storytelling-Elementen. Kein Calculator.
+✅ **E-02 entschieden (2026-05-28):** Neue Pilot-Reihenfolge — risiko-uebersetzer = Pilot-1 (Calculator-Pilot), prokrastinations-preis = Pilot-2 (Daten-/Chart-/Story-Pilot). 05_PILOT_STRATEGY.md aktualisiert.
+
+⚙️ **Nächster Schritt B1:** B-01 MSCI-Datenbasis klären (Quelle + JSON-Format) → dann Slice-0 implementieren.
 
 ---
 
@@ -54,7 +57,7 @@ Stand: 2026-05-28 | Session: APP-01-Slice-0-Reboot | Geändert von: Claude
 
 ## 3. Nächster sinnvoller Schritt
 
-- **B1 Slice-0: Entscheidungen klären** — E-01 (App-Familie), E-02 (Pilot-1-Scope), B-01 (MSCI-Datenbasis). APP_SPEC V1.0 fertig. Nächster Schritt: diese 3 Punkte mit Albert klären, dann Slice-0 implementieren.
+- **B1 Slice-0: B-01 MSCI-Datenbasis klären** — Quelle + JSON-Format (02_OPEN_QUESTIONS.md Data-01). E-01 (App-Familie) und E-02 (Pilot-Reihenfolge) sind entschieden. APP_SPEC V1.0 fertig. Danach: Slice-0 implementieren.
 - **AP-20/21** (Mixed-Rhythm CV-Heuristik) — 🟡 Aktiv, Chart-Engine, parallel möglich
 
 ---
@@ -67,7 +70,7 @@ Stand: 2026-05-28 | Session: APP-01-Slice-0-Reboot | Geändert von: Claude
 | Chart-Engine | Stabil, offene APs | Siehe `docs/steering/BACKLOG.md` |
 | Theme | In Entwicklung | `THEME-ASSEMBLY-CHECKLIST.md` |
 | CSS | Stabil | Siehe `docs/steering/BACKLOG.md` (CSS-N Items) |
-| Apps | B1 APP_SPEC V1.0 fertig ✅ | Entscheidungen E-01/E-02/B-01 klären → Slice-0 |
+| Apps | E-01/E-02 entschieden ✅ | B-01 MSCI-Datenbasis klären → Slice-0 |
 | Content | Laufend | Redaktionsleitfaden aktiv |
 | Security | SECURITY-BASELINE.md App-Fabrik-gatefähig ✅ | Security-Sync-Regel + Gate-Prüffrage verankert (ST-13/ST-14) |
 
@@ -102,6 +105,9 @@ Vollständig im DECISION-LOG dokumentiert (`docs/steering/DECISION-LOG.md`):
 ---
 
 ## 8. Letzte Session
+
+2026-05-28 — E-01 + E-02 entschieden (APP-01-E02-Entscheidung).
+E-01: prokrastinations-preis = Szenario-/Vergleichs-App mit Storytelling-Elementen (kein Calculator). E-02: neue Pilot-Reihenfolge — risiko-uebersetzer Pilot-1 (Calculator-Pilot), prokrastinations-preis Pilot-2 (Daten-/Chart-/Story-Pilot). 05_PILOT_STRATEGY.md, APP_SPEC §1/§3/§17/§19.10, NAVIGATION.md, DECISION-LOG (D-APP-01-E01 + E02) aktualisiert.
 
 2026-05-28 — B1 Slice-0-Reboot abgeschlossen (APP-01-Slice-0-Reboot).
 APP_SPEC V1.0 (Marktzeit-Mechanik) neu erstellt — 19 Abschnitte (tech-spec-app + heldenreise). App-Familie: Szenario-/Vergleichs-App mit 4-Screen-Flow, externe MSCI-JSON-Daten. Pilot-Strategie-Konflikt entdeckt und als E-02 für Albert markiert. NAVIGATION.md Ausnahme-B1-Warnung → Reboot-Notiz. BACKLOG: APP-01 aktualisiert + APP-01-E01/E02/B01 neu.
@@ -240,16 +246,18 @@ Neue APs: DS-012, DS-013, DS-014.
 
 ## 9. Einstieg für nächste Session
 
-**Nächster Schritt: B1 Entscheidungen klären (E-01/E-02/B-01) → Slice-0 implementieren.**
+**Nächster Schritt: B-01 MSCI-Datenbasis klären → Slice-0 implementieren.**
+
+Entschieden (nicht mehr offen):
+- E-01 ✅: prokrastinations-preis ist Szenario-/Vergleichs-App mit Storytelling-Elementen
+- E-02 ✅: Pilot-1 = risiko-uebersetzer (Calculator-Pilot), Pilot-2 = prokrastinations-preis (Daten-/Chart-/Story-Pilot)
+
+Noch offen (Blocker vor Implementierung):
+- B-01: MSCI-Datenbasis (Quelle + JSON-Format) — 02_OPEN_QUESTIONS.md Data-01
 
 Operative Quelle:
 - `Apps/prokrastinations-preis/APP_SPEC.md` — V1.0 Marktzeit-Mechanik ✅ (operativ)
 - `Apps/prokrastinations-preis/MINI_SPEC_FROM_HAUPTDOKUMENT.md` — Hintergrundquelle
-
-Offene Entscheidungen (vor Slice-0-Implementierung):
-- E-01: App-Familie bestätigen (Szenario-/Vergleichs-App — Arbeitsannahme)
-- E-02: Pilot-1-Scope klären (B1 komplexer als geplant — externe Daten, Chart, 4 Screens)
-- B-01: MSCI-Datenbasis (Quelle + JSON-Format)
 
 ⚠️ NOCH NICHT VERWENDEN:
 - `Apps/prokrastinations-preis/SLICE_0_KICKOFF.md` — VERALTET (alte Mechanik)
