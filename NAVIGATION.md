@@ -1,5 +1,5 @@
 # NAVIGATION.md – Finanzwesir 2.0
-Stand: 2026-05-19 | Session: D4-Einpflege | Geändert von: Claude
+Stand: 2026-05-28 | Session: APP-01-Slice-0-Reboot | Geändert von: Claude
 
 Für Claude: **Routing-Dokument.** Wird beim Session-Start (Schritt 2) gelesen.
 Gibt Pfade und Lese-Reihenfolgen vor — KEINE Verhaltensregeln (die stehen in CLAUDE.md).
@@ -148,10 +148,10 @@ Nach Abschluss: `/abschluss-ritual`.
 10. Apps/[App-Name]/                              ← App-spezifischer Code + Prototypen
 11. Apps/[App-Name]/SLICE_PLAN.md (wenn vorhanden) ← Slice-Struktur + freigegebener Umfang (vor Implementierung lesen)
 
-> [!warning] Ausnahme B1 / prokrastinations-preis
-> `Apps/prokrastinations-preis/APP_SPEC.md`, `SLICE_0_KICKOFF.md` und `SLICE_PLAN.md` sind VERALTET und dürfen nicht als Implementierungsgrundlage verwendet werden.
-> Bis zum B1 Slice-0-Reboot ist die operative fachliche Quelle nur:
-> `Apps/prokrastinations-preis/MINI_SPEC_FROM_HAUPTDOKUMENT.md`
+> [!note] B1 / prokrastinations-preis — Slice-0-Reboot abgeschlossen (2026-05-28)
+> `Apps/prokrastinations-preis/APP_SPEC.md` V1.0 (Marktzeit-Mechanik) ist jetzt die operative Spec-Quelle.
+> `Apps/prokrastinations-preis/MINI_SPEC_FROM_HAUPTDOKUMENT.md` bleibt als fachliche Hintergrundquelle.
+> `SLICE_0_KICKOFF.md` und `SLICE_PLAN.md` sind VERALTET (alte Mechanik) — neue Slice-Dateien ausstehend.
 12. bei Chart-Nutzung: relevante Chart-Engine-Spec + WORKING-FEATURES.md
 ```
 

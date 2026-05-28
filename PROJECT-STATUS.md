@@ -1,14 +1,14 @@
 <!-- HOOK-META
 Version: 1
-Stand: 2026-05-18
+Stand: 2026-05-28
 Fokus-AP: APP-01 — prokrastinations-preis
-Nächster-Schritt: B1 Slice-0-Reboot — neue APP_SPEC für Marktzeit-Mechanik erstellen (alte APP_SPEC/Slice-Dateien mit VERALTET-Header versehen, nicht mehr operative Spezifikation)
+Nächster-Schritt: B1 Entscheidungen klären (E-01 App-Familie, E-02 Pilot-Scope, B-01 MSCI-Datenbasis) → dann Slice-0 implementieren
 Blocker: keine
 -->
 
 # PROJECT STATUS — Finanzwesir 2.0
 
-Stand: 2026-05-18 | Session: Block-B-Restinkonsistenzen | Geändert von: Claude
+Stand: 2026-05-28 | Session: APP-01-Slice-0-Reboot | Geändert von: Claude
 
 **Zweck:** Schneller Wiedereinstieg nach Pausen.
 **Zielgruppe:** Albert und Claude.
@@ -25,7 +25,9 @@ Stand: 2026-05-18 | Session: Block-B-Restinkonsistenzen | Geändert von: Claude
 
 **B1 operative Dateien VERALTET ✅** (2026-05-18): APP_SPEC.md, SLICE_0_KICKOFF.md und SLICE_PLAN.md mit hartem VERALTET-Header versehen. Nicht mehr als Implementierungsanleitung verwenden. Operative Quelle für B1: MINI_SPEC_FROM_HAUPTDOKUMENT.md.
 
-⚙️ **Nächster Schritt B1:** B1 Slice-0-Reboot — neue APP_SPEC für die Marktzeit-Mechanik erstellen (eigener Task).
+✅ **B1 Slice-0-Reboot abgeschlossen (2026-05-28):** APP_SPEC V1.0 (Marktzeit-Mechanik, 19 Abschnitte inkl. heldenreise) fertig. NAVIGATION.md Ausnahme-Warnung auf Reboot-Notiz aktualisiert.
+
+⚙️ **Nächster Schritt B1:** E-01 App-Familie + E-02 Pilot-Scope + B-01 MSCI-Datenbasis klären (BACKLOG APP-01-E01/E02/B01) → dann Slice-0 implementieren.
 
 ---
 
@@ -52,7 +54,7 @@ Stand: 2026-05-18 | Session: Block-B-Restinkonsistenzen | Geändert von: Claude
 
 ## 3. Nächster sinnvoller Schritt
 
-- **B1 Slice-0-Reboot** — neue APP_SPEC für Marktzeit-Mechanik erstellen (eigener Task). Basis: `Apps/prokrastinations-preis/MINI_SPEC_FROM_HAUPTDOKUMENT.md`. Alte APP_SPEC/Slice-Dateien sind VERALTET, kein Code ohne neue APP_SPEC.
+- **B1 Slice-0: Entscheidungen klären** — E-01 (App-Familie), E-02 (Pilot-1-Scope), B-01 (MSCI-Datenbasis). APP_SPEC V1.0 fertig. Nächster Schritt: diese 3 Punkte mit Albert klären, dann Slice-0 implementieren.
 - **AP-20/21** (Mixed-Rhythm CV-Heuristik) — 🟡 Aktiv, Chart-Engine, parallel möglich
 
 ---
@@ -65,7 +67,7 @@ Stand: 2026-05-18 | Session: Block-B-Restinkonsistenzen | Geändert von: Claude
 | Chart-Engine | Stabil, offene APs | Siehe `docs/steering/BACKLOG.md` |
 | Theme | In Entwicklung | `THEME-ASSEMBLY-CHECKLIST.md` |
 | CSS | Stabil | Siehe `docs/steering/BACKLOG.md` (CSS-N Items) |
-| Apps | Block B umgebaut ✅ + VERALTET-Header gesetzt | B1 Slice-0-Reboot: neue APP_SPEC für Marktzeit-Mechanik |
+| Apps | B1 APP_SPEC V1.0 fertig ✅ | Entscheidungen E-01/E-02/B-01 klären → Slice-0 |
 | Content | Laufend | Redaktionsleitfaden aktiv |
 | Security | SECURITY-BASELINE.md App-Fabrik-gatefähig ✅ | Security-Sync-Regel + Gate-Prüffrage verankert (ST-13/ST-14) |
 
@@ -100,6 +102,9 @@ Vollständig im DECISION-LOG dokumentiert (`docs/steering/DECISION-LOG.md`):
 ---
 
 ## 8. Letzte Session
+
+2026-05-28 — B1 Slice-0-Reboot abgeschlossen (APP-01-Slice-0-Reboot).
+APP_SPEC V1.0 (Marktzeit-Mechanik) neu erstellt — 19 Abschnitte (tech-spec-app + heldenreise). App-Familie: Szenario-/Vergleichs-App mit 4-Screen-Flow, externe MSCI-JSON-Daten. Pilot-Strategie-Konflikt entdeckt und als E-02 für Albert markiert. NAVIGATION.md Ausnahme-B1-Warnung → Reboot-Notiz. BACKLOG: APP-01 aktualisiert + APP-01-E01/E02/B01 neu.
 
 2026-05-18 — Block-B-Restinkonsistenzen bereinigt (Block-B-Restinkonsistenzen).
 App-Register B4/B5 aus Zusatz-Modul-Tabelle → Master-App-Ordner-Tabelle (21 Einträge). APP_INVENTORY + App-Register D.1 auf Epochen-/30-Jahres-Logik. BACKLOG APP-01 → B1 Slice-0-Reboot. NAVIGATION [!warning]-Block B1-Ausnahme. 00_STATUS Zählung 19→21 / 22→24 + Nächste Schritte + Robuste Arbeitsannahmen. AF-16 archiviert, AF-15 auf MINI_SPEC_MAPPING-Rest reduziert.
@@ -235,20 +240,20 @@ Neue APs: DS-012, DS-013, DS-014.
 
 ## 9. Einstieg für nächste Session
 
-**Nächster Schritt: B1 Slice-0-Reboot — neue APP_SPEC für Marktzeit-Mechanik erstellen.**
+**Nächster Schritt: B1 Entscheidungen klären (E-01/E-02/B-01) → Slice-0 implementieren.**
 
-⚠️ NICHT mehr lesen / verwenden:
-- `Apps/prokrastinations-preis/APP_SPEC.md` — VERALTET (alte Mechanik: Verlustzähler)
+Operative Quelle:
+- `Apps/prokrastinations-preis/APP_SPEC.md` — V1.0 Marktzeit-Mechanik ✅ (operativ)
+- `Apps/prokrastinations-preis/MINI_SPEC_FROM_HAUPTDOKUMENT.md` — Hintergrundquelle
+
+Offene Entscheidungen (vor Slice-0-Implementierung):
+- E-01: App-Familie bestätigen (Szenario-/Vergleichs-App — Arbeitsannahme)
+- E-02: Pilot-1-Scope klären (B1 komplexer als geplant — externe Daten, Chart, 4 Screens)
+- B-01: MSCI-Datenbasis (Quelle + JSON-Format)
+
+⚠️ NOCH NICHT VERWENDEN:
 - `Apps/prokrastinations-preis/SLICE_0_KICKOFF.md` — VERALTET (alte Mechanik)
 - `Apps/prokrastinations-preis/SLICE_PLAN.md` — VERALTET (alte Mechanik)
-
-Operative Quelle für B1-Reboot:
-- `Apps/prokrastinations-preis/MINI_SPEC_FROM_HAUPTDOKUMENT.md` — neue B1-Richtung (Marktzeit-Mechanik, MSCI-World-Monatsdaten)
-- `docs/App-Fabrik/ETF-Apps-Hauptdokument.md` — B1-Abschnitt im Block B
-
-Pflichtquellen weiterhin bindend:
-- `docs/spec/APP-INTERFACE.md` — Ghost-Card-Vertrag
-- `docs/steering/audits/SECURITY-BASELINE.md` — Sicherheitsregeln
 
 **Scope-Funde die noch offen sind:**
 - AUTHOR_GUIDE-v3.md: `data-app` → `data-fw-app` Update (nach Pilot-1, wenn Vertrag stabil)

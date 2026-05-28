@@ -1,32 +1,6 @@
-> [!warning] VERALTET — NICHT MEHR ALS IMPLEMENTIERUNGSANLEITUNG VERWENDEN
->
-> Diese Datei beschreibt die alte B1-Mechanik „Prokrastinations-Preis" mit Verlustzähler, Wartezeit-Slider, Festrendite/Zukunftsprojektion und alter Slice-Logik.
->
-> Diese Mechanik ist durch die neue B1-Richtung ersetzt:
->
-> **B1 – Marktzeit schlägt Timing / Lieber heute als morgen**
->
-> Neue B1-Mechanik:
-> - echte MSCI-World-Monatsdaten
-> - letzter verfügbarer Monatswert = „heute"
-> - Startpunkt = 120 Monate davor
-> - monatlicher Sparplan
-> - echte historische Strecke inklusive Einbrüche
-> - keine Tagesdaten
-> - keine glatte Zukunftsprojektion
-> - keine animierte Verlustzähler-Strafzettel-Logik
->
-> Gültige fachliche Quelle bis zur neuen APP_SPEC:
->
-> `Apps/prokrastinations-preis/MINI_SPEC_FROM_HAUPTDOKUMENT.md`
->
-> Eine neue `APP_SPEC.md` und neue Slice-Dateien für die Marktzeit-Mechanik sind ein eigener Folge-Task („B1 Slice-0-Reboot").
-
----
-
 # APP_SPEC — prokrastinations-preis
 
-Stand: 2026-05-10 | Spec-Gate-Nachschärfung V0.3 | Geändert von: Claude
+Stand: 2026-05-28 | Slice-0-Reboot V1.0 | Geändert von: Claude
 
 ---
 
@@ -34,417 +8,385 @@ Stand: 2026-05-10 | Spec-Gate-Nachschärfung V0.3 | Geändert von: Claude
 
 | Feld | Wert |
 |---|---|
-| Version | Draft V0.3 |
-| Phase | Pilot-1, Phase 3 — Spec-Gate-Nachschärfung |
-| Nächster Schritt | Spec-Gate: Albert prüft, gibt explizites OK |
+| Version | Draft V1.0 — Slice-0-Reboot (Marktzeit-Mechanik) |
+| Phase | Pilot-1, Phase 2 — Spec |
+| Nächster Schritt | `/heldenreise` anwenden → Spec-Gate → Pre-Code-Gate → Slice-0 |
 | Kein Code-Freigabe-Dokument | Implementierung erst nach Spec-Gate + Pre-Code-Gate |
-| Grundlage | docs/App-Fabrik/04_CLAUDE_WORKFLOW_DRAFT.md Phase 3 |
+| Grundlage | `Apps/prokrastinations-preis/MINI_SPEC_FROM_HAUPTDOKUMENT.md` |
+| Ersetzt | APP_SPEC V0.3 (alte Prokrastinations-Preis-Mechanik — Verlustzähler/Festrendite) |
 
 ---
 
 ## 2. Zweck und Nutzerfrage
 
-**Nutzerfrage:** „Was kostet es mich, mit dem Investieren noch ein paar Jahre zu warten?"
+**Nutzerfrage:** „Der Zug ist doch abgefahren — oder lohnt es sich trotzdem noch?"
 
-**Was soll die App auslösen:** Der Nutzer soll spüren, dass Warten keine neutrale Position ist. Jeder Monat Verzögerung ist eine Entscheidung mit messbaren Konsequenzen — nicht Pech, sondern Preis.
+**Was soll die App auslösen:** Der Nutzer soll spüren, dass „heute" ein echter Entscheidungspunkt ist — nicht der zweitbeste Zeitpunkt, sondern der einzige verfügbare. Die echte historische Strecke (mit Einbrüchen) macht das erlebbar ohne glatte Zukunftsversprechen.
 
-**Kernaussage:** Der Prokrastinations-Preis ist real und konkret. Der Rechner macht ihn sichtbar: als Euro-Betrag, auf den man verzichtet, wenn man den Sparplan um N Jahre verschiebt.
+**Kernaussage:**
+> „Du kannst nicht mehr vor 10 Jahren starten. Aber du kannst verhindern, dass heute in 10 Jahren wieder ‚vor 10 Jahren' heißt."
 
-**Abgrenzung:** Die App rechnet mit Annahmen (Rendite, monatliche Rate, Laufzeit). Sie ersetzt keine Finanzberatung. Annahmen werden explizit sichtbar gemacht (→ P-06 Truthful UX, §14 Sicherheitsregeln).
+Kurzform: „Warten nimmt dir Marktzeit."
+
+**Was nicht Ziel dieser App ist:**
+- Keine Renditeprojektion (keine glatte 6–8 %-Zukunftskurve)
+- Kein moralischer Strafzettel / Verlustzähler-Ton als Hauptton
+- Kein historischer Epochen-Fächer (das ist B2)
+- Keine Kohortenanalyse
+- Kein animierter Countdown als Hauptmechanik
+- Keine Renditedebatte
 
 ---
 
 ## 3. App-Familie
 
-**Familie:** Calculator / Rechner-App
+**Klassifizierung: Szenario-/Vergleichs-App mit Storytelling-Elementen [Arbeitsannahme — Entscheidung E-01 → §17]**
 
-**Pilotrolle:** Pilot-1 der App-Fabrik. Diese App validiert das Calculator-Template, das für alle weiteren Calculator-Apps wiederverwendet wird:  
-`risiko-uebersetzer` (Pilot-2), `kostenkiller-ter`, `thesaurierer-rennen`, `renditekiller-volatilitaet`.
+Die neue B1-Mechanik (Marktzeit) ist kein reiner Calculator mehr. Sie kombiniert:
+- Nutzer-Eingabe (monatliche Sparrate) — wie Calculator
+- Historische Echtdaten mit echten Einbrüchen — wie Szenario-/Vergleichs-App
+- Sequentielle 4-Screen-Narration — wie Storytelling-Dashboard
 
-**Warum diese Familie für Pilot-1:**
-- Keine externe Datenpipeline — einfachste Ausgangslage
-- Klare Eingaben und Ausgaben
-- Erzwingt alle typischen UI-Primitiven der Calculator-Familie
-- Überschaubare Fachlogik — Fokus liegt auf dem Fließband, nicht auf der Komplexität
+Abwägung nach 03_APP_FACTORY_STANDARD_DRAFT.md:
 
-**Was dieser Pilot erstmalig spezifiziert:**
-- AppContext-Schema für Calculator-Familie (Arch-06, §10)
-- A11y-Vertrag für Calculator-Familie (Arch-07, §11)
-- Reise eines Inputs durch die Calculator-Architektur (P-10, §12)
+| Familie | Passt weil | Passt nicht weil |
+|---|---|---|
+| Calculator / Rechner-App | Nutzer gibt Sparrate ein | Kein Formel-Rechner mit Festrendite; braucht Echtdaten; kein LiveCounter als Hauptmechanik |
+| Szenario-/Vergleichs-App | Daten laden → Chart → Erklärung → CTA; historische Strecke ist Kern | Kein Zeitraum-Slider; kein klassischer Szenario-Vergleich |
+| Storytelling-Dashboard | Sequentielle Screens; narrativer Flow; Entscheidungspunkt | Kein reines Dashboard; Nutzer gibt Sparrate aktiv ein |
+
+**Arbeitsannahme:** Szenario-/Vergleichs-App (historische Daten) mit Storytelling-Elementen (4 Screens).
+
+**Konsequenz für Pilot-1-Strategie:** 05_PILOT_STRATEGY.md beschreibt B1 noch als „einfachsten Calculator ohne externe Daten". Die Marktzeit-Mechanik hat externe Daten, Chart und 4-Screen-Flow — die Komplexität steigt. Entscheidung E-02 (→ §17) erforderlich.
 
 **Wiederverwendbare Bausteine, die dieser Pilot erzwingt:**
-Slider, KpiCard, LiveCounter, ResultSentence, AssumptionsBox, PrimaryCta, ErrorState, LoadingSkeleton
+- JSON-Datenpipeline für historische Monatsdaten
+- Chart mit historischer Sparplan-Linie (1 Datenserie)
+- Screen-Flow-Mechanismus (4 Screens sequentiell)
+- Entscheidungspunkt-Marker (vertikale Linie „heute")
+- KpiCard (eingezahlt / Depotwert / Differenz)
+- Slider für monatliche Sparrate
+- Microcopy-Blöcke zwischen Screens
 
 ---
 
-## 4. Inputs
+## 4. Bezug zur Produktlandkarte / Multi-Modul-Struktur
 
-### 4.1 Nutzer-Eingaben
+**Block B — Marktzeit statt Timing:**
+
+| App | Rolle | App-Ordner |
+|---|---|---|
+| `prokrastinations-preis` | **Master-App** — Marktzeit-Entscheidungspunkt | `Apps/prokrastinations-preis/` |
+| B2–B5 | Folge-Apps (Epochen, Depot-Kipppunkt etc.) | je eigener Ordner |
+
+**Scope dieser Spec:** Nur `prokrastinations-preis` (B1).
+
+**Abgrenzung zu B2 (Geburtsjahrlos):**
+- B1: „Was mache ich mit dem verpassten Gestern und dem verfügbaren Heute?" → 1 historische Strecke, Entscheidungspunkt
+- B2: „Wie unterschiedlich liefen 30 Jahre ETF-Sparen je nach Börsenepoche?" → Kohortenvergleich, Epochen-Fächer
+
+---
+
+## 5. Inputs
+
+### 5.1 Nutzer-Eingaben
 
 | Parameter | Typ | Default | Min | Max | Einheit | Validierungsregel |
 |---|---|---|---|---|---|---|
-| `monatlicheRate` | Integer | 300 | 50 | 2.000 | €/Monat | Ganzzahl; außerhalb Range → Clamp auf Grenze |
-| `gesamtlaufzeit` | Integer | 30 | 5 | 50 | Jahre | Ganzzahl; muss > `prokrastinationsJahre` |
-| `prokrastinationsJahre` | Integer | 5 | 1 | 20 | Jahre | Ganzzahl; muss < `gesamtlaufzeit` |
-| `jahresrendite` | Number | 7,0 | — | — | % p.a. | Festwert — kein Nutzer-Slider (O-03 ✅ entschieden; → §6 Config-JSON) |
+| `monatlicheRate` | Integer | 300 | 50 | 2.000 | €/Monat | Ganzzahl; außerhalb Range → Clamp |
+| `startBetrag` | Integer | 0 | 0 | 50.000 | € | Optional; Ganzzahl; außerhalb Range → Clamp |
 
-**prokrastinationsJahre Range 1–20:** Min=1 (nicht 0 aus Mini-Spec) weil 0 Jahre Verzögerung keinen Prokrastinations-Preis ergibt; Max=20 (nicht 10) für größeren Ausdrucksbereich bei längeren Sparplänen.
+**Zeitraum:** Fix 10 Jahre (120 Monate) — kein Nutzer-Parameter. Begründung: „Vor 10 Jahren wäre besser gewesen" ist eine konkrete emotionale Aussage. Ein variabler Zeitraum verwässert die Kernbotschaft.
 
-**Defaults:** Aus Config-JSON geladen. Via `data-fw-options` überschreibbar (→ §8 Whitelist).
+### 5.2 Eingabewege
 
-**Eingabewege:**
-- Slider (primär): haptische Eingabe, Live-Neuberechnung bei jeder Änderung
-- NumericInput (sekundär): nicht Teil von Pilot-1 — Scope-Fund SF-02
+| Quelle | Parameter | Zeitpunkt |
+|---|---|---|
+| Slider (primär) | `monatlicheRate` | laufend bei Nutzerinteraktion |
+| `data-fw-options` | `defaultRate`, `startBetrag` | einmalig beim Initialisieren |
+| `data-fw-data` | JSON-Datei (MSCI-Monatsdaten) | einmalig beim Laden |
 
-**Welche Inputs kommen aus `data-fw-options` (Ghost-Card, Redakteur):**
-`defaultRate`, `years`, `delayYears` — maximal diese 3 Keys (→ §8)
+### 5.3 Validierungsregeln (Two-Step-Parsing, P-02)
 
-**Welche Inputs kommen aus Config-JSON (init, einmalig):**
-Slider-Grenzen, Defaults, `jahresrendite`-Festwert (7 % nominal), Annahmentexte, ResultSentence-Templates
-
-**Welche Inputs kommen aus UI (Nutzereingabe, laufend):**
-Drei Slider-Parameter (monatlicheRate, gesamtlaufzeit, prokrastinationsJahre) — `jahresrendite` ist Festwert aus Config-JSON, kein Slider
-
-**Validierungsregeln — Two-Step-Parsing (P-02):**
-1. Syntaktisch: Ist es eine Zahl? Ist der Typ korrekt (Integer vs. Number)?
+1. Syntaktisch: Ist der Wert eine Zahl? Integer?
 2. Semantisch: Liegt der Wert im erlaubten Bereich?
-3. Bei Verletzung: Wert normalisieren (clampen auf Bereichsgrenzen). Sonderregel: `prokrastinationsJahre` darf maximal `gesamtlaufzeit - 1` sein — wird bei Slider-Bedienung automatisch angepasst.
-4. Empty-State ist Sicherheitsnetz für unmögliche Config-Zustände nach dem Laden, nicht der normale Weg bei Slider-Bedienung (→ §9).
+3. Bei Verletzung: Clamp auf Min/Max. Kein Error-State bei normalem Slider-Betrieb.
 
 ---
 
-## 5. Outputs
+## 6. Outputs
 
 | Output | UI-Primitive | Beschreibung |
 |---|---|---|
-| `endwertSofort` | KpiCard | Projiziertes Endvermögen bei sofortigem Sparplan-Start |
-| `endwertSpaeter` | KpiCard | Projiziertes Endvermögen nach `prokrastinationsJahre` Verzögerung |
-| `prokrastinationsPreis` | KpiCard + LiveCounter | Differenz — das Hauptergebnis der App |
-| `verloreneEinzahlungen` | KpiCard (sekundär) | Nicht eingezahlte Beiträge während der Verzögerung: `monatlicheRate × prokrastinationsJahre × 12` |
-| Chart | 2-Linien-Chart | Nicht in Pilot-1 — SF-01 verschoben bis ChartAdapter/API definiert (O-02 ✅; → §13) |
-| ResultSentence | Text | Auto-generierter Ergebnissatz aus Config-Template |
-| AssumptionsBox | Text | Pflichtzeile immer sichtbar: Rendite-Annahme (7 % nominal). Weitere Hinweise (Inflation nicht eingerechnet, Beratungshinweis) expandierbar — Pflicht nach P-06 |
-| PrimaryCta | Button/Link | Pilot-1: Funnel-CTA → `risiko-uebersetzer` (Arbeitsannahme). Standalone-CTA: spätere Variante. |
-| A11y-Summary | ARIA Live Region | Screenreader-kompatibles Ergebnis bei Neuberechnung (→ §11) |
-
-**ResultSentence-Muster:**  
-„Wer {prokrastinationsJahre} Jahre wartet, verzichtet auf ca. {prokrastinationsPreis}."
-
-**Neben-KPIs: Reihenfolge (positiv zuerst)**
-1. `endwertSofort` — „Bei sofortigem Start"
-2. `endwertSpaeter` — „Bei {N} Jahren Wartezeit"
-3. `verloreneEinzahlungen` — „Nicht eingezahlte Beiträge"
-
-Begründung: Positiv zuerst rahmen. Nebenwerte erklären die Hauptzahl und konkurrieren nicht mit ihr (→ §18.6 Erkenntnishierarchie).
+| Historischer Chart | SparplanChart (1 Datenserie) | Simulierter Sparplan-Verlauf auf Basis echter MSCI-Monatsdaten |
+| Entscheidungspunkt-Marker | VertikaleLinie | Markierung bei letztem Datenpunkt = „heute" |
+| `eingezahlt` | KpiCard | `monatlicheRate × 120 + startBetrag` |
+| `depotwertHeute` | KpiCard | Simulierter Depotwert am letzten Datenpunkt |
+| `differenz` | KpiCard | `depotwertHeute − eingezahlt` (Gewinn oder Verlust) |
+| Microcopy | TextBlock | Kontexttext pro Screen (aus MINI_SPEC) |
+| PrimaryCta | Button/Link | „Heute Marktzeit sammeln" oder „Ich starte jetzt" [E-04 → §17] |
+| A11y-Summary | ARIA Live Region | Screenreader-Zusammenfassung (→ §12) |
 
 ---
 
-## 6. Datenbedarf
+## 7. Datenbedarf
 
-**Keine externe CSV.** `prokrastinations-preis` ist eine reine Rechner-App. Alle Berechnungen erfolgen aus Formeln und Nutzer-Inputs — keine externe Datenpipeline nötig.
+**Externe Datenpipeline: ja.** Im Unterschied zur alten Calculator-Mechanik braucht B1 (Marktzeit) historische MSCI-World-Monatsdaten.
 
-**Config-JSON: ja.** Kein `data-fw-config`-Attribut in der Ghost-Card für Pilot-1 — die Default-Config wird mit der App ausgeliefert. Ob als lokale `app.config.json` oder internes Config-Objekt wird in der Implementierungsplanung entschieden. Externe Config-URL ist kein Blocker für Pilot-1 (AA-03).
+### 7.1 Datenquelle
 
-**Config-JSON-Inhalte (Skizze):**
+| Feld | Wert |
+|---|---|
+| Format | JSON-Array |
+| Einbindung | `data-fw-data` (Ghost-Card-Attribut) |
+| URL (Ziel) | `https://www.finanzwesir.com/content/files/2026/msci-world-monthly.json` [endgültige URL nach Upload] |
+| Datenbasis-Quelle | **[TBD — Blocker B-01: Quelle und Normierungsformat offen → 02_OPEN_QUESTIONS.md Data-01]** |
+| Zeitraum | Mindestens 120 Monate; letzter Eintrag = „heute" |
+
+### 7.2 Erwartetes JSON-Schema (Arbeitsannahme AA-01)
 
 ```json
-{
-  "defaults": {
-    "monatlicheRate": 300,
-    "gesamtlaufzeit": 30,
-    "prokrastinationsJahre": 5,
-    "jahresrendite": 7.0
-  },
-  "ranges": {
-    "monatlicheRate": { "min": 50, "max": 2000, "step": 50 },
-    "gesamtlaufzeit": { "min": 5, "max": 50, "step": 1 },
-    "prokrastinationsJahre": { "min": 1, "max": 20, "step": 1 }
-  },
-  "_note": "jahresrendite hat keine Range — Festwert 7.0 aus 'defaults'. Kein Slider (O-03 ✅).",
-  "assumptions": {
-    "rendite": "7 % p.a. nominal — historischer MSCI-World-Durchschnitt. Nicht garantiert.",
-    "nominal": "Diese Rechnung ist nominal (ohne Inflationsbereinigung).",
-    "beratung": "Keine Finanzberatung. Vergangenheitsrenditen sagen nichts über die Zukunft."
-  },
-  "resultTemplates": {
-    "standard": "Wer {prokrastinationsJahre} Jahre wartet, verzichtet auf ca. {prokrastinationsPreis}.",
-    "high": "{prokrastinationsJahre} verpasste Jahre — das kostet {prokrastinationsPreis}.",
-    "mathematik": "{prokrastinationsJahre} Jahre Warten kosten dich {prokrastinationsPreis} — keine Mahnung, reine Mathematik.",
-    "context": "Das entspricht etwa {vergleichsAnker} Monatsraten à {monatlicheRate}."
-  },
-  "cta": {
-    "funnel": { "label": "Weiter: Risiko-Übersetzer →", "href": "" },
-    "standalone": { "label": "Jetzt Sparplan starten", "href": "" }
-  }
-}
+[
+  { "month": "2016-01", "indexValue": 1234.56 },
+  { "month": "2016-02", "indexValue": 1245.78 },
+  ...
+  { "month": "2026-04", "indexValue": 2567.89 }
+]
 ```
 
-**Keine schwere Datenaufbereitung im Browser.** Alle Berechnungen sind geschlossene Formeln — kein Vorab-Processing nötig. Chart: nicht in Pilot-1 Scope (SF-01).
+Pflichtfelder pro Eintrag: `month` (String, Format `YYYY-MM`), `indexValue` (Number)
+Mindestlänge: 120 Datenpunkte
+Validierung: Felder vorhanden? Typen korrekt? ≥ 120 Punkte? → sonst Empty-State
+
+### 7.3 Berechnungslogik — Arbeitsannahme (TBD B-02)
+
+Anteilslogik (Arbeitsannahme — muss Albert bestätigen):
+
+```
+Startanteile = startBetrag / indexValue[0]
+Für jeden Monat t:
+  Anteile += monatlicheRate / indexValue[t]   // monatlicher Anteilskauf
+  depotwert[t] = Anteile × indexValue[t]
+```
+
+Alternative: vereinfachte Annuität mit durchschnittlicher Monatsrendite. Entscheidung B-02 (→ §17) vor Implementierung erforderlich.
+
+### 7.4 Cache-Busting
+
+Versionsparameter in URL: `?v=2026-05` oder versionierter Dateiname.
+Dev-Ausnahme: `localhost`/`127.0.0.1` erlaubt, als Dev-Ausnahme dokumentiert.
 
 ---
 
-## 7. Ghost-Card-Vertrag
+## 8. Ghost-Card-Vertrag
 
 Gemäß `docs/spec/APP-INTERFACE.md` §3.1.
 
-**Minimal-Card (Pflicht-Beispiel, Copy-Paste für Redakteur):**
-
-```html
-<div class="fw-app"
-     data-fw-app="prokrastinations-preis">
-</div>
-```
-
-**Card mit Redakteur-Overrides (optional):**
+**Minimal-Card:**
 
 ```html
 <div class="fw-app"
      data-fw-app="prokrastinations-preis"
-     data-fw-options="defaultRate:500, years:20">
+     data-fw-data="https://www.finanzwesir.com/content/files/2026/msci-world-monthly.json">
 </div>
 ```
 
-**Card mit Config-Datei (falls Config-JSON extern gehostet wird):**
+**Card mit Redakteur-Override (optional):**
 
 ```html
 <div class="fw-app"
      data-fw-app="prokrastinations-preis"
-     data-fw-config="https://www.finanzwesir.com/content/files/2026/prokrastinations-preis.config.json">
+     data-fw-data="https://www.finanzwesir.com/content/files/2026/msci-world-monthly.json"
+     data-fw-options="defaultRate:500">
 </div>
 ```
 
 **Verboten in dieser Card:**
-- Kein `data-app` (veralteter Namespace — BACKLOG AF-04)
+- Kein `data-app` (veralteter Namespace)
 - Kein `data-fw-theme` (reserviert, nicht produktiv)
-- Kein freies JSON in `data-fw-options` (`data-fw-options='{"key":"val"}'` → verboten)
+- Kein freies JSON in `data-fw-options`
 - Keine URLs außerhalb erlaubter Domains
+
+**Unterschied zur alten Spec:** Die neue Card hat zwingend `data-fw-data` für die JSON-Datendatei. Die alte Calculator-App hatte keine externe Datenquelle.
 
 ---
 
-## 8. data-fw-options-Whitelist
-
-`prokrastinations-preis` unterstützt maximal 3 Inline-Overrides für Redakteure.
+## 9. data-fw-options-Whitelist
 
 | Key | Typ | Default | Min | Max | Fallback bei ungültigem Wert |
 |---|---|---|---|---|---|
-| `defaultRate` | Integer | 300 | 50 | 2.000 | 300 (aus Config-JSON) |
-| `years` | Integer | 30 | 5 | 50 | 30 (aus Config-JSON) |
-| `delayYears` | Integer | 5 | 1 | 20 | 5 (aus Config-JSON) |
+| `defaultRate` | Integer | 300 | 50 | 2.000 | 300 (interner Default) |
+| `startBetrag` | Integer | 0 | 0 | 50.000 | 0 (interner Default) |
 
-**Verarbeitungsregel:** Unbekannte Keys werden stillschweigend ignoriert (Whitelist-Prinzip, APP-INTERFACE.md §5, Q-02).
-
-**`jahresrendite` ist kein Redakteurs-Override.** Die Rendite-Annahme ist eine fachliche Entscheidung, keine redaktionelle. Sie liegt im Config-JSON und wird in der AssumptionsBox erklärt.
-
-**Keine weiteren Keys in `data-fw-options`.** Mehr als 3–4 Parameter gehören in eine Config-JSON-Datei (`data-fw-config`).
+Unbekannte Keys: stillschweigend ignoriert (Whitelist-Prinzip, APP-INTERFACE.md §5).
+Die Datenbasis kommt aus `data-fw-data`, nicht aus `data-fw-options`.
 
 ---
 
-## 9. State-Modell
+## 10. State-Modell
 
 ```
 Init
-  ├─ Slug-Prüfung: ungültig           → Error   (ungültiger data-fw-app-Slug)
-  └─ loadConfig()  → Loading
-                       → Content      (Normalfall)
-                       → Error        (Config-JSON nicht parsebar; URL/Domain-Lock → Pilot-1 intern)
-                       → Empty        (ungültige Wertekombination nach Berechnung)
+  ├─ Slug-Prüfung: ungültig            → Error (a)
+  └─ loadData(data-fw-data) → Loading
+                               → Content    (≥ 120 valide Datenpunkte)
+                               → Error (b)  (URL ungültig / Domain-Lock / JSON nicht parsebar)
+                               → Empty      (JSON valide aber < 120 Punkte oder Pflichtfelder fehlen)
 ```
 
 | State | Bedingung | Ausgabe für Nutzer |
 |---|---|---|
-| Loading | App initialisiert, Config wird geladen | LoadingSkeleton: Platzhalter für Slider + KpiCards |
-| Content | Config geladen, Werte valide, Berechnung erfolgreich | Vollständige App mit Slidern, KpiCards, LiveCounter, CTA |
-| Error (a) | Config-JSON nicht parsebar (Pilot-1: intern gebündelt — kein Netz-Fetch; URL/Domain-Lock → Zukunft) | „Konfiguration konnte nicht geladen werden. Bitte Seite neu laden." — kein Stack-Trace, `textContent` |
-| Error (b) | Ungültiger `data-fw-app`-Slug | „Diese App konnte nicht geladen werden. Bitte App-Konfiguration prüfen." — kein Stack-Trace, `textContent` (Entscheidung 5 ✅) |
-| Empty | Config-Zustand nach Load nicht normalisierbar (z. B. `prokrastinationsJahre >= gesamtlaufzeit` trotz Clamp, Division durch 0) — Sicherheitsnetz, kein normaler Slider-Weg (→ §4) | „Diese Kombination ergibt keinen sinnvollen Vergleich. Bitte Werte anpassen." |
+| Loading | Daten werden geladen | Lade-Indikator (Skeleton oder Spinner), kein leerer Container |
+| Content | Daten geladen und valide | Screen-Flow 1→2→3→4 mit Chart, KpiCards, CTA |
+| Error (a) | Ungültiger `data-fw-app`-Slug | „Diese App konnte nicht geladen werden. Bitte App-Konfiguration prüfen." — `textContent`, kein Stacktrace |
+| Error (b) | URL ungültig / Domain-Lock / JSON nicht parsebar | „Daten konnten nicht geladen werden. Bitte Seite neu laden." — `textContent`, kein Stacktrace |
+| Empty | JSON valide, aber < 120 Datenpunkte oder Pflichtfelder fehlen | „Nicht genug Daten für die Berechnung. Bitte Datenquelle prüfen." — `textContent`, kein Stacktrace |
 
-**Ungültiger `data-fw-options`-Wert:** Wert auf Default aus Config-JSON setzen. Kein Error-State, kein Warning für Endnutzer.
-
-**Fehlender Container:** App-Start wird nicht ausgeführt. `console.warn` (kein User-facing Error — kein Container, keine Ausgabe).
-
-**Ungültiger `data-fw-app`-Slug:** Error-State wird angezeigt. Meldung: „Diese App konnte nicht geladen werden. Bitte App-Konfiguration prüfen." — kein Stack-Trace, `textContent`. Kein Hinweis auf interne Slug-Struktur (Sicherheitsregel; Entscheidung 5 ✅).
+**Ungültige `data-fw-options`-Werte:** Fallback auf internen Default, kein Error-State.
 
 ---
 
-## 10. AppContext-Schema — Calculator-Familie
+## 11. AppContext-Schema
 
-Konkretisierung von Arch-06 nur für die Calculator-Familie. Keine globale Lösung für alle Familien erzwungen.
-
-**Wer erzeugt AppContext:** `CalculatorStrategy` nach jeder Neuberechnung (auch bei Initialisierung mit Defaults).  
-**Wer konsumiert AppContext:** Renderer (KpiCards, LiveCounter, ResultSentence, AssumptionsBox, A11y-Output). Chart: nicht in Pilot-1 Scope (SF-01).  
+**Wer erzeugt AppContext:** `MartketimeStrategy` nach Datenladen und bei jeder Nutzer-Eingabe.
+**Wer konsumiert AppContext:** Renderer (SparplanChart, KpiCards, TextBlocks, A11y-Output, PrimaryCta).
 **Invariante (P-04):** Renderer interpretieren keine Rohdaten — sie lesen ausschließlich AppContext.
 
-### 10.1 Statischer Kern (einmalig nach Config-Load gesetzt)
+### 11.1 Statischer Kern (einmalig nach Datenladen gesetzt)
 
 ```js
 {
-  // Formatierungskontext
-  valueMode: 'currency',       // 'currency' | 'percent' | 'number'
+  valueMode: 'currency',
   currency: 'EUR',
   locale: 'de-DE',
-
-  // Slider-Konfiguration für Renderer
-  ranges: {
-    monatlicheRate:       { min: 50,  max: 2000, step: 50  },
-    gesamtlaufzeit:       { min: 5,   max: 50,   step: 1   },
-    prokrastinationsJahre:{ min: 1,   max: 20,   step: 1   }
-    // jahresrendite: kein Slider, kein Range-Eintrag (O-03 ✅ — Festwert aus Config)
-  },
-
-  // Annahmentexte (für AssumptionsBox)
-  assumptions: {
-    rendite:  '7 % p.a. nominal — historischer MSCI-World-Durchschnitt. Nicht garantiert.',
-    nominal:  'Diese Rechnung ist nominal (ohne Inflationsbereinigung).',
-    beratung: 'Keine Finanzberatung. Vergangenheitsrenditen sagen nichts über die Zukunft.'
-  }
+  periodMonths: 120,               // fest: 10 Jahre
+  msciData: [...],                 // read-only Array, ≥ 120 Einträge
+  latestMonth: '2026-04',          // letzter Datenpunkt = „heute"
+  startMonth:  '2016-05'          // latestMonth − 119 Monate
 }
 ```
 
-### 10.2 Dynamische Schale (nach jeder Neuberechnung aktualisiert)
+### 11.2 Dynamische Schale (nach jeder Nutzer-Eingabe aktualisiert)
 
 ```js
 {
-  // Eingaben nach Parsing und Validierung (reine Zahlen, P-05)
-  monatlicheRate:          300,    // Integer, €/Monat
-  gesamtlaufzeit:          30,     // Integer, Jahre
-  prokrastinationsJahre:   5,      // Integer, Jahre
-  jahresrendite:           0.07,   // aus Config-JSON (Festwert 7 % nominal), kein Nutzer-Slider (O-03 ✅)
+  monatlicheRate: 300,             // Integer, €/Monat, validiert
+  startBetrag:    0,               // Integer, €, validiert
 
-  // Ergebnisse (reine Zahlen — keine Formatierung in Strategy, P-05)
-  endwertSofort:           340000, // €
-  endwertSpaeter:          220000, // €
-  prokrastinationsPreis:   120000, // € — Hauptergebnis
-  verloreneEinzahlungen:    18000, // € = monatlicheRate × prokrastinationsJahre × 12
-  vergleichsAnker:            400, // optional — Math.round(prokrastinationsPreis / monatlicheRate); erklärender Kontext, keine zweite Hauptzahl
+  chartSeries: [                   // simulierter Depotwert pro Monat (reine Zahlen)
+    { month: '2016-05', depotwert: 300 },
+    ...
+    { month: '2026-04', depotwert: 52000 }
+  ],
+  eingezahlt:      36000,          // monatlicheRate × 120 + startBetrag
+  depotwertHeute:  52000,          // letzter Punkt in chartSeries
+  differenz:       16000,          // depotwertHeute − eingezahlt
 
-  // chartData: kein Feld in Pilot-1 (SF-01 — Chart nach Pilot-1; ChartAdapter/API offen)
-
-  // Semantische Felder (P-09, keine Hex-Werte)
-  resultTone: 'neutral',   // Pilot-1: immer 'neutral' (O-01 ✅ entschieden)
-
-  // A11y-Felder (P-08)
-  a11ySummary:
-    'Der Prokrastinations-Preis für 5 Jahre Wartezeit beträgt 120.000 €.',
-  a11yInputSummary:
-    'Monatsrate: 300 €. Laufzeit: 30 Jahre. Verzögerung: 5 Jahre. Rendite: 7 % p.a.'
+  resultTone:   'neutral',         // V1.0: immer 'neutral'
+  a11ySummary:  'Wer vor 10 Jahren 300 € monatlich investiert hätte, hätte heute 52.000 € — bei 36.000 € eingezahlt.'
 }
 ```
 
-### 10.3 Pflichtfelder und Fallbacks
+### 11.3 Pflichtfelder und Fallbacks
 
 | Feld | Pflicht | Fallback wenn fehlt |
 |---|---|---|
 | `valueMode` | ✅ | `'currency'` |
 | `currency` | ✅ | `'EUR'` |
 | `locale` | ✅ | `'de-DE'` |
-| `ranges` | ✅ | Default-Ranges aus Spec |
-| `assumptions` | ✅ | Leer-Objekt `{}` |
-| `monatlicheRate` | ✅ | Default aus Config |
-| `gesamtlaufzeit` | ✅ | Default aus Config |
-| `prokrastinationsJahre` | ✅ | Default aus Config |
-| `jahresrendite` | ✅ | Default aus Config |
-| `endwertSofort` | ✅ | `0` |
-| `endwertSpaeter` | ✅ | `0` |
-| `prokrastinationsPreis` | ✅ | `0` |
-| `verloreneEinzahlungen` | ✅ | `0` |
-| `vergleichsAnker` | Optional | `undefined` (Renderer ignoriert fehlendes Feld) |
-| `chartData` | Kein Feld in Pilot-1 | Verschoben → SF-01 (Chart-Adapter offen; nach Pilot-1) |
+| `periodMonths` | ✅ | 120 |
+| `msciData` | ✅ | Empty-State |
+| `latestMonth` | ✅ | letzter Eintrag aus `msciData` |
+| `startMonth` | ✅ | berechnet aus `latestMonth − 119` |
+| `monatlicheRate` | ✅ | 300 |
+| `startBetrag` | ✅ | 0 |
+| `chartSeries` | ✅ | Empty-State wenn Berechnung fehlschlägt |
+| `eingezahlt` | ✅ | 0 |
+| `depotwertHeute` | ✅ | 0 |
+| `differenz` | ✅ | 0 |
 | `resultTone` | ✅ | `'neutral'` |
 | `a11ySummary` | ✅ | `'Ergebnis wird berechnet.'` |
-| `a11yInputSummary` | ✅ | `''` |
 
 ---
 
-## 11. A11y-Vertrag — Calculator-Familie
+## 12. A11y-Vertrag
 
-Konkretisierung von Arch-07 nur für Calculator. Nicht global für alle Familien erzwungen.
-
-### 11.1 Input-Labels
-
-- Jeder Slider hat ein sichtbares `<label>`-Element mit `for`-Attribut
-- Jedes `<input>` hat `aria-label` als Fallback wenn kein sichtbares `<label>` vorhanden
-- Slider erhalten: `role="slider"`, `aria-valuemin`, `aria-valuemax`, `aria-valuenow`, `aria-valuetext`
-  - Beispiel: `aria-valuetext="300 Euro pro Monat"` (nicht nur `"300"`)
-
-### 11.2 ARIA Live Region bei Neuberechnung
+### 12.1 ARIA Live Region
 
 ```html
 <div aria-live="polite"
      aria-atomic="true"
      data-fw-role="a11y-result"
      class="visually-hidden">
-  Der Prokrastinations-Preis für 5 Jahre Wartezeit beträgt 120.000 €.
+  Wer vor 10 Jahren 300 € monatlich investiert hätte, hätte heute 52.000 € — bei 36.000 € eingezahlt.
 </div>
 ```
 
 - `aria-live="polite"` — unterbricht keine laufende Sprachausgabe
-- `aria-atomic="true"` — vollständige Nachricht wird vorgelesen, nicht nur geänderte Teile
-- Aktualisierung nach Debounce (min. 300 ms) — kein Screenreader-Spam bei schnellem Slider-Bewegen
-- Inhalt kommt aus `a11ySummary` im AppContext
+- `aria-atomic="true"` — vollständige Nachricht wird vorgelesen
+- Aktualisierung nach Slider-Release (kein Screenreader-Spam)
 
-### 11.3 Ergebnis-Summary als Text
+### 12.2 Chart-Accessibility
 
-`a11ySummary` aus AppContext (§10.2) wird in die Live Region geschrieben.  
-Muster: `"Der Prokrastinations-Preis für {X} Jahre Wartezeit beträgt {Y} €."`
+- Chart hat `role="img"` mit `aria-label` oder `<figure>` mit `<figcaption>`
+- Figcaption enthält Textzusammenfassung: Zeitraum, Sparrate, Ergebnis
+- Datentabelle als ergänzende Alternative: [TBD — ob für Pilot nötig]
 
-### 11.4 AssumptionsBox
+### 12.3 Slider
 
-- Annahmentexte sind HTML-Text (`textContent`), kein Bild, keine rein visuelle Darstellung
-- Erste Zeile immer sichtbar und nicht kollabierbar — unabhängig vom Expand/Collapse-Zustand (→ §18.8)
-- Weitere Hinweise dürfen expandierbar sein — `aria-expanded` korrekt setzen wenn Collapse vorhanden
+- Sichtbares `<label>` mit `for`-Attribut
+- `role="slider"`, `aria-valuemin`, `aria-valuemax`, `aria-valuenow`, `aria-valuetext`
+- Beispiel: `aria-valuetext="300 Euro pro Monat"`
 
-### 11.5 KpiCards
+### 12.4 KpiCards
 
-- Semantisch als `<dl>` mit `<dt>` (Label) und `<dd>` (Wert) oder `<div role="group" aria-label="...">` mit sichtbarem Wert-Text
-- Werte enthalten immer Einheit im Text: `"120.000 €"` nicht `"120.000"`
+- `<dl>` mit `<dt>` (Label) und `<dd>` (Wert) oder `<div role="group" aria-label="...">`
+- Werte mit Einheit: „52.000 €", nicht „52.000"
 
-### 11.6 LiveCounter
+### 12.5 prefers-reduced-motion
 
-- Wert muss textlich zugänglich sein (nicht nur animierte Zahl, sondern vollständiger Wert mit Einheit im DOM)
-- `prefers-reduced-motion`: Animation wird deaktiviert, Endwert sofort angezeigt
+- Chart-Zeichenanimation deaktiviert, Chart sofort vollständig gezeigt
+- Screen-Flow-Übergänge deaktiviert, direkt Zielzustand
 
-### 11.7 Chart (Pilot-1 Ausblick)
+### 12.6 Screen-Flow-Navigation
 
-Chart nicht in Pilot-1 Scope (SF-01 ✅ entschieden — Option A). A11y-Anforderungen werden mit Chart-Implementierung spezifiziert (nach Pilot-1; APP-INTERFACE.md §4 offen).
+- Jeder Screen hat eine sichtbare `<h2>`-Überschrift
+- Fokus-Management bei Screen-Wechsel: Fokus auf neue Überschrift setzen
+- Tastatur-Navigation: alle 4 Screens erreichbar (Tab, Enter)
 
 ---
 
-## 12. Reise eines Inputs / Datenpunkts
+## 13. Reise eines Inputs / Datenpunkts
 
 **Pflichtabschnitt nach P-10.**
 
-**Beispiel:** Nutzer setzt die Monatliche Sparrate auf 300 € (Initialzustand / Default-Wert).
+**Beispiel:** JSON-Datei geladen, Nutzer stellt monatlicheRate = 300 € ein.
 
 ### Schritt 1 — Eingang
 
-**Quelle A — Ghost-Card / data-fw-options:**
-```html
-<div class="fw-app" data-fw-app="prokrastinations-preis"
-     data-fw-options="defaultRate:300, years:30">
-```
-Der Bootstrapper liest das Attribut `data-fw-options` als String: `"defaultRate:300, years:30"`.
+**Quelle A — data-fw-data (Ghost-Card):**
+URL wird als String gelesen. Domain-Validierung: muss `finanzwesir.com` enthalten.
 
-**Quelle B — Config-JSON (einmalig beim Laden):**
-`app.config.json` wird geladen; `defaults.monatlicheRate` = `300` als Fallback wenn kein Override gesetzt.
+**Quelle B — data-fw-options:**
+String `"defaultRate:300"` → geparst zu `{ defaultRate: 300 }`, gegen Whitelist geprüft.
 
-**Quelle C — UI-Slider-Interaktion (laufend):**
-`input`-Event am Slider liefert `event.target.value = "300"` als DOM-String.
+**Quelle C — UI-Slider:**
+`input`-Event liefert `event.target.value = "300"` als DOM-String.
 
-### Schritt 2 — Two-Step Parsing (P-02)
+### Schritt 2 — Parsing und Validierung
 
-**Syntaktisch:**
+**JSON-Daten:**
 ```js
-const rawValue = "300";         // String aus DOM oder Attribut
-const parsed = parseInt(rawValue, 10);  // → 300
-// Ist es NaN? Nein. Ist es Integer? Ja.
+const raw = await fetch(validatedUrl).then(r => r.json());
+// Ist es ein Array? Hat es ≥ 120 Einträge?
+// Hat jeder Eintrag 'month' (string) und 'indexValue' (number)?
+// Fehler → Error-State (b) oder Empty-State
 ```
 
-**Semantisch:**
+**Nutzer-Eingabe monatlicheRate:**
 ```js
-const min = config.ranges.monatlicheRate.min;  // 50
-const max = config.ranges.monatlicheRate.max;  // 2000
-const clamped = Math.min(max, Math.max(min, parsed)); // 300 — innerhalb Range
-// Validiertes Ergebnis: monatlicheRate = 300
+const parsed  = parseInt(event.target.value, 10);     // "300" → 300
+const clamped = Math.min(2000, Math.max(50, parsed));  // 300 — innerhalb Range
 ```
 
 ### Schritt 3 — Read-only AppData (P-01)
@@ -452,385 +394,382 @@ const clamped = Math.min(max, Math.max(min, parsed)); // 300 — innerhalb Range
 ```js
 const appData = Object.freeze({
   monatlicheRate: 300,
-  gesamtlaufzeit: 30,
-  prokrastinationsJahre: 5,
-  jahresrendite: 0.07
+  startBetrag:    0,
+  msciData:       [...120 validierte Datenpunkte]
 });
-// AppData ist nun unveränderlich. Strategy rechnet auf Basis dieser Werte.
 ```
 
-### Schritt 4 — Calculator-Strategy (reine Zahlen, P-05)
+### Schritt 4 — MarktzetStrategy (reine Zahlen, P-05)
 
 ```js
-// Monatliche Rendite aus Jahresrendite
-const r = Math.pow(1 + appData.jahresrendite, 1/12) - 1;  // ≈ 0.005654
-
-// Future Value eines monatlichen Sparplans: PMT × ((1+r)^n - 1) / r
-const fv = (pmt, r, n) => pmt * (Math.pow(1 + r, n) - 1) / r;
-
-const n_sofort  = appData.gesamtlaufzeit * 12;                              // 360 Monate
-const n_spaeter = (appData.gesamtlaufzeit - appData.prokrastinationsJahre) * 12; // 300 Monate
-
-const endwertSofort  = fv(300, r, n_sofort);    // ≈ 340.000 €
-const endwertSpaeter = fv(300, r, n_spaeter);   // ≈ 220.000 €
-
-// Keine Formatierung hier — nur Zahlen.
+// Anteilslogik (Arbeitsannahme AA-01, TBD B-02)
+let anteile = appData.startBetrag / appData.msciData[0].indexValue;
+const chartSeries = appData.msciData.map(p => {
+  anteile += appData.monatlicheRate / p.indexValue;
+  return { month: p.month, depotwert: anteile * p.indexValue };
+});
+const eingezahlt     = appData.monatlicheRate * 120 + appData.startBetrag;
+const depotwertHeute = chartSeries[119].depotwert;
+const differenz      = depotwertHeute - eingezahlt;
+// Keine Formatierung in Strategy — nur Zahlen.
 ```
 
 ### Schritt 5 — AppContext befüllen (P-04)
 
 ```js
 const appContext = {
-  ...staticContext,                        // valueMode, currency, locale, ranges, assumptions
-  monatlicheRate: 300,
-  gesamtlaufzeit: 30,
-  prokrastinationsJahre: 5,
-  jahresrendite: 0.07,
-  endwertSofort: 340000,
-  endwertSpaeter: 220000,
-  prokrastinationsPreis: 120000,           // 340000 - 220000
-  verloreneEinzahlungen: 18000,            // 300 × 5 × 12
-  // chartData: kein Feld in Pilot-1 (SF-01)
+  ...staticContext,
+  monatlicheRate, startBetrag,
+  chartSeries, eingezahlt, depotwertHeute, differenz,
   resultTone: 'neutral',
-  a11ySummary:
-    'Der Prokrastinations-Preis für 5 Jahre Wartezeit beträgt 120.000 €.',
-  a11yInputSummary:
-    'Monatsrate: 300 €. Laufzeit: 30 Jahre. Verzögerung: 5 Jahre. Rendite: 7 % p.a.'
+  a11ySummary: `Wer vor 10 Jahren ${monatlicheRate} € monatlich investiert hätte, hätte heute ${fmt(depotwertHeute)} — bei ${fmt(eingezahlt)} eingezahlt.`
 };
 ```
 
-### Schritt 6 — Renderer / Rehydrierung (P-05)
+### Schritt 6 — Renderer (P-05)
 
 ```js
-const fmt = new Intl.NumberFormat('de-DE', {
-  style: 'currency', currency: 'EUR', maximumFractionDigits: 0
-});
+const fmt = new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'EUR', maximumFractionDigits: 0 });
 
-// KpiCard Prokrastinations-Preis:
-fmt.format(appContext.prokrastinationsPreis); // → "120.000 €"
-
-// LiveCounter animiert von vorherigem Wert zu 120.000 € (requestAnimationFrame)
-
-// ResultSentence aus Template:
-// "Wer 5 Jahre wartet, verzichtet auf ca. 120.000 €."
+// SparplanChart: chartSeries → x: month, y: depotwert
+// KpiCard: fmt.format(depotwertHeute)  → "52.000 €"
+// KpiCard: fmt.format(eingezahlt)      → "36.000 €"
+// KpiCard: fmt.format(differenz) mit Vorzeichen → "+16.000 €"
 ```
-
-Kein Formatierungsstring wird durch die Berechnungsschicht gezogen — Zahl und Einheit reisen getrennt im AppContext.
 
 ### Schritt 7 — A11y-Ausgabe (P-08)
 
 ```js
-// Live Region im DOM wird aktualisiert:
 a11yRegion.textContent = appContext.a11ySummary;
-// → "Der Prokrastinations-Preis für 5 Jahre Wartezeit beträgt 120.000 €."
-
-// Screenreader liest beim nächsten Idle-Moment vor.
-
-// Slider aria-Attribute:
 slider.setAttribute('aria-valuenow', '300');
 slider.setAttribute('aria-valuetext', '300 Euro pro Monat');
 ```
 
 ---
 
-## 13. UX/UI-Primitiven
+## 14. UX/UI-Primitiven
 
-| Primitive | Zweck in dieser App | Status |
+### 14.1 Screen-Flow (4 Screens)
+
+Die App ist kein Single-Screen-Calculator. Sie führt den Nutzer durch 4 sequentielle narrative Screens.
+
+| Screen | Überschrift (aus MINI_SPEC) | Hauptelement |
 |---|---|---|
-| Slider | Monatliche Rate, Laufzeit, Prokrastinationsjahre (3 Slider; Jahresrendite: Festwert, kein Slider — O-03 ✅) | ❓ zu bauen |
-| KpiCard | endwertSofort, endwertSpaeter, prokrastinationsPreis, verloreneEinzahlungen | ❓ zu bauen |
-| LiveCounter | Animierter prokrastinationsPreis bei Slider-Änderung | ❓ zu bauen |
-| ResultSentence | Auto-generierter Ergebnissatz aus Config-Template | ❓ zu bauen |
-| AssumptionsBox | Pflichtzeile immer sichtbar: Rendite-Annahme. Weitere Hinweise (Inflation nicht eingerechnet, Beratungshinweis) expandierbar | ❓ zu bauen |
-| PrimaryCta | Funnel (Risiko-Übersetzer) oder Standalone (Sparplan starten) | ❓ zu bauen |
-| ErrorState | Fehlermeldung bei Config-Ladefehler, auf Deutsch | ❓ zu bauen |
-| LoadingSkeleton | Platzhalter während Init + Config-Load | ❓ zu bauen |
-| 2-Linien-Chart | Nicht in Pilot-1 — verschoben bis ChartAdapter/API definiert | ⏸️ SF-01 — nach Pilot-1 |
+| 1 — Frage | „Vor 10 Jahren wäre besser gewesen. Was ist mit heute?" | Slider (monatliche Rate) + Subtext |
+| 2 — Echte Vergangenheit | „Das wäre kein gerader Weg gewesen. Aber es wäre Marktzeit gewesen." | SparplanChart + KpiCards |
+| 3 — Heute | „Vor 10 Jahren ist weg. Heute nicht." | SparplanChart mit VertikaleLinie bei „heute" |
+| 4 — Entscheidung | „Wenn du jetzt wieder wartest, wird heute in zehn Jahren wieder der verpasste Zeitpunkt sein." | Microcopy + PrimaryCta |
 
-**Scope-Fund SF-01 — Chart in Pilot-1:**
+### 14.2 UI-Primitive-Liste
 
-✅ Entschieden (O-02): Kein Chart in Pilot-1 — Option A (KPIs + LiveCounter als primäre Ausgabe). ChartAdapter/API-Frage bleibt offen (APP-INTERFACE.md §4). Chart-Implementierung nach Pilot-1 als eigener AP.
-
-### 13.1 Label-Konventionen (Krug)
-
-UI-Labels verwenden Alltagssprache — keine Fachbegriffe als Primärlabels.
-
-| Interner Name | UI-Label | Begründung |
+| Primitive | Zweck | Status |
 |---|---|---|
-| `prokrastinationsJahre` | „Wartezeit" / „Ich warte noch … Jahre" | „Prokrastination" ist Fachbegriff — nicht selbsterklärend |
-| `monatlicheRate` | „Monatsrate" | kurz, handlungsbezogen |
-| `gesamtlaufzeit` | „Anlagedauer" | Alltagssprache statt „Gesamtlaufzeit" |
-| `prokrastinationsPreis` | „Warten kostet dich" (Headline) / „Prokrastinations-Preis" (KpiCard-Label) | im Ergebnissatz umgangssprachlich rahmen |
-| `jahresrendite` | „Angenommene Rendite: 7 % p.a." | nur in AssumptionsBox, transparent erklärt |
-| `endwertSofort` | „Bei sofortigem Start" | handlungsbezogen, positiv formuliert |
-| `endwertSpaeter` | „Bei {N} Jahren Wartezeit" | konkret auf Slider-Wert bezogen |
-| `verloreneEinzahlungen` | „Nicht eingezahlte Beiträge" | konkret, wertneutral |
+| Slider | monatliche Sparrate (Haupt-Eingabe) | zu bauen |
+| SparplanChart | historische Depotwert-Linie (1 Datenserie) | zu bauen — Chart-Engine-Frage SF-01 |
+| VertikaleLinie | Entscheidungspunkt-Marker „heute" im Chart | zu bauen |
+| KpiCard | eingezahlt / depotwertHeute / differenz | zu bauen |
+| TextBlock | Microcopy pro Screen (aus MINI_SPEC) | zu bauen |
+| PrimaryCta | „Heute Marktzeit sammeln" / „Ich starte jetzt" | zu bauen |
+| ErrorState | Fehlermeldung auf Deutsch | zu bauen |
+| LoadingSkeleton | Platzhalter während Datenladen | zu bauen |
+
+### 14.3 Screen-Übergänge
+
+Mechanismus: [TBD — Scroll-triggered, Button-triggered oder Autoplay? → B-03]
+prefers-reduced-motion: Übergänge deaktiviert, direkt Zielzustand.
+
+### 14.4 Label-Konventionen (Krug — Alltagssprache)
+
+| Intern | UI-Label | Begründung |
+|---|---|---|
+| `monatlicheRate` | „Ich spare monatlich" / „Monatsrate" | handlungsbezogen, Ich-Form |
+| `startBetrag` | „Startbetrag (optional)" | ehrlich optional halten |
+| `eingezahlt` | „Eingezahlt" | direkt |
+| `depotwertHeute` | „Depotwert heute" | konkret, zeitbezogen |
+| `differenz` | „Gewinn / Verlust" | wertneutral, beide Richtungen möglich |
 
 ---
 
-## 14. Sicherheitsregeln
+## 15. Sicherheitsregeln
 
 Aus APP-INTERFACE.md §7 und SECURITY-BASELINE.md:
 
-1. **Alle `data-*` Attribute sind untrusted input.** `data-fw-options`-Strings werden geparst und gegen Whitelist (§8) geprüft — keine direkte Verwendung im DOM.
-2. **SafeDOM (Q-01):** KpiCard-Werte, ResultSentence, A11y-Summary — ausschließlich über `textContent`. Niemals `innerHTML` für Nutzdaten oder Config-Inhalte.
-3. **Whitelist-Prinzip (Q-02):** Unbekannte `data-fw-options`-Keys werden ignoriert. Unbekannter `data-fw-app`-Slug → Error-State (Entscheidung 5 ✅; → §9).
-4. **URL-Validierung:** Pilot-1 nutzt intern gebündeltes Config-JSON — kein Netz-Fetch, keine URL-Validierung nötig. Für spätere externe `data-fw-config`-URLs: Domain-Whitelist `www.finanzwesir.com`, Dev-Ausnahme `localhost`/`127.0.0.1`. Fehlschlag → Error-State, kein Crash.
-5. **Config-JSON validieren** vor Verwendung: gültiges JSON? Pflichtfelder vorhanden? Wertebereiche sinnvoll?
-6. **Keine externen Scripts.** Keine CDN-Abhängigkeiten — alle Abhängigkeiten lokal gebündelt (A-08).
-7. **Keine geheimen Tokens.** Config-JSON enthält keine Credentials, keine API-Keys.
-8. **Empty-State statt Crash.** Ungültige Wertekombinationen (z.B. prokrastinationsJahre ≥ gesamtlaufzeit) → sauberer Empty-State, kein JavaScript-Exception für Endnutzer.
-9. **XSS-Schutz:** Alle nutzer- oder redakteursgesteuerten Werte werden als Zahlen geparst — keine String-Injektion möglich. Strings aus Config-Inhalte (Texte, Templates) via `textContent`, niemals via `innerHTML`.
-10. **`data-fw-theme` nicht verwendet** — reserviert, noch nicht implementiert (APP-INTERFACE.md §3.1).
+1. **Alle `data-*` Attribute sind untrusted input** — ohne Ausnahme.
+2. **URL-Validierung (data-fw-data):** Domain muss `www.finanzwesir.com` enthalten. Dev-Ausnahme: `localhost`/`127.0.0.1`. Fehlschlag → Error-State (b), kein Crash.
+3. **SafeDOM (Q-01):** KpiCard-Werte, TextBlocks, A11y-Summary — ausschließlich `textContent`. Niemals `innerHTML` für Nutzdaten.
+4. **JSON validieren:** Format, Pflichtfelder, Mindestlänge (≥ 120). Fehler → Empty-State oder Error-State.
+5. **Whitelist-Prinzip (Q-02):** Unbekannte `data-fw-options`-Keys werden ignoriert. Unbekannter Slug → Error-State (a).
+6. **Keine externen Scripts.** Alle Abhängigkeiten lokal gebündelt.
+7. **Keine geheimen Tokens.** Kein API-Key, keine Credentials in Code oder Config.
+8. **Empty-State statt Crash.** Ungültige Daten → sauberer Fehlerzustand, kein Stacktrace für Endnutzer.
+9. **XSS-Schutz:** Optionswerte werden als Zahlen geparst — keine String-Injektion. Chart-Datenpunkte kommen aus validiertem JSON, nicht aus DOM-Input.
+10. **`data-fw-theme` nicht verwendet** — reserviert, nicht produktiv einsetzen.
+
+**Security-Sync-Status:** synchron mit Nicht-Blockern.
+Begründung: Die Erweiterung auf externe JSON-Daten via `data-fw-data` ist in APP-INTERFACE.md §6 bereits vorgesehen. Keine neue globale Sicherheitsregel nötig. URL-Validierungsregeln und Domain-Lock gelten unverändert.
 
 ---
 
-## 15. Testfälle
+## 16. Testfälle
 
-### Ghost-Card und Initialisierung
+### Ghost-Card und Datenladen
 
 | # | Testfall | Erwartetes Verhalten |
 |---|---|---|
-| T-01 | Minimal-Card (`data-fw-app` only) lädt | App startet, Defaults aus Config geladen, Content-State sichtbar |
-| T-02 | Card mit `data-fw-options="defaultRate:500, years:20"` | Slider-Startposition entspricht Override-Werten; Berechnung korrekt |
-| T-03 | Ungültiger `data-fw-app`-Slug | Error-State: „Diese App konnte nicht geladen werden. Bitte App-Konfiguration prüfen." — kein Stack-Trace (Entscheidung 5 ✅) |
-| T-04 | Unbekannter Key in `data-fw-options` | Wird ignoriert, App startet mit restlichen Werten normal |
-| T-05 | Ungültiger Optionswert (`defaultRate:abc`) | Fallback auf Default-Wert aus Config, kein Error-State |
-| T-06 | XSS-Versuch in Options (`defaultRate:<script>`) | Wert als NaN geparst → Fallback auf Default; kein Script-Aufruf |
+| T-01 | Minimal-Card mit gültiger `data-fw-data`-URL | Loading → Content (Screen 1 sichtbar) |
+| T-02 | Ungültiger `data-fw-app`-Slug | Error-State (a), nutzerfreundliche Meldung auf Deutsch |
+| T-03 | `data-fw-data`-URL mit ungültiger Domain | Error-State (b) |
+| T-04 | `data-fw-data`-URL unerreichbar (404, Netzwerkfehler) | Error-State (b) |
+| T-05 | JSON syntaktisch ungültig | Error-State (b) |
+| T-06 | JSON < 120 Datenpunkte | Empty-State |
+| T-07 | JSON mit fehlenden `indexValue`-Feldern | Empty-State |
+| T-08 | Unbekannter Key in `data-fw-options` | Ignoriert, App normal |
+| T-09 | `defaultRate:abc` (ungültiger Typ) | Fallback auf Default (300) |
+| T-10 | XSS-Versuch in `data-fw-options` (`defaultRate:<script>`) | NaN → Fallback; kein Script-Aufruf |
 
 ### Slider-Interaktion und Berechnung
 
 | # | Testfall | Erwartetes Verhalten |
 |---|---|---|
-| T-07 | Slider „Monatliche Rate" bewegen | KpiCards und LiveCounter aktualisieren sich sofort |
-| T-08 | prokrastinationsJahre-Slider bis Maximum schieben | Wert wird auf `gesamtlaufzeit - 1` geclampt; App rechnet korrekt; kein Empty-State durch Slider-Bedienung (→ §4 Regel 3) |
-| T-09 | prokrastinationsJahre = 1 (Minimum) | Kleiner Prokrastinations-Preis, App rechnet korrekt |
-| T-10 | Alle 3 Slider auf Maximalwerte | App rechnet korrekt; kein Integer-Overflow |
+| T-11 | Slider monatliche Rate bewegen | Chart und KpiCards aktualisieren sich |
+| T-12 | Slider auf Maximalwert (2.000 €) | Berechnung korrekt, kein Crash |
+| T-13 | Slider auf Minimalwert (50 €) | Berechnung korrekt |
+
+### Screen-Flow
+
+| # | Testfall | Erwartetes Verhalten |
+|---|---|---|
+| T-14 | Screen-Flow 1→2→3→4 durchlaufen | Alle 4 Screens erreichbar, Inhalte korrekt |
+| T-15 | Screen 3 — Entscheidungspunkt-Marker | VertikaleLinie bei letztem Datenpunkt sichtbar |
 
 ### State-Tests
 
 | # | Testfall | Erwartetes Verhalten |
 |---|---|---|
-| T-13 | Loading-State | LoadingSkeleton sichtbar, kein leerer weißer Container |
-| T-14 | Config-JSON intern nicht parsebar (Syntaxfehler) | Error-State: „Konfiguration konnte nicht geladen werden. Bitte Seite neu laden." — kein Stack-Trace |
-| T-15 | Config-Datei nicht valides JSON | Error-State |
-| T-16 | Empty-State (ungültige Wertekombination) | Hinweistext auf Deutsch, kein Crash |
+| T-16 | Loading-State | Lade-Indikator sichtbar, kein leerer Container |
+| T-17 | Error-State (b) | Meldung auf Deutsch, kein Stacktrace |
+| T-18 | Empty-State | Hinweistext auf Deutsch, kein Crash |
 
 ### Responsive / Viewport
 
 | # | Testfall | Erwartetes Verhalten |
 |---|---|---|
-| T-18 | Mobile 375px | Alle Slider bedienbar, KpiCards lesbar, kein horizontaler Overflow |
-| T-19 | Tablet 768px | Layout korrekt; Slider nicht zu klein zum Bedienen |
-| T-20 | Desktop 1280px | Vollständiges Layout; alle Primitiven sichtbar |
+| T-19 | Mobile 375px | Slider bedienbar, Chart lesbar, kein horizontaler Overflow |
+| T-20 | Tablet 768px | Layout korrekt |
+| T-21 | Desktop 1280px | Vollständiges Layout |
 
 ### A11y
 
 | # | Testfall | Erwartetes Verhalten |
 |---|---|---|
-| T-21 | Tastatur-Navigation | Tab durch alle Slider und Inputs; Slider mit Pfeiltasten bedienbar |
-| T-22 | ARIA Live Region | Screenreader liest `a11ySummary` nach Slider-Änderung (polite) |
-| T-23 | WCAG-AA-Kontrast | Alle Text/Hintergrund-Kombinationen ≥ 4.5:1 |
-| T-24 | `prefers-reduced-motion` | LiveCounter-Animation deaktiviert, Endwert direkt angezeigt |
-| T-25 | Slider `aria-valuetext` | Wert wird als lesbarer Text vorgelesen: „300 Euro pro Monat" |
-
-### Nicht in Pilot-1 getestet / späterer Scope
-
-| # | Thema | Grund |
-|---|---|---|
-| T-10/T-11 (alt) | Jahresrendite-Slider Minimum / Maximum | Kein Rendite-Slider in Pilot-1 (O-03 ✅) |
-| T-17 (alt) | Externe `data-fw-config`-URL außerhalb erlaubter Domain | Keine externe Config-URL in Pilot-1 (AA-03) |
-| — | Chart / ChartAdapter | SF-01 — nach Pilot-1, wenn ChartAdapter/API definiert |
+| T-22 | Tastatur-Navigation | Tab durch Slider; Screen-Wechsel per Tastatur möglich |
+| T-23 | ARIA Live Region | a11ySummary nach Slider-Änderung vorgelesen (polite) |
+| T-24 | WCAG-AA-Kontrast | Alle Text/Hintergrund-Kombinationen ≥ 4.5:1 |
+| T-25 | prefers-reduced-motion | Chart-Animation und Übergänge deaktiviert |
+| T-26 | Chart-Alternativtext | role="img" oder figcaption mit beschreibendem Text |
 
 ---
 
-## 16. Offene Fragen
+## 17. Offene Fragen
 
-### Blocker vor Spec-Gate
+### Blocker (vor Implementierungsbeginn zu klären)
 
-Keine echten Blocker. Alle kritischen Entscheidungen sind als Arbeitsannahmen dokumentiert.
-
-### Arbeitsannahmen (dokumentiert, noch nicht von Albert bestätigt)
-
-| ID | Annahme | Begründung | Risiko |
-|---|---|---|---|
-| AA-01 | Jahresrendite-Default: 7 % nominal | Historischer MSCI-World-Durchschnitt; weit verbreitet | Nutzer könnte Scheingenauigkeit wahrnehmen → AssumptionsBox Pflicht |
-| AA-02 | Rechnung nominal (nicht real/inflationsbereinigt) | Einfacher erklärbar; Inflationshinweis in AssumptionsBox | Höhere absolute Zahlen — muss ehrlich kommuniziert werden |
-| AA-03 | Formel: monatliche Verzinsung, Sparplan-Annuität | Standard-Finanzmathematik für monatliche Einzahlungen | Abweichung von jährlicher Verzinsung in NOTES dokumentieren |
-| AA-04 | LiveCounter animiert bei Slider-Änderung, kein Real-Time-Tick | Kein Backend, kein persönlicher Startzeitpunkt bekannt | Verliert „tickende Kostenuhr"-Effekt — als spätere Erweiterung möglich |
-
-### Entscheidungen für Albert
-
-| ID | Frage | Entscheidung |
+| ID | Frage | Konsequenz wenn nicht geklärt |
 |---|---|---|
-| O-01 ✅ | `resultTone: 'warning'` — ab welchem Prokrastinations-Preis? | Pilot-1: immer `'neutral'`. Warning-Schwelle per Config-JSON konfigurierbar nach Pilot-1 (→ §10.2). |
-| O-02 ✅ | Chart in Pilot-1? | Option A — kein Chart. KPIs + LiveCounter als primäre Ausgabe. Chart nach Pilot-1 (SF-01). |
-| O-03 ✅ | Jahresrendite als Slider oder Festwert? | Festwert 7 % nominal in Config-JSON. Kein Nutzer-Slider in Pilot-1 (→ §4, §6, §10). |
+| B-01 | **MSCI-Daten: Quelle und Normierungsformat?** (02_OPEN_QUESTIONS.md Data-01) — Woher kommen die historischen MSCI-World-Monatsdaten? Welches JSON-Schema? Absoluter Indexwert oder normiert? | Keine Datenpipeline, kein Chart, keine Berechnung |
+| B-02 | **Berechnungsformel für simulierten Sparplan:** Anteilslogik (kaufe monatlich Anteile) oder vereinfachte Annuität mit Durchschnittsrendite? | Falsche oder irreführende Zahlen in Chart und KpiCards |
+| B-03 | **Screen-Flow-Mechanismus:** Scroll-triggered, Button-triggered oder Autoplay? | UX-Struktur unklar — direkte Auswirkung auf Implementierung |
 
-### Scope-Funde (späterer Backlog)
+### Entscheidungsfragen für Albert
+
+| ID | Frage | Arbeitsannahme |
+|---|---|---|
+| E-01 | **App-Familie:** Szenario-/Vergleichs-App oder Hybrid? | Szenario-/Vergleichs-App mit Storytelling-Elementen |
+| E-02 | **Pilot-1-Scope:** Die Marktzeit-Mechanik ist komplexer als der alte Calculator (externe Daten, Chart, 4 Screens). Bleibt B1 Pilot-1, oder wird ein einfacherer App (z. B. `risiko-uebersetzer`) vorgezogen? | B1 bleibt Pilot-1 — Marktzeit ist die zentrale Botschaft |
+| E-03 | **Startbetrag als Eingabe:** Ja (Optional-Slider/Eingabe) oder nein (zu viel UX-Aufwand)? | Ja, optional mit Default 0 |
+| E-04 | **CTA-Text:** „Heute Marktzeit sammeln" oder „Ich starte jetzt"? | TBD — nach `/heldenreise` entscheiden |
+
+### Pilot-Strategie-Konflikt (explizit sichtbar)
+
+05_PILOT_STRATEGY.md beschreibt B1 noch als:
+> „Einfachster Calculator, keine externen Daten, erzwingt Slider/KPI/Counter/CTA-Standard"
+
+Die neue Marktzeit-Mechanik hat: externe JSON-Daten (MSCI-World), Chart mit historischer Linie, 4-Screen-Flow.
+
+→ 05_PILOT_STRATEGY.md muss nach Alberts Entscheid zu E-02 aktualisiert werden.
+
+### Nicht-Blocker / Scope-Funde
 
 | ID | Thema |
 |---|---|
-| SF-01 | 2-Linien-Chart wenn ChartAdapter/API definiert (APP-INTERFACE.md §4) |
-| SF-02 | NumericInput neben Slider für präzise Zahleneingabe |
-| SF-03 | Real-Time-LiveCounter (tickende Kostenuhr) wenn Nutzereingabe Startdatum ermöglicht |
-| SF-04 | Share-Feature für Ergebnis (02_OPEN_QUESTIONS.md UX-03) |
+| SF-01 | Chart-Engine-Integration: welche Bibliothek / welche Komponente für SparplanChart? — nach B-01 und Pilot-Entscheid |
+| SF-02 | NumericInput neben Slider für präzise Eingabe — nach Pilot |
+| SF-03 | Varianten-Funktion: verschiedene Startpunkte vergleichen — nach Pilot |
+| SF-04 | Share-Feature — nach Pilot |
 
 ---
 
-## 17. Spec-Gate-Checkliste
-
-Vor Implementierungsbeginn müssen alle Punkte erfüllt sein. Führt Claude durch, Albert entscheidet.
+## 18. Spec-Gate-Checkliste
 
 | Prüfpunkt | Status |
 |---|---|
-| Ghost-Card-Vertrag aus APP-INTERFACE.md korrekt? (`data-fw-app` vorhanden, kein `data-app`, kein `data-fw-theme` produktiv) | ✅ §7 |
-| AppContext mit Pflichtfeldern definiert? | ✅ §10 |
-| Pflichtfelder und Fallback-Felder unterschieden? | ✅ §10.3 |
-| `data-fw-options` whitelistbar? (Whitelist dokumentiert) | ✅ §8 |
-| Datenquellen und Config-Strategie geklärt? | ✅ §6 (Config-JSON intern gebündelt für Pilot-1; Cache-Busting für externe URL → Zukunft) |
-| Empty-State definiert? (kein leerer Container, kein Stack-Trace) | ✅ §9 |
-| A11y-Vertrag für Calculator-Familie definiert? | ✅ §11 |
-| Reise eines Inputs vollständig beschrieben? | ✅ §12 |
-| Keine offenen Fragen stillschweigend entschieden? | ✅ §16 — alle Annahmen sichtbar markiert |
-| UX-Gate (heldenreise): Beweisdramaturgie-Abschnitt vollständig? (Gewohnte Welt, Aha-Moment, Erkenntnishierarchie, UI-Reihenfolge, Ehrlichkeitsregeln, Funnel-Anschluss) | ✅ §18 |
-| UX-Gate: Genau eine Hauptzahl / Hauptvisualisierung dominant? | ✅ §18.6 |
-| UX-Gate: Keine Dark Patterns (keine Fake-Urgency, kein Confirmshaming, keine Beschämung)? | ✅ §18.5, §18.8 |
-| UX-Gate: Labels in Alltagssprache (Krug)? | ✅ §13.1 |
-| UX-Gate: Funnel-Anschluss logisch und benannt? | ✅ §18.10 |
-| AssumptionsBox: Pflichtzeile (Rendite-Annahme) immer sichtbar, nicht kollabierbar? | ✅ §18.8, §11.4 |
-| Vergleichsanker optional und nicht als zweite Hauptzahl dargestellt? | ✅ §10.2, §18.6 |
-| Neben-KPIs in Reihenfolge: positiv zuerst (endwertSofort → endwertSpaeter → verloreneEinzahlungen)? | ✅ §5, §18.6 |
+| Ghost-Card-Vertrag korrekt? (`data-fw-app`, `data-fw-data`, kein `data-app`, kein produktives `data-fw-theme`) | ✅ §8 |
+| Kein data-app? | ✅ §8 |
+| Kein produktives data-fw-theme? | ✅ §15 |
+| data-fw-options whitelistbar? (Whitelist dokumentiert) | ✅ §9 |
+| Datenquellen und Cache-Busting geklärt? | ⚠️ Schema definiert (AA-01), Datenbasis-Quelle TBD (B-01) |
+| AppContext definiert? | ✅ §11 |
+| Pflichtfelder und Fallback-Felder unterschieden? | ✅ §11.3 |
+| A11y-Vertrag definiert? | ✅ §12 |
+| State-Modell definiert? | ✅ §10 |
+| Reise eines Inputs vollständig beschrieben? | ✅ §13 |
+| Sicherheitsregeln erfüllt? Security-Sync synchron? | ✅ §15 — synchron mit Nicht-Blockern |
+| Keine offenen Blocker stillschweigend entschieden? | ✅ §17 — alle Blocker explizit markiert |
+| Mini-Spec vollständig berücksichtigt? | ✅ alle Screens, Microcopy, Datenlogik, Abgrenzungen übernommen |
+| Offene Blocker für Spec-Gate? | ⚠️ B-01 / B-02 / B-03 sind Implementierungsblocker, kein Spec-Gate-Blocker |
 | Alberts explizites OK? | ⬜ AUSSTEHEND |
+
+**UX-Gate (heldenreise):** ✅ angewendet → §19
+
+| UX-Prüfpunkt | Status |
+|---|---|
+| Gewohnte Welt benannt? | ✅ §19.1 |
+| Nutzerwiderstand benannt? | ✅ §19.2 |
+| Interaktiver Beweis klar? | ✅ §19.3 |
+| Aha-Moment in einem Satz? | ✅ §19.4 |
+| Genau eine Hauptzahl / Hauptvisualisierung? | ✅ §19.6 |
+| Keine Dark Patterns? | ✅ §19.5, §19.8, §19.9 |
+| Labels in Alltagssprache (Krug)? | ✅ §14.4 |
+| Funnel-Anschluss logisch? | ✅ §19.10 |
+| Ethik-Gate bestanden? | ✅ §19.8 |
 
 ---
 
-## 18. Beweisdramaturgie / Entscheidungspsychologie
+*Nächster Schritt: NAVIGATION.md Ausnahme-B1-Warnung aktualisieren → Spec-Gate*
 
-Pflichtabschnitt nach `/heldenreise`-Skill. Ergänzt die technische Spec um die UX-Wirkungsschicht: nicht nur was gebaut wird, sondern welche Erkenntnisbewegung die App im Kopf des Nutzers erzeugt.
+---
 
-### 18.1 Gewohnte Welt / Vorannahme
+## 19. Beweisdramaturgie / Entscheidungspsychologie
 
-Der Nutzer denkt: „Ich kann später anfangen. Erst muss ich mehr wissen. Fünf Jahre machen wahrscheinlich keinen so großen Unterschied."
+*Pflichtabschnitt nach `/heldenreise`-Skill.*
 
-Bequeme Illusion: Warten ist eine neutrale Option, solange man noch nichts konkret verloren hat.
+### 19.1 Gewohnte Welt / Vorannahme
 
-### 18.2 Nutzerwiderstand
+Der Nutzer kommt mit einer von zwei Vorannahmen:
 
-- **Perfektionismus:** Der perfekte Einstiegszeitpunkt wird abgewartet — Korrektur, mehr Wissen, stabile Lage.
-- **Angst vor falscher Entscheidung:** „Was, wenn die Rendite nicht stimmt? Was, wenn ich falsch liege?"
-- **Unterschätzte Zeitwirkung:** Zinseszins ist schwer intuitiv zu erfassen — lineare Intuition trifft auf exponentielle Realität.
-- **Überschätzte Bedeutung des Einstiegspunkts:** „Ich warte noch auf die nächste Korrektur."
-- **Prokrastination als Komfort:** Nicht-Entscheiden vermeidet das Risiko des Scheiterns — scheinbar.
+**Variante A — Verpasster Zug:**
+> „Vor zehn Jahren wäre es ideal gewesen. Jetzt ist der Moment vorbei. Die Märkte sind zu hoch."
 
-### 18.3 Interaktiver Beweis
+**Variante B — Wartestrategie:**
+> „Ich warte noch. Es könnte günstiger werden. Ich will keinen schlechten Zeitpunkt erwischen."
 
-Drei Slider verändern den Prokrastinations-Preis in Echtzeit:
-- „Wie viele Jahre warte ich noch?" (primärer Slider — steht zuerst)
-- „Wie viel lege ich monatlich an?"
-- „Wie lange lege ich insgesamt an?"
+Beide teilen dieselbe Illusion: **Es gibt einen richtigen Zeitpunkt — und dieser ist nicht heute.**
 
-Die Hauptzahl (`prokrastinationsPreis`) reagiert sofort auf jeden Slider. Der Nutzer sieht live, wie Wartezeit in Euro übersetzt wird — kein abstraktes Prozent, sondern ein konkreter Betrag, der wächst, wenn er wartet.
+### 19.2 Nutzerwiderstand
 
-**Was die Interaktion beweist:** Warten ist keine neutrale Position. Jeder Monat Verzögerung hat einen messbaren, in Euro ausdrückbaren Preis.
+| Widerstand | Mechanismus |
+|---|---|
+| Verpasster-Zug-Syndrom | „Die guten Jahre sind vorbei. Ich bin zu spät." |
+| Timing-Glaube | „Ich warte auf die nächste Korrektur." |
+| Paralysis by analysis | Zu viele Informationen, keine Entscheidung |
+| Einbruchs-Angst | „Was, wenn ich jetzt einsteige und der Markt fällt?" |
+| Perfektionismus | „Ich muss erst mehr verstehen. Noch nicht." |
+| Unsichtbarer Zinseszins | Exponentielle Wirkung ist intuitiv nicht greifbar — lineare Intuition unterschätzt sie |
 
-### 18.4 Aha-Moment
+### 19.3 Interaktiver Beweis
 
-**Primär:** „Warten ist nicht neutral."
+Nicht eine Formel. Nicht eine Prognose. Sondern: die echte historische Strecke der letzten 10 Jahre — mit echten Einbrüchen, nicht geglättet.
 
-**Sekundär:** „Zeit ist der Teil der Rendite, den du nicht nachkaufen kannst."
+Der Nutzer setzt seine monatliche Sparrate (Screen 1). Die App zeigt: So hätte **sein** Sparplan in den letzten 10 Jahren ausgesehen (Screen 2). Nicht als abstrakte Marktgrafik — als personalisierte Reise: seine 300 € × diese 120 Monate = dieser konkrete Verlauf.
 
-Kein Fachbegriff. Alltagssprache. Ein Satz. (Quelle: Kernbotschaft aus MINI_SPEC_FROM_HAUPTDOKUMENT.md)
+**Was beweist das:**
+1. Einbrüche passierten — und die Strecke endete trotzdem positiv.
+2. Wer vor 10 Jahren gestartet wäre, hätte Einbrüche mitgemacht — und stünde heute trotzdem besser da als ohne.
+3. Heute ist nicht „nach dem richtigen Zeitpunkt" — heute ist der Ausgangspunkt für die nächsten 10 Jahre.
 
-### 18.5 Emotionale Zielreaktion
+Screen 3 macht den Pivot sichtbar: Eine vertikale Linie bei „heute" trennt Vergangenheit von Entscheidung. Die Vergangenheit ist abgeschlossen. Die Entscheidung gehört dem Nutzer.
+
+### 19.4 Aha-Moment
+
+**Primär:**
+> „Du kannst nicht mehr vor 10 Jahren starten. Aber du kannst verhindern, dass heute in 10 Jahren wieder ‚vor 10 Jahren' heißt."
+
+**Kurzform:**
+> „Warten nimmt dir Marktzeit."
+
+Ein Satz. Alltagssprache. Kein Fachbegriff. Kein Vorwurf.
+
+### 19.5 Emotionale Zielreaktion
 
 **Erwünscht:**
-- „Oh. Das hätte ich nicht gedacht." — Überraschung über die Größe des Betrags
-- „Ich muss nicht perfekt sein. Ich muss anfangen." — Handlungsfähigkeit
-- „Jetzt sehe ich, warum Warten teuer ist." — Klarheit
-- Neugier: „Was ändert sich, wenn ich die Wartezeit auf 2 Jahre reduziere?"
+- „Die Einbrüche sehen auf der Langfristgrafik gar nicht mehr so groß aus." — Relativierung der Angst
+- „Wer vor 10 Jahren gestartet wäre, hätte die Einbrüche mitgemacht — und wäre trotzdem besser dran." — Kontext für Timing-Glaube
+- „Heute ist mein ‚vor 10 Jahren'." — Handlungsfähigkeit
+- „Ich muss nicht den perfekten Zeitpunkt finden. Ich muss anfangen." — Erlaubnis ohne Druck
 
-**Unerwünscht (Dark-Pattern-Grenze):**
+**Unerwünscht:**
 - Scham: „Ich hätte schon vor Jahren anfangen sollen."
-- Panik: „Jetzt ist es sowieso zu spät."
-- Druck: „Sofort handeln, sonst verlierst du alles."
-- Überforderung durch konkurrierende Hauptaussagen.
+- Panik: „Jetzt muss ich sofort handeln."
+- Selbstvorwurf, künstliche Dringlichkeit, Überforderung durch zu viele Zahlen.
 
-### 18.6 Erkenntnishierarchie
+### 19.6 Erkenntnishierarchie
 
 | Ebene | Element | Darstellung |
 |---|---|---|
-| Hauptaussage | `prokrastinationsPreis` — der Preis des Wartens in € | groß, animiert (LiveCounter), visuell dominant |
-| Nebeninformation | `endwertSofort`, `endwertSpaeter`, `verloreneEinzahlungen` | KpiCards — erklären die Hauptzahl, konkurrieren nicht |
-| Kontextualisierung | ResultSentence, AssumptionsBox | unterstützen, dominieren nicht |
-| Handlungsimpuls | PrimaryCta | klar, nach Ergebnis positioniert |
+| **Hauptbeweis** | SparplanChart — die historische Strecke | visuell dominant, volle Breite, Screen 2 und 3 |
+| **Pivot** | VertikaleLinie „heute" | klar markiert in Screen 3 |
+| **Hauptzahl** | `depotwertHeute` | groß unter dem Chart — positiv formuliert |
+| **Kontext** | `eingezahlt`, `differenz` | KpiCards — erklären, konkurrieren nicht |
+| **Rahmung** | Microcopy pro Screen | kurz, führt die Erkenntnis |
+| **Handlung** | PrimaryCta | nach dem Beweis |
 
-**Tufte-Regel:** Immer genau eine Hauptzahl sichtbar dominierend — `prokrastinationsPreis`. Nebenwerte erklären; sie konkurrieren nicht.
+**Tufte-Regel:** Der Chart ist der Beweis, nicht Dekoration. `depotwertHeute` ist die Hauptzahl (positiv: „was du hättest"). `differenz` ist Kontextinformation — nicht als Hauptzahl (Verlust-Framing vermeiden).
 
-**Reihenfolge der Neben-KPIs (positiv zuerst):**
-1. `endwertSofort` — „Bei sofortigem Start"
-2. `endwertSpaeter` — „Bei {N} Jahren Wartezeit"
-3. `verloreneEinzahlungen` — „Nicht eingezahlte Beiträge"
+### 19.7 Dramaturgische UI-Reihenfolge
 
-Begründung: Positiv zuerst rahmen. Die Nebenwerte erklären die Hauptzahl und konkurrieren nicht mit ihr.
+| Screen | Heldenreise-Rolle | Inhalt |
+|---|---|---|
+| **1 — Frage** | Ruf zum Abenteuer | Überschrift: „Vor 10 Jahren wäre besser gewesen. Was ist mit heute?" / Slider monatliche Rate / Subtext: „Wir rechnen mit echten MSCI-World-Monatsdaten." |
+| **2 — Beweis** | Schwelle überwunden | Chart: historische Sparplan-Strecke / KpiCards / Microcopy: „Das wäre kein gerader Weg gewesen. Aber es wäre Marktzeit gewesen." |
+| **3 — Pivot** | Aha-Moment | Selber Chart + VertikaleLinie „heute" / Text: „Vor 10 Jahren ist weg. Heute nicht." |
+| **4 — Entscheidung** | Rückkehr / CTA | Microcopy: „Wenn du jetzt wieder wartest, wird heute in zehn Jahren wieder der verpasste Zeitpunkt sein." / PrimaryCta |
 
-### 18.7 Dramaturgische UI-Reihenfolge
+**Slider steht in Screen 1** — bevor der Chart erscheint. Der Nutzer personalisiert zuerst (seine Rate), dann sieht er den personalisierten Beweis. Das macht Screen 2 zu „seiner" Reise, nicht zu einem abstrakten Marktchart.
 
-1. **Einstiegsfrage** — „Was kostet Warten?" — sichtbar vor den Slidern, nicht im Tab-Title versteckt
-2. **Hauptzahl** — LiveCounter: „Warten kostet dich etwa {prokrastinationsPreis}" — sofort sichtbar, ohne Scrollen (above the fold)
-3. **Primärer Slider** — Wartezeit: verkörpert die Kernfrage, steht zuerst
-4. **Weitere Slider** — Monatsrate, Anlagedauer
-5. **Ergebnissatz** — ResultSentence: „Unter diesen Annahmen verzichtest du auf ca. {prokrastinationsPreis}."
-6. **Nebenwerte** — KpiCards: endwertSofort, endwertSpaeter, verloreneEinzahlungen
-7. **Annahmenbox** — AssumptionsBox: Rendite-Annahme, nominal, Beratungshinweis
-8. **CTA** — PrimaryCta: „Weiter: Risiko verstehen →" (→ `risiko-uebersetzer`)
+### 19.8 Ehrlichkeitsregeln
 
-**Wartezeit-Slider steht zuerst**, weil er die Kernfrage der App verkörpert — nicht Monatsrate oder Laufzeit.
+1. **Echte Daten mit echten Einbrüchen.** Keine bereinigten oder geglätteten Kurven.
+2. **Nur ein Zeitfenster.** Die App zeigt genau das aktuellste 10-Jahres-Fenster. Ein anderes Fenster könnte anders aussehen.
+3. **Keine Zukunftsaussage.** Screen 4 enthält keine Prognose. Kein „so wird es laufen."
+4. **Vergangenheit ≠ Zukunft.** Sichtbarer Hinweis in AssumptionsBox Pflicht.
+5. **Keine Finanzberatung.** Hinweis in AssumptionsBox.
+6. **Offenlegungs-Test:** Wenn dem Nutzer erklärt wird, warum die App so gestaltet ist — würde er sich geholfen oder manipuliert fühlen? Antwort muss „geholfen" sein.
 
-### 18.8 Ehrlichkeitsregeln
+**AssumptionsBox (immer sichtbar, Screen 2 oder 3):**
+> „Basis: MSCI World, monatliche Daten, letzter verfügbarer Monat = heute, 10 Jahre rückwärts. Vergangene Wertentwicklungen sind keine Garantie für die Zukunft. Keine Finanzberatung."
 
-- Renditeannahme (7 % nominal) explizit in AssumptionsBox — kein Kleingedrucktes, sondern sichtbarer App-Bestandteil.
-- Nominalrechnung (nicht inflationsbereinigt) explizit sichtbar.
-- ResultSentence: „unter diesen Annahmen" — kein deterministisches „du wirst" oder „du verlierst garantiert".
-- Keine Finanzberatung (P-06, §14 Sicherheitsregel 7): Beratungshinweis in AssumptionsBox Pflicht.
-- `resultTone` bleibt `'neutral'` in Pilot-1 (O-01 ✅) — kein `'warning'`, kein künstlicher Alarm.
-
-**AssumptionsBox-Inhalt (verbindlich):**
-
-Pflichtzeile (immer sichtbar, nicht kollabierbar):
-> „Annahme: 7 % p.a. nominal — historischer MSCI-World-Durchschnitt. Nicht garantiert."
-
-Expandierbare Hinweise (dürfen ein- und ausgeblendet werden):
-- „Inflation ist nicht eingerechnet. Real, also nach Kaufkraftverlust, wären die Beträge niedriger."
-- „Keine Finanzberatung."
-- „Vergangenheitsrenditen sagen nichts über die Zukunft."
-
-Nicht ergänzen: keine konkrete Inflationsrate, keine Realrendite-Berechnung, kein zweiter Rechner.
-
-- Defaults sichtbar erklärt und im Nutzerinteresse (kein manipulativer Default gegen Nutzerinteresse).
-
-**Offenlegungs-Test:** Wenn dem Nutzer erklärt würde, warum die App so gestaltet ist — würde er sich geholfen oder manipuliert fühlen? Die Antwort muss „geholfen" sein.
-
-### 18.9 Bewusst nicht in dieser App (Pilot-1)
+### 19.9 Bewusst nicht in dieser App
 
 | Weggelassen | Grund |
 |---|---|
-| Chart | KPI + LiveCounter tragen den Beweis besser (Tufte); ChartAdapter offen (O-02 ✅, SF-01) |
-| Rendite-Slider | Fachliche Entscheidung, kein Nutzer-Parameter (O-03 ✅); verhindert Scheingenauigkeit |
-| Szenario-Matrix | Erhöht kognitive Last ohne Aha-Mehrwert in Pilot-1 |
-| Tickende Echtzeit-Uhr | Kein persönlicher Startpunkt bekannt; würde künstlichen Druck erzeugen (AA-04, Dark-Pattern-Grenze) |
-| Share-Feature | Nach Pilot-1 (SF-04) |
-| NumericInput neben Slider | Nach Pilot-1 (SF-02) |
-| `resultTone: 'warning'` | Keine Alarmstufe in Pilot-1 — erst Wirkung verstehen, dann Schwelle kalibrieren (O-01 ✅) |
+| Zukunftsprognose als Chart | Keine belastbare Grundlage; erzeugt Scheingenauigkeit |
+| Mehrere Zeitfenster-Vergleich | Das ist B2 (Geburtsjahrlos / Epochen-Fächer) |
+| Rendite-Angabe in % | Würde Renditedebatte auslösen — nicht Thema dieser App |
+| Inflationsbereinigung | Erhöht kognitive Last ohne Kernaussage zu stärken |
+| Animierter Countdown / tickende Uhr | Fake-Urgency — Dark-Pattern-Grenze |
+| „Günstiger Einstieg"-Hinweis | Würde Timing-Glauben verstärken statt auflösen |
+| Startbetrag als Haupteingabe | Lenkt von Kernbotschaft ab; nur optionaler Input |
 
-### 18.10 Funnel-Anschluss
+### 19.10 Funnel-Anschluss
 
-**Was der Nutzer nach dieser App weiß:** Warten ist teuer. Früher anfangen lohnt sich. Der genaue Betrag ist konkret erfahrbar.
+**Was der Nutzer nach dieser App weiß:**
+Warten ist keine neutrale Position. Die vergangene Marktzeit ist unwiederbringlich. Heute ist der Ausgangspunkt für die nächsten 10 Jahre.
 
-**Nächste logische Frage:** „Wie viel Risiko halte ich aus — und was bedeutet das für meine Anlageentscheidung?"
+**Welche Frage entsteht danach logisch:**
+> „Verstanden. Aber ich habe Angst vor Einbrüchen. Wie viel Risiko halte ich eigentlich aus?"
 
-**Nächste App im Funnel:** `risiko-uebersetzer` (Pilot-2)
+**Nächste App:** `risiko-uebersetzer` (Pilot-2)
 
-**CTA-Label:** „Weiter: Risiko verstehen →"
+**CTA-Text-Empfehlung:** „Heute Marktzeit sammeln →"
 
-**Warum dieser Anschluss funktioniert:** Der Nutzer hat verstanden, dass er anfangen soll. Die nächste emotionale Hürde ist Risiko-Angst — genau das adressiert `risiko-uebersetzer`.
+Begründung: „Marktzeit" ist der Kernbegriff dieser App — der CTA wiederholt das Gelernte als Handlungsimpuls. Kein Imperativ wie „Jetzt handeln!" (vermeidet Druck-Formulierung).
