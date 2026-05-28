@@ -1,5 +1,5 @@
 # Patterns — Finanzwesir 2.0
-Stand: 2026-05-18 | Muster mit ≥2 Belegen (Normal) oder ≥1 Beleg (High-Impact) werden Kandidaten. Nur Alberts OK → Promotion.
+Stand: 2026-05-28 | Muster mit ≥2 Belegen (Normal) oder ≥1 Beleg (High-Impact) werden Kandidaten. Nur Alberts OK → Promotion.
 
 ---
 
@@ -38,6 +38,7 @@ Stand: 2026-05-18 | Muster mit ≥2 Belegen (Normal) oder ≥1 Beleg (High-Impac
 - [B] Falsches Shell-Tool aufgerufen — Bash-Tool mit Add-Content (PowerShell-Syntax) aufgerufen → Fehler → PowerShell-Tool korrekt (AF-12, 2026-05-18) — 1 Beleg, Normal
 - [C] Kontext-Komprimierung vor Abschluss — Abschlussphase musste aus Zusammenfassung wiederaufgenommen werden; Signal: /uebergabe früher starten (AF-12, 2026-05-18) — 1 Beleg, Normal
 - [D] Slice-Plan zu früh ohne vollständige Testszenarien — 4 Präzisierungslücken (Container-Selektor, Szenarien C/D/E, Edge-Cases) → 4 Korrekturen auf Alberts Anweisung (APP-01, 2026-05-11) — 1 Beleg, Normal
+- [E] Subagent-Existenzaussagen vor Write-Operationen verifizieren — Spec-Scout meldete nicht-existente Verzeichnisse (der-alte-euro, depot-kipppunkt); beide bereits vorhanden. Vor Write: Existenz selbst prüfen. Verwandt: [[feedback_strukturannahmen]]. (Block-B-Umbau, 2026-05-18) — 1 Beleg, Normal
 
 ---
 
