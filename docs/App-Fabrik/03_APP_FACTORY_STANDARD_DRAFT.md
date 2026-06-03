@@ -470,6 +470,158 @@ Beide Verträge koexistieren. Kein gegenseitiges Überschreiben.
 
 ---
 
+## 7a. Data Need Snapshot — Blaupause für APP_SPEC.md
+
+🟡 ARBEITSANNAHME — Blaupause abgeleitet aus Pilot `prokrastinations-preis` (APP_SPEC V1.5).
+Bestehende APP_SPEC.md werden noch nicht umgebaut. Rollout: AP-DATA-08 (→ `docs/data/OFFENE-ARBEITSPUNKTE.md`).
+
+**Warum ein expliziter Abschnitt in jeder APP_SPEC.md?**
+
+`Benötigter Index: keiner` ist eine wichtige Information. Kein Abschnitt ist mehrdeutig —
+unklar bleibt dann, ob der Datenbedarf vergessen wurde oder bewusst nicht besteht.
+
+---
+
+### Statuswerte
+
+| Status | Bedeutung |
+|---|---|
+| `offen` | Datenbedarf noch nicht entschieden |
+| `keine externe Datenreihe erforderlich` | Bewusst keine externe Index-/ETF-/Makrozeitreihe nötig |
+| `Wunschdaten definiert` | Fachlicher Bedarf klar, Quelle/Daten noch offen |
+| `Datenkandidat vorhanden` | Datei oder Quelle liegt vor, noch nicht freigegeben |
+| `produktiv` | Daten liegen vor und dürfen verwendet werden |
+| `gesperrt` | Nicht verwenden |
+
+Keine weiteren Statuswerte einführen, außer zwingend nötig.
+
+---
+
+### Ebene A — Minimalblock (Pflicht in jeder APP_SPEC.md)
+
+Jede APP_SPEC.md enthält mindestens diesen Block — auch wenn keine externe Datenreihe nötig ist.
+
+```markdown
+## Datenbedarf / Data Need Snapshot
+
+| Feld | Wert |
+|---|---|
+| Datenstatus | offen / keine externe Datenreihe erforderlich / Wunschdaten definiert / Datenkandidat vorhanden / produktiv / gesperrt |
+| Externe Daten erforderlich? | ja / nein / offen |
+| Benötigter Index | keiner / offen / ... |
+| Benötigte ETF-Zeitreihe | keine / offen / ... |
+| Benötigte Makrodaten | keine / offen / ... |
+| Benötigte Modell-/Konfigurationsdaten | keine / offen / ... |
+| Produktive CSV/JSON vorhanden? | ja / nein / nicht erforderlich |
+| Dataset-ID | keine / offen / ... |
+| Nächster Klärungsschritt | ... |
+```
+
+---
+
+### Ebene B — Detailblock (nur wenn externe Daten / Zeitreihen / CSVs nötig)
+
+Nur ergänzen wenn die App echte externe Daten, Zeitreihen, CSVs, ETF-Daten, Indexdaten,
+Makrodaten oder kuratierte Daten braucht. Nicht jede App braucht alle Unterabschnitte.
+
+```markdown
+### [Abschnittsnummer].1 Wofür braucht die App diese Daten?
+
+### [Abschnittsnummer].2 Ideale Datenreihe / Datenstruktur
+
+### [Abschnittsnummer].3 Mindeststandard
+
+### [Abschnittsnummer].4 Nicht verwenden
+
+### [Abschnittsnummer].5 Erwartetes CSV-/JSON-Format
+
+### [Abschnittsnummer].6 Produktive Anbindung
+
+### [Abschnittsnummer].7 Was Claude vor dem Bau klären muss
+
+### [Abschnittsnummer].8 Wie Claude vorhandene Daten prüfen soll
+
+### [Abschnittsnummer].9 Pflegehinweis
+
+### [Abschnittsnummer].10 App-spezifische Regeln / Berechnung
+```
+
+Hinweise:
+- Bei reinen Calculator-Apps reicht Ebene A plus kurzer Hinweis zu Modellannahmen.
+- Bei JSON-Konfigurationsdaten kein CSV-Format-Abschnitt erzwingen.
+- Bei Apps ohne externe Daten explizit: `keine externe Datenreihe erforderlich`.
+
+---
+
+### Beispiele
+
+#### Beispiel 1: Externe Indexzeitreihe
+
+| Feld | Wert |
+|---|---|
+| Datenstatus | Wunschdaten definiert |
+| Externe Daten erforderlich? | ja |
+| Benötigter Index | MSCI World Net Return / offen |
+| Benötigte ETF-Zeitreihe | keine |
+| Benötigte Makrodaten | keine |
+| Benötigte Modell-/Konfigurationsdaten | Slider-Defaults |
+| Produktive CSV/JSON vorhanden? | nein |
+| Dataset-ID | offen / bestehende ID |
+| Nächster Klärungsschritt | Quelle, Währung, Zeitraum klären |
+
+#### Beispiel 2: Calculator ohne externe Daten
+
+| Feld | Wert |
+|---|---|
+| Datenstatus | keine externe Datenreihe erforderlich |
+| Externe Daten erforderlich? | nein |
+| Benötigter Index | keiner |
+| Benötigte ETF-Zeitreihe | keine |
+| Benötigte Makrodaten | keine |
+| Benötigte Modell-/Konfigurationsdaten | ja — Annahmen/Defaults in APP_SPEC dokumentieren |
+| Produktive CSV/JSON vorhanden? | nicht erforderlich |
+| Dataset-ID | keine |
+| Nächster Klärungsschritt | Modellannahmen prüfen |
+
+#### Beispiel 3: Datenbedarf noch offen
+
+| Feld | Wert |
+|---|---|
+| Datenstatus | offen |
+| Externe Daten erforderlich? | offen |
+| Benötigter Index | offen |
+| Benötigte ETF-Zeitreihe | offen |
+| Benötigte Makrodaten | offen |
+| Benötigte Modell-/Konfigurationsdaten | offen |
+| Produktive CSV/JSON vorhanden? | nein |
+| Dataset-ID | offen |
+| Nächster Klärungsschritt | Erst App-Mechanik klären, dann Datenbedarf konkretisieren |
+
+#### Beispiel 4: Kuratierte JSON-/Konfigurationsdaten
+
+| Feld | Wert |
+|---|---|
+| Datenstatus | Wunschdaten definiert |
+| Externe Daten erforderlich? | nein / teilweise |
+| Benötigter Index | keiner |
+| Benötigte ETF-Zeitreihe | keine |
+| Benötigte Makrodaten | keine |
+| Benötigte Modell-/Konfigurationsdaten | ja — kuratierte Konfigurationsdaten |
+| Produktive CSV/JSON vorhanden? | nein |
+| Dataset-ID | keine / offen |
+| Nächster Klärungsschritt | Datenmodell und redaktionelle Pflege klären |
+
+---
+
+### Rollout-Logik
+
+- Jetzt: nur diese Blaupause dokumentiert. Bestehende APP_SPEC.md werden noch nicht umgebaut.
+- Später: vorhandene APP_SPEC.md strukturell angleichen (→ AP-DATA-08).
+- Beim Rollout: keine Datenbedarfe erfinden. Wenn unklar: `offen`. Wenn bewusst nicht nötig: `keine externe Datenreihe erforderlich`.
+- Ein leerer oder fehlender Abschnitt soll künftig vermieden werden.
+
+---
+
 ## 8. Design-System-Vertrag
 
 🟢 ENTSCHIEDEN (Grundprinzipien) — Quelle: `01_DECISION_LOG.md` A-04, Q-04

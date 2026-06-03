@@ -8,7 +8,7 @@ Blocker: keine
 
 # PROJECT STATUS — Finanzwesir 2.0
 
-Stand: 2026-06-03 | Session: Data-Need-Snapshot | Geändert von: Claude
+Stand: 2026-06-03 | Session: AP-DATA-08-Blaupause | Geändert von: Claude
 
 **Zweck:** Schneller Wiedereinstieg nach Pausen.
 **Zielgruppe:** Albert und Claude.
@@ -36,6 +36,7 @@ Stand: 2026-06-03 | Session: Data-Need-Snapshot | Geändert von: Claude
 ✅ **B1-CSV-Guardrail (2026-06-03):** D-APP-01-B01 im DECISION-LOG angelegt. Guardrail in APP_SPEC §7.1 verankert: CSV gilt ausschließlich für externe MSCI-Datendatei (data-fw-data). JSON bleibt für data-fw-options, AppContext, Registry und alle anderen App-Fabrik-Zwecke zulässig.
 
 ✅ **Data Need Snapshot (2026-06-03):** APP_SPEC V1.5 — §7 zu Datenbedarf/Data Need Snapshot umgebaut (10 Unterabschnitte: Wofür, Ideale Reihe, Mindeststandard, Nicht verwenden, CSV-Format, Produktive Anbindung, Klärungspflichten, CSV-Prüfprotokoll, Pflegehinweis, Berechnung). DATENQUELLEN-GOVERNANCE.md: Subsection ergänzt. NAVIGATION.md: Data-Need-Snapshot-Note. APP_INVENTORY.md: JSON→CSV. AP-DATA-07 vollständig abgeschlossen.
+✅ **AP-DATA-08 Blaupause (2026-06-03):** Data Need Snapshot Blaupause in `03_APP_FACTORY_STANDARD_DRAFT.md §7a` dokumentiert — Minimalblock (Pflicht für alle APP_SPEC.md), Detailblock (nur bei Datenbedarf), 6 Statuswerte, 4 Beispiele (Index / Calculator / offen / JSON-Config), Rollout-Logik. AP-DATA-08 in OFFENE-ARBEITSPUNKTE.md registriert; Rollout (APP_SPEC-Angleich) ⬜ ausstehend.
 
 ✅ **Datenlayer-Konsistenzpatch (2026-06-03):** APP_SPEC V1.4 — §7 auf zentralen Datenlayer umgestellt, CSV-Format date/index_value/YYYY-MM-DD normiert, App-spezifische Verbote als §7.4 ergänzt. NAVIGATION.md: Datenlayer-Pflichtlektüre für datengetriebene Apps (Punkt 12). BACKLOG: AP-DATA-01/04/05 aktiv. AP-DATA-07 abgeschlossen. DECISION_LOG: P-01 veraltet markiert, D-APP-01-E02 angelegt. 02_OPEN_QUESTIONS Data-01: B-01-D geklärt, B-01-A teilgeklärt.
 

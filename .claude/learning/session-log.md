@@ -19,5 +19,11 @@ Wird geleert nach /distill. Einträge: [FRICTION] [WIN] [PREF] [QUESTION] [OK]
 ## 2026-06-03 – SESSION START | Fokus: APP-01 — prokrastinations-preis
 `FinanzwesirData.js, CSVParser.js, FwDateUtils.js — diese Session nicht berühren. ✓`
 
+## 2026-06-03 – AP-DATA-08 | Data Need Snapshot Blaupause in Factory-Standard dokumentiert
+- [OK] Keine Vorkommnisse
+
 ## 2026-06-03 – AP-DATA-07 | Data Need Snapshot dokumentiert
 - [FRICTION] APP_SPEC.md Edit-Match fehlgeschlagen (ausdrücklicher vs. ausdrückliche in Z. 210) → §7-Umbau in 4 Teiledits zerlegt
+
+## 2026-06-03 – SESSION START | Fokus: APP-01 — prokrastinations-preis
+`FinanzwesirData.js, CSVParser.js, FwDateUtils.js — diese Session nicht berühren. ✓`

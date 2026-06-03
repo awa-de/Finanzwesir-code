@@ -158,3 +158,40 @@ Quellenregeln vollständig zu duplizieren.
 - Keine Änderung am CSVParser
 
 **Abhängigkeit:** Datenlayer muss stabil sein (diese Datei und DATENQUELLEN-GOVERNANCE.md).
+
+---
+
+## AP-DATA-08: Data Need Snapshot als APP_SPEC-Blaupause ausrollen
+
+**Priorität:** mittel
+**Status:** offen
+
+**Ziel:**
+Aus dem Pilot `Apps/prokrastinations-preis/APP_SPEC.md` eine entkonkretisierte,
+pragmatische Blaupause für den Abschnitt `Datenbedarf / Data Need Snapshot`
+ableiten und später bestehende APP_SPEC.md strukturell angleichen.
+
+Die Blaupause selbst ist dokumentiert in `docs/App-Fabrik/03_APP_FACTORY_STANDARD_DRAFT.md §7a`.
+
+**Begründung:**
+Jede APP_SPEC.md soll künftig explizit zeigen, ob und welche Daten sie braucht.
+Auch `Benötigter Index: keiner` ist eine wichtige Information. Kein Abschnitt ist
+mehrdeutig, weil später unklar bleibt, ob der Datenbedarf vergessen wurde oder
+bewusst nicht besteht.
+
+**Akzeptanzkriterien:**
+
+- Die Blaupause ist in `docs/App-Fabrik/03_APP_FACTORY_STANDARD_DRAFT.md §7a` dokumentiert. ✅
+- Die Blaupause enthält einen Minimalblock für jede APP_SPEC.md. ✅
+- Die Blaupause enthält einen Detailblock für datengetriebene Apps. ✅
+- Die Blaupause unterscheidet: externe Index-/ETF-/Makrodaten / kuratierte JSON-Konfiguration / Modellannahmen / keine externe Datenreihe / Datenbedarf offen. ✅
+- Es ist dokumentiert, dass beim Rollout keine Datenbedarfe erfunden werden. ✅
+- Vorhandene APP_SPEC.md wurden strukturell angeglichen. ⬜ (ausstehend)
+
+**Nicht-Ziel:**
+
+- Keine Datenquellenrecherche.
+- Keine CSV-Anlage.
+- Keine Implementierung.
+- Kein sofortiger Umbau aller APP_SPEC.md — Rollout nach Alberts explizitem Auftrag.
+- Keine Enterprise-Datenstruktur.
