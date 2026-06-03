@@ -1,11 +1,13 @@
 # BACKLOG-ARCHIV – Finanzwesir 2.0
-Stand: 2026-06-03 | Session: Datenlayer-Setup | Geändert von: Claude
+Stand: 2026-06-03 | Session: Datenlayer-Konsistenzpatch | Geändert von: Claude
 
 Abgeschlossene Items, neueste zuerst (append-only).
 Archivierungs-Trigger: wenn > 200 Zeilen → neue Datei `BACKLOG-ARCHIV-YYYY.md` anlegen.
 
 | ID | Bereich | Titel | Abgeschlossen | Session |
 |----|---------|-------|---------------|---------|
+| APP-01-datenlayer-konsistenz | App | Advocatus-Diaboli-Konsistenzpatch: APP_SPEC V1.3→V1.4 (Datenlayer-Links, CSV-Schema date/index_value/YYYY-MM-DD, §7.4 Verbote); NAVIGATION.md Punkt 12 (Datenlayer-Pflichtlektüre); BACKLOG AP-DATA-01/04/05; DECISION_LOG P-01 veraltet + D-APP-01-E02; 02_OPEN_QUESTIONS Data-01 B-01-D/A aktualisiert. *(sofort erledigt)* | 2026-06-03 | Datenlayer-Konsistenzpatch |
+| AP-DATA-07 | Data | App-Spec prokrastinations-preis auf Datenlayer umgestellt — §7 auf zentralen Datenlayer verwiesen, CSV-Spalten date/index_value/YYYY-MM-DD normiert, Governance-Links (docs/data/) ergänzt, app-spezifische Verbote als §7.4 neu, Dataset-Contract-Referenz in §7.3, §13-Pseudocode synchronisiert. APP_SPEC V1.4. *(sofort erledigt)* | 2026-06-03 | Datenlayer-Konsistenzpatch |
 | APP-01-datenlayer-governance | App | Datenlayer Governance: docs/data/ + Theme/assets/data/b1/ angelegt — 7 .md-Dateien (README, DATENQUELLEN-GOVERNANCE, SOURCE-TIERS, DATASET-CATALOG, DATASET-CONTRACT-TEMPLATE, INDEX-RETURN-VARIANTEN, OFFENE-ARBEITSPUNKTE); 7 APs (AP-DATA-01 bis AP-DATA-07) registriert; CSVParser-Verbot + Net-Return-Präferenz dokumentiert; NAVIGATION.md ergänzt. *(sofort erledigt)* | 2026-06-03 | Datenlayer-Setup |
 | DIST-05 | System | Distill 5 — 1 Pattern promoted (feedback_spec_verbote_scope: Spec-Verbote im engsten Scope), 1 Reoccurrence notiert (feedback_strukturannahmen APP-01-E02), 1 neues Observing-Entry ([F] JSON-Format ohne Spec-Intent-Check); session-log.md geleert. *(sofort erledigt)* | 2026-06-03 | distill-5 |
 | APP-01-csv-guardrail | App | B1 Regression-Guardrail: CSV gilt ausschließlich für externe MSCI-Datendatei (data-fw-data). JSON bleibt für data-fw-options, AppContext, Registry und alle anderen App-Fabrik-Zwecke zulässig. D-APP-01-B01 im DECISION-LOG neu angelegt. APP_SPEC §7.1 Guardrail-Blockquote ergänzt. *(sofort erledigt)* | 2026-06-03 | B1-CSV-Guardrail |

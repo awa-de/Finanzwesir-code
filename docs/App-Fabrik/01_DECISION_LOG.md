@@ -1,6 +1,6 @@
 # Decision Log — App-Fabrik
 
-Stand: 2026-05-19 | D4-Einpflege | Geändert von: Claude
+Stand: 2026-06-03 | Datenlayer-Konsistenzpatch | Geändert von: Claude
 
 **Legende:**
 - 🟢 ENTSCHIEDEN — robuste Entscheidung, Grundlage für weitere Schritte
@@ -282,10 +282,23 @@ Stand: 2026-05-19 | D4-Einpflege | Geändert von: Claude
 ## Pilot
 
 ### P-01 — Pilot-Reihenfolge nach Template-Nutzen, nicht nach Wichtigkeit
-**Status:** 🟢 ENTSCHIEDEN  
+**Status:** 🟢 ENTSCHIEDEN — ÜBERHOLT DURCH D-APP-01-E02 (2026-05-28)
 **Entscheidung:** Pilot 1: `prokrastinations-preis`. Pilot 2: `risiko-uebersetzer`.  
 **Begründung:** `prokrastinations-preis` ist als erster Factory-Pilot besser geeignet, weil die App voraussichtlich ein klarer Rechner mit einfachen Eingaben, klarer Ausgabe und wenig Sonderlogik ist. Ziel ist nicht die inhaltlich wichtigste App zuerst, sondern das Fließband an einer überschaubaren App zu härten.  
 **Quelle:** ETF-App-Fabrik_Produktlandkarte_V0-2.md §10 | Entschieden: 2026-05-09
+
+**Hinweis 2026-05-28:** Diese Pilot-Reihenfolge wurde durch Entscheidung D-APP-01-E02 ersetzt. Aktuell gilt:
+- Pilot 1: `risiko-uebersetzer` (Calculator-Pilot — App-Shell, kein externe Datenpipeline)
+- Pilot 2: `prokrastinations-preis` (Daten-/Chart-/Story-Pilot — historische Datenpipeline, Chart-Engine)
+→ D-APP-01-E02 | `docs/App-Fabrik/05_PILOT_STRATEGY.md`
+
+---
+
+### D-APP-01-E02 — Pilot-Reihenfolge aktualisiert
+**Status:** 🟢 ENTSCHIEDEN  
+**Entscheidung:** Pilot 1 ist `risiko-uebersetzer` (Calculator-Pilot); Pilot 2 ist `prokrastinations-preis` (Daten-/Chart-/Story-Pilot).  
+**Begründung:** Calculator-Mechanik zuerst härten (keine externe Datenpipeline), historische Datenpipeline und Chart als zweiter Komplexitätsschritt.  
+**Quelle:** `docs/App-Fabrik/05_PILOT_STRATEGY.md` | Entschieden: 2026-05-28
 
 ---
 

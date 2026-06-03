@@ -1,6 +1,6 @@
 # APP_SPEC — prokrastinations-preis
 
-Stand: 2026-06-03 | Slice-0-Reboot V1.3 | Geändert von: Claude
+Stand: 2026-06-03 | V1.4 — Datenlayer-Konsistenz | Geändert von: Claude
 
 ---
 
@@ -131,50 +131,62 @@ Abwägung nach 03_APP_FACTORY_STANDARD_DRAFT.md:
 
 ## 7. Datenbedarf
 
-**Externe Datenpipeline: ja.** Im Unterschied zur alten Calculator-Mechanik braucht B1 (Marktzeit) historische MSCI-World-Monatsdaten.
+**Externe Datenpipeline: ja.**
 
-### 7.1 Datenquelle
+Diese App nutzt den zentralen Finanzwesir-Datenlayer.
+
+Allgemeine Regeln:
+- `docs/data/DATENQUELLEN-GOVERNANCE.md`
+- `docs/data/SOURCE-TIERS.md`
+- `docs/data/INDEX-RETURN-VARIANTEN.md`
+- `docs/data/DATASET-CATALOG.md`
+
+### 7.1 Datenbasis
 
 | Feld | Wert |
 |---|---|
-| Datenbasis | MSCI World Index, monatliche Indexwerte — kein ETF-Proxy, keine Produktnennung |
-| Format | CSV — Separator: `;` — Dezimalzeichen: `,` |
-| Datum-Spalte | `month` (Format `YYYY-MM`) oder `date` (Format `YYYY-MM-DD`) |
-| Wert-Spalte | `indexValue` (Komma-Dezimal) |
-| Lokaler Pfad | `Apps/prokrastinations-preis/data/msci-world-monthly.csv` |
-| Dokumentation | `Apps/prokrastinations-preis/data/msci-world-monthly.README.md` |
+| Datenklasse | Aktienindex |
+| Bevorzugte Datenbasis | MSCI World Net Return |
+| Return-Variante | Net Return stark bevorzugt; Abweichung nur mit ausdrücklicher Freigabe (→ `docs/data/INDEX-RETURN-VARIANTEN.md`) |
+| Währung | **[TBD B-01-B]** — wird in AP-DATA-01 geklärt |
+| Quelle | **[TBD B-01-C]** — wird in AP-DATA-01 geklärt |
+| Format | CSV über bestehenden CSVParser |
+| Produktiver Datenpfad | `Theme/assets/data/b1/[Dateiname nach AP-DATA-05].csv` |
+| Dataset Contract | `docs/data/contracts/[dataset-id].md` — anzulegen in AP-DATA-04 |
 | Einbindung | `data-fw-data` (Ghost-Card-Attribut) |
-| URL (Ziel) | `https://www.finanzwesir.com/content/files/2026/msci-world-monthly.csv` [endgültige URL nach Upload] |
+| URL (Ziel) | `https://www.finanzwesir.com/content/files/[Dateiname nach AP-DATA-05]` [nach Upload] |
 | Zeitraum | Mindestens 120 Monate; letzter Eintrag = letzter vollständig verfügbarer Monat |
-| Indexvariante | **[TBD B-01-A]** Price / Net Return / Gross Return |
-| Währung | **[TBD B-01-B]** |
-| Quelle | **[TBD B-01-C]** |
-| CSV erstellt durch | **[TBD B-01-D]** |
 
 > **Guardrail (→ D-APP-01-B01):** Diese CSV-Entscheidung gilt ausschließlich für diese externe MSCI-Datendatei (`data-fw-data`). JSON bleibt für `data-fw-options`, interne JavaScript-Objekte, AppContext, Registry/Manifest und alle anderen App-Fabrik-Zwecke zulässig. Kein pauschales JSON-Verbot.
 
-### 7.2 Erwartetes CSV-Format
+> **Datenhoheit:** Der Projektinhaber (Albert Warnecke) erstellt und pflegt die CSV redaktionell. Claude verarbeitet nur freigegebene Datasets (→ `docs/data/DATENQUELLEN-GOVERNANCE.md`).
 
-Datei: `Apps/prokrastinations-preis/data/msci-world-monthly.csv`
+### 7.2 CSV-Schema
+
+CSV-Format gemäß bestehendem CSVParser. Produktiver Datenpfad: `Theme/assets/data/b1/[Dateiname nach AP-DATA-05].csv`
+
 Separator: `;` (Semikolon)
 Dezimalzeichen: `,` (Komma)
 Header-Zeile: Pflicht
+Monatsdaten: Monatsultimo
 
 Beispiel:
 ```
-month;indexValue
-2016-05;1234,56
-2016-06;1241,22
-2016-07;1258,90
+date;index_value
+2002-01-31;1234,56
+2002-02-28;1256,78
+2002-03-29;1189,34
 ```
 
-Pflicht-Spalten: `month` (String `YYYY-MM` oder `YYYY-MM-DD`) und `indexValue` (Komma-Dezimal)
+Pflicht-Spalten: `date` (String `YYYY-MM-DD`) und `index_value` (Komma-Dezimal)
 Mindestlänge: 120 Datenzeilen (ohne Header)
 Validierung: Header vorhanden? Pflicht-Spalten vorhanden? ≥ 120 Zeilen? Werte parsebar? → sonst Empty-State oder Error-State (b)
 
-### 7.3 README-Pflichtfelder
+### 7.3 Dataset Contract (Übergangsdokumentation)
 
-Datei: `Apps/prokrastinations-preis/data/msci-world-monthly.README.md`
+Sobald AP-DATA-04 abgeschlossen ist, löst `docs/data/contracts/[dataset-id].md` diese Übergangsdokumentation ab.
+
+Bis dahin gelten folgende Pflichtfelder. Datei: `Apps/prokrastinations-preis/data/msci-world-monthly.README.md` ← wird durch Dataset Contract ersetzt
 
 | Feld | Beschreibung |
 |---|---|
@@ -188,7 +200,15 @@ Datei: `Apps/prokrastinations-preis/data/msci-world-monthly.README.md`
 | `transformation` | Rohwert oder normiert auf 100 (erster Datenpunkt) |
 | Hinweis | Keine ETF-Produktempfehlung — nur indexbasierte Prinzip-Demonstration |
 
-### 7.4 Berechnungslogik [entschieden — B-02, 2026-05-28]
+### 7.4 App-spezifische Verbote
+
+- kein ETF-Proxy als Ersatz für Indexdaten
+- keine Produktempfehlung
+- keine exakte ETF-Sparplan-Simulation
+- kein Wechsel auf Price Return wegen längerer Historie ohne ausdrückliche Freigabe
+- keine Interpolation fehlender Monate
+
+### 7.5 Berechnungslogik [entschieden — B-02, 2026-05-28]
 
 Anteilslogik:
 
@@ -199,7 +219,7 @@ Für jeden Monat t:
   depotwert[t] = Anteile × indexValue[t]
 ```
 
-### 7.5 Cache-Busting
+### 7.6 Cache-Busting
 
 Versionsparameter in URL: `?v=2026-05` oder versionierter Dateiname.
 Dev-Ausnahme: `localhost`/`127.0.0.1` erlaubt, als Dev-Ausnahme dokumentiert.
@@ -406,9 +426,9 @@ String `"defaultRate:300"` → geparst zu `{ defaultRate: 300 }`, gegen Whitelis
 **CSV-Daten:**
 ```js
 const csvText = await fetch(validatedUrl).then(r => r.text());
-// Hat csvText eine Header-Zeile mit 'month' und 'indexValue'?
+// Hat csvText eine Header-Zeile mit 'date' und 'index_value'?
 // Hat es ≥ 120 Datenzeilen (ohne Header)?
-// Ist jeder indexValue-Wert als Komma-Dezimal parsebar?
+// Ist jeder index_value-Wert als Komma-Dezimal parsebar?
 //   parseFloat(v.replace(',', '.'))
 // Fehler → Error-State (b) oder Empty-State
 ```
@@ -433,10 +453,10 @@ const appData = Object.freeze({
 
 ```js
 // Anteilslogik (entschieden — B-02, 2026-05-28)
-let anteile = appData.startBetrag / appData.msciData[0].indexValue;
+let anteile = appData.startBetrag / appData.msciData[0].index_value;
 const chartSeries = appData.msciData.map(p => {
-  anteile += appData.monatlicheRate / p.indexValue;
-  return { month: p.month, depotwert: anteile * p.indexValue };
+  anteile += appData.monatlicheRate / p.index_value;
+  return { month: p.date.slice(0, 7), depotwert: anteile * p.index_value };
 });
 const eingezahlt     = appData.monatlicheRate * 120 + appData.startBetrag;
 const depotwertHeute = chartSeries[119].depotwert;
@@ -553,7 +573,7 @@ Begründung: Die Erweiterung auf externe CSV-Daten via `data-fw-data` ist in APP
 | T-04 | `data-fw-data`-URL unerreichbar (404, Netzwerkfehler) | Error-State (b) |
 | T-05 | CSV nicht parsebar (fehlende Header / ungültige Struktur) | Error-State (b) |
 | T-06 | CSV < 120 Datenzeilen | Empty-State |
-| T-07 | CSV mit fehlender oder leerer `indexValue`-Spalte | Empty-State |
+| T-07 | CSV mit fehlender oder leerer `index_value`-Spalte | Empty-State |
 | T-08 | Unbekannter Key in `data-fw-options` | Ignoriert, App normal |
 | T-09 | `defaultRate:abc` (ungültiger Typ) | Fallback auf Default (300) |
 | T-10 | XSS-Versuch in `data-fw-options` (`defaultRate:<script>`) | NaN → Fallback; kein Script-Aufruf |

@@ -8,7 +8,7 @@ Blocker: keine
 
 # PROJECT STATUS — Finanzwesir 2.0
 
-Stand: 2026-06-03 | Session: Datenlayer-Setup | Geändert von: Claude
+Stand: 2026-06-03 | Session: Datenlayer-Konsistenzpatch | Geändert von: Claude
 
 **Zweck:** Schneller Wiedereinstieg nach Pausen.
 **Zielgruppe:** Albert und Claude.
@@ -34,6 +34,8 @@ Stand: 2026-06-03 | Session: Datenlayer-Setup | Geändert von: Claude
 
 ✅ **APP_SPEC V1.3 CSV-Konsistenz (2026-06-03):** JSON→CSV in §3/§13/§15 synchronisiert; E-01-Invariante präzisiert; Tippfehler MarketTimeStrategy korrigiert. DECISION-LOG + 05_PILOT_STRATEGY + 02_OPEN_QUESTIONS synchronisiert.
 ✅ **B1-CSV-Guardrail (2026-06-03):** D-APP-01-B01 im DECISION-LOG angelegt. Guardrail in APP_SPEC §7.1 verankert: CSV gilt ausschließlich für externe MSCI-Datendatei (data-fw-data). JSON bleibt für data-fw-options, AppContext, Registry und alle anderen App-Fabrik-Zwecke zulässig.
+
+✅ **Datenlayer-Konsistenzpatch (2026-06-03):** APP_SPEC V1.4 — §7 auf zentralen Datenlayer umgestellt, CSV-Format date/index_value/YYYY-MM-DD normiert, App-spezifische Verbote als §7.4 ergänzt. NAVIGATION.md: Datenlayer-Pflichtlektüre für datengetriebene Apps (Punkt 12). BACKLOG: AP-DATA-01/04/05 aktiv. AP-DATA-07 abgeschlossen. DECISION_LOG: P-01 veraltet markiert, D-APP-01-E02 angelegt. 02_OPEN_QUESTIONS Data-01: B-01-D geklärt, B-01-A teilgeklärt.
 
 ✅ **Datenlayer Governance (2026-06-03):** docs/data/ angelegt mit 7 Dateien (DATENQUELLEN-GOVERNANCE, SOURCE-TIERS, DATASET-CATALOG, DATASET-CONTRACT-TEMPLATE, INDEX-RETURN-VARIANTEN, OFFENE-ARBEITSPUNKTE). Theme/assets/data/b1/ als produktives Datenverzeichnis eingerichtet. CSVParser-Verbot + Net-Return-Präferenz dokumentiert. 7 APs (AP-DATA-01–07) für Quellenrecherche und Dataset-Contract erfasst.
 
@@ -112,6 +114,9 @@ Vollständig im DECISION-LOG dokumentiert (`docs/steering/DECISION-LOG.md`):
 ---
 
 ## 8. Letzte Session
+
+2026-06-03 — Datenlayer-Konsistenzpatch (APP-01-datenlayer-konsistenz).
+APP_SPEC V1.4: §7 auf zentralen Datenlayer umgestellt (Pfade → Theme/assets/data/b1/, CSV-Format date/index_value/YYYY-MM-DD, Monatsultimo, Governance-Links → docs/data/), §7.3 Dataset Contract Hinweis, §7.4 App-spezifische Verbote neu, §13 Pseudocode synchronisiert. NAVIGATION.md: Punkt 12 für datengetriebene Apps ergänzt (docs/data/ Pflichtlektüre). BACKLOG: AP-DATA-01 in Aktiv, AP-DATA-04/05 in Offen. BACKLOG-ARCHIV: AP-DATA-07 abgeschlossen. DECISION_LOG: P-01 als veraltet markiert, D-APP-01-E02 angelegt. 02_OPEN_QUESTIONS Data-01: B-01-D geklärt (Projektinhaber erstellt CSV redaktionell), B-01-A teilgeklärt (Net Return stark bevorzugt). CSVParser, FinanzwesirData, Engine-Dateien unberührt.
 
 2026-06-03 — Datenlayer Governance eingeführt (APP-01-datenlayer-governance).
 docs/data/ + Theme/assets/data/b1/ angelegt. 7 Governance-Dateien (README, DATENQUELLEN-GOVERNANCE, SOURCE-TIERS, DATASET-CATALOG, DATASET-CONTRACT-TEMPLATE, INDEX-RETURN-VARIANTEN, OFFENE-ARBEITSPUNKTE). CSVParser und FinanzwesirData.js nicht berührt. 7 APs (AP-DATA-01–07) für nächste Schritte (Quellenrecherche, Dataset Contract, Dateiname CSV, App-Spec-Umstellung).

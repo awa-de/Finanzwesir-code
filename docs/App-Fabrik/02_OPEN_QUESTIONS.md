@@ -1,6 +1,6 @@
 # Offene Fragen — App-Fabrik
 
-Stand: 2026-05-28 | APP-01-B01-Spec-V1.2 | Geändert von: Claude
+Stand: 2026-06-03 | Datenlayer-Konsistenzpatch | Geändert von: Claude
 
 **Status-Codes:** ❓ offen | ⏳ in Klärung | ✅ geklärt (→ 01_DECISION_LOG.md)
 
@@ -69,12 +69,22 @@ Option C: Hybrid (Registry mit dynamischen Imports)
 ## Daten
 
 ### Data-01 — Historische MSCI-World-Daten: Quelle und Format
-**Status:** ⚠️ teilweise entschieden (2026-05-28)
-**Entschieden:** Datenbasis = MSCI World Index, monatliche Indexwerte; Format = CSV (Semikolon, Komma-Dezimal); kein ETF-Proxy. Dokumentiert in `Apps/prokrastinations-preis/APP_SPEC.md` §7 (V1.3).
-**Noch offen (B-01-A/B/C/D):** Indexvariante (Price/NR/GR), Währung, konkrete Quelle, Wer erstellt CSV.
-**Frage ursprünglich:** Woher kommen die historischen MSCI-World-Renditedaten (B2, A2, B3)? Welches normierte Format (Felder, Zeiteinheit, real/nominal, Quelle-Metadaten)?  
-**Kontext:** Rollierende-Sparpläne-Prototyp hat bereits Datenpipeline-Idee (MSCI NTR + CPI → normalisierte Ergebnisdatei).  
-**Blockiert:** B1 Slice-0 (B-01-A/B/C/D); B2, A2, B3 finale Implementierung
+**Status:** ⚠️ teilweise entschieden — in Klärung (AP-DATA-01 offen)
+**Entschieden:**
+- Datenbasis = MSCI World Index, monatliche Indexwerte; kein ETF-Proxy. ✅
+- Format = CSV (Semikolon, Komma-Dezimal), Datum `YYYY-MM-DD` (Monatsultimo), Spalten `date`/`index_value`. ✅ (V1.4)
+- Datenhoheit = Projektinhaber erstellt CSV redaktionell; Claude verarbeitet nur. ✅ **B-01-D geklärt**
+- Return-Variante = Net Return stark bevorzugt; Abweichung nur mit ausdrücklicher Freigabe. ✅ **B-01-A teilgeklärt** (→ `docs/data/INDEX-RETURN-VARIANTEN.md`)
+- Governance = zentraler Datenlayer `docs/data/` (angelegt 2026-06-03). ✅
+
+**Noch offen:**
+- B-01-B: Währung (USD oder EUR) — abhängig von AP-DATA-01
+- B-01-C: Konkrete Datenquelle — abhängig von AP-DATA-01
+
+**Klärungsweg:** AP-DATA-01 → AP-DATA-04 (Dataset Contract) → AP-DATA-05 (Dateiname) → Slice-0
+
+**Dokumentiert in:** `Apps/prokrastinations-preis/APP_SPEC.md` §7 (V1.4) | `docs/data/OFFENE-ARBEITSPUNKTE.md`
+**Blockiert:** B1 Slice-0 (B-01-B/C noch offen); B2, A2, B3 finale Implementierung
 
 ---
 

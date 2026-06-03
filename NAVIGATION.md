@@ -147,6 +147,14 @@ Nach Abschluss: `/abschluss-ritual`.
 9. docs/App-Fabrik/APP_FOLDER_STRUCTURE.md        ← Kanonische Dateiliste pro App-Ordner (Phase 0/1/2)
 10. Apps/[App-Name]/                              ← App-spezifischer Code + Prototypen
 11. Apps/[App-Name]/SLICE_PLAN.md (wenn vorhanden) ← Slice-Struktur + freigegebener Umfang (vor Implementierung lesen)
+12. bei externer Datenquelle (CSV / historische Indexdaten / ETF-/Makrodaten) zusätzlich:
+    - `docs/data/README.md`
+    - `docs/data/DATENQUELLEN-GOVERNANCE.md`
+    - `docs/data/SOURCE-TIERS.md`
+    - `docs/data/DATASET-CATALOG.md`
+    - `docs/data/INDEX-RETURN-VARIANTEN.md`
+    - ggf. `docs/data/contracts/[dataset-id].md`
+    → Gilt nur für datengetriebene Apps mit externer CSV-Quelle. Calculator-Apps ohne externe Datenquelle überspringen diesen Schritt.
 
 > [!note] B1 / prokrastinations-preis — Slice-0-Reboot abgeschlossen (2026-05-28)
 > `Apps/prokrastinations-preis/APP_SPEC.md` V1.3 (Marktzeit-Mechanik) ist jetzt die operative Spec-Quelle.
