@@ -12,7 +12,7 @@ Stand: 2026-06-03 | Session: Datenlayer-Konsistenzpatch | Geändert von: Claude
 
 | ID       | Bereich | Titel                                     | Prio | Dep | Detail                              |
 |----------|---------|-------------------------------------------|------|-----|-------------------------------------|
-| APP-01   | App     | B1 Slice-0: Entscheidungen klären → dann Slice-0 implementieren   | H | — | Apps/prokrastinations-preis/APP_SPEC.md (V1.3) |
+| APP-01   | App     | B1 Slice-0: Entscheidungen klären → dann Slice-0 implementieren   | H | — | Apps/prokrastinations-preis/APP_SPEC.md (V1.4) |
 | APP-01-B01 | App   | B1 Blocker: MSCI-Datenbasis klären (Quelle + CSV-Beschaffung)     | H | APP-01 | APP_SPEC §17; entschieden: MSCI World Index, CSV-Format, B-02 Anteilslogik, B-03 Button-Flow; B-01-A teilgeklärt: Net Return stark bevorzugt; B-01-D geklärt: Projektinhaber erstellt CSV redaktionell; offen: B-01-B Währung, B-01-C konkrete Quelle; nächster Schritt AP-DATA-01 |
 | AP-DATA-01 | Data  | Quellenrecherche MSCI World Net Return                            | H | APP-01-B01 | docs/data/OFFENE-ARBEITSPUNKTE.md |
 | AP-20/21 | Engine  | Mixed-Rhythm CV-Heuristik (T5→T3→T6→T7)  | H    | —   | engine/detail/AP-20-DETAIL.md       |

@@ -23,7 +23,7 @@ Stand: 2026-06-03 | Session: Datenlayer-Konsistenzpatch | Geändert von: Claude
 
 **App-Landschaft bereinigt + Block B umgebaut ✅** (AF-13 + 2026-05-18): B1 von Verlustzähler zu Marktzeit-App umgerahmt, B2 auf Epochen-Fokus reduziert, Block B zu „Marktzeit statt Timing" umbenannt, Der alte Euro (B4) + Depot-Kipppunkt (B5) in Block B integriert (vorher F3/F4), 1-Million-App verworfen. 21 Master-Apps / 24 Ordner.
 
-**B1 operative Dateien VERALTET ✅** (2026-05-18): APP_SPEC.md, SLICE_0_KICKOFF.md und SLICE_PLAN.md mit hartem VERALTET-Header versehen. Nicht mehr als Implementierungsanleitung verwenden. Operative Quelle für B1: MINI_SPEC_FROM_HAUPTDOKUMENT.md.
+**B1 operative Dateien VERALTET ✅** (2026-05-18): APP_SPEC.md (alte Verlustzähler-Mechanik), SLICE_0_KICKOFF.md und SLICE_PLAN.md mit hartem VERALTET-Header versehen. *(Galt für die alte Mechanik vor dem Slice-0-Reboot 2026-05-28.)* Operative Quelle heute: `Apps/prokrastinations-preis/APP_SPEC.md` V1.4 (Datenlayer-Konsistenz / Marktzeit-Mechanik). `MINI_SPEC_FROM_HAUPTDOKUMENT.md` bleibt fachliche Hintergrundquelle.
 
 ✅ **B1 Slice-0-Reboot abgeschlossen (2026-05-28):** APP_SPEC V1.2 (Marktzeit-Mechanik, 19 Abschnitte inkl. heldenreise) fertig. Datenbasis MSCI World Index, Format CSV entschieden. NAVIGATION.md Ausnahme-Warnung auf Reboot-Notiz aktualisiert.
 
