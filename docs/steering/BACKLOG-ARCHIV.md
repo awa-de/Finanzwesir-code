@@ -1,17 +1,19 @@
 # BACKLOG-ARCHIV – Finanzwesir 2.0
-Stand: 2026-06-03 | Session: B1-CSV-Guardrail | Geändert von: Claude
+Stand: 2026-06-03 | Session: distill-5 | Geändert von: Claude
 
 Abgeschlossene Items, neueste zuerst (append-only).
 Archivierungs-Trigger: wenn > 200 Zeilen → neue Datei `BACKLOG-ARCHIV-YYYY.md` anlegen.
 
 | ID | Bereich | Titel | Abgeschlossen | Session |
 |----|---------|-------|---------------|---------|
+| DIST-05 | System | Distill 5 — 1 Pattern promoted (feedback_spec_verbote_scope: Spec-Verbote im engsten Scope), 1 Reoccurrence notiert (feedback_strukturannahmen APP-01-E02), 1 neues Observing-Entry ([F] JSON-Format ohne Spec-Intent-Check); session-log.md geleert. *(sofort erledigt)* | 2026-06-03 | distill-5 |
 | APP-01-csv-guardrail | App | B1 Regression-Guardrail: CSV gilt ausschließlich für externe MSCI-Datendatei (data-fw-data). JSON bleibt für data-fw-options, AppContext, Registry und alle anderen App-Fabrik-Zwecke zulässig. D-APP-01-B01 im DECISION-LOG neu angelegt. APP_SPEC §7.1 Guardrail-Blockquote ergänzt. *(sofort erledigt)* | 2026-06-03 | B1-CSV-Guardrail |
 | APP-01-csv-sync | App | B1 APP_SPEC V1.3 CSV-Konsistenz — JSON→CSV in §3/§13/§15 (Datenpipeline-Referenzen); E-01-Invariante präzisiert (Calculator-UI-Primitive erlaubt solange Szenario-/Story-App); Tippfehler MartketimeStrategy/MarktzetStrategy → MarketTimeStrategy; Version Draft V1.0→V1.3 in §1 Status-Tabelle. DECISION-LOG E-02 + 05_PILOT_STRATEGY Pilot-2-Beschreibung + 02_OPEN_QUESTIONS Data-01 V1.2→V1.3 synchronisiert. *(sofort erledigt)* | 2026-06-03 | B1-CSV-Konsistenz |
 | APP-01-B03 | App | B1 Entscheidung Screen-Flow: Button-getrieben V1 (Screens 1→2→3→4 per sichtbarem Button/Tastatur). Kein Autoplay, kein Scroll-Trigger. prefers-reduced-motion respektiert. APP_SPEC §14.3 aktualisiert. D-APP-01-B03 im DECISION-LOG. *(sofort erledigt)* | 2026-05-28 | APP-01-B02-B03-Entscheidung |
 | APP-01-B02 | App | B1 Entscheidung Berechnungsformel: Anteilslogik (monatlicher Anteilskauf). Keine Annuität, keine Durchschnittsrendite. APP_SPEC §7.4 + §13 aktualisiert. D-APP-01-B02 im DECISION-LOG. *(sofort erledigt)* | 2026-05-28 | APP-01-B02-B03-Entscheidung |
 | APP-01-E02 | App | B1 Pilot-Reihenfolge: risiko-uebersetzer = Pilot-1 (Calculator-Pilot), prokrastinations-preis = Pilot-2 (Daten-/Chart-/Story-Pilot). 05_PILOT_STRATEGY.md + APP_SPEC §1/§3/§17/§19.10 aktualisiert. D-APP-01-E02 im DECISION-LOG. | 2026-05-28 | APP-01-E02-Entscheidung |
 | APP-01-E01 | App | B1 Entscheidung App-Familie: prokrastinations-preis ist Szenario-/Vergleichs-App mit Storytelling-Elementen. Kein Calculator. APP_SPEC §3 gültig. Alle Folge-Dokumente dürfen als entschieden behandeln. D-APP-01-E01 im DECISION-LOG. | 2026-05-28 | APP-01-E01-Entscheidung |
+| DIST-04 | System | Distill 4 — [OK] Keine Vorkommnisse; session-log.md geleert. Retroaktiv eingetragen: Archiv-Eintrag fehlte beim ursprünglichen Abschluss. *(sofort erledigt)* | 2026-05-28 | distill-4 |
 | AF-18 | App-Fabrik | D4-Doku-Konsistenzpatch — Zähltexte, Überschriften und Metadaten nach AF-17 bereinigt: 21→22 / 24→25 in 5 Dateien (App-Register, 00_STATUS, DECISION_LOG, APP_INVENTORY, Hauptdokument); Z-01 als historisches Ausgangsmodell markiert (Hinweis auf Z-05 als SSoT); Z-05 nach Z-04 verschoben. *(sofort erledigt)* | 2026-05-19 | D4-Konsistenzpatch |
 | AF-17 | App-Fabrik | D4 ETF-Vergleich / ETF-Feinschliff-Entgifter ins Steuerungssystem eingepflegt — 6 Dateien aktualisiert (00_STATUS, APP_INVENTORY, App-Register V0.7, Hauptdokument v6.0, Decision-Log Z-05, NAVIGATION); Zählmodell 21→22 Master-Apps / 24→25 App-Ordner. *(sofort erledigt)* | 2026-05-19 | D4-Einpflege |
 | AF-15 | App-Fabrik | MINI_SPEC_MAPPING Konsistenz abgeschlossen — A3 markt-kam-zurueck in Haupt-Mapping-Tabelle und Status-Liste ergänzt; 00_STATUS rollierende-sparplaene auf 30-Jahres-Realwert-Logik aktualisiert; Zählungen 23→24. *(sofort erledigt)* | 2026-05-19 | AF-15-Abschluss |
