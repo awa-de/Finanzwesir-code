@@ -1,6 +1,6 @@
 {
   "purpose": "LLM guardrail file. Claude must read this before file operations and refuse unsafe edits unless Albert explicitly overrides.",
-  "version": "1.0",
+  "version": "1.1",
   "protected_paths": [
     {
       "path": "Active Campaign Liste/",
@@ -13,19 +13,29 @@
       "reason": "Projektweiter Datenschutz und Sync-Schutz. Änderungen nur nach expliziter Begründung."
     },
     {
-      "path": "Theme/assets/js/fw-chart-engine/core/FinanzwesirData.js",
+      "path": "Theme/assets/js/fw-chart-engine/data/FinanzwesirData.js",
       "level": "forbidden",
-      "reason": "Layer 1 / TABU — Datenfundament. Niemals ändern."
+      "reason": "Layer 1 / TABU — Data Vault / Single Source of Truth. Niemals ändern."
     },
     {
-      "path": "Theme/assets/js/fw-chart-engine/core/CSVParser.js",
+      "path": "Theme/assets/js/fw-chart-engine/data/CSVParser.js",
       "level": "forbidden",
       "reason": "Layer 1 / TABU — CSV-Ingestion. Niemals ändern."
     },
     {
-      "path": "Theme/assets/js/fw-chart-engine/utils/FwDateUtils.js",
+      "path": "Theme/assets/js/fw-chart-engine/core/FwDateUtils.js",
       "level": "protected",
       "reason": "Zentrale Zeit-Erkennung. Änderungen nur mit expliziter Begründung."
+    },
+    {
+      "path": "Theme/assets/js/fw-chart-engine/core/ChartEngine.js",
+      "level": "protected",
+      "reason": "Chart-Engine-Orchestrator. Änderungen nur mit expliziter Begründung und Regressionstest."
+    },
+    {
+      "path": "Theme/assets/js/fw-chart-engine/core/FwRenderer.js",
+      "level": "protected",
+      "reason": "Zentrale Rendering-Schicht. Änderungen nur mit expliziter Begründung und Regressionstest."
     }
   ]
 }
