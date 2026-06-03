@@ -8,7 +8,7 @@ Stand: 2026-05-28 | Slice-0-Reboot V1.3 | Geändert von: Claude
 
 | Feld | Wert |
 |---|---|
-| Version | Draft V1.0 — Slice-0-Reboot (Marktzeit-Mechanik) |
+| Version | Draft V1.3 — Slice-0-Reboot (Marktzeit-Mechanik) |
 | Phase | Daten-/Chart-/Story-Pilot (Pilot-2), Phase 2 — Spec |
 | Nächster Schritt | `/heldenreise` anwenden → Spec-Gate → Pre-Code-Gate → Slice-0 |
 | Kein Code-Freigabe-Dokument | Implementierung erst nach Spec-Gate + Pre-Code-Gate |
@@ -60,7 +60,7 @@ Abwägung nach 03_APP_FACTORY_STANDARD_DRAFT.md:
 **Pilot-Rolle (E-02, 2026-05-28):** Daten-/Chart-/Story-Pilot (Pilot-2). Pilot-1 ist `risiko-uebersetzer` (Calculator-Pilot). 05_PILOT_STRATEGY.md aktualisiert.
 
 **Wiederverwendbare Bausteine, die dieser Pilot erzwingt:**
-- JSON-Datenpipeline für historische Monatsdaten
+- CSV-Datenpipeline für historische Monatsdaten
 - Chart mit historischer Sparplan-Linie (1 Datenserie)
 - Screen-Flow-Mechanismus (4 Screens sequentiell)
 - Entscheidungspunkt-Marker (vertikale Linie „heute")
@@ -274,7 +274,7 @@ Init
 
 ## 11. AppContext-Schema
 
-**Wer erzeugt AppContext:** `MartketimeStrategy` nach Datenladen und bei jeder Nutzer-Eingabe.
+**Wer erzeugt AppContext:** `MarketTimeStrategy` nach Datenladen und bei jeder Nutzer-Eingabe.
 **Wer konsumiert AppContext:** Renderer (SparplanChart, KpiCards, TextBlocks, A11y-Output, PrimaryCta).
 **Invariante (P-04):** Renderer interpretieren keine Rohdaten — sie lesen ausschließlich AppContext.
 
@@ -386,7 +386,7 @@ Init
 
 **Pflichtabschnitt nach P-10.**
 
-**Beispiel:** JSON-Datei geladen, Nutzer stellt monatlicheRate = 300 € ein.
+**Beispiel:** CSV-Datei geladen, Nutzer stellt monatlicheRate = 300 € ein.
 
 ### Schritt 1 — Eingang
 
@@ -427,7 +427,7 @@ const appData = Object.freeze({
 });
 ```
 
-### Schritt 4 — MarktzetStrategy (reine Zahlen, P-05)
+### Schritt 4 — MarketTimeStrategy (reine Zahlen, P-05)
 
 ```js
 // Anteilslogik (entschieden — B-02, 2026-05-28)
@@ -526,16 +526,16 @@ Aus APP-INTERFACE.md §7 und SECURITY-BASELINE.md:
 1. **Alle `data-*` Attribute sind untrusted input** — ohne Ausnahme.
 2. **URL-Validierung (data-fw-data):** Domain muss `www.finanzwesir.com` enthalten. Dev-Ausnahme: `localhost`/`127.0.0.1`. Fehlschlag → Error-State (b), kein Crash.
 3. **SafeDOM (Q-01):** KpiCard-Werte, TextBlocks, A11y-Summary — ausschließlich `textContent`. Niemals `innerHTML` für Nutzdaten.
-4. **JSON validieren:** Format, Pflichtfelder, Mindestlänge (≥ 120). Fehler → Empty-State oder Error-State.
+4. **CSV validieren:** Format, Pflichtfelder, Mindestlänge (≥ 120). Fehler → Empty-State oder Error-State.
 5. **Whitelist-Prinzip (Q-02):** Unbekannte `data-fw-options`-Keys werden ignoriert. Unbekannter Slug → Error-State (a).
 6. **Keine externen Scripts.** Alle Abhängigkeiten lokal gebündelt.
 7. **Keine geheimen Tokens.** Kein API-Key, keine Credentials in Code oder Config.
 8. **Empty-State statt Crash.** Ungültige Daten → sauberer Fehlerzustand, kein Stacktrace für Endnutzer.
-9. **XSS-Schutz:** Optionswerte werden als Zahlen geparst — keine String-Injektion. Chart-Datenpunkte kommen aus validiertem JSON, nicht aus DOM-Input.
+9. **XSS-Schutz:** Optionswerte werden als Zahlen geparst — keine String-Injektion. Chart-Datenpunkte kommen aus validierter CSV, nicht aus DOM-Input.
 10. **`data-fw-theme` nicht verwendet** — reserviert, nicht produktiv einsetzen.
 
 **Security-Sync-Status:** synchron mit Nicht-Blockern.
-Begründung: Die Erweiterung auf externe JSON-Daten via `data-fw-data` ist in APP-INTERFACE.md §6 bereits vorgesehen. Keine neue globale Sicherheitsregel nötig. URL-Validierungsregeln und Domain-Lock gelten unverändert.
+Begründung: Die Erweiterung auf externe CSV-Daten via `data-fw-data` ist in APP-INTERFACE.md §6 bereits vorgesehen. Keine neue globale Sicherheitsregel nötig. URL-Validierungsregeln und Domain-Lock gelten unverändert.
 
 ---
 

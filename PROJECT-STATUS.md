@@ -1,6 +1,6 @@
 <!-- HOOK-META
 Version: 1
-Stand: 2026-05-28
+Stand: 2026-06-03
 Fokus-AP: APP-01 — prokrastinations-preis
 Nächster-Schritt: B-01-A/B/C/D klären (Indexvariante, Währung, Quelle, CSV-Erstellung) → dann Slice-0 implementieren
 Blocker: keine
@@ -8,7 +8,7 @@ Blocker: keine
 
 # PROJECT STATUS — Finanzwesir 2.0
 
-Stand: 2026-05-28 | Session: APP-01-B02-B03-Entscheidung | Geändert von: Claude
+Stand: 2026-06-03 | Session: B1-CSV-Konsistenz | Geändert von: Claude
 
 **Zweck:** Schneller Wiedereinstieg nach Pausen.
 **Zielgruppe:** Albert und Claude.
@@ -31,6 +31,8 @@ Stand: 2026-05-28 | Session: APP-01-B02-B03-Entscheidung | Geändert von: Claude
 ✅ **E-02 entschieden (2026-05-28):** Neue Pilot-Reihenfolge — risiko-uebersetzer = Pilot-1 (Calculator-Pilot), prokrastinations-preis = Pilot-2 (Daten-/Chart-/Story-Pilot). 05_PILOT_STRATEGY.md aktualisiert.
 ✅ **B-02 entschieden (2026-05-28):** Berechnungsformel = Anteilslogik (monatlicher Anteilskauf). Keine Annuität, keine Durchschnittsrendite.
 ✅ **B-03 entschieden (2026-05-28):** Screen-Flow = Button-getrieben V1. Kein Autoplay, kein Scroll-Trigger.
+
+✅ **APP_SPEC V1.3 CSV-Konsistenz (2026-06-03):** JSON→CSV in §3/§13/§15 synchronisiert; E-01-Invariante präzisiert; Tippfehler MarketTimeStrategy korrigiert. DECISION-LOG + 05_PILOT_STRATEGY + 02_OPEN_QUESTIONS synchronisiert.
 
 ⚙️ **Nächster Schritt B1:** B-01-A/B/C/D klären (Indexvariante, Währung, Quelle, CSV-Erstellung) → dann Slice-0 implementieren.
 
@@ -107,6 +109,9 @@ Vollständig im DECISION-LOG dokumentiert (`docs/steering/DECISION-LOG.md`):
 ---
 
 ## 8. Letzte Session
+
+2026-06-03 — APP_SPEC V1.3 CSV-Konsistenz (APP-01-csv-sync).
+JSON→CSV in APP_SPEC §3/§13/§15 (Datenpipeline-Referenzen) synchronisiert. E-01-Invariante präzisiert: Calculator-UI-Primitive erlaubt solange Szenario-/Story-App dient. Tippfehler MarketTimeStrategy in §11 + §13 korrigiert. Version Draft V1.0→V1.3 in Status-Tabelle. DECISION-LOG E-02, 05_PILOT_STRATEGY Pilot-2-Beschreibung, 02_OPEN_QUESTIONS Data-01 V1.2→V1.3 synchronisiert.
 
 2026-05-28 — B-02 + B-03 entschieden (APP-01-B02-B03-Entscheidung).
 B-02: Berechnungsformel = Anteilslogik (monatlicher Anteilskauf) — keine Annuität, keine Durchschnittsrendite. B-03: Screen-Flow = Button-getrieben V1 — kein Autoplay, kein Scroll-Trigger, prefers-reduced-motion wird respektiert. APP_SPEC V1.3, DECISION-LOG (D-APP-01-B02 + D-APP-01-B03), PROJECT-STATUS aktualisiert.

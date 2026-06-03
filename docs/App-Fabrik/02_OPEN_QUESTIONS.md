@@ -70,7 +70,7 @@ Option C: Hybrid (Registry mit dynamischen Imports)
 
 ### Data-01 — Historische MSCI-World-Daten: Quelle und Format
 **Status:** ⚠️ teilweise entschieden (2026-05-28)
-**Entschieden:** Datenbasis = MSCI World Index, monatliche Indexwerte; Format = CSV (Semikolon, Komma-Dezimal); kein ETF-Proxy. Dokumentiert in `Apps/prokrastinations-preis/APP_SPEC.md` §7 (V1.2).
+**Entschieden:** Datenbasis = MSCI World Index, monatliche Indexwerte; Format = CSV (Semikolon, Komma-Dezimal); kein ETF-Proxy. Dokumentiert in `Apps/prokrastinations-preis/APP_SPEC.md` §7 (V1.3).
 **Noch offen (B-01-A/B/C/D):** Indexvariante (Price/NR/GR), Währung, konkrete Quelle, Wer erstellt CSV.
 **Frage ursprünglich:** Woher kommen die historischen MSCI-World-Renditedaten (B2, A2, B3)? Welches normierte Format (Felder, Zeiteinheit, real/nominal, Quelle-Metadaten)?  
 **Kontext:** Rollierende-Sparpläne-Prototyp hat bereits Datenpipeline-Idee (MSCI NTR + CPI → normalisierte Ergebnisdatei).  

@@ -22,7 +22,7 @@ Die erste App muss:
 | Rang | App | Slug | Warum | Risiko |
 |---|---|---|---|---|
 | **1** | **Risiko-Übersetzer** | `risiko-uebersetzer` | Calculator-Pilot: App-Shell, Slider, Formel, KPI, CTA, State-Modell, A11y, Ghost-Card-Vertrag validieren | Konsumgut-Anker redaktionell abstimmen |
-| 2 | Prokrastinations-Preis | `prokrastinations-preis` | Daten-/Chart-/Story-Pilot: JSON-Datenpipeline, historischer Chart, Screen-Flow, Entscheidungspunkt-Marker, AssumptionsBox validieren | Externe Datenpipeline und Chart-Engine als Zusatzkomplexität |
+| 2 | Prokrastinations-Preis | `prokrastinations-preis` | Daten-/Chart-/Story-Pilot: CSV-Datenpipeline, historischer Chart, Screen-Flow, Entscheidungspunkt-Marker, AssumptionsBox validieren | Externe Datenpipeline und Chart-Engine als Zusatzkomplexität |
 | 3 | ETF-Namensdecoder | `etf-namensdecoder` | Parser/Explainer-Template, kein Chart-Bedarf | Freitext-Parsing darf nicht ausufern |
 | 4 | Geburtsjahrlos-Simulator | `geburtsjahrlos` | Nutzt vorhandenen Prototyp, testet Datenpipeline + Scenario Chart | Datenaufbereitung muss sauber ausgelagert sein |
 | 5 | Weltkarte / Diversifikations-Detektor | `weltkarte-etf-indizes` → `diversifikations-detektor` | Nutzt vorhandenen Explorer-Prototyp | D3/TopoJSON und Overlap-Datenmodell sind Zusatzkomplexität |
@@ -42,7 +42,7 @@ Die erste App muss:
 
 **Pilot-2 `prokrastinations-preis` (Daten-/Chart-/Story-Pilot):**
 
-1. **JSON-Datenpipeline** — historische MSCI-Monatsdaten laden, validieren, verarbeiten
+1. **CSV-Datenpipeline** — historische MSCI-World-Monatsdaten laden, validieren, verarbeiten
 2. **SparplanChart** — historische Linie, Entscheidungspunkt-Marker, Chart-Engine-Integration
 3. **Screen-Flow-Mechanismus** — 4 Screens sequentiell, Fokus-Management, A11y
 4. **AssumptionsBox** — Pflicht-Transparenzblock für Daten-Apps

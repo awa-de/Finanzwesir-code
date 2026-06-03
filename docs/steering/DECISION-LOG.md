@@ -1,4 +1,4 @@
-**Stand:** 2026-05-28 | **Session:** APP-01-B02-B03-Entscheidung | **Geändert von:** Claude
+**Stand:** 2026-06-03 | **Session:** B1-CSV-Konsistenz | **Geändert von:** Claude
 
 # Decision Log — Finanzwesir 2.0
 
@@ -131,7 +131,7 @@ APP_SPEC §17 E-02 hatte offen gelassen, ob B1 (prokrastinations-preis) technisc
 #### Entscheidung
 
 1. `risiko-uebersetzer` = technischer Calculator-Pilot (Pilot-1): App-Shell, Slider, Formel, KPI, CTA, State-Modell, A11y, Ghost-Card-Vertrag validieren.
-2. `prokrastinations-preis` = erster Daten-/Chart-/Story-Pilot (Pilot-2): JSON-Datenpipeline, historischer Chart, Screen-Flow, Entscheidungspunkt-Marker, AssumptionsBox validieren.
+2. `prokrastinations-preis` = erster Daten-/Chart-/Story-Pilot (Pilot-2): CSV-Datenpipeline, historischer Chart, Screen-Flow, Entscheidungspunkt-Marker, AssumptionsBox validieren.
 
 #### Begründung
 
@@ -182,7 +182,7 @@ Slice-0-Implementierung und alle Folge-Slices folgen dem Szenario-Modell. Alle F
 
 #### Invariante
 
-Kein Calculator-Element ohne erneute explizite Entscheidung von Albert.
+Keine Rückkehr zur reinen Calculator-/Verlustzähler-App ohne erneute explizite Entscheidung von Albert. Calculator-UI-Primitive wie Slider, KPI-Cards oder einfache Eingaben sind erlaubt, solange sie der Szenario-/Story-App dienen.
 
 #### Revisit
 
