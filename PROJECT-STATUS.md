@@ -2,7 +2,7 @@
 Version: 1
 Stand: 2026-06-03
 Fokus-AP: APP-01 — prokrastinations-preis
-Nächster-Schritt: AP-DATA-01 Quellenrecherche MSCI World Net Return (docs/data/OFFENE-ARBEITSPUNKTE.md) → B-01-A/B klären → Slice-0 implementieren
+Nächster-Schritt: AP-DATA-01 Quellenrecherche MSCI World Net Return → B-01-B Währung und B-01-C konkrete Quelle klären → AP-DATA-04 Dataset Contract → AP-DATA-05 Dateiname → Slice-0
 Blocker: keine
 -->
 
@@ -39,7 +39,7 @@ Stand: 2026-06-03 | Session: Datenlayer-Konsistenzpatch | Geändert von: Claude
 
 ✅ **Datenlayer Governance (2026-06-03):** docs/data/ angelegt mit 7 Dateien (DATENQUELLEN-GOVERNANCE, SOURCE-TIERS, DATASET-CATALOG, DATASET-CONTRACT-TEMPLATE, INDEX-RETURN-VARIANTEN, OFFENE-ARBEITSPUNKTE). Theme/assets/data/b1/ als produktives Datenverzeichnis eingerichtet. CSVParser-Verbot + Net-Return-Präferenz dokumentiert. 7 APs (AP-DATA-01–07) für Quellenrecherche und Dataset-Contract erfasst.
 
-⚙️ **Nächster Schritt B1:** AP-DATA-01 Quellenrecherche MSCI World Net Return (docs/data/OFFENE-ARBEITSPUNKTE.md) → B-01-A/B/C/D klären → Slice-0 implementieren.
+⚙️ **Nächster Schritt B1:** AP-DATA-01 Quellenrecherche MSCI World Net Return → B-01-B Währung + B-01-C Quelle klären (B-01-A teilgeklärt, B-01-D geklärt) → AP-DATA-04 → AP-DATA-05 → Slice-0.
 
 ---
 
@@ -66,7 +66,7 @@ Stand: 2026-06-03 | Session: Datenlayer-Konsistenzpatch | Geändert von: Claude
 
 ## 3. Nächster sinnvoller Schritt
 
-- **B1 Slice-0: B-01-A/B/C/D klären** — Indexvariante, Währung, Quelle, CSV-Erstellung (02_OPEN_QUESTIONS.md Data-01). E-01/E-02 entschieden. Datenbasis (MSCI World Index) + Format (CSV) entschieden. APP_SPEC V1.2 fertig. Danach: Slice-0 implementieren.
+- **B1 Slice-0: B-01-B Währung + B-01-C Quelle klären** — B-01-A teilgeklärt (Net Return stark bevorzugt); B-01-D geklärt (Projektinhaber erstellt CSV redaktionell). Nächster Schritt: AP-DATA-01. APP_SPEC V1.4 operativ. Danach: AP-DATA-04 Dataset Contract → AP-DATA-05 Dateiname → Slice-0 implementieren.
 - **AP-20/21** (Mixed-Rhythm CV-Heuristik) — 🟡 Aktiv, Chart-Engine, parallel möglich
 
 ---
@@ -270,7 +270,7 @@ Neue APs: DS-012, DS-013, DS-014.
 
 ## 9. Einstieg für nächste Session
 
-**Nächster Schritt: AP-DATA-01 Quellenrecherche MSCI World Net Return (docs/data/OFFENE-ARBEITSPUNKTE.md) → B-01-A Indexvariante + B-01-B Währung klären → Slice-0 implementieren.**
+**Nächster Schritt: AP-DATA-01 Quellenrecherche MSCI World Net Return → B-01-B Währung und B-01-C konkrete Quelle klären → AP-DATA-04 Dataset Contract → AP-DATA-05 Dateiname → Slice-0 implementieren.**
 
 Entschieden (nicht mehr offen):
 - E-01 ✅: prokrastinations-preis ist Szenario-/Vergleichs-App mit Storytelling-Elementen
@@ -280,13 +280,13 @@ Entschieden (nicht mehr offen):
 - B-03 ✅: Screen-Flow = Button-getrieben V1; kein Autoplay, kein Scroll-Trigger
 
 Noch offen (Blocker vor Implementierung):
-- B-01-A: Indexvariante (Price / Net Return / Gross Return) — APP_SPEC §17
-- B-01-B: Währung (USD / EUR) — APP_SPEC §17
-- B-01-C: Datenquelle — APP_SPEC §17
-- B-01-D: Wer erstellt und gibt CSV frei — APP_SPEC §17
+- B-01-A: ✅ teilgeklärt — Net Return stark bevorzugt; konkrete Datenreihe in AP-DATA-01 — APP_SPEC §17
+- B-01-B: Währung (USD / EUR) — abhängig von AP-DATA-01 — APP_SPEC §17
+- B-01-C: Datenquelle (konkrete Quelle) — abhängig von AP-DATA-01 — APP_SPEC §17
+- B-01-D: ✅ geklärt — Projektinhaber erstellt CSV redaktionell; Claude verarbeitet nur freigegebene Datasets — APP_SPEC §17
 
 Operative Quelle:
-- `Apps/prokrastinations-preis/APP_SPEC.md` — V1.3 Marktzeit-Mechanik ✅ (operativ)
+- `Apps/prokrastinations-preis/APP_SPEC.md` — V1.4 Datenlayer-Konsistenz ✅ (operativ)
 - `Apps/prokrastinations-preis/MINI_SPEC_FROM_HAUPTDOKUMENT.md` — Hintergrundquelle
 
 ⚠️ NOCH NICHT VERWENDEN:

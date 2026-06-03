@@ -306,8 +306,11 @@ Stand: 2026-06-03 | Datenlayer-Konsistenzpatch | Geändert von: Claude
 
 ## Spec-Gates
 
-### SG-01 — Pilot-1 prokrastinations-preis: Spec-Gate bestanden
-**Status:** 🟢 ENTSCHIEDEN  
+### SG-01 — Historisch: prokrastinations-preis Spec-Gate V0.3 bestanden
+**Status:** 🟢 ENTSCHIEDEN (historisch — vor E-02)
+
+**Hinweis 2026-05-28:** Historischer Eintrag vor Entscheidung D-APP-01-E02. `prokrastinations-preis` ist heute Pilot-2; Pilot-1 ist `risiko-uebersetzer`.
+
 **Entscheidung:** APP_SPEC.md V0.3 für `prokrastinations-preis` hat das Spec-Gate bestanden (bestanden mit Nicht-Blockern). Keine echten Blocker. Vier Nicht-Blocker mit definierten Klärungszeitpunkten (NB-1 vor Release, NB-2 Phase 4, NB-3 Slice 6, NB-4 vor Ghost-Deploy). Alberts vier Grundsatzbestätigungen für Pre-Code-Gate erteilt (globaler Bootstrapper, lokale Testseite ausreichend für Slices 0–6, Core-Extraktion nach Pilot 2, Fallback-Tokens erlaubt).  
 **Nächster Schritt:** Pre-Code-Gate Full mit Slice-Plan aus RFC §8.  
 **Quelle:** `/Apps/prokrastinations-preis/SPEC_GATE_REPORT.md` | 2026-05-10

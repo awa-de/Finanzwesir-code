@@ -8,7 +8,7 @@ Stand: 2026-06-03 | V1.4 — Datenlayer-Konsistenz | Geändert von: Claude
 
 | Feld | Wert |
 |---|---|
-| Version | Draft V1.3 — Slice-0-Reboot (Marktzeit-Mechanik) |
+| Version | Draft V1.4 — Datenlayer-Konsistenz |
 | Phase | Daten-/Chart-/Story-Pilot (Pilot-2), Phase 2 — Spec |
 | Nächster Schritt | `/heldenreise` anwenden → Spec-Gate → Pre-Code-Gate → Slice-0 |
 | Kein Code-Freigabe-Dokument | Implementierung erst nach Spec-Gate + Pre-Code-Gate |
@@ -186,7 +186,9 @@ Validierung: Header vorhanden? Pflicht-Spalten vorhanden? ≥ 120 Zeilen? Werte 
 
 Sobald AP-DATA-04 abgeschlossen ist, löst `docs/data/contracts/[dataset-id].md` diese Übergangsdokumentation ab.
 
-Bis dahin gelten folgende Pflichtfelder. Datei: `Apps/prokrastinations-preis/data/msci-world-monthly.README.md` ← wird durch Dataset Contract ersetzt
+Frühere app-lokale README-Pfade sind veraltet. Neue Dataset-Dokumentation erfolgt ausschließlich über `docs/data/contracts/[dataset-id].md`.
+
+Bis AP-DATA-04 abgeschlossen ist, gelten die Pflichtfelder aus dem zentralen Datenlayer (`docs/data/DATASET-CONTRACT-TEMPLATE.md`) als Übergangsanforderung. Es wird keine neue app-lokale README angelegt.
 
 | Feld | Beschreibung |
 |---|---|
@@ -219,6 +221,8 @@ Für jeden Monat t:
   depotwert[t] = Anteile × indexValue[t]
 ```
 
+> **Hinweis:** `indexValue[t]` ist hier mathematische Formelnotation. Der externe CSV-Spaltenname bleibt `index_value`; intern darf nach Validierung auf `indexValue` normalisiert werden (siehe §13).
+
 ### 7.6 Cache-Busting
 
 Versionsparameter in URL: `?v=2026-05` oder versionierter Dateiname.
@@ -235,7 +239,7 @@ Gemäß `docs/spec/APP-INTERFACE.md` §3.1.
 ```html
 <div class="fw-app"
      data-fw-app="prokrastinations-preis"
-     data-fw-data="https://www.finanzwesir.com/content/files/2026/msci-world-monthly.csv">
+     data-fw-data="https://www.finanzwesir.com/content/files/[Dateiname nach AP-DATA-05]">
 </div>
 ```
 
@@ -244,7 +248,7 @@ Gemäß `docs/spec/APP-INTERFACE.md` §3.1.
 ```html
 <div class="fw-app"
      data-fw-app="prokrastinations-preis"
-     data-fw-data="https://www.finanzwesir.com/content/files/2026/msci-world-monthly.csv"
+     data-fw-data="https://www.finanzwesir.com/content/files/[Dateiname nach AP-DATA-05]"
      data-fw-options="defaultRate:500">
 </div>
 ```
@@ -439,13 +443,24 @@ const parsed  = parseInt(event.target.value, 10);     // "300" → 300
 const clamped = Math.min(2000, Math.max(50, parsed));  // 300 — innerhalb Range
 ```
 
+### Namenskonvention / Mapping
+
+**Namenskonvention / Mapping:**
+- CSV-Vertrag: `date`, `index_value` (snake_case, tool-neutral für Excel/Python/DuckDB/Validierung).
+- Interne AppData-Domainobjekte: `date`, `indexValue` (camelCase, JavaScript-konform).
+- Beim Übergang von validierter CSV zu AppData wird `index_value` explizit zu `indexValue` gemappt.
+- Ab AppData arbeitet Strategie-Code mit `indexValue`.
+
 ### Schritt 3 — Read-only AppData (P-01)
 
 ```js
 const appData = Object.freeze({
   monatlicheRate: 300,
   startBetrag:    0,
-  msciData:       [...120 validierte Datenpunkte]
+  msciData:       validatedRows.map(row => ({
+    date:       row.date,
+    indexValue: row.index_value     // snake_case → camelCase beim Übergang CSV → AppData
+  }))
 });
 ```
 
@@ -453,10 +468,10 @@ const appData = Object.freeze({
 
 ```js
 // Anteilslogik (entschieden — B-02, 2026-05-28)
-let anteile = appData.startBetrag / appData.msciData[0].index_value;
+let anteile = appData.startBetrag / appData.msciData[0].indexValue;
 const chartSeries = appData.msciData.map(p => {
-  anteile += appData.monatlicheRate / p.index_value;
-  return { month: p.date.slice(0, 7), depotwert: anteile * p.index_value };
+  anteile += appData.monatlicheRate / p.indexValue;
+  return { month: p.date.slice(0, 7), depotwert: anteile * p.indexValue };
 });
 const eingezahlt     = appData.monatlicheRate * 120 + appData.startBetrag;
 const depotwertHeute = chartSeries[119].depotwert;
@@ -629,10 +644,10 @@ Begründung: Die Erweiterung auf externe CSV-Daten via `data-fw-data` ist in APP
 |---|---|---|
 | B-01 | **Datenbasis:** MSCI World Index, monatliche Indexwerte — kein ETF-Proxy | ✅ entschieden 2026-05-28 |
 | B-01 | **Format:** CSV, Semikolon-Separator, Komma-Dezimal | ✅ entschieden 2026-05-28 |
-| B-01-A | **Indexvariante:** Price, Net Return oder Gross Return? | ⬜ offen — Konsequenz: falsches Renditebild |
+| B-01-A | **Indexvariante:** Net Return stark bevorzugt; Abweichung nur mit ausdrücklicher Freigabe | ✅ teilgeklärt 2026-06-03 — konkrete Datenreihe in AP-DATA-01 |
 | B-01-B | **Währung:** USD oder EUR? | ⬜ offen — Konsequenz: Skalierung und Metadokumentation unklar |
 | B-01-C | **Datenquelle:** MSCI direkt, Stooq, Investing.com, manuell…? | ⬜ offen — Konsequenz: keine CSV, keine Datenpipeline |
-| B-01-D | **Wer erstellt und gibt die CSV frei?** | ⬜ offen — Konsequenz: kein Chart, keine Berechnung |
+| B-01-D | **CSV-Erstellung und Freigabe:** Projektinhaber erstellt und pflegt CSV redaktionell; Claude verarbeitet nur freigegebene Datasets | ✅ geklärt 2026-06-03 |
 | B-02 | **Berechnungsformel:** Anteilslogik — monatlicher Anteilskauf | ✅ entschieden 2026-05-28 |
 | B-03 | **Screen-Flow-Mechanismus:** Button-getrieben, kein Autoplay | ✅ entschieden 2026-05-28 |
 
@@ -668,7 +683,7 @@ Begründung: Die Erweiterung auf externe CSV-Daten via `data-fw-data` ist in APP
 | Kein data-app? | ✅ §8 |
 | Kein produktives data-fw-theme? | ✅ §15 |
 | data-fw-options whitelistbar? (Whitelist dokumentiert) | ✅ §9 |
-| Datenquellen und Cache-Busting geklärt? | ⚠️ Datenbasis (MSCI World Index) und Format (CSV) entschieden; B-01-A/B/C/D offen |
+| Datenquellen und Cache-Busting geklärt? | ⚠️ Datenbasis und CSV-Format entschieden; B-01-A Net Return stark bevorzugt; B-01-D geklärt; offen: B-01-B Währung, B-01-C Quelle |
 | AppContext definiert? | ✅ §11 |
 | Pflichtfelder und Fallback-Felder unterschieden? | ✅ §11.3 |
 | A11y-Vertrag definiert? | ✅ §12 |
@@ -677,7 +692,7 @@ Begründung: Die Erweiterung auf externe CSV-Daten via `data-fw-data` ist in APP
 | Sicherheitsregeln erfüllt? Security-Sync synchron? | ✅ §15 — synchron mit Nicht-Blockern |
 | Keine offenen Blocker stillschweigend entschieden? | ✅ §17 — alle Blocker explizit markiert |
 | Mini-Spec vollständig berücksichtigt? | ✅ alle Screens, Microcopy, Datenlogik, Abgrenzungen übernommen |
-| Offene Blocker für Spec-Gate? | ⚠️ B-01-A/B/C/D offen (Indexvariante, Währung, Quelle, CSV) — B-02 + B-03 entschieden |
+| Offene Blocker für Spec-Gate? | ⚠️ B-01-B/C offen (Währung, Quelle); AP-DATA-01 bleibt nächster Schritt |
 | Alberts explizites OK? | ⬜ AUSSTEHEND |
 
 **UX-Gate (heldenreise):** ✅ angewendet → §19

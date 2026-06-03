@@ -157,11 +157,11 @@ Nach Abschluss: `/abschluss-ritual`.
     → Gilt nur für datengetriebene Apps mit externer CSV-Quelle. Calculator-Apps ohne externe Datenquelle überspringen diesen Schritt.
 
 > [!note] B1 / prokrastinations-preis — Slice-0-Reboot abgeschlossen (2026-05-28)
-> `Apps/prokrastinations-preis/APP_SPEC.md` V1.3 (Marktzeit-Mechanik) ist jetzt die operative Spec-Quelle.
+> `Apps/prokrastinations-preis/APP_SPEC.md` V1.4 (Datenlayer-Konsistenz / Marktzeit-Mechanik) ist jetzt die operative Spec-Quelle.
 > `Apps/prokrastinations-preis/MINI_SPEC_FROM_HAUPTDOKUMENT.md` bleibt als fachliche Hintergrundquelle.
 > `SLICE_0_KICKOFF.md` und `SLICE_PLAN.md` sind VERALTET (alte Mechanik) — neue Slice-Dateien ausstehend.
 > B1 ist Pilot-2 (Daten-/Chart-/Story-Pilot). Pilot-1 ist `risiko-uebersetzer` (Calculator-Pilot) — entschieden E-02, 2026-05-28.
-12. bei Chart-Nutzung: relevante Chart-Engine-Spec + WORKING-FEATURES.md
+13. bei Chart-Nutzung: relevante Chart-Engine-Spec + WORKING-FEATURES.md
 ```
 
 Claude gibt Bestätigung aus bevor es weitergeht: „APP-INTERFACE.md ✓, SECURITY-BASELINE.md ✓."
