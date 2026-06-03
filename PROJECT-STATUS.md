@@ -8,7 +8,7 @@ Blocker: keine
 
 # PROJECT STATUS — Finanzwesir 2.0
 
-Stand: 2026-06-03 | Session: B1-CSV-Konsistenz | Geändert von: Claude
+Stand: 2026-06-03 | Session: B1-CSV-Guardrail | Geändert von: Claude
 
 **Zweck:** Schneller Wiedereinstieg nach Pausen.
 **Zielgruppe:** Albert und Claude.
@@ -33,6 +33,7 @@ Stand: 2026-06-03 | Session: B1-CSV-Konsistenz | Geändert von: Claude
 ✅ **B-03 entschieden (2026-05-28):** Screen-Flow = Button-getrieben V1. Kein Autoplay, kein Scroll-Trigger.
 
 ✅ **APP_SPEC V1.3 CSV-Konsistenz (2026-06-03):** JSON→CSV in §3/§13/§15 synchronisiert; E-01-Invariante präzisiert; Tippfehler MarketTimeStrategy korrigiert. DECISION-LOG + 05_PILOT_STRATEGY + 02_OPEN_QUESTIONS synchronisiert.
+✅ **B1-CSV-Guardrail (2026-06-03):** D-APP-01-B01 im DECISION-LOG angelegt. Guardrail in APP_SPEC §7.1 verankert: CSV gilt ausschließlich für externe MSCI-Datendatei (data-fw-data). JSON bleibt für data-fw-options, AppContext, Registry und alle anderen App-Fabrik-Zwecke zulässig.
 
 ⚙️ **Nächster Schritt B1:** B-01-A/B/C/D klären (Indexvariante, Währung, Quelle, CSV-Erstellung) → dann Slice-0 implementieren.
 

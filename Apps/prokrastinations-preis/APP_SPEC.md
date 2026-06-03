@@ -1,6 +1,6 @@
 # APP_SPEC — prokrastinations-preis
 
-Stand: 2026-05-28 | Slice-0-Reboot V1.3 | Geändert von: Claude
+Stand: 2026-06-03 | Slice-0-Reboot V1.3 | Geändert von: Claude
 
 ---
 
@@ -150,6 +150,8 @@ Abwägung nach 03_APP_FACTORY_STANDARD_DRAFT.md:
 | Währung | **[TBD B-01-B]** |
 | Quelle | **[TBD B-01-C]** |
 | CSV erstellt durch | **[TBD B-01-D]** |
+
+> **Guardrail (→ D-APP-01-B01):** Diese CSV-Entscheidung gilt ausschließlich für diese externe MSCI-Datendatei (`data-fw-data`). JSON bleibt für `data-fw-options`, interne JavaScript-Objekte, AppContext, Registry/Manifest und alle anderen App-Fabrik-Zwecke zulässig. Kein pauschales JSON-Verbot.
 
 ### 7.2 Erwartetes CSV-Format
 

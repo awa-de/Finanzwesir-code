@@ -1,4 +1,4 @@
-**Stand:** 2026-06-03 | **Session:** B1-CSV-Konsistenz | **Geändert von:** Claude
+**Stand:** 2026-06-03 | **Session:** B1-CSV-Guardrail | **Geändert von:** Claude
 
 # Decision Log — Finanzwesir 2.0
 
@@ -45,6 +45,50 @@ TBD
 #### Revisit
 
 TBD
+
+---
+
+## D-APP-01-B01: Datenformat — CSV für externe MSCI-Datendatei
+
+Datum: 2026-05-28
+Status: beschlossen
+
+#### Problem
+
+Die externe Datendatei für historische MSCI-World-Monatsdaten braucht ein Format, das Albert selbst beschaffen und prüfen kann.
+
+#### Entscheidung
+
+CSV (Semikolon-Separator, Komma-Dezimal) für die externe B1-MSCI-Datendatei. Einbindung via `data-fw-data`.
+
+#### Begründung
+
+Albert kann CSV einfacher beschaffen und prüfen als JSON. Die Monats-Zeitreihe ist eine einfache Tabelle — CSV ist dafür ausreichend und robuster im Arbeitsprozess.
+
+#### Alternativen
+
+JSON-Datei (verworfen): Kein messbarer Vorteil für eine einfache Zeitreihe; höherer Beschaffungsaufwand für Albert.
+
+#### Konsequenzen
+
+Die externe MSCI-Datendatei (`data-fw-data`) ist CSV. Alle Datenpipeline-Referenzen in APP_SPEC §7, §13 und §15 verwenden CSV-Terminologie. B-01-A/B/C/D (Indexvariante, Währung, Quelle, Aufbereitung) bleiben offen.
+
+#### Invariante / Regression-Guardrail
+
+**Die CSV-Entscheidung gilt ausschließlich für die externe B1-MSCI-Datendatei (`data-fw-data`).**
+
+JSON bleibt für alle anderen Zwecke zulässig:
+- `data-fw-options` (Ghost-Card-Attribut mit Key:Value-Syntax; intern JavaScript-Objekte)
+- AppContext und Rucksack-/Options-Strukturen
+- Registry, Manifest, App-Konfigurationen
+- Interne JavaScript-Objekte und andere App-Fabrik-Zwecke
+- Andere Apps (z. B. risiko-uebersetzer)
+
+Bei künftigen Änderungen darf JSON nicht pauschal entfernt oder durch CSV ersetzt werden.
+
+#### Revisit
+
+Wenn MSCI-Daten in anderem Format vorliegen oder die Datenpipeline grundlegend überarbeitet wird.
 
 ---
 

@@ -1,6 +1,9 @@
 # Session-Log — Finanzwesir 2.0
 Wird geleert nach /distill. Einträge: [FRICTION] [WIN] [PREF] [QUESTION] [OK]
 
+## 2026-06-03 – APP-01-csv-guardrail | CSV gilt nur für externe B1-MSCI-Datendatei
+- [FRICTION] Formulierung „keine JSON-Reste" aus vorherigem CSV-Sync-Patch zu weit gefasst — Albert präzisierte: CSV gilt ausschließlich für data-fw-data; JSON bleibt für data-fw-options, AppContext, Registry und alle anderen App-Fabrik-Zwecke zulässig
+
 ## 2026-06-03 – APP-01-CSV-Sync | B1 APP_SPEC V1.3 CSV-Konsistenz
 - [OK] Keine Vorkommnisse
 

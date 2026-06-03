@@ -1,11 +1,12 @@
 # BACKLOG-ARCHIV – Finanzwesir 2.0
-Stand: 2026-06-03 | Session: B1-CSV-Konsistenz | Geändert von: Claude
+Stand: 2026-06-03 | Session: B1-CSV-Guardrail | Geändert von: Claude
 
 Abgeschlossene Items, neueste zuerst (append-only).
 Archivierungs-Trigger: wenn > 200 Zeilen → neue Datei `BACKLOG-ARCHIV-YYYY.md` anlegen.
 
 | ID | Bereich | Titel | Abgeschlossen | Session |
 |----|---------|-------|---------------|---------|
+| APP-01-csv-guardrail | App | B1 Regression-Guardrail: CSV gilt ausschließlich für externe MSCI-Datendatei (data-fw-data). JSON bleibt für data-fw-options, AppContext, Registry und alle anderen App-Fabrik-Zwecke zulässig. D-APP-01-B01 im DECISION-LOG neu angelegt. APP_SPEC §7.1 Guardrail-Blockquote ergänzt. *(sofort erledigt)* | 2026-06-03 | B1-CSV-Guardrail |
 | APP-01-csv-sync | App | B1 APP_SPEC V1.3 CSV-Konsistenz — JSON→CSV in §3/§13/§15 (Datenpipeline-Referenzen); E-01-Invariante präzisiert (Calculator-UI-Primitive erlaubt solange Szenario-/Story-App); Tippfehler MartketimeStrategy/MarktzetStrategy → MarketTimeStrategy; Version Draft V1.0→V1.3 in §1 Status-Tabelle. DECISION-LOG E-02 + 05_PILOT_STRATEGY Pilot-2-Beschreibung + 02_OPEN_QUESTIONS Data-01 V1.2→V1.3 synchronisiert. *(sofort erledigt)* | 2026-06-03 | B1-CSV-Konsistenz |
 | APP-01-B03 | App | B1 Entscheidung Screen-Flow: Button-getrieben V1 (Screens 1→2→3→4 per sichtbarem Button/Tastatur). Kein Autoplay, kein Scroll-Trigger. prefers-reduced-motion respektiert. APP_SPEC §14.3 aktualisiert. D-APP-01-B03 im DECISION-LOG. *(sofort erledigt)* | 2026-05-28 | APP-01-B02-B03-Entscheidung |
 | APP-01-B02 | App | B1 Entscheidung Berechnungsformel: Anteilslogik (monatlicher Anteilskauf). Keine Annuität, keine Durchschnittsrendite. APP_SPEC §7.4 + §13 aktualisiert. D-APP-01-B02 im DECISION-LOG. *(sofort erledigt)* | 2026-05-28 | APP-01-B02-B03-Entscheidung |
