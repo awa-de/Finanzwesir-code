@@ -1,5 +1,5 @@
 # NAVIGATION.md – Finanzwesir 2.0
-Stand: 2026-05-28 | Session: APP-01-E02-Entscheidung | Geändert von: Claude
+Stand: 2026-06-03 | Session: Datenlayer-Setup | Geändert von: Claude
 
 Für Claude: **Routing-Dokument.** Wird beim Session-Start (Schritt 2) gelesen.
 Gibt Pfade und Lese-Reihenfolgen vor — KEINE Verhaltensregeln (die stehen in CLAUDE.md).
@@ -224,6 +224,8 @@ Manuelle Aktivierung: `/spec-rewrite-guard docs/spec/[Dateiname]`
 | Was | Pfad |
 |---|---|
 | CSV-Testdaten | `Theme/data/` — Dev only, nicht deployen |
+| Externe B1-Datendateien | `Theme/assets/data/b1/` — produktive externe CSV-Dateien für Apps |
+| Datenlayer Governance | `docs/data/` — Quellenregeln, Return-Varianten, Dataset Catalog, Contracts |
 | Statische Seiten | `content/pages/` |
 | Rechtliches | `content/legal/` |
 | App-Ordner | `Apps/` |

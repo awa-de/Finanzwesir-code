@@ -2,13 +2,13 @@
 Version: 1
 Stand: 2026-06-03
 Fokus-AP: APP-01 — prokrastinations-preis
-Nächster-Schritt: B-01-A/B/C/D klären (Indexvariante, Währung, Quelle, CSV-Erstellung) → dann Slice-0 implementieren
+Nächster-Schritt: AP-DATA-01 Quellenrecherche MSCI World Net Return (docs/data/OFFENE-ARBEITSPUNKTE.md) → B-01-A/B klären → Slice-0 implementieren
 Blocker: keine
 -->
 
 # PROJECT STATUS — Finanzwesir 2.0
 
-Stand: 2026-06-03 | Session: B1-CSV-Guardrail | Geändert von: Claude
+Stand: 2026-06-03 | Session: Datenlayer-Setup | Geändert von: Claude
 
 **Zweck:** Schneller Wiedereinstieg nach Pausen.
 **Zielgruppe:** Albert und Claude.
@@ -35,7 +35,9 @@ Stand: 2026-06-03 | Session: B1-CSV-Guardrail | Geändert von: Claude
 ✅ **APP_SPEC V1.3 CSV-Konsistenz (2026-06-03):** JSON→CSV in §3/§13/§15 synchronisiert; E-01-Invariante präzisiert; Tippfehler MarketTimeStrategy korrigiert. DECISION-LOG + 05_PILOT_STRATEGY + 02_OPEN_QUESTIONS synchronisiert.
 ✅ **B1-CSV-Guardrail (2026-06-03):** D-APP-01-B01 im DECISION-LOG angelegt. Guardrail in APP_SPEC §7.1 verankert: CSV gilt ausschließlich für externe MSCI-Datendatei (data-fw-data). JSON bleibt für data-fw-options, AppContext, Registry und alle anderen App-Fabrik-Zwecke zulässig.
 
-⚙️ **Nächster Schritt B1:** B-01-A/B/C/D klären (Indexvariante, Währung, Quelle, CSV-Erstellung) → dann Slice-0 implementieren.
+✅ **Datenlayer Governance (2026-06-03):** docs/data/ angelegt mit 7 Dateien (DATENQUELLEN-GOVERNANCE, SOURCE-TIERS, DATASET-CATALOG, DATASET-CONTRACT-TEMPLATE, INDEX-RETURN-VARIANTEN, OFFENE-ARBEITSPUNKTE). Theme/assets/data/b1/ als produktives Datenverzeichnis eingerichtet. CSVParser-Verbot + Net-Return-Präferenz dokumentiert. 7 APs (AP-DATA-01–07) für Quellenrecherche und Dataset-Contract erfasst.
+
+⚙️ **Nächster Schritt B1:** AP-DATA-01 Quellenrecherche MSCI World Net Return (docs/data/OFFENE-ARBEITSPUNKTE.md) → B-01-A/B/C/D klären → Slice-0 implementieren.
 
 ---
 
@@ -110,6 +112,9 @@ Vollständig im DECISION-LOG dokumentiert (`docs/steering/DECISION-LOG.md`):
 ---
 
 ## 8. Letzte Session
+
+2026-06-03 — Datenlayer Governance eingeführt (APP-01-datenlayer-governance).
+docs/data/ + Theme/assets/data/b1/ angelegt. 7 Governance-Dateien (README, DATENQUELLEN-GOVERNANCE, SOURCE-TIERS, DATASET-CATALOG, DATASET-CONTRACT-TEMPLATE, INDEX-RETURN-VARIANTEN, OFFENE-ARBEITSPUNKTE). CSVParser und FinanzwesirData.js nicht berührt. 7 APs (AP-DATA-01–07) für nächste Schritte (Quellenrecherche, Dataset Contract, Dateiname CSV, App-Spec-Umstellung).
 
 2026-06-03 — APP_SPEC V1.3 CSV-Konsistenz (APP-01-csv-sync).
 JSON→CSV in APP_SPEC §3/§13/§15 (Datenpipeline-Referenzen) synchronisiert. E-01-Invariante präzisiert: Calculator-UI-Primitive erlaubt solange Szenario-/Story-App dient. Tippfehler MarketTimeStrategy in §11 + §13 korrigiert. Version Draft V1.0→V1.3 in Status-Tabelle. DECISION-LOG E-02, 05_PILOT_STRATEGY Pilot-2-Beschreibung, 02_OPEN_QUESTIONS Data-01 V1.2→V1.3 synchronisiert.
@@ -260,7 +265,7 @@ Neue APs: DS-012, DS-013, DS-014.
 
 ## 9. Einstieg für nächste Session
 
-**Nächster Schritt: B-01-A/B/C/D klären (Indexvariante, Währung, Quelle, CSV-Erstellung) → Slice-0 implementieren.**
+**Nächster Schritt: AP-DATA-01 Quellenrecherche MSCI World Net Return (docs/data/OFFENE-ARBEITSPUNKTE.md) → B-01-A Indexvariante + B-01-B Währung klären → Slice-0 implementieren.**
 
 Entschieden (nicht mehr offen):
 - E-01 ✅: prokrastinations-preis ist Szenario-/Vergleichs-App mit Storytelling-Elementen
