@@ -94,4 +94,40 @@ Apps, die externe Daten nutzen, sollen auf `docs/data/` verweisen statt eigene
 Quellenregeln vollständig zu duplizieren. App-spezifische Ergänzungen sind erlaubt,
 allgemeine Datenquellenregeln jedoch nicht pro App zu wiederholen.
 
-→ Aufgabe AP-DATA-07: App-Spec prokrastinations-preis auf Datenlayer umstellen.
+### Data Need Snapshot in APP_SPEC.md
+
+Jede datengetriebene App-Spec enthält einen Abschnitt
+`Datenbedarf / Data Need Snapshot`.
+
+Der Snapshot beschreibt den fachlichen Datenbedarf der konkreten App.
+Er ersetzt keinen Dataset Contract.
+
+Für dieses Projekt gilt:
+
+- `APP_SPEC.md` beschreibt: Was braucht diese App konkret?
+- `DATASET-CATALOG.md` beschreibt: Welche Datenreihen gibt es oder sind geplant?
+- Dataset Contract beschreibt: Was ist bei einer freigegebenen Datenreihe wirklich wichtig?
+- Produktive CSV-Datei enthält: die tatsächlichen Werte.
+
+Der Snapshot soll Drift verhindern, aber keine Datenbank im Markdown-Format werden.
+
+Er muss festhalten:
+
+- wofür die App die Daten braucht
+- welche ideale Datenreihe fachlich gewünscht ist
+- welche Mindestanforderung gilt
+- welche Ersatzdaten nicht verwendet werden dürfen
+- welche Dataset-ID gemeint ist
+- wo später CSV und Contract liegen
+- welches CSV-Format erwartet wird
+- wie Claude eine vorhandene CSV prüfen soll
+- welche Fragen vor dem produktiven Bau offen sind
+- welche app-spezifischen Regeln oder Berechnungen gelten
+
+Allgemeine CSV-, Quellen- und Return-Regeln werden nicht pro App dupliziert.
+Dafür wird auf `docs/data/` verwiesen.
+
+Grundsatz: So wenig Struktur wie möglich. So viel Klarheit wie nötig.
+Keine neuen Dateien, wenn eine bestehende Datei den Zweck erfüllt.
+Keine neuen Kategorien, wenn eine bestehende Statusliste reicht.
+Keine abstrakte Perfektion, wenn ein konkretes Beispiel robuster ist.

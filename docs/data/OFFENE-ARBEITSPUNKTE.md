@@ -145,7 +145,7 @@ Empfehlung dokumentieren: jetzt bauen / später bauen / nicht nötig.
 ## AP-DATA-07: App-Spec prokrastinations-preis auf Datenlayer umstellen
 
 **Priorität:** mittel
-**Status:** offen
+**Status:** abgeschlossen | 2026-06-03
 
 **Ziel:**
 Die App-Spec soll auf den zentralen Datenlayer verweisen statt eigene

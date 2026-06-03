@@ -156,6 +156,13 @@ Nach Abschluss: `/abschluss-ritual`.
     - ggf. `docs/data/contracts/[dataset-id].md`
     → Gilt nur für datengetriebene Apps mit externer CSV-Quelle. Calculator-Apps ohne externe Datenquelle überspringen diesen Schritt.
 
+> [!note] Datengetriebene Apps — Data Need Snapshot zuerst
+> Bei datengetriebenen Apps ist zuerst der Abschnitt `Datenbedarf / Data Need Snapshot`
+> in der jeweiligen `APP_SPEC.md` zu prüfen. Dieser Abschnitt sagt Claude, welche Daten
+> die App fachlich braucht, welches Format erwartet wird, welche Ersatzdaten verboten sind
+> und welche Datenfragen vor dem produktiven Bau offen sind.
+> Nur bei Quellen-, CSV-, Contract- oder Datenänderungsfragen zusätzlich `docs/data/` lesen.
+
 > [!note] B1 / prokrastinations-preis — Slice-0-Reboot abgeschlossen (2026-05-28)
 > `Apps/prokrastinations-preis/APP_SPEC.md` V1.4 (Datenlayer-Konsistenz / Marktzeit-Mechanik) ist jetzt die operative Spec-Quelle.
 > `Apps/prokrastinations-preis/MINI_SPEC_FROM_HAUPTDOKUMENT.md` bleibt als fachliche Hintergrundquelle.

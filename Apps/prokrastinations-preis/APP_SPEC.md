@@ -1,6 +1,6 @@
 # APP_SPEC — prokrastinations-preis
 
-Stand: 2026-06-03 | V1.4 — Datenlayer-Konsistenz | Geändert von: Claude
+Stand: 2026-06-03 | V1.5 — Data-Need-Snapshot | Geändert von: Claude
 
 ---
 
@@ -8,7 +8,7 @@ Stand: 2026-06-03 | V1.4 — Datenlayer-Konsistenz | Geändert von: Claude
 
 | Feld | Wert |
 |---|---|
-| Version | Draft V1.4 — Datenlayer-Konsistenz |
+| Version | Draft V1.5 — Data Need Snapshot |
 | Phase | Daten-/Chart-/Story-Pilot (Pilot-2), Phase 2 — Spec |
 | Nächster Schritt | `/heldenreise` anwenden → Spec-Gate → Pre-Code-Gate → Slice-0 |
 | Kein Code-Freigabe-Dokument | Implementierung erst nach Spec-Gate + Pre-Code-Gate |
@@ -129,7 +129,7 @@ Abwägung nach 03_APP_FACTORY_STANDARD_DRAFT.md:
 
 ---
 
-## 7. Datenbedarf
+## 7. Datenbedarf / Data Need Snapshot
 
 **Externe Datenpipeline: ja.**
 
@@ -141,29 +141,73 @@ Allgemeine Regeln:
 - `docs/data/INDEX-RETURN-VARIANTEN.md`
 - `docs/data/DATASET-CATALOG.md`
 
-### 7.1 Datenbasis
+### 7.1 Wofür braucht die App diese Daten?
+
+Diese App zeigt, dass Warten Marktzeit kostet.
+
+Die Daten werden benötigt, um den Unterschied zwischen „früher investiert" und „später investiert" nicht als glatte Modellrechnung, sondern anhand eines realen oder möglichst realitätsnahen historischen Kapitalmarktpfads sichtbar zu machen.
+
+Die App lebt davon, dass echte Marktbewegungen, Einbrüche und Erholungen in der Zeitreihe sichtbar sind.
+
+Ohne geeignete historische Monatsdaten wird die App zu einer bloßen Renditeannahmen-Rechnung. Das ist nicht der gewünschte Effekt.
+
+### 7.2 Ideale Datenreihe
 
 | Feld | Wert |
 |---|---|
+| Datenrolle | Historische Marktreihe für Sparplan-/Marktzeit-Simulation |
+| Ideale Reihe | Breiter globaler Aktienindex, monatliche Indexstände, möglichst lange Historie |
+| Bevorzugter Kandidat | MSCI World Net Return |
 | Datenklasse | Aktienindex |
-| Bevorzugte Datenbasis | MSCI World Net Return |
-| Return-Variante | Net Return stark bevorzugt; Abweichung nur mit ausdrücklicher Freigabe (→ `docs/data/INDEX-RETURN-VARIANTEN.md`) |
+| Frequenz | Monatlich |
+| Mindestzeitraum | Mindestens 120 Monate; fachlich besser: deutlich längere Historie |
 | Währung | **[TBD B-01-B]** — wird in AP-DATA-01 geklärt |
-| Quelle | **[TBD B-01-C]** — wird in AP-DATA-01 geklärt |
-| Format | CSV über bestehenden CSVParser |
-| Produktiver Datenpfad | `Theme/assets/data/b1/[Dateiname nach AP-DATA-05].csv` |
-| Dataset Contract | `docs/data/contracts/[dataset-id].md` — anzulegen in AP-DATA-04 |
-| Einbindung | `data-fw-data` (Ghost-Card-Attribut) |
-| URL (Ziel) | `https://www.finanzwesir.com/content/files/[Dateiname nach AP-DATA-05]` [nach Upload] |
-| Zeitraum | Mindestens 120 Monate; letzter Eintrag = letzter vollständig verfügbarer Monat |
+| Return-Variante | Net Return stark bevorzugt; Abweichung nur mit ausdrücklicher Freigabe (→ `docs/data/INDEX-RETURN-VARIANTEN.md`) |
+| Dataset-ID | `msci-world-net-return-monthly` (→ `docs/data/DATASET-CATALOG.md`) |
+| Status | in Arbeit — Quelle **[TBD B-01-C]** und Währung **[TBD B-01-B]** offen |
+| Owner | Projektinhaber |
 
-> **Guardrail (→ D-APP-01-B01):** Diese CSV-Entscheidung gilt ausschließlich für diese externe MSCI-Datendatei (`data-fw-data`). JSON bleibt für `data-fw-options`, interne JavaScript-Objekte, AppContext, Registry/Manifest und alle anderen App-Fabrik-Zwecke zulässig. Kein pauschales JSON-Verbot.
+Hinweis: Die ideale Datenreihe beschreibt den fachlichen Wunschzustand. Sie ist nicht automatisch identisch mit der später verfügbaren produktiven Quelle.
 
-> **Datenhoheit:** Der Projektinhaber (Albert Warnecke) erstellt und pflegt die CSV redaktionell. Claude verarbeitet nur freigegebene Datasets (→ `docs/data/DATENQUELLEN-GOVERNANCE.md`).
+### 7.3 Mindeststandard
 
-### 7.2 CSV-Schema
+Die App darf für Layout, Interaktion und Story-Flow mit Mock-Daten vorbereitet werden.
 
-CSV-Format gemäß bestehendem CSVParser. Produktiver Datenpfad: `Theme/assets/data/b1/[Dateiname nach AP-DATA-05].csv`
+Für produktive Veröffentlichung braucht sie mindestens:
+
+- monatliche Indexstände
+- Datumswerte als Monatsultimo
+- mindestens 120 Datenmonate
+- konsistente Datenreihe ohne undokumentierten Variantenwechsel
+- eindeutige Währung
+- eindeutige Return-Variante
+- dokumentierte Quelle
+- keine stillschweigend gefüllten Datenlücken
+- Dataset-Eintrag im `DATASET-CATALOG.md`
+- Dataset Contract, sobald die Reihe produktiv verwendet wird
+
+Nicht erforderlich: Tagesdaten, Echtzeitdaten, automatische Datenpipeline, Datenbank.
+
+### 7.4 Nicht verwenden
+
+Für diese App ausdrücklich nicht akzeptabel:
+
+- frei erfundene konstante Jahresrendite als produktive Datenbasis
+- ETF-Kursdaten als versteckter Ersatz für Indexdaten
+- ETF-Daten, die als Indexdaten ausgegeben werden
+- kurze ETF-Zeitreihe, wenn dadurch der Langfristeffekt verwässert wird
+- Wechsel auf Price Return nur wegen längerer Historie ohne ausdrückliche Freigabe
+- unklare Yahoo-/Investing-/Foren-Daten ohne Identitätsprüfung
+- nicht dokumentierte Kombination mehrerer Datenreihen
+- Interpolation fehlender Monate
+- stille Währungswechsel
+- stille Variantenwechsel
+
+Begründung: Die App soll ein Marktzeit-Prinzip anhand einer nachvollziehbaren historischen Marktreihe zeigen. Eine bequeme, aber fachlich falsche Ersatzreihe würde die Aussage der App verändern.
+
+### 7.5 Erwartetes CSV-Format
+
+Die spätere produktive CSV muss zum bestehenden CSVParser passen.
 
 Separator: `;` (Semikolon)
 Dezimalzeichen: `,` (Komma)
@@ -180,53 +224,129 @@ date;index_value
 
 Pflicht-Spalten: `date` (String `YYYY-MM-DD`) und `index_value` (Komma-Dezimal)
 Mindestlänge: 120 Datenzeilen (ohne Header)
-Validierung: Header vorhanden? Pflicht-Spalten vorhanden? ≥ 120 Zeilen? Werte parsebar? → sonst Empty-State oder Error-State (b)
 
-### 7.3 Dataset Contract (Übergangsdokumentation)
+Regeln:
+- Semikolon als Trennzeichen
+- Komma als Dezimalzeichen
+- Header-Zeile Pflicht
+- `date` im Format YYYY-MM-DD, entspricht Monatsultimo
+- `index_value` enthält den Indexstand
+- keine Kommentarzeilen
+- keine Leerzeilen innerhalb der Daten
+- keine Änderung an `CSVParser.js`
+- keine Änderung an `FinanzwesirData.js`
 
-Sobald AP-DATA-04 abgeschlossen ist, löst `docs/data/contracts/[dataset-id].md` diese Übergangsdokumentation ab.
+Interne JS-Konvention: Nach erfolgreicher Validierung darf `index_value` app-intern auf `indexValue` gemappt werden (snake_case → camelCase beim Übergang CSV → AppData, → §13).
 
-Frühere app-lokale README-Pfade sind veraltet. Neue Dataset-Dokumentation erfolgt ausschließlich über `docs/data/contracts/[dataset-id].md`.
+> **Guardrail (→ D-APP-01-B01):** Diese CSV-Entscheidung gilt ausschließlich für diese externe MSCI-Datendatei (`data-fw-data`). JSON bleibt für `data-fw-options`, interne JavaScript-Objekte, AppContext, Registry/Manifest und alle anderen App-Fabrik-Zwecke zulässig. Kein pauschales JSON-Verbot.
 
-Bis AP-DATA-04 abgeschlossen ist, gelten die Pflichtfelder aus dem zentralen Datenlayer (`docs/data/DATASET-CONTRACT-TEMPLATE.md`) als Übergangsanforderung. Es wird keine neue app-lokale README angelegt.
+### 7.6 Produktive Anbindung
 
-| Feld | Beschreibung |
+| Feld | Wert |
 |---|---|
-| `indexName` | z. B. „MSCI World Index" |
-| `indexVariant` | Price / Net Return / Gross Return — TBD B-01-A |
-| `currency` | z. B. USD oder EUR — TBD B-01-B |
-| `frequency` | monthly |
-| `source` | z. B. „MSCI Inc." — TBD B-01-C |
-| `sourceUrl` | URL oder manueller Quellenhinweis |
-| `downloadDate` / `lastUpdated` | Datum des Downloads oder letzten Aktualisierung |
-| `transformation` | Rohwert oder normiert auf 100 (erster Datenpunkt) |
-| Hinweis | Keine ETF-Produktempfehlung — nur indexbasierte Prinzip-Demonstration |
+| Produktiver CSV-Pfad | `Theme/assets/data/b1/[Dateiname nach AP-DATA-05].csv` |
+| Dataset Contract | `docs/data/contracts/[dataset-id].md` — anzulegen in AP-DATA-04 |
+| Catalog-Eintrag | `docs/data/DATASET-CATALOG.md` |
+| Einbindung in Ghost | `data-fw-data` (Ghost-Card-Attribut) |
+| URL (Ziel) | `https://www.finanzwesir.com/content/files/[Dateiname nach AP-DATA-05]` [nach Upload] |
+| Datenstatus für App-Bau | Mock-Daten erlaubt; produktive Daten offen |
+| Zeitraum | Mindestens 120 Monate; letzter Eintrag = letzter vollständig verfügbarer Monat |
 
-### 7.4 App-spezifische Verbote
+Cache-Busting: Versionsparameter in URL `?v=2026-05` oder versionierter Dateiname.
+Dev-Ausnahme: `localhost`/`127.0.0.1` erlaubt, als Dev-Ausnahme dokumentiert.
 
-- kein ETF-Proxy als Ersatz für Indexdaten
-- keine Produktempfehlung
-- keine exakte ETF-Sparplan-Simulation
-- kein Wechsel auf Price Return wegen längerer Historie ohne ausdrückliche Freigabe
-- keine Interpolation fehlender Monate
+> **Datenhoheit:** Der Projektinhaber (Albert Warnecke) erstellt und pflegt die CSV redaktionell. Claude verarbeitet nur freigegebene Datasets (→ `docs/data/DATENQUELLEN-GOVERNANCE.md`).
 
-### 7.5 Berechnungslogik [entschieden — B-02, 2026-05-28]
+### 7.7 Was Claude vor dem Bau klären muss
 
-Anteilslogik:
+Wenn die App implementiert oder produktiv gemacht werden soll, muss Claude den Projektinhaber fragen bzw. prüfen:
+
+- Liegt bereits eine CSV-Datei vor?
+- Wenn ja: Wo liegt sie? Welche Indexreihe ist enthalten? Welche Return-Variante? Welche Währung? Welcher Zeitraum? Ist die Quelle dokumentiert?
+- Gibt es einen Dataset-Catalog-Eintrag?
+- Gibt es bereits einen Dataset Contract?
+- Darf die App mit dieser Datenreihe produktiv gebaut werden oder nur mit Mock-Daten?
+
+Claude darf diese Entscheidungen nicht selbst treffen. Insbesondere darf Claude nicht eigenmächtig entscheiden: Quelle, Währung, Return-Variante, Wechsel auf ETF-Daten, Wechsel auf Price Return, Interpolation fehlender Monate.
+
+### 7.8 Wie Claude eine vorhandene CSV prüfen soll
+
+Wenn eine CSV-Datei bereits vorliegt, prüft Claude vor Verwendung:
+
+**Formale Prüfung**
+- Datei ist erreichbar
+- Header ist vorhanden
+- Spalten `date` und `index_value` sind vorhanden
+- Trennzeichen ist Semikolon
+- Dezimalzeichen ist Komma
+- Datumsformat ist YYYY-MM-DD
+- Keine Leerzeilen innerhalb der Daten
+- Keine Kommentarzeilen
+
+**Zeitreihenprüfung**
+- Alle Datumswerte sind Monatsultimo
+- Keine doppelten Monate
+- Keine fehlenden Monate innerhalb des dokumentierten Zeitraums
+- Mindestens 120 Datenzeilen
+- Letzter Datenpunkt ist plausibel dokumentiert
+
+**Fachliche Prüfung**
+- Datenklasse ist Index, nicht ETF
+- Indexname ist dokumentiert
+- Return-Variante ist dokumentiert
+- Währung ist dokumentiert
+- Quelle ist dokumentiert
+- Keine erkennbaren Varianten- oder Währungswechsel innerhalb der Reihe
+
+**Ergebnis:** Claude meldet danach knapp:
+- CSV formal ok / nicht ok
+- Zeitreihe ok / nicht ok
+- Fachliche Dokumentation ok / nicht ok
+- Offene Punkte
+- Darf verwendet werden als: Mock / Kandidat / produktiv nur nach Freigabe
+
+Claude repariert die CSV nicht eigenmächtig.
+
+### 7.9 Pflegehinweis
+
+Normaler späterer Update-Fall:
+
+1. Produktive CSV öffnen
+2. Neue Monatswerte unten ergänzen
+3. Spaltennamen unverändert lassen
+4. Format unverändert lassen
+5. Keine historischen Werte ändern, außer bewusst dokumentierte Korrektur
+6. Dataset Contract aktualisieren
+7. Dataset Catalog prüfen
+8. App lokal öffnen und visuell prüfen
+9. `CSVParser.js` und `FinanzwesirData.js` nicht anfassen
+
+Typischer Umfang: ca. 12 neue Monatswerte pro Jahr, manuelle redaktionelle Pflege durch den Projektinhaber. Keine Echtzeitpipeline, keine Datenbank.
+
+### 7.10 App-spezifische Regeln / Berechnung
+
+Die App verwendet die Indexreihe zur Sparplan-Simulation.
+
+Anteilslogik [entschieden — B-02, 2026-05-28]:
 
 ```
 Startanteile = startBetrag / indexValue[0]
+
 Für jeden Monat t:
-  Anteile += monatlicheRate / indexValue[t]   // monatlicher Anteilskauf
+  Anteile += monatlicheRate / indexValue[t]
   depotwert[t] = Anteile × indexValue[t]
 ```
 
-> **Hinweis:** `indexValue[t]` ist hier mathematische Formelnotation. Der externe CSV-Spaltenname bleibt `index_value`; intern darf nach Validierung auf `indexValue` normalisiert werden (siehe §13).
+> **Hinweis:** `indexValue[t]` ist hier mathematische Formelnotation. Der externe CSV-Spaltenname bleibt `index_value`; intern darf nach Validierung auf `indexValue` normalisiert werden (→ §13).
 
-### 7.6 Cache-Busting
-
-Versionsparameter in URL: `?v=2026-05` oder versionierter Dateiname.
-Dev-Ausnahme: `localhost`/`127.0.0.1` erlaubt, als Dev-Ausnahme dokumentiert.
+App-spezifische Verbote:
+- keine Produktempfehlung
+- keine exakte ETF-Sparplan-Simulation
+- kein ETF-Proxy als Indexersatz
+- kein Wechsel auf Price Return wegen längerer Historie ohne ausdrückliche Freigabe
+- keine Interpolation fehlender Monate
+- keine eigene Parserlogik
+- keine Änderung am CSVParser
 
 ---
 
@@ -711,7 +831,7 @@ Begründung: Die Erweiterung auf externe CSV-Daten via `data-fw-data` ist in APP
 
 ---
 
-*Nächster Schritt: NAVIGATION.md Ausnahme-B1-Warnung aktualisieren → Spec-Gate*
+*Nächster Schritt: AP-DATA-01 Quellenrecherche MSCI World Net Return → B-01-B Währung, B-01-C Quelle klären → AP-DATA-04 Dataset Contract → Slice-0*
 
 ---
 
