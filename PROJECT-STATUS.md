@@ -8,7 +8,7 @@ Blocker: keine
 
 # PROJECT STATUS — Finanzwesir 2.0
 
-Stand: 2026-06-03 | Session: AP-DATA-08-Blaupause | Geändert von: Claude
+Stand: 2026-06-03 | Session: AP-DATA-08-Nachputz | Geändert von: Claude
 
 **Zweck:** Schneller Wiedereinstieg nach Pausen.
 **Zielgruppe:** Albert und Claude.
@@ -23,7 +23,7 @@ Stand: 2026-06-03 | Session: AP-DATA-08-Blaupause | Geändert von: Claude
 
 **App-Landschaft bereinigt + Block B umgebaut ✅** (AF-13 + 2026-05-18): B1 von Verlustzähler zu Marktzeit-App umgerahmt, B2 auf Epochen-Fokus reduziert, Block B zu „Marktzeit statt Timing" umbenannt, Der alte Euro (B4) + Depot-Kipppunkt (B5) in Block B integriert (vorher F3/F4), 1-Million-App verworfen. 21 Master-Apps / 24 Ordner.
 
-**B1 operative Dateien VERALTET ✅** (2026-05-18): APP_SPEC.md (alte Verlustzähler-Mechanik), SLICE_0_KICKOFF.md und SLICE_PLAN.md mit hartem VERALTET-Header versehen. *(Galt für die alte Mechanik vor dem Slice-0-Reboot 2026-05-28.)* Operative Quelle heute: `Apps/prokrastinations-preis/APP_SPEC.md` V1.4 (Datenlayer-Konsistenz / Marktzeit-Mechanik). `MINI_SPEC_FROM_HAUPTDOKUMENT.md` bleibt fachliche Hintergrundquelle.
+**B1 operative Dateien VERALTET ✅** (2026-05-18): APP_SPEC.md (alte Verlustzähler-Mechanik), SLICE_0_KICKOFF.md und SLICE_PLAN.md mit hartem VERALTET-Header versehen. *(Galt für die alte Mechanik vor dem Slice-0-Reboot 2026-05-28.)* Operative Quelle heute: `Apps/prokrastinations-preis/APP_SPEC.md` V1.5 (Data Need Snapshot / Datenlayer-Konsistenz / Marktzeit-Mechanik). `MINI_SPEC_FROM_HAUPTDOKUMENT.md` bleibt fachliche Hintergrundquelle.
 
 ✅ **B1 Slice-0-Reboot abgeschlossen (2026-05-28):** APP_SPEC V1.2 (Marktzeit-Mechanik, 19 Abschnitte inkl. heldenreise) fertig. Datenbasis MSCI World Index, Format CSV entschieden. NAVIGATION.md Ausnahme-Warnung auf Reboot-Notiz aktualisiert.
 
@@ -36,7 +36,7 @@ Stand: 2026-06-03 | Session: AP-DATA-08-Blaupause | Geändert von: Claude
 ✅ **B1-CSV-Guardrail (2026-06-03):** D-APP-01-B01 im DECISION-LOG angelegt. Guardrail in APP_SPEC §7.1 verankert: CSV gilt ausschließlich für externe MSCI-Datendatei (data-fw-data). JSON bleibt für data-fw-options, AppContext, Registry und alle anderen App-Fabrik-Zwecke zulässig.
 
 ✅ **Data Need Snapshot (2026-06-03):** APP_SPEC V1.5 — §7 zu Datenbedarf/Data Need Snapshot umgebaut (10 Unterabschnitte: Wofür, Ideale Reihe, Mindeststandard, Nicht verwenden, CSV-Format, Produktive Anbindung, Klärungspflichten, CSV-Prüfprotokoll, Pflegehinweis, Berechnung). DATENQUELLEN-GOVERNANCE.md: Subsection ergänzt. NAVIGATION.md: Data-Need-Snapshot-Note. APP_INVENTORY.md: JSON→CSV. AP-DATA-07 vollständig abgeschlossen.
-✅ **AP-DATA-08 Blaupause (2026-06-03):** Data Need Snapshot Blaupause in `03_APP_FACTORY_STANDARD_DRAFT.md §7a` dokumentiert — Minimalblock (Pflicht für alle APP_SPEC.md), Detailblock (nur bei Datenbedarf), 6 Statuswerte, 4 Beispiele (Index / Calculator / offen / JSON-Config), Rollout-Logik. AP-DATA-08 in OFFENE-ARBEITSPUNKTE.md registriert; Rollout (APP_SPEC-Angleich) ⬜ ausstehend.
+✅ **AP-DATA-08 Blaupause (2026-06-03):** Data Need Snapshot Blaupause in `03_APP_FACTORY_STANDARD_DRAFT.md §7a` dokumentiert — Minimalblock (Pflicht für alle APP_SPEC.md), Detailblock (nur bei Datenbedarf), 6 Statuswerte, 4 Beispiele (Index / Calculator / offen / JSON-Config), Rollout-Logik. AP-DATA-08 abgeschlossen (Blaupause ✅); Rollout → AP-DATA-09 (offen).
 
 ✅ **Datenlayer-Konsistenzpatch (2026-06-03):** APP_SPEC V1.4 — §7 auf zentralen Datenlayer umgestellt, CSV-Format date/index_value/YYYY-MM-DD normiert, App-spezifische Verbote als §7.4 ergänzt. NAVIGATION.md: Datenlayer-Pflichtlektüre für datengetriebene Apps (Punkt 12). BACKLOG: AP-DATA-01/04/05 aktiv. AP-DATA-07 abgeschlossen. DECISION_LOG: P-01 veraltet markiert, D-APP-01-E02 angelegt. 02_OPEN_QUESTIONS Data-01: B-01-D geklärt, B-01-A teilgeklärt.
 
@@ -69,7 +69,7 @@ Stand: 2026-06-03 | Session: AP-DATA-08-Blaupause | Geändert von: Claude
 
 ## 3. Nächster sinnvoller Schritt
 
-- **B1 Slice-0: B-01-B Währung + B-01-C Quelle klären** — B-01-A teilgeklärt (Net Return stark bevorzugt); B-01-D geklärt (Projektinhaber erstellt CSV redaktionell). Nächster Schritt: AP-DATA-01. APP_SPEC V1.4 operativ. Danach: AP-DATA-04 Dataset Contract → AP-DATA-05 Dateiname → Slice-0 implementieren.
+- **B1 Slice-0: B-01-B Währung + B-01-C Quelle klären** — B-01-A teilgeklärt (Net Return stark bevorzugt); B-01-D geklärt (Projektinhaber erstellt CSV redaktionell). Nächster Schritt: AP-DATA-01. APP_SPEC V1.5 operativ. Danach: AP-DATA-04 Dataset Contract → AP-DATA-05 Dateiname → Slice-0 implementieren.
 - **AP-20/21** (Mixed-Rhythm CV-Heuristik) — 🟡 Aktiv, Chart-Engine, parallel möglich
 
 ---
@@ -289,7 +289,7 @@ Noch offen (Blocker vor Implementierung):
 - B-01-D: ✅ geklärt — Projektinhaber erstellt CSV redaktionell; Claude verarbeitet nur freigegebene Datasets — APP_SPEC §17
 
 Operative Quelle:
-- `Apps/prokrastinations-preis/APP_SPEC.md` — V1.4 Datenlayer-Konsistenz ✅ (operativ)
+- `Apps/prokrastinations-preis/APP_SPEC.md` — V1.5 Data Need Snapshot ✅ (operativ)
 - `Apps/prokrastinations-preis/MINI_SPEC_FROM_HAUPTDOKUMENT.md` — Hintergrundquelle
 
 ⚠️ NOCH NICHT VERWENDEN:

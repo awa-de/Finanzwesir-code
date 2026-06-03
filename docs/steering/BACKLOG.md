@@ -1,5 +1,5 @@
 # BACKLOG – Finanzwesir 2.0
-Stand: 2026-06-03 | Session: Datenlayer-Konsistenzpatch | Geändert von: Claude
+Stand: 2026-06-03 | Session: AP-DATA-08-Nachputz | Geändert von: Claude
 
 **Regeln:**
 - ✅-Zeilen werden sofort nach `BACKLOG-ARCHIV.md` verschoben (append), dann hier gelöscht.
@@ -12,7 +12,7 @@ Stand: 2026-06-03 | Session: Datenlayer-Konsistenzpatch | Geändert von: Claude
 
 | ID       | Bereich | Titel                                     | Prio | Dep | Detail                              |
 |----------|---------|-------------------------------------------|------|-----|-------------------------------------|
-| APP-01   | App     | B1 Slice-0: Entscheidungen klären → dann Slice-0 implementieren   | H | — | Apps/prokrastinations-preis/APP_SPEC.md (V1.4) |
+| APP-01   | App     | B1 Slice-0: Entscheidungen klären → dann Slice-0 implementieren   | H | — | Apps/prokrastinations-preis/APP_SPEC.md (V1.5) |
 | APP-01-B01 | App   | B1 Blocker: MSCI-Datenbasis klären (Quelle + CSV-Beschaffung)     | H | APP-01 | APP_SPEC §17; entschieden: MSCI World Index, CSV-Format, B-02 Anteilslogik, B-03 Button-Flow; B-01-A teilgeklärt: Net Return stark bevorzugt; B-01-D geklärt: Projektinhaber erstellt CSV redaktionell; offen: B-01-B Währung, B-01-C konkrete Quelle; nächster Schritt AP-DATA-01 |
 | AP-DATA-01 | Data  | Quellenrecherche MSCI World Net Return                            | H | APP-01-B01 | docs/data/OFFENE-ARBEITSPUNKTE.md |
 | AP-20/21 | Engine  | Mixed-Rhythm CV-Heuristik (T5→T3→T6→T7)  | H    | —   | engine/detail/AP-20-DETAIL.md       |
@@ -27,6 +27,7 @@ Stand: 2026-06-03 | Session: Datenlayer-Konsistenzpatch | Geändert von: Claude
 |----------|---------|------------------------------------------------|------|--------------|---------------------------------------------------|
 | AP-DATA-04 | Data  | Dataset Contract MSCI World Pilot anlegen          | H | AP-DATA-01 | docs/data/OFFENE-ARBEITSPUNKTE.md                 |
 | AP-DATA-05 | Data  | Dateiname produktive CSV entscheiden               | H | AP-DATA-01 | docs/data/OFFENE-ARBEITSPUNKTE.md                 |
+| AP-DATA-09 | Data  | Bestehende APP_SPEC.md nach Data-Need-Blaupause angleichen | M | — | docs/data/OFFENE-ARBEITSPUNKTE.md; Rollout erst nach Alberts explizitem Auftrag |
 | DS-003   | Design  | Tastatur-Navigation testen (Safari/Firefox/Chrome) | H | —          | —                                                 |
 | DS-004   | Design  | WCAG Kontrast-Tabelle dokumentieren            | H    | —            | —                                                 |
 | TMPL-1   | Theme   | Ghost-Template bauen (Phase 2, 14 Items)       | H    | —            | theme-build/THEME-ASSEMBLY-CHECKLIST.md           |

@@ -1,4 +1,4 @@
-Stand: 2026-06-03 | Erstellt von: Claude | Session: Datenlayer-Setup
+Stand: 2026-06-03 | Geändert von: Claude | Session: AP-DATA-08-Nachputz
 
 # Offene Arbeitspunkte — Datenlayer Finanzwesir 2.0
 
@@ -161,17 +161,15 @@ Quellenregeln vollständig zu duplizieren.
 
 ---
 
-## AP-DATA-08: Data Need Snapshot als APP_SPEC-Blaupause ausrollen
+## AP-DATA-08: Data Need Snapshot Blaupause für APP_SPEC.md dokumentieren
 
 **Priorität:** mittel
-**Status:** offen
+**Status:** abgeschlossen | 2026-06-03
 
 **Ziel:**
 Aus dem Pilot `Apps/prokrastinations-preis/APP_SPEC.md` eine entkonkretisierte,
 pragmatische Blaupause für den Abschnitt `Datenbedarf / Data Need Snapshot`
-ableiten und später bestehende APP_SPEC.md strukturell angleichen.
-
-Die Blaupause selbst ist dokumentiert in `docs/App-Fabrik/03_APP_FACTORY_STANDARD_DRAFT.md §7a`.
+ableiten und in `docs/App-Fabrik/03_APP_FACTORY_STANDARD_DRAFT.md §7a` dokumentieren.
 
 **Begründung:**
 Jede APP_SPEC.md soll künftig explizit zeigen, ob und welche Daten sie braucht.
@@ -186,12 +184,48 @@ bewusst nicht besteht.
 - Die Blaupause enthält einen Detailblock für datengetriebene Apps. ✅
 - Die Blaupause unterscheidet: externe Index-/ETF-/Makrodaten / kuratierte JSON-Konfiguration / Modellannahmen / keine externe Datenreihe / Datenbedarf offen. ✅
 - Es ist dokumentiert, dass beim Rollout keine Datenbedarfe erfunden werden. ✅
-- Vorhandene APP_SPEC.md wurden strukturell angeglichen. ⬜ (ausstehend)
 
 **Nicht-Ziel:**
 
 - Keine Datenquellenrecherche.
 - Keine CSV-Anlage.
 - Keine Implementierung.
-- Kein sofortiger Umbau aller APP_SPEC.md — Rollout nach Alberts explizitem Auftrag.
+- Kein sofortiger Umbau aller APP_SPEC.md — Rollout: AP-DATA-09.
+- Keine Enterprise-Datenstruktur.
+
+---
+
+## AP-DATA-09: Bestehende APP_SPEC.md nach Data-Need-Blaupause angleichen
+
+**Priorität:** mittel
+**Status:** offen
+
+**Ziel:**
+Alle vorhandenen `APP_SPEC.md` unter `/Apps` strukturell nach der Blaupause
+`docs/App-Fabrik/03_APP_FACTORY_STANDARD_DRAFT.md §7a` angleichen.
+
+**Begründung:**
+Jede APP_SPEC.md soll künftig explizit zeigen, ob und welche Daten sie braucht.
+Auch `Benötigter Index: keiner` ist eine wichtige Information. Kein Abschnitt ist
+mehrdeutig, weil später unklar bleibt, ob der Datenbedarf vergessen wurde oder
+bewusst nicht besteht.
+
+**Akzeptanzkriterien:**
+
+- Alle vorhandenen `APP_SPEC.md` wurden geprüft.
+- Jede vorhandene `APP_SPEC.md` enthält mindestens den Minimalblock
+  `Datenbedarf / Data Need Snapshot`.
+- Datenbedarfe werden nicht erfunden.
+- Wenn unklar: `offen`.
+- Wenn bewusst keine externe Datenreihe nötig ist:
+  `keine externe Datenreihe erforderlich` / `keiner`.
+- Apps ohne `APP_SPEC.md` bleiben unverändert.
+- Abweichungen von der Blaupause werden begründet.
+
+**Nicht-Ziel:**
+
+- Keine Datenquellenrecherche.
+- Keine CSV-Anlage.
+- Keine Implementierung.
+- Keine neuen APP_SPEC.md nur wegen dieses Standards.
 - Keine Enterprise-Datenstruktur.

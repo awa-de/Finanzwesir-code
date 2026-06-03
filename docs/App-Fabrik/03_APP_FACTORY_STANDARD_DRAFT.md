@@ -1,6 +1,6 @@
 # App-Fabrik-Standard — Draft V0.1
 
-Stand: 2026-05-10 | Chart-Engine-Architekturprinzipien | Geändert von: Claude  
+Stand: 2026-06-03 | AP-DATA-08-Nachputz | Geändert von: Claude  
 Ziel-Pfad wenn bindend: `docs/spec/APP-FACTORY-STANDARD.md`
 
 **Alle Inhalte hier sind Arbeitsstände.**  
@@ -145,7 +145,7 @@ Offen: Konkrete technische Kopplung und Navigation zwischen den drei Modulen —
 
 **Wiederverwendbare Bausteine:** Slider, NumericInput, KpiCard, LiveCounter, RangeButtons, ResultSentence, AssumptionsBox, PrimaryCta
 
-**Apps dieser Familie:** `prokrastinations-preis` (Pilot 1), `risiko-uebersetzer` (Pilot 2), `kostenkiller-ter`, `thesaurierer-rennen`, `renditekiller-volatilitaet`
+**Apps dieser Familie:** `risiko-uebersetzer` (Pilot-1), `kostenkiller-ter`, `thesaurierer-rennen`, `renditekiller-volatilitaet`
 
 ---
 
@@ -167,7 +167,7 @@ Offen: Konkrete technische Kopplung und Navigation zwischen den drei Modulen —
 
 **Wiederverwendbare Bausteine:** RangeButtons, Chart-Engine-Integration, AssumptionsBox, KpiCard, ResultSentence, PrimaryCta
 
-**Apps dieser Familie:** `geburtsjahrlos`, `rollierende-sparplaene`, `crash-reaktions-test`, `market-timing-simulator`
+**Apps dieser Familie:** `prokrastinations-preis` (Pilot-2), `geburtsjahrlos`, `rollierende-sparplaene`, `crash-reaktions-test`, `market-timing-simulator`
 
 ---
 
@@ -616,7 +616,7 @@ Hinweise:
 ### Rollout-Logik
 
 - Jetzt: nur diese Blaupause dokumentiert. Bestehende APP_SPEC.md werden noch nicht umgebaut.
-- Später: vorhandene APP_SPEC.md strukturell angleichen (→ AP-DATA-08).
+- Später: vorhandene APP_SPEC.md strukturell angleichen (→ AP-DATA-09).
 - Beim Rollout: keine Datenbedarfe erfinden. Wenn unklar: `offen`. Wenn bewusst nicht nötig: `keine externe Datenreihe erforderlich`.
 - Ein leerer oder fehlender Abschnitt soll künftig vermieden werden.
 
@@ -1038,8 +1038,8 @@ Jede App mit Renditeannahmen braucht eine sichtbare Annahmenbox. Ist das Pflicht
 Nach Freigabe dieser V0.1 durch Albert:
 
 1. **`04_CLAUDE_WORKFLOW_DRAFT.md` ausarbeiten** — Orchestrierung der vorhandenen Skills für den App-Entwicklungs-Workflow (Intake → Spec → Gate → Build → Release)
-2. **`APP_SPEC.md` für Pilot 1 erstellen** — `prokrastinations-preis`, App-Familie Calculator, kein externer Datenbedarf, Ghost-Card-Beispiel, alle vier States
-3. **Pilot 1 bauen** — `prokrastinations-preis` als ersten App-Fabrik-Durchlauf; Factory-Lücken durch echte Erfahrung identifizieren
+2. **`APP_SPEC.md` für Pilot-1 erstellen** — `risiko-uebersetzer`, App-Familie Calculator, kein externer Datenbedarf, Ghost-Card-Beispiel, alle vier States. Pilot-2: `prokrastinations-preis` (Daten-/Chart-/Story-Pilot).
+3. **Pilot-1 bauen** — `risiko-uebersetzer` als ersten App-Fabrik-Durchlauf; Factory-Lücken durch echte Erfahrung identifizieren
 4. **Standard erhärten** — nach Pilot-1-Abschluss diesen Draft in `docs/spec/APP-FACTORY-STANDARD.md` überführen
 
 Der Pilot testet nicht die inhaltlich wichtigste App zuerst. Er härtet das Fließband an einer überschaubaren App, bevor komplexere Apps gebaut werden.
