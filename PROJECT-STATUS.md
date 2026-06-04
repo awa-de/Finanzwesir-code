@@ -2,13 +2,13 @@
 Version: 1
 Stand: 2026-06-04
 Fokus-AP: APP-01 — prokrastinations-preis
-Nächster-Schritt: Pre-Code-Gate Full → Slice-0 implementieren (SLICE_PLAN + SLICE_0_KICKOFF bereit)
+Nächster-Schritt: Slice 1 implementieren — CSV-Datenladen + CSVParser-Import + Daten-States (Slice-0 abgeschlossen)
 Blocker: keine
 -->
 
 # PROJECT STATUS — Finanzwesir 2.0
 
-Stand: 2026-06-04 | Session: APP-01-slice-planung | Geändert von: Claude
+Stand: 2026-06-04 16:30 | Session: APP-01-slice0-impl | Geändert von: Claude
 
 **Zweck:** Schneller Wiedereinstieg nach Pausen.
 **Zielgruppe:** Albert und Claude.
@@ -50,7 +50,9 @@ Stand: 2026-06-04 | Session: APP-01-slice-planung | Geändert von: Claude
 
 ✅ **B1 SLICE_PLAN + SLICE_0_KICKOFF (neue Mechanik) fertig (2026-06-04):** Beide Slice-Planungsdateien für die Marktzeit-Mechanik erstellt. OA-01 entschieden: app.js als ES-Modul (`<script type="module">`), folgt Chart-Engine-Muster. CSVParser.js in `Theme/assets/js/fw-chart-engine/data/`.
 
-⚙️ **Nächster Schritt B1:** Pre-Code-Gate Full → Slice-0 implementieren (app.js, app.css, app.test.html).
+✅ **B1 Slice-0 abgeschlossen (2026-06-04):** app.js (ES-Modul), app.css (.fw-app-Namespace), app.test.html (7 Szenarien A–G). Full-Gate bestanden, Szenarien A–G getestet — keine Fehler.
+
+⚙️ **Nächster Schritt B1:** Slice 1 — CSV-Datenladen + CSVParser-Import + Datenvalidierung + Daten-States.
 
 ---
 
@@ -77,7 +79,7 @@ Stand: 2026-06-04 | Session: APP-01-slice-planung | Geändert von: Claude
 
 ## 3. Nächster sinnvoller Schritt
 
-- **B1 Slice-0 implementieren** — SLICE_PLAN + SLICE_0_KICKOFF bereit (2026-06-04). Pre-Code-Gate Full zuerst. OA-01 entschieden: ES-Modul. Erlaubte Dateien: `app.js`, `app.css`, `app.test.html` (alle NEU in `Apps/prokrastinations-preis/`).
+- **B1 Slice-1** — CSV-Datenladen + CSVParser-Import + Datenvalidierung + Daten-States. Voraussetzung: Slice-0 ✅ (2026-06-04), OA-01 entschieden (ES-Modul). Nächster Pre-Code-Gate vor Implementierung.
 - **AP-20/21** (Mixed-Rhythm CV-Heuristik) — 🟡 Aktiv, Chart-Engine, parallel möglich
 
 ---
@@ -90,7 +92,7 @@ Stand: 2026-06-04 | Session: APP-01-slice-planung | Geändert von: Claude
 | Chart-Engine | Stabil, offene APs | Siehe `docs/steering/BACKLOG.md` |
 | Theme | In Entwicklung | `THEME-ASSEMBLY-CHECKLIST.md` |
 | CSS | Stabil | Siehe `docs/steering/BACKLOG.md` (CSS-N Items) |
-| Apps | E-01/E-02 entschieden ✅ | B1 Slice-0 implementieren; operative Datenbasis MSCI World freigegeben |
+| Apps | Slice-0 ✅ 2026-06-04 | B1 Slice-1: CSV-Datenladen (CSVParser-Import) |
 | Content | Laufend | Redaktionsleitfaden aktiv |
 | Security | SECURITY-BASELINE.md App-Fabrik-gatefähig ✅ | Security-Sync-Regel + Gate-Prüffrage verankert (ST-13/ST-14) |
 
@@ -125,6 +127,9 @@ Vollständig im DECISION-LOG dokumentiert (`docs/steering/DECISION-LOG.md`):
 ---
 
 ## 8. Letzte Session
+
+2026-06-04 — APP-01 Slice 0 implementiert (APP-01-slice0-impl).
+app.js (ES-Modul, Slug-Whitelist, Guard, SafeDOM), app.css (.fw-app-Namespace, 4 State-Blöcke), app.test.html (7 Szenarien A–G inkl. XSS). Full-Gate bestanden, Szenarien A–G getestet — keine Fehler. Slice-0-Status in SLICE_PLAN und SLICE_0_KICKOFF aktualisiert.
 
 2026-06-04 — Konsistenzpatch Datenlayer nach raw-to-csv und MSCI-Datasets (AP-DATA-12).
 
@@ -285,7 +290,7 @@ Neue APs: DS-012, DS-013, DS-014.
 
 ## 9. Einstieg für nächste Session
 
-**Nächster Schritt: B1 Slice-0 implementieren. Operative Datenbasis MSCI World Net Return EUR CSV ist freigegeben. Dataset Contract und alle B-01-Entscheidungen abgeschlossen.**
+**Nächster Schritt: B1 Slice-1 — CSV-Datenladen + CSVParser-Import + Datenvalidierung. Slice-0 (App-Shell) abgeschlossen und getestet ✅ (2026-06-04). Pre-Code-Gate Full vor Slice-1-Implementierung.**
 
 Entschieden (nicht mehr offen):
 - E-01 ✅: prokrastinations-preis ist Szenario-/Vergleichs-App mit Storytelling-Elementen
@@ -305,8 +310,8 @@ Operative Quelle:
 - `Apps/prokrastinations-preis/MINI_SPEC_FROM_HAUPTDOKUMENT.md` — Hintergrundquelle
 
 Slice-Planungsdateien (neue Mechanik, 2026-06-04):
-- `Apps/prokrastinations-preis/SLICE_PLAN.md` — aktuell ✅
-- `Apps/prokrastinations-preis/SLICE_0_KICKOFF.md` — aktuell ✅, Pre-Code-Gate vor Implementierung Pflicht
+- `Apps/prokrastinations-preis/SLICE_PLAN.md` — aktuell ✅ (Slice-0 abgeschlossen, Slice-1 offen)
+- `Apps/prokrastinations-preis/SLICE_0_KICKOFF.md` — abgeschlossen ✅
 
 **Scope-Funde die noch offen sind:**
 - AUTHOR_GUIDE-v3.md: `data-app` → `data-fw-app` Update (nach Pilot-1, wenn Vertrag stabil)

@@ -1,0 +1,38 @@
+/* NEW — Slice 0 */
+
+/* === Basis === */
+.fw-app {
+  position: relative;
+  box-sizing: border-box;
+  width: 100%;
+  min-height: 200px;
+  font-family: var(--fw-font-base, sans-serif);
+  color: var(--fw-color-text, #1a1a1a);
+  background: var(--fw-color-bg, #ffffff);
+}
+
+/* === Loading === */
+.fw-app[data-fw-state="loading"] {
+  opacity: 0.6;
+  /* Kein Spinner in Slice 0 — State-Wechsel ist synchron */
+}
+
+/* === Error === */
+.fw-app[data-fw-state="error"] {
+  border: 1px solid var(--fw-color-error-border, #c62828);
+  background: var(--fw-color-error-bg, #fff8f8);
+  padding: var(--fw-space-md, 1rem);
+  color: var(--fw-color-error-text, #b71c1c);
+}
+
+/* === Empty (CSS-Hook für Slice 1 — noch keine JS-Logik dahinter) === */
+.fw-app[data-fw-state="empty"] {
+  padding: var(--fw-space-md, 1rem);
+  color: var(--fw-color-muted, #555555);
+}
+
+/* === Content === */
+.fw-app[data-fw-state="content"] {
+  opacity: 1;
+  padding: var(--fw-space-md, 1rem);
+}

@@ -7,7 +7,7 @@
 
 # SLICE_PLAN — prokrastinations-preis
 
-Stand: 2026-06-04 | Basis: APP_SPEC V1.6 + RFC + Decision Log | Geändert von: Claude
+Stand: 2026-06-04 16:30 | Session: APP-01-slice0-impl | Geändert von: Claude
 
 ---
 
@@ -19,9 +19,9 @@ Stand: 2026-06-04 | Basis: APP_SPEC V1.6 + RFC + Decision Log | Geändert von: C
 | Pilot-Rolle | Pilot-2 — Daten-/Chart-/Story-Pilot (D-APP-01-E02) |
 | APP_SPEC | V1.6 (2026-06-04) |
 | Spec-Gate | OK erteilt 2026-06-04 (mündlich durch Albert) |
-| Pre-Code-Gate | Noch nicht ausgeführt — läuft vor Slice-0-Implementierung |
-| Freigabe Slice 0 | Alberts explizites OK ausstehend |
-| Nächster Schritt | Alberts OK → Pre-Code-Gate → Slice-0 implementieren |
+| Pre-Code-Gate | OK 2026-06-04 (Full-Gate, 9 Fragen) |
+| Freigabe Slice 0 | OK 2026-06-04, getestet ✅ (Szenarien A–G) |
+| Nächster Schritt | Slice 1 — CSV-Datenladen + Datenvalidierung + Daten-States |
 
 ---
 
@@ -70,7 +70,7 @@ Diese Frage ist nach B-01-Entscheidungen weiterhin offen.
 
 | Slice | Ziel | Layer | Voraussetzung | Status |
 |---|---|---|---|---|
-| **0** | App-Shell + Slug-Prüfung + URL-Attribut-Lesen + State-Maschine | Ghost-Card → Bootstrap → State → CSS | — | Bereit für OK |
+| **0** | App-Shell + Slug-Prüfung + URL-Attribut-Lesen + State-Maschine | Ghost-Card → Bootstrap → State → CSS | — | ✅ 2026-06-04 |
 | **1** | CSV-Datenladen + Datenvalidierung + Daten-States | Fetch → CSVParser → Validierung → AppData | OA-01 entschieden ✓ | Offen |
 | **2** | MarketTimeStrategy + KpiCards | AppData → Strategy → AppContext → Renderer | Slice 1 | Offen |
 | **3** | Slider monatlicheRate | UI → Event → Clamp → Strategy → AppContext → Renderer → ARIA | Slice 2 | Offen |

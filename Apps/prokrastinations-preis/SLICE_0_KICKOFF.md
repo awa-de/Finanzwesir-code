@@ -18,8 +18,8 @@ Stand: 2026-06-04 | Erstellt von: Claude | Grundlage: SLICE_PLAN + APP_SPEC V1.6
 | App | prokrastinations-preis |
 | Slice | Slice 0 — App-Shell + Slug-Prüfung + URL-Attribut-Lesen + State-Maschine |
 | Spec-Gate | OK erteilt 2026-06-04 (mündlich durch Albert) |
-| Pre-Code-Gate | Noch nicht ausgeführt — läuft vor Implementierung |
-| Freigabe | Alberts explizites OK ausstehend |
+| Pre-Code-Gate | OK 2026-06-04 (Full-Gate, 9 Fragen) |
+| Freigabe | OK 2026-06-04, getestet ✅ (Szenarien A–G) |
 
 **Hinweis:** Dieses Dokument ist keine Code-Freigabe. Es dokumentiert Annahmen, Risiken und den vereinbarten Implementierungsplan, damit Albert eine informierte Freigabe erteilen kann.
 

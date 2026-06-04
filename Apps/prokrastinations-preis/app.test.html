@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Testseite — prokrastinations-preis Slice 0</title>
+  <link rel="stylesheet" href="./app.css">
+  <style>
+    /* Nur für Testseite — gehört nicht in app.css */
+    body { font-family: sans-serif; max-width: 960px; margin: 2rem auto; padding: 0 1rem; color: #222; }
+    .test-warning { background: #fff3cd; border: 1px solid #ffc107; padding: 0.75rem 1rem; margin-bottom: 2rem; border-radius: 4px; font-weight: bold; }
+    .test-section { border: 1px dashed #ccc; margin-bottom: 2rem; padding: 1rem; border-radius: 4px; }
+    .test-section > h2 { margin-top: 0; font-size: 1rem; color: #333; }
+    .test-meta { font-size: 0.8rem; color: #666; margin-bottom: 0.75rem; }
+    .kg-card { background: #f9f9f9; padding: 1rem; border-radius: 4px; }
+    .kg-card + .kg-card { margin-top: 1rem; }
+  </style>
+</head>
+<body>
+
+  <h1>Testseite — prokrastinations-preis Slice 0</h1>
+
+  <div class="test-warning">
+    Muss über VSCode Live Server geöffnet werden (http://127.0.0.1:5500/...) — nicht als file://. ES-Module laden sonst nicht.
+  </div>
+
+  <!-- Szenario A: Minimal-Card mit Daten-URL -->
+  <div class="test-section">
+    <h2>A — Minimal-Card mit Daten-URL</h2>
+    <p class="test-meta">
+      Erwartung: Content-State sichtbar, Platzhaltertext „[Marktzeit-Simulation — Daten folgen in Slice 1]", kein leerer Container.<br>
+      AK: A0-1
+    </p>
+    <div class="kg-card">
+      <div class="fw-app"
+           data-fw-app="prokrastinations-preis"
+           data-fw-data="../../Theme/assets/data/b1/msci-world-net-return-eur-monthly.csv">
+      </div>
+    </div>
+  </div>
+
+  <!-- Szenario B: Ungültiger Slug -->
+  <div class="test-section">
+    <h2>B — Ungültiger Slug</h2>
+    <p class="test-meta">
+      Erwartung: Error-State, Meldung „Diese App konnte nicht geladen werden.", kein Stack-Trace im UI.<br>
+      AK: A0-2
+    </p>
+    <div class="kg-card">
+      <div class="fw-app" data-fw-app="ungueltig-slug"></div>
+    </div>
+  </div>
+
+  <!-- Szenario C: Fehlender Slug -->
+  <div class="test-section">
+    <h2>C — Fehlender Slug (kein data-fw-app)</h2>
+    <p class="test-meta">
+      Erwartung: Error-State, Meldung auf Deutsch, kein Stack-Trace im UI.<br>
+      AK: A0-2
+    </p>
+    <div class="kg-card">
+      <div class="fw-app"></div>
+    </div>
+  </div>
+
+  <!-- Szenario D: Zwei gültige Container -->
+  <div class="test-section">
+    <h2>D — Zwei gültige Container</h2>
+    <p class="test-meta">
+      Erwartung: Beide im Content-State, kein doppelter DOM-Node, keine Exception in Konsole.<br>
+      AK: A0-1, A0-7
+    </p>
+    <div class="kg-card">
+      <div class="fw-app"
+           data-fw-app="prokrastinations-preis"
+           data-fw-data="../../Theme/assets/data/b1/msci-world-net-return-eur-monthly.csv">
+      </div>
+    </div>
+    <div class="kg-card">
+      <div class="fw-app"
+           data-fw-app="prokrastinations-preis"
+           data-fw-data="../../Theme/assets/data/b1/msci-world-net-return-eur-monthly.csv">
+      </div>
+    </div>
+  </div>
+
+  <!-- Szenario E: XSS-Versuch in data-fw-options -->
+  <div class="test-section">
+    <h2>E — XSS-Versuch in data-fw-options</h2>
+    <p class="test-meta">
+      Erwartung: Kein Alert, kein innerHTML, App stabil, Content-State normal. Das Attribut wird in Slice 0 vollständig ignoriert.<br>
+      AK: A0-5, A0-8
+    </p>
+    <div class="kg-card">
+      <div class="fw-app"
+           data-fw-app="prokrastinations-preis"
+           data-fw-data="../../Theme/assets/data/b1/msci-world-net-return-eur-monthly.csv"
+           data-fw-options="defaultRate:&lt;img src=x onerror=alert(1)&gt;">
+      </div>
+    </div>
+  </div>
+
+  <!-- Szenario F: Fehlendes data-fw-data -->
+  <div class="test-section">
+    <h2>F — Fehlendes data-fw-data</h2>
+    <p class="test-meta">
+      Erwartung: Content-State mit Platzhalter (kein Error in Slice 0 — URL-Validierung und Fetch-Fehler sind Slice-1-Verantwortung).<br>
+      AK: A0-10
+    </p>
+    <div class="kg-card">
+      <div class="fw-app" data-fw-app="prokrastinations-preis"></div>
+    </div>
+  </div>
+
+  <!-- Szenario G: CSS-Leak-Check -->
+  <div class="test-section">
+    <h2>G — CSS-Leak-Check</h2>
+    <p class="test-meta">
+      Erwartung: Artikeltext, Überschriften und Absätze neben .fw-app visuell unverändert. app.css darf keine Ghost-Elemente beeinflussen.<br>
+      AK: A0-9
+    </p>
+    <article>
+      <h2>Normaler Artikeltext (h2 außerhalb .fw-app)</h2>
+      <p>Dieser Absatz soll durch app.css nicht beeinflusst werden. Schriftgröße, Farbe und Abstände müssen wie auf einer normalen Ghost-Seite aussehen.</p>
+      <div class="kg-card">
+        <div class="fw-app"
+             data-fw-app="prokrastinations-preis"
+             data-fw-data="../../Theme/assets/data/b1/msci-world-net-return-eur-monthly.csv">
+        </div>
+      </div>
+      <p>Dieser Absatz nach der App soll ebenfalls unverändert aussehen.</p>
+    </article>
+  </div>
+
+  <script type="module" src="./app.js"></script>
+</body>
+</html>

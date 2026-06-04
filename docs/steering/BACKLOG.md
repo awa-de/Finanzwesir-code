@@ -1,5 +1,5 @@
 # BACKLOG – Finanzwesir 2.0
-Stand: 2026-06-04 | Session: data-raw-Workflow | Geändert von: Claude
+Stand: 2026-06-04 16:30 | Session: APP-01-slice0-impl | Geändert von: Claude
 
 **Regeln:**
 - ✅-Zeilen werden sofort nach `BACKLOG-ARCHIV.md` verschoben (append), dann hier gelöscht.
@@ -12,7 +12,7 @@ Stand: 2026-06-04 | Session: data-raw-Workflow | Geändert von: Claude
 
 | ID       | Bereich | Titel                                     | Prio | Dep | Detail                              |
 |----------|---------|-------------------------------------------|------|-----|-------------------------------------|
-| APP-01   | App     | B1 Slice-0: Entscheidungen klären → dann Slice-0 implementieren   | H | — | Apps/prokrastinations-preis/APP_SPEC.md (V1.5) |
+| APP-01   | App     | B1 Slice-1: CSV-Datenladen + Datenvalidierung (Slice-0 ✅ 2026-06-04) | H | — | Apps/prokrastinations-preis/SLICE_PLAN.md |
 | AP-20/21 | Engine  | Mixed-Rhythm CV-Heuristik (T5→T3→T6→T7)  | H    | —   | engine/detail/AP-20-DETAIL.md       |
 | AP-6c    | Engine  | Touch-Tooltip Smartphone-Test             | M    | —   | engine/detail/AP-6c-DETAIL.md       |
 | AP-22    | Engine  | Zero-Line lineWidth (~3 Zeilen Fix)       | L    | —   | —                                   |
