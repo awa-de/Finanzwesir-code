@@ -8,10 +8,10 @@ Stand: 2026-06-04 | V1.6 — Restdrift-Patch chartSeries-Beispielmonate | Geänd
 
 | Feld | Wert |
 |---|---|
-| Version | Draft V1.5 — Data Need Snapshot |
-| Phase | Daten-/Chart-/Story-Pilot (Pilot-2), Phase 2 — Spec |
-| Nächster Schritt | `/heldenreise` anwenden → Spec-Gate → Pre-Code-Gate → Slice-0 |
-| Kein Code-Freigabe-Dokument | Implementierung erst nach Spec-Gate + Pre-Code-Gate |
+| Version | Draft V1.6 — Marktzeit / Datenlayer / Slice-0 abgeschlossen |
+| Phase | Daten-/Chart-/Story-Pilot (Pilot-2), Phase 3 — Umsetzung |
+| Nächster Schritt | Slice 1 — CSV-Datenladen + Datenvalidierung + Daten-States |
+| Code-Freigabe | Slice 0 abgeschlossen; Slice 1 erst nach Pre-Code-Gate |
 | Grundlage | `Apps/prokrastinations-preis/MINI_SPEC_FROM_HAUPTDOKUMENT.md` |
 | Ersetzt | APP_SPEC V0.3 (alte Prokrastinations-Preis-Mechanik — Verlustzähler/Festrendite) |
 

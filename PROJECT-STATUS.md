@@ -8,7 +8,7 @@ Blocker: keine
 
 # PROJECT STATUS — Finanzwesir 2.0
 
-Stand: 2026-06-04 16:30 | Session: APP-01-slice0-impl | Geändert von: Claude
+Stand: 2026-06-04 | Session: APP-01-mini-konsistenzpatch | Geändert von: Claude
 
 **Zweck:** Schneller Wiedereinstieg nach Pausen.
 **Zielgruppe:** Albert und Claude.

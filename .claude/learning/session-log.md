@@ -91,3 +91,9 @@ Wird geleert nach /distill. Einträge: [FRICTION] [WIN] [PREF] [QUESTION] [OK]
 
 ## 2026-06-04 – APP-01 Slice 0 | App-Shell + Slug-Prüfung + State-Maschine
 - [OK] Keine Vorkommnisse
+
+## 2026-06-04 – SESSION START | Fokus: APP-01 — prokrastinations-preis (neuer Faden)
+`FinanzwesirData.js, CSVParser.js, FwDateUtils.js — diese Session nicht berühren. ✓`
+
+## 2026-06-04 – APP-01 Mini-Konsistenzpatch nach Slice 0
+- [WIN] Advocatus-Diaboli-Prüfung hat 2 zusätzliche veraltete IIFE-Stellen gefunden (SLICE_PLAN Slice-1-Voraussetzung + SLICE_0_KICKOFF §6); Albert hat sie direkt in den Scope aufgenommen — Patch dadurch vollständig bereinigt

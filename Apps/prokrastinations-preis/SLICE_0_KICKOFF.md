@@ -34,7 +34,7 @@ Container wird erkannt, Slug-Prüfung funktioniert, `data-fw-data`-URL wird als 
 „Die App startet, zeigt den richtigen State, stürzt nicht ab." — kein leerer Container, kein Stack-Trace, kein XSS.
 
 **Unterschied zur alten Calculator-Mechanik:**
-Die alte Slice-0 hatte keine externen Daten. In der neuen Mechanik ist `data-fw-data` ein Pflichtattribut der Ghost-Card. Slice 0 liest und speichert dieses Attribut — der echte Fetch via CSVParser kommt in Slice 1. Das entkoppelt das App-Shell-Fundament von der noch offenen Architekturfrage OA-01 (IIFE vs. ES-Modul für CSVParser-Import).
+Die alte Slice-0 hatte keine externen Daten. In der neuen Mechanik ist `data-fw-data` ein Pflichtattribut der Ghost-Card. Slice 0 liest dieses Attribut — der echte Fetch via CSVParser kommt in Slice 1. Das entkoppelt das App-Shell-Fundament von der noch offenen Architekturfrage OA-01 (IIFE vs. ES-Modul für CSVParser-Import).
 
 **Architekturprinzip CSVParser (gilt ab Slice 1):**
 CSVParser.js übernimmt URL-Validierung, CSV-Parsing, Unit-Detection und Datenbereinigung. Die App zieht sich eine Kopie aus dem versiegelten Vault und vertraut dem Ergebnis. Keine eigene Parserlogik in app.js (APP_SPEC §7.5). Slice 0 berührt CSVParser.js noch nicht.
@@ -52,7 +52,7 @@ Apps/prokrastinations-preis/app.test.html
 Apps/prokrastinations-preis/ghost-card.example.html   ← optional
 ```
 
-Keine bestehende Datei wird geändert. Keine Dateien außerhalb dieses Ordners.
+Während der Slice-0-Codeimplementierung werden keine bestehenden Dateien geändert und keine Dateien außerhalb `Apps/prokrastinations-preis/` angefasst. Das Abschluss-Ritual darf anschließend Status- und Steuerdateien aktualisieren, sofern keine App-, Engine-, Parser- oder CSV-Wertänderungen erfolgen.
 
 **Ausdrücklich NICHT erlaubt:**
 
@@ -61,7 +61,7 @@ Keine bestehende Datei wird geändert. Keine Dateien außerhalb dieses Ordners.
 - Keine Chart-Engine-Berührung
 - Kein Framework, kein Build-System, kein Shadow DOM
 - Keine Berechnung, kein Slider, kein Chart, kein Screen-Flow
-- Keine Änderung an SLICE_PLAN.md
+- Keine Änderung an `SLICE_PLAN.md` während der Codeimplementierung; Statusaktualisierung nach Abschluss ist Teil des Abschluss-Rituals.
 
 ---
 
@@ -114,7 +114,7 @@ Keine bestehende Datei wird geändert. Keine Dateien außerhalb dieses Ordners.
 | Risiko | Warum später teuer | Gegenmaßnahme in Slice 0 |
 |---|---|---|
 | CSV-Fetch in Slice 0 eingebaut | OA-01 (IIFE vs. Modul) wird erzwungen; Architektur-Regret wenn Entscheid sich ändert | Slice 0 enthält explizit keinen Fetch |
-| IIFE vs. Modul in Slice 0 entschieden | Falsche Entscheidung zieht sich durch alle Slices | OA-01 bleibt offen; Slice 0 ist IIFE-kompatibel |
+| IIFE vs. Modul in Slice 0 entschieden | Falsche Entscheidung zieht sich durch alle Slices | OA-01 entschieden: ES-Modul (`<script type="module">`), kein IIFE — 2026-06-04 |
 | Zu viel Logik in Slice 0 | Slice 1 nicht sauber gegen Slice 0 testbar; CSV-Parsing und State-Maschine vermischt | Slice 0: ausschließlich Container-Erkennung, Slug-Prüfung, State-Setzung, Platzhalter |
 | Unklare Bootstrapper-Struktur | Ghost-Integration (Slice 8b) muss Bootstrapper kennen | IIFE mit sichtbarem `bootstrap()`-Einstiegspunkt; `DOMContentLoaded → bootstrap()` eindeutig |
 | Zu lockere Slug-Prüfung | Slug-Whitelist ist Sicherheitsperimeter der App-Fabrik | `SLUG_WHITELIST` als Kompilzeit-Konstante; exakter Match; kein Partial-Match |
@@ -286,7 +286,7 @@ Dokumentstruktur:
 | **F — Fehlendes data-fw-data** | `<div class="fw-app" data-fw-app="prokrastinations-preis">` (ohne data-fw-data) | Content-State mit Platzhalter (kein Error in Slice 0) |
 | **G — CSS-Leak-Check** | `.fw-app` neben normalem Artikeltext und Überschriften | Artikeltext und Überschriften visuell unverändert |
 
-**Hinweis Szenario A:** Der relative Pfad `../../Theme/assets/data/b1/msci-world-net-return-eur-monthly.csv` wird in Slice 0 nicht gefetcht. Er ist als URL-Attribut gespeichert — in Slice 1 wird er an CSVParser übergeben.
+**Hinweis Szenario A:** Der relative Pfad `../../Theme/assets/data/b1/msci-world-net-return-eur-monthly.csv` wird in Slice 0 nicht gefetcht. `data-fw-data` wird in Slice 0 nur gelesen. AppState/Persistenz und Übergabe an CSVParser folgen in Slice 1.
 
 ---
 

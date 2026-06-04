@@ -30,7 +30,7 @@ Stand: 2026-06-04 16:30 | Session: APP-01-slice0-impl | Geändert von: Claude
 | Entscheidung | Quelle | Status |
 |---|---|---|
 | Vanilla JS, kein Framework, kein Bundler | RFC §D1, D2 | 🟢 |
-| IIFE-Wrapper, kein globaler Namespace | RFC §D11 | 🟢 |
+| ES-Modul, kein globaler Namespace | OA-01, Chart-Engine-Muster | 🟢 |
 | `async initApp()`, `async loadData()` | A-11 | 🟢 |
 | `Object.freeze()` für AppData nach Parsing | A-09 | 🟢 |
 | Two-Step Parsing (Syntax → Semantik) | A-10 | 🟢 |
@@ -87,7 +87,7 @@ Diese Frage ist nach B-01-Entscheidungen weiterhin offen.
 
 ### Ziel
 
-Beweisen: Container wird erkannt, Slug-Prüfung funktioniert, `data-fw-data`-URL wird gelesen und Domain-validiert (aber **nicht gefetcht**), States schalten sauber.
+Beweisen: Container wird erkannt, Slug-Prüfung funktioniert, `data-fw-data`-URL wird als Attribut gelesen (aber **nicht validiert und nicht gefetcht**), States schalten sauber.
 
 ### Nutzerwert
 
@@ -116,6 +116,8 @@ Keine bestehende Datei wird verändert. Keine Dateien außerhalb dieses Ordners.
 - Kein Screen-Flow, kein SparplanChart, keine KpiCards mit echten Zahlen
 - Kein Shadow DOM, kein Framework, kein Build-System
 - Keine Dateien außerhalb `Apps/prokrastinations-preis/`
+- Keine URL-/Domain-Validierung in Slice 0; diese kommt in Slice 1 im Datenladepfad zusammen mit CSVParser/Daten-States.
+- Fehlendes `data-fw-data` ist nur in Slice 0 kein Error-State, weil Slice 0 keinen Datenladepfad hat. Ab Slice 1 muss fehlendes, leeres oder ungültiges `data-fw-data` über den Daten-State-Pfad behandelt werden.
 
 ### Akzeptanzkriterien
 
@@ -145,7 +147,7 @@ Relevante APP_SPEC-Testfälle: T-02, T-08, T-10, T-16.
 
 ### Voraussetzung
 
-**OA-01 muss entschieden sein** (IIFE + dynamic import vs. ES-Modul).
+OA-01 entschieden: `app.js` als ES-Modul (`<script type="module">`), folgt Chart-Engine-Muster (2026-06-04).
 
 ### Ziel
 
