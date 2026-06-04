@@ -1,6 +1,6 @@
 # App Interface — Finanzwesir 2.0
 
-Stand: 2026-05-10 | Session: APP-INTERFACE Update fw-app-Namespace | Geändert von: Claude
+Stand: 2026-06-04 | Session: APP-01-slice-planung | Geändert von: Claude
 
 **Zweck:** Kanonischer Schnittstellen-Vertrag zwischen Ghost-Content, App-Fabrik-Apps und Chart-Engine.
 **Zielgruppe:** Claude, Albert, zukünftige App-Implementierungen.
@@ -191,6 +191,9 @@ Beide Attribute folgen derselben Syntax: `key:value, key:value`
 **Verboten:**
 - Beliebige Fremd-URLs ohne explizite Architekturentscheidung
 - Dynamische Script-Interpretation aus Datenattributen
+
+**CSV-Lademechanismus (D-04):**
+Alle Apps, die `data-fw-data` nutzen, laden CSV über `CSVParser.js` (`Theme/assets/js/fw-chart-engine/data/CSVParser.js`). CSVParser.js ist shared App-Fabrik-Infrastruktur — keine App schreibt eigene Parser-Logik. Die Chart-Engine nutzt denselben Mechanismus. Rückgabe: `FinanzwesirData` mit `unitKey`, bereinigten Werten und `Date`-Objekten. Beide Dateien sind TABU (nicht ändern).
 
 **Regeln:**
 - CSV und JSON werden als Daten behandelt — niemals als Code

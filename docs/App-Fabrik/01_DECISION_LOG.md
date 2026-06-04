@@ -1,6 +1,6 @@
 # Decision Log — App-Fabrik
 
-Stand: 2026-06-03 | Datenlayer-Konsistenzpatch | Geändert von: Claude
+Stand: 2026-06-04 | APP-01-slice-planung | Geändert von: Claude
 
 **Legende:**
 - 🟢 ENTSCHIEDEN — robuste Entscheidung, Grundlage für weitere Schritte
@@ -172,6 +172,16 @@ Stand: 2026-06-03 | Datenlayer-Konsistenzpatch | Geändert von: Claude
 **Status:** 🟡 ARBEITSANNAHME  
 **Entscheidung:** Historische Daten werden vorverarbeitet und als normalisierte Ergebnisdatei bereitgestellt. Beispiel B2: Browser bekommt `sparplan_results.json`, nicht Rohdaten.  
 **Quelle:** ETF-App-Fabrik_Produktlandkarte_V0-2.md §6.2
+
+---
+
+### D-04 — CSVParser.js ist shared App-Fabrik-Infrastruktur
+**Status:** 🟢 ENTSCHIEDEN  
+**Entscheidung:** Alle Apps, die externe CSV-Daten laden (`data-fw-data`), nutzen `CSVParser.js` und `FinanzwesirData.js` als gemeinsame Infrastruktur. Keine App implementiert eigene CSV-Parser-Logik. Die Chart-Engine nutzt denselben Mechanismus — sie ist in diesem Kontext ebenfalls eine App, die sich des geteilten Datenlayers bedient.  
+**Muster:** `import { CSVParser } from '../../Theme/assets/js/fw-chart-engine/data/CSVParser.js'`; `new CSVParser(); await parser.parse(url, options)` → `FinanzwesirData` (unitKey, bereinigte Werte, Date-Objekte).  
+**Physischer Ort:** `Theme/assets/js/fw-chart-engine/data/` — der Pfad ist historisch, die Nutzung ist app-fabrik-weit.  
+**Konsequenz:** Kein zweiter CSV-Parser, keine eigene Unit-Detection, keine eigene Domain-Validierung in App-Code. CSVParser.js und FinanzwesirData.js bleiben TABU (nicht ändern).  
+**Quelle:** Entschieden 2026-06-04 — OA-01-Auflösung + APP_SPEC §7.5 + Chart-Engine-Muster
 
 ---
 
