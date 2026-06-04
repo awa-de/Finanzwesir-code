@@ -2,13 +2,13 @@
 Version: 1
 Stand: 2026-06-04
 Fokus-AP: APP-01 — prokrastinations-preis
-Nächster-Schritt: Slice-0 implementieren (Datenbasis fertig — CSV + Skill + Bronze-Infrastruktur abgeschlossen)
+Nächster-Schritt: Slice-0 implementieren (MSCI World + ACWI CSV bereit)
 Blocker: keine
 -->
 
 # PROJECT STATUS — Finanzwesir 2.0
 
-Stand: 2026-06-04 | Session: data-raw-Workflow | Geändert von: Claude
+Stand: 2026-06-04 | Session: raw-to-csv-acwi | Geändert von: Claude
 
 **Zweck:** Schneller Wiedereinstieg nach Pausen.
 **Zielgruppe:** Albert und Claude.
@@ -46,7 +46,9 @@ Stand: 2026-06-04 | Session: data-raw-Workflow | Geändert von: Claude
 
 ✅ **APP-01-B01 + data-raw-Infrastruktur abgeschlossen (2026-06-04):** Bronze-Architektur etabliert (`data-raw/index/msci-world/|etf/|macro/`); historyIndex.xls → `data-raw/index/msci-world/`; CSV generiert (306 Zeilen, 2000-12-29 bis 2026-05-29, alle 5 Validierungschecks grün) → `Theme/assets/data/b1/msci-world-net-return-eur-monthly.csv`; `tools/raw-to-csv.py` + Skill `/raw-to-csv` für zukünftige Datenquellen.
 
-⚙️ **Nächster Schritt B1:** Slice-0 implementieren — Datenbasis vollständig.
+✅ **AP-DATA-11 MSCI ACWI abgeschlossen (2026-06-04):** historyIndex.xls → `data-raw/index/msci-acwi/`; Contract `docs/data/contracts/msci-acwi-net-return-monthly.md`; CSV 306 Zeilen 2000-12-29 bis 2026-05-29 → `Theme/assets/data/b1/msci-acwi-net-return-eur-monthly.csv`; alle 5 Checks grün. DATASET-CATALOG aktualisiert.
+
+⚙️ **Nächster Schritt B1:** Slice-0 implementieren — MSCI World + ACWI CSV bereit.
 
 ---
 

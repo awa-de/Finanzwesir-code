@@ -1,11 +1,12 @@
 # BACKLOG-ARCHIV – Finanzwesir 2.0
-Stand: 2026-06-04 | Session: data-raw-Workflow | Geändert von: Claude
+Stand: 2026-06-04 | Session: raw-to-csv-acwi | Geändert von: Claude
 
 Abgeschlossene Items, neueste zuerst (append-only).
 Archivierungs-Trigger: wenn > 200 Zeilen → neue Datei `BACKLOG-ARCHIV-YYYY.md` anlegen.
 
 | ID | Bereich | Titel | Abgeschlossen | Session |
 |----|---------|-------|---------------|---------|
+| AP-DATA-11 | Data | MSCI ACWI Net Return EUR monatlich: Dataset Contract `docs/data/contracts/msci-acwi-net-return-monthly.md` angelegt; CSV 306 Zeilen 2000-12-29 bis 2026-05-29 → `Theme/assets/data/b1/msci-acwi-net-return-eur-monthly.csv`; alle 5 Validierungschecks grün. *(sofort erledigt)* | 2026-06-04 | raw-to-csv-acwi |
 | ST-17 | System | tools/raw-to-csv.py + /raw-to-csv Skill: XLS/XLSX/CSV → CSVParser-kompatible CSV mit 5 Validierungschecks (Startdatum, Zeilenanzahl, Duplikate, Monatsfolge, Werte > 0); Contract-gesteuert; Albert nennt Datei + Pfad in Konversation; xlrd + openpyxl installiert. *(sofort erledigt)* | 2026-06-04 | data-raw-Workflow |
 | AP-DATA-10 | Data | data-raw/ Bronze-Architektur: Datenquellen für Apps/ → data-raw/index/msci-world/\|etf/\|macro/ (type-first); .gitignore aktualisiert; README mit Bronze-Regeln + Checkliste; DATENQUELLEN-GOVERNANCE.md Verzeichnisstruktur + Workflow-Checkliste; NAVIGATION.md Einträge. *(sofort erledigt)* | 2026-06-04 | data-raw-Workflow |
 | APP-01-B01 | App | MSCI-Datenbasis vollständig: historyIndex.xls → data-raw/index/msci-world/; CSV 306 Zeilen 2000-12-29 bis 2026-05-29 generiert → Theme/assets/data/b1/msci-world-net-return-eur-monthly.csv; Dataset Contract Extraktions-Block + Qualitätsregeln abgehakt. | 2026-06-04 | data-raw-Workflow |

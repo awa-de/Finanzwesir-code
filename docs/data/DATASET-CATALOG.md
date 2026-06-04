@@ -1,4 +1,4 @@
-Stand: 2026-06-04 | Geändert von: Claude | Session: AP-DATA-01-04-05-Abschluss
+Stand: 2026-06-04 | Geändert von: Claude | Session: raw-to-csv-acwi
 
 # Dataset Catalog — Finanzwesir 2.0
 
@@ -22,17 +22,24 @@ Liste aller freigegebenen, geplanten und archivierten Datasets.
 
 | Dataset-ID | Datei | Datenklasse | Quelle | Variante | Währung | Frequenz | Status | Apps | Owner |
 |---|---|---|---|---|---|---|---|---|---|
-| msci-world-net-return-monthly | `Theme/assets/data/b1/msci-world-net-return-eur-monthly.csv` | Index | MSCI direkt (msci.com), Tier 0, ab 2000-12-29 | Net Return | EUR (entschieden B-01-B, 2026-06-04) | monatlich | in Arbeit | prokrastinations-preis; später weitere Prinzip-Apps | Projektinhaber |
+| msci-world-net-return-monthly | `Theme/assets/data/b1/msci-world-net-return-eur-monthly.csv` | Index | MSCI direkt (msci.com), Tier 0, ab 2000-12-29 | Net Return | EUR | monatlich | freigegeben | prokrastinations-preis; später weitere Prinzip-Apps | Projektinhaber |
+| msci-acwi-net-return-monthly | `Theme/assets/data/b1/msci-acwi-net-return-eur-monthly.csv` | Index | MSCI direkt (msci.com), Tier 0, ab 2000-12-29 | Net Return | EUR | monatlich | freigegeben | prokrastinations-preis; später weitere Prinzip-Apps | Projektinhaber |
 
 ---
 
 ## Hinweise zum Eintrag msci-world-net-return-monthly
 
-- **Quelle:** MSCI direkt (msci.com), Tier 0. Startdatum 2000-12-29 (tatsächlicher erster Datenpunkt). Rohdatei `historyIndex.xls` liegt in `Datenquellen für Apps/`.
-- **Dateiname:** `msci-world-net-return-eur-monthly.csv` — entschieden 2026-06-04 (AP-DATA-05).
+- **Quelle:** MSCI direkt (msci.com), Tier 0. Startdatum 2000-12-29. Rohdatei `historyIndex.xls` liegt in `data-raw/index/msci-world/`.
 - **Contract:** `docs/data/contracts/msci-world-net-return-monthly.md` — angelegt 2026-06-04 (AP-DATA-04).
 - **Variante:** Net Return. Abweichung nur nach ausdrücklicher Entscheidung des Projektinhabers (→ `INDEX-RETURN-VARIANTEN.md`).
-- **Nächster Schritt:** CSV aus Rohdatei generieren → `Theme/assets/data/b1/` (APP-01-B01 offen).
+- **Status:** freigegeben — CSV 306 Zeilen, 2000-12-29 bis 2026-05-29, alle Checks grün (APP-01-B01 abgeschlossen 2026-06-04).
+
+## Hinweise zum Eintrag msci-acwi-net-return-monthly
+
+- **Quelle:** MSCI direkt (msci.com), Tier 0. Startdatum 2000-12-29. Rohdatei `historyIndex.xls` liegt in `data-raw/index/msci-acwi/`.
+- **Contract:** `docs/data/contracts/msci-acwi-net-return-monthly.md` — angelegt 2026-06-04 (AP-DATA-11).
+- **Variante:** Net Return. Abweichung nur nach ausdrücklicher Entscheidung des Projektinhabers (→ `INDEX-RETURN-VARIANTEN.md`).
+- **Status:** freigegeben — CSV 306 Zeilen, 2000-12-29 bis 2026-05-29, alle Checks grün (AP-DATA-11 abgeschlossen 2026-06-04).
 
 ---
 

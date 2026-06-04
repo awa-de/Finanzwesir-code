@@ -1,6 +1,17 @@
 # Session-Log — Finanzwesir 2.0
 Wird geleert nach /distill. Einträge: [FRICTION] [WIN] [PREF] [QUESTION] [OK]
 
+## 2026-06-04 – SESSION START | Fokus: APP-01 — prokrastinations-preis
+`FinanzwesirData.js, CSVParser.js, FwDateUtils.js — diese Session nicht berühren. ✓`
+
+## 2026-06-04 – MSCI ACWI Net Return EUR — Contract + CSV (Sofort-erledigt)
+- [OK] Keine Vorkommnisse
+- Contract docs/data/contracts/msci-acwi-net-return-monthly.md angelegt
+- CSV Theme/assets/data/b1/msci-acwi-net-return-eur-monthly.csv erstellt — 306 Zeilen, 2000-12-29 bis 2026-05-29, alle Checks grün
+
+## 2026-06-04 – Python vs. PowerShell
+- [PREF] Python für Datei-Inhalt (lesen, parsen, validieren) — PowerShell für Dateisystem und Git. Grund: PowerShell COM ist locale-abhängig und nicht deterministisch. Python-Libraries (xlrd, openpyxl, csv) liefern gleichen Output auf jedem Rechner.
+
 ## 2026-06-04 – data-raw-Infrastruktur + APP-01-B01 CSV + /raw-to-csv Skill
 - [PREF] Python statt PowerShell für XLS-Verarbeitung (Alberts expliziter Wunsch)
 - [WIN] .gitignore hatte Datenquellen für Apps/ bereits drin — kein Datenschutz-Risiko während Umbenennung
