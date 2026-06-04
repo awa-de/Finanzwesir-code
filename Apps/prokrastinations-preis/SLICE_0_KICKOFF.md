@@ -34,7 +34,7 @@ Container wird erkannt, Slug-Prüfung funktioniert, `data-fw-data`-URL wird als 
 „Die App startet, zeigt den richtigen State, stürzt nicht ab." — kein leerer Container, kein Stack-Trace, kein XSS.
 
 **Unterschied zur alten Calculator-Mechanik:**
-Die alte Slice-0 hatte keine externen Daten. In der neuen Mechanik ist `data-fw-data` ein Pflichtattribut der Ghost-Card. Slice 0 liest dieses Attribut — der echte Fetch via CSVParser kommt in Slice 1. Das entkoppelt das App-Shell-Fundament von der noch offenen Architekturfrage OA-01 (IIFE vs. ES-Modul für CSVParser-Import).
+Die alte Slice-0 hatte keine externen Daten. In der neuen Mechanik ist `data-fw-data` ein Pflichtattribut der Ghost-Card. Slice 0 liest dieses Attribut — der echte Fetch via CSVParser kommt in Slice 1. Das hält das App-Shell-Fundament bewusst frei vom Datenladepfad. OA-01 ist entschieden: `app.js` ist ein ES-Modul (`<script type="module">`); der CSVParser-Import folgt erst in Slice 1.
 
 **Architekturprinzip CSVParser (gilt ab Slice 1):**
 CSVParser.js übernimmt URL-Validierung, CSV-Parsing, Unit-Detection und Datenbereinigung. Die App zieht sich eine Kopie aus dem versiegelten Vault und vertraut dem Ergebnis. Keine eigene Parserlogik in app.js (APP_SPEC §7.5). Slice 0 berührt CSVParser.js noch nicht.
@@ -75,11 +75,11 @@ Während der Slice-0-Codeimplementierung werden keine bestehenden Dateien geänd
 | A-4 | JavaScript ist aktiviert; kein `noscript`-Fallback in Pilot-2 | APP_SPEC §15 | Nutzer ohne JS sieht leeren Container | Nein — bewusste Einschränkung für Pilot |
 | A-5 | `data-fw-app` kann fehlen, leer oder ungültig sein — alle Fälle sind Redakteursfehler | APP-INTERFACE §3.1 | Crash auf echter Ghost-Seite wenn nur Happy Path behandelt | Nein — Pflicht laut Spec |
 | A-6 | Mehrere `.fw-app` Container auf einer Seite sind normaler Betrieb | APP-INTERFACE §3.1 | Zweite App startet nie ohne Fehlermeldung | Nein — Pflicht laut Spec |
-| A-7 | `SLUG_WHITELIST = ['prokrastinations-preis']` als Kompilzeit-Konstante im IIFE | SLICE_PLAN §Binding | Dynamische Whitelist: async-Komplexität in Slice 0 unerwünscht | Nein — Slice-0-Entscheidung |
+| A-7 | `SLUG_WHITELIST = ['prokrastinations-preis']` als modul-lokale Kompilzeit-Konstante im ES-Modul | SLICE_PLAN §Binding / OA-01 | Dynamische Whitelist: async-Komplexität in Slice 0 unerwünscht | Nein — Slice-0-Entscheidung |
 | A-8 | Alle `data-*`-Attribute sind untrusted input — auch intern erstellte Cards | SECURITY-BASELINE §6.2 | XSS-Risiko wenn Ghost-Daten als trusted behandelt | Nein — Pflicht laut SECURITY-BASELINE |
 | A-9 | `textContent` ist das einzige erlaubte DOM-Ausgabeverfahren in Slice 0 | Q-01 | `innerHTML` → XSS-Risiko | Nein — Binding Decision Q-01 |
 | A-10 | `data-fw-options` wird in Slice 0 vollständig ignoriert | SLICE_PLAN §Slice 0 | Selbst als Zeichenkette ausgegeben: potenzielle Injection | Nein — explizit ausgeschlossen |
-| A-11 | `data-fw-data` URL wird in Slice 0 als Attribut gelesen und gespeichert — kein Fetch | SLICE_PLAN §Slice 0 Ziel | Wenn Fetch dazukommt: OA-01 wird erzwungen ohne Entscheid | Nein — explizit deferred |
+| A-11 | `data-fw-data` URL wird in Slice 0 nur als Attribut gelesen — kein Fetch, keine Persistenz, keine CSVParser-Übergabe | SLICE_PLAN §Slice 0 Ziel | Wenn Fetch, Persistenz oder CSVParser-Übergabe dazukommt: Slice-1-Logik wird vorgezogen | Nein — explizit deferred |
 | A-12 | Loading-State ist in Slice 0 transitional und synchron; kein Timer, kein Timeout | A0-4 | Künstlicher Timeout: unnötige Komplexität; bricht Slice 1 ggf. | Nein — SLICE_PLAN explizit |
 | A-13 | Content-State zeigt in Slice 0 nur statischen Platzhaltertext, der offensichtlich kein echter Wert ist | SLICE_PLAN §Ziel | Wenn Platzhalter wie echte Zahlen aussehen: Slice 1 nicht sauber gegen Slice 0 testbar | Nein |
 | A-14 | Error-State (a) zeigt exakt: „Diese App konnte nicht geladen werden." — kein Stack-Trace | APP_SPEC §10 | Stack-Trace im UI: technische Details sichtbar; Sicherheitsrisiko | Nein — Binding Decision |
@@ -113,10 +113,10 @@ Während der Slice-0-Codeimplementierung werden keine bestehenden Dateien geänd
 
 | Risiko | Warum später teuer | Gegenmaßnahme in Slice 0 |
 |---|---|---|
-| CSV-Fetch in Slice 0 eingebaut | OA-01 (IIFE vs. Modul) wird erzwungen; Architektur-Regret wenn Entscheid sich ändert | Slice 0 enthält explizit keinen Fetch |
+| CSV-Fetch in Slice 0 eingebaut | Fetch-Logik gehört in Slice 1 zusammen mit CSVParser-Import; Slice 0 bleibt bewusst ohne Datenladepfad | Slice 0 enthält explizit keinen Fetch |
 | IIFE vs. Modul in Slice 0 entschieden | Falsche Entscheidung zieht sich durch alle Slices | OA-01 entschieden: ES-Modul (`<script type="module">`), kein IIFE — 2026-06-04 |
 | Zu viel Logik in Slice 0 | Slice 1 nicht sauber gegen Slice 0 testbar; CSV-Parsing und State-Maschine vermischt | Slice 0: ausschließlich Container-Erkennung, Slug-Prüfung, State-Setzung, Platzhalter |
-| Unklare Bootstrapper-Struktur | Ghost-Integration (Slice 8b) muss Bootstrapper kennen | IIFE mit sichtbarem `bootstrap()`-Einstiegspunkt; `DOMContentLoaded → bootstrap()` eindeutig |
+| Unklare Bootstrapper-Struktur | Ghost-Integration (Slice 8b) muss Bootstrapper kennen | Modul-lokale `bootstrap()`-Funktion; `DOMContentLoaded → bootstrap()` eindeutig; keine globale Window-API |
 | Zu lockere Slug-Prüfung | Slug-Whitelist ist Sicherheitsperimeter der App-Fabrik | `SLUG_WHITELIST` als Kompilzeit-Konstante; exakter Match; kein Partial-Match |
 | `app.js` als unstrukturierter Blob | Jeder spätere Slice muss in `app.js` integriert werden; unklare Grenzen → schleichende Komplexität | Klare Funktionsgrenzen: `validateSlug()`, `setState()`, `renderContent()`, `renderError()`, `initApp()`, `bootstrap()` |
 | CSS ohne klares Naming | Slice 7 (Responsive + A11y) muss in `app.css` erweitern; unbenannte Blöcke erschweren das | Vier benannte Blöcke: Basis, loading, error, content; empty-Hook schon angelegt |
