@@ -1,11 +1,14 @@
 # BACKLOG-ARCHIV – Finanzwesir 2.0
-Stand: 2026-06-03 | Session: AP-DATA-08-Nachputz | Geändert von: Claude
+Stand: 2026-06-04 | Session: AP-DATA-01-04-05-Abschluss | Geändert von: Claude
 
 Abgeschlossene Items, neueste zuerst (append-only).
 Archivierungs-Trigger: wenn > 200 Zeilen → neue Datei `BACKLOG-ARCHIV-YYYY.md` anlegen.
 
 | ID | Bereich | Titel | Abgeschlossen | Session |
 |----|---------|-------|---------------|---------|
+| AP-DATA-05 | Data | Dateiname produktive CSV entschieden — `msci-world-net-return-eur-monthly.csv`; Ablageort `Theme/assets/data/b1/`. Begründung: B-01-B EUR festgestellt, Entscheidungsregel greift. *(sofort erledigt)* | 2026-06-04 | AP-DATA-01-04-05-Abschluss |
+| AP-DATA-04 | Data | Dataset Contract MSCI World Pilot angelegt — `docs/data/contracts/msci-world-net-return-monthly.md`; Tier 0; EUR-Suffix-Pflicht dokumentiert; Startdatum 2000-12-29. *(sofort erledigt)* | 2026-06-04 | AP-DATA-01-04-05-Abschluss |
+| AP-DATA-01 | Data | Quellenrecherche MSCI World Net Return abgeschlossen — MSCI direkt (msci.com) Tier 0; EUR; Startdatum 2000-12-29 (korrigiert von ursprünglicher Annahme 2002-01-31); Rohdatei historyIndex.xls in `Datenquellen für Apps/`. *(sofort erledigt)* | 2026-06-04 | AP-DATA-01-04-05-Abschluss |
 | AP-DATA-08-Nachputz | Data | Status- und Versionsdrift bereinigt: AP-DATA-08 → abgeschlossen; AP-DATA-09 (Rollout) neu angelegt; APP_SPEC V1.4→V1.5 in PROJECT-STATUS/BACKLOG; Pilot-Drift in 03_APP_FACTORY_STANDARD_DRAFT §4.1/§4.2/§14 korrigiert (prokrastinations-preis=Pilot-2/Szenario, risiko-uebersetzer=Pilot-1/Calculator). *(sofort erledigt)* | 2026-06-03 | AP-DATA-08-Nachputz |
 | AP-DATA-08 | Data | Data Need Snapshot Blaupause in Factory-Standard dokumentiert — §7a in 03_APP_FACTORY_STANDARD_DRAFT.md (Minimalblock, Detailblock, 6 Statuswerte, 4 Beispiele, Rollout-Logik). Rollout (APP_SPEC.md-Angleich) → AP-DATA-09 (offen). *(sofort erledigt)* | 2026-06-03 | AP-DATA-08-Blaupause |
 | data-need-snapshot | Data | AP-DATA-07 vollständig: APP_SPEC §7 zu Datenbedarf/Data Need Snapshot umgebaut (§7.1–7.10); DATENQUELLEN-GOVERNANCE.md Subsection; NAVIGATION.md Note; APP_INVENTORY.md JSON→CSV; OFFENE-ARBEITSPUNKTE.md abgeschlossen. APP_SPEC V1.5. *(sofort erledigt)* | 2026-06-03 | Data-Need-Snapshot |

@@ -1,6 +1,14 @@
 # Session-Log — Finanzwesir 2.0
 Wird geleert nach /distill. Einträge: [FRICTION] [WIN] [PREF] [QUESTION] [OK]
 
+## 2026-06-04 – AP-DATA-01/04/05 | Quellenrecherche, Dataset Contract, Dateiname abgeschlossen
+- [WIN] Startdatum 2000-12-29 — 14 Monate früher als Annahme (2002-01-31 war unbelegt); Rohdatei bestätigt
+- [FRICTION] Contract-Vorschau zeigte `1234,56` ohne EUR-Suffix; nach CSVParser-Analyse korrigiert auf `135,668 EUR`
+- [WIN] EUR-Suffix-Lösung vollautomatisch durch Parser — kein Code nötig; unitKey CURRENCY_EUR aus _detectSuffix
+
+## 2026-06-04 – SESSION START | Fokus: APP-01 — prokrastinations-preis (Faden 2)
+`FinanzwesirData.js, CSVParser.js, FwDateUtils.js — diese Session nicht berühren. ✓`
+
 ## 2026-06-04 – SESSION START | Fokus: APP-01 — prokrastinations-preis
 `FinanzwesirData.js, CSVParser.js, FwDateUtils.js — diese Session nicht berühren. ✓`
 

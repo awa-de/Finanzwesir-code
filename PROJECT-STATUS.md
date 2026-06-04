@@ -2,13 +2,13 @@
 Version: 1
 Stand: 2026-06-04
 Fokus-AP: APP-01 — prokrastinations-preis
-Nächster-Schritt: B-01-C konkrete Quelle klären → AP-DATA-01 abschließen → AP-DATA-04 Dataset Contract → AP-DATA-05 Dateiname → Slice-0
+Nächster-Schritt: CSV aus historyIndex.xls generieren → Theme/assets/data/b1/ (APP-01-B01) → Slice-0 implementieren
 Blocker: keine
 -->
 
 # PROJECT STATUS — Finanzwesir 2.0
 
-Stand: 2026-06-04 | Session: AP-DATA-01-B01B | Geändert von: Claude
+Stand: 2026-06-04 | Session: AP-DATA-01-04-05-Abschluss | Geändert von: Claude
 
 **Zweck:** Schneller Wiedereinstieg nach Pausen.
 **Zielgruppe:** Albert und Claude.
@@ -42,7 +42,9 @@ Stand: 2026-06-04 | Session: AP-DATA-01-B01B | Geändert von: Claude
 
 ✅ **Datenlayer Governance (2026-06-03):** docs/data/ angelegt mit 7 Dateien (DATENQUELLEN-GOVERNANCE, SOURCE-TIERS, DATASET-CATALOG, DATASET-CONTRACT-TEMPLATE, INDEX-RETURN-VARIANTEN, OFFENE-ARBEITSPUNKTE). Theme/assets/data/b1/ als produktives Datenverzeichnis eingerichtet. CSVParser-Verbot + Net-Return-Präferenz dokumentiert. 7 APs (AP-DATA-01–07) für Quellenrecherche und Dataset-Contract erfasst.
 
-⚙️ **Nächster Schritt B1:** B-01-C konkrete Quelle klären (B-01-B EUR Pflicht entschieden 2026-06-04) → AP-DATA-01 abschließen → AP-DATA-04 Dataset Contract → AP-DATA-05 Dateiname → Slice-0.
+✅ **AP-DATA-01/04/05 abgeschlossen (2026-06-04):** B-01-C MSCI direkt (msci.com) Tier 0 entschieden; Startdatum 2000-12-29 (korrigiert); Dataset Contract `docs/data/contracts/msci-world-net-return-monthly.md` angelegt; Dateiname `msci-world-net-return-eur-monthly.csv` festgelegt. Rohdatei `historyIndex.xls` in `Datenquellen für Apps/`.
+
+⚙️ **Nächster Schritt B1:** CSV aus `historyIndex.xls` generieren → `Theme/assets/data/b1/msci-world-net-return-eur-monthly.csv` (APP-01-B01 offen) → danach Slice-0 implementieren.
 
 ---
 

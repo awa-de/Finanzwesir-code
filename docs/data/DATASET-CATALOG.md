@@ -1,4 +1,4 @@
-Stand: 2026-06-03 | Erstellt von: Claude | Session: Datenlayer-Setup
+Stand: 2026-06-04 | Geändert von: Claude | Session: AP-DATA-01-04-05-Abschluss
 
 # Dataset Catalog — Finanzwesir 2.0
 
@@ -22,18 +22,17 @@ Liste aller freigegebenen, geplanten und archivierten Datasets.
 
 | Dataset-ID | Datei | Datenklasse | Quelle | Variante | Währung | Frequenz | Status | Apps | Owner |
 |---|---|---|---|---|---|---|---|---|---|
-| msci-world-net-return-monthly | `Theme/assets/data/b1/[Dateiname offen — AP-DATA-05]` | Index | MSCI direkt ab 31.01.2002; ältere Quelle offen (AP-DATA-01/02) | Net Return stark bevorzugt | offen — USD oder EUR (AP-DATA-01) | monatlich | in Arbeit | prokrastinations-preis; später weitere Prinzip-Apps | Projektinhaber |
+| msci-world-net-return-monthly | `Theme/assets/data/b1/msci-world-net-return-eur-monthly.csv` | Index | MSCI direkt (msci.com), Tier 0, ab 2000-12-29 | Net Return | EUR (entschieden B-01-B, 2026-06-04) | monatlich | in Arbeit | prokrastinations-preis; später weitere Prinzip-Apps | Projektinhaber |
 
 ---
 
 ## Hinweise zum Eintrag msci-world-net-return-monthly
 
-- **Quelle:** MSCI direkt liefert aktuell ab 31.01.2002. Für längere Historien laufen
-  die Recherchen AP-DATA-01 und AP-DATA-02.
-- **Dateiname:** Steht erst fest wenn Währung geklärt ist (→ AP-DATA-05).
-- **Contract:** Noch nicht erstellt — wird Gegenstand von AP-DATA-04.
-- **Variante:** Net Return ist stark bevorzugt. Abweichung nur nach ausdrücklicher
-  Entscheidung des Projektinhabers (→ `INDEX-RETURN-VARIANTEN.md`).
+- **Quelle:** MSCI direkt (msci.com), Tier 0. Startdatum 2000-12-29 (tatsächlicher erster Datenpunkt). Rohdatei `historyIndex.xls` liegt in `Datenquellen für Apps/`.
+- **Dateiname:** `msci-world-net-return-eur-monthly.csv` — entschieden 2026-06-04 (AP-DATA-05).
+- **Contract:** `docs/data/contracts/msci-world-net-return-monthly.md` — angelegt 2026-06-04 (AP-DATA-04).
+- **Variante:** Net Return. Abweichung nur nach ausdrücklicher Entscheidung des Projektinhabers (→ `INDEX-RETURN-VARIANTEN.md`).
+- **Nächster Schritt:** CSV aus Rohdatei generieren → `Theme/assets/data/b1/` (APP-01-B01 offen).
 
 ---
 

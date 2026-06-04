@@ -1,6 +1,6 @@
 # APP_SPEC — prokrastinations-preis
 
-Stand: 2026-06-04 | V1.5 — Data-Need-Snapshot | Geändert von: Claude
+Stand: 2026-06-04 | V1.6 — B-01-C Datenquelle entschieden | Geändert von: Claude
 
 ---
 
@@ -164,7 +164,7 @@ Ohne geeignete historische Monatsdaten wird die App zu einer bloßen Renditeanna
 | Währung | **EUR** — Pflichtbedingung; Abweichung → App lehnt Datei ab (Error State c) [entschieden B-01-B, 2026-06-04] |
 | Return-Variante | Net Return stark bevorzugt; Abweichung nur mit ausdrücklicher Freigabe (→ `docs/data/INDEX-RETURN-VARIANTEN.md`) |
 | Dataset-ID | `msci-world-net-return-monthly` (→ `docs/data/DATASET-CATALOG.md`) |
-| Status | in Arbeit — Quelle **[TBD B-01-C]** offen; Währung EUR entschieden (B-01-B, 2026-06-04) |
+| Status | in Arbeit — Quelle MSCI direkt (msci.com), Tier 0, ab 2000-12-29 [entschieden B-01-C, 2026-06-04]; Währung EUR [entschieden B-01-B, 2026-06-04]; Contract: `docs/data/contracts/msci-world-net-return-monthly.md` |
 | Owner | Projektinhaber |
 
 Hinweis: Die ideale Datenreihe beschreibt den fachlichen Wunschzustand. Sie ist nicht automatisch identisch mit der später verfügbaren produktiven Quelle.
@@ -244,8 +244,8 @@ Interne JS-Konvention: Nach erfolgreicher Validierung darf `index_value` app-int
 
 | Feld | Wert |
 |---|---|
-| Produktiver CSV-Pfad | `Theme/assets/data/b1/[Dateiname nach AP-DATA-05].csv` |
-| Dataset Contract | `docs/data/contracts/[dataset-id].md` — anzulegen in AP-DATA-04 |
+| Produktiver CSV-Pfad | `Theme/assets/data/b1/msci-world-net-return-eur-monthly.csv` [entschieden AP-DATA-05, 2026-06-04] |
+| Dataset Contract | `docs/data/contracts/msci-world-net-return-monthly.md` ✅ angelegt 2026-06-04 |
 | Catalog-Eintrag | `docs/data/DATASET-CATALOG.md` |
 | Einbindung in Ghost | `data-fw-data` (Ghost-Card-Attribut) |
 | URL (Ziel) | `https://www.finanzwesir.com/content/files/[Dateiname nach AP-DATA-05]` [nach Upload] |
@@ -770,7 +770,7 @@ Begründung: Die Erweiterung auf externe CSV-Daten via `data-fw-data` ist in APP
 | B-01 | **Format:** CSV, Semikolon-Separator, Komma-Dezimal | ✅ entschieden 2026-05-28 |
 | B-01-A | **Indexvariante:** Net Return stark bevorzugt; Abweichung nur mit ausdrücklicher Freigabe | ✅ teilgeklärt 2026-06-03 — konkrete Datenreihe in AP-DATA-01 |
 | B-01-B | **Währung:** EUR — Pflichtbedingung; App prüft `unitKey` nach CSV-Laden und lehnt Abweichungen mit Error State (c) ab | ✅ entschieden 2026-06-04 |
-| B-01-C | **Datenquelle:** MSCI direkt, Stooq, Investing.com, manuell…? | ⬜ offen — Konsequenz: keine CSV, keine Datenpipeline |
+| B-01-C | **Datenquelle:** MSCI direkt (msci.com), Tier 0, EUR, ab 2000-12-29 | ✅ entschieden 2026-06-04 — Contract: `docs/data/contracts/msci-world-net-return-monthly.md` |
 | B-01-D | **CSV-Erstellung und Freigabe:** Projektinhaber erstellt und pflegt CSV redaktionell; Claude verarbeitet nur freigegebene Datasets | ✅ geklärt 2026-06-03 |
 | B-02 | **Berechnungsformel:** Anteilslogik — monatlicher Anteilskauf | ✅ entschieden 2026-05-28 |
 | B-03 | **Screen-Flow-Mechanismus:** Button-getrieben, kein Autoplay | ✅ entschieden 2026-05-28 |
@@ -816,7 +816,7 @@ Begründung: Die Erweiterung auf externe CSV-Daten via `data-fw-data` ist in APP
 | Sicherheitsregeln erfüllt? Security-Sync synchron? | ✅ §15 — synchron mit Nicht-Blockern |
 | Keine offenen Blocker stillschweigend entschieden? | ✅ §17 — alle Blocker explizit markiert |
 | Mini-Spec vollständig berücksichtigt? | ✅ alle Screens, Microcopy, Datenlogik, Abgrenzungen übernommen |
-| Offene Blocker für Spec-Gate? | ⚠️ B-01-B/C offen (Währung, Quelle); AP-DATA-01 bleibt nächster Schritt |
+| Offene Blocker für Spec-Gate? | ⚠️ CSV-Datei noch nicht abgelegt (APP-01-B01 offen); alle B-01-Entscheidungen erledigt (B-01-B 2026-06-04, B-01-C 2026-06-04) |
 | Alberts explizites OK? | ⬜ AUSSTEHEND |
 
 **UX-Gate (heldenreise):** ✅ angewendet → §19

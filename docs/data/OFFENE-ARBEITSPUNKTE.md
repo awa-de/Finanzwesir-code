@@ -1,4 +1,4 @@
-Stand: 2026-06-04 | Geändert von: Claude | Session: AP-DATA-01-B01B
+Stand: 2026-06-04 | Geändert von: Claude | Session: AP-DATA-01-04-05-Abschluss
 
 # Offene Arbeitspunkte — Datenlayer Finanzwesir 2.0
 
@@ -7,7 +7,7 @@ Stand: 2026-06-04 | Geändert von: Claude | Session: AP-DATA-01-B01B
 ## AP-DATA-01: Quellenrecherche MSCI World Net Return
 
 **Priorität:** hoch
-**Status:** offen
+**Status:** abgeschlossen | 2026-06-04
 
 **Ziel:**
 Eine belastbare Quelle für MSCI World Net Return Monatsdaten finden.
@@ -22,11 +22,11 @@ Eine belastbare Quelle für MSCI World Net Return Monatsdaten finden.
 - Wenn nur MSCI direkt ab 31.01.2002 verfügbar ist: das als sauberer Mindeststand dokumentieren
 
 **Bekannter Ausgangspunkt:**
-MSCI direkt liefert Net Return ab 31.01.2002 (USD und EUR verfügbar).
+MSCI direkt liefert Net Return ab 29.12.2000 (USD und EUR verfügbar). Startdatum korrigiert 2026-06-04 — tatsächlicher erster Datenpunkt aus historyIndex.xls. Frühere Annahme (31.01.2002) war nicht belegt.
 
 **Teilentscheidungen:**
 - B-01-B Währung: **EUR — entschieden 2026-06-04.** Pflichtbedingung. CSV-Werte müssen EUR-Suffix enthalten (`1234,56 EUR`). App prüft `unitKey === CURRENCY_EUR` nach Datenladen; Abweichung → Error State (c). Keine Ausnahme.
-- B-01-C Quelle: **offen** — nächster Schritt.
+- B-01-C Quelle: **MSCI direkt (msci.com), Tier 0, EUR, ab 2000-12-29 — entschieden 2026-06-04.** Dataset Contract: `docs/data/contracts/msci-world-net-return-monthly.md`.
 
 ---
 
@@ -104,21 +104,12 @@ Das Verzeichnis `contracts/` wird bei Bedarf angelegt. Kurze Begründung vorab.
 ## AP-DATA-05: Entscheidung Dateiname produktive CSV
 
 **Priorität:** hoch — Blocker für Dateianlage
-**Status:** offen
+**Status:** abgeschlossen | 2026-06-04
 
-**Ziel:**
-Einen stabilen Dateinamen für die spätere MSCI-World-CSV festlegen.
+**Entschieden:** `msci-world-net-return-eur-monthly.csv` — 2026-06-04.
+Ablageort: `Theme/assets/data/b1/`
 
-**Kandidaten:**
-- `msci-world-net-return-usd-monthly.csv`
-- `msci-world-net-return-eur-monthly.csv`
-- `msci-world-net-return-monthly.csv` (nur wenn Währung dauerhaft offen bleibt)
-
-**Entscheidungsregel:**
-Wenn Währung feststeht → Währung in den Dateinamen aufnehmen.
-Wenn Währung noch offen ist → keine produktive CSV anlegen.
-
-**Abhängigkeit:** AP-DATA-01 (Währung muss geklärt sein).
+**Begründung:** Währung EUR durch B-01-B festgestellt (2026-06-04). Entscheidungsregel greift: Währung im Dateinamen aufnehmen.
 
 ---
 
