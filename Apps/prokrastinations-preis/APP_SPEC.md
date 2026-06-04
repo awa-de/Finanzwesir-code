@@ -1,6 +1,6 @@
 # APP_SPEC — prokrastinations-preis
 
-Stand: 2026-06-03 | V1.5 — Data-Need-Snapshot | Geändert von: Claude
+Stand: 2026-06-04 | V1.5 — Data-Need-Snapshot | Geändert von: Claude
 
 ---
 
@@ -161,10 +161,10 @@ Ohne geeignete historische Monatsdaten wird die App zu einer bloßen Renditeanna
 | Datenklasse | Aktienindex |
 | Frequenz | Monatlich |
 | Mindestzeitraum | Mindestens 120 Monate; fachlich besser: deutlich längere Historie |
-| Währung | **[TBD B-01-B]** — wird in AP-DATA-01 geklärt |
+| Währung | **EUR** — Pflichtbedingung; Abweichung → App lehnt Datei ab (Error State c) [entschieden B-01-B, 2026-06-04] |
 | Return-Variante | Net Return stark bevorzugt; Abweichung nur mit ausdrücklicher Freigabe (→ `docs/data/INDEX-RETURN-VARIANTEN.md`) |
 | Dataset-ID | `msci-world-net-return-monthly` (→ `docs/data/DATASET-CATALOG.md`) |
-| Status | in Arbeit — Quelle **[TBD B-01-C]** und Währung **[TBD B-01-B]** offen |
+| Status | in Arbeit — Quelle **[TBD B-01-C]** offen; Währung EUR entschieden (B-01-B, 2026-06-04) |
 | Owner | Projektinhaber |
 
 Hinweis: Die ideale Datenreihe beschreibt den fachlichen Wunschzustand. Sie ist nicht automatisch identisch mit der später verfügbaren produktiven Quelle.
@@ -217,9 +217,9 @@ Monatsdaten: Monatsultimo
 Beispiel:
 ```
 date;index_value
-2002-01-31;1234,56
-2002-02-28;1256,78
-2002-03-29;1189,34
+2002-01-31;1234,56 EUR
+2002-02-28;1256,78 EUR
+2002-03-29;1189,34 EUR
 ```
 
 Pflicht-Spalten: `date` (String `YYYY-MM-DD`) und `index_value` (Komma-Dezimal)
@@ -230,7 +230,7 @@ Regeln:
 - Komma als Dezimalzeichen
 - Header-Zeile Pflicht
 - `date` im Format YYYY-MM-DD, entspricht Monatsultimo
-- `index_value` enthält den Indexstand
+- `index_value` enthält den Indexstand mit Währungssuffix `EUR` (Pflicht — Redakteur-Verantwortung; ohne Suffix lehnt die App die Datei mit Error State (c) ab)
 - keine Kommentarzeilen
 - keine Leerzeilen innerhalb der Daten
 - keine Änderung an `CSVParser.js`
@@ -401,8 +401,9 @@ Die Datenbasis kommt aus `data-fw-data`, nicht aus `data-fw-options`.
 Init
   ├─ Slug-Prüfung: ungültig            → Error (a)
   └─ loadData(data-fw-data) → Loading
-                               → Content    (≥ 120 valide Datenpunkte)
+                               → Content    (≥ 120 valide Datenpunkte, unitKey = CURRENCY_EUR)
                                → Error (b)  (URL ungültig / Domain-Lock / CSV nicht parsebar)
+                               → Error (c)  (CSV parsebar, unitKey ≠ CURRENCY_EUR)
                                → Empty      (CSV valide aber < 120 Zeilen oder Pflichtfelder fehlen)
 ```
 
@@ -412,6 +413,7 @@ Init
 | Content | Daten geladen und valide | Screen-Flow 1→2→3→4 mit Chart, KpiCards, CTA |
 | Error (a) | Ungültiger `data-fw-app`-Slug | „Diese App konnte nicht geladen werden. Bitte App-Konfiguration prüfen." — `textContent`, kein Stacktrace |
 | Error (b) | URL ungültig / Domain-Lock / CSV nicht parsebar | „Daten konnten nicht geladen werden. Bitte Seite neu laden." — `textContent`, kein Stacktrace |
+| Error (c) | CSV parsebar, aber `unitKey ≠ CURRENCY_EUR` (kein oder falscher Währungssuffix) | „Datenreihe hat keine oder ungültige Währungsangabe. Erwartet: EUR." — `textContent`, kein Stacktrace |
 | Empty | CSV valide, aber < 120 Datenzeilen oder Pflichtfelder fehlen | „Nicht genug Daten für die Berechnung. Bitte Datenquelle prüfen." — `textContent`, kein Stacktrace |
 
 **Ungültige `data-fw-options`-Werte:** Fallback auf internen Default, kein Error-State.
@@ -429,7 +431,7 @@ Init
 ```js
 {
   valueMode: 'currency',
-  currency: 'EUR',
+  currency: 'EUR',             // abgeleitet aus validiertem unitKey (CURRENCY_EUR → 'EUR') — nicht hardcoded blind
   locale: 'de-DE',
   periodMonths: 120,               // fest: 10 Jahre
   msciData: [...],                 // read-only Array, ≥ 120 Einträge
@@ -709,6 +711,8 @@ Begründung: Die Erweiterung auf externe CSV-Daten via `data-fw-data` ist in APP
 | T-05 | CSV nicht parsebar (fehlende Header / ungültige Struktur) | Error-State (b) |
 | T-06 | CSV < 120 Datenzeilen | Empty-State |
 | T-07 | CSV mit fehlender oder leerer `index_value`-Spalte | Empty-State |
+| T-07a | CSV ohne Währungssuffix in `index_value` (`unitKey = UNIT_NONE`) | Error-State (c), Meldung auf Deutsch |
+| T-07b | CSV mit USD-Suffix statt EUR (`unitKey = CURRENCY_USD`) | Error-State (c), Meldung auf Deutsch |
 | T-08 | Unbekannter Key in `data-fw-options` | Ignoriert, App normal |
 | T-09 | `defaultRate:abc` (ungültiger Typ) | Fallback auf Default (300) |
 | T-10 | XSS-Versuch in `data-fw-options` (`defaultRate:<script>`) | NaN → Fallback; kein Script-Aufruf |
@@ -765,7 +769,7 @@ Begründung: Die Erweiterung auf externe CSV-Daten via `data-fw-data` ist in APP
 | B-01 | **Datenbasis:** MSCI World Index, monatliche Indexwerte — kein ETF-Proxy | ✅ entschieden 2026-05-28 |
 | B-01 | **Format:** CSV, Semikolon-Separator, Komma-Dezimal | ✅ entschieden 2026-05-28 |
 | B-01-A | **Indexvariante:** Net Return stark bevorzugt; Abweichung nur mit ausdrücklicher Freigabe | ✅ teilgeklärt 2026-06-03 — konkrete Datenreihe in AP-DATA-01 |
-| B-01-B | **Währung:** USD oder EUR? | ⬜ offen — Konsequenz: Skalierung und Metadokumentation unklar |
+| B-01-B | **Währung:** EUR — Pflichtbedingung; App prüft `unitKey` nach CSV-Laden und lehnt Abweichungen mit Error State (c) ab | ✅ entschieden 2026-06-04 |
 | B-01-C | **Datenquelle:** MSCI direkt, Stooq, Investing.com, manuell…? | ⬜ offen — Konsequenz: keine CSV, keine Datenpipeline |
 | B-01-D | **CSV-Erstellung und Freigabe:** Projektinhaber erstellt und pflegt CSV redaktionell; Claude verarbeitet nur freigegebene Datasets | ✅ geklärt 2026-06-03 |
 | B-02 | **Berechnungsformel:** Anteilslogik — monatlicher Anteilskauf | ✅ entschieden 2026-05-28 |
@@ -803,7 +807,7 @@ Begründung: Die Erweiterung auf externe CSV-Daten via `data-fw-data` ist in APP
 | Kein data-app? | ✅ §8 |
 | Kein produktives data-fw-theme? | ✅ §15 |
 | data-fw-options whitelistbar? (Whitelist dokumentiert) | ✅ §9 |
-| Datenquellen und Cache-Busting geklärt? | ⚠️ Datenbasis und CSV-Format entschieden; B-01-A Net Return stark bevorzugt; B-01-D geklärt; offen: B-01-B Währung, B-01-C Quelle |
+| Datenquellen und Cache-Busting geklärt? | ⚠️ Datenbasis und CSV-Format entschieden; B-01-A Net Return stark bevorzugt; B-01-B EUR Pflicht entschieden (2026-06-04); B-01-D geklärt; offen: B-01-C Quelle |
 | AppContext definiert? | ✅ §11 |
 | Pflichtfelder und Fallback-Felder unterschieden? | ✅ §11.3 |
 | A11y-Vertrag definiert? | ✅ §12 |
@@ -831,7 +835,7 @@ Begründung: Die Erweiterung auf externe CSV-Daten via `data-fw-data` ist in APP
 
 ---
 
-*Nächster Schritt: AP-DATA-01 Quellenrecherche MSCI World Net Return → B-01-B Währung, B-01-C Quelle klären → AP-DATA-04 Dataset Contract → Slice-0*
+*Nächster Schritt: B-01-C Quelle klären → AP-DATA-01 abschließen → AP-DATA-04 Dataset Contract → AP-DATA-05 Dateiname → Slice-0*
 
 ---
 

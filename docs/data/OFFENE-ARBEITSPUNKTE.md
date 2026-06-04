@@ -1,4 +1,4 @@
-Stand: 2026-06-03 | Geändert von: Claude | Session: AP-DATA-08-Nachputz
+Stand: 2026-06-04 | Geändert von: Claude | Session: AP-DATA-01-B01B
 
 # Offene Arbeitspunkte — Datenlayer Finanzwesir 2.0
 
@@ -23,6 +23,10 @@ Eine belastbare Quelle für MSCI World Net Return Monatsdaten finden.
 
 **Bekannter Ausgangspunkt:**
 MSCI direkt liefert Net Return ab 31.01.2002 (USD und EUR verfügbar).
+
+**Teilentscheidungen:**
+- B-01-B Währung: **EUR — entschieden 2026-06-04.** Pflichtbedingung. CSV-Werte müssen EUR-Suffix enthalten (`1234,56 EUR`). App prüft `unitKey === CURRENCY_EUR` nach Datenladen; Abweichung → Error State (c). Keine Ausnahme.
+- B-01-C Quelle: **offen** — nächster Schritt.
 
 ---
 
