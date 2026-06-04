@@ -1,6 +1,6 @@
 # APP_SPEC — prokrastinations-preis
 
-Stand: 2026-06-04 | V1.6 — B-01-C Datenquelle entschieden | Geändert von: Claude
+Stand: 2026-06-04 | V1.6 — Restdrift-Patch chartSeries-Beispielmonate | Geändert von: Claude
 
 ---
 
@@ -448,9 +448,9 @@ Init
   startBetrag:    0,               // Integer, €, validiert
 
   chartSeries: [                   // simulierter Depotwert pro Monat (reine Zahlen)
-    { month: '2016-05', depotwert: 300 },
+    { month: '<startMonth>', depotwert: 300 },
     ...
-    { month: '2026-04', depotwert: 52000 }
+    { month: '<latestMonth>', depotwert: 52000 }
   ],
   eingezahlt:      36000,          // monatlicheRate × 120 + startBetrag
   depotwertHeute:  52000,          // letzter Punkt in chartSeries

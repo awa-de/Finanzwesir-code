@@ -74,3 +74,6 @@ Wird geleert nach /distill. Einträge: [FRICTION] [WIN] [PREF] [QUESTION] [OK]
 
 ## 2026-06-03 – SESSION START | Fokus: APP-01 — prokrastinations-preis
 `FinanzwesirData.js, CSVParser.js, FwDateUtils.js — diese Session nicht berühren. ✓`
+
+## 2026-06-04 – AP-DATA-13 Restdrift-Patch (APP_SPEC §11.2 + PROJECT-STATUS §8)
+- [OK] Keine Vorkommnisse

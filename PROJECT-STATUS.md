@@ -8,7 +8,7 @@ Blocker: keine
 
 # PROJECT STATUS — Finanzwesir 2.0
 
-Stand: 2026-06-04 | Session: konsistenzpatch-datenlayer | Geändert von: Claude
+Stand: 2026-06-04 | Session: restdrift-patch | Geändert von: Claude
 
 **Zweck:** Schneller Wiedereinstieg nach Pausen.
 **Zielgruppe:** Albert und Claude.
@@ -123,6 +123,10 @@ Vollständig im DECISION-LOG dokumentiert (`docs/steering/DECISION-LOG.md`):
 ---
 
 ## 8. Letzte Session
+
+2026-06-04 — Konsistenzpatch Datenlayer nach raw-to-csv und MSCI-Datasets (AP-DATA-12).
+
+Statusdrift nach Dataset-Contracts und raw-to-csv bereinigt: PROJECT-STATUS §3/§4 auf Slice-0 als nächsten Schritt aktualisiert; OFFENE-ARBEITSPUNKTE AP-DATA-04 und AP-DATA-06 auf abgeschlossen gesetzt; DATENQUELLEN-GOVERNANCE data-raw/README-Verweis entfernt; DATASET-CATALOG und ACWI-Contract markieren ACWI als Reserve-/Vergleichsdataset; APP_SPEC AppContext-Beispiele entkonkretisiert; raw-to-csv.py und /raw-to-csv Skill auf V1-Scope MSCI-EUR-Indexreihen begrenzt. Keine App-Code-, Engine-Code-, Parser- oder CSV-Wertänderungen.
 
 2026-06-03 — Datenlayer-Konsistenzpatch (APP-01-datenlayer-konsistenz).
 APP_SPEC V1.4: §7 auf zentralen Datenlayer umgestellt (Pfade → Theme/assets/data/b1/, CSV-Format date/index_value/YYYY-MM-DD, Monatsultimo, Governance-Links → docs/data/), §7.3 Dataset Contract Hinweis, §7.4 App-spezifische Verbote neu, §13 Pseudocode synchronisiert. NAVIGATION.md: Punkt 12 für datengetriebene Apps ergänzt (docs/data/ Pflichtlektüre). BACKLOG: AP-DATA-01 in Aktiv, AP-DATA-04/05 in Offen. BACKLOG-ARCHIV: AP-DATA-07 abgeschlossen. DECISION_LOG: P-01 als veraltet markiert, D-APP-01-E02 angelegt. 02_OPEN_QUESTIONS Data-01: B-01-D geklärt (Projektinhaber erstellt CSV redaktionell), B-01-A teilgeklärt (Net Return stark bevorzugt). CSVParser, FinanzwesirData, Engine-Dateien unberührt.
