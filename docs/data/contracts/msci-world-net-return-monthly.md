@@ -68,13 +68,13 @@ Währungssuffix: Pflicht — `EUR` nach dem Wert, CSVParser erkennt daraus unitK
 
 ## Qualitätsregeln
 
-- [ ] Monatsultimo-Konformität geprüft (letzter Handelstag je Monat)
-- [ ] Keine fehlenden Monate innerhalb des Zeitraums
-- [ ] Keine Duplikate
-- [ ] Numerische Werte vorhanden (keine leeren Zellen)
-- [ ] Mindestanzahl Datenpunkte: ca. 306 Monate (Dez 2000 bis laufend)
-- [ ] Reihe konsistent (kein Varianten- oder Währungswechsel innerhalb der Datei)
-- [ ] EUR-Suffix in allen Datenwerten vorhanden
+- [x] Monatsultimo-Konformität geprüft (letzter Handelstag je Monat)
+- [x] Keine fehlenden Monate innerhalb des Zeitraums
+- [x] Keine Duplikate
+- [x] Numerische Werte vorhanden (keine leeren Zellen)
+- [x] Mindestanzahl Datenpunkte: ca. 306 Monate (Dez 2000 bis laufend) — tatsächlich: 306
+- [x] Reihe konsistent (kein Varianten- oder Währungswechsel innerhalb der Datei)
+- [x] EUR-Suffix in allen Datenwerten vorhanden
 
 ---
 
@@ -83,7 +83,7 @@ Währungssuffix: Pflicht — `EUR` nach dem Wert, CSVParser erkennt daraus unitK
 - Startdatum 2000-12-29 (tatsächlicher erster Datenpunkt aus MSCI Performance Tool)
 - MSCI-Daten nur für interne Redaktionsarbeit — keine öffentliche Weiterverbreitung der Rohdaten
 - Kein automatischer Update — manueller Abruf erforderlich
-- Rohdatei (historyIndex.xls) liegt in `Datenquellen für Apps/` — nicht im produktiven Pfad
+- Rohdatei (historyIndex.xls) liegt in `data-raw/index/msci-world/` — nicht im produktiven Pfad
 
 ---
 
@@ -104,6 +104,25 @@ Währungssuffix: Pflicht — `EUR` nach dem Wert, CSVParser erkennt daraus unitK
 Projektinhaber: Albert Warnecke
 
 Änderungen an Quelle, Variante, Währung oder Freigabestatus nur durch den Projektinhaber.
+
+---
+
+## Extraktion
+
+Parameter für `tools/raw-to-csv.py` — wird durch Skill `/raw-to-csv` gelesen.
+
+```
+source:         data-raw/index/msci-world/historyIndex.xls
+output:         Theme/assets/data/b1/msci-world-net-return-eur-monthly.csv
+header_row:     7
+date_col:       0
+date_format:    %b %d, %Y
+value_col:      1
+expected_start: 2000-12-29
+min_rows:       306
+```
+
+Neue MSCI-Lieferung: neue XLS in `data-raw/index/msci-world/` ablegen, `/raw-to-csv` aufrufen.
 
 ---
 

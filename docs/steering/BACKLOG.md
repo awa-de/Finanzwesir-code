@@ -1,5 +1,5 @@
 # BACKLOG – Finanzwesir 2.0
-Stand: 2026-06-04 | Session: AP-DATA-01-04-05-Abschluss | Geändert von: Claude
+Stand: 2026-06-04 | Session: data-raw-Workflow | Geändert von: Claude
 
 **Regeln:**
 - ✅-Zeilen werden sofort nach `BACKLOG-ARCHIV.md` verschoben (append), dann hier gelöscht.
@@ -13,7 +13,6 @@ Stand: 2026-06-04 | Session: AP-DATA-01-04-05-Abschluss | Geändert von: Claude
 | ID       | Bereich | Titel                                     | Prio | Dep | Detail                              |
 |----------|---------|-------------------------------------------|------|-----|-------------------------------------|
 | APP-01   | App     | B1 Slice-0: Entscheidungen klären → dann Slice-0 implementieren   | H | — | Apps/prokrastinations-preis/APP_SPEC.md (V1.5) |
-| APP-01-B01 | App   | B1 Blocker: MSCI-Datenbasis klären (Quelle + CSV-Beschaffung)     | H | APP-01 | APP_SPEC §17; B-01-A Net Return, B-01-B EUR, B-01-C MSCI direkt Tier 0 (alle entschieden); AP-DATA-01/04/05 erledigt; Rohdatei in Datenquellen für Apps/; nächster Schritt: CSV konvertieren → Theme/assets/data/b1/ |
 | AP-20/21 | Engine  | Mixed-Rhythm CV-Heuristik (T5→T3→T6→T7)  | H    | —   | engine/detail/AP-20-DETAIL.md       |
 | AP-6c    | Engine  | Touch-Tooltip Smartphone-Test             | M    | —   | engine/detail/AP-6c-DETAIL.md       |
 | AP-22    | Engine  | Zero-Line lineWidth (~3 Zeilen Fix)       | L    | —   | —                                   |

@@ -1,6 +1,16 @@
 # Session-Log — Finanzwesir 2.0
 Wird geleert nach /distill. Einträge: [FRICTION] [WIN] [PREF] [QUESTION] [OK]
 
+## 2026-06-04 – data-raw-Infrastruktur + APP-01-B01 CSV + /raw-to-csv Skill
+- [PREF] Python statt PowerShell für XLS-Verarbeitung (Alberts expliziter Wunsch)
+- [WIN] .gitignore hatte Datenquellen für Apps/ bereits drin — kein Datenschutz-Risiko während Umbenennung
+- [FRICTION] Ordnerstruktur zweimal erweitert: msci/ → msci-world/ → index/msci-world/ — schrittweise im Dialog entwickelt
+- [WIN] Validierungs-Script mit 5 Checks — erkennt Lücken, Duplikate, falsches Startdatum; CSV nur bei grünem Report
+- [WIN] openpyxl fehlte — sofort nachinstalliert; XLSX-Support vollständig
+
+## 2026-06-04 – SESSION START | Fokus: APP-01 — prokrastinations-preis
+`FinanzwesirData.js, CSVParser.js, FwDateUtils.js — diese Session nicht berühren. ✓`
+
 ## 2026-06-04 – AP-DATA-01/04/05 | Quellenrecherche, Dataset Contract, Dateiname abgeschlossen
 - [WIN] Startdatum 2000-12-29 — 14 Monate früher als Annahme (2002-01-31 war unbelegt); Rohdatei bestätigt
 - [FRICTION] Contract-Vorschau zeigte `1234,56` ohne EUR-Suffix; nach CSVParser-Analyse korrigiert auf `135,668 EUR`

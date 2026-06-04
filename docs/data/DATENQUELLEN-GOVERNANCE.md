@@ -1,6 +1,32 @@
-Stand: 2026-06-03 | Erstellt von: Claude | Session: Datenlayer-Setup
+Stand: 2026-06-04 | Geändert von: Claude | Session: data-raw-Workflow
 
 # Datenquellen-Governance — Finanzwesir 2.0
+
+## Verzeichnisstruktur
+
+| Pfad | Rolle | Git-Status |
+|---|---|---|
+| `data-raw/` | Bronze-Zone: Rohdaten, unveraendert vom Anbieter | gitignored |
+| `data-raw/index/[dataset]/` | Marktindizes (MSCI, S&P, ...) | gitignored |
+| `data-raw/etf/[dataset]/` | ETF-Kursdaten | gitignored |
+| `data-raw/macro/[dataset]/` | Makrodaten (Inflation, Wechselkurse, Geldmarkt) | gitignored |
+| `Theme/assets/data/b1/` | Gold-Zone: normalisierte CSV fuer Apps | versioniert |
+| `docs/data/contracts/` | Dataset Contracts (Lineage-Dokumentation) | versioniert |
+
+Rohdateien sind unveraenderlich. Neue Version eines Datasets → neue Datei, alte bleibt.
+Details und Checkliste direkt im Ordner: `data-raw/README.md`
+
+## Neue Datenquelle hinzufuegen — Checkliste
+
+1. Rohdatei in `data-raw/[klasse]/[dataset]/` ablegen (Original-Dateiname behalten)
+2. Rohdatei **nicht bearbeiten** — Bronze-Regel
+3. CSV exportieren und normalisieren → `Theme/assets/data/b1/[dateiname nach Contract-Konvention].csv`
+4. Dataset Contract anlegen oder pruefen → `docs/data/contracts/[dataset].md`
+   Pflichtfelder: Datenklasse, Quelle, Variante, Waehrung, Frequenz, Startdatum, Enddatum, Einschraenkungen
+5. `docs/data/DATASET-CATALOG.md` aktualisieren
+
+Referenzbeispiel fuer den vollstaendigen Durchlauf: MSCI World Net Return EUR Monthly
+(`data-raw/index/msci-world/historyIndex.xls` → `Theme/assets/data/b1/msci-world-net-return-eur-monthly.csv`)
 
 ## Grundprinzip
 

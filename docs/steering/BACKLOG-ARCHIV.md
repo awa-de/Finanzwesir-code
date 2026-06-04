@@ -1,11 +1,14 @@
 # BACKLOG-ARCHIV – Finanzwesir 2.0
-Stand: 2026-06-04 | Session: AP-DATA-01-04-05-Abschluss | Geändert von: Claude
+Stand: 2026-06-04 | Session: data-raw-Workflow | Geändert von: Claude
 
 Abgeschlossene Items, neueste zuerst (append-only).
 Archivierungs-Trigger: wenn > 200 Zeilen → neue Datei `BACKLOG-ARCHIV-YYYY.md` anlegen.
 
 | ID | Bereich | Titel | Abgeschlossen | Session |
 |----|---------|-------|---------------|---------|
+| ST-17 | System | tools/raw-to-csv.py + /raw-to-csv Skill: XLS/XLSX/CSV → CSVParser-kompatible CSV mit 5 Validierungschecks (Startdatum, Zeilenanzahl, Duplikate, Monatsfolge, Werte > 0); Contract-gesteuert; Albert nennt Datei + Pfad in Konversation; xlrd + openpyxl installiert. *(sofort erledigt)* | 2026-06-04 | data-raw-Workflow |
+| AP-DATA-10 | Data | data-raw/ Bronze-Architektur: Datenquellen für Apps/ → data-raw/index/msci-world/\|etf/\|macro/ (type-first); .gitignore aktualisiert; README mit Bronze-Regeln + Checkliste; DATENQUELLEN-GOVERNANCE.md Verzeichnisstruktur + Workflow-Checkliste; NAVIGATION.md Einträge. *(sofort erledigt)* | 2026-06-04 | data-raw-Workflow |
+| APP-01-B01 | App | MSCI-Datenbasis vollständig: historyIndex.xls → data-raw/index/msci-world/; CSV 306 Zeilen 2000-12-29 bis 2026-05-29 generiert → Theme/assets/data/b1/msci-world-net-return-eur-monthly.csv; Dataset Contract Extraktions-Block + Qualitätsregeln abgehakt. | 2026-06-04 | data-raw-Workflow |
 | AP-DATA-05 | Data | Dateiname produktive CSV entschieden — `msci-world-net-return-eur-monthly.csv`; Ablageort `Theme/assets/data/b1/`. Begründung: B-01-B EUR festgestellt, Entscheidungsregel greift. *(sofort erledigt)* | 2026-06-04 | AP-DATA-01-04-05-Abschluss |
 | AP-DATA-04 | Data | Dataset Contract MSCI World Pilot angelegt — `docs/data/contracts/msci-world-net-return-monthly.md`; Tier 0; EUR-Suffix-Pflicht dokumentiert; Startdatum 2000-12-29. *(sofort erledigt)* | 2026-06-04 | AP-DATA-01-04-05-Abschluss |
 | AP-DATA-01 | Data | Quellenrecherche MSCI World Net Return abgeschlossen — MSCI direkt (msci.com) Tier 0; EUR; Startdatum 2000-12-29 (korrigiert von ursprünglicher Annahme 2002-01-31); Rohdatei historyIndex.xls in `Datenquellen für Apps/`. *(sofort erledigt)* | 2026-06-04 | AP-DATA-01-04-05-Abschluss |

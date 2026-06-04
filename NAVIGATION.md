@@ -1,5 +1,5 @@
 # NAVIGATION.md – Finanzwesir 2.0
-Stand: 2026-06-03 | Session: Datenlayer-Setup | Geändert von: Claude
+Stand: 2026-06-04 | Session: data-raw-Workflow | Geändert von: Claude
 
 Für Claude: **Routing-Dokument.** Wird beim Session-Start (Schritt 2) gelesen.
 Gibt Pfade und Lese-Reihenfolgen vor — KEINE Verhaltensregeln (die stehen in CLAUDE.md).
@@ -19,6 +19,8 @@ Für Albert: Index aller Projektdokumente — was wo liegt und wann gelesen werd
 | `.claude/agents/` | Modellgebundene Haiku-Subagenten für mechanische Zuarbeit (codebase-scout, spec-scout, regression-scout, abschluss-scout) |
 | `PROJECT-STATUS.md` | Tageslage: Fokus, Blocker, nächster Schritt |
 | `MEMORY.md` | Stabile Projektfakten, Arbeitskontext |
+| `data-raw/` | Bronze-Zone: Rohdaten vom Anbieter (gitignored) — Struktur: `index/`, `etf/`, `macro/` |
+| `Theme/assets/data/b1/` | Gold-Zone: normalisierte CSV für Apps (versioniert) |
 
 ---
 
@@ -39,6 +41,7 @@ Albert kann sie auch explizit aufrufen.
 | `/distill` | Destilliert session-log zu Mustern in patterns.md | Von /start empfohlen (Schwellen-basiert); oder manuell |
 | `/uebergabe` | Strukturierter Übergabeprompt + session-log Breadcrumb | Albert sagt „Übergabe/neuer Thread"; oder MODUS M |
 | `/intake` | Aufnahme-Protokoll für neue Aufgaben (5 Fragen → BACKLOG-Eintrag) | Claude startet bei NEUE AUFGABE; oder Albert ruft explizit auf |
+| `/raw-to-csv` | Rohdatei (XLS/XLSX/CSV) → validierte CSVParser-kompatible CSV; Albert nennt Dateiname + Pfad in Konversation; Claude liest Dataset Contract + ruft `tools/raw-to-csv.py` auf | Manuell: Albert nennt Datei + schreibt `/raw-to-csv` |
 | `/pre-code-gate [light\|full]` | Gate-Checklisten ausführen (Light: 3 Fragen / Full: 9 Fragen) | Claude startet automatisch vor Code; oder manuell |
 | `/subagent-dispatch` | Entscheidungshilfe Subagenten (Tiering, Eskalationsregel) | BUG/FIX Schritt 7; oder manuell |
 | `/finde-skills` | Skill aus externen Marktplätzen suchen, sicherheitsgeprüft integrieren | Manuell wenn neuer Skill gesucht wird |

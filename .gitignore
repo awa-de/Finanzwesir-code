@@ -7,7 +7,7 @@ Active Campaign Liste/
 
 # Kein Tracking von Archiv- und App-Datenmaterial
 Archiv/
-Datenquellen für Apps/
+data-raw/
 
 # Chart-Engine Dev-Ordner — nicht versionieren
 Theme/data/
