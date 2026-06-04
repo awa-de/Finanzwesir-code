@@ -7,6 +7,9 @@ Wird geleert nach /distill. Einträge: [FRICTION] [WIN] [PREF] [QUESTION] [OK]
 ## 2026-06-04 – SESSION START (Faden 2) | Fokus: APP-01 — prokrastinations-preis
 `FinanzwesirData.js, CSVParser.js, FwDateUtils.js — diese Session nicht berühren. ✓`
 
+## 2026-06-04 – SESSION START (Faden 3) | Fokus: APP-01 — prokrastinations-preis
+`FinanzwesirData.js, CSVParser.js, FwDateUtils.js — diese Session nicht berühren. ✓`
+
 ## 2026-06-04 – Konsistenzpatch Datenlayer nach raw-to-csv-Arbeit
 - [PREF] §9 in PROJECT-STATUS.md (Einstieg nächste Session) nach Gate-Beobachtung explizit in Scope aufgenommen — Gate-Dialog als Scope-Klärungs-Kanal bewährt
 
@@ -68,6 +71,11 @@ Wird geleert nach /distill. Einträge: [FRICTION] [WIN] [PREF] [QUESTION] [OK]
 
 ## 2026-06-03 – AP-DATA-08 | Data Need Snapshot Blaupause in Factory-Standard dokumentiert
 - [OK] Keine Vorkommnisse
+
+## 2026-06-04 – APP-01 Slice-Planung | SLICE_PLAN + SLICE_0_KICKOFF neue Mechanik
+- [FRICTION] CSVParser.js-Pfad initial falsch erwartet (fw-chart-engine/*.js) → tatsächlich in fw-chart-engine/data/; Faden 3 musste Albert direkt nachliefern
+- [WIN] Chart-Engine-Lektüre hat OA-01 (IIFE vs. ES-Modul) sofort gelöst — ChartEngine.js zeigt das Muster direkt
+- [PREF] Albert klärte Parser-Architektur aktiv: „Der Parser liefert. Die App bedient sich." → kein eigener Validierungscode in app.js; App vertraut FinanzwesirData-Ergebnis vollständig
 
 ## 2026-06-03 – AP-DATA-07 | Data Need Snapshot dokumentiert
 - [FRICTION] APP_SPEC.md Edit-Match fehlgeschlagen (ausdrücklicher vs. ausdrückliche in Z. 210) → §7-Umbau in 4 Teiledits zerlegt

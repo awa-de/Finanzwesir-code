@@ -166,10 +166,10 @@ Nach Abschluss: `/abschluss-ritual`.
 > und welche Datenfragen vor dem produktiven Bau offen sind.
 > Nur bei Quellen-, CSV-, Contract- oder Datenänderungsfragen zusätzlich `docs/data/` lesen.
 
-> [!note] B1 / prokrastinations-preis — Slice-0-Reboot abgeschlossen (2026-05-28)
-> `Apps/prokrastinations-preis/APP_SPEC.md` V1.4 (Datenlayer-Konsistenz / Marktzeit-Mechanik) ist jetzt die operative Spec-Quelle.
+> [!note] B1 / prokrastinations-preis — Slice-Planung abgeschlossen (2026-06-04)
+> `Apps/prokrastinations-preis/APP_SPEC.md` V1.6 ist die operative Spec-Quelle.
 > `Apps/prokrastinations-preis/MINI_SPEC_FROM_HAUPTDOKUMENT.md` bleibt als fachliche Hintergrundquelle.
-> `SLICE_0_KICKOFF.md` und `SLICE_PLAN.md` sind VERALTET (alte Mechanik) — neue Slice-Dateien ausstehend.
+> `SLICE_PLAN.md` und `SLICE_0_KICKOFF.md` sind aktuell (neue Mechanik, 2026-06-04). OA-01 entschieden: app.js ist ES-Modul (`<script type="module">`). Nächster Schritt: Pre-Code-Gate Full → Slice-0 implementieren.
 > B1 ist Pilot-2 (Daten-/Chart-/Story-Pilot). Pilot-1 ist `risiko-uebersetzer` (Calculator-Pilot) — entschieden E-02, 2026-05-28.
 13. bei Chart-Nutzung: relevante Chart-Engine-Spec + WORKING-FEATURES.md
 ```

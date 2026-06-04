@@ -1,32 +1,13 @@
-> [!warning] VERALTET — NICHT MEHR ALS IMPLEMENTIERUNGSANLEITUNG VERWENDEN
+> [!note] AKTUELLE VERSION — Neue Mechanik (Marktzeit)
 >
-> Diese Datei beschreibt die alte B1-Mechanik „Prokrastinations-Preis" mit Verlustzähler, Wartezeit-Slider, Festrendite/Zukunftsprojektion und alter Slice-Logik.
->
-> Diese Mechanik ist durch die neue B1-Richtung ersetzt:
->
-> **B1 – Marktzeit schlägt Timing / Lieber heute als morgen**
->
-> Neue B1-Mechanik:
-> - echte MSCI-World-Monatsdaten
-> - letzter verfügbarer Monatswert = „heute"
-> - Startpunkt = 120 Monate davor
-> - monatlicher Sparplan
-> - echte historische Strecke inklusive Einbrüche
-> - keine Tagesdaten
-> - keine glatte Zukunftsprojektion
-> - keine animierte Verlustzähler-Strafzettel-Logik
->
-> Gültige fachliche Quelle bis zur neuen APP_SPEC:
->
-> `Apps/prokrastinations-preis/MINI_SPEC_FROM_HAUPTDOKUMENT.md`
->
-> Eine neue `APP_SPEC.md` und neue Slice-Dateien für die Marktzeit-Mechanik sind ein eigener Folge-Task („B1 Slice-0-Reboot").
+> Diese Datei ersetzt `SLICE_0_KICKOFF.md` (alte Calculator-Mechanik, 2026-05-11).
+> Basis: `APP_SPEC.md` V1.6 + `SLICE_PLAN.md` + RFC.
 
 ---
 
 # SLICE_0_KICKOFF — prokrastinations-preis
 
-Stand: 2026-05-11 | Erstellt von: Claude | Grundlage: Pre-Code-Gate Full bestanden
+Stand: 2026-06-04 | Erstellt von: Claude | Grundlage: SLICE_PLAN + APP_SPEC V1.6 + RFC
 
 ---
 
@@ -35,67 +16,52 @@ Stand: 2026-05-11 | Erstellt von: Claude | Grundlage: Pre-Code-Gate Full bestand
 | Feld | Wert |
 |---|---|
 | App | prokrastinations-preis |
-| Slice | Slice 0 — App-Shell und Ghost-Card-Bootstrap |
-| Datum | 2026-05-11 |
-| Ergebnis | Freigegeben durch Albert — 2026-05-11 |
-| Grundlage | SLICE_PLAN.md (Pre-Code-Gate Full bestanden 2026-05-10) |
-| Spec-Gate | SG-01, SPEC_GATE_REPORT.md — bestanden 2026-05-10 |
+| Slice | Slice 0 — App-Shell + Slug-Prüfung + URL-Attribut-Lesen + State-Maschine |
+| Spec-Gate | OK erteilt 2026-06-04 (mündlich durch Albert) |
+| Pre-Code-Gate | Noch nicht ausgeführt — läuft vor Implementierung |
+| Freigabe | Alberts explizites OK ausstehend |
 
-**Hinweis:** Dieses Dokument ist keine Implementierung und keine Code-Freigabe. Es dokumentiert Annahmen, Risiken und den vereinbarten Implementierungsplan für Slice 0, damit Albert eine informierte Freigabe erteilen kann.
+**Hinweis:** Dieses Dokument ist keine Code-Freigabe. Es dokumentiert Annahmen, Risiken und den vereinbarten Implementierungsplan, damit Albert eine informierte Freigabe erteilen kann.
 
 ---
 
 ## 2. Slice-Ziel
 
 **Was soll Slice 0 beweisen?**
-Dass der Ghost-Card-Vertrag lokal funktioniert: Container wird erkannt, Slug-Prüfung funktioniert, die drei States (loading → content / error) schalten sauber, und kein sicherheitsrelevantes Verhalten bricht.
+Container wird erkannt, Slug-Prüfung funktioniert, `data-fw-data`-URL wird als Attribut gelesen (aber **nicht gefetcht**), States schalten sauber. Kein sicherheitsrelevantes Verhalten bricht.
 
 **Nutzerwert:**
 „Die App startet, zeigt den richtigen State, stürzt nicht ab." — kein leerer Container, kein Stack-Trace, kein XSS.
 
-**Ausdrücklich nicht Teil von Slice 0:**
-- Keine Berechnung (prokrastinationsPreis, endwertSofort etc.)
-- Kein Config-Load (weder intern noch extern)
-- Kein Slider, kein Input-Handler
-- Kein Data-Fetch, keine asynchronen Netzwerkoperationen
-- Kein Core-Modul / keine Extraktion für Pilot 2
-- Kein Framework (React, Vue, Alpine etc.)
-- Kein Build-System (Vite, Rollup, Webpack)
-- Kein Shadow DOM
-- Keine Chart-Engine-Berührung
-- Keine echten Berechnungsdaten in den Platzhaltern
+**Unterschied zur alten Calculator-Mechanik:**
+Die alte Slice-0 hatte keine externen Daten. In der neuen Mechanik ist `data-fw-data` ein Pflichtattribut der Ghost-Card. Slice 0 liest und speichert dieses Attribut — der echte Fetch via CSVParser kommt in Slice 1. Das entkoppelt das App-Shell-Fundament von der noch offenen Architekturfrage OA-01 (IIFE vs. ES-Modul für CSVParser-Import).
+
+**Architekturprinzip CSVParser (gilt ab Slice 1):**
+CSVParser.js übernimmt URL-Validierung, CSV-Parsing, Unit-Detection und Datenbereinigung. Die App zieht sich eine Kopie aus dem versiegelten Vault und vertraut dem Ergebnis. Keine eigene Parserlogik in app.js (APP_SPEC §7.5). Slice 0 berührt CSVParser.js noch nicht.
 
 ---
 
 ## 3. Erlaubter Änderungsumfang
 
-**Erlaubt für spätere Slice-0-Implementierung:**
+**Neue Dateien:**
 
 ```
-Apps/prokrastinations-preis/app.js        ← NEU
-Apps/prokrastinations-preis/app.css       ← NEU
-Apps/prokrastinations-preis/app.test.html ← NEU
+Apps/prokrastinations-preis/app.js
+Apps/prokrastinations-preis/app.css
+Apps/prokrastinations-preis/app.test.html
+Apps/prokrastinations-preis/ghost-card.example.html   ← optional
 ```
 
-Alle drei Dateien werden neu angelegt. Keine bestehende Datei wird verändert.
+Keine bestehende Datei wird geändert. Keine Dateien außerhalb dieses Ordners.
 
-**Nicht erlaubt:**
-- keine APP_SPEC-Änderung
-- keine SECURITY-BASELINE-Änderung
-- keine APP-INTERFACE-Änderung
-- keine RFC-Änderung (APP_FACTORY_IMPLEMENTATION_RFC.md)
-- keine Workflow-Änderung (04_CLAUDE_WORKFLOW_DRAFT.md)
-- keine Decision-Log-Änderung
-- keine Chart-Engine-Berührung
-- keine Core-Extraktion
-- kein Framework
-- kein Build-System
-- kein Shadow DOM
-- keine Berechnung
-- keine Slider
-- keine externe Config
-- keine Dateien außerhalb Apps/prokrastinations-preis/
-- keine Änderung an SLICE_PLAN.md
+**Ausdrücklich NICHT erlaubt:**
+
+- Keine APP_SPEC-, SECURITY-BASELINE-, APP-INTERFACE-Änderung
+- Kein Berühren von CSVParser.js oder FinanzwesirData.js
+- Keine Chart-Engine-Berührung
+- Kein Framework, kein Build-System, kein Shadow DOM
+- Keine Berechnung, kein Slider, kein Chart, kein Screen-Flow
+- Keine Änderung an SLICE_PLAN.md
 
 ---
 
@@ -103,173 +69,224 @@ Alle drei Dateien werden neu angelegt. Keine bestehende Datei wird verändert.
 
 | Nr | Annahme | Quelle | Risiko, falls falsch | Albert-Bestätigung nötig? |
 |---|---|---|---|---|
-| A-1 | app.test.html läuft über VSCode Live Server (localhost), nicht als file://-URL | SLICE_PLAN.md §Testaufruf | file://-URLs können CORS-Fehler bei späteren fetch()-Aufrufen (Slice 1+) erzeugen; in Slice 0 noch kein Fetch | Nein — dokumentierter Workflow |
-| A-2 | app.js und app.css werden per relativem Pfad eingebunden (./app.js, ./app.css) | SLICE_PLAN.md §Erlaubte Dateien | Falscher Pfad → App lädt nicht; sofort sichtbar im Test | Nein |
-| A-3 | Ghost-CSS (screen.css, Tailwind, Theme-Tokens) ist in app.test.html nicht vorhanden; Fallback-Tokens müssen eigenständig halten | SPEC_GATE_REPORT.md §NB-3 | Ohne Fallbacks: leerer Container ohne sichtbare Stile | Nein — NB-3: Theme-Inventar erst vor Slice 6 nötig |
-| A-4 | JavaScript ist aktiviert; kein noscript-Fallback in Slice 0 | APP_SPEC.md §14 Sicherheitsregel 8 | Nutzer ohne JS sieht leeren Container; kein Fallback in Pilot-1 vorgesehen | Nein — bewusste Einschränkung für Pilot-1 |
-| A-5 | data-fw-app kann fehlen, leer oder ungültig sein; alle drei Fälle sind Redakteursfehler, keine Ausnahmen | APP-INTERFACE.md §3.1, SECURITY-BASELINE.md §6.3 | Wenn nur Happy Path behandelt: leerer Container oder Crash auf echter Ghost-Seite | Nein — Pflicht laut Spec |
-| A-6 | Mehrere .fw-app Container auf einer Seite sind normaler Betrieb | APP-INTERFACE.md §3.1, RFC §D9 | Wenn nur ein Container behandelt: zweite App startet nie, ohne Fehlermeldung | Nein — Pflicht laut Spec |
-| A-7 | SLUG_WHITELIST ist eine Kompilzeit-Konstante im IIFE-Wrapper: ['prokrastinations-preis'] | SLICE_PLAN.md §app.js, RFC §B3 | Wenn Whitelist extern geladen: async-Komplexität und Netzwerkabhängigkeit in Slice 0 | Nein — Slice-0-Entscheidung in SLICE_PLAN |
-| A-8 | Alle Werte aus data-*-Attributen sind untrusted input, unabhängig von der Ghost-Quelle | SECURITY-BASELINE.md §6.2 | Wenn Ghost-Daten als trusted behandelt: XSS-Angriff über manipulierte Ghost-Cards möglich | Nein — Pflicht laut SECURITY-BASELINE |
-| A-9 | textContent ist das einzige erlaubte DOM-Ausgabeverfahren für Slice 0 | Q-01 (DECISION_LOG.md), APP-INTERFACE.md §9 Regel 2 | innerHTML → XSS-Risiko; keine Ausnahme möglich | Nein — Binding Decision Q-01 |
-| A-10 | data-fw-options wird in Slice 0 weder gelesen noch ausgegeben | SLICE_PLAN.md §Was Slice 0 NICHT enthält, Q-02 | Selbst als Zeichenkette ausgegeben: Ausgabe wäre potentiell unsauber; XSS-Payload liegt im Attribut-Wert | Nein — explizit ausgeschlossen |
-| A-11 | Loading-State ist transitional und synchron; kein Timer, kein Timeout | SLICE_PLAN.md §A0-3 | Künstlicher Timeout: unnötige Komplexität, bricht Slice 1 ggf. | Nein — SLICE_PLAN explizit |
-| A-12 | Content-State enthält in Slice 0 nur statische Platzhaltertexte, die offensichtlich keine echten Zahlen sind | SLICE_PLAN.md §Ziel | Wenn Platzhalter wie echte Werte aussehen: Slice 1 wird nicht sauber gegen Slice 0 getestet | Nein — Platzhalter müssen als Platzhalter erkennbar sein |
-| A-13 | Error-State zeigt exakt: „Diese App konnte nicht geladen werden." — kein Stack-Trace | SLICE_PLAN.md §app.js, APP_SPEC.md §9 | Stack-Trace im UI: technische Details für Endnutzer sichtbar; Sicherheitsrisiko | Nein — Binding Decision |
-| A-14 | bootstrap() erhält einen Initialisierungs-Guard (data-fw-initialized); zweiter Aufruf überspringt bereits initialisierte Container | RFC §B3, RFC §D9 | Slice 7b: Ghost Code Injection + Theme-Einbindung können beide app.js laden → doppelte DOM-Nodes | Nein — präventive Maßnahme, 2 Zeilen |
-| A-15 | Kein Shadow DOM, keine iframes; querySelectorAll('.fw-app') findet alle Container | SLICE_PLAN.md §Was Slice 0 NICHT enthält | Shadow DOM: querySelectorAll findet Container nicht; App startet nie | Nein — Shadow DOM ausgeschlossen |
-| A-16 | Kein window.FwAppInit oder gleichwertige Window-API; App-Logik bleibt im IIFE-Scope | DECISION_LOG.md §A-06 | Globale Window-API: Namespace-Kollision mit anderen Scripts in Ghost | Nein — Binding Decision A-06 |
-| A-17 | init() wird als async function designt, auch wenn Slice 0 intern synchron arbeitet | DECISION_LOG.md §A-11 | Synchrones init(): Slice 1 muss init() auf async umstellen → Breaking Change in allen Aufrufstellen | Nein — Binding Decision A-11 |
-| A-18 | Keine globalen IDs innerhalb .fw-app; alle DOM-Operationen relativ zum Container-Parameter | DECISION_LOG.md §Q-03 | Globale IDs: bei zwei Containern findet document.getElementById() immer den ersten → zweite App bricht | Nein — Binding Decision Q-03 |
+| A-1 | `app.test.html` läuft über VSCode Live Server (localhost), nicht als `file://` | RFC §D6 | `file://` kann spätere `fetch()`-Aufrufe (Slice 1) via CORS blockieren; in Slice 0 noch kein Fetch | Nein — dokumentierter Workflow |
+| A-2 | `app.js` und `app.css` werden per relativem Pfad eingebunden (`./app.js`, `./app.css`) | RFC §D7 | Falscher Pfad → App lädt nicht; sofort sichtbar | Nein |
+| A-3 | Ghost-CSS ist in `app.test.html` nicht vorhanden; CSS-Fallbacks müssen eigenständig halten | NB-3 | Ohne Fallbacks: Inhalte ohne sichtbare Styles | Nein — NB-3: Theme-Inventar erst vor Slice 7 nötig |
+| A-4 | JavaScript ist aktiviert; kein `noscript`-Fallback in Pilot-2 | APP_SPEC §15 | Nutzer ohne JS sieht leeren Container | Nein — bewusste Einschränkung für Pilot |
+| A-5 | `data-fw-app` kann fehlen, leer oder ungültig sein — alle Fälle sind Redakteursfehler | APP-INTERFACE §3.1 | Crash auf echter Ghost-Seite wenn nur Happy Path behandelt | Nein — Pflicht laut Spec |
+| A-6 | Mehrere `.fw-app` Container auf einer Seite sind normaler Betrieb | APP-INTERFACE §3.1 | Zweite App startet nie ohne Fehlermeldung | Nein — Pflicht laut Spec |
+| A-7 | `SLUG_WHITELIST = ['prokrastinations-preis']` als Kompilzeit-Konstante im IIFE | SLICE_PLAN §Binding | Dynamische Whitelist: async-Komplexität in Slice 0 unerwünscht | Nein — Slice-0-Entscheidung |
+| A-8 | Alle `data-*`-Attribute sind untrusted input — auch intern erstellte Cards | SECURITY-BASELINE §6.2 | XSS-Risiko wenn Ghost-Daten als trusted behandelt | Nein — Pflicht laut SECURITY-BASELINE |
+| A-9 | `textContent` ist das einzige erlaubte DOM-Ausgabeverfahren in Slice 0 | Q-01 | `innerHTML` → XSS-Risiko | Nein — Binding Decision Q-01 |
+| A-10 | `data-fw-options` wird in Slice 0 vollständig ignoriert | SLICE_PLAN §Slice 0 | Selbst als Zeichenkette ausgegeben: potenzielle Injection | Nein — explizit ausgeschlossen |
+| A-11 | `data-fw-data` URL wird in Slice 0 als Attribut gelesen und gespeichert — kein Fetch | SLICE_PLAN §Slice 0 Ziel | Wenn Fetch dazukommt: OA-01 wird erzwungen ohne Entscheid | Nein — explizit deferred |
+| A-12 | Loading-State ist in Slice 0 transitional und synchron; kein Timer, kein Timeout | A0-4 | Künstlicher Timeout: unnötige Komplexität; bricht Slice 1 ggf. | Nein — SLICE_PLAN explizit |
+| A-13 | Content-State zeigt in Slice 0 nur statischen Platzhaltertext, der offensichtlich kein echter Wert ist | SLICE_PLAN §Ziel | Wenn Platzhalter wie echte Zahlen aussehen: Slice 1 nicht sauber gegen Slice 0 testbar | Nein |
+| A-14 | Error-State (a) zeigt exakt: „Diese App konnte nicht geladen werden." — kein Stack-Trace | APP_SPEC §10 | Stack-Trace im UI: technische Details sichtbar; Sicherheitsrisiko | Nein — Binding Decision |
+| A-15 | Initialisierungs-Guard: `data-fw-initialized`-Attribut verhindert doppelte Initialisierung | RFC §D9 | Ghost Code Injection + Theme → zwei script-Tags → doppelte DOM-Nodes | Nein — präventive Pflicht |
+| A-16 | Kein Shadow DOM, kein iframe; `querySelectorAll('.fw-app')` findet alle Container | RFC §D3 | Shadow DOM: Container nicht gefunden; App startet nie | Nein — Shadow DOM ausgeschlossen |
+| A-17 | `app.js` ist ES-Modul (`<script type="module">`); kein IIFE-Wrapper (OA-01 entschieden 2026-06-04) | OA-01, Chart-Engine-Muster | Falsches Lademodell → Guard oder DOMContentLoaded-Timing kann abweichen | Nein — ENTSCHIEDEN |
+| A-18 | `initApp()` ist `async function` — auch wenn Slice 0 intern synchron arbeitet | A-11 | Nachträgliche API-Änderung sync → async bricht alle Aufrufer in Slice 1+ | Nein — Binding Decision A-11 |
+| A-19 | Fehlendes `data-fw-data` ist in Slice 0 kein Error-State; Platzhalter-Content wird angezeigt | SLICE_PLAN §Slice 0 | URL-Validierung und Fetch-Fehler sind Slice-1-Verantwortung | Nein — bewusst deferred |
+| A-20 | App-CSS definiert einen leeren `.fw-app[data-fw-state="empty"]`-Hook ohne JS-Logik dahinter | SLICE_PLAN §Slice 0 | Empty-State kommt in Slice 1; CSS-Hook jetzt schon anlegen vermeidet späteres Hinzufügen | Nein |
 
 ---
 
-## 5. Failure Cases zuerst
+## 5. Failure Cases
 
-| FC | Situation | Erwartetes Verhalten | In Slice 0 behandelt? | In app.test.html testbar? | Akzeptanzkriterium |
+| FC | Situation | Erwartetes Verhalten | In Slice 0? | Testbar? | AK |
 |---|---|---|---|---|---|
-| FC-1 | Kein .fw-app Container auf der Seite | console.warn('[fw-app] Kein Container gefunden.'), keine Exception, Seite lädt normal | Ja | Nein — Codeverhalten, DevTools prüfbar | Keine Exception in Konsole |
-| FC-2 | .fw-app ohne data-fw-app | Error-State: „Diese App konnte nicht geladen werden." — kein Stack-Trace, kein leerer Container | Ja | Ja — Szenario C | A0-2 |
-| FC-3 | Ungültiger data-fw-app-Slug (nicht in SLUG_WHITELIST) | Error-State: „Diese App konnte nicht geladen werden." — kein Stack-Trace | Ja | Ja — Szenario B | A0-2 |
-| FC-4 | Mehrere .fw-app Container auf einer Seite | Alle Container werden initialisiert; keine Exception; kein doppelter DOM-Node | Ja | Ja — Szenario D | A0-1, A0-5 |
-| FC-5 | Doppelte Initialisierung (z.B. zwei script-Tags oder Ghost Code Injection + Theme) | data-fw-initialized-Guard: zweiter Aufruf überspringt bereits initialisierte Container | Ja — Guard empfohlen | Eingeschränkt (zwei script-Tags simulierbar) | A0-7 |
-| FC-6 | data-fw-options mit XSS-Testwert | Attribut wird in Slice 0 vollständig ignoriert; kein Alert, kein innerHTML | Ja — data-fw-options wird nicht gelesen | Ja — Szenario E | A0-4, A0-5 |
-| FC-7 | Unerwartete JS-Exception in initApp() | try/catch: Error-State + textContent-Fehlermeldung; Stack-Trace nur in console.error, nie im UI | Ja — try/catch in initApp() ist Pflicht | Eingeschränkt (nur durch gezieltes Provozieren) | A0-2, A0-5 |
-| FC-8 | Versehentliche innerHTML-Nutzung | Verboten durch Q-01; Verifikation durch Code-Review nach Implementierung | Ja — Binding Decision Q-01 | Nein — Blackbox-Test reicht nicht | A0-4 |
-| FC-9 | CSS leakt aus .fw-app heraus | Kein Selektor außerhalb .fw-app; kein globaler Reset; Ghost-Elemente neben .fw-app bleiben unverändert | Ja — CSS-Namespace-Pflicht | Teilweise — Ghost-Elemente neben .fw-app in app.test.html prüfen | A0-9 |
-| FC-10 | Ghost-Theme überschreibt App-Styles unerwartet | app.css definiert Basis-Stile mit ausreichender Spezifität; Fallback-Tokens greifen wenn --fw-*-Variablen fehlen | Teilweise — vollständiger Ghost-Test erst Slice 7b | Teilweise — ohne Ghost-CSS prüfbar ob Fallbacks halten | A0-6 |
-| FC-11 | Testseite simuliert Ghost nicht realistisch genug | Dokumentierter Trade-off; Fallback-Tokens halten; .kg-card-Wrapper in Szenarien gibt Mindest-Kontext | Teilweise — vollständiger Ghost-Test erst Slice 7b (NB-4) | Ja — .kg-card-Wrapper in app.test.html einbauen | Kein Failure in Slice 0; Risiko dokumentiert |
+| FC-1 | Kein `.fw-app` auf der Seite | `console.warn`, keine Exception, Seite normal | Ja | Nein (DevTools) | A0-6 |
+| FC-2 | `.fw-app` ohne `data-fw-app` | Error-State (a): Meldung auf Deutsch | Ja | Ja — Szenario C | A0-3 |
+| FC-3 | Ungültiger Slug (nicht in Whitelist) | Error-State (a): Meldung auf Deutsch | Ja | Ja — Szenario B | A0-2 |
+| FC-4 | Mehrere Container auf einer Seite | Alle initialisiert; keine Exception; kein doppelter Node | Ja | Ja — Szenario D | A0-9 |
+| FC-5 | Doppelte Initialisierung (zwei script-Tags) | Guard: zweiter Aufruf überspringt bereits initialisierte Container | Ja | Eingeschränkt | A0-9 |
+| FC-6 | `data-fw-options` mit XSS-Testwert | Attribut wird ignoriert; kein Alert; kein `innerHTML`; App stabil | Ja — ignorieren | Ja — Szenario E | A0-5, A0-8 |
+| FC-7 | Unerwartete JS-Exception in `initApp()` | `try/catch`: Error-State + `textContent`-Fehlermeldung; Stack-Trace nur `console.error`, nie im UI | Ja | Eingeschränkt | A0-2, A0-6 |
+| FC-8 | Versehentliche `innerHTML`-Nutzung | Durch Q-01 verboten; Verifikation per Code-Review nach Implementierung | Präventiv | Nein — Blackbox-Test reicht nicht | A0-5 |
+| FC-9 | CSS leakt aus `.fw-app` heraus | Kein Selektor außerhalb `.fw-app`; Ghost-Elemente neben App unverändert | Ja — CSS-Namespace | Ja — Szenario G | A0-10 |
+| FC-10 | Fehlendes `data-fw-data` | Content-State mit Platzhalter (kein Error in Slice 0) | Ja | Ja — Szenario F | A0-1 |
 
 ---
 
 ## 6. Sechs-Monats-Regret
 
-| Risiko | Regret | Warum später teuer | Gegenmaßnahme in Slice 0 |
-|---|---|---|---|
-| Zu viel Logik in Slice 0 | „Warum ist die Berechnung schon hier? Ich kann Slice 1 nicht sauber testen." | Slice 0 und Slice 1 werden untrennbar; Regressions-Ursache schwer isolierbar | Slice 0 enthält ausschließlich: Container-Erkennung, Slug-Prüfung, State-Setzung, Platzhalter-Text |
-| Unklare Bootstrapper-Struktur | „Ich finde den Einstiegspunkt nicht mehr; bootstrap() ist irgendwo drin vergraben." | Ghost-Integration (Slice 7b) muss Bootstrapper kennen; je unklarer, desto mehr Suchaufwand | IIFE-Wrapper mit einem sichtbaren bootstrap()-Einstiegspunkt; DOMContentLoaded → bootstrap() eindeutig am Ende |
-| Zu lockere Slug-Prüfung | „Irgendjemand hat 'prokrastinations-preis-neu' eingetragen und die App hat es kommentarlos geladen." | Slug-Whitelist ist Sicherheitsperimeter der App-Fabrik; Erweiterungen müssen explizit sein | SLUG_WHITELIST als Kompilzeit-Konstante; validateSlug() gibt boolean; kein Partial-Match, keine Regex-Großzügigkeit |
-| app.js als unstrukturierter Blob | „Ich muss Slice 3 ergänzen, finde aber nicht wo Validierung endet und Rendering anfängt." | Jede spätere Erweiterung (Slice 1–5) muss in app.js integriert werden; unstrukturierter Code → schleichende Komplexität | Klare Funktionsgrenzen: validateSlug(), setState(), initApp(), bootstrap(); keine Inline-Logik im forEach-Loop |
-| CSS ohne klares Naming | „Wo ist der Loading-Skeleton definiert? Hat er einen eigenen Block oder ist das irgendwo inline?" | app.css wird in Slice 6 erheblich erweitert; unbenannte Blöcke erschweren Responsive + A11y-Härtung | Vier klare Blöcke: .fw-app (Basis), [data-fw-state="loading"], [data-fw-state="error"], [data-fw-state="content"] |
-| Testseite nur Happy Path | „Ich habe Slice 3 gebaut, aber die XSS-Szenarien nie getestet — ich weiß nicht ob Q-01 wirklich gilt." | Sicherheits-Testfälle werden nachträglich eingebaut, aber gegen fertigen Code — Fehler sind teurer zu finden | app.test.html enthält ab Slice 0 alle 5 Szenarien (A–E) inkl. Fehler- und XSS-Testwert |
-| Sicherheitsregeln nicht sichtbar im Code | „Wann haben wir entschieden, dass data-fw-options ignoriert wird? Ich finde den Grund nicht." | Spätere Slice-1-Erweiterung fügt data-fw-options-Parsing hinzu; ohne sichtbaren Guard leicht vergessen | Kommentar-Marker an der Stelle wo data-fw-options bewusst nicht gelesen wird; nicht-offensichtliche Guards sichtbar machen |
-| Späterer Core schwer extrahierbar | „Pilot 2 braucht denselben Bootstrapper, aber in app.js ist alles prokrastinations-preis-spezifisch." | Core-Extraktion (nach Pilot 2, RFC §11) kostet weniger wenn Bootstrap-Logik von App-Logik getrennt ist | Strikte Trennung: bootstrap() + validateSlug() als generische Logik; App-spezifisches nur in initApp(); kein hard-coded prokrastinations-preis-Text in bootstrap() |
+| Risiko | Warum später teuer | Gegenmaßnahme in Slice 0 |
+|---|---|---|
+| CSV-Fetch in Slice 0 eingebaut | OA-01 (IIFE vs. Modul) wird erzwungen; Architektur-Regret wenn Entscheid sich ändert | Slice 0 enthält explizit keinen Fetch |
+| IIFE vs. Modul in Slice 0 entschieden | Falsche Entscheidung zieht sich durch alle Slices | OA-01 bleibt offen; Slice 0 ist IIFE-kompatibel |
+| Zu viel Logik in Slice 0 | Slice 1 nicht sauber gegen Slice 0 testbar; CSV-Parsing und State-Maschine vermischt | Slice 0: ausschließlich Container-Erkennung, Slug-Prüfung, State-Setzung, Platzhalter |
+| Unklare Bootstrapper-Struktur | Ghost-Integration (Slice 8b) muss Bootstrapper kennen | IIFE mit sichtbarem `bootstrap()`-Einstiegspunkt; `DOMContentLoaded → bootstrap()` eindeutig |
+| Zu lockere Slug-Prüfung | Slug-Whitelist ist Sicherheitsperimeter der App-Fabrik | `SLUG_WHITELIST` als Kompilzeit-Konstante; exakter Match; kein Partial-Match |
+| `app.js` als unstrukturierter Blob | Jeder spätere Slice muss in `app.js` integriert werden; unklare Grenzen → schleichende Komplexität | Klare Funktionsgrenzen: `validateSlug()`, `setState()`, `renderContent()`, `renderError()`, `initApp()`, `bootstrap()` |
+| CSS ohne klares Naming | Slice 7 (Responsive + A11y) muss in `app.css` erweitern; unbenannte Blöcke erschweren das | Vier benannte Blöcke: Basis, loading, error, content; empty-Hook schon angelegt |
+| Testseite nur Happy Path | Security-Testfälle werden nachträglich eingebaut — teurer im fertigen Code zu finden | `app.test.html` enthält ab Slice 0 alle Szenarien A–G inkl. XSS-Testwert |
+| Platzhalter wie echte Werte | Slice 1 nicht klar abgrenzbar | Platzhalter ist offensichtlich kein echter Wert (`[Marktzeit-Simulation — Daten folgen in Slice 1]`) |
 
 ---
 
-## 7. Umsetzungsvorschlag für Slice 0
+## 7. Umsetzungsvorschlag
 
 ### app.js
 
-**Minimalstruktur** (IIFE-Wrapper, kein globaler Namespace, kein window-Property):
+ES-Modul — kein IIFE-Wrapper (OA-01 entschieden, Chart-Engine-Muster).
+Slice 0 hat noch keine `import`-Zeile; der CSVParser-Import kommt in Slice 1.
 
-```
-(function () {
+```js
+// app.js — ES-Modul (OA-01: <script type="module">)
+// Slice 0: kein CSVParser-Import (kein Fetch in diesem Slice)
 
-  // SLUG_WHITELIST: Kompilzeit-Konstante, bewusst keine dynamische Quelle in Slice 0
-  const SLUG_WHITELIST = ['prokrastinations-preis'];
+// SLUG_WHITELIST: Kompilzeit-Konstante — bewusst keine dynamische Quelle in Slice 0
+const SLUG_WHITELIST = ['prokrastinations-preis'];
 
-  validateSlug(slug) → boolean
-    Prüft: typeof slug === 'string' && SLUG_WHITELIST.includes(slug.trim())
-    Kein Partial-Match, keine Regex
+function validateSlug(slug) {
+  // Exakter Match — kein Partial-Match, keine Regex-Großzügigkeit
+  return typeof slug === 'string' && SLUG_WHITELIST.includes(slug.trim());
+}
 
-  setState(container, state)
-    container.dataset.fwState = state
-    Erlaubte Werte: 'loading' | 'content' | 'error'
+function setState(container, state) {
+  container.dataset.fwState = state;
+  // Erlaubte Werte: 'loading' | 'content' | 'error' | 'empty'
+}
 
-  async initApp(container, slug)
-    1. setState(container, 'loading')
-    2. try {
-         if validateSlug(slug):
-           setState(container, 'content')
-           Platzhalter-Element via textContent befüllen
-           Text: eindeutig kein echter Wert (z.B. "[Prokrastinations-Preis wird in Slice 1 berechnet]")
-         else:
-           setState(container, 'error')
-           Fehlerelement via textContent: "Diese App konnte nicht geladen werden."
-       } catch(e) {
-         console.error(e)   ← nie im UI ausgeben
-         setState(container, 'error')
-         Fehlerelement via textContent: "Diese App konnte nicht geladen werden."
-       }
-    data-fw-options wird nicht gelesen und nicht ausgegeben (Slice 0)
+function renderContent(container) {
+  // Slice 0: statischer Platzhalter — eindeutig kein echter Wert
+  const p = document.createElement('p');
+  p.textContent = '[Marktzeit-Simulation — Daten folgen in Slice 1]';
+  container.appendChild(p);
+}
 
-  bootstrap()
-    containers = document.querySelectorAll('.fw-app')
-    if containers.length === 0:
-      console.warn('[fw-app] Kein .fw-app-Container gefunden.')
-      return
-    containers.forEach(container => {
-      if (container.dataset.fwInitialized === 'true') return   ← Guard
-      container.dataset.fwInitialized = 'true'
-      slug = (container.dataset.fwApp || '').trim()
-      initApp(container, slug)
-    })
+function renderError(container, message) {
+  const p = document.createElement('p');
+  p.textContent = message; // SafeDOM: textContent, niemals innerHTML (Q-01)
+  container.appendChild(p);
+}
 
-  document.addEventListener('DOMContentLoaded', bootstrap)
+async function initApp(container, slug) {
+  try {
+    setState(container, 'loading');
 
-})();
+    if (!validateSlug(slug)) {
+      setState(container, 'error');
+      renderError(container, 'Diese App konnte nicht geladen werden.');
+      return;
+    }
+
+    // data-fw-data: URL-Attribut lesen und für Slice 1 bereitstellen
+    // Kein Fetch in Slice 0 — wird in Slice 1 an CSVParser.parse(dataUrl) übergeben
+    const dataUrl = (container.dataset.fwData || '').trim(); // eslint-disable-line no-unused-vars
+
+    // data-fw-options: wird in Slice 0 bewusst NICHT verarbeitet (→ Slice 3)
+    // Attribut kann vorhanden sein — es wird ignoriert, nichts ausgegeben.
+
+    setState(container, 'content');
+    renderContent(container);
+
+  } catch (e) {
+    // Stack-Trace nur in Konsole — niemals im UI ausgeben
+    console.error('[fw-app] initApp error:', e);
+    setState(container, 'error');
+    renderError(container, 'Diese App konnte nicht geladen werden.');
+  }
+}
+
+function bootstrap() {
+  const containers = document.querySelectorAll('.fw-app');
+  if (containers.length === 0) {
+    console.warn('[fw-app] Kein .fw-app-Container gefunden.');
+    return;
+  }
+  containers.forEach(container => {
+    // Guard: verhindert doppelte Initialisierung (z.B. Ghost Code Injection + Theme)
+    if (container.dataset.fwInitialized === 'true') return;
+    container.dataset.fwInitialized = 'true';
+
+    const slug = (container.dataset.fwApp || '').trim();
+    initApp(container, slug);
+  });
+}
+
+// ES-Modul: defer by default — DOMContentLoaded ist dennoch sicherer gegen Race Conditions
+document.addEventListener('DOMContentLoaded', bootstrap);
 ```
 
 **SafeDOM-Regeln:**
-- Kein innerHTML für Nutzdaten, Fehlertexte oder Platzhalter
-- Ausschließlich textContent oder createElement + appendChild
-- data-fw-options wird in Slice 0 nicht gelesen und nicht ausgegeben
+- Kein `innerHTML` für Nutzdaten, Fehlertexte oder Platzhalter
+- Ausschließlich `textContent` oder `createElement` + `appendChild`
+- `data-fw-options` wird nicht gelesen, nicht ausgegeben
 
-**Keine globalen IDs** innerhalb .fw-app; alle DOM-Operationen relativ zum container-Parameter.
+**Keine globalen IDs** im App-Container; alle DOM-Operationen relativ zum `container`-Parameter.
 
 ---
 
 ### app.css
 
-**Namespace:** Alle Selektoren ausschließlich unter .fw-app. Kein globaler Reset (*, html, body).
+Namespace: Alle Selektoren ausschließlich unter `.fw-app`. Kein globaler Reset (`*`, `html`, `body`).
 
-**Vier Blöcke:**
+```css
+/* === Basis === */
+.fw-app {
+  position: relative;
+  box-sizing: border-box;
+  width: 100%;
+  min-height: 200px;
+  font-family: var(--fw-font-base, sans-serif);
+  color: var(--fw-color-text, #1a1a1a);
+  background: var(--fw-color-bg, #ffffff);
+}
 
+/* === Loading === */
+.fw-app[data-fw-state="loading"] {
+  opacity: 0.6;
+  /* Kein Spinner in Slice 0 — State-Wechsel ist synchron */
+}
+
+/* === Error === */
+.fw-app[data-fw-state="error"] {
+  border: 1px solid var(--fw-color-error-border, #c62828);
+  background: var(--fw-color-error-bg, #fff8f8);
+  padding: var(--fw-space-md, 1rem);
+  color: var(--fw-color-error-text, #b71c1c);
+}
+
+/* === Empty (CSS-Hook für Slice 1 — noch keine JS-Logik dahinter) === */
+.fw-app[data-fw-state="empty"] {
+  padding: var(--fw-space-md, 1rem);
+  color: var(--fw-color-muted, #555555);
+}
+
+/* === Content === */
+.fw-app[data-fw-state="content"] {
+  opacity: 1;
+  padding: var(--fw-space-md, 1rem);
+}
 ```
-.fw-app
-  Basis: position relative, box-sizing border-box, width 100%, min-height 200px
-  Typografie: font-family via var(--fw-font-base, sans-serif)
-  Text: color via var(--fw-color-text, #1a1a1a)
-  Hintergrund: background via var(--fw-color-bg, #ffffff)
-  Kein margin auf Container-Ebene (Ghost verantwortet Außenabstände)
 
-.fw-app[data-fw-state="loading"]
-  Visuell gedimmt (opacity o.ä.)
-  Kein Spinner (Slice 0: sofortiger State-Wechsel)
-  Farben via var(--fw-color-loading-*, #fallback)
-
-.fw-app[data-fw-state="error"]
-  Dezente Hervorhebung (Rahmen + leicht abweichender Hintergrund)
-  Fehlermeldung lesbar, kein Crash-Design
-  Farben via var(--fw-color-error-*, #fallback)
-  Innenabstand via var(--fw-space-md, 1rem)
-
-.fw-app[data-fw-state="content"]
-  Basis-Sichtbarkeit (opacity 1)
-  Kein weiteres Layout in Slice 0
-```
-
-**Keine eigenständigen Hex-Werte** — nur als Fallback in `var(--fw-..., #fallback)`. Niemals `color: #1a1a1a` direkt (A-17).
+**Keine eigenständigen Hex-Werte** — nur als Fallback in `var(--fw-..., #fallback)`.
+Niemals `color: #1a1a1a` direkt (A-17).
 
 ---
 
-### app.test.html
+### app.test.html — Szenarien
 
-Dokument-Struktur:
+Dokumentstruktur:
 - `<!DOCTYPE html>`, `<meta charset="UTF-8">`, `<meta name="viewport" content="width=device-width, initial-scale=1">`
 - `<link rel="stylesheet" href="./app.css">` im `<head>`
-- `<script src="./app.js">` am Ende von `<body>`
+- `<script type="module" src="./app.js">` am Ende von `<body>` (OA-01: ES-Modul)
 - Kein Ghost-CSS — Fallbacks müssen eigenständig halten
-- Jedes Szenario: sichtbare H2-Beschriftung + Erwartungstext + `.kg-card`-Wrapper (rudimentärer Ghost-Kontext)
+- Jedes Szenario: sichtbare `<h2>`-Beschriftung + Erwartungstext + `.kg-card`-Wrapper (rudimentärer Ghost-Kontext)
 
 | Szenario | Container | Erwartung |
 |---|---|---|
-| A — Gültige Minimal-Card | `<div class="fw-app" data-fw-app="prokrastinations-preis">` | Content-State; Platzhaltertext sichtbar; kein leerer Container |
-| B — Ungültiger Slug | `<div class="fw-app" data-fw-app="ungueltig-slug">` | Error-State; „Diese App konnte nicht geladen werden."; kein Stack-Trace |
-| C — Fehlender Slug | `<div class="fw-app">` | Error-State; „Diese App konnte nicht geladen werden."; kein Stack-Trace |
-| D — Zwei gültige Container | Zwei identische Cards wie Szenario A | Beide im Content-State; kein doppelter DOM-Node; keine Exception |
-| E — XSS in data-fw-options | Card wie A + `data-fw-options="defaultRate:<img src=x onerror=alert(1)>"` | Stabil; kein Alert; kein innerHTML; Content-State normal |
+| **A — Minimal-Card mit Daten-URL** | `<div class="fw-app" data-fw-app="prokrastinations-preis" data-fw-data="../../Theme/assets/data/b1/msci-world-net-return-eur-monthly.csv">` | Content-State; Platzhaltertext sichtbar; kein leerer Container |
+| **B — Ungültiger Slug** | `<div class="fw-app" data-fw-app="ungueltig-slug">` | Error-State; „Diese App konnte nicht geladen werden."; kein Stack-Trace |
+| **C — Fehlender Slug** | `<div class="fw-app">` | Error-State; Meldung auf Deutsch; kein Stack-Trace |
+| **D — Zwei gültige Container** | Zwei identische Cards wie Szenario A | Beide im Content-State; kein doppelter Node; keine Exception |
+| **E — XSS in data-fw-options** | Card wie A + `data-fw-options="defaultRate:<img src=x onerror=alert(1)>"` | Stabil; kein Alert; kein `innerHTML`; Content-State normal |
+| **F — Fehlendes data-fw-data** | `<div class="fw-app" data-fw-app="prokrastinations-preis">` (ohne data-fw-data) | Content-State mit Platzhalter (kein Error in Slice 0) |
+| **G — CSS-Leak-Check** | `.fw-app` neben normalem Artikeltext und Überschriften | Artikeltext und Überschriften visuell unverändert |
+
+**Hinweis Szenario A:** Der relative Pfad `../../Theme/assets/data/b1/msci-world-net-return-eur-monthly.csv` wird in Slice 0 nicht gefetcht. Er ist als URL-Attribut gespeichert — in Slice 1 wird er an CSVParser übergeben.
 
 ---
 
@@ -277,35 +294,34 @@ Dokument-Struktur:
 
 | ID | Kriterium | Quelle |
 |---|---|---|
-| A0-1 | Alle .fw-app Container werden gefunden und initialisiert (Szenarien A, D) | SLICE_PLAN.md |
-| A0-2 | Fehlender oder ungültiger data-fw-app-Wert → Error-State: „Diese App konnte nicht geladen werden." — kein Stack-Trace (Szenarien B, C) | SLICE_PLAN.md |
-| A0-3 | Loading-State-Pfad ist implementiert; darf sofort in Content/Error übergehen; kein künstlicher Timeout | SLICE_PLAN.md |
-| A0-4 | Kein innerHTML für Nutzdaten, Fehlertexte oder Platzhalter — ausschließlich textContent | SLICE_PLAN.md / Q-01 |
-| A0-5 | Keine JavaScript-Exception in Browser-Konsole bei normalem Testlauf aller 5 Szenarien | SLICE_PLAN.md |
-| A0-6 | Kein horizontaler Overflow bei 375px, 768px, 1280px (Viewport-Prüfung in DevTools) | SLICE_PLAN.md |
-| A0-7 | Doppelte Initialisierung (Szenario D + zwei script-Tags): data-fw-initialized-Guard aktiv; kein doppelter DOM-Node | Kickoff — FC-5 |
-| A0-8 | XSS-Testwert in data-fw-options (Szenario E) löst keinen Alert aus; App bleibt stabil | Kickoff — FC-6 |
-| A0-9 | CSS-Leak-Check: Ghost-Elemente neben .fw-app bleiben visuell unverändert | Kickoff — FC-9 |
+| A0-1 | Alle `.fw-app` Container werden gefunden und initialisiert (Szenarien A, D) | SLICE_PLAN |
+| A0-2 | Fehlender oder ungültiger `data-fw-app`-Wert → Error-State (a): „Diese App konnte nicht geladen werden." — kein Stack-Trace (Szenarien B, C) | APP_SPEC §10 |
+| A0-3 | Loading-State implementiert; darf sofort in Content/Error übergehen; kein künstlicher Timeout | SLICE_PLAN |
+| A0-4 | Kein `innerHTML` für Nutzdaten, Fehlertexte oder Platzhalter — ausschließlich `textContent` | Q-01 |
+| A0-5 | Keine JS-Exception in Browser-Konsole bei normalem Testlauf aller Szenarien A–G | SLICE_PLAN |
+| A0-6 | Kein horizontaler Overflow bei 375px, 768px, 1280px | SLICE_PLAN |
+| A0-7 | Guard aktiv: kein doppelter DOM-Node bei zwei script-Tags oder Szenario D | A-15 |
+| A0-8 | XSS-Testwert in `data-fw-options` (Szenario E): kein Alert, App stabil | Q-01, Q-02 |
+| A0-9 | CSS-Leak (Szenario G): Ghost-Elemente neben `.fw-app` visuell unverändert | RFC §D3 |
+| A0-10 | `data-fw-data`-URL ist im Content-State als Attribut gespeichert — kein Fetch | SLICE_PLAN §Slice 0 Ziel |
 
 ---
 
 ## 9. Offene Punkte
 
-Keine Blocker.
-
-Vier Nicht-Blocker aus SPEC_GATE_REPORT.md, die Slice 0 nicht betreffen:
-
-| NB | Thema | Betrifft | Status |
+| Nr | Thema | Betrifft | Status |
 |---|---|---|---|
-| NB-1 | CTA href leer — risiko-uebersetzer URL unbekannt | Slice 5 / Release | Offen |
-| NB-2 | Config-Form | Slice 1 | Entschieden: internes Config-Objekt (RFC §D5) |
-| NB-3 | Theme-Token-Inventar aus screen.css | Slice 6 | Offen |
-| NB-4 | Bootstrapper-Strategie + Ghost-Upload-URL | Slice 7b | Offen |
+| OA-01 | ES-Modul für app.js — folgt Chart-Engine-Muster | Slice 1 | **ENTSCHIEDEN 2026-06-04** — `<script type="module">`, kein IIFE |
+| OA-02 | SparplanChart: Bibliothek und Integrationsform | Slice 4 | Offen |
+| NB-3 | Theme-Token-Inventar aus `screen.css` | Slice 7 | Offen — Fallback-Tokens erlaubt |
+| NB-4 | Bootstrapper + Ghost-Upload-URL | Slice 8b | Offen |
 
-Albert muss nur Slice 0 zur Implementierung freigeben.
+Keine dieser offenen Punkte blockiert Slice 0.
 
 ---
 
 ## 10. Freigabefrage
 
-Albert, gibst Du Slice 0 zur Implementierung frei?
+Albert, gibst du Slice 0 zur Implementierung frei?
+
+(Implementierung bedeutet: Pre-Code-Gate Full läuft → bei OK werden `app.js`, `app.css`, `app.test.html` neu angelegt.)

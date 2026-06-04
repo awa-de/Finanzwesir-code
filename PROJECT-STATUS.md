@@ -2,13 +2,13 @@
 Version: 1
 Stand: 2026-06-04
 Fokus-AP: APP-01 — prokrastinations-preis
-Nächster-Schritt: Slice-0 implementieren (MSCI World + ACWI CSV bereit)
+Nächster-Schritt: Pre-Code-Gate Full → Slice-0 implementieren (SLICE_PLAN + SLICE_0_KICKOFF bereit)
 Blocker: keine
 -->
 
 # PROJECT STATUS — Finanzwesir 2.0
 
-Stand: 2026-06-04 | Session: restdrift-patch | Geändert von: Claude
+Stand: 2026-06-04 | Session: APP-01-slice-planung | Geändert von: Claude
 
 **Zweck:** Schneller Wiedereinstieg nach Pausen.
 **Zielgruppe:** Albert und Claude.
@@ -48,7 +48,9 @@ Stand: 2026-06-04 | Session: restdrift-patch | Geändert von: Claude
 
 ✅ **AP-DATA-11 MSCI ACWI abgeschlossen (2026-06-04):** historyIndex.xls → `data-raw/index/msci-acwi/`; Contract `docs/data/contracts/msci-acwi-net-return-monthly.md`; CSV 306 Zeilen 2000-12-29 bis 2026-05-29 → `Theme/assets/data/b1/msci-acwi-net-return-eur-monthly.csv`; alle 5 Checks grün. DATASET-CATALOG aktualisiert.
 
-⚙️ **Nächster Schritt B1:** Slice-0 implementieren — MSCI World + ACWI CSV bereit.
+✅ **B1 SLICE_PLAN + SLICE_0_KICKOFF (neue Mechanik) fertig (2026-06-04):** Beide Slice-Planungsdateien für die Marktzeit-Mechanik erstellt. OA-01 entschieden: app.js als ES-Modul (`<script type="module">`), folgt Chart-Engine-Muster. CSVParser.js in `Theme/assets/js/fw-chart-engine/data/`.
+
+⚙️ **Nächster Schritt B1:** Pre-Code-Gate Full → Slice-0 implementieren (app.js, app.css, app.test.html).
 
 ---
 
@@ -75,7 +77,7 @@ Stand: 2026-06-04 | Session: restdrift-patch | Geändert von: Claude
 
 ## 3. Nächster sinnvoller Schritt
 
-- **B1 Slice-0 implementieren** — operative Datenbasis liegt bereit: MSCI World Net Return EUR CSV (`Theme/assets/data/b1/msci-world-net-return-eur-monthly.csv`) ist freigegeben; Dataset Contract existiert; B-01-B/B-01-C/B-01-D sind geklärt. ACWI liegt zusätzlich als freigegebenes Reserve-/Vergleichsdataset vor, ist aber nicht automatisch operative B1-Slice-0-Datenreihe.
+- **B1 Slice-0 implementieren** — SLICE_PLAN + SLICE_0_KICKOFF bereit (2026-06-04). Pre-Code-Gate Full zuerst. OA-01 entschieden: ES-Modul. Erlaubte Dateien: `app.js`, `app.css`, `app.test.html` (alle NEU in `Apps/prokrastinations-preis/`).
 - **AP-20/21** (Mixed-Rhythm CV-Heuristik) — 🟡 Aktiv, Chart-Engine, parallel möglich
 
 ---
@@ -299,12 +301,12 @@ B-01-Teilentscheidungen — alle abgeschlossen ✅:
 - B-01-D: ✅ Projektinhaber erstellt CSV redaktionell; Claude verarbeitet nur freigegebene Datasets — APP_SPEC §7
 
 Operative Quelle:
-- `Apps/prokrastinations-preis/APP_SPEC.md` — V1.5 Data Need Snapshot ✅ (operativ)
+- `Apps/prokrastinations-preis/APP_SPEC.md` — V1.6 ✅ (operativ)
 - `Apps/prokrastinations-preis/MINI_SPEC_FROM_HAUPTDOKUMENT.md` — Hintergrundquelle
 
-⚠️ NOCH NICHT VERWENDEN:
-- `Apps/prokrastinations-preis/SLICE_0_KICKOFF.md` — VERALTET (alte Mechanik)
-- `Apps/prokrastinations-preis/SLICE_PLAN.md` — VERALTET (alte Mechanik)
+Slice-Planungsdateien (neue Mechanik, 2026-06-04):
+- `Apps/prokrastinations-preis/SLICE_PLAN.md` — aktuell ✅
+- `Apps/prokrastinations-preis/SLICE_0_KICKOFF.md` — aktuell ✅, Pre-Code-Gate vor Implementierung Pflicht
 
 **Scope-Funde die noch offen sind:**
 - AUTHOR_GUIDE-v3.md: `data-app` → `data-fw-app` Update (nach Pilot-1, wenn Vertrag stabil)

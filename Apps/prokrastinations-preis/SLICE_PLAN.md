@@ -1,33 +1,13 @@
-> [!warning] VERALTET — NICHT MEHR ALS IMPLEMENTIERUNGSANLEITUNG VERWENDEN
+> [!note] AKTUELLE VERSION — Neue Mechanik (Marktzeit)
 >
-> Diese Datei beschreibt die alte B1-Mechanik „Prokrastinations-Preis" mit Verlustzähler, Wartezeit-Slider, Festrendite/Zukunftsprojektion und alter Slice-Logik.
->
-> Diese Mechanik ist durch die neue B1-Richtung ersetzt:
->
-> **B1 – Marktzeit schlägt Timing / Lieber heute als morgen**
->
-> Neue B1-Mechanik:
-> - echte MSCI-World-Monatsdaten
-> - letzter verfügbarer Monatswert = „heute"
-> - Startpunkt = 120 Monate davor
-> - monatlicher Sparplan
-> - echte historische Strecke inklusive Einbrüche
-> - keine Tagesdaten
-> - keine glatte Zukunftsprojektion
-> - keine animierte Verlustzähler-Strafzettel-Logik
->
-> Gültige fachliche Quelle bis zur neuen APP_SPEC:
->
-> `Apps/prokrastinations-preis/MINI_SPEC_FROM_HAUPTDOKUMENT.md`
->
-> Eine neue `APP_SPEC.md` und neue Slice-Dateien für die Marktzeit-Mechanik sind ein eigener Folge-Task („B1 Slice-0-Reboot").
+> Diese Datei ersetzt `SLICE_PLAN.md` (alte Calculator-Mechanik, 2026-05-11).
+> Basis: `APP_SPEC.md` V1.6 + RFC (~95% verbindlich) + Decision Log.
 
 ---
 
 # SLICE_PLAN — prokrastinations-preis
 
-Stand: 2026-05-11 | Pre-Code-Gate Full | Geändert von: Claude
-Basis: APP_FACTORY_IMPLEMENTATION_RFC.md §8 + APP_SPEC.md V0.3 + SPEC_GATE_REPORT.md
+Stand: 2026-06-04 | Basis: APP_SPEC V1.6 + RFC + Decision Log | Geändert von: Claude
 
 ---
 
@@ -35,321 +15,313 @@ Basis: APP_FACTORY_IMPLEMENTATION_RFC.md §8 + APP_SPEC.md V0.3 + SPEC_GATE_REPO
 
 | Feld | Wert |
 |---|---|
-| Gate | Pre-Code-Gate Full — keine Blocker |
-| Security-Sync | synchron ✓ |
+| App | prokrastinations-preis (B1) |
+| Pilot-Rolle | Pilot-2 — Daten-/Chart-/Story-Pilot (D-APP-01-E02) |
+| APP_SPEC | V1.6 (2026-06-04) |
+| Spec-Gate | OK erteilt 2026-06-04 (mündlich durch Albert) |
+| Pre-Code-Gate | Noch nicht ausgeführt — läuft vor Slice-0-Implementierung |
 | Freigabe Slice 0 | Alberts explizites OK ausstehend |
-| Nächster Schritt | Albert: OK → Slice 0 implementieren |
+| Nächster Schritt | Alberts OK → Pre-Code-Gate → Slice-0 implementieren |
+
+---
+
+## Grundsatzentscheidungen (~95% verbindlich, Quelle: RFC + Decision Log)
+
+| Entscheidung | Quelle | Status |
+|---|---|---|
+| Vanilla JS, kein Framework, kein Bundler | RFC §D1, D2 | 🟢 |
+| IIFE-Wrapper, kein globaler Namespace | RFC §D11 | 🟢 |
+| `async initApp()`, `async loadData()` | A-11 | 🟢 |
+| `Object.freeze()` für AppData nach Parsing | A-09 | 🟢 |
+| Two-Step Parsing (Syntax → Semantik) | A-10 | 🟢 |
+| CSS-Namespace: ausschließlich `.fw-app` | RFC §D3 | 🟢 |
+| Theme-Tokens via CSS Custom Properties; Fallbacks erlaubt bis NB-3 | A-04, A-17, RFC §D4 | 🟢 |
+| Keine globalen IDs im App-Container | Q-03 | 🟢 |
+| SafeDOM: kein `innerHTML` für Nutzdaten | Q-01 | 🟢 |
+| `data-fw-options` Whitelist-Prinzip | Q-02 | 🟢 |
+| app-lokal: kein Core vor App-2 | RFC §D8 | 🟢 |
+| Lokale `app.test.html`, kein E2E | RFC §D6 | 🟢 |
+| CSVParser.js + FinanzwesirData.js: TABU (nicht ändern) | CLAUDE.md | 🟢 |
+| Berechnungsformel: Anteilslogik | B-02, APP_SPEC §7.10 | 🟢 |
+| Screen-Flow: Button-getrieben, kein Autoplay | B-03, APP_SPEC §14.3 | 🟢 |
+
+---
+
+## Offene Architekturfragen
+
+### OA-01 — ES-Modul für app.js (ENTSCHIEDEN 2026-06-04)
+
+`app.js` wird als ES-Modul geschrieben (`<script type="module">`). Kein IIFE-Wrapper.
+
+**Begründung:** Exakt das Muster der Chart-Engine — `ChartEngine.js` importiert `CSVParser` direkt mit `import { CSVParser } from '../data/CSVParser.js'`. Das RFC-Prinzip „kein globaler Namespace" ist mit ES-Modulen genauso erfüllt, konsistent mit der bestehenden Codebasis.
+
+Slice-1-Import: `import { CSVParser } from '../../Theme/assets/js/fw-chart-engine/data/CSVParser.js'`
+Produktionspfad (Ghost-Upload): offen (NB-4).
+
+### OA-02 — SparplanChart: Bibliothek und Integrationsform (Pflicht vor Slice 4)
+
+APP_SPEC §17 SF-01: „Chart-Engine-Integration: welche Bibliothek / welche Komponente für SparplanChart?"
+Diese Frage ist nach B-01-Entscheidungen weiterhin offen.
+**Muss vor Slice 4 entschieden sein.**
 
 ---
 
 ## Slice-Übersicht
 
-| Slice | Ziel | Dateien | Status |
-|---|---|---|---|
-| **Slice 0** | App-Shell + Ghost-Card-Bootstrap | `app.js`, `app.css`, `app.test.html` (alle NEU) | Bereit für Alberts OK |
-| Slice 1 | Hauptzahl aus Defaults | `app.js` erweitern | Offen |
-| Slice 2 | Wartezeit-Slider | `app.js` erweitern | Offen |
-| Slice 3 | Monatsrate + Anlagedauer | `app.js` erweitern | Offen |
-| Slice 4 | AssumptionsBox | `app.js` erweitern | Offen |
-| Slice 5 | Nebenwerte + Vergleichsanker | `app.js` erweitern | Offen |
-| Slice 6 | Responsive + A11y-Härtung | `app.css` erweitern | Offen |
-| Slice 7a | QA / Testseite vollständig | `app.test.html` vervollständigen | Offen |
-| Slice 7b | Echter Ghost-Integrationstest | Ghost-Deploy | Offen — erfordert Ghost-Test |
+| Slice | Ziel | Layer | Voraussetzung | Status |
+|---|---|---|---|---|
+| **0** | App-Shell + Slug-Prüfung + URL-Attribut-Lesen + State-Maschine | Ghost-Card → Bootstrap → State → CSS | — | Bereit für OK |
+| **1** | CSV-Datenladen + Datenvalidierung + Daten-States | Fetch → CSVParser → Validierung → AppData | OA-01 entschieden ✓ | Offen |
+| **2** | MarketTimeStrategy + KpiCards | AppData → Strategy → AppContext → Renderer | Slice 1 | Offen |
+| **3** | Slider monatlicheRate | UI → Event → Clamp → Strategy → AppContext → Renderer → ARIA | Slice 2 | Offen |
+| **4** | SparplanChart | AppContext → Chart-Renderer | Slice 2 + OA-02 entschieden | Offen |
+| **5** | 4-Screen-Flow (Button-getrieben) | Screen-Controller → Fokus-Management | Slice 2 + 3 | Offen |
+| **6** | VertikaleLinie + AssumptionsBox | Chart-Erweiterung + TextBlock + PrimaryCta | Slice 4 + 5 | Offen |
+| **7** | A11y-Härtung + Responsive | app.js, app.css | Slice 6 | Offen |
+| **8a** | QA / Testseite vollständig | app.test.html | Slice 7 | Offen |
+| **8b** | Ghost-Integrationstest | Ghost-Deploy | NB-4 (Bootstrapper + Upload-URL) | Offen |
 
 ---
 
-## Slice 0 — App-Shell + Ghost-Card-Bootstrap
+## Slice 0 — App-Shell + Slug-Prüfung + URL-Attribut-Lesen + State-Maschine
 
 ### Ziel
-Beweisen: Container wird erkannt, Slug-Prüfung funktioniert, States schalten sauber.
+
+Beweisen: Container wird erkannt, Slug-Prüfung funktioniert, `data-fw-data`-URL wird gelesen und Domain-validiert (aber **nicht gefetcht**), States schalten sauber.
 
 ### Nutzerwert
-„Die App startet, zeigt den richtigen State, stürzt nicht ab."
 
-### Erlaubte Dateien (exakt)
+„Die App startet, zeigt den richtigen State, stürzt nicht ab." — kein leerer Container, kein Stack-Trace, kein XSS.
 
-```
-/Apps/prokrastinations-preis/app.js        ← NEU
-/Apps/prokrastinations-preis/app.css       ← NEU
-/Apps/prokrastinations-preis/app.test.html ← NEU
-```
+### Betroffene Layer
 
-Kein anderer Pfad. Keine bestehende Datei ändern.
+Ghost-Card → Bootstrap → URL-Leser → State-Renderer → CSS
 
-### app.js — Struktur
+### Erlaubte Dateien (exakt — alle NEU)
 
 ```
-IIFE-Wrapper (kein globaler Namespace)
-├── SLUG_WHITELIST = ['prokrastinations-preis']
-├── bootstrap()
-│   ├── Alle .fw-app Container finden
-│   └── pro Container:
-│       ├── data-fw-app lesen und validateSlug(slug) → boolean
-│       └── initApp(container, slug)
-│           ├── setState(container, 'loading')
-│           ├── bei gültigem Slug: setState(container, 'content')
-│           │   → Platzhalter-Texte via textContent (keine Berechnung)
-│           └── bei fehlendem oder ungültigem Slug: setState(container, 'error')
-│               → textContent: "Diese App konnte nicht geladen werden."
-└── DOMContentLoaded → bootstrap()
+Apps/prokrastinations-preis/app.js
+Apps/prokrastinations-preis/app.css
+Apps/prokrastinations-preis/app.test.html
+Apps/prokrastinations-preis/ghost-card.example.html   ← optional
 ```
 
-Alle DOM-Ausgaben: ausschließlich `textContent` (SafeDOM, Q-01).
-Kein `innerHTML` für Nutzdaten oder Fehlertexte.
-
-### app.css — Struktur
-
-```css
-.fw-app { /* Container-Basis, Position, Min-Height */ }
-.fw-app[data-fw-state="loading"] { /* LoadingSkeleton-Darstellung */ }
-.fw-app[data-fw-state="error"]   { /* Error-Darstellung */ }
-.fw-app[data-fw-state="content"] { /* Content-Basis */ }
-
-/* Farben ausschließlich via CSS Custom Properties mit Fallback */
-/* Beispiel: color: var(--fw-color-text, #1a1a1a) */
-/* Kein Selektor außerhalb .fw-app */
-/* Kein globaler Reset */
-```
-
-Hex-Werte nur als Fallback in `var(--fw-..., #fallback)` — keine eigenständigen Hex-Werte (A-17).
-
-### app.test.html — Szenarien
-
-```
-Szenario A: Gültige Minimal-Card
-  → <div class="fw-app" data-fw-app="prokrastinations-preis"></div>
-  → Erwartung: Content-State mit Platzhalter sichtbar, kein leerer Container
-
-Szenario B: Ungültiger Slug
-  → <div class="fw-app" data-fw-app="ungueltig-slug"></div>
-  → Erwartung: Error-State, kein Stack-Trace, kein leerer Container
-
-Szenario C: Fehlender Slug
-  → <div class="fw-app"></div>
-  → Erwartung: Error-State, kein Stack-Trace, kein leerer Container
-
-Szenario D: Mehrere Container auf einer Seite
-  → Mindestens zwei gültige .fw-app Container
-  → Erwartung: Beide werden initialisiert, keine doppelte Initialisierung, keine Exception
-
-Szenario E: data-fw-options mit XSS-Testwert
-  → <div class="fw-app"
-         data-fw-app="prokrastinations-preis"
-         data-fw-options="defaultRate:<img src=x onerror=alert(1)>">
-     </div>
-  → Erwartung: Wird in Slice 0 nicht fachlich verarbeitet, aber nichts wird ausgeführt,
-     nichts via innerHTML ausgegeben, App bleibt stabil
-
-Kein-Container-Fall (Codeverhalten, kein Pflichtszenario):
-Wenn bootstrap() auf einer Seite ohne .fw-app Container läuft:
-console.warn, keine Exception, Seite lädt normal.
-```
+Keine bestehende Datei wird verändert. Keine Dateien außerhalb dieses Ordners.
 
 ### Was Slice 0 NICHT enthält
 
-- Keine Berechnung (prokrastinationsPreis, endwertSofort etc.)
-- Kein Config-Load (weder extern noch intern)
-- Kein Slider, kein Input-Handler
-- Kein innerHTML für Nutzdaten
-- Kein Core-Modul / keine Extraktion
-- Kein Framework (React, Vue, etc.)
-- Kein Build-System (Vite, Rollup, Webpack)
-- Kein Shadow DOM
-- Keine Chart-Engine-Berührung
-- Keine Dateien außerhalb /Apps/prokrastinations-preis/
+- Kein CSV-Fetch, kein CSVParser.js-Import
+- Keine Berechnung (MarketTimeStrategy, Anteilslogik)
+- Kein Slider, kein Input-Handler, kein data-fw-options-Parsing
+- Kein Screen-Flow, kein SparplanChart, keine KpiCards mit echten Zahlen
+- Kein Shadow DOM, kein Framework, kein Build-System
+- Keine Dateien außerhalb `Apps/prokrastinations-preis/`
 
 ### Akzeptanzkriterien
 
 | ID | Kriterium |
 |---|---|
-| A0-1 | Minimal-Card lädt → Content-State mit Platzhalter sichtbar (kein leerer Container) |
-| A0-2 | Ungültiger Slug → Error-State: „Diese App konnte nicht geladen werden." — kein Stack-Trace |
-| A0-3 | Loading-State-Pfad ist implementiert. Kein künstlicher Timeout nur zur Sichtbarmachung. In Slice 0 darf der Loading-State sofort in Content/Error übergehen. |
-| A0-4 | Kein `innerHTML` für Nutzdaten oder Fehlertexte — nur `textContent` |
-| A0-5 | Keine JavaScript-Exception in der Browser-Konsole |
-| A0-6 | Layout ohne horizontalen Overflow bei 375px, 768px, 1280px |
+| A0-1 | Minimal-Card mit `data-fw-data` → Content-State mit Platzhalter sichtbar, kein leerer Container |
+| A0-2 | Ungültiger Slug → Error-State (a): „Diese App konnte nicht geladen werden." — kein Stacktrace |
+| A0-3 | Fehlender `data-fw-app`-Slug → Error-State (a): gleiche Meldung |
+| A0-4 | Loading-State implementiert; darf sofort in Content/Error übergehen; kein künstlicher Timeout |
+| A0-5 | Kein `innerHTML` für Nutzdaten, Fehlertexte oder Platzhalter — ausschließlich `textContent` |
+| A0-6 | Keine JS-Exception in Browser-Konsole bei allen Testszenarien |
+| A0-7 | Kein horizontaler Overflow bei 375px, 768px, 1280px |
+| A0-8 | XSS-Versuch in `data-fw-options`: kein Alert, kein innerHTML, App stabil |
+| A0-9 | Mehrere Container: alle initialisiert, `data-fw-initialized`-Guard aktiv, kein doppelter DOM-Node |
+| A0-10 | CSS-Leak: Ghost-Elemente neben `.fw-app` visuell unverändert |
 
 ### Testaufruf (Albert)
 
-`app.test.html` im VSCode Live Server öffnen.
-Alle fünf Szenarien (A–E) prüfen.
-DevTools: Console auf Fehler prüfen.
-Viewports: 375px / 768px / 1280px.
+`app.test.html` im VSCode Live Server öffnen (`http://127.0.0.1:5500/...`).
+Szenarien A–G durchlaufen. DevTools: Console auf Fehler. Viewport: 375px / 768px / 1280px.
 
-Relevante APP_SPEC-Testfälle: T-01, T-03, T-06, T-13.
+Relevante APP_SPEC-Testfälle: T-02, T-08, T-10, T-16.
 
 ---
 
-## Slice 1 — Hauptzahl aus Defaults
+## Slice 1 — CSV-Datenladen + Datenvalidierung + Daten-States
+
+### Voraussetzung
+
+**OA-01 muss entschieden sein** (IIFE + dynamic import vs. ES-Modul).
 
 ### Ziel
-Config laden (intern), Berechnung mit Default-Werten, `prokrastinationsPreis` als Hero-KpiCard anzeigen.
 
-### Nutzerwert
-Nutzer sieht den Prokrastinations-Preis bei App-Start — ohne Slider-Interaktion.
+Beweisen: CSV wird über CSVParser.js geladen, Format korrekt validiert, `unitKey = CURRENCY_EUR` geprüft, alle Daten-States korrekt implementiert.
 
-### Betroffene Layer (APP_SPEC §12)
-Config → Two-Step-Parsing (P-02) → AppData freeze (P-01) → CalculatorStrategy → AppContext → Renderer → A11y-Summary
+### Was drin ist
 
-### Dateien
-- `app.js` erweitern
+- Echter `fetch` via CSVParser.js (Weg je nach OA-01-Entscheid)
+- Domain-Validierung: `www.finanzwesir.com` oder `localhost` (APP_SPEC §15 Regel 2)
+- CSV-Validierung: Pflichtfelder `date` + `index_value`, ≥ 120 Zeilen, `unitKey = CURRENCY_EUR`
+- Mapping: `index_value` (CSV snake_case) → `indexValue` (JS camelCase) bei CSV → AppData
+- `Object.freeze()` für AppData (A-09): `{ msciData, latestMonth, startMonth, periodMonths: 120, currency: 'EUR', locale: 'de-DE' }`
+- Alle Daten-States: Loading, Content-Gerüst (Zahlen noch 0/Platzhalter), Error (b), Error (c), Empty
+- A11y: Lade-Indikator im Content-State (kein leerer Container während Loading)
 
-### NB-2 — Entschieden
-Config-Form für Pilot-1: **internes Config-Objekt (JS-Konstante)** gemäß RFC §D5.
-Kein externer Fetch, kein `data-fw-config` in Pilot-1.
+### Was NICHT drin ist
 
-### Akzeptanzkriterien
-- `prokrastinationsPreis` korrekt berechnet (Formel: APP_SPEC §12, Schritt 4)
-- AppContext statischer Kern + dynamische Schale befüllt (APP_SPEC §10)
-- Hero-KpiCard: Wert via `textContent`, Einheit im Text
-- A11y-Summary in `aria-live`-Region via `textContent`
-- SafeDOM: kein `innerHTML` für berechnete Werte
-- Error-State wenn Config-Objekt nicht parsebar
+- Keine Berechnung (MarketTimeStrategy kommt in Slice 2)
+- Kein Slider, kein Chart, kein Screen-Flow
+
+### Neue Testszenarien
+
+Erweitert app.test.html aus Slice 0 um: T-03, T-04, T-05, T-06, T-07, T-07a, T-07b.
 
 ---
 
-## Slice 2 — Wartezeit-Slider
+## Slice 2 — MarketTimeStrategy + KpiCards
+
+### Voraussetzung
+
+Slice 1 abgeschlossen und bestätigt.
 
 ### Ziel
-Primärer Slider für `prokrastinationsJahre` — Live-Neuberechnung bei Slider-Änderung.
 
-### Nutzerwert
-Nutzer bewegt Slider und spürt direkt, wie Wartezeit den Prokrastinations-Preis beeinflusst.
+Berechnung läuft mit Default-Werten (300 €/Monat), KpiCards zeigen echte Zahlen.
 
-### Betroffene Layer
-UI (Slider) → input-Event → Validation/Clamp → CalculatorStrategy → AppContext → Renderer → ARIA Live Region
+### Was drin ist
 
-### Dateien
-- `app.js` erweitern
+- MarketTimeStrategy: Anteilslogik (APP_SPEC §7.10, §13 Schritt 4)
+- AppContext (statischer Kern + dynamische Schale, APP_SPEC §11)
+- KpiCard-Renderer: `eingezahlt`, `depotwertHeute`, `differenz` via `textContent`
+- Formatierung: `Intl.NumberFormat('de-DE', { style: 'currency', currency: 'EUR', maximumFractionDigits: 0 })`
+- `a11ySummary`-Text in ARIA Live Region via `textContent`
+- Vorzeichen-Formatierung für `differenz` (+/-)
 
-### Akzeptanzkriterien
-- Slider `prokrastinationsJahre`: Range 1–20, Default 5, Step 1
-- Hauptzahl (LiveCounter) reagiert sofort auf Slider-Bewegung
-- Tastatur-Navigation: Pfeiltasten verändern Wert
-- `aria-valuetext`: „5 Jahre Wartezeit" (nicht nur „5")
-- ARIA Live Region: `a11ySummary` nach Debounce ≥ 300ms
-- `prefers-reduced-motion`: LiveCounter-Animation deaktiviert, Endwert direkt
-- Clamp: `prokrastinationsJahre` max `gesamtlaufzeit - 1`
+### Was NICHT drin ist
+
+- Kein Slider (Default-Wert 300 € direkt in Berechnung)
+- Kein Chart
+
+### Neue Testszenarien
+
+T-11 (Slider-Interaktion kommt erst Slice 3), T-12, T-13 mit fixen Werten verifizieren.
 
 ---
 
-## Slice 3 — Monatsrate + Anlagedauer
+## Slice 3 — Slider monatlicheRate
 
-### Ziel
-Vollständige Eingabe-Freiheit: alle drei Slider bedienbar.
+### Voraussetzung
 
-### Nutzerwert
-Nutzer kann eigene Situation annähern (eigene Sparrate, eigene Laufzeit).
+Slice 2 abgeschlossen.
 
-### Dateien
-- `app.js` erweitern
+### Was drin ist
 
-### Akzeptanzkriterien
-- Slider `monatlicheRate`: Range 50–2.000, Step 50, Default 300
-- Slider `gesamtlaufzeit`: Range 5–50, Step 1, Default 30
-- Alle drei Slider gleichzeitig bedienbar
-- Clamp-Regeln greifen bei Grenzwerten
-- Kein Empty-State bei normaler Slider-Bedienung (§4 Regel 3)
-- `aria-valuetext` korrekt für alle Slider
+- `<input type="range">`: `monatlicheRate`, 50–2.000, Default 300, Step 50
+- `data-fw-options` Parsing: `defaultRate` aus Whitelist (APP_SPEC §9)
+- Live-Neuberechnung bei `input`-Event (Strategy → AppContext → Renderer)
+- ARIA: `role="slider"`, `aria-valuemin`, `aria-valuemax`, `aria-valuenow`, `aria-valuetext` („300 Euro pro Monat")
+- ARIA Live Region: Update nach Slider-Release (nicht bei jedem Tick — kein Screenreader-Spam)
+- `prefers-reduced-motion`: keine Animation, direkt Endwert
 
----
+### Was NICHT drin ist
 
-## Slice 4 — AssumptionsBox
-
-### Ziel
-Truthful UX: Annahmen explizit sichtbar machen (P-06).
-
-### Dateien
-- `app.js` erweitern
-
-### Akzeptanzkriterien
-- Pflichtzeile immer sichtbar, nicht kollabierbar: „Annahme: 7 % p.a. nominal — historischer MSCI-World-Durchschnitt. Nicht garantiert."
-- Expandierbare Hinweise: Inflation, Beratungshinweis
-- `aria-expanded` korrekt gesetzt bei Expand/Collapse
-- Alle Texte via `textContent`
+- Kein `startBetrag`-Slider (optional, nach Pilot)
+- Kein Chart
 
 ---
 
-## Slice 5 — Nebenwerte + Vergleichsanker
+## Slice 4 — SparplanChart
 
-### Ziel
-Hauptzahl erklären: `endwertSofort`, `endwertSpaeter`, `verloreneEinzahlungen`.
+### Voraussetzung
 
-### Dateien
-- `app.js` erweitern
+Slice 2 abgeschlossen. **OA-02 entschieden** (Chart-Bibliothek und Integrationsform).
 
-### Akzeptanzkriterien
-- Reihenfolge: positiv zuerst (endwertSofort → endwertSpaeter → verloreneEinzahlungen)
-- Keine zweite Hauptzahl — Nebenwerte erklären, konkurrieren nicht
-- Vergleichsanker optional, nicht dominant
-- ResultSentence aus Config-Template via `textContent`
-- PrimaryCta (href bleibt leer bis NB-1 gelöst)
+### Was drin ist
+
+- SparplanChart: historische Depotwert-Linie (1 Datenserie, chartSeries aus AppContext)
+- Chart `role="img"` mit `aria-label` oder `<figure><figcaption>`
+- `prefers-reduced-motion`: Chart sofort vollständig, keine Zeichenanimation
+
+### Offene Frage (SF-01)
+
+Direkte Chart.js-Nutzung? Eigene Canvas-Implementierung? Chart-Engine-Adapter? Entscheid vor diesem Slice notwendig.
 
 ---
 
-## Slice 6 — Responsive + A11y-Härtung
+## Slice 5 — 4-Screen-Flow
 
-### Ziel
-App nutzbar auf echten Geräten in allen Viewports.
+### Voraussetzung
 
-### Dateien
-- `app.css` erweitern
+Slice 2 und 3 abgeschlossen.
 
-### Akzeptanzkriterien
-- 375px: kein horizontaler Overflow, alle Slider bedienbar
-- 768px: Layout lesbar, Slider nicht zu klein
-- 1280px: vollständiges Layout
-- Tastatur-Test: alle Slider mit Pfeiltasten bedienbar
+### Was drin ist
+
+- Screen-Flow-Controller: Screens 1→2→3→4 sequenziell (APP_SPEC §14.1)
+- Button-Navigation (kein Autoplay, kein Scroll-Trigger in V1)
+- Fokus-Management: Fokus auf neue `<h2>` bei Screen-Wechsel
+- Jeder Screen: sichtbare `<h2>`, Microcopy aus APP_SPEC §14.1 / MINI_SPEC
+- `prefers-reduced-motion`: Übergänge deaktiviert, direkt Zielzustand
+
+---
+
+## Slice 6 — VertikaleLinie + AssumptionsBox + PrimaryCta
+
+### Voraussetzung
+
+Slice 4 und 5 abgeschlossen.
+
+### Was drin ist
+
+- VertikaleLinie im Chart bei letztem Datenpunkt (Screen 3, APP_SPEC §14.2)
+- AssumptionsBox (immer sichtbar, Screen 2 oder 3, APP_SPEC §19.8):
+  > „Basis: MSCI World Index, monatliche Indexwerte, 10 Jahre rückwärts bis zum letzten vollständig verfügbaren Monat. Keine Finanzberatung. Vergangene Wertentwicklungen sind keine Garantie für die Zukunft."
+- PrimaryCta: „Heute Marktzeit sammeln →" (APP_SPEC §19.10); `href` zunächst leer (NB-1)
+
+---
+
+## Slice 7 — A11y-Härtung + Responsive
+
+### Was drin ist
+
 - WCAG-AA: Kontrast ≥ 4.5:1 für alle Text/Hintergrund-Paare
-- `prefers-reduced-motion`: Animation deaktiviert
-
-### Voraussetzung (NB-3)
-Spätestens hier: Theme-Token-Inventar aus `screen.css` prüfen.
-Fallback-Tokens ersetzen durch echte Design-Tokens.
-
----
-
-## Slice 7a — QA / Testseite vollständig
-
-### Ziel
-Albert kann alle APP_SPEC-Testfälle lokal durchführen.
-
-### Dateien
-- `app.test.html` vervollständigen
-
-### Akzeptanzkriterien
-- Alle Testfälle T-01 bis T-25 aus APP_SPEC §15 lokal prüfbar
-- Szenarien dokumentiert mit erwarteten Ergebnissen
-- Manuelle Testliste als Checkliste
+- 375px / 768px / 1280px: kein Overflow, Slider bedienbar, Chart lesbar
+- Tastatur-Navigation: alle 4 Screens, Slider, CTA erreichbar
+- Screenreader: a11ySummary vollständig, Chart-Alternativtext
+- `prefers-reduced-motion`: vollständig geprüft
+- Theme-Token-Inventar aus `screen.css` prüfen; Fallback-Tokens durch echte Tokens ersetzen (NB-3)
 
 ---
 
-## Slice 7b — Echter Ghost-Integrationstest
+## Slice 8a — QA / Testseite vollständig
 
-### Ziel
-Produktionsnaher Test in echter Ghost-Seite.
+### Was drin ist
 
-### Voraussetzungen (NB-4)
-- Ghost-Upload-URL-Schema bekannt (RFC B2) — praktischer Ghost-Test durch Albert
-- Bootstrapper-Strategie entschieden (RFC B3): Ghost Code Injection vs. Theme-Einbindung
-- Beide Punkte sind kein Blocker für Slices 0–6
+- Alle T-01 bis T-26 aus APP_SPEC §16 lokal prüfbar
+- `app.test.html` mit dokumentierten Szenarien und erwarteten Ergebnissen
+- Manuelle Testcheckliste
 
-### Akzeptanzkriterien
+---
+
+## Slice 8b — Ghost-Integrationstest
+
+### Voraussetzungen
+
+- NB-4a: B3 (Bootstrapper-Strategie) entschieden
+- NB-4b: B2 (Ghost-Upload-URL-Schema) bekannt
+
+### Was drin ist
+
 - App lädt in echter Ghost-Seite über HTML-Card
-- URLs für `app.js` und `app.css` funktionieren
-- Keine Theme-Konflikte (CSS-Bleeding, JS-Namespace)
-- Keine unerwarteten Konsolenfehler
+- `data-fw-data` URL (produktiver Ghost-Upload-Pfad) funktioniert
+- Kein CSS-Bleeding ins Ghost-Theme
+- Kein JS-Fehler in Browser-Konsole
 
 ---
 
-## Nicht-Blocker (aus SPEC_GATE_REPORT.md)
+## Nicht-Blocker
 
-| ID | Thema | Betrifft | Fällig | Status |
-|---|---|---|---|---|
-| NB-1 | CTA `href` leer — `risiko-uebersetzer` URL unbekannt | Slice 5 / Release | Vor Release | Offen |
-| NB-2 | Config-Form | Slice 1 | Vor Slice 1 | **Entschieden: internes Config-Objekt (RFC §D5)** |
-| NB-3 | Theme-Token-Inventar (`screen.css`) — Fallback erlaubt | Slice 6 | Vor Slice 6 | Offen |
-| NB-4 | Bootstrapper-Strategie + Ghost-Upload-URL | Slice 7b | Vor Ghost-Deploy | Offen |
+| ID | Thema | Betrifft | Status |
+|---|---|---|---|
+| NB-1 | PrimaryCta `href` leer — `risiko-uebersetzer` URL unbekannt | Slice 6 / Release | Offen |
+| NB-2 | `startBetrag`-Slider optional | Nach Pilot | Offen (SF-02) |
+| NB-3 | Theme-Token-Inventar aus `screen.css` | Slice 7 | Offen — Fallback-Tokens bis dahin erlaubt |
+| NB-4 | Bootstrapper + Ghost-Upload-URL | Slice 8b | Offen (B2, B3) |
+| OA-01 | ES-Modul für app.js | Slice 1 | **ENTSCHIEDEN 2026-06-04** — `<script type="module">`, Chart-Engine-Muster |
+| OA-02 | Chart-Bibliothek / SparplanChart-Integrationsform | Slice 4 | Offen (SF-01) |
 
 ---
 
@@ -359,9 +331,12 @@ Produktionsnaher Test in echter Ghost-Seite.
 |---|---|
 | Q-01 | SafeDOM: kein `innerHTML` für Nutzdaten |
 | Q-02 | Whitelist-Prinzip für `data-fw-options` |
-| A-09 | Read-only AppData: `Object.freeze()` nach Parsing (ab Slice 1) |
-| A-10 | Two-Step Parsing: Syntax Phase 1, Semantik Phase 2 (ab Slice 1) |
-| A-14 | Truthful UX: Annahmen sichtbar (Slice 4 Pflicht) |
-| A-17 | Theme-Hoheit: semantische Tokens, keine Hex-Werte |
-| D-01 | Config intern für Pilot-1 (kein `data-fw-config` in Ghost-Card) |
-| SG-01 | Spec-Gate bestanden 2026-05-10 |
+| A-09 | Read-only AppData: `Object.freeze()` nach Parsing |
+| A-10 | Two-Step Parsing |
+| A-11 | `async initApp()`, `async loadData()` |
+| A-13 | Unit Sovereignty: Mathematik mit reinen Zahlen |
+| A-14 | Truthful UX: AssumptionsBox Pflicht |
+| A-17 | Theme-Hoheit: CSS Custom Properties, keine eigenständigen Hex-Werte |
+| B-02 | Berechnungsformel: Anteilslogik (APP_SPEC §7.10) |
+| B-03 | Screen-Flow: Button-getrieben, kein Autoplay |
+| D-APP-01-E02 | prokrastinations-preis ist Pilot-2 (Daten-/Chart-/Story-Pilot) |
