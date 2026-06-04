@@ -1,4 +1,4 @@
-Stand: 2026-06-04 | Geändert von: Claude | Session: raw-to-csv-acwi
+Stand: 2026-06-04 | Geändert von: Claude | Session: konsistenzpatch-datenlayer
 
 # Dataset Catalog — Finanzwesir 2.0
 
@@ -23,7 +23,7 @@ Liste aller freigegebenen, geplanten und archivierten Datasets.
 | Dataset-ID | Datei | Datenklasse | Quelle | Variante | Währung | Frequenz | Status | Apps | Owner |
 |---|---|---|---|---|---|---|---|---|---|
 | msci-world-net-return-monthly | `Theme/assets/data/b1/msci-world-net-return-eur-monthly.csv` | Index | MSCI direkt (msci.com), Tier 0, ab 2000-12-29 | Net Return | EUR | monatlich | freigegeben | prokrastinations-preis; später weitere Prinzip-Apps | Projektinhaber |
-| msci-acwi-net-return-monthly | `Theme/assets/data/b1/msci-acwi-net-return-eur-monthly.csv` | Index | MSCI direkt (msci.com), Tier 0, ab 2000-12-29 | Net Return | EUR | monatlich | freigegeben | prokrastinations-preis; später weitere Prinzip-Apps | Projektinhaber |
+| msci-acwi-net-return-monthly | `Theme/assets/data/b1/msci-acwi-net-return-eur-monthly.csv` | Index | MSCI direkt (msci.com), Tier 0, ab 2000-12-29 | Net Return | EUR | monatlich | freigegeben | Reserve-/Vergleichsdataset für prokrastinations-preis; spätere Prinzip-Apps | Projektinhaber |
 
 ---
 
@@ -40,6 +40,7 @@ Liste aller freigegebenen, geplanten und archivierten Datasets.
 - **Contract:** `docs/data/contracts/msci-acwi-net-return-monthly.md` — angelegt 2026-06-04 (AP-DATA-11).
 - **Variante:** Net Return. Abweichung nur nach ausdrücklicher Entscheidung des Projektinhabers (→ `INDEX-RETURN-VARIANTEN.md`).
 - **Status:** freigegeben — CSV 306 Zeilen, 2000-12-29 bis 2026-05-29, alle Checks grün (AP-DATA-11 abgeschlossen 2026-06-04).
+- **Nutzungsstatus:** freigegebenes Reserve-/Vergleichsdataset. Für B1 Slice-0 bleibt MSCI World die operative Datenreihe, solange keine ausdrückliche Umstellung beschlossen wird.
 
 ---
 

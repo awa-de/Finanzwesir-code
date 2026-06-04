@@ -1,6 +1,12 @@
 """
 raw-to-csv.py  —  Rohdaten -> CSVParser-kompatible CSV
 
+V1-Scope:
+- freigegeben für MSCI-EUR-Indexreihen im aktuellen Finanzwesir-Datenlayer
+- schreibt bewusst `EUR` als Suffix
+- schreibt Werte mit drei Nachkommastellen
+- ist Vorab-Konverter/Validator, kein Ersatz für CSVParser.js
+
 Wird durch den Claude-Skill /raw-to-csv gesteuert. Nie direkt aufrufen.
 Unterstuetzt: .xls  .xlsx  .csv
 Ausgabe-Format: date;index_value  (Semikolon, Komma-Dezimal, EUR-Suffix)

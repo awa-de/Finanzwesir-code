@@ -4,6 +4,12 @@ Wird geleert nach /distill. Einträge: [FRICTION] [WIN] [PREF] [QUESTION] [OK]
 ## 2026-06-04 – SESSION START | Fokus: APP-01 — prokrastinations-preis
 `FinanzwesirData.js, CSVParser.js, FwDateUtils.js — diese Session nicht berühren. ✓`
 
+## 2026-06-04 – SESSION START (Faden 2) | Fokus: APP-01 — prokrastinations-preis
+`FinanzwesirData.js, CSVParser.js, FwDateUtils.js — diese Session nicht berühren. ✓`
+
+## 2026-06-04 – Konsistenzpatch Datenlayer nach raw-to-csv-Arbeit
+- [PREF] §9 in PROJECT-STATUS.md (Einstieg nächste Session) nach Gate-Beobachtung explizit in Scope aufgenommen — Gate-Dialog als Scope-Klärungs-Kanal bewährt
+
 ## 2026-06-04 – MSCI ACWI Net Return EUR — Contract + CSV (Sofort-erledigt)
 - [OK] Keine Vorkommnisse
 - Contract docs/data/contracts/msci-acwi-net-return-monthly.md angelegt

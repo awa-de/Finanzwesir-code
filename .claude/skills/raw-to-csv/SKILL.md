@@ -5,6 +5,18 @@ description: Rohdatei (XLS/XLSX/CSV) in eine CSVParser-kompatible CSV umwandeln.
 
 # Skill: /raw-to-csv
 
+## V1-Scope
+
+Dieser Skill ist in V1 nur für MSCI-EUR-Indexreihen freigegeben.
+
+Er nutzt `tools/raw-to-csv.py`, das bewusst:
+- `EUR` als Suffix schreibt,
+- Werte mit drei Nachkommastellen ausgibt,
+- nur als Vorab-Konverter/Validator arbeitet,
+- den produktiven CSVParser nicht ersetzt.
+
+Andere Währungen, andere Einheiten oder andere Dezimalstellen erst nach expliziter Erweiterung.
+
 ## Auslöser
 
 Albert schreibt sinngemäß:

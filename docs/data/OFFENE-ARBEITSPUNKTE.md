@@ -1,4 +1,4 @@
-Stand: 2026-06-04 | Geändert von: Claude | Session: AP-DATA-01-04-05-Abschluss
+Stand: 2026-06-04 | Geändert von: Claude | Session: konsistenzpatch-datenlayer
 
 # Offene Arbeitspunkte — Datenlayer Finanzwesir 2.0
 
@@ -73,7 +73,7 @@ Prüfquelle oder nur Notquelle taugen.
 ## AP-DATA-04: Dataset Contract für MSCI World Pilot
 
 **Priorität:** hoch — Blocker für Slice-0
-**Status:** offen
+**Status:** abgeschlossen | 2026-06-04
 
 **Ziel:**
 Ersten konkreten Dataset Contract für den Pilot erstellen.
@@ -99,6 +99,8 @@ Das Verzeichnis `contracts/` wird bei Bedarf angelegt. Kurze Begründung vorab.
 **Abhängigkeit:** AP-DATA-01 muss vorher mindestens teilweise geklärt sein
 (Quelle, Variante, Währung).
 
+**Ergebnis:** Contract angelegt: `docs/data/contracts/msci-world-net-return-monthly.md`. Quelle, Variante, Währung, Frequenz, Startdatum, Einschränkungen, CSV-Schema und Extraktionsparameter sind dokumentiert.
+
 ---
 
 ## AP-DATA-05: Entscheidung Dateiname produktive CSV
@@ -116,7 +118,7 @@ Ablageort: `Theme/assets/data/b1/`
 ## AP-DATA-06: Optionales Validierungsskript prüfen
 
 **Priorität:** niedrig
-**Status:** offen
+**Status:** abgeschlossen | 2026-06-04
 
 **Ziel:**
 Prüfen, ob ein externes Validierungsskript sinnvoll ist.
@@ -134,6 +136,10 @@ außerhalb des Parsers vorab prüfen:
 
 **Akzeptanzkriterium:**
 Empfehlung dokumentieren: jetzt bauen / später bauen / nicht nötig.
+
+**Ergebnis:** Validierungsskript wurde als externer Vorab-Konverter/Validator umgesetzt: `tools/raw-to-csv.py`. Es ersetzt den CSVParser nicht und erzeugt nur nach erfolgreichen Checks eine CSV für `Theme/assets/data/b1/`.
+
+**Grenze:** V1 ist für MSCI-EUR-Indexreihen freigegeben. Allgemeinere Nutzung erst nach expliziter Erweiterung, z.B. Parameter für Einheit/Währung und Dezimalstellen.
 
 ---
 

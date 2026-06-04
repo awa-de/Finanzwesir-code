@@ -435,8 +435,8 @@ Init
   locale: 'de-DE',
   periodMonths: 120,               // fest: 10 Jahre
   msciData: [...],                 // read-only Array, ≥ 120 Einträge
-  latestMonth: '2026-04',          // letzter Datenpunkt = „heute"
-  startMonth:  '2016-05'          // latestMonth − 119 Monate
+  latestMonth: '<letzter Datenmonat aus CSV>',     // dynamisch aus letztem validen Datenpunkt
+  startMonth:  '<latestMonth minus 119 Monate>'    // dynamisch aus latestMonth abgeleitet
 }
 ```
 

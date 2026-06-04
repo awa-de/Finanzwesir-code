@@ -1,4 +1,4 @@
-Stand: 2026-06-04 | Erstellt von: Claude | Session: raw-to-csv-acwi
+Stand: 2026-06-04 | Geändert von: Claude | Session: konsistenzpatch-datenlayer
 
 # Dataset Contract: MSCI ACWI Net Return EUR Monthly
 
@@ -14,7 +14,8 @@ als Vergleichsmaßstab für die Opportunitätskosten von Prokrastination bei der
 
 ## Konsumenten / Apps
 
-- Apps/prokrastinations-preis (Pilot)
+- Reserve-/Vergleichsdataset für Apps/prokrastinations-preis
+- spätere Prinzip-Apps nach ausdrücklicher Entscheidung
 
 ---
 
@@ -84,6 +85,7 @@ Währungssuffix: Pflicht — `EUR` nach dem Wert, CSVParser erkennt daraus unitK
 - MSCI-Daten nur für interne Redaktionsarbeit — keine öffentliche Weiterverbreitung der Rohdaten
 - Kein automatischer Update — manueller Abruf erforderlich
 - Rohdatei (historyIndex.xls) liegt in `data-raw/index/msci-acwi/` — nicht im produktiven Pfad
+- Für B1 Slice-0 nicht automatisch operative Datenreihe. Operative B1-Datenreihe bleibt MSCI World, solange keine ausdrückliche Umstellung beschlossen wird.
 
 ---
 

@@ -1,4 +1,4 @@
-Stand: 2026-06-04 | Geändert von: Claude | Session: data-raw-Workflow
+Stand: 2026-06-04 | Geändert von: Claude | Session: konsistenzpatch-datenlayer
 
 # Datenquellen-Governance — Finanzwesir 2.0
 
@@ -14,7 +14,7 @@ Stand: 2026-06-04 | Geändert von: Claude | Session: data-raw-Workflow
 | `docs/data/contracts/` | Dataset Contracts (Lineage-Dokumentation) | versioniert |
 
 Rohdateien sind unveraenderlich. Neue Version eines Datasets → neue Datei, alte bleibt.
-Details und Checkliste direkt im Ordner: `data-raw/README.md`
+Kanonische versionierte Dokumentation und Checkliste stehen in dieser Datei. `data-raw/` bleibt vollständig gitignored und enthält nur lokale Rohdaten.
 
 ## Neue Datenquelle hinzufuegen — Checkliste
 

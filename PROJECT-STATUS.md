@@ -8,7 +8,7 @@ Blocker: keine
 
 # PROJECT STATUS — Finanzwesir 2.0
 
-Stand: 2026-06-04 | Session: raw-to-csv-acwi | Geändert von: Claude
+Stand: 2026-06-04 | Session: konsistenzpatch-datenlayer | Geändert von: Claude
 
 **Zweck:** Schneller Wiedereinstieg nach Pausen.
 **Zielgruppe:** Albert und Claude.
@@ -75,7 +75,7 @@ Stand: 2026-06-04 | Session: raw-to-csv-acwi | Geändert von: Claude
 
 ## 3. Nächster sinnvoller Schritt
 
-- **B1 Slice-0: B-01-C Quelle klären** — B-01-A Net Return stark bevorzugt; B-01-B EUR Pflicht entschieden 2026-06-04 (unitKey-Validierung, Error State c); B-01-D geklärt. APP_SPEC V1.5 operativ (§7.2/§7.5/§10/§11/§16/§17/§18 aktualisiert). Danach: AP-DATA-01 abschließen → AP-DATA-04 Dataset Contract → AP-DATA-05 Dateiname → Slice-0.
+- **B1 Slice-0 implementieren** — operative Datenbasis liegt bereit: MSCI World Net Return EUR CSV (`Theme/assets/data/b1/msci-world-net-return-eur-monthly.csv`) ist freigegeben; Dataset Contract existiert; B-01-B/B-01-C/B-01-D sind geklärt. ACWI liegt zusätzlich als freigegebenes Reserve-/Vergleichsdataset vor, ist aber nicht automatisch operative B1-Slice-0-Datenreihe.
 - **AP-20/21** (Mixed-Rhythm CV-Heuristik) — 🟡 Aktiv, Chart-Engine, parallel möglich
 
 ---
@@ -88,7 +88,7 @@ Stand: 2026-06-04 | Session: raw-to-csv-acwi | Geändert von: Claude
 | Chart-Engine | Stabil, offene APs | Siehe `docs/steering/BACKLOG.md` |
 | Theme | In Entwicklung | `THEME-ASSEMBLY-CHECKLIST.md` |
 | CSS | Stabil | Siehe `docs/steering/BACKLOG.md` (CSS-N Items) |
-| Apps | E-01/E-02 entschieden ✅ | B-01 MSCI-Datenbasis klären → Slice-0 |
+| Apps | E-01/E-02 entschieden ✅ | B1 Slice-0 implementieren; operative Datenbasis MSCI World freigegeben |
 | Content | Laufend | Redaktionsleitfaden aktiv |
 | Security | SECURITY-BASELINE.md App-Fabrik-gatefähig ✅ | Security-Sync-Regel + Gate-Prüffrage verankert (ST-13/ST-14) |
 
@@ -279,7 +279,7 @@ Neue APs: DS-012, DS-013, DS-014.
 
 ## 9. Einstieg für nächste Session
 
-**Nächster Schritt: B-01-C konkrete Quelle klären (Hast du MSCI.com bereits angeschaut?) → AP-DATA-01 abschließen → AP-DATA-04 Dataset Contract → AP-DATA-05 Dateiname → Slice-0 implementieren.**
+**Nächster Schritt: B1 Slice-0 implementieren. Operative Datenbasis MSCI World Net Return EUR CSV ist freigegeben. Dataset Contract und alle B-01-Entscheidungen abgeschlossen.**
 
 Entschieden (nicht mehr offen):
 - E-01 ✅: prokrastinations-preis ist Szenario-/Vergleichs-App mit Storytelling-Elementen
@@ -288,11 +288,11 @@ Entschieden (nicht mehr offen):
 - B-02 ✅: Berechnungsformel = Anteilslogik (monatlicher Anteilskauf); keine Annuität, keine Durchschnittsrendite
 - B-03 ✅: Screen-Flow = Button-getrieben V1; kein Autoplay, kein Scroll-Trigger
 
-Noch offen (Blocker vor Implementierung):
-- B-01-A: ✅ teilgeklärt — Net Return stark bevorzugt; konkrete Datenreihe in AP-DATA-01 — APP_SPEC §17
-- B-01-B: Währung (USD / EUR) — abhängig von AP-DATA-01 — APP_SPEC §17
-- B-01-C: Datenquelle (konkrete Quelle) — abhängig von AP-DATA-01 — APP_SPEC §17
-- B-01-D: ✅ geklärt — Projektinhaber erstellt CSV redaktionell; Claude verarbeitet nur freigegebene Datasets — APP_SPEC §17
+B-01-Teilentscheidungen — alle abgeschlossen ✅:
+- B-01-A: ✅ Net Return (MSCI World Net Return EUR, MSCI direkt) — APP_SPEC §7
+- B-01-B: ✅ EUR — entschieden 2026-06-04 — APP_SPEC §7
+- B-01-C: ✅ MSCI direkt (msci.com), Tier 0 — entschieden 2026-06-04 — APP_SPEC §7
+- B-01-D: ✅ Projektinhaber erstellt CSV redaktionell; Claude verarbeitet nur freigegebene Datasets — APP_SPEC §7
 
 Operative Quelle:
 - `Apps/prokrastinations-preis/APP_SPEC.md` — V1.5 Data Need Snapshot ✅ (operativ)
