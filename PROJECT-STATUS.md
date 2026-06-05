@@ -2,13 +2,13 @@
 Version: 1
 Stand: 2026-06-05
 Fokus-AP: APP-01 — prokrastinations-preis
-Nächster-Schritt: Slice 3 implementieren — Slider + Options-Parsing (Slice-2 abgeschlossen)
+Nächster-Schritt: Slice 4 — SparplanChart (OA-02 muss zuerst entschieden werden)
 Blocker: keine
 -->
 
 # PROJECT STATUS — Finanzwesir 2.0
 
-Stand: 2026-06-05 | Session: APP-01-slice2-nachputz | Geändert von: Claude
+Stand: 2026-06-05 | Session: APP-01-slice3 | Geändert von: Claude
 
 **Zweck:** Schneller Wiedereinstieg nach Pausen.
 **Zielgruppe:** Albert und Claude.
@@ -56,7 +56,9 @@ Stand: 2026-06-05 | Session: APP-01-slice2-nachputz | Geändert von: Claude
 
 ✅ **B1 Slice-2 abgeschlossen (2026-06-05):** marketTimeStrategy() (Anteilslogik, 120 Monate), buildAppContext() (AppContext-Rucksack), renderKpiCards() (dl/dt/dd SafeDOM), renderA11yRegion() (aria-live polite). 16 Testszenarien A–P bestätigt (36.000 € / 72.176 € / +36.176 €). P-11 Fetch-Dedup-Cache formalisiert (Factory-Standard-Draft §9).
 
-⚙️ **Nächster Schritt B1:** Slice 3 — Slider + Options-Parsing.
+✅ **B1 Slice-3 abgeschlossen (2026-06-05):** clamp() + parseOptions() (Whitelist defaultRate/startBetrag), renderContent() neu mit Slider + wrapping label (Q-06), ARIA-Slider, ARIA Live Region (input/change getrennt), app.css Slider-Stile. Q-06 in Decision Log + Factory Standard formalisiert. 20 Szenarien A–T bestätigt, Viewport 375px ✅.
+
+⚙️ **Nächster Schritt B1:** Slice 4 — SparplanChart. Voraussetzung: OA-02 (Bibliothek + Integrationsform) muss zuerst entschieden werden.
 
 ---
 
@@ -83,7 +85,7 @@ Stand: 2026-06-05 | Session: APP-01-slice2-nachputz | Geändert von: Claude
 
 ## 3. Nächster sinnvoller Schritt
 
-- **B1 Slice-3** — Slider + Options-Parsing. Voraussetzung: Slice-0 ✅, Slice-1 ✅, Slice-2 ✅ (alle 2026-06-05). Pre-Code-Gate vor Implementierung.
+- **B1 Slice-4** — SparplanChart. Voraussetzung: OA-02 (Bibliothek + Integrationsform) muss zuerst entschieden werden. Slice-0/1/2/3 ✅ (alle 2026-06-05).
 - **AP-20/21** (Mixed-Rhythm CV-Heuristik) — 🟡 Aktiv, Chart-Engine, parallel möglich
 
 ---
@@ -96,7 +98,7 @@ Stand: 2026-06-05 | Session: APP-01-slice2-nachputz | Geändert von: Claude
 | Chart-Engine | Stabil, offene APs | Siehe `docs/steering/BACKLOG.md` |
 | Theme | In Entwicklung | `THEME-ASSEMBLY-CHECKLIST.md` |
 | CSS | Stabil | Siehe `docs/steering/BACKLOG.md` (CSS-N Items) |
-| Apps | Slice-2 ✅ 2026-06-05 | B1 Slice-3: Slider + Options-Parsing |
+| Apps | Slice-3 ✅ 2026-06-05 | B1 Slice-4: SparplanChart (OA-02 offen) |
 | Content | Laufend | Redaktionsleitfaden aktiv |
 | Security | SECURITY-BASELINE.md App-Fabrik-gatefähig ✅ | Security-Sync-Regel + Gate-Prüffrage verankert (ST-13/ST-14) |
 
@@ -131,6 +133,9 @@ Vollständig im DECISION-LOG dokumentiert (`docs/steering/DECISION-LOG.md`):
 ---
 
 ## 8. Letzte Session
+
+2026-06-05 — APP-01 Slice 3 abgeschlossen (APP-01-slice3).
+clamp() + parseOptions() (data-fw-options Whitelist: defaultRate/startBetrag), renderContent() komplett neu: Slider + wrapping label (Q-06), ARIA-Slider, ARIA Live Region (input/change getrennt), app.css Slider-Stile (flex/wrap, accent-color, prefers-reduced-motion). Q-06 in Decision Log + Factory Standard formalisiert. NB-5 (synchrone DOM-Neuaufbau) dokumentiert. 20 Szenarien A–T bestätigt, Viewport 375px ✅.
 
 2026-06-05 — APP-01 Slice 2 abgeschlossen + Nachputz Slice-2-Sync (APP-01-slice2).
 marketTimeStrategy() (Anteilslogik, 120 Monate), buildAppContext(), renderKpiCards() (dl/dt/dd SafeDOM), renderA11yRegion() (aria-live polite). P-11 Fetch-Dedup-Cache formalisiert (Factory-Standard §9). 16 Testszenarien A–P bestätigt (36.000 € / 72.176 € / +36.176 €). Nachputz: APP_SPEC §1 + PROJECT-STATUS §3/§4/§8/§9 auf Slice-3 aktualisiert; _loadDataImpl um Date-Objekt-Wächter (`row.date instanceof Date`) + Numerik-Wächter (null/NaN/0/nicht-endlich) erweitert; Szenarien Q/R + 2 Test-CSVs ergänzt.
@@ -300,7 +305,7 @@ Neue APs: DS-012, DS-013, DS-014.
 
 ## 9. Einstieg für nächste Session
 
-**Nächster Schritt: B1 Slice-3 — Slider + Options-Parsing. Slice-2 (MarketTimeStrategy + KpiCards) abgeschlossen und getestet ✅ (2026-06-05). Pre-Code-Gate Full vor Slice-3-Implementierung.**
+**Nächster Schritt: B1 Slice-4 — SparplanChart. Slice-3 (Slider + Options-Parsing) abgeschlossen und getestet ✅ (2026-06-05). Voraussetzung: OA-02 (Bibliothek + Integrationsform) muss zuerst entschieden werden.**
 
 Entschieden (nicht mehr offen):
 - E-01 ✅: prokrastinations-preis ist Szenario-/Vergleichs-App mit Storytelling-Elementen

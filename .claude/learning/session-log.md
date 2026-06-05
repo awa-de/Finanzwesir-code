@@ -1,6 +1,12 @@
 # Session-Log — Finanzwesir 2.0
 Wird geleert nach /distill. Einträge: [FRICTION] [WIN] [PREF] [QUESTION] [OK]
 
+## 2026-06-05 – APP-01 Slice 3 – Slider + Options-Parsing
+- [FRICTION] Edit-Tool-Ablehnung beim session-log-Schreiben zu Sessionbeginn → sofort neu gestartet, kein Datenverlust
+- [WIN] NB-5 (synchrone DOM-Neuaufbau auf Slider-Tick) während Advocatus-Diaboli-Phase entdeckt — als Nicht-Blocker in SLICE_PLAN.md + Codekommentar formalisiert, Albert aktiv entschieden
+- [WIN] Q-06 (wrapping label statt for/id) während Full-Gate-Annahmen-Check entdeckt — direkt global formalisiert in 01_DECISION_LOG.md + 03_APP_FACTORY_STANDARD_DRAFT.md
+- Szenarien A, E, O, P, S, T + Viewport 375px: alle bestätigt ✓
+
 ## 2026-06-05 – SESSION START (Faden 3) | Fokus: APP-01 — prokrastinations-preis
 `FinanzwesirData.js, CSVParser.js, FwDateUtils.js — diese Session nicht berühren. ✓`
 

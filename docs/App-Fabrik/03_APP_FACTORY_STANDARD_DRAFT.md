@@ -697,6 +697,8 @@ Hinweise:
 
 **Keine globalen IDs als App-API:** Alle Selektoren relativ zum App-Root (`ctx.root`). Elemente über `data-fw-role` oder `data-fw-kpi` finden, nicht über `getElementById`. (🟡 Q-03)
 
+**Label-Konvention für Formular-Controls:** `<label>` als Elternelement um `<input>` wickeln statt `for`/`id` — vermeidet globale ID-Konflikte bei mehreren App-Instanzen auf einer Seite. Falls `for`/`id` in Ausnahmefällen unvermeidbar: ID pro Container-Instanz eindeutig generieren (Zähler), nie hardcoden. (🟢 Q-06)
+
 ### State-Modell (Pflicht für jede App)
 
 Jede App muss alle vier Zustände behandeln:

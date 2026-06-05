@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Testseite — prokrastinations-preis Slice 2</title>
+  <title>Testseite — prokrastinations-preis Slice 3</title>
   <link rel="stylesheet" href="./app.css">
   <style>
     /* Nur für Testseite — gehört nicht in app.css */
@@ -18,7 +18,7 @@
 </head>
 <body>
 
-  <h1>Testseite — prokrastinations-preis Slice 2</h1>
+  <h1>Testseite — prokrastinations-preis Slice 3</h1>
 
   <div class="test-warning">
     Muss über VSCode Live Server geöffnet werden (http://127.0.0.1:5500/...) — nicht als file://. ES-Module laden sonst nicht.
@@ -91,8 +91,8 @@
   <div class="test-section">
     <h2>E — XSS-Versuch in data-fw-options</h2>
     <p class="test-meta">
-      Erwartung: Kein Alert, kein innerHTML, App stabil. data-fw-options wird in Slice 2 weiterhin ignoriert (Parsing kommt in Slice 3).<br>
-      App zeigt KpiCards mit Default 300 €.<br>
+      Erwartung: Kein Alert, kein innerHTML, App stabil. XSS-Wert → parseInt gibt NaN → Fallback 300 €.<br>
+      Slider startet bei 300 € (Default), KpiCards zeigen 300-€-Werte. Kein Script-Aufruf.<br>
       Testfälle: T-08, T-10 | AK: A0-5, A0-8
     </p>
     <div class="kg-card">
@@ -252,11 +252,10 @@
 
   <!-- Szenario O: T-12 — Maximalwert 2.000 €/Monat -->
   <div class="test-section">
-    <h2>O — Maximalwert 2.000 €/Monat (T-12, Slice-3-Scaffolding)</h2>
+    <h2>O — Maximalwert 2.000 €/Monat via defaultRate (T-12)</h2>
     <p class="test-meta">
-      Slice 2: data-fw-options wird noch ignoriert — App zeigt KpiCards mit Default 300 €. Kein Crash.<br>
-      Slice 3: Slider + Options-Parsing aktiviert → KpiCards zeigen Werte für 2.000 €/Monat.<br>
-      Manuelle Verifikation Slice 2: In renderContent Wert auf 2000 setzen → Berechnung korrekt, kein Crash.<br>
+      Erwartung: Slider startet bei 2.000 €. KpiCards: Eingezahlt = 240.000 €. Kein Crash.<br>
+      Slider auf kleineren Wert ziehen → KpiCards aktualisieren sich live.<br>
       Testfall: T-12
     </p>
     <div class="kg-card">
@@ -270,11 +269,10 @@
 
   <!-- Szenario P: T-13 — Minimalwert 50 €/Monat -->
   <div class="test-section">
-    <h2>P — Minimalwert 50 €/Monat (T-13, Slice-3-Scaffolding)</h2>
+    <h2>P — Minimalwert 50 €/Monat via defaultRate (T-13)</h2>
     <p class="test-meta">
-      Slice 2: data-fw-options wird noch ignoriert — App zeigt KpiCards mit Default 300 €. Kein Crash.<br>
-      Slice 3: Slider + Options-Parsing aktiviert → KpiCards zeigen Werte für 50 €/Monat.<br>
-      Manuelle Verifikation Slice 2: In renderContent Wert auf 50 setzen → Berechnung korrekt, kein Crash.<br>
+      Erwartung: Slider startet bei 50 €. KpiCards: Eingezahlt = 6.000 €. Kein Crash.<br>
+      Slider auf größeren Wert ziehen → KpiCards aktualisieren sich live.<br>
       Testfall: T-13
     </p>
     <div class="kg-card">
@@ -282,6 +280,44 @@
            data-fw-app="prokrastinations-preis"
            data-fw-data="../../Theme/assets/data/b1/msci-world-net-return-eur-monthly.csv"
            data-fw-options="defaultRate:50">
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════════ -->
+  <!-- Slice 3: Slider-Interaktion + Options-Parsing (S, T)      -->
+  <!-- ═══════════════════════════════════════════════════════════ -->
+
+  <!-- Szenario S: T-11 — Slider-Interaktion live -->
+  <div class="test-section">
+    <h2>S — Slider-Interaktion live (T-11)</h2>
+    <p class="test-meta">
+      Erwartung: Slider sichtbar bei 300 €. Slider ziehen → KpiCards aktualisieren sich live.<br>
+      Slider auf 1.000 € → Eingezahlt = 120.000 €. Kein Crash, keine JS-Exception in Konsole.<br>
+      ARIA Live Region (DevTools: [data-fw-role="a11y-result"]) aktualisiert sich nach Slider-Release, nicht bei jedem Tick.<br>
+      Viewport 375px: Slider bedienbar, kein horizontaler Overflow.<br>
+      Testfall: T-11
+    </p>
+    <div class="kg-card">
+      <div class="fw-app"
+           data-fw-app="prokrastinations-preis"
+           data-fw-data="../../Theme/assets/data/b1/msci-world-net-return-eur-monthly.csv">
+      </div>
+    </div>
+  </div>
+
+  <!-- Szenario T: T-09 — defaultRate ungültiger Typ → Fallback -->
+  <div class="test-section">
+    <h2>T — defaultRate:abc (T-09 — Fallback auf Default)</h2>
+    <p class="test-meta">
+      Erwartung: parseInt("abc") = NaN → Fallback 300. Slider startet bei 300 €. Kein Error-State, kein Crash.<br>
+      Testfall: T-09
+    </p>
+    <div class="kg-card">
+      <div class="fw-app"
+           data-fw-app="prokrastinations-preis"
+           data-fw-data="../../Theme/assets/data/b1/msci-world-net-return-eur-monthly.csv"
+           data-fw-options="defaultRate:abc">
       </div>
     </div>
   </div>

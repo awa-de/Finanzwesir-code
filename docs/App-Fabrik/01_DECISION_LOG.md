@@ -280,6 +280,14 @@ Stand: 2026-06-04 | APP-01-slice-planung | Geändert von: Claude
 
 ---
 
+### Q-06 — Label-Konvention für Formular-Controls in App-Containern
+**Status:** 🟢 ENTSCHIEDEN  
+**Entscheidung:** Formular-Controls (`<input>`, `<select>` etc.) in App-Fabrik-Apps werden mit einem wrapping `<label>` versehen statt mit `for`/`id`. Das wrapping Label ist semantisch gleichwertig und WCAG-konform. Hardcodierte IDs wie `id="fw-slider-rate"` sind verboten, weil mehrere App-Instanzen auf einer Seite (→ Q-03) dieselbe ID doppelt setzen würden — HTML-Spec-Verletzung und AT-Verknüpfungsbruch. Falls ein explizites `for`/`id` in Ausnahmefällen unvermeidbar ist: ID pro Container-Instanz eindeutig generieren (z.B. über Zähler), nie hardcoden.  
+**Begründung:** Abgeleitet aus Pilot-2 `prokrastinations-preis` Slice 3, Full-Gate 2026-06-05. Szenario D (zwei Container) macht das Problem sichtbar.  
+**Quelle:** Full-Gate APP-01-slice3 | 2026-06-05
+
+---
+
 ## Demo-Template
 
 ### T-01 — Perplexity-Demo ist Labor, nicht Produktionsstandard

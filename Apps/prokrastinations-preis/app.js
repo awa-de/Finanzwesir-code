@@ -1,6 +1,6 @@
-// CHANGED — Slice 2 (war: Slice 1)
+// CHANGED — Slice 3 (war: Slice 2)
 // app.js — ES-Modul (OA-01: <script type="module">)
-// Slice 2: MarketTimeStrategy + AppContext + KpiCards + A11y-Region
+// Slice 3: Slider + Options-Parsing + Live-Neuberechnung
 
 import { CSVParser } from '../../Theme/assets/js/fw-chart-engine/data/CSVParser.js';
 
@@ -34,6 +34,32 @@ function renderError(container, message) {
   const p = document.createElement('p');
   p.textContent = message; // SafeDOM: textContent, niemals innerHTML (Q-01)
   container.appendChild(p);
+}
+
+// NEW — Clamp-Helfer für Two-Step-Parsing (APP_SPEC §5.3)
+function clamp(val, min, max) {
+  return Math.min(max, Math.max(min, val));
+}
+
+// NEW — data-fw-options Parsing: Whitelist defaultRate + startBetrag (APP_SPEC §9, Q-02)
+function parseOptions(raw) {
+  const opts = { defaultRate: 300, startBetrag: 0 };
+  if (!raw || typeof raw !== 'string') return opts;
+  raw.split(',').forEach(pair => {
+    const idx = pair.indexOf(':');
+    if (idx < 0) return;
+    const key = pair.slice(0, idx).trim();
+    const val = pair.slice(idx + 1).trim();
+    if (key === 'defaultRate') {
+      const n = parseInt(val, 10);
+      opts.defaultRate = Number.isFinite(n) ? clamp(n, 50, 2000) : 300;
+    } else if (key === 'startBetrag') {
+      const n = parseInt(val, 10);
+      opts.startBetrag = Number.isFinite(n) ? clamp(n, 0, 50000) : 0;
+    }
+    // unbekannte Keys: stillschweigend ignoriert (Q-02)
+  });
+  return opts;
 }
 
 // NEW — Anteilslogik (B-02, APP_SPEC §7.10, §13 Schritt 4). Keine Formatierung — nur Zahlen.
@@ -110,23 +136,85 @@ function renderKpiCards(container, appContext) {
   container.appendChild(dl);
 }
 
-// NEW — ARIA Live Region (APP_SPEC §12.1) via textContent
-function renderA11yRegion(container, appContext) {
-  const div = document.createElement('div');
-  div.setAttribute('aria-live', 'polite');
-  div.setAttribute('aria-atomic', 'true');
-  div.dataset.fwRole = 'a11y-result';
-  div.className = 'fw-app__visually-hidden';
-  div.textContent = appContext.a11ySummary;
-  container.appendChild(div);
-}
+// CHANGED — Slice 3: Slider + Options-Parsing + Live-Neuberechnung (renderA11yRegion entfernt — inline)
+function renderContent(container, appData, options) {
+  const initialRate = options.defaultRate;
+  const startBetrag = options.startBetrag;
 
-// CHANGED — ersetzt renderContentSkeleton (Slice 1); jetzt echte Berechnung und KpiCards
-function renderContent(container, appData) {
-  // Slice 2: Default-Werte direkt — Slider kommt in Slice 3
-  const appContext = buildAppContext(appData, 300, 0);
-  renderKpiCards(container, appContext);
-  renderA11yRegion(container, appContext);
+  // Slider-Sektion — wrapping label (Q-06: kein for/id wegen Mehrfach-Container)
+  const sliderSection = document.createElement('div');
+  sliderSection.className = 'fw-app__slider-section';
+
+  const label = document.createElement('label');
+  label.className = 'fw-app__slider-label';
+
+  const labelText = document.createElement('span');
+  labelText.className = 'fw-app__slider-label-text';
+  labelText.textContent = 'Ich spare monatlich';
+
+  const slider = document.createElement('input');
+  slider.type = 'range';
+  slider.className = 'fw-app__slider';
+  slider.min = '50';
+  slider.max = '2000';
+  slider.step = '50';
+  slider.value = String(initialRate);
+  slider.setAttribute('role', 'slider');
+  slider.setAttribute('aria-valuemin', '50');
+  slider.setAttribute('aria-valuemax', '2000');
+  slider.setAttribute('aria-valuenow', String(initialRate));
+  slider.setAttribute('aria-valuetext', initialRate + ' Euro pro Monat');
+
+  const valueDisplay = document.createElement('span');
+  valueDisplay.className = 'fw-app__slider-value';
+  valueDisplay.setAttribute('aria-hidden', 'true');
+  valueDisplay.textContent = initialRate + ' €/Monat';
+
+  label.appendChild(labelText);
+  label.appendChild(slider);
+  label.appendChild(valueDisplay);
+  sliderSection.appendChild(label);
+  container.appendChild(sliderSection);
+
+  // KPI-Bereich
+  const kpiArea = document.createElement('div');
+  kpiArea.dataset.fwRole = 'kpi-area';
+  container.appendChild(kpiArea);
+
+  // ARIA Live Region (APP_SPEC §12.1) — Update nur bei change, nicht bei jedem input-Tick
+  const a11yRegion = document.createElement('div');
+  a11yRegion.setAttribute('aria-live', 'polite');
+  a11yRegion.setAttribute('aria-atomic', 'true');
+  a11yRegion.dataset.fwRole = 'a11y-result';
+  a11yRegion.className = 'fw-app__visually-hidden';
+  container.appendChild(a11yRegion);
+
+  // Initiale Darstellung
+  function updateKpiCards(rate) {
+    const ctx = buildAppContext(appData, rate, startBetrag);
+    kpiArea.textContent = ''; // SafeDOM: Container leeren (kein innerHTML)
+    renderKpiCards(kpiArea, ctx);
+    return ctx;
+  }
+
+  const initCtx = updateKpiCards(initialRate);
+  a11yRegion.textContent = initCtx.a11ySummary;
+
+  // Perf-NB (NB-5): synchrone Neuberechnung auf jedem Tick — für Pilot ok; In-place-dd-Update bei Bedarf (Slice 7)
+  slider.addEventListener('input', () => {
+    const rate = clamp(parseInt(slider.value, 10), 50, 2000);
+    slider.setAttribute('aria-valuenow', String(rate));
+    slider.setAttribute('aria-valuetext', rate + ' Euro pro Monat');
+    valueDisplay.textContent = rate + ' €/Monat';
+    updateKpiCards(rate);
+  });
+
+  // change: Live Region nach Slider-Release — kein Screenreader-Spam (APP_SPEC §12.1)
+  slider.addEventListener('change', () => {
+    const rate = clamp(parseInt(slider.value, 10), 50, 2000);
+    const ctx = buildAppContext(appData, rate, startBetrag);
+    a11yRegion.textContent = ctx.a11ySummary;
+  });
 }
 
 // gibt { appData } bei Erfolg oder { error: 'b'|'c'|'empty', message } zurück
@@ -224,7 +312,9 @@ async function initApp(container, slug) {
       renderError(container, result.message);
     } else {
       setState(container, 'content');
-      renderContent(container, result.appData); // CHANGED
+      const rawOptions = (container.dataset.fwOptions || '').trim(); // NEW
+      const options    = parseOptions(rawOptions);                    // NEW
+      renderContent(container, result.appData, options);              // CHANGED
     }
 
   } catch (e) {

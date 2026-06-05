@@ -7,7 +7,7 @@
 
 # SLICE_PLAN — prokrastinations-preis
 
-Stand: 2026-06-05 | Session: APP-01-slice2 | Geändert von: Claude
+Stand: 2026-06-05 | Session: APP-01-slice3 | Geändert von: Claude
 
 ---
 
@@ -23,7 +23,8 @@ Stand: 2026-06-05 | Session: APP-01-slice2 | Geändert von: Claude
 | Freigabe Slice 0 | OK 2026-06-04, getestet ✅ (Szenarien A–G) |
 | Freigabe Slice 1 | OK 2026-06-05, getestet ✅ (Szenarien A–N) |
 | Freigabe Slice 2 | OK 2026-06-05, getestet ✅ (Szenarien A–P, KpiCards 36.000 € / 72.176 € / +36.176 €) |
-| Nächster Schritt | Slice 3 — Slider + Options-Parsing |
+| Freigabe Slice 3 | OK 2026-06-05, getestet ✅ (Szenarien A–T, Viewport 375px, Slider-Interaktion) |
+| Nächster Schritt | Slice 4 — SparplanChart (OA-02 muss vorher entschieden sein) |
 
 ---
 
@@ -75,7 +76,7 @@ Diese Frage ist nach B-01-Entscheidungen weiterhin offen.
 | **0** | App-Shell + Slug-Prüfung + URL-Attribut-Lesen + State-Maschine | Ghost-Card → Bootstrap → State → CSS | — | ✅ 2026-06-04 |
 | **1** | CSV-Datenladen + Datenvalidierung + Daten-States | Fetch → CSVParser → Validierung → AppData | OA-01 entschieden ✓ | ✅ 2026-06-05 |
 | **2** | MarketTimeStrategy + KpiCards | AppData → Strategy → AppContext → Renderer | Slice 1 | ✅ 2026-06-05 |
-| **3** | Slider monatlicheRate | UI → Event → Clamp → Strategy → AppContext → Renderer → ARIA | Slice 2 | Offen |
+| **3** | Slider monatlicheRate | UI → Event → Clamp → Strategy → AppContext → Renderer → ARIA | Slice 2 | ✅ 2026-06-05 |
 | **4** | SparplanChart | AppContext → Chart-Renderer | Slice 2 + OA-02 entschieden | Offen |
 | **5** | 4-Screen-Flow (Button-getrieben) | Screen-Controller → Fokus-Management | Slice 2 + 3 | Offen |
 | **6** | VertikaleLinie + AssumptionsBox | Chart-Erweiterung + TextBlock + PrimaryCta | Slice 4 + 5 | Offen |
@@ -324,6 +325,7 @@ Slice 4 und 5 abgeschlossen.
 | NB-2 | `startBetrag`-Slider optional | Nach Pilot | Offen (SF-02) |
 | NB-3 | Theme-Token-Inventar aus `screen.css` | Slice 7 | Offen — Fallback-Tokens bis dahin erlaubt |
 | NB-4 | Bootstrapper + Ghost-Upload-URL | Slice 8b | Offen (B2, B3) |
+| NB-5 | Perf: `marketTimeStrategy` + DOM-Neuaufbau auf jedem Slider-Tick (synchron) — für Pilot ok; bei Bedarf `<dd>`-Werte in-place aktualisieren statt Container leeren | Slice 7 / nach Pilot | Offen |
 | OA-01 | ES-Modul für app.js | Slice 1 | **ENTSCHIEDEN 2026-06-04** — `<script type="module">`, Chart-Engine-Muster |
 | OA-02 | Chart-Bibliothek / SparplanChart-Integrationsform | Slice 4 | Offen (SF-01) |
 

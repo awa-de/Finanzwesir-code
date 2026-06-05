@@ -1,4 +1,4 @@
-/* CHANGED — Slice 2 (war: Slice 1) */
+/* CHANGED — Slice 3 (war: Slice 2) */
 
 /* === Basis === */
 .fw-app {
@@ -63,6 +63,48 @@
   font-weight: bold;
   color: var(--fw-color-text, #1a1a1a);
   margin: 0;
+}
+
+/* === Slice 3: Slider (APP_SPEC §12.3, Q-06) === */
+.fw-app__slider-section {
+  margin: var(--fw-space-md, 1rem) 0;
+}
+
+.fw-app__slider-label {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem var(--fw-space-md, 1rem);
+  cursor: pointer;
+}
+
+.fw-app__slider-label-text {
+  font-size: 0.9em;
+  color: var(--fw-color-muted, #555555);
+  flex-shrink: 0;
+}
+
+.fw-app__slider {
+  flex: 1 1 160px;
+  min-width: 0;
+  accent-color: var(--fw-color-primary, #0071bf);
+  cursor: pointer;
+}
+
+.fw-app__slider-value {
+  font-size: 1em;
+  font-weight: bold;
+  color: var(--fw-color-text, #1a1a1a);
+  min-width: 7ch;
+  text-align: right;
+  flex-shrink: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fw-app__slider,
+  .fw-app__slider-value {
+    transition: none;
+  }
 }
 
 /* === A11y: ARIA Live Region (APP_SPEC §12.1) === */
