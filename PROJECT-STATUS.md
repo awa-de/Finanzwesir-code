@@ -133,7 +133,7 @@ Vollständig im DECISION-LOG dokumentiert (`docs/steering/DECISION-LOG.md`):
 ## 8. Letzte Session
 
 2026-06-05 — APP-01 Slice 2 abgeschlossen + Nachputz Slice-2-Sync (APP-01-slice2).
-marketTimeStrategy() (Anteilslogik, 120 Monate), buildAppContext(), renderKpiCards() (dl/dt/dd SafeDOM), renderA11yRegion() (aria-live polite). P-11 Fetch-Dedup-Cache formalisiert (Factory-Standard §9). 16 Testszenarien A–P bestätigt (36.000 € / 72.176 € / +36.176 €). Nachputz: APP_SPEC §1 + PROJECT-STATUS §3/§4/§8/§9 auf Slice-3 aktualisiert; _loadDataImpl um date-Prüfung + Numerik-Wächter (null/NaN/0/nicht-endlich) erweitert; Szenarien Q/R + 2 Test-CSVs ergänzt.
+marketTimeStrategy() (Anteilslogik, 120 Monate), buildAppContext(), renderKpiCards() (dl/dt/dd SafeDOM), renderA11yRegion() (aria-live polite). P-11 Fetch-Dedup-Cache formalisiert (Factory-Standard §9). 16 Testszenarien A–P bestätigt (36.000 € / 72.176 € / +36.176 €). Nachputz: APP_SPEC §1 + PROJECT-STATUS §3/§4/§8/§9 auf Slice-3 aktualisiert; _loadDataImpl um Date-Objekt-Wächter (`row.date instanceof Date`) + Numerik-Wächter (null/NaN/0/nicht-endlich) erweitert; Szenarien Q/R + 2 Test-CSVs ergänzt.
 
 2026-06-05 — APP-01 Slice 1 implementiert (APP-01-slice1).
 CSVParser-Import (ES-Modul), loadData() mit Two-Step-Validierung (unitKey CURRENCY_EUR, ≥120 Zeilen, index_value-Spalte), Object.freeze AppData (Date→ISO-String-Mapping). Alle 5 Daten-States (Loading/Content/Error-b/c/Empty). app.test.html auf 14 Szenarien A–N erweitert, 5 Test-CSVs in test-data/ angelegt. Full-Gate bestanden, Szenarien A–N getestet — alle korrekt.

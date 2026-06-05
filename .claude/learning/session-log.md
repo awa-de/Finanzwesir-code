@@ -1,6 +1,9 @@
 # Session-Log — Finanzwesir 2.0
 Wird geleert nach /distill. Einträge: [FRICTION] [WIN] [PREF] [QUESTION] [OK]
 
+## 2026-06-05 – SESSION START (Faden 3) | Fokus: APP-01 — prokrastinations-preis
+`FinanzwesirData.js, CSVParser.js, FwDateUtils.js — diese Session nicht berühren. ✓`
+
 ## 2026-06-05 – APP-01 Nachputz Slice-2 Sync + Validierungshärtung
 - [FRICTION] Annahme falsch: date-Prüfung in hasRequiredColumns war toter Code — CSVParser-GATEKEEPER erzwingt date-Spalte schon beim Parsen; rows ohne date erreichen app.js nie. Test-Q-Erwartung (Empty-State) korrigiert auf Error-State (b).
 - [WIN] hasInvalidRows-Wächter (index_value <= 0) funktionierte auf Anhieb korrekt — R lieferte Empty-State ohne console.error, erste Iteration.
