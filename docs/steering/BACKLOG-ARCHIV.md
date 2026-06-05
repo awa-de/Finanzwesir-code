@@ -1,11 +1,12 @@
 # BACKLOG-ARCHIV – Finanzwesir 2.0
-Stand: 2026-06-05 | Session: APP-01-slice2 | Geändert von: Claude
+Stand: 2026-06-05 | Session: APP-01-slice2-nachputz | Geändert von: Claude
 
 Abgeschlossene Items, neueste zuerst (append-only).
 Archivierungs-Trigger: wenn > 200 Zeilen → neue Datei `BACKLOG-ARCHIV-YYYY.md` anlegen.
 
 | ID | Bereich | Titel | Abgeschlossen | Session |
 |----|---------|-------|---------------|---------|
+| APP-01-slice2-nachputz | App | APP_SPEC.md §1 auf V1.7/Slice-2-abgeschlossen aktualisiert; PROJECT-STATUS.md §3/§4/§8/§9 auf Slice-3 aktualisiert; app.js `_loadDataImpl()` hasInvalidRows-Wächter (index_value ≤ 0 + date instanceof Date als defense-in-depth); test-data/no-date.csv + invalid-index-value.csv angelegt; app.test.html Szenarien Q + R ergänzt (16 → 18 Szenarien). CSVParser-GATEKEEPER-Verhalten entdeckt: date-Prüfung in hasRequiredColumns war toter Code. *(sofort erledigt)* | 2026-06-05 | APP-01-slice2-nachputz |
 | APP-01-p11 | App-Fabrik | P-11 Fetch-Dedup-Cache formalisiert: `_dataCache = new Map()` in app.js (loadData-Shell + _loadDataImpl), P-11-Prinzip in Factory-Standard-Draft §9 (🟢 ENTSCHIEDEN), Pflicht-Scaffold in SLICE_0_KICKOFF §11. 7 parallele CSV-Requests → 1, Albert bestätigt. *(sofort erledigt)* | 2026-06-05 | APP-01-slice2 |
 | APP-01-slice2 | App | Slice 2 implementiert: marketTimeStrategy() (Anteilslogik, 120 Monate), buildAppContext() (AppContext-Rucksack mit a11ySummary), renderKpiCards() (dl/dt/dd, SafeDOM), renderA11yRegion() (aria-live polite). app.test.html auf 16 Szenarien A–P erweitert. Full-Gate bestanden, Szenarien A–P getestet ✅ (KpiCards: 36.000 € / 72.176 € / +36.176 €). | 2026-06-05 | APP-01-slice2 |
 | APP-01-slice1 | App | Slice 1 implementiert: CSVParser-Import (ES-Modul), loadData() mit Two-Step-Validierung (unitKey CURRENCY_EUR, ≥120 Zeilen, index_value-Spalte), AppData (Object.freeze, Date→ISO-String-Mapping). Alle 5 Daten-States (Loading/Content/Error-b/c/Empty). app.test.html auf 14 Szenarien A–N erweitert, 5 Test-CSVs in test-data/ angelegt. Full-Gate bestanden, Szenarien A–N getestet ✅. | 2026-06-05 | APP-01-slice1 |

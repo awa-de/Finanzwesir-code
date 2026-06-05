@@ -1,6 +1,6 @@
 # APP_SPEC — prokrastinations-preis
 
-Stand: 2026-06-04 | V1.6 — Restdrift-Patch chartSeries-Beispielmonate | Geändert von: Claude
+Stand: 2026-06-05 | V1.7 — Slice-2-abgeschlossen-Sync | Geändert von: Claude
 
 ---
 
@@ -8,10 +8,10 @@ Stand: 2026-06-04 | V1.6 — Restdrift-Patch chartSeries-Beispielmonate | Geänd
 
 | Feld | Wert |
 |---|---|
-| Version | Draft V1.6 — Marktzeit / Datenlayer / Slice-1 abgeschlossen |
+| Version | Draft V1.7 — Marktzeit / Datenlayer / Slice-2 abgeschlossen |
 | Phase | Daten-/Chart-/Story-Pilot (Pilot-2), Phase 3 — Umsetzung |
-| Nächster Schritt | Slice 2 — MarketTimeStrategy + KpiCards |
-| Code-Freigabe | Slice 0 ✅ 2026-06-04, Slice 1 ✅ 2026-06-05; Slice 2 erst nach Pre-Code-Gate |
+| Nächster Schritt | Slice 3 — Slider + Options-Parsing |
+| Code-Freigabe | Slice 0 ✅ 2026-06-04, Slice 1 ✅ 2026-06-05, Slice 2 ✅ 2026-06-05; Slice 3 erst nach Pre-Code-Gate |
 | Grundlage | `Apps/prokrastinations-preis/MINI_SPEC_FROM_HAUPTDOKUMENT.md` |
 | Ersetzt | APP_SPEC V0.3 (alte Prokrastinations-Preis-Mechanik — Verlustzähler/Festrendite) |
 

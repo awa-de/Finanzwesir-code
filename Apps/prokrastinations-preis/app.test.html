@@ -286,6 +286,45 @@
     </div>
   </div>
 
+  <!-- ═══════════════════════════════════════════════════════════ -->
+  <!-- Slice-2-Nachputz: Validierungslücken (Q, R)               -->
+  <!-- ═══════════════════════════════════════════════════════════ -->
+
+  <!-- Szenario Q: CSV ohne date-Header → Error (b) via CSVParser-GATEKEEPER -->
+  <div class="test-section">
+    <h2>Q — CSV ohne date-Spalte (CSVParser-GATEKEEPER)</h2>
+    <p class="test-meta">
+      Erwartung: Error-State (b), Meldung „Daten konnten nicht geladen werden. Bitte Seite neu laden."<br>
+      CSV hat 120 Zeilen mit index_value (EUR), aber keine date-Spalte.<br>
+      CSVParser-GATEKEEPER wirft für fehlende/ungültige date-Spalte — app.js-Validierung wird nicht erreicht.<br>
+      Console: CSVParser-Fehler + app.js-catch-Log erwartet (kein Stacktrace im UI).<br>
+      Testfall: T-05 (Erweiterung)
+    </p>
+    <div class="kg-card">
+      <div class="fw-app"
+           data-fw-app="prokrastinations-preis"
+           data-fw-data="./test-data/no-date.csv">
+      </div>
+    </div>
+  </div>
+
+  <!-- Szenario R: CSV mit index_value = 0 in letzten 120 Zeilen → Empty -->
+  <div class="test-section">
+    <h2>R — CSV mit ungültigem index_value (0,00 EUR)</h2>
+    <p class="test-meta">
+      Erwartung: Empty-State, Meldung „Nicht genug Daten für die Berechnung. Bitte Datenquelle prüfen."<br>
+      CSV hat 120 Zeilen, date + index_value vorhanden (EUR), letzter Wert 0,00 EUR.<br>
+      hasInvalidRows = true (index_value <= 0) → Empty, kein Crash, keine JS-Exception in Konsole.<br>
+      Testfall: T-07 (Erweiterung)
+    </p>
+    <div class="kg-card">
+      <div class="fw-app"
+           data-fw-app="prokrastinations-preis"
+           data-fw-data="./test-data/invalid-index-value.csv">
+      </div>
+    </div>
+  </div>
+
   <script type="module" src="./app.js"></script>
 </body>
 </html>

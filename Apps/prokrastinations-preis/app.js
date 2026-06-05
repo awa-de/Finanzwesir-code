@@ -156,11 +156,23 @@ async function _loadDataImpl(url) {
 
   // Pflichtfelder und Mindestlänge prüfen (APP_SPEC §10 Empty-State)
   const rows = fwData.rows;
-  if (rows.length < 120 || !Object.prototype.hasOwnProperty.call(rows[0], 'index_value')) {
+  const hasRequiredColumns = rows.length > 0 && // CHANGED — rows[0]-Zugriff abgesichert
+    Object.prototype.hasOwnProperty.call(rows[0], 'index_value');
+
+  if (rows.length < 120 || !hasRequiredColumns) {
     return { error: 'empty', message: 'Nicht genug Daten für die Berechnung. Bitte Datenquelle prüfen.' };
   }
 
   const last120 = rows.slice(-120);
+
+  const hasInvalidRows = last120.some(row => // NEW — Wächter gegen null/NaN/0/nicht-endlich
+    !(row.date instanceof Date) ||
+    !Number.isFinite(row.index_value) ||
+    row.index_value <= 0
+  );
+  if (hasInvalidRows) {
+    return { error: 'empty', message: 'Nicht genug Daten für die Berechnung. Bitte Datenquelle prüfen.' };
+  }
   const msciData = last120.map(row => {
     const d   = row.date; // Date-Objekt aus CSVParser
     const y   = d.getFullYear();
