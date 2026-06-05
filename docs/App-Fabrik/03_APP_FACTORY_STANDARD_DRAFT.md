@@ -1,6 +1,6 @@
 # App-Fabrik-Standard — Draft V0.1
 
-Stand: 2026-06-03 | AP-DATA-08-Nachputz | Geändert von: Claude  
+Stand: 2026-06-05 | COMP-ARCH-Verankerung | Geändert von: Claude  
 Ziel-Pfad wenn bindend: `docs/spec/APP-FACTORY-STANDARD.md`
 
 **Alle Inhalte hier sind Arbeitsstände.**  
@@ -63,6 +63,113 @@ Jede Familie hat einen eigenen Shell-Code. Die App-spezifische Datei enthält nu
 
 ---
 
+## 1a. Architekturmodell: Komponentenbasierte App-Komposition
+
+**Fachbegriff:** Component Composition Architecture | Komponentenbasierte App-Komposition  
+**Status:** 🟢 ENTSCHIEDEN — 2026-06-05 | Kontext: Architekturdiskussion im Umfeld von OA-02
+
+Eine Finanzwesir-App ist keine technische Sonderform eines Charts.  
+Eine Finanzwesir-App ist eine **komponierte Erlebnisfläche**.
+
+---
+
+**Die App ist das Lego-Brett.**  
+**Die Komponenten sind die Steine.**  
+**Engines und Renderer sind die Spezialwerkzeuge, die bestimmte Steine korrekt herstellen.**
+
+Dies ist kein illustratives Bild — es ist das verbindliche mentale Modell der App-Fabrik.
+
+---
+
+### Was eine App ist
+
+Die App orchestriert Zustand, Ablauf, Nutzerinteraktion und Aussage.  
+Die App selbst hat keine Visualisierungslogik — sie weiß, *was* gezeigt werden soll, nicht *wie*.
+
+Eine App kann chartfrei sein.  
+Eine App kann nur aus einem Chart bestehen.  
+Eine App kann aus Chart, Karte, Cards, Slider, Tabelle, Animation und CTA bestehen.  
+Eine App kann aus Map-Komponente, Chart-Komponente und Controls bestehen.
+
+Die App-Fabrik ist nicht um Charts herum gebaut.  
+Sie komponiert didaktische Erlebnisflächen aus Komponenten.
+
+---
+
+### Was eine Komponente ist
+
+Eine Komponente ist ein wiederverwendbarer Baustein innerhalb einer App-Komposition.  
+Spezialisierte Komponenten werden nicht innerhalb jeder App frei neu gebaut — sie kommen aus ihrer zuständigen Engine oder ihrem zuständigen Renderer.  
+Jede Komponentenklasse hat genau eine zuständige Quelle der Wahrheit.
+
+| Komponentenklasse | Beispiele | Zuständige Engine / Renderer |
+|---|---|---|
+| Chart-Komponente | Linien-, Balken-, Tortendiagramm | ChartEngine (vorhanden) |
+| Map-Komponente | Weltkarte ETF-Indizes | Map-/Geo-Logik (noch zu definieren) |
+| Card-Komponente | KPI-Karte, Ergebniskarte, Infokarte | CardRenderer (noch zu definieren) |
+| Control-Komponente | Slider, Buttons, Tabs, Auswahlfelder | UI-Shell oder App direkt |
+| Text-/Copy-Komponente | Ergebnissatz, Microcopy, CTA | App direkt |
+
+Neue Klassen entstehen durch Bedarf — nicht durch Vorausplanung.
+
+---
+
+### Was eine Engine / ein Renderer ist
+
+Eine Engine oder ein Renderer ist das Spezialwerkzeug für eine Komponentenklasse.
+
+- Die **ChartEngine** ist die Single Source of Truth für Chart-Komponenten.
+- Eine zukünftige Map-/Geo-Logik kann die Single Source of Truth für Map-Komponenten werden.
+- Ein zukünftiger CardRenderer kann für Card-Komponenten zuständig werden.
+
+**Kernaussage:** Die ChartEngine ist nicht die App-Fabrik.  
+Sie ist die Produktionsstraße für Chart-Komponenten innerhalb der größeren App-Fabrik.
+
+---
+
+### Charts: historisch wichtig, architektonisch kein Sonderfall
+
+Der historische MSCI-World-Chart war die erste Finanzwesir-App mit einer dominanten Chart-Komponente. Er ist historisch wichtig. Architektonisch ist er kein Sonderfall.
+
+| Altes Denken — nicht mehr verwenden | Stattdessen |
+|---|---|
+| App = Chart | App = Komposition aus Komponenten |
+| App-Chart als Sonderfall | Chart-Komponente innerhalb einer App-Komposition |
+| Normaler Chart vs. App-Chart | Dieselbe Chart-Komponente in unterschiedlichen Kompositionen |
+| ChartEngine als AppEngine | ChartEngine als Engine für Chart-Komponenten |
+| MSCI-World-Chart als Sonderarchitektur | Historische erste Ein-Komponenten-App |
+
+---
+
+### Konsequenz für die App-Fabrik
+
+Charts sind eine wichtige Komponentenklasse, aber nicht die einzige.  
+Karten, Cards, Slider, Tabellen, Animationen, Entscheidungselemente, Texte und CTAs sind ebenfalls legitime App-Bausteine.
+
+Belege aus den Mini-Specs:
+
+- **A1 (Risiko-Übersetzer):** Slider + Cards + Entscheidungssatz — keine Chart-Komponente
+- **B1 (Prokrastinations-Preis):** Chart + KPI-Cards + Entscheidungstext
+- **D1 (ETF-Namensdecoder):** Tokenisierung + Token-Chips + Aufklappboxen — keine Chart-Komponente
+- **Weltkarte ETF-Indizes:** Map-Komponente als Hauptbaustein
+- **G1 (Regulatorik-Dashboard):** Regler + KPI-Ausgaben + Szenario-Matrix
+
+Diese Vielfalt ist Absicht, nicht Ausnahme.
+
+---
+
+### Konsequenz für OA-02 und künftige Chart-Integration
+
+OA-02 (Bibliothek und Integrationsform für Chart-Komponenten in Apps) ist eine **Chart-Komponenten-Entscheidung**, keine App-Fabrik-Gesamtentscheidung.
+
+Ziel von OA-02: eine Chart-Komponente app-fabrikfähig machen.  
+Nicht: einen Sonderweg für „App-Charts" bauen.
+
+Die ChartEngine bleibt Single Source of Truth für alle Chart-Komponenten.  
+Neue App-Fabrik-Apps mit Chart-Komponenten gehen durch die ChartEngine — kein direktes Canvas-Rendering an ihr vorbei.
+
+---
+
 ## 2. Begriffe und Ebenen
 
 | Begriff | Definition |
@@ -76,6 +183,10 @@ Jede Familie hat einen eigenen Shell-Code. Die App-spezifische Datei enthält nu
 | **Chart-Engine** | Gemeinsame Infrastruktur für Datenvisualisierung. Kein App-Ordner, kein Funnel-Slot. Wird von Apps genutzt, nicht von der App-Fabrik gesteuert. Hat eigenen Ghost-Card-Vertrag (`financial-chart-module`), der vorerst unverändert bleibt. |
 | **Design-System** | CSS Custom Properties aus `screen.css`, gelesen via Theme-Bridge. Liefert Farben, Typografie und Abstände. Apps hardcoden keine Hex-Werte. |
 | **Ghost-HTML-Card** | Ein einzelner `<div>`-Container, den der Redakteur in Ghost einfügt. Enthält keine App-Logik — das Theme lädt diese automatisch. Zwei Vertragstypen: `fw-app` (App-Fabrik-Apps) und `financial-chart-module` (Chart-Engine, bestehend). |
+| **Kompositionsfläche** / **App Board** | Die App als Fläche, auf der Komponenten angeordnet werden. Die App orchestriert Zustand, Ablauf und Aussage — sie hat keine eigene Visualisierungslogik. |
+| **Komponente** | Wiederverwendbarer Baustein innerhalb einer App-Komposition. Komponentenklassen: Chart-Komponente, Map-Komponente, Card-Komponente, Control-Komponente, Text-Komponente. Spezialisierte Komponenten kommen aus ihrer zuständigen Engine oder ihrem Renderer. |
+| **Component Engine** / **Renderer** | Spezialwerkzeug für eine Komponentenklasse. Jede Komponentenklasse hat genau eine zuständige Quelle der Wahrheit. Beispiel: ChartEngine für Chart-Komponenten. |
+| **Chart-Komponente** | Chart-Baustein (Linien-, Balken-, Tortendiagramm) innerhalb einer App-Komposition. Gerendert durch die ChartEngine. Architektonisch kein Sonderfall — eine von mehreren Komponentenklassen. |
 
 ---
 

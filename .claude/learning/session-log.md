@@ -1,6 +1,9 @@
 # Session-Log — Finanzwesir 2.0
 Wird geleert nach /distill. Einträge: [FRICTION] [WIN] [PREF] [QUESTION] [OK]
 
+## 2026-06-05 – SESSION START (Faden 4) | Fokus: APP-01 — prokrastinations-preis
+`FinanzwesirData.js, CSVParser.js, FwDateUtils.js — diese Session nicht berühren. ✓`
+
 ## 2026-06-05 – APP-01 Slice 3 – Slider + Options-Parsing
 - [FRICTION] Edit-Tool-Ablehnung beim session-log-Schreiben zu Sessionbeginn → sofort neu gestartet, kein Datenverlust
 - [WIN] NB-5 (synchrone DOM-Neuaufbau auf Slider-Tick) während Advocatus-Diaboli-Phase entdeckt — als Nicht-Blocker in SLICE_PLAN.md + Codekommentar formalisiert, Albert aktiv entschieden
@@ -126,3 +129,9 @@ Wird geleert nach /distill. Einträge: [FRICTION] [WIN] [PREF] [QUESTION] [OK]
 
 ## 2026-06-04 – APP-01 Mini-Konsistenzpatch nach Slice 0
 - [WIN] Advocatus-Diaboli-Prüfung hat 2 zusätzliche veraltete IIFE-Stellen gefunden (SLICE_PLAN Slice-1-Voraussetzung + SLICE_0_KICKOFF §6); Albert hat sie direkt in den Scope aufgenommen — Patch dadurch vollständig bereinigt
+
+## 2026-06-05 – SESSION START | Fokus: APP-01 — prokrastinations-preis
+`FinanzwesirData.js, CSVParser.js, FwDateUtils.js — diese Session nicht berühren. ✓`
+
+## 2026-06-05 – COMP-ARCH-Verankerung | Component Composition Architecture
+- [OK] Keine Vorkommnisse

@@ -2,13 +2,13 @@
 Version: 1
 Stand: 2026-06-05
 Fokus-AP: APP-01 — prokrastinations-preis
-Nächster-Schritt: Slice 4 — SparplanChart (OA-02 muss zuerst entschieden werden)
+Nächster-Schritt: OA-02 entscheiden (Peer-Review + COMP-ARCH-Kontext ready) → dann Slice 4 SparplanChart
 Blocker: keine
 -->
 
 # PROJECT STATUS — Finanzwesir 2.0
 
-Stand: 2026-06-05 | Session: APP-01-slice3 | Geändert von: Claude
+Stand: 2026-06-05 | Session: COMP-ARCH-Verankerung | Geändert von: Claude
 
 **Zweck:** Schneller Wiedereinstieg nach Pausen.
 **Zielgruppe:** Albert und Claude.
@@ -58,7 +58,9 @@ Stand: 2026-06-05 | Session: APP-01-slice3 | Geändert von: Claude
 
 ✅ **B1 Slice-3 abgeschlossen (2026-06-05):** clamp() + parseOptions() (Whitelist defaultRate/startBetrag), renderContent() neu mit Slider + wrapping label (Q-06), ARIA-Slider, ARIA Live Region (input/change getrennt), app.css Slider-Stile. Q-06 in Decision Log + Factory Standard formalisiert. 20 Szenarien A–T bestätigt, Viewport 375px ✅.
 
-⚙️ **Nächster Schritt B1:** Slice 4 — SparplanChart. Voraussetzung: OA-02 (Bibliothek + Integrationsform) muss zuerst entschieden werden.
+✅ **COMP-ARCH-Verankerung (2026-06-05):** Component Composition Architecture als verbindliches Architekturmodell verankert — §1a in 03_APP_FACTORY_STANDARD_DRAFT.md (Lego-Brett-Modell, Komponentenklassen, Chart entzaubert), §2-Begriffe erweitert, CHART_ENGINE_ROLE_AND_INTEGRATION.md §1 Einordnung, APP-INTERFACE.md §4 Querverweis, ADR-COMP-ARCH-01 angelegt. OA-02 als Chart-Komponenten-Entscheidung gerahmt — kein App-Fabrik-Sonderweg.
+
+⚙️ **Nächster Schritt B1:** OA-02 entscheiden (Peer-Review + COMP-ARCH-Kontext liegen vor) → dann Slice 4 SparplanChart.
 
 ---
 
@@ -133,6 +135,9 @@ Vollständig im DECISION-LOG dokumentiert (`docs/steering/DECISION-LOG.md`):
 ---
 
 ## 8. Letzte Session
+
+2026-06-05 — COMP-ARCH-Verankerung (COMP-ARCH-01).
+Component Composition Architecture als verbindliches Architekturmodell verankert. §1a in 03_APP_FACTORY_STANDARD_DRAFT.md (Lego-Brett-Modell, Komponentenklassen, Chart entzaubert), CHART_ENGINE_ROLE_AND_INTEGRATION.md §1 Einordnung, APP-INTERFACE.md §4 Querverweis, ADR-COMP-ARCH-01 angelegt. OA-02-Peer-Review erstmals committed.
 
 2026-06-05 — APP-01 Slice 3 abgeschlossen (APP-01-slice3).
 clamp() + parseOptions() (data-fw-options Whitelist: defaultRate/startBetrag), renderContent() komplett neu: Slider + wrapping label (Q-06), ARIA-Slider, ARIA Live Region (input/change getrennt), app.css Slider-Stile (flex/wrap, accent-color, prefers-reduced-motion). Q-06 in Decision Log + Factory Standard formalisiert. NB-5 (synchrone DOM-Neuaufbau) dokumentiert. 20 Szenarien A–T bestätigt, Viewport 375px ✅.
@@ -305,7 +310,9 @@ Neue APs: DS-012, DS-013, DS-014.
 
 ## 9. Einstieg für nächste Session
 
-**Nächster Schritt: B1 Slice-4 — SparplanChart. Slice-3 (Slider + Options-Parsing) abgeschlossen und getestet ✅ (2026-06-05). Voraussetzung: OA-02 (Bibliothek + Integrationsform) muss zuerst entschieden werden.**
+**Nächster Schritt: OA-02 entscheiden → Slice-4 SparplanChart implementieren.**
+
+OA-02-Kontext vorbereitet: COMP-ARCH-Entscheidung (§1a + ADR-COMP-ARCH-01) und Peer-Review (`docs/steering/audits/OA-02-chart-engine-integration-peer-review.md`) liegen vor. Empfehlung: Option C3 (FwAppChart-Klasse). Slice-3 ✅ 2026-06-05.
 
 Entschieden (nicht mehr offen):
 - E-01 ✅: prokrastinations-preis ist Szenario-/Vergleichs-App mit Storytelling-Elementen

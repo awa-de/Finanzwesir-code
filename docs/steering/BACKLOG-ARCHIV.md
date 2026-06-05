@@ -1,11 +1,12 @@
 # BACKLOG-ARCHIV – Finanzwesir 2.0
-Stand: 2026-06-05 | Session: APP-01-slice3 | Geändert von: Claude
+Stand: 2026-06-05 | Session: COMP-ARCH-Verankerung | Geändert von: Claude
 
 Abgeschlossene Items, neueste zuerst (append-only).
 Archivierungs-Trigger: wenn > 200 Zeilen → neue Datei `BACKLOG-ARCHIV-YYYY.md` anlegen.
 
 | ID | Bereich | Titel | Abgeschlossen | Session |
 |----|---------|-------|---------------|---------|
+| COMP-ARCH-01 | Architektur | Component Composition Architecture verankert: §1a in 03_APP_FACTORY_STANDARD_DRAFT.md (Lego-Brett-Modell, Komponentenklassen, Chart entzaubert), §2-Begriffe erweitert, CHART_ENGINE_ROLE_AND_INTEGRATION.md §1 Einordnung, APP-INTERFACE.md §4 Querverweis, ADR-COMP-ARCH-01 angelegt. OA-02 als Chart-Komponenten-Entscheidung gerahmt — kein App-Fabrik-Sonderweg. Peer-Review (OA-02-chart-engine-integration-peer-review.md) erstmals in Git committed. *(sofort erledigt)* | 2026-06-05 | COMP-ARCH-Verankerung |
 | APP-01-slice3 | App | Slice 3 implementiert: clamp() + parseOptions() (Whitelist defaultRate/startBetrag, Two-Step-Parsing A-10), renderContent() komplett neu (Slider + wrapping label Q-06, ARIA-Slider, ARIA Live Region aria-live polite, input/change-Events getrennt), app.css Slider-Stile (flex/wrap, accent-color, prefers-reduced-motion), app.test.html 20 Szenarien A–T. Q-06 (Label-Konvention) in 01_DECISION_LOG.md + 03_APP_FACTORY_STANDARD_DRAFT.md §9 formalisiert. NB-5 (synchrone DOM-Neuaufbau pro Slider-Tick) in SLICE_PLAN + Codekommentar dokumentiert. Szenarien A/E/O/P/S/T + Viewport 375px bestätigt ✅. | 2026-06-05 | APP-01-slice3 |
 | APP-01-slice2-nachputz | App | APP_SPEC.md §1 auf V1.7/Slice-2-abgeschlossen aktualisiert; PROJECT-STATUS.md §3/§4/§8/§9 auf Slice-3 aktualisiert; app.js `_loadDataImpl()` hasInvalidRows-Wächter (index_value ≤ 0 + date instanceof Date als defense-in-depth); test-data/no-date.csv + invalid-index-value.csv angelegt; app.test.html Szenarien Q + R ergänzt (16 → 18 Szenarien). CSVParser-GATEKEEPER-Verhalten entdeckt: date-Prüfung in hasRequiredColumns war toter Code. *(sofort erledigt)* | 2026-06-05 | APP-01-slice2-nachputz |
 | APP-01-p11 | App-Fabrik | P-11 Fetch-Dedup-Cache formalisiert: `_dataCache = new Map()` in app.js (loadData-Shell + _loadDataImpl), P-11-Prinzip in Factory-Standard-Draft §9 (🟢 ENTSCHIEDEN), Pflicht-Scaffold in SLICE_0_KICKOFF §11. 7 parallele CSV-Requests → 1, Albert bestätigt. *(sofort erledigt)* | 2026-06-05 | APP-01-slice2 |

@@ -1,6 +1,6 @@
 # App Interface — Finanzwesir 2.0
 
-Stand: 2026-06-04 | Session: APP-01-slice-planung | Geändert von: Claude
+Stand: 2026-06-05 | COMP-ARCH-Querverweis | Geändert von: Claude
 
 **Zweck:** Kanonischer Schnittstellen-Vertrag zwischen Ghost-Content, App-Fabrik-Apps und Chart-Engine.
 **Zielgruppe:** Claude, Albert, zukünftige App-Implementierungen.
@@ -146,6 +146,9 @@ Bestehender Vertrag — bleibt vollständig gültig, wird nicht auf fw-app migri
 ---
 
 ## 4. Interner Entwicklervertrag
+
+Architektonisches Grundmodell: Finanzwesir-Apps sind Kompositionsflächen (Component Composition Architecture). Ein Chart ist eine Komponente innerhalb dieser Komposition — kein architektonischer Sonderfall.  
+→ `docs/App-Fabrik/03_APP_FACTORY_STANDARD_DRAFT.md` §1a
 
 Apps bauen keine Charts direkt. Sie nutzen die Chart-Engine als Subsystem.
 

@@ -1,6 +1,6 @@
 # Chart-Engine: Rolle und Architekturprinzipien für die App-Fabrik
 
-Stand: 2026-05-10 | Chart-Engine-Referenzmodell | Geändert von: Claude
+Stand: 2026-06-05 | COMP-ARCH-Einordnung | Geändert von: Claude
 
 **Zweck:** Klärt die Stellung der Chart-Engine im App-Fabrik-Ökosystem und dokumentiert, welche Architekturprinzipien aus dem Architecture Strategy Paper VX als Referenzmuster für App-Fabrik-Apps gelten.
 
@@ -21,6 +21,17 @@ Die Chart-Engine ist ein **eigenständiges Visualisierungs-Subsystem** — keine
 | Wird von Chart-Apps als Baustein eingesetzt | Ein Sonderfall, der App-Fabrik-Regeln bricht |
 
 **Konsequenz:** Änderungen an der Chart-Engine erfordern ein separates Gate und Alberts explizite Freigabe — unabhängig von diesem Dokument. Dieses Dokument ändert nichts an der Chart-Engine.
+
+### Einordnung in die Component Composition Architecture
+
+Im Rahmen der Component Composition Architecture der App-Fabrik gilt die Chart-Engine als **Produktionsstraße für Chart-Komponenten** — nicht als App-Fabrik als Ganzes.
+
+Die App-Fabrik komponiert didaktische Erlebnisflächen aus mehreren Komponentenklassen. Charts sind eine wichtige Komponentenklasse — nicht die einzige.
+
+Die ChartEngine ist die Single Source of Truth für Chart-Komponenten. Andere Komponentenklassen (Map, Card, Control) haben ihre eigenen zuständigen Engines oder Renderer.
+
+→ Vollständiges Modell: `docs/App-Fabrik/03_APP_FACTORY_STANDARD_DRAFT.md` §1a  
+→ Entscheidungsnotiz: `docs/steering/audits/ADR-COMP-ARCH-01-component-composition-architecture.md`
 
 ---
 
