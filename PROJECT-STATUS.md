@@ -2,13 +2,13 @@
 Version: 1
 Stand: 2026-06-05
 Fokus-AP: APP-01 — prokrastinations-preis
-Nächster-Schritt: Slice 2 implementieren — MarketTimeStrategy + KpiCards (Slice-1 abgeschlossen)
+Nächster-Schritt: Slice 3 implementieren — Slider + Options-Parsing (Slice-2 abgeschlossen)
 Blocker: keine
 -->
 
 # PROJECT STATUS — Finanzwesir 2.0
 
-Stand: 2026-06-05 | Session: APP-01-slice1 | Geändert von: Claude
+Stand: 2026-06-05 | Session: APP-01-slice2 | Geändert von: Claude
 
 **Zweck:** Schneller Wiedereinstieg nach Pausen.
 **Zielgruppe:** Albert und Claude.
@@ -54,7 +54,9 @@ Stand: 2026-06-05 | Session: APP-01-slice1 | Geändert von: Claude
 
 ✅ **B1 Slice-1 abgeschlossen (2026-06-05):** CSVParser-Import (ES-Modul), loadData() mit Two-Step-Validierung (unitKey CURRENCY_EUR, ≥120 Zeilen, index_value-Spalte), AppData (Object.freeze, Date→ISO-String). Alle 5 Daten-States implementiert, 14 Testszenarien A–N bestätigt.
 
-⚙️ **Nächster Schritt B1:** Slice 2 — MarketTimeStrategy + KpiCards.
+✅ **B1 Slice-2 abgeschlossen (2026-06-05):** marketTimeStrategy() (Anteilslogik, 120 Monate), buildAppContext() (AppContext-Rucksack), renderKpiCards() (dl/dt/dd SafeDOM), renderA11yRegion() (aria-live polite). 16 Testszenarien A–P bestätigt (36.000 € / 72.176 € / +36.176 €). P-11 Fetch-Dedup-Cache formalisiert (Factory-Standard-Draft §9).
+
+⚙️ **Nächster Schritt B1:** Slice 3 — Slider + Options-Parsing.
 
 ---
 

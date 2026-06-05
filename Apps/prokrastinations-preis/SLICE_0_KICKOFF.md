@@ -325,3 +325,33 @@ Keine dieser offenen Punkte blockiert Slice 0.
 Albert, gibst du Slice 0 zur Implementierung frei?
 
 (Implementierung bedeutet: Pre-Code-Gate Full läuft → bei OK werden `app.js`, `app.css`, `app.test.html` neu angelegt.)
+
+---
+
+## 11. Pflicht-Scaffold ab Slice 1 — Fetch-Dedup-Cache (Vorlage für neue Apps)
+
+Gilt für alle Apps mit externer Datenpipeline. Einzufügen in `app.js` beim Übergang von Slice 0 → Slice 1.
+
+Quelle: P-11 in `docs/App-Fabrik/03_APP_FACTORY_STANDARD_DRAFT.md` §9
+
+```js
+// Modul-Level (nach SLUG_WHITELIST, vor erster Funktion)
+const _dataCache = new Map();
+
+// loadData — dünne Cache-Shell (P-11)
+async function loadData(url) {
+  if (!url) return { error: 'b', message: 'Daten konnten nicht geladen werden. Bitte Seite neu laden.' };
+  if (!_dataCache.has(url)) _dataCache.set(url, _loadDataImpl(url));
+  return _dataCache.get(url);
+}
+
+// _loadDataImpl — eigentliche Lade- und Parse-Logik
+async function _loadDataImpl(url) {
+  // CSVParser aufrufen, Error-Handling, Validierung, AppData aufbauen
+  // Rückgabe: { appData } oder { error: 'b'|'c'|'empty', message }
+}
+```
+
+**Merksatz:** Promise cachen, nicht Result — verhindert Race Conditions bei gleichzeitiger Container-Initialisierung.
+
+**Nicht nötig bei:** Calculator-Apps ohne externe CSV/JSON-Daten.

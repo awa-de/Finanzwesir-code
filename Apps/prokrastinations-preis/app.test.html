@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Testseite — prokrastinations-preis Slice 1</title>
+  <title>Testseite — prokrastinations-preis Slice 2</title>
   <link rel="stylesheet" href="./app.css">
   <style>
     /* Nur für Testseite — gehört nicht in app.css */
@@ -18,7 +18,7 @@
 </head>
 <body>
 
-  <h1>Testseite — prokrastinations-preis Slice 1</h1>
+  <h1>Testseite — prokrastinations-preis Slice 2</h1>
 
   <div class="test-warning">
     Muss über VSCode Live Server geöffnet werden (http://127.0.0.1:5500/...) — nicht als file://. ES-Module laden sonst nicht.
@@ -28,9 +28,11 @@
   <div class="test-section">
     <h2>A — Minimal-Card mit gültiger Daten-URL</h2>
     <p class="test-meta">
-      Erwartung: Loading → Content-State. Gerüst-Text zeigt Anzahl Monate und letzten Monat der CSV.<br>
-      Kein Slice-0-Platzhalter mehr sichtbar. Keine JS-Exception in DevTools-Konsole.<br>
-      Testfälle: T-01 | AK: A0-1
+      Erwartung: Loading → Content-State. Drei KpiCards sichtbar: „Eingezahlt", „Depotwert heute", „Gewinn / Verlust".<br>
+      Werte basieren auf Default 300 €/Monat, 120 Monate. „Differenz" mit Vorzeichen (+/−).<br>
+      ARIA Live Region vorhanden (DevTools → DOM: [data-fw-role="a11y-result"] enthält Screenreader-Text).<br>
+      Keine JS-Exception in DevTools-Konsole.<br>
+      Testfälle: T-01, T-12 (manuell: Wert in renderContent auf 2000 setzen → kein Crash), T-13 (auf 50 setzen → kein Crash)
     </p>
     <div class="kg-card">
       <div class="fw-app"
@@ -68,7 +70,7 @@
   <div class="test-section">
     <h2>D — Zwei gültige Container</h2>
     <p class="test-meta">
-      Erwartung: Beide im Content-State, kein doppelter DOM-Node, keine Exception in Konsole.<br>
+      Erwartung: Beide im Content-State mit KpiCards, kein doppelter DOM-Node, keine Exception in Konsole.<br>
       AK: A0-1, A0-7
     </p>
     <div class="kg-card">
@@ -89,7 +91,8 @@
   <div class="test-section">
     <h2>E — XSS-Versuch in data-fw-options</h2>
     <p class="test-meta">
-      Erwartung: Kein Alert, kein innerHTML, App stabil. data-fw-options wird in Slice 1 weiterhin ignoriert.<br>
+      Erwartung: Kein Alert, kein innerHTML, App stabil. data-fw-options wird in Slice 2 weiterhin ignoriert (Parsing kommt in Slice 3).<br>
+      App zeigt KpiCards mit Default 300 €.<br>
       Testfälle: T-08, T-10 | AK: A0-5, A0-8
     </p>
     <div class="kg-card">
@@ -101,12 +104,11 @@
     </div>
   </div>
 
-  <!-- Szenario F: Fehlendes data-fw-data — GEÄNDERT in Slice 1 -->
+  <!-- Szenario F: Fehlendes data-fw-data -->
   <div class="test-section">
     <h2>F — Fehlendes data-fw-data</h2>
     <p class="test-meta">
       Erwartung: Error-State (b), Meldung „Daten konnten nicht geladen werden. Bitte Seite neu laden."<br>
-      Slice-1-Änderung: In Slice 0 war dies Content-State — ab Slice 1 ist fehlendes data-fw-data Error (b).<br>
       Testfälle: T-03 (URL leer)
     </p>
     <div class="kg-card">
@@ -135,7 +137,7 @@
   </div>
 
   <!-- ═══════════════════════════════════════════════════════════ -->
-  <!-- NEU — Slice 1: Daten-States (T-03 bis T-07b)              -->
+  <!-- Slice 1: Daten-States (T-03 bis T-07b)                    -->
   <!-- ═══════════════════════════════════════════════════════════ -->
 
   <!-- Szenario H: Ungültige Domain → Error (b) -->
@@ -240,6 +242,46 @@
       <div class="fw-app"
            data-fw-app="prokrastinations-preis"
            data-fw-data="./test-data/usd-suffix.csv">
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════════ -->
+  <!-- NEU — Slice 2: Berechnung (T-12, T-13)                    -->
+  <!-- ═══════════════════════════════════════════════════════════ -->
+
+  <!-- Szenario O: T-12 — Maximalwert 2.000 €/Monat -->
+  <div class="test-section">
+    <h2>O — Maximalwert 2.000 €/Monat (T-12, Slice-3-Scaffolding)</h2>
+    <p class="test-meta">
+      Slice 2: data-fw-options wird noch ignoriert — App zeigt KpiCards mit Default 300 €. Kein Crash.<br>
+      Slice 3: Slider + Options-Parsing aktiviert → KpiCards zeigen Werte für 2.000 €/Monat.<br>
+      Manuelle Verifikation Slice 2: In renderContent Wert auf 2000 setzen → Berechnung korrekt, kein Crash.<br>
+      Testfall: T-12
+    </p>
+    <div class="kg-card">
+      <div class="fw-app"
+           data-fw-app="prokrastinations-preis"
+           data-fw-data="../../Theme/assets/data/b1/msci-world-net-return-eur-monthly.csv"
+           data-fw-options="defaultRate:2000">
+      </div>
+    </div>
+  </div>
+
+  <!-- Szenario P: T-13 — Minimalwert 50 €/Monat -->
+  <div class="test-section">
+    <h2>P — Minimalwert 50 €/Monat (T-13, Slice-3-Scaffolding)</h2>
+    <p class="test-meta">
+      Slice 2: data-fw-options wird noch ignoriert — App zeigt KpiCards mit Default 300 €. Kein Crash.<br>
+      Slice 3: Slider + Options-Parsing aktiviert → KpiCards zeigen Werte für 50 €/Monat.<br>
+      Manuelle Verifikation Slice 2: In renderContent Wert auf 50 setzen → Berechnung korrekt, kein Crash.<br>
+      Testfall: T-13
+    </p>
+    <div class="kg-card">
+      <div class="fw-app"
+           data-fw-app="prokrastinations-preis"
+           data-fw-data="../../Theme/assets/data/b1/msci-world-net-return-eur-monthly.csv"
+           data-fw-options="defaultRate:50">
       </div>
     </div>
   </div>

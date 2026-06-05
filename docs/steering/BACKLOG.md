@@ -1,5 +1,5 @@
 # BACKLOG – Finanzwesir 2.0
-Stand: 2026-06-05 | Session: APP-01-slice1 | Geändert von: Claude
+Stand: 2026-06-05 | Session: APP-01-slice2 | Geändert von: Claude
 
 **Regeln:**
 - ✅-Zeilen werden sofort nach `BACKLOG-ARCHIV.md` verschoben (append), dann hier gelöscht.
@@ -12,7 +12,7 @@ Stand: 2026-06-05 | Session: APP-01-slice1 | Geändert von: Claude
 
 | ID       | Bereich | Titel                                     | Prio | Dep | Detail                              |
 |----------|---------|-------------------------------------------|------|-----|-------------------------------------|
-| APP-01   | App     | B1 Slice-2: MarketTimeStrategy + KpiCards (Slice-1 ✅ 2026-06-05) | H | — | Apps/prokrastinations-preis/SLICE_PLAN.md |
+| APP-01   | App     | B1 Slice-3: Slider + Options-Parsing (Slice-2 ✅ 2026-06-05) | H | — | Apps/prokrastinations-preis/SLICE_PLAN.md |
 | AP-20/21 | Engine  | Mixed-Rhythm CV-Heuristik (T5→T3→T6→T7)  | H    | —   | engine/detail/AP-20-DETAIL.md       |
 | AP-6c    | Engine  | Touch-Tooltip Smartphone-Test             | M    | —   | engine/detail/AP-6c-DETAIL.md       |
 | AP-22    | Engine  | Zero-Line lineWidth (~3 Zeilen Fix)       | L    | —   | —                                   |

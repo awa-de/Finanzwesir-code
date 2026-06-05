@@ -1,4 +1,4 @@
-/* CHANGED — Slice 1 (war: Slice 0) */
+/* CHANGED — Slice 2 (war: Slice 1) */
 
 /* === Basis === */
 .fw-app {
@@ -14,7 +14,6 @@
 /* === Loading === */
 .fw-app[data-fw-state="loading"] {
   opacity: 0.6;
-  /* Slice 1: asynchrones CSV-Laden — DOM-Inhalt über renderLoading() */
 }
 
 /* === Error === */
@@ -25,7 +24,7 @@
   color: var(--fw-color-error-text, #b71c1c);
 }
 
-/* === Empty (CSS-Hook für Slice 1 — noch keine JS-Logik dahinter) === */
+/* === Empty === */
 .fw-app[data-fw-state="empty"] {
   padding: var(--fw-space-md, 1rem);
   color: var(--fw-color-muted, #555555);
@@ -35,4 +34,46 @@
 .fw-app[data-fw-state="content"] {
   opacity: 1;
   padding: var(--fw-space-md, 1rem);
+}
+
+/* === Slice 2: KpiCards (APP_SPEC §12.4) === */
+.fw-app__kpi-cards {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--fw-space-md, 1rem);
+  margin: var(--fw-space-md, 1rem) 0 0;
+  padding: 0;
+}
+
+.fw-app__kpi-card {
+  flex: 1 1 140px;
+  background: var(--fw-color-surface, #f5f5f5);
+  border-radius: 4px;
+  padding: var(--fw-space-sm, 0.5rem) var(--fw-space-md, 1rem);
+}
+
+.fw-app__kpi-card dt {
+  font-size: 0.8em;
+  color: var(--fw-color-muted, #555555);
+  margin-bottom: 0.25em;
+}
+
+.fw-app__kpi-card dd {
+  font-size: 1.4em;
+  font-weight: bold;
+  color: var(--fw-color-text, #1a1a1a);
+  margin: 0;
+}
+
+/* === A11y: ARIA Live Region (APP_SPEC §12.1) === */
+.fw-app__visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
 }

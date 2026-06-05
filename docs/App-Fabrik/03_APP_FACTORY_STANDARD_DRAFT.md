@@ -882,6 +882,34 @@ Jede `APP_SPEC.md` enthält einen Abschnitt „Reise eines Inputs / Datenpunkts"
 
 ---
 
+### P-11 — Fetch-Dedup-Cache
+
+🟢 ENTSCHIEDEN — Quelle: Pilot-Erfahrung `prokrastinations-preis` Slice 2, 2026-06-05
+
+Jede `loadData`-Funktion, die externe Dateien lädt (CSV, JSON), cacht das laufende Promise auf Modul-Level. Mehrere Container mit derselben URL lösen nur einen HTTP-Request und einen Parse-Vorgang aus.
+
+**Implementierungsmuster:**
+
+```js
+const _dataCache = new Map();
+
+async function loadData(url) {
+  if (!url) return { error: 'b', message: '...' };
+  if (!_dataCache.has(url)) _dataCache.set(url, _loadDataImpl(url));
+  return _dataCache.get(url);
+}
+
+async function _loadDataImpl(url) { /* eigentliche Lade- und Parse-Logik */ }
+```
+
+**Warum Promise cachen, nicht Result:** Mehrere Container starten gleichzeitig beim `DOMContentLoaded`. Erst das Cachen der Promise — vor dem ersten `await` — verhindert Race Conditions. Alle gleichzeitigen Aufrufe bekommen dieselbe Promise zurück.
+
+**Scope:** Gilt für alle Apps mit externer Datenpipeline (CSV, JSON). Calculator-Apps ohne externe Daten sind ausgenommen.
+
+**Übergangsregel:** Bis die gemeinsame App-Shell existiert (→ offene Frage F-06 in §13), liegt dieser Cache in jeder `app.js`. Wenn die Shell kommt, wandert der Cache dorthin. P-11 bleibt als Prinzip — nur der Ablageort ändert sich.
+
+---
+
 ## 11. Sicherheitsregeln
 
 🟢 ENTSCHIEDEN — Quelle: `01_DECISION_LOG.md` Q-01, Q-02; `docs/steering/audits/SECURITY-BASELINE.md`

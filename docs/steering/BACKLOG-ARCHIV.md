@@ -1,11 +1,13 @@
 # BACKLOG-ARCHIV – Finanzwesir 2.0
-Stand: 2026-06-05 | Session: APP-01-slice1 | Geändert von: Claude
+Stand: 2026-06-05 | Session: APP-01-slice2 | Geändert von: Claude
 
 Abgeschlossene Items, neueste zuerst (append-only).
 Archivierungs-Trigger: wenn > 200 Zeilen → neue Datei `BACKLOG-ARCHIV-YYYY.md` anlegen.
 
 | ID | Bereich | Titel | Abgeschlossen | Session |
 |----|---------|-------|---------------|---------|
+| APP-01-p11 | App-Fabrik | P-11 Fetch-Dedup-Cache formalisiert: `_dataCache = new Map()` in app.js (loadData-Shell + _loadDataImpl), P-11-Prinzip in Factory-Standard-Draft §9 (🟢 ENTSCHIEDEN), Pflicht-Scaffold in SLICE_0_KICKOFF §11. 7 parallele CSV-Requests → 1, Albert bestätigt. *(sofort erledigt)* | 2026-06-05 | APP-01-slice2 |
+| APP-01-slice2 | App | Slice 2 implementiert: marketTimeStrategy() (Anteilslogik, 120 Monate), buildAppContext() (AppContext-Rucksack mit a11ySummary), renderKpiCards() (dl/dt/dd, SafeDOM), renderA11yRegion() (aria-live polite). app.test.html auf 16 Szenarien A–P erweitert. Full-Gate bestanden, Szenarien A–P getestet ✅ (KpiCards: 36.000 € / 72.176 € / +36.176 €). | 2026-06-05 | APP-01-slice2 |
 | APP-01-slice1 | App | Slice 1 implementiert: CSVParser-Import (ES-Modul), loadData() mit Two-Step-Validierung (unitKey CURRENCY_EUR, ≥120 Zeilen, index_value-Spalte), AppData (Object.freeze, Date→ISO-String-Mapping). Alle 5 Daten-States (Loading/Content/Error-b/c/Empty). app.test.html auf 14 Szenarien A–N erweitert, 5 Test-CSVs in test-data/ angelegt. Full-Gate bestanden, Szenarien A–N getestet ✅. | 2026-06-05 | APP-01-slice1 |
 | APP-01-konsistenzpatch | App | Mini-Konsistenzpatch nach Slice 0: APP_SPEC §1 auf V1.6/Phase-3/Slice-1 aktualisiert; SLICE_PLAN IIFE→ES-Modul, Slice-0-Ziel Domain-validiert entfernt, 2 Slice-0-Sonderfall-Hinweise ergänzt, OA-01-Voraussetzung in Slice-1-Section präzisiert; SLICE_0_KICKOFF §2/§3/§6 Formulierungsdrifts bereinigt (liest-statt-speichert, Abschluss-Ritual-Trennung, Sechs-Monats-Regret OA-01 aktualisiert). *(sofort erledigt)* | 2026-06-04 | APP-01-mini-konsistenzpatch |
 | APP-01-slice0 | App | Slice 0 implementiert: App-Shell, Slug-Prüfung, URL-Attribut-Lesen, State-Maschine. app.js (ES-Modul, ~65 Zeilen), app.css (.fw-app-Namespace, 4 Blöcke + empty-Hook), app.test.html (7 Szenarien A–G inkl. XSS-Test). SafeDOM durchgängig, Guard aktiv. Szenarien A–G lokal getestet ✅, keine Konsolen-Fehler. *(sofort erledigt)* | 2026-06-04 | APP-01-slice0-impl |

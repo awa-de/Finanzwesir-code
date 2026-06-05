@@ -7,7 +7,7 @@
 
 # SLICE_PLAN — prokrastinations-preis
 
-Stand: 2026-06-04 16:30 | Session: APP-01-slice0-impl | Geändert von: Claude
+Stand: 2026-06-05 | Session: APP-01-slice2 | Geändert von: Claude
 
 ---
 
@@ -22,7 +22,8 @@ Stand: 2026-06-04 16:30 | Session: APP-01-slice0-impl | Geändert von: Claude
 | Pre-Code-Gate | OK 2026-06-04 (Full-Gate, 9 Fragen) |
 | Freigabe Slice 0 | OK 2026-06-04, getestet ✅ (Szenarien A–G) |
 | Freigabe Slice 1 | OK 2026-06-05, getestet ✅ (Szenarien A–N) |
-| Nächster Schritt | Slice 2 — MarketTimeStrategy + KpiCards |
+| Freigabe Slice 2 | OK 2026-06-05, getestet ✅ (Szenarien A–P, KpiCards 36.000 € / 72.176 € / +36.176 €) |
+| Nächster Schritt | Slice 3 — Slider + Options-Parsing |
 
 ---
 
@@ -73,7 +74,7 @@ Diese Frage ist nach B-01-Entscheidungen weiterhin offen.
 |---|---|---|---|---|
 | **0** | App-Shell + Slug-Prüfung + URL-Attribut-Lesen + State-Maschine | Ghost-Card → Bootstrap → State → CSS | — | ✅ 2026-06-04 |
 | **1** | CSV-Datenladen + Datenvalidierung + Daten-States | Fetch → CSVParser → Validierung → AppData | OA-01 entschieden ✓ | ✅ 2026-06-05 |
-| **2** | MarketTimeStrategy + KpiCards | AppData → Strategy → AppContext → Renderer | Slice 1 | Offen |
+| **2** | MarketTimeStrategy + KpiCards | AppData → Strategy → AppContext → Renderer | Slice 1 | ✅ 2026-06-05 |
 | **3** | Slider monatlicheRate | UI → Event → Clamp → Strategy → AppContext → Renderer → ARIA | Slice 2 | Offen |
 | **4** | SparplanChart | AppContext → Chart-Renderer | Slice 2 + OA-02 entschieden | Offen |
 | **5** | 4-Screen-Flow (Button-getrieben) | Screen-Controller → Fokus-Management | Slice 2 + 3 | Offen |

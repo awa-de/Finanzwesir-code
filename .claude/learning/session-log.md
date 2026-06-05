@@ -1,6 +1,12 @@
 # Session-Log — Finanzwesir 2.0
 Wird geleert nach /distill. Einträge: [FRICTION] [WIN] [PREF] [QUESTION] [OK]
 
+## 2026-06-05 – APP-01 Slice 2 (nachgeholt) + P-11 Fetch-Dedup-Cache
+- [WIN] Slice 2 vollständig getestet und bestätigt: MarketTimeStrategy + AppContext + KpiCards + ARIA Live Region korrekt; KpiCards zeigen Eingezahlt 36.000 €, Depotwert 72.176 €, Gewinn +36.176 €
+- [WIN] P-11 Fetch-Dedup-Cache: 7 parallele CSV-Requests → 1; Ladezeit merklich schneller, Albert bestätigt
+- [WIN] P-11 in Factory-Standard-Draft §9 + SLICE_0_KICKOFF §11 formalisiert — Pflicht-Scaffold für alle 23 Apps mit Datenpipeline
+- [FRICTION] Abschluss-Ritual für Slice 2 war in der Vorsession nicht abgeschlossen worden — in dieser Session nachgeholt
+
 ## 2026-06-05 – SESSION START | Fokus: APP-01 — prokrastinations-preis
 `FinanzwesirData.js, CSVParser.js, FwDateUtils.js — diese Session nicht berühren. ✓`
 

@@ -166,10 +166,10 @@ Nach Abschluss: `/abschluss-ritual`.
 > und welche Datenfragen vor dem produktiven Bau offen sind.
 > Nur bei Quellen-, CSV-, Contract- oder Datenänderungsfragen zusätzlich `docs/data/` lesen.
 
-> [!note] B1 / prokrastinations-preis — Slice-1 abgeschlossen (2026-06-05)
+> [!note] B1 / prokrastinations-preis — Slice-2 abgeschlossen (2026-06-05)
 > `Apps/prokrastinations-preis/APP_SPEC.md` V1.6 ist die operative Spec-Quelle.
 > `Apps/prokrastinations-preis/MINI_SPEC_FROM_HAUPTDOKUMENT.md` bleibt als fachliche Hintergrundquelle.
-> `SLICE_PLAN.md` aktuell (neue Mechanik, Slice-1 ✅ 2026-06-05). OA-01 entschieden: app.js ist ES-Modul (`<script type="module">`). Nächster Schritt: Slice 2 — MarketTimeStrategy + KpiCards.
+> `SLICE_PLAN.md` aktuell (neue Mechanik, Slice-2 ✅ 2026-06-05). OA-01 entschieden: app.js ist ES-Modul (`<script type="module">`). Nächster Schritt: Slice 3 — Slider + Options-Parsing.
 > B1 ist Pilot-2 (Daten-/Chart-/Story-Pilot). Pilot-1 ist `risiko-uebersetzer` (Calculator-Pilot) — entschieden E-02, 2026-05-28.
 13. bei Chart-Nutzung: relevante Chart-Engine-Spec + WORKING-FEATURES.md
 ```
