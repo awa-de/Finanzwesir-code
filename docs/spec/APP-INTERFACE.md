@@ -1,6 +1,6 @@
 # App Interface — Finanzwesir 2.0
 
-Stand: 2026-06-05 | COMP-ARCH-Querverweis | Geändert von: Claude
+Stand: 2026-06-05 | COMP-ARCH-01-Nachputz | Geändert von: Claude
 
 **Zweck:** Kanonischer Schnittstellen-Vertrag zwischen Ghost-Content, App-Fabrik-Apps und Chart-Engine.
 **Zielgruppe:** Claude, Albert, zukünftige App-Implementierungen.
@@ -152,9 +152,9 @@ Architektonisches Grundmodell: Finanzwesir-Apps sind Kompositionsflächen (Compo
 
 Apps bauen keine Charts direkt. Sie nutzen die Chart-Engine als Subsystem.
 
-Langfristig: App → ChartAdapter/API → Chart-Engine.
+Langfristig: App → Chart-Komponente / Chart-Datenadapter / ChartEngine-API → ChartEngine.
 
-Der genaue Entwicklervertrag (ChartAdapter-API, Aufrufkonvention, Lifecycle) ist noch offen und wird nicht jetzt implementiert. Er ist nicht Teil des Redakteursvertrags (§3) und erscheint nicht in Ghost-HTML-Cards.
+Der genaue Entwicklervertrag (Name, API, Aufrufkonvention, Lifecycle, Update-Pfad) ist OA-02 und bleibt offen, bis diese Entscheidung explizit getroffen ist. Er ist nicht Teil des Redakteursvertrags (§3) und erscheint nicht in Ghost-HTML-Cards.
 
 Änderungen an der Chart-Engine erfordern ein separates Gate und explizite Freigabe durch Albert.
 

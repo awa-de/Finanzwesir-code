@@ -4,6 +4,9 @@ Wird geleert nach /distill. Einträge: [FRICTION] [WIN] [PREF] [QUESTION] [OK]
 ## 2026-06-05 – SESSION START (Faden 4) | Fokus: APP-01 — prokrastinations-preis
 `FinanzwesirData.js, CSVParser.js, FwDateUtils.js — diese Session nicht berühren. ✓`
 
+## 2026-06-05 – COMP-ARCH-01-NACHPUTZ — Dokumentations-Drift-Korrektur
+- [OK] Keine Vorkommnisse. 5 Dateien, alle Korrekturen 1:1 aus Albert's Briefing umgesetzt. NAVIGATION.md war erwartungsgemäß sauber.
+
 ## 2026-06-05 – APP-01 Slice 3 – Slider + Options-Parsing
 - [FRICTION] Edit-Tool-Ablehnung beim session-log-Schreiben zu Sessionbeginn → sofort neu gestartet, kein Datenverlust
 - [WIN] NB-5 (synchrone DOM-Neuaufbau auf Slider-Tick) während Advocatus-Diaboli-Phase entdeckt — als Nicht-Blocker in SLICE_PLAN.md + Codekommentar formalisiert, Albert aktiv entschieden

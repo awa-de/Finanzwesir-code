@@ -1,4 +1,21 @@
-Stand: 2026-06-05 | Autor: Claude Sonnet 4.6 | Status: Zur Peer-Review
+Stand: 2026-06-05 | Autor: Claude Sonnet 4.6 | Status: Historischer Input / vor ADR-COMP-ARCH-01 / zu aktualisieren
+
+> [!warning] Historischer Peer-Review-Stand — vor ADR-COMP-ARCH-01
+> Dieses Dokument ist wertvolle Vorarbeit, aber **nicht mehr der aktuelle Entscheidungsstand**.
+> Es wurde vor der Verankerung der Component Composition Architecture erstellt.
+>
+> Veraltete / zu prüfende Punkte in diesem Dokument:
+> - `C3 / FwAppChart` ist **keine finale Empfehlung** mehr.
+> - Der Begriff „App-Chart" ist zu eng. Maßgeblich ist jetzt: **Chart-Komponente innerhalb einer App-Komposition**.
+> - `fw-chart-engine/index.js` darf **nicht** als neue Export-Fassade vorgeschlagen oder umgebaut werden, weil diese Datei bereits Auto-Start-Code enthält.
+> - OA-02 ist nach ADR-COMP-ARCH-01 neu zu rahmen als **Chart-Komponenten-Vertrag** innerhalb der App-Fabrik.
+>
+> Maßgeblich für den nächsten OA-02-Schritt:
+> - `docs/steering/audits/ADR-COMP-ARCH-01-component-composition-architecture.md`
+> - `docs/App-Fabrik/03_APP_FACTORY_STANDARD_DRAFT.md` §1a
+> - `docs/spec/APP-INTERFACE.md` §4
+>
+> Dieses Dokument darf nur als historischer Input verwendet werden, nicht als Implementierungsanweisung.
 
 # OA-02 — Chart-Engine-Integration: Architekturentscheidung
 

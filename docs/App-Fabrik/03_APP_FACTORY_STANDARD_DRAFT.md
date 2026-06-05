@@ -1,6 +1,6 @@
 # App-Fabrik-Standard — Draft V0.1
 
-Stand: 2026-06-05 | COMP-ARCH-Verankerung | Geändert von: Claude  
+Stand: 2026-06-05 | COMP-ARCH-01-Nachputz | Geändert von: Claude  
 Ziel-Pfad wenn bindend: `docs/spec/APP-FACTORY-STANDARD.md`
 
 **Alle Inhalte hier sind Arbeitsstände.**  
@@ -83,8 +83,10 @@ Dies ist kein illustratives Bild — es ist das verbindliche mentale Modell der 
 
 ### Was eine App ist
 
-Die App orchestriert Zustand, Ablauf, Nutzerinteraktion und Aussage.  
-Die App selbst hat keine Visualisierungslogik — sie weiß, *was* gezeigt werden soll, nicht *wie*.
+Die App orchestriert Zustand, Ablauf, Nutzerinteraktion und Aussage.
+Spezialisierte Visualisierungslogik wird, sobald eine zuständige Engine, ein Renderer oder ein Komponentenvertrag existiert, nicht in jeder App neu gebaut.
+
+Für einfache oder noch nicht standardisierte Komponenten darf die App vorerst selbst rendern — aber nur nach gemeinsamen SafeDOM-, Design-, A11y- und App-Fabrik-Regeln.
 
 Eine App kann chartfrei sein.  
 Eine App kann nur aus einem Chart bestehen.  
@@ -191,6 +193,15 @@ Neue App-Fabrik-Apps mit Chart-Komponenten gehen durch die ChartEngine — kein 
 ---
 
 ## 3. Zählmodell
+
+> [!warning] Zählmodell prüfen
+> Dieses Zählmodell stammt aus einem älteren App-Fabrik-Stand (2026-05-09).
+> Neuere Referenzen enthalten abweichende Zählstände:
+> - `Apps/MINI_SPEC_MAPPING.md`: 21 Haupt-App-Abschnitte / 24 reale App-Ordner (Stand 2026-05-19)
+> - `docs/App-Fabrik/APP_INVENTORY.md`: 25 App-Ordner inklusive `etf-vergleich` (Stand 2026-05-19)
+>
+> Bis zur Konsolidierung ist `APP_INVENTORY.md` die aktuellste Arbeitsquelle für App-Ordner.
+> Diese Zählung darf nicht für neue Architekturentscheidungen verwendet werden.
 
 🟢 ENTSCHIEDEN — Quelle: `01_DECISION_LOG.md` Z-01, Z-02, Z-03, Z-04
 

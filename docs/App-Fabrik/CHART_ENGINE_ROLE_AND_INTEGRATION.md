@@ -1,6 +1,6 @@
 # Chart-Engine: Rolle und Architekturprinzipien für die App-Fabrik
 
-Stand: 2026-06-05 | COMP-ARCH-Einordnung | Geändert von: Claude
+Stand: 2026-06-05 | COMP-ARCH-01-Nachputz | Geändert von: Claude
 
 **Zweck:** Klärt die Stellung der Chart-Engine im App-Fabrik-Ökosystem und dokumentiert, welche Architekturprinzipien aus dem Architecture Strategy Paper VX als Referenzmuster für App-Fabrik-Apps gelten.
 
@@ -11,16 +11,18 @@ Stand: 2026-06-05 | COMP-ARCH-Einordnung | Geändert von: Claude
 
 ## 1. Rolle der Chart-Engine
 
-Die Chart-Engine ist ein **eigenständiges Visualisierungs-Subsystem** — keine normale App, kein App-Fabrik-Produkt.
+Die ChartEngine ist ein **eigenständiges Visualisierungs-Subsystem** — kein App-Ordner und kein Funnel-Produkt.
 
 | Was sie ist | Was sie nicht ist |
 |---|---|
 | Gemeinsame Infrastruktur für Datenvisualisierung | Ein App-Fabrik-App-Ordner mit `fw-app`-Namespace |
-| Hat eigenen Ghost-Card-Vertrag (`financial-chart-module`) | Von der App-Fabrik gesteuert oder verwaltet |
+| Hat eigenen Ghost-Card-Vertrag (`financial-chart-module`) | Von App-Fabrik-Registry oder Bootstrapper gesteuert |
 | Hat eigene Layer-Architektur (Layer 1–5, 14 KDRs) | Durch neue App-Fabrik-Prinzipien veränderbar |
-| Wird von Chart-Apps als Baustein eingesetzt | Ein Sonderfall, der App-Fabrik-Regeln bricht |
+| Wird von App-Fabrik-Apps als Chart-Komponenten-Engine genutzt | Ein Sonderfall, der App-Fabrik-Regeln bricht |
 
 **Konsequenz:** Änderungen an der Chart-Engine erfordern ein separates Gate und Alberts explizite Freigabe — unabhängig von diesem Dokument. Dieses Dokument ändert nichts an der Chart-Engine.
+
+Wird von App-Fabrik-Apps als Chart-Komponenten-Engine genutzt — Änderungen an der Engine selbst unterliegen einem separaten Gate.
 
 ### Einordnung in die Component Composition Architecture
 

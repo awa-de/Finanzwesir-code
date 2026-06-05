@@ -2,13 +2,13 @@
 Version: 1
 Stand: 2026-06-05
 Fokus-AP: APP-01 — prokrastinations-preis
-Nächster-Schritt: OA-02 entscheiden (Peer-Review + COMP-ARCH-Kontext ready) → dann Slice 4 SparplanChart
+Nächster-Schritt: OA-02 entscheiden (COMP-ARCH-01 + historischer Peer-Review liegen vor) → dann Slice 4 SparplanChart
 Blocker: keine
 -->
 
 # PROJECT STATUS — Finanzwesir 2.0
 
-Stand: 2026-06-05 | Session: COMP-ARCH-Verankerung | Geändert von: Claude
+Stand: 2026-06-05 | Session: COMP-ARCH-01-Nachputz | Geändert von: Claude
 
 **Zweck:** Schneller Wiedereinstieg nach Pausen.
 **Zielgruppe:** Albert und Claude.
@@ -312,7 +312,22 @@ Neue APs: DS-012, DS-013, DS-014.
 
 **Nächster Schritt: OA-02 entscheiden → Slice-4 SparplanChart implementieren.**
 
-OA-02-Kontext vorbereitet: COMP-ARCH-Entscheidung (§1a + ADR-COMP-ARCH-01) und Peer-Review (`docs/steering/audits/OA-02-chart-engine-integration-peer-review.md`) liegen vor. Empfehlung: Option C3 (FwAppChart-Klasse). Slice-3 ✅ 2026-06-05.
+OA-02-Kontext vorbereitet: COMP-ARCH-Entscheidung (§1a + ADR-COMP-ARCH-01) liegt vor.
+Die alte OA-02-Peer-Review-Datei ist historische Vorarbeit und muss vor Umsetzung gegen COMP-ARCH-01 aktualisiert werden.
+
+Neue Leitlinie:
+OA-02 entscheidet den Chart-Komponenten-Vertrag innerhalb der Component Composition Architecture.
+
+Nicht vorentschieden:
+- Name der Komponente / Adapter-Grenze
+- konkrete Engine-API
+- Lifecycle-Vertrag
+- Update-Strategie
+
+Verboten:
+- Sonderweg für „App-Charts"
+- direkter Chart.js-Pfad aus App-Code
+- Umbau von `Theme/assets/js/fw-chart-engine/index.js` zur Export-Fassade
 
 Entschieden (nicht mehr offen):
 - E-01 ✅: prokrastinations-preis ist Szenario-/Vergleichs-App mit Storytelling-Elementen
@@ -332,7 +347,9 @@ Operative Quelle:
 - `Apps/prokrastinations-preis/MINI_SPEC_FROM_HAUPTDOKUMENT.md` — Hintergrundquelle
 
 Slice-Planungsdateien (neue Mechanik, 2026-06-04):
-- `Apps/prokrastinations-preis/SLICE_PLAN.md` — aktuell ✅ (Slice-2 abgeschlossen ✅ 2026-06-05, Slice-3 offen)
+- `Apps/prokrastinations-preis/SLICE_PLAN.md` — aktuell ✅
+  Slice-0/1/2/3 abgeschlossen ✅
+  Nächster Schritt: Slice-4 SparplanChart, aber erst nach sauberer OA-02-Entscheidung.
 - `Apps/prokrastinations-preis/SLICE_0_KICKOFF.md` — abgeschlossen ✅
 
 **Scope-Funde die noch offen sind:**
