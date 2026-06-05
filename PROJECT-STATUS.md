@@ -1,14 +1,14 @@
 <!-- HOOK-META
 Version: 1
-Stand: 2026-06-04
+Stand: 2026-06-05
 Fokus-AP: APP-01 — prokrastinations-preis
-Nächster-Schritt: Slice 1 implementieren — CSV-Datenladen + CSVParser-Import + Daten-States (Slice-0 abgeschlossen)
+Nächster-Schritt: Slice 2 implementieren — MarketTimeStrategy + KpiCards (Slice-1 abgeschlossen)
 Blocker: keine
 -->
 
 # PROJECT STATUS — Finanzwesir 2.0
 
-Stand: 2026-06-04 | Session: APP-01-mini-konsistenzpatch | Geändert von: Claude
+Stand: 2026-06-05 | Session: APP-01-slice1 | Geändert von: Claude
 
 **Zweck:** Schneller Wiedereinstieg nach Pausen.
 **Zielgruppe:** Albert und Claude.
@@ -52,7 +52,9 @@ Stand: 2026-06-04 | Session: APP-01-mini-konsistenzpatch | Geändert von: Claude
 
 ✅ **B1 Slice-0 abgeschlossen (2026-06-04):** app.js (ES-Modul), app.css (.fw-app-Namespace), app.test.html (7 Szenarien A–G). Full-Gate bestanden, Szenarien A–G getestet — keine Fehler.
 
-⚙️ **Nächster Schritt B1:** Slice 1 — CSV-Datenladen + CSVParser-Import + Datenvalidierung + Daten-States.
+✅ **B1 Slice-1 abgeschlossen (2026-06-05):** CSVParser-Import (ES-Modul), loadData() mit Two-Step-Validierung (unitKey CURRENCY_EUR, ≥120 Zeilen, index_value-Spalte), AppData (Object.freeze, Date→ISO-String). Alle 5 Daten-States implementiert, 14 Testszenarien A–N bestätigt.
+
+⚙️ **Nächster Schritt B1:** Slice 2 — MarketTimeStrategy + KpiCards.
 
 ---
 
@@ -92,7 +94,7 @@ Stand: 2026-06-04 | Session: APP-01-mini-konsistenzpatch | Geändert von: Claude
 | Chart-Engine | Stabil, offene APs | Siehe `docs/steering/BACKLOG.md` |
 | Theme | In Entwicklung | `THEME-ASSEMBLY-CHECKLIST.md` |
 | CSS | Stabil | Siehe `docs/steering/BACKLOG.md` (CSS-N Items) |
-| Apps | Slice-0 ✅ 2026-06-04 | B1 Slice-1: CSV-Datenladen (CSVParser-Import) |
+| Apps | Slice-1 ✅ 2026-06-05 | B1 Slice-2: MarketTimeStrategy + KpiCards |
 | Content | Laufend | Redaktionsleitfaden aktiv |
 | Security | SECURITY-BASELINE.md App-Fabrik-gatefähig ✅ | Security-Sync-Regel + Gate-Prüffrage verankert (ST-13/ST-14) |
 
@@ -127,6 +129,9 @@ Vollständig im DECISION-LOG dokumentiert (`docs/steering/DECISION-LOG.md`):
 ---
 
 ## 8. Letzte Session
+
+2026-06-05 — APP-01 Slice 1 implementiert (APP-01-slice1).
+CSVParser-Import (ES-Modul), loadData() mit Two-Step-Validierung (unitKey CURRENCY_EUR, ≥120 Zeilen, index_value-Spalte), Object.freeze AppData (Date→ISO-String-Mapping). Alle 5 Daten-States (Loading/Content/Error-b/c/Empty). app.test.html auf 14 Szenarien A–N erweitert, 5 Test-CSVs in test-data/ angelegt. Full-Gate bestanden, Szenarien A–N getestet — alle korrekt.
 
 2026-06-04 — APP-01 Slice 0 implementiert (APP-01-slice0-impl).
 app.js (ES-Modul, Slug-Whitelist, Guard, SafeDOM), app.css (.fw-app-Namespace, 4 State-Blöcke), app.test.html (7 Szenarien A–G inkl. XSS). Full-Gate bestanden, Szenarien A–G getestet — keine Fehler. Slice-0-Status in SLICE_PLAN und SLICE_0_KICKOFF aktualisiert.
@@ -290,7 +295,7 @@ Neue APs: DS-012, DS-013, DS-014.
 
 ## 9. Einstieg für nächste Session
 
-**Nächster Schritt: B1 Slice-1 — CSV-Datenladen + CSVParser-Import + Datenvalidierung. Slice-0 (App-Shell) abgeschlossen und getestet ✅ (2026-06-04). Pre-Code-Gate Full vor Slice-1-Implementierung.**
+**Nächster Schritt: B1 Slice-2 — MarketTimeStrategy + KpiCards. Slice-1 (CSV-Datenladen) abgeschlossen und getestet ✅ (2026-06-05). Pre-Code-Gate Full vor Slice-2-Implementierung.**
 
 Entschieden (nicht mehr offen):
 - E-01 ✅: prokrastinations-preis ist Szenario-/Vergleichs-App mit Storytelling-Elementen
@@ -310,7 +315,7 @@ Operative Quelle:
 - `Apps/prokrastinations-preis/MINI_SPEC_FROM_HAUPTDOKUMENT.md` — Hintergrundquelle
 
 Slice-Planungsdateien (neue Mechanik, 2026-06-04):
-- `Apps/prokrastinations-preis/SLICE_PLAN.md` — aktuell ✅ (Slice-0 abgeschlossen, Slice-1 offen)
+- `Apps/prokrastinations-preis/SLICE_PLAN.md` — aktuell ✅ (Slice-1 abgeschlossen ✅ 2026-06-05, Slice-2 offen)
 - `Apps/prokrastinations-preis/SLICE_0_KICKOFF.md` — abgeschlossen ✅
 
 **Scope-Funde die noch offen sind:**

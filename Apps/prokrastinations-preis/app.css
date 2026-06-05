@@ -1,4 +1,4 @@
-/* NEW — Slice 0 */
+/* CHANGED — Slice 1 (war: Slice 0) */
 
 /* === Basis === */
 .fw-app {
@@ -14,7 +14,7 @@
 /* === Loading === */
 .fw-app[data-fw-state="loading"] {
   opacity: 0.6;
-  /* Kein Spinner in Slice 0 — State-Wechsel ist synchron */
+  /* Slice 1: asynchrones CSV-Laden — DOM-Inhalt über renderLoading() */
 }
 
 /* === Error === */

@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Testseite — prokrastinations-preis Slice 0</title>
+  <title>Testseite — prokrastinations-preis Slice 1</title>
   <link rel="stylesheet" href="./app.css">
   <style>
     /* Nur für Testseite — gehört nicht in app.css */
@@ -18,18 +18,19 @@
 </head>
 <body>
 
-  <h1>Testseite — prokrastinations-preis Slice 0</h1>
+  <h1>Testseite — prokrastinations-preis Slice 1</h1>
 
   <div class="test-warning">
     Muss über VSCode Live Server geöffnet werden (http://127.0.0.1:5500/...) — nicht als file://. ES-Module laden sonst nicht.
   </div>
 
-  <!-- Szenario A: Minimal-Card mit Daten-URL -->
+  <!-- Szenario A: Minimal-Card mit gültiger Daten-URL -->
   <div class="test-section">
-    <h2>A — Minimal-Card mit Daten-URL</h2>
+    <h2>A — Minimal-Card mit gültiger Daten-URL</h2>
     <p class="test-meta">
-      Erwartung: Content-State sichtbar, Platzhaltertext „[Marktzeit-Simulation — Daten folgen in Slice 1]", kein leerer Container.<br>
-      AK: A0-1
+      Erwartung: Loading → Content-State. Gerüst-Text zeigt Anzahl Monate und letzten Monat der CSV.<br>
+      Kein Slice-0-Platzhalter mehr sichtbar. Keine JS-Exception in DevTools-Konsole.<br>
+      Testfälle: T-01 | AK: A0-1
     </p>
     <div class="kg-card">
       <div class="fw-app"
@@ -43,8 +44,8 @@
   <div class="test-section">
     <h2>B — Ungültiger Slug</h2>
     <p class="test-meta">
-      Erwartung: Error-State, Meldung „Diese App konnte nicht geladen werden.", kein Stack-Trace im UI.<br>
-      AK: A0-2
+      Erwartung: Error-State (a), Meldung „Diese App konnte nicht geladen werden.", kein Stack-Trace im UI.<br>
+      Testfälle: T-02 | AK: A0-2
     </p>
     <div class="kg-card">
       <div class="fw-app" data-fw-app="ungueltig-slug"></div>
@@ -55,7 +56,7 @@
   <div class="test-section">
     <h2>C — Fehlender Slug (kein data-fw-app)</h2>
     <p class="test-meta">
-      Erwartung: Error-State, Meldung auf Deutsch, kein Stack-Trace im UI.<br>
+      Erwartung: Error-State (a), Meldung auf Deutsch, kein Stack-Trace im UI.<br>
       AK: A0-2
     </p>
     <div class="kg-card">
@@ -88,8 +89,8 @@
   <div class="test-section">
     <h2>E — XSS-Versuch in data-fw-options</h2>
     <p class="test-meta">
-      Erwartung: Kein Alert, kein innerHTML, App stabil, Content-State normal. Das Attribut wird in Slice 0 vollständig ignoriert.<br>
-      AK: A0-5, A0-8
+      Erwartung: Kein Alert, kein innerHTML, App stabil. data-fw-options wird in Slice 1 weiterhin ignoriert.<br>
+      Testfälle: T-08, T-10 | AK: A0-5, A0-8
     </p>
     <div class="kg-card">
       <div class="fw-app"
@@ -100,12 +101,13 @@
     </div>
   </div>
 
-  <!-- Szenario F: Fehlendes data-fw-data -->
+  <!-- Szenario F: Fehlendes data-fw-data — GEÄNDERT in Slice 1 -->
   <div class="test-section">
     <h2>F — Fehlendes data-fw-data</h2>
     <p class="test-meta">
-      Erwartung: Content-State mit Platzhalter (kein Error in Slice 0 — URL-Validierung und Fetch-Fehler sind Slice-1-Verantwortung).<br>
-      AK: A0-10
+      Erwartung: Error-State (b), Meldung „Daten konnten nicht geladen werden. Bitte Seite neu laden."<br>
+      Slice-1-Änderung: In Slice 0 war dies Content-State — ab Slice 1 ist fehlendes data-fw-data Error (b).<br>
+      Testfälle: T-03 (URL leer)
     </p>
     <div class="kg-card">
       <div class="fw-app" data-fw-app="prokrastinations-preis"></div>
@@ -117,7 +119,7 @@
     <h2>G — CSS-Leak-Check</h2>
     <p class="test-meta">
       Erwartung: Artikeltext, Überschriften und Absätze neben .fw-app visuell unverändert. app.css darf keine Ghost-Elemente beeinflussen.<br>
-      AK: A0-9
+      AK: A0-9, A0-10
     </p>
     <article>
       <h2>Normaler Artikeltext (h2 außerhalb .fw-app)</h2>
@@ -130,6 +132,116 @@
       </div>
       <p>Dieser Absatz nach der App soll ebenfalls unverändert aussehen.</p>
     </article>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════════ -->
+  <!-- NEU — Slice 1: Daten-States (T-03 bis T-07b)              -->
+  <!-- ═══════════════════════════════════════════════════════════ -->
+
+  <!-- Szenario H: Ungültige Domain → Error (b) -->
+  <div class="test-section">
+    <h2>H — Ungültige Domain (nicht finanzwesir.com)</h2>
+    <p class="test-meta">
+      Erwartung: Error-State (b), Meldung „Daten konnten nicht geladen werden. Bitte Seite neu laden."<br>
+      CSVParser GATEKEEPER schlägt an — keine Verbindung zu Fremd-URL.<br>
+      Testfall: T-03
+    </p>
+    <div class="kg-card">
+      <div class="fw-app"
+           data-fw-app="prokrastinations-preis"
+           data-fw-data="https://evil.example.com/data.csv">
+      </div>
+    </div>
+  </div>
+
+  <!-- Szenario I: Nicht erreichbare URL (404) → Error (b) -->
+  <div class="test-section">
+    <h2>I — Nicht erreichbare URL (404)</h2>
+    <p class="test-meta">
+      Erwartung: Error-State (b), Meldung „Daten konnten nicht geladen werden. Bitte Seite neu laden."<br>
+      Testfall: T-04
+    </p>
+    <div class="kg-card">
+      <div class="fw-app"
+           data-fw-app="prokrastinations-preis"
+           data-fw-data="./test-data/nonexistent.csv">
+      </div>
+    </div>
+  </div>
+
+  <!-- Szenario J: CSV nicht parsebar (ungültiges Datumsformat) → Error (b) -->
+  <div class="test-section">
+    <h2>J — CSV nicht parsebar</h2>
+    <p class="test-meta">
+      Erwartung: Error-State (b), Meldung „Daten konnten nicht geladen werden. Bitte Seite neu laden."<br>
+      Testfall: T-05
+    </p>
+    <div class="kg-card">
+      <div class="fw-app"
+           data-fw-app="prokrastinations-preis"
+           data-fw-data="./test-data/invalid.csv">
+      </div>
+    </div>
+  </div>
+
+  <!-- Szenario K: CSV < 120 Zeilen → Empty -->
+  <div class="test-section">
+    <h2>K — CSV mit weniger als 120 Datenzeilen</h2>
+    <p class="test-meta">
+      Erwartung: Empty-State, Meldung „Nicht genug Daten für die Berechnung. Bitte Datenquelle prüfen."<br>
+      Testfall: T-06
+    </p>
+    <div class="kg-card">
+      <div class="fw-app"
+           data-fw-app="prokrastinations-preis"
+           data-fw-data="./test-data/short.csv">
+      </div>
+    </div>
+  </div>
+
+  <!-- Szenario L: Fehlende index_value-Spalte → Empty -->
+  <div class="test-section">
+    <h2>L — CSV ohne index_value-Spalte</h2>
+    <p class="test-meta">
+      Erwartung: Empty-State, Meldung „Nicht genug Daten für die Berechnung. Bitte Datenquelle prüfen."<br>
+      Testfall: T-07
+    </p>
+    <div class="kg-card">
+      <div class="fw-app"
+           data-fw-app="prokrastinations-preis"
+           data-fw-data="./test-data/no-index-value.csv">
+      </div>
+    </div>
+  </div>
+
+  <!-- Szenario M: Kein EUR-Suffix → Error (c) -->
+  <div class="test-section">
+    <h2>M — CSV ohne Währungssuffix (unitKey ≠ CURRENCY_EUR)</h2>
+    <p class="test-meta">
+      Erwartung: Error-State (c), Meldung „Datenreihe hat keine oder ungültige Währungsangabe. Erwartet: EUR."<br>
+      Testfall: T-07a
+    </p>
+    <div class="kg-card">
+      <div class="fw-app"
+           data-fw-app="prokrastinations-preis"
+           data-fw-data="./test-data/no-eur.csv">
+      </div>
+    </div>
+  </div>
+
+  <!-- Szenario N: USD-Suffix → Error (c) -->
+  <div class="test-section">
+    <h2>N — CSV mit USD-Suffix statt EUR</h2>
+    <p class="test-meta">
+      Erwartung: Error-State (c), Meldung „Datenreihe hat keine oder ungültige Währungsangabe. Erwartet: EUR."<br>
+      Testfall: T-07b
+    </p>
+    <div class="kg-card">
+      <div class="fw-app"
+           data-fw-app="prokrastinations-preis"
+           data-fw-data="./test-data/usd-suffix.csv">
+      </div>
+    </div>
   </div>
 
   <script type="module" src="./app.js"></script>

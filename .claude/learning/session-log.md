@@ -1,6 +1,12 @@
 # Session-Log — Finanzwesir 2.0
 Wird geleert nach /distill. Einträge: [FRICTION] [WIN] [PREF] [QUESTION] [OK]
 
+## 2026-06-05 – SESSION START | Fokus: APP-01 — prokrastinations-preis
+`FinanzwesirData.js, CSVParser.js, FwDateUtils.js — diese Session nicht berühren. ✓`
+
+## 2026-06-05 – APP-01 Slice 1 abgeschlossen
+- [FRICTION] CSVParser (TABU) loggt eigene console.error-Einträge für Error-(b)-Testszenarien — Albert hielt diese für Bugs; Klärung nötig, dass sie erwartetes Fangverhalten zeigen und nicht ins UI durchschlagen
+
 ## 2026-06-04 – SESSION START | Fokus: APP-01 — prokrastinations-preis
 `FinanzwesirData.js, CSVParser.js, FwDateUtils.js — diese Session nicht berühren. ✓`
 

@@ -1,5 +1,5 @@
 # NAVIGATION.md – Finanzwesir 2.0
-Stand: 2026-06-04 | Session: data-raw-Workflow | Geändert von: Claude
+Stand: 2026-06-05 | Session: APP-01-slice1 | Geändert von: Claude
 
 Für Claude: **Routing-Dokument.** Wird beim Session-Start (Schritt 2) gelesen.
 Gibt Pfade und Lese-Reihenfolgen vor — KEINE Verhaltensregeln (die stehen in CLAUDE.md).
@@ -166,10 +166,10 @@ Nach Abschluss: `/abschluss-ritual`.
 > und welche Datenfragen vor dem produktiven Bau offen sind.
 > Nur bei Quellen-, CSV-, Contract- oder Datenänderungsfragen zusätzlich `docs/data/` lesen.
 
-> [!note] B1 / prokrastinations-preis — Slice-Planung abgeschlossen (2026-06-04)
+> [!note] B1 / prokrastinations-preis — Slice-1 abgeschlossen (2026-06-05)
 > `Apps/prokrastinations-preis/APP_SPEC.md` V1.6 ist die operative Spec-Quelle.
 > `Apps/prokrastinations-preis/MINI_SPEC_FROM_HAUPTDOKUMENT.md` bleibt als fachliche Hintergrundquelle.
-> `SLICE_PLAN.md` und `SLICE_0_KICKOFF.md` sind aktuell (neue Mechanik, 2026-06-04). OA-01 entschieden: app.js ist ES-Modul (`<script type="module">`). Nächster Schritt: Pre-Code-Gate Full → Slice-0 implementieren.
+> `SLICE_PLAN.md` aktuell (neue Mechanik, Slice-1 ✅ 2026-06-05). OA-01 entschieden: app.js ist ES-Modul (`<script type="module">`). Nächster Schritt: Slice 2 — MarketTimeStrategy + KpiCards.
 > B1 ist Pilot-2 (Daten-/Chart-/Story-Pilot). Pilot-1 ist `risiko-uebersetzer` (Calculator-Pilot) — entschieden E-02, 2026-05-28.
 13. bei Chart-Nutzung: relevante Chart-Engine-Spec + WORKING-FEATURES.md
 ```

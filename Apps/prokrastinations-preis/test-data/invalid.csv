@@ -1,0 +1,3 @@
+date;index_value
+NOT-A-DATE;100,00 EUR
+ALSO-INVALID;101,50 EUR

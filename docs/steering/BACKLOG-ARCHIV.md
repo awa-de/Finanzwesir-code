@@ -1,11 +1,12 @@
 # BACKLOG-ARCHIV – Finanzwesir 2.0
-Stand: 2026-06-04 | Session: APP-01-mini-konsistenzpatch | Geändert von: Claude
+Stand: 2026-06-05 | Session: APP-01-slice1 | Geändert von: Claude
 
 Abgeschlossene Items, neueste zuerst (append-only).
 Archivierungs-Trigger: wenn > 200 Zeilen → neue Datei `BACKLOG-ARCHIV-YYYY.md` anlegen.
 
 | ID | Bereich | Titel | Abgeschlossen | Session |
 |----|---------|-------|---------------|---------|
+| APP-01-slice1 | App | Slice 1 implementiert: CSVParser-Import (ES-Modul), loadData() mit Two-Step-Validierung (unitKey CURRENCY_EUR, ≥120 Zeilen, index_value-Spalte), AppData (Object.freeze, Date→ISO-String-Mapping). Alle 5 Daten-States (Loading/Content/Error-b/c/Empty). app.test.html auf 14 Szenarien A–N erweitert, 5 Test-CSVs in test-data/ angelegt. Full-Gate bestanden, Szenarien A–N getestet ✅. | 2026-06-05 | APP-01-slice1 |
 | APP-01-konsistenzpatch | App | Mini-Konsistenzpatch nach Slice 0: APP_SPEC §1 auf V1.6/Phase-3/Slice-1 aktualisiert; SLICE_PLAN IIFE→ES-Modul, Slice-0-Ziel Domain-validiert entfernt, 2 Slice-0-Sonderfall-Hinweise ergänzt, OA-01-Voraussetzung in Slice-1-Section präzisiert; SLICE_0_KICKOFF §2/§3/§6 Formulierungsdrifts bereinigt (liest-statt-speichert, Abschluss-Ritual-Trennung, Sechs-Monats-Regret OA-01 aktualisiert). *(sofort erledigt)* | 2026-06-04 | APP-01-mini-konsistenzpatch |
 | APP-01-slice0 | App | Slice 0 implementiert: App-Shell, Slug-Prüfung, URL-Attribut-Lesen, State-Maschine. app.js (ES-Modul, ~65 Zeilen), app.css (.fw-app-Namespace, 4 Blöcke + empty-Hook), app.test.html (7 Szenarien A–G inkl. XSS-Test). SafeDOM durchgängig, Guard aktiv. Szenarien A–G lokal getestet ✅, keine Konsolen-Fehler. *(sofort erledigt)* | 2026-06-04 | APP-01-slice0-impl |
 | AP-DATA-13 | Data | Restdrift-Patch nach Konsistenzpatch: chartSeries-Beispielmonate in APP_SPEC §11.2 auf `<startMonth>`/`<latestMonth>` neutralisiert; neuer Session-Eintrag 2026-06-04 in PROJECT-STATUS §8 ergänzt. *(sofort erledigt)* | 2026-06-04 | restdrift-patch |

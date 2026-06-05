@@ -21,7 +21,8 @@ Stand: 2026-06-04 16:30 | Session: APP-01-slice0-impl | Geändert von: Claude
 | Spec-Gate | OK erteilt 2026-06-04 (mündlich durch Albert) |
 | Pre-Code-Gate | OK 2026-06-04 (Full-Gate, 9 Fragen) |
 | Freigabe Slice 0 | OK 2026-06-04, getestet ✅ (Szenarien A–G) |
-| Nächster Schritt | Slice 1 — CSV-Datenladen + Datenvalidierung + Daten-States |
+| Freigabe Slice 1 | OK 2026-06-05, getestet ✅ (Szenarien A–N) |
+| Nächster Schritt | Slice 2 — MarketTimeStrategy + KpiCards |
 
 ---
 
@@ -71,7 +72,7 @@ Diese Frage ist nach B-01-Entscheidungen weiterhin offen.
 | Slice | Ziel | Layer | Voraussetzung | Status |
 |---|---|---|---|---|
 | **0** | App-Shell + Slug-Prüfung + URL-Attribut-Lesen + State-Maschine | Ghost-Card → Bootstrap → State → CSS | — | ✅ 2026-06-04 |
-| **1** | CSV-Datenladen + Datenvalidierung + Daten-States | Fetch → CSVParser → Validierung → AppData | OA-01 entschieden ✓ | Offen |
+| **1** | CSV-Datenladen + Datenvalidierung + Daten-States | Fetch → CSVParser → Validierung → AppData | OA-01 entschieden ✓ | ✅ 2026-06-05 |
 | **2** | MarketTimeStrategy + KpiCards | AppData → Strategy → AppContext → Renderer | Slice 1 | Offen |
 | **3** | Slider monatlicheRate | UI → Event → Clamp → Strategy → AppContext → Renderer → ARIA | Slice 2 | Offen |
 | **4** | SparplanChart | AppContext → Chart-Renderer | Slice 2 + OA-02 entschieden | Offen |
