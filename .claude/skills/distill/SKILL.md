@@ -74,8 +74,8 @@ Kein Eintrag wird unilateral gelöscht.
 
 | Typ | Zieldatei |
 |---|---|
-| Präferenz / Kommunikation / Arbeitsweise | `memory/feedback_*.md` (neue Datei je Thema) |
-| Projektfakt / Entscheidung | `memory/project_*.md` |
+| Präferenz / Kommunikation / Arbeitsweise | `.claude/memory/feedback_*.md` (neue Datei je Thema) |
+| Projektfakt / Entscheidung | `.claude/memory/project_*.md` |
 | Universelle Verhaltensregel | `CLAUDE.md` — nur via [Regelaufnahme-Schutz]-Gate (alle 7 Bedingungen!) |
 | Wiederholbarer Workflow | `.claude/skills/[name]/SKILL.md` |
 

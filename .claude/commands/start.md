@@ -25,6 +25,11 @@ Layer-1-Fingerabdruck bestätigen:
 Hook-Output enthält `BLOCKED-APs`. Wenn nicht „keine":
 → Sofortiger Abbruch-Trigger: „BLOCKED: [AP-ID] — Session pausiert. Situation beschreiben."
 
+## Schritt 1b — Memory-Index lesen
+
+Lies: `.claude/memory/MEMORY.md`
+Gilt für diese Session als Hintergrundkontext. Einzelne Memory-Files bei Bedarf nachladen.
+
 ## Schritt 2 — Haiku-Dispatch: Lücken und Backlog
 
 Dispatch an `spec-scout` (läuft auf Haiku per settings.json):

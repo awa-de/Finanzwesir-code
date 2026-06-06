@@ -29,7 +29,7 @@ Claude verwendet diese Pfade direkt. Nicht im Root raten, außer der Pfad ist au
 | Working Features | `docs/steering/engine/WORKING-FEATURES.md` |
 | Regression-Matrix | `docs/steering/engine/REGRESSION-MATRIX.md` |
 | Session-Log | `.claude/learning/session-log.md` |
-| Memory-Verzeichnis | `C:\Users\Albert HP PC\.claude\projects\z--Documents-Nextcloud-Finanzwesir-2-0\memory\` |
+| Memory-Verzeichnis | `.claude/memory/` |
 
 Wenn ein Pfad nicht existiert:
 1. Nicht im Root raten.
@@ -157,7 +157,7 @@ Beobachtungen, die nicht zum AP gehörten?
 → Kein stilles Verschwinden — was nicht festgehalten wird, existiert nicht.
 
 **3. MEMORY aktualisieren**
-Pfad: `C:\Users\Albert HP PC\.claude\projects\z--Documents-Nextcloud-Finanzwesir-2-0\memory\`
+Pfad: `.claude/memory/`
 Neue stabile Projektfakten, Feedback oder Entscheidungen eintragen.
 
 **4. Commit-Message erzeugen**

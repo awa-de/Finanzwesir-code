@@ -1,5 +1,5 @@
 # BACKLOG – Finanzwesir 2.0
-Stand: 2026-06-05 | Session: APP-01-slice3 | Geändert von: Claude
+Stand: 2026-06-06 | Session: ST-19-Memory-Infra | Geändert von: Claude
 
 **Regeln:**
 - ✅-Zeilen werden sofort nach `BACKLOG-ARCHIV.md` verschoben (append), dann hier gelöscht.
@@ -12,6 +12,7 @@ Stand: 2026-06-05 | Session: APP-01-slice3 | Geändert von: Claude
 
 | ID       | Bereich | Titel                                     | Prio | Dep | Detail                              |
 |----------|---------|-------------------------------------------|------|-----|-------------------------------------|
+| ST-18    | System  | Memory-Files mergen — .claude/memory/ (rekonstruiert, Laptop) gegen ~/.claude/.../memory/ (Original, Heim-PC) abgleichen | M | — | .claude/memory/MEMORY.md |
 | APP-01   | App     | B1 Slice-4: SparplanChart (Slice-3 ✅ 2026-06-05, OA-02 offen) | H | — | Apps/prokrastinations-preis/SLICE_PLAN.md |
 | AP-20/21 | Engine  | Mixed-Rhythm CV-Heuristik (T5→T3→T6→T7)  | H    | —   | engine/detail/AP-20-DETAIL.md       |
 | AP-6c    | Engine  | Touch-Tooltip Smartphone-Test             | M    | —   | engine/detail/AP-6c-DETAIL.md       |

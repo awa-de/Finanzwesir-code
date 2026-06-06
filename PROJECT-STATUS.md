@@ -8,7 +8,7 @@ Blocker: keine
 
 # PROJECT STATUS — Finanzwesir 2.0
 
-Stand: 2026-06-05 | Session: DIST-06 | Geändert von: Claude
+Stand: 2026-06-06 | Session: ST-19-Memory-Infra | Geändert von: Claude
 
 **Zweck:** Schneller Wiedereinstieg nach Pausen.
 **Zielgruppe:** Albert und Claude.
@@ -135,6 +135,9 @@ Vollständig im DECISION-LOG dokumentiert (`docs/steering/DECISION-LOG.md`):
 ---
 
 ## 8. Letzte Session
+
+2026-06-06 — Memory-System Rekonstruktion (ST-19).
+.claude/memory/ angelegt: 18 Feedback-Files aus patterns.md + session-log rekonstruiert (~80–90 % Präzision), MEMORY.md-Index, /start Schritt 1b, distill-Pfad, abschluss-ritual Memory-Pfad korrigiert. ST-18 (Heim-PC-Merge) in BACKLOG aktiv.
 
 2026-06-05 — Distill 6 (DIST-06).
 39 Log-Einträge destilliert. 5 Patterns promoted: feedback_python_powershell_tooling, feedback_gate_scope_dialog, feedback_csvparser_vertrauenswuerdig, feedback_edit_vorab_lesen, feedback_abschluss_ritual_timing.
