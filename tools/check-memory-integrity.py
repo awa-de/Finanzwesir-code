@@ -8,6 +8,8 @@ import re
 import sys
 from pathlib import Path
 
+sys.stdout.reconfigure(encoding="utf-8")
+
 
 def main():
     root = Path(__file__).parent.parent
@@ -31,11 +33,10 @@ def main():
     # 2. Links extrahieren: - [Titel](dateiname.md) — Beschreibung
     link_re = re.compile(r"^\s*-\s+\[[^\]]+\]\(([^)]+\.md)\)", re.MULTILINE)
     filenames = link_re.findall(memory_text)
-    expected = 18
     count = len(filenames)
     ok["entries"] = count
-    if count != expected:
-        errors.append(f"MEMORY.md: {count} Einträge gefunden, erwartet {expected}")
+    if count == 0:
+        errors.append("MEMORY.md: keine Memory-Einträge gefunden")
 
     # 3–6. Dateien: Existenz, Frontmatter, metadata.type
     missing, bad_fm, bad_type, invalid_type_list = [], [], [], []
@@ -108,15 +109,16 @@ def main():
         else:
             ok["hook_meta"] = hook_m.group(1)
 
-    # 10. NAVIGATION.md: Memory-Dateizahl synchron
+    # 10. NAVIGATION.md: Hinweis auf Memory-System + optionale Zählprüfung
+    # Kein Number → kein Fehler (gewünschter Normalzustand nach Entdynamisierung)
     if not navigation.exists():
-        warnings.append("NAVIGATION.md fehlt — Zählung nicht prüfbar")
+        warnings.append("NAVIGATION.md fehlt")
     else:
         nav = navigation.read_text(encoding="utf-8")
+        if ".claude/memory/" not in nav or "MEMORY.md" not in nav:
+            warnings.append("NAVIGATION.md: kein Hinweis auf .claude/memory/ oder MEMORY.md")
         nav_m = re.search(r"Memory-System[^\n]*?(\d+)\s+Files", nav, re.IGNORECASE)
-        if not nav_m:
-            warnings.append("NAVIGATION.md: keine Memory-Dateizahl gefunden — manuell prüfen")
-        else:
+        if nav_m:
             nav_count = int(nav_m.group(1))
             if nav_count != count:
                 errors.append(
