@@ -1,6 +1,6 @@
 <!-- HOOK-META
 Version: 1
-Stand: 2026-06-05
+Stand: 2026-06-06
 Fokus-AP: APP-01 — prokrastinations-preis
 Nächster-Schritt: OA-02 entscheiden (COMP-ARCH-01 + historischer Peer-Review liegen vor) → dann Slice 4 SparplanChart
 Blocker: keine

@@ -2,7 +2,7 @@
 <!-- Index-Datei. Einträge max. 200 Zeilen. Jeder Eintrag eine Zeile. -->
 <!-- Ort: .claude/memory/ (Nextcloud + git). Nicht in ~/.claude/ — kein Auto-Load durch Harness. -->
 <!-- /start liest diese Datei in Schritt 1b. Einzelne Files bei Bedarf nachladen. -->
-<!-- MERGE-HINWEIS: Auf Heim-PC mit ~/.claude/projects/.../memory/ abgleichen (ST-17). -->
+<!-- MERGE-HINWEIS: Auf Heim-PC mit ~/.claude/projects/.../memory/ abgleichen (ST-18). -->
 
 - [Arbeitsweise](feedback_arbeitsweise.md) — Sachlich-direkter Arbeitsstil, kein Smalltalk, Ergebnis zuerst
 - [Kein Denglisch](feedback_sprache_kein_denglisch.md) — Nur reines Deutsch, keine englischen Einschübe wenn deutsches Äquivalent existiert

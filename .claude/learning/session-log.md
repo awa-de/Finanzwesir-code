@@ -1,6 +1,9 @@
 # Session-Log — Finanzwesir 2.0
 Wird geleert nach /distill. Einträge: [FRICTION] [WIN] [PREF] [QUESTION] [OK]
 
+## 2026-06-06 – SESSION START | Fokus: APP-01 — prokrastinations-preis
+FinanzwesirData.js, CSVParser.js, FwDateUtils.js — diese Session nicht berühren. ✓
+
 ## 2026-06-06 – ST-19 | Memory-System Rekonstruktion + Infrastruktur
 - [FRICTION] Write-Versuch vor Pfad-Klärung gestartet → Albert hat gestoppt, Zielort zuerst entschieden (.claude/memory/)
 - [WIN] Vollständige Rekonstruktion aus patterns.md + session-log möglich — alle 18 Files mit ~80–90 % Präzision wiederhergestellt; Heim-PC-Merge (ST-18) wird genaue Formulierungen nachschärfen
