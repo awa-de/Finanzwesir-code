@@ -159,6 +159,7 @@ Beobachtungen, die nicht zum AP gehörten?
 **3. MEMORY aktualisieren**
 Pfad: `.claude/memory/`
 Neue stabile Projektfakten, Feedback oder Entscheidungen eintragen.
+Bei Änderungen in `.claude/memory/`: `python tools/check-memory-integrity.py` empfehlen oder ausführen.
 
 **4. Commit-Message erzeugen**
 Format (eigenständig — kein externer Verweis nötig): Ausgabe als reinen Text, bereit zum Einfügen in VSCode Message-Feld.

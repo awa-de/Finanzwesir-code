@@ -237,6 +237,7 @@ Manuelle Aktivierung: `/spec-rewrite-guard docs/spec/[Dateiname]`
 | SVGs + Favicons | `Theme/assets/images/` |
 | Learning-Pipeline (session-log, patterns) | `.claude/learning/` |
 | Memory-System (Feedback, Projektwissen) | `.claude/memory/` — 18 Files + MEMORY.md (Nextcloud + git) |
+| Memory-Integritätscheck | `tools/check-memory-integrity.py` — manuell; bei Änderungen an `.claude/memory/` |
 
 ## Testdaten und Content
 
