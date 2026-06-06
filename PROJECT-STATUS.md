@@ -8,7 +8,7 @@ Blocker: keine
 
 # PROJECT STATUS — Finanzwesir 2.0
 
-Stand: 2026-06-05 | Session: COMP-ARCH-01-Nachputz | Geändert von: Claude
+Stand: 2026-06-05 | Session: DIST-06 | Geändert von: Claude
 
 **Zweck:** Schneller Wiedereinstieg nach Pausen.
 **Zielgruppe:** Albert und Claude.
@@ -135,6 +135,9 @@ Vollständig im DECISION-LOG dokumentiert (`docs/steering/DECISION-LOG.md`):
 ---
 
 ## 8. Letzte Session
+
+2026-06-05 — Distill 6 (DIST-06).
+39 Log-Einträge destilliert. 5 Patterns promoted: feedback_python_powershell_tooling, feedback_gate_scope_dialog, feedback_csvparser_vertrauenswuerdig, feedback_edit_vorab_lesen, feedback_abschluss_ritual_timing.
 
 2026-06-05 — COMP-ARCH-Verankerung (COMP-ARCH-01).
 Component Composition Architecture als verbindliches Architekturmodell verankert. §1a in 03_APP_FACTORY_STANDARD_DRAFT.md (Lego-Brett-Modell, Komponentenklassen, Chart entzaubert), CHART_ENGINE_ROLE_AND_INTEGRATION.md §1 Einordnung, APP-INTERFACE.md §4 Querverweis, ADR-COMP-ARCH-01 angelegt. OA-02-Peer-Review erstmals committed.
