@@ -6,6 +6,7 @@ Archivierungs-Trigger: wenn > 200 Zeilen → neue Datei `BACKLOG-ARCHIV-YYYY.md`
 
 | ID | Bereich | Titel | Abgeschlossen | Session |
 |----|---------|-------|---------------|---------|
+| AP-KORR-10 | System | legacy-map letzter Konsistenzschliff: LOCAL_PRUEFEN → SONDERFAELLE_DOKUMENTIERT; Archiv/local/ Bestandszahl als nicht-versioniert gekennzeichnet; Weiterer-local/-Ordner-Formulierung präzisiert. *(sofort erledigt)* | 2026-06-08 | AP-KORR-10 |
 | AP-KORR-9 | System | Reststaub-Cleanup Archivstrategie: 7 Dateien, 20 Stellen — sichtbare Marker (// NEW ×4, // CHANGED ×2) entfernt; veraltete AP9-Forward-Referenzen (6 Stellen) neutralisiert; Faktenwidersprüche bereinigt (docs/App-Fabrik/_archive/ 0 KB → 349 Bytes; Inhalte alte Site 0 KB → 119 Bytes); Nicht-Routing-Satz in 4 lokale READMEs ergänzt; Archiv/struktur.md-Risikoeintrag auf späterer Bedarfs-AP umformuliert. *(sofort erledigt)* | 2026-06-08 | AP-KORR-9 |
 | AP-KORR-8 | System | Abschluss-Audit Archivstrategie-Nachputzserie (AP-KORR-1–7): 10/10 Pruefpunkte bestanden. P0: 0, P1: 0, P2: 1 (stale Forward-Referenz in KAPITELRAHMEN.md — nicht operativ). Nachputzserie abgeschlossen ohne Blocker. *(sofort erledigt)* | 2026-06-08 | AP-KORR-8 |
 | AP-KORR-7 | System | docs/steering/ARCHIV-SONDERFAELLE.md angelegt: 3 Archiv-Sonderfaelle inventarisiert (archivliste.md, docs/App-Fabrik/_archive/, Inhalte alte Site/blog/archiv/). Archiv/legacy-map.md minimal ergaenzt (Faktkorrektur + 3 Details-Verweise + Stand-Update). *(sofort erledigt)* | 2026-06-08 | AP-KORR-7 |

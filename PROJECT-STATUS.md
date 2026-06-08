@@ -5,7 +5,7 @@ Fokus-AP: APP-01 — prokrastinations-preis
 Nächster-Schritt: OA-02 entscheiden (COMP-ARCH-01 + historischer Peer-Review liegen vor) → dann Slice 4 SparplanChart
 Blocker: keine
 -->
-<!-- HOOK-META-SESSION: AP-KORR-9 -->
+<!-- HOOK-META-SESSION: AP-KORR-10 -->
 
 # PROJECT STATUS — Finanzwesir 2.0
 

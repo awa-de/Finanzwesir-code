@@ -1,4 +1,4 @@
-Stand: 2026-06-08 | Quelle: docs/steering/ARCHIV-INVENTAR.md | Geändert von: Claude | Session: AP-KORR-9
+Stand: 2026-06-08 | Quelle: docs/steering/ARCHIV-INVENTAR.md | Geändert von: Claude | Session: AP-KORR-10
 
 # Föderierter Archivkatalog / Legacy Map
 
@@ -71,7 +71,7 @@ Vollständige Regeln: `docs/steering/ARCHIV-STRATEGIE.md`
 
 | Pfad (relativ) | Typ | Bereich | Zweck / Kontext | Making-of-Wert | Drift-Risiko | Zielrolle | Nächste Aktion |
 |---|---|---|---|---|---|---|---|
-| `Archiv/` | ROOT_ARCHIV | Gesamtprojekt | 14 Themeninseln; Chart-Engine-Historie, Peer-Reviews, Design, KI-Workflow-Geschichte | hoch | niedrig | ROOT_KURATION + MAKING_OF_BELEG | LOCAL_PRUEFEN |
+| `Archiv/` | ROOT_ARCHIV | Gesamtprojekt | 14 Themeninseln; Chart-Engine-Historie, Peer-Reviews, Design, KI-Workflow-Geschichte | hoch | niedrig | ROOT_KURATION + MAKING_OF_BELEG | SONDERFAELLE_DOKUMENTIERT — weitere Prüfung nur mit gesondertem AP |
 | `Archiv/local/` | LOCAL_QUARANTAENE | Root-Archiv | Gitignored Quarantäne; 203 Dateien, ≈31 MB; Binärdateien, LLM-Dumps, Rohmaterial | unklar | niedrig | LOCAL_QUARANTAENE | BELASSEN_UND_VERTRAG_ANWENDEN |
 | `Archiv/optimierung-projektsteuerung/Optimierung Projektsteuerung/Archiv/` | LOKALES_ARCHIV | Root-Archiv (verschachtelt) | 2 Dateien: LLM-Synthese-Exports (CLAUDE-pre-synthese + NAVIGATION-pre-synthese, 2026-05-03) | mittel | niedrig | LOCAL_QUARANTAENE + ZU_PRUEFEN | ERLEDIGT_AP_KORR_6 |
 | `Apps/prokrastinations-preis/Archiv/` | LOKALES_ARCHIV | App prokrastinations-preis | 2 Markdown-Dateien, 6 KB; Slice-0-Kickoff-Prompt + Implementierungs-Prompt | mittel | niedrig | LOKALER_KONTEXT + MAKING_OF_BELEG | SPÄTERE_KURATIERUNG_OPTIONAL |
@@ -228,11 +228,11 @@ Lokale Archive bleiben an Ort und Stelle; das Root-Archiv enthält projektüberg
 
 - **Zielrolle:** LOCAL_QUARANTAENE
 - **Gitignored:** ✓ (`.gitignore`: `Archiv/local/`)
-- **Dateien:** 203 Dateien, ≈31 MB
+- **Dateien:** lokaler, gitignored Bestand; genaue aktuelle Anzahl nicht versioniert (Initialinventar: 203 Dateien, ≈31 MB; nach AP-KORR-6 plus 2 verschobene LLM-Dumps)
 - **Unterordner (12):** Apps, Chart-Engine-Historie, Design, Historische Excel-Kalkulationen, optimierung-projektsteuerung, Peer Review Arbeitspakete, Peer Review Migration, Projekt Kontroll-Skills, Rechtliches, Refactoring des Gehirns, selbstlernenes System, Seminar - die Basis
 - **Direktdatei:** `Start-Prompt Gemini.md` (3 KB) — LLM-Prompt, korrekt in local/
 - **Befund:** Quarantäne funktioniert. Struktur spiegelt weitgehend Root-Archiv (historischer Befund aus ST-20/21). `Historische Excel-Kalkulationen/` und `Seminar - die Basis/` bestätigen Binär- und Rohmaterial-Verdacht.
-- **Weiterer local/-Ordner:** keiner gefunden
+- **Weiterer local/-Ordner außerhalb Archiv/local/:** keiner gefunden
 - **Nächste Aktion:** BELASSEN_UND_VERTRAG_ANWENDEN — kein Handlungsbedarf
 
 ---
