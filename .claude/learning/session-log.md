@@ -60,3 +60,8 @@ FinanzwesirData.js, CSVParser.js, FwDateUtils.js — diese Session nicht berühr
 
 ## 2026-06-08 – AP-6 (ST-25) | Föderierter Archivkatalog — legacy-map.md
 - [OK] Keine Vorkommnisse
+
+## 2026-06-08 – AP 9 / ST-27 | Pilotarchiv auswählen und kontrolliert behandeln
+- [WIN] Kandidat-1-Auswahlregel aus legacy-map.md hat gepasst — Pilotinsel ohne Zusatzrecherche startbar
+- [WIN] README (AP 7) war vollständig — kein Änderungsbedarf in AP 9; Vorarbeit hat getragen
+- [WIN] Pilot-Lernpunkt: legacy-map arbeitet auf Zusammenfassungsebene (v3-Datei in docs/spec/archiv/ fehlte in Kurzbeschreibung; kein Problem — Map ist kein 1:1-Dateiverzeichnis)

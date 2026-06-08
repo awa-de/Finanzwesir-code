@@ -1,4 +1,4 @@
-Stand: 2026-06-08 | Erstellt in: AP 8 | Geändert von: Claude
+Stand: 2026-06-08 | Erstellt in: AP 8 | Geändert von: Claude | Aktualisiert in: AP 9
 
 # Kapitelrahmen — Making-of Finanzwesir 2.0
 
@@ -60,7 +60,7 @@ Leitfragen:
 Mögliche Belege (aus legacy-map.md):
 
 - `Archiv/Chart-Engine-Historie/` — Teil von `Archiv/` (Zielrolle: ROOT_KURATION + MAKING_OF_BELEG; Making-of-Wert: hoch)
-- `docs/spec/archiv/` — LOKALER_KONTEXT + MAKING_OF_BELEG; Spec-Versionen v1/v12/v13 für HTML-Karten und Ticks/Labels; 4 Dateien, 47 KB
+- `docs/spec/archiv/` — LOKALER_KONTEXT + MAKING_OF_BELEG; Spec-Versionen v1/v12/v13 für HTML-Karten und Ticks/Labels; 4 Dateien, 47 KB — Pilotbewertung (AP 9): `docs/spec/archiv/PILOT-BEWERTUNG.md`
 
 Status: Rahmen
 

@@ -1,4 +1,4 @@
-Stand: 2026-06-08 | Quelle: docs/steering/ARCHIV-INVENTAR.md | Geändert von: Claude | Session: AP-8-making-of-rahmen
+Stand: 2026-06-08 | Quelle: docs/steering/ARCHIV-INVENTAR.md | Geändert von: Claude | Session: AP-9-pilotarchiv
 
 # Föderierter Archivkatalog / Legacy Map
 
@@ -46,7 +46,7 @@ Vollständige Regeln: `docs/steering/ARCHIV-STRATEGIE.md`
 | Quelle | `docs/steering/ARCHIV-INVENTAR.md` |
 | Stand | 2026-06-08 |
 | Status | Befundkarte, keine Zielstruktur |
-| Nächste geplante Überarbeitung | nach AP 9 (Pilotarchiv abgeschlossen) |
+| Nächste geplante Überarbeitung | nach AP 9 ✅ abgeschlossen |
 
 ---
 
@@ -75,7 +75,7 @@ Vollständige Regeln: `docs/steering/ARCHIV-STRATEGIE.md`
 | `Apps/prokrastinations-preis/Archiv/` | LOKALES_ARCHIV | App prokrastinations-preis | 2 Markdown-Dateien, 6 KB; Slice-0-Kickoff-Prompt + Implementierungs-Prompt | mittel | niedrig | LOKALER_KONTEXT + MAKING_OF_BELEG | README_ANWENDEN + ROOT_REFERENZ_PRUEFEN |
 | `docs/App-Fabrik/_archive/` | LOKALES_ARCHIV | App-Fabrik | 1 Datei (README.md, 0 KB, leer); Archiv de facto leer | niedrig | niedrig | ZU_PRUEFEN | SONDERFALL_PRUEFEN |
 | `docs/design-system/archiv/` | LOKALES_ARCHIV | Design-System | 1 Datei (boxen-stress-test-referenz.html, 9 KB); Referenz-Stresstest aus Design-System-Entwicklung | mittel | niedrig | LOKALER_KONTEXT + MAKING_OF_BELEG | README_ANWENDEN + ROOT_REFERENZ_PRUEFEN |
-| `docs/spec/archiv/` | LOKALES_ARCHIV | Spec / Chart-Engine | 4 Markdown-Dateien, 47 KB; Spec-Versionen v1/v12/v13 für HTML-Karten und Ticks/Labels | hoch | mittel | LOKALER_KONTEXT + MAKING_OF_BELEG | README_ANWENDEN + PILOTKANDIDAT |
+| `docs/spec/archiv/` | LOKALES_ARCHIV | Spec / Chart-Engine | 4 Markdown-Dateien, 47 KB; Spec-Versionen v1/v12/v13 für HTML-Karten und Ticks/Labels | hoch | mittel | LOKALER_KONTEXT + MAKING_OF_BELEG | BELASSEN_UND_VERTRAG_ANWENDEN |
 | `docs/steering/archiv/` | LOKALES_ARCHIV | Steering / Projektsteuerung | 15 Dateien, 222 KB; AP-Übergaben, Implementierungspläne, Handoff-Prompts, Known-Issues-Geschichte | hoch | hoch | LOKALER_KONTEXT + MAKING_OF_BELEG | README_ANWENDEN |
 | `Inhalte alte Site/blog/archiv/` | SONDERFALL | Alte Website / Content | 1 leere Datei (page.md, 0 KB); Archiv-Ordner innerhalb alter Websiteinhalte; de facto leer | niedrig | niedrig | SONDERFALL | SONDERFALL_PRUEFEN + LOESCHKANDIDAT_PRUEFEN |
 | `archivliste.md` | SONDERFALL | Projektroot | 1 KB; manuelle Archivorte-Liste mit absoluten Windows-Pfaden; durch ARCHIV-INVENTAR.md ersetzt | niedrig | niedrig | SONDERFALL | LOESCHKANDIDAT_PRUEFEN |
@@ -181,8 +181,8 @@ Lokale Archive bleiben an Ort und Stelle; das Root-Archiv enthält projektüberg
 - **Rohmaterial:** nein
 - **Drift-Risiko:** mittel — veraltete Spec-Versionen könnten bei versehentlichem Laden mit aktuellen Regeln verwechselt werden
 - **README vorhanden:** ja (AP 7)
-- **Pilotstatus:** Kandidat 1 (→ Pilotkandidaten)
-- **Nächste Aktion:** README_ANWENDEN + PILOTKANDIDAT
+- **Pilotstatus:** AP 9 abgeschlossen — Pilotbewertung: `docs/spec/archiv/PILOT-BEWERTUNG.md`
+- **Nächste Aktion:** BELASSEN_UND_VERTRAG_ANWENDEN
 
 ---
 
@@ -270,10 +270,9 @@ Lokale Archive bleiben an Ort und Stelle; das Root-Archiv enthält projektüberg
 
 ### Rangliste
 
-**1. Bester Pilot: `docs/spec/archiv/`**
+**1. Bester Pilot: `docs/spec/archiv/` — AP 9 abgeschlossen ✅**
 4 Dateien, 47 KB, klar abgegrenzt, hoher Kuratierwert, kein Rohmaterial, mittleres Drift-Risiko.
-AP 9 kann direkt starten: README-Schablone anlegen, alle 4 Dateien mit Status `ERSETZT` markieren,
-Nachfolger auf aktive Chart-Engine-Spec-Dateien in `docs/spec/` verweisen. Kein Verschieben nötig.
+Pilotbewertung: `docs/spec/archiv/PILOT-BEWERTUNG.md`
 
 **2. Zweiter Kandidat: `Apps/prokrastinations-preis/Archiv/`**
 2 Dateien, 6 KB, minimales Risiko, direkter APP-01-Bezug (Slice-0-Entstehung).
@@ -317,7 +316,7 @@ Wichtigster Kandidat für AP 7 README-Anwendung — aber zu groß und komplex f�
 |---|---|---|
 | AP 7 | Lokale README-Schablone gezielt anwenden | legacy-map.md liegt vor ✅; nur dort anlegen, wo AP 6 empfiehlt |
 | AP 8 | Root-Making-of-Rahmen vorbereiten | legacy-map.md liegt vor ✅; nur rahmen, nicht fertig erzählen |
-| AP 9 | Pilotarchiv behandeln: `docs/spec/archiv/` | legacy-map.md + AP-9-Startbasis oben; ohne weitere Recherche startbar |
+| AP 9 | Pilotarchiv behandeln: `docs/spec/archiv/` ✅ | Abgeschlossen — Pilotbewertung: `docs/spec/archiv/PILOT-BEWERTUNG.md` |
 
 **Vor AP 7 klären:**
 - `Archiv/optimierung-projektsteuerung/.../Archiv/` — LOCAL_PRUEFEN (LLM-Dumps nach `Archiv/local/` verschieben)

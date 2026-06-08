@@ -1,11 +1,12 @@
 # BACKLOG-ARCHIV – Finanzwesir 2.0
-Stand: 2026-06-08 | Session: AP-8-making-of-rahmen | Geändert von: Claude
+Stand: 2026-06-08 | Session: AP-9-pilotarchiv | Geändert von: Claude
 
 Abgeschlossene Items, neueste zuerst (append-only).
 Archivierungs-Trigger: wenn > 200 Zeilen → neue Datei `BACKLOG-ARCHIV-YYYY.md` anlegen.
 
 | ID | Bereich | Titel | Abgeschlossen | Session |
 |----|---------|-------|---------------|---------|
+| ST-27 | System | Pilotarchiv auswählen und kontrolliert behandeln (AP-9): `docs/spec/archiv/` als erste Pilotinsel behandelt — `PILOT-BEWERTUNG.md` angelegt (Einordnung, Befund, Kontextschutz, Making-of-Bezug, Lernpunkt). `legacy-map.md` Pilotstatus + Nächste Aktion aktualisiert. `KAPITELRAHMEN.md` Kapitel-02-Belegverweis ergänzt. Pilot-Lernpunkt: Auswahlregel aus legacy-map funktioniert, AP-7-README trug ohne Änderungsbedarf. Grundarchitektur AP 3–9 abgeschlossen. | 2026-06-08 | AP-9-pilotarchiv |
 | ST-26 | System | Root-Making-of-Rahmen vorbereitet (AP-8): `Archiv/making-of/` angelegt mit `README.md` (Schutzregel, Quellenlogik) und `KAPITELRAHMEN.md` (7 Kapitelkandidaten: 6 mit Belegen aus `legacy-map.md`, 1 RAHMEN_OHNE_BELEG für Kapitel 01/Ursprung). `legacy-map.md` minimal aktualisiert (+1 Haupttabelleneintrag, +1 Themeninseln-Eintrag, Zähler 15→16). | 2026-06-08 | AP-8-making-of-rahmen |
 | ST-28 | System | README-Schablone auf 4 lokale Archivorte angewandt (AP-7): `README.md` angelegt in `Apps/prokrastinations-preis/Archiv/`, `docs/design-system/archiv/`, `docs/spec/archiv/`, `docs/steering/archiv/`. Archivvertrag + Schutzsatz + Erstellt-Datum 2026-06-08. `legacy-map.md` aktualisiert (`README vorhanden: ja`). Offene Folgepunkte: LOCAL_PRUEFEN (`Archiv/optimierung-projektsteuerung/...`), SONDERFALL_PRUEFEN (`docs/App-Fabrik/_archive/`). | 2026-06-08 | AP-7-local-readme |
 | ST-25 | System | Föderierter Archivkatalog (AP-6): `Archiv/legacy-map.md` erstellt — 15 Archivorte kartiert, 6 Zielrollen (ROOT_KURATION, LOKALER_KONTEXT, LOCAL_QUARANTAENE, MAKING_OF_BELEG, SONDERFALL, ZU_PRUEFEN), 2 Pilotkandidaten (docs/spec/archiv/ Kandidat 1, Apps/prokrastinations-preis/Archiv/ Kandidat 2). AP-9-Startbasis für docs/spec/archiv/ enthalten. | 2026-06-08 | AP-6-legacy-map |

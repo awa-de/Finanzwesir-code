@@ -8,7 +8,7 @@ Blocker: keine
 
 # PROJECT STATUS — Finanzwesir 2.0
 
-Stand: 2026-06-08 | Session: AP-7-local-readme | Geändert von: Claude
+Stand: 2026-06-08 | Session: AP-9-pilotarchiv | Geändert von: Claude
 
 **Zweck:** Schneller Wiedereinstieg nach Pausen.
 **Zielgruppe:** Albert und Claude.
@@ -71,6 +71,10 @@ Stand: 2026-06-08 | Session: AP-7-local-readme | Geändert von: Claude
 ✅ **Föderierter Archivkatalog abgeschlossen (2026-06-08):** `Archiv/legacy-map.md` erstellt — 15 Archivorte kartiert, 6 Zielrollen, 2 Pilotkandidaten (docs/spec/archiv/ + Apps/prokrastinations-preis/Archiv/). AP-9-Startbasis enthalten. Archiv-Block ST-20–ST-25 vollständig. (ST-25)
 
 ✅ **Archiv-README-Schablone angewandt (AP-7 / ST-28, 2026-06-08):** 4 lokale Archive mit Kontextschutz-README versehen (`Apps/prokrastinations-preis/Archiv/`, `docs/design-system/archiv/`, `docs/spec/archiv/`, `docs/steering/archiv/`). Schutzsatz + Archivvertrag + Erstellt-Datum. `legacy-map.md` aktualisiert. AP 8 (Root-Making-of-Rahmen) startbar.
+
+✅ **Root-Making-of-Rahmen vorbereitet (AP-8 / ST-26, 2026-06-08):** `Archiv/making-of/` angelegt mit `README.md` (Schutzregel, Quellenlogik) und `KAPITELRAHMEN.md` (7 Kapitelkandidaten, 6 mit Belegen aus legacy-map.md, 1 RAHMEN_OHNE_BELEG für Kapitel 01 Ursprung). `legacy-map.md` minimal aktualisiert (+1 Haupttabelleneintrag, Zähler 15→16).
+
+✅ **Archiv-Grundarchitektur abgeschlossen (AP-9 / ST-27, 2026-06-08):** `docs/spec/archiv/` als erste Pilotinsel behandelt — `PILOT-BEWERTUNG.md` angelegt (Einordnung, Befund, Kontextschutz, Making-of-Bezug, Lernpunkt). `legacy-map.md` Pilotstatus aktualisiert. `KAPITELRAHMEN.md` Kapitel-02-Belegverweis ergänzt. Pilot-Lernpunkt: Auswahlregel hat funktioniert, AP-7-README trug. Archivstrategie-Grundarchitektur AP 3–9 abgeschlossen.
 
 ⚙️ **Nächster Schritt B1:** OA-02 entscheiden (Peer-Review + COMP-ARCH-Kontext liegen vor) → dann Slice 4 SparplanChart.
 
