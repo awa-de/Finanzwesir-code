@@ -8,7 +8,7 @@ Blocker: keine
 
 # PROJECT STATUS — Finanzwesir 2.0
 
-Stand: 2026-06-08 | Session: AP-3 Föderiertes Archivmodell | Geändert von: Claude
+Stand: 2026-06-08 | Session: AP-4 Archivvertrag | Geändert von: Claude
 
 **Zweck:** Schneller Wiedereinstieg nach Pausen.
 **Zielgruppe:** Albert und Claude.
@@ -61,6 +61,8 @@ Stand: 2026-06-08 | Session: AP-3 Föderiertes Archivmodell | Geändert von: Cla
 ✅ **Archiv-Infrastruktur abgeschlossen (2026-06-08):** `.gitignore` umgestellt (`Archiv/` versionierbar, `Archiv/local/` gitignored). 292 Dateien (Binärdateien, LLM-Dumps, Rohmaterial) nach `Archiv/local/` verschoben. Hash-Analyse: 0 Cross-Dubletten. NAVIGATION.md Archivstrategie verankert. (ST-20 / ST-21)
 
 ✅ **Föderiertes Archivmodell beschlossen (2026-06-08):** `docs/steering/ARCHIV-STRATEGIE.md` angelegt — SSoT für Archivvertrag (10 Regeln), Begriffsklärung, Making-of-Zielbild. Lokale Archive bleiben, werden über Archivvertrag kontrolliert. Keine Massenkonsolidierung. Folge-APs ST-23–27 in BACKLOG. (ST-22)
+
+✅ **Archivvertrag konkretisiert (2026-06-08):** `ARCHIV-STRATEGIE.md` um Regel 11 + §Statuswerte (HIST/ERSETZT/POSTMORTEM/RAW, nicht: ARCHIV) + §Nachfolgerregel für ERSETZT + §README-Schablone für lokale Archive ergänzt. ST-28 (AP-7 README-Anwenden) neu in BACKLOG. Folge-APs auf AP 5–9 aktualisiert. NAVIGATION.md Nicht-Routing-Regel: fehlend → Folgepunkt. (ST-23)
 
 ✅ **COMP-ARCH-Verankerung (2026-06-05):** Component Composition Architecture als verbindliches Architekturmodell verankert — §1a in 03_APP_FACTORY_STANDARD_DRAFT.md (Lego-Brett-Modell, Komponentenklassen, Chart entzaubert), §2-Begriffe erweitert, CHART_ENGINE_ROLE_AND_INTEGRATION.md §1 Einordnung, APP-INTERFACE.md §4 Querverweis, ADR-COMP-ARCH-01 angelegt. OA-02 als Chart-Komponenten-Entscheidung gerahmt — kein App-Fabrik-Sonderweg.
 

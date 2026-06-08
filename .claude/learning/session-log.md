@@ -36,3 +36,6 @@ FinanzwesirData.js, CSVParser.js, FwDateUtils.js — diese Session nicht berühr
 
 ## 2026-06-08 – AP-3 | Föderiertes Archivmodell
 - [WIN] docs/steering/ARCHIV-STRATEGIE.md neu angelegt (SSoT für Archivmodell + Archivvertrag). NAVIGATION.md § Archivstrategie auf 4-Zeilen-Pointer reduziert, Steuerungsdokument-Tabelle ergänzt.
+
+## 2026-06-08 – AP-4 | Archivvertrag konkretisiert + README-Schablone definiert
+- [OK] Keine Vorkommnisse

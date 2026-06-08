@@ -1,11 +1,12 @@
 # BACKLOG-ARCHIV – Finanzwesir 2.0
-Stand: 2026-06-08 | Session: AP-3 Föderiertes Archivmodell | Geändert von: Claude
+Stand: 2026-06-08 | Session: AP-4 Archivvertrag | Geändert von: Claude
 
 Abgeschlossene Items, neueste zuerst (append-only).
 Archivierungs-Trigger: wenn > 200 Zeilen → neue Datei `BACKLOG-ARCHIV-YYYY.md` anlegen.
 
 | ID | Bereich | Titel | Abgeschlossen | Session |
 |----|---------|-------|---------------|---------|
+| ST-23 | System | Archivvertrag konkretisiert (AP-4): `docs/steering/ARCHIV-STRATEGIE.md` um Regel 11 (Making-of-Timing) + §Statuswerte (HIST/ERSETZT/POSTMORTEM/RAW, Nicht verwenden: ARCHIV) + §Nachfolgerregel für ERSETZT (Pflichtformel, Beispiele, UNKLAR-Fallback) + §README-Schablone für lokale Archive ergänzt. Folge-APs AP 5–9 aktualisiert. NAVIGATION.md Nicht-Routing-Regel fehlend → Folgepunkt. | 2026-06-08 | AP-4-Archivvertrag |
 | ST-22 | System | Föderiertes Archivmodell beschlossen (AP-3): `docs/steering/ARCHIV-STRATEGIE.md` angelegt (SSoT: Archivvertrag 10 Regeln, Begriffsklärung, Making-of-Zielbild, Folge-APs ST-23–27 definiert). NAVIGATION.md § Archivstrategie auf 4-Zeilen-Pointer reduziert, Steuerungsdokument-Tabelle ergänzt. *(sofort erledigt)* | 2026-06-08 | AP-3-Föderiertes-Archivmodell |
 | ST-21 | System | Archiv/local/ Quarantäne: Binärdateien, LLM-Unterordner (ChatGPT/Gemini/Perplexity), Peer-Review-Dumps und Seminar-Material nach `Archiv/local/` verschoben. Hash-Analyse: 0 Cross-Dubletten — Move-Item sauber. Windows-Konfliktkopie gelöscht. *(sofort erledigt)* | 2026-06-08 | Archiv-Infrastruktur-Setup |
 | ST-20 | System | Archivstrategie verankert + .gitignore umgestellt: NAVIGATION.md § Archivstrategie/Kontext-Hygiene (Aktive Dateien/Archiv/Git), `Archiv/` unignoriert → versionierbar, `Archiv/local/` als gitignored Puffer eingetragen. *(sofort erledigt)* | 2026-06-08 | Archiv-Infrastruktur-Setup |
