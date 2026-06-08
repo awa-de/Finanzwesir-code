@@ -1,5 +1,5 @@
 # NAVIGATION.md – Finanzwesir 2.0
-Stand: 2026-06-08 | Session: AP-3 Föderiertes Archivmodell | Geändert von: Claude
+Stand: 2026-06-08 | Session: AP-5 Archiv-Inventar | Geändert von: Claude
 
 Für Claude: **Routing-Dokument.** Wird beim Session-Start (Schritt 2) gelesen.
 Gibt Pfade und Lese-Reihenfolgen vor — KEINE Verhaltensregeln (die stehen in CLAUDE.md).
@@ -259,6 +259,7 @@ Manuelle Aktivierung: `/spec-rewrite-guard docs/spec/[Dateiname]`
 |---|---|---|
 | Subagent-Policy Praxisnotiz | `docs/steering/SUBAGENT-POLICY-PRAXIS.md` | Warum und wie Haiku-Scouts zentral genutzt werden |
 | Archivstrategie | `docs/steering/ARCHIV-STRATEGIE.md` | Föderiertes Archivmodell, Archivvertrag, Begriffsklärung, Folge-APs |
+| Archiv-Inventar | `docs/steering/ARCHIV-INVENTAR.md` | Bestandsaufnahme aller Archivorte — Befund für ST-25 (legacy-map) |
 
 ## Archivstrategie / Kontext-Hygiene
 

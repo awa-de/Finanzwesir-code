@@ -17,4 +17,4 @@ Archivvertrag (10 Regeln, vollständig in ARCHIV-STRATEGIE.md): Archivdateien ni
 
 **How to apply:** Beim Lesen von Archiv/-Dateien: nur Inhalte außerhalb von `Archiv/local/` sind kuratiert. Bei neuen Archiv-Operationen: Binärdateien, LLM-Dumps, Rohmaterial → `Archiv/local/`. Bestehende lokale Archive nicht blind bereinigen — Archivvertrag aus ARCHIV-STRATEGIE.md gilt. Neue `local/`-Unterverzeichnisse nur auf gesonderten AP-Auftrag anlegen.
 
-Folge-APs: ST-23 (README-Schablone), ST-24 (Inventar — zuerst), ST-25 (Katalog — nach ST-24), ST-26 (Making-of-Rahmen), ST-27 (Pilotarchiv). ST-24 muss vor ST-25 abgeschlossen sein.
+Folge-APs: ST-23 ✅, ST-24 ✅ (Inventar — abgeschlossen, Befund in `docs/steering/ARCHIV-INVENTAR.md`), ST-25 (Katalog — offen, Befund vorhanden), ST-26 (Making-of-Rahmen), ST-27 (Pilotarchiv), ST-28 (README-Schablone anwenden).

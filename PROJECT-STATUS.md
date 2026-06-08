@@ -8,7 +8,7 @@ Blocker: keine
 
 # PROJECT STATUS — Finanzwesir 2.0
 
-Stand: 2026-06-08 | Session: AP-4 Archivvertrag | Geändert von: Claude
+Stand: 2026-06-08 | Session: AP-5 Archiv-Inventar | Geändert von: Claude
 
 **Zweck:** Schneller Wiedereinstieg nach Pausen.
 **Zielgruppe:** Albert und Claude.
@@ -63,6 +63,8 @@ Stand: 2026-06-08 | Session: AP-4 Archivvertrag | Geändert von: Claude
 ✅ **Föderiertes Archivmodell beschlossen (2026-06-08):** `docs/steering/ARCHIV-STRATEGIE.md` angelegt — SSoT für Archivvertrag (10 Regeln), Begriffsklärung, Making-of-Zielbild. Lokale Archive bleiben, werden über Archivvertrag kontrolliert. Keine Massenkonsolidierung. Folge-APs ST-23–27 in BACKLOG. (ST-22)
 
 ✅ **Archivvertrag konkretisiert (2026-06-08):** `ARCHIV-STRATEGIE.md` um Regel 11 + §Statuswerte (HIST/ERSETZT/POSTMORTEM/RAW, nicht: ARCHIV) + §Nachfolgerregel für ERSETZT + §README-Schablone für lokale Archive ergänzt. ST-28 (AP-7 README-Anwenden) neu in BACKLOG. Folge-APs auf AP 5–9 aktualisiert. NAVIGATION.md Nicht-Routing-Regel: fehlend → Folgepunkt. (ST-23)
+
+✅ **Archiv-Inventar abgeschlossen (2026-06-08):** `docs/steering/ARCHIV-INVENTAR.md` angelegt — 15 Archivorte inventarisiert (9 Verzeichnisse + 6 Dateien/Sonderfälle). Archiv/local/ gitignored bestätigt. Größtes Drift-Risiko: docs/steering/archiv/ (15 Dateien, 222 KB). Pilotkandidaten: docs/spec/archiv/ + Apps/prokrastinations-preis/Archiv/. Befund für ST-25 (föderierter Katalog). (ST-24)
 
 ✅ **COMP-ARCH-Verankerung (2026-06-05):** Component Composition Architecture als verbindliches Architekturmodell verankert — §1a in 03_APP_FACTORY_STANDARD_DRAFT.md (Lego-Brett-Modell, Komponentenklassen, Chart entzaubert), §2-Begriffe erweitert, CHART_ENGINE_ROLE_AND_INTEGRATION.md §1 Einordnung, APP-INTERFACE.md §4 Querverweis, ADR-COMP-ARCH-01 angelegt. OA-02 als Chart-Komponenten-Entscheidung gerahmt — kein App-Fabrik-Sonderweg.
 
@@ -141,6 +143,9 @@ Vollständig im DECISION-LOG dokumentiert (`docs/steering/DECISION-LOG.md`):
 ---
 
 ## 8. Letzte Session
+
+2026-06-08 — Archiv-Block abgeschlossen (ST-20–ST-24).
+Archiv-Infrastruktur (ST-20/21): .gitignore umgestellt, Archiv/local/ als Quarantäne (203 Dateien, 31 MB). Föderiertes Archivmodell (ST-22): ARCHIV-STRATEGIE.md neu. Archivvertrag (ST-23): Statuswerte, README-Schablone, Nachfolgerregel. Archiv-Inventar (ST-24): ARCHIV-INVENTAR.md mit 15 Archivorton — Befund für ST-25.
 
 2026-06-06 — Memory-System Rekonstruktion (ST-19).
 .claude/memory/ angelegt: 18 Feedback-Files aus patterns.md + session-log rekonstruiert (~80–90 % Präzision), MEMORY.md-Index, /start Schritt 1b, distill-Pfad, abschluss-ritual Memory-Pfad korrigiert. ST-18 (Heim-PC-Merge) in BACKLOG aktiv.

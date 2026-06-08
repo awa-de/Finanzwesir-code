@@ -1,11 +1,12 @@
 # BACKLOG-ARCHIV – Finanzwesir 2.0
-Stand: 2026-06-08 | Session: AP-4 Archivvertrag | Geändert von: Claude
+Stand: 2026-06-08 | Session: AP-5 Archiv-Inventar | Geändert von: Claude
 
 Abgeschlossene Items, neueste zuerst (append-only).
 Archivierungs-Trigger: wenn > 200 Zeilen → neue Datei `BACKLOG-ARCHIV-YYYY.md` anlegen.
 
 | ID | Bereich | Titel | Abgeschlossen | Session |
 |----|---------|-------|---------------|---------|
+| ST-24 | System | Archiv-Inventar (AP-5): `docs/steering/ARCHIV-INVENTAR.md` angelegt — 15 Archivorte erfasst (9 Verzeichnisse + 6 Dateien/Sonderfälle; 1 ROOT_ARCHIV, 6 LOKALE_ARCHIVE, 1 LOCAL_QUARANTAENE, 4 ARCHIVDATEIEN, 3 SONDERFAELLE). Archiv/local/ gitignored bestätigt. Größtes Drift-Risiko: docs/steering/archiv/ (15 Dateien, 222 KB). Pilotkandidaten: docs/spec/archiv/ + Apps/prokrastinations-preis/Archiv/. Befund für ST-25. | 2026-06-08 | AP-5-Archiv-Inventar |
 | ST-23 | System | Archivvertrag konkretisiert (AP-4): `docs/steering/ARCHIV-STRATEGIE.md` um Regel 11 (Making-of-Timing) + §Statuswerte (HIST/ERSETZT/POSTMORTEM/RAW, Nicht verwenden: ARCHIV) + §Nachfolgerregel für ERSETZT (Pflichtformel, Beispiele, UNKLAR-Fallback) + §README-Schablone für lokale Archive ergänzt. Folge-APs AP 5–9 aktualisiert. NAVIGATION.md Nicht-Routing-Regel fehlend → Folgepunkt. | 2026-06-08 | AP-4-Archivvertrag |
 | ST-22 | System | Föderiertes Archivmodell beschlossen (AP-3): `docs/steering/ARCHIV-STRATEGIE.md` angelegt (SSoT: Archivvertrag 10 Regeln, Begriffsklärung, Making-of-Zielbild, Folge-APs ST-23–27 definiert). NAVIGATION.md § Archivstrategie auf 4-Zeilen-Pointer reduziert, Steuerungsdokument-Tabelle ergänzt. *(sofort erledigt)* | 2026-06-08 | AP-3-Föderiertes-Archivmodell |
 | ST-21 | System | Archiv/local/ Quarantäne: Binärdateien, LLM-Unterordner (ChatGPT/Gemini/Perplexity), Peer-Review-Dumps und Seminar-Material nach `Archiv/local/` verschoben. Hash-Analyse: 0 Cross-Dubletten — Move-Item sauber. Windows-Konfliktkopie gelöscht. *(sofort erledigt)* | 2026-06-08 | Archiv-Infrastruktur-Setup |

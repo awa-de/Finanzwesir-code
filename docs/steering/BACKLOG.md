@@ -1,5 +1,5 @@
 # BACKLOG – Finanzwesir 2.0
-Stand: 2026-06-08 | Session: AP-4 Archivvertrag | Geändert von: Claude
+Stand: 2026-06-08 | Session: AP-5 Archiv-Inventar | Geändert von: Claude
 
 **Regeln:**
 - ✅-Zeilen werden sofort nach `BACKLOG-ARCHIV.md` verschoben (append), dann hier gelöscht.
@@ -37,8 +37,7 @@ Stand: 2026-06-08 | Session: AP-4 Archivvertrag | Geändert von: Claude
 | AP-SEC-1 | Engine  | Domain-Lock Validierungsfunktion implementieren| M    | AP-DOC-1     | —                                                 |
 | ST-01    | System  | Scope-Creep-Erkennung stärken — proaktiver Mid-Work-Check nach jedem Patch + Selftest-Szenario Pfad 14 | H | — | — |
 | ST-02    | System  | Selftest: Szenario „Protected Path direkt" ergänzen — Pfad 11, PROTECTED_PATHS.json-Protokoll vs. CLAUDE.md-Tabu-Regel | H | — | — |
-| ST-24    | System  | Alle Archiv-Vorkommen inventarisieren — Befund zuerst, Struktur danach (AP-5) | M | ST-22 ✅ | docs/steering/ARCHIV-STRATEGIE.md |
-| ST-25    | System  | Föderierter Archivkatalog / legacy-map.md erstellen aus Inventar (AP-6) | L | ST-24 | docs/steering/ARCHIV-STRATEGIE.md |
+| ST-25    | System  | Föderierter Archivkatalog / legacy-map.md erstellen aus Inventar (AP-6) | L | ST-24 ✅ | docs/steering/ARCHIV-STRATEGIE.md |
 | ST-28    | System  | README-Schablone für lokale Archive gezielt anwenden (AP-7) | L | ST-23 ✅ | docs/steering/ARCHIV-STRATEGIE.md |
 | ST-26    | System  | Root-Making-of-Rahmen vorbereiten (AP-8) | L | ST-25 | docs/steering/ARCHIV-STRATEGIE.md |
 | ST-27    | System  | Pilotarchiv auswählen und kontrolliert behandeln (AP-9) | L | ST-24 | docs/steering/ARCHIV-STRATEGIE.md |

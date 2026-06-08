@@ -39,3 +39,9 @@ FinanzwesirData.js, CSVParser.js, FwDateUtils.js — diese Session nicht berühr
 
 ## 2026-06-08 – AP-4 | Archivvertrag konkretisiert + README-Schablone definiert
 - [OK] Keine Vorkommnisse
+
+## 2026-06-08 – SESSION START | Fokus: APP-01 — prokrastinations-preis
+FinanzwesirData.js, CSVParser.js, FwDateUtils.js — diese Session nicht berühren. ✓
+
+## 2026-06-08 – AP-5 | Archiv-Inventar
+- [WIN] docs/steering/ARCHIV-INVENTAR.md angelegt: 15 Archivorte erfasst (9 Verzeichnisse + 6 Dateien/Sonderfälle). Archiv/local/ gitignored bestätigt. Größtes Risiko: docs/steering/archiv/ (Drift). Pilotkandidaten: docs/spec/archiv/ + Apps/prokrastinations-preis/Archiv/.
