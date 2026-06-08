@@ -1,3 +1,32 @@
+---
+archiv_status: POSTMORTEM
+archiv_hinweis: "Historischer Schlachtplan. Nicht handlungsleitend."
+aktive_steuerquellen:
+  - PROJECT-STATUS.md
+  - BACKLOG.md
+  - NAVIGATION.md
+erstellt_vor_archivvertrag: true
+geprüft_am: 2026-06-08
+geprüft_in: AP-KORR-5
+---
+
+# Archivhinweis
+
+Diese Datei ist ein historisches Prozessartefakt.
+
+Sie ist kein operativer Standardkontext für Claude.
+Sie ersetzt keine aktiven Steuerdateien und darf nicht als aktueller Arbeitsplan verwendet werden.
+
+Aktuelle Projektsteuerung steht in:
+
+- `PROJECT-STATUS.md`
+- `BACKLOG.md`
+- `NAVIGATION.md`
+
+Der folgende Inhalt bleibt als Postmortem- und Verlaufsmaterial erhalten.
+
+---
+
 # Schlachtplan: KNOWN-ISSUES abarbeiten
 
 ## Übersicht

@@ -8,7 +8,7 @@ Blocker: keine
 
 # PROJECT STATUS — Finanzwesir 2.0
 
-Stand: 2026-06-08 | Session: AP-KORR-Serie | Geändert von: Claude
+Stand: 2026-06-08 | Session: AP-KORR-5 | Geändert von: Claude
 
 **Zweck:** Schneller Wiedereinstieg nach Pausen.
 **Zielgruppe:** Albert und Claude.
@@ -151,6 +151,9 @@ Vollständig im DECISION-LOG dokumentiert (`docs/steering/DECISION-LOG.md`):
 ---
 
 ## 8. Letzte Session
+
+2026-06-08 — AP-KORR-5: KNOWN-ISSUES-SCHLACHTPLAN-ARCHIV.md als POSTMORTEM markiert.
+Schutzheader eingefügt (YAML-Frontmatter + Archivhinweis, aktive Steuerquellen benannt). `legacy-map.md`: Status UNKLAR_PRUEFEN → POSTMORTEM / ERLEDIGT_AP_KORR_5 in Haupttabelle, Archivdateien-Tabelle, Offene Risiken und Folge-APs. Historischer Inhalt unverändert.
 
 2026-06-08 — Archivstrategie-Korrekturserie AP-KORR-1 bis AP-KORR-4 abgeschlossen.
 Nicht-Routing-Regel in NAVIGATION.md verankert (AP-KORR-1). `Archiv/README.md` als Root-Kontextschutz angelegt (AP-KORR-2). `legacy-map.md` nach Setup-Serie synchronisiert — alle `README_ANWENDEN`-Driftpunkte bereinigt (AP-KORR-3). `ARCHIV-STRATEGIE.md` § Erwartete Folge-APs → § Setup-Serie AP 3–9 Abschlussstand, Nicht-Routing-Regel in Archivvertrag und README-Schablone ergänzt (AP-KORR-4). Keine AP10-Pflichtkette.

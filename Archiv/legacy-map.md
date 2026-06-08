@@ -1,4 +1,4 @@
-Stand: 2026-06-08 | Quelle: docs/steering/ARCHIV-INVENTAR.md | Geändert von: Claude | Session: AP-KORR-3
+Stand: 2026-06-08 | Quelle: docs/steering/ARCHIV-INVENTAR.md | Geändert von: Claude | Session: AP-KORR-5
 
 # Föderierter Archivkatalog / Legacy Map
 
@@ -84,7 +84,7 @@ Vollständige Regeln: `docs/steering/ARCHIV-STRATEGIE.md`
 | `Archiv/Refactoring der Dateistruktur/Aufraeum-Archiv.md` | ARCHIVDATEI | Root-Archiv / Refactoring | 18 KB; Aufräum-Analyse aus der Refactoring-Phase der Dateistruktur | mittel | niedrig | ROOT_KURATION + MAKING_OF_BELEG | BELASSEN_UND_VERTRAG_ANWENDEN |
 | `docs/steering/archiv/AUFRAEUM-ANALYSE-ARCHIV.md` | ARCHIVDATEI | Steering-Archiv | 8 KB; archivierte Aufräum-Analyse aus der Steering-Phase | mittel | mittel | LOKALER_KONTEXT + MAKING_OF_BELEG | BELASSEN_UND_VERTRAG_ANWENDEN |
 | `docs/steering/archiv/KNOWN-ISSUES-ARCHIV.md` | ARCHIVDATEI | Steering-Archiv | 8 KB; archivierte Known-Issues-Liste | mittel | mittel | LOKALER_KONTEXT + MAKING_OF_BELEG | BELASSEN_UND_VERTRAG_ANWENDEN |
-| `docs/steering/archiv/KNOWN-ISSUES-SCHLACHTPLAN-ARCHIV.md` | ARCHIVDATEI | Steering-Archiv | 79 KB; archivierter Known-Issues-Schlachtplan; größter Einzelartefakt im Inventar | hoch | hoch | LOKALER_KONTEXT + MAKING_OF_BELEG | UNKLAR_PRUEFEN |
+| `docs/steering/archiv/KNOWN-ISSUES-SCHLACHTPLAN-ARCHIV.md` | ARCHIVDATEI | Steering-Archiv | 79 KB; archivierter Known-Issues-Schlachtplan; größter Einzelartefakt im Inventar | hoch | hoch | LOKALER_KONTEXT + MAKING_OF_BELEG | ERLEDIGT_AP_KORR_5 |
 | `docs/steering/BACKLOG-ARCHIV.md` | SONDERFALL | Steering (aktiver Pfad) | 34 KB; aktives Backlog-Archiv; operatives Artefakt — wird von /start und Kassensturz direkt gelesen | mittel | niedrig | SONDERFALL | BELASSEN_UND_VERTRAG_ANWENDEN |
 | `Archiv/making-of/` | LOKALES_ARCHIV | Root-Archiv | Making-of-Rahmen; KAPITELRAHMEN.md + README.md; kein operativer Inhalt; erstellt AP 8 | hoch | niedrig | ROOT_KURATION + MAKING_OF_BELEG | BELASSEN_UND_VERTRAG_ANWENDEN |
 
@@ -206,7 +206,7 @@ Lokale Archive bleiben an Ort und Stelle; das Root-Archiv enthält projektüberg
 |---|---|---|---|---|---|
 | `docs/steering/archiv/AUFRAEUM-ANALYSE-ARCHIV.md` | 8 KB | mittel | mittel | POSTMORTEM | BELASSEN_UND_VERTRAG_ANWENDEN |
 | `docs/steering/archiv/KNOWN-ISSUES-ARCHIV.md` | 8 KB | mittel | mittel | HIST | BELASSEN_UND_VERTRAG_ANWENDEN |
-| `docs/steering/archiv/KNOWN-ISSUES-SCHLACHTPLAN-ARCHIV.md` | 79 KB | hoch | hoch | klären: ERSETZT oder POSTMORTEM | UNKLAR_PRUEFEN |
+| `docs/steering/archiv/KNOWN-ISSUES-SCHLACHTPLAN-ARCHIV.md` | 79 KB | hoch | hoch | POSTMORTEM | ERLEDIGT_AP_KORR_5 |
 
 ---
 
@@ -304,7 +304,7 @@ Wichtigster Kandidat für AP 7 README-Anwendung — aber zu groß und komplex f�
 | Priorität | Risiko | Betroffener Ort | Folgepunkt |
 |---|---|---|---|
 | hoch | Drift-Risiko durch veraltete Pläne + Prompts | `docs/steering/archiv/` | README-Kontextschutz erledigt (AP7); spätere Inhaltskuratierung optional / bei Bedarf |
-| hoch | 79-KB-Einzelartefakt mit ungeklärtem Status | `docs/steering/archiv/KNOWN-ISSUES-SCHLACHTPLAN-ARCHIV.md` | Status klären: ERSETZT oder POSTMORTEM (AP-KORR-5) |
+| niedrig | 79-KB-Einzelartefakt — POSTMORTEM gesetzt | `docs/steering/archiv/KNOWN-ISSUES-SCHLACHTPLAN-ARCHIV.md` | ERLEDIGT_AP_KORR_5 |
 | mittel | LLM-Dumps im Root-Archiv außerhalb local/ | `Archiv/optimierung-projektsteuerung/.../Archiv/` | LOCAL_PRUEFEN — gehört zu AP-KORR-6 |
 | mittel | Veraltete Spec-Versionen (Verwechslungsgefahr) | `docs/spec/archiv/` | AP9-Pilotbewertung erledigt; spätere Einzeldatei-Kuratierung optional |
 | niedrig | Veraltete Datei mit absoluten Pfaden im Root | `archivliste.md` | LOESCHKANDIDAT_PRUEFEN — Albert entscheidet |
@@ -326,7 +326,7 @@ Wichtigster Kandidat für AP 7 README-Anwendung — aber zu groß und komplex f�
 Diese Punkte sind keine Pflicht — nur bei konkretem Bedarf aufgreifen:
 
 - Steering-Archiv kuratieren (`docs/steering/archiv/`) — SONDERPRUEFUNG_STEERING_ARCHIV
-- `docs/steering/archiv/KNOWN-ISSUES-SCHLACHTPLAN-ARCHIV.md` Status klären (AP-KORR-5)
+- `docs/steering/archiv/KNOWN-ISSUES-SCHLACHTPLAN-ARCHIV.md` Status POSTMORTEM gesetzt ✅ (AP-KORR-5)
 - `docs/spec/archiv/` Einzeldateien mit ERSETZT/Nachfolger prüfen
 - `Apps/prokrastinations-preis/Archiv/` als zweiten Pilot prüfen
 - LLM-Dumps in `Archiv/optimierung-projektsteuerung/.../Archiv/` nach `Archiv/local/` verschieben (AP-KORR-6)
