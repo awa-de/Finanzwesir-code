@@ -1,4 +1,4 @@
-Stand: 2026-06-08 | Erstellt in: AP 8 | Geändert von: Claude | Aktualisiert in: AP-KORR-9
+Stand: 2026-06-08 | Erstellt in: AP 8 | Geändert von: Claude | Aktualisiert in: AP-KORR-9, Belegnotizen 2026-06-08
 
 # Kapitelrahmen — Making-of Finanzwesir 2.0
 
@@ -152,6 +152,9 @@ Mögliche Belege (aus legacy-map.md):
 - `docs/steering/archiv/AUFRAEUM-ANALYSE-ARCHIV.md` — LOKALER_KONTEXT + MAKING_OF_BELEG; 8 KB
 - `docs/steering/archiv/KNOWN-ISSUES-ARCHIV.md` — LOKALER_KONTEXT + MAKING_OF_BELEG; 8 KB
 - `docs/steering/archiv/KNOWN-ISSUES-SCHLACHTPLAN-ARCHIV.md` — LOKALER_KONTEXT + MAKING_OF_BELEG; 79 KB; Status: POSTMORTEM (AP-KORR-5); historisches Prozessartefakt, nicht handlungsleitend
+- `Archiv/making-of/07a_component-composition-architecture_BELEGNOTIZ.md` — erklärt den Architektur-Wendepunkt App = Board, Komponenten = Steine, Engines = Spezialwerkzeuge.
+- `Archiv/making-of/07b_claude-drift-durch-historische-dokumente_BELEGNOTIZ.md` — erklärt das Driftproblem durch Vermischung historischer und aktueller Dokumente.
+- `Archiv/making-of/07c_archivstrategie-foederiertes-modell_BELEGNOTIZ.md` — erklärt den Weg vom zentralen Archiv zur föderierten Archivstrategie mit Making-of-Reservoir.
 
 Status: Rahmen
 

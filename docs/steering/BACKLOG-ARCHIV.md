@@ -1,11 +1,12 @@
 # BACKLOG-ARCHIV – Finanzwesir 2.0
-Stand: 2026-06-08 | Session: AP-KORR-8 | Geändert von: Claude
+Stand: 2026-06-08 | Session: AP-KORR-11 | Geändert von: Claude
 
 Abgeschlossene Items, neueste zuerst (append-only).
 Archivierungs-Trigger: wenn > 200 Zeilen → neue Datei `BACKLOG-ARCHIV-YYYY.md` anlegen.
 
 | ID | Bereich | Titel | Abgeschlossen | Session |
 |----|---------|-------|---------------|---------|
+| AP-KORR-11 | System | Making-of-Belege Archivstrategie integriert: 3 BELEGNOTIZ-Dateien (07a–07c) in Archiv/making-of/ abgelegt; KAPITELRAHMEN.md Kap. 07 um Belegverweise ergänzt; legacy-map.md Archiv/making-of/-Einträge in Föderierte Archivkarte + Themeninseln aktualisiert; Rohmaterial-README in Archiv/local/making-of/2026-06-08_archivstrategie-kontext-hygiene_raw/ angelegt. *(sofort erledigt)* | 2026-06-08 | AP-KORR-11 |
 | AP-KORR-10 | System | legacy-map letzter Konsistenzschliff: LOCAL_PRUEFEN → SONDERFAELLE_DOKUMENTIERT; Archiv/local/ Bestandszahl als nicht-versioniert gekennzeichnet; Weiterer-local/-Ordner-Formulierung präzisiert. *(sofort erledigt)* | 2026-06-08 | AP-KORR-10 |
 | AP-KORR-9 | System | Reststaub-Cleanup Archivstrategie: 7 Dateien, 20 Stellen — sichtbare Marker (// NEW ×4, // CHANGED ×2) entfernt; veraltete AP9-Forward-Referenzen (6 Stellen) neutralisiert; Faktenwidersprüche bereinigt (docs/App-Fabrik/_archive/ 0 KB → 349 Bytes; Inhalte alte Site 0 KB → 119 Bytes); Nicht-Routing-Satz in 4 lokale READMEs ergänzt; Archiv/struktur.md-Risikoeintrag auf späterer Bedarfs-AP umformuliert. *(sofort erledigt)* | 2026-06-08 | AP-KORR-9 |
 | AP-KORR-8 | System | Abschluss-Audit Archivstrategie-Nachputzserie (AP-KORR-1–7): 10/10 Pruefpunkte bestanden. P0: 0, P1: 0, P2: 1 (stale Forward-Referenz in KAPITELRAHMEN.md — nicht operativ). Nachputzserie abgeschlossen ohne Blocker. *(sofort erledigt)* | 2026-06-08 | AP-KORR-8 |
