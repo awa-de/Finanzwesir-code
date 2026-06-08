@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Finanzwesir Master Design Check</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        petrol: { DEFAULT: '#218380', tint: 'rgba(33, 131, 128, 0.08)', 30: 'rgba(33, 131, 128, 0.3)' },
+                        purpur: { DEFAULT: '#8D0267', tint: 'rgba(141, 2, 103, 0.08)', 30: 'rgba(141, 2, 103, 0.3)' },
+                        gelb: { DEFAULT: '#DFC805', 80: '#F9EF9E', tint: 'rgba(223, 200, 5, 0.08)', 30: 'rgba(223, 200, 5, 0.3)' },
+                        text: { DEFAULT: '#272727', secondary: '#4C4C4C' },
+                        background: '#FFFFFF',
+                        border: '#E7ECEF',
+                    },
+                    fontFamily: {
+                        display: ['"Archivo Black"', 'sans-serif'],
+                        body: ['"Source Sans Pro"', 'sans-serif'],
+                    },
+                    boxShadow: {
+                        'soft': '0 4px 20px -2px rgba(39, 39, 39, 0.05)',
+                        'hover': '0 10px 25px -5px rgba(39, 39, 39, 0.1)',
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="stylesheet" href="../../../assets/css/screen.css">
+    
+    <style>
+        body { font-family: 'Source Sans Pro', sans-serif; background: #f3f4f6; }
+        
+        .label { 
+            display: inline-block; background: #272727; color: #fff; 
+            padding: 4px 8px; font-size: 12px; border-radius: 4px; 
+            margin-bottom: 20px; font-family: monospace; text-transform: uppercase; letter-spacing: 0.05em;
+        }
+
+        /* Der finale Kontrast-Filter */
+        .hard-rim { filter: drop-shadow(1px 1px 0px rgba(0,0,0,0.25)); }
+        
+        /* Für die Demo-Listen */
+        .box-list { list-style: disc; padding-left: 1.2em; margin-top: 0.5em; }
+    </style>
+</head>
+<body class="text-text-secondary antialiased leading-relaxed pb-32">
+
+    <header class="bg-white border-b border-border h-[80px] flex items-center mb-12 sticky top-0 z-50">
+        <div class="max-w-[1200px] mx-auto px-6 w-full flex justify-between items-center">
+            <span class="font-display text-2xl text-petrol">FINANZWESIR</span>
+            <span class="text-sm font-mono text-gray-400">Master Reference V1</span>
+        </div>
+    </header>
+
+    <div class="max-w-[1000px] mx-auto px-6">
+
+        <section class="mb-32">
+            <span class="label">Teil 1: Homepage (Timeline Layout)</span>
+            <p class="mb-8">Hier testen wir die neuen 72px Icons im Kontext der Homepage. <br><strong>Achtung:</strong> Die vertikale Linie wurde neu berechnet, damit sie durch die Mitte der 72px Icons läuft.</p>
+
+            <div class="bg-white p-8 md:p-12 rounded-xl shadow-sm border border-gray-200">
+                
+                <div class="text-center mb-16">
+                    <h2 class="font-display text-3xl md:text-4xl text-petrol mb-2 uppercase tracking-wide">Fundament</h2>
+                    <p class="text-lg text-text-secondary font-normal">Philosophie & Strategie</p>
+                </div>
+
+                <div class="relative">
+                    <div class="absolute left-[32px] md:left-[36px] top-0 bottom-0 w-[2px] bg-petrol/20 -translate-x-1/2"></div>
+
+                    <div class="space-y-12 md:space-y-16">
+                        
+                        <div class="relative group">
+                            <div class="absolute left-[32px] md:left-[36px] top-0 w-[22px] h-[22px] bg-petrol rounded-full border-[4px] border-white shadow-sm z-10 -translate-x-1/2"></div>
+                            
+                            <article class="relative ml-24 md:ml-28 bg-white rounded-xl p-6 md:p-8 shadow-soft transition-all duration-300 hover:shadow-hover border border-border flex flex-col md:flex-row gap-6 md:gap-8 items-start">
+                                
+                                <div class="w-16 h-16 md:w-[72px] md:h-[72px] shrink-0 flex items-center justify-center rounded-2xl bg-petrol-30 p-1">
+                                    <img src="Feder.svg" alt="Symbol" class="w-full h-full object-contain hard-rim">
+                                </div>
+                                
+                                <div class="flex-1">
+                                    <h3 class="font-display text-xl md:text-2xl text-text mb-2 md:mb-3">1. Der Weg</h3>
+                                    <p class="text-[0.95rem] md:text-lg text-text-secondary mb-4 leading-relaxed">
+                                        Die Icons sind jetzt riesig (72px). Sie wirken wie "Kapitel-Initialen". Das Hard-Rim sorgt dafür, dass sie sich auch auf dem hellen Petrol-Hintergrund abheben.
+                                    </p>
+                                    <a href="#" class="font-semibold text-blau hover:text-petrol underline decoration-1 underline-offset-4">Mehr erfahren →</a>
+                                </div>
+                            </article>
+                        </div>
+
+                        <div class="relative group">
+                            <div class="absolute left-[32px] md:left-[36px] top-0 w-[22px] h-[22px] bg-gelb rounded-full border-[4px] border-white shadow-sm z-10 -translate-x-1/2"></div>
+                            
+                            <article class="relative ml-24 md:ml-28 bg-white rounded-xl p-6 md:p-8 shadow-soft transition-all duration-300 hover:shadow-hover border border-border flex flex-col md:flex-row gap-6 md:gap-8 items-start">
+                                
+                                <div class="w-16 h-16 md:w-[72px] md:h-[72px] shrink-0 flex items-center justify-center rounded-2xl bg-gelb-30 p-1">
+                                    <img src="Schwert.svg" alt="Symbol" class="w-full h-full object-contain hard-rim">
+                                </div>
+                                
+                                <div class="flex-1">
+                                    <h3 class="font-display text-xl md:text-2xl text-text mb-2 md:mb-3">2. Bausteine</h3>
+                                    <p class="text-[0.95rem] md:text-lg text-text-secondary mb-4 leading-relaxed">
+                                        Hier der Härtetest mit Gelb auf Gelb (30%). Durch den "Hard Rim" Schatten bleibt die Kontur des Schwertes messerscharf erkennbar.
+                                    </p>
+                                    <a href="#" class="font-semibold text-blau hover:text-petrol underline decoration-1 underline-offset-4">Mehr erfahren →</a>
+                                </div>
+                            </article>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <section>
+            <span class="label">Teil 2: Artikel (Content Boxen)</span>
+            <p class="mb-8">Das gleiche System im Fließtext. Absolute Konsistenz in Form, Größe und Schatten.</p>
+
+            <div class="bg-petrol-tint border border-petrol-20 rounded-xl p-6 md:p-8 mb-12 flex flex-col md:flex-row gap-4 md:gap-6 items-start">
+                <div class="w-16 h-16 md:w-[72px] md:h-[72px] shrink-0 flex items-center justify-center rounded-2xl bg-petrol-30 p-1">
+                    <img src="Feder.svg" alt="Info" class="w-full h-full object-contain hard-rim">
+                </div>
+                <div class="flex-1 min-w-0">
+                    <h4 class="font-display text-lg md:text-xl text-petrol mb-2 mt-1">Wissenswert: Konsistenz</h4>
+                    <div class="text-text-secondary m-0 text-lg leading-relaxed">
+                        <p>Das Icon hier ist identisch zur Homepage. Der Nutzer lernt: "Aha, quadratisch + Icon = Wichtiges Konzept".</p>
+                        <ul class="box-list">
+                            <li>Desktop: 72px (wuchtig, stabil)</li>
+                            <li>Mobile: 64px (gut lesbar)</li>
+                            <li>Schatten: Hard Rim (1px)</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-white border-l-4 border-purpur shadow-soft p-6 md:p-8 mb-12 flex flex-col md:flex-row gap-4 md:gap-6 items-start">
+                <div class="w-16 h-16 md:w-[72px] md:h-[72px] shrink-0 flex items-center justify-center rounded-2xl bg-purpur-30 p-1">
+                    <img src="Schwert.svg" alt="Achtung" class="w-full h-full object-contain hard-rim">
+                </div>
+                <div class="flex-1 min-w-0">
+                    <h4 class="font-display text-lg md:text-xl text-purpur mb-2 mt-1">Achtung: Risiko</h4>
+                    <p class="text-text-secondary m-0 text-lg leading-relaxed">
+                        Auch hier funktioniert das System. Das Purpur (30%) im Hintergrund beißt sich nicht mit dem Gelb des Icons, dank der harten Schattenkante.
+                    </p>
+                </div>
+            </div>
+
+        </section>
+
+    </div>
+
+</body>
+</html>

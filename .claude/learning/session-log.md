@@ -4,6 +4,9 @@ Wird geleert nach /distill. Einträge: [FRICTION] [WIN] [PREF] [QUESTION] [OK]
 ## 2026-06-06 – SESSION START | Fokus: APP-01 — prokrastinations-preis
 FinanzwesirData.js, CSVParser.js, FwDateUtils.js — diese Session nicht berühren. ✓
 
+## 2026-06-06 – SESSION START (2) | Fokus: APP-01 — prokrastinations-preis
+FinanzwesirData.js, CSVParser.js, FwDateUtils.js — diese Session nicht berühren. ✓
+
 ## 2026-06-06 – ST-19-Fix | Memory-Integritätscheck entkoppeln
 - [FRICTION] Prompt enthielt falschen Python-Pfad (Python312\\python.exe, aus ChatGPT-Quelle) → mehrfache abgelehnte Tool-Calls und Erklärungsschleife; Klärung durch Albert: python ist im PATH
 
@@ -13,3 +16,17 @@ FinanzwesirData.js, CSVParser.js, FwDateUtils.js — diese Session nicht berühr
 
 ## 2026-06-05 – DIST-06 | Distill + Abschluss-Ritual
 - [OK] Keine Vorkommnisse. 5 Promotions (3 PREF + 2 Normal), 0 retired, 4 neue Observing-Einträge. Alle Cluster von Albert ohne Anpassung bestätigt.
+
+## 2026-06-08 – SESSION START | Fokus: APP-01 — prokrastinations-preis
+FinanzwesirData.js, CSVParser.js, FwDateUtils.js — diese Session nicht berühren. ✓
+
+## 2026-06-08 – Archivstrategie-Verankerung
+- [WIN] Grundsatzentscheidung Aktive Dateien / Archiv / Git in NAVIGATION.md § Archivstrategie / Kontext-Hygiene verankert. Basis für alle Folge-APs zur Archivstruktur.
+
+## 2026-06-08 – .gitignore Archiv-Umstellung
+- [WIN] Archiv/ aus globalem gitignore entfernt, Archiv/local/ als neuer ungetrackter Puffer eingetragen. Archiv/ ist jetzt versionierbar. Binärdateien und LLM-Dumps müssen vor erstem git add nach Archiv/local/ (Folge-AP).
+
+## 2026-06-08 – Archiv/local/ Verschiebung + Doublettenprüfung
+- [FRICTION] AP1: Albert stoppte vor NAVIGATION.md-Edit mit „Erkläre erst in eigenen Worten" — Erklärung geliefert, dann Freigabe
+- [PREF] „Konzentriere Dich auf Archiv/ im Root" zweimal explizit klargestellt → Fokuseinschränkung war nicht implizit klar
+- [WIN] Hash-Analyse nach Verschiebung: 0 Cross-Dubletten — Move-Item hat sauber verschoben, keine Kopier-Artefakte; einzige Dublette war Windows-Konfliktkopie (1), sofort gelöscht

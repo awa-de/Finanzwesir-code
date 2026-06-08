@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html lang="de" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ETF-Regulatorik-Dashboard</title>
+
+  <!-- Tailwind CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Satoshi', 'system-ui', 'sans-serif'],
+          },
+          colors: {
+            bg: '#f7f6f2',
+            surface: '#f9f8f5',
+            'surface-2': '#fbfbf9',
+            'surface-offset': '#f3f0ec',
+            border: '#d4d1ca',
+            divider: '#dcd9d5',
+            text: '#28251d',
+            'text-muted': '#6f6d67',
+            'text-faint': '#9d9a92',
+            primary: '#01696f',
+            'primary-dark': '#0c4e54',
+            success: '#437a22',
+            warning: '#964219',
+            danger: '#a12c7b',
+          },
+          boxShadow: {
+            soft: '0 1px 2px rgba(40,37,29,.06), 0 4px 12px rgba(40,37,29,.06)',
+          },
+        },
+      },
+    }
+  </script>
+
+  <!-- Font -->
+  <link rel="preconnect" href="https://api.fontshare.com" />
+  <link href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700,900&display=swap" rel="stylesheet">
+
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js" defer></script>
+</head>
+<body class="min-h-screen bg-bg text-text font-sans">
+  <div class="grid min-h-screen lg:grid-cols-[360px,1fr]">
+    <!-- SIDEBAR -->
+    <aside class="bg-surface border-r border-border px-6 py-6 lg:py-8 space-y-8 sticky top-0 max-h-screen overflow-y-auto">
+      <!-- Logo -->
+      <div class="flex items-center gap-3">
+        <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="4"
+             class="w-10 h-10 text-primary" aria-hidden="true">
+          <rect x="8" y="8" width="48" height="48" rx="14"></rect>
+          <path d="M18 40l10-12 8 7 10-15"></path>
+          <path d="M18 22h10"></path>
+        </svg>
+        <div>
+          <h1 class="text-lg font-semibold leading-tight">ETF‑Regulatorik</h1>
+          <p class="text-sm text-text-muted">Anspar- &amp; Entnahmephase</p>
+        </div>
+      </div>
+
+      <!-- Ansparphase -->
+      <div class="space-y-4">
+        <p class="text-[0.7rem] uppercase tracking-[0.18em] text-primary font-semibold">Ansparphase</p>
+        <div class="space-y-3">
+          <label class="block text-sm font-semibold" for="saveYears">Sparzeitraum (Jahre)</label>
+          <input id="saveYears" type="number" min="1" max="50" step="1" value="30"
+                 class="w-full rounded-md border border-border bg-surface-2 px-3 py-2.5 text-sm outline-none focus:border-primary focus:ring-2 focus:ring-primary/20" />
+        </div>
+        <div class="space-y-3">
+          <label class="block text-sm font-semibold" for="saveRate">Monatliche Sparrate</label>
+          <input id="saveRate" type="number" min="0" step="50" value="400"
+                 class="w-full rounded-md border border-border bg-surface-2 px-3 py-2.5 text-sm outline-none focus:border-primary focus:ring-2 focus:ring-primary/20" />
+        </div>
+        <div class="space-y-3">
+          <label class="block text-sm font-semibold" for="saveReturn">Durchschnittliche Buy‑&‑Hold‑Rendite p.a.</label>
+          <input id="saveReturn" type="number" min="-5" max="15" step="0.1" value="6"
+                 class="w-full rounded-md border border-border bg-surface-2 px-3 py-2.5 text-sm outline-none focus:border-primary focus:ring-2 focus:ring-primary/20" />
+        </div>
+        <div class="space-y-2">
+          <label class="block text-sm font-semibold" for="dragSaveSlider">
+            Regulatorischer Renditeverlust (Sparphase)
+          </label>
+          <input id="dragSaveSlider" type="range" min="0" max="3" step="0.1" value="0"
+                 class="w-full accent-primary" />
+          <p class="text-xs text-text-muted">
+            Aktuell: <span id="dragSaveLabel">0,0</span> %-Punkte weniger Rendite pro Jahr in der Sparphase.
+          </p>
+        </div>
+      </div>
+
+      <!-- Entnahmephase: gemeinsame Stellschrauben -->
+      <div class="space-y-4">
+        <p class="text-[0.7rem] uppercase tracking-[0.18em] text-primary font-semibold">Rentenphase</p>
+
+        <div class="space-y-3">
+          <label class="block text-sm font-semibold" for="drawYears">Betrachtungszeitraum (Jahre)</label>
+          <input id="drawYears" type="number" min="1" max="50" step="1" value="30"
+                 class="w-full rounded-md border border-border bg-surface-2 px-3 py-2.5 text-sm outline-none focus:border-primary focus:ring-2 focus:ring-primary/20" />
+        </div>
+
+        <div class="space-y-3">
+          <label class="block text-sm font-semibold" for="drawReturn">Renditeerwartung in der Rente p.a.</label>
+          <input id="drawReturn" type="number" min="-5" max="15" step="0.1" value="4"
+                 class="w-full rounded-md border border-border bg-surface-2 px-3 py-2.5 text-sm outline-none focus:border-primary focus:ring-2 focus:ring-primary/20" />
+        </div>
+
+        <div class="space-y-2">
+          <label class="block text-sm font-semibold" for="dragDrawSlider">
+            Regulatorischer Renditeverlust (Rente)
+          </label>
+          <input id="dragDrawSlider" type="range" min="0" max="3" step="0.1" value="0"
+                 class="w-full accent-primary" />
+          <p class="text-xs text-text-muted">
+            Aktuell: <span id="dragDrawLabel">0,0</span> %-Punkte weniger Rendite pro Jahr in der Rente.
+          </p>
+        </div>
+      </div>
+
+      <!-- Entnahme-spezifische Eingaben -->
+      <div class="space-y-4">
+        <p class="text-[0.7rem] uppercase tracking-[0.18em] text-primary font-semibold">
+          Fragen in der Rentenphase
+        </p>
+
+        <div class="space-y-3">
+          <label class="block text-sm font-semibold" for="targetEndValue">
+            Ziel‑Depotwert nach Betrachtungszeitraum (für „Was kann ich mir leisten?“)
+          </label>
+          <input id="targetEndValue" type="number" min="0" step="10000" value="0"
+                 class="w-full rounded-md border border-border bg-surface-2 px-3 py-2.5 text-sm outline-none focus:border-primary focus:ring-2 focus:ring-primary/20" />
+          <p class="text-xs text-text-muted">
+            Beispiel: 0 € bedeutet „Ich darf mein Depot bis auf Null aufbrauchen“.
+          </p>
+        </div>
+
+        <div class="space-y-3">
+          <label class="block text-sm font-semibold" for="desiredWithdrawal">
+            Gewünschte Auszahlung pro Jahr (für „Wie lange reicht mein Geld?“)
+          </label>
+          <input id="desiredWithdrawal" type="number" min="0" step="1000" value="40000"
+                 class="w-full rounded-md border border-border bg-surface-2 px-3 py-2.5 text-sm outline-none focus:border-primary focus:ring-2 focus:ring-primary/20" />
+        </div>
+      </div>
+    </aside>
+
+    <!-- MAIN -->
+    <main class="px-4 py-6 lg:px-8 lg:py-8 space-y-8">
+      <!-- Header -->
+      <section class="bg-surface border border-border rounded-2xl shadow-soft p-6 lg:p-8">
+        <div class="flex items-start justify-between gap-4">
+          <div class="space-y-3">
+            <p class="text-[0.7rem] uppercase tracking-[0.18em] text-primary font-semibold">
+              Überblick
+            </p>
+            <h2 class="text-xl font-semibold leading-tight max-w-xl">
+              Was kostet dich regulatorischer Renditeverlust – beim Sparen und in der Rente?
+            </h2>
+            <p class="text-sm text-text-muted max-w-2xl">
+              Oben siehst du, wie viel Endvermögen dir in der Sparphase verloren geht – oder
+              wie du das durch höhere Sparraten ausgleichen kannst. Darunter siehst du in zwei
+              getrennten Blickwinkeln, was derselbe Renditeverlust später in der Rente mit deinem
+              jährlichen Lebensstandard und der Reichweite deines Vermögens macht.
+            </p>
+          </div>
+          <button
+            class="shrink-0 inline-flex h-11 w-11 items-center justify-center rounded-full border border-border bg-surface-2 text-text hover:bg-surface-2/80"
+            type="button"
+            id="themeToggle"
+            aria-label="Theme wechseln">
+            <svg id="themeIcon" width="20" height="20" viewBox="0 0 24 24"
+                 fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+            </svg>
+          </button>
+        </div>
+      </section>
+
+      <!-- Sparphase KPIs -->
+      <section class="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+        <!-- Ohne Verlust -->
+        <div class="bg-surface border border-border rounded-2xl shadow-soft p-5 space-y-2">
+          <p class="text-[0.7rem] uppercase tracking-[0.18em] text-text-muted font-semibold">
+            Endvermögen ohne Renditeverlust
+          </p>
+          <p id="kpiSaveNoDrag" class="text-2xl font-extrabold tabular-nums">0 €</p>
+          <p class="text-xs text-text-muted">
+            Buy‑&‑Hold‑Rendite wie von dir angegeben, ohne regulatorische Verschlechterung.
+          </p>
+        </div>
+
+        <!-- Mit Verlust / Start in Rente -->
+        <div class="bg-surface border border-border rounded-2xl shadow-soft p-5 space-y-2">
+          <p class="text-[0.7rem] uppercase tracking-[0.18em] text-text-muted font-semibold">
+            Endvermögen mit Renditeverlust / Start in der Rente
+          </p>
+          <p id="kpiSaveWithDrag" class="text-2xl font-extrabold tabular-nums">0 €</p>
+          <p id="kpiSaveWithDragSub" class="text-xs text-text-muted">
+            Was nach der Sparphase übrig ist und als Startvermögen in die Rente geht.
+          </p>
+        </div>
+
+        <!-- Kompensations-Sparrate -->
+        <div class="bg-surface border border-border rounded-2xl shadow-soft p-5 space-y-2">
+          <p class="text-[0.7rem] uppercase tracking-[0.18em] text-text-muted font-semibold">
+            Nötige Sparrate ohne Verlust
+          </p>
+          <p id="kpiSaveCompRate" class="text-2xl font-extrabold tabular-nums">0 €</p>
+          <p id="kpiSaveLoss" class="text-xs text-text-muted">
+            Monatliche Sparrate, um trotz Renditeverlust das gleiche Endvermögen zu erreichen.
+          </p>
+        </div>
+      </section>
+
+      <!-- Bereich A: Was kann ich mir pro Jahr leisten? -->
+      <section class="space-y-4">
+        <div class="flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between">
+          <div>
+            <p class="text-[0.7rem] uppercase tracking-[0.18em] text-primary font-semibold">
+              Frage 1
+            </p>
+            <h3 class="text-lg font-semibold">
+              Was kann ich mir pro Jahr leisten, wenn ich nach X Jahren noch Y € übrig haben will?
+            </h3>
+            <p class="text-sm text-text-muted max-w-2xl mt-1.5">
+              Hier bleibt dein gewünschter Endwert fest. Wir zeigen dir, wie viel du
+              pro Jahr entnehmen kannst, ohne diesen Zielwert zu unterschreiten –
+              mit und ohne regulatorischen Renditeverlust.
+            </p>
+          </div>
+        </div>
+
+        <!-- KPIs A -->
+        <div class="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
+          <div class="bg-surface border border-border rounded-2xl shadow-soft p-5 space-y-1.5">
+            <p class="text-[0.7rem] uppercase tracking-[0.18em] text-text-muted font-semibold">
+              Ziel‑Endwert nach Zeitraum
+            </p>
+            <p id="kpiTargetEndValue" class="text-2xl font-extrabold tabular-nums">0 €</p>
+            <p class="text-xs text-text-muted">
+              Dieser Depotwert soll nach dem Betrachtungszeitraum übrig bleiben.
+            </p>
+          </div>
+          <div class="bg-surface border border-border rounded-2xl shadow-soft p-5 space-y-1.5">
+            <p class="text-[0.7rem] uppercase tracking-[0.18em] text-text-muted font-semibold">
+              Mögliche Auszahlung ohne Verlust
+            </p>
+            <p id="kpiMaxWithdrawalNoDrag" class="text-2xl font-extrabold tabular-nums">0 €</p>
+            <p class="text-xs text-text-muted">
+              Jährliche Auszahlung, wenn es keinen regulatorischen Renditeverlust in der Rente gibt.
+            </p>
+          </div>
+          <div class="bg-surface border border-border rounded-2xl shadow-soft p-5 space-y-1.5">
+            <p class="text-[0.7rem] uppercase tracking-[0.18em] text-text-muted font-semibold">
+              Mögliche Auszahlung im Slider‑Szenario
+            </p>
+            <p id="kpiMaxWithdrawalSlider" class="text-2xl font-extrabold tabular-nums">0 €</p>
+            <p class="text-xs text-text-muted" id="kpiMaxWithdrawalSliderSub">
+              Jährliche Auszahlung bei aktuellem Renditeverlust in der Rente.
+            </p>
+          </div>
+          <div class="bg-surface border border-border rounded-2xl shadow-soft p-5 space-y-1.5">
+            <p class="text-[0.7rem] uppercase tracking-[0.18em] text-text-muted font-semibold">
+              Unterschied pro Jahr
+            </p>
+            <p id="kpiMaxWithdrawalDelta" class="text-2xl font-extrabold tabular-nums">0 €</p>
+            <p class="text-xs text-text-muted">
+              So viel weniger Geld kommt pro Jahr bei dir an durch den Renditeverlust.
+            </p>
+          </div>
+        </div>
+
+        <!-- Chart A: Balken -->
+        <div class="bg-surface border border-border rounded-2xl shadow-soft p-5">
+          <div class="h-72">
+            <canvas id="barWithdrawalChart" aria-label="Maximale jährliche Entnahme je Szenario" role="img"></canvas>
+          </div>
+        </div>
+      </section>
+
+      <!-- Bereich B: Wie lange reicht mein Geld? -->
+      <section class="space-y-4">
+        <div class="flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between">
+          <div>
+            <p class="text-[0.7rem] uppercase tracking-[0.18em] text-primary font-semibold">
+              Frage 2
+            </p>
+            <h3 class="text-lg font-semibold">
+              Wie lange reicht mein Geld, wenn ich X € pro Jahr entnehmen will?
+            </h3>
+            <p class="text-sm text-text-muted max-w-2xl mt-1.5">
+              Hier bleibt deine gewünschte Auszahlung pro Jahr fest. Wir zeigen dir,
+              wann dein Depot im jeweiligen Szenario rechnerisch aufgebraucht ist –
+              und wie sich das durch den Renditeverlust verschiebt.
+            </p>
+          </div>
+        </div>
+
+        <!-- KPIs B -->
+        <div class="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
+          <div class="bg-surface border border-border rounded-2xl shadow-soft p-5 space-y-1.5">
+            <p class="text-[0.7rem] uppercase tracking-[0.18em] text-text-muted font-semibold">
+              Gewünschte Auszahlung pro Jahr
+            </p>
+            <p id="kpiDesiredWithdrawal" class="text-2xl font-extrabold tabular-nums">0 €</p>
+            <p class="text-xs text-text-muted">
+              So viel möchtest du jedes Jahr entnehmen.
+            </p>
+          </div>
+          <div class="bg-surface border border-border rounded-2xl shadow-soft p-5 space-y-1.5">
+            <p class="text-[0.7rem] uppercase tracking-[0.18em] text-text-muted font-semibold">
+              Reichweite ohne Renditeverlust
+            </p>
+            <p id="kpiYearsNoDrag" class="text-2xl font-extrabold tabular-nums">–</p>
+            <p class="text-xs text-text-muted">
+              Wie lange dein Vermögen ohne Renditeverlust bei dieser Auszahlung reicht.
+            </p>
+          </div>
+          <div class="bg-surface border border-border rounded-2xl shadow-soft p-5 space-y-1.5">
+            <p class="text-[0.7rem] uppercase tracking-[0.18em] text-text-muted font-semibold">
+              Reichweite im Slider‑Szenario
+            </p>
+            <p id="kpiYearsSlider" class="text-2xl font-extrabold tabular-nums">–</p>
+            <p class="text-xs text-text-muted">
+              Wie lange dein Vermögen bei aktuellem Renditeverlust reicht.
+            </p>
+          </div>
+          <div class="bg-surface border border-border rounded-2xl shadow-soft p-5 space-y-1.5">
+            <p class="text-[0.7rem] uppercase tracking-[0.18em] text-text-muted font-semibold">
+              Unterschied in Jahren
+            </p>
+            <p id="kpiYearsDelta" class="text-2xl font-extrabold tabular-nums">–</p>
+            <p class="text-xs text-text-muted">
+              So viele Jahre Reichweite kostet dich der Renditeverlust.
+            </p>
+          </div>
+        </div>
+
+        <!-- Chart B: Linie -->
+        <div class="bg-surface border border-border rounded-2xl shadow-soft p-5">
+          <div class="h-80">
+            <canvas id="lineWealthChart" aria-label="Vermögensverlauf je Szenario" role="img"></canvas>
+          </div>
+          <p class="mt-3 text-xs text-text-muted">
+            Die vertikalen Markierungen zeigen, in welchem Jahr das Vermögen im jeweiligen Szenario aufgebraucht ist –
+            sofern das überhaupt innerhalb des Betrachtungszeitraums passiert.
+          </p>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script>
+    window.addEventListener('DOMContentLoaded', () => {
+      const euro = new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'EUR', maximumFractionDigits: 0 });
+      const pct1 = new Intl.NumberFormat('de-DE', { minimumFractionDigits: 1, maximumFractionDigits: 1 });
+
+      const els = {
+        saveYears: document.getElementById('saveYears'),
+        saveRate: document.getElementById('saveRate'),
+        saveReturn: document.getElementById('saveReturn'),
+        dragSaveSlider: document.getElementById('dragSaveSlider'),
+        dragSaveLabel: document.getElementById('dragSaveLabel'),
+
+        drawYears: document.getElementById('drawYears'),
+        drawReturn: document.getElementById('drawReturn'),
+        dragDrawSlider: document.getElementById('dragDrawSlider'),
+        dragDrawLabel: document.getElementById('dragDrawLabel'),
+
+        targetEndValue: document.getElementById('targetEndValue'),
+        desiredWithdrawal: document.getElementById('desiredWithdrawal'),
+
+        kpiSaveNoDrag: document.getElementById('kpiSaveNoDrag'),
+        kpiSaveWithDrag: document.getElementById('kpiSaveWithDrag'),
+        kpiSaveWithDragSub: document.getElementById('kpiSaveWithDragSub'),
+        kpiSaveCompRate: document.getElementById('kpiSaveCompRate'),
+        kpiSaveLoss: document.getElementById('kpiSaveLoss'),
+
+        kpiTargetEndValue: document.getElementById('kpiTargetEndValue'),
+        kpiMaxWithdrawalNoDrag: document.getElementById('kpiMaxWithdrawalNoDrag'),
+        kpiMaxWithdrawalSlider: document.getElementById('kpiMaxWithdrawalSlider'),
+        kpiMaxWithdrawalSliderSub: document.getElementById('kpiMaxWithdrawalSliderSub'),
+        kpiMaxWithdrawalDelta: document.getElementById('kpiMaxWithdrawalDelta'),
+
+        kpiDesiredWithdrawal: document.getElementById('kpiDesiredWithdrawal'),
+        kpiYearsNoDrag: document.getElementById('kpiYearsNoDrag'),
+        kpiYearsSlider: document.getElementById('kpiYearsSlider'),
+        kpiYearsDelta: document.getElementById('kpiYearsDelta'),
+      };
+
+      // Sparplan-Endwert
+      function savingsFV(monthlyRate, years, annualReturn) {
+        const n = years * 12;
+        const r = annualReturn / 100 / 12;
+        if (r === 0) return monthlyRate * n;
+        return monthlyRate * ((Math.pow(1 + r, n) - 1) / r);
+      }
+
+      // Sparrate aus Endwert lösen
+      function solveMonthlyRateForFV(targetFV, years, annualReturn) {
+        const n = years * 12;
+        const r = annualReturn / 100 / 12;
+        if (r === 0) return n === 0 ? 0 : targetFV / n;
+        return targetFV * r / (Math.pow(1 + r, n) - 1);
+      }
+
+      // Vermögensverlauf Rente
+      function wealthPathReturn(start, withdrawal, years, annualReturn) {
+        let wealth = start;
+        const out = [];
+        for (let y = 0; y <= years; y++) {
+          out.push(Math.max(wealth, 0));
+          wealth = wealth * (1 + annualReturn / 100) - withdrawal;
+          if (wealth < 0) wealth = 0;
+        }
+        return out;
+      }
+
+      // Jahr des Aufbrauchs
+      function depletionYear(path) {
+        const idx = path.findIndex((v, i) => i > 0 && v <= 0);
+        return idx === -1 ? Infinity : idx;
+      }
+
+      function scenarios(dragRente) {
+        return [
+          { name:'Best Case', class:'best', drag:0, color:'#437a22' },
+          { name:'Base Case', class:'base', drag:1.5, color:'#964219' },
+          { name:'Worst Case', class:'worst', drag:3, color:'#a12c7b' },
+          { name:'Slider‑Szenario', class:'custom', drag:dragRente, color:'#01696f', custom:true },
+        ];
+      }
+
+      // Charts init
+      const barChart = new Chart(document.getElementById('barWithdrawalChart'), {
+        type: 'bar',
+        data: { labels: [], datasets: [] },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: { display: false },
+            tooltip: {
+              callbacks: {
+                label: ctx => euro.format(ctx.raw),
+              }
+            }
+          },
+          scales: {
+            x: { ticks: { color: '#6f6d67' }, grid: { display: false } },
+            y: {
+              ticks: {
+                color: '#6f6d67',
+                callback: v => euro.format(v),
+              },
+              grid: { color: '#dcd9d5' }
+            }
+          }
+        }
+      });
+
+      const lineChart = new Chart(document.getElementById('lineWealthChart'), {
+        type: 'line',
+        data: { labels: [], datasets: [] },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: { display: false },
+            tooltip: {
+              callbacks: {
+                label: ctx => `${ctx.dataset.label}: ${euro.format(ctx.raw)}`
+              }
+            }
+          },
+          scales: {
+            x: { ticks: { color: '#6f6d67' }, grid: { color:'#dcd9d5' } },
+            y: {
+              ticks: { color: '#6f6d67', callback: v => euro.format(v) },
+              grid: { color:'#dcd9d5' }
+            }
+          }
+        }
+      });
+
+      function render() {
+        const saveYears = Math.max(1, Number(els.saveYears.value) || 1);
+        const saveRate = Math.max(0, Number(els.saveRate.value) || 0);
+        const saveReturn = Number(els.saveReturn.value) || 0;
+        const dragSave = Math.max(0, Math.min(3, Number(els.dragSaveSlider.value) || 0));
+
+        const drawYears = Math.max(1, Number(els.drawYears.value) || 1);
+        const drawReturn = Number(els.drawReturn.value) || 0;
+        const dragDraw = Math.max(0, Math.min(3, Number(els.dragDrawSlider.value) || 0));
+
+        const targetEnd = Math.max(0, Number(els.targetEndValue.value) || 0);
+        const desiredWithdrawal = Math.max(0, Number(els.desiredWithdrawal.value) || 0);
+
+        els.dragSaveLabel.textContent = pct1.format(dragSave);
+        els.dragDrawLabel.textContent = pct1.format(dragDraw);
+
+        // Sparphase
+        const fvNoDrag = savingsFV(saveRate, saveYears, saveReturn);
+        const fvWithDrag = savingsFV(saveRate, saveYears, saveReturn - dragSave);
+
+        els.kpiSaveNoDrag.textContent = euro.format(fvNoDrag);
+        els.kpiSaveWithDrag.textContent = euro.format(fvWithDrag);
+        els.kpiSaveWithDragSub.textContent =
+          `Was nach der Sparphase übrig ist und als Startvermögen in die Rente geht – aktuell bei ${pct1.format(dragSave)} %-Punkten Renditeverlust in der Sparphase.`;
+
+        if (fvWithDrag <= 0) {
+          els.kpiSaveCompRate.textContent = euro.format(saveRate);
+          els.kpiSaveLoss.textContent = 'Aktuell entsteht kein positiver Endwert, daher ist keine verlässliche Kompensationsrate berechenbar.';
+        } else {
+          const compRate = solveMonthlyRateForFV(fvWithDrag, saveYears, saveReturn);
+          els.kpiSaveCompRate.textContent = euro.format(compRate);
+          const diff = fvNoDrag - fvWithDrag;
+          if (diff <= 0) {
+            els.kpiSaveLoss.textContent = 'Keine Minderung gegenüber „ohne Renditeverlust“.';
+          } else {
+            const lossPct = pct1.format(diff / fvNoDrag * 100);
+            els.kpiSaveLoss.textContent =
+              `Du verlierst in der Sparphase ${euro.format(diff)} Endvermögen (${lossPct} %).`;
+          }
+        }
+
+        // Startwert für Rente (aus Sparphase)
+        const startWealth = fvWithDrag;
+
+        // Frage 1: Was kann ich mir leisten?
+        els.kpiTargetEndValue.textContent = euro.format(targetEnd);
+
+        // Berechnung: Max Entnahme so, dass nach drawYears Ziel-Endwert bleibt
+        function maxWithdrawalForScenario(drag) {
+          const effReturn = drawReturn - drag;
+          // wir iterieren näherungsweise, um nicht analytisch lösen zu müssen
+          let low = 0, high = startWealth;
+          for (let i=0;i<40;i++) {
+            const mid = (low+high)/2;
+            const path = wealthPathReturn(startWealth, mid, drawYears, effReturn);
+            const end = path[path.length-1];
+            if (end > targetEnd) {
+              low = mid;
+            } else {
+              high = mid;
+            }
+          }
+          return (low+high)/2;
+        }
+
+        const scen = scenarios(dragDraw);
+
+        let maxNoDrag = 0;
+        let maxSlider = 0;
+
+        const barLabels = [];
+        const barData = [];
+        const barColors = [];
+
+        scen.forEach(s => {
+          const w = maxWithdrawalForScenario(s.drag);
+          barLabels.push(s.name);
+          barData.push(w);
+          barColors.push(s.color);
+
+          if (s.drag === 0) maxNoDrag = w;
+          if (s.custom) maxSlider = w;
+        });
+
+        els.kpiMaxWithdrawalNoDrag.textContent = euro.format(maxNoDrag);
+        els.kpiMaxWithdrawalSlider.textContent = euro.format(maxSlider);
+        els.kpiMaxWithdrawalSliderSub.textContent =
+          `Jährliche Auszahlung im Slider‑Szenario (Renditeverlust in der Rente: ${pct1.format(dragDraw)} %-Punkte).`;
+        const delta = maxNoDrag - maxSlider;
+        els.kpiMaxWithdrawalDelta.textContent = euro.format(delta);
+
+        barChart.data.labels = barLabels;
+        barChart.data.datasets = [{
+          data: barData,
+          backgroundColor: barColors.map(c => c + '66'),
+          borderColor: barColors,
+          borderWidth: 1.5,
+          borderRadius: 6,
+        }];
+        barChart.update();
+
+        // Frage 2: Wie lange reicht mein Geld?
+        els.kpiDesiredWithdrawal.textContent = euro.format(desiredWithdrawal);
+
+        const labels = Array.from({length: drawYears+1}, (_,i)=>`Jahr ${i}`);
+        lineChart.data.labels = labels;
+        lineChart.data.datasets = scen.map(s => {
+          const effReturn = drawReturn - s.drag;
+          const path = wealthPathReturn(startWealth, desiredWithdrawal, drawYears, effReturn);
+          return {
+            label: `${s.name} (${pct1.format(effReturn)} % Rendite)`,
+            data: path,
+            borderColor: s.color,
+            backgroundColor: s.color + '22',
+            borderWidth: s.custom ? 2.5 : 1.8,
+            tension: .15,
+            pointRadius: 0,
+            pointHoverRadius: 4,
+          };
+        });
+        lineChart.update();
+
+        // Depletion-KPIs
+        const pathNoDrag = wealthPathReturn(startWealth, desiredWithdrawal, drawYears, drawReturn);
+        const yearsNoDrag = depletionYear(pathNoDrag);
+        const pathSlider = wealthPathReturn(startWealth, desiredWithdrawal, drawYears, drawReturn - dragDraw);
+        const yearsSlider = depletionYear(pathSlider);
+
+        els.kpiYearsNoDrag.textContent =
+          yearsNoDrag === Infinity ? `> ${drawYears}` : `${yearsNoDrag}`;
+        els.kpiYearsSlider.textContent =
+          yearsSlider === Infinity ? `> ${drawYears}` : `${yearsSlider}`;
+
+        let deltaYears;
+        if (yearsNoDrag === Infinity && yearsSlider === Infinity) {
+          deltaYears = 0;
+        } else if (yearsNoDrag === Infinity) {
+          deltaYears = yearsSlider === Infinity ? 0 : (yearsSlider - drawYears);
+        } else if (yearsSlider === Infinity) {
+          deltaYears = drawYears - yearsNoDrag;
+        } else {
+          deltaYears = yearsSlider - yearsNoDrag;
+        }
+        els.kpiYearsDelta.textContent = `${deltaYears}`;
+
+      }
+
+      // Theme toggle
+      const themeToggle = document.getElementById('themeToggle');
+      const themeIcon = document.getElementById('themeIcon');
+      function setTheme(theme) {
+        document.documentElement.setAttribute('data-theme', theme);
+        if (theme === 'dark') {
+          document.body.classList.remove('bg-bg');
+          document.body.classList.add('bg-[#171614]');
+          document.body.classList.add('text-[#cdccca]');
+          themeIcon.innerHTML = '<circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>';
+        } else {
+          document.body.classList.remove('bg-[#171614]');
+          document.body.classList.add('bg-bg');
+          document.body.classList.add('text-text');
+          themeIcon.innerHTML = '<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>';
+        }
+      }
+      themeToggle.addEventListener('click', () => {
+        const current = document.documentElement.getAttribute('data-theme') || 'light';
+        setTheme(current === 'light' ? 'dark' : 'light');
+      });
+
+      setTheme(window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+
+      [
+        'saveYears','saveRate','saveReturn','dragSaveSlider',
+        'drawYears','drawReturn','dragDrawSlider',
+        'targetEndValue','desiredWithdrawal'
+      ].forEach(id => {
+        document.getElementById(id).addEventListener('input', render);
+      });
+
+      render();
+    });
+  </script>
+</body>
+</html>

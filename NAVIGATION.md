@@ -1,5 +1,5 @@
 # NAVIGATION.md – Finanzwesir 2.0
-Stand: 2026-06-06 | Session: ST-19-Memory-Infra | Geändert von: Claude
+Stand: 2026-06-08 | Session: Archiv-Infrastruktur-Setup | Geändert von: Claude
 
 Für Claude: **Routing-Dokument.** Wird beim Session-Start (Schritt 2) gelesen.
 Gibt Pfade und Lese-Reihenfolgen vor — KEINE Verhaltensregeln (die stehen in CLAUDE.md).
@@ -259,13 +259,26 @@ Manuelle Aktivierung: `/spec-rewrite-guard docs/spec/[Dateiname]`
 |---|---|---|
 | Subagent-Policy Praxisnotiz | `docs/steering/SUBAGENT-POLICY-PRAXIS.md` | Warum und wie Haiku-Scouts zentral genutzt werden |
 
+## Archivstrategie / Kontext-Hygiene
+
+Aktive Dateien zeigen, was heute gilt.
+
+Das Archiv enthält Material, das lehrreich war, aber nicht mehr handlungsleitend ist.
+
+Git zeigt, wie sich der Projektstand verändert hat.
+
+Historische Analysen, alte Peer-Reviews, verworfene Optionsmatrizen und überholte Begründungen dürfen den aktiven Arbeitskontext nicht überlagern.
+
+Diese Grundsatzentscheidung ist die Basis für spätere Archiv-Arbeitspakete. `.gitignore`-Umstellung und initiale Quarantäne (`Archiv/local/`) sind abgeschlossen (2026-06-08). Konkrete Archivstruktur, Skill-Anpassungen und weitere Einzelarchivierungen folgen separat.
+
 ## Archiv
 
 | Was | Pfad |
 |---|---|
-| Alte Chart-Engine-Versionen | `Archiv/Chart-Engine-Historie/` |
-| Historische Excel-Kalkulationen | `Archiv/Historische Excel-Kalkulationen/` |
-| Alte Design-Dateien | `Archiv/Design/` |
+| Kuratierte Archivartefakte (versioniert) | `Archiv/` |
+| Lokale Rohmaterialien, Binärdateien, LLM-Dumps (gitignored) | `Archiv/local/` |
+| Historische Chart-Engine-Materialien | `Archiv/Chart-Engine-Historie/` |
+| Historische Design-Materialien | `Archiv/Design/` |
 
 ## Niemals in Git
 

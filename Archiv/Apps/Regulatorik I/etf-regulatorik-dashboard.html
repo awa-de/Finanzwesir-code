@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="de" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ETF Regulatorik Dashboard</title>
+  <link rel="preconnect" href="https://api.fontshare.com" />
+  <link href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700,900&display=swap" rel="stylesheet">
+  <style>
+    :root,[data-theme="light"]{
+      --text-xs:clamp(.75rem,.7rem + .25vw,.875rem);
+      --text-sm:clamp(.875rem,.8rem + .35vw,1rem);
+      --text-base:clamp(1rem,.95rem + .25vw,1.125rem);
+      --text-lg:clamp(1.125rem,1rem + .75vw,1.5rem);
+      --text-xl:clamp(1.5rem,1.2rem + 1.25vw,2.25rem);
+      --space-1:.25rem;--space-2:.5rem;--space-3:.75rem;--space-4:1rem;--space-5:1.25rem;--space-6:1.5rem;--space-8:2rem;--space-10:2.5rem;--space-12:3rem;--space-16:4rem;
+      --color-bg:#f7f6f2;--color-surface:#f9f8f5;--color-surface-2:#fbfbf9;--color-surface-offset:#f3f0ec;--color-border:#d4d1ca;--color-divider:#dcd9d5;
+      --color-text:#28251d;--color-text-muted:#6f6d67;--color-text-faint:#9d9a92;--color-text-inverse:#f9f8f4;
+      --color-primary:#01696f;--color-primary-hover:#0c4e54;--color-blue:#006494;--color-warning:#964219;--color-error:#a12c7b;--color-success:#437a22;--color-gold:#d19900;
+      --radius-sm:.375rem;--radius-md:.5rem;--radius-lg:.75rem;--radius-xl:1rem;--radius-full:9999px;
+      --shadow-sm:0 1px 2px rgba(40,37,29,.06);--shadow-md:0 4px 12px rgba(40,37,29,.08);--shadow-lg:0 12px 32px rgba(40,37,29,.12);
+      --transition:180ms cubic-bezier(.16,1,.3,1);
+    }
+    [data-theme="dark"]{
+      --color-bg:#171614;--color-surface:#1c1b19;--color-surface-2:#201f1d;--color-surface-offset:#22211f;--color-border:#393836;--color-divider:#262523;
+      --color-text:#cdccca;--color-text-muted:#9b9894;--color-text-faint:#6f6b66;--color-text-inverse:#1c1b19;
+      --color-primary:#4f98a3;--color-primary-hover:#227f8b;--color-blue:#5591c7;--color-warning:#bb653b;--color-error:#d163a7;--color-success:#6daa45;--color-gold:#e8af34;
+      --shadow-sm:0 1px 2px rgba(0,0,0,.2);--shadow-md:0 4px 12px rgba(0,0,0,.3);--shadow-lg:0 12px 32px rgba(0,0,0,.4);
+    }
+    *{box-sizing:border-box;margin:0;padding:0}
+    html,body{height:100%;overflow:hidden;font-family:'Satoshi',sans-serif;background:var(--color-bg);color:var(--color-text)}
+    body{font-size:var(--text-base);line-height:1.55;-webkit-font-smoothing:antialiased}
+    button,input,select{font:inherit;color:inherit}
+    .dashboard{display:grid;grid-template-columns:280px 1fr;grid-template-rows:72px 1fr;height:100dvh}
+    .sidebar{grid-row:1 / -1;background:var(--color-surface);border-right:1px solid var(--color-border);padding:var(--space-6);overflow:auto}
+    .header{grid-column:2;display:flex;align-items:center;justify-content:space-between;padding:0 var(--space-6);border-bottom:1px solid var(--color-border);background:color-mix(in srgb, var(--color-surface) 88%, transparent);backdrop-filter:blur(12px);position:sticky;top:0;z-index:10}
+    .main{grid-column:2;overflow:auto;padding:var(--space-6)}
+    .logo{display:flex;align-items:center;gap:var(--space-3);margin-bottom:var(--space-8)}
+    .logo svg{width:34px;height:34px;color:var(--color-primary)}
+    .logo h1{font-size:var(--text-lg);line-height:1.1}
+    .muted{color:var(--color-text-muted)}
+    .nav{display:grid;gap:var(--space-2)}
+    .nav a{display:flex;align-items:center;gap:var(--space-3);padding:.8rem .9rem;border-radius:var(--radius-md);text-decoration:none;color:var(--color-text-muted);font-size:var(--text-sm);transition:all var(--transition)}
+    .nav a.active,.nav a:hover{background:var(--color-surface-offset);color:var(--color-text)}
+    .theme-btn{display:inline-flex;align-items:center;justify-content:center;width:44px;height:44px;border-radius:var(--radius-full);border:1px solid var(--color-border);background:var(--color-surface-2);cursor:pointer}
+    .hero{display:grid;grid-template-columns:1.3fr .9fr;gap:var(--space-6);margin-bottom:var(--space-6)}
+    .card{background:var(--color-surface);border:1px solid var(--color-border);border-radius:var(--radius-xl);box-shadow:var(--shadow-sm)}
+    .hero-panel{padding:var(--space-6)}
+    .eyebrow{font-size:var(--text-xs);letter-spacing:.08em;text-transform:uppercase;color:var(--color-primary);font-weight:700;margin-bottom:var(--space-3)}
+    .title{font-size:var(--text-xl);line-height:1.06;max-width:18ch;margin-bottom:var(--space-4)}
+    .kpi-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:var(--space-4);margin-bottom:var(--space-6)}
+    .kpi{padding:var(--space-5)}
+    .kpi .label{font-size:var(--text-xs);text-transform:uppercase;letter-spacing:.06em;color:var(--color-text-muted);margin-bottom:var(--space-2)}
+    .kpi .value{font-size:clamp(1.5rem,1.2rem + 1vw,2rem);font-weight:900;font-variant-numeric:tabular-nums}
+    .kpi .sub{font-size:var(--text-sm);color:var(--color-text-muted);margin-top:var(--space-2)}
+    .grid-2{display:grid;grid-template-columns:1.1fr .9fr;gap:var(--space-6);margin-bottom:var(--space-6)}
+    .section{padding:var(--space-6)}
+    .section h2{font-size:var(--text-lg);margin-bottom:var(--space-2)}
+    .section p{color:var(--color-text-muted);max-width:72ch}
+    .matrix{margin-top:var(--space-5);display:grid;gap:var(--space-4)}
+    .scenario{padding:var(--space-4);border:1px solid var(--color-border);border-radius:var(--radius-lg);background:var(--color-surface-2)}
+    .scenario-top{display:flex;justify-content:space-between;gap:var(--space-4);align-items:center;margin-bottom:var(--space-3)}
+    .scenario h3{font-size:var(--text-base)}
+    .tag{padding:.28rem .55rem;border-radius:var(--radius-full);font-size:var(--text-xs);font-weight:700}
+    .tag.low{background:rgba(67,122,34,.14);color:var(--color-success)}
+    .tag.mid{background:rgba(209,153,0,.16);color:var(--color-warning)}
+    .tag.high{background:rgba(161,44,123,.14);color:var(--color-error)}
+    .bar-wrap{display:grid;gap:var(--space-2);margin-top:var(--space-3)}
+    .bar-row{display:grid;grid-template-columns:140px 1fr 64px;gap:var(--space-3);align-items:center;font-size:var(--text-sm)}
+    .bar{height:12px;border-radius:999px;background:var(--color-surface-offset);overflow:hidden;border:1px solid color-mix(in srgb, var(--color-border) 80%, transparent)}
+    .fill{height:100%;border-radius:999px}
+    .fill.prob{background:linear-gradient(90deg,var(--color-blue),var(--color-primary))}
+    .fill.damage{background:linear-gradient(90deg,var(--color-gold),var(--color-warning))}
+    .fill.impact{background:linear-gradient(90deg,var(--color-warning),var(--color-error))}
+    table{width:100%;border-collapse:collapse;margin-top:var(--space-4);font-size:var(--text-sm)}
+    th,td{text-align:left;padding:.9rem .8rem;border-bottom:1px solid var(--color-divider);vertical-align:top}
+    th{font-size:var(--text-xs);text-transform:uppercase;letter-spacing:.06em;color:var(--color-text-muted)}
+    .heat{display:inline-flex;align-items:center;justify-content:center;min-width:52px;padding:.25rem .5rem;border-radius:var(--radius-full);font-size:var(--text-xs);font-weight:700}
+    .h1{background:rgba(67,122,34,.16);color:var(--color-success)} .h2{background:rgba(209,153,0,.16);color:var(--color-warning)} .h3{background:rgba(161,44,123,.16);color:var(--color-error)}
+    .notes{display:grid;gap:var(--space-3);margin-top:var(--space-4)}
+    .note{padding:var(--space-4);border-radius:var(--radius-lg);background:var(--color-surface-offset);font-size:var(--text-sm);color:var(--color-text-muted)}
+    .footerline{margin-top:var(--space-6);font-size:var(--text-xs);color:var(--color-text-faint)}
+    .mini{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--space-4);margin-top:var(--space-5)}
+    .mini .box{padding:var(--space-4);border-radius:var(--radius-lg);background:var(--color-surface-offset)}
+    .box strong{display:block;font-size:var(--text-sm);margin-bottom:var(--space-2)}
+    @media (max-width: 1024px){.dashboard{grid-template-columns:84px 1fr}.logo h1,.nav span,.sidebar .muted-block{display:none}.hero,.grid-2{grid-template-columns:1fr}.kpi-grid{grid-template-columns:repeat(2,1fr)}.bar-row{grid-template-columns:120px 1fr 54px}}
+    @media (max-width: 720px){html,body{overflow:auto}.dashboard{display:block;height:auto}.sidebar{display:none}.header{position:sticky}.main{overflow:visible;padding:var(--space-4)}.kpi-grid,.mini{grid-template-columns:1fr}.title{max-width:100%}.bar-row{grid-template-columns:1fr}.bar-row span:last-child{justify-self:end}}
+  </style>
+</head>
+<body>
+  <div class="dashboard">
+    <aside class="sidebar">
+      <div class="logo" aria-label="ETF Regulatorik Dashboard Logo">
+        <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="4" aria-hidden="true">
+          <rect x="10" y="10" width="44" height="44" rx="12"></rect>
+          <path d="M22 40V24h20"></path>
+          <path d="M24 36l8-8 10 6 8-12"></path>
+        </svg>
+        <div>
+          <h1>ETF Regulatorik</h1>
+          <div class="muted">Dashboard</div>
+        </div>
+      </div>
+      <nav class="nav" aria-label="Bereiche">
+        <a href="#ueberblick" class="active"><span>Überblick</span></a>
+        <a href="#matrix"><span>Szenario-Matrix</span></a>
+        <a href="#entnahme"><span>Entnahmequote</span></a>
+        <a href="#deutschland"><span>Deutschland-Bias</span></a>
+      </nav>
+      <div class="muted-block" style="margin-top:2rem;font-size:var(--text-sm);color:var(--color-text-muted);line-height:1.5;">
+        Fokus: regulatorische Tail-Risiken für ETF-Sparer mit 25–30 Jahren Horizont, insbesondere schleichende Nettorendite-Erosion statt Systembruch.
+      </div>
+    </aside>
+
+    <header class="header">
+      <div>
+        <div class="eyebrow" style="margin-bottom:.2rem">Langfristige Altersvorsorge</div>
+        <div style="font-size:var(--text-sm);color:var(--color-text-muted)">Wahrscheinlichkeit × Schadenshöhe = Einschlagswucht</div>
+      </div>
+      <button class="theme-btn" data-theme-toggle aria-label="Theme wechseln">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+      </button>
+    </header>
+
+    <main class="main">
+      <section id="ueberblick" class="hero">
+        <div class="card hero-panel">
+          <div class="eyebrow">Kernaussage</div>
+          <h2 class="title">Nicht der Atomschlag, sondern der Tod durch 1000 Schnitte.</h2>
+          <p class="muted">Für ETF-Sparer in Deutschland ist der wahrscheinlichere regulatorische Pfad nicht die Abschaffung des Systems, sondern die langsame Erosion von Nettorendite, Entnahmeeffizienz und Planbarkeit durch viele kleine Änderungen bei Steuern, Berichtspflichten und Förderlogiken.</p>
+          <div class="mini">
+            <div class="box"><strong>Best Case</strong><span class="muted">0 bis -0,5 Prozentpunkte auf die Entnahmequote über 30 Jahre</span></div>
+            <div class="box"><strong>Base Case</strong><span class="muted">-0,5 bis -1,5 Prozentpunkte durch mehrere kleine bis mittlere Verschlechterungen</span></div>
+            <div class="box"><strong>Worst Case</strong><span class="muted">-1,5 bis -3,0 Prozentpunkte bei deutlich ungünstiger Steuer- oder Förderpolitik</span></div>
+          </div>
+        </div>
+        <div class="card section">
+          <h2>Interpretation</h2>
+          <p>Die institutionelle Basis in Deutschland bleibt robust. Das Tail-Risk liegt weniger bei Eigentumsverlust oder ETF-Verbot, sondern bei kumulativen Reibungsverlusten, die die spätere Entnahme belasten.</p>
+          <div class="notes">
+            <div class="note">Hohe Wahrscheinlichkeit + kleiner Schaden = alltägliche Reibung</div>
+            <div class="note">Niedrige Wahrscheinlichkeit + großer Schaden = politischer Extremschock</div>
+            <div class="note">Für den Ruhestand zählt nicht nur Rendite, sondern die Stabilität der Netto-Entnahme</div>
+          </div>
+        </div>
+      </section>
+
+      <section class="kpi-grid">
+        <div class="card kpi"><div class="label">Wahrscheinlichster Pfad</div><div class="value">Drift</div><div class="sub">viele kleine Regeländerungen statt Systembruch</div></div>
+        <div class="card kpi"><div class="label">Regulatorik-Schock</div><div class="value">1–5%</div><div class="sub">für drastische Eingriffe über langen Horizont</div></div>
+        <div class="card kpi"><div class="label">Kumulierter Kleinschaden</div><div class="value">hoch</div><div class="sub">über Jahrzehnte finanziell relevant</div></div>
+        <div class="card kpi"><div class="label">Vertrauensniveau</div><div class="value">mittel</div><div class="sub">Tendenz belastbar, Punktschätzung unsicher</div></div>
+      </section>
+
+      <section id="matrix" class="grid-2">
+        <div class="card section">
+          <h2>Szenario-Matrix</h2>
+          <p>Die Einschlagswucht kombiniert grob Eintrittswahrscheinlichkeit und finanzielle Schadenshöhe. Werte sind heuristische Arbeitsgrößen für strategisches Denken, nicht präzise Prognosen.</p>
+          <div class="matrix">
+            <article class="scenario">
+              <div class="scenario-top"><h3>Moderate Detailänderung</h3><span class="tag mid">häufig</span></div>
+              <div class="muted">Vorabpauschale, Freibeträge, Meldepflichten oder Entnahmedetails werden angepasst.</div>
+              <div class="bar-wrap">
+                <div class="bar-row"><span>Wahrscheinlichkeit</span><div class="bar"><div class="fill prob" style="width:50%"></div></div><span>50%</span></div>
+                <div class="bar-row"><span>Schadenshöhe</span><div class="bar"><div class="fill damage" style="width:18%"></div></div><span>2%</span></div>
+                <div class="bar-row"><span>Einschlagswucht</span><div class="bar"><div class="fill impact" style="width:34%"></div></div><span>0,9</span></div>
+              </div>
+            </article>
+            <article class="scenario">
+              <div class="scenario-top"><h3>Steuerliche Verschlechterung</h3><span class="tag high">kritisch</span></div>
+              <div class="muted">Kapitalerträge werden höher belastet oder Teilfreistellung/Steuervorteile verschlechtern sich.</div>
+              <div class="bar-wrap">
+                <div class="bar-row"><span>Wahrscheinlichkeit</span><div class="bar"><div class="fill prob" style="width:20%"></div></div><span>20%</span></div>
+                <div class="bar-row"><span>Schadenshöhe</span><div class="bar"><div class="fill damage" style="width:55%"></div></div><span>5,5%</span></div>
+                <div class="bar-row"><span>Einschlagswucht</span><div class="bar"><div class="fill impact" style="width:42%"></div></div><span>1,1</span></div>
+              </div>
+            </article>
+            <article class="scenario">
+              <div class="scenario-top"><h3>Förderlogik kippt</h3><span class="tag mid">relevant</span></div>
+              <div class="muted">Neue Altersvorsorgemodelle machen alte Logiken unattraktiver oder verlagern Anreize.</div>
+              <div class="bar-wrap">
+                <div class="bar-row"><span>Wahrscheinlichkeit</span><div class="bar"><div class="fill prob" style="width:15%"></div></div><span>15%</span></div>
+                <div class="bar-row"><span>Schadenshöhe</span><div class="bar"><div class="fill damage" style="width:40%"></div></div><span>4%</span></div>
+                <div class="bar-row"><span>Einschlagswucht</span><div class="bar"><div class="fill impact" style="width:28%"></div></div><span>0,6</span></div>
+              </div>
+            </article>
+            <article class="scenario">
+              <div class="scenario-top"><h3>Drastischer politischer Eingriff</h3><span class="tag high">tail risk</span></div>
+              <div class="muted">Sonderabgabe, Vermögensabgabe oder harte steuerliche Neusortierung.</div>
+              <div class="bar-wrap">
+                <div class="bar-row"><span>Wahrscheinlichkeit</span><div class="bar"><div class="fill prob" style="width:3%"></div></div><span>3%</span></div>
+                <div class="bar-row"><span>Schadenshöhe</span><div class="bar"><div class="fill damage" style="width:100%"></div></div><span>25%</span></div>
+                <div class="bar-row"><span>Einschlagswucht</span><div class="bar"><div class="fill impact" style="width:18%"></div></div><span>0,75</span></div>
+              </div>
+            </article>
+          </div>
+        </div>
+
+        <div id="entnahme" class="card section">
+          <h2>30-Jahres-Effekt auf die Entnahmequote</h2>
+          <p>Die strategische Leitfrage ist nicht nur, ob das ETF-System besteht, sondern wie stark sich die real verfügbare Netto-Entnahme verschieben kann.</p>
+          <table aria-label="Best Case Base Case Worst Case Matrix">
+            <thead>
+              <tr><th>Szenario</th><th>Annahme</th><th>Effekt</th><th>Wucht</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Best Case</strong></td>
+                <td>weitgehend stabile Regeln, nur kleine Anpassungen</td>
+                <td>0 bis -0,5 Prozentpunkte</td>
+                <td><span class="heat h1">niedrig</span></td>
+              </tr>
+              <tr>
+                <td><strong>Base Case</strong></td>
+                <td>mehrere kleine bis mittlere Änderungen über Jahrzehnte</td>
+                <td>-0,5 bis -1,5 Prozentpunkte</td>
+                <td><span class="heat h2">mittel</span></td>
+              </tr>
+              <tr>
+                <td><strong>Worst Case</strong></td>
+                <td>spürbar schlechtere Steuer- oder Förderpolitik</td>
+                <td>-1,5 bis -3,0 Prozentpunkte</td>
+                <td><span class="heat h3">hoch</span></td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="footerline">Faustregel: Eine scheinbar sichere 4%-Entnahme kann durch regulatorische Erosion praktisch eher wie 2,5–3,5% wirken.</div>
+        </div>
+      </section>
+
+      <section id="deutschland" class="card section">
+        <h2>Deutschland: skeptische Einordnung</h2>
+        <p>Der belastbare Trend spricht für stabile Eigentums- und Kapitalmarktgrundlagen, aber zunehmende Komplexität, Bürokratie und politische Feinsteuerung. Das macht Deutschland nicht uninvestierbar, senkt jedoch die Planungssicherheit auf Ebene der Detailregeln.</p>
+        <table aria-label="Bias-sensible Einordnung">
+          <thead>
+            <tr><th>Frage</th><th>robuste Tendenz</th><th>Belastbarkeit</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>ETF-Verbot oder Systembruch?</td><td>Sehr unwahrscheinlich</td><td>hoch</td></tr>
+            <tr><td>Steuer- und Förderdrift?</td><td>Wahrscheinlich</td><td>mittel bis hoch</td></tr>
+            <tr><td>Nettorendite-Erosion?</td><td>Wahrscheinlich über lange Horizonte</td><td>mittel</td></tr>
+            <tr><td>Präzise Punktprognosen?</td><td>Nicht belastbar</td><td>niedrig</td></tr>
+          </tbody>
+        </table>
+        <div class="notes">
+          <div class="note"><strong>Bias-Hinweis:</strong> Verbände und politische Akteure überzeichnen oft die Dramatik; staatliche Quellen beschönigen eher. Die robuste Aussage liegt meist in der Mitte.</div>
+          <div class="note"><strong>Portfolio-Folge:</strong> Ein ETF-Sparplan bleibt tragfähig, wenn du nicht auf einzelne Steuervorteile angewiesen bist und deine spätere Entnahme konservativ planst.</div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script>
+    (() => {
+      const root = document.documentElement;
+      const btn = document.querySelector('[data-theme-toggle]');
+      let theme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+      root.setAttribute('data-theme', theme);
+      const renderIcon = () => {
+        btn.innerHTML = theme === 'dark'
+          ? '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>'
+          : '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>';
+      };
+      renderIcon();
+      btn.addEventListener('click', () => {
+        theme = theme === 'dark' ? 'light' : 'dark';
+        root.setAttribute('data-theme', theme);
+        renderIcon();
+      });
+      document.querySelectorAll('.nav a').forEach(a => a.addEventListener('click', () => {
+        document.querySelectorAll('.nav a').forEach(x => x.classList.remove('active'));
+        a.classList.add('active');
+      }));
+    })();
+  </script>
+</body>
+</html>

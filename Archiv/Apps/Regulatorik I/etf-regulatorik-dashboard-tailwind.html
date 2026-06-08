@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ETF-Regulatorik-Dashboard</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Satoshi', 'system-ui', 'sans-serif'],
+          },
+          colors: {
+            sand: '#f7f6f2',
+            panel: '#fbfbf9',
+            panel2: '#f3f0ec',
+            ink: '#28251d',
+            muted: '#6f6d67',
+            line: '#d4d1ca',
+            teal: '#01696f',
+            olive: '#437a22',
+            amber: '#964219',
+            plum: '#a12c7b',
+          },
+          boxShadow: {
+            soft: '0 1px 2px rgba(40,37,29,.05), 0 8px 24px rgba(40,37,29,.06)',
+          }
+        }
+      }
+    }
+  </script>
+  <link rel="preconnect" href="https://api.fontshare.com">
+  <link href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700,900&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js" defer></script>
+  <style>
+    input[type="range"] { accent-color: #01696f; }
+  </style>
+</head>
+<body class="bg-sand text-ink font-sans min-h-screen">
+  <header class="border-b border-line bg-panel/90 backdrop-blur">
+    <div class="max-w-7xl mx-auto px-4 py-4 sm:px-6 lg:px-8 flex items-center gap-3">
+      <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="4" class="w-10 h-10 text-teal" aria-hidden="true">
+        <rect x="8" y="8" width="48" height="48" rx="14"></rect>
+        <path d="M18 41l9-12 9 7 10-15"></path>
+        <path d="M19 22h10"></path>
+      </svg>
+      <div>
+        <h1 class="text-lg sm:text-xl font-bold">ETF-Regulatorik-Dashboard</h1>
+        <p class="text-sm text-muted">Sparphase, Rendite-Drag und Entnahmephase in einem Blick</p>
+      </div>
+    </div>
+  </header>
+
+  <main class="max-w-7xl mx-auto px-4 py-5 sm:px-6 lg:px-8 space-y-6">
+    <section class="grid gap-4 xl:grid-cols-[360px,1fr]">
+      <aside class="bg-panel border border-line rounded-2xl shadow-soft p-4 sm:p-5 space-y-5 h-fit xl:sticky xl:top-4">
+        <div>
+          <p class="text-[11px] uppercase tracking-[0.18em] text-teal font-bold">Eingaben</p>
+          <h2 class="text-lg font-bold mt-1">Erstkontakt-tauglich und mobil lesbar</h2>
+          <p class="text-sm text-muted mt-2">Oben steuerst du nur die Kernannahmen. Unten werden die Folgen direkt erklärt, ohne dass du Begriffe im Kopf behalten musst.</p>
+        </div>
+
+        <div class="space-y-4">
+          <div>
+            <label for="saveYears" class="block text-sm font-semibold mb-1.5">Sparzeitraum in Jahren</label>
+            <input id="saveYears" type="number" min="1" max="50" value="30" class="w-full rounded-xl border border-line bg-white px-3 py-3 text-base" />
+          </div>
+          <div>
+            <label for="saveRate" class="block text-sm font-semibold mb-1.5">Monatliche Sparrate</label>
+            <input id="saveRate" type="number" min="0" step="50" value="400" class="w-full rounded-xl border border-line bg-white px-3 py-3 text-base" />
+          </div>
+          <div>
+            <label for="saveReturn" class="block text-sm font-semibold mb-1.5">Erwartete Rendite pro Jahr</label>
+            <input id="saveReturn" type="number" min="-5" max="15" step="0.1" value="6" class="w-full rounded-xl border border-line bg-white px-3 py-3 text-base" />
+          </div>
+          <div>
+            <label for="dragSlider" class="block text-sm font-semibold mb-1.5">Regulatorischer Renditeverlust in der Sparphase</label>
+            <input id="dragSlider" type="range" min="0" max="3" step="0.1" value="1.2" class="w-full" />
+            <p class="mt-2 text-sm text-muted">Aktuell: <span id="dragLabel" class="font-semibold text-ink">1,2</span> Prozentpunkte weniger Rendite pro Jahr</p>
+          </div>
+        </div>
+      </aside>
+
+      <section class="space-y-6">
+        <section class="bg-panel border border-line rounded-2xl shadow-soft p-4 sm:p-6">
+          <p class="text-[11px] uppercase tracking-[0.18em] text-teal font-bold">Sparphase</p>
+          <h2 class="text-lg sm:text-xl font-bold mt-1">Wie stark drückt der Renditeverlust dein Endvermögen – und wie viel mehr musst du sparen?</h2>
+          <p class="text-sm text-muted mt-2 max-w-3xl">Der Zusammenhang wird direkt in den KPI-Kästen erklärt: Erst siehst du den Verlust im Endvermögen, dann die Sparrate, die diesen Verlust vollständig kompensieren würde.</p>
+
+          <div class="mt-5 grid gap-4 md:grid-cols-2 xl:grid-cols-4">
+            <article class="bg-white border border-line rounded-2xl p-5">
+              <p class="text-[11px] uppercase tracking-[0.18em] text-muted font-bold">Endvermögen ohne Renditeverlust</p>
+              <p id="fvBase" class="mt-2 text-2xl sm:text-3xl font-extrabold tabular-nums">0 €</p>
+              <p class="mt-2 text-sm text-muted">Buy-and-Hold-Rendite wie von dir angegeben, ohne regulatorische Verschlechterung.</p>
+            </article>
+
+            <article class="bg-white border border-line rounded-2xl p-5">
+              <p class="text-[11px] uppercase tracking-[0.18em] text-muted font-bold">Endvermögen mit Renditeverlust / Start in der Rente</p>
+              <p id="fvDrag" class="mt-2 text-2xl sm:text-3xl font-extrabold tabular-nums">0 €</p>
+              <p id="fvDragSubA" class="mt-2 text-sm text-muted">Was nach der Sparphase übrig ist und als Startvermögen in die Rente geht.</p>
+              <p id="fvDragSubB" class="mt-1 text-sm text-muted">Du verlierst in der Sparphase 0 € Endvermögen (0,0 %).</p>
+            </article>
+
+            <article class="bg-white border border-line rounded-2xl p-5">
+              <p class="text-[11px] uppercase tracking-[0.18em] text-muted font-bold">Nötige Sparrate ohne Verlust</p>
+              <p id="compRate" class="mt-2 text-2xl sm:text-3xl font-extrabold tabular-nums">0 €</p>
+              <p id="compSubA" class="mt-2 text-sm text-muted">Mit dieser Sparrate kompensierst du den regulatorischen Verlust von 0,0 Prozentpunkten.</p>
+              <p id="compSubB" class="mt-1 text-sm text-muted">Das sind 0 € mehr pro Monat beziehungsweise 0,0 % mehr Sparrate.</p>
+            </article>
+
+            <article class="bg-white border border-line rounded-2xl p-5">
+              <p class="text-[11px] uppercase tracking-[0.18em] text-muted font-bold">Zusammenhang: Drag → höhere Sparrate</p>
+              <p id="liftRatio" class="mt-2 text-2xl sm:text-3xl font-extrabold tabular-nums">0,0 %</p>
+              <p id="liftSubA" class="mt-2 text-sm text-muted">So stark muss deine monatliche Sparrate steigen, um den Renditeverlust vollständig auszugleichen.</p>
+              <p id="liftSubB" class="mt-1 text-sm text-muted">Je höher der Drag, desto stärker steigt die nötige Sparplanerhöhung.</p>
+            </article>
+          </div>
+        </section>
+
+        <section class="bg-panel border border-line rounded-2xl shadow-soft p-4 sm:p-6">
+          <div class="flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
+            <div>
+              <p class="text-[11px] uppercase tracking-[0.18em] text-teal font-bold">Visualisierung</p>
+              <h2 class="text-lg sm:text-xl font-bold mt-1">Direkte Zuordnung statt versteckter Formel</h2>
+              <p class="text-sm text-muted mt-2 max-w-3xl">Aus UX-Sicht ist ein eigener Kasten für den Zusammenhang besser als ein langer Untertext: Die Relation zwischen X % Drag und Y % Sparplanerhöhung ist eine eigenständige Aussage und sollte deshalb eigenständig hervorgehoben werden.</p>
+            </div>
+          </div>
+          <div class="mt-5 grid gap-6 lg:grid-cols-[1.15fr,0.85fr] items-start">
+            <div class="bg-white border border-line rounded-2xl p-4">
+              <div class="h-72 sm:h-80"><canvas id="compareChart"></canvas></div>
+            </div>
+            <div class="space-y-4">
+              <div class="bg-white border border-line rounded-2xl p-5">
+                <h3 class="text-base font-bold">Was die Anzeige leisten soll</h3>
+                <ul class="mt-3 space-y-2 text-sm text-muted">
+                  <li>• Erst zeigen, was wegfällt: geringeres Endvermögen.</li>
+                  <li>• Dann zeigen, wie man es ausgleicht: höhere Sparrate.</li>
+                  <li>• Den Zusammenhang nicht verstecken, sondern direkt benennen.</li>
+                </ul>
+              </div>
+              <div class="bg-white border border-line rounded-2xl p-5">
+                <h3 class="text-base font-bold">Designentscheidung</h3>
+                <p class="mt-3 text-sm text-muted">Krug spricht für klare visuelle Hierarchie und dafür, logisch Zusammengehöriges auch visuell zusammenzufassen. Tufte spricht für direkte Beschriftung und wenig Chart-Junk. Deshalb ist hier ein eigener kompakter KPI-Kasten plus eine schlichte Vergleichsgrafik besser als ein langer erklärender Fließtext im Sparraten-Kasten.</p>
+              </div>
+            </div>
+          </div>
+        </section>
+      </section>
+    </section>
+  </main>
+
+  <script>
+    const euro = new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'EUR', maximumFractionDigits: 0 });
+    const pct1 = new Intl.NumberFormat('de-DE', { minimumFractionDigits: 1, maximumFractionDigits: 1 });
+
+    const $ = id => document.getElementById(id);
+
+    function fvOrdinaryAnnuity(monthlyContribution, annualRatePct, years) {
+      const n = years * 12;
+      const r = annualRatePct / 100 / 12;
+      if (n <= 0) return 0;
+      if (Math.abs(r) < 1e-12) return monthlyContribution * n;
+      return monthlyContribution * ((Math.pow(1 + r, n) - 1) / r);
+    }
+
+    function paymentForTargetFV(targetFV, annualRatePct, years) {
+      const n = years * 12;
+      const r = annualRatePct / 100 / 12;
+      if (n <= 0) return 0;
+      if (Math.abs(r) < 1e-12) return targetFV / n;
+      return targetFV * r / (Math.pow(1 + r, n) - 1);
+    }
+
+    const compareChart = new Chart(document.getElementById('compareChart'), {
+      type: 'bar',
+      data: {
+        labels: ['Monatliche Sparrate heute', 'Nötige Sparrate zum Ausgleich'],
+        datasets: [{
+          data: [0, 0],
+          backgroundColor: ['rgba(1,105,111,0.35)', 'rgba(161,44,123,0.35)'],
+          borderColor: ['#01696f', '#a12c7b'],
+          borderWidth: 1.5,
+          borderRadius: 8,
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: { display: false },
+          tooltip: {
+            callbacks: { label: (ctx) => euro.format(ctx.raw) }
+          }
+        },
+        scales: {
+          x: { grid: { display: false }, ticks: { color: '#6f6d67' } },
+          y: {
+            beginAtZero: true,
+            ticks: { color: '#6f6d67', callback: (v) => euro.format(v) },
+            grid: { color: '#e4e1db' }
+          }
+        }
+      }
+    });
+
+    function render() {
+      const years = Math.max(1, Number($('saveYears').value) || 30);
+      const monthly = Math.max(0, Number($('saveRate').value) || 0);
+      const annual = Number($('saveReturn').value) || 0;
+      const drag = Math.max(0, Math.min(3, Number($('dragSlider').value) || 0));
+      const annualAfterDrag = annual - drag;
+
+      $('dragLabel').textContent = pct1.format(drag);
+
+      const fvBase = fvOrdinaryAnnuity(monthly, annual, years);
+      const fvDrag = fvOrdinaryAnnuity(monthly, annualAfterDrag, years);
+      const lossAbs = fvBase - fvDrag;
+      const lossPct = fvBase === 0 ? 0 : (lossAbs / fvBase) * 100;
+      const compRate = paymentForTargetFV(fvBase, annualAfterDrag, years);
+      const addPerMonth = compRate - monthly;
+      const addPct = monthly === 0 ? 0 : (addPerMonth / monthly) * 100;
+
+      $('fvBase').textContent = euro.format(fvBase);
+      $('fvDrag').textContent = euro.format(fvDrag);
+      $('fvDragSubA').textContent = `Was nach der Sparphase übrig ist und als Startvermögen in die Rente geht – aktuell bei ${pct1.format(drag)} Prozentpunkten Renditeverlust in der Sparphase.`;
+      $('fvDragSubB').textContent = `Du verlierst in der Sparphase ${euro.format(lossAbs)} Endvermögen (${pct1.format(lossPct)} %).`;
+
+      $('compRate').textContent = euro.format(compRate);
+      $('compSubA').textContent = `Mit dieser Sparrate kompensierst du den regulatorischen Verlust von ${pct1.format(drag)} Prozentpunkten.`;
+      $('compSubB').textContent = `Das sind ${euro.format(addPerMonth)} mehr pro Monat beziehungsweise ${pct1.format(addPct)} % mehr Sparrate.`;
+
+      $('liftRatio').textContent = `${pct1.format(addPct)} %`;
+      $('liftSubA').textContent = `${pct1.format(drag)} Prozentpunkte Drag erfordern rechnerisch ${pct1.format(addPct)} % mehr Sparrate.`;
+      $('liftSubB').textContent = `Konkret steigt dein Sparplan von ${euro.format(monthly)} auf ${euro.format(compRate)} pro Monat.`;
+
+      compareChart.data.datasets[0].data = [monthly, compRate];
+      compareChart.update();
+    }
+
+    ['saveYears','saveRate','saveReturn','dragSlider'].forEach(id => $(id).addEventListener('input', render));
+    render();
+  </script>
+</body>
+</html>

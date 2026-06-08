@@ -1,11 +1,13 @@
 # BACKLOG-ARCHIV – Finanzwesir 2.0
-Stand: 2026-06-06 | Session: ST-19-Memory-Infra | Geändert von: Claude
+Stand: 2026-06-08 | Session: Archiv-Infrastruktur-Setup | Geändert von: Claude
 
 Abgeschlossene Items, neueste zuerst (append-only).
 Archivierungs-Trigger: wenn > 200 Zeilen → neue Datei `BACKLOG-ARCHIV-YYYY.md` anlegen.
 
 | ID | Bereich | Titel | Abgeschlossen | Session |
 |----|---------|-------|---------------|---------|
+| ST-21 | System | Archiv/local/ Quarantäne: Binärdateien, LLM-Unterordner (ChatGPT/Gemini/Perplexity), Peer-Review-Dumps und Seminar-Material nach `Archiv/local/` verschoben. Hash-Analyse: 0 Cross-Dubletten — Move-Item sauber. Windows-Konfliktkopie gelöscht. *(sofort erledigt)* | 2026-06-08 | Archiv-Infrastruktur-Setup |
+| ST-20 | System | Archivstrategie verankert + .gitignore umgestellt: NAVIGATION.md § Archivstrategie/Kontext-Hygiene (Aktive Dateien/Archiv/Git), `Archiv/` unignoriert → versionierbar, `Archiv/local/` als gitignored Puffer eingetragen. *(sofort erledigt)* | 2026-06-08 | Archiv-Infrastruktur-Setup |
 | ST-19 | System | Memory-System neu aufgebaut: .claude/memory/ mit 18 rekonstruierten Feedback-Files (aus patterns.md + session-log, ~80–90 % Präzision), MEMORY.md-Index, /start Schritt 1b ergänzt, distill-Skill-Pfad korrigiert, abschluss-ritual Memory-Pfad aktualisiert, NAVIGATION.md synchronisiert. ST-18 (Heim-PC-Merge) offen. *(sofort erledigt)* | 2026-06-06 | ST-19-Memory-Infra |
 | DIST-06 | Learning | Distill 6: 39 Log-Einträge aus 4 Sessions (2026-06-03 bis 2026-06-05) destilliert — 5 Patterns promoted (feedback_python_powershell_tooling, feedback_gate_scope_dialog, feedback_csvparser_vertrauenswuerdig, feedback_edit_vorab_lesen, feedback_abschluss_ritual_timing); 4 neue Observing-Einträge [G]–[J]; 2 Reoccurrences für feedback_strukturannahmen vermerkt; session-log geleert. *(sofort erledigt)* | 2026-06-05 | DIST-06 |
 | COMP-ARCH-01-NACHPUTZ | Architektur | Dokumentationsdrift nach COMP-ARCH-01 bereinigt: OA-02-Peer-Review historisch markiert (Status + Warnblock), PROJECT-STATUS §9 C3-Empfehlung entfernt + neutrale OA-02-Leitlinie + Verbote, HOOK-META Peer-Review-Framing neutralisiert, Slice-Status korrigiert (Slice-3 offen → Slice-0/1/2/3 ✅), §1a überabsolute Visualisierungsaussage entschärft, §3 Zählmodell-Warnblock (Option B, APP_INVENTORY.md = Quelle), CHART_ENGINE_ROLE_AND_INTEGRATION.md §1 Intro + Tabelle präzisiert, APP-INTERFACE.md §4 ChartAdapter → Chart-Komponenten-Vertrag OA-02. NAVIGATION.md war sauber — kein Eingriff. fw-chart-engine/index.js ist Auto-Start-Code, darf nicht als Export-Fassade umgebaut werden (bestätigt + verboten). *(sofort erledigt)* | 2026-06-05 | COMP-ARCH-01-Nachputz |

@@ -5,8 +5,11 @@ Active Campaign Liste/
 # Nextcloud-Sync-Konflikte (kein Git-Tracking nötig)
 *.sync-conflict-*
 
-# Kein Tracking von Archiv- und App-Datenmaterial
-Archiv/
+# Archiv: kuratierte historische Artefakte werden versioniert.
+# Nur lokale Rohmaterialien bleiben ungetrackt.
+Archiv/local/
+
+# Kein Tracking von App-Datenmaterial
 data-raw/
 
 # Chart-Engine Dev-Ordner — nicht versionieren

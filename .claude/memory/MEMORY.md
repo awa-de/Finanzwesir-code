@@ -22,3 +22,4 @@
 - [CSVParser vertrauen](feedback_csvparser_vertrauenswuerdig.md) — CSVParser-Output vollständig vertrauen, keine sekundäre Validierung
 - [Edit vorab lesen](feedback_edit_vorab_lesen.md) — Datei immer mit Read lesen bevor Edit verwendet wird
 - [Abschluss-Ritual-Timing](feedback_abschluss_ritual_timing.md) — Abschluss-Ritual sofort nach AP-Fertigstellung anbieten, nicht auf Alberts Initiative warten
+- [Archivstrategie](project_archivstrategie.md) — Dreiteilung: Aktive Dateien / Archiv (versioniert) / Git; `Archiv/local/` gitignored für Rohmaterial, LLM-Dumps, Binärdateien
