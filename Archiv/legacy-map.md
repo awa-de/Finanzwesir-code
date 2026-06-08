@@ -56,7 +56,7 @@ Vollständige Regeln: `docs/steering/ARCHIV-STRATEGIE.md`
 
 | Kategorie | Anzahl |
 |---|---|
-| Kartierte Archivorte gesamt | 16 |
+| Kartierte Archivorte gesamt | 15 |
 | Root-Archive | 1 |
 | Lokale Archive | 6 |
 | local/-Quarantänen | 1 |
@@ -86,7 +86,6 @@ Vollständige Regeln: `docs/steering/ARCHIV-STRATEGIE.md`
 | `docs/steering/archiv/KNOWN-ISSUES-ARCHIV.md` | ARCHIVDATEI | Steering-Archiv | 8 KB; archivierte Known-Issues-Liste | mittel | mittel | LOKALER_KONTEXT + MAKING_OF_BELEG | BELASSEN_UND_VERTRAG_ANWENDEN |
 | `docs/steering/archiv/KNOWN-ISSUES-SCHLACHTPLAN-ARCHIV.md` | ARCHIVDATEI | Steering-Archiv | 79 KB; archivierter Known-Issues-Schlachtplan; größter Einzelartefakt im Inventar | hoch | hoch | LOKALER_KONTEXT + MAKING_OF_BELEG | ERLEDIGT_AP_KORR_5 |
 | `docs/steering/BACKLOG-ARCHIV.md` | SONDERFALL | Steering (aktiver Pfad) | 34 KB; aktives Backlog-Archiv; operatives Artefakt — wird von /start und Kassensturz direkt gelesen | mittel | niedrig | SONDERFALL | BELASSEN_UND_VERTRAG_ANWENDEN |
-| `Archiv/making-of/` | LOKALES_ARCHIV | Root-Archiv | Making-of-Rahmen; KAPITELRAHMEN.md + README.md + Belegnotizen 07a–07c; erstellt AP 8 | hoch | niedrig | ROOT_KURATION + MAKING_OF_BELEG | BELASSEN_UND_VERTRAG_ANWENDEN |
 
 ---
 
