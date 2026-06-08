@@ -83,3 +83,9 @@ FinanzwesirData.js, CSVParser.js, FwDateUtils.js — diese Session nicht berühr
 
 ## 2026-06-08 – AP-KORR-5 | KNOWN-ISSUES-Schlachtplan als POSTMORTEM markieren
 - [OK] Keine Vorkommnisse
+
+## 2026-06-08 – AP-KORR-7 | Archiv-Sonderfälle inventarisieren
+- [FRICTION] legacy-map.md hatte docs/App-Fabrik/_archive/ README als „0 KB, leer" dokumentiert — tatsächlich 349 Bytes mit Platzhalter-Regeltext und named Candidate. Faktische Korrektur in legacy-map.md vollzogen.
+
+## 2026-06-08 – AP-KORR-8 | Abschluss-Audit Archivstrategie-Nachputzserie
+- [OK] Audit bestanden (P0: 0, P1: 0, P2: 1). P2-Hinweis: KAPITELRAHMEN.md enthält veraltete Forward-Referenz „Status unklar" fuer KNOWN-ISSUES-SCHLACHTPLAN — AP-KORR-5 hat POSTMORTEM gesetzt. Nicht operativ, kein Blocker.

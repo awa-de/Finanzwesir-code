@@ -5,10 +5,11 @@ Fokus-AP: APP-01 — prokrastinations-preis
 Nächster-Schritt: OA-02 entscheiden (COMP-ARCH-01 + historischer Peer-Review liegen vor) → dann Slice 4 SparplanChart
 Blocker: keine
 -->
+<!-- HOOK-META-SESSION: AP-KORR-8 -->
 
 # PROJECT STATUS — Finanzwesir 2.0
 
-Stand: 2026-06-08 | Session: AP-KORR-6 | Geändert von: Claude
+Stand: 2026-06-08 | Session: AP-KORR-8 | Geändert von: Claude
 
 **Zweck:** Schneller Wiedereinstieg nach Pausen.
 **Zielgruppe:** Albert und Claude.
@@ -151,6 +152,9 @@ Vollständig im DECISION-LOG dokumentiert (`docs/steering/DECISION-LOG.md`):
 ---
 
 ## 8. Letzte Session
+
+2026-06-08 — Archivstrategie-Nachputzserie AP-KORR-1 bis AP-KORR-8 vollständig abgeschlossen.
+AP-KORR-7: `docs/steering/ARCHIV-SONDERFAELLE.md` angelegt — 3 Sonderfälle (archivliste.md, docs/App-Fabrik/_archive/, Inhalte alte Site/blog/archiv/) inventarisiert, Entscheidungen bei Albert. Archiv/legacy-map.md minimal ergaenzt. AP-KORR-8: Abschluss-Audit — 10/10 Pruefpunkte bestanden, P2-Resthinweis (KAPITELRAHMEN.md stale Forward-Referenz, nicht operativ). KORR-Serie abgeschlossen, keine Blocker.
 
 2026-06-08 — LLM-Dumps in local-Quarantäne verschoben (AP-KORR-6).
 CLAUDE-pre-synthese + NAVIGATION-pre-synthese (2026-05-03) aus Archiv/optimierung-projektsteuerung/.../Archiv/ nach Archiv/local/optimierung-projektsteuerung/ verschoben. Quellordner danach leer. legacy-map.md: 6 Stellen auf ERLEDIGT_AP_KORR_6 gesetzt. Korrekturserie AP-KORR-1 bis AP-KORR-6 abgeschlossen.

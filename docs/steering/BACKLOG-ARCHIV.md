@@ -1,11 +1,13 @@
 # BACKLOG-ARCHIV – Finanzwesir 2.0
-Stand: 2026-06-08 | Session: AP-KORR-6 | Geändert von: Claude
+Stand: 2026-06-08 | Session: AP-KORR-8 | Geändert von: Claude
 
 Abgeschlossene Items, neueste zuerst (append-only).
 Archivierungs-Trigger: wenn > 200 Zeilen → neue Datei `BACKLOG-ARCHIV-YYYY.md` anlegen.
 
 | ID | Bereich | Titel | Abgeschlossen | Session |
 |----|---------|-------|---------------|---------|
+| AP-KORR-8 | System | Abschluss-Audit Archivstrategie-Nachputzserie (AP-KORR-1–7): 10/10 Pruefpunkte bestanden. P0: 0, P1: 0, P2: 1 (stale Forward-Referenz in KAPITELRAHMEN.md — nicht operativ). Nachputzserie abgeschlossen ohne Blocker. *(sofort erledigt)* | 2026-06-08 | AP-KORR-8 |
+| AP-KORR-7 | System | docs/steering/ARCHIV-SONDERFAELLE.md angelegt: 3 Archiv-Sonderfaelle inventarisiert (archivliste.md, docs/App-Fabrik/_archive/, Inhalte alte Site/blog/archiv/). Archiv/legacy-map.md minimal ergaenzt (Faktkorrektur + 3 Details-Verweise + Stand-Update). *(sofort erledigt)* | 2026-06-08 | AP-KORR-7 |
 | AP-KORR-6 | System | CLAUDE-pre-synthese-2026-05-03.md + NAVIGATION-pre-synthese-2026-05-03.md aus Archiv/optimierung-projektsteuerung/.../Archiv/ nach Archiv/local/optimierung-projektsteuerung/ verschoben. legacy-map.md: 6 Stellen auf ERLEDIGT_AP_KORR_6 gesetzt. Quellordner danach leer. *(sofort erledigt)* | 2026-06-08 | AP-KORR-6 |
 | AP-KORR-5 | System | KNOWN-ISSUES-SCHLACHTPLAN-ARCHIV.md als POSTMORTEM markiert: YAML-Frontmatter + Archivhinweis oben eingefügt, historischer Inhalt unverändert. legacy-map.md: Haupttabelle, Archivdateien-Tabelle, Offene Risiken, Folge-APs auf POSTMORTEM / ERLEDIGT_AP_KORR_5 gesetzt. *(sofort erledigt)* | 2026-06-08 | AP-KORR-5 |
 | AP-KORR-4 | System | ARCHIV-STRATEGIE.md: § Erwartete Folge-APs → § Setup-Serie AP 3–9 Abschlussstand; Nicht-Routing-Regel in Archivvertrag Regel 1 + README-Schablone ergänzt. Keine AP10-Pflichtkette. *(sofort erledigt)* | 2026-06-08 | AP-KORR-Serie |

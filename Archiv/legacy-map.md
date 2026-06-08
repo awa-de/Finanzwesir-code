@@ -1,4 +1,4 @@
-Stand: 2026-06-08 | Quelle: docs/steering/ARCHIV-INVENTAR.md | Geändert von: Claude | Session: AP-KORR-6
+Stand: 2026-06-08 | Quelle: docs/steering/ARCHIV-INVENTAR.md | Geändert von: Claude | Session: AP-KORR-7
 
 # Föderierter Archivkatalog / Legacy Map
 
@@ -152,10 +152,11 @@ Lokale Archive bleiben an Ort und Stelle; das Root-Archiv enthält projektüberg
 
 - **Subsystem:** App-Fabrik-Dokumentation
 - **Zielrolle:** ZU_PRUEFEN
-- **Dateien:** 1 Datei (README.md, 0 KB, leer)
-- **Befund:** Archiv de facto leer — bewusster Platzhalter oder verwaister Ordner?
+- **Dateien:** 1 Datei (README.md, 349 Bytes; bewusster Platzhalter mit Regeltext) // CHANGED
+- **Befund:** Kein Archivinhalt außer README; nennt potenziellen Kandidaten — erst nach Alberts Freigabe verschiebbar // CHANGED
 - **Drift-Risiko:** niedrig
 - **Nächste Aktion:** SONDERFALL_PRUEFEN — offen, kein AP geplant
+- **Details:** docs/steering/ARCHIV-SONDERFAELLE.md // NEW
 
 ---
 
@@ -245,6 +246,7 @@ Lokale Archive bleiben an Ort und Stelle; das Root-Archiv enthält projektüberg
 - **Warum Sonderfall:** Manuelle Archivorte-Liste mit absoluten Windows-Pfaden (`C:\Users\...`); entstanden vor dem Archivmodell; nicht portabel; durch `docs/steering/ARCHIV-INVENTAR.md` faktisch ersetzt
 - **Behandlung:** LOESCHKANDIDAT_PRUEFEN — Albert entscheidet
 - **Root-Archiv-Verweis:** nein — Datei dokumentiert keinen Prozess, sondern einen veralteten Zustand
+- **Details:** docs/steering/ARCHIV-SONDERFAELLE.md // NEW
 
 ---
 
@@ -265,6 +267,7 @@ Lokale Archive bleiben an Ort und Stelle; das Root-Archiv enthält projektüberg
 - **Warum Sonderfall:** Gehört fachlich zur alten Website, nicht zum Projektarchiv-System; 1 leere Datei (page.md, 0 KB)
 - **Behandlung:** SONDERFALL_PRUEFEN + LOESCHKANDIDAT_PRUEFEN — leerer Ordner, alter Website-Kontext; außerhalb der Archivstrategie
 - **Root-Archiv-Verweis:** nein
+- **Details:** docs/steering/ARCHIV-SONDERFAELLE.md // NEW
 
 ---
 
