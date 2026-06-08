@@ -7,6 +7,9 @@ FinanzwesirData.js, CSVParser.js, FwDateUtils.js — diese Session nicht berühr
 ## 2026-06-08 – ST-28 (AP 7) | README-Schablone auf lokale Archive anwenden
 - [OK] Keine Vorkommnisse
 
+## 2026-06-08 – ST-26 (AP 8) | Root-Making-of-Rahmen vorbereiten
+- [OK] Keine Vorkommnisse
+
 ## 2026-06-06 – SESSION START | Fokus: APP-01 — prokrastinations-preis
 FinanzwesirData.js, CSVParser.js, FwDateUtils.js — diese Session nicht berühren. ✓
 

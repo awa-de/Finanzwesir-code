@@ -1,4 +1,4 @@
-Stand: 2026-06-08 | Quelle: docs/steering/ARCHIV-INVENTAR.md | Geändert von: Claude
+Stand: 2026-06-08 | Quelle: docs/steering/ARCHIV-INVENTAR.md | Geändert von: Claude | Session: AP-8-making-of-rahmen
 
 # Föderierter Archivkatalog / Legacy Map
 
@@ -54,7 +54,7 @@ Vollständige Regeln: `docs/steering/ARCHIV-STRATEGIE.md`
 
 | Kategorie | Anzahl |
 |---|---|
-| Kartierte Archivorte gesamt | 15 |
+| Kartierte Archivorte gesamt | 16 |
 | Root-Archive | 1 |
 | Lokale Archive | 6 |
 | local/-Quarantänen | 1 |
@@ -84,6 +84,7 @@ Vollständige Regeln: `docs/steering/ARCHIV-STRATEGIE.md`
 | `docs/steering/archiv/KNOWN-ISSUES-ARCHIV.md` | ARCHIVDATEI | Steering-Archiv | 8 KB; archivierte Known-Issues-Liste | mittel | mittel | LOKALER_KONTEXT + MAKING_OF_BELEG | BELASSEN_UND_VERTRAG_ANWENDEN |
 | `docs/steering/archiv/KNOWN-ISSUES-SCHLACHTPLAN-ARCHIV.md` | ARCHIVDATEI | Steering-Archiv | 79 KB; archivierter Known-Issues-Schlachtplan; größter Einzelartefakt im Inventar | hoch | hoch | LOKALER_KONTEXT + MAKING_OF_BELEG | UNKLAR_PRUEFEN |
 | `docs/steering/BACKLOG-ARCHIV.md` | SONDERFALL | Steering (aktiver Pfad) | 34 KB; aktives Backlog-Archiv; operatives Artefakt — wird von /start und Kassensturz direkt gelesen | mittel | niedrig | SONDERFALL | BELASSEN_UND_VERTRAG_ANWENDEN |
+| `Archiv/making-of/` | LOKALES_ARCHIV | Root-Archiv | Making-of-Rahmen; KAPITELRAHMEN.md + README.md; kein operativer Inhalt; erstellt AP 8 | hoch | niedrig | ROOT_KURATION + MAKING_OF_BELEG | BELASSEN_UND_VERTRAG_ANWENDEN |
 
 ---
 
@@ -113,6 +114,7 @@ Lokale Archive bleiben an Ort und Stelle; das Root-Archiv enthält projektüberg
 | `Archiv/Refactoring der Dateistruktur/` | Enthält Aufraeum-Archiv.md (18 KB) | mittel | mittel | nein |
 | `Archiv/Refactoring des Gehirns/` | KI-Workflow-Geschichte, Prozess-Reflexion | hoch | hoch | unklar |
 | `Archiv/root-dateien-2026-05-03/` | Root-Dateien-Backup vom 2026-05-03 | niedrig | niedrig | ja |
+| `Archiv/making-of/` | Making-of-Rahmen; KAPITELRAHMEN.md + README.md; erstellt AP 8 | hoch | hoch | nein |
 | `Archiv/selbstlernenes System/` | Geschichte des selbstlernenden Projektsystems | hoch | hoch | unklar |
 
 ### Direkte Dateien im Root

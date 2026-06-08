@@ -148,6 +148,9 @@ Vollständig im DECISION-LOG dokumentiert (`docs/steering/DECISION-LOG.md`):
 
 ## 8. Letzte Session
 
+2026-06-08 — Root-Making-of-Rahmen vorbereitet (AP-8 / ST-26).
+`Archiv/making-of/` angelegt: `README.md` (Schutzregel, Quellenlogik, Zweck) und `KAPITELRAHMEN.md` (7 Kapitelkandidaten, 6 mit Belegen aus `legacy-map.md`, Kapitel 01 RAHMEN_OHNE_BELEG). `legacy-map.md` minimal aktualisiert (making-of/ eingetragen, Zähler 15→16). AP 9 (Pilotarchiv: `docs/spec/archiv/`) startbar.
+
 2026-06-08 — Archiv-README-Schablone angewandt (AP-7 / ST-28).
 4 lokale Archive mit Kontextschutz-README versehen: `Apps/prokrastinations-preis/Archiv/`, `docs/design-system/archiv/`, `docs/spec/archiv/`, `docs/steering/archiv/`. Schutzsatz + Archivvertrag + Erstellt-Datum 2026-06-08. `legacy-map.md` aktualisiert (4 Einträge `README vorhanden: ja`). Offene Folgepunkte: LOCAL_PRUEFEN (`Archiv/optimierung-projektsteuerung/...`), SONDERFALL_PRUEFEN (`docs/App-Fabrik/_archive/`). AP 8 (Root-Making-of-Rahmen) startbar.
 
