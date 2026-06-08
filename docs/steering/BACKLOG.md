@@ -1,5 +1,5 @@
 # BACKLOG – Finanzwesir 2.0
-Stand: 2026-06-08 | Session: AP-6-legacy-map | Geändert von: Claude
+Stand: 2026-06-08 | Session: AP-7-local-readme | Geändert von: Claude
 
 **Regeln:**
 - ✅-Zeilen werden sofort nach `BACKLOG-ARCHIV.md` verschoben (append), dann hier gelöscht.
@@ -37,7 +37,6 @@ Stand: 2026-06-08 | Session: AP-6-legacy-map | Geändert von: Claude
 | AP-SEC-1 | Engine  | Domain-Lock Validierungsfunktion implementieren| M    | AP-DOC-1     | —                                                 |
 | ST-01    | System  | Scope-Creep-Erkennung stärken — proaktiver Mid-Work-Check nach jedem Patch + Selftest-Szenario Pfad 14 | H | — | — |
 | ST-02    | System  | Selftest: Szenario „Protected Path direkt" ergänzen — Pfad 11, PROTECTED_PATHS.json-Protokoll vs. CLAUDE.md-Tabu-Regel | H | — | — |
-| ST-28    | System  | README-Schablone für lokale Archive gezielt anwenden (AP-7) | L | ST-23 ✅ | docs/steering/ARCHIV-STRATEGIE.md |
 | ST-26    | System  | Root-Making-of-Rahmen vorbereiten (AP-8) | L | ST-25 ✅ | docs/steering/ARCHIV-STRATEGIE.md |
 | ST-27    | System  | Pilotarchiv auswählen und kontrolliert behandeln (AP-9) | L | ST-24 | docs/steering/ARCHIV-STRATEGIE.md |
 | CL-04    | Cleanup | theme/CLAUDE.md schreiben                      | M    | —            | —                                                 |

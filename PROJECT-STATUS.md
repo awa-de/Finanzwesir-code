@@ -8,7 +8,7 @@ Blocker: keine
 
 # PROJECT STATUS — Finanzwesir 2.0
 
-Stand: 2026-06-08 | Session: AP-6-legacy-map | Geändert von: Claude
+Stand: 2026-06-08 | Session: AP-7-local-readme | Geändert von: Claude
 
 **Zweck:** Schneller Wiedereinstieg nach Pausen.
 **Zielgruppe:** Albert und Claude.
@@ -69,6 +69,8 @@ Stand: 2026-06-08 | Session: AP-6-legacy-map | Geändert von: Claude
 ✅ **COMP-ARCH-Verankerung (2026-06-05):** Component Composition Architecture als verbindliches Architekturmodell verankert — §1a in 03_APP_FACTORY_STANDARD_DRAFT.md (Lego-Brett-Modell, Komponentenklassen, Chart entzaubert), §2-Begriffe erweitert, CHART_ENGINE_ROLE_AND_INTEGRATION.md §1 Einordnung, APP-INTERFACE.md §4 Querverweis, ADR-COMP-ARCH-01 angelegt. OA-02 als Chart-Komponenten-Entscheidung gerahmt — kein App-Fabrik-Sonderweg.
 
 ✅ **Föderierter Archivkatalog abgeschlossen (2026-06-08):** `Archiv/legacy-map.md` erstellt — 15 Archivorte kartiert, 6 Zielrollen, 2 Pilotkandidaten (docs/spec/archiv/ + Apps/prokrastinations-preis/Archiv/). AP-9-Startbasis enthalten. Archiv-Block ST-20–ST-25 vollständig. (ST-25)
+
+✅ **Archiv-README-Schablone angewandt (AP-7 / ST-28, 2026-06-08):** 4 lokale Archive mit Kontextschutz-README versehen (`Apps/prokrastinations-preis/Archiv/`, `docs/design-system/archiv/`, `docs/spec/archiv/`, `docs/steering/archiv/`). Schutzsatz + Archivvertrag + Erstellt-Datum. `legacy-map.md` aktualisiert. AP 8 (Root-Making-of-Rahmen) startbar.
 
 ⚙️ **Nächster Schritt B1:** OA-02 entscheiden (Peer-Review + COMP-ARCH-Kontext liegen vor) → dann Slice 4 SparplanChart.
 
@@ -145,6 +147,9 @@ Vollständig im DECISION-LOG dokumentiert (`docs/steering/DECISION-LOG.md`):
 ---
 
 ## 8. Letzte Session
+
+2026-06-08 — Archiv-README-Schablone angewandt (AP-7 / ST-28).
+4 lokale Archive mit Kontextschutz-README versehen: `Apps/prokrastinations-preis/Archiv/`, `docs/design-system/archiv/`, `docs/spec/archiv/`, `docs/steering/archiv/`. Schutzsatz + Archivvertrag + Erstellt-Datum 2026-06-08. `legacy-map.md` aktualisiert (4 Einträge `README vorhanden: ja`). Offene Folgepunkte: LOCAL_PRUEFEN (`Archiv/optimierung-projektsteuerung/...`), SONDERFALL_PRUEFEN (`docs/App-Fabrik/_archive/`). AP 8 (Root-Making-of-Rahmen) startbar.
 
 2026-06-08 — Föderierter Archivkatalog erstellt (ST-25 / AP-6).
 `Archiv/legacy-map.md` angelegt: 15 Archivorte kartiert (1 Root-Archiv, 6 lokale Archive, 1 local/-Quarantäne, 4 Archivdateien, 3 Sonderfälle). Pilotkandidaten: docs/spec/archiv/ (Kandidat 1) + Apps/prokrastinations-preis/Archiv/ (Kandidat 2). AP-9-Startbasis für docs/spec/archiv/ vollständig. Archiv-Block ST-20–ST-25 abgeschlossen.

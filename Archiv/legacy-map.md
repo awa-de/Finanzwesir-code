@@ -138,7 +138,7 @@ Lokale Archive bleiben an Ort und Stelle; das Root-Archiv enthält projektüberg
 - **Kontextnähe:** sinnvoll — erklärt Entstehung direkt am App-Kontext
 - **Rohmaterial:** nein
 - **Drift-Risiko:** niedrig
-- **README vorhanden:** nein
+- **README vorhanden:** ja (AP 7)
 - **Pilotstatus:** Kandidat 2 (→ Pilotkandidaten)
 - **Nächste Aktion:** README_ANWENDEN + ROOT_REFERENZ_PRUEFEN — Root-Archiv soll später auf Slice-0-Geschichte verweisen
 
@@ -164,7 +164,7 @@ Lokale Archive bleiben an Ort und Stelle; das Root-Archiv enthält projektüberg
 - **Kontextnähe:** sinnvoll — Stress-Test-Referenz bleibt nahe am Design-System-Kontext
 - **Rohmaterial:** nein (HTML-Datei, kein Binary)
 - **Drift-Risiko:** niedrig
-- **README vorhanden:** nein
+- **README vorhanden:** ja (AP 7)
 - **Nächste Aktion:** README_ANWENDEN + ROOT_REFERENZ_PRUEFEN
 
 ---
@@ -178,7 +178,7 @@ Lokale Archive bleiben an Ort und Stelle; das Root-Archiv enthält projektüberg
 - **Kontextnähe:** sinnvoll — Spec-Versionsgeschichte bleibt nahe an aktiver Spec
 - **Rohmaterial:** nein
 - **Drift-Risiko:** mittel — veraltete Spec-Versionen könnten bei versehentlichem Laden mit aktuellen Regeln verwechselt werden
-- **README vorhanden:** nein
+- **README vorhanden:** ja (AP 7)
 - **Pilotstatus:** Kandidat 1 (→ Pilotkandidaten)
 - **Nächste Aktion:** README_ANWENDEN + PILOTKANDIDAT
 
@@ -193,7 +193,7 @@ Lokale Archive bleiben an Ort und Stelle; das Root-Archiv enthält projektüberg
 - **Kontextnähe:** sinnvoll — operative Geschichte bleibt nahe am aktiven Steering-Pfad
 - **Rohmaterial:** keine erkennbaren; MEMORY-THEME-PHASE.md (28 KB) auf LLM-Dump-Anteil prüfen
 - **Drift-Risiko:** hoch — Handoff-Prompts, Implementierungspläne (AP-21-IMPLEMENTATIONSPLAN.md, 29 KB) und Übergabedokumente könnten operative Verwirrung stiften
-- **README vorhanden:** nein
+- **README vorhanden:** ja (AP 7)
 - **Nächste Aktion:** README_ANWENDEN (Priorität: hoch — wegen Drift-Risiko)
 
 **Archivdateien in diesem Archiv:**
