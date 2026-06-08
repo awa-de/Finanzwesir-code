@@ -1,4 +1,4 @@
-Stand: 2026-06-08 | Quelle: docs/steering/ARCHIV-INVENTAR.md | Geändert von: Claude | Session: AP-KORR-7
+Stand: 2026-06-08 | Quelle: docs/steering/ARCHIV-INVENTAR.md | Geändert von: Claude | Session: AP-KORR-9
 
 # Föderierter Archivkatalog / Legacy Map
 
@@ -75,11 +75,11 @@ Vollständige Regeln: `docs/steering/ARCHIV-STRATEGIE.md`
 | `Archiv/local/` | LOCAL_QUARANTAENE | Root-Archiv | Gitignored Quarantäne; 203 Dateien, ≈31 MB; Binärdateien, LLM-Dumps, Rohmaterial | unklar | niedrig | LOCAL_QUARANTAENE | BELASSEN_UND_VERTRAG_ANWENDEN |
 | `Archiv/optimierung-projektsteuerung/Optimierung Projektsteuerung/Archiv/` | LOKALES_ARCHIV | Root-Archiv (verschachtelt) | 2 Dateien: LLM-Synthese-Exports (CLAUDE-pre-synthese + NAVIGATION-pre-synthese, 2026-05-03) | mittel | niedrig | LOCAL_QUARANTAENE + ZU_PRUEFEN | ERLEDIGT_AP_KORR_6 |
 | `Apps/prokrastinations-preis/Archiv/` | LOKALES_ARCHIV | App prokrastinations-preis | 2 Markdown-Dateien, 6 KB; Slice-0-Kickoff-Prompt + Implementierungs-Prompt | mittel | niedrig | LOKALER_KONTEXT + MAKING_OF_BELEG | SPÄTERE_KURATIERUNG_OPTIONAL |
-| `docs/App-Fabrik/_archive/` | LOKALES_ARCHIV | App-Fabrik | 1 Datei (README.md, 0 KB, leer); Archiv de facto leer | niedrig | niedrig | ZU_PRUEFEN | SONDERFALL_PRUEFEN |
+| `docs/App-Fabrik/_archive/` | LOKALES_ARCHIV | App-Fabrik | 1 Datei (README.md, 349 Bytes; bewusster Platzhalter mit Regeltext; kein Archivinhalt) | niedrig | niedrig | ZU_PRUEFEN | SONDERFALL_PRUEFEN |
 | `docs/design-system/archiv/` | LOKALES_ARCHIV | Design-System | 1 Datei (boxen-stress-test-referenz.html, 9 KB); Referenz-Stresstest aus Design-System-Entwicklung | mittel | niedrig | LOKALER_KONTEXT + MAKING_OF_BELEG | BELASSEN_UND_VERTRAG_ANWENDEN |
 | `docs/spec/archiv/` | LOKALES_ARCHIV | Spec / Chart-Engine | 4 Markdown-Dateien, 47 KB; Spec-Versionen v1/v12/v13 für HTML-Karten und Ticks/Labels | hoch | mittel | LOKALER_KONTEXT + MAKING_OF_BELEG | BELASSEN_UND_VERTRAG_ANWENDEN |
 | `docs/steering/archiv/` | LOKALES_ARCHIV | Steering / Projektsteuerung | 15 Dateien, 222 KB; AP-Übergaben, Implementierungspläne, Handoff-Prompts, Known-Issues-Geschichte | hoch | hoch | LOKALER_KONTEXT + MAKING_OF_BELEG | SONDERPRUEFUNG_STEERING_ARCHIV |
-| `Inhalte alte Site/blog/archiv/` | SONDERFALL | Alte Website / Content | 1 leere Datei (page.md, 0 KB); Archiv-Ordner innerhalb alter Websiteinhalte; de facto leer | niedrig | niedrig | SONDERFALL | SONDERFALL_PRUEFEN + LOESCHKANDIDAT_PRUEFEN |
+| `Inhalte alte Site/blog/archiv/` | SONDERFALL | Alte Website / Content | 1 Datei (page.md, 119 Bytes); alter Website-Kontext; de facto leer / nur Platzhalterinhalt laut Sonderfallprüfung | niedrig | niedrig | SONDERFALL | SONDERFALL_PRUEFEN + LOESCHKANDIDAT_PRUEFEN |
 | `archivliste.md` | SONDERFALL | Projektroot | 1 KB; manuelle Archivorte-Liste mit absoluten Windows-Pfaden; durch ARCHIV-INVENTAR.md ersetzt | niedrig | niedrig | SONDERFALL | LOESCHKANDIDAT_PRUEFEN |
 | `Archiv/Refactoring der Dateistruktur/Aufraeum-Archiv.md` | ARCHIVDATEI | Root-Archiv / Refactoring | 18 KB; Aufräum-Analyse aus der Refactoring-Phase der Dateistruktur | mittel | niedrig | ROOT_KURATION + MAKING_OF_BELEG | BELASSEN_UND_VERTRAG_ANWENDEN |
 | `docs/steering/archiv/AUFRAEUM-ANALYSE-ARCHIV.md` | ARCHIVDATEI | Steering-Archiv | 8 KB; archivierte Aufräum-Analyse aus der Steering-Phase | mittel | mittel | LOKALER_KONTEXT + MAKING_OF_BELEG | BELASSEN_UND_VERTRAG_ANWENDEN |
@@ -152,11 +152,11 @@ Lokale Archive bleiben an Ort und Stelle; das Root-Archiv enthält projektüberg
 
 - **Subsystem:** App-Fabrik-Dokumentation
 - **Zielrolle:** ZU_PRUEFEN
-- **Dateien:** 1 Datei (README.md, 349 Bytes; bewusster Platzhalter mit Regeltext) // CHANGED
-- **Befund:** Kein Archivinhalt außer README; nennt potenziellen Kandidaten — erst nach Alberts Freigabe verschiebbar // CHANGED
+- **Dateien:** 1 Datei (README.md, 349 Bytes; bewusster Platzhalter mit Regeltext)
+- **Befund:** Kein Archivinhalt außer README; nennt potenziellen Kandidaten — erst nach Alberts Freigabe verschiebbar
 - **Drift-Risiko:** niedrig
 - **Nächste Aktion:** SONDERFALL_PRUEFEN — offen, kein AP geplant
-- **Details:** docs/steering/ARCHIV-SONDERFAELLE.md // NEW
+- **Details:** docs/steering/ARCHIV-SONDERFAELLE.md
 
 ---
 
@@ -246,7 +246,7 @@ Lokale Archive bleiben an Ort und Stelle; das Root-Archiv enthält projektüberg
 - **Warum Sonderfall:** Manuelle Archivorte-Liste mit absoluten Windows-Pfaden (`C:\Users\...`); entstanden vor dem Archivmodell; nicht portabel; durch `docs/steering/ARCHIV-INVENTAR.md` faktisch ersetzt
 - **Behandlung:** LOESCHKANDIDAT_PRUEFEN — Albert entscheidet
 - **Root-Archiv-Verweis:** nein — Datei dokumentiert keinen Prozess, sondern einen veralteten Zustand
-- **Details:** docs/steering/ARCHIV-SONDERFAELLE.md // NEW
+- **Details:** docs/steering/ARCHIV-SONDERFAELLE.md
 
 ---
 
@@ -264,10 +264,10 @@ Lokale Archive bleiben an Ort und Stelle; das Root-Archiv enthält projektüberg
 
 - **Lage:** `Inhalte alte Site/blog/archiv/`
 - **Zielrolle:** SONDERFALL
-- **Warum Sonderfall:** Gehört fachlich zur alten Website, nicht zum Projektarchiv-System; 1 leere Datei (page.md, 0 KB)
+- **Warum Sonderfall:** Gehört fachlich zur alten Website, nicht zum Projektarchiv-System; 1 Datei (page.md, 119 Bytes); de facto leer / nur Platzhalterinhalt laut Sonderfallprüfung
 - **Behandlung:** SONDERFALL_PRUEFEN + LOESCHKANDIDAT_PRUEFEN — leerer Ordner, alter Website-Kontext; außerhalb der Archivstrategie
 - **Root-Archiv-Verweis:** nein
-- **Details:** docs/steering/ARCHIV-SONDERFAELLE.md // NEW
+- **Details:** docs/steering/ARCHIV-SONDERFAELLE.md
 
 ---
 
@@ -312,7 +312,7 @@ Wichtigster Kandidat für AP 7 README-Anwendung — aber zu groß und komplex f�
 | mittel | Veraltete Spec-Versionen (Verwechslungsgefahr) | `docs/spec/archiv/` | AP9-Pilotbewertung erledigt; spätere Einzeldatei-Kuratierung optional |
 | niedrig | Veraltete Datei mit absoluten Pfaden im Root | `archivliste.md` | LOESCHKANDIDAT_PRUEFEN — Albert entscheidet |
 | niedrig | Leere Archive ohne Klärung | `docs/App-Fabrik/_archive/`, `Inhalte alte Site/blog/archiv/` | SONDERFALL_PRUEFEN |
-| niedrig | `Archiv/struktur.md` — Status unbekannt | `Archiv/struktur.md` | UNKLAR_PRUEFEN (AP 8 oder AP 9) |
+| niedrig | `Archiv/struktur.md` — Status unbekannt | `Archiv/struktur.md` | UNKLAR_PRUEFEN — späterer Bedarfs-AP |
 
 ---
 

@@ -4,6 +4,7 @@ Dieses Archiv enthält historische, nicht mehr handlungsleitende Materialien
 zu diesem Subsystem.
 
 Es ist kein operativer Standardkontext für Claude.
+Claude liest Archivmaterial nur auf ausdrückliche Anweisung von Albert oder wenn ein AP explizit Archivarbeit verlangt.
 
 Aktuelle Regeln stehen im aktiven Pfad dieses Subsystems, nicht in diesem Archiv.
 

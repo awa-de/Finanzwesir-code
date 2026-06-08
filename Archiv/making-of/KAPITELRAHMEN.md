@@ -1,4 +1,4 @@
-Stand: 2026-06-08 | Erstellt in: AP 8 | Geändert von: Claude | Aktualisiert in: AP 9
+Stand: 2026-06-08 | Erstellt in: AP 8 | Geändert von: Claude | Aktualisiert in: AP-KORR-9
 
 # Kapitelrahmen — Making-of Finanzwesir 2.0
 
@@ -42,7 +42,7 @@ Leitfragen:
 
 Mögliche Belege (aus legacy-map.md):
 
-- Kein MAKING_OF_BELEG-Archifort für Ursprung/Zielbild in `legacy-map.md` erkennbar — in AP 9 prüfen
+- Kein MAKING_OF_BELEG-Archifort für Ursprung/Zielbild in `legacy-map.md` erkennbar — bei späterem Making-of-/Kuratierungs-AP prüfen
 
 Status: RAHMEN_OHNE_BELEG
 
@@ -77,7 +77,7 @@ Leitfragen:
 Mögliche Belege (aus legacy-map.md):
 
 - `Apps/prokrastinations-preis/Archiv/` — LOKALER_KONTEXT + MAKING_OF_BELEG; Slice-0-Kickoff-Prompt + Implementierungs-Prompt; 2 Dateien, 6 KB
-- `Archiv/Apps/` — Teil von `Archiv/` (Zielrolle: ROOT_KURATION + MAKING_OF_BELEG); Kuratierbarer Wert: unklar; Überlappung mit `Apps/prokrastinations-preis/Archiv/` in AP 9 prüfen
+- `Archiv/Apps/` — Teil von `Archiv/` (Zielrolle: ROOT_KURATION + MAKING_OF_BELEG); Kuratierbarer Wert: unklar; Überlappung mit `Apps/prokrastinations-preis/Archiv/` bei späterem Making-of-/Kuratierungs-AP prüfen
 
 Status: Rahmen
 
@@ -151,7 +151,7 @@ Mögliche Belege (aus legacy-map.md):
 - `Archiv/Refactoring der Dateistruktur/Aufraeum-Archiv.md` — ROOT_KURATION + MAKING_OF_BELEG; Aufräum-Analyse aus der Refactoring-Phase; 18 KB
 - `docs/steering/archiv/AUFRAEUM-ANALYSE-ARCHIV.md` — LOKALER_KONTEXT + MAKING_OF_BELEG; 8 KB
 - `docs/steering/archiv/KNOWN-ISSUES-ARCHIV.md` — LOKALER_KONTEXT + MAKING_OF_BELEG; 8 KB
-- `docs/steering/archiv/KNOWN-ISSUES-SCHLACHTPLAN-ARCHIV.md` — LOKALER_KONTEXT + MAKING_OF_BELEG; 79 KB; Status unklar (ERSETZT oder POSTMORTEM — in AP 9 klären)
+- `docs/steering/archiv/KNOWN-ISSUES-SCHLACHTPLAN-ARCHIV.md` — LOKALER_KONTEXT + MAKING_OF_BELEG; 79 KB; Status: POSTMORTEM (AP-KORR-5); historisches Prozessartefakt, nicht handlungsleitend
 
 Status: Rahmen
 
@@ -163,15 +163,15 @@ Kapitel ohne erkennbare Belegquelle in `legacy-map.md`:
 
 | Kapitel | Lückentyp | Folgepunkt |
 |---|---|---|
-| 01 — Ursprung und Zielbild | Kein MAKING_OF_BELEG-Archifort in `legacy-map.md` erkennbar | AP 9: Prüfen ob `docs/steering/archiv/` Belege zum Ursprung enthält |
+| 01 — Ursprung und Zielbild | Kein MAKING_OF_BELEG-Archifort in `legacy-map.md` erkennbar | Späterer Making-of-/Kuratierungs-AP: Prüfen ob `docs/steering/archiv/` Belege zum Ursprung enthält |
 
 ## Offene Fragen
 
 - Welche Kapitel tragen wirklich, wenn die Website fertig ist?
 - Welche Belege sind repräsentativ für das spätere Erzählen?
 - Welche Rohmaterialien bleiben dauerhaft nur in `local/`?
-- Welche Pilotinsel soll zuerst kontrolliert bearbeitet werden?
-- `Archiv/Apps/`: Überlappung mit `Apps/prokrastinations-preis/Archiv/` in AP 9 klären
+- Welche weiteren Pilotinseln sollen später vertieft werden?
+- `Archiv/Apps/`: Überlappung mit `Apps/prokrastinations-preis/Archiv/` bei späterem Kuratierungs-AP klären
 
 ## Nicht jetzt tun
 

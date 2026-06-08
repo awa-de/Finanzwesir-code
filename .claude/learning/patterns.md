@@ -1,5 +1,5 @@
 # Patterns — Finanzwesir 2.0
-Stand: 2026-06-05 | Muster mit ≥2 Belegen (Normal) oder ≥1 Beleg (High-Impact) werden Kandidaten. Nur Alberts OK → Promotion.
+Stand: 2026-06-08 | Muster mit ≥2 Belegen (Normal) oder ≥1 Beleg (High-Impact) werden Kandidaten. Nur Alberts OK → Promotion.
 
 ---
 
@@ -9,11 +9,11 @@ Stand: 2026-06-05 | Muster mit ≥2 Belegen (Normal) oder ≥1 Beleg (High-Impac
 - feedback_sprache_kein_denglisch.md → promoted
 - feedback_surgical_check.md → promoted (Distill 2026-05-09: Kandidat B bestätigt, Beleg bereits dokumentiert)
 - feedback_ankuendigung_ohne_ausfuehrung.md → promoted 2026-05-09
-- feedback_strukturannahmen.md → promoted 2026-05-09 | Reoccurrence 2026-06-03 (NAVIGATION.md-Text-Referenz) | Reoccurrence 2026-06-04 (CSVParser-Pfad: fw-chart-engine/*.js statt data/) | Reoccurrence 2026-06-05 (date-Prüfung in hasRequiredColumns als toter Code angenommen)
+- feedback_strukturannahmen.md → promoted 2026-05-09 | Reoccurrence 2026-06-03 (NAVIGATION.md-Text-Referenz) | Reoccurrence 2026-06-04 (CSVParser-Pfad: fw-chart-engine/*.js statt data/) | Reoccurrence 2026-06-05 (date-Prüfung in hasRequiredColumns als toter Code angenommen) | Reoccurrence 2026-06-06 (ST-19: Write vor Zielort-Klärung gestartet) | Reoccurrence 2026-06-08 (AP-KORR-7: legacy-map Datei als leer angenommen — 349 Bytes mit Inhalt)
 - project_audit_trail.md → promoted 2026-05-09
 - feedback_review_als_datei.md → promoted 2026-05-09
 - feedback_nummerierung.md → promoted 2026-05-09
-- feedback_verifikation_vor_output.md → promoted 2026-05-10 (Distill 2: Zahlen/Referenzen vor Output gegen Quelle prüfen — 2 Belege AF-07 + APP-01-spec)
+- feedback_verifikation_vor_output.md → promoted 2026-05-10 (Distill 2: Zahlen/Referenzen vor Output gegen Quelle prüfen — 2 Belege AF-07 + APP-01-spec) | Reoccurrence 2026-06-08 (AP-KORR-6: Gate-Output nannte ARCHIV-STRATEGIE.md statt ARCHIV-INVENTAR.md → Edit fehlgeschlagen)
 - feedback_pilot_status_sprache.md → promoted 2026-05-10 (Distill 2: PREF AF-08 — „Arbeitsfassung" statt „freigegeben" bei Pilot-Artefakten)
 - feedback_verbote_explizit_formulieren.md → promoted 2026-05-10 (Distill 2: PREF AF-08 — Verbote als Verbote formulieren)
 - feedback_glob_vs_read.md → promoted (Bekannte Pfade direkt lesen, nie Glob) | Reoccurrence 2026-05-10 (APP-01-spec-gate: Glob bei bekanntem Pfad SECURITY-BASELINE.md → Albert korrigierte)
@@ -47,6 +47,8 @@ Stand: 2026-06-05 | Muster mit ≥2 Belegen (Normal) oder ≥1 Beleg (High-Impac
 - [H] CSVParser-console.error-Verwirrung — TABU-Komponente loggt eigene console.error für Error-(b)-Szenarien; Albert hielt sie für Bugs; erwartetes Fangverhalten nicht erklärt (APP-01-Slice-1, 2026-06-05) — 1 Beleg, Normal
 - [I] Ordnerstruktur schrittweise erweitert — msci/ → msci-world/ → index/msci-world/ zweimal erweitert; Endstruktur im Dialog statt vorab geklärt (data-raw-Infrastruktur, 2026-06-04) — 1 Beleg, Normal
 - [J] Contract-Vorschau falscher Standardwert — Vorschau zeigte 1234,56 ohne EUR-Suffix; erst nach CSVParser-Analyse korrigiert (AP-DATA-01, 2026-06-04) — 1 Beleg, Normal
+- [K] Externer Pfad ungeprüft übernommen — Python312\python.exe aus ChatGPT-Quelle direkt verwendet → mehrfache abgelehnte Tool-Calls; Albert klärte: python ist im PATH. Externe Umgebungsangaben vor Ausführung prüfen. (ST-19-Fix, 2026-06-06) — 1 Beleg, Normal
+- [L] Riskante Operation ohne Vorbriefing gestartet — Albert stoppte vor NAVIGATION.md-Edit: „Erkläre erst in eigenen Worten." Nach Erklärung Freigabe. Bei signifikanten Edits erst Absicht verbalisieren, dann ausführen. Verwandt: [[feedback_gate_scope_dialog]]. (Archiv/local/-Verschiebung, 2026-06-08) — 1 Beleg, Normal
 
 ---
 
