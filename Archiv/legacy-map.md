@@ -1,4 +1,4 @@
-Stand: 2026-06-08 | Quelle: docs/steering/ARCHIV-INVENTAR.md | Geändert von: Claude | Session: AP-KORR-5
+Stand: 2026-06-08 | Quelle: docs/steering/ARCHIV-INVENTAR.md | Geändert von: Claude | Session: AP-KORR-6
 
 # Föderierter Archivkatalog / Legacy Map
 
@@ -73,7 +73,7 @@ Vollständige Regeln: `docs/steering/ARCHIV-STRATEGIE.md`
 |---|---|---|---|---|---|---|---|
 | `Archiv/` | ROOT_ARCHIV | Gesamtprojekt | 14 Themeninseln; Chart-Engine-Historie, Peer-Reviews, Design, KI-Workflow-Geschichte | hoch | niedrig | ROOT_KURATION + MAKING_OF_BELEG | LOCAL_PRUEFEN |
 | `Archiv/local/` | LOCAL_QUARANTAENE | Root-Archiv | Gitignored Quarantäne; 203 Dateien, ≈31 MB; Binärdateien, LLM-Dumps, Rohmaterial | unklar | niedrig | LOCAL_QUARANTAENE | BELASSEN_UND_VERTRAG_ANWENDEN |
-| `Archiv/optimierung-projektsteuerung/Optimierung Projektsteuerung/Archiv/` | LOKALES_ARCHIV | Root-Archiv (verschachtelt) | 2 Dateien: LLM-Synthese-Exports (CLAUDE-pre-synthese + NAVIGATION-pre-synthese, 2026-05-03) | mittel | niedrig | LOCAL_QUARANTAENE + ZU_PRUEFEN | LOCAL_PRUEFEN |
+| `Archiv/optimierung-projektsteuerung/Optimierung Projektsteuerung/Archiv/` | LOKALES_ARCHIV | Root-Archiv (verschachtelt) | 2 Dateien: LLM-Synthese-Exports (CLAUDE-pre-synthese + NAVIGATION-pre-synthese, 2026-05-03) | mittel | niedrig | LOCAL_QUARANTAENE + ZU_PRUEFEN | ERLEDIGT_AP_KORR_6 |
 | `Apps/prokrastinations-preis/Archiv/` | LOKALES_ARCHIV | App prokrastinations-preis | 2 Markdown-Dateien, 6 KB; Slice-0-Kickoff-Prompt + Implementierungs-Prompt | mittel | niedrig | LOKALER_KONTEXT + MAKING_OF_BELEG | SPÄTERE_KURATIERUNG_OPTIONAL |
 | `docs/App-Fabrik/_archive/` | LOKALES_ARCHIV | App-Fabrik | 1 Datei (README.md, 0 KB, leer); Archiv de facto leer | niedrig | niedrig | ZU_PRUEFEN | SONDERFALL_PRUEFEN |
 | `docs/design-system/archiv/` | LOKALES_ARCHIV | Design-System | 1 Datei (boxen-stress-test-referenz.html, 9 KB); Referenz-Stresstest aus Design-System-Entwicklung | mittel | niedrig | LOKALER_KONTEXT + MAKING_OF_BELEG | BELASSEN_UND_VERTRAG_ANWENDEN |
@@ -215,9 +215,9 @@ Lokale Archive bleiben an Ort und Stelle; das Root-Archiv enthält projektüberg
 - **Subsystem:** Root-Archiv (verschachtelt in Themeninsel)
 - **Zielrolle:** LOCAL_QUARANTAENE + ZU_PRUEFEN
 - **Dateien:** 2 Dateien — CLAUDE-pre-synthese-2026-05-03.md (20 KB) + NAVIGATION-pre-synthese-2026-05-03.md (7 KB)
-- **LLM-Dump-Verdacht:** ja — beide Dateien sind LLM-Synthese-Exports
+- **LLM-Dump-Verdacht:** erledigt — nach `Archiv/local/optimierung-projektsteuerung/` verschoben (AP-KORR-6, 2026-06-08)
 - **Kontextnähe:** unklar — Verschachtelung tief; fachlicher Kontext nicht sofort erkennbar
-- **Nächste Aktion:** LOCAL_PRUEFEN — Inhalte nach `Archiv/local/` verschieben (gesonderter Schritt — AP-KORR-6)
+- **Nächste Aktion:** ERLEDIGT_AP_KORR_6 — Quellordner danach leer; Dateisystem-Leerordner kann verschwinden.
 
 ---
 
@@ -305,7 +305,7 @@ Wichtigster Kandidat für AP 7 README-Anwendung — aber zu groß und komplex f�
 |---|---|---|---|
 | hoch | Drift-Risiko durch veraltete Pläne + Prompts | `docs/steering/archiv/` | README-Kontextschutz erledigt (AP7); spätere Inhaltskuratierung optional / bei Bedarf |
 | niedrig | 79-KB-Einzelartefakt — POSTMORTEM gesetzt | `docs/steering/archiv/KNOWN-ISSUES-SCHLACHTPLAN-ARCHIV.md` | ERLEDIGT_AP_KORR_5 |
-| mittel | LLM-Dumps im Root-Archiv außerhalb local/ | `Archiv/optimierung-projektsteuerung/.../Archiv/` | LOCAL_PRUEFEN — gehört zu AP-KORR-6 |
+| mittel | LLM-Dumps im Root-Archiv außerhalb local/ | `Archiv/optimierung-projektsteuerung/.../Archiv/` | ERLEDIGT_AP_KORR_6 — verschoben nach `Archiv/local/optimierung-projektsteuerung/` |
 | mittel | Veraltete Spec-Versionen (Verwechslungsgefahr) | `docs/spec/archiv/` | AP9-Pilotbewertung erledigt; spätere Einzeldatei-Kuratierung optional |
 | niedrig | Veraltete Datei mit absoluten Pfaden im Root | `archivliste.md` | LOESCHKANDIDAT_PRUEFEN — Albert entscheidet |
 | niedrig | Leere Archive ohne Klärung | `docs/App-Fabrik/_archive/`, `Inhalte alte Site/blog/archiv/` | SONDERFALL_PRUEFEN |
@@ -329,11 +329,11 @@ Diese Punkte sind keine Pflicht — nur bei konkretem Bedarf aufgreifen:
 - `docs/steering/archiv/KNOWN-ISSUES-SCHLACHTPLAN-ARCHIV.md` Status POSTMORTEM gesetzt ✅ (AP-KORR-5)
 - `docs/spec/archiv/` Einzeldateien mit ERSETZT/Nachfolger prüfen
 - `Apps/prokrastinations-preis/Archiv/` als zweiten Pilot prüfen
-- LLM-Dumps in `Archiv/optimierung-projektsteuerung/.../Archiv/` nach `Archiv/local/` verschieben (AP-KORR-6)
+- LLM-Dumps in `Archiv/optimierung-projektsteuerung/.../Archiv/` nach `Archiv/local/` verschieben ✅ ERLEDIGT_AP_KORR_6
 - `docs/App-Fabrik/_archive/` und `archivliste.md` klären
 - Making-of später erzählen, jetzt nicht
 
 ### Offene Sonderprüfungen nach Setup-Serie
 
-- `Archiv/optimierung-projektsteuerung/.../Archiv/` — LOCAL_PRUEFEN (LLM-Dumps nach `Archiv/local/` — AP-KORR-6)
+- `Archiv/optimierung-projektsteuerung/.../Archiv/` — ERLEDIGT_AP_KORR_6 (2026-06-08)
 - `docs/App-Fabrik/_archive/` — SONDERFALL_PRUEFEN (leer oder Platzhalter?)

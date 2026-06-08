@@ -78,5 +78,8 @@ FinanzwesirData.js, CSVParser.js, FwDateUtils.js — diese Session nicht berühr
 - [WIN] README (AP 7) war vollständig — kein Änderungsbedarf in AP 9; Vorarbeit hat getragen
 - [WIN] Pilot-Lernpunkt: legacy-map arbeitet auf Zusammenfassungsebene (v3-Datei in docs/spec/archiv/ fehlte in Kurzbeschreibung; kein Problem — Map ist kein 1:1-Dateiverzeichnis)
 
+## 2026-06-08 – AP-KORR-6 | LLM-Dumps nach Archiv/local/ verschieben
+- [FRICTION] Gate-Output enthielt „ARCHIV-STRATEGIE.md" als Quellenangabe in der Stand-Zeile von legacy-map.md; tatsächlich steht dort „ARCHIV-INVENTAR.md" → erster Edit-Versuch fehlgeschlagen, nach erneutem Read korrekt gesetzt.
+
 ## 2026-06-08 – AP-KORR-5 | KNOWN-ISSUES-Schlachtplan als POSTMORTEM markieren
 - [OK] Keine Vorkommnisse

@@ -8,7 +8,7 @@ Blocker: keine
 
 # PROJECT STATUS — Finanzwesir 2.0
 
-Stand: 2026-06-08 | Session: AP-KORR-5 | Geändert von: Claude
+Stand: 2026-06-08 | Session: AP-KORR-6 | Geändert von: Claude
 
 **Zweck:** Schneller Wiedereinstieg nach Pausen.
 **Zielgruppe:** Albert und Claude.
@@ -151,6 +151,9 @@ Vollständig im DECISION-LOG dokumentiert (`docs/steering/DECISION-LOG.md`):
 ---
 
 ## 8. Letzte Session
+
+2026-06-08 — LLM-Dumps in local-Quarantäne verschoben (AP-KORR-6).
+CLAUDE-pre-synthese + NAVIGATION-pre-synthese (2026-05-03) aus Archiv/optimierung-projektsteuerung/.../Archiv/ nach Archiv/local/optimierung-projektsteuerung/ verschoben. Quellordner danach leer. legacy-map.md: 6 Stellen auf ERLEDIGT_AP_KORR_6 gesetzt. Korrekturserie AP-KORR-1 bis AP-KORR-6 abgeschlossen.
 
 2026-06-08 — AP-KORR-5: KNOWN-ISSUES-SCHLACHTPLAN-ARCHIV.md als POSTMORTEM markiert.
 Schutzheader eingefügt (YAML-Frontmatter + Archivhinweis, aktive Steuerquellen benannt). `legacy-map.md`: Status UNKLAR_PRUEFEN → POSTMORTEM / ERLEDIGT_AP_KORR_5 in Haupttabelle, Archivdateien-Tabelle, Offene Risiken und Folge-APs. Historischer Inhalt unverändert.
