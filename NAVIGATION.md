@@ -1,5 +1,5 @@
 # NAVIGATION.md – Finanzwesir 2.0
-Stand: 2026-06-08 | Session: AP-5 Archiv-Inventar | Geändert von: Claude
+Stand: 2026-06-08 | Session: AP-6-legacy-map | Geändert von: Claude
 
 Für Claude: **Routing-Dokument.** Wird beim Session-Start (Schritt 2) gelesen.
 Gibt Pfade und Lese-Reihenfolgen vor — KEINE Verhaltensregeln (die stehen in CLAUDE.md).
@@ -259,7 +259,8 @@ Manuelle Aktivierung: `/spec-rewrite-guard docs/spec/[Dateiname]`
 |---|---|---|
 | Subagent-Policy Praxisnotiz | `docs/steering/SUBAGENT-POLICY-PRAXIS.md` | Warum und wie Haiku-Scouts zentral genutzt werden |
 | Archivstrategie | `docs/steering/ARCHIV-STRATEGIE.md` | Föderiertes Archivmodell, Archivvertrag, Begriffsklärung, Folge-APs |
-| Archiv-Inventar | `docs/steering/ARCHIV-INVENTAR.md` | Bestandsaufnahme aller Archivorte — Befund für ST-25 (legacy-map) |
+| Archiv-Inventar | `docs/steering/ARCHIV-INVENTAR.md` | Bestandsaufnahme aller Archivorte — Quelle für legacy-map.md |
+| Föderierter Archivkatalog | `Archiv/legacy-map.md` | Zentrale Steuerkarte: 15 Archivorte, Zielrollen, Drift-Risiken, Pilotkandidaten |
 
 ## Archivstrategie / Kontext-Hygiene
 
@@ -274,6 +275,7 @@ Details und Archivvertrag: `docs/steering/ARCHIV-STRATEGIE.md`
 | Was | Pfad |
 |---|---|
 | Kuratierte Archivartefakte (versioniert) | `Archiv/` |
+| Föderierter Archivkatalog (Steuerkarte) | `Archiv/legacy-map.md` |
 | Lokale Rohmaterialien, Binärdateien, LLM-Dumps (gitignored) | `Archiv/local/` |
 | Historische Chart-Engine-Materialien | `Archiv/Chart-Engine-Historie/` |
 | Historische Design-Materialien | `Archiv/Design/` |
