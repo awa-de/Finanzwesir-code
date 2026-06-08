@@ -28,5 +28,11 @@ FinanzwesirData.js, CSVParser.js, FwDateUtils.js — diese Session nicht berühr
 
 ## 2026-06-08 – Archiv/local/ Verschiebung + Doublettenprüfung
 - [FRICTION] AP1: Albert stoppte vor NAVIGATION.md-Edit mit „Erkläre erst in eigenen Worten" — Erklärung geliefert, dann Freigabe
+
+## 2026-06-08 – SESSION START | Fokus: APP-01 — prokrastinations-preis
+FinanzwesirData.js, CSVParser.js, FwDateUtils.js — diese Session nicht berühren. ✓
 - [PREF] „Konzentriere Dich auf Archiv/ im Root" zweimal explizit klargestellt → Fokuseinschränkung war nicht implizit klar
 - [WIN] Hash-Analyse nach Verschiebung: 0 Cross-Dubletten — Move-Item hat sauber verschoben, keine Kopier-Artefakte; einzige Dublette war Windows-Konfliktkopie (1), sofort gelöscht
+
+## 2026-06-08 – AP-3 | Föderiertes Archivmodell
+- [WIN] docs/steering/ARCHIV-STRATEGIE.md neu angelegt (SSoT für Archivmodell + Archivvertrag). NAVIGATION.md § Archivstrategie auf 4-Zeilen-Pointer reduziert, Steuerungsdokument-Tabelle ergänzt.

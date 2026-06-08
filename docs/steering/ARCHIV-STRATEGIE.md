@@ -1,0 +1,71 @@
+Stand: 2026-06-08 | Session: AP-3 Föderiertes Archivmodell | Geändert von: Claude
+
+# Archivstrategie — Finanzwesir 2.0
+
+## Föderiertes Archivmodell
+
+Das Projekt verwendet ein föderiertes Archivmodell.
+
+Aktive Dateien zeigen, was heute gilt.
+
+Lokale Archive dürfen in der Nähe ihres Subsystems bleiben, wenn sie lokalen Kontext erklären,
+zum Beispiel App-, Spec-, Design- oder Steering-Historie.
+
+Das Root-Archiv `/Archiv/` ist kein Sammelbecken für alle alten Dateien. Es dient
+projektübergreifender Kuratierung, Making-of-Material, Querschnittsentscheidungen und
+zentralen historischen Wendepunkten.
+
+Die bestehende Archivstreuung ist historischer Befund, nicht Zielarchitektur. Sie wird nicht
+blind bereinigt, sondern über einen gemeinsamen Archivvertrag kontrolliert. Physische
+Konsolidierung erfolgt nur bei projektübergreifendem Wert oder nach gesondertem AP.
+
+## Archivvertrag
+
+Alle Archive — Root und lokal — folgen diesen Regeln:
+
+1. Archivdateien sind nie operativer Standardkontext für Claude.
+2. Aktuelle Regeln stehen im aktiven Pfad, nicht im Archiv.
+3. Historische Entscheidungen tragen einen Status: HIST, ERSETZT, POSTMORTEM oder RAW.
+4. ERSETZT verweist auf den aktiven Nachfolger.
+5. Rohmaterial, Binärdateien, vollständige LLM-Dumps und unkuratierte Exporte gehören nach `local/`.
+6. `local/` bleibt gitignored — wo es existiert. Neu anlegen nur auf gesonderten AP-Auftrag.
+7. Root-Archiv nimmt nur projektübergreifendes Material auf.
+8. Lokale Archive bleiben lokal, solange sie lokalen Kontext erklären.
+9. Making-of-Material darf im Root-Archiv kuratiert werden, auch wenn die Belege lokal verbleiben.
+10. Keine Massenkonsolidierung ohne gesonderten Plan.
+
+## Begriffsklärung
+
+**Aktive Dateien** — Was heute gilt. Was Claude befolgen soll.
+
+**Lokale Archive** — Nahe am Subsystem (z.B. `Apps/prokrastinations-preis/Archiv/`,
+`docs/spec/archiv/`). Erklären lokale Entstehung, nicht aktiven Stand.
+
+**Root-Archiv** (`/Archiv/`) — Projektübergreifende Reise: Wendepunkte, Peer-Reviews,
+Querschnittsentscheidungen, KI-Workflow-Geschichte.
+
+**`local/`** — Quarantäne für Rohmaterial: vollständige Chat-Exporte, LLM-Dumps,
+Binärdateien, PDFs, ZIPs, Excel-, PowerPoint-Dateien. Bleibt gitignored.
+
+## Making-of-Zielbild
+
+Das Archiv ist das Reservoir für ein späteres Making-of der neuen Finanzwesir-Website.
+Ziel: mit KI durch die Entstehungsgeschichte reisen (Was? Warum? Was hat funktioniert?
+Was nicht? Welche Wendepunkte? Welche Rolle spielten Claude, ChatGPT, Gemini, Perplexity?).
+
+Jetzt geht es um Sichern und Klassifizieren, nicht um Erzählen.
+Die narrative Aufbereitung erfolgt wenn die Website steht.
+
+## Infrastruktur-Stand (2026-06-08)
+
+- `.gitignore`-Umstellung abgeschlossen: `Archiv/` versioniert, `Archiv/local/` gitignored
+- Initiale Quarantäne (`Archiv/local/`) abgeschlossen
+- Föderiertes Modell beschlossen (AP-3)
+
+## Erwartete Folge-APs
+
+AP 4 — Archivvertrag konkretisieren (lokale README-Schablone)
+AP 5 — Alle Archiv-Vorkommen inventarisieren (Befund zuerst)
+AP 6 — Föderierter Archivkatalog aus Inventar erstellen (nach AP 5)
+AP 7 — Root-Making-of-Rahmen vorbereiten
+AP 8 — Pilotarchiv auswählen und kontrolliert behandeln

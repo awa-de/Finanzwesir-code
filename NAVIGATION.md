@@ -1,5 +1,5 @@
 # NAVIGATION.md – Finanzwesir 2.0
-Stand: 2026-06-08 | Session: Archiv-Infrastruktur-Setup | Geändert von: Claude
+Stand: 2026-06-08 | Session: AP-3 Föderiertes Archivmodell | Geändert von: Claude
 
 Für Claude: **Routing-Dokument.** Wird beim Session-Start (Schritt 2) gelesen.
 Gibt Pfade und Lese-Reihenfolgen vor — KEINE Verhaltensregeln (die stehen in CLAUDE.md).
@@ -258,18 +258,15 @@ Manuelle Aktivierung: `/spec-rewrite-guard docs/spec/[Dateiname]`
 | Dokument | Pfad | Beschreibung |
 |---|---|---|
 | Subagent-Policy Praxisnotiz | `docs/steering/SUBAGENT-POLICY-PRAXIS.md` | Warum und wie Haiku-Scouts zentral genutzt werden |
+| Archivstrategie | `docs/steering/ARCHIV-STRATEGIE.md` | Föderiertes Archivmodell, Archivvertrag, Begriffsklärung, Folge-APs |
 
 ## Archivstrategie / Kontext-Hygiene
 
-Aktive Dateien zeigen, was heute gilt.
+Föderiertes Archivmodell: Aktive Dateien zeigen was gilt, lokale Archive erklären
+lokale Entstehung, Root-Archiv erzählt die projektweite Reise, `local/` schützt
+Git und Claude vor Rohmaterial.
 
-Das Archiv enthält Material, das lehrreich war, aber nicht mehr handlungsleitend ist.
-
-Git zeigt, wie sich der Projektstand verändert hat.
-
-Historische Analysen, alte Peer-Reviews, verworfene Optionsmatrizen und überholte Begründungen dürfen den aktiven Arbeitskontext nicht überlagern.
-
-Diese Grundsatzentscheidung ist die Basis für spätere Archiv-Arbeitspakete. `.gitignore`-Umstellung und initiale Quarantäne (`Archiv/local/`) sind abgeschlossen (2026-06-08). Konkrete Archivstruktur, Skill-Anpassungen und weitere Einzelarchivierungen folgen separat.
+Details und Archivvertrag: `docs/steering/ARCHIV-STRATEGIE.md`
 
 ## Archiv
 
