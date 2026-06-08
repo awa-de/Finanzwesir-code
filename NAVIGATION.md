@@ -268,6 +268,8 @@ Föderiertes Archivmodell: Aktive Dateien zeigen was gilt, lokale Archive erklä
 lokale Entstehung, Root-Archiv erzählt die projektweite Reise, `local/` schützt
 Git und Claude vor Rohmaterial.
 
+**Nicht-Routing-Regel:** Claude liest Archivmaterial nur auf ausdrückliche Anweisung von Albert oder wenn ein AP explizit Archivarbeit verlangt.
+
 Details und Archivvertrag: `docs/steering/ARCHIV-STRATEGIE.md`
 
 ## Archiv
@@ -275,6 +277,7 @@ Details und Archivvertrag: `docs/steering/ARCHIV-STRATEGIE.md`
 | Was | Pfad |
 |---|---|
 | Kuratierte Archivartefakte (versioniert) | `Archiv/` |
+| Kontextschutz / Nicht-Routing-Stoppschild am Root-Archiv | `Archiv/README.md` |
 | Föderierter Archivkatalog (Steuerkarte) | `Archiv/legacy-map.md` |
 | Lokale Rohmaterialien, Binärdateien, LLM-Dumps (gitignored) | `Archiv/local/` |
 | Historische Chart-Engine-Materialien | `Archiv/Chart-Engine-Historie/` |

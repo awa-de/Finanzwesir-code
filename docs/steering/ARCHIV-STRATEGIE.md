@@ -1,4 +1,4 @@
-Stand: 2026-06-08 | Session: AP-4 Archivvertrag | Geändert von: Claude
+Stand: 2026-06-08 | Session: AP-KORR-4 | Geändert von: Claude
 
 # Archivstrategie — Finanzwesir 2.0
 
@@ -24,6 +24,7 @@ Konsolidierung erfolgt nur bei projektübergreifendem Wert oder nach gesondertem
 Alle Archive — Root und lokal — folgen diesen Regeln:
 
 1. Archivdateien sind nie operativer Standardkontext für Claude.
+   Claude liest Archivmaterial nur auf ausdrückliche Anweisung von Albert oder wenn ein AP explizit Archivarbeit verlangt.
 2. Aktuelle Regeln stehen im aktiven Pfad, nicht im Archiv.
 3. Historische Entscheidungen tragen einen Status: HIST, ERSETZT, POSTMORTEM oder RAW.
 4. ERSETZT verweist auf den aktiven Nachfolger.
@@ -84,6 +85,7 @@ z.B. `App-Fabrik`, `spec`, `design-system`, `steering`.
 Dieses Archiv enthält historische, nicht mehr handlungsleitende Materialien zu diesem Subsystem.
 
 Es ist kein operativer Standardkontext für Claude.
+Claude liest Archivmaterial nur auf ausdrückliche Anweisung von Albert oder wenn ein AP explizit Archivarbeit verlangt.
 
 Aktuelle Regeln stehen im aktiven Pfad dieses Subsystems, nicht in diesem Archiv.
 
@@ -145,11 +147,28 @@ Die narrative Aufbereitung erfolgt wenn die Website steht.
 - Initiale Quarantäne (`Archiv/local/`) abgeschlossen
 - Föderiertes Modell beschlossen (AP-3)
 
-## Erwartete Folge-APs
+## Setup-Serie AP 3–9 — Abschlussstand
 
-AP 4 — Archivvertrag konkretisiert, README-Schablone definiert ✅
-AP 5 — Alle Archiv-Vorkommen inventarisieren (Befund zuerst, Struktur danach)
-AP 6 — Föderierter Archivkatalog / legacy-map.md aus Inventar erstellen (nach AP 5)
-AP 7 — README-Schablone gezielt anwenden (lokale Archive)
-AP 8 — Root-Making-of-Rahmen vorbereiten
-AP 9 — Pilotarchiv auswählen und kontrolliert behandeln
+Abgeschlossen am 2026-06-08:
+
+- AP 3 — Föderiertes Archivmodell beschlossen
+- AP 4 — Archivvertrag konkretisiert
+- AP 5 — Archiv-Vorkommen inventarisiert
+- AP 6 — `Archiv/legacy-map.md` / föderierter Archivkatalog erstellt
+- AP 7 — lokale Archiv-READMEs gezielt angewandt
+- AP 8 — Root-Making-of-Rahmen vorbereitet
+- AP 9 — Pilotarchiv `docs/spec/archiv/` kontrolliert behandelt
+
+Ergebnis:
+Die Archiv-Grundarchitektur ist arbeitsfähig.
+
+Nicht abgeschlossen und nur bei Bedarf als eigene APs:
+- spätere Kuratierung einzelner Archivinseln
+- spätere Statusvergabe an einzelne Archivdateien
+- spätere `local/`-Bereinigung
+- spätere Sonderfallentscheidung, zum Beispiel `archivliste.md`
+- spätere Making-of-Erzählung
+- weitere Pilotdurchläufe
+
+Diese Folgearbeiten sind keine automatische AP10-Kette.
+Sie werden nur ausgeführt, wenn Albert sie ausdrücklich beauftragt oder ein späterer AP sie klar verlangt.

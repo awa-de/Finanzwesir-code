@@ -1,4 +1,4 @@
-Stand: 2026-06-08 | Quelle: docs/steering/ARCHIV-INVENTAR.md | Geändert von: Claude | Session: AP-9-pilotarchiv
+Stand: 2026-06-08 | Quelle: docs/steering/ARCHIV-INVENTAR.md | Geändert von: Claude | Session: AP-KORR-3
 
 # Föderierter Archivkatalog / Legacy Map
 
@@ -12,6 +12,8 @@ Lokale Archive bleiben dort, wo sie lokalen Kontext erklären.
 
 Das Root-Archiv `Archiv/` dient projektübergreifender Kuratierung, Making-of-Material,
 Querschnittsentscheidungen und zentralen historischen Wendepunkten.
+
+Setup-Serie AP3–AP9 ist abgeschlossen. Weitere Kuratierung erfolgt nur auf gesondertem AP.
 
 ---
 
@@ -46,7 +48,7 @@ Vollständige Regeln: `docs/steering/ARCHIV-STRATEGIE.md`
 | Quelle | `docs/steering/ARCHIV-INVENTAR.md` |
 | Stand | 2026-06-08 |
 | Status | Befundkarte, keine Zielstruktur |
-| Nächste geplante Überarbeitung | nach AP 9 ✅ abgeschlossen |
+| Nächste geplante Überarbeitung | AP-KORR-3 Synchronisierung ✅ abgeschlossen |
 
 ---
 
@@ -72,11 +74,11 @@ Vollständige Regeln: `docs/steering/ARCHIV-STRATEGIE.md`
 | `Archiv/` | ROOT_ARCHIV | Gesamtprojekt | 14 Themeninseln; Chart-Engine-Historie, Peer-Reviews, Design, KI-Workflow-Geschichte | hoch | niedrig | ROOT_KURATION + MAKING_OF_BELEG | LOCAL_PRUEFEN |
 | `Archiv/local/` | LOCAL_QUARANTAENE | Root-Archiv | Gitignored Quarantäne; 203 Dateien, ≈31 MB; Binärdateien, LLM-Dumps, Rohmaterial | unklar | niedrig | LOCAL_QUARANTAENE | BELASSEN_UND_VERTRAG_ANWENDEN |
 | `Archiv/optimierung-projektsteuerung/Optimierung Projektsteuerung/Archiv/` | LOKALES_ARCHIV | Root-Archiv (verschachtelt) | 2 Dateien: LLM-Synthese-Exports (CLAUDE-pre-synthese + NAVIGATION-pre-synthese, 2026-05-03) | mittel | niedrig | LOCAL_QUARANTAENE + ZU_PRUEFEN | LOCAL_PRUEFEN |
-| `Apps/prokrastinations-preis/Archiv/` | LOKALES_ARCHIV | App prokrastinations-preis | 2 Markdown-Dateien, 6 KB; Slice-0-Kickoff-Prompt + Implementierungs-Prompt | mittel | niedrig | LOKALER_KONTEXT + MAKING_OF_BELEG | README_ANWENDEN + ROOT_REFERENZ_PRUEFEN |
+| `Apps/prokrastinations-preis/Archiv/` | LOKALES_ARCHIV | App prokrastinations-preis | 2 Markdown-Dateien, 6 KB; Slice-0-Kickoff-Prompt + Implementierungs-Prompt | mittel | niedrig | LOKALER_KONTEXT + MAKING_OF_BELEG | SPÄTERE_KURATIERUNG_OPTIONAL |
 | `docs/App-Fabrik/_archive/` | LOKALES_ARCHIV | App-Fabrik | 1 Datei (README.md, 0 KB, leer); Archiv de facto leer | niedrig | niedrig | ZU_PRUEFEN | SONDERFALL_PRUEFEN |
-| `docs/design-system/archiv/` | LOKALES_ARCHIV | Design-System | 1 Datei (boxen-stress-test-referenz.html, 9 KB); Referenz-Stresstest aus Design-System-Entwicklung | mittel | niedrig | LOKALER_KONTEXT + MAKING_OF_BELEG | README_ANWENDEN + ROOT_REFERENZ_PRUEFEN |
+| `docs/design-system/archiv/` | LOKALES_ARCHIV | Design-System | 1 Datei (boxen-stress-test-referenz.html, 9 KB); Referenz-Stresstest aus Design-System-Entwicklung | mittel | niedrig | LOKALER_KONTEXT + MAKING_OF_BELEG | BELASSEN_UND_VERTRAG_ANWENDEN |
 | `docs/spec/archiv/` | LOKALES_ARCHIV | Spec / Chart-Engine | 4 Markdown-Dateien, 47 KB; Spec-Versionen v1/v12/v13 für HTML-Karten und Ticks/Labels | hoch | mittel | LOKALER_KONTEXT + MAKING_OF_BELEG | BELASSEN_UND_VERTRAG_ANWENDEN |
-| `docs/steering/archiv/` | LOKALES_ARCHIV | Steering / Projektsteuerung | 15 Dateien, 222 KB; AP-Übergaben, Implementierungspläne, Handoff-Prompts, Known-Issues-Geschichte | hoch | hoch | LOKALER_KONTEXT + MAKING_OF_BELEG | README_ANWENDEN |
+| `docs/steering/archiv/` | LOKALES_ARCHIV | Steering / Projektsteuerung | 15 Dateien, 222 KB; AP-Übergaben, Implementierungspläne, Handoff-Prompts, Known-Issues-Geschichte | hoch | hoch | LOKALER_KONTEXT + MAKING_OF_BELEG | SONDERPRUEFUNG_STEERING_ARCHIV |
 | `Inhalte alte Site/blog/archiv/` | SONDERFALL | Alte Website / Content | 1 leere Datei (page.md, 0 KB); Archiv-Ordner innerhalb alter Websiteinhalte; de facto leer | niedrig | niedrig | SONDERFALL | SONDERFALL_PRUEFEN + LOESCHKANDIDAT_PRUEFEN |
 | `archivliste.md` | SONDERFALL | Projektroot | 1 KB; manuelle Archivorte-Liste mit absoluten Windows-Pfaden; durch ARCHIV-INVENTAR.md ersetzt | niedrig | niedrig | SONDERFALL | LOESCHKANDIDAT_PRUEFEN |
 | `Archiv/Refactoring der Dateistruktur/Aufraeum-Archiv.md` | ARCHIVDATEI | Root-Archiv / Refactoring | 18 KB; Aufräum-Analyse aus der Refactoring-Phase der Dateistruktur | mittel | niedrig | ROOT_KURATION + MAKING_OF_BELEG | BELASSEN_UND_VERTRAG_ANWENDEN |
@@ -125,7 +127,7 @@ Lokale Archive bleiben an Ort und Stelle; das Root-Archiv enthält projektüberg
 | `Archiv/Author Guide Ghost-v2.md` | 5 KB | Zweite Version des Author Guides — Versionsgeschichte kuratierbar | BELASSEN_UND_VERTRAG_ANWENDEN |
 | `Archiv/struktur.md` | 17 KB | Strukturdokument; Inhalt und Status unbekannt | UNKLAR_PRUEFEN |
 
-**Offener Punkt:** `Archiv/Apps/` hat mögliche Überlappung mit `Apps/prokrastinations-preis/Archiv/` — in AP 9 prüfen, wenn Pilotarchiv behandelt wird.
+**Offener Punkt:** `Archiv/Apps/` hat mögliche Überlappung mit `Apps/prokrastinations-preis/Archiv/` — AP9 abgeschlossen; Überlappungsprüfung offen, bei Bedarf in gesondertem AP.
 
 ---
 
@@ -142,7 +144,7 @@ Lokale Archive bleiben an Ort und Stelle; das Root-Archiv enthält projektüberg
 - **Drift-Risiko:** niedrig
 - **README vorhanden:** ja (AP 7)
 - **Pilotstatus:** Kandidat 2 (→ Pilotkandidaten)
-- **Nächste Aktion:** README_ANWENDEN + ROOT_REFERENZ_PRUEFEN — Root-Archiv soll später auf Slice-0-Geschichte verweisen
+- **Nächste Aktion:** README vorhanden (AP7); möglicher späterer zweiter Pilot, keine Setup-Pflicht.
 
 ---
 
@@ -153,7 +155,7 @@ Lokale Archive bleiben an Ort und Stelle; das Root-Archiv enthält projektüberg
 - **Dateien:** 1 Datei (README.md, 0 KB, leer)
 - **Befund:** Archiv de facto leer — bewusster Platzhalter oder verwaister Ordner?
 - **Drift-Risiko:** niedrig
-- **Nächste Aktion:** SONDERFALL_PRUEFEN — Klärungsbedarf vor AP 7 oder AP 9
+- **Nächste Aktion:** SONDERFALL_PRUEFEN — offen, kein AP geplant
 
 ---
 
@@ -167,7 +169,7 @@ Lokale Archive bleiben an Ort und Stelle; das Root-Archiv enthält projektüberg
 - **Rohmaterial:** nein (HTML-Datei, kein Binary)
 - **Drift-Risiko:** niedrig
 - **README vorhanden:** ja (AP 7)
-- **Nächste Aktion:** README_ANWENDEN + ROOT_REFERENZ_PRUEFEN
+- **Nächste Aktion:** BELASSEN_UND_VERTRAG_ANWENDEN
 
 ---
 
@@ -196,7 +198,7 @@ Lokale Archive bleiben an Ort und Stelle; das Root-Archiv enthält projektüberg
 - **Rohmaterial:** keine erkennbaren; MEMORY-THEME-PHASE.md (28 KB) auf LLM-Dump-Anteil prüfen
 - **Drift-Risiko:** hoch — Handoff-Prompts, Implementierungspläne (AP-21-IMPLEMENTATIONSPLAN.md, 29 KB) und Übergabedokumente könnten operative Verwirrung stiften
 - **README vorhanden:** ja (AP 7)
-- **Nächste Aktion:** README_ANWENDEN (Priorität: hoch — wegen Drift-Risiko)
+- **Nächste Aktion:** SONDERPRUEFUNG_STEERING_ARCHIV — README vorhanden; hoher Drift-Risiko-Ort; Einzeldateien nur in gesondertem AP kuratieren.
 
 **Archivdateien in diesem Archiv:**
 
@@ -215,7 +217,7 @@ Lokale Archive bleiben an Ort und Stelle; das Root-Archiv enthält projektüberg
 - **Dateien:** 2 Dateien — CLAUDE-pre-synthese-2026-05-03.md (20 KB) + NAVIGATION-pre-synthese-2026-05-03.md (7 KB)
 - **LLM-Dump-Verdacht:** ja — beide Dateien sind LLM-Synthese-Exports
 - **Kontextnähe:** unklar — Verschachtelung tief; fachlicher Kontext nicht sofort erkennbar
-- **Nächste Aktion:** LOCAL_PRUEFEN — Inhalte nach `Archiv/local/` verschieben (gesonderter Schritt, nicht Teil von AP 6)
+- **Nächste Aktion:** LOCAL_PRUEFEN — Inhalte nach `Archiv/local/` verschieben (gesonderter Schritt — AP-KORR-6)
 
 ---
 
@@ -277,7 +279,7 @@ Pilotbewertung: `docs/spec/archiv/PILOT-BEWERTUNG.md`
 **2. Zweiter Kandidat: `Apps/prokrastinations-preis/Archiv/`**
 2 Dateien, 6 KB, minimales Risiko, direkter APP-01-Bezug (Slice-0-Entstehung).
 Gut als ergänzender Pilot oder unmittelbare Folgeinsel nach Kandidat 1.
-README-Schablone anlegen, Making-of-Status setzen.
+README vorhanden (AP7); möglicher späterer zweiter Pilot, keine Setup-Pflicht.
 
 **3. Nicht geeignet als Pilot, aber später wichtig: `docs/steering/archiv/`**
 15 Dateien, 222 KB, hohes Drift-Risiko, komplexe Inhaltstypen (Handoff-Prompts, 79-KB-Schlachtplan).
@@ -289,10 +291,11 @@ Wichtigster Kandidat für AP 7 README-Anwendung — aber zu groß und komplex f�
 |---|---|
 | Zielrolle | LOKALER_KONTEXT + MAKING_OF_BELEG |
 | Dateien | 4 Markdown-Dateien, 47 KB |
-| Status aller Dateien | ERSETZT — Nachfolger: aktive Chart-Engine-Spec-Dateien in `docs/spec/` |
-| README-Schablone | aus `docs/steering/ARCHIV-STRATEGIE.md` |
-| Nächste Aktion | README_ANWENDEN: lokales README mit Warnhinweis und ERSETZT-Verweis anlegen |
-| Risiko | mittel — Verwechslungsgefahr mit aktiver Spec; README minimiert dieses Risiko |
+| Pilotstatus | AP9 abgeschlossen — Pilotbewertung vorhanden (`docs/spec/archiv/PILOT-BEWERTUNG.md`) |
+| Einzeldatei-Kuratierung | offen / optionaler späterer AP |
+| Vermutung | ältere Spec-Versionen wahrscheinlich ERSETZT; aktive Nachfolger in gesondertem AP prüfen |
+| Nächste Aktion | BELASSEN; spätere ERSETZT/Nachfolger-Prüfung nur bei gesondertem Kuratierungs-AP |
+| Risiko | mittel — Verwechslungsgefahr mit aktiver Spec; README und Pilotbewertung minimieren dieses Risiko |
 
 ---
 
@@ -300,10 +303,10 @@ Wichtigster Kandidat für AP 7 README-Anwendung — aber zu groß und komplex f�
 
 | Priorität | Risiko | Betroffener Ort | Folgepunkt |
 |---|---|---|---|
-| hoch | Drift-Risiko durch veraltete Pläne + Prompts | `docs/steering/archiv/` | AP 7: README mit Warnhinweis anlegen |
-| hoch | 79-KB-Einzelartefakt mit ungeklärtem Status | `docs/steering/archiv/KNOWN-ISSUES-SCHLACHTPLAN-ARCHIV.md` | Status klären: ERSETZT oder POSTMORTEM (AP 7) |
-| mittel | LLM-Dumps im Root-Archiv außerhalb local/ | `Archiv/optimierung-projektsteuerung/.../Archiv/` | LOCAL_PRUEFEN — vor AP 7 klären |
-| mittel | Veraltete Spec-Versionen (Verwechslungsgefahr) | `docs/spec/archiv/` | AP 9: README mit ERSETZT-Status |
+| hoch | Drift-Risiko durch veraltete Pläne + Prompts | `docs/steering/archiv/` | README-Kontextschutz erledigt (AP7); spätere Inhaltskuratierung optional / bei Bedarf |
+| hoch | 79-KB-Einzelartefakt mit ungeklärtem Status | `docs/steering/archiv/KNOWN-ISSUES-SCHLACHTPLAN-ARCHIV.md` | Status klären: ERSETZT oder POSTMORTEM (AP-KORR-5) |
+| mittel | LLM-Dumps im Root-Archiv außerhalb local/ | `Archiv/optimierung-projektsteuerung/.../Archiv/` | LOCAL_PRUEFEN — gehört zu AP-KORR-6 |
+| mittel | Veraltete Spec-Versionen (Verwechslungsgefahr) | `docs/spec/archiv/` | AP9-Pilotbewertung erledigt; spätere Einzeldatei-Kuratierung optional |
 | niedrig | Veraltete Datei mit absoluten Pfaden im Root | `archivliste.md` | LOESCHKANDIDAT_PRUEFEN — Albert entscheidet |
 | niedrig | Leere Archive ohne Klärung | `docs/App-Fabrik/_archive/`, `Inhalte alte Site/blog/archiv/` | SONDERFALL_PRUEFEN |
 | niedrig | `Archiv/struktur.md` — Status unbekannt | `Archiv/struktur.md` | UNKLAR_PRUEFEN (AP 8 oder AP 9) |
@@ -312,12 +315,25 @@ Wichtigster Kandidat für AP 7 README-Anwendung — aber zu groß und komplex f�
 
 ## Folge-APs
 
-| AP | Aufgabe | Voraussetzung |
-|---|---|---|
-| AP 7 | Lokale README-Schablone gezielt anwenden | legacy-map.md liegt vor ✅; nur dort anlegen, wo AP 6 empfiehlt |
-| AP 8 | Root-Making-of-Rahmen vorbereiten | legacy-map.md liegt vor ✅; nur rahmen, nicht fertig erzählen |
-| AP 9 | Pilotarchiv behandeln: `docs/spec/archiv/` ✅ | Abgeschlossen — Pilotbewertung: `docs/spec/archiv/PILOT-BEWERTUNG.md` |
+### Setup-Serie AP3–AP9 abgeschlossen ✅
 
-**Vor AP 7 klären:**
-- `Archiv/optimierung-projektsteuerung/.../Archiv/` — LOCAL_PRUEFEN (LLM-Dumps nach `Archiv/local/` verschieben)
+- AP7: Lokale Archiv-READMEs gezielt angewandt — Kontextschutz vorhanden
+- AP8: Root-Making-of-Rahmen vorbereitet (`Archiv/making-of/`)
+- AP9: Pilotarchiv `docs/spec/archiv/` kontrolliert behandelt — Pilotbewertung: `docs/spec/archiv/PILOT-BEWERTUNG.md`
+
+### Optionale spätere Bedarfs-APs
+
+Diese Punkte sind keine Pflicht — nur bei konkretem Bedarf aufgreifen:
+
+- Steering-Archiv kuratieren (`docs/steering/archiv/`) — SONDERPRUEFUNG_STEERING_ARCHIV
+- `docs/steering/archiv/KNOWN-ISSUES-SCHLACHTPLAN-ARCHIV.md` Status klären (AP-KORR-5)
+- `docs/spec/archiv/` Einzeldateien mit ERSETZT/Nachfolger prüfen
+- `Apps/prokrastinations-preis/Archiv/` als zweiten Pilot prüfen
+- LLM-Dumps in `Archiv/optimierung-projektsteuerung/.../Archiv/` nach `Archiv/local/` verschieben (AP-KORR-6)
+- `docs/App-Fabrik/_archive/` und `archivliste.md` klären
+- Making-of später erzählen, jetzt nicht
+
+### Offene Sonderprüfungen nach Setup-Serie
+
+- `Archiv/optimierung-projektsteuerung/.../Archiv/` — LOCAL_PRUEFEN (LLM-Dumps nach `Archiv/local/` — AP-KORR-6)
 - `docs/App-Fabrik/_archive/` — SONDERFALL_PRUEFEN (leer oder Platzhalter?)

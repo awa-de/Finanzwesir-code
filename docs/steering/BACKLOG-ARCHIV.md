@@ -1,11 +1,15 @@
 # BACKLOG-ARCHIV – Finanzwesir 2.0
-Stand: 2026-06-08 | Session: AP-9-pilotarchiv | Geändert von: Claude
+Stand: 2026-06-08 | Session: AP-KORR-Serie | Geändert von: Claude
 
 Abgeschlossene Items, neueste zuerst (append-only).
 Archivierungs-Trigger: wenn > 200 Zeilen → neue Datei `BACKLOG-ARCHIV-YYYY.md` anlegen.
 
 | ID | Bereich | Titel | Abgeschlossen | Session |
 |----|---------|-------|---------------|---------|
+| AP-KORR-4 | System | ARCHIV-STRATEGIE.md: § Erwartete Folge-APs → § Setup-Serie AP 3–9 Abschlussstand; Nicht-Routing-Regel in Archivvertrag Regel 1 + README-Schablone ergänzt. Keine AP10-Pflichtkette. *(sofort erledigt)* | 2026-06-08 | AP-KORR-Serie |
+| AP-KORR-3 | System | legacy-map.md synchronisiert nach AP7–AP9: alle README_ANWENDEN-Stellen bereinigt (SPÄTERE_KURATIERUNG_OPTIONAL / BELASSEN / SONDERPRUEFUNG_STEERING_ARCHIV), AP-9-Startbasis-Tabelle korrigiert (keine ERSETZT-Behauptung), Folge-APs zu Setup-Serie ✅ + optionale Bedarfs-APs umgebaut. *(sofort erledigt)* | 2026-06-08 | AP-KORR-Serie |
+| AP-KORR-2 | System | Archiv/README.md als Kontextschutz am Root-Archiv neu angelegt: Nicht-Routing-Stoppschild, Archivvertrag, local/-Quarantäne-Regel, Verweis auf ARCHIV-STRATEGIE.md als verbindliche Strategie. *(sofort erledigt)* | 2026-06-08 | AP-KORR-Serie |
+| AP-KORR-1 | System | Nicht-Routing-Regel in NAVIGATION.md § Archivstrategie / Kontext-Hygiene verankert: „Claude liest Archivmaterial nur auf ausdrückliche Anweisung von Albert oder wenn ein AP explizit Archivarbeit verlangt." *(sofort erledigt)* | 2026-06-08 | AP-KORR-Serie |
 | ST-27 | System | Pilotarchiv auswählen und kontrolliert behandeln (AP-9): `docs/spec/archiv/` als erste Pilotinsel behandelt — `PILOT-BEWERTUNG.md` angelegt (Einordnung, Befund, Kontextschutz, Making-of-Bezug, Lernpunkt). `legacy-map.md` Pilotstatus + Nächste Aktion aktualisiert. `KAPITELRAHMEN.md` Kapitel-02-Belegverweis ergänzt. Pilot-Lernpunkt: Auswahlregel aus legacy-map funktioniert, AP-7-README trug ohne Änderungsbedarf. Grundarchitektur AP 3–9 abgeschlossen. | 2026-06-08 | AP-9-pilotarchiv |
 | ST-26 | System | Root-Making-of-Rahmen vorbereitet (AP-8): `Archiv/making-of/` angelegt mit `README.md` (Schutzregel, Quellenlogik) und `KAPITELRAHMEN.md` (7 Kapitelkandidaten: 6 mit Belegen aus `legacy-map.md`, 1 RAHMEN_OHNE_BELEG für Kapitel 01/Ursprung). `legacy-map.md` minimal aktualisiert (+1 Haupttabelleneintrag, +1 Themeninseln-Eintrag, Zähler 15→16). | 2026-06-08 | AP-8-making-of-rahmen |
 | ST-28 | System | README-Schablone auf 4 lokale Archivorte angewandt (AP-7): `README.md` angelegt in `Apps/prokrastinations-preis/Archiv/`, `docs/design-system/archiv/`, `docs/spec/archiv/`, `docs/steering/archiv/`. Archivvertrag + Schutzsatz + Erstellt-Datum 2026-06-08. `legacy-map.md` aktualisiert (`README vorhanden: ja`). Offene Folgepunkte: LOCAL_PRUEFEN (`Archiv/optimierung-projektsteuerung/...`), SONDERFALL_PRUEFEN (`docs/App-Fabrik/_archive/`). | 2026-06-08 | AP-7-local-readme |

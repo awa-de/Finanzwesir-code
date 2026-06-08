@@ -10,6 +10,18 @@ FinanzwesirData.js, CSVParser.js, FwDateUtils.js — diese Session nicht berühr
 ## 2026-06-08 – ST-26 (AP 8) | Root-Making-of-Rahmen vorbereiten
 - [OK] Keine Vorkommnisse
 
+## 2026-06-08 – AP-KORR-1 | Nicht-Routing-Regel in NAVIGATION.md verankern
+- [OK] Keine Vorkommnisse
+
+## 2026-06-08 – AP-KORR-2 | Root-Archiv README als Kontextschutz anlegen
+- [OK] Keine Vorkommnisse
+
+## 2026-06-08 – AP-KORR-3 | legacy-map nach Setup-Serie synchronisieren
+- [OK] Keine Vorkommnisse
+
+## 2026-06-08 – AP-KORR-4 | ARCHIV-STRATEGIE Setup-Serie AP3–AP9 als abgeschlossen markieren
+- [OK] Keine Vorkommnisse
+
 ## 2026-06-06 – SESSION START | Fokus: APP-01 — prokrastinations-preis
 FinanzwesirData.js, CSVParser.js, FwDateUtils.js — diese Session nicht berühren. ✓
 
