@@ -1,4 +1,4 @@
-Stand: 2026-06-08 | Quelle: docs/steering/ARCHIV-INVENTAR.md | Geändert von: Claude | Session: AP-KORR-11
+Stand: 2026-06-09 | Quelle: docs/steering/ARCHIV-INVENTAR.md | Geändert von: Claude | Session: /archivieren OA-02
 
 # Föderierter Archivkatalog / Legacy Map
 
@@ -108,7 +108,7 @@ Lokale Archive bleiben an Ort und Stelle; das Root-Archiv enthält projektüberg
 | `Archiv/git-migration/` | Git-Migrationsdokumente | mittel | mittel | nein |
 | `Archiv/local/` | Quarantäne — separat kartiert | — | — | ja |
 | `Archiv/optimierung-projektsteuerung/` | Enthält verschachteltes Archiv mit LLM-Dumps | unklar | mittel | ja |
-| `Archiv/Peer Review Arbeitspakete/` | Peer-Review-Material zu Arbeitspaketen | hoch | hoch | nein |
+| `Archiv/Peer Review Arbeitspakete/` | Peer-Review-Material zu Arbeitspaketen; inkl. OA-02 HIST-Dateien (2026-06-09) | hoch | hoch | nein |
 | `Archiv/Peer Review Migration/` | Peer-Review-Material zur Migration | hoch | hoch | nein |
 | `Archiv/Projekt Kontroll-Skills/` | KI-Workflow-Geschichte | mittel | hoch | unklar |
 | `Archiv/Rechtliches/` | Rechtliche Dokumente | mittel | niedrig | nein |
