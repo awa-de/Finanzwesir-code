@@ -1,5 +1,5 @@
 # NAVIGATION.md – Finanzwesir 2.0
-Stand: 2026-06-09 | Session: SKILL-ARCHIV-01 | Geändert von: Claude
+Stand: 2026-06-09 | Session: SKILL-ARCHIV-02 | Geändert von: Claude
 
 Für Claude: **Routing-Dokument.** Wird beim Session-Start (Schritt 2) gelesen.
 Gibt Pfade und Lese-Reihenfolgen vor — KEINE Verhaltensregeln (die stehen in CLAUDE.md).
@@ -32,6 +32,7 @@ Albert kann sie auch explizit aufrufen.
 | Slash-Kommando | Wann | Trigger |
 |---|---|---|
 | `/abschluss-ritual [AP-N]` | Nach Abschluss einer Aufgabe | Claude bietet proaktiv an; oder Albert sagt „fertig" |
+| `/archivieren [was archivieren?]` | Kontrollierte Überführung von Material in Archive | Albert ruft explizit auf; Claude schlägt vor wenn Rohmaterial/Belegmaterial entstanden ist |
 | `/decompose` | Wenn eine Ideensammlung in Tasks zerlegt werden soll | Albert sagt „jetzt zerlegen" |
 | `/manual-test-plan [AP-N]` | Bei komplexen visuellen Testfällen | Claude schlägt vor; oder Albert ruft explizit auf |
 | `/spec-rewrite-guard [Datei]` | Vor Änderungen an `docs/spec/`-Dateien | Claude startet automatisch bei Spec-Edits |

@@ -1,11 +1,12 @@
 # BACKLOG-ARCHIV – Finanzwesir 2.0
-Stand: 2026-06-09 | Session: SKILL-ARCHIV-01 | Geändert von: Claude
+Stand: 2026-06-09 | Session: SKILL-ARCHIV-02 | Geändert von: Claude
 
 Abgeschlossene Items, neueste zuerst (append-only).
 Archivierungs-Trigger: wenn > 200 Zeilen → neue Datei `BACKLOG-ARCHIV-YYYY.md` anlegen.
 
 | ID | Bereich | Titel | Abgeschlossen | Session |
 |----|---------|-------|---------------|---------|
+| SKILL-ARCHIV-02 | System | Skill /archivieren implementiert: `.claude/skills/archivieren/SKILL.md` angelegt — Phasen 0–6, 9 Klassifikationskategorien, 4 Freigabe-Gates, Entscheidungsbaum, Zielorte-Tabelle, Git-Sicherheitsregeln, Subagent-Policy. NAVIGATION.md Skills-Tabelle ergänzt. *(sofort erledigt)* | 2026-06-09 | SKILL-ARCHIV-02 |
 | SKILL-ARCHIV-01 | System | Spezifikation Skill /archivieren: `docs/steering/SKILL-ARCHIVIEREN-SPEZIFIKATION.md` angelegt — 6 Arbeitsphasen (Phase 0 Scope bis Phase 6 Abschlussbericht), 9 Klassifikationskategorien (RAW/HIST/ERSETZT/POSTMORTEM/MAKING_OF_BELEG/LOKALER_KONTEXT/ROOT_KURATION/SONDERFALL/ZU_PRUEFEN), 4 Freigabe-Gates, Git-Sicherheitsregeln, Abgrenzung zu distill/kassensturz/start/abschluss-ritual. Umsetzungshinweise für SKILL-ARCHIV-02 enthalten. *(sofort erledigt)* | 2026-06-09 | SKILL-ARCHIV-01 |
 | AP-KORR-11 | System | Making-of-Belege Archivstrategie integriert: 3 BELEGNOTIZ-Dateien (07a–07c) in Archiv/making-of/ abgelegt; KAPITELRAHMEN.md Kap. 07 um Belegverweise ergänzt; legacy-map.md Archiv/making-of/-Einträge in Föderierte Archivkarte + Themeninseln aktualisiert; Rohmaterial-README in Archiv/local/making-of/2026-06-08_archivstrategie-kontext-hygiene_raw/ angelegt. *(sofort erledigt)* | 2026-06-08 | AP-KORR-11 |
 | AP-KORR-10 | System | legacy-map letzter Konsistenzschliff: LOCAL_PRUEFEN → SONDERFAELLE_DOKUMENTIERT; Archiv/local/ Bestandszahl als nicht-versioniert gekennzeichnet; Weiterer-local/-Ordner-Formulierung präzisiert. *(sofort erledigt)* | 2026-06-08 | AP-KORR-10 |
