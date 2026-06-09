@@ -1,11 +1,12 @@
 # BACKLOG-ARCHIV – Finanzwesir 2.0
-Stand: 2026-06-09 | Session: SKILL-ARCHIV-05 | Geändert von: Claude
+Stand: 2026-06-09 | Session: OA-02-Dissens-1 | Geändert von: Claude
 
 Abgeschlossene Items, neueste zuerst (append-only).
 Archivierungs-Trigger: wenn > 200 Zeilen → neue Datei `BACKLOG-ARCHIV-YYYY.md` anlegen.
 
 | ID | Bereich | Titel | Abgeschlossen | Session |
 |----|---------|-------|---------------|---------|
+| OA-02-DISSENS-1 | Architektur | Terminologische Schärfung Component Composition Architecture: ADR-COMP-ARCH-01, APP-INTERFACE.md (§1, §3, §3.2), 03_APP_FACTORY_STANDARD_DRAFT.md (§6) — „Standalone"-Begriff entfernt, Legacy-Vertrag-Framing verankert. docs/steering/patches/ als neues Verzeichnis angelegt. *(sofort erledigt)* | 2026-06-09 | OA-02-Dissens-1 |
 | SKILL-ARCHIV-05 | System | Spezifikation /archivieren an Laufzeit-Skill angeglichen: Staging-Logik aus `SKILL-ARCHIVIEREN-SPEZIFIKATION.md` entfernt — Gate 4 „Gezieltes Staging" → „Übergabe an Albert"; Git-Sicherheit Vier-Augen-Prinzip → Albert-Übergabe; Phase 1 Eingangsschublade `Archiv/local/muss noch eingeordnet werden/` ergänzt; `git add Archiv/` in Phase-5-Verbot ergänzt. Spec und Skill jetzt konsistent: Claude staged nicht. *(sofort erledigt)* | 2026-06-09 | SKILL-ARCHIV-05 |
 | SKILL-ARCHIV-03 | System | Testlauf /archivieren: Erster Echtlauf — 2 Perplexity-Chroniken aus `Archiv/local/muss noch eingeordnet werden` als HIST + MAKING_OF_BELEG klassifiziert und nach `Archiv/Peer Review Arbeitspakete/` überführt. `KAPITELRAHMEN.md` Kap. 02 + 06 um 3 Belegverweise ergänzt. Alle 6 Phasen und 4 Freigabe-Gates ohne Korrekturschritt durchgelaufen. *(sofort erledigt)* | 2026-06-09 | SKILL-ARCHIV-03 |
 | SKILL-ARCHIV-02 | System | Skill /archivieren implementiert: `.claude/skills/archivieren/SKILL.md` angelegt — Phasen 0–6, 9 Klassifikationskategorien, 4 Freigabe-Gates, Entscheidungsbaum, Zielorte-Tabelle, Git-Sicherheitsregeln, Subagent-Policy. NAVIGATION.md Skills-Tabelle ergänzt. *(sofort erledigt)* | 2026-06-09 | SKILL-ARCHIV-02 |

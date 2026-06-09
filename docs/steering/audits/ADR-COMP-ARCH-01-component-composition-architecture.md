@@ -1,4 +1,4 @@
-Stand: 2026-06-05 | Session: COMP-ARCH-Verankerung | Geändert von: Claude
+Stand: 2026-06-09 | Session: OA-02-Dissens-1 | Geändert von: Claude
 
 # ADR-COMP-ARCH-01: Component Composition Architecture
 
@@ -64,7 +64,7 @@ Die Entscheidung OA-02 (Bibliothek und Integrationsform für Chart-Komponenten i
 ## Was diese Entscheidung nicht ändert
 
 - Die Chart-Engine (ChartEngine.js, Layer 1–5) bleibt unverändert — TABU.
-- Bestehende Ghost-Card-Verträge (`financial-chart-module`) bleiben vollständig gültig.
+- Bestehende Ghost-Card-Verträge (`financial-chart-module`) bleiben vollständig gültig. Bestandsschutz bedeutet nicht architektonische Gleichrangigkeit: `financial-chart-module` lebt als Legacy-Vertrag innerhalb des Gesamtmodells weiter — nicht als konkurrierendes Weltbild daneben.
 - Bestehende Mini-Specs werden nicht umgeschrieben.
 - App-Fabrik-Familien (§4 in 03_APP_FACTORY_STANDARD_DRAFT.md) bleiben gültig — sie beschreiben Interaktionsmuster, keine Architekturmodelle.
 - P-01–P-11 aus dem Architecture Strategy Paper bleiben unverändert gültig.

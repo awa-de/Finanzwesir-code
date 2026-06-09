@@ -1,6 +1,6 @@
 # App Interface — Finanzwesir 2.0
 
-Stand: 2026-06-05 | COMP-ARCH-01-Nachputz | Geändert von: Claude
+Stand: 2026-06-09 | OA-02-Dissens-1 | Geändert von: Claude
 
 **Zweck:** Kanonischer Schnittstellen-Vertrag zwischen Ghost-Content, App-Fabrik-Apps und Chart-Engine.
 **Zielgruppe:** Claude, Albert, zukünftige App-Implementierungen.
@@ -16,7 +16,7 @@ Stand: 2026-06-05 | COMP-ARCH-01-Nachputz | Geändert von: Claude
 Diese Datei definiert die öffentlichen Schnittstellen zwischen:
 - **Ghost-Content** (Redakteur fügt HTML-Card ein)
 - **App-Fabrik-Apps** (neue interaktive Apps, fw-app-Namespace)
-- **Chart-Engine** (bestehende Standalone-Charts, financial-chart-module)
+- **Chart-Engine** (Legacy-/CSV-Vertrag für bestehende Daten-Charts, `financial-chart-module`)
 
 **Was gehört hinein:**
 - Öffentliche Redakteursverträge: Attribute, Syntax, Beispiele
@@ -48,6 +48,8 @@ Kein Backend ohne explizite Architekturentscheidung.
 ## 3. Öffentliche Redakteursverträge
 
 Zwei Vertragstypen koexistieren. Kein gegenseitiges Überschreiben.
+
+`fw-app` ist der Primärrahmen (Component Composition Architecture). `financial-chart-module` ist ein fortbestehender Legacy-Vertrag innerhalb dieses Modells — vollständig gültig, keine Migration geplant, kein konkurrierendes Architekturmodell.
 
 | Vertrag | Klasse | Wann |
 |---|---|---|
@@ -112,7 +114,7 @@ App mit Optionen:
 
 ---
 
-### 3.2 Standalone Chart-Card
+### 3.2 Chart-Card (Legacy-Vertrag / Bestandsschutz)
 
 Bestehender Vertrag — bleibt vollständig gültig, wird nicht auf fw-app migriert:
 

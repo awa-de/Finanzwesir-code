@@ -512,7 +512,7 @@ Für App-Fabrik-Apps wird der Finanzwesir-Namespace verwendet.
 
 ---
 
-### Chart-Card-Sonderfall (bestehender Vertrag)
+### Chart-Card (Legacy-Vertrag / Bestandsschutz)
 
 🟢 ENTSCHIEDEN — Quelle: Alberts Briefing 2026-05-09; `Cheat-Sheet HTML-Karten.md`
 
@@ -533,7 +533,7 @@ Der bestehende Chart-Engine-Vertrag bleibt vollständig gültig und wird **nicht
 - `data-options` ist eine einfache `key:value, key:value`-Syntax — keine komplexen JSON-Strukturen
 - `data-colors` enthält Name-Farbe-Paare: `Name: #HEX, Name2: #HEX`
 - Die Chart-Engine wird vorerst nicht auf den `fw-app`-Namespace migriert
-- Langfristig kann geprüft werden, ob Charts als App-Familie in die App-Fabrik integriert werden
+- Chart-Komponenten sind bereits Teil des App-Fabrik-Modells (Component Composition Architecture). Was noch offen ist: die konkrete API und Integrationsform (OA-02), nicht die grundsätzliche Zuordnung.
 
 **Zwei-Vertrags-Modell:**
 

@@ -1,5 +1,5 @@
 # BACKLOG – Finanzwesir 2.0
-Stand: 2026-06-08 | Session: AP-9-pilotarchiv | Geändert von: Claude
+Stand: 2026-06-09 | Session: OA-02-Dissens-1 | Geändert von: Claude
 
 **Regeln:**
 - ✅-Zeilen werden sofort nach `BACKLOG-ARCHIV.md` verschoben (append), dann hier gelöscht.
@@ -54,6 +54,7 @@ Stand: 2026-06-08 | Session: AP-9-pilotarchiv | Geändert von: Claude
 | AF-19    | App-Fabrik | docs/App-Fabrik/01_DECISION_LOG.md synchronisieren — E-01, B-02, B-03 einpflegen (E-02 erledigt 2026-06-03, letzter Stand A-12) | L | — | docs/App-Fabrik/01_DECISION_LOG.md |
 | AF-04    | App     | AUTHOR_GUIDE harmonisieren — `data-app` → `data-fw-app` | M    | Pilot-1      | —                                                 |
 | AF-05    | App     | Redakteurs-Cheat-Sheet fw-apps erstellen        | M    | Pilot-1      | —                                                 |
+| AF-20    | App-Fabrik | CHART_ENGINE_ROLE_AND_INTEGRATION.md: „Standalone"-Terminologie prüfen und ggf. korrigieren (Folge aus OA-02-Dissens-1) | L | — | docs/App-Fabrik/CHART_ENGINE_ROLE_AND_INTEGRATION.md |
 
 ---
 

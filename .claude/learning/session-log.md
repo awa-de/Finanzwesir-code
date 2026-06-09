@@ -7,6 +7,10 @@ Wird geleert nach /distill. Einträge: [FRICTION] [WIN] [PREF] [QUESTION] [OK]
 ## 2026-06-09 – SESSION START (neuer Faden) | Fokus: APP-01 — prokrastinations-preis
 `FinanzwesirData.js, CSVParser.js, FwDateUtils.js — diese Session nicht berühren. ✓`
 
+## 2026-06-09 – OA-02-Dissens-1 | Terminologische Schärfung Component Composition Architecture
+- [FRICTION] Stand-Datum in APP-INTERFACE.md im Hauptpatch vergessen → separater Nachpatch nötig
+- [PREF] Albert wollte Patch-Quittung als committed Datei in docs/steering/patches/ — neues Verzeichnis angelegt
+
 ## 2026-06-09 – /archivieren OA-02 | HIST-Dateien nach Archiv/Peer Review Arbeitspakete
 - [OK] Keine Vorkommnisse.
 
@@ -36,6 +40,9 @@ Wird geleert nach /distill. Einträge: [FRICTION] [WIN] [PREF] [QUESTION] [OK]
 
 ## 2026-06-09 – SESSION START | Fokus: APP-01 — prokrastinations-preis
 FinanzwesirData.js, CSVParser.js, FwDateUtils.js — diese Session nicht berühren. ✓
+
+## 2026-06-09 – SESSION START (neuer Faden) | Fokus: APP-01 — prokrastinations-preis
+`FinanzwesirData.js, CSVParser.js, FwDateUtils.js — diese Session nicht berühren. ✓`
 
 ## 2026-06-09 – SKILL-ARCHIV-05 | Spezifikation an Laufzeit-Skill angleichen
 - [OK] Keine Vorkommnisse
