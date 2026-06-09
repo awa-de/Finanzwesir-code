@@ -4,6 +4,13 @@ Wird geleert nach /distill. Einträge: [FRICTION] [WIN] [PREF] [QUESTION] [OK]
 ## 2026-06-09 – SESSION START | Fokus: APP-01 — prokrastinations-preis
 `FinanzwesirData.js, CSVParser.js, FwDateUtils.js — diese Session nicht berühren. ✓`
 
+## 2026-06-09 – SESSION START (neuer Faden) | Fokus: APP-01 — prokrastinations-preis
+`FinanzwesirData.js, CSVParser.js, FwDateUtils.js — diese Session nicht berühren. ✓`
+
+## 2026-06-09 – SKILL-ARCHIV-03 | Testlauf /archivieren
+- [WIN] Erster Echtlauf /archivieren ohne Reibung: alle Phasen und Gates durchgelaufen, kein Korrekturschritt nötig.
+- [WIN] Beide Dateien aus local/muss-noch-eingeordnet-werden korrekt als HIST + MAKING_OF_BELEG klassifiziert und in Archiv/Peer Review Arbeitspakete/ überführt.
+
 ## 2026-06-09 – SKILL-ARCHIV-02 | Skill /archivieren implementieren
 - [OK] Keine Vorkommnisse.
 
