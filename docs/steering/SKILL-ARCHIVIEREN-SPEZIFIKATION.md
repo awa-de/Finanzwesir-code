@@ -1,4 +1,4 @@
-Stand: 2026-06-09 | Session: SKILL-ARCHIV-01 | Geändert von: Claude
+Stand: 2026-06-09 | Session: SKILL-ARCHIV-05 | Geändert von: Claude
 
 # Spezifikation — Skill /archivieren
 
@@ -86,6 +86,9 @@ Mögliche Quellen:
 - vorhandene Archivdateien im Scope
 
 Claude liest genannte Pfade direkt. Nicht raten, nicht blind suchen.
+
+Wenn Albert keinen konkreten Pfad nennt und der Auftrag allgemein lautet „archivieren" oder „sichere diese Erkenntnisreise", prüft Claude zuerst `Archiv/local/muss noch eingeordnet werden/`, sofern vorhanden. Dieses Verzeichnis ist nur eine Eingangsschublade für noch nicht eingeordnetes Material, keine Zielstruktur. Konkrete Pfadangaben von Albert haben Vorrang. Nichts daraus wird ohne Klassifikation und Blockfreigabe verschoben oder kuratiert.
+
 Für mechanische Inventur: `abschluss-scout` einsetzbar (gleiche Policy wie im Abschluss-Ritual).
 
 ### Phase 2 — Material klassifizieren
@@ -138,9 +141,9 @@ Erst nach Alberts OK pro Block:
 - Dateien erzeugen (Belegnotizen, README-Ergänzungen)
 - Verweise minimal eintragen (legacy-map, KAPITELRAHMEN — nur wenn klar nötig)
 - Git-Status prüfen (Gate 3)
-- Nur gezieltes Staging (Gate 4)
+- Übergabe an Albert vorbereiten (Gate 4)
 
-Verboten in Phase 5: Löschen, Verschieben ohne explizite Freigabe, `git add .`, `git add -A`, `local/`-Ordner anlegen ohne Freigabe im aktuellen Block oder gesonderten AP-Auftrag.
+Verboten in Phase 5: Löschen, Verschieben ohne explizite Freigabe, `git add .`, `git add -A`, `git add Archiv/`, `local/`-Ordner anlegen ohne Freigabe im aktuellen Block oder gesonderten AP-Auftrag.
 
 ### Phase 6 — Abschlussbericht
 
@@ -211,22 +214,29 @@ Wenn Claude Belegnotizen oder README-Ergänzungen schreibt: Albert sieht den vor
 
 ### Gate 3 — Git-Status-Check
 
-Vor Staging:
+Vor Übergabe:
 ```
 git status --short
 git status --short Archiv/local/
 ```
 Erwartung: `Archiv/local/` zeigt keinen Output (gitignored). Wenn doch Output: stoppen, melden.
 
-### Gate 4 — Gezieltes Staging
+### Gate 4 — Übergabe an Albert
 
-Verboten:
+Claude zeigt:
+- welche Dateien neu sind oder geändert wurden
+- welche Dateien unter `Archiv/local/` liegen und deshalb nicht im Git-Status erscheinen sollten
+- ob `Archiv/local/` sauber gitignored bleibt
+- welche Dateien Albert in VSCode prüfen und selbst stagen kann
+
+Kein Staging durch Claude.
+
+Verboten bleibt:
 ```
 git add .
 git add -A
 git add Archiv/
 ```
-Nur gezieltes Staging der konkret freigegebenen Dateien.
 
 ---
 
@@ -234,7 +244,9 @@ Nur gezieltes Staging der konkret freigegebenen Dateien.
 
 - `Archiv/local/` ist gitignored — bei versehentlichem Tracking: sofort stoppen, melden.
 - Keine `.gitignore`-Änderungen ohne gesonderten AP-Auftrag.
-- Staging immer nach Vier-Augen-Prinzip: Claude zeigt was gestagtet wird, Albert gibt frei.
+- Staging und Commit übernimmt Albert in VSCode oder Git.
+- Claude prüft Git-Status und meldet neue/geänderte Dateien.
+- Claude staged nicht.
 
 ---
 

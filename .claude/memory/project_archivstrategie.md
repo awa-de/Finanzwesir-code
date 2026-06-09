@@ -23,4 +23,4 @@ Archiv-Sonderfälle: `docs/steering/ARCHIV-SONDERFAELLE.md` (AP-KORR-7 ✅) — 
 
 Setup-Serie AP 3–9 ✅ + Nachputzserie AP-KORR-1 bis AP-KORR-8 ✅ (2026-06-08) — Archivstrategie vollständig etabliert. Keine Folge-APs als Pflichtkette. Weitere Archivarbeit nur auf gesonderten Auftrag.
 
-SKILL-ARCHIV-01 ✅ (2026-06-09) — Spezifikation für Skill `/archivieren` angelegt (`docs/steering/SKILL-ARCHIVIEREN-SPEZIFIKATION.md`): 6 Arbeitsphasen, 9 Klassifikationskategorien, 4 Freigabe-Gates. SKILL-ARCHIV-02 (Implementierung der Skill-Datei) ist nächster geplanter AP — nur auf gesonderten Auftrag.
+SKILL-ARCHIV-01 ✅ (2026-06-09) — Spezifikation angelegt. SKILL-ARCHIV-02 ✅ — Skill-Datei implementiert. SKILL-ARCHIV-03 ✅ — Testlauf erfolgreich (alle 6 Phasen ohne Korrekturschritt). SKILL-ARCHIV-05 ✅ (2026-06-09) — Spezifikation an Laufzeit-Skill angeglichen: Gate 4 „Gezieltes Staging" → „Übergabe an Albert"; Vier-Augen-Prinzip → Albert-Übergabe; Eingangsschublade `Archiv/local/muss noch eingeordnet werden/` in Phase 1. **Kernentscheidung:** Claude staged nicht im `/archivieren`-Skill. Staging und Commit übernimmt Albert in VSCode oder Git.

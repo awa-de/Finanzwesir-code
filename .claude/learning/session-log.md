@@ -30,3 +30,14 @@ Wird geleert nach /distill. Einträge: [FRICTION] [WIN] [PREF] [QUESTION] [OK]
 
 ## 2026-06-08 – AP-KORR-9 | Archivstrategie Reststaub-Cleanup
 - [OK] Keine Vorkommnisse. 7 Dateien, 20 Stellen. Alle Kontrollfragen grün.
+
+## 2026-06-09 – SESSION START | Fokus: APP-01 — prokrastinations-preis
+FinanzwesirData.js, CSVParser.js, FwDateUtils.js — diese Session nicht berühren. ✓
+
+## 2026-06-09 – SKILL-ARCHIV-05 | Spezifikation an Laufzeit-Skill angleichen
+- [OK] Keine Vorkommnisse
+- Staging-Logik aus SKILL-ARCHIVIEREN-SPEZIFIKATION.md entfernt
+- Gate 4 „Gezieltes Staging" → „Übergabe an Albert"
+- Git-Sicherheit: Vier-Augen-Prinzip → Albert-Übergabe
+- Eingangsschublade Archiv/local/muss noch eingeordnet werden/ in Phase 1 ergänzt
+- Nur docs/steering/SKILL-ARCHIVIEREN-SPEZIFIKATION.md geändert
