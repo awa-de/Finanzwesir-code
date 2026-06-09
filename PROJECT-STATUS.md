@@ -1,15 +1,15 @@
 <!-- HOOK-META
 Version: 1
-Stand: 2026-06-08
+Stand: 2026-06-09
 Fokus-AP: APP-01 — prokrastinations-preis
 Nächster-Schritt: OA-02 entscheiden (COMP-ARCH-01 + historischer Peer-Review liegen vor) → dann Slice 4 SparplanChart
 Blocker: keine
 -->
-<!-- HOOK-META-SESSION: AP-KORR-10 -->
+<!-- HOOK-META-SESSION: SKILL-ARCHIV-01 -->
 
 # PROJECT STATUS — Finanzwesir 2.0
 
-Stand: 2026-06-08 | Session: AP-KORR-9 | Geändert von: Claude
+Stand: 2026-06-09 | Session: SKILL-ARCHIV-01 | Geändert von: Claude
 
 **Zweck:** Schneller Wiedereinstieg nach Pausen.
 **Zielgruppe:** Albert und Claude.
@@ -152,6 +152,9 @@ Vollständig im DECISION-LOG dokumentiert (`docs/steering/DECISION-LOG.md`):
 ---
 
 ## 8. Letzte Session
+
+2026-06-09 — Skill /archivieren spezifiziert (SKILL-ARCHIV-01).
+`docs/steering/SKILL-ARCHIVIEREN-SPEZIFIKATION.md` angelegt: 6 Arbeitsphasen (Phase 0 Scope bis Phase 6 Abschlussbericht), 9 Klassifikationskategorien, 4 Freigabe-Gates (Klassifikation / Kuratierter Inhalt / Git-Status / Staging), Abgrenzung zu distill/kassensturz/start/abschluss-ritual, Umsetzungshinweise für SKILL-ARCHIV-02. NAVIGATION.md + BACKLOG-ARCHIV.md + Memory aktualisiert.
 
 2026-06-08 — Reststaub-Cleanup Archivstrategie (AP-KORR-9).
 7 Dateien, 20 Stellen: sichtbare Marker (// NEW ×4, // CHANGED ×2) entfernt; veraltete AP9-Forward-Referenzen (6 Stellen) neutralisiert; Faktenwidersprüche in legacy-map.md bereinigt (docs/App-Fabrik/_archive/ 0 KB → 349 Bytes; Inhalte alte Site 0 KB → 119 Bytes); Nicht-Routing-Satz in 4 lokale READMEs ergänzt. Alle Kontrollfragen grün.

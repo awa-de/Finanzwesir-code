@@ -1,5 +1,5 @@
 # NAVIGATION.md – Finanzwesir 2.0
-Stand: 2026-06-08 | Session: AP-KORR-9 | Geändert von: Claude
+Stand: 2026-06-09 | Session: SKILL-ARCHIV-01 | Geändert von: Claude
 
 Für Claude: **Routing-Dokument.** Wird beim Session-Start (Schritt 2) gelesen.
 Gibt Pfade und Lese-Reihenfolgen vor — KEINE Verhaltensregeln (die stehen in CLAUDE.md).
@@ -262,6 +262,7 @@ Manuelle Aktivierung: `/spec-rewrite-guard docs/spec/[Dateiname]`
 | Archiv-Inventar | `docs/steering/ARCHIV-INVENTAR.md` | Bestandsaufnahme aller Archivorte — Quelle für legacy-map.md |
 | Föderierter Archivkatalog | `Archiv/legacy-map.md` | Zentrale Steuerkarte: 16 Archivorte, Zielrollen, Drift-Risiken, Pilotkandidaten |
 | Archiv-Sonderfälle | `docs/steering/ARCHIV-SONDERFAELLE.md` | Arbeitsliste für Archiv-Sonderfälle — Entscheidungen bei Albert, kein Claude-Handeln ohne AP |
+| Skill /archivieren Spezifikation | `docs/steering/SKILL-ARCHIVIEREN-SPEZIFIKATION.md` | Spec für SKILL-ARCHIV-02: Phasen, Klassifikationslogik, Gates, Abgrenzung zu distill/kassensturz/start/abschluss-ritual |
 
 ## Archivstrategie / Kontext-Hygiene
 

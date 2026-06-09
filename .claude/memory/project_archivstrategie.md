@@ -22,3 +22,5 @@ Föderierter Archivkatalog: `Archiv/legacy-map.md` (AP-6 / ST-25 ✅) — zentra
 Archiv-Sonderfälle: `docs/steering/ARCHIV-SONDERFAELLE.md` (AP-KORR-7 ✅) — Arbeitsliste für 3 Sonderfälle (archivliste.md, docs/App-Fabrik/_archive/, Inhalte alte Site/blog/archiv/). Entscheidungen bei Albert. Claude darf ohne eigenen AP nicht handeln.
 
 Setup-Serie AP 3–9 ✅ + Nachputzserie AP-KORR-1 bis AP-KORR-8 ✅ (2026-06-08) — Archivstrategie vollständig etabliert. Keine Folge-APs als Pflichtkette. Weitere Archivarbeit nur auf gesonderten Auftrag.
+
+SKILL-ARCHIV-01 ✅ (2026-06-09) — Spezifikation für Skill `/archivieren` angelegt (`docs/steering/SKILL-ARCHIVIEREN-SPEZIFIKATION.md`): 6 Arbeitsphasen, 9 Klassifikationskategorien, 4 Freigabe-Gates. SKILL-ARCHIV-02 (Implementierung der Skill-Datei) ist nächster geplanter AP — nur auf gesonderten Auftrag.
