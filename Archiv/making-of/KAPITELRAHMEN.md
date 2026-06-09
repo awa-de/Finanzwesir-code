@@ -42,7 +42,7 @@ Leitfragen:
 
 Mögliche Belege (aus legacy-map.md):
 
-- Kein MAKING_OF_BELEG-Archifort für Ursprung/Zielbild in `legacy-map.md` erkennbar — bei späterem Making-of-/Kuratierungs-AP prüfen
+- Kein MAKING_OF_BELEG-Archivort für Ursprung/Zielbild in `legacy-map.md` erkennbar — bei späterem Making-of-/Kuratierungs-AP prüfen
 
 Status: RAHMEN_OHNE_BELEG
 
@@ -169,7 +169,7 @@ Kapitel ohne erkennbare Belegquelle in `legacy-map.md`:
 
 | Kapitel | Lückentyp | Folgepunkt |
 |---|---|---|
-| 01 — Ursprung und Zielbild | Kein MAKING_OF_BELEG-Archifort in `legacy-map.md` erkennbar | Späterer Making-of-/Kuratierungs-AP: Prüfen ob `docs/steering/archiv/` Belege zum Ursprung enthält |
+| 01 — Ursprung und Zielbild | Kein MAKING_OF_BELEG-Archivort in `legacy-map.md` erkennbar | Späterer Making-of-/Kuratierungs-AP: Prüfen ob `docs/steering/archiv/` Belege zum Ursprung enthält |
 
 ## Offene Fragen
 

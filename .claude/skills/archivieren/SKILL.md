@@ -95,6 +95,8 @@ Mögliche Quellen:
 
 Genannte Pfade direkt lesen. Nicht raten, nicht blind global suchen.
 
+Wenn Albert keinen konkreten Pfad nennt und der Auftrag allgemein lautet „archivieren" oder „sichere diese Erkenntnisreise", prüfe zuerst `Archiv/local/muss noch eingeordnet werden/`, sofern vorhanden. Dieses Verzeichnis ist nur eine Eingangsschublade für noch nicht eingeordnetes Material, keine Zielstruktur. Nichts daraus wird ohne Blockfreigabe verschoben oder kuratiert.
+
 Für mechanische Inventur: `abschluss-scout` einsetzbar (gleiche Policy wie im Abschluss-Ritual).
 
 ### Phase 2 — Material klassifizieren
@@ -146,7 +148,7 @@ Erst nach Alberts OK pro Block:
 - Dateien erzeugen (Belegnotizen, README-Ergänzungen)
 - Verweise minimal eintragen (legacy-map, KAPITELRAHMEN — nur wenn klar nötig)
 - Git-Status prüfen (Gate 3)
-- Nur gezieltes Staging (Gate 4)
+- Übergabe an Albert vorbereiten (Gate 4)
 
 Verboten in Phase 5:
 - Löschen
@@ -221,22 +223,29 @@ Wenn Claude Belegnotizen oder README-Ergänzungen schreibt: vorgeschlagenen Inha
 
 ### Gate 3 — Git-Status-Check
 
-Vor Staging:
+Vor Übergabe:
 ```
 git status --short
 git status --short Archiv/local/
 ```
 Erwartung: `Archiv/local/` zeigt keinen Output (gitignored). Wenn doch Output: stoppen, melden.
 
-### Gate 4 — Gezieltes Staging
+### Gate 4 — Übergabe an Albert
 
-Verboten:
+Claude zeigt:
+- welche Dateien neu sind oder geändert wurden
+- welche Dateien unter `Archiv/local/` liegen und deshalb nicht im Git-Status erscheinen sollten
+- ob `Archiv/local/` sauber gitignored bleibt
+- welche Dateien Albert in VSCode prüfen und selbst stagen kann
+
+Kein Staging durch Claude.
+
+Verboten bleibt:
 ```
 git add .
 git add -A
 git add Archiv/
 ```
-Nur gezieltes Staging der konkret freigegebenen Dateien.
 
 ---
 
@@ -244,7 +253,7 @@ Nur gezieltes Staging der konkret freigegebenen Dateien.
 
 - `Archiv/local/` ist gitignored — bei versehentlichem Tracking: sofort stoppen, melden.
 - Keine `.gitignore`-Änderungen ohne gesonderten AP-Auftrag.
-- Staging immer nach Vier-Augen-Prinzip: Claude zeigt was gestagtet wird, Albert gibt frei.
+- Staging und Commit übernimmt Albert in VSCode oder Git.
 
 ---
 
