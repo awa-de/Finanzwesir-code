@@ -28,7 +28,10 @@ stale OA-02-Offen-Formulierungen in ADR und App-Fabrik-Standard schließen, PROJ
 | Datei | Was geändert |
 |---|---|
 | `PROJECT-STATUS.md` | HOOK-META-SESSION, Stand-Datum, §1 Nachputz-Eintrag, §8 Nachputz-Session |
-| `docs/steering/BACKLOG.md` | APP-01-Zeile: „OA-02 offen" → „OA-02 Doku ✅" |
+| `docs/steering/BACKLOG.md` | APP-01-Zeile: „OA-02 offen" → „OA-02 Doku ✅"; Header-Stand auf OA-02-Nachputz (Mini-Nachputz) |
+| `docs/steering/BACKLOG-ARCHIV.md` | OA-02-NACHPUTZ Sofort-erledigt-Eintrag hinzugefügt; Stand-Datum auf OA-02-Nachputz |
+| `.claude/memory/MEMORY.md` | Index-Eintrag für feedback_git_staging hinzugefügt |
+| `.claude/memory/feedback_git_staging.md` | Neu: Feedback Albert führt Git-Staging selbst aus |
 
 ### Protokoll
 

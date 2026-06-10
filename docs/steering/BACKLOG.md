@@ -1,5 +1,5 @@
 # BACKLOG – Finanzwesir 2.0
-Stand: 2026-06-09 | Session: OA-02-Dissens-1 | Geändert von: Claude
+Stand: 2026-06-10 | Session: OA-02-Nachputz | Geändert von: Claude
 
 **Regeln:**
 - ✅-Zeilen werden sofort nach `BACKLOG-ARCHIV.md` verschoben (append), dann hier gelöscht.
