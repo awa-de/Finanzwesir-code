@@ -1,4 +1,4 @@
-**Stand:** 2026-06-03 | **Session:** B1-CSV-Guardrail | **Geändert von:** Claude
+**Stand:** 2026-06-10 | **Session:** OA-02-Dissens-2 | **Geändert von:** Claude
 
 # Decision Log — Finanzwesir 2.0
 
@@ -353,3 +353,45 @@ Nicht angehen, solange Begriff und Scope nicht definiert sind.
 #### Revisit
 
 Wenn Albert konkret beschreiben kann, was „Blueprint-Extraktion" bedeutet.
+
+---
+
+## D-OA-02-2: Vereinheitlichung auf der richtigen Ebene — ChartEngine-Einstiege
+
+Datum: 2026-06-10
+Status: beschlossen
+
+#### Problem
+
+Wie soll die ChartEngine vereinheitlicht werden: auf der Markup-/Vertragsebene (alles identisch) oder auf der Ebene des internen Rendering-Kerns?
+
+#### Entscheidung
+
+Vereinheitlicht wird der interne Rendering-/State-/Draw-/Update-Kern. Außen bleiben zwei explizit benannte, offizielle Einstiegspfade:
+
+1. **Deklarativer Init-Pfad** — Scan nach `financial-chart-module`-Containern, CSV-Laden, Render. Bestehender Pfad, vollständig gültig.
+2. **Daten-Bridge-Pfad** — App übergibt app-berechnete, validierte, versiegelte Daten; Engine rendert durch dieselbe interne Pipeline.
+
+#### Begründung
+
+Extremum A (alles auf HTML-Ebene identisch): verschwimmt die Semantik, ein deklarativer CSV-Container ist nicht dasselbe wie ein app-berechneter Datenpfad. Extremum B (app-lokaler Adapter): ChartEngine verliert SSoT-Rolle, Tooltip/A11y/Theme müssten pro App repliziert werden. Beschlossene Mitte: intern vereinheitlichen, außen explizit bleiben.
+
+#### Alternativen
+
+- Alles identisch auf Markup-Ebene (verworfen): Semantikverlust, Vertragsverwirrung.
+- Separater lokaler App-Adapter (verworfen): ChartEngine verliert SSoT-Rolle.
+
+#### Konsequenzen
+
+- `docs/spec/APP-INTERFACE.md` §4: beschlossener Befund eingetragen, „offen"-Vermerk entfernt
+- `docs/App-Fabrik/CHART_ENGINE_ROLE_AND_INTEGRATION.md` §1: Bridge-Pfad als offizieller Einstieg dokumentiert
+- `docs/spec/ARCHITECTURE STRATEGY PAPER VX.md`: Layer-1-Beschreibung um zwei zulässige Produzenten erweitert
+- Lifecycle und genaue API-Signaturen: separates Gate bei ChartEngine.js-Implementierung
+
+#### Invariante
+
+Kein app-lokaler Chart-Wrapper ohne erneute explizite Entscheidung. Die App bleibt Eigentümerin von Domänenlogik und App-State — nie von Visualisierung oder Chart-State.
+
+#### Revisit
+
+Wenn ChartEngine.js für Pfad 2 implementiert wird — dann API-Signaturen und Lifecycle-Vertrag in separatem Gate festlegen.

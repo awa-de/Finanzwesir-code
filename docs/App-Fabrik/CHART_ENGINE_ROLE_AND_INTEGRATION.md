@@ -1,6 +1,6 @@
 # Chart-Engine: Rolle und Architekturprinzipien für die App-Fabrik
 
-Stand: 2026-06-05 | COMP-ARCH-01-Nachputz | Geändert von: Claude
+Stand: 2026-06-10 | OA-02-Dissens-2 | Geändert von: Claude
 
 **Zweck:** Klärt die Stellung der Chart-Engine im App-Fabrik-Ökosystem und dokumentiert, welche Architekturprinzipien aus dem Architecture Strategy Paper VX als Referenzmuster für App-Fabrik-Apps gelten.
 
@@ -34,6 +34,25 @@ Die ChartEngine ist die Single Source of Truth für Chart-Komponenten. Andere Ko
 
 → Vollständiges Modell: `docs/App-Fabrik/03_APP_FACTORY_STANDARD_DRAFT.md` §1a  
 → Entscheidungsnotiz: `docs/steering/audits/ADR-COMP-ARCH-01-component-composition-architecture.md`
+
+### Zwei offizielle Einstiege — ein gemeinsamer Kern
+
+Die Engine bietet zwei offizielle Einstiegspfade in dieselbe Visualisierungspipeline (OA-02-Dissens-2):
+
+**Pfad 1 — Deklarativer Init-Pfad:** Scannt einen DOM-Scope nach `financial-chart-module`-Containern, lädt CSV über CSVParser, baut State, rendert. Bestehender, vollständig gültiger Pfad.
+
+**Pfad 2 — Daten-Bridge-Pfad:** Nimmt app-berechnete, validierte, versiegelte Daten entgegen und rendert durch dieselbe interne Pipeline. Kein Sonderweg neben der Engine — offizieller Einstieg in die Engine.
+
+Die Engine wird dadurch nicht zum App-State-Manager oder Domänenrechner. Die Verantwortungsgrenze ist hart:
+
+| Eigentümerschaft | App | ChartEngine |
+|---|---|---|
+| Domänenlogik, KPI-Berechnung | ✓ | — |
+| Slider-/Screen-State, App-State | ✓ | — |
+| Visualisierung, Tooltip, Legende | — | ✓ |
+| Theme, A11y, Chart-State, Smart Update | — | ✓ |
+
+→ Entscheidung: `docs/steering/DECISION-LOG.md` D-OA-02-2
 
 ---
 

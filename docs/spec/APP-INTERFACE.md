@@ -1,6 +1,6 @@
 # App Interface — Finanzwesir 2.0
 
-Stand: 2026-06-09 | OA-02-Dissens-1 | Geändert von: Claude
+Stand: 2026-06-10 | OA-02-Dissens-2 | Geändert von: Claude
 
 **Zweck:** Kanonischer Schnittstellen-Vertrag zwischen Ghost-Content, App-Fabrik-Apps und Chart-Engine.
 **Zielgruppe:** Claude, Albert, zukünftige App-Implementierungen.
@@ -154,9 +154,17 @@ Architektonisches Grundmodell: Finanzwesir-Apps sind Kompositionsflächen (Compo
 
 Apps bauen keine Charts direkt. Sie nutzen die Chart-Engine als Subsystem.
 
-Langfristig: App → Chart-Komponente / Chart-Datenadapter / ChartEngine-API → ChartEngine.
+Die ChartEngine bietet zwei offizielle Einstiege in dieselbe Visualisierungspipeline:
 
-Der genaue Entwicklervertrag (Name, API, Aufrufkonvention, Lifecycle, Update-Pfad) ist OA-02 und bleibt offen, bis diese Entscheidung explizit getroffen ist. Er ist nicht Teil des Redakteursvertrags (§3) und erscheint nicht in Ghost-HTML-Cards.
+**Pfad 1 — Deklarativer Init-Pfad** (`init(scope)` oder funktional gleichwertig): Scannt einen DOM-Scope nach `financial-chart-module`-Containern, lädt CSV, rendert. Bestehender, vollständig gültiger Pfad.
+
+**Pfad 2 — Daten-Bridge-Pfad** (`renderFromData(container, data, type, options)` oder funktional gleichwertig): Nimmt app-berechnete, validierte, versiegelte Daten entgegen und rendert durch dieselbe interne Pipeline. Kein Sonderweg — offizieller Einstieg.
+
+**Verantwortungsgrenzen (nicht verhandelbar):**
+- App: Domänenlogik, KPI-Berechnung, Slider-/Screen-State, App-State
+- ChartEngine: Visualisierung, Tooltip, Legende, Theme, A11y, Chart-State, Smart Update
+
+Lifecycle-Vertrag und genaue API-Signaturen werden in einem separaten Gate festgelegt, wenn ChartEngine.js implementiert wird. Er ist nicht Teil des Redakteursvertrags (§3) und erscheint nicht in Ghost-HTML-Cards.
 
 Änderungen an der Chart-Engine erfordern ein separates Gate und explizite Freigabe durch Albert.
 
@@ -270,7 +278,7 @@ Gilt für CSV- und JSON-Datendateien.
 |---|---|
 | `AUTHOR_GUIDE-v3.md` nutzt `data-app` statt `data-fw-app` | Harmonisierung nach Pilot 1 — BACKLOG AF-04 |
 | Redakteurs-Cheat-Sheet für fw-apps fehlt | Erstellen nach Pilot 1 — BACKLOG AF-05 |
-| ChartAdapter/API (interner Entwicklervertrag §4) | Noch zu spezifizieren — offen |
+| ChartEngine-Einstiegspfade (interner Entwicklervertrag §4) | Beschlossen: zwei Pfade (deklarativ + Bridge), gemeinsamer Kern — OA-02-Dissens-2. Lifecycle und API-Signaturen: separates Gate bei ChartEngine.js-Implementierung. |
 | `data-fw-theme` | Reserviert — noch nicht implementiert. Nicht produktiv in Ghost-Cards verwenden. Nur über Enum-Whitelist, wenn implementiert. |
 
 Bestehende Ghost-HTML-Cards mit `data-app` (falls vorhanden): funktionieren weiterhin, solange kein Bootstrapper für `fw-app` aktiv ist. Kein Breaking Change im Pilot.

@@ -1,11 +1,12 @@
 # BACKLOG-ARCHIV – Finanzwesir 2.0
-Stand: 2026-06-09 | Session: OA-02-Dissens-1 | Geändert von: Claude
+Stand: 2026-06-10 | Session: OA-02-Dissens-2 | Geändert von: Claude
 
 Abgeschlossene Items, neueste zuerst (append-only).
 Archivierungs-Trigger: wenn > 200 Zeilen → neue Datei `BACKLOG-ARCHIV-YYYY.md` anlegen.
 
 | ID | Bereich | Titel | Abgeschlossen | Session |
 |----|---------|-------|---------------|---------|
+| OA-02-DISSENS-2 | Architektur | Vereinheitlichung ChartEngine-Einstiege: APP-INTERFACE.md §4 (zwei offizielle Einstiege + Verantwortungsgrenzen), CHART_ENGINE_ROLE_AND_INTEGRATION.md §1 (Bridge-Pfad + Eigenverantwortungs-Tabelle), ARCHITECTURE STRATEGY PAPER VX.md (Layer-1 zwei zulässige Produzenten, Appendix A Pfad-2-Verweis), DECISION-LOG.md D-OA-02-2. Lifecycle und API-Signaturen offen bis ChartEngine.js-Implementierung. *(sofort erledigt)* | 2026-06-10 | OA-02-Dissens-2 |
 | OA-02-DISSENS-1 | Architektur | Terminologische Schärfung Component Composition Architecture: ADR-COMP-ARCH-01, APP-INTERFACE.md (§1, §3, §3.2), 03_APP_FACTORY_STANDARD_DRAFT.md (§6) — „Standalone"-Begriff entfernt, Legacy-Vertrag-Framing verankert. docs/steering/patches/ als neues Verzeichnis angelegt. *(sofort erledigt)* | 2026-06-09 | OA-02-Dissens-1 |
 | SKILL-ARCHIV-05 | System | Spezifikation /archivieren an Laufzeit-Skill angeglichen: Staging-Logik aus `SKILL-ARCHIVIEREN-SPEZIFIKATION.md` entfernt — Gate 4 „Gezieltes Staging" → „Übergabe an Albert"; Git-Sicherheit Vier-Augen-Prinzip → Albert-Übergabe; Phase 1 Eingangsschublade `Archiv/local/muss noch eingeordnet werden/` ergänzt; `git add Archiv/` in Phase-5-Verbot ergänzt. Spec und Skill jetzt konsistent: Claude staged nicht. *(sofort erledigt)* | 2026-06-09 | SKILL-ARCHIV-05 |
 | SKILL-ARCHIV-03 | System | Testlauf /archivieren: Erster Echtlauf — 2 Perplexity-Chroniken aus `Archiv/local/muss noch eingeordnet werden` als HIST + MAKING_OF_BELEG klassifiziert und nach `Archiv/Peer Review Arbeitspakete/` überführt. `KAPITELRAHMEN.md` Kap. 02 + 06 um 3 Belegverweise ergänzt. Alle 6 Phasen und 4 Freigabe-Gates ohne Korrekturschritt durchgelaufen. *(sofort erledigt)* | 2026-06-09 | SKILL-ARCHIV-03 |

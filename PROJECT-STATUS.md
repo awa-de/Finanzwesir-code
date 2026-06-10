@@ -1,15 +1,15 @@
 <!-- HOOK-META
 Version: 1
-Stand: 2026-06-09
+Stand: 2026-06-10
 Fokus-AP: APP-01 — prokrastinations-preis
-Nächster-Schritt: OA-02 Dissens 2 + 3 entscheiden → dann Slice 4 SparplanChart
+Nächster-Schritt: OA-02 Dissens 3 entscheiden → dann Slice 4 SparplanChart
 Blocker: keine
 -->
-<!-- HOOK-META-SESSION: OA-02-Dissens-1 -->
+<!-- HOOK-META-SESSION: OA-02-Dissens-2 -->
 
 # PROJECT STATUS — Finanzwesir 2.0
 
-Stand: 2026-06-09 | Session: OA-02-Dissens-1 | Geändert von: Claude
+Stand: 2026-06-10 | Session: OA-02-Dissens-2 | Geändert von: Claude
 
 **Zweck:** Schneller Wiedereinstieg nach Pausen.
 **Zielgruppe:** Albert und Claude.
@@ -77,7 +77,7 @@ Stand: 2026-06-09 | Session: OA-02-Dissens-1 | Geändert von: Claude
 
 ✅ **Archiv-Grundarchitektur abgeschlossen (AP-9 / ST-27, 2026-06-08):** `docs/spec/archiv/` als erste Pilotinsel behandelt — `PILOT-BEWERTUNG.md` angelegt (Einordnung, Befund, Kontextschutz, Making-of-Bezug, Lernpunkt). `legacy-map.md` Pilotstatus aktualisiert. `KAPITELRAHMEN.md` Kapitel-02-Belegverweis ergänzt. Pilot-Lernpunkt: Auswahlregel hat funktioniert, AP-7-README trug. Archivstrategie-Grundarchitektur AP 3–9 abgeschlossen.
 
-⚙️ **Nächster Schritt B1:** OA-02: Dissens 1 ✅ — Dissens 2 und 3 entscheiden → dann Slice 4 SparplanChart.
+⚙️ **Nächster Schritt B1:** OA-02: Dissens 1 ✅ Dissens 2 ✅ — Dissens 3 entscheiden → dann Slice 4 SparplanChart.
 
 ---
 
@@ -117,7 +117,7 @@ Stand: 2026-06-09 | Session: OA-02-Dissens-1 | Geändert von: Claude
 | Chart-Engine | Stabil, offene APs | Siehe `docs/steering/BACKLOG.md` |
 | Theme | In Entwicklung | `THEME-ASSEMBLY-CHECKLIST.md` |
 | CSS | Stabil | Siehe `docs/steering/BACKLOG.md` (CSS-N Items) |
-| Apps | Slice-3 ✅ 2026-06-05 | B1 Slice-4: SparplanChart (OA-02: Dissens 1 ✅, Dissens 2+3 offen) |
+| Apps | Slice-3 ✅ 2026-06-05 | B1 Slice-4: SparplanChart (OA-02: Dissens 1+2 ✅, Dissens 3 offen) |
 | Content | Laufend | Redaktionsleitfaden aktiv |
 | Security | SECURITY-BASELINE.md App-Fabrik-gatefähig ✅ | Security-Sync-Regel + Gate-Prüffrage verankert (ST-13/ST-14) |
 
@@ -152,6 +152,9 @@ Vollständig im DECISION-LOG dokumentiert (`docs/steering/DECISION-LOG.md`):
 ---
 
 ## 8. Letzte Session
+
+2026-06-10 — OA-02-Dissens-2: Vereinheitlichung auf richtiger Ebene.
+Zwei offizielle ChartEngine-Einstiege dokumentiert (deklarativer Init-Pfad + Daten-Bridge-Pfad), gemeinsamer Kern. Verantwortungsgrenzen App ↔ Engine explizit festgehalten. 4 Dokumente gepatcht: APP-INTERFACE.md §4 + §10, CHART_ENGINE_ROLE_AND_INTEGRATION.md §1, ARCHITECTURE STRATEGY PAPER VX.md, DECISION-LOG.md D-OA-02-2. Lifecycle und API-Signaturen: separates Gate bei ChartEngine.js-Implementierung.
 
 2026-06-09 — OA-02-Dissens-1: Terminologische Schärfung Component Composition Architecture.
 ADR-COMP-ARCH-01, APP-INTERFACE.md (§1, §3, §3.2), 03_APP_FACTORY_STANDARD_DRAFT.md (§6): „Standalone"-Begriff entfernt, Legacy-Vertrag-Framing verankert. docs/steering/patches/ angelegt. AF-20 für CHART_ENGINE_ROLE_AND_INTEGRATION.md-Check in BACKLOG eingetragen.
@@ -366,9 +369,10 @@ Neue APs: DS-012, DS-013, DS-014.
 
 ## 9. Einstieg für nächste Session
 
-**Nächster Schritt: OA-02 Dissens 2 + 3 entscheiden → Slice-4 SparplanChart implementieren.**
+**Nächster Schritt: OA-02 Dissens 3 entscheiden → Slice-4 SparplanChart implementieren.**
 
 OA-02-Dissens-1 ✅: Terminologische Schärfung abgeschlossen (ADR, APP-INTERFACE.md, 03_APP_FACTORY_STANDARD_DRAFT.md).
+OA-02-Dissens-2 ✅: Vereinheitlichung auf richtiger Ebene — zwei Einstiege, gemeinsamer Kern, Verantwortungsgrenzen explizit (APP-INTERFACE.md §4, CHART_ENGINE_ROLE_AND_INTEGRATION.md §1, ARCHITECTURE STRATEGY PAPER VX.md, DECISION-LOG D-OA-02-2).
 OA-02-Kontext vorbereitet: COMP-ARCH-Entscheidung (§1a + ADR-COMP-ARCH-01) liegt vor.
 Die alte OA-02-Peer-Review-Datei ist historische Vorarbeit und muss vor Umsetzung gegen COMP-ARCH-01 aktualisiert werden.
 

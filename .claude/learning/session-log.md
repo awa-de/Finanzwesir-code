@@ -11,6 +11,12 @@ Wird geleert nach /distill. Einträge: [FRICTION] [WIN] [PREF] [QUESTION] [OK]
 - [FRICTION] Stand-Datum in APP-INTERFACE.md im Hauptpatch vergessen → separater Nachpatch nötig
 - [PREF] Albert wollte Patch-Quittung als committed Datei in docs/steering/patches/ — neues Verzeichnis angelegt
 
+## 2026-06-10 – OA-02-Dissens-2 | Vereinheitlichung auf der richtigen Ebene
+- [PREF] Albert hat Patch-Quittung direkt als Datei in docs/steering/patches/ angefordert — konsistent mit OA-02-Dissens-1-Quittung.
+
+## 2026-06-10 – SESSION START | Fokus: APP-01 — prokrastinations-preis
+`FinanzwesirData.js, CSVParser.js, FwDateUtils.js — diese Session nicht berühren. ✓`
+
 ## 2026-06-09 – /archivieren OA-02 | HIST-Dateien nach Archiv/Peer Review Arbeitspakete
 - [OK] Keine Vorkommnisse.
 
