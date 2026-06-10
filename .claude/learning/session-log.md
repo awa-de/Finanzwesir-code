@@ -71,3 +71,6 @@ FinanzwesirData.js, CSVParser.js, FwDateUtils.js — diese Session nicht berühr
 - [PREF] Albert führt Git-Staging und Commit selbst aus — Claude liefert Commit-Message nur als reinen Text, kein git staging.
 - [OK] Alle 6 Pflichtprüfungen bestanden. Keine Regressionen, kein JS berührt.
 - [OK] CLAUDE.md-Kandidat geschlossen: Entscheidung Albert — kein Eintrag, keine neue Regel. Einmaliger Doku-Hygiene-Fehler; produktive Doku im OA-02-Nachputz bereinigt.
+
+## 2026-06-10 – APP-01 Slice-4-Gate + Nachputz | OA-02 Advocatus-Diaboli-Prüfung verankert
+- [OK] Keine Vorkommnisse

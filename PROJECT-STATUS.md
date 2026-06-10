@@ -5,11 +5,11 @@ Fokus-AP: APP-01 — prokrastinations-preis
 Nächster-Schritt: Slice 4 SparplanChart (APP-01)
 Blocker: keine
 -->
-<!-- HOOK-META-SESSION: OA-02-Nachputz -->
+<!-- HOOK-META-SESSION: APP-01-slice4-gate -->
 
 # PROJECT STATUS — Finanzwesir 2.0
 
-Stand: 2026-06-10 | Session: OA-02-Nachputz | Geändert von: Claude
+Stand: 2026-06-10 | Session: APP-01-slice4-gate | Geändert von: Claude
 
 **Zweck:** Schneller Wiedereinstieg nach Pausen.
 **Zielgruppe:** Albert und Claude.
@@ -76,6 +76,8 @@ Stand: 2026-06-10 | Session: OA-02-Nachputz | Geändert von: Claude
 ✅ **Root-Making-of-Rahmen vorbereitet (AP-8 / ST-26, 2026-06-08):** `Archiv/making-of/` angelegt mit `README.md` (Schutzregel, Quellenlogik) und `KAPITELRAHMEN.md` (7 Kapitelkandidaten, 6 mit Belegen aus legacy-map.md, 1 RAHMEN_OHNE_BELEG für Kapitel 01 Ursprung). `legacy-map.md` minimal aktualisiert (+1 Haupttabelleneintrag, Zähler 15→16).
 
 ✅ **Archiv-Grundarchitektur abgeschlossen (AP-9 / ST-27, 2026-06-08):** `docs/spec/archiv/` als erste Pilotinsel behandelt — `PILOT-BEWERTUNG.md` angelegt (Einordnung, Befund, Kontextschutz, Making-of-Bezug, Lernpunkt). `legacy-map.md` Pilotstatus aktualisiert. `KAPITELRAHMEN.md` Kapitel-02-Belegverweis ergänzt. Pilot-Lernpunkt: Auswahlregel hat funktioniert, AP-7-README trug. Archivstrategie-Grundarchitektur AP 3–9 abgeschlossen.
+
+✅ **APP-01 Slice-4-Gate verankert (2026-06-10):** OA-02 Advocatus-Diaboli-Prüfung als Pflicht-Gate (`###`) im SLICE_PLAN.md Slice-4-Abschnitt verankert. 3 Risiken + 5 Pflichtfragen vor Slice-4-Code dokumentiert. BACKLOG-Erinnerungsanker gesetzt. Kein Code geändert.
 
 ✅ **OA-02-Doku-Nachputz abgeschlossen (2026-06-10):** `// NEW`-Marker aus Markdown entfernt, D-OA-02-1 im DECISION-LOG ergänzt, OA-02-Status in ADR und App-Fabrik-Standard synchronisiert. Kein JavaScript geändert.
 
@@ -154,6 +156,9 @@ Vollständig im DECISION-LOG dokumentiert (`docs/steering/DECISION-LOG.md`):
 ---
 
 ## 8. Letzte Session
+
+2026-06-10 — APP-01 Slice-4-Gate (APP-01-slice4-gate).
+OA-02 Advocatus-Diaboli-Prüfung als Pflicht-Gate (`###`) in SLICE_PLAN.md Slice-4-Abschnitt verankert. 3 Risiken (Legacy-Vertrag, Adapter-Sonderlayer, fw-appchart-Verfestigung) + 5 Pflichtfragen vor Slice-4-Code dokumentiert. BACKLOG APP-01-Zeile um Erinnerungsanker ergänzt. Formaler Nachputz: Gate-Heading auf `###` abgesenkt, Patch-Quittung präzisiert. Kein Code, kein neuer AP.
 
 2026-06-10 — OA-02-Nachputz: Doku-Konsistenz OA-02 geschlossen.
 `// NEW`-Marker aus APP-INTERFACE.md und CHART_ENGINE_ROLE_AND_INTEGRATION.md entfernt. D-OA-02-1 im DECISION-LOG angelegt. OA-02-Status in ADR-COMP-ARCH-01 und 03_APP_FACTORY_STANDARD_DRAFT §6 auf beschlossen aktualisiert. P-01–P-11 → P-01–P-10 in ADR korrigiert. Kein JavaScript geändert. Commit-Message-Artefakt `7d3a803` verbleibt historisch.

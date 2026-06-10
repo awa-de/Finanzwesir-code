@@ -247,7 +247,7 @@ Direkte Chart.js-Nutzung? Eigene Canvas-Implementierung? Chart-Engine-Adapter? E
 
 ---
 
-## Pflicht-Gate vor Slice 4: OA-02 Advocatus-Diaboli-Prüfung
+### Pflicht-Gate vor Slice 4: OA-02 Advocatus-Diaboli-Prüfung
 
 Bevor für Slice 4 `SparplanChart` Code geschrieben wird, müssen die drei OA-02-Dissens-Risiken aktiv geprüft und beantwortet werden.
 
