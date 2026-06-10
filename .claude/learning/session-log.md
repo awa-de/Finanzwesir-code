@@ -60,3 +60,10 @@ FinanzwesirData.js, CSVParser.js, FwDateUtils.js — diese Session nicht berühr
 
 ## 2026-06-10 – OA-02-Dissens-3 | Markup-Vertrag für In-App-Charts, Kollisionsvermeidung
 - [FRICTION] `// NEW`-Marker in Markdown-Dateien eingefügt — CLAUDE.md sagt „im Code", gilt nicht für Doku-Dateien. Nachpatch nötig.
+
+## 2026-06-10 – SESSION START | Fokus: APP-01 — prokrastinations-preis
+`FinanzwesirData.js, CSVParser.js, FwDateUtils.js — diese Session nicht berühren. ✓`
+
+## 2026-06-10 – OA-02-Nachputz | Dissens-Doku konsistent schließen
+- [PREF] Albert führt Git-Staging und Commit selbst aus — Claude liefert Commit-Message nur als reinen Text, kein git staging.
+- [OK] Alle 6 Pflichtprüfungen bestanden. Keine Regressionen, kein JS berührt.

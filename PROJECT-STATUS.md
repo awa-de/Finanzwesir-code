@@ -5,11 +5,11 @@ Fokus-AP: APP-01 — prokrastinations-preis
 Nächster-Schritt: Slice 4 SparplanChart (APP-01)
 Blocker: keine
 -->
-<!-- HOOK-META-SESSION: OA-02-Dissens-3 -->
+<!-- HOOK-META-SESSION: OA-02-Nachputz -->
 
 # PROJECT STATUS — Finanzwesir 2.0
 
-Stand: 2026-06-10 | Session: OA-02-Dissens-3 | Geändert von: Claude
+Stand: 2026-06-10 | Session: OA-02-Nachputz | Geändert von: Claude
 
 **Zweck:** Schneller Wiedereinstieg nach Pausen.
 **Zielgruppe:** Albert und Claude.
@@ -77,7 +77,9 @@ Stand: 2026-06-10 | Session: OA-02-Dissens-3 | Geändert von: Claude
 
 ✅ **Archiv-Grundarchitektur abgeschlossen (AP-9 / ST-27, 2026-06-08):** `docs/spec/archiv/` als erste Pilotinsel behandelt — `PILOT-BEWERTUNG.md` angelegt (Einordnung, Befund, Kontextschutz, Making-of-Bezug, Lernpunkt). `legacy-map.md` Pilotstatus aktualisiert. `KAPITELRAHMEN.md` Kapitel-02-Belegverweis ergänzt. Pilot-Lernpunkt: Auswahlregel hat funktioniert, AP-7-README trug. Archivstrategie-Grundarchitektur AP 3–9 abgeschlossen.
 
-⚙️ **Nächster Schritt B1:** OA-02 abgeschlossen ✅ (Dissens 1 ✅ Dissens 2 ✅ Dissens 3 ✅) — Slice 4 SparplanChart.
+✅ **OA-02-Doku-Nachputz abgeschlossen (2026-06-10):** `// NEW`-Marker aus Markdown entfernt, D-OA-02-1 im DECISION-LOG ergänzt, OA-02-Status in ADR und App-Fabrik-Standard synchronisiert. Kein JavaScript geändert.
+
+⚙️ **Nächster Schritt B1:** OA-02 abgeschlossen ✅ (Dissens 1 ✅ Dissens 2 ✅ Dissens 3 ✅ + Doku-Nachputz ✅) — Slice 4 SparplanChart.
 
 ---
 
@@ -152,6 +154,9 @@ Vollständig im DECISION-LOG dokumentiert (`docs/steering/DECISION-LOG.md`):
 ---
 
 ## 8. Letzte Session
+
+2026-06-10 — OA-02-Nachputz: Doku-Konsistenz OA-02 geschlossen.
+`// NEW`-Marker aus APP-INTERFACE.md und CHART_ENGINE_ROLE_AND_INTEGRATION.md entfernt. D-OA-02-1 im DECISION-LOG angelegt. OA-02-Status in ADR-COMP-ARCH-01 und 03_APP_FACTORY_STANDARD_DRAFT §6 auf beschlossen aktualisiert. P-01–P-11 → P-01–P-10 in ADR korrigiert. Kein JavaScript geändert. Commit-Message-Artefakt `7d3a803` verbleibt historisch.
 
 2026-06-10 — OA-02-Dissens-3: Markup-Vertrag für In-App-Charts.
 Separater `fw-appchart`-Marker als kollisionsfreier Zielcontainer für app-berechnete Charts dokumentiert. `financial-chart-module` bleibt exklusiv Legacy-/CSV-Vertrag. Container-Guard-Pflicht verankert. 3 Dokumente gepatcht: APP-INTERFACE.md §4, CHART_ENGINE_ROLE_AND_INTEGRATION.md §1, DECISION-LOG.md D-OA-02-3. OA-02 vollständig abgeschlossen (alle 3 Dissense ✅).

@@ -1,6 +1,6 @@
 # App-Fabrik-Standard — Draft V0.1
 
-Stand: 2026-06-05 | COMP-ARCH-01-Nachputz | Geändert von: Claude  
+Stand: 2026-06-10 | OA-02-Nachputz | Geändert von: Claude  
 Ziel-Pfad wenn bindend: `docs/spec/APP-FACTORY-STANDARD.md`
 
 **Alle Inhalte hier sind Arbeitsstände.**  
@@ -533,7 +533,7 @@ Der bestehende Chart-Engine-Vertrag bleibt vollständig gültig und wird **nicht
 - `data-options` ist eine einfache `key:value, key:value`-Syntax — keine komplexen JSON-Strukturen
 - `data-colors` enthält Name-Farbe-Paare: `Name: #HEX, Name2: #HEX`
 - Die Chart-Engine wird vorerst nicht auf den `fw-app`-Namespace migriert
-- Chart-Komponenten sind bereits Teil des App-Fabrik-Modells (Component Composition Architecture). Was noch offen ist: die konkrete API und Integrationsform (OA-02), nicht die grundsätzliche Zuordnung.
+- OA-02 ist auf Architektur-/Doku-Ebene entschieden: Chart-Komponenten nutzen die ChartEngine als Single Source of Truth; es gibt den bestehenden deklarativen Legacy-/CSV-Pfad und den Daten-Bridge-Pfad für app-berechnete Daten. Offen bleibt nur die konkrete ChartEngine.js-Implementierung: API-Signatur, Lifecycle, Attributform des In-App-Zielcontainers und Container-Guard.
 
 **Zwei-Vertrags-Modell:**
 

@@ -54,23 +54,23 @@ Die Engine wird dadurch nicht zum App-State-Manager oder Domänenrechner. Die Ve
 
 → Entscheidung: `docs/steering/DECISION-LOG.md` D-OA-02-2
 
-### Kollisionsvermeidung — Separate Marker // NEW
+### Kollisionsvermeidung — Separate Marker
 
-Pfad 1 und Pfad 2 teilen denselben Rendering-Kern, aber verwenden unterschiedliche Container-Marker. Dies ist Pflicht, keine Option. // NEW
+Pfad 1 und Pfad 2 teilen denselben Rendering-Kern, aber verwenden unterschiedliche Container-Marker. Dies ist Pflicht, keine Option.
 
 | Pfad | Container-Marker | Einstieg |
 |---|---|---|
 | Pfad 1 (deklarativ) | `financial-chart-module` | Globaler DOM-Scan, CSV-Laden, Render |
 | Pfad 2 (Bridge) | `fw-appchart` (TBD im ChartEngine-Gate) | App-lokales Finden innerhalb der App-Hülle, Übergabe an Bridge-Pfad |
 
-**Regeln (nicht verhandelbar):** // NEW
-- Mischbetrieb verboten: Ein Container darf nicht gleichzeitig durch Pfad 1 und Pfad 2 angesprochen werden. // NEW
-- `financial-chart-module` darf nicht für app-berechnete Daten verwendet werden. // NEW
-- `fw-appchart` darf nicht durch den globalen deklarativen Scan initialisiert werden. // NEW
+**Regeln (nicht verhandelbar):**
+- Mischbetrieb verboten: Ein Container darf nicht gleichzeitig durch Pfad 1 und Pfad 2 angesprochen werden.
+- `financial-chart-module` darf nicht für app-berechnete Daten verwendet werden.
+- `fw-appchart` darf nicht durch den globalen deklarativen Scan initialisiert werden.
 
-**Container-Guard (Pflicht):** Schutz gegen Doppelinitialisierung, doppelte Listener, widersprüchlichen Chart-State. Konkrete Implementierung im ChartEngine-Gate. // NEW
+**Container-Guard (Pflicht):** Schutz gegen Doppelinitialisierung, doppelte Listener, widersprüchlichen Chart-State. Konkrete Implementierung im ChartEngine-Gate.
 
-→ Entscheidung: `docs/steering/DECISION-LOG.md` D-OA-02-3 // NEW
+→ Entscheidung: `docs/steering/DECISION-LOG.md` D-OA-02-3
 
 ---
 

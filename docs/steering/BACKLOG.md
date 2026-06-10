@@ -13,7 +13,7 @@ Stand: 2026-06-09 | Session: OA-02-Dissens-1 | Geändert von: Claude
 | ID       | Bereich | Titel                                     | Prio | Dep | Detail                              |
 |----------|---------|-------------------------------------------|------|-----|-------------------------------------|
 | ST-18    | System  | Memory-Files mergen — .claude/memory/ (rekonstruiert, Laptop) gegen ~/.claude/.../memory/ (Original, Heim-PC) abgleichen | M | — | .claude/memory/MEMORY.md |
-| APP-01   | App     | B1 Slice-4: SparplanChart (Slice-3 ✅ 2026-06-05, OA-02 offen) | H | — | Apps/prokrastinations-preis/SLICE_PLAN.md |
+| APP-01   | App     | B1 Slice-4: SparplanChart (Slice-3 ✅ 2026-06-05, OA-02 Doku ✅) | H | — | Apps/prokrastinations-preis/SLICE_PLAN.md |
 | AP-20/21 | Engine  | Mixed-Rhythm CV-Heuristik (T5→T3→T6→T7)  | H    | —   | engine/detail/AP-20-DETAIL.md       |
 | AP-6c    | Engine  | Touch-Tooltip Smartphone-Test             | M    | —   | engine/detail/AP-6c-DETAIL.md       |
 | AP-22    | Engine  | Zero-Line lineWidth (~3 Zeilen Fix)       | L    | —   | —                                   |

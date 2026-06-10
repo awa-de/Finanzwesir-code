@@ -170,12 +170,12 @@ Lifecycle-Vertrag und genaue API-Signaturen werden in einem separaten Gate festg
 
 App-berechnete Charts erhalten einen separaten Zielcontainer — unterschieden vom deklarativen CSV-Container durch einen eigenen Marker:
 
-- Marker: `fw-appchart` (genaue Form — class oder data-Attribut — wird im ChartEngine-Gate festgelegt) // NEW
-- Die App findet diesen Container lokal innerhalb ihrer eigenen DOM-Hülle — kein globaler DOM-Scan // NEW
-- Kein `data-csv`, kein `financial-chart-module` auf diesem Container // NEW
-- Kein Redakteursvertrag: erscheint nicht in Ghost-HTML-Cards, nur in App-Templates // NEW
+- Marker: `fw-appchart` (genaue Form — class oder data-Attribut — wird im ChartEngine-Gate festgelegt)
+- Die App findet diesen Container lokal innerhalb ihrer eigenen DOM-Hülle — kein globaler DOM-Scan
+- Kein `data-csv`, kein `financial-chart-module` auf diesem Container
+- Kein Redakteursvertrag: erscheint nicht in Ghost-HTML-Cards, nur in App-Templates
 
-**Container-Guard (Pflicht):** Kein Container darf zweimal initialisiert werden. Schutz gegen Doppelinitialisierung, doppelte Event-Listener, doppelten Chart-State und Mischbetrieb. Konkrete Implementierung im ChartEngine-Gate. // NEW
+**Container-Guard (Pflicht):** Kein Container darf zweimal initialisiert werden. Schutz gegen Doppelinitialisierung, doppelte Event-Listener, doppelten Chart-State und Mischbetrieb. Konkrete Implementierung im ChartEngine-Gate.
 
 Änderungen an der Chart-Engine erfordern ein separates Gate und explizite Freigabe durch Albert.
 

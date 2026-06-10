@@ -1,4 +1,4 @@
-**Stand:** 2026-06-10 | **Session:** OA-02-Dissens-3 | **Geändert von:** Claude
+**Stand:** 2026-06-10 | **Session:** OA-02-Nachputz | **Geändert von:** Claude
 
 # Decision Log — Finanzwesir 2.0
 
@@ -353,6 +353,49 @@ Nicht angehen, solange Begriff und Scope nicht definiert sind.
 #### Revisit
 
 Wenn Albert konkret beschreiben kann, was „Blueprint-Extraktion" bedeutet.
+
+---
+
+## D-OA-02-1: Alles ist App-Komposition — kein konkurrierendes Standalone-Chart-Weltbild
+
+Datum: 2026-06-09
+Status: beschlossen
+
+#### Problem
+
+Die frühe ChartEngine-Geschichte erzeugte das mentale Modell „normale Charts" vs. „Apps mit Chart". Dieses Modell ist falsch und erzeugt Drift: Es legt nahe, dass `financial-chart-module` und `fw-app` zwei gleichrangige Architekturwelten nebeneinander sind — was zu Zwei-Welten-Denken und falschen Sonderfallimplementierungen führt.
+
+#### Entscheidung
+
+Finanzwesir-Apps sind komponierte Erlebnisflächen (Component Composition Architecture).
+
+- Charts sind Komponenten innerhalb dieser Komposition — kein architektonischer Sonderfall.
+- ChartEngine ist Single Source of Truth für Chart-Komponenten.
+- `financial-chart-module` bleibt als Legacy-/CSV-Vertrag vollständig gültig, aber nicht als konkurrierendes Architekturmodell neben `fw-app`.
+
+#### Begründung
+
+- Verhindert Zwei-Welten-Denken.
+- Macht OA-02 zu einer Chart-Komponenten-Integrationsentscheidung innerhalb der App-Fabrik, nicht zu einer Wahl zwischen zwei Architekturen.
+- Schützt den Bestand ohne neue Gleichrangigkeit zu etablieren.
+
+#### Alternativen
+
+- Standalone-Chart-Welt neben App-Welt weiterführen (verworfen): erzeugt dauerhaften Drift, falsche Sonderfallimplementierungen.
+- Legacy-Vertrag sofort migrieren (verworfen): unnötige Destabilisierung ohne Mehrwert.
+
+#### Konsequenzen
+
+- Terminologie in ADR-COMP-ARCH-01, APP-INTERFACE.md und 03_APP_FACTORY_STANDARD_DRAFT.md geschärft.
+- Legacy-Vertrag (`financial-chart-module`) bleibt gültig, aber als Bestandsschutz innerhalb der Component Composition Architecture.
+
+#### Invariante
+
+Keine neue Doku darf `financial-chart-module` als zweite Architekturwelt neben `fw-app` darstellen.
+
+#### Revisit
+
+Nur wenn eine explizite spätere Architekturentscheidung das Gesamtmodell ändert.
 
 ---
 

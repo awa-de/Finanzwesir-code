@@ -1,4 +1,4 @@
-Stand: 2026-06-09 | Session: OA-02-Dissens-1 | Geändert von: Claude
+Stand: 2026-06-10 | Session: OA-02-Nachputz | Geändert von: Claude
 
 # ADR-COMP-ARCH-01: Component Composition Architecture
 
@@ -54,7 +54,7 @@ Die Entscheidung OA-02 (Bibliothek und Integrationsform für Chart-Komponenten i
 
 | Frage | Status |
 |---|---|
-| OA-02: Welche Bibliothek und Integrationsform für Chart-Komponenten? | Offen |
+| OA-02: Welche Bibliothek und Integrationsform für Chart-Komponenten? | Beschlossen auf Doku-/Architekturebene: D-OA-02-1 bis D-OA-02-3; konkrete API-/Lifecycle-/Container-Guard-Implementierung bleibt separates ChartEngine-Gate. |
 | Card-Komponente: Wann und wie entsteht ein CardRenderer? | Durch Bedarf |
 | Map-Komponente: Weltkarte ETF-Indizes als erster Fall — Standardisierung? | Durch Bedarf |
 | Control-Komponente: Wann wandern Slider/Buttons in eine eigene UI-Shell? | Durch Bedarf |
@@ -67,7 +67,7 @@ Die Entscheidung OA-02 (Bibliothek und Integrationsform für Chart-Komponenten i
 - Bestehende Ghost-Card-Verträge (`financial-chart-module`) bleiben vollständig gültig. Bestandsschutz bedeutet nicht architektonische Gleichrangigkeit: `financial-chart-module` lebt als Legacy-Vertrag innerhalb des Gesamtmodells weiter — nicht als konkurrierendes Weltbild daneben.
 - Bestehende Mini-Specs werden nicht umgeschrieben.
 - App-Fabrik-Familien (§4 in 03_APP_FACTORY_STANDARD_DRAFT.md) bleiben gültig — sie beschreiben Interaktionsmuster, keine Architekturmodelle.
-- P-01–P-11 aus dem Architecture Strategy Paper bleiben unverändert gültig.
+- P-01–P-10 aus dem Architecture Strategy Paper bleiben unverändert gültig.
 
 ---
 
@@ -77,3 +77,4 @@ Vollständige Dokumentation des Modells: `docs/App-Fabrik/03_APP_FACTORY_STANDAR
 Querverweise:
 - `docs/App-Fabrik/CHART_ENGINE_ROLE_AND_INTEGRATION.md` §1 (Einordnung in die Component Composition Architecture)
 - `docs/spec/APP-INTERFACE.md` §4 (Querverweis im internen Entwicklervertrag)
+- `docs/steering/DECISION-LOG.md` D-OA-02-1 (kein Standalone-Chart-Weltbild), D-OA-02-2 (zwei offizielle Einstiege, gemeinsamer Kern), D-OA-02-3 (Markup-Vertrag, Kollisionsvermeidung)
