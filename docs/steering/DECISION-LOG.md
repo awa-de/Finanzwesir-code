@@ -1,4 +1,4 @@
-**Stand:** 2026-06-10 | **Session:** OA-02-Dissens-2 | **Geändert von:** Claude
+**Stand:** 2026-06-10 | **Session:** OA-02-Dissens-3 | **Geändert von:** Claude
 
 # Decision Log — Finanzwesir 2.0
 
@@ -395,3 +395,46 @@ Kein app-lokaler Chart-Wrapper ohne erneute explizite Entscheidung. Die App blei
 #### Revisit
 
 Wenn ChartEngine.js für Pfad 2 implementiert wird — dann API-Signaturen und Lifecycle-Vertrag in separatem Gate festlegen.
+
+---
+
+## D-OA-02-3: Markup-Vertrag für In-App-Charts — Kollisionsvermeidung durch separate Marker
+
+Datum: 2026-06-10
+Status: beschlossen
+
+#### Problem
+
+Wenn `financial-chart-module` auch für app-interne Render-Ziele verwendet wird, kann der deklarative Init-Pfad (Pfad 1) den falschen Container initialisieren. Resultat: falscher Einstiegspfad, Erwartung von `data-csv` obwohl die App berechnete Daten liefern will, Doppelinitialisierung, doppelte Listener, widersprüchlicher Chart-State.
+
+#### Entscheidung
+
+In-App-Charts nutzen dieselbe ChartEngine-Infrastruktur (Pfad 2 — Daten-Bridge-Pfad). Die Kollisionsfreiheit wird durch Markup-Trennung sichergestellt:
+
+- `financial-chart-module` bleibt exklusiv der deklarative Legacy-/CSV-Vertrag (Pfad 1).
+- In-App-Chart-Zielcontainer erhalten einen separaten Marker: `fw-appchart` (genaue Form — class oder data-Attribut — wird im ChartEngine-Gate festgelegt).
+- Die App findet ihren Zielcontainer lokal innerhalb ihrer eigenen DOM-Hülle — kein globaler Scan.
+- Container-Guard ist Pflicht: Kein Container darf zweimal initialisiert werden. Schutz gegen Doppelinitialisierung, doppelte Listener, Mischbetrieb.
+
+#### Begründung
+
+Die eigentliche Gefahr liegt nicht in Tooltip, Legende oder Achsen — sie liegt im Container-Auffinden. Klare Markup-Semantik (zwei explizit verschiedene Marker) eliminiert die Ambiguität ohne Laufzeitkomplexität. Gemeinsamer Rendering-Kern, getrennte Einstiegssignale.
+
+#### Alternativen
+
+- Ein einziger Marker für beide Pfade (verworfen): Semantikverlust, Kollisionsrisiko, falscher Init-Pfad.
+- App-lokaler Chart-Wrapper mit eigenem Tooltip/A11y/Theme (verworfen): ChartEngine verliert SSoT-Rolle — bereits durch D-OA-02-1 ausgeschlossen.
+
+#### Konsequenzen
+
+- `docs/spec/APP-INTERFACE.md` §4: Unterabschnitt „In-App-Chart-Zielcontainer" ergänzt
+- `docs/App-Fabrik/CHART_ENGINE_ROLE_AND_INTEGRATION.md` §1: Unterabschnitt „Kollisionsvermeidung — Separate Marker" ergänzt
+- Konkrete API: `fw-appchart`-Attributform und Container-Guard-Implementierung im separaten ChartEngine-Gate
+
+#### Invariante
+
+`financial-chart-module` und `fw-appchart` sind nie auf demselben Container. Kein Container wird durch beide Pfade initialisiert.
+
+#### Revisit
+
+Wenn ChartEngine.js für Pfad 2 implementiert wird — `fw-appchart`-Form, lokales Find-Muster und Container-Guard konkretisieren.

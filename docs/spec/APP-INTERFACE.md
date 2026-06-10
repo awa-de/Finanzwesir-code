@@ -1,6 +1,6 @@
 # App Interface — Finanzwesir 2.0
 
-Stand: 2026-06-10 | OA-02-Dissens-2 | Geändert von: Claude
+Stand: 2026-06-10 | OA-02-Dissens-3 | Geändert von: Claude
 
 **Zweck:** Kanonischer Schnittstellen-Vertrag zwischen Ghost-Content, App-Fabrik-Apps und Chart-Engine.
 **Zielgruppe:** Claude, Albert, zukünftige App-Implementierungen.
@@ -165,6 +165,17 @@ Die ChartEngine bietet zwei offizielle Einstiege in dieselbe Visualisierungspipe
 - ChartEngine: Visualisierung, Tooltip, Legende, Theme, A11y, Chart-State, Smart Update
 
 Lifecycle-Vertrag und genaue API-Signaturen werden in einem separaten Gate festgelegt, wenn ChartEngine.js implementiert wird. Er ist nicht Teil des Redakteursvertrags (§3) und erscheint nicht in Ghost-HTML-Cards.
+
+**In-App-Chart-Zielcontainer (Pfad 2 — intern):**
+
+App-berechnete Charts erhalten einen separaten Zielcontainer — unterschieden vom deklarativen CSV-Container durch einen eigenen Marker:
+
+- Marker: `fw-appchart` (genaue Form — class oder data-Attribut — wird im ChartEngine-Gate festgelegt) // NEW
+- Die App findet diesen Container lokal innerhalb ihrer eigenen DOM-Hülle — kein globaler DOM-Scan // NEW
+- Kein `data-csv`, kein `financial-chart-module` auf diesem Container // NEW
+- Kein Redakteursvertrag: erscheint nicht in Ghost-HTML-Cards, nur in App-Templates // NEW
+
+**Container-Guard (Pflicht):** Kein Container darf zweimal initialisiert werden. Schutz gegen Doppelinitialisierung, doppelte Event-Listener, doppelten Chart-State und Mischbetrieb. Konkrete Implementierung im ChartEngine-Gate. // NEW
 
 Änderungen an der Chart-Engine erfordern ein separates Gate und explizite Freigabe durch Albert.
 

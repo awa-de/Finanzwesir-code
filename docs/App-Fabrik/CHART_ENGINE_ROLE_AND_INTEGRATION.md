@@ -1,6 +1,6 @@
 # Chart-Engine: Rolle und Architekturprinzipien für die App-Fabrik
 
-Stand: 2026-06-10 | OA-02-Dissens-2 | Geändert von: Claude
+Stand: 2026-06-10 | OA-02-Dissens-3 | Geändert von: Claude
 
 **Zweck:** Klärt die Stellung der Chart-Engine im App-Fabrik-Ökosystem und dokumentiert, welche Architekturprinzipien aus dem Architecture Strategy Paper VX als Referenzmuster für App-Fabrik-Apps gelten.
 
@@ -53,6 +53,24 @@ Die Engine wird dadurch nicht zum App-State-Manager oder Domänenrechner. Die Ve
 | Theme, A11y, Chart-State, Smart Update | — | ✓ |
 
 → Entscheidung: `docs/steering/DECISION-LOG.md` D-OA-02-2
+
+### Kollisionsvermeidung — Separate Marker // NEW
+
+Pfad 1 und Pfad 2 teilen denselben Rendering-Kern, aber verwenden unterschiedliche Container-Marker. Dies ist Pflicht, keine Option. // NEW
+
+| Pfad | Container-Marker | Einstieg |
+|---|---|---|
+| Pfad 1 (deklarativ) | `financial-chart-module` | Globaler DOM-Scan, CSV-Laden, Render |
+| Pfad 2 (Bridge) | `fw-appchart` (TBD im ChartEngine-Gate) | App-lokales Finden innerhalb der App-Hülle, Übergabe an Bridge-Pfad |
+
+**Regeln (nicht verhandelbar):** // NEW
+- Mischbetrieb verboten: Ein Container darf nicht gleichzeitig durch Pfad 1 und Pfad 2 angesprochen werden. // NEW
+- `financial-chart-module` darf nicht für app-berechnete Daten verwendet werden. // NEW
+- `fw-appchart` darf nicht durch den globalen deklarativen Scan initialisiert werden. // NEW
+
+**Container-Guard (Pflicht):** Schutz gegen Doppelinitialisierung, doppelte Listener, widersprüchlichen Chart-State. Konkrete Implementierung im ChartEngine-Gate. // NEW
+
+→ Entscheidung: `docs/steering/DECISION-LOG.md` D-OA-02-3 // NEW
 
 ---
 

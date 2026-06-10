@@ -57,3 +57,6 @@ FinanzwesirData.js, CSVParser.js, FwDateUtils.js — diese Session nicht berühr
 - Git-Sicherheit: Vier-Augen-Prinzip → Albert-Übergabe
 - Eingangsschublade Archiv/local/muss noch eingeordnet werden/ in Phase 1 ergänzt
 - Nur docs/steering/SKILL-ARCHIVIEREN-SPEZIFIKATION.md geändert
+
+## 2026-06-10 – OA-02-Dissens-3 | Markup-Vertrag für In-App-Charts, Kollisionsvermeidung
+- [FRICTION] `// NEW`-Marker in Markdown-Dateien eingefügt — CLAUDE.md sagt „im Code", gilt nicht für Doku-Dateien. Nachpatch nötig.
