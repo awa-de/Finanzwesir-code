@@ -83,3 +83,12 @@ FinanzwesirData.js, CSVParser.js, FwDateUtils.js — diese Session nicht berühr
 - [FRICTION] Revision 4: inline appDataLineStrategy in ChartEngine.js = Layer-2-Verschmutzung (Transformation, fwContext, A11y, Zeitlogik gehören in Layer 3) → Revision 4 nicht freigegeben
 - [WIN] _draw() als gemeinsamer Kern korrekt identifiziert; bestehende LineChartStrategy als Revision-5-Ziel klar
 - [OK] Handover-Braindump vollständig in docs/steering/handovers/ abgelegt — neuer Faden kann mit Spec-Trace starten
+## 2026-06-10 – SESSION START | Fokus: APP-01 — prokrastinations-preis
+FinanzwesirData.js, CSVParser.js, FwDateUtils.js — diese Session nicht berühren. ✓
+
+## 2026-06-10 – APP-01 Slice-4-Gate / Gates 1–3 + Implementierungs-Handover
+- [FRICTION] FwRenderer-Pfad: `renderer/FwRenderer.js` angenommen → korrekt: `core/FwRenderer.js`; Glob-Prüfung nötig
+- [FRICTION] Gate-2-Framing: `rangeControls` als „Unterdrückung / noRangeButtons" formuliert → Albert korrigierte: Engine bietet Fähigkeiten an, App wählt deklarativ aus; kein `isAppChart`, kein `noRangeButtons`
+- [PREF] Neutrales `config.features`-Objekt mit Boolean-Flags ist offizielle Doktrin — keine negativen Sonderflags, keine domainspezifischen Flags in Engine/Renderer
+- [WIN] Legende: `_renderLegend()` gibt automatisch null bei 1 Dataset zurück → kein Feature-Flag nötig, spart einen Patch
+- [OK] Gates 1–3 durchgeführt, alle freigegeben. Implementierungs-Handover in docs/steering/handovers/ abgelegt. Kein Code geändert.

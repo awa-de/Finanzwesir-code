@@ -1,5 +1,5 @@
 # BACKLOG – Finanzwesir 2.0
-Stand: 2026-06-10 | Session: OA-02-Nachputz | Geändert von: Claude
+Stand: 2026-06-10 | Session: APP-01-Slice-4-Implementierung | Geändert von: Claude
 
 **Regeln:**
 - ✅-Zeilen werden sofort nach `BACKLOG-ARCHIV.md` verschoben (append), dann hier gelöscht.
@@ -13,7 +13,7 @@ Stand: 2026-06-10 | Session: OA-02-Nachputz | Geändert von: Claude
 | ID       | Bereich | Titel                                     | Prio | Dep | Detail                              |
 |----------|---------|-------------------------------------------|------|-----|-------------------------------------|
 | ST-18    | System  | Memory-Files mergen — .claude/memory/ (rekonstruiert, Laptop) gegen ~/.claude/.../memory/ (Original, Heim-PC) abgleichen | M | — | .claude/memory/MEMORY.md |
-| APP-01   | App     | B1 Slice-4: SparplanChart (Slice-3 ✅ 2026-06-05, OA-02 Gate Rev.1–4 ✅ Rev.4 nicht freigegeben → Handover ✅, neuer Faden: Spec-Trace via LineChartStrategy) | H | — | docs/steering/handovers/HANDOVER-APP-01-SLICE-4-CHARTENGINE-PFAD-2-2026-06-10.md |
+| APP-01   | App     | B1 Slice-4: SparplanChart (Slice-3 ✅ 2026-06-05, Gates 1–3 ✅ freigegeben 2026-06-10, Implementierungs-Handover ✅ → neuer Faden: Implementierung) | H | — | docs/steering/handovers/HANDOVER-APP-01-SLICE-4-IMPLEMENTIERUNG-2026-06-10.md |
 | AP-20/21 | Engine  | Mixed-Rhythm CV-Heuristik (T5→T3→T6→T7)  | H    | —   | engine/detail/AP-20-DETAIL.md       |
 | AP-6c    | Engine  | Touch-Tooltip Smartphone-Test             | M    | —   | engine/detail/AP-6c-DETAIL.md       |
 | AP-22    | Engine  | Zero-Line lineWidth (~3 Zeilen Fix)       | L    | —   | —                                   |

@@ -24,3 +24,4 @@
 - [Abschluss-Ritual-Timing](feedback_abschluss_ritual_timing.md) — Abschluss-Ritual sofort nach AP-Fertigstellung anbieten, nicht auf Alberts Initiative warten
 - [Archivstrategie](project_archivstrategie.md) — Dreiteilung: Aktive Dateien / Archiv (versioniert) / Git; `Archiv/local/` gitignored für Rohmaterial, LLM-Dumps, Binärdateien
 - [Git-Staging durch Albert](feedback_git_staging.md) — Claude liefert Commit-Message nur als reinen Text, kein git add/commit; Albert staged und committed selbst
+- [Features Capability Selection](feedback_features_capability_selection.md) — Engine bietet Fähigkeiten an, App wählt deklarativ aus: `config.features` mit Boolean-Flags; kein `isAppChart`, keine negativen Sonderflags
