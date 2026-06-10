@@ -7,7 +7,7 @@
 
 # SLICE_PLAN — prokrastinations-preis
 
-Stand: 2026-06-05 | Session: APP-01-slice3 | Geändert von: Claude
+Stand: 2026-06-10 | Session: APP-01-slice4-gate | Geändert von: Claude
 
 ---
 
@@ -244,6 +244,59 @@ Slice 2 abgeschlossen. **OA-02 entschieden** (Chart-Bibliothek und Integrationsf
 ### Offene Frage (SF-01)
 
 Direkte Chart.js-Nutzung? Eigene Canvas-Implementierung? Chart-Engine-Adapter? Entscheid vor diesem Slice notwendig.
+
+---
+
+## Pflicht-Gate vor Slice 4: OA-02 Advocatus-Diaboli-Prüfung
+
+Bevor für Slice 4 `SparplanChart` Code geschrieben wird, müssen die drei OA-02-Dissens-Risiken aktiv geprüft und beantwortet werden.
+
+### Risiko 1 — Legacy-Vertrag wird fälschlich als abgelöst interpretiert
+
+Frage:
+Bleibt `financial-chart-module` ausschließlich der bestehende deklarative CSV-/Legacy-Vertrag und wird nicht für app-berechnete Daten verwendet?
+
+Muss gelten:
+- Kein Umbau bestehender `financial-chart-module`-Charts.
+- Keine Migration alter Charts.
+- Kein Mischbetrieb im selben Container.
+- App-berechnete Charts bekommen einen separaten Zielcontainer.
+
+### Risiko 2 — Falscher Adapter-/Sonderlayer entsteht
+
+Frage:
+Wird die ChartEngine als gemeinsamer Rendering-Kern genutzt, ohne einen neuen parallelen Chart-Sonderweg oder app-lokalen Chart.js-Bypass zu bauen?
+
+Muss gelten:
+- Kein eigener Chart.js-Renderingpfad in APP-01.
+- Kein separater „Chart-Datenadapter" als neue Architekturwelt.
+- Die App liefert berechnete Daten.
+- Die ChartEngine verantwortet Visualisierung, Skalen, Renderer, Tooltips und Chart-State.
+- Offene API-/Lifecycle-Fragen werden vor Code explizit entschieden.
+
+### Risiko 3 — `fw-appchart` wird vorschnell verfestigt
+
+Frage:
+Wird der In-App-Chart-Zielcontainer bewusst und kollisionsfrei festgelegt, statt den Namen `fw-appchart` unreflektiert aus der Doku in Code zu gießen?
+
+Muss gelten:
+- Marker-Form vor Implementierung festlegen: class oder data-Attribut.
+- Kein globaler DOM-Scan für In-App-Charts.
+- Container wird lokal innerhalb der App-Hülle gefunden.
+- Kein `data-csv`, kein `financial-chart-module` auf diesem Container.
+- Container-Guard gegen Doppelinitialisierung/Mischbetrieb definieren.
+
+### Ergebnis dieses Gates
+
+Vor Code muss Claude kurz dokumentieren:
+
+1. Welche Container-Konvention wird für Slice 4 verwendet?
+2. Welche ChartEngine-Einstiegsfunktion wird genutzt oder minimal ergänzt?
+3. Wie wird Mischbetrieb verhindert?
+4. Was bleibt weiterhin offen für ein späteres ChartEngine-Gate?
+5. Welche Dateien werden geändert — und welche ausdrücklich nicht?
+
+Ohne diese Antworten kein Slice-4-Code.
 
 ---
 
