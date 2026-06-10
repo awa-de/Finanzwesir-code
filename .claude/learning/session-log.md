@@ -62,7 +62,7 @@ FinanzwesirData.js, CSVParser.js, FwDateUtils.js — diese Session nicht berühr
 - Nur docs/steering/SKILL-ARCHIVIEREN-SPEZIFIKATION.md geändert
 
 ## 2026-06-10 – OA-02-Dissens-3 | Markup-Vertrag für In-App-Charts, Kollisionsvermeidung
-- [FRICTION] `// NEW`-Marker in Markdown-Dateien eingefügt — CLAUDE.md sagt „im Code", gilt nicht für Doku-Dateien. Nachpatch nötig.
+- [FRICTION] `// NEW`-Marker in Markdown-Dateien eingefügt — CLAUDE.md sagt „im Code", gilt nicht für Doku-Dateien. Nachpatch in OA-02-Nachputz erledigt. ✓
 
 ## 2026-06-10 – SESSION START | Fokus: APP-01 — prokrastinations-preis
 `FinanzwesirData.js, CSVParser.js, FwDateUtils.js — diese Session nicht berühren. ✓`
@@ -70,3 +70,4 @@ FinanzwesirData.js, CSVParser.js, FwDateUtils.js — diese Session nicht berühr
 ## 2026-06-10 – OA-02-Nachputz | Dissens-Doku konsistent schließen
 - [PREF] Albert führt Git-Staging und Commit selbst aus — Claude liefert Commit-Message nur als reinen Text, kein git staging.
 - [OK] Alle 6 Pflichtprüfungen bestanden. Keine Regressionen, kein JS berührt.
+- [OK] CLAUDE.md-Kandidat geschlossen: Entscheidung Albert — kein Eintrag, keine neue Regel. Einmaliger Doku-Hygiene-Fehler; produktive Doku im OA-02-Nachputz bereinigt.

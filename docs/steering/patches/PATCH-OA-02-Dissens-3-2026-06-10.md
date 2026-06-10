@@ -7,7 +7,7 @@ Dateien:       docs/spec/APP-INTERFACE.md
                docs/steering/DECISION-LOG.md
 CHANGED/NEW:   HINWEIS — `// NEW`-Marker fälschlicherweise in Markdown-Dateien
                eingefügt (CLAUDE.md sagt „im Code", nicht in Doku).
-               Nachpatch nach Alberts Testbestätigung.
+               Nachpatch in OA-02-Nachputz erledigt (2026-06-10). ✓
 Tabu-Check:    keine ✓ — Layer-1-Dateien und PROTECTED_PATHS nicht berührt
 Gate-Typ:      Full
 Testfall:      Dokumentenreview — kein Browser-Test (reine Doku-Änderung).
@@ -16,5 +16,6 @@ Testfall:      Dokumentenreview — kein Browser-Test (reine Doku-Änderung).
                CHART_ENGINE_ROLE_AND_INTEGRATION.md §1?
                (3) D-OA-02-2 in DECISION-LOG.md unverändert?
                (4) D-OA-02-3 vorhanden und vollständig?
-Offene Fragen: `// NEW`-Marker in Markdown-Dateien entfernen →
-               Nachpatch nach Alberts Bestätigung
+Offene Fragen: Nachpatch in OA-02-Nachputz erledigt (2026-06-10). ✓
+               CLAUDE.md-Kandidat geschlossen: Entscheidung Albert — kein Eintrag,
+               keine neue Regel. Einmaliger Doku-Hygiene-Fehler; bereinigt.
