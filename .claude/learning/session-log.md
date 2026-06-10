@@ -74,3 +74,12 @@ FinanzwesirData.js, CSVParser.js, FwDateUtils.js — diese Session nicht berühr
 
 ## 2026-06-10 – APP-01 Slice-4-Gate + Nachputz | OA-02 Advocatus-Diaboli-Prüfung verankert
 - [OK] Keine Vorkommnisse
+
+## 2026-06-10 – SESSION START (neuer Faden) | Fokus: APP-01 — prokrastinations-preis
+`FinanzwesirData.js, CSVParser.js, FwDateUtils.js — diese Session nicht berühren. ✓`
+
+## 2026-06-10 – APP-01 Slice-4-Gate / OA-02 Advocatus-Diaboli (Revisionen 1–4) + Handover
+- [FRICTION] Revision 2: renderFromData() hatte eigenen Inline-Chart.js-Pfad geplant — Engine-interner Bypass erkannt, _draw() als gemeinsamer Render-Kern etabliert
+- [FRICTION] Revision 4: inline appDataLineStrategy in ChartEngine.js = Layer-2-Verschmutzung (Transformation, fwContext, A11y, Zeitlogik gehören in Layer 3) → Revision 4 nicht freigegeben
+- [WIN] _draw() als gemeinsamer Kern korrekt identifiziert; bestehende LineChartStrategy als Revision-5-Ziel klar
+- [OK] Handover-Braindump vollständig in docs/steering/handovers/ abgelegt — neuer Faden kann mit Spec-Trace starten

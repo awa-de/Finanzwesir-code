@@ -2,14 +2,14 @@
 Version: 1
 Stand: 2026-06-10
 Fokus-AP: APP-01 — prokrastinations-preis
-Nächster-Schritt: Slice 4 SparplanChart (APP-01)
+Nächster-Schritt: Neuer Faden — Spec-Trace via LineChartStrategy (HANDOVER-APP-01-SLICE-4-CHARTENGINE-PFAD-2-2026-06-10.md)
 Blocker: keine
 -->
-<!-- HOOK-META-SESSION: APP-01-slice4-gate -->
+<!-- HOOK-META-SESSION: APP-01-Slice-4-Gate -->
 
 # PROJECT STATUS — Finanzwesir 2.0
 
-Stand: 2026-06-10 | Session: APP-01-slice4-gate | Geändert von: Claude
+Stand: 2026-06-10 | Session: APP-01-Slice-4-Gate | Geändert von: Claude
 
 **Zweck:** Schneller Wiedereinstieg nach Pausen.
 **Zielgruppe:** Albert und Claude.
@@ -81,7 +81,9 @@ Stand: 2026-06-10 | Session: APP-01-slice4-gate | Geändert von: Claude
 
 ✅ **OA-02-Doku-Nachputz abgeschlossen (2026-06-10):** `// NEW`-Marker aus Markdown entfernt, D-OA-02-1 im DECISION-LOG ergänzt, OA-02-Status in ADR und App-Fabrik-Standard synchronisiert. Kein JavaScript geändert.
 
-⚙️ **Nächster Schritt B1:** OA-02 abgeschlossen ✅ (Dissens 1 ✅ Dissens 2 ✅ Dissens 3 ✅ + Doku-Nachputz ✅) — Slice 4 SparplanChart.
+✅ **OA-02 Advocatus-Diaboli Gate-Revisionen 1–4 + Handover (2026-06-10):** Gate-Revisionen 1–4 für `renderFromData()` (Pfad 2) ausgeführt. Kernerkenntnisse: `_draw()` als gemeinsamer Render-Kern; inline `appDataLineStrategy` in ChartEngine.js = Layer-2-Verschmutzung. Revision 4 nicht freigegeben. Vollständiger Braindump in `docs/steering/handovers/HANDOVER-APP-01-SLICE-4-CHARTENGINE-PFAD-2-2026-06-10.md` — Spec-Trace-Prompt für neuen Faden (Revision 5 via LineChartStrategy). Kein JS geändert.
+
+⚙️ **Nächster Schritt B1:** Neuer Faden — Spec-Trace-Matrix via Handover-Prompt. Revision 5 muss bestehende LineChartStrategy nutzen (nicht inline in ChartEngine).
 
 ---
 
@@ -121,7 +123,7 @@ Stand: 2026-06-10 | Session: APP-01-slice4-gate | Geändert von: Claude
 | Chart-Engine | Stabil, offene APs | Siehe `docs/steering/BACKLOG.md` |
 | Theme | In Entwicklung | `THEME-ASSEMBLY-CHECKLIST.md` |
 | CSS | Stabil | Siehe `docs/steering/BACKLOG.md` (CSS-N Items) |
-| Apps | Slice-3 ✅ 2026-06-05 | B1 Slice-4: SparplanChart (OA-02 ✅ alle 3 Dissense) |
+| Apps | Gate Rev.1–4 ✅ 2026-06-10 | B1 Slice-4: neuer Faden — Spec-Trace via LineChartStrategy (Handover ✅) |
 | Content | Laufend | Redaktionsleitfaden aktiv |
 | Security | SECURITY-BASELINE.md App-Fabrik-gatefähig ✅ | Security-Sync-Regel + Gate-Prüffrage verankert (ST-13/ST-14) |
 
@@ -156,6 +158,9 @@ Vollständig im DECISION-LOG dokumentiert (`docs/steering/DECISION-LOG.md`):
 ---
 
 ## 8. Letzte Session
+
+2026-06-10 — APP-01 Slice-4-Gate / OA-02 Advocatus-Diaboli Revisionen 1–4 + Handover (APP-01-Slice-4-Gate).
+Gate-Revisionen 1–4 für `renderFromData()` ausgeführt. Kernproblem identifiziert: inline `appDataLineStrategy` in ChartEngine.js = Layer-2-Verschmutzung. Revision 4 nicht freigegeben. Vollständiger Braindump mit Spec-Trace-Prompt in `docs/steering/handovers/HANDOVER-APP-01-SLICE-4-CHARTENGINE-PFAD-2-2026-06-10.md`. Neues Verzeichnis `docs/steering/handovers/` angelegt. NAVIGATION.md aktualisiert. Kein JavaScript geändert.
 
 2026-06-10 — APP-01 Slice-4-Gate (APP-01-slice4-gate).
 OA-02 Advocatus-Diaboli-Prüfung als Pflicht-Gate (`###`) in SLICE_PLAN.md Slice-4-Abschnitt verankert. 3 Risiken (Legacy-Vertrag, Adapter-Sonderlayer, fw-appchart-Verfestigung) + 5 Pflichtfragen vor Slice-4-Code dokumentiert. BACKLOG APP-01-Zeile um Erinnerungsanker ergänzt. Formaler Nachputz: Gate-Heading auf `###` abgesenkt, Patch-Quittung präzisiert. Kein Code, kein neuer AP.
@@ -382,15 +387,28 @@ Neue APs: DS-012, DS-013, DS-014.
 
 ## 9. Einstieg für nächste Session
 
-**Nächster Schritt: Slice-4 SparplanChart implementieren.**
+**Nächster Schritt: Neuer Faden mit Spec-Trace-Matrix.**
+
+Übergabedokument vollständig: `docs/steering/handovers/HANDOVER-APP-01-SLICE-4-CHARTENGINE-PFAD-2-2026-06-10.md`
+
+Der neue Faden startet mit dem Spec-Trace-Prompt aus §11 des Handover-Dokuments. Kein Code ohne Spec-Trace und Gate-Freigabe.
+
+Binding Decisions aus Gate-Revisionen 1–4:
+- Pfad 2 läuft über ChartEngine — kein app-lokaler Renderer
+- Container: `data-fw-appchart="sparplan"` (data-Attribut, nicht class)
+- `renderFromData()` muss `_draw()` als gemeinsamen Render-Kern nutzen
+- Kein inline `appDataLineStrategy` in ChartEngine.js — Layer-2-Verschmutzung
+- Revision 5 muss bestehende `LineChartStrategy` (Layer 3) als Zielstrategie nutzen
+- ChartEngine.js (Layer 2) darf nur Guard, Validierung, Freeze, Format-Übersetzung enthalten
 
 OA-02 vollständig abgeschlossen ✅:
 - OA-02-Dissens-1 ✅: Terminologische Schärfung (ADR-COMP-ARCH-01, APP-INTERFACE.md, 03_APP_FACTORY_STANDARD_DRAFT.md)
 - OA-02-Dissens-2 ✅: Zwei offizielle Einstiege, gemeinsamer Kern, Verantwortungsgrenzen (APP-INTERFACE.md §4, CHART_ENGINE_ROLE_AND_INTEGRATION.md §1, ARCHITECTURE STRATEGY PAPER VX.md, DECISION-LOG D-OA-02-2)
 - OA-02-Dissens-3 ✅: `fw-appchart`-Marker als kollisionsfreier Zielcontainer, Container-Guard-Pflicht (APP-INTERFACE.md §4, CHART_ENGINE_ROLE_AND_INTEGRATION.md §1, DECISION-LOG D-OA-02-3)
 
-Offene Implementierungsarbeit (separates ChartEngine-Gate):
-- `fw-appchart`-Attributform (class oder data-Attribut) festlegen
+Offene Implementierungsarbeit (ChartEngine-Gate Revision 5):
+- Spec-Trace-Matrix: kanonisches Eingabeformat von `LineChartStrategy.transform()`
+- Übersetzung `chartSeries [{ month, depotwert }]` → kanonisches Format
 - Container-Guard in ChartEngine.js implementieren
 - Lifecycle-Vertrag und API-Signaturen für Pfad 2 (Daten-Bridge)
 
