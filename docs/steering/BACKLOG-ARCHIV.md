@@ -1,11 +1,12 @@
 # BACKLOG-ARCHIV – Finanzwesir 2.0
-Stand: 2026-06-10 | Session: APP-01-slice4-gate | Geändert von: Claude
+Stand: 2026-06-11 | Session: APP-01-Slice-4-Implementierung | Geändert von: Claude
 
 Abgeschlossene Items, neueste zuerst (append-only).
 Archivierungs-Trigger: wenn > 200 Zeilen → neue Datei `BACKLOG-ARCHIV-YYYY.md` anlegen.
 
 | ID | Bereich | Titel | Abgeschlossen | Session |
 |----|---------|-------|---------------|---------|
+| APP-01 | App | B1 Slice-4: SparplanChart — `renderFromData()` in ChartEngine.js (WeakMap-State, Feature-Normalisierung, Container-Guard, Validierung `depotwert >= 0`), `rangeControls`-Feature-Guard in FwRenderer.js `_renderControls()`, Headline-Feature-Guard in `_draw()`, app.js/css/test.html verdrahtet. Slider-Smart-Update via WeakMap. Alle manuellen Checks + A11y bestanden. | 2026-06-11 | APP-01-Slice-4-Implementierung |
 | APP-01-GATE-01 | App | OA-02 Advocatus-Diaboli-Gate als Pflicht-Gate (###) in SLICE_PLAN.md Slice-4-Abschnitt verankert, BACKLOG-Erinnerungsanker gesetzt. Kein Code, kein neuer AP. *(sofort erledigt)* | 2026-06-10 | APP-01-slice4-gate |
 | OA-02-NACHPUTZ | Architektur | Doku-Konsistenz nach OA-02-Dissens-1/2/3: `// NEW`-Marker aus produktiven Doku-Dateien entfernt, D-OA-02-1 im DECISION-LOG angelegt, OA-02-Status in ADR-COMP-ARCH-01 und App-Fabrik-Standard synchronisiert, PROJECT-STATUS + BACKLOG aktualisiert. *(sofort erledigt)* | 2026-06-10 | OA-02-Nachputz |
 | OA-02-DISSENS-3 | Architektur | Markup-Vertrag für In-App-Charts: separater `fw-appchart`-Marker (TBD im ChartEngine-Gate) als kollisionsfreier Zielcontainer für app-berechnete Charts. `financial-chart-module` bleibt exklusiv Legacy-/CSV-Vertrag. Container-Guard-Pflicht dokumentiert. APP-INTERFACE.md §4, CHART_ENGINE_ROLE_AND_INTEGRATION.md §1, DECISION-LOG.md D-OA-02-3. *(sofort erledigt)* | 2026-06-10 | OA-02-Dissens-3 |

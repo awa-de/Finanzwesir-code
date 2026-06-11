@@ -1,15 +1,15 @@
 <!-- HOOK-META
 Version: 1
-Stand: 2026-06-10
+Stand: 2026-06-11
 Fokus-AP: APP-01 — prokrastinations-preis
-Nächster-Schritt: Neuer Faden — Implementierung Slice 4 (HANDOVER-APP-01-SLICE-4-IMPLEMENTIERUNG-2026-06-10.md)
+Nächster-Schritt: B1 Slice 5+ — nächster Faden
 Blocker: keine
 -->
 <!-- HOOK-META-SESSION: APP-01-Slice-4-Implementierung -->
 
 # PROJECT STATUS — Finanzwesir 2.0
 
-Stand: 2026-06-10 | Session: APP-01-Slice-4-Implementierung | Geändert von: Claude
+Stand: 2026-06-11 | Session: APP-01-Slice-4-Implementierung | Geändert von: Claude
 
 **Zweck:** Schneller Wiedereinstieg nach Pausen.
 **Zielgruppe:** Albert und Claude.
@@ -85,7 +85,9 @@ Stand: 2026-06-10 | Session: APP-01-Slice-4-Implementierung | Geändert von: Cla
 
 ✅ **APP-01 Slice-4 / Gates 1–3 + Implementierungs-Handover (2026-06-10):** Gate 1 (Spec-Trace-Matrix), Gate 2 (exakter LineChartStrategy-Contract + WeakMap + UI-Analyse), Gate 3 (Implementierungsplan mit Auflagen) — alle freigegeben. Architekturentscheidung: `config.features` als neutrale Fähigkeitswahl (kein `isAppChart`, kein `noRangeButtons`). Implementierungs-Handover vollständig: `docs/steering/handovers/HANDOVER-APP-01-SLICE-4-IMPLEMENTIERUNG-2026-06-10.md`. Kein JS geändert.
 
-⚙️ **Nächster Schritt B1:** Neuer Faden — Implementierung direkt starten (Handover ✅ enthält vollständigen Scope).
+✅ **B1 Slice-4 abgeschlossen (2026-06-11):** `renderFromData()` in ChartEngine.js implementiert (WeakMap-State, Deep-Freeze, Feature-Normalisierung). `rangeControls`-Guard in FwRenderer._renderControls(), Headline-Guard in ChartEngine._draw(). app.js: ChartEngine-Import, chartSection-Container, initialer Chart-Render, Slider-Smart-Update. app.css: `.fw-app__chart-section`. FRICTION: `app.test.html` fehlte Chart.js-Script-Tag (fix: CDN-Tag vor Modul-Script ergänzt). 20 Szenarien A–T + Szenario U (SparplanChart) bestätigt. REG-APP-001 in REGRESSION-MATRIX.md.
+
+⚙️ **Nächster Schritt B1:** Slice 5+ (SLICE_PLAN.md lesen für nächsten Scope).
 
 ---
 
@@ -112,7 +114,7 @@ Stand: 2026-06-10 | Session: APP-01-Slice-4-Implementierung | Geändert von: Cla
 
 ## 3. Nächster sinnvoller Schritt
 
-- **B1 Slice-4** — SparplanChart. Gates 1–3 ✅ freigegeben 2026-06-10. Implementierungs-Handover ✅. Neuer Faden: Implementierung direkt starten.
+- **B1 Slice 5+** — SparplanChart ✅ (Slice 4 abgeschlossen 2026-06-11). `SLICE_PLAN.md` lesen für nächsten Scope.
 - **AP-20/21** (Mixed-Rhythm CV-Heuristik) — 🟡 Aktiv, Chart-Engine, parallel möglich
 
 ---
@@ -125,7 +127,7 @@ Stand: 2026-06-10 | Session: APP-01-Slice-4-Implementierung | Geändert von: Cla
 | Chart-Engine | Stabil, offene APs | Siehe `docs/steering/BACKLOG.md` |
 | Theme | In Entwicklung | `THEME-ASSEMBLY-CHECKLIST.md` |
 | CSS | Stabil | Siehe `docs/steering/BACKLOG.md` (CSS-N Items) |
-| Apps | Gates 1–3 ✅ 2026-06-10 | B1 Slice-4: neuer Faden — Implementierung (Handover ✅) |
+| Apps | Slice 4 ✅ 2026-06-11 | B1 Slice 5+: SLICE_PLAN.md lesen, neuer Faden |
 | Content | Laufend | Redaktionsleitfaden aktiv |
 | Security | SECURITY-BASELINE.md App-Fabrik-gatefähig ✅ | Security-Sync-Regel + Gate-Prüffrage verankert (ST-13/ST-14) |
 
@@ -160,6 +162,9 @@ Vollständig im DECISION-LOG dokumentiert (`docs/steering/DECISION-LOG.md`):
 ---
 
 ## 8. Letzte Session
+
+2026-06-11 — APP-01 Slice-4 implementiert (APP-01-Slice-4-Implementierung).
+`renderFromData()` in ChartEngine.js: WeakMap-State, Deep-Freeze, Feature-Normalisierung, Container-Guards. `rangeControls`-Guard in FwRenderer._renderControls(). Headline-Guard in ChartEngine._draw(). app.js: ChartEngine-Import, chartSection-Container, initialer Render, Slider-Smart-Update. app.css: `.fw-app__chart-section`. FRICTION: `app.test.html` fehlte Chart.js-Script-Tag. 20+1 Szenarien bestätigt. REG-APP-001 neu.
 
 2026-06-10 — APP-01 Slice-4 / Gates 1–3 + Implementierungs-Handover (APP-01-Slice-4-Implementierung).
 Gate 1 (Spec-Trace-Matrix), Gate 2 (LineChartStrategy-Contract + WeakMap + UI-Analyse), Gate 3 (Implementierungsplan) freigegeben. Architekturentscheidung: `config.features` als neutrale Fähigkeitswahl — keine AppChart-Sonderlogik, kein `isAppChart`, kein `noRangeButtons`. 4 Dateien im Scope: ChartEngine.js, FwRenderer.js, app.js, app.css. Implementierungs-Handover vollständig: `docs/steering/handovers/HANDOVER-APP-01-SLICE-4-IMPLEMENTIERUNG-2026-06-10.md`. Kein JS geändert.
@@ -392,40 +397,19 @@ Neue APs: DS-012, DS-013, DS-014.
 
 ## 9. Einstieg für nächste Session
 
-**Nächster Schritt: Neuer Faden — Implementierung Slice 4 direkt starten.**
+**Nächster Schritt: B1 Slice 5+ — `SLICE_PLAN.md` lesen, dann neuer Faden.**
 
-Implementierungs-Handover vollständig: `docs/steering/handovers/HANDOVER-APP-01-SLICE-4-IMPLEMENTIERUNG-2026-06-10.md`
-
-Der neue Faden liest die Handover-Datei und implementiert direkt im definierten Scope. Kein weiteres Gate erforderlich — Gates 1–3 sind freigegeben.
-
-Scope der Implementierung (4 Dateien):
-- `Theme/assets/js/fw-chart-engine/core/ChartEngine.js` — WeakMap + `renderFromData()` + `_draw()`-Headline-Check
-- `Theme/assets/js/fw-chart-engine/core/FwRenderer.js` — `rangeControls`-Feature-Check in `_renderControls()`
-- `Apps/prokrastinations-preis/app.js` — ChartEngine-Import + Container + initialer Aufruf + Slider-Handler
-- `Apps/prokrastinations-preis/app.css` — `.fw-app__chart-section`
-
-Nicht ändern: `LineChartStrategy.js`, `FwDateUtils.js`, `CSVParser.js`, `FinanzwesirData.js`
-
-Binding Decisions (nicht mehr verhandelbar):
-- `renderFromData()` = Bridge / Orchestration; kein `new Chart()` in APP-01
-- `config.features` = neutrale Fähigkeitswahl; kein `isAppChart`, kein `noRangeButtons`
-- WeakMap-State-Persistenz für Smart Update (`chart.update()` statt destroy/recreate)
-- Container-Marker: `data-fw-appchart="sparplan"` (kein `financial-chart-module`)
-- Bridgeformat: `{ columns: ['Date','Depotwert'], rows: [{Date:'YYYY-MM-01', Depotwert: number}], metadata: { unitKey: 'CURRENCY_EUR' } }`
-
-Entschieden (nicht mehr offen):
-- E-01 ✅: prokrastinations-preis ist Szenario-/Vergleichs-App mit Storytelling-Elementen
-- E-02 ✅: Pilot-1 = risiko-uebersetzer (Calculator-Pilot), Pilot-2 = prokrastinations-preis (Daten-/Chart-/Story-Pilot)
-- B-01/B-02/B-03 ✅: Anteilslogik + CSV + Button-getrieben — alle entschieden
+Slice 4 vollständig abgeschlossen (2026-06-11): `renderFromData()` implementiert und getestet.
 
 Operative Quellen:
 - `Apps/prokrastinations-preis/APP_SPEC.md` — V1.7 ✅ (operativ)
-- `Apps/prokrastinations-preis/SLICE_PLAN.md` — Slice-0/1/2/3 ✅, Slice-4 nächster Schritt
-- `docs/steering/handovers/HANDOVER-APP-01-SLICE-4-IMPLEMENTIERUNG-2026-06-10.md` — Implementierungs-Handover ✅
+- `Apps/prokrastinations-preis/SLICE_PLAN.md` — Slice-0/1/2/3/4 ✅, Slice 5+ nächster Schritt
 
-**Scope-Funde die noch offen sind:**
-- AUTHOR_GUIDE-v3.md: `data-app` → `data-fw-app` Update (nach Pilot-1, wenn Vertrag stabil)
-- Redakteurs-Cheat-Sheet für `fw-apps` analog zum Chart-Cheat-Sheet (nach Pilot-1)
+Entschieden (nicht mehr offen):
+- E-01/E-02/B-01/B-02/B-03 ✅: Szenario-App, Anteilslogik, CSV, Button-getrieben
+- OA-02 ✅: `renderFromData()` = offizieller zweiter Engine-Einstieg (Pfad 2, 2026-06-10)
+- `config.features` = neutrale Fähigkeitswahl (kein `isAppChart`, kein `noRangeButtons`)
+- Container-Marker: `data-fw-appchart` (kein `financial-chart-module`)
 
 **Parallel weiter offen:**
 - AP-20/21 (Mixed-Rhythm CV-Heuristik) — Chart-Engine

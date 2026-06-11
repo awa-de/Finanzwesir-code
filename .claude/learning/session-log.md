@@ -92,3 +92,6 @@ FinanzwesirData.js, CSVParser.js, FwDateUtils.js — diese Session nicht berühr
 - [PREF] Neutrales `config.features`-Objekt mit Boolean-Flags ist offizielle Doktrin — keine negativen Sonderflags, keine domainspezifischen Flags in Engine/Renderer
 - [WIN] Legende: `_renderLegend()` gibt automatisch null bei 1 Dataset zurück → kein Feature-Flag nötig, spart einen Patch
 - [OK] Gates 1–3 durchgeführt, alle freigegeben. Implementierungs-Handover in docs/steering/handovers/ abgelegt. Kein Code geändert.
+
+## 2026-06-11 – APP-01 Slice 4 | renderFromData() + Feature-Guards implementiert
+- [FRICTION] app.test.html brauchte Chart.js CDN-Script-Tag — nicht im Handover erwähnt; erst beim Browser-Test erkannt (Error: Chart.js Library nicht geladen)

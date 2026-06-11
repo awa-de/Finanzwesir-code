@@ -78,6 +78,97 @@ export class ChartEngine {
         // Reihenfolge: new FwTheme() → theme.init() → _injectStyles().
         // So liest die Bridge die CSS-Tokens, bevor Styles generiert werden.
         this.renderer = new FwRenderer();
+        this._appChartStates = new WeakMap(); // NEW — AppChart State-Registry
+    }
+
+    // NEW — Slice 4: Bridge für App-berechnete Daten (kein CSV-Fetch)
+    renderFromData(container, chartSeries, options = {}) {
+        // Container-Guard
+        if (!(container instanceof HTMLElement)) {
+            console.error('[ChartEngine] renderFromData: container ist kein HTMLElement');
+            return;
+        }
+        if (!container.hasAttribute('data-fw-appchart')) {
+            console.error('[ChartEngine] renderFromData: container hat kein data-fw-appchart');
+            return;
+        }
+        if (container.classList.contains('financial-chart-module')) {
+            console.error('[ChartEngine] renderFromData: container hat .financial-chart-module');
+            return;
+        }
+        if (container.hasAttribute('data-csv')) {
+            console.error('[ChartEngine] renderFromData: container hat data-csv');
+            return;
+        }
+
+        // chartSeries-Validierung
+        var monthRegex = /^\d{4}-\d{2}$/;
+        if (!Array.isArray(chartSeries) || chartSeries.length === 0) {
+            this.renderer.showError(container, 'chartSeries ist kein Array oder ist leer');
+            return;
+        }
+        for (var i = 0; i < chartSeries.length; i++) {
+            var item = chartSeries[i];
+            if (!item.month || !monthRegex.test(item.month)) {
+                this.renderer.showError(container, 'chartSeries: month muss YYYY-MM-Format haben');
+                return;
+            }
+            if (!Number.isFinite(item.depotwert) || item.depotwert < 0) {
+                this.renderer.showError(container, 'chartSeries: depotwert muss endliche Zahl >= 0 sein');
+                return;
+            }
+        }
+        if (chartSeries[chartSeries.length - 1].month < chartSeries[0].month) {
+            this.renderer.showError(container, 'chartSeries: Monatsfolge muss aufsteigend sein');
+            return;
+        }
+
+        // Typ-Auflösung
+        var type = (options.type && this.strategies[options.type]) ? options.type : 'line';
+
+        // Mapping → kanonisches Format mit Deep-Freeze
+        var frozenData = Object.freeze({
+            columns: Object.freeze(['Date', 'Depotwert']),
+            rows: Object.freeze(
+                chartSeries.map(function(it) {
+                    return Object.freeze({ Date: it.month + '-01', Depotwert: it.depotwert });
+                })
+            ),
+            metadata: Object.freeze({ unitKey: 'CURRENCY_EUR' })
+        });
+
+        // Feature-Normalisierung: nur ausgewertete Features übernehmen
+        var inputFeatures = options.features || {};
+        var features = Object.freeze({
+            rangeControls: inputFeatures.rangeControls,
+            headline:      inputFeatures.headline
+        });
+
+        // WeakMap-State-Mechanik
+        if (this._appChartStates.has(container)) {
+            var state = this._appChartStates.get(container);
+            if (state.type !== type) {
+                console.error('[ChartEngine] renderFromData: Typ-Wechsel nach initialem Render ist verboten');
+                return;
+            }
+            state.data = frozenData;
+            state.config.features = features;
+        } else {
+            var state = {
+                data:          frozenData,
+                strategy:      this.strategies[type],
+                type:          type,
+                config:        { colors: {}, options: '', title: '', features: features },
+                range:         'max',
+                view:          'value',
+                viewOptions:   [],
+                benchmark:     null,
+                chartInstance: null
+            };
+            this._appChartStates.set(container, state);
+        }
+
+        this._draw(container, this._appChartStates.get(container));
     }
 
     async init() {
@@ -146,6 +237,8 @@ export class ChartEngine {
 
         var meta = chartData.meta || {};
         runtimeConfig.headline = meta.headline || null; // BAN V5.0.0
+        // CHANGED — Feature-Auswahl: headline === false → BAN unterdrücken
+        if ((runtimeConfig.features || {}).headline === false) runtimeConfig.headline = null;
 
         var strategyWantsNoTooltip = false;
         if (chartConfig.options && 

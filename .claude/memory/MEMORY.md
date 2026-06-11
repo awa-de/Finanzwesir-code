@@ -25,3 +25,4 @@
 - [Archivstrategie](project_archivstrategie.md) — Dreiteilung: Aktive Dateien / Archiv (versioniert) / Git; `Archiv/local/` gitignored für Rohmaterial, LLM-Dumps, Binärdateien
 - [Git-Staging durch Albert](feedback_git_staging.md) — Claude liefert Commit-Message nur als reinen Text, kein git add/commit; Albert staged und committed selbst
 - [Features Capability Selection](feedback_features_capability_selection.md) — Engine bietet Fähigkeiten an, App wählt deklarativ aus: `config.features` mit Boolean-Flags; kein `isAppChart`, keine negativen Sonderflags
+- [Chart.js Global Requirement](project_chartjs_global_requirement.md) — Chart.js muss via `<script>`-Tag global geladen werden (vor dem app.js-Modul), nie als ES-Module-Import; gilt besonders für standalone App-Test-HTMLs

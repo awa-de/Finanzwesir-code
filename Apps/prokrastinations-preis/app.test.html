@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Testseite — prokrastinations-preis Slice 3</title>
+  <title>Testseite — prokrastinations-preis Slice 4</title>
   <link rel="stylesheet" href="./app.css">
   <style>
     /* Nur für Testseite — gehört nicht in app.css */
@@ -18,7 +18,7 @@
 </head>
 <body>
 
-  <h1>Testseite — prokrastinations-preis Slice 3</h1>
+  <h1>Testseite — prokrastinations-preis Slice 4</h1>
 
   <div class="test-warning">
     Muss über VSCode Live Server geöffnet werden (http://127.0.0.1:5500/...) — nicht als file://. ES-Module laden sonst nicht.
@@ -361,6 +361,29 @@
     </div>
   </div>
 
+  <!-- ═══════════════════════════════════════════════════════════ -->
+  <!-- NEU — Slice 4: SparplanChart (U)                          -->
+  <!-- ═══════════════════════════════════════════════════════════ -->
+
+  <!-- Szenario U: Slice 4 — Chart erscheint und aktualisiert sich -->
+  <div class="test-section">
+    <h2>U — Slice 4: SparplanChart (Hauptszenario)</h2>
+    <p class="test-meta">
+      Erwartung: Chart erscheint unterhalb der KpiCards. Canvas sichtbar, 120 Datenpunkte (Liniendiagramm).<br>
+      Keine Range-Buttons, keine BAN/Headline, kein View-Toggle, keine Legende.<br>
+      Tooltip aktiv (Hover: Monat + EUR-Depotwert). A11y-Tabelle im DOM (position:absolute; left:-9999px).<br>
+      Slider ziehen → Chart aktualisiert sich ohne sichtbaren DOM-Rebuild (Smart Update via chart.update()).<br>
+      KpiCards bleiben korrekt. Keine JS-Exception in Konsole.
+    </p>
+    <div class="kg-card">
+      <div class="fw-app"
+           data-fw-app="prokrastinations-preis"
+           data-fw-data="../../Theme/assets/data/b1/msci-world-net-return-eur-monthly.csv">
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script type="module" src="./app.js"></script>
 </body>
 </html>

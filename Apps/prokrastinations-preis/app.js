@@ -3,6 +3,7 @@
 // Slice 3: Slider + Options-Parsing + Live-Neuberechnung
 
 import { CSVParser } from '../../Theme/assets/js/fw-chart-engine/data/CSVParser.js';
+import { ChartEngine } from '../../Theme/assets/js/fw-chart-engine/core/ChartEngine.js'; // NEW — Slice 4
 
 // SLUG_WHITELIST: Kompilzeit-Konstante — bewusst keine dynamische Quelle
 const SLUG_WHITELIST = ['prokrastinations-preis'];
@@ -181,6 +182,14 @@ function renderContent(container, appData, options) {
   kpiArea.dataset.fwRole = 'kpi-area';
   container.appendChild(kpiArea);
 
+  // NEW — Slice 4: Chart-Engine-Instanz und dynamischer Chart-Container
+  const chartEngine = new ChartEngine();
+
+  const chartSection = document.createElement('div');
+  chartSection.setAttribute('data-fw-appchart', 'sparplan');
+  chartSection.className = 'fw-app__chart-section';
+  container.appendChild(chartSection);
+
   // ARIA Live Region (APP_SPEC §12.1) — Update nur bei change, nicht bei jedem input-Tick
   const a11yRegion = document.createElement('div');
   a11yRegion.setAttribute('aria-live', 'polite');
@@ -199,6 +208,13 @@ function renderContent(container, appData, options) {
 
   const initCtx = updateKpiCards(initialRate);
   a11yRegion.textContent = initCtx.a11ySummary;
+  chartEngine.renderFromData(chartSection, initCtx.chartSeries, {  // NEW — Slice 4: Initial Chart
+    type: 'line',
+    features: {
+      rangeControls: false,
+      headline: false
+    }
+  });
 
   // Perf-NB (NB-5): synchrone Neuberechnung auf jedem Tick — für Pilot ok; In-place-dd-Update bei Bedarf (Slice 7)
   slider.addEventListener('input', () => {
@@ -206,7 +222,11 @@ function renderContent(container, appData, options) {
     slider.setAttribute('aria-valuenow', String(rate));
     slider.setAttribute('aria-valuetext', rate + ' Euro pro Monat');
     valueDisplay.textContent = rate + ' €/Monat';
-    updateKpiCards(rate);
+    const ctx = updateKpiCards(rate);                                   // CHANGED — Slice 4: Rückgabewert nutzen
+    chartEngine.renderFromData(chartSection, ctx.chartSeries, {         // NEW — Slice 4: Chart aktualisieren
+      type: 'line',
+      features: { rangeControls: false, headline: false }
+    });
   });
 
   // change: Live Region nach Slider-Release — kein Screenreader-Spam (APP_SPEC §12.1)

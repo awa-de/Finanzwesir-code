@@ -100,6 +100,13 @@
   flex-shrink: 0;
 }
 
+/* === Slice 4: SparplanChart === */
+.fw-app__chart-section {
+  position: relative;
+  width: 100%;
+  margin-top: var(--fw-space-md, 1rem);
+}
+
 @media (prefers-reduced-motion: reduce) {
   .fw-app__slider,
   .fw-app__slider-value {

@@ -247,6 +247,9 @@ export class FwRenderer {
     
     _renderControls(type, config, fullData, activeView, viewOptions) {
         if (type === 'pie') return null;
+        // CHANGED — Feature-Auswahl: rangeControls === false → keine Range-Buttons
+        const features = config.features || {};
+        if (features.rangeControls === false) return null;
         var toolbar = document.createElement('div'); 
         toolbar.className = 'fw-chart-toolbar';
 

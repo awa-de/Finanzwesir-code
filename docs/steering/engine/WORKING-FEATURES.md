@@ -1,5 +1,5 @@
 # Funktionierende Features (Nicht kaputt machen!)
-Stand: 2026-05-03 08:02 | Session: A7-Stand-Datum | Geändert von: Claude
+Stand: 2026-06-11 | Session: APP-01-Slice-4-Implementierung | Geändert von: Claude
 
 ## Hinweis
 
@@ -20,6 +20,7 @@ Die genaue technische Umsetzung darf Claude selbst analysieren.
 - Smart Updates: View-/Range-Wechsel nutzen `chart.update()` (flüssige Animation, kein Flackern).
 - Error Boundary: Fehlerhafte CSVs zeigen einen Platzhalter, die restliche Seite bleibt stabil.
 - Legend Toggle: Klick auf Legende blendet Datasets ein/aus.
+- `renderFromData()` (Slice 4, 2026-06-11): Zweiter offizieller Engine-Einstieg für app-berechnete Daten ohne CSV-Fetch. Validierung + Mapping + Deep-Freeze + WeakMap-State. `features.rangeControls: false` → keine Range-Buttons. `features.headline: false` → kein BAN. Slider-Smart-Update via `chart.update()` (kein DOM-Rebuild). Bestehende `.financial-chart-module`-Charts unverändert.
 
 ## Layer 3: Chart Strategies
 

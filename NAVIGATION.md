@@ -170,7 +170,7 @@ Nach Abschluss: `/abschluss-ritual`.
 > [!note] B1 / prokrastinations-preis — Slice-3 abgeschlossen (2026-06-05)
 > `Apps/prokrastinations-preis/APP_SPEC.md` V1.7 ist die operative Spec-Quelle.
 > `Apps/prokrastinations-preis/MINI_SPEC_FROM_HAUPTDOKUMENT.md` bleibt als fachliche Hintergrundquelle.
-> `SLICE_PLAN.md` aktuell (neue Mechanik, Slice-2 ✅ 2026-06-05, Slice-3 ✅ 2026-06-05). OA-01 entschieden: app.js ist ES-Modul (`<script type="module">`). Nächster Schritt: Slice 4 — SparplanChart (OA-02 muss vorher entschieden sein).
+> `SLICE_PLAN.md` aktuell (neue Mechanik, Slice-2 ✅ 2026-06-05, Slice-3 ✅ 2026-06-05, Slice-4 ✅ 2026-06-11). OA-01 entschieden: app.js ist ES-Modul (`<script type="module">`). OA-02 entschieden (2026-06-10): Pfad 2 via `renderFromData()`. Nächster Schritt: Slice 5+.
 > B1 ist Pilot-2 (Daten-/Chart-/Story-Pilot). Pilot-1 ist `risiko-uebersetzer` (Calculator-Pilot) — entschieden E-02, 2026-05-28.
 13. bei Chart-Nutzung: relevante Chart-Engine-Spec + WORKING-FEATURES.md
 ```

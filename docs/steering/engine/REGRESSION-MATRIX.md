@@ -1,4 +1,4 @@
-Stand: 2026-05-03 08:02 | Session: Masterplan-Härtung-A4 | Geändert von: Claude
+Stand: 2026-06-11 | Session: APP-01-Slice-4-Implementierung | Geändert von: Claude
 
 # Regression Matrix — Chart Engine
 
@@ -39,6 +39,7 @@ Immer mindestens einen passenden Regressionstest aus dieser Matrix prüfen.
 | REG-LAY-002 | Layout | Desktop Breite | index_linien.html — max-width:1200px (Zone L); alle 7 Szenarien | Keine übergroßen Abstände | FwLayoutRules |
 | REG-CTX-001 | fwContext | Line Chart | index_linie_CI.html — systematischer Line-Permutationstest (Valid/Default/Toxic) | Pflichtfelder vorhanden | Strategies, FwChartPlugins |
 | REG-CTX-002 | fwContext | Bar Chart | index_balken_CI.html — systematischer Bar-Permutationstest (Valid/Default/Toxic) | Pflichtfelder vorhanden | Strategies, FwChartPlugins |
+| REG-APP-001 | AppChart | renderFromData() — SparplanChart Slider-Update | Apps/prokrastinations-preis/app.test.html — Szenario U: Slider bewegen, Chart aktualisiert sich ohne DOM-Rebuild | Kein Range-Button, kein BAN, kein View-Toggle, Tooltip aktiv, A11y-Tabelle vorhanden; bestehende .financial-chart-module-Charts unberührt | ChartEngine.renderFromData(), FwRenderer._renderControls(), ChartEngine._draw() |
 
 ---
 
