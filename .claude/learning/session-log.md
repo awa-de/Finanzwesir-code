@@ -15,3 +15,6 @@ Wird geleert nach /distill. Einträge: [FRICTION] [WIN] [PREF] [QUESTION] [OK]
 - [FRICTION] Patch-Quittung-als-Datei-Regel war in Memory, nicht im Skill — Schritt übersprungen, Albert musste korrigieren
 - [WIN] Letzter-Distill-Parsing-Bug vollständig diagnostiziert: session-log-Parsing überschrieb HOOK-META-Wert (Reset auf "nie" in Zeile 87 + kein Guard). Fix: HOOK-META primär, session-log nur Fallback mit präziserem Regex (nur Heading-Zeilen)
 - [WIN] Kassensturz-Idempotenz + Letzter-Distill Write-back mit identischem Muster gelöst — kein neues Konzept eingeführt
+
+## 2026-06-15 – SESSION START | Fokus: APP-01 — prokrastinations-preis
+`FinanzwesirData.js, CSVParser.js, FwDateUtils.js — diese Session nicht berühren. ✓`
