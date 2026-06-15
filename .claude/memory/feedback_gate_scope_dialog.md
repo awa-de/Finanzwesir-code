@@ -5,8 +5,8 @@ metadata:
   type: feedback
 ---
 
-Das Pre-Code-Gate ist kein reines Formular — es ist ein Klärungspunkt. Wenn im Gate-Dialog Scope-Ambiguitäten auftauchen, explizit fragen statt annehmen und weitermachen.
+Das Pre-Code-Gate ist kein reines Formular — es ist ein Klärungspunkt. Wenn im Gate-Dialog Scope-Ambiguitäten auftauchen, diese explizit benennen und klären, bevor weitergemacht wird.
 
-**Why:** Der Gate-Dialog hat Scope-Unklarheiten aufgedeckt die sonst erst beim Coding sichtbar geworden wären (Distill 6, 2026-06-05, 1 Beleg PREF). Gate als Dialog nutzen spart spätere Korrekturen.
+**Why:** Beim Gate-Durchlauf wurde Scope sichtbar, der vorher implizit war. Gate-Dialog hat Scope-Unklarheiten aufgedeckt die sonst erst beim Coding sichtbar geworden wären (Distill 6, 2026-06-05).
 
-**How to apply:** Im Full-Gate: Gate-Felder nicht mechanisch abarbeiten. Wenn eine Frage eine Ambiguität aufdeckt → stoppen, Albert fragen, erst nach Klärung weiter. Gate-Dialog ist der legitime Ort für Scope-Fragen — besser dort als mitten im Code.
+**How to apply:** Im Full-Gate: Gate-Felder nicht mechanisch abarbeiten. Wenn eine Frage eine Ambiguität aufdeckt → stoppen, Albert fragen, erst nach Klärung weiter. Scope-relevante Beobachtungen während des Gates aktiv ansprechen — nicht übergehen um schneller zu Code zu kommen. Gate-Dialog ist der legitime Ort für Scope-Fragen.

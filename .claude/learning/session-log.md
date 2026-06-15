@@ -18,3 +18,11 @@ Wird geleert nach /distill. Einträge: [FRICTION] [WIN] [PREF] [QUESTION] [OK]
 
 ## 2026-06-15 – SESSION START | Fokus: APP-01 — prokrastinations-preis
 `FinanzwesirData.js, CSVParser.js, FwDateUtils.js — diese Session nicht berühren. ✓`
+
+## 2026-06-15 – ST-18 | Memory-Files mergen
+
+- [FRICTION] NTFS Junction (mklink /J + New-Item -ItemType Junction) scheitert bei Netzlaufwerkzielen — Ziel Z:\ und UNC-Pfad nicht moeglich; auf mklink /D (symbolischer Link) umgeschwenkt
+- [FRICTION] setup-memory-junction.ps1: Unicode-Zeichen in Kommentaren verursachten PowerShell-TerminatorExpectedAtEndOfString-Fehler — Script auf ASCII-only Zeichen neu geschrieben
+- [FRICTION] mklink /D ohne Developer Mode: „Berechtigungen reichen nicht aus" — Albert aktivierte Windows Developer Mode (Einstellungen → System → Entwickler), dann erfolgreich
+- [WIN] 18-Wege-Merge vollstaendig: alle 18 geteilten Dateien sorgfaeltig abgeglichen, 4 Laptop-only + 15 Heim-PC-only integriert; MEMORY.md mit 37 Eintraegen neu aufgebaut
+- [WIN] Symlink live: C:\Users\Albert HP PC\.claude\projects\z--...\memory auf NAS-UNC-Pfad — 38 Dateien sichtbar, kein Brain-Silo mehr

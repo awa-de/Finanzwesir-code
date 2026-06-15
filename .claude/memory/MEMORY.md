@@ -1,28 +1,40 @@
-# Memory — Finanzwesir 2.0
-<!-- Index-Datei. Einträge max. 200 Zeilen. Jeder Eintrag eine Zeile. -->
-<!-- Ort: .claude/memory/ (Nextcloud + git). Nicht in ~/.claude/ — kein Auto-Load durch Harness. -->
-<!-- /start liest diese Datei in Schritt 1b. Einzelne Files bei Bedarf nachladen. -->
-<!-- MERGE-HINWEIS: Auf Heim-PC mit ~/.claude/projects/.../memory/ abgleichen (ST-18). -->
+# Memory Index — Finanzwesir 2.0
 
-- [Arbeitsweise](feedback_arbeitsweise.md) — Sachlich-direkter Arbeitsstil, kein Smalltalk, Ergebnis zuerst
-- [Kein Denglisch](feedback_sprache_kein_denglisch.md) — Nur reines Deutsch, keine englischen Einschübe wenn deutsches Äquivalent existiert
-- [Surgical Check](feedback_surgical_check.md) — Nur ändern was direkt zum Auftrag gehört, keine opportunistischen Verbesserungen am Nachbarcode
-- [Ankündigung = Ausführung](feedback_ankuendigung_ohne_ausfuehrung.md) — Was angekündigt wird ausführen, was ausgeführt wird ankündigen
-- [Strukturannahmen](feedback_strukturannahmen.md) — Pfade und Strukturen immer aus aktuellem Stand lesen, nie annehmen (reoccurrences 2026-06-03/04/05)
-- [Audit Trail](project_audit_trail.md) — Jede Entscheidung dokumentieren: DECISION-LOG (architektonisch) oder session-log (operativ)
-- [Review als Datei](feedback_review_als_datei.md) — Gate-Reports und Reviews als committed Files ablegen, nicht nur Chat-Output
-- [Nummerierung](feedback_nummerierung.md) — AP-IDs und Distill-Kandidaten nach Projekt-Schema (APP-01, ST-16, A/B/C...)
-- [Verifikation vor Output](feedback_verifikation_vor_output.md) — Zahlen und Referenzen gegen Quelle prüfen bevor ausgegeben
-- [Pilot-Status-Sprache](feedback_pilot_status_sprache.md) — Pilot-Artefakte als „Arbeitsfassung" bezeichnen, nie als „freigegeben"
-- [Verbote explizit](feedback_verbote_explizit_formulieren.md) — Verbote als Verbote formulieren, keine Weichzeichner bei echten Grenzen
-- [Glob vs. Read](feedback_glob_vs_read.md) — Bekannter Pfad → sofort Read verwenden, nie Glob als Sicherheitsnetz
-- [Spec-Verbote scopten](feedback_spec_verbote_scope.md) — Spec-Verbote präzise scopten, nicht so breit dass legitime Use-Cases ausgeschlossen werden
-- [Python/PowerShell](feedback_python_powershell_tooling.md) — Python für Datei-Inhalte, PowerShell für Dateisystem/Git
-- [Gate als Scope-Dialog](feedback_gate_scope_dialog.md) — Gate-Dialog aktiv zur Scope-Klärung nutzen, nicht nur Checkliste abarbeiten
-- [CSVParser vertrauen](feedback_csvparser_vertrauenswuerdig.md) — CSVParser-Output vollständig vertrauen, keine sekundäre Validierung
-- [Edit vorab lesen](feedback_edit_vorab_lesen.md) — Datei immer mit Read lesen bevor Edit verwendet wird
-- [Abschluss-Ritual-Timing](feedback_abschluss_ritual_timing.md) — Abschluss-Ritual sofort nach AP-Fertigstellung anbieten, nicht auf Alberts Initiative warten
-- [Archivstrategie](project_archivstrategie.md) — Dreiteilung: Aktive Dateien / Archiv (versioniert) / Git; `Archiv/local/` gitignored für Rohmaterial, LLM-Dumps, Binärdateien
+- [Projektstruktur und Kontext](project_structure.md) — Wer, was, wo: Ghost.io, Einpersonen, Live Server, Arbeitsverzeichnis
+- [App-Architektur (beschlossen)](project_app_architecture.md) — HTML-Card-Einbettung, Ghost liefert screen.css+Tailwind, zwei Rendering-Welten (HTML+Canvas), kein Dark Mode in Apps
+- [Design-API Konzept](project_design_api.md) — Zentraler Baukasten interaktiver UI-Elemente, alle Apps nutzen dieselben Selektoren, Zustände vollständig definieren
+- [Arbeitsweise mit Albert](feedback_arbeitsweise.md) — Sachlich-direkt, kein Smalltalk, Freigabe vor Aktionen, primitiver Dev-Workflow (VSCode+Live Server), Git-Commit durch Albert
+- [Sprache: kein Denglisch](feedback_sprache_kein_denglisch.md) — Alle Texte auf Deutsch mit Umlauten, Fachbegriffe als Nomen OK, keine Hybridformen wie gecommittet/gepusht
+- [Projektsteuerung Synthese aktiviert](project_steering_synthese.md) — Kreuzfahrt-Modell aktiv seit 2026-05-03, 4 neue Skills, schlanke CLAUDE.md
+- [Session-Start-Infrastruktur](project_session_start_infra.md) — Zwei-Stufen-Modell: SessionStart-Hook (HOOK-META aus PROJECT-STATUS.md) + /start-Synthese; DEGRADED-Erkennung aktiv (ST-15, 2026-05-11)
+- [Selbstlernendes System](project_learning_system.md) — Learning-Pipeline implementiert (session-log, patterns, distill, uebergabe, CLAUDE.md §12); Pilot-Test ausstehend
+- [Surgical-Check gilt für alle Edits](feedback_surgical_check.md) — Gilt für jeden Patch (auch .md/.json), nicht nur Code; „nur Kosmetik" ist die Falle
+- [Design-Ressourcen: Refero.design](reference_refero_design.md) — styles.refero.design + MCP: Pflicht-Check bei CSS/Design/App-Styling-Entscheidungen
+- [Ankündigung ohne Ausführung](feedback_ankuendigung_ohne_ausfuehrung.md) — Nie „notiert/geschrieben" sagen ohne tatsächlichen Write-Tool-Call; mentaler ≠ physischer Schritt
+- [Keine Strukturannahmen ohne Verifikation](feedback_strukturannahmen.md) — Vor „X ist vorhanden"-Aussagen die Datei lesen, nie erinnern; reoccurrences 2026-06-03/04/05
+- [Audit-Trail Prinzip](project_audit_trail.md) — DECISION-LOG für Architektur, session-log für Schritte, audits/ für Evaluierungen; kein direkter Claude-Beschluss
+- [Review als eigenständige Datei](feedback_review_als_datei.md) — Bei Evaluierungen: kommentierte Datei liefern, Albert entscheidet selbst; kein direkter Claude-Beschluss
+- [Knappe konstante Namen statt Nummern](feedback_nummerierung.md) — AP-IDs nach Projekt-Schema (APP-01, ST-16...); Schritte/Abschnitte in Docs mit sprechenden Namen
+- [App-Fabrik Struktur und Zählmodell](project_app_fabrik_struktur.md) — 22+3=25 App-Ordner; B1 Slice-4 ✅ 2026-06-11 (renderFromData+SparplanChart); Slice-5+ offen
+- [Datenlayer Governance](project_datenlayer.md) — docs/data/ + Theme/assets/data/b1/; Contract in docs/data/contracts/; AP-DATA-01/04/05 abgeschlossen 2026-06-04; Startdatum 2000-12-29; AP-DATA-09 (Rollout) offen
+- [CSVParser GATEKEEPER-Verhalten](project_csvparser_gatekeeper.md) — Wirft vor Rückgabe von rows wenn date-Spalte fehlt/ungültig; date-Checks in app.js sind toter Code; Error-State (b) erwarten
+- [Zahlen und Referenzen vor Output verifizieren](feedback_verifikation_vor_output.md) — Nie aus dem Kopf nennen; Quelle zuerst konsultieren (Dateianzahl, O-Verweise, Abschnittsnummern)
+- [Pilot-Status vorsichtig abstufend formulieren](feedback_pilot_status_sprache.md) — „Arbeitsfassung für Pilot-1" statt „freigegeben"; Pilot ≠ Kanonisierung
+- [Technische Verbote explizit formulieren](feedback_verbote_explizit_formulieren.md) — Verbote als Verbote schreiben, nicht abschwächen; Gegenstück: [[feedback-spec-verbote-scope]]
+- [Subagenten-Setup v2.1.2](project_subagent_setup.md) — SSoT in subagent-dispatch/SKILL.md; 4 Agenten aktiv; Dispatch-Quittung + Rückfall-Regel Pflicht
+- [Bekannte Pfade direkt lesen, nie Glob](feedback_glob_vs_read.md) — Read mit absolutem Pfad wenn Pfad bekannt; Glob nur bei unbekannten Pfaden; Timeout bei Pflichtquelle = stoppen
+- [Spec-Verbote im engsten Scope formulieren](feedback_spec_verbote_scope.md) — Verbote/Regeln nicht breiter als nötig; explizit abgrenzen was nicht gilt; Gegenstück: [[feedback-verbote-explizit-formulieren]]
+- [Component Composition Architecture](project_comp_arch.md) — App=Board, Komponente=Stein, Engine=Werkzeug; OA-02 als Chart-Komponenten-Entscheidung; §1a in 03_APP_FACTORY_STANDARD_DRAFT.md
+- [Python/PowerShell Tooling](feedback_python_powershell_tooling.md) — Python für Datei-Inhalte (parsen/validieren), PowerShell für Dateisystem/Git; locale-Determinismus
+- [Gate als Scope-Klärungs-Kanal](feedback_gate_scope_dialog.md) — Gate-Durchlauf explizit zum Klären von Scope-Grenzen nutzen, nicht nur Checkliste abhaken
+- [CSVParser-Output vertrauenswürdig](feedback_csvparser_vertrauenswuerdig.md) — kein eigener Validierungscode in app.js; Parser liefert korrekt und vollständig
+- [Edit-Vorab-Lesen](feedback_edit_vorab_lesen.md) — Vor Edit die Ziel-Passage lesen; Whitespace/Flexion können exakten Match brechen
+- [Abschluss-Ritual-Timing](feedback_abschluss_ritual_timing.md) — Ritual sofort anbieten und in der Arbeits-Session ausführen; /uebergabe früh starten bei Kontext-Druck
+- [Patch-Quittung als Datei](feedback_patch_quittung_workflow.md) — Quittung als committed Datei in docs/steering/patches/, nicht nur im Chat
+- [Skill-Spezifikation: erst klären](feedback_skill_spec_klaerung_vorab.md) — offene Punkte vor dem Schreiben von Albert bestätigen lassen
+- [Engine Layer-Grenzen](feedback_engine_layer_grenzen.md) — frühe Engine-Entwürfe tendieren zu Layer-Verschmutzung; Layer-Check vor Freigabe
+- [Archivstrategie](project_archivstrategie.md) — Föderiertes Modell; Archiv/local/ gitignored für Rohmaterial; Archivvertrag in ARCHIV-STRATEGIE.md; kein Handeln ohne AP
 - [Git-Staging durch Albert](feedback_git_staging.md) — Claude liefert Commit-Message nur als reinen Text, kein git add/commit; Albert staged und committed selbst
-- [Features Capability Selection](feedback_features_capability_selection.md) — Engine bietet Fähigkeiten an, App wählt deklarativ aus: `config.features` mit Boolean-Flags; kein `isAppChart`, keine negativen Sonderflags
-- [Chart.js Global Requirement](project_chartjs_global_requirement.md) — Chart.js muss via `<script>`-Tag global geladen werden (vor dem app.js-Modul), nie als ES-Module-Import; gilt besonders für standalone App-Test-HTMLs
+- [Features Capability Selection](feedback_features_capability_selection.md) — Engine bietet Fähigkeiten an, App wählt deklarativ aus: config.features mit Boolean-Flags; kein isAppChart
+- [Chart.js Global Requirement](project_chartjs_global_requirement.md) — Chart.js muss via script-Tag global geladen werden (vor app.js-Modul), nie als ES-Module-Import
+- [Memory-Portabilität](project_memory_portability.md) — Symlink-Loesung: Brain auf NAS (Heim-PC) und Nextcloud (Laptop) portabel; Setup einmalig via tools/setup-memory-junction.ps1

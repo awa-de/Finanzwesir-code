@@ -1,12 +1,12 @@
 ---
 name: feedback-review-als-datei
-description: Reviews und Gate-Reports als committed Files ablegen, nicht nur als Chat-Output
+description: Reviews als committed Files ablegen — kein direkter Claude-Beschluss bei Evaluierungen
 metadata:
   type: feedback
 ---
 
-Spec-Gate-Reports, FAANG-Reviews und ähnliche Bewertungen werden als Dateien committed und nicht nur im Chat ausgegeben.
+Spec-Gate-Reports, FAANG-Reviews und Evaluierungen werden als eigenständige Dateien committed, nicht nur als Chat-Output ausgegeben. Bei Evaluierungen keine direkten Beschlüsse fassen — kommentierte Review-Datei als Entscheidungsgrundlage liefern.
 
-**Why:** Chat-Output ist flüchtig und nicht nachschlagbar. Files zeigen den Ablauf, sind versioniert und können in späteren Sessions referenziert werden (z.B. SPEC_GATE_REPORT.md in Apps/prokrastinations-preis/).
+**Why:** Chat-Output ist flüchtig und nicht nachschlagbar. Albert: „Review als eigenständige kommentierte Datei — Albert liest selbst, entscheidet selbst; kein direkter Claude-Beschluss." Beispiel: SPEC_GATE_REPORT.md in Apps/prokrastinations-preis/.
 
-**How to apply:** Nach Spec-Gate, FAANG-Review oder gleichwertigem Prüfschritt: Report-File anlegen (Namensschema: SPEC_GATE_REPORT.md, REVIEW_[NAME].md o.ä.), committen. Nicht nur im Chat zusammenfassen.
+**How to apply:** Nach Spec-Gate, FAANG-Review oder Evaluierungsaufgabe: Report-File anlegen (SPEC_GATE_REPORT.md, REVIEW_[NAME].md o.ä.), committen. Bei Evaluierungen (z.B. /finde-skills, Option A vs. B): kommentierte Datei mit Pro/Contra erstellen. Empfehlung als „Tendenz" formulieren — nie als abschließenden Beschluss.

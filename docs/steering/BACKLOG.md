@@ -1,5 +1,5 @@
 # BACKLOG – Finanzwesir 2.0
-Stand: 2026-06-11 | Session: APP-01-Slice-4-Implementierung | Geändert von: Claude
+Stand: 2026-06-15 | Session: AF-21-23-PBN-decompose | Geändert von: Claude
 
 **Regeln:**
 - ✅-Zeilen werden sofort nach `BACKLOG-ARCHIV.md` verschoben (append), dann hier gelöscht.
@@ -12,7 +12,6 @@ Stand: 2026-06-11 | Session: APP-01-Slice-4-Implementierung | Geändert von: Cla
 
 | ID       | Bereich | Titel                                     | Prio | Dep | Detail                              |
 |----------|---------|-------------------------------------------|------|-----|-------------------------------------|
-| ST-18    | System  | Memory-Files mergen — .claude/memory/ (rekonstruiert, Laptop) gegen ~/.claude/.../memory/ (Original, Heim-PC) abgleichen | M | — | .claude/memory/MEMORY.md |
 | AP-20/21 | Engine  | Mixed-Rhythm CV-Heuristik (T5→T3→T6→T7)  | H    | —   | engine/detail/AP-20-DETAIL.md       |
 | AP-6c    | Engine  | Touch-Tooltip Smartphone-Test             | M    | —   | engine/detail/AP-6c-DETAIL.md       |
 | AP-22    | Engine  | Zero-Line lineWidth (~3 Zeilen Fix)       | L    | —   | —                                   |
@@ -54,6 +53,9 @@ Stand: 2026-06-11 | Session: APP-01-Slice-4-Implementierung | Geändert von: Cla
 | AF-04    | App     | AUTHOR_GUIDE harmonisieren — `data-app` → `data-fw-app` | M    | Pilot-1      | —                                                 |
 | AF-05    | App     | Redakteurs-Cheat-Sheet fw-apps erstellen        | M    | Pilot-1      | —                                                 |
 | AF-20    | App-Fabrik | CHART_ENGINE_ROLE_AND_INTEGRATION.md: „Standalone"-Terminologie prüfen und ggf. korrigieren (Folge aus OA-02-Dissens-1) | L | — | docs/App-Fabrik/CHART_ENGINE_ROLE_AND_INTEGRATION.md |
+| AF-21    | App-Fabrik | App-Familien P→B→N-Standards ausarbeiten              | M    | —       | docs/App-Fabrik/PBN-FAMILY-STANDARDS.md anlegen: 6-7 Familien je mit Proven-Muster, Better-Satz, Tailwind-Komponenten-Liste |
+| AF-22    | App-Fabrik | P→B→N-Block in APP_SPEC-Template integrieren          | M    | AF-21   | Pflichtabschnitt in APP_SPEC.md-Vorlage + 10v10-Test-Feld |
+| AF-23    | App-Fabrik | Pincus-Check als Pre-Code-Quality-Gate dokumentieren  | L    | AF-22   | 4-Punkte-Checkliste in .claude/commands/ oder CLAUDE.md §6 App-Arbeit |
 
 ---
 

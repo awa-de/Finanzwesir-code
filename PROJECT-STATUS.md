@@ -11,7 +11,7 @@ Kassensturz-Datum: 2026-06-15
 
 # PROJECT STATUS — Finanzwesir 2.0
 
-Stand: 2026-06-15 | Session: session-housekeeping-2026-06-15 | Geändert von: Claude
+Stand: 2026-06-15 | Session: ST-18-memory-merge | Geändert von: Claude
 
 **Zweck:** Schneller Wiedereinstieg nach Pausen.
 **Zielgruppe:** Albert und Claude.
@@ -89,6 +89,8 @@ Stand: 2026-06-15 | Session: session-housekeeping-2026-06-15 | Geändert von: Cl
 
 ✅ **B1 Slice-4 abgeschlossen (2026-06-11):** `renderFromData()` in ChartEngine.js implementiert (WeakMap-State, Deep-Freeze, Feature-Normalisierung). `rangeControls`-Guard in FwRenderer._renderControls(), Headline-Guard in ChartEngine._draw(). app.js: ChartEngine-Import, chartSection-Container, initialer Chart-Render, Slider-Smart-Update. app.css: `.fw-app__chart-section`. FRICTION: `app.test.html` fehlte Chart.js-Script-Tag (fix: CDN-Tag vor Modul-Script ergänzt). 20 Szenarien A–T + Szenario U (SparplanChart) bestätigt. REG-APP-001 in REGRESSION-MATRIX.md.
 
+✅ **Memory-Portabilität abgeschlossen (ST-18, 2026-06-15):** 37 Memory-Dateien aus zwei Verzeichnissen zusammengefuehrt (18 Wege-Merge). Symlink Heim-PC eingerichtet (mklink /D, Developer Mode). Setup-Script `tools/setup-memory-junction.ps1` angelegt. Brain-Silo aufgeloest.
+
 ⚙️ **Nächster Schritt B1:** Slice 5+ (SLICE_PLAN.md lesen für nächsten Scope).
 
 ---
@@ -164,6 +166,9 @@ Vollständig im DECISION-LOG dokumentiert (`docs/steering/DECISION-LOG.md`):
 ---
 
 ## 8. Letzte Session
+
+2026-06-15 — Memory-Portabilität (ST-18-memory-merge).
+37 Memory-Dateien aus zwei Verzeichnissen zusammengefuehrt (18 Wege-Merge + 4 Laptop-only + 15 Heim-PC-only). Symlink C:\Users\Albert HP PC\.claude\...\memory auf NAS-UNC-Pfad (mklink /D, Developer Mode noetig). Setup-Script tools/setup-memory-junction.ps1 angelegt. Brain-Silo aufgeloest. Laptop-Setup: einmalig setup-memory-junction.ps1 ausfuehren.
 
 2026-06-11 — APP-01 Slice-4 implementiert (APP-01-Slice-4-Implementierung).
 `renderFromData()` in ChartEngine.js: WeakMap-State, Deep-Freeze, Feature-Normalisierung, Container-Guards. `rangeControls`-Guard in FwRenderer._renderControls(). Headline-Guard in ChartEngine._draw(). app.js: ChartEngine-Import, chartSection-Container, initialer Render, Slider-Smart-Update. app.css: `.fw-app__chart-section`. FRICTION: `app.test.html` fehlte Chart.js-Script-Tag. 20+1 Szenarien bestätigt. REG-APP-001 neu.
