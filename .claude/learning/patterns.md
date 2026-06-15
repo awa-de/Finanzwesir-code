@@ -1,5 +1,5 @@
 # Patterns — Finanzwesir 2.0
-Stand: 2026-06-08 | Muster mit ≥2 Belegen (Normal) oder ≥1 Beleg (High-Impact) werden Kandidaten. Nur Alberts OK → Promotion.
+Stand: 2026-06-15 | Muster mit ≥2 Belegen (Normal) oder ≥1 Beleg (High-Impact) werden Kandidaten. Nur Alberts OK → Promotion.
 
 ---
 
@@ -9,7 +9,7 @@ Stand: 2026-06-08 | Muster mit ≥2 Belegen (Normal) oder ≥1 Beleg (High-Impac
 - feedback_sprache_kein_denglisch.md → promoted
 - feedback_surgical_check.md → promoted (Distill 2026-05-09: Kandidat B bestätigt, Beleg bereits dokumentiert)
 - feedback_ankuendigung_ohne_ausfuehrung.md → promoted 2026-05-09
-- feedback_strukturannahmen.md → promoted 2026-05-09 | Reoccurrence 2026-06-03 (NAVIGATION.md-Text-Referenz) | Reoccurrence 2026-06-04 (CSVParser-Pfad: fw-chart-engine/*.js statt data/) | Reoccurrence 2026-06-05 (date-Prüfung in hasRequiredColumns als toter Code angenommen) | Reoccurrence 2026-06-06 (ST-19: Write vor Zielort-Klärung gestartet) | Reoccurrence 2026-06-08 (AP-KORR-7: legacy-map Datei als leer angenommen — 349 Bytes mit Inhalt)
+- feedback_strukturannahmen.md → promoted 2026-05-09 | Reoccurrence 2026-06-03 (NAVIGATION.md-Text-Referenz) | Reoccurrence 2026-06-04 (CSVParser-Pfad: fw-chart-engine/*.js statt data/) | Reoccurrence 2026-06-05 (date-Prüfung in hasRequiredColumns als toter Code angenommen) | Reoccurrence 2026-06-06 (ST-19: Write vor Zielort-Klärung gestartet) | Reoccurrence 2026-06-08 (AP-KORR-7: legacy-map Datei als leer angenommen — 349 Bytes mit Inhalt) | Reoccurrence 2026-06-10 (FwRenderer-Pfad: renderer/ statt core/ angenommen)
 - project_audit_trail.md → promoted 2026-05-09
 - feedback_review_als_datei.md → promoted 2026-05-09
 - feedback_nummerierung.md → promoted 2026-05-09
@@ -23,6 +23,11 @@ Stand: 2026-06-08 | Muster mit ≥2 Belegen (Normal) oder ≥1 Beleg (High-Impac
 - feedback_csvparser_vertrauenswuerdig.md → promoted 2026-06-05 (Distill 6: Parser-Output vollständig vertrauenswürdig — 1 Beleg PREF)
 - feedback_edit_vorab_lesen.md → promoted 2026-06-05 (Distill 6: Edit-Vorab-Lesen — 2 Belege Normal)
 - feedback_abschluss_ritual_timing.md → promoted 2026-06-05 (Distill 6: Abschluss-Ritual-Timing — 3 Belege Normal)
+- feedback_patch_quittung_workflow.md → promoted 2026-06-15 (Distill 7: PREF OA-02-Dissens-1/2 — Patch-Quittung als committed Datei in docs/steering/patches/)
+- feedback_skill_spec_klaerung_vorab.md → promoted 2026-06-15 (Distill 7: PREF SKILL-ARCHIV-01 — Präzisierungen vor dem Schreiben klären)
+- feedback_engine_layer_grenzen.md → promoted 2026-06-15 (Distill 7: [P] 2 Belege — Layer-Verschmutzung in frühen Engine-Entwürfen, APP-01 Slice-4)
+- feedback_arbeitsweise.md → ergänzt 2026-06-15 (Distill 7: PREF OA-02-Nachputz — Git-Commit als reiner Text, kein Staging)
+- project_comp_arch.md → ergänzt 2026-06-15 (Distill 7: PREF Slice-4-Gate — config.features-Doktrin, neutrale Boolean-Flags)
 
 ---
 
@@ -49,6 +54,9 @@ Stand: 2026-06-08 | Muster mit ≥2 Belegen (Normal) oder ≥1 Beleg (High-Impac
 - [J] Contract-Vorschau falscher Standardwert — Vorschau zeigte 1234,56 ohne EUR-Suffix; erst nach CSVParser-Analyse korrigiert (AP-DATA-01, 2026-06-04) — 1 Beleg, Normal
 - [K] Externer Pfad ungeprüft übernommen — Python312\python.exe aus ChatGPT-Quelle direkt verwendet → mehrfache abgelehnte Tool-Calls; Albert klärte: python ist im PATH. Externe Umgebungsangaben vor Ausführung prüfen. (ST-19-Fix, 2026-06-06) — 1 Beleg, Normal
 - [L] Riskante Operation ohne Vorbriefing gestartet — Albert stoppte vor NAVIGATION.md-Edit: „Erkläre erst in eigenen Worten." Nach Erklärung Freigabe. Bei signifikanten Edits erst Absicht verbalisieren, dann ausführen. Verwandt: [[feedback_gate_scope_dialog]]. (Archiv/local/-Verschiebung, 2026-06-08) — 1 Beleg, Normal
+- [M] Stand-Datum im Hauptpatch vergessen — bei Mehrfach-Datei-Patches steht das Stand-Datum-Update nicht auf der mentalen Checkliste; separater Nachpatch nötig (OA-02-Dissens-1, 2026-06-09) — 1 Beleg, Normal
+- [N] Code-Marker in Dokumentationsdateien — `// NEW`-Marker in .md-Dateien eingefügt; CLAUDE.md-Regel „im Code" gilt nicht für Doku-Dateien (OA-02-Dissens-3, 2026-06-10) — 1 Beleg, Normal
+- [O] Handover-Lücke: Umgebungsabhängigkeiten fehlen — `app.test.html` brauchte Chart.js CDN-Script-Tag, nicht im Handover dokumentiert; erst beim Browser-Test erkannt (APP-01 Slice 4, 2026-06-11) — 1 Beleg, Normal
 
 ---
 
