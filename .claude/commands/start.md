@@ -70,4 +70,9 @@ Direkt danach:
 `Zählprüfung: „Du hast [N] aktive APs (🟡). Stimmt diese Zahl?"`
 
 Wenn Hook-Output `Wochentag: Monday` (oder Montag):
-`/kassensturz wird jetzt ausgeführt (Wochentag: Montag)` → Kassensturz-Output direkt ausgeben
+  Vergleiche Hook-Output `Kassensturz-Datum` (Format YYYY-MM-DD) mit heutigem Datum:
+  - Kassensturz-Datum ≠ heute ODER „nie":
+    `/kassensturz wird jetzt ausgeführt (Wochentag: Montag)` → Kassensturz-Output direkt ausgeben
+    Danach: Edit-Tool auf `PROJECT-STATUS.md` — Feld `Kassensturz-Datum:` auf heutiges Datum (YYYY-MM-DD) setzen
+  - Kassensturz-Datum == heute:
+    `Kassensturz bereits heute ausgeführt (${Kassensturz-Datum}) — übersprungen.`

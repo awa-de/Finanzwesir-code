@@ -20,11 +20,13 @@ $warnungen  = @()
 
 # --- HOOK-META aus PROJECT-STATUS.md ---
 # CHANGED: Liest maschinenlesbaren Block statt Fliesstext per Regex
-$metaVersion = $null
-$metaStand   = $null
-$fokus       = "unbekannt"
-$naechster   = "unbekannt"
-$blocker     = "unbekannt"
+$metaVersion      = $null
+$metaStand        = $null
+$fokus            = "unbekannt"
+$naechster        = "unbekannt"
+$blocker          = "unbekannt"
+$kassensturzDatum = "nie"                                                          # NEW
+$lastDistill      = "nie"
 
 $statusFile = Join-Path $RepoRoot "PROJECT-STATUS.md"
 if (Test-Path $statusFile) {
@@ -47,7 +49,9 @@ if (Test-Path $statusFile) {
             elseif  ($ml -match "^Stand:\s*(.+)$")            { $metaStand   = $matches[1].Trim() }
             elseif  ($ml -match "^Fokus-AP:\s*(.+)$")         { $fokus       = $matches[1].Trim() }
             elseif  ($ml -match "^N.chster-Schritt:\s*(.+)$") { $naechster   = $matches[1].Trim() }
-            elseif  ($ml -match "^Blocker:\s*(.+)$")          { $blocker     = $matches[1].Trim() }
+            elseif  ($ml -match "^Blocker:\s*(.+)$")                { $blocker          = $matches[1].Trim() }
+            elseif  ($ml -match "^Letzter-Distill:\s*(.+)$")     { $lastDistill      = $matches[1].Trim() } # NEW
+            elseif  ($ml -match "^Kassensturz-Datum:\s*(.+)$")   { $kassensturzDatum = $matches[1].Trim() } # NEW
         }
         if ($metaVersion -ne "1") {
             $hookStatus  = "DEGRADED"
@@ -79,16 +83,17 @@ if (Test-Path $attemptLog) {
     $warnungen += "ATTEMPT-LOG.json fehlt"
 }
 
-# --- Session-Log Eintragsanzahl & letzter Distill ---
-$logCount    = 0
-$lastDistill = "nie"
-$sessionLog  = Join-Path $RepoRoot ".claude\learning\session-log.md"
+# --- Session-Log Eintragsanzahl & letzter Distill (Fallback) ---
+$logCount   = 0
+$sessionLog = Join-Path $RepoRoot ".claude\learning\session-log.md"
 if (Test-Path $sessionLog) {
-    $logContent  = Get-Content $sessionLog -Encoding UTF8
-    $logCount    = ($logContent | Where-Object { $_ -match "^## 20" }).Count
-    # CHANGED: robustere Erkennung — DIST-N-Eintraege und "distill" im Text
-    $distillLine = $logContent | Where-Object { $_ -match "DIST-\d+|distill" } | Select-Object -Last 1
-    if ($distillLine -match "(\d{4}-\d{2}-\d{2})") { $lastDistill = $matches[1] }
+    $logContent = Get-Content $sessionLog -Encoding UTF8
+    $logCount   = ($logContent | Where-Object { $_ -match "^## 20" }).Count
+    # Fallback: nur wenn HOOK-META kein Datum geliefert hat
+    if ($lastDistill -eq "nie") {
+        $distillLine = $logContent | Where-Object { $_ -match "^## 20.*(?:DIST-\d+|[Dd]istill)" } | Select-Object -Last 1
+        if ($distillLine -match "(\d{4}-\d{2}-\d{2})") { $lastDistill = $matches[1] }
+    }
 } else {
     $warnungen += "session-log.md fehlt"
 }
@@ -122,6 +127,7 @@ Write-Output "Blocker-Meta:       $blocker"
 Write-Output "BLOCKED-APs:        $blocked"
 Write-Output "Log-Eintraege:      $logCount"
 Write-Output "Letzter Distill:    $lastDistill"
+Write-Output "Kassensturz-Datum:  $kassensturzDatum"                                 # NEW
 Write-Output "Pattern-Kandidaten: $patterns"
 Write-Output "Wochentag:          $wochentag"
 Write-Output "==========================="

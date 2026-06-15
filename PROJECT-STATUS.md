@@ -4,7 +4,8 @@ Stand: 2026-06-15
 Fokus-AP: APP-01 — prokrastinations-preis
 Nächster-Schritt: B1 Slice 5+ — nächster Faden
 Blocker: keine
-Letzter-Distill: 2026-06-05
+Letzter-Distill: 2026-06-15
+Kassensturz-Datum: 2026-06-15
 -->
 <!-- HOOK-META-SESSION: APP-01-Slice-4-Implementierung -->
 

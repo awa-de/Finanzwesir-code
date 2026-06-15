@@ -66,6 +66,7 @@ Kein Eintrag wird unilateral gelöscht.
 **7. Abschluss**
 - session-log.md leeren (nur Header-Zeilen behalten)
 - patterns.md Stand-Datum aktualisieren
+- `PROJECT-STATUS.md` HOOK-META-Feld `Letzter-Distill:` auf heutiges Datum (YYYY-MM-DD) setzen (Pflicht — Edit-Tool)
 - Ausgabe: „Distill abgeschlossen. [N] Kandidaten promoted, [M] retired, [K] observing."
 
 ---

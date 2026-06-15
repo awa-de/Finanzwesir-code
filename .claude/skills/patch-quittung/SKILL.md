@@ -17,7 +17,9 @@ Aufwand für Albert: 5 Sekunden überfliegen + Testfall bestätigen.
 3. Tabu-Dateien prüfen (Layer-1 + PROTECTED_PATHS)
 4. CHANGED/NEW-Markierungen im Code bestätigen
 5. Testfall aus Gate übernehmen
-6. Output erzeugen
+6. Quittungsdatei in `docs/steering/patches/` schreiben (Pflicht — nicht nur Chat-Ausgabe)
+   Dateiname: `PATCH-[AP-ID oder Kurzname]-[YYYY-MM-DD].md`
+7. Quittung zusätzlich im Chat ausgeben (Kurzform)
 
 ---
 
