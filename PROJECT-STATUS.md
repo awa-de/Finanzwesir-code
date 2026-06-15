@@ -11,7 +11,7 @@ Kassensturz-Datum: 2026-06-15
 
 # PROJECT STATUS — Finanzwesir 2.0
 
-Stand: 2026-06-15 | Session: ST-18-memory-merge | Geändert von: Claude
+Stand: 2026-06-15 | Session: AF-21-23-PBN-decompose | Geändert von: Claude
 
 **Zweck:** Schneller Wiedereinstieg nach Pausen.
 **Zielgruppe:** Albert und Claude.
@@ -91,6 +91,8 @@ Stand: 2026-06-15 | Session: ST-18-memory-merge | Geändert von: Claude
 
 ✅ **Memory-Portabilität abgeschlossen (ST-18, 2026-06-15):** 37 Memory-Dateien aus zwei Verzeichnissen zusammengefuehrt (18 Wege-Merge). Symlink Heim-PC eingerichtet (mklink /D, Developer Mode). Setup-Script `tools/setup-memory-junction.ps1` angelegt. Brain-Silo aufgeloest.
 
+✅ **P→B→N als App-Building-Layer zerlegt (PLAN-01, 2026-06-15):** AF-21 (App-Familien P→B→N-Standards), AF-22 (P→B→N-Block in APP_SPEC-Template), AF-23 (Pincus-Check als Pre-Code-Gate) in BACKLOG eingetragen. Proven=Tailwind, Better=10v10-Test pro Familie, New=isoliert.
+
 ⚙️ **Nächster Schritt B1:** Slice 5+ (SLICE_PLAN.md lesen für nächsten Scope).
 
 ---
@@ -166,6 +168,9 @@ Vollständig im DECISION-LOG dokumentiert (`docs/steering/DECISION-LOG.md`):
 ---
 
 ## 8. Letzte Session
+
+2026-06-15 — P→B→N-Analyse + Decompose (AF-21-23-PBN-decompose).
+P→B→N Framework (Mark Pincus) als operativer App-Building-Layer analysiert. Proven→Tailwind-Standardkomponenten, Better→ein klar formulierter Nutzenmoment pro App-Familie (10v10-Test), New→isoliert. AF-21 (Family-Standards), AF-22 (APP_SPEC-Template-Block), AF-23 (Pincus-Check als Pre-Code-Gate) in BACKLOG eingetragen.
 
 2026-06-15 — Memory-Portabilität (ST-18-memory-merge).
 37 Memory-Dateien aus zwei Verzeichnissen zusammengefuehrt (18 Wege-Merge + 4 Laptop-only + 15 Heim-PC-only). Symlink C:\Users\Albert HP PC\.claude\...\memory auf NAS-UNC-Pfad (mklink /D, Developer Mode noetig). Setup-Script tools/setup-memory-junction.ps1 angelegt. Brain-Silo aufgeloest. Laptop-Setup: einmalig setup-memory-junction.ps1 ausfuehren.

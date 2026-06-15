@@ -26,3 +26,10 @@ Wird geleert nach /distill. Einträge: [FRICTION] [WIN] [PREF] [QUESTION] [OK]
 - [FRICTION] mklink /D ohne Developer Mode: „Berechtigungen reichen nicht aus" — Albert aktivierte Windows Developer Mode (Einstellungen → System → Entwickler), dann erfolgreich
 - [WIN] 18-Wege-Merge vollstaendig: alle 18 geteilten Dateien sorgfaeltig abgeglichen, 4 Laptop-only + 15 Heim-PC-only integriert; MEMORY.md mit 37 Eintraegen neu aufgebaut
 - [WIN] Symlink live: C:\Users\Albert HP PC\.claude\projects\z--...\memory auf NAS-UNC-Pfad — 38 Dateien sichtbar, kein Brain-Silo mehr
+
+## 2026-06-15 – PLAN-01 | P→B→N-Analyse + Decompose AF-21/22/23
+- [OK] Keine Vorkommnisse — Proven-Better-New_Finanzwesir2-Blaupause.md analysiert, 3 Integrationswege formuliert, Preview freigegeben, AF-21/22/23 in BACKLOG eingetragen
+
+## 2026-06-15 – Memory-Symlink-Verifikation
+- [FRICTION] Feedback-Memory feedback_memory_schreibpfad.md war Fehldiagnose — enthielt falsche Regel „nie C:\Users\..."; musste nach PowerShell-Test korrigiert werden
+- [WIN] SYMLINKD per `cmd /c dir /aL` bestätigt: C:\Users\...\memory\ → \\NAS-Datengrab\...\memory; Harness-Pfad korrekt, System funktioniert wie geplant

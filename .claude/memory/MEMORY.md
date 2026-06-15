@@ -38,3 +38,5 @@
 - [Features Capability Selection](feedback_features_capability_selection.md) — Engine bietet Fähigkeiten an, App wählt deklarativ aus: config.features mit Boolean-Flags; kein isAppChart
 - [Chart.js Global Requirement](project_chartjs_global_requirement.md) — Chart.js muss via script-Tag global geladen werden (vor app.js-Modul), nie als ES-Module-Import
 - [Memory-Portabilität](project_memory_portability.md) — Symlink-Loesung: Brain auf NAS (Heim-PC) und Nextcloud (Laptop) portabel; Setup einmalig via tools/setup-memory-junction.ps1
+- [P→B→N als App-Building-Layer](project_pbn_strategy.md) — Proven=Tailwind, Better=ein Nutzenmoment pro Familie (10v10-Test), New=isoliert; AF-21/22/23 in Umsetzung
+- [Memory-Symlink Setup](feedback_memory_schreibpfad.md) — SYMLINKD bestätigt: C:\Users\...\memory\ → NAS; Harness-Pfad korrekt, kein besonderes Verhalten nötig
