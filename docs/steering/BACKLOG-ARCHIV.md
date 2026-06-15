@@ -1,11 +1,12 @@
 # BACKLOG-ARCHIV – Finanzwesir 2.0
-Stand: 2026-06-15 | Session: AF-21-23-PBN-decompose | Geändert von: Claude
+Stand: 2026-06-15 | Session: APP-01-Slice5-Diskussion | Geändert von: Claude
 
 Abgeschlossene Items, neueste zuerst (append-only).
 Archivierungs-Trigger: wenn > 200 Zeilen → neue Datei `BACKLOG-ARCHIV-YYYY.md` anlegen.
 
 | ID | Bereich | Titel | Abgeschlossen | Session |
 |----|---------|-------|---------------|---------|
+| APP-01-Slice-5 | App | B1 Slice-5: 4-Screen-Flow — Screen-Controller showScreen(n), lazy Chart-Render (chartEngine2/chartEngine3), Button-Wiring, Slider-Events ohne Live-Chart-Update. Szenarien S–X erweitert (V/W/X neu), Patch-Quittung in docs/steering/patches/. UX-Diskussion 2026-06-15: Slider-Kopplung ok, SF-02 (NumericInput Hybrid) auf Slice 7 vorgezogen, Microcopy-Schicht für Slice 6 geplant. | 2026-06-15 | APP-01-Slice5-Diskussion |
 | PLAN-01 | App-Fabrik | P→B→N-Analyse (Mark Pincus Framework): 3 Integrationswege erarbeitet (Family-Standards, APP_SPEC-Template, Pincus-Check als Gate) + AF-21/22/23 als Arbeitspakete in BACKLOG zerlegt *(sofort erledigt)* | 2026-06-15 | AF-21-23-PBN-decompose |
 | ST-18 | System | Memory-Files mergen: 37 Memory-Dateien aus zwei divergenten Verzeichnissen (Laptop-rekonstruiert vs. Heim-PC-original) zusammengefuehrt (18 Wege-Merge + 4 Laptop-only + 15 Heim-PC-only). Symlink C:\Users\Albert HP PC\.claude\...\memory auf NAS-UNC-Pfad (mklink /D, Developer Mode). Setup-Script `tools/setup-memory-junction.ps1` fuer neue Maschinen. Memory maschinenuebergreifend portabel. | 2026-06-15 | ST-18-memory-merge |
 | ST-29 | System | Session-Start Infrastruktur Zuverlässigkeit: (1) Kassensturz-Idempotenz — neues HOOK-META-Feld `Kassensturz-Datum` in PROJECT-STATUS.md; session-start.ps1 liest Feld; start.md prüft Datum vor Kassensturz-Aufruf und schreibt nach Lauf zurück. (2) Letzter-Distill Write-back — HOOK-META-Feld `Letzter-Distill` als primäre Quelle in session-start.ps1 verankert (session-log nur Fallback, Regex auf Heading-Zeilen beschränkt); distill/SKILL.md Pflichtschritt 7 ergänzt. (3) Patch-Quittung-als-Datei-Pflicht in patch-quittung/SKILL.md als Schritt 6 verankert. *(sofort erledigt)* | 2026-06-15 | ST-29-session-start-infra |

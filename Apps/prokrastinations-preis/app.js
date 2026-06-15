@@ -1,6 +1,6 @@
-// CHANGED — Slice 3 (war: Slice 2)
+// CHANGED — Slice 5 (war: Slice 3/4)
 // app.js — ES-Modul (OA-01: <script type="module">)
-// Slice 3: Slider + Options-Parsing + Live-Neuberechnung
+// Slice 5: 4-Screen-Flow (Screen-Controller, Button-Navigation, Fokus-Management)
 
 import { CSVParser } from '../../Theme/assets/js/fw-chart-engine/data/CSVParser.js';
 import { ChartEngine } from '../../Theme/assets/js/fw-chart-engine/core/ChartEngine.js'; // NEW — Slice 4
@@ -137,22 +137,43 @@ function renderKpiCards(container, appContext) {
   container.appendChild(dl);
 }
 
-// CHANGED — Slice 3: Slider + Options-Parsing + Live-Neuberechnung (renderA11yRegion entfernt — inline)
+// CHANGED — Slice 5: 4-Screen-Flow (war: flache Darstellung Slice 3/4)
 function renderContent(container, appData, options) {
   const initialRate = options.defaultRate;
   const startBetrag = options.startBetrag;
 
-  // Slider-Sektion — wrapping label (Q-06: kein for/id wegen Mehrfach-Container)
+  function makeBtn(text, extraClass) {
+    const btn = document.createElement('button');
+    btn.type = 'button';
+    btn.textContent = text;
+    btn.className = 'fw-app__btn ' + extraClass;
+    return btn;
+  }
+
+  // --- Screen 1 — Frage + Slider ---
+  const screen1 = document.createElement('section');
+  screen1.className = 'fw-app__screen';
+  screen1.dataset.fwScreen = '1';
+
+  const h2S1 = document.createElement('h2');
+  h2S1.className = 'fw-app__screen-headline';
+  h2S1.tabIndex = -1; // fokussierbar via JS, nicht im Tab-Ring
+  h2S1.textContent = 'Vor 10 Jahren wäre besser gewesen. Was ist mit heute?';
+  screen1.appendChild(h2S1);
+
+  const subline = document.createElement('p');
+  subline.className = 'fw-app__screen-subline';
+  subline.textContent = 'Wir rechnen nicht mit Wunschwerten. Wir nehmen echte MSCI-World-Monatsdaten.';
+  screen1.appendChild(subline);
+
+  // Slider-Sektion (Slice 3 — Q-06: kein for/id wegen Mehrfach-Container)
   const sliderSection = document.createElement('div');
   sliderSection.className = 'fw-app__slider-section';
-
   const label = document.createElement('label');
   label.className = 'fw-app__slider-label';
-
   const labelText = document.createElement('span');
   labelText.className = 'fw-app__slider-label-text';
   labelText.textContent = 'Ich spare monatlich';
-
   const slider = document.createElement('input');
   slider.type = 'range';
   slider.className = 'fw-app__slider';
@@ -165,32 +186,100 @@ function renderContent(container, appData, options) {
   slider.setAttribute('aria-valuemax', '2000');
   slider.setAttribute('aria-valuenow', String(initialRate));
   slider.setAttribute('aria-valuetext', initialRate + ' Euro pro Monat');
-
   const valueDisplay = document.createElement('span');
   valueDisplay.className = 'fw-app__slider-value';
   valueDisplay.setAttribute('aria-hidden', 'true');
   valueDisplay.textContent = initialRate + ' €/Monat';
-
   label.appendChild(labelText);
   label.appendChild(slider);
   label.appendChild(valueDisplay);
   sliderSection.appendChild(label);
-  container.appendChild(sliderSection);
+  screen1.appendChild(sliderSection);
 
-  // KPI-Bereich
+  const btnS1Next = makeBtn('Weiter →', 'fw-app__btn--next');
+  screen1.appendChild(btnS1Next);
+
+  // --- Screen 2 — Vergangenheit (KpiCards + Chart) ---
+  const screen2 = document.createElement('section');
+  screen2.className = 'fw-app__screen';
+  screen2.dataset.fwScreen = '2';
+  screen2.setAttribute('hidden', '');
+
+  const h2S2 = document.createElement('h2');
+  h2S2.className = 'fw-app__screen-headline';
+  h2S2.tabIndex = -1;
+  h2S2.textContent = 'Das wäre kein gerader Weg gewesen. Aber es wäre Marktzeit gewesen.';
+  screen2.appendChild(h2S2);
+
   const kpiArea = document.createElement('div');
   kpiArea.dataset.fwRole = 'kpi-area';
-  container.appendChild(kpiArea);
+  screen2.appendChild(kpiArea);
 
-  // NEW — Slice 4: Chart-Engine-Instanz und dynamischer Chart-Container
-  const chartEngine = new ChartEngine();
+  const chartSection2 = document.createElement('div');
+  chartSection2.setAttribute('data-fw-appchart', 'sparplan-s2');
+  chartSection2.className = 'fw-app__chart-section';
+  screen2.appendChild(chartSection2);
 
-  const chartSection = document.createElement('div');
-  chartSection.setAttribute('data-fw-appchart', 'sparplan');
-  chartSection.className = 'fw-app__chart-section';
-  container.appendChild(chartSection);
+  const navS2 = document.createElement('div');
+  navS2.className = 'fw-app__screen-nav';
+  const btnS2Prev = makeBtn('← Zurück', 'fw-app__btn--prev');
+  const btnS2Next = makeBtn('Weiter →', 'fw-app__btn--next');
+  navS2.appendChild(btnS2Prev);
+  navS2.appendChild(btnS2Next);
+  screen2.appendChild(navS2);
 
-  // ARIA Live Region (APP_SPEC §12.1) — Update nur bei change, nicht bei jedem input-Tick
+  // --- Screen 3 — Heute (Chart ohne VertikaleLinie — TODO Slice 6) ---
+  const screen3 = document.createElement('section');
+  screen3.className = 'fw-app__screen';
+  screen3.dataset.fwScreen = '3';
+  screen3.setAttribute('hidden', '');
+
+  const h2S3 = document.createElement('h2');
+  h2S3.className = 'fw-app__screen-headline';
+  h2S3.tabIndex = -1;
+  h2S3.textContent = 'Vor 10 Jahren ist weg. Heute nicht.';
+  screen3.appendChild(h2S3);
+
+  const chartSection3 = document.createElement('div');
+  chartSection3.setAttribute('data-fw-appchart', 'sparplan-s3'); // TODO Slice 6: VertikaleLinie
+  chartSection3.className = 'fw-app__chart-section';
+  screen3.appendChild(chartSection3);
+
+  const navS3 = document.createElement('div');
+  navS3.className = 'fw-app__screen-nav';
+  const btnS3Prev = makeBtn('← Zurück', 'fw-app__btn--prev');
+  const btnS3Next = makeBtn('Weiter →', 'fw-app__btn--next');
+  navS3.appendChild(btnS3Prev);
+  navS3.appendChild(btnS3Next);
+  screen3.appendChild(navS3);
+
+  // --- Screen 4 — Entscheidung ---
+  const screen4 = document.createElement('section');
+  screen4.className = 'fw-app__screen';
+  screen4.dataset.fwScreen = '4';
+  screen4.setAttribute('hidden', '');
+
+  const h2S4 = document.createElement('h2');
+  h2S4.className = 'fw-app__screen-headline';
+  h2S4.tabIndex = -1;
+  h2S4.textContent = 'Wenn du jetzt wieder wartest, wird heute in zehn Jahren wieder der verpasste Zeitpunkt sein.';
+  screen4.appendChild(h2S4);
+
+  const ctaStub = document.createElement('a'); // STUB — href + Styling folgen in Slice 6 (NB-1)
+  ctaStub.className = 'fw-app__cta';
+  ctaStub.href = '';
+  ctaStub.textContent = 'Heute Marktzeit sammeln →';
+  screen4.appendChild(ctaStub);
+
+  const navS4 = document.createElement('div');
+  navS4.className = 'fw-app__screen-nav';
+  const btnS4Prev = makeBtn('← Zurück', 'fw-app__btn--prev');
+  navS4.appendChild(btnS4Prev);
+  screen4.appendChild(navS4);
+
+  [screen1, screen2, screen3, screen4].forEach(s => container.appendChild(s));
+
+  // ARIA Live Region (APP_SPEC §12.1)
   const a11yRegion = document.createElement('div');
   a11yRegion.setAttribute('aria-live', 'polite');
   a11yRegion.setAttribute('aria-atomic', 'true');
@@ -198,43 +287,78 @@ function renderContent(container, appData, options) {
   a11yRegion.className = 'fw-app__visually-hidden';
   container.appendChild(a11yRegion);
 
-  // Initiale Darstellung
-  function updateKpiCards(rate) {
+  // NEW — Chart-Engines lazy je Screen: hidden canvas hat 0px → erst bei Sichtbarkeit rendern
+  const chartEngine2 = new ChartEngine();
+  const chartEngine3 = new ChartEngine();
+  let lastRenderedRateS2 = null;
+  let lastRenderedRateS3 = null;
+
+  function renderS2(rate) {
     const ctx = buildAppContext(appData, rate, startBetrag);
-    kpiArea.textContent = ''; // SafeDOM: Container leeren (kein innerHTML)
+    kpiArea.textContent = '';
     renderKpiCards(kpiArea, ctx);
+    chartEngine2.renderFromData(chartSection2, ctx.chartSeries, {
+      type: 'line', features: { rangeControls: false, headline: false }
+    });
+    lastRenderedRateS2 = rate;
+    lastRenderedRateS3 = null; // Rate geändert → S3 muss neu rendern
     return ctx;
   }
 
-  const initCtx = updateKpiCards(initialRate);
-  a11yRegion.textContent = initCtx.a11ySummary;
-  chartEngine.renderFromData(chartSection, initCtx.chartSeries, {  // NEW — Slice 4: Initial Chart
-    type: 'line',
-    features: {
-      rangeControls: false,
-      headline: false
-    }
-  });
+  function renderS3(rate) {
+    const { chartSeries } = buildAppContext(appData, rate, startBetrag);
+    chartEngine3.renderFromData(chartSection3, chartSeries, {
+      type: 'line', features: { rangeControls: false, headline: false } // TODO Slice 6: VertikaleLinie
+    });
+    lastRenderedRateS3 = rate;
+  }
 
-  // Perf-NB (NB-5): synchrone Neuberechnung auf jedem Tick — für Pilot ok; In-place-dd-Update bei Bedarf (Slice 7)
+  // NEW — Screen-Controller (prefers-reduced-motion: hidden-Toggle ist direkt, kein CSS-Übergang)
+  const allScreens = [screen1, screen2, screen3, screen4];
+
+  function showScreen(n, focus) {
+    allScreens.forEach((s, i) => {
+      if (i + 1 === n) s.removeAttribute('hidden');
+      else s.setAttribute('hidden', '');
+    });
+    if (focus) {
+      const h2 = allScreens[n - 1].querySelector('h2');
+      if (h2) h2.focus();
+    }
+    const rate = clamp(parseInt(slider.value, 10), 50, 2000);
+    if (n === 2 && rate !== lastRenderedRateS2) {
+      const ctx = renderS2(rate);
+      a11yRegion.textContent = ctx.a11ySummary;
+    }
+    if (n === 3 && rate !== lastRenderedRateS3) renderS3(rate);
+  }
+
+  // NEW — Button-Wiring
+  btnS1Next.addEventListener('click', () => showScreen(2, true));
+  btnS2Prev.addEventListener('click', () => showScreen(1, true));
+  btnS2Next.addEventListener('click', () => showScreen(3, true));
+  btnS3Prev.addEventListener('click', () => showScreen(2, true));
+  btnS3Next.addEventListener('click', () => showScreen(4, true));
+  btnS4Prev.addEventListener('click', () => showScreen(3, true));
+
+  // Slider-Events: kein live Chart-Update (Chart auf Screen 2, Slider auf Screen 1)
   slider.addEventListener('input', () => {
     const rate = clamp(parseInt(slider.value, 10), 50, 2000);
     slider.setAttribute('aria-valuenow', String(rate));
     slider.setAttribute('aria-valuetext', rate + ' Euro pro Monat');
     valueDisplay.textContent = rate + ' €/Monat';
-    const ctx = updateKpiCards(rate);                                   // CHANGED — Slice 4: Rückgabewert nutzen
-    chartEngine.renderFromData(chartSection, ctx.chartSeries, {         // NEW — Slice 4: Chart aktualisieren
-      type: 'line',
-      features: { rangeControls: false, headline: false }
-    });
+    lastRenderedRateS2 = null; // Invalidiert für nächsten Screen-2-Besuch
+    lastRenderedRateS3 = null;
   });
 
-  // change: Live Region nach Slider-Release — kein Screenreader-Spam (APP_SPEC §12.1)
   slider.addEventListener('change', () => {
     const rate = clamp(parseInt(slider.value, 10), 50, 2000);
     const ctx = buildAppContext(appData, rate, startBetrag);
-    a11yRegion.textContent = ctx.a11ySummary;
+    a11yRegion.textContent = ctx.a11ySummary; // Update nach Release (kein Screenreader-Spam)
   });
+
+  // Initiale Anzeige: Screen 1, kein Focus-Steal beim Laden
+  showScreen(1, false);
 }
 
 // gibt { appData } bei Erfolg oder { error: 'b'|'c'|'empty', message } zurück

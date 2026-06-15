@@ -1,4 +1,4 @@
-/* CHANGED — Slice 3 (war: Slice 2) */
+/* CHANGED — Slice 5 (war: Slice 3/4) */
 
 /* === Basis === */
 .fw-app {
@@ -112,6 +112,53 @@
   .fw-app__slider-value {
     transition: none;
   }
+}
+
+/* === Slice 5: Screen-Flow === */
+.fw-app__screen-headline {
+  font-size: 1.2em;
+  font-weight: bold;
+  color: var(--fw-color-text, #1a1a1a);
+  margin: 0 0 var(--fw-space-sm, 0.5rem);
+}
+
+.fw-app__screen-headline:focus {
+  outline: none; /* nur JS-Fokus (tabIndex=-1), kein Tastatur-Fokus-Ring nötig */
+}
+
+.fw-app__screen-subline {
+  color: var(--fw-color-muted, #555555);
+  font-size: 0.9em;
+  margin: 0 0 var(--fw-space-md, 1rem);
+}
+
+.fw-app__screen-nav {
+  display: flex;
+  gap: var(--fw-space-sm, 0.5rem);
+  margin-top: var(--fw-space-md, 1rem);
+}
+
+.fw-app__btn {
+  padding: 0.5rem 1.25rem;
+  border: 1px solid var(--fw-color-primary, #0071bf);
+  border-radius: 4px;
+  background: transparent;
+  color: var(--fw-color-primary, #0071bf);
+  font-size: 0.95em;
+  cursor: pointer;
+}
+
+.fw-app__btn--next {
+  background: var(--fw-color-primary, #0071bf);
+  color: var(--fw-color-bg, #ffffff);
+  margin-left: auto;
+}
+
+/* Slice 6: .fw-app__cta erhält finales Styling */
+.fw-app__cta {
+  display: inline-block;
+  margin-top: var(--fw-space-md, 1rem);
+  color: var(--fw-color-primary, #0071bf);
 }
 
 /* === A11y: ARIA Live Region (APP_SPEC §12.1) === */

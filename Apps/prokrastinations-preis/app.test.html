@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Testseite — prokrastinations-preis Slice 4</title>
+  <title>Testseite — prokrastinations-preis Slice 5</title>
   <link rel="stylesheet" href="./app.css">
   <style>
     /* Nur für Testseite — gehört nicht in app.css */
@@ -18,7 +18,7 @@
 </head>
 <body>
 
-  <h1>Testseite — prokrastinations-preis Slice 4</h1>
+  <h1>Testseite — prokrastinations-preis Slice 5</h1>
 
   <div class="test-warning">
     Muss über VSCode Live Server geöffnet werden (http://127.0.0.1:5500/...) — nicht als file://. ES-Module laden sonst nicht.
@@ -288,13 +288,13 @@
   <!-- Slice 3: Slider-Interaktion + Options-Parsing (S, T)      -->
   <!-- ═══════════════════════════════════════════════════════════ -->
 
-  <!-- Szenario S: T-11 — Slider-Interaktion live -->
+  <!-- Szenario S: T-11 — Slider-Interaktion (ab Slice 5: kein live Chart-Update mehr) -->
   <div class="test-section">
-    <h2>S — Slider-Interaktion live (T-11)</h2>
+    <h2>S — Slider auf Screen 1 (T-11)</h2>
     <p class="test-meta">
-      Erwartung: Slider sichtbar bei 300 €. Slider ziehen → KpiCards aktualisieren sich live.<br>
-      Slider auf 1.000 € → Eingezahlt = 120.000 €. Kein Crash, keine JS-Exception in Konsole.<br>
-      ARIA Live Region (DevTools: [data-fw-role="a11y-result"]) aktualisiert sich nach Slider-Release, nicht bei jedem Tick.<br>
+      Erwartung: Screen 1 sichtbar. Slider startet bei 300 €. Slider ziehen → Anzeige „X €/Monat" aktualisiert sich live.<br>
+      KpiCards und Chart sind auf Screen 1 NICHT sichtbar (erst auf Screen 2).<br>
+      ARIA Live Region aktualisiert sich nach Slider-Release (nicht bei jedem Tick).<br>
       Viewport 375px: Slider bedienbar, kein horizontaler Overflow.<br>
       Testfall: T-11
     </p>
@@ -365,15 +365,86 @@
   <!-- NEU — Slice 4: SparplanChart (U)                          -->
   <!-- ═══════════════════════════════════════════════════════════ -->
 
-  <!-- Szenario U: Slice 4 — Chart erscheint und aktualisiert sich -->
+  <!-- Szenario U: Slice 4/5 — SparplanChart (jetzt auf Screen 2) -->
   <div class="test-section">
-    <h2>U — Slice 4: SparplanChart (Hauptszenario)</h2>
+    <h2>U — SparplanChart auf Screen 2 (Slice 4/5)</h2>
     <p class="test-meta">
-      Erwartung: Chart erscheint unterhalb der KpiCards. Canvas sichtbar, 120 Datenpunkte (Liniendiagramm).<br>
+      Erwartung: Screen 1 zuerst sichtbar (kein Chart). „Weiter →" klicken → Screen 2 erscheint.<br>
+      Chart erscheint unterhalb der KpiCards. Canvas sichtbar, 120 Datenpunkte (Liniendiagramm).<br>
       Keine Range-Buttons, keine BAN/Headline, kein View-Toggle, keine Legende.<br>
-      Tooltip aktiv (Hover: Monat + EUR-Depotwert). A11y-Tabelle im DOM (position:absolute; left:-9999px).<br>
-      Slider ziehen → Chart aktualisiert sich ohne sichtbaren DOM-Rebuild (Smart Update via chart.update()).<br>
-      KpiCards bleiben korrekt. Keine JS-Exception in Konsole.
+      Tooltip aktiv (Hover: Monat + EUR-Depotwert).<br>
+      Kein live Chart-Update während Slider auf Screen 1 — Chart rendert erst beim Wechsel zu Screen 2.<br>
+      Keine JS-Exception in Konsole.
+    </p>
+    <div class="kg-card">
+      <div class="fw-app"
+           data-fw-app="prokrastinations-preis"
+           data-fw-data="../../Theme/assets/data/b1/msci-world-net-return-eur-monthly.csv">
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════════ -->
+  <!-- NEU — Slice 5: 4-Screen-Flow (V, W, X)                    -->
+  <!-- ═══════════════════════════════════════════════════════════ -->
+
+  <!-- ENTWICKLUNGSNOTIZ — Slider-Chart-Kopplung (Entscheidung offen) -->
+  <div class="test-warning" style="border-color: #fd7e14; background: #fff8f0;">
+    <strong>Offene UX-Entscheidung (Slice 5 → Slice 7):</strong><br>
+    Ab Slice 5 aktualisiert sich Chart und KpiCards NICHT live während der Slider-Interaktion.
+    Der Slider steht auf Screen 1, Chart + KPIs erscheinen erst beim Wechsel zu Screen 2.
+    Das ist spec-konform (MINI_SPEC: Nutzer personalisiert zuerst, sieht dann den Beweis).<br>
+    <strong>Bitte beim Test bewusst evaluieren:</strong> Fühlt sich das richtig an?
+    Falls nicht → in Slice 7 änderbar: Chart-Update im Hintergrund bei Slider-Bewegung,
+    sichtbar sobald Screen 2 geöffnet wird.
+  </div>
+
+  <!-- Szenario V: Screen-Flow vollständig (T-14) -->
+  <div class="test-section">
+    <h2>V — Screen-Flow 1→2→3→4 vollständig (T-14)</h2>
+    <p class="test-meta">
+      Erwartung:<br>
+      Screen 1: Headline + Subline + Slider + „Weiter →" sichtbar. Kein Chart, keine KPIs.<br>
+      „Weiter →" → Screen 2: Fokus liegt auf &lt;h2&gt; (DevTools → Accessibility: focused element).
+      KpiCards + Chart sichtbar. Buttons „← Zurück" und „Weiter →".<br>
+      „Weiter →" → Screen 3: Fokus auf &lt;h2&gt;. Chart sichtbar (identische Daten, kein VertikaleLinie — kommt Slice 6). Buttons „← Zurück" und „Weiter →".<br>
+      „Weiter →" → Screen 4: Fokus auf &lt;h2&gt;. Text + „Heute Marktzeit sammeln →" (Stub, href leer). Nur „← Zurück".<br>
+      Kein JS-Fehler in Konsole. Viewport 375px, 768px, 1280px.<br>
+      Testfall: T-14
+    </p>
+    <div class="kg-card">
+      <div class="fw-app"
+           data-fw-app="prokrastinations-preis"
+           data-fw-data="../../Theme/assets/data/b1/msci-world-net-return-eur-monthly.csv">
+      </div>
+    </div>
+  </div>
+
+  <!-- Szenario W: Rate ändern und Screen 2 erneut besuchen -->
+  <div class="test-section">
+    <h2>W — Rate ändern → Screen 2 zeigt aktualisierte Werte</h2>
+    <p class="test-meta">
+      Testschritte:<br>
+      1. Slider auf 1.000 € → „Weiter →" → Screen 2: Eingezahlt = 120.000 €, Chart korrekt.<br>
+      2. „← Zurück" → Screen 1: Slider auf 500 € stellen.<br>
+      3. „Weiter →" → Screen 2: Eingezahlt = 60.000 €. Chart muss sich aktualisiert haben.<br>
+      Erwartung: KpiCards und Chart zeigen die neue Rate. Kein stale State. Kein JS-Fehler.
+    </p>
+    <div class="kg-card">
+      <div class="fw-app"
+           data-fw-app="prokrastinations-preis"
+           data-fw-data="../../Theme/assets/data/b1/msci-world-net-return-eur-monthly.csv">
+      </div>
+    </div>
+  </div>
+
+  <!-- Szenario X: Zurück-Navigation -->
+  <div class="test-section">
+    <h2>X — Zurück-Navigation durch alle Screens</h2>
+    <p class="test-meta">
+      Testschritte: 1→2→3→4 komplett durchklicken, dann 4→3→2→1 zurückklicken.<br>
+      Erwartung: Jeder Schritt zeigt den korrekten Screen. Fokus liegt jeweils auf der &lt;h2&gt; (außer beim initialen Laden).<br>
+      Kein doppelter Chart, keine JS-Exception, kein Layout-Bruch.
     </p>
     <div class="kg-card">
       <div class="fw-app"

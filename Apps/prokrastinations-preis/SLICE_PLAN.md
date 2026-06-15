@@ -7,7 +7,7 @@
 
 # SLICE_PLAN — prokrastinations-preis
 
-Stand: 2026-06-10 | Session: APP-01-slice4-gate | Geändert von: Claude
+Stand: 2026-06-15 | Session: APP-01-Slice5-Diskussion | Geändert von: Claude
 
 ---
 
@@ -24,7 +24,9 @@ Stand: 2026-06-10 | Session: APP-01-slice4-gate | Geändert von: Claude
 | Freigabe Slice 1 | OK 2026-06-05, getestet ✅ (Szenarien A–N) |
 | Freigabe Slice 2 | OK 2026-06-05, getestet ✅ (Szenarien A–P, KpiCards 36.000 € / 72.176 € / +36.176 €) |
 | Freigabe Slice 3 | OK 2026-06-05, getestet ✅ (Szenarien A–T, Viewport 375px, Slider-Interaktion) |
-| Nächster Schritt | Slice 4 — SparplanChart (OA-02 muss vorher entschieden sein) |
+| Freigabe Slice 4 | OK 2026-06-11, getestet ✅ (SparplanChart, Chart.js, Szenarien S–U) |
+| Freigabe Slice 5 | OK 2026-06-15, getestet ✅ (Szenarien S–X, Screen-Flow 1→4, Diskussion 2026-06-15 abgeschlossen) |
+| Nächster Schritt | Slice 6 — VertikaleLinie + AssumptionsBox + PrimaryCta |
 
 ---
 
@@ -77,8 +79,8 @@ Diese Frage ist nach B-01-Entscheidungen weiterhin offen.
 | **1** | CSV-Datenladen + Datenvalidierung + Daten-States | Fetch → CSVParser → Validierung → AppData | OA-01 entschieden ✓ | ✅ 2026-06-05 |
 | **2** | MarketTimeStrategy + KpiCards | AppData → Strategy → AppContext → Renderer | Slice 1 | ✅ 2026-06-05 |
 | **3** | Slider monatlicheRate | UI → Event → Clamp → Strategy → AppContext → Renderer → ARIA | Slice 2 | ✅ 2026-06-05 |
-| **4** | SparplanChart | AppContext → Chart-Renderer | Slice 2 + OA-02 entschieden | Offen |
-| **5** | 4-Screen-Flow (Button-getrieben) | Screen-Controller → Fokus-Management | Slice 2 + 3 | Offen |
+| **4** | SparplanChart | AppContext → Chart-Renderer | Slice 2 + OA-02 entschieden | ✅ 2026-06-11 |
+| **5** | 4-Screen-Flow (Button-getrieben) | Screen-Controller → Fokus-Management | Slice 2 + 3 | ✅ 2026-06-15 |
 | **6** | VertikaleLinie + AssumptionsBox | Chart-Erweiterung + TextBlock + PrimaryCta | Slice 4 + 5 | Offen |
 | **7** | A11y-Härtung + Responsive | app.js, app.css | Slice 6 | Offen |
 | **8a** | QA / Testseite vollständig | app.test.html | Slice 7 | Offen |
@@ -328,6 +330,7 @@ Slice 4 und 5 abgeschlossen.
 - AssumptionsBox (immer sichtbar, Screen 2 oder 3, APP_SPEC §19.8):
   > „Basis: MSCI World Index, monatliche Indexwerte, 10 Jahre rückwärts bis zum letzten vollständig verfügbaren Monat. Keine Finanzberatung. Vergangene Wertentwicklungen sind keine Garantie für die Zukunft."
 - PrimaryCta: „Heute Marktzeit sammeln →" (APP_SPEC §19.10); `href` zunächst leer (NB-1)
+- Microcopy-Schicht (Krug — Don't Make Me Think): Screen-Headlines (h2) visuell dominant als erste Wahrnehmungsebene; Subline direkt über oder unter dem Chart erklärt in einem Satz was zu sehen ist (Sparrate, Zeitraum, Datenquelle); Screen-3-Kontext verbindet Subline explizit mit der VertikaleLinie
 
 ---
 
@@ -341,6 +344,7 @@ Slice 4 und 5 abgeschlossen.
 - Screenreader: a11ySummary vollständig, Chart-Alternativtext
 - `prefers-reduced-motion`: vollständig geprüft
 - Theme-Token-Inventar aus `screen.css` prüfen; Fallback-Tokens durch echte Tokens ersetzen (NB-3)
+- Slider + NumericInput Hybrid (SF-02): Direkteingabe neben Slider — beide synchronisiert; Slider für Exploration, Zahlenfeld für Präzision auf Mobile
 
 ---
 
@@ -379,6 +383,7 @@ Slice 4 und 5 abgeschlossen.
 | NB-3 | Theme-Token-Inventar aus `screen.css` | Slice 7 | Offen — Fallback-Tokens bis dahin erlaubt |
 | NB-4 | Bootstrapper + Ghost-Upload-URL | Slice 8b | Offen (B2, B3) |
 | NB-5 | Perf: `marketTimeStrategy` + DOM-Neuaufbau auf jedem Slider-Tick (synchron) — für Pilot ok; bei Bedarf `<dd>`-Werte in-place aktualisieren statt Container leeren | Slice 7 / nach Pilot | Offen |
+| SF-02 | Slider + NumericInput Hybrid für mobile Präzision (≥ 50 % Mobile-Traffic bestätigt) | Slice 7 | Vorgezogen aus „nach Pilot" — Entschieden 2026-06-15 |
 | OA-01 | ES-Modul für app.js | Slice 1 | **ENTSCHIEDEN 2026-06-04** — `<script type="module">`, Chart-Engine-Muster |
 | OA-02 | Chart-Bibliothek / SparplanChart-Integrationsform | Slice 4 | Offen (SF-01) |
 
