@@ -215,10 +215,20 @@ function renderContent(container, appData, options) {
   kpiArea.dataset.fwRole = 'kpi-area';
   screen2.appendChild(kpiArea);
 
+  const sublineS2 = document.createElement('p'); // NEW — Slice 6
+  sublineS2.className = 'fw-app__screen-subline';
+  sublineS2.textContent = 'MSCI World, 10 Jahre, monatliche Kursdaten — historische Entwicklung deines Depots.';
+  screen2.appendChild(sublineS2);
+
   const chartSection2 = document.createElement('div');
   chartSection2.setAttribute('data-fw-appchart', 'sparplan-s2');
   chartSection2.className = 'fw-app__chart-section';
   screen2.appendChild(chartSection2);
+
+  const assumptionsS2 = document.createElement('aside'); // NEW — Slice 6: AssumptionsBox (APP_SPEC §19.8)
+  assumptionsS2.className = 'fw-app__assumptions';
+  assumptionsS2.textContent = 'Basis: MSCI World Index, monatliche Indexwerte, 10 Jahre rückwärts bis zum letzten vollständig verfügbaren Monat. Die Werte zeigen das Marktprinzip, keine konkrete ETF-Produktempfehlung. Vergangene Wertentwicklungen sind keine Garantie für die Zukunft. Keine Finanzberatung.';
+  screen2.appendChild(assumptionsS2);
 
   const navS2 = document.createElement('div');
   navS2.className = 'fw-app__screen-nav';
@@ -240,10 +250,20 @@ function renderContent(container, appData, options) {
   h2S3.textContent = 'Vor 10 Jahren ist weg. Heute nicht.';
   screen3.appendChild(h2S3);
 
+  const sublineS3 = document.createElement('p'); // NEW — Slice 6
+  sublineS3.className = 'fw-app__screen-subline';
+  sublineS3.textContent = 'Derselbe Verlauf — der Strich markiert den letzten verfügbaren Monat, also heute.';
+  screen3.appendChild(sublineS3);
+
   const chartSection3 = document.createElement('div');
-  chartSection3.setAttribute('data-fw-appchart', 'sparplan-s3'); // TODO Slice 6: VertikaleLinie
+  chartSection3.setAttribute('data-fw-appchart', 'sparplan-s3'); // CHANGED — Slice 6: VertikaleLinie via features
   chartSection3.className = 'fw-app__chart-section';
   screen3.appendChild(chartSection3);
+
+  const assumptionsS3 = document.createElement('aside'); // NEW — Slice 6: AssumptionsBox (APP_SPEC §19.8)
+  assumptionsS3.className = 'fw-app__assumptions';
+  assumptionsS3.textContent = 'Basis: MSCI World Index, monatliche Indexwerte, 10 Jahre rückwärts bis zum letzten vollständig verfügbaren Monat. Die Werte zeigen das Marktprinzip, keine konkrete ETF-Produktempfehlung. Vergangene Wertentwicklungen sind keine Garantie für die Zukunft. Keine Finanzberatung.';
+  screen3.appendChild(assumptionsS3);
 
   const navS3 = document.createElement('div');
   navS3.className = 'fw-app__screen-nav';
@@ -265,11 +285,11 @@ function renderContent(container, appData, options) {
   h2S4.textContent = 'Wenn du jetzt wieder wartest, wird heute in zehn Jahren wieder der verpasste Zeitpunkt sein.';
   screen4.appendChild(h2S4);
 
-  const ctaStub = document.createElement('a'); // STUB — href + Styling folgen in Slice 6 (NB-1)
-  ctaStub.className = 'fw-app__cta';
-  ctaStub.href = '';
-  ctaStub.textContent = 'Heute Marktzeit sammeln →';
-  screen4.appendChild(ctaStub);
+  const cta = document.createElement('a'); // CHANGED — Slice 6: finales CTA-Styling; href leer (NB-1)
+  cta.className = 'fw-app__cta';
+  cta.href = '';
+  cta.textContent = 'Heute Marktzeit sammeln →';
+  screen4.appendChild(cta);
 
   const navS4 = document.createElement('div');
   navS4.className = 'fw-app__screen-nav';
@@ -308,7 +328,7 @@ function renderContent(container, appData, options) {
   function renderS3(rate) {
     const { chartSeries } = buildAppContext(appData, rate, startBetrag);
     chartEngine3.renderFromData(chartSection3, chartSeries, {
-      type: 'line', features: { rangeControls: false, headline: false } // TODO Slice 6: VertikaleLinie
+      type: 'line', features: { rangeControls: false, headline: false, verticalLine: 'last' } // CHANGED — Slice 6
     });
     lastRenderedRateS3 = rate;
   }

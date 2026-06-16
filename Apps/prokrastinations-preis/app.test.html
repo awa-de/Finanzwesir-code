@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Testseite — prokrastinations-preis Slice 5</title>
+  <title>Testseite — prokrastinations-preis Slice 6</title>
   <link rel="stylesheet" href="./app.css">
   <style>
     /* Nur für Testseite — gehört nicht in app.css */
@@ -18,7 +18,7 @@
 </head>
 <body>
 
-  <h1>Testseite — prokrastinations-preis Slice 5</h1>
+  <h1>Testseite — prokrastinations-preis Slice 6</h1>
 
   <div class="test-warning">
     Muss über VSCode Live Server geöffnet werden (http://127.0.0.1:5500/...) — nicht als file://. ES-Module laden sonst nicht.
@@ -407,8 +407,8 @@
       Screen 1: Headline + Subline + Slider + „Weiter →" sichtbar. Kein Chart, keine KPIs.<br>
       „Weiter →" → Screen 2: Fokus liegt auf &lt;h2&gt; (DevTools → Accessibility: focused element).
       KpiCards + Chart sichtbar. Buttons „← Zurück" und „Weiter →".<br>
-      „Weiter →" → Screen 3: Fokus auf &lt;h2&gt;. Chart sichtbar (identische Daten, kein VertikaleLinie — kommt Slice 6). Buttons „← Zurück" und „Weiter →".<br>
-      „Weiter →" → Screen 4: Fokus auf &lt;h2&gt;. Text + „Heute Marktzeit sammeln →" (Stub, href leer). Nur „← Zurück".<br>
+      „Weiter →" → Screen 3: Fokus auf &lt;h2&gt;. Chart mit VertikaleLinie am rechten Ende sichtbar. Subline vorhanden. Buttons „← Zurück" und „Weiter →".<br>
+      „Weiter →" → Screen 4: Fokus auf &lt;h2&gt;. PrimaryCta „Heute Marktzeit sammeln →" als Button sichtbar (href leer, NB-1). Nur „← Zurück".<br>
       Kein JS-Fehler in Konsole. Viewport 375px, 768px, 1280px.<br>
       Testfall: T-14
     </p>
@@ -445,6 +445,62 @@
       Testschritte: 1→2→3→4 komplett durchklicken, dann 4→3→2→1 zurückklicken.<br>
       Erwartung: Jeder Schritt zeigt den korrekten Screen. Fokus liegt jeweils auf der &lt;h2&gt; (außer beim initialen Laden).<br>
       Kein doppelter Chart, keine JS-Exception, kein Layout-Bruch.
+    </p>
+    <div class="kg-card">
+      <div class="fw-app"
+           data-fw-app="prokrastinations-preis"
+           data-fw-data="../../Theme/assets/data/b1/msci-world-net-return-eur-monthly.csv">
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════════ -->
+  <!-- NEU — Slice 6: VertikaleLinie + AssumptionsBox + CTA      -->
+  <!-- ═══════════════════════════════════════════════════════════ -->
+
+  <!-- Szenario Y: AssumptionsBox auf Screen 2 und Screen 3 -->
+  <div class="test-section">
+    <h2>Y — AssumptionsBox auf Screen 2 und Screen 3 (APP_SPEC §19.8)</h2>
+    <p class="test-meta">
+      Testschritte: 1→2→3 klicken.<br>
+      Erwartung Screen 2: AssumptionsBox sichtbar unter dem Chart. Text beginnt mit „Basis: MSCI World Index …".<br>
+      Erwartung Screen 3: AssumptionsBox ebenfalls sichtbar unter dem Chart. Identischer Text.<br>
+      Kein innerHTML, kein Stacktrace. Kein JS-Fehler in Konsole.
+    </p>
+    <div class="kg-card">
+      <div class="fw-app"
+           data-fw-app="prokrastinations-preis"
+           data-fw-data="../../Theme/assets/data/b1/msci-world-net-return-eur-monthly.csv">
+      </div>
+    </div>
+  </div>
+
+  <!-- Szenario Z: VertikaleLinie auf Screen 3 -->
+  <div class="test-section">
+    <h2>Z — VertikaleLinie im Chart auf Screen 3 (APP_SPEC §14.2)</h2>
+    <p class="test-meta">
+      Testschritte: 1→2→3 klicken.<br>
+      Erwartung: Gestrichelte blaue Linie am rechten Ende des Charts (letzter Datenpunkt = heute).<br>
+      Subline vorhanden: „Derselbe Verlauf — der Strich markiert den letzten verfügbaren Monat, also heute."<br>
+      Linie bleibt nach Rate-Wechsel und erneutem Screen-3-Besuch sichtbar.<br>
+      Kein JS-Fehler in Konsole. Viewport 375px, 768px, 1280px.
+    </p>
+    <div class="kg-card">
+      <div class="fw-app"
+           data-fw-app="prokrastinations-preis"
+           data-fw-data="../../Theme/assets/data/b1/msci-world-net-return-eur-monthly.csv">
+      </div>
+    </div>
+  </div>
+
+  <!-- Szenario AA: PrimaryCta auf Screen 4 -->
+  <div class="test-section">
+    <h2>AA — PrimaryCta auf Screen 4 (APP_SPEC §19.10)</h2>
+    <p class="test-meta">
+      Testschritte: 1→2→3→4 klicken.<br>
+      Erwartung: Button „Heute Marktzeit sammeln →" sichtbar als Primary-Button (blauer Hintergrund, weißer Text).<br>
+      Kein href-Sprung (href leer, NB-1). Kein JS-Fehler in Konsole.<br>
+      Viewport 375px: Button vollständig sichtbar, kein Overflow.
     </p>
     <div class="kg-card">
       <div class="fw-app"

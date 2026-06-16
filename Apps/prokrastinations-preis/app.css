@@ -115,8 +115,9 @@
 }
 
 /* === Slice 5: Screen-Flow === */
+/* CHANGED — Slice 6: visuell dominant (war: 1.2em) */
 .fw-app__screen-headline {
-  font-size: 1.2em;
+  font-size: 1.5em;
   font-weight: bold;
   color: var(--fw-color-text, #1a1a1a);
   margin: 0 0 var(--fw-space-sm, 0.5rem);
@@ -154,11 +155,28 @@
   margin-left: auto;
 }
 
-/* Slice 6: .fw-app__cta erhält finales Styling */
+/* === Slice 6: PrimaryCta (APP_SPEC §19.10) === */
 .fw-app__cta {
   display: inline-block;
   margin-top: var(--fw-space-md, 1rem);
-  color: var(--fw-color-primary, #0071bf);
+  padding: 0.75rem 1.5rem;
+  background: var(--fw-color-primary, #0071bf);
+  color: var(--fw-color-bg, #ffffff);
+  border-radius: 4px;
+  text-decoration: none;
+  font-weight: bold;
+}
+.fw-app__cta:hover {
+  opacity: 0.9;
+}
+
+/* === Slice 6: AssumptionsBox (APP_SPEC §19.8) === */
+.fw-app__assumptions {
+  font-size: 0.8em;
+  color: var(--fw-color-muted, #555555);
+  border-left: 3px solid var(--fw-color-muted, #555555);
+  padding: var(--fw-space-sm, 0.5rem) var(--fw-space-md, 1rem);
+  margin-top: var(--fw-space-md, 1rem);
 }
 
 /* === A11y: ARIA Live Region (APP_SPEC §12.1) === */

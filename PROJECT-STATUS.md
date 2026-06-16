@@ -1,17 +1,17 @@
 <!-- HOOK-META
 Version: 1
-Stand: 2026-06-15
+Stand: 2026-06-16
 Fokus-AP: APP-01 — prokrastinations-preis
-Nächster-Schritt: B1 Slice 6 — VertikaleLinie + AssumptionsBox + PrimaryCta + Microcopy-Schicht
+Nächster-Schritt: AP-UX-01 entscheiden (Screen-Flow Dramaturgie Screen 2/3) — dann B1 Slice 7 A11y + Responsive
 Blocker: keine
 Letzter-Distill: 2026-06-15
 Kassensturz-Datum: 2026-06-15
 -->
-<!-- HOOK-META-SESSION: APP-01-Slice-4-Implementierung -->
+<!-- HOOK-META-SESSION: APP-01-Slice6 -->
 
 # PROJECT STATUS — Finanzwesir 2.0
 
-Stand: 2026-06-15 | Session: APP-01-Slice5-Diskussion | Geändert von: Claude
+Stand: 2026-06-16 | Session: APP-01-Slice6 | Geändert von: Claude
 
 **Zweck:** Schneller Wiedereinstieg nach Pausen.
 **Zielgruppe:** Albert und Claude.
@@ -93,7 +93,9 @@ Stand: 2026-06-15 | Session: APP-01-Slice5-Diskussion | Geändert von: Claude
 
 ✅ **P→B→N als App-Building-Layer zerlegt (PLAN-01, 2026-06-15):** AF-21 (App-Familien P→B→N-Standards), AF-22 (P→B→N-Block in APP_SPEC-Template), AF-23 (Pincus-Check als Pre-Code-Gate) in BACKLOG eingetragen. Proven=Tailwind, Better=10v10-Test pro Familie, New=isoliert.
 
-⚙️ **B1 Slice-5 abgeschlossen (2026-06-15):** Screen-Flow 1→4, lazy Chart-Render, Button-Wiring getestet. SF-02 (NumericInput Hybrid) auf Slice 7 vorgezogen (Mobile ≥ 50 %). Nächster Schritt: Slice 6.
+✅ **B1 Slice-5 abgeschlossen (2026-06-15):** Screen-Flow 1→4, lazy Chart-Render, Button-Wiring getestet. SF-02 (NumericInput Hybrid) auf Slice 7 vorgezogen (Mobile ≥ 50 %).
+
+⚙️ **B1 Slice-6 abgeschlossen (2026-06-16):** VertikaleLinie (afterDraw-Plugin ChartEngine.js), AssumptionsBox (Screen 2+3, APP_SPEC §19.8), PrimaryCta (finales Styling), Microcopy-Sublines (Screen 2+3). REG-APP-002 neu. OFFEN: UX-Dramaturgie Screen 2/3 (AP-UX-01) — muss vor Slice 7 entschieden werden.
 
 ---
 
@@ -120,7 +122,7 @@ Stand: 2026-06-15 | Session: APP-01-Slice5-Diskussion | Geändert von: Claude
 
 ## 3. Nächster sinnvoller Schritt
 
-- **B1 Slice 6** — VertikaleLinie + AssumptionsBox + PrimaryCta + Microcopy-Schicht (Slice 5 ✅ 2026-06-15)
+- **AP-UX-01** — Screen-Flow Dramaturgie entscheiden (Screen 2/3 trennen oder zusammenführen), dann B1 Slice 7 A11y + Responsive (Slice 6 ✅ 2026-06-16)
 - **AP-20/21** (Mixed-Rhythm CV-Heuristik) — 🟡 Aktiv, Chart-Engine, parallel möglich
 
 ---
@@ -133,7 +135,7 @@ Stand: 2026-06-15 | Session: APP-01-Slice5-Diskussion | Geändert von: Claude
 | Chart-Engine | Stabil, offene APs | Siehe `docs/steering/BACKLOG.md` |
 | Theme | In Entwicklung | `THEME-ASSEMBLY-CHECKLIST.md` |
 | CSS | Stabil | Siehe `docs/steering/BACKLOG.md` (CSS-N Items) |
-| Apps | Slice 5 ✅ 2026-06-15 | B1 Slice 6: VertikaleLinie + AssumptionsBox + PrimaryCta + Microcopy-Schicht |
+| Apps | Slice 6 ✅ 2026-06-16 | AP-UX-01 entscheiden → B1 Slice 7: A11y-Härtung + Responsive |
 | Content | Laufend | Redaktionsleitfaden aktiv |
 | Security | SECURITY-BASELINE.md App-Fabrik-gatefähig ✅ | Security-Sync-Regel + Gate-Prüffrage verankert (ST-13/ST-14) |
 
@@ -168,6 +170,9 @@ Vollständig im DECISION-LOG dokumentiert (`docs/steering/DECISION-LOG.md`):
 ---
 
 ## 8. Letzte Session
+
+2026-06-16 — APP-01 Slice-6 abgeschlossen (APP-01-Slice6).
+VertikaleLinie (afterDraw-Plugin ChartEngine.js, gestrichelt blau #0071bf am letzten Datenpunkt), AssumptionsBox (Screen 2+3, APP_SPEC §19.8), PrimaryCta (Screen 4, finales Button-Styling), Microcopy-Sublines. ChartEngine.js mit Alberts Freigabe geändert. REG-APP-002 in Regression-Matrix. FRICTION: UX-Dramaturgie Screen 2/3 kommt nicht an — Albert pausiert für Konzeptüberarbeitung. AP-UX-01 im BACKLOG.
 
 2026-06-15 — APP-01 Slice-5 abgeschlossen (APP-01-Slice5-Diskussion).
 Screen-Flow 1→4 implementiert und getestet (Szenarien S–X). UX-Diskussion: Slider-Kopplung ok, Screens-2+3-Doppelgänger ist erwarteter Slice-5-Zustand (VertikaleLinie kommt in Slice 6). SF-02 (NumericInput Hybrid) auf Slice 7 vorgezogen (Mobile ≥ 50 % Traffic). Microcopy-Schicht für Slice 6 geplant. SLICE_PLAN, NAVIGATION, BACKLOG-ARCHIV aktualisiert.
@@ -412,13 +417,13 @@ Neue APs: DS-012, DS-013, DS-014.
 
 ## 9. Einstieg für nächste Session
 
-**Nächster Schritt: B1 Slice 6 — VertikaleLinie + AssumptionsBox + PrimaryCta + Microcopy-Schicht**
+**Nächster Schritt: AP-UX-01 — UX-Entscheidung Screen-Flow Dramaturgie, dann Slice 7**
 
-Slice 5 vollständig abgeschlossen (2026-06-15): Screen-Flow 1→4 implementiert und getestet.
+Slice 6 technisch abgeschlossen (2026-06-16). UX-Entscheidung Screen 2/3 steht aus (AP-UX-01): Merge zu einem Screen oder Kontext-Bridge stärken — muss vor Slice 7 entschieden sein.
 
 Operative Quellen:
 - `Apps/prokrastinations-preis/APP_SPEC.md` — V1.7 ✅ (operativ)
-- `Apps/prokrastinations-preis/SLICE_PLAN.md` — Slice-0/1/2/3/4/5 ✅, Slice 6 nächster Schritt
+- `Apps/prokrastinations-preis/SLICE_PLAN.md` — Slice-0/1/2/3/4/5/6 ✅, Slice 7 nach UX-Entscheidung
 
 Entschieden (nicht mehr offen):
 - E-01/E-02/B-01/B-02/B-03 ✅: Szenario-App, Anteilslogik, CSV, Button-getrieben

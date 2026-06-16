@@ -141,7 +141,8 @@ export class ChartEngine {
         var inputFeatures = options.features || {};
         var features = Object.freeze({
             rangeControls: inputFeatures.rangeControls,
-            headline:      inputFeatures.headline
+            headline:      inputFeatures.headline,
+            verticalLine:  inputFeatures.verticalLine  // NEW — Slice 6
         });
 
         // WeakMap-State-Mechanik
@@ -239,6 +240,29 @@ export class ChartEngine {
         runtimeConfig.headline = meta.headline || null; // BAN V5.0.0
         // CHANGED — Feature-Auswahl: headline === false → BAN unterdrücken
         if ((runtimeConfig.features || {}).headline === false) runtimeConfig.headline = null;
+
+        // NEW — Slice 6: VertikaleLinie als Chart.js-inline-Plugin (Option A: pixel-genau)
+        if ((runtimeConfig.features || {}).verticalLine === 'last') {
+            chartConfig.plugins = [{
+                id: 'fwVerticalLine',
+                afterDraw: function(chart) {
+                    var m = chart.getDatasetMeta(0);
+                    if (!m || !m.data || !m.data.length) return;
+                    var last = m.data[m.data.length - 1];
+                    var ctx = chart.ctx;
+                    var ca = chart.chartArea;
+                    ctx.save();
+                    ctx.beginPath();
+                    ctx.moveTo(last.x, ca.top);
+                    ctx.lineTo(last.x, ca.bottom);
+                    ctx.strokeStyle = '#0071bf';
+                    ctx.lineWidth = 2;
+                    ctx.setLineDash([4, 4]);
+                    ctx.stroke();
+                    ctx.restore();
+                }
+            }];
+        }
 
         var strategyWantsNoTooltip = false;
         if (chartConfig.options && 

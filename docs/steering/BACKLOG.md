@@ -1,5 +1,5 @@
 # BACKLOG – Finanzwesir 2.0
-Stand: 2026-06-15 | Session: AF-21-23-PBN-decompose | Geändert von: Claude
+Stand: 2026-06-16 | Session: APP-01-Slice6 | Geändert von: Claude
 
 **Regeln:**
 - ✅-Zeilen werden sofort nach `BACKLOG-ARCHIV.md` verschoben (append), dann hier gelöscht.
@@ -22,6 +22,7 @@ Stand: 2026-06-15 | Session: AF-21-23-PBN-decompose | Geändert von: Claude
 
 | ID       | Bereich | Titel                                          | Prio | Dep          | Detail                                            |
 |----------|---------|------------------------------------------------|------|--------------|---------------------------------------------------|
+| AP-UX-01 | App     | Screen-Flow Dramaturgie entscheiden: Screen 2/3 trennen oder zusammenführen? Aktuell 2 getrennte Chart-Screens (Screen 2 = Vergangenheit, Screen 3 = Heute mit VertikaleLinie) — UX-Wirkung laut Albert nach Slice-6-Test nicht intuitiv. Optionen: (A) §14.1 anpassen: 2→3 zu einem Screen mit bedingter VertikaleLinie; (B) Kontext-Bridge / Übergangs-Microcopy stärken. Muss vor Slice 7 entschieden sein. | H    | —            | Apps/prokrastinations-preis/APP_SPEC.md §14       |
 | AP-DATA-09 | Data  | Bestehende APP_SPEC.md nach Data-Need-Blaupause angleichen | M | — | docs/data/OFFENE-ARBEITSPUNKTE.md; Rollout erst nach Alberts explizitem Auftrag |
 | DS-003   | Design  | Tastatur-Navigation testen (Safari/Firefox/Chrome) | H | —          | —                                                 |
 | DS-004   | Design  | WCAG Kontrast-Tabelle dokumentieren            | H    | —            | —                                                 |

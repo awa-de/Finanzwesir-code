@@ -7,7 +7,7 @@
 
 # SLICE_PLAN — prokrastinations-preis
 
-Stand: 2026-06-15 | Session: APP-01-Slice5-Diskussion | Geändert von: Claude
+Stand: 2026-06-16 | Session: APP-01-Slice6 | Geändert von: Claude
 
 ---
 
@@ -26,7 +26,7 @@ Stand: 2026-06-15 | Session: APP-01-Slice5-Diskussion | Geändert von: Claude
 | Freigabe Slice 3 | OK 2026-06-05, getestet ✅ (Szenarien A–T, Viewport 375px, Slider-Interaktion) |
 | Freigabe Slice 4 | OK 2026-06-11, getestet ✅ (SparplanChart, Chart.js, Szenarien S–U) |
 | Freigabe Slice 5 | OK 2026-06-15, getestet ✅ (Szenarien S–X, Screen-Flow 1→4, Diskussion 2026-06-15 abgeschlossen) |
-| Nächster Schritt | Slice 6 — VertikaleLinie + AssumptionsBox + PrimaryCta |
+| Nächster Schritt | Slice 7 — A11y-Härtung + Responsive (nach UX-Entscheidung Screen-Flow) |
 
 ---
 
@@ -81,7 +81,7 @@ Diese Frage ist nach B-01-Entscheidungen weiterhin offen.
 | **3** | Slider monatlicheRate | UI → Event → Clamp → Strategy → AppContext → Renderer → ARIA | Slice 2 | ✅ 2026-06-05 |
 | **4** | SparplanChart | AppContext → Chart-Renderer | Slice 2 + OA-02 entschieden | ✅ 2026-06-11 |
 | **5** | 4-Screen-Flow (Button-getrieben) | Screen-Controller → Fokus-Management | Slice 2 + 3 | ✅ 2026-06-15 |
-| **6** | VertikaleLinie + AssumptionsBox | Chart-Erweiterung + TextBlock + PrimaryCta | Slice 4 + 5 | Offen |
+| **6** | VertikaleLinie + AssumptionsBox | Chart-Erweiterung + TextBlock + PrimaryCta | Slice 4 + 5 | ✅ 2026-06-16 |
 | **7** | A11y-Härtung + Responsive | app.js, app.css | Slice 6 | Offen |
 | **8a** | QA / Testseite vollständig | app.test.html | Slice 7 | Offen |
 | **8b** | Ghost-Integrationstest | Ghost-Deploy | NB-4 (Bootstrapper + Upload-URL) | Offen |

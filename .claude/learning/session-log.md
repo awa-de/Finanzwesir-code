@@ -49,3 +49,10 @@ Wird geleert nach /distill. Einträge: [FRICTION] [WIN] [PREF] [QUESTION] [OK]
 - [WIN] Slider-Kopplung kein Problem: Chart auf Screen 1 nicht sichtbar — Nutzer versteht Slider→Weiter-Flow ohne Live-Update
 - [WIN] Screens 2+3 Doppelgänger: erwarteter Slice-5-Zustand — VertikaleLinie ist Slice-6-Scope; Kritik war verfrüht
 - [OK] Mobile ≥ 50 % Traffic bestätigt: SF-02 (Slider + NumericInput Hybrid) von „nach Pilot" auf Slice 7 vorgezogen
+
+## 2026-06-15 – SESSION START (Faden 6) | Fokus: APP-01 — prokrastinations-preis
+`FinanzwesirData.js, CSVParser.js, FwDateUtils.js — diese Session nicht berühren. ✓`
+
+## 2026-06-16 – APP-01 | Slice 6 — VertikaleLinie + AssumptionsBox + PrimaryCta
+- [FRICTION] Slice 6 technisch korrekt implementiert und getestet (Szenarien Y/Z/AA ✅), aber UX Screen-Flow-Dramaturgie (Screen 2 Vergangenheit / Screen 3 Heute) kommt nach Sichtung nicht an — Albert hält inne für Konzeptüberarbeitung
+- [QUESTION] Ob 4-Screen-Flow mit zwei getrennten Chart-Screens beim Nutzer ankommt, wurde erst nach Implementierung sichtbar; Spec §14 war eindeutig, aber UX-Wirkung nicht

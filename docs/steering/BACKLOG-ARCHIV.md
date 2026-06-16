@@ -1,11 +1,12 @@
 # BACKLOG-ARCHIV – Finanzwesir 2.0
-Stand: 2026-06-15 | Session: APP-01-Slice5-Diskussion | Geändert von: Claude
+Stand: 2026-06-16 | Session: APP-01-Slice6 | Geändert von: Claude
 
 Abgeschlossene Items, neueste zuerst (append-only).
 Archivierungs-Trigger: wenn > 200 Zeilen → neue Datei `BACKLOG-ARCHIV-YYYY.md` anlegen.
 
 | ID | Bereich | Titel | Abgeschlossen | Session |
 |----|---------|-------|---------------|---------|
+| APP-01-Slice-6 | App | B1 Slice-6: VertikaleLinie (Screen 3, afterDraw-Plugin in ChartEngine.js, gestrichelt blau #0071bf am letzten Datenpunkt), AssumptionsBox (Screen 2+3, aside.fw-app__assumptions, APP_SPEC §19.8-Text), PrimaryCta (Screen 4, finales Styling), Microcopy-Sublines (Screen 2+3). ChartEngine.js protected — Albert-Freigabe erteilt. REG-APP-002 in Regression-Matrix. UX-Entscheidung Screen-Flow-Dramaturgie (Screen 2/3 Trennung) offen → AP-UX-01 in BACKLOG. *(technisch vollständig, UX-Konzept offen)* | 2026-06-16 | APP-01-Slice6 |
 | APP-01-Slice-5 | App | B1 Slice-5: 4-Screen-Flow — Screen-Controller showScreen(n), lazy Chart-Render (chartEngine2/chartEngine3), Button-Wiring, Slider-Events ohne Live-Chart-Update. Szenarien S–X erweitert (V/W/X neu), Patch-Quittung in docs/steering/patches/. UX-Diskussion 2026-06-15: Slider-Kopplung ok, SF-02 (NumericInput Hybrid) auf Slice 7 vorgezogen, Microcopy-Schicht für Slice 6 geplant. | 2026-06-15 | APP-01-Slice5-Diskussion |
 | PLAN-01 | App-Fabrik | P→B→N-Analyse (Mark Pincus Framework): 3 Integrationswege erarbeitet (Family-Standards, APP_SPEC-Template, Pincus-Check als Gate) + AF-21/22/23 als Arbeitspakete in BACKLOG zerlegt *(sofort erledigt)* | 2026-06-15 | AF-21-23-PBN-decompose |
 | ST-18 | System | Memory-Files mergen: 37 Memory-Dateien aus zwei divergenten Verzeichnissen (Laptop-rekonstruiert vs. Heim-PC-original) zusammengefuehrt (18 Wege-Merge + 4 Laptop-only + 15 Heim-PC-only). Symlink C:\Users\Albert HP PC\.claude\...\memory auf NAS-UNC-Pfad (mklink /D, Developer Mode). Setup-Script `tools/setup-memory-junction.ps1` fuer neue Maschinen. Memory maschinenuebergreifend portabel. | 2026-06-15 | ST-18-memory-merge |
