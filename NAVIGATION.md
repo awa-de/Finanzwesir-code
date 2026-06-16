@@ -1,5 +1,5 @@
 # NAVIGATION.md – Finanzwesir 2.0
-Stand: 2026-06-10 | Session: APP-01-Slice-4-Gate | Geändert von: Claude
+Stand: 2026-06-16 | Session: AP-01-AP-02-Zeitreise-Umbau | Geändert von: Claude
 
 Für Claude: **Routing-Dokument.** Wird beim Session-Start (Schritt 2) gelesen.
 Gibt Pfade und Lese-Reihenfolgen vor — KEINE Verhaltensregeln (die stehen in CLAUDE.md).
@@ -167,10 +167,11 @@ Nach Abschluss: `/abschluss-ritual`.
 > und welche Datenfragen vor dem produktiven Bau offen sind.
 > Nur bei Quellen-, CSV-, Contract- oder Datenänderungsfragen zusätzlich `docs/data/` lesen.
 
-> [!note] B1 / prokrastinations-preis — Slice-5 abgeschlossen (2026-06-15)
-> `Apps/prokrastinations-preis/APP_SPEC.md` V1.7 ist die operative Spec-Quelle.
+> [!note] B1 / prokrastinations-preis — Zeitreise-Umbau (B1-AP-01/02 ✅ 2026-06-16)
+> `Apps/prokrastinations-preis/APP_SPEC.md` V2.0 (AP-02 Zeitreise-Umbau, 2026-06-16) ist die operative Spec-Quelle.
+> `Apps/prokrastinations-preis/ENTSCHEIDUNGSPROTOKOLL.md` (B1-AP-01, 2026-06-16) ist die verbindliche Architektur-Klammer für B1-AP-02 bis B1-AP-08.
 > `Apps/prokrastinations-preis/MINI_SPEC_FROM_HAUPTDOKUMENT.md` bleibt als fachliche Hintergrundquelle.
-> `SLICE_PLAN.md` aktuell (Slice-2 ✅ 2026-06-05, Slice-3 ✅ 2026-06-05, Slice-4 ✅ 2026-06-11, Slice-5 ✅ 2026-06-15). OA-01 entschieden. OA-02 entschieden (2026-06-10): Pfad 2 via `renderFromData()`. Nächster Schritt: Slice 6 — VertikaleLinie + AssumptionsBox + PrimaryCta + Microcopy-Schicht.
+> `SLICE_PLAN.md` aktuell (Slice-2 ✅ 2026-06-05, Slice-3 ✅ 2026-06-05, Slice-4 ✅ 2026-06-11, Slice-5 ✅ 2026-06-15, Slice-6 ✅ 2026-06-16). OA-01 entschieden. OA-02 entschieden (2026-06-10): Pfad 2 via `renderFromData()`. Nächster Schritt: B1-AP-03 — Datenvertrag Stations-JSON.
 > B1 ist Pilot-2 (Daten-/Chart-/Story-Pilot). Pilot-1 ist `risiko-uebersetzer` (Calculator-Pilot) — entschieden E-02, 2026-05-28.
 13. bei Chart-Nutzung: relevante Chart-Engine-Spec + WORKING-FEATURES.md
 ```

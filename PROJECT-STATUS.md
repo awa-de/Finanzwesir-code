@@ -2,16 +2,16 @@
 Version: 1
 Stand: 2026-06-16
 Fokus-AP: APP-01 — prokrastinations-preis
-Nächster-Schritt: AP-UX-01 entscheiden (Screen-Flow Dramaturgie Screen 2/3) — dann B1 Slice 7 A11y + Responsive
+Nächster-Schritt: B1-AP-03 — Datenvertrag Stations-JSON; dann B1-AP-04 bis AP-06; danach Slice 7 A11y + Responsive
 Blocker: keine
 Letzter-Distill: 2026-06-15
 Kassensturz-Datum: 2026-06-15
 -->
-<!-- HOOK-META-SESSION: APP-01-Slice6 -->
+<!-- HOOK-META-SESSION: AP-01-AP-02-Zeitreise-Umbau -->
 
 # PROJECT STATUS — Finanzwesir 2.0
 
-Stand: 2026-06-16 | Session: APP-01-Slice6 | Geändert von: Claude
+Stand: 2026-06-16 | Session: AP-01-AP-02-Zeitreise-Umbau | Geändert von: Claude
 
 **Zweck:** Schneller Wiedereinstieg nach Pausen.
 **Zielgruppe:** Albert und Claude.
@@ -95,7 +95,13 @@ Stand: 2026-06-16 | Session: APP-01-Slice6 | Geändert von: Claude
 
 ✅ **B1 Slice-5 abgeschlossen (2026-06-15):** Screen-Flow 1→4, lazy Chart-Render, Button-Wiring getestet. SF-02 (NumericInput Hybrid) auf Slice 7 vorgezogen (Mobile ≥ 50 %).
 
-⚙️ **B1 Slice-6 abgeschlossen (2026-06-16):** VertikaleLinie (afterDraw-Plugin ChartEngine.js), AssumptionsBox (Screen 2+3, APP_SPEC §19.8), PrimaryCta (finales Styling), Microcopy-Sublines (Screen 2+3). REG-APP-002 neu. OFFEN: UX-Dramaturgie Screen 2/3 (AP-UX-01) — muss vor Slice 7 entschieden werden.
+✅ **B1 Slice-6 abgeschlossen (2026-06-16):** VertikaleLinie (afterDraw-Plugin ChartEngine.js), AssumptionsBox (Screen 2+3, APP_SPEC §19.8), PrimaryCta (finales Styling), Microcopy-Sublines (Screen 2+3). REG-APP-002 neu.
+
+✅ **AP-UX-01 entschieden (2026-06-16):** Screen-Flow Dramaturgie: Stationen-Zeitreise (3 Akte, 4 Screens). Screen 2 = Zeitreise ohne Endwissen, Screen 3 = erster vollständiger Reveal + KPI-Cards. Kein Merge der Chart-Screens.
+
+✅ **B1-AP-01 ENTSCHEIDUNGSPROTOKOLL.md angelegt (2026-06-16):** Verbindliche Architektur-Klammer für B1-AP-02 bis B1-AP-08. Sechs Stationen v2.1, Rolling Window aus latestMonth, Stations-JSON als zweite Datenschicht, keine rote Crash-Codierung, Mobile-Collapsible.
+
+✅ **B1-AP-02 APP_SPEC.md V1.7→V2.0 (2026-06-16):** Stationen-Zeitreise-Umbau nach /spec-rewrite-guard. §8 Zwei-Datenschichten, §9 Rolling Window, §16 Screen-Tabelle + Stationen-Mechanik neu, §17 Verbotene Visuals, §20 Redaktions-Gate. Alte Screen-2-Behauptungen bereinigt. Kein Code geändert.
 
 ---
 
@@ -122,7 +128,8 @@ Stand: 2026-06-16 | Session: APP-01-Slice6 | Geändert von: Claude
 
 ## 3. Nächster sinnvoller Schritt
 
-- **AP-UX-01** — Screen-Flow Dramaturgie entscheiden (Screen 2/3 trennen oder zusammenführen), dann B1 Slice 7 A11y + Responsive (Slice 6 ✅ 2026-06-16)
+- **B1-AP-03** — Datenvertrag Stations-JSON (Felder, Enums, Flags, Quellenstatus, Validierungsregeln); Basis: ENTSCHEIDUNGSPROTOKOLL.md + APP_SPEC §8
+- **B1-AP-04 bis AP-08** — UX-Heldenreise, A11y/Mobile, Testfälle, Redaktions-Gate, Widerspruchs-Bereinigung; nach AP-03; dann Slice 7
 - **AP-20/21** (Mixed-Rhythm CV-Heuristik) — 🟡 Aktiv, Chart-Engine, parallel möglich
 
 ---
@@ -135,7 +142,7 @@ Stand: 2026-06-16 | Session: APP-01-Slice6 | Geändert von: Claude
 | Chart-Engine | Stabil, offene APs | Siehe `docs/steering/BACKLOG.md` |
 | Theme | In Entwicklung | `THEME-ASSEMBLY-CHECKLIST.md` |
 | CSS | Stabil | Siehe `docs/steering/BACKLOG.md` (CSS-N Items) |
-| Apps | Slice 6 ✅ 2026-06-16 | AP-UX-01 entscheiden → B1 Slice 7: A11y-Härtung + Responsive |
+| Apps | Slice 6 ✅, AP-UX-01 ✅, B1-AP-01/02 ✅ 2026-06-16 | B1-AP-03 Datenvertrag → AP-04–08 → Slice 7: A11y + Responsive |
 | Content | Laufend | Redaktionsleitfaden aktiv |
 | Security | SECURITY-BASELINE.md App-Fabrik-gatefähig ✅ | Security-Sync-Regel + Gate-Prüffrage verankert (ST-13/ST-14) |
 
@@ -171,8 +178,11 @@ Vollständig im DECISION-LOG dokumentiert (`docs/steering/DECISION-LOG.md`):
 
 ## 8. Letzte Session
 
+2026-06-16 — B1-AP-01/AP-02 Zeitreise-Umbau abgeschlossen (AP-01-AP-02-Zeitreise-Umbau).
+ENTSCHEIDUNGSPROTOKOLL.md (B1-AP-01) als Architektur-Klammer für AP-02 bis AP-08 angelegt: Stationen-Zeitreise (3 Akte, 6 Stationen v2.1), Rolling Window aus latestMonth, Stations-JSON als zweite Datenschicht, keine rote Crash-Codierung, Mobile-Collapsible. APP_SPEC.md V1.7→V2.0 (B1-AP-02) nach /spec-rewrite-guard: §8 Zwei-Datenschichten, §9 Rolling Window, §16 Screen-Tabelle neu, §17 Verbotene Visuals, §20 Redaktions-Gate. AP-UX-01 damit erledigt. Kein Code geändert.
+
 2026-06-16 — APP-01 Slice-6 abgeschlossen (APP-01-Slice6).
-VertikaleLinie (afterDraw-Plugin ChartEngine.js, gestrichelt blau #0071bf am letzten Datenpunkt), AssumptionsBox (Screen 2+3, APP_SPEC §19.8), PrimaryCta (Screen 4, finales Button-Styling), Microcopy-Sublines. ChartEngine.js mit Alberts Freigabe geändert. REG-APP-002 in Regression-Matrix. FRICTION: UX-Dramaturgie Screen 2/3 kommt nicht an — Albert pausiert für Konzeptüberarbeitung. AP-UX-01 im BACKLOG.
+VertikaleLinie (afterDraw-Plugin ChartEngine.js, gestrichelt blau #0071bf am letzten Datenpunkt), AssumptionsBox (Screen 2+3, APP_SPEC §19.8), PrimaryCta (Screen 4, finales Button-Styling), Microcopy-Sublines. ChartEngine.js mit Alberts Freigabe geändert. REG-APP-002 in Regression-Matrix.
 
 2026-06-15 — APP-01 Slice-5 abgeschlossen (APP-01-Slice5-Diskussion).
 Screen-Flow 1→4 implementiert und getestet (Szenarien S–X). UX-Diskussion: Slider-Kopplung ok, Screens-2+3-Doppelgänger ist erwarteter Slice-5-Zustand (VertikaleLinie kommt in Slice 6). SF-02 (NumericInput Hybrid) auf Slice 7 vorgezogen (Mobile ≥ 50 % Traffic). Microcopy-Schicht für Slice 6 geplant. SLICE_PLAN, NAVIGATION, BACKLOG-ARCHIV aktualisiert.
@@ -417,19 +427,20 @@ Neue APs: DS-012, DS-013, DS-014.
 
 ## 9. Einstieg für nächste Session
 
-**Nächster Schritt: AP-UX-01 — UX-Entscheidung Screen-Flow Dramaturgie, dann Slice 7**
+**Nächster Schritt: B1-AP-03 — Datenvertrag Stations-JSON**
 
-Slice 6 technisch abgeschlossen (2026-06-16). UX-Entscheidung Screen 2/3 steht aus (AP-UX-01): Merge zu einem Screen oder Kontext-Bridge stärken — muss vor Slice 7 entschieden sein.
+AP-UX-01, B1-AP-01 und B1-AP-02 ✅ 2026-06-16. Stationen-Zeitreise beschlossen und spec-seitig umgesetzt. Nächste Specs: AP-03 (JSON-Vertrag), AP-04 (UX/Heldenreise), AP-05 (A11y/Mobile), AP-06 (Testfälle), AP-07 (Redaktions-Gate), AP-08 (Widerspruchs-Bereinigung). Erst nach AP-03–AP-06: Slice 7 (A11y + Responsive + SF-02 NumericInput).
 
 Operative Quellen:
-- `Apps/prokrastinations-preis/APP_SPEC.md` — V1.7 ✅ (operativ)
-- `Apps/prokrastinations-preis/SLICE_PLAN.md` — Slice-0/1/2/3/4/5/6 ✅, Slice 7 nach UX-Entscheidung
+- `Apps/prokrastinations-preis/APP_SPEC.md` — V2.0 ✅ (operativ, AP-02 2026-06-16)
+- `Apps/prokrastinations-preis/ENTSCHEIDUNGSPROTOKOLL.md` — Architektur-Klammer B1-AP-01 ✅
+- `Apps/prokrastinations-preis/SLICE_PLAN.md` — Slice-0/1/2/3/4/5/6 ✅, Slice 7 nach AP-03 bis AP-06
 
 Entschieden (nicht mehr offen):
-- E-01/E-02/B-01/B-02/B-03 ✅: Szenario-App, Anteilslogik, CSV, Button-getrieben
+- E-01/E-02/B-01/B-02/B-03 ✅: Zeitreise-App, Anteilslogik, CSV, Button-getrieben
 - OA-02 ✅: `renderFromData()` = offizieller zweiter Engine-Einstieg (Pfad 2, 2026-06-10)
+- AP-UX-01 ✅: Stationen-Zeitreise (3 Akte, Screen 2 = ohne Endwissen, Screen 3 = erster Reveal)
 - `config.features` = neutrale Fähigkeitswahl (kein `isAppChart`, kein `noRangeButtons`)
-- Container-Marker: `data-fw-appchart` (kein `financial-chart-module`)
 
 **Parallel weiter offen:**
 - AP-20/21 (Mixed-Rhythm CV-Heuristik) — Chart-Engine

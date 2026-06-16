@@ -56,3 +56,9 @@ Wird geleert nach /distill. Einträge: [FRICTION] [WIN] [PREF] [QUESTION] [OK]
 ## 2026-06-16 – APP-01 | Slice 6 — VertikaleLinie + AssumptionsBox + PrimaryCta
 - [FRICTION] Slice 6 technisch korrekt implementiert und getestet (Szenarien Y/Z/AA ✅), aber UX Screen-Flow-Dramaturgie (Screen 2 Vergangenheit / Screen 3 Heute) kommt nach Sichtung nicht an — Albert hält inne für Konzeptüberarbeitung
 - [QUESTION] Ob 4-Screen-Flow mit zwei getrennten Chart-Screens beim Nutzer ankommt, wurde erst nach Implementierung sichtbar; Spec §14 war eindeutig, aber UX-Wirkung nicht
+
+## 2026-06-16 – SESSION START | Fokus: APP-01 — prokrastinations-preis
+`FinanzwesirData.js, CSVParser.js, FwDateUtils.js — diese Session nicht berühren. ✓`
+
+## 2026-06-16 – AP-01 + AP-02 | Entscheidungsprotokoll + APP_SPEC V2.0
+- [OK] Keine Vorkommnisse — beide APs planmäßig: AP-01 ENTSCHEIDUNGSPROTOKOLL.md neu angelegt, AP-02 APP_SPEC.md V1.7→V2.0 nach Spec-Rewrite-Guard ohne Korrektur umgebaut

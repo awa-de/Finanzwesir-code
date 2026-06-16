@@ -1,5 +1,5 @@
 # BACKLOG – Finanzwesir 2.0
-Stand: 2026-06-16 | Session: APP-01-Slice6 | Geändert von: Claude
+Stand: 2026-06-16 | Session: AP-01-AP-02-Zeitreise-Umbau | Geändert von: Claude
 
 **Regeln:**
 - ✅-Zeilen werden sofort nach `BACKLOG-ARCHIV.md` verschoben (append), dann hier gelöscht.
@@ -22,7 +22,12 @@ Stand: 2026-06-16 | Session: APP-01-Slice6 | Geändert von: Claude
 
 | ID       | Bereich | Titel                                          | Prio | Dep          | Detail                                            |
 |----------|---------|------------------------------------------------|------|--------------|---------------------------------------------------|
-| AP-UX-01 | App     | Screen-Flow Dramaturgie entscheiden: Screen 2/3 trennen oder zusammenführen? Aktuell 2 getrennte Chart-Screens (Screen 2 = Vergangenheit, Screen 3 = Heute mit VertikaleLinie) — UX-Wirkung laut Albert nach Slice-6-Test nicht intuitiv. Optionen: (A) §14.1 anpassen: 2→3 zu einem Screen mit bedingter VertikaleLinie; (B) Kontext-Bridge / Übergangs-Microcopy stärken. Muss vor Slice 7 entschieden sein. | H    | —            | Apps/prokrastinations-preis/APP_SPEC.md §14       |
+| B1-AP-03 | App     | Datenvertrag Stations-JSON: Felder, Enums, Flags (role, priority, falseResolution, late_wobble), Quellenstatus-Schema (primary_verified/secondary_verified/source_claimed_unchecked/derived_from_app_data), Validierungsregeln. Basis: ENTSCHEIDUNGSPROTOKOLL.md §4+§9, APP_SPEC §8. | H    | B1-AP-02 ✅  | Apps/prokrastinations-preis/ENTSCHEIDUNGSPROTOKOLL.md |
+| B1-AP-04 | App     | UX-/Heldenreise-Abschnitt aktualisieren: Hindsight Bias, falsche Auflösung, late_wobble, dynamischer Reveal in APP_SPEC §23 aktualisieren. | M    | B1-AP-03     | Apps/prokrastinations-preis/APP_SPEC.md §23       |
+| B1-AP-05 | App     | A11y- und Mobile-Regeln ergänzen: aufklappbarer Zwischenstand auf Mobile (Collapsible), Fokusführung beim Stationswechsel, Reduced Motion, Button-Labels als Micro-Commitment. Basis: APP_SPEC §14. | H    | B1-AP-03     | Apps/prokrastinations-preis/APP_SPEC.md §14       |
+| B1-AP-06 | App     | Testfälle aktualisieren: Stations-JSON lädt, Fensterfilter funktioniert, finaler Reveal aus CSV, keine roten Crash-Visuals, Mobile-Collapsible, kein KPI vor Screen 3. Basis: APP_SPEC §19. | M    | B1-AP-05     | Apps/prokrastinations-preis/APP_SPEC.md §19       |
+| B1-AP-07 | App     | Redaktions-Gate dokumentieren: Quellenstatus, Mindestkrise (priority ≥ 95), Produktivfähigkeit, sichtbare Stationen-Prüfung. Detailausarbeitung von APP_SPEC §20. | M    | B1-AP-06     | Apps/prokrastinations-preis/APP_SPEC.md §20       |
+| B1-AP-08 | App     | Widersprüchliche Stellen bereinigen: SLICE_PLAN.md + MINI_SPEC_FROM_HAUPTDOKUMENT.md enthalten noch alte Screen-2-Aussagen (vollständiger Chart mit KPIs). Alle Stellen korrigieren. | L    | B1-AP-07     | Apps/prokrastinations-preis/SLICE_PLAN.md, MINI_SPEC_FROM_HAUPTDOKUMENT.md |
 | AP-DATA-09 | Data  | Bestehende APP_SPEC.md nach Data-Need-Blaupause angleichen | M | — | docs/data/OFFENE-ARBEITSPUNKTE.md; Rollout erst nach Alberts explizitem Auftrag |
 | DS-003   | Design  | Tastatur-Navigation testen (Safari/Firefox/Chrome) | H | —          | —                                                 |
 | DS-004   | Design  | WCAG Kontrast-Tabelle dokumentieren            | H    | —            | —                                                 |

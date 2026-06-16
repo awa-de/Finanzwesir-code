@@ -1,11 +1,14 @@
 # BACKLOG-ARCHIV – Finanzwesir 2.0
-Stand: 2026-06-16 | Session: APP-01-Slice6 | Geändert von: Claude
+Stand: 2026-06-16 | Session: AP-01-AP-02-Zeitreise-Umbau | Geändert von: Claude
 
 Abgeschlossene Items, neueste zuerst (append-only).
 Archivierungs-Trigger: wenn > 200 Zeilen → neue Datei `BACKLOG-ARCHIV-YYYY.md` anlegen.
 
 | ID | Bereich | Titel | Abgeschlossen | Session |
 |----|---------|-------|---------------|---------|
+| AP-UX-01 | App | Screen-Flow Dramaturgie entschieden: Stationen-Zeitreise (3 Akte, 4 Screens). Screen 2 = Zeitreise ohne Endwissen, Screen 3 = erster vollständiger Reveal. ENTSCHEIDUNGSPROTOKOLL.md (B1-AP-01) + APP_SPEC V2.0 (B1-AP-02) dokumentieren die Entscheidung. | 2026-06-16 | AP-01-AP-02-Zeitreise-Umbau |
+| B1-AP-01 | App | ENTSCHEIDUNGSPROTOKOLL.md angelegt — Stationen-Zeitreise als Grundentscheidung beschlossen (3 Akte, 6 Stationen v2.1, Rolling Window aus latestMonth, Stationen-JSON als zweite Datenschicht, keine rote Crash-Codierung, Mobile-Collapsible). Verbindliche Klammer für B1-AP-02 bis B1-AP-08. *(sofort erledigt)* | 2026-06-16 | AP-01-AP-02-Zeitreise-Umbau |
+| B1-AP-02 | App | APP_SPEC.md V1.7→V2.0: Screen-Flow auf Stationen-Zeitreise umgestellt. §8 Zwei-Datenschichten-Architektur, §9 Rolling-Window-Regel, §16 Screen-Tabelle + Stationen-Mechanik neu, §17 Verbotene Visuals, §20 Redaktions-Gate. Alte Screen-2-Behauptungen bereinigt. Kein Code geändert. *(sofort erledigt)* | 2026-06-16 | AP-01-AP-02-Zeitreise-Umbau |
 | APP-01-Slice-6 | App | B1 Slice-6: VertikaleLinie (Screen 3, afterDraw-Plugin in ChartEngine.js, gestrichelt blau #0071bf am letzten Datenpunkt), AssumptionsBox (Screen 2+3, aside.fw-app__assumptions, APP_SPEC §19.8-Text), PrimaryCta (Screen 4, finales Styling), Microcopy-Sublines (Screen 2+3). ChartEngine.js protected — Albert-Freigabe erteilt. REG-APP-002 in Regression-Matrix. UX-Entscheidung Screen-Flow-Dramaturgie (Screen 2/3 Trennung) offen → AP-UX-01 in BACKLOG. *(technisch vollständig, UX-Konzept offen)* | 2026-06-16 | APP-01-Slice6 |
 | APP-01-Slice-5 | App | B1 Slice-5: 4-Screen-Flow — Screen-Controller showScreen(n), lazy Chart-Render (chartEngine2/chartEngine3), Button-Wiring, Slider-Events ohne Live-Chart-Update. Szenarien S–X erweitert (V/W/X neu), Patch-Quittung in docs/steering/patches/. UX-Diskussion 2026-06-15: Slider-Kopplung ok, SF-02 (NumericInput Hybrid) auf Slice 7 vorgezogen, Microcopy-Schicht für Slice 6 geplant. | 2026-06-15 | APP-01-Slice5-Diskussion |
 | PLAN-01 | App-Fabrik | P→B→N-Analyse (Mark Pincus Framework): 3 Integrationswege erarbeitet (Family-Standards, APP_SPEC-Template, Pincus-Check als Gate) + AF-21/22/23 als Arbeitspakete in BACKLOG zerlegt *(sofort erledigt)* | 2026-06-15 | AF-21-23-PBN-decompose |
