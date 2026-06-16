@@ -1,6 +1,12 @@
 # Session-Log — Finanzwesir 2.0
 Wird geleert nach /distill. Einträge: [FRICTION] [WIN] [PREF] [QUESTION] [OK]
 
+## 2026-06-16 – SESSION START | Fokus: APP-01 — prokrastinations-preis
+`FinanzwesirData.js, CSVParser.js, FwDateUtils.js — diese Session nicht berühren. ✓`
+
+## 2026-06-16 – B1-AP-03 abgeschlossen | Stations-JSON-Datenvertrag
+[FRICTION] Patch-Quittung zunächst nur im Chat ausgegeben — als Datei in docs/steering/patches/ nachgeholt nach Alberts Hinweis.
+
 ## 2026-06-15 – SESSION START | Fokus: APP-01 — prokrastinations-preis
 `FinanzwesirData.js, CSVParser.js, FwDateUtils.js — diese Session nicht berühren. ✓`
 

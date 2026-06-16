@@ -10,7 +10,7 @@ Stand: 2026-06-16 | V2.0 — AP-02 Zeitreise-Umbau | Geändert von: Claude
 |---|---|
 | Version | Draft V2.0 — Zeitreise-Umbau / AP-02 |
 | Phase | Konzept-Umbau auf Stationen-Zeitreise (AP-01 ✅ abgeschlossen) |
-| Nächster Schritt | AP-03 — Datenvertrag für Stations-JSON |
+| Nächster Schritt | B1-AP-04 — UX/Heldenreise-Abschnitt (AP-03 ✅ 2026-06-16) |
 | Code-Freigabe | Slice 0 ✅ 2026-06-04, Slice 1 ✅ 2026-06-05, Slice 2 ✅ 2026-06-05, Slice 6 ✅ 2026-06-16; Slice 7+ erst nach Pre-Code-Gate |
 | Grundlage | `Apps/prokrastinations-preis/ENTSCHEIDUNGSPROTOKOLL.md` (AP-01, 2026-06-16) |
 | Ersetzt | APP_SPEC V1.7 (Ergebnisgrafik-Logik — Screen 2 zeigte vollständigen Chart mit KPIs) |
@@ -383,14 +383,14 @@ Die App verwendet zwei getrennte Datenquellen. Beide müssen vorhanden und valid
 
 **CSV bleibt CSV.** Regeln aus §7 gelten unverändert.
 
-**Stationen-JSON ist neu.** Der detaillierte Vertrag (Felder, Enums, Flags, Quellenstatus, Validierungsregeln) kommt in AP-03.
+**Stationen-JSON ist neu.** Der detaillierte Vertrag (Felder, Enums, Flags, Quellenstatus, Validierungsregeln) ist in `STATIONS_CONFIG_CONTRACT.md` dokumentiert.
 
 **Redaktionelle Kontrolle:**
-Claude darf die redaktionellen Stationen nicht eigenmächtig erfinden, erweitern oder umpriorisieren. Claude lädt die freigegebene JSON-Konfiguration, validiert sie gegen den Vertrag (AP-03) und rendert sie.
+Claude darf die redaktionellen Stationen nicht eigenmächtig erfinden, erweitern oder umpriorisieren. Claude lädt die freigegebene JSON-Konfiguration, validiert sie gegen den Vertrag (STATIONS_CONFIG_CONTRACT.md) und rendert sie.
 
 **Fehlerfall Stations-JSON:**
-- JSON nicht erreichbar / nicht parsebar → Error-State (d) oder Fallback auf einen definierten Minimalzustand (AP-03 entscheidet)
-- JSON valide, aber kein Station im aktiven Fenster → definierten Fallback-State (AP-03 entscheidet)
+- JSON nicht erreichbar / nicht parsebar → Error-State (d) oder Fallback auf einen definierten Minimalzustand (STATIONS_CONFIG_CONTRACT.md §12)
+- JSON valide, aber kein Station im aktiven Fenster → definierten Fallback-State (STATIONS_CONFIG_CONTRACT.md §12)
 
 > **Guardrail:** Depotwerte je Station (Eingezahlt, Depotwert damals) werden aus der Sparplanberechnung abgeleitet, nicht in der JSON gepflegt.
 
@@ -493,7 +493,7 @@ Init
 
 **Ungültige `data-fw-options`-Werte:** Fallback auf internen Default, kein Error-State.
 
-**Stations-JSON-Fehler:** Detaillierter Fallback wird in AP-03 definiert.
+**Stations-JSON-Fehler:** Fallback-Konzept: STATIONS_CONFIG_CONTRACT.md §12. Technische Implementierung folgt in Coding-AP.
 
 ---
 
@@ -562,7 +562,7 @@ Init
 **Wichtig:**
 - `visibleChartSeries` ist für Screen 2 nur der bis zur aktuellen Station sichtbare Ausschnitt.
 - `chartSeries` (vollständig) wird erst für Screen 3 verwendet.
-- Die endgültige technische Definition der Station-Objekte folgt in AP-03.
+- Die endgültige technische Definition der Station-Objekte ist in STATIONS_CONFIG_CONTRACT.md §5–§7 dokumentiert.
 
 ### 13.4 Pflichtfelder und Fallbacks
 
@@ -1048,7 +1048,7 @@ Wenn diese Bedingungen nicht erfüllt sind, ist die App redaktionell nicht publi
 | B-01-D | **CSV-Erstellung und Freigabe:** Projektinhaber erstellt und pflegt CSV redaktionell; Claude verarbeitet nur freigegebene Datasets | ✅ geklärt 2026-06-03 |
 | B-02 | **Berechnungsformel:** Anteilslogik — monatlicher Anteilskauf | ✅ entschieden 2026-05-28 |
 | B-03 | **Screen-Flow-Mechanismus:** Button-getrieben, kein Autoplay | ✅ entschieden 2026-05-28 |
-| B-04 | **Stations-JSON-Vertrag:** Felder, Enums, Flags, Quellenstatus, Validierungsregeln | ⬜ AP-03 |
+| B-04 | **Stations-JSON-Vertrag:** Felder, Enums, Flags, Quellenstatus, Validierungsregeln | ✅ 2026-06-16 — Vertrag: `STATIONS_CONFIG_CONTRACT.md` |
 
 ### Entscheidungsfragen für Albert
 
@@ -1078,7 +1078,7 @@ Wenn diese Bedingungen nicht erfüllt sind, ist die App redaktionell nicht publi
 | Kein data-app? | ✅ §10 |
 | Kein produktives data-fw-theme? | ✅ §18 |
 | data-fw-options whitelistbar? (Whitelist dokumentiert) | ✅ §11 |
-| Datenquellen und Cache-Busting geklärt? | ⚠️ CSV entschieden; Stations-JSON-Vertrag offen (AP-03) |
+| Datenquellen und Cache-Busting geklärt? | ✅ CSV entschieden; Stations-JSON-Vertrag: `STATIONS_CONFIG_CONTRACT.md` |
 | Zwei-Datenschichten-Architektur dokumentiert? | ✅ §8 |
 | Rolling-Window-Regel korrekt formuliert? | ✅ §9 |
 | AppContext definiert? | ✅ §13 |
@@ -1115,7 +1115,7 @@ Wenn diese Bedingungen nicht erfüllt sind, ist die App redaktionell nicht publi
 
 ---
 
-*Nächster Schritt: AP-03 — Datenvertrag für Stations-JSON (Felder, Enums, Flags, Quellenstatus, Validierungsregeln)*
+*Nächster Schritt: B1-AP-04 — UX/Heldenreise-Abschnitt für APP_SPEC.md (AP-03 ✅ 2026-06-16)*
 
 ---
 

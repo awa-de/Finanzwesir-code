@@ -1,11 +1,12 @@
 # BACKLOG-ARCHIV – Finanzwesir 2.0
-Stand: 2026-06-16 | Session: AP-01-AP-02-Zeitreise-Umbau | Geändert von: Claude
+Stand: 2026-06-16 | Session: B1-AP-03 | Geändert von: Claude
 
 Abgeschlossene Items, neueste zuerst (append-only).
 Archivierungs-Trigger: wenn > 200 Zeilen → neue Datei `BACKLOG-ARCHIV-YYYY.md` anlegen.
 
 | ID | Bereich | Titel | Abgeschlossen | Session |
 |----|---------|-------|---------------|---------|
+| B1-AP-03 | App | Datenvertrag Stations-JSON (STATIONS_CONFIG_CONTRACT.md): Felder, Enums, Flags (role, priority, falseResolution, late_wobble), Quellenstatus-Schema (primary_verified/secondary_verified/source_claimed_unchecked/derived_from_app_data), Validierungsregeln, Rolling-Window-Fensterfilter, Redaktions-Gate. APP_SPEC.md §8/§21/§22 aktualisiert. Kein Code geändert. | 2026-06-16 | B1-AP-03 |
 | AP-UX-01 | App | Screen-Flow Dramaturgie entschieden: Stationen-Zeitreise (3 Akte, 4 Screens). Screen 2 = Zeitreise ohne Endwissen, Screen 3 = erster vollständiger Reveal. ENTSCHEIDUNGSPROTOKOLL.md (B1-AP-01) + APP_SPEC V2.0 (B1-AP-02) dokumentieren die Entscheidung. | 2026-06-16 | AP-01-AP-02-Zeitreise-Umbau |
 | B1-AP-01 | App | ENTSCHEIDUNGSPROTOKOLL.md angelegt — Stationen-Zeitreise als Grundentscheidung beschlossen (3 Akte, 6 Stationen v2.1, Rolling Window aus latestMonth, Stationen-JSON als zweite Datenschicht, keine rote Crash-Codierung, Mobile-Collapsible). Verbindliche Klammer für B1-AP-02 bis B1-AP-08. *(sofort erledigt)* | 2026-06-16 | AP-01-AP-02-Zeitreise-Umbau |
 | B1-AP-02 | App | APP_SPEC.md V1.7→V2.0: Screen-Flow auf Stationen-Zeitreise umgestellt. §8 Zwei-Datenschichten-Architektur, §9 Rolling-Window-Regel, §16 Screen-Tabelle + Stationen-Mechanik neu, §17 Verbotene Visuals, §20 Redaktions-Gate. Alte Screen-2-Behauptungen bereinigt. Kein Code geändert. *(sofort erledigt)* | 2026-06-16 | AP-01-AP-02-Zeitreise-Umbau |

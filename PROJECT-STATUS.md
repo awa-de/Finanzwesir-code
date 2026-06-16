@@ -2,16 +2,16 @@
 Version: 1
 Stand: 2026-06-16
 Fokus-AP: APP-01 — prokrastinations-preis
-Nächster-Schritt: B1-AP-03 — Datenvertrag Stations-JSON; dann B1-AP-04 bis AP-06; danach Slice 7 A11y + Responsive
+Nächster-Schritt: B1-AP-04 — UX/Heldenreise-Abschnitt; dann B1-AP-05 bis AP-08; danach Slice 7 A11y + Responsive
 Blocker: keine
 Letzter-Distill: 2026-06-15
 Kassensturz-Datum: 2026-06-15
 -->
-<!-- HOOK-META-SESSION: AP-01-AP-02-Zeitreise-Umbau -->
+<!-- HOOK-META-SESSION: B1-AP-03 -->
 
 # PROJECT STATUS — Finanzwesir 2.0
 
-Stand: 2026-06-16 | Session: AP-01-AP-02-Zeitreise-Umbau | Geändert von: Claude
+Stand: 2026-06-16 | Session: B1-AP-03 | Geändert von: Claude
 
 **Zweck:** Schneller Wiedereinstieg nach Pausen.
 **Zielgruppe:** Albert und Claude.
@@ -103,6 +103,8 @@ Stand: 2026-06-16 | Session: AP-01-AP-02-Zeitreise-Umbau | Geändert von: Claude
 
 ✅ **B1-AP-02 APP_SPEC.md V1.7→V2.0 (2026-06-16):** Stationen-Zeitreise-Umbau nach /spec-rewrite-guard. §8 Zwei-Datenschichten, §9 Rolling Window, §16 Screen-Tabelle + Stationen-Mechanik neu, §17 Verbotene Visuals, §20 Redaktions-Gate. Alte Screen-2-Behauptungen bereinigt. Kein Code geändert.
 
+✅ **B1-AP-03 abgeschlossen (2026-06-16):** STATIONS_CONFIG_CONTRACT.md angelegt (Stations-JSON-Datenvertrag, 14 Abschnitte: Top-Level-Struktur, Station-Objekt, Pflichtfelder, Enums, Redaktions-Gate, Rolling-Window-Fensterfilter, Fehlerkonzept). APP_SPEC.md §8/§21/§22 aktualisiert. Kein Code geändert.
+
 ---
 
 ## 2. Letzter stabiler Stand
@@ -128,8 +130,8 @@ Stand: 2026-06-16 | Session: AP-01-AP-02-Zeitreise-Umbau | Geändert von: Claude
 
 ## 3. Nächster sinnvoller Schritt
 
-- **B1-AP-03** — Datenvertrag Stations-JSON (Felder, Enums, Flags, Quellenstatus, Validierungsregeln); Basis: ENTSCHEIDUNGSPROTOKOLL.md + APP_SPEC §8
-- **B1-AP-04 bis AP-08** — UX-Heldenreise, A11y/Mobile, Testfälle, Redaktions-Gate, Widerspruchs-Bereinigung; nach AP-03; dann Slice 7
+- **B1-AP-04** — UX/Heldenreise-Abschnitt: APP_SPEC §23 für Zeitreise-Logik aktualisieren (AP-03 ✅ 2026-06-16)
+- **B1-AP-05 bis AP-08** — A11y/Mobile, Testfälle, Redaktions-Gate, Widerspruchs-Bereinigung; nach AP-04; dann Slice 7
 - **AP-20/21** (Mixed-Rhythm CV-Heuristik) — 🟡 Aktiv, Chart-Engine, parallel möglich
 
 ---
@@ -142,7 +144,7 @@ Stand: 2026-06-16 | Session: AP-01-AP-02-Zeitreise-Umbau | Geändert von: Claude
 | Chart-Engine | Stabil, offene APs | Siehe `docs/steering/BACKLOG.md` |
 | Theme | In Entwicklung | `THEME-ASSEMBLY-CHECKLIST.md` |
 | CSS | Stabil | Siehe `docs/steering/BACKLOG.md` (CSS-N Items) |
-| Apps | Slice 6 ✅, AP-UX-01 ✅, B1-AP-01/02 ✅ 2026-06-16 | B1-AP-03 Datenvertrag → AP-04–08 → Slice 7: A11y + Responsive |
+| Apps | Slice 6 ✅, AP-UX-01 ✅, B1-AP-01/02/03 ✅ 2026-06-16 | B1-AP-04–08 → Slice 7: A11y + Responsive |
 | Content | Laufend | Redaktionsleitfaden aktiv |
 | Security | SECURITY-BASELINE.md App-Fabrik-gatefähig ✅ | Security-Sync-Regel + Gate-Prüffrage verankert (ST-13/ST-14) |
 
@@ -177,6 +179,9 @@ Vollständig im DECISION-LOG dokumentiert (`docs/steering/DECISION-LOG.md`):
 ---
 
 ## 8. Letzte Session
+
+2026-06-16 — B1-AP-03 Stations-JSON-Datenvertrag abgeschlossen (B1-AP-03).
+STATIONS_CONFIG_CONTRACT.md (14 Abschnitte) angelegt. APP_SPEC.md §8/§21/§22 aktualisiert. Kein Code geändert.
 
 2026-06-16 — B1-AP-01/AP-02 Zeitreise-Umbau abgeschlossen (AP-01-AP-02-Zeitreise-Umbau).
 ENTSCHEIDUNGSPROTOKOLL.md (B1-AP-01) als Architektur-Klammer für AP-02 bis AP-08 angelegt: Stationen-Zeitreise (3 Akte, 6 Stationen v2.1), Rolling Window aus latestMonth, Stations-JSON als zweite Datenschicht, keine rote Crash-Codierung, Mobile-Collapsible. APP_SPEC.md V1.7→V2.0 (B1-AP-02) nach /spec-rewrite-guard: §8 Zwei-Datenschichten, §9 Rolling Window, §16 Screen-Tabelle neu, §17 Verbotene Visuals, §20 Redaktions-Gate. AP-UX-01 damit erledigt. Kein Code geändert.
@@ -427,9 +432,9 @@ Neue APs: DS-012, DS-013, DS-014.
 
 ## 9. Einstieg für nächste Session
 
-**Nächster Schritt: B1-AP-03 — Datenvertrag Stations-JSON**
+**Nächster Schritt: B1-AP-04 — UX/Heldenreise-Abschnitt**
 
-AP-UX-01, B1-AP-01 und B1-AP-02 ✅ 2026-06-16. Stationen-Zeitreise beschlossen und spec-seitig umgesetzt. Nächste Specs: AP-03 (JSON-Vertrag), AP-04 (UX/Heldenreise), AP-05 (A11y/Mobile), AP-06 (Testfälle), AP-07 (Redaktions-Gate), AP-08 (Widerspruchs-Bereinigung). Erst nach AP-03–AP-06: Slice 7 (A11y + Responsive + SF-02 NumericInput).
+AP-UX-01, B1-AP-01, B1-AP-02 und B1-AP-03 ✅ 2026-06-16. Stationen-Zeitreise beschlossen, spec-seitig umgesetzt, JSON-Vertrag definiert (STATIONS_CONFIG_CONTRACT.md). Nächste Specs: AP-04 (UX/Heldenreise), AP-05 (A11y/Mobile), AP-06 (Testfälle), AP-07 (Redaktions-Gate), AP-08 (Widerspruchs-Bereinigung). Erst nach AP-04–AP-07: Slice 7 (A11y + Responsive + SF-02 NumericInput).
 
 Operative Quellen:
 - `Apps/prokrastinations-preis/APP_SPEC.md` — V2.0 ✅ (operativ, AP-02 2026-06-16)
