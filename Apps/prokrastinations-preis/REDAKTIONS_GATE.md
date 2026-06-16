@@ -1,4 +1,4 @@
-Stand: 2026-06-16 | V1.0 — AP-07 | Erstellt von: Claude
+Stand: 2026-06-16 | V1.1 — AP-08b Konsistenz-Nachputz | Geändert von: Claude
 
 # Redaktions-Gate — prokrastinations-preis
 
@@ -155,6 +155,29 @@ Regel: Screen 2 darf nicht zeigen:
 - Vorschau auf spätere Stationen.
 
 Begründung: Wenn Screen 2 das Ende verrät, ist der Hindsight-Bias-Beweis zerstört.
+
+---
+
+### G-A06b — Kein Endwissens-Leak über A11y (Screenreader)
+
+**Typ:** Technisch / Manuell
+**Blockierend:** Ja
+
+Regel: Die ARIA Live Region darf auf Screen 1 und Screen 2 keinen Depotwert und kein finales Ergebnis ausgeben.
+
+Verboten auf Screen 2 in der Live Region:
+- finaler Depotwert (`depotwertHeute`),
+- eingezahltes Gesamtkapital (`eingezahlt`),
+- Differenz / Gewinn (`differenz`),
+- jede Formulierung, die das Endergebnis der 10-Jahres-Reise nennt.
+
+Erlaubt auf Screen 2: `stationLiveMessage` — Stationsname und Kurzbeschreibung ohne Zahlen aus dem Endergebnis.
+
+Erst auf Screen 3: `revealA11ySummary` mit vollem Ergebnis in die Live Region schreiben.
+
+Begründung: G-A06 gilt auch für Screenreader. Ein Endwissens-Leak über die Live Region zerstört den Hindsight-Bias-Beweis für Nutzer mit Seheinschränkung.
+
+Prüfung: → TC-H05 in `QA_TEST_CASES.md`.
 
 ---
 
@@ -486,4 +509,4 @@ AP-07 implementiert das nicht, sondern dokumentiert die Regel. Technische Umsetz
 | Offen | Business Insider 2018 oder WiWo 2018 ersetzen — Quellenentscheidung |
 | Offen | Finale Impfstoff-Quelle (November 2020) bestätigen |
 
-*Nächster Schritt: B1-AP-08 — Widersprüchliche Stellen bereinigen (AP-07 ✅ 2026-06-16)*
+*AP-07 ✅ 2026-06-16, AP-08b ✅ 2026-06-16 | Nächster Schritt: B1-AP-09 — produktive `stations.de.json` anlegen*

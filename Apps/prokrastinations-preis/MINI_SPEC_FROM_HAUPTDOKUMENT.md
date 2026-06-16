@@ -1,7 +1,7 @@
 # MINI_SPEC_FROM_HAUPTDOKUMENT — Marktzeit schlägt Timing / Lieber heute als morgen
 
 > Quelle: `docs/App-Fabrik/ETF-Apps-Hauptdokument.md` + `aktuelles Projekt/04_ZUSATZTEXT_B1_REWRITE_MARKTZEIT.md`
-> Status: Historisch — abgeleitet aus Planungsphase Mai 2026. Bei Widerspruch gilt `APP_SPEC.md` V2.4.
+> Status: Historisch — abgeleitet aus Planungsphase Mai 2026. Bei Widerspruch gilt `APP_SPEC.md` V2.5.
 > Letzte Änderung: 2026-06-16 — Screen-Flow an Stationen-Zeitreise angepasst (AP-08)
 
 ---
@@ -99,7 +99,7 @@ Microcopy:
 
 > „Das wäre kein gerader Weg gewesen. Aber es wäre Marktzeit gewesen."
 
-→ Führende Quelle: `APP_SPEC.md` V2.4 §14, §6
+→ Führende Quelle: `APP_SPEC.md` V2.5 §16.1–§16.4
 
 ### Screen 3 — Erster vollständiger Reveal
 
@@ -114,7 +114,7 @@ Text:
 
 > „Vor 10 Jahren ist weg. Heute nicht."
 
-→ Führende Quelle: `APP_SPEC.md` V2.4 §14, §6
+→ Führende Quelle: `APP_SPEC.md` V2.5 §16.1–§16.4
 
 ### Screen 4 — Nicht weiter warten
 
@@ -122,7 +122,7 @@ Keine Zukunftsprognose als glatte Kurve.
 
 Kernaussage:
 
-> „Wenn du jetzt wieder wartest, wird heute in zehn Jahren wieder der verpasste Zeitpunkt sein."
+> ~~„Wenn du jetzt wieder wartest, wird heute in zehn Jahren wieder der verpasste Zeitpunkt sein."~~ *(historischer Planungsentwurf — zu druckvoll; verbindliche Microcopy in `APP_SPEC.md` V2.5 §23.16)*
 
 ---
 
@@ -158,9 +158,7 @@ B2 ist die Kohorten-/Epochen-App.
 
 > „Heute Marktzeit sammeln"
 
-oder:
-
-> „Ich starte jetzt"
+*(„Ich starte jetzt" ist nicht mehr aktiv — entschieden E-04, `APP_SPEC.md` V2.5 §21)*
 
 ---
 
@@ -183,4 +181,4 @@ oder:
 - Slug laut Hauptdokument: `prokrastinations-preis`
 - Zugeordneter App-Ordner: `/Apps/prokrastinations-preis/`
 - Modulrolle: Haupt-App
-- Status: Roh-Mini-Spec, noch nicht APP_SPEC
+- Status: Historisch — bei Widerspruch gilt `APP_SPEC.md` V2.5

@@ -1,5 +1,5 @@
 # NAVIGATION.md – Finanzwesir 2.0
-Stand: 2026-06-16 | Session: B1-AP-08 | Geändert von: Claude
+Stand: 2026-06-16 | Session: B1-AP-08b | Geändert von: Claude
 
 Für Claude: **Routing-Dokument.** Wird beim Session-Start (Schritt 2) gelesen.
 Gibt Pfade und Lese-Reihenfolgen vor — KEINE Verhaltensregeln (die stehen in CLAUDE.md).
@@ -167,11 +167,11 @@ Nach Abschluss: `/abschluss-ritual`.
 > und welche Datenfragen vor dem produktiven Bau offen sind.
 > Nur bei Quellen-, CSV-, Contract- oder Datenänderungsfragen zusätzlich `docs/data/` lesen.
 
-> [!note] B1 / prokrastinations-preis — Zeitreise-Umbau (B1-AP-01 bis AP-08 ✅ 2026-06-16)
-> `Apps/prokrastinations-preis/APP_SPEC.md` V2.4 (AP-07 Redaktions-Gate, 2026-06-16) ist die operative Spec-Quelle.
-> `Apps/prokrastinations-preis/ENTSCHEIDUNGSPROTOKOLL.md` (B1-AP-01, 2026-06-16) ist die verbindliche Architektur-Klammer für B1-AP-02 bis B1-AP-08.
-> `Apps/prokrastinations-preis/MINI_SPEC_FROM_HAUPTDOKUMENT.md` — historisch, an Stationen-Zeitreise angepasst (AP-08); bei Widerspruch gilt APP_SPEC.md V2.4.
-> `SLICE_PLAN.md` aktuell (Slice-2 ✅ 2026-06-05, Slice-3 ✅ 2026-06-05, Slice-4 ✅ 2026-06-11, Slice-5 ✅ 2026-06-15, Slice-6 ✅ 2026-06-16). OA-01 entschieden. OA-02 entschieden (2026-06-10): Pfad 2 via `renderFromData()`. B1-AP-03 ✅ 2026-06-16 — `STATIONS_CONFIG_CONTRACT.md` angelegt. B1-AP-04 ✅ 2026-06-16 — `APP_SPEC.md` §23 UX/Heldenreise/Beweisdramaturgie auf V2.1 aktualisiert (§23.1–§23.19). B1-AP-05 ✅ 2026-06-16 — `APP_SPEC.md` §14 A11y- und Mobile-Regeln (15 Subsektionen). B1-AP-06 ✅ 2026-06-16 — `QA_TEST_CASES.md` angelegt (12 Gruppen A–L, 23 Testfälle, 18 Muss). B1-AP-07 ✅ 2026-06-16 — `REDAKTIONS_GATE.md` angelegt (10 Gate-A, 7 Gate-B, 3 Gate-C + Release-Checkliste). `APP_SPEC.md` V2.4, `QA_TEST_CASES.md` V1.1. B1-AP-08 ✅ 2026-06-16 — Widersprüchliche Stellen bereinigt (SLICE_PLAN V1.6→V2.4, MINI_SPEC Screen 2+3, APP_SPEC Versionstabelle, 3 weitere Dateien markiert). Nächster Schritt: Slice 7 — A11y + Responsive + SF-02 NumericInput.
+> [!note] B1 / prokrastinations-preis — Zeitreise-Umbau (B1-AP-01 bis AP-08b ✅ 2026-06-16)
+> `Apps/prokrastinations-preis/APP_SPEC.md` V2.5 (AP-08b Konsistenz-Nachputz, 2026-06-16) ist die operative Spec-Quelle.
+> `Apps/prokrastinations-preis/ENTSCHEIDUNGSPROTOKOLL.md` (B1-AP-01, 2026-06-16) ist die verbindliche Architektur-Klammer für B1-AP-02 bis B1-AP-08b.
+> `Apps/prokrastinations-preis/MINI_SPEC_FROM_HAUPTDOKUMENT.md` — historisch; bei Widerspruch gilt APP_SPEC.md V2.5.
+> `SLICE_PLAN.md` aktuell (Slice-6 ✅ 2026-06-16 — Altstand, alte Ergebnisgrafik-Logik, kein Zielzustand). OA-01 entschieden. OA-02 entschieden: Pfad 2 via `renderFromData()`. B1-AP-03 ✅ — `STATIONS_CONFIG_CONTRACT.md`. B1-AP-04 ✅ — §23 UX/Heldenreise. B1-AP-05 ✅ — §14 A11y/Mobile. B1-AP-06 ✅ — `QA_TEST_CASES.md` V1.2. B1-AP-07 ✅ — `REDAKTIONS_GATE.md` V1.1. B1-AP-08 ✅ — Widersprüchliche Stellen bereinigt. B1-AP-08b ✅ 2026-06-16 — Konsistenz-Nachputz: APP_SPEC V2.5, a11y-Schema (revealA11ySummary/stationLiveMessage), A11y-Endwissens-Leak-Verbot (§14.1, TC-H05, G-A06b), Dez-2018-Rolle korrigiert, MINI_SPEC/SLICE_PLAN/STATIONS_CONTRACT/app.test.html/PROJECT-STATUS/NAVIGATION/Memory/BACKLOG/REGRESSION-MATRIX aktualisiert. Nächster Schritt: B1-AP-09 — produktive `stations.de.json` anlegen.
 > B1 ist Pilot-2 (Daten-/Chart-/Story-Pilot). Pilot-1 ist `risiko-uebersetzer` (Calculator-Pilot) — entschieden E-02, 2026-05-28.
 13. bei Chart-Nutzung: relevante Chart-Engine-Spec + WORKING-FEATURES.md
 ```

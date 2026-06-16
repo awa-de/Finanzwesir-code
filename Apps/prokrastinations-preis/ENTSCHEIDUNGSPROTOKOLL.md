@@ -114,7 +114,7 @@ Aktuell beschlossen für den Launch-Kontext:
 | Datum | Ereignis | Dramaturgische Funktion |
 |---|---|---|
 | Februar 2018 | Die ruhigen Börsenjahre enden abrupt | Erster Einbruch |
-| Dezember 2018 | Das Jahr endet tief im Minus | Krise |
+| Dezember 2018 | Das Jahr endet tief im Minus | Zermürbung / Zweifel |
 | März 2020 | Corona-Crash | Klimax |
 | November 2020 | Impfstoff-Erleichterung | **Falsche Auflösung** |
 | Februar 2022 | Krieg in Europa | Finaler Wackler beginnt |

@@ -1,11 +1,11 @@
-Stand: 2026-06-16 | V1.1 — AP-07 Redaktions-Gate Verweis | Geändert von: Claude
+Stand: 2026-06-16 | V1.2 — AP-08b Konsistenz-Nachputz | Geändert von: Claude
 
 # QA_TEST_CASES — prokrastinations-preis
 
 Vollständige Test- und QA-Kriterien für die Stationen-Zeitreise.
 
 **Bindende Quellen:**
-- `APP_SPEC.md` V2.3 (führende Spec)
+- `APP_SPEC.md` V2.5 (führende Spec)
 - `STATIONS_CONFIG_CONTRACT.md` (Felder, Enums, Fensterfilter, Redaktions-Gate)
 - `ENTSCHEIDUNGSPROTOKOLL.md` (dramaturgische Regeln)
 - `REDAKTIONS_GATE.md` (Gate-Regeln und Release-Checkliste — `QA_TEST_CASES.md` beschreibt das Wie der Prüfung, `REDAKTIONS_GATE.md` das Was)
@@ -671,6 +671,29 @@ Chart beschreibt vollständige Entwicklung über 120 Monate bis zum letzten CSV-
 
 ---
 
+### TC-H05 — Kein A11y-Endwissens-Leak vor Screen 3
+
+**Typ:** A11y / Manuell
+**Priorität:** Muss
+
+**Hintergrund:** `revealA11ySummary` enthält den finalen Depotwert. Wird er auf Screen 2 in die ARIA Live Region geschrieben, erfährt der Screenreader-Nutzer das Ergebnis vor dem dramaturisch vorgesehenen Reveal auf Screen 3. Das ist ein Endwissens-Leak.
+
+**Schritte:**
+1. Screenreader aktivieren.
+2. App starten, Slider bedienen (Screen 1).
+3. Zeitreise starten, mehrere Stationen durchlaufen (Screen 2).
+4. Auf jeder Station: ARIA Live Region auf Inhalt prüfen.
+
+**Erwartetes Ergebnis:**
+- Live Region auf Screen 1 und Screen 2: leer oder enthält nur `stationLiveMessage` (Stationsname + Kurztext, kein Depotwert).
+- Live Region erst auf Screen 3: `revealA11ySummary` mit vollständigem Ergebnis.
+
+**Fehlschlag, wenn:**
+- Live Region auf Screen 2 einen Depotwert oder die Gesamtaussage „X € bei Y € eingezahlt" enthält.
+- Screenreader-Nutzer das finale Ergebnis vor dem Übergang zu Screen 3 erfährt.
+
+---
+
 ## Gruppe I — Reduced Motion
 
 ### TC-I01 — Reduced Motion entfernt Bewegung, nicht Inhalt
@@ -891,4 +914,4 @@ Chart beschreibt vollständige Entwicklung über 120 Monate bis zum letzten CSV-
 
 ---
 
-*Nächster Schritt: B1-AP-07 — Redaktions-Gate dokumentieren (AP-06 ✅ 2026-06-16)*
+*AP-06 ✅ 2026-06-16, AP-07 ✅ 2026-06-16, AP-08b ✅ 2026-06-16 | Nächster Schritt: B1-AP-09 — produktive `stations.de.json` anlegen*

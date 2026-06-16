@@ -591,8 +591,8 @@ AP-03 baut keine Implementierung, benennt aber die Fehlerfälle:
 | Stationenarray leer | Config-Error oder Empty-State |
 | keine `crisis` im aktiven Fenster | Redaktions-Gate nicht bestanden |
 | sichtbare Station mit ungeprüfter Quelle | Redaktions-Gate nicht bestanden |
-| `dynamic_latest_month` fehlt | Config-Error oder App erzeugt Default aus Contract |
-| rote Visualregel auf `true` | Config ungültig oder sicherer Override |
+| `dynamic_latest_month` fehlt | Config-Error — kein synthetischer Default; App zeigt Error-State |
+| rote Visualregel auf `true` | Config ungültig — kein stiller Override; App zeigt Config-Error |
 
 Die genaue technische Fehlerbehandlung folgt in Coding-APs.
 

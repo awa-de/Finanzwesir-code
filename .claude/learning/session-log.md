@@ -1,10 +1,21 @@
 # Session-Log — Finanzwesir 2.0
 Wird geleert nach /distill. Einträge: [FRICTION] [WIN] [PREF] [QUESTION] [OK]
 
+## 2026-06-16 – SESSION START | Fokus: APP-01 — prokrastinations-preis
+- FinanzwesirData.js, CSVParser.js, FwDateUtils.js — diese Session nicht berühren. ✓
+
 ## 2026-06-16 – B1-AP-08 abgeschlossen | Dokumentations-Bereinigung Stationen-Zeitreise
 - [OK] 6 Dateien bereinigt: APP_SPEC (Versionstabelle), SLICE_PLAN (V1.6→V2.4, Redesign-Abschnitt, Microcopy-Ref), MINI_SPEC (Screen 2+3), SLICE_0_KICKOFF (Header), SPEC_GATE_REPORT + Perplexity-Review (Archiv-Warnung)
 - [OK] Kein Code, keine produktive JSON, keine Versionskopien, keine Archivbewegungen
 - [WIN] Alle alten Screen-2-vollständig-Chart-Behauptungen aus aktiven Docs entfernt
+
+## 2026-06-16 – B1-AP-08b abgeschlossen | Konsistenz-Nachputz Stationen-Zeitreise
+- [OK] 13 Dateien bereinigt, kein Code geändert, keine neuen Strukturen eingeführt
+- [OK] APP_SPEC V2.5: a11y-Schema aufgespalten (revealA11ySummary/stationLiveMessage), A11y-Endwissens-Leak-Verbot (§14.1), CTA „Ich starte jetzt" entfernt, §19 + §22 ergänzt
+- [OK] QA TC-H05 + REDAKTIONS_GATE G-A06b: A11y-Endwissens-Leak-Schutz als Muss-Test und Gate verankert
+- [OK] ENTSCHEIDUNGSPROTOKOLL: Dez 2018 Rolle „Krise" → „Zermürbung / Zweifel" (einzige crisis-Station bleibt März 2020)
+- [OK] Alle „Nächster Schritt: Slice 7"-Verweise systemweit auf B1-AP-09 umgestellt
+- [OK] HOOK-META, NAVIGATION, Memory, BACKLOG (B1-AP-09 + B1-AP-10 eingetragen), REGRESSION-MATRIX aktualisiert
 
 ## 2026-06-16 – SESSION START | Fokus: APP-01 — prokrastinations-preis
 FinanzwesirData.js, CSVParser.js, FwDateUtils.js — diese Session nicht berühren. ✓

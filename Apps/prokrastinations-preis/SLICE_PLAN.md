@@ -1,7 +1,7 @@
-> [!note] AKTUELLE VERSION — Neue Mechanik (Marktzeit)
+> [!note] ALTSTAND — Slice 6 (app.js, app.css)
 >
-> Diese Datei ersetzt `SLICE_PLAN.md` (alte Calculator-Mechanik, 2026-05-11).
-> Basis: `APP_SPEC.md` V2.4 + RFC + Decision Log.
+> Diese Datei beschreibt den implementierten Stand bis Slice 6. Slice 6 implementiert noch die alte Ergebnisgrafik-Logik (Screen 2 mit KPI-Cards — nicht der Zielzustand Stationen-Zeitreise).
+> Basis: `APP_SPEC.md` V2.5 + RFC + Decision Log. Neue Slice-Planung für Stationen-Zeitreise folgt nach B1-AP-09/AP-10.
 
 ---
 
@@ -17,7 +17,7 @@ Stand: 2026-06-16 | Session: APP-01-Slice6 | Geändert von: Claude
 |---|---|
 | App | prokrastinations-preis (B1) |
 | Pilot-Rolle | Pilot-2 — Daten-/Chart-/Story-Pilot (D-APP-01-E02) |
-| APP_SPEC | V2.4 (2026-06-16) |
+| APP_SPEC | V2.5 (2026-06-16) |
 | Spec-Gate | OK erteilt 2026-06-04 (mündlich durch Albert) |
 | Pre-Code-Gate | OK 2026-06-04 (Full-Gate, 9 Fragen) |
 | Freigabe Slice 0 | OK 2026-06-04, getestet ✅ (Szenarien A–G) |
@@ -26,7 +26,8 @@ Stand: 2026-06-16 | Session: APP-01-Slice6 | Geändert von: Claude
 | Freigabe Slice 3 | OK 2026-06-05, getestet ✅ (Szenarien A–T, Viewport 375px, Slider-Interaktion) |
 | Freigabe Slice 4 | OK 2026-06-11, getestet ✅ (SparplanChart, Chart.js, Szenarien S–U) |
 | Freigabe Slice 5 | OK 2026-06-15, getestet ✅ (Szenarien S–X, Screen-Flow 1→4, Diskussion 2026-06-15 abgeschlossen) |
-| Nächster Schritt | Slice 7 — A11y-Härtung + Responsive (Stationen-Zeitreise, APP_SPEC V2.4) |
+| Freigabe Slice 6 | OK 2026-06-16, getestet ✅ (Szenarien Y/Z/AA) — Altstand, kein Zielzustand |
+| Nächster Schritt | B1-AP-09 — produktive `stations.de.json` anlegen; Coding-Slices für Stationen-Zeitreise folgen nach AP-09/AP-10 |
 
 ---
 
@@ -35,7 +36,7 @@ Stand: 2026-06-16 | Session: APP-01-Slice6 | Geändert von: Claude
 Der bisherige Slice-Plan basierte auf der alten Annahme, dass Screen 2 den vollständigen Chart und KPI-Cards zeigt. Diese Annahme ist ersetzt.
 
 Führend sind:
-- `APP_SPEC.md` V2.4
+- `APP_SPEC.md` V2.5
 - `ENTSCHEIDUNGSPROTOKOLL.md`
 - `STATIONS_CONFIG_CONTRACT.md`
 - `QA_TEST_CASES.md`
@@ -46,7 +47,7 @@ Die technische Umsetzung muss künftig die Stationen-Zeitreise abbilden:
 - Screen 3 = erster vollständiger Reveal + KPI-Cards
 - Screen 4 = Transfer ohne Prognose
 
-Die Coding-Slices 7+ werden nach AP-08 geplant. Slice-Planung für Stationen-Zeitreise ist noch nicht ausgearbeitet.
+Die Coding-Slices 7+ werden nach AP-09/AP-10 geplant. Slice-Planung für Stationen-Zeitreise ist noch nicht ausgearbeitet. **Slice 6 (aktueller app.js-Stand) ist Altstand** — implementiert die alte Ergebnisgrafik-Logik und ist nicht der Zielzustand.
 
 ---
 

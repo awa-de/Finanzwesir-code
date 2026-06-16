@@ -1,11 +1,12 @@
 # BACKLOG-ARCHIV – Finanzwesir 2.0
-Stand: 2026-06-16 | Session: B1-AP-08 | Geändert von: Claude
+Stand: 2026-06-16 | Session: B1-AP-08b | Geändert von: Claude
 
 Abgeschlossene Items, neueste zuerst (append-only).
 Archivierungs-Trigger: wenn > 200 Zeilen → neue Datei `BACKLOG-ARCHIV-YYYY.md` anlegen.
 
 | ID | Bereich | Titel | Abgeschlossen | Session |
 |----|---------|-------|---------------|---------|
+| B1-AP-08b | App | Konsistenz-Nachputz nach AP-01 bis AP-08: APP_SPEC V2.5 (a11ySummary aufgespalten in `revealA11ySummary` Screen-3 + `stationLiveMessage` Screen-2; A11y-Endwissens-Leak-Verbot §14.1; CTA „Ich starte jetzt" als inaktiv markiert; §19 Muss-Test + §22 Gate-Prüfpunkt ergänzt). QA_TEST_CASES V1.2 (TC-H05 A11y-Endwissens-Leak). REDAKTIONS_GATE V1.1 (G-A06b). ENTSCHEIDUNGSPROTOKOLL Dez-2018 „Krise" → „Zermürbung / Zweifel". MINI_SPEC Status/Refs/CTA/Screen-4-Copy. SLICE_PLAN Altstand-Notiz + AP-09. STATIONS_CONTRACT §12. app.test.html Altstand-Warnung. PROJECT-STATUS + NAVIGATION + Memory + BACKLOG (B1-AP-09/AP-10) + REGRESSION-MATRIX. Kein Code geändert. *(sofort erledigt)* | 2026-06-16 | B1-AP-08b |
 | B1-AP-08 | App | Widersprüchliche Stellen bereinigt: 6 Dateien bereinigt (APP_SPEC Versionstabelle V2.3→V2.4 + AP-08 als Nächster Schritt, SLICE_PLAN V1.6→V2.4 + Redesign-Abschnitt + Microcopy-Ref entfernt, MINI_SPEC Header als Historisch + Screen 2→Stationen-Zeitreise + Screen 3→erster Reveal, SLICE_0_KICKOFF Header als historisches Protokoll, SPEC_GATE_REPORT + Perplexity-Review Archiv-Warnung). Kein Code geändert. | 2026-06-16 | B1-AP-08 |
 | B1-AP-07 | App | REDAKTIONS_GATE.md angelegt: 10 Gate-A-Regeln (G-A01–G-A10: Mindestkrise, Quellenstatus, Quellenstatus-Ehrlichkeit, CSV-Fenster, CSV-Reveal, Screen-2-kein-Endwissen, KPI-erst-Screen-3, kein-Rot, keine-Prognose, keine-Scham), 7 Gate-B-Regeln (G-B01–G-B07: Stationenzahl, Pacing, Sichtbarkeit, positive-Stationen-sparsam, Mobile-Lesbarkeit, Stationstext-kurz, Button-Konsistenz), 3 Gate-C-Hinweise (G-C01–G-C03: Quellenauswahl, Quellenlabel-Kürze, keine-externen-Prozente). Release-Checkliste (Daten/Fenster, Stationen/Dramaturgie, Quellen, UI/Ethik, Mobile/A11y). Manuell/Technisch-Trennung und Prod-/Dev-Modus dokumentiert. Verweise ergänzt: APP_SPEC.md §20 (V2.4), STATIONS_CONFIG_CONTRACT.md §11, QA_TEST_CASES.md V1.1. NAVIGATION.md, BACKLOG aktualisiert. Kein Code geändert. | 2026-06-16 | B1-AP-07 |
 | B1-AP-06 | App | QA_TEST_CASES.md angelegt: 12 Gruppen A–L, 23 Testfälle im TC-Format (18 Muss) für Stationen-Zeitreise. APP_SPEC.md §19 Referenzblock + Muss-Kurzliste, Version V2.3, Nächster Schritt AP-07. Kein Code geändert. | 2026-06-16 | B1-AP-06 |

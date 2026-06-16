@@ -1,6 +1,6 @@
 # APP_SPEC — prokrastinations-preis
 
-Stand: 2026-06-16 | V2.4 — AP-07 Redaktions-Gate | Geändert von: Claude
+Stand: 2026-06-16 | V2.5 — AP-08b Konsistenz-Nachputz | Geändert von: Claude
 
 ---
 
@@ -8,10 +8,11 @@ Stand: 2026-06-16 | V2.4 — AP-07 Redaktions-Gate | Geändert von: Claude
 
 | Feld | Wert |
 |---|---|
-| Version | V2.4 — AP-07 Redaktions-Gate |
-| Phase | Konzept-Umbau auf Stationen-Zeitreise (AP-01 ✅, AP-02 ✅, AP-03 ✅, AP-04 ✅, AP-05 ✅, AP-06 ✅, AP-07 ✅) |
-| Nächster Schritt | B1-AP-08 — Widersprüchliche Stellen bereinigen (AP-07 ✅ 2026-06-16) |
-| Code-Freigabe | Slice 0 ✅ 2026-06-04, Slice 1 ✅ 2026-06-05, Slice 2 ✅ 2026-06-05, Slice 6 ✅ 2026-06-16; Slice 7+ erst nach Pre-Code-Gate |
+| Version | V2.5 — AP-08b Konsistenz-Nachputz |
+| Phase | Konzept-Umbau auf Stationen-Zeitreise (AP-01 ✅, AP-02 ✅, AP-03 ✅, AP-04 ✅, AP-05 ✅, AP-06 ✅, AP-07 ✅, AP-08 ✅, AP-08b Konsistenz-Nachputz) |
+| Nächster Schritt | B1-AP-09 — produktive `stations.de.json` anlegen |
+| Code-Freigabe | Slice 0 ✅ 2026-06-04, Slice 1 ✅ 2026-06-05, Slice 2 ✅ 2026-06-05, Slice 6 ✅ 2026-06-16; Slice 7+ erst nach AP-09/AP-10 und neuem Pre-Code-Gate |
+| Code-Stand | Slice 6 implementiert die alte Ergebnisgrafik-Logik (Screen 2 mit KPI-Cards). Dieser Stand ist nicht mehr Zielzustand. Coding für Stationen-Zeitreise folgt nach AP-09/AP-10. |
 | Grundlage | `Apps/prokrastinations-preis/ENTSCHEIDUNGSPROTOKOLL.md` (AP-01, 2026-06-16) |
 | Ersetzt | APP_SPEC V1.7 (Ergebnisgrafik-Logik — Screen 2 zeigte vollständigen Chart mit KPIs) |
 
@@ -146,7 +147,7 @@ Die neue Logik (Stationen-Zeitreise) geht über die ursprüngliche Szenario-/Ver
 | `differenz` | KpiCard | `depotwertHeute − eingezahlt` (Gewinn oder Verlust) | Screen 3 |
 | AssumptionsBox | TextBlock | Historische Basis, kein Zukunftsversprechen | Screen 3 |
 | Microcopy | TextBlock | Kontexttext pro Screen | je Screen |
-| PrimaryCta | Button/Link | „Heute Marktzeit sammeln" oder „Ich starte jetzt" [E-04 → §21] | Screen 4 |
+| PrimaryCta | Button/Link | „Heute Marktzeit sammeln" [E-04 → §21; „Ich starte jetzt" nicht mehr aktiv] | Screen 4 |
 | A11y-Summary | ARIA Live Region | Screenreader-Zusammenfassung (→ §14) | Screen 3 |
 
 ---
@@ -539,8 +540,9 @@ Init
   depotwertHeute:  52000,          // letzter Punkt in chartSeries
   differenz:       16000,          // depotwertHeute − eingezahlt
 
-  resultTone:   'neutral',         // V1.0: immer 'neutral'
-  a11ySummary:  'Wer vor 10 Jahren 300 € monatlich investiert hätte, hätte heute 52.000 € — bei 36.000 € eingezahlt.'
+  resultTone:          'neutral',         // V1.0: immer 'neutral'
+  stationLiveMessage:  'Neue Station: März 2020. Börsenhandel an der Wall Street ausgesetzt.',
+  revealA11ySummary:   'Vollständiger Rückblick: Wer vor 10 Jahren 300 € monatlich investiert hätte, hätte im letzten verfügbaren Datenmonat 52.000 € Depotwert — bei 36.000 € eingezahlt.'
 }
 ```
 
@@ -587,7 +589,8 @@ Init
 | `depotwertHeute` | ✅ | 0 |
 | `differenz` | ✅ | 0 |
 | `resultTone` | ✅ | `'neutral'` |
-| `a11ySummary` | ✅ | `'Ergebnis wird berechnet.'` |
+| `stationLiveMessage` | ✅ | `''` (leerer String — keine Ankündigung) |
+| `revealA11ySummary` | ✅ | `'Ergebnis wird berechnet.'` |
 
 ---
 
@@ -614,21 +617,26 @@ Init
      aria-atomic="true"
      data-fw-role="a11y-result"
      class="visually-hidden">
-  Wer vor 10 Jahren 300 € monatlich investiert hätte, hätte heute 52.000 € — bei 36.000 € eingezahlt.
 </div>
 ```
 
 - `aria-live="polite"` — unterbricht keine laufende Sprachausgabe
 - `aria-atomic="true"` — vollständige Nachricht wird vorgelesen
-- Aktualisierung nach Slider-Release und nach Screen-3-Eintritt (kein Screenreader-Spam)
+- Aktualisierung nur bei Stationswechsel (Screen 2) und Screen-3-Eintritt (kein Screenreader-Spam)
 
-**Stationswechsel-Ankündigung:**
+**Endwissens-Verbot:** Live-Regionen dürfen das Endwissen nicht vor Screen 3 verraten. `depotwertHeute`, `eingezahlt`, `differenz` dürfen erst ab Screen 3 in eine Live-Region geschrieben werden.
 
-Eine dezente Live-Region kann genutzt werden, um Stationswechsel anzukündigen:
+**Screen 2 — Stationswechsel (`stationLiveMessage`):**
 ```
 Neue Station: März 2020. Börsenhandel an der Wall Street ausgesetzt.
 ```
-Nicht zu viel vorlesen. Keine komplette Chartbeschreibung automatisch vorlesen.
+Nur Stationsname und Kurztext. Keine Depotwert-Aussage. Nicht zu viel vorlesen. Keine komplette Chartbeschreibung automatisch vorlesen.
+
+**Screen 3 — Erster Reveal (`revealA11ySummary`):**
+```
+Vollständiger Rückblick: Wer vor 10 Jahren 300 € monatlich investiert hätte, hätte im letzten verfügbaren Datenmonat 52.000 € Depotwert — bei 36.000 € eingezahlt.
+```
+Wird erst beim Übergang zu Screen 3 gesetzt.
 
 ### 14.2 Chart-Accessibility
 
@@ -980,8 +988,9 @@ const appContext = {
   ...staticContext,
   monatlicheRate, startBetrag,
   chartSeries, eingezahlt, depotwertHeute, differenz,
-  resultTone: 'neutral',
-  a11ySummary: `Wer vor 10 Jahren ${monatlicheRate} € monatlich investiert hätte, hätte heute ${fmt(depotwertHeute)} — bei ${fmt(eingezahlt)} eingezahlt.`
+  resultTone:         'neutral',
+  stationLiveMessage: '',  // wird bei Stationswechsel in Screen 2 gesetzt — kein Endwissen
+  revealA11ySummary:  `Vollständiger Rückblick: Wer vor 10 Jahren ${monatlicheRate} € monatlich investiert hätte, hätte im letzten verfügbaren Datenmonat ${fmt(depotwertHeute)} Depotwert — bei ${fmt(eingezahlt)} eingezahlt.`  // nur Screen 3
 };
 ```
 
@@ -1000,7 +1009,12 @@ const fmt = new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'EUR',
 ### Schritt 7 — A11y-Ausgabe (P-08)
 
 ```js
-a11yRegion.textContent = appContext.a11ySummary;
+// Screen 2: Stationswechsel ankündigen (kein Endwissen)
+a11yRegion.textContent = appContext.stationLiveMessage;
+
+// Screen 3: erst beim Übergang den vollständigen Reveal ausgeben
+// a11yRegion.textContent = appContext.revealA11ySummary;
+
 slider.setAttribute('aria-valuenow', '300');
 slider.setAttribute('aria-valuetext', '300 Euro pro Monat');
 ```
@@ -1187,6 +1201,7 @@ Die vollständigen Test- und QA-Kriterien für die Stationen-Zeitreise sind in `
 - Keine rote Crash-Codierung
 - `prefers-reduced-motion` entfernt Bewegung, nicht Inhalte
 - Screen 4 zeigt keine Prognose
+- Screenreader erfährt den finalen Depotwert erst auf Screen 3 (`revealA11ySummary` — kein A11y-Endwissens-Leak)
 
 Die Testfälle T-01–T-40 (unten) sind eine ergänzende Kurzreferenz; maßgebend für Abnahme und QA ist `QA_TEST_CASES.md`.
 
@@ -1379,6 +1394,7 @@ Wenn diese Bedingungen nicht erfüllt sind, ist die App redaktionell nicht publi
 | Labels in Alltagssprache (Krug)? | ✅ §16.5 |
 | Funnel-Anschluss logisch? | ✅ §23.10 |
 | Ethik-Gate bestanden? | ✅ §23.8, §23.15 |
+| A11y-Endwissens-Leak ausgeschlossen? (`revealA11ySummary` nur Screen 3, `stationLiveMessage` kein Depotwert) | ✅ §14.1 |
 | Hindsight Bias als Hauptgegner benannt? | ✅ §23.11 |
 | Dramaturgische Stationsrollen erklärt? | ✅ §23.12 |
 | Falsche Auflösung als Werkzeug dokumentiert? | ✅ §23.13 |
