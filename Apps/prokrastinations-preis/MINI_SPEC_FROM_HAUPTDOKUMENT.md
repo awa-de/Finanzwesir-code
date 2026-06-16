@@ -156,9 +156,15 @@ B2 ist die Kohorten-/Epochen-App.
 
 ## CTA
 
+Aktive Kandidaten laut `APP_SPEC.md` V2.5 §21:
+
 > „Heute Marktzeit sammeln"
 
-*(„Ich starte jetzt" ist nicht mehr aktiv — entschieden E-04, `APP_SPEC.md` V2.5 §21)*
+> „Meine nächsten 10 Jahre starten"
+
+Final redaktionell offen — keine Entscheidung in dieser Datei. Maßgebend ist `APP_SPEC.md` §21.
+
+*(„Ich starte jetzt" ist nicht mehr aktiv — entschieden E-04)*
 
 ---
 

@@ -682,14 +682,16 @@ Chart beschreibt vollständige Entwicklung über 120 Monate bis zum letzten CSV-
 1. Screenreader aktivieren.
 2. App starten, Slider bedienen (Screen 1).
 3. Zeitreise starten, mehrere Stationen durchlaufen (Screen 2).
-4. Auf jeder Station: ARIA Live Region auf Inhalt prüfen.
+4. Auf jeder Station prüfen: ARIA Live Region, `aria-label`-Attribute, `figcaption`-Texte, `visually-hidden`-Elemente und Chartbeschreibungen.
 
 **Erwartetes Ergebnis:**
 - Live Region auf Screen 1 und Screen 2: leer oder enthält nur `stationLiveMessage` (Stationsname + Kurztext, kein Depotwert).
+- `aria-label` und `figcaption` des Charts auf Screen 2: beschreiben nur Teilausschnitt bis zur aktuellen Station, nennen kein Endergebnis.
+- `visually-hidden`-Texte: kein Depotwert, keine Gewinn-/Verlustangabe vor Screen 3.
 - Live Region erst auf Screen 3: `revealA11ySummary` mit vollständigem Ergebnis.
 
 **Fehlschlag, wenn:**
-- Live Region auf Screen 2 einen Depotwert oder die Gesamtaussage „X € bei Y € eingezahlt" enthält.
+- Live Region, `aria-label`, `figcaption` oder `visually-hidden` auf Screen 1/2 einen Depotwert oder die Gesamtaussage „X € bei Y € eingezahlt" enthalten.
 - Screenreader-Nutzer das finale Ergebnis vor dem Übergang zu Screen 3 erfährt.
 
 ---
@@ -869,9 +871,9 @@ Chart beschreibt vollständige Entwicklung über 120 Monate bis zum letzten CSV-
 2. Prüfen, ob alte Aussagen noch als aktive Testanforderung auftauchen.
 
 **Erwartetes Ergebnis:**
-- Testfälle folgen `APP_SPEC.md` V2.3.
+- Testfälle folgen aktuelle `APP_SPEC.md` (V2.5 oder neuer).
 - Alte Screen-2-Vollchart-Logik ist nicht mehr testleitend.
-- Fundstellen außerhalb Scope werden für AP-08 notiert.
+- Bekannte Fundstellen wurden in AP-08/AP-08b/AP-08c bereinigt.
 
 **Fehlschlag, wenn:**
 - Tests weiterhin vollständigen Chart auf Screen 2 erwarten.
@@ -906,12 +908,14 @@ Chart beschreibt vollständige Entwicklung über 120 Monate bis zum letzten CSV-
 
 ---
 
-## AP-08-Fundstellen (nicht in AP-06 bereinigt)
+## Historische Fundstellen (AP-08 bis AP-08c bereinigt)
 
-- `SLICE_PLAN.md` — möglicherweise alte Screen-2-Vollchart-Annahmen
-- `MINI_SPEC_FROM_HAUPTDOKUMENT.md` — Screen-2-Aussagen widersprechen Zeitreise-Logik (bekannte Fundstelle, AP-08-Scope)
-- TC-L02 verweist auf diese Stellen als Dokumentations-Regression
+Diese Stellen waren beim Anlegen von QA_TEST_CASES.md (AP-06) als offene Fundstellen notiert. Sie wurden in AP-08/AP-08b/AP-08c vollständig bereinigt und sind keine aktiven To-dos mehr.
+
+- `SLICE_PLAN.md` — alte Screen-2-Vollchart-Annahmen ✅ bereinigt (AP-08/AP-08c)
+- `MINI_SPEC_FROM_HAUPTDOKUMENT.md` — Screen-2-Aussagen widersprechend Zeitreise-Logik ✅ bereinigt (AP-08)
+- TC-L02 Dokumentations-Regression ✅ bereinigt (AP-08c)
 
 ---
 
-*AP-06 ✅ 2026-06-16, AP-07 ✅ 2026-06-16, AP-08b ✅ 2026-06-16 | Nächster Schritt: B1-AP-09 — produktive `stations.de.json` anlegen*
+*AP-06 ✅ 2026-06-16, AP-07 ✅ 2026-06-16, AP-08b ✅ 2026-06-16, AP-08c ✅ 2026-06-16 | Nächster Schritt: B1-AP-09 — produktive `stations.de.json` anlegen*

@@ -69,7 +69,7 @@ Die Coding-Slices 7+ werden nach AP-09/AP-10 geplant. Slice-Planung für Station
 | Lokale `app.test.html`, kein E2E | RFC §D6 | 🟢 |
 | CSVParser.js + FinanzwesirData.js: TABU (nicht ändern) | CLAUDE.md | 🟢 |
 | Berechnungsformel: Anteilslogik | B-02, APP_SPEC §7.10 | 🟢 |
-| Screen-Flow: Button-getrieben, kein Autoplay | B-03, APP_SPEC §14.3 | 🟢 |
+| Screen-Flow: Button-getrieben, kein Autoplay | B-03, APP_SPEC §16.1 | 🟢 |
 
 ---
 
@@ -368,6 +368,8 @@ Slice 4 und 5 abgeschlossen.
 - Slider + NumericInput Hybrid (SF-02): Direkteingabe neben Slider — beide synchronisiert; Slider für Exploration, Zahlenfeld für Präzision auf Mobile
 
 ---
+
+> [!note] Altplan — Slice 8a und 8b wurden vor dem Stationen-Zeitreise-Redesign geplant. Sie sind kein aktueller Auftrag. Neue Slice-Planung folgt nach B1-AP-09/AP-10.
 
 ## Slice 8a — QA / Testseite vollständig
 

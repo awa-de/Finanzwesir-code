@@ -130,7 +130,7 @@ Typ: Object | Pflicht: ja
 - `futurePreview` muss `false` sein.
 - `stationValueMobile` muss `"collapsible"` sein.
 
-Wenn diese Werte in der JSON anders gesetzt sind, muss die Config als ungültig gelten oder die App muss hart auf die sicheren Defaults fallen. Entscheidung in Coding-AP; AP-03 dokumentiert die Regel.
+Wenn diese Werte in der JSON anders gesetzt sind, ist die Config ungültig. Kein stiller Override, kein Fallback auf sichere Defaults. Die App zeigt Config-Error. Technische Fehlerbehandlung folgt in Coding-AP.
 
 ---
 
@@ -474,7 +474,7 @@ Beispiele: Ukraine / 2022, Zoll-Schock / 2025.
 
 Typ: Boolean | Pflichtwert: `true`
 
-Wenn eine Station `noRedColor: false` setzt, gilt die Config als ungültig oder der Wert wird ignoriert. Entscheidung in Coding-AP. Vertraglich gilt: rote Codierung ist verboten.
+Wenn eine Station `noRedColor: false` setzt, ist die Config ungültig. Kein stiller Override, kein Ignorieren. Vertraglich gilt: rote Codierung ist verboten — ohne Ausnahme.
 
 ---
 
@@ -634,5 +634,4 @@ Die genaue technische Fehlerbehandlung folgt in Coding-APs.
 | AP-09 | Produktive `stations.de.json` anlegen (redaktionelle Stationsliste befüllen) |
 | AP-11 | Stations-JSON-Loader implementieren (fetch, validieren gegen diesen Vertrag) |
 | AP-12 | Fensterfilter und Auswahllogik implementieren |
-| Coding-AP | Technische Fehlerbehandlung bei Config-Error und Empty-State |
-| Coding-AP | Entscheidung: Config ungültig vs. sicherer Override bei `noRedColor: false` |
+| Coding-AP | Technische Fehlerbehandlung bei Config-Error und Empty-State implementieren |

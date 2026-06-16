@@ -26,7 +26,7 @@ Stand: 2026-06-16 | Session: B1-AP-08b | Geändert von: Claude
 
 **App-Landschaft bereinigt + Block B umgebaut ✅** (AF-13 + 2026-05-18): B1 von Verlustzähler zu Marktzeit-App umgerahmt, B2 auf Epochen-Fokus reduziert, Block B zu „Marktzeit statt Timing" umbenannt, Der alte Euro (B4) + Depot-Kipppunkt (B5) in Block B integriert (vorher F3/F4), 1-Million-App verworfen. 21 Master-Apps / 24 Ordner.
 
-**B1 operative Dateien VERALTET ✅** (2026-05-18): APP_SPEC.md (alte Verlustzähler-Mechanik), SLICE_0_KICKOFF.md und SLICE_PLAN.md mit hartem VERALTET-Header versehen. *(Galt für die alte Mechanik vor dem Slice-0-Reboot 2026-05-28.)* Operative Quelle heute: `Apps/prokrastinations-preis/APP_SPEC.md` V1.5 (Data Need Snapshot / Datenlayer-Konsistenz / Marktzeit-Mechanik). `MINI_SPEC_FROM_HAUPTDOKUMENT.md` bleibt fachliche Hintergrundquelle.
+**B1 operative Dateien VERALTET ✅** (2026-05-18): APP_SPEC.md (alte Verlustzähler-Mechanik), SLICE_0_KICKOFF.md und SLICE_PLAN.md mit hartem VERALTET-Header versehen. *(Galt für die alte Mechanik vor dem Slice-0-Reboot 2026-05-28.)* Operative Quelle heute: `Apps/prokrastinations-preis/APP_SPEC.md` V1.5 *(war operativ 2026-06-03; heute V2.5 — AP-08b/AP-08c)*. `MINI_SPEC_FROM_HAUPTDOKUMENT.md` bleibt fachliche Hintergrundquelle.
 
 ✅ **B1 Slice-0-Reboot abgeschlossen (2026-05-28):** APP_SPEC V1.2 (Marktzeit-Mechanik, 19 Abschnitte inkl. heldenreise) fertig. Datenbasis MSCI World Index, Format CSV entschieden. NAVIGATION.md Ausnahme-Warnung auf Reboot-Notiz aktualisiert.
 
@@ -461,9 +461,9 @@ Neue APs: DS-012, DS-013, DS-014.
 AP-UX-01, B1-AP-01 bis B1-AP-08b ✅ 2026-06-16. Stationen-Zeitreise vollständig spec-seitig umgesetzt und Doku bereinigt: APP_SPEC.md V2.5 (AP-08b), REDAKTIONS_GATE.md V1.1 (AP-07 + AP-08b), QA_TEST_CASES.md V1.2 (AP-06 + AP-08b), STATIONS_CONFIG_CONTRACT.md (AP-03), UX/Heldenreise §23 (AP-04), A11y/Mobile §14 (AP-05), Doku-Bereinigung (AP-08 + AP-08b). Slice 6 ist Altstand (alte Ergebnisgrafik-Logik, nicht Zielzustand). Coding-Slices für Stationen-Zeitreise folgen nach AP-09/AP-10.
 
 Operative Quellen:
-- `Apps/prokrastinations-preis/APP_SPEC.md` — V2.4 ✅ (AP-07/AP-08 2026-06-16)
-- `Apps/prokrastinations-preis/REDAKTIONS_GATE.md` — Redaktions-Gate B1-AP-07 ✅ 2026-06-16
-- `Apps/prokrastinations-preis/QA_TEST_CASES.md` — Testfälle B1-AP-06 ✅, V1.1 (AP-07)
+- `Apps/prokrastinations-preis/APP_SPEC.md` — V2.5 ✅ (AP-08b/AP-08c 2026-06-16)
+- `Apps/prokrastinations-preis/REDAKTIONS_GATE.md` — V1.1 ✅ (AP-07 + AP-08b 2026-06-16)
+- `Apps/prokrastinations-preis/QA_TEST_CASES.md` — V1.2 ✅ (AP-06 + AP-08b + AP-08c 2026-06-16)
 - `Apps/prokrastinations-preis/ENTSCHEIDUNGSPROTOKOLL.md` — Architektur-Klammer B1-AP-01 ✅
 - `Apps/prokrastinations-preis/SLICE_PLAN.md` — Slice-0/1/2/3/4/5/6 ✅ (Slice 6 = Altstand), B1-AP-09 als Nächster Schritt (AP-08b ✅)
 - `Apps/prokrastinations-preis/STATIONS_CONFIG_CONTRACT.md` — Stations-JSON-Vertrag B1-AP-03 ✅

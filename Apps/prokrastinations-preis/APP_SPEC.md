@@ -390,8 +390,8 @@ Die App verwendet zwei getrennte Datenquellen. Beide müssen vorhanden und valid
 Claude darf die redaktionellen Stationen nicht eigenmächtig erfinden, erweitern oder umpriorisieren. Claude lädt die freigegebene JSON-Konfiguration, validiert sie gegen den Vertrag (STATIONS_CONFIG_CONTRACT.md) und rendert sie.
 
 **Fehlerfall Stations-JSON:**
-- JSON nicht erreichbar / nicht parsebar → Error-State (d) oder Fallback auf einen definierten Minimalzustand (STATIONS_CONFIG_CONTRACT.md §12)
-- JSON valide, aber kein Station im aktiven Fenster → definierten Fallback-State (STATIONS_CONFIG_CONTRACT.md §12)
+- JSON nicht erreichbar / nicht parsebar → Error-State (d). Kein synthetischer Fallback, keine Ersatzstationen.
+- JSON valide, aber keine Station im aktiven Fenster → Empty-Journey-State (STATIONS_CONFIG_CONTRACT.md §12). Kein synthetischer Ersatz.
 
 > **Guardrail:** Depotwerte je Station (Eingezahlt, Depotwert damals) werden aus der Sparplanberechnung abgeleitet, nicht in der JSON gepflegt.
 
@@ -494,7 +494,7 @@ Init
 
 **Ungültige `data-fw-options`-Werte:** Fallback auf internen Default, kein Error-State.
 
-**Stations-JSON-Fehler:** Fallback-Konzept: STATIONS_CONFIG_CONTRACT.md §12. Technische Implementierung folgt in Coding-AP.
+**Stations-JSON-Fehler:** Kein synthetischer Fallback, keine Ersatzstationen. Bei ungültiger oder fehlender Config: nutzerfreundlicher Error-/Empty-State. Dev: Gate-Fehler sichtbar. Details: STATIONS_CONFIG_CONTRACT.md §12. Technische Implementierung folgt in Coding-AP.
 
 ---
 
@@ -900,7 +900,7 @@ Wenn globale Dokumente existieren (zentrale Responsive-Regeln, Accessibility-Reg
 - auf globale Regeln wird verwiesen, wenn passend
 - globale Regeln werden in AP-05 nicht geändert
 
-**Mögliche globale Folgearbeit (AP-08 oder Pattern-Update):**
+**Mögliche globale Folgearbeit (Pattern-Update nach Pilot):**
 - Touch-Target-Standards (aktuell app-spezifisch)
 - Collapsible-A11y-Muster (Kandidat für App-Fabrik-Pattern)
 - Chart-A11y-Labels Screen 2/3 (Kandidat für Chart-Engine-Regel)
@@ -1227,9 +1227,9 @@ Die Testfälle T-01–T-40 (unten) sind eine ergänzende Kurzreferenz; maßgeben
 | # | Testfall | Erwartetes Verhalten |
 |---|---|---|
 | T-11a | Stations-JSON lädt korrekt | aktive Stationen vorhanden, Screen 2 startet |
-| T-11b | Stations-JSON nicht erreichbar | Fallback-State (AP-03 definiert Verhalten) |
+| T-11b | Stations-JSON nicht erreichbar | Error-State (d) — kein synthetischer Ersatz |
 | T-11c | Station außerhalb des aktiven CSV-Fensters | Station wird nicht angezeigt, kein Fehler |
-| T-11d | Alle Stationen außerhalb des Fensters | Fallback-State (AP-03 definiert Verhalten) |
+| T-11d | Alle Stationen außerhalb des Fensters | Empty-Journey-State — kein synthetischer Ersatz |
 | T-11e | `source_claimed_unchecked`-Station im Produktionsmodus | Redaktions-Gate schlägt an (→ §20) |
 
 ### Slider-Interaktion und Berechnung
@@ -1311,6 +1311,7 @@ Mindestregeln (Kurzfassung):
 - [ ] Finale KPI-Cards erscheinen erst nach Abschluss der Zeitreise (Screen 3).
 - [ ] Mobile-Zwischenstände sind aufklappbar, nicht permanent sichtbar.
 - [ ] `dynamic_latest_month` wird aus der validierten CSV erzeugt, nicht aus dem Tagesdatum.
+- [ ] Kein A11y-Endwissens-Leak: Live-Region, `aria-label`, `figcaption` und `visually-hidden`-Texte verraten vor Screen 3 keinen Depotwert (→ §14.1, G-A06b).
 
 Wenn diese Bedingungen nicht erfüllt sind, ist die App redaktionell nicht publikationsreif.
 
@@ -1427,11 +1428,11 @@ Wenn diese Bedingungen nicht erfüllt sind, ist die App redaktionell nicht publi
 | Rote Signals weiterhin verboten? | ✅ §17, §14.0, §14.5 |
 | Keine Code-Dateien geändert? | ✅ |
 | Keine produktive stations.de.json angelegt? | ✅ |
-| AP-08-Scope nicht berührt? | ✅ |
+| AP-08b Konsistenz-Nachputz ✅ 2026-06-16? | ✅ |
 
 ---
 
-*Nächster Schritt: B1-AP-07 — Redaktions-Gate dokumentieren (AP-06 ✅ 2026-06-16)*
+*AP-06 ✅, AP-07 ✅, AP-08 ✅, AP-08b ✅, AP-08c ✅ 2026-06-16 | Nächster Schritt: B1-AP-09 — produktive `stations.de.json` anlegen*
 
 ---
 
