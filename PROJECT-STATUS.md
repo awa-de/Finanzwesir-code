@@ -2,16 +2,16 @@
 Version: 1
 Stand: 2026-06-16
 Fokus-AP: APP-01 — prokrastinations-preis
-Nächster-Schritt: B1-AP-04 — UX/Heldenreise-Abschnitt; dann B1-AP-05 bis AP-08; danach Slice 7 A11y + Responsive
+Nächster-Schritt: B1-AP-05 — A11y- und Mobile-Regeln; dann B1-AP-06 bis AP-08; danach Slice 7 A11y + Responsive
 Blocker: keine
 Letzter-Distill: 2026-06-15
 Kassensturz-Datum: 2026-06-15
 -->
-<!-- HOOK-META-SESSION: B1-AP-03 -->
+<!-- HOOK-META-SESSION: B1-AP-04 -->
 
 # PROJECT STATUS — Finanzwesir 2.0
 
-Stand: 2026-06-16 | Session: B1-AP-03 | Geändert von: Claude
+Stand: 2026-06-16 | Session: B1-AP-04 | Geändert von: Claude
 
 **Zweck:** Schneller Wiedereinstieg nach Pausen.
 **Zielgruppe:** Albert und Claude.

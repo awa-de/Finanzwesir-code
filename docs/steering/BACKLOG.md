@@ -22,7 +22,6 @@ Stand: 2026-06-16 | Session: B1-AP-03 | Geändert von: Claude
 
 | ID       | Bereich | Titel                                          | Prio | Dep          | Detail                                            |
 |----------|---------|------------------------------------------------|------|--------------|---------------------------------------------------|
-| B1-AP-04 | App     | UX-/Heldenreise-Abschnitt aktualisieren: Hindsight Bias, falsche Auflösung, late_wobble, dynamischer Reveal in APP_SPEC §23 aktualisieren. | M    | B1-AP-03 ✅  | Apps/prokrastinations-preis/APP_SPEC.md §23       |
 | B1-AP-05 | App     | A11y- und Mobile-Regeln ergänzen: aufklappbarer Zwischenstand auf Mobile (Collapsible), Fokusführung beim Stationswechsel, Reduced Motion, Button-Labels als Micro-Commitment. Basis: APP_SPEC §14. | H    | B1-AP-03 ✅  | Apps/prokrastinations-preis/APP_SPEC.md §14       |
 | B1-AP-06 | App     | Testfälle aktualisieren: Stations-JSON lädt, Fensterfilter funktioniert, finaler Reveal aus CSV, keine roten Crash-Visuals, Mobile-Collapsible, kein KPI vor Screen 3. Basis: APP_SPEC §19. | M    | B1-AP-05     | Apps/prokrastinations-preis/APP_SPEC.md §19       |
 | B1-AP-07 | App     | Redaktions-Gate dokumentieren: Quellenstatus, Mindestkrise (priority ≥ 95), Produktivfähigkeit, sichtbare Stationen-Prüfung. Detailausarbeitung von APP_SPEC §20. | M    | B1-AP-06     | Apps/prokrastinations-preis/APP_SPEC.md §20       |

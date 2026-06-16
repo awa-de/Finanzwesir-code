@@ -171,7 +171,7 @@ Nach Abschluss: `/abschluss-ritual`.
 > `Apps/prokrastinations-preis/APP_SPEC.md` V2.0 (AP-02 Zeitreise-Umbau, 2026-06-16) ist die operative Spec-Quelle.
 > `Apps/prokrastinations-preis/ENTSCHEIDUNGSPROTOKOLL.md` (B1-AP-01, 2026-06-16) ist die verbindliche Architektur-Klammer für B1-AP-02 bis B1-AP-08.
 > `Apps/prokrastinations-preis/MINI_SPEC_FROM_HAUPTDOKUMENT.md` bleibt als fachliche Hintergrundquelle.
-> `SLICE_PLAN.md` aktuell (Slice-2 ✅ 2026-06-05, Slice-3 ✅ 2026-06-05, Slice-4 ✅ 2026-06-11, Slice-5 ✅ 2026-06-15, Slice-6 ✅ 2026-06-16). OA-01 entschieden. OA-02 entschieden (2026-06-10): Pfad 2 via `renderFromData()`. B1-AP-03 ✅ 2026-06-16 — `STATIONS_CONFIG_CONTRACT.md` angelegt. Nächster Schritt: B1-AP-04 — UX/Heldenreise-Abschnitt.
+> `SLICE_PLAN.md` aktuell (Slice-2 ✅ 2026-06-05, Slice-3 ✅ 2026-06-05, Slice-4 ✅ 2026-06-11, Slice-5 ✅ 2026-06-15, Slice-6 ✅ 2026-06-16). OA-01 entschieden. OA-02 entschieden (2026-06-10): Pfad 2 via `renderFromData()`. B1-AP-03 ✅ 2026-06-16 — `STATIONS_CONFIG_CONTRACT.md` angelegt. B1-AP-04 ✅ 2026-06-16 — `APP_SPEC.md` §23 UX/Heldenreise/Beweisdramaturgie auf V2.1 aktualisiert (§23.1–§23.19). Nächster Schritt: B1-AP-05 — A11y- und Mobile-Regeln.
 > B1 ist Pilot-2 (Daten-/Chart-/Story-Pilot). Pilot-1 ist `risiko-uebersetzer` (Calculator-Pilot) — entschieden E-02, 2026-05-28.
 13. bei Chart-Nutzung: relevante Chart-Engine-Spec + WORKING-FEATURES.md
 ```

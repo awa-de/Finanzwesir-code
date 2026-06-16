@@ -4,6 +4,10 @@ Wird geleert nach /distill. Einträge: [FRICTION] [WIN] [PREF] [QUESTION] [OK]
 ## 2026-06-16 – SESSION START | Fokus: APP-01 — prokrastinations-preis
 `FinanzwesirData.js, CSVParser.js, FwDateUtils.js — diese Session nicht berühren. ✓`
 
+## 2026-06-16 – B1-AP-04 abgeschlossen | UX/Heldenreise-Abschnitt APP_SPEC.md
+- [OK] Gate + Umsetzung plangemäß — alle 10 Edits ohne Abweichung
+- [QUESTION] MINI_SPEC_FROM_HAUPTDOKUMENT.md im App-Verzeichnis gefunden mit veralteten Screen-2-Aussagen (zeigt vollständigen Chart + KPIs — widerspricht Zeitreise-Logik). Status "Roh-Mini-Spec, noch nicht APP_SPEC" → nicht in AP-04 geändert, als Fundstelle für AP-08 gemeldet
+
 ## 2026-06-16 – B1-AP-03 abgeschlossen | Stations-JSON-Datenvertrag
 [FRICTION] Patch-Quittung zunächst nur im Chat ausgegeben — als Datei in docs/steering/patches/ nachgeholt nach Alberts Hinweis.
 

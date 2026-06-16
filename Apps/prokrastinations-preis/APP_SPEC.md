@@ -1,6 +1,6 @@
 # APP_SPEC — prokrastinations-preis
 
-Stand: 2026-06-16 | V2.0 — AP-02 Zeitreise-Umbau | Geändert von: Claude
+Stand: 2026-06-16 | V2.1 — AP-04 UX/Heldenreise | Geändert von: Claude
 
 ---
 
@@ -8,9 +8,9 @@ Stand: 2026-06-16 | V2.0 — AP-02 Zeitreise-Umbau | Geändert von: Claude
 
 | Feld | Wert |
 |---|---|
-| Version | Draft V2.0 — Zeitreise-Umbau / AP-02 |
-| Phase | Konzept-Umbau auf Stationen-Zeitreise (AP-01 ✅ abgeschlossen) |
-| Nächster Schritt | B1-AP-04 — UX/Heldenreise-Abschnitt (AP-03 ✅ 2026-06-16) |
+| Version | Draft V2.1 — UX/Heldenreise / AP-04 |
+| Phase | Konzept-Umbau auf Stationen-Zeitreise (AP-01 ✅, AP-02 ✅, AP-03 ✅) |
+| Nächster Schritt | B1-AP-05 — A11y- und Mobile-Regeln (AP-04 ✅ 2026-06-16) |
 | Code-Freigabe | Slice 0 ✅ 2026-06-04, Slice 1 ✅ 2026-06-05, Slice 2 ✅ 2026-06-05, Slice 6 ✅ 2026-06-16; Slice 7+ erst nach Pre-Code-Gate |
 | Grundlage | `Apps/prokrastinations-preis/ENTSCHEIDUNGSPROTOKOLL.md` (AP-01, 2026-06-16) |
 | Ersetzt | APP_SPEC V1.7 (Ergebnisgrafik-Logik — Screen 2 zeigte vollständigen Chart mit KPIs) |
@@ -1111,11 +1111,20 @@ Wenn diese Bedingungen nicht erfüllt sind, ist die App redaktionell nicht publi
 | Keine Dark Patterns? | ✅ §17, §23.5, §23.8, §23.9 |
 | Labels in Alltagssprache (Krug)? | ✅ §16.5 |
 | Funnel-Anschluss logisch? | ✅ §23.10 |
-| Ethik-Gate bestanden? | ✅ §23.8 |
+| Ethik-Gate bestanden? | ✅ §23.8, §23.15 |
+| Hindsight Bias als Hauptgegner benannt? | ✅ §23.11 |
+| Dramaturgische Stationsrollen erklärt? | ✅ §23.12 |
+| Falsche Auflösung als Werkzeug dokumentiert? | ✅ §23.13 |
+| Finaler Wackler dokumentiert? | ✅ §23.14 |
+| Informationsethik (kein Dark Pattern) begründet? | ✅ §23.15 |
+| Microcopy-Regeln definiert? | ✅ §23.16 |
+| Button `Weiter investiert bleiben` als Micro-Commitment erklärt? | ✅ §23.17 |
+| Screen 4 als Transfer ohne Verkaufsdruck beschrieben? | ✅ §23.18 |
+| P→B→N-Einordnung dokumentiert? | ✅ §23.19 |
 
 ---
 
-*Nächster Schritt: B1-AP-04 — UX/Heldenreise-Abschnitt für APP_SPEC.md (AP-03 ✅ 2026-06-16)*
+*Nächster Schritt: B1-AP-05 — A11y- und Mobile-Regeln ergänzen (AP-04 ✅ 2026-06-16)*
 
 ---
 
@@ -1133,18 +1142,24 @@ Der Nutzer kommt mit einer von zwei Vorannahmen:
 **Variante B — Wartestrategie:**
 > „Ich warte noch. Es könnte günstiger werden. Ich will keinen schlechten Zeitpunkt erwischen."
 
-Beide teilen dieselbe Illusion: **Es gibt einen richtigen Zeitpunkt — und dieser ist nicht heute.**
+**Variante C — Rückblick-Illusion:**
+> „Damals war es doch offensichtlich einfacher als heute. Die Märkte sind jetzt unberechenbarer."
+
+Diese dritte Vorannahme ist oft unbewusst: Der Nutzer bewertet die Vergangenheit mit Wissen, das damalige Anleger nicht hatten — das ist Hindsight Bias. Die App darf den vollständigen Chart deshalb nicht zu früh zeigen.
+
+Alle drei teilen dieselbe Illusion: **Es gibt einen richtigen Zeitpunkt — und dieser ist nicht heute.**
 
 ### 23.2 Nutzerwiderstand
 
-| Widerstand | Mechanismus |
-|---|---|
-| Verpasster-Zug-Syndrom | „Die guten Jahre sind vorbei. Ich bin zu spät." |
-| Timing-Glaube | „Ich warte auf die nächste Korrektur." |
-| Paralysis by analysis | Zu viele Informationen, keine Entscheidung |
-| Einbruchs-Angst | „Was, wenn ich jetzt einsteige und der Markt fällt?" |
-| Perfektionismus | „Ich muss erst mehr verstehen. Noch nicht." |
-| Unsichtbarer Zinseszins | Exponentielle Wirkung ist intuitiv nicht greifbar — lineare Intuition unterschätzt sie |
+| Widerstand | Mechanismus | Antwort der App |
+|---|---|---|
+| Verpasster-Zug-Syndrom | „Der beste Zeitpunkt ist vorbei." | Heute wird als neuer Anfang gerahmt |
+| Timing-Glaube | „Ich warte auf einen besseren Einstieg." | Zeitreise zeigt: Der perfekte Einstieg ist erst rückblickend sichtbar |
+| Hindsight Bias | „Damals war es doch leicht." | Chart wird erst nach der Reise vollständig gezeigt |
+| Einbruchs-Angst | „Was, wenn ich direkt vor einem Crash starte?" | Stationen zeigen reale Einbrüche ohne Endwissen |
+| Erholungs-Misstrauen | „Nach der Erholung kommt bestimmt wieder etwas." | Falsche Auflösung und finaler Wackler zeigen genau das |
+| Prokrastination | „Ich mache es später." | Screen 4 übersetzt Marktzeit in heutige Entscheidung |
+| Überforderung | „Zu viele Daten, zu viele Szenarien." | Eine Strecke, wenige Stationen, ein Beweis |
 
 ### 23.3 Interaktiver Beweis
 
@@ -1158,15 +1173,24 @@ Der Nutzer setzt seine monatliche Sparrate (Screen 1). Die App springt 10 Jahre 
 3. Im Rückblick sieht Mut aus wie Logik. In Echtzeit war es eine Entscheidung.
 4. Heute ist nicht „nach dem richtigen Zeitpunkt" — heute ist der Ausgangspunkt für die nächsten 10 Jahre.
 
+**Wie die App das beweist — kontrollierter Informationsentzug:**
+
+Die App beweist ihre Aussage nicht durch eine fertige Ergebnisgrafik, sondern durch kontrollierten Informationsentzug: Screen 2 zeigt dem Nutzer zunächst nur das, was ein damaliger Anleger zu diesem Zeitpunkt wissen konnte.
+
+Das ist keine Täuschung. Es ist die ehrliche Rekonstruktion der damaligen Perspektive. Die App legt am Ende vollständig offen: echte historische Daten, echte Stationen, keine Prognose, Vergangenheit keine Garantie, keine Finanzberatung.
+
 Screen 3 liefert den Reveal: Der vollständige Chart erscheint erstmals. KPI-Cards zeigen das Ergebnis. Die Vergangenheit ist abgeschlossen. Screen 4 überträgt die Erkenntnis auf die Gegenwart.
 
 ### 23.4 Aha-Moment
 
-**Primär:**
-> „Du kannst nicht mehr vor 10 Jahren starten. Aber du kannst verhindern, dass heute in 10 Jahren wieder ‚vor 10 Jahren' heißt."
-
-**Zeitreise-Kernsatz:**
+**Primärer Aha-Moment:**
 > „Im Rückblick sieht Mut aus wie Logik. In Echtzeit war es eine Entscheidung."
+
+**Sekundärer Aha-Moment:**
+> „Heute fühlt sich schwer an, weil du das Ende nicht kennst. Genau so war es vor 10 Jahren auch."
+
+**Transfer-Satz (Screen 4):**
+> „Du kannst nicht mehr vor 10 Jahren starten. Aber du kannst verhindern, dass heute in 10 Jahren wieder ‚vor 10 Jahren' heißt."
 
 **Kurzform:**
 > „Warten nimmt dir Marktzeit."
@@ -1174,30 +1198,59 @@ Screen 3 liefert den Reveal: Der vollständige Chart erscheint erstmals. KPI-Car
 ### 23.5 Emotionale Zielreaktion
 
 **Erwünscht:**
+- „Ach so — die wussten damals auch nicht, wie es ausgeht." — Kern-Erkenntnis
+- „Der Chart sieht erst im Nachhinein ruhig aus." — Hindsight Bias aufgebrochen
+- „Durchhalten war damals keine Selbstverständlichkeit." — Respekt vor dem Weg
+- „Heute ist nicht schwieriger als damals. Heute ist nur genauso offen." — Gleichstellung
+- „Ich brauche keinen perfekten Zeitpunkt. Ich brauche einen Anfang." — Handlungsfähigkeit
 - „Die Einbrüche sehen auf der Langfristgrafik gar nicht mehr so groß aus." — Relativierung der Angst
 - „Ich hätte das nicht durchgehalten." — ehrliche Selbsteinschätzung, dann: „Aber ich würde trotzdem besser dastehen."
-- „Heute ist mein ‚vor 10 Jahren'." — Handlungsfähigkeit
-- „Ich muss nicht den perfekten Zeitpunkt finden. Ich muss anfangen." — Erlaubnis ohne Druck
 
 **Unerwünscht:**
-- Scham: „Ich hätte schon vor Jahren anfangen sollen."
-- Panik: „Jetzt muss ich sofort handeln."
-- Selbstvorwurf, künstliche Dringlichkeit, Überforderung durch zu viele Zahlen.
+- Scham: „Ich war dumm, nicht früher angefangen zu haben."
+- Panik: „Ich muss sofort handeln."
+- Fatalismus: „Es kann ja jederzeit alles crashen."
+- Triumph: „Aktien gehen immer hoch."
+- Scheinsicherheit: „Die nächsten 10 Jahre werden auch so."
 
 ### 23.6 Erkenntnishierarchie
 
-| Ebene | Element | Darstellung | Screen |
-|---|---|---|---|
-| **Einstieg** | Slider — personalisierte Sparrate | interaktiv dominant | 1 |
-| **Zeitreise** | wachsender Chart + Stationstexte | visuell dominant, schrittweise | 2 |
-| **Hauptbeweis** | vollständiger SparplanChart | visuell dominant, volle Breite | 3 |
-| **Pivot** | VertikaleLinie „heute" | klar markiert | 3 |
-| **Hauptzahl** | `depotwertHeute` | groß unter dem Chart — positiv formuliert | 3 |
-| **Kontext** | `eingezahlt`, `differenz` | KpiCards — erklären, konkurrieren nicht | 3 |
-| **Rahmung** | Microcopy pro Screen | kurz, führt die Erkenntnis | je Screen |
-| **Handlung** | PrimaryCta | nach dem Beweis | 4 |
+**Screen 1 — Frage / Teleportation:**
 
-**Tufte-Regel:** Der Chart ist der Beweis, nicht Dekoration. `depotwertHeute` ist die Hauptzahl. `differenz` ist Kontextinformation — nicht als Hauptzahl (Verlust-Framing vermeiden).
+| Ebene | Element | Darstellung |
+|---|---|---|
+| **Einstieg** | Slider — personalisierte Sparrate | interaktiv dominant |
+| **Kontext** | Subtext: Wir springen 10 Jahre zurück | führend, kurz |
+| **Handlung** | Teleportationsbutton | klar, einziger CTA |
+
+**Screen 2 — Zeitreise:**
+
+| Ebene | Element | Darstellung |
+|---|---|---|
+| **Hauptvisualisierung** | Teilweise enthüllter Chart bis zur aktuellen Station | wachsend, schrittweise |
+| **Haupttext** | Stationstext / Anleger-Anker | narrativ dominant |
+| **Untergeordnet** | Zwischenstand (Mobile-Collapsible) | ausgeblendet bis Tap |
+| **Nicht sichtbar** | Finale KPI-Cards, vollständiger Chart, Zukunftsvorschau | — |
+
+**Screen 3 — Rückblick / Reveal:**
+
+| Ebene | Element | Darstellung |
+|---|---|---|
+| **Hauptvisualisierung** | Vollständiger Chart | visuell dominant, volle Breite |
+| **Pivot** | VertikaleLinie | klar markiert |
+| **Hauptzahl** | `depotwertHeute` — Depotwert im letzten CSV-Monat | groß, positiv formuliert |
+| **Kontextzahlen** | `eingezahlt`, `differenz` | KpiCards — erklären, konkurrieren nicht |
+| **Pflicht-Rahmung** | AssumptionsBox | immer sichtbar |
+
+**Screen 4 — Entscheidung:**
+
+| Ebene | Element | Darstellung |
+|---|---|---|
+| **Hauptaussage** | „Heute beginnt wieder ein Chart, dessen Ende niemand kennt." | Headline |
+| **Keine neue Zahl** | — | keine Prognose, kein Zukunftschart |
+| **Handlung** | PrimaryCta | Transfer, kein Druck |
+
+**Tufte-Regel:** Der Chart ist der Beweis, nicht Dekoration. `depotwertHeute` ist die Hauptzahl auf Screen 3. `differenz` ist Kontextinformation — nicht als Hauptzahl (Verlust-Framing vermeiden).
 
 ### 23.7 Dramaturgische UI-Reihenfolge
 
@@ -1248,3 +1301,244 @@ Warten ist keine neutrale Position. Die vergangene Marktzeit ist unwiederbringli
 **CTA-Text-Empfehlung:** „Heute Marktzeit sammeln →" [redaktionell zu bestätigen — E-04]
 
 Begründung: „Marktzeit" ist der Kernbegriff dieser App — der CTA wiederholt das Gelernte als Handlungsimpuls. Kein Imperativ wie „Jetzt handeln!" (vermeidet Druck-Formulierung).
+
+---
+
+### 23.11 Hindsight Bias — Hauptgegner dieser App
+
+Der zentrale Gegner dieser App ist Hindsight Bias.
+
+**Definition:**
+Sobald der Nutzer den vollständigen 10-Jahres-Chart sieht, bewertet er die Vergangenheit mit Wissen, das damalige Anleger nicht hatten. Die Konsequenz:
+
+Die alte App erzeugte die falsche emotionale Reaktion:
+> „Das sieht doch einfach aus. War doch klar."
+
+Die neue App soll die richtige Reaktion auslösen:
+> „Damals wusste niemand, dass es gut ausgeht."
+
+**Warum der Chart nicht zu früh gezeigt werden darf:**
+Wer das Ergebnis kennt, bewertet rückblickend als Logik, was in Echtzeit eine Entscheidung unter Unsicherheit war. Der vollständige Chart darf deshalb erst auf Screen 3 erscheinen — nach der Zeitreise, nicht vorher.
+
+**Abgrenzung zu anderen Bias-Konzepten:**
+- Hindsight Bias: „Im Nachhinein war es offensichtlich." — das ist der Hauptgegner hier
+- Timing-Bias: „Es gibt einen perfekten Einstiegszeitpunkt." — wird durch die Zeitreise mitbehandelt
+- Status-quo-Bias: „Nichts tun ist sicherer." — wird durch Screen 4 (Transfer) adressiert
+
+---
+
+### 23.12 Dramaturgische Stationsrollen
+
+Die Stationen in Screen 2 folgen einer Bogenstruktur. Sie sind keine willkürlichen Datenpunkte, sondern dramaturgische Werkzeuge.
+
+**Grundstruktur des Bogens:**
+```
+Ruhiger Start
+  → erste Unruhe
+  → längere Zermürbung
+  → Klimax
+  → falsche Auflösung
+  → finaler Wackler
+  → dynamischer Reveal
+```
+
+**Beschlossene aktive Stationsrollen (Launch-Kontext):**
+
+| Station | Rolle | Funktion |
+|---|---|---|
+| Februar 2018 | Erste Unruhe (`shock`) | Die Ruhe endet, ohne großen äußeren Auslöser |
+| Dezember 2018 | Zermürbung (`doubt`) | Ein ganzes Jahr fühlt sich verloren an |
+| März 2020 | Klimax (`crisis`) | Der stärkste Schock der Reise |
+| November 2020 | Falsche Auflösung (`relief`, `falseResolution: true`) | Erleichterung — aber noch nicht das Ende |
+| Februar 2022 | Finaler Wackler beginnt (`geopolitical_shock`, `finalWobble: true`) | Krieg, Inflation, Lieferketten |
+| April 2025 | Letzter Wackler (`late_wobble`, `finalWobble: true`) | Kurz vor dem Ziel kommt noch einmal Unsicherheit |
+| `dynamic_latest_month` | Reveal (`final_reveal`) | Jetzt erst kennt der Nutzer das Ende |
+
+Die Stationen duplizieren nicht die JSON-Liste — sie beschreiben deren dramaturgischen Zweck.
+
+---
+
+### 23.13 Falsche Auflösung
+
+Die Impfstoff-Erleichterung im November 2020 dient als bewusste falsche Auflösung.
+
+**Zweck:**
+Der Nutzer soll kurz glauben, dass die Reise geschafft ist. Danach folgt mit 2022 ein erneuter Test. Diese Wendung ist dramaturgisch gewollt, weil Anleger in Echtzeit nie wissen, ob eine Krise endgültig vorbei ist.
+
+**Umsetzungsregel:**
+- Die App soll diese falsche Auflösung nicht ankündigen.
+- Der Stationstext für November 2020 darf nicht sagen: „Aber die Reise ist noch nicht vorbei."
+- Die nächste Station kommt einfach.
+
+**Ethische Einordnung:**
+Das ist kein Dark Pattern. Es ist die historische Rekonstruktion der damaligen Unsicherheit. Anleger im November 2020 wussten nicht, was 2022 kommt. Die App zeigt das ehrlich.
+
+**JSON-Flag:** `flags.falseResolution: true` für die November-2020-Station.
+
+---
+
+### 23.14 Finaler Wackler
+
+Kurz vor dem guten Ende kommt noch einmal Unsicherheit zurück.
+
+**Zweck:**
+Der finale Reveal soll nicht wie eine glatte Erfolgsgeschichte wirken, sondern wie das Ergebnis einer Reise, die bis zuletzt offen war.
+
+**Aktuell vorgesehene Station:** April 2025 (Zoll-Schock / `late_wobble`)
+
+**Tonalität:**
+- Kein roter Schockeffekt
+- Kein Alarm
+- Keine Panik
+- Nur ein erneuter Hinweis: Langfristcharts fühlen sich nur im Nachhinein glatt an
+
+**Wirkung:**
+Der anschließende dynamische Reveal gewinnt an Kraft, weil er nach einer letzten Unsicherheit kommt. Das Ende bleibt bis zuletzt offen — genau wie in Echtzeit.
+
+**JSON-Flag:** `flags.finalWobble: true` für den April-2025-Block.
+
+---
+
+### 23.15 Informationsethik / Kontrollierter Informationsentzug
+
+Der kontrollierte Informationsentzug in Screen 2 ist kein Dark Pattern.
+
+**Begründung — warum er zulässig ist:**
+- Die App rekonstruiert historische Perspektive, sie erfindet keine Knappheit
+- Die Daten werden am Ende vollständig gezeigt
+- Keine Kaufentscheidung wird erzwungen
+- Keine künstliche Dringlichkeit wird behauptet
+- Keine Zukunft wird versprochen
+- Keine Scham wird erzeugt
+
+**Begründung — warum er ethisch korrekt ist:**
+Der Nutzer kennt im Rückblick zu viel. Screen 2 nimmt ihm dieses Wissen vorübergehend weg, um die damalige Unsicherheit sichtbar zu machen. Das korrigiert eine kognitive Verzerrung (Hindsight Bias), statt eine neue zu erzeugen.
+
+**Offenlegungs-Test:**
+Wenn dem Nutzer erklärt wird, warum die App so gestaltet ist — würde er sich geholfen oder manipuliert fühlen? Antwort muss „geholfen" sein.
+
+**Abgrenzung zu Dark Patterns:**
+
+| Dark Pattern | Was diese App macht |
+|---|---|
+| Fake-Knappheit | Keine Countdown-Uhr, kein Ablaufdatum |
+| Versteckte Kosten | Keine Kosten, kein Produkt |
+| Erzwungene Aktion | Nutzer kann jederzeit aufhören |
+| Beschämung | Kein Strafzettel, kein Verlierer-Ton |
+| Täuschung | Historische Rekonstruktion, keine Erfindung |
+
+---
+
+### 23.16 Microcopy-Regeln
+
+**Tonalität:**
+- ruhig
+- konkret
+- nicht schreiend
+- nicht moralisierend
+- nicht triumphierend
+- nicht defätistisch
+- keine Börsenhelden-Sprache
+- keine Verlierer-/Gewinner-Beschämung
+
+**Gute Formulierungen:**
+```
+In der fertigen Rückblick-Grafik ist das später nur ein Knick.
+```
+```
+Der Sparplan läuft weiter — aber die Belohnung ist nicht zu sehen.
+```
+```
+Heute beginnt wieder ein Chart, dessen Ende niemand kennt.
+```
+
+**Verbotene Formulierungen:**
+```
+Wer jetzt verkauft, ist selbst schuld.
+```
+```
+Nur wer durchhält, wird belohnt.
+```
+```
+Jetzt bloß nicht aussteigen!
+```
+```
+Die Börse crasht dramatisch.
+```
+```
+Danach geht es wieder nach oben.
+```
+
+**Begründung:**
+Die letzten drei verbotenen Formulierungen nehmen dem Nutzer das Endwissen vorweg — genau das, was die App nicht tun darf, solange Screen 2 läuft.
+
+---
+
+### 23.17 Button-Labels als Micro-Commitment
+
+Der Button `Weiter investiert bleiben` ist nicht nur Navigation.
+
+**Er ist ein bewusstes Micro-Commitment:**
+Der Nutzer bestätigt nicht „weiter zur nächsten Folie", sondern: „Ich bleibe in dieser historischen Situation investiert."
+
+**Regeln:**
+- Dieser Button darf nicht generisch `Weiter` heißen.
+- Das Label muss die Handlungsentscheidung benennen, nicht die UI-Navigation.
+
+**Label-Wechsel beim finalen Reveal:**
+```
+Ergebnis ansehen
+```
+Dieser Wechsel signalisiert: Die Zeitreise ist abgeschlossen. Jetzt kommt ein anderer Zustand. Der Kontrast ist gewollt.
+
+---
+
+### 23.18 Screen 4 als Transfer, nicht Verkaufsdruck
+
+Screen 4 soll nicht sagen:
+> „Jetzt handeln, sonst verpasst du alles."
+
+Screen 4 soll sagen:
+> „Heute ist wieder ein Anfang ohne fertigen Chart."
+
+**Ziel:**
+Der Nutzer soll Handlungsfähigkeit spüren, nicht Druck.
+
+**CTA-Kandidaten** [redaktionell zu bestätigen — E-04]:
+```
+Meine nächsten 10 Jahre starten
+```
+oder
+```
+Heute Marktzeit sammeln
+```
+
+Claude entscheidet diesen CTA nicht selbst, solange die Spec redaktionell offen ist.
+
+**Was Screen 4 nicht enthält:**
+- Keine Zukunftsprognose
+- Keinen Zukunftschart
+- Keine neue Zahl
+- Keinen Countdown
+- Keine Beschämung für Zögern
+
+---
+
+### 23.19 P→B→N-Einordnung
+
+**Proven — bewährt, ohne Risiko:**
+- Echte MSCI-CSV als Datenbasis
+- Echte historische 10-Jahres-Strecke
+- Echte redaktionell belegte Stationen
+- Keine Prognose
+
+**Better — ein klarer Nutzensprung:**
+- Nicht nur fertiger Rückblick-Chart, sondern Anti-Hindsight-Zeitreise
+- Nutzer erlebt Unsicherheit statt nur Ergebnis
+- Hindsight Bias wird aktiv aufgebrochen, nicht bestätigt
+
+**New — bewusst isoliert, mit Nachweis:**
+- Keine klassische Rechner-App
+- Keine reine Chart-App
+- Geführte Psycho-App: historische Zeitreise mit kontrolliertem Endwissens-Entzug
+- Dieser Mechanismus (New) ist in Pilot-2 isoliert und wird vor dem Rollout auf weitere Apps evaluiert
