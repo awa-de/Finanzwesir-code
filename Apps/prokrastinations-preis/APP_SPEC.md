@@ -1,6 +1,6 @@
 # APP_SPEC — prokrastinations-preis
 
-Stand: 2026-06-16 | V2.1 — AP-04 UX/Heldenreise | Geändert von: Claude
+Stand: 2026-06-16 | V2.2 — AP-05 A11y- und Mobile-Regeln | Geändert von: Claude
 
 ---
 
@@ -8,9 +8,9 @@ Stand: 2026-06-16 | V2.1 — AP-04 UX/Heldenreise | Geändert von: Claude
 
 | Feld | Wert |
 |---|---|
-| Version | Draft V2.1 — UX/Heldenreise / AP-04 |
+| Version | Draft V2.2 — A11y- und Mobile-Regeln / AP-05 |
 | Phase | Konzept-Umbau auf Stationen-Zeitreise (AP-01 ✅, AP-02 ✅, AP-03 ✅) |
-| Nächster Schritt | B1-AP-05 — A11y- und Mobile-Regeln (AP-04 ✅ 2026-06-16) |
+| Nächster Schritt | B1-AP-06 — Testfälle aktualisieren (AP-05 ✅ 2026-06-16) |
 | Code-Freigabe | Slice 0 ✅ 2026-06-04, Slice 1 ✅ 2026-06-05, Slice 2 ✅ 2026-06-05, Slice 6 ✅ 2026-06-16; Slice 7+ erst nach Pre-Code-Gate |
 | Grundlage | `Apps/prokrastinations-preis/ENTSCHEIDUNGSPROTOKOLL.md` (AP-01, 2026-06-16) |
 | Ersetzt | APP_SPEC V1.7 (Ergebnisgrafik-Logik — Screen 2 zeigte vollständigen Chart mit KPIs) |
@@ -591,7 +591,21 @@ Init
 
 ---
 
-## 14. A11y-Vertrag
+## 14. A11y- und Mobile-Regeln
+
+**Leitprinzip:** Mobile ist der Standardfall, nicht die abgespeckte Variante. Die Stationen-Zeitreise muss auf kleinen Bildschirmen funktionieren, ohne dass der Nutzer mikroskopische Zahlen, dichte Tooltips oder überladene Chart-Annotationen entziffern muss.
+
+### 14.0 Mobile-Grundsatz
+
+**Mobile-Leitregeln:**
+- eine primäre Aussage pro Station
+- ein sichtbarer Hauptbutton
+- keine permanent sichtbaren Kleinst-KPIs
+- keine Hover-Abhängigkeit
+- keine dichten Chart-Labels
+- keine roten Alarm-Codes (→ §17)
+- keine UI-Elemente, die nur mit Maus funktionieren
+- Zwischenwerte nur auf Wunsch
 
 ### 14.1 ARIA Live Region
 
@@ -608,11 +622,39 @@ Init
 - `aria-atomic="true"` — vollständige Nachricht wird vorgelesen
 - Aktualisierung nach Slider-Release und nach Screen-3-Eintritt (kein Screenreader-Spam)
 
+**Stationswechsel-Ankündigung:**
+
+Eine dezente Live-Region kann genutzt werden, um Stationswechsel anzukündigen:
+```
+Neue Station: März 2020. Börsenhandel an der Wall Street ausgesetzt.
+```
+Nicht zu viel vorlesen. Keine komplette Chartbeschreibung automatisch vorlesen.
+
 ### 14.2 Chart-Accessibility
 
 - Chart hat `role="img"` mit `aria-label` oder `<figure>` mit `<figcaption>`
-- Figcaption enthält Textzusammenfassung: Zeitraum, Sparrate, sichtbarer Ausschnitt (Screen 2) bzw. Gesamtergebnis (Screen 3)
-- Datentabelle als ergänzende Alternative: [TBD — ob für Pilot nötig]
+- Screen 2: Beschreibung muss sagen, dass nur ein Ausschnitt bis zur aktuellen Station gezeigt wird
+- Screen 3: Beschreibung muss sagen, dass jetzt der vollständige 10-Jahres-Rückblick gezeigt wird
+
+**Beispiel Screen 2:**
+```
+Chart: Entwicklung des Sparplans bis März 2020. Die spätere Entwicklung ist noch nicht eingeblendet.
+```
+
+**Beispiel Screen 3:**
+```
+Chart: Vollständige Entwicklung des Sparplans über 120 Monate bis zum letzten verfügbaren Datenmonat.
+```
+
+**Keine Chart-Überladung:**
+- keine dichten Annotationen auf Mobile
+- keine Mikro-Labels an jedem Datenpunkt
+- keine Legenden, die nur Farben erklären, wenn Farben nicht nötig sind
+- keine rote Verlustfarbe (→ §17)
+
+Stationstexte müssen die Kernaussage auch ohne Chart verständlich machen.
+
+Datentabelle als ergänzende Alternative: [TBD — ob für Pilot nötig]
 
 ### 14.3 Slider
 
@@ -625,26 +667,235 @@ Init
 - `<dl>` mit `<dt>` (Label) und `<dd>` (Wert) oder `<div role="group" aria-label="...">`
 - Werte mit Einheit: „52.000 €", nicht „52.000"
 
-### 14.5 Stationen (Screen 2)
+### 14.5 Stationen (Screen 2) und Collapsible-Zwischenstand
 
-- Stationsbutton (`Weiter investiert bleiben`) ist ein `<button>`, kein `<a>`
+**Stationsbutton:**
+- ist ein `<button>`, kein `<a>`
 - Button-Label enthält handlungsbezogenen Text, kein „Weiter"
 - Stationstext hat sichtbare semantische Überschrift
-- Mobile-Collapsible: `<details>` / `<summary>` oder ARIA-Expand-Pattern; `summary` = „Zwischenstand anzeigen"
-- Nach Stationswechsel: Fokus auf neue Stations-Überschrift setzen
+- Datum und Quellenlabel dürfen nicht nur visuell sein
+- Anleger-Anker muss als normaler Text vorgelesen werden können
+- Chart darf nicht die einzige Informationsquelle sein
+
+**Fokusführung nach Stationswechsel:**
+
+Zwei zulässige Varianten:
+
+| Variante | Verhalten | Vorteil | Nachteil |
+|---|---|---|---|
+| A — Fokus bleibt auf Button | Button bleibt an vergleichbarer Stelle, erhält aktualisierten Kontext | weniger Fokus-Sprung, schnelle Bedienung | Screenreader braucht Live-Region oder Kontextänderung |
+| B — Fokus springt zur neuen Stations-Überschrift | Neue Station wird sofort vorgelesen | klare Orientierung für Screenreader | stärkerer Fokus-Sprung |
+
+**Präferenz:** Fokus nach Stationswechsel auf die neue Stationsheadline oder den Station-Container setzen, wenn dadurch Screenreader-Nutzer die neue Situation direkt erfassen. Bei visuellen Nutzern muss der Fokus sichtbar und nachvollziehbar bleiben. Die genaue Implementierung folgt im Coding-AP.
+
+**Mobile-Collapsible (Zwischenstand anzeigen):**
+
+Sichtbarer Zustand geschlossen:
+```
+Zwischenstand anzeigen
+```
+
+Geöffneter Zustand:
+```
+Eingezahlt: {paidInAtStation}
+Depotwert damals: {portfolioValueAtStation}
+```
+
+Optional bei Platz:
+```
+Stand: {stationDisplayDate}
+```
+
+Regeln:
+- Zwischenstand ist optionaler Kontext, nicht Hauptbotschaft
+- Zwischenstand darf die Station nicht dominieren
+- Werte werden berechnet, nicht in der JSON gepflegt
+- Auf Mobile keine Hover-Tooltips
+- Auf Mobile keine permanent sichtbaren Mini-KPI-Karten pro Station
+- Finale KPI-Cards erscheinen erst auf Screen 3
+
+**Collapsible-A11y:**
+- Trigger wird als Button behandelt, nicht als dekorativer Link
+- Empfohlene ARIA-Attribute: `aria-expanded`, `aria-controls`, eindeutige ID des aufklappbaren Inhalts
+- Beim Öffnen bleibt der Fokus grundsätzlich auf dem Trigger
+- Aufgeklappter Inhalt erscheint direkt nach dem Trigger in der Lesereihenfolge
+- Beim Schließen verschwindet der Inhalt sauber aus der Tab-Reihenfolge
+- Label geschlossen: `Zwischenstand anzeigen`
+- Label geöffnet: `Zwischenstand ausblenden`
+- Wenn die sichtbare Beschriftung nicht wechselt, muss `aria-expanded` den Status für Assistive Technology signalisieren
+
+**Desktop-Zwischenstand:**
+
+Erlaubt:
+- Hover-/Focus-Tooltip auf Station-Marker
+- kleiner Zwischenstand im Stationstext
+- derselbe Collapsible wie Mobile
+
+Nicht erlaubt:
+- Nur-Hover-Informationen als einziger Zugang
+- Informationen, die per Tastatur nicht erreichbar sind
+- dichte Mini-KPI-Karten unter jeder Station
+- rote Verlustmarkierung (→ §17)
+
+**Empfehlung für V1:** Dieselbe Collapsible-Lösung auf allen Breakpoints. Begründung: einfacher, konsistenter, barriereärmer, weniger Sonderlogik. Tooltip kann später optional ergänzt werden.
 
 ### 14.6 prefers-reduced-motion
 
-- Chart-Draw-Animation zwischen Stationen deaktiviert → direkt zur nächsten Station springen (kein Zwischen-Zustand)
-- Screen-Flow-Übergänge deaktiviert → direkt Zielzustand
-- Kein automatisches Warten, keine erzwungene Pause
+Bei `prefers-reduced-motion` aktiv:
+- keine Draw-Animation zwischen Stationen
+- kein langes Überblenden
+- kein Scroll-Jacking
+- keine Parallax- oder Dramatisierungseffekte
+- direkter Wechsel zur nächsten Station
+- neue Station wird klar fokussiert oder angekündigt
 
-### 14.7 Screen-Flow-Navigation
+**Wichtig:** Reduced Motion darf keine Inhalte entfernen. Es ändert nur die Bewegung, nicht die Information.
+
+**Animation und Timing:**
+
+Im Standardmodus:
+```
+Zwischen Stationen darf der Chart kurz animiert weitergezeichnet werden. Die Animation soll den Übergang verständlich machen, nicht dramatisieren. Bei reduzierter Bewegung wird direkt auf den neuen Zustand gewechselt.
+```
+
+Grenzen:
+- kein langes passives Autoplay
+- kein automatisches Durchlaufen mehrerer Stationen
+- keine künstliche Wartepflicht vor dem Button
+- Animation dient Orientierung, nicht Spektakel
+- Nutzer behält Kontrolle
+
+### 14.7 Screen-Flow-Navigation und Scroll
 
 - Jeder Screen hat eine sichtbare `<h2>`-Überschrift
 - Fokus-Management bei Screen-Wechsel: Fokus auf neue Überschrift setzen
 - Tastatur-Navigation: alle 4 Screens erreichbar (Tab, Enter)
 - Screen 2: Stationen-Button per Tastatur (Enter/Space) aktivierbar
+- Collapsible-Trigger per Tastatur (Enter/Space) bedienbar
+- Keine Tastaturfalle
+
+**Scroll-Verhalten:**
+- kein Scroll-Jacking
+- kein erzwungenes automatisches Scrollen über lange Strecken
+- wenn nach Stationswechsel automatisch gescrollt wird, dann nur zur Orientierung und nicht gegen den Nutzer
+- auf Mobile muss der neue Stationstext sichtbar werden
+- bei Tastatur/Screenreader-Nutzung hat Fokusführung Vorrang vor visueller Scrollposition
+
+### 14.8 Mobile-Layout Screen 2
+
+**Empfohlene vertikale Reihenfolge:**
+
+```
+1. Screen-/Stationsheadline
+2. Chart-Ausschnitt
+3. Datum / Quellenlabel
+4. Station-Headline
+5. Anleger-Anker
+6. Zwischenstand anzeigen (Collapsible)
+7. Weiter investiert bleiben (Button)
+```
+
+**Regel:** Der Nutzer soll ohne Suche verstehen:
+- Wo bin ich in der Zeitreise?
+- Was ist gerade passiert?
+- Was bedeutet das für den Sparplan?
+- Wie komme ich weiter?
+
+**Mobile-Höhenproblem:**
+- Der Chart darf Screen 2 auf Mobile nicht vollständig dominieren. Er ist Beweisvisualisierung, aber der Anleger-Anker ist für die psychologische Wirkung gleich wichtig.
+- Chart auf Mobile kompakter als auf Desktop
+- Stationstext muss ohne übermäßiges Scrollen sichtbar bleiben
+- Button darf nicht unter einer langen Scrollstrecke verschwinden
+
+### 14.9 Button — Weiter investiert bleiben
+
+Regeln:
+- Button ist pro Station eindeutig
+- Normaler Button-Text: `Weiter investiert bleiben`
+- Finaler Button: `Ergebnis ansehen`
+- Kein generisches `Weiter`
+- Keine zwei gleichrangigen Primärbuttons
+- Button nicht über dem Chart schweben lassen, wenn er Chartdaten verdeckt
+- Button muss mit Daumen erreichbar sein
+- Button muss ausreichend groß sein (→ §14.11 Touch-Ziele)
+
+**Sticky-Entscheidung (offen):**
+```
+Mobile-Button darf sticky im unteren Bereich sein, wenn er keine Inhalte verdeckt und die Fokus-/Screenreader-Reihenfolge korrekt bleibt.
+```
+Wenn sticky zu komplex oder störend ist, genügt ein normaler Button unter dem Stationstext. AP-05 erzwingt keine finale technische Entscheidung — nur die Bedingungen sind festgehalten.
+
+### 14.10 Quellenlabel auf Mobile
+
+- Quellenlabel kurz halten
+- Quelle und Datum sichtbar machen
+- Lange URLs nicht sichtbar im Haupttext anzeigen
+- Quelle darf verlinkt sein, aber nicht als primäre Handlung erscheinen
+- Externe Quelle öffnet nur nach Nutzeraktion
+- Linktext verständlich: `Quelle: TAGESSCHAU · 9. MÄRZ 2020` — nicht die rohe URL
+
+### 14.11 Touch-Ziele und Abstand
+
+- Primäre Buttons ausreichend groß
+- Collapsible-Trigger ausreichend groß
+- Links nicht zu dicht nebeneinander
+- Keine kleinen Chartmarker als einzige Interaktion
+- Station-Marker auf Mobile nicht als Pflichtinteraktion verwenden
+- Nutzer muss die App mit normalem Daumengebrauch bedienen können
+
+Wenn das Projekt globale Touch-Target-Regeln definiert, verweist diese App darauf. Bis dahin gilt: Primärinteraktionen müssen mit normalem Daumengebrauch erreichbar sein.
+
+### 14.12 Content-Dichte pro Station
+
+**Pro Station sichtbar:**
+- Datum / Quelle
+- eine Headline
+- maximal zwei kurze Anker-Sätze
+- ein Collapsible-Link
+- ein Primärbutton
+
+**Nicht sichtbar im Standardzustand:**
+- lange Quellenzitate
+- vollständige Nachrichtenzusammenfassung
+- externe Prozentwerte
+- mehrere KPI-Karten
+- technische Renditebegriffe
+- Prognosen
+
+**Ziel:** Eine Station ist ein Halt in der Anlegerreise, kein Zeitungsartikel und keine Bilanzanalyse.
+
+### 14.13 Fehlermeldungen — A11y
+
+Fehlermeldungen müssen:
+- sichtbar sein
+- screenreader-tauglich sein
+- nicht nur farblich codiert sein
+- konkret sagen, was fehlt
+- keine Entwicklerdetails im Produktivmodus zeigen
+
+**Beispiele:**
+```
+Die Zeitreise kann gerade nicht geladen werden.
+```
+```
+Die Stationendaten sind unvollständig.
+```
+
+Im Dev-Modus dürfen technische Details ergänzt werden.
+
+### 14.14 Verhältnis zu globalen Regeln
+
+AP-05 ergänzt ausschließlich app-spezifische A11y- und Mobile-Regeln in dieser Spec.
+
+Wenn globale Dokumente existieren (zentrale Responsive-Regeln, Accessibility-Regeln, UX-Primitiven, Chart-Engine-Regeln):
+- `APP_SPEC.md` wird app-spezifisch ergänzt
+- auf globale Regeln wird verwiesen, wenn passend
+- globale Regeln werden in AP-05 nicht geändert
+
+**Mögliche globale Folgearbeit (AP-08 oder Pattern-Update):**
+- Touch-Target-Standards (aktuell app-spezifisch)
+- Collapsible-A11y-Muster (Kandidat für App-Fabrik-Pattern)
+- Chart-A11y-Labels Screen 2/3 (Kandidat für Chart-Engine-Regel)
 
 ---
 
@@ -1122,9 +1373,33 @@ Wenn diese Bedingungen nicht erfüllt sind, ist die App redaktionell nicht publi
 | Screen 4 als Transfer ohne Verkaufsdruck beschrieben? | ✅ §23.18 |
 | P→B→N-Einordnung dokumentiert? | ✅ §23.19 |
 
+**A11y- und Mobile-Gate (AP-05):** ✅ angewendet → §14
+
+| A11y/Mobile-Prüfpunkt | Status |
+|---|---|
+| Mobile als Standardfall dokumentiert? | ✅ §14.0 |
+| Screen-2-Mobile-Layout beschrieben? | ✅ §14.8 |
+| `Weiter investiert bleiben` als erreichbarer Primärbutton spezifiziert? | ✅ §14.9 |
+| Mobile-Zwischenstand als Collapsible dokumentiert? | ✅ §14.5 |
+| Collapsible-A11y-Regeln beschrieben? | ✅ §14.5 |
+| Desktop-Zwischenstand nicht nur Hover? | ✅ §14.5 |
+| Tastaturbedienung dokumentiert? | ✅ §14.7 |
+| Fokusführung nach Stationswechsel beschrieben? | ✅ §14.5 |
+| Screenreader-Logik Stationswechsel beschrieben? | ✅ §14.1 |
+| Chart-A11y Screen 2 und Screen 3 beschrieben? | ✅ §14.2 |
+| Reduced Motion dokumentiert? | ✅ §14.6 |
+| Scroll-Verhalten geregelt? | ✅ §14.7 |
+| Quellenlabel auf Mobile geregelt? | ✅ §14.10 |
+| Touch-Ziele und Content-Dichte beschrieben? | ✅ §14.11, §14.12 |
+| Fehlermeldungen A11y-konform beschrieben? | ✅ §14.13 |
+| Rote Signals weiterhin verboten? | ✅ §17, §14.0, §14.5 |
+| Keine Code-Dateien geändert? | ✅ |
+| Keine produktive stations.de.json angelegt? | ✅ |
+| AP-08-Scope nicht berührt? | ✅ |
+
 ---
 
-*Nächster Schritt: B1-AP-05 — A11y- und Mobile-Regeln ergänzen (AP-04 ✅ 2026-06-16)*
+*Nächster Schritt: B1-AP-06 — Testfälle aktualisieren (AP-05 ✅ 2026-06-16)*
 
 ---
 

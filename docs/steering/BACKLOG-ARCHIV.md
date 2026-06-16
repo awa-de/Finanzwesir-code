@@ -1,11 +1,12 @@
 # BACKLOG-ARCHIV – Finanzwesir 2.0
-Stand: 2026-06-16 | Session: B1-AP-04 | Geändert von: Claude
+Stand: 2026-06-16 | Session: B1-AP-05 | Geändert von: Claude
 
 Abgeschlossene Items, neueste zuerst (append-only).
 Archivierungs-Trigger: wenn > 200 Zeilen → neue Datei `BACKLOG-ARCHIV-YYYY.md` anlegen.
 
 | ID | Bereich | Titel | Abgeschlossen | Session |
 |----|---------|-------|---------------|---------|
+| B1-AP-05 | App | A11y- und Mobile-Regeln ergänzt: APP_SPEC.md §14 auf 15 Subsektionen erweitert (§14.0 Mobile-Grundsatz, §14.1 ARIA Live Region + Stationswechsel, §14.2 Chart-A11y Screen 2/3, §14.5 Collapsible-Spec + A11y + Desktop-Zwischenstand + Fokusführung Variante A/B, §14.6 Reduced Motion + Animation/Timing, §14.7 Scroll-Verhalten, §14.8 Mobile-Layout, §14.9 Button-Regeln, §14.10–§14.14 Quellenlabel/Touch-Ziele/Content-Dichte/Fehlermeldungen/Globale Regeln). §22 Gate-Tabelle mit 19 AP-05-Prüfpunkten erweitert. Version V2.2. Kein Code geändert. | 2026-06-16 | B1-AP-05 |
 | B1-AP-04 | App | UX-/Heldenreise-/Beweisdramaturgie-Abschnitt aktualisiert: APP_SPEC.md §23 auf V2.1 erweitert (§23.1–§23.19). Hindsight Bias als Hauptgegner benannt (§23.11), Aha-Moment-Hierarchie (Primär/Sekundär/Transfer) umgebaut (§23.4), Stationsrollen dramaturgisch erklärt (§23.12), Falsche Auflösung (§23.13) + Finaler Wackler (§23.14) dokumentiert, Informationsethik/Kein-Dark-Pattern (§23.15), Microcopy-Regeln (§23.16), Button-Labels als Micro-Commitment (§23.17), Screen 4 als Transfer (§23.18), P→B→N (§23.19). §22 Gate-Checkliste um 9 AP-04-Punkte erweitert. §23.1 Variante C (Rückblick-Illusion) + §23.2 3-spaltige Widerstandstabelle mit Hindsight Bias. MINI_SPEC_FROM_HAUPTDOKUMENT.md als Fundstelle für AP-08 gemeldet. Kein Code geändert. | 2026-06-16 | B1-AP-04 |
 | B1-AP-03 | App | Datenvertrag Stations-JSON (STATIONS_CONFIG_CONTRACT.md): Felder, Enums, Flags (role, priority, falseResolution, late_wobble), Quellenstatus-Schema (primary_verified/secondary_verified/source_claimed_unchecked/derived_from_app_data), Validierungsregeln, Rolling-Window-Fensterfilter, Redaktions-Gate. APP_SPEC.md §8/§21/§22 aktualisiert. Kein Code geändert. | 2026-06-16 | B1-AP-03 |
 | AP-UX-01 | App | Screen-Flow Dramaturgie entschieden: Stationen-Zeitreise (3 Akte, 4 Screens). Screen 2 = Zeitreise ohne Endwissen, Screen 3 = erster vollständiger Reveal. ENTSCHEIDUNGSPROTOKOLL.md (B1-AP-01) + APP_SPEC V2.0 (B1-AP-02) dokumentieren die Entscheidung. | 2026-06-16 | AP-01-AP-02-Zeitreise-Umbau |

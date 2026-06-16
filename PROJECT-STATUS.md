@@ -2,16 +2,16 @@
 Version: 1
 Stand: 2026-06-16
 Fokus-AP: APP-01 — prokrastinations-preis
-Nächster-Schritt: B1-AP-05 — A11y- und Mobile-Regeln; dann B1-AP-06 bis AP-08; danach Slice 7 A11y + Responsive
+Nächster-Schritt: B1-AP-06 — Testfälle aktualisieren; dann B1-AP-07 bis AP-08; danach Slice 7 A11y + Responsive
 Blocker: keine
 Letzter-Distill: 2026-06-15
 Kassensturz-Datum: 2026-06-15
 -->
-<!-- HOOK-META-SESSION: B1-AP-04 -->
+<!-- HOOK-META-SESSION: B1-AP-05 -->
 
 # PROJECT STATUS — Finanzwesir 2.0
 
-Stand: 2026-06-16 | Session: B1-AP-04 | Geändert von: Claude
+Stand: 2026-06-16 | Session: B1-AP-05 | Geändert von: Claude
 
 **Zweck:** Schneller Wiedereinstieg nach Pausen.
 **Zielgruppe:** Albert und Claude.
@@ -105,6 +105,10 @@ Stand: 2026-06-16 | Session: B1-AP-04 | Geändert von: Claude
 
 ✅ **B1-AP-03 abgeschlossen (2026-06-16):** STATIONS_CONFIG_CONTRACT.md angelegt (Stations-JSON-Datenvertrag, 14 Abschnitte: Top-Level-Struktur, Station-Objekt, Pflichtfelder, Enums, Redaktions-Gate, Rolling-Window-Fensterfilter, Fehlerkonzept). APP_SPEC.md §8/§21/§22 aktualisiert. Kein Code geändert.
 
+✅ **B1-AP-04 UX/Heldenreise-Abschnitt (2026-06-16):** APP_SPEC.md §23 auf V2.1 erweitert (§23.1–§23.19). Hindsight Bias als Hauptgegner (§23.11), Aha-Moment-Hierarchie (Primär/Sekundär/Transfer, §23.4), Dramaturgische Stationsrollen (§23.12), Falsche Auflösung + Finaler Wackler (§23.13–14), Informationsethik/Kein-Dark-Pattern (§23.15), Microcopy-Regeln (§23.16–18), P→B→N (§23.19). §22 Gate mit 9 AP-04-Prüfpunkten erweitert. Kein Code geändert.
+
+✅ **B1-AP-05 A11y- und Mobile-Regeln (2026-06-16):** APP_SPEC.md §14 von 7 auf 15 Subsektionen erweitert (§14.0–§14.14). Mobile als Standardfall (§14.0), Collapsible-Zwischenstand komplett spezifiziert (Spec + A11y + Desktop, §14.5), Fokusführung Variante A/B, Screenreader-Stationswechsel (§14.1), Chart-A11y Screen 2 vs. 3 (§14.2), Reduced Motion + Timing-Grenzen (§14.6), Mobile-Layout Screen 2 (§14.8), Button-Regeln (§14.9), Touch-Ziele/Content-Dichte/Fehlermeldungen (§14.11–§14.13). §22 Gate mit 19 AP-05-Prüfpunkten. Version V2.2. Kein Code geändert.
+
 ---
 
 ## 2. Letzter stabiler Stand
@@ -130,8 +134,8 @@ Stand: 2026-06-16 | Session: B1-AP-04 | Geändert von: Claude
 
 ## 3. Nächster sinnvoller Schritt
 
-- **B1-AP-04** — UX/Heldenreise-Abschnitt: APP_SPEC §23 für Zeitreise-Logik aktualisieren (AP-03 ✅ 2026-06-16)
-- **B1-AP-05 bis AP-08** — A11y/Mobile, Testfälle, Redaktions-Gate, Widerspruchs-Bereinigung; nach AP-04; dann Slice 7
+- **B1-AP-06** — Testfälle aktualisieren: Stations-JSON lädt, Fensterfilter, finaler Reveal aus CSV, keine roten Crash-Visuals, Mobile-Collapsible, kein KPI vor Screen 3 (AP-04/05 ✅ 2026-06-16)
+- **B1-AP-07 bis AP-08** — Redaktions-Gate, Widerspruchs-Bereinigung; dann Slice 7
 - **AP-20/21** (Mixed-Rhythm CV-Heuristik) — 🟡 Aktiv, Chart-Engine, parallel möglich
 
 ---
@@ -144,7 +148,7 @@ Stand: 2026-06-16 | Session: B1-AP-04 | Geändert von: Claude
 | Chart-Engine | Stabil, offene APs | Siehe `docs/steering/BACKLOG.md` |
 | Theme | In Entwicklung | `THEME-ASSEMBLY-CHECKLIST.md` |
 | CSS | Stabil | Siehe `docs/steering/BACKLOG.md` (CSS-N Items) |
-| Apps | Slice 6 ✅, AP-UX-01 ✅, B1-AP-01/02/03 ✅ 2026-06-16 | B1-AP-04–08 → Slice 7: A11y + Responsive |
+| Apps | Slice 6 ✅, AP-UX-01 ✅, B1-AP-01/02/03/04/05 ✅ 2026-06-16 | B1-AP-06–08 → Slice 7: A11y + Responsive |
 | Content | Laufend | Redaktionsleitfaden aktiv |
 | Security | SECURITY-BASELINE.md App-Fabrik-gatefähig ✅ | Security-Sync-Regel + Gate-Prüffrage verankert (ST-13/ST-14) |
 
@@ -179,6 +183,12 @@ Vollständig im DECISION-LOG dokumentiert (`docs/steering/DECISION-LOG.md`):
 ---
 
 ## 8. Letzte Session
+
+2026-06-16 — B1-AP-05 A11y- und Mobile-Regeln abgeschlossen (B1-AP-05).
+APP_SPEC.md §14 von „A11y-Vertrag" (7 Subsektionen) auf „A11y- und Mobile-Regeln" (15 Subsektionen, §14.0–§14.14) erweitert. Mobile als Standardfall (§14.0), Collapsible-Zwischenstand (§14.5), Fokusführung Variante A/B, Screenreader-Stationswechsel (§14.1), Chart-A11y Screen 2/3 (§14.2), Reduced Motion + Timing-Grenzen (§14.6), Mobile-Layout (§14.8), Button-Regeln (§14.9), Touch-Ziele/Content-Dichte/Fehlermeldungen (§14.11–§14.13). §22 Gate mit 19 AP-05-Prüfpunkten. Version V2.2. Kein Code geändert.
+
+2026-06-16 — B1-AP-04 UX/Heldenreise-Abschnitt abgeschlossen (B1-AP-04).
+APP_SPEC.md §23 auf V2.1 erweitert (§23.1–§23.19). Hindsight Bias als Hauptgegner (§23.11), Aha-Moment-Hierarchie (Primär/Sekundär/Transfer, §23.4), Dramaturgische Stationsrollen (§23.12), Falsche Auflösung + Finaler Wackler (§23.13–14), Informationsethik/Kein-Dark-Pattern (§23.15), Microcopy-Regeln (§23.16–18), P→B→N (§23.19). §22 Gate mit 9 AP-04-Prüfpunkten. Kein Code geändert.
 
 2026-06-16 — B1-AP-03 Stations-JSON-Datenvertrag abgeschlossen (B1-AP-03).
 STATIONS_CONFIG_CONTRACT.md (14 Abschnitte) angelegt. APP_SPEC.md §8/§21/§22 aktualisiert. Kein Code geändert.
@@ -432,14 +442,15 @@ Neue APs: DS-012, DS-013, DS-014.
 
 ## 9. Einstieg für nächste Session
 
-**Nächster Schritt: B1-AP-04 — UX/Heldenreise-Abschnitt**
+**Nächster Schritt: B1-AP-06 — Testfälle aktualisieren**
 
-AP-UX-01, B1-AP-01, B1-AP-02 und B1-AP-03 ✅ 2026-06-16. Stationen-Zeitreise beschlossen, spec-seitig umgesetzt, JSON-Vertrag definiert (STATIONS_CONFIG_CONTRACT.md). Nächste Specs: AP-04 (UX/Heldenreise), AP-05 (A11y/Mobile), AP-06 (Testfälle), AP-07 (Redaktions-Gate), AP-08 (Widerspruchs-Bereinigung). Erst nach AP-04–AP-07: Slice 7 (A11y + Responsive + SF-02 NumericInput).
+AP-UX-01, B1-AP-01 bis B1-AP-05 ✅ 2026-06-16. Stationen-Zeitreise beschlossen, spec-seitig umgesetzt (APP_SPEC.md V2.2), JSON-Vertrag (STATIONS_CONFIG_CONTRACT.md), UX/Heldenreise (§23) und A11y/Mobile-Regeln (§14) definiert. Nächste Specs: AP-06 (Testfälle), AP-07 (Redaktions-Gate), AP-08 (Widerspruchs-Bereinigung). Erst nach AP-06–AP-07: Slice 7 (A11y + Responsive + SF-02 NumericInput).
 
 Operative Quellen:
-- `Apps/prokrastinations-preis/APP_SPEC.md` — V2.0 ✅ (operativ, AP-02 2026-06-16)
+- `Apps/prokrastinations-preis/APP_SPEC.md` — V2.2 ✅ (AP-05 2026-06-16)
 - `Apps/prokrastinations-preis/ENTSCHEIDUNGSPROTOKOLL.md` — Architektur-Klammer B1-AP-01 ✅
-- `Apps/prokrastinations-preis/SLICE_PLAN.md` — Slice-0/1/2/3/4/5/6 ✅, Slice 7 nach AP-03 bis AP-06
+- `Apps/prokrastinations-preis/SLICE_PLAN.md` — Slice-0/1/2/3/4/5/6 ✅, Slice 7 nach AP-06–07
+- `Apps/prokrastinations-preis/STATIONS_CONFIG_CONTRACT.md` — Stations-JSON-Vertrag B1-AP-03 ✅
 
 Entschieden (nicht mehr offen):
 - E-01/E-02/B-01/B-02/B-03 ✅: Zeitreise-App, Anteilslogik, CSV, Button-getrieben

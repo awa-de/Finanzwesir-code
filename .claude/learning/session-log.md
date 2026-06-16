@@ -4,6 +4,13 @@ Wird geleert nach /distill. Einträge: [FRICTION] [WIN] [PREF] [QUESTION] [OK]
 ## 2026-06-16 – SESSION START | Fokus: APP-01 — prokrastinations-preis
 `FinanzwesirData.js, CSVParser.js, FwDateUtils.js — diese Session nicht berühren. ✓`
 
+## 2026-06-16 – B1-AP-05 abgeschlossen | A11y- und Mobile-Regeln APP_SPEC.md
+- [OK] Full-Gate sauber — 1 Datei, 6 Stellen, §14 von 7 auf 15 Subsektionen erweitert
+- [OK] SLICE_PLAN.md + MINI_SPEC_FROM_HAUPTDOKUMENT.md plangemäß nicht berührt (AP-08-Scope)
+- [WIN] Mobile-Grundsatz als §14.0 explizit als Leitprinzip verankert
+- [QUESTION] Sticky-Button, Fokus-Variante A/B, Collapsible-Implementierung → offen für Coding-AP dokumentiert
+- [QUESTION] Touch-Target + Collapsible-A11y + Chart-A11y-Labels als globale Folgearbeit gemeldet (AP-08 oder Pattern-Update)
+
 ## 2026-06-16 – B1-AP-04 abgeschlossen | UX/Heldenreise-Abschnitt APP_SPEC.md
 - [OK] Gate + Umsetzung plangemäß — alle 10 Edits ohne Abweichung
 - [QUESTION] MINI_SPEC_FROM_HAUPTDOKUMENT.md im App-Verzeichnis gefunden mit veralteten Screen-2-Aussagen (zeigt vollständigen Chart + KPIs — widerspricht Zeitreise-Logik). Status "Roh-Mini-Spec, noch nicht APP_SPEC" → nicht in AP-04 geändert, als Fundstelle für AP-08 gemeldet
