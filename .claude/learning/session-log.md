@@ -1,6 +1,14 @@
 # Session-Log — Finanzwesir 2.0
 Wird geleert nach /distill. Einträge: [FRICTION] [WIN] [PREF] [QUESTION] [OK]
 
+## 2026-06-16 – B1-AP-07 abgeschlossen | Redaktions-Gate Stationen-Zeitreise
+- [OK] Keine Vorkommnisse — Umsetzung direkt aus Briefing, kein AP-08-Scope, kein Code
+- [OK] REDAKTIONS_GATE.md angelegt: 10 Gate-A, 7 Gate-B, 3 Gate-C, Release-Checkliste, Manuell/Technisch, Prod/Dev
+- [OK] Verweise in APP_SPEC.md §20, STATIONS_CONFIG_CONTRACT.md §11, QA_TEST_CASES.md ergänzt
+
+## 2026-06-16 – SESSION START | Fokus: APP-01 — prokrastinations-preis
+- FinanzwesirData.js, CSVParser.js, FwDateUtils.js — diese Session nicht berühren. ✓
+
 ## 2026-06-16 – B1-AP-06 abgeschlossen | Testfälle und QA-Kriterien Stationen-Zeitreise
 - [OK] Keine Vorkommnisse — Gate und Umsetzung plangemäß
 - [OK] Full-Gate sauber — 2 Dateien, 5 Stellen: QA_TEST_CASES.md (neu) + APP_SPEC.md §1/§19/§22/Stand

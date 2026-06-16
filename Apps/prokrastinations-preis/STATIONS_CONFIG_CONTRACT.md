@@ -1,4 +1,4 @@
-Stand: 2026-06-16 | Erstellt von: Claude | Session: AP-03
+Stand: 2026-06-16 | Geändert von: Claude | Session: AP-03 / AP-07
 
 # Stations-JSON-Datenvertrag — prokrastinations-preis
 
@@ -574,6 +574,8 @@ Vor Veröffentlichung muss gelten:
 - [ ] Finale KPIs erscheinen erst nach der Zeitreise.
 
 Wenn das Redaktions-Gate nicht bestanden ist, ist die App nicht publikationsreif.
+
+Vollständige Ausarbeitung: `REDAKTIONS_GATE.md` (→ AP-07). `STATIONS_CONFIG_CONTRACT.md` definiert die JSON-Struktur; `REDAKTIONS_GATE.md` definiert die Publikationsreife.
 
 ---
 

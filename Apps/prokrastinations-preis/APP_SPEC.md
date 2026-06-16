@@ -1,6 +1,6 @@
 # APP_SPEC — prokrastinations-preis
 
-Stand: 2026-06-16 | V2.3 — AP-06 Testfälle | Geändert von: Claude
+Stand: 2026-06-16 | V2.4 — AP-07 Redaktions-Gate | Geändert von: Claude
 
 ---
 
@@ -1285,7 +1285,9 @@ Die Testfälle T-01–T-40 (unten) sind eine ergänzende Kurzreferenz; maßgeben
 
 ## 20. Redaktions-Gate (Kurzfassung)
 
-Detaillierte Ausarbeitung folgt in AP-07. Mindestregeln, die bereits jetzt gelten:
+Detaillierte Ausarbeitung: `REDAKTIONS_GATE.md` (→ AP-07, 2026-06-16). Die APP_SPEC definiert UX und Zielzustand; das Redaktions-Gate definiert, ob eine konkrete Stationsauswahl veröffentlicht werden darf.
+
+Mindestregeln (Kurzfassung):
 
 - [ ] Das aktive Fenster enthält mindestens eine Station mit `role: "crisis"` und `priority >= 95`.
 - [ ] Keine sichtbare Station bleibt dauerhaft auf `source_claimed_unchecked`.

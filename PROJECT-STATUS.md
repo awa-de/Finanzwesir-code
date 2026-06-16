@@ -2,16 +2,16 @@
 Version: 1
 Stand: 2026-06-16
 Fokus-AP: APP-01 — prokrastinations-preis
-Nächster-Schritt: B1-AP-07 — Redaktions-Gate dokumentieren; dann B1-AP-08; danach Slice 7 A11y + Responsive
+Nächster-Schritt: B1-AP-08 — Widersprüchliche Stellen bereinigen; danach Slice 7 A11y + Responsive
 Blocker: keine
 Letzter-Distill: 2026-06-15
 Kassensturz-Datum: 2026-06-15
 -->
-<!-- HOOK-META-SESSION: B1-AP-06 -->
+<!-- HOOK-META-SESSION: B1-AP-07 -->
 
 # PROJECT STATUS — Finanzwesir 2.0
 
-Stand: 2026-06-16 | Session: B1-AP-06 | Geändert von: Claude
+Stand: 2026-06-16 | Session: B1-AP-07 | Geändert von: Claude
 
 **Zweck:** Schneller Wiedereinstieg nach Pausen.
 **Zielgruppe:** Albert und Claude.
@@ -109,6 +109,8 @@ Stand: 2026-06-16 | Session: B1-AP-06 | Geändert von: Claude
 
 ✅ **B1-AP-05 A11y- und Mobile-Regeln (2026-06-16):** APP_SPEC.md §14 von 7 auf 15 Subsektionen erweitert (§14.0–§14.14). Mobile als Standardfall (§14.0), Collapsible-Zwischenstand komplett spezifiziert (Spec + A11y + Desktop, §14.5), Fokusführung Variante A/B, Screenreader-Stationswechsel (§14.1), Chart-A11y Screen 2 vs. 3 (§14.2), Reduced Motion + Timing-Grenzen (§14.6), Mobile-Layout Screen 2 (§14.8), Button-Regeln (§14.9), Touch-Ziele/Content-Dichte/Fehlermeldungen (§14.11–§14.13). §22 Gate mit 19 AP-05-Prüfpunkten. Version V2.2. Kein Code geändert.
 
+✅ **B1-AP-07 Redaktions-Gate Stationen-Zeitreise (2026-06-16):** REDAKTIONS_GATE.md angelegt — 10 Gate-A-Regeln (G-A01–G-A10: Mindestkrise, Quellenstatus, Quellenstatus-Ehrlichkeit, CSV-Fenster, CSV-Reveal, Screen-2-kein-Endwissen, KPI-erst-Screen-3, kein-Rot, keine-Prognose, keine-Scham), 7 Gate-B-Regeln (G-B01–G-B07), 3 Gate-C-Hinweise (G-C01–G-C03), Release-Checkliste. Verweise in APP_SPEC.md §20 (V2.4), STATIONS_CONFIG_CONTRACT.md §11, QA_TEST_CASES.md (V1.1). Kein Code geändert.
+
 ✅ **B1-AP-06 Testfälle Stationen-Zeitreise (2026-06-16):** QA_TEST_CASES.md angelegt (12 Gruppen A–L, 23 Testfälle TC-Format, 18 Muss). APP_SPEC.md §19 Referenzblock + Muss-Kurzliste, Version V2.3, Nächster Schritt AP-07. Kein Code geändert.
 
 ---
@@ -136,8 +138,8 @@ Stand: 2026-06-16 | Session: B1-AP-06 | Geändert von: Claude
 
 ## 3. Nächster sinnvoller Schritt
 
-- **B1-AP-07** — Redaktions-Gate dokumentieren: Quellenstatus, Mindestkrise (priority ≥ 95), Produktivfähigkeit, sichtbare Stationen-Prüfung (AP-04/05/06 ✅ 2026-06-16)
-- **B1-AP-08** — Widerspruchs-Bereinigung SLICE_PLAN.md + MINI_SPEC_FROM_HAUPTDOKUMENT.md; dann Slice 7
+- **B1-AP-08** — Widersprüchliche Stellen bereinigen: SLICE_PLAN.md + MINI_SPEC_FROM_HAUPTDOKUMENT.md (AP-07 ✅ 2026-06-16)
+- Danach: Slice 7 (A11y + Responsive + SF-02 NumericInput)
 - **AP-20/21** (Mixed-Rhythm CV-Heuristik) — 🟡 Aktiv, Chart-Engine, parallel möglich
 
 ---
@@ -150,7 +152,7 @@ Stand: 2026-06-16 | Session: B1-AP-06 | Geändert von: Claude
 | Chart-Engine | Stabil, offene APs | Siehe `docs/steering/BACKLOG.md` |
 | Theme | In Entwicklung | `THEME-ASSEMBLY-CHECKLIST.md` |
 | CSS | Stabil | Siehe `docs/steering/BACKLOG.md` (CSS-N Items) |
-| Apps | Slice 6 ✅, AP-UX-01 ✅, B1-AP-01 bis AP-06 ✅ 2026-06-16 | B1-AP-07–08 → Slice 7: A11y + Responsive |
+| Apps | Slice 6 ✅, AP-UX-01 ✅, B1-AP-01 bis AP-07 ✅ 2026-06-16 | B1-AP-08 → Slice 7: A11y + Responsive |
 | Content | Laufend | Redaktionsleitfaden aktiv |
 | Security | SECURITY-BASELINE.md App-Fabrik-gatefähig ✅ | Security-Sync-Regel + Gate-Prüffrage verankert (ST-13/ST-14) |
 
@@ -185,6 +187,9 @@ Vollständig im DECISION-LOG dokumentiert (`docs/steering/DECISION-LOG.md`):
 ---
 
 ## 8. Letzte Session
+
+2026-06-16 — B1-AP-07 Redaktions-Gate Stationen-Zeitreise abgeschlossen (B1-AP-07).
+REDAKTIONS_GATE.md angelegt: 10 Gate-A-Regeln (G-A01–G-A10 release-blockierend), 7 Gate-B-Regeln (G-B01–G-B07 qualitätskritisch), 3 Gate-C-Hinweise (G-C01–G-C03). Release-Checkliste, Manuell/Technisch-Trennung, Prod-/Dev-Modus-Abschnitt. Verweise in APP_SPEC.md §20 (V2.4), STATIONS_CONFIG_CONTRACT.md §11, QA_TEST_CASES.md (V1.1). Kein Code geändert. Nächster Schritt: B1-AP-08.
 
 2026-06-16 — B1-AP-06 Testfälle Stationen-Zeitreise abgeschlossen (B1-AP-06).
 QA_TEST_CASES.md angelegt: 12 Gruppen A–L, 23 Testfälle TC-Format (18 Muss). APP_SPEC.md §19 Referenzblock + Muss-Kurzliste, Stand-Datum V2.3, Nächster Schritt AP-07. NAVIGATION.md B1-Note aktualisiert (AP-05/06 ✅). BACKLOG.md B1-AP-06-Zeile entfernt. Kein Code geändert.
@@ -447,15 +452,16 @@ Neue APs: DS-012, DS-013, DS-014.
 
 ## 9. Einstieg für nächste Session
 
-**Nächster Schritt: B1-AP-07 — Redaktions-Gate dokumentieren**
+**Nächster Schritt: B1-AP-08 — Widersprüchliche Stellen bereinigen**
 
-AP-UX-01, B1-AP-01 bis B1-AP-06 ✅ 2026-06-16. Stationen-Zeitreise beschlossen, spec-seitig umgesetzt (APP_SPEC.md V2.3), Testfälle (QA_TEST_CASES.md), JSON-Vertrag (STATIONS_CONFIG_CONTRACT.md), UX/Heldenreise (§23) und A11y/Mobile-Regeln (§14) definiert. Nächste Specs: AP-07 (Redaktions-Gate), AP-08 (Widerspruchs-Bereinigung). Erst nach AP-07–AP-08: Slice 7 (A11y + Responsive + SF-02 NumericInput).
+AP-UX-01, B1-AP-01 bis B1-AP-07 ✅ 2026-06-16. Stationen-Zeitreise vollständig spec-seitig umgesetzt: APP_SPEC.md V2.4, REDAKTIONS_GATE.md (AP-07), QA_TEST_CASES.md V1.1 (AP-06), STATIONS_CONFIG_CONTRACT.md (AP-03), UX/Heldenreise §23 (AP-04), A11y/Mobile §14 (AP-05). Nächster Schritt: AP-08 (Widerspruchs-Bereinigung in SLICE_PLAN.md + MINI_SPEC_FROM_HAUPTDOKUMENT.md). Danach: Slice 7 (A11y + Responsive + SF-02 NumericInput).
 
 Operative Quellen:
-- `Apps/prokrastinations-preis/APP_SPEC.md` — V2.3 ✅ (AP-06 2026-06-16)
-- `Apps/prokrastinations-preis/QA_TEST_CASES.md` — Testfälle B1-AP-06 ✅ 2026-06-16
+- `Apps/prokrastinations-preis/APP_SPEC.md` — V2.4 ✅ (AP-07 2026-06-16)
+- `Apps/prokrastinations-preis/REDAKTIONS_GATE.md` — Redaktions-Gate B1-AP-07 ✅ 2026-06-16
+- `Apps/prokrastinations-preis/QA_TEST_CASES.md` — Testfälle B1-AP-06 ✅, V1.1 (AP-07)
 - `Apps/prokrastinations-preis/ENTSCHEIDUNGSPROTOKOLL.md` — Architektur-Klammer B1-AP-01 ✅
-- `Apps/prokrastinations-preis/SLICE_PLAN.md` — Slice-0/1/2/3/4/5/6 ✅, Slice 7 nach AP-06–07
+- `Apps/prokrastinations-preis/SLICE_PLAN.md` — Slice-0/1/2/3/4/5/6 ✅, Slice 7 nach AP-08
 - `Apps/prokrastinations-preis/STATIONS_CONFIG_CONTRACT.md` — Stations-JSON-Vertrag B1-AP-03 ✅
 
 Entschieden (nicht mehr offen):

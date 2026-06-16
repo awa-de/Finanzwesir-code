@@ -1,4 +1,4 @@
-Stand: 2026-06-16 | V1.0 — AP-06 Testfälle | Erstellt von: Claude
+Stand: 2026-06-16 | V1.1 — AP-07 Redaktions-Gate Verweis | Geändert von: Claude
 
 # QA_TEST_CASES — prokrastinations-preis
 
@@ -8,6 +8,7 @@ Vollständige Test- und QA-Kriterien für die Stationen-Zeitreise.
 - `APP_SPEC.md` V2.3 (führende Spec)
 - `STATIONS_CONFIG_CONTRACT.md` (Felder, Enums, Fensterfilter, Redaktions-Gate)
 - `ENTSCHEIDUNGSPROTOKOLL.md` (dramaturgische Regeln)
+- `REDAKTIONS_GATE.md` (Gate-Regeln und Release-Checkliste — `QA_TEST_CASES.md` beschreibt das Wie der Prüfung, `REDAKTIONS_GATE.md` das Was)
 
 **Geltungsbereich:** AP-06 definiert Testfälle für Coding- und QA-Arbeitspakete. Kein Code, keine automatisierten Tests, keine produktive `stations.de.json`.
 
