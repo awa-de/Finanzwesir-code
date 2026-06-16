@@ -1,5 +1,12 @@
 # Spec-Review: `prokrastinations-preis` V0.2 / heldenreise V0.3
 
+> [!warning] ARCHIVIERUNG EMPFOHLEN
+>
+> Dieser Review prüfte `APP_SPEC.md` V0.2 (alter Calculator/LiveCounter-Ansatz, 2026-05-10).
+> Das Konzept wurde vollständig durch die Stationen-Zeitreise ersetzt (AP-01, 2026-06-16).
+> LiveCounter, Prokrastinations-Preis als Hauptzahl, Wartezeit-Slider und Annuitätsformel
+> existieren in der aktuellen App nicht. Führende Quelle: `APP_SPEC.md` V2.4.
+
 **Stand:** 2026-05-10 | **Reviewer:** Perplexity / Claude | **Grundlage:** APP_SPEC V0.2 + heldenreise-Ergänzung V0.3
 
 ---

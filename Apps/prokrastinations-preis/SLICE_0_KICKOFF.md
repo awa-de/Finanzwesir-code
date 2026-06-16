@@ -1,7 +1,8 @@
-> [!note] AKTUELLE VERSION — Neue Mechanik (Marktzeit)
+> [!note] HISTORISCHES DOKUMENT — Slice 0 abgeschlossen 2026-06-04 ✅
 >
-> Diese Datei ersetzt `SLICE_0_KICKOFF.md` (alte Calculator-Mechanik, 2026-05-11).
-> Basis: `APP_SPEC.md` V1.6 + `SLICE_PLAN.md` + RFC.
+> Dieses Dokument ist Implementierungsprotokoll für den abgeschlossenen Slice 0.
+> Technische Architektur (Shell, State-Maschine, ES-Modul) weiterhin gültig.
+> Basis war: `APP_SPEC.md` V1.6. Führend ist jetzt: `APP_SPEC.md` V2.4.
 
 ---
 

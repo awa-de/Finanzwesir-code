@@ -1,5 +1,12 @@
 # SPEC_GATE_REPORT — prokrastinations-preis
 
+> [!warning] ARCHIVIERUNG EMPFOHLEN
+>
+> Dieser Report prüfte `APP_SPEC.md` V0.3 (alter Calculator/LiveCounter-Ansatz, 2026-05-10).
+> Das Konzept wurde vollständig durch die Stationen-Zeitreise ersetzt (AP-01, 2026-06-16).
+> LiveCounter, Wartezeit-Slider und FV-Formel existieren in der aktuellen App nicht.
+> Führende Quelle: `APP_SPEC.md` V2.4 + `ENTSCHEIDUNGSPROTOKOLL.md`.
+
 Stand: 2026-05-10 | Geändert von: Claude
 
 ---

@@ -1,5 +1,5 @@
 # BACKLOG – Finanzwesir 2.0
-Stand: 2026-06-16 | Session: B1-AP-07 | Geändert von: Claude
+Stand: 2026-06-16 | Session: B1-AP-08 | Geändert von: Claude
 
 **Regeln:**
 - ✅-Zeilen werden sofort nach `BACKLOG-ARCHIV.md` verschoben (append), dann hier gelöscht.
@@ -22,7 +22,6 @@ Stand: 2026-06-16 | Session: B1-AP-07 | Geändert von: Claude
 
 | ID       | Bereich | Titel                                          | Prio | Dep          | Detail                                            |
 |----------|---------|------------------------------------------------|------|--------------|---------------------------------------------------|
-| B1-AP-08 | App     | Widersprüchliche Stellen bereinigen: SLICE_PLAN.md + MINI_SPEC_FROM_HAUPTDOKUMENT.md enthalten noch alte Screen-2-Aussagen (vollständiger Chart mit KPIs). Alle Stellen korrigieren. | L    | B1-AP-07     | Apps/prokrastinations-preis/SLICE_PLAN.md, MINI_SPEC_FROM_HAUPTDOKUMENT.md |
 | AP-DATA-09 | Data  | Bestehende APP_SPEC.md nach Data-Need-Blaupause angleichen | M | — | docs/data/OFFENE-ARBEITSPUNKTE.md; Rollout erst nach Alberts explizitem Auftrag |
 | DS-003   | Design  | Tastatur-Navigation testen (Safari/Firefox/Chrome) | H | —          | —                                                 |
 | DS-004   | Design  | WCAG Kontrast-Tabelle dokumentieren            | H    | —            | —                                                 |

@@ -1,8 +1,8 @@
 # MINI_SPEC_FROM_HAUPTDOKUMENT — Marktzeit schlägt Timing / Lieber heute als morgen
 
 > Quelle: `docs/App-Fabrik/ETF-Apps-Hauptdokument.md` + `aktuelles Projekt/04_ZUSATZTEXT_B1_REWRITE_MARKTZEIT.md`
-> Status: Roh-Mini-Spec, noch nicht APP_SPEC
-> Letzte Änderung: 2026-05-18 — B1 von Verlustzähler zu Marktzeit-App umgerahmt
+> Status: Historisch — abgeleitet aus Planungsphase Mai 2026. Bei Widerspruch gilt `APP_SPEC.md` V2.4.
+> Letzte Änderung: 2026-06-16 — Screen-Flow an Stationen-Zeitreise angepasst (AP-08)
 
 ---
 
@@ -85,29 +85,36 @@ Eingabe:
 - optional Startbetrag
 - Zeitraum fix: 10 Jahre
 
-### Screen 2 — Echte Vergangenheit
+### Screen 2 — Stationen-Zeitreise (ohne Endwissen)
 
-Visual: Vor 10 Jahren gestartet → heute
+Screen 2 ist kein vollständiger Chart-Reveal. Der Chart wächst Station für Station.
 
-Die App zeigt eine echte historische Sparplanstrecke.
-
-Dazu:
-
-- eingezahlt
-- heutiger Depotwert
-- Gewinn/Verlust gegenüber Einzahlung
+- Nur Teilansicht des Charts bis zur aktuellen Station sichtbar.
+- Keine finalen KPI-Cards. Keine vollständige Sparplan-Strecke.
+- Jede Station: Stationstext (Datum, Headline, Anleger-Anker).
+- Nutzer klickt `Weiter investiert bleiben` zur nächsten Station.
+- Mobil: Collapsible `Zwischenstand anzeigen` → Eingezahlt + Depotwert damals.
 
 Microcopy:
 
 > „Das wäre kein gerader Weg gewesen. Aber es wäre Marktzeit gewesen."
 
-### Screen 3 — Heute als Entscheidungspunkt
+→ Führende Quelle: `APP_SPEC.md` V2.4 §14, §6
 
-Die Vergangenheit endet bei heute. Heute wird als vertikale Linie markiert.
+### Screen 3 — Erster vollständiger Reveal
+
+Screen 3 ist der erste Moment, in dem der Nutzer das vollständige Bild sieht.
+
+- Erstmals vollständiger 120-Monate-Chart sichtbar.
+- Entscheidungspunkt-Marker: VertikaleLinie beim letzten Datenpunkt.
+- Finale KPI-Cards: eingezahlt, Depotwert heute, Differenz.
+- AssumptionsBox (historische Basis, kein Zukunftsversprechen).
 
 Text:
 
 > „Vor 10 Jahren ist weg. Heute nicht."
+
+→ Führende Quelle: `APP_SPEC.md` V2.4 §14, §6
 
 ### Screen 4 — Nicht weiter warten
 

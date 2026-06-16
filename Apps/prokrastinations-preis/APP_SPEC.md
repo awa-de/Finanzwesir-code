@@ -8,9 +8,9 @@ Stand: 2026-06-16 | V2.4 — AP-07 Redaktions-Gate | Geändert von: Claude
 
 | Feld | Wert |
 |---|---|
-| Version | Draft V2.3 — Testfälle / AP-06 |
-| Phase | Konzept-Umbau auf Stationen-Zeitreise (AP-01 ✅, AP-02 ✅, AP-03 ✅, AP-04 ✅, AP-05 ✅, AP-06 ✅) |
-| Nächster Schritt | B1-AP-07 — Redaktions-Gate dokumentieren (AP-06 ✅ 2026-06-16) |
+| Version | V2.4 — AP-07 Redaktions-Gate |
+| Phase | Konzept-Umbau auf Stationen-Zeitreise (AP-01 ✅, AP-02 ✅, AP-03 ✅, AP-04 ✅, AP-05 ✅, AP-06 ✅, AP-07 ✅) |
+| Nächster Schritt | B1-AP-08 — Widersprüchliche Stellen bereinigen (AP-07 ✅ 2026-06-16) |
 | Code-Freigabe | Slice 0 ✅ 2026-06-04, Slice 1 ✅ 2026-06-05, Slice 2 ✅ 2026-06-05, Slice 6 ✅ 2026-06-16; Slice 7+ erst nach Pre-Code-Gate |
 | Grundlage | `Apps/prokrastinations-preis/ENTSCHEIDUNGSPROTOKOLL.md` (AP-01, 2026-06-16) |
 | Ersetzt | APP_SPEC V1.7 (Ergebnisgrafik-Logik — Screen 2 zeigte vollständigen Chart mit KPIs) |

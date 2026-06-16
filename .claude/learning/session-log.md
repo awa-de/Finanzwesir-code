@@ -1,6 +1,14 @@
 # Session-Log — Finanzwesir 2.0
 Wird geleert nach /distill. Einträge: [FRICTION] [WIN] [PREF] [QUESTION] [OK]
 
+## 2026-06-16 – B1-AP-08 abgeschlossen | Dokumentations-Bereinigung Stationen-Zeitreise
+- [OK] 6 Dateien bereinigt: APP_SPEC (Versionstabelle), SLICE_PLAN (V1.6→V2.4, Redesign-Abschnitt, Microcopy-Ref), MINI_SPEC (Screen 2+3), SLICE_0_KICKOFF (Header), SPEC_GATE_REPORT + Perplexity-Review (Archiv-Warnung)
+- [OK] Kein Code, keine produktive JSON, keine Versionskopien, keine Archivbewegungen
+- [WIN] Alle alten Screen-2-vollständig-Chart-Behauptungen aus aktiven Docs entfernt
+
+## 2026-06-16 – SESSION START | Fokus: APP-01 — prokrastinations-preis
+FinanzwesirData.js, CSVParser.js, FwDateUtils.js — diese Session nicht berühren. ✓
+
 ## 2026-06-16 – B1-AP-07 abgeschlossen | Redaktions-Gate Stationen-Zeitreise
 - [OK] Keine Vorkommnisse — Umsetzung direkt aus Briefing, kein AP-08-Scope, kein Code
 - [OK] REDAKTIONS_GATE.md angelegt: 10 Gate-A, 7 Gate-B, 3 Gate-C, Release-Checkliste, Manuell/Technisch, Prod/Dev
