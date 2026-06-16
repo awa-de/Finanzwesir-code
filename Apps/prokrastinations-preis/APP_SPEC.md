@@ -1,6 +1,6 @@
 # APP_SPEC — prokrastinations-preis
 
-Stand: 2026-06-16 | V2.2 — AP-05 A11y- und Mobile-Regeln | Geändert von: Claude
+Stand: 2026-06-16 | V2.3 — AP-06 Testfälle | Geändert von: Claude
 
 ---
 
@@ -8,9 +8,9 @@ Stand: 2026-06-16 | V2.2 — AP-05 A11y- und Mobile-Regeln | Geändert von: Clau
 
 | Feld | Wert |
 |---|---|
-| Version | Draft V2.2 — A11y- und Mobile-Regeln / AP-05 |
-| Phase | Konzept-Umbau auf Stationen-Zeitreise (AP-01 ✅, AP-02 ✅, AP-03 ✅) |
-| Nächster Schritt | B1-AP-06 — Testfälle aktualisieren (AP-05 ✅ 2026-06-16) |
+| Version | Draft V2.3 — Testfälle / AP-06 |
+| Phase | Konzept-Umbau auf Stationen-Zeitreise (AP-01 ✅, AP-02 ✅, AP-03 ✅, AP-04 ✅, AP-05 ✅, AP-06 ✅) |
+| Nächster Schritt | B1-AP-07 — Redaktions-Gate dokumentieren (AP-06 ✅ 2026-06-16) |
 | Code-Freigabe | Slice 0 ✅ 2026-06-04, Slice 1 ✅ 2026-06-05, Slice 2 ✅ 2026-06-05, Slice 6 ✅ 2026-06-16; Slice 7+ erst nach Pre-Code-Gate |
 | Grundlage | `Apps/prokrastinations-preis/ENTSCHEIDUNGSPROTOKOLL.md` (AP-01, 2026-06-16) |
 | Ersetzt | APP_SPEC V1.7 (Ergebnisgrafik-Logik — Screen 2 zeigte vollständigen Chart mit KPIs) |
@@ -1176,6 +1176,20 @@ Aus APP-INTERFACE.md §7 und SECURITY-BASELINE.md:
 
 ## 19. Testfälle
 
+Die vollständigen Test- und QA-Kriterien für die Stationen-Zeitreise sind in `QA_TEST_CASES.md` dokumentiert.
+
+**Muss-Tests (Kurzliste):**
+- Screen 2 zeigt nur Teilchart bis zur aktuellen Station
+- Screen 2 zeigt keine finalen KPI-Cards
+- Stationen werden aus JSON geladen und nach CSV-Fenster gefiltert
+- Finaler Reveal kommt aus `latestMonth` der CSV (nicht aus Tagesdatum)
+- Mobile-Zwischenstand ist Collapsible, keine permanenten Mini-KPIs
+- Keine rote Crash-Codierung
+- `prefers-reduced-motion` entfernt Bewegung, nicht Inhalte
+- Screen 4 zeigt keine Prognose
+
+Die Testfälle T-01–T-40 (unten) sind eine ergänzende Kurzreferenz; maßgebend für Abnahme und QA ist `QA_TEST_CASES.md`.
+
 ### Ghost-Card und Datenladen
 
 | # | Testfall | Erwartetes Verhalten |
@@ -1399,7 +1413,7 @@ Wenn diese Bedingungen nicht erfüllt sind, ist die App redaktionell nicht publi
 
 ---
 
-*Nächster Schritt: B1-AP-06 — Testfälle aktualisieren (AP-05 ✅ 2026-06-16)*
+*Nächster Schritt: B1-AP-07 — Redaktions-Gate dokumentieren (AP-06 ✅ 2026-06-16)*
 
 ---
 

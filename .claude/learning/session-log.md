@@ -1,6 +1,16 @@
 # Session-Log — Finanzwesir 2.0
 Wird geleert nach /distill. Einträge: [FRICTION] [WIN] [PREF] [QUESTION] [OK]
 
+## 2026-06-16 – B1-AP-06 abgeschlossen | Testfälle und QA-Kriterien Stationen-Zeitreise
+- [OK] Keine Vorkommnisse — Gate und Umsetzung plangemäß
+- [OK] Full-Gate sauber — 2 Dateien, 5 Stellen: QA_TEST_CASES.md (neu) + APP_SPEC.md §1/§19/§22/Stand
+- [OK] QA_TEST_CASES.md angelegt: 12 Gruppen A–L, 23 Testfälle im TC-Format, 18 davon Muss
+- [OK] manuell/automatisierbar-Übersicht + AP-08-Fundstellen dokumentiert
+- [OK] APP_SPEC.md §19 Referenzblock + Muss-Kurzliste, V2.3, Nächster Schritt AP-07
+
+## 2026-06-16 – SESSION START (Faden 3) | Fokus: APP-01 — prokrastinations-preis
+`FinanzwesirData.js, CSVParser.js, FwDateUtils.js — diese Session nicht berühren. ✓`
+
 ## 2026-06-16 – SESSION START | Fokus: APP-01 — prokrastinations-preis
 `FinanzwesirData.js, CSVParser.js, FwDateUtils.js — diese Session nicht berühren. ✓`
 
