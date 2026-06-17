@@ -1,4 +1,4 @@
-Stand: 2026-06-16 | Geändert von: Claude | Session: AP-03 / AP-07
+Stand: 2026-06-16 | Geändert von: Claude | Session: AP-03 / AP-07 / AP-08c Nachputz
 
 # Stations-JSON-Datenvertrag — prokrastinations-preis
 
@@ -588,7 +588,7 @@ AP-03 baut keine Implementierung, benennt aber die Fehlerfälle:
 | JSON nicht ladbar | nutzerfreundlicher Error-State |
 | JSON parsebar, aber `app` falsch | Config-Error |
 | Pflichtfeld fehlt | Config-Error |
-| Stationenarray leer | Config-Error oder Empty-State |
+| Stationenarray leer | Empty-Journey-State oder Config-Error nach Contract-Validierung; keine Ersatzstationen |
 | keine `crisis` im aktiven Fenster | Redaktions-Gate nicht bestanden |
 | sichtbare Station mit ungeprüfter Quelle | Redaktions-Gate nicht bestanden |
 | `dynamic_latest_month` fehlt | Config-Error — kein synthetischer Default; App zeigt Error-State |
