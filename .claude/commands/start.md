@@ -15,7 +15,25 @@ Enthält die Datei einen Eintrag `## YYYY-MM-DD – SESSION START` mit dem **heu
 - **Alle weiteren Schritte entfallen** (kein Dispatch, kein BACKLOG-Lesen, kein Kassensturz).
 - Fertig.
 
-**NEIN → Kaltstart:** weiter mit „Vorab — Hook-Status-Check" unten.
+**NEIN → Kaltstart:** weiter mit „Vorab — Ketten-Modus-Check" unten.
+
+---
+
+## Vorab — Ketten-Modus-Check (nur bei Kaltstart, neuer Faden)
+
+Parse Hook-Output-Feld `Naechster Schritt`:
+Enthält es das Muster `(AP-ID ✅ YYYY-MM-DD)` und ist YYYY-MM-DD ≤ 7 Tage alt?
+
+**JA → KETTENMODUS:**
+- Schreibe sofort in session-log.md: `## YYYY-MM-DD – SESSION START | [KETTENMODUS] | Fokus: [Fokus-AP]`
+- Layer-1-Fingerabdruck bestätigen: `FinanzwesirData.js, CSVParser.js, FwDateUtils.js — diese Session nicht berühren. ✓`
+- BLOCKED-Check (Schritt 1) ausführen.
+- Schritt 1b (MEMORY), 2 (Haiku-Dispatch), 3 (Lücken-Alarm/Distill) entfallen.
+- Stil-Skill (Schritt 4) ausführen.
+- Ausgabe: `[KETTENMODUS] | Fokus: [Fokus-AP] | Letzte Station: [AP-ID ✅ DATUM] | BLOCKED: [keine oder AP-ID]`
+- Fertig.
+
+**NEIN → Vollmodus:** weiter mit „Vorab — Hook-Status-Check" unten.
 
 ---
 

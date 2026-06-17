@@ -167,3 +167,6 @@ FinanzwesirData.js, CSVParser.js, FwDateUtils.js — diese Session nicht berühr
 
 ### 2026-06-17 – Process | /start Warm-Start-Modus
 - [OK] Warm-Start-Check in start.md verankert (Kaltstart vs. laufender Faden); Block-Modus in abschluss-ritual identifiziert aber nicht proaktiv gemeldet — Lücke erkannt.
+
+### 2026-06-17 – ST-29 | Ketten-Modus auto-erkannt (start + abschluss-ritual)
+- [OK] start.md: Ketten-Modus-Check via HOOK-META-Muster; abschluss-ritual: Block-Modus → Ketten-Modus auto-erkannt via AP-Präfix-Vergleich + Kettenende-Erkennung + HOOK-META-Konvention.

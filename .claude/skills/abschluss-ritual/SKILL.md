@@ -9,9 +9,10 @@ argument-hint: "[AP-ID, z.B. AP-20] — oder Aufgabenbeschreibung wenn kein BACK
 Trigger: Albert sagt „fertig" / „finale Phase" / sinngemäß — oder Claude bietet proaktiv an nach erkennbarem Task-Ende.
 Argumente: $ARGUMENTS (AP-ID oder Aufgabenbeschreibung)
 
-**Mini vs. Voll:**
-- Mini (nur Stand-Datum + Commit-Message): für kleine, klar abgegrenzte Änderungen ohne Code- oder Architekturwirkung
-- Voll: alles andere — bei Zweifel immer Voll
+**Modus-Erkennung (automatisch — kein Trigger von Albert nötig):**
+- **Ketten-Modus**: nächster AP nach diesem Abschluss hat denselben Serien-Präfix (z.B. B1-AP-13 → B1-AP-14). Claude erkennt das selbst. → Pro-AP-Abschluss (schlank), Voll-Abschluss am Kettenende.
+- **Mini**: kleine, klar abgegrenzte Änderung ohne Code- oder Architekturwirkung, kein Serien-AP.
+- **Voll**: alles andere, Kettenende, oder bei Zweifel immer Voll.
 
 ---
 
@@ -204,28 +205,35 @@ Bei jeder Änderung an Fokus, nächstem Schritt oder Blockern HOOK-META synchron
 
 ---
 
-## Block-Modus (sequenzielle AP-Kette)
+## Ketten-Modus (sequenzielle AP-Kette)
 
-Wenn mehrere APs direkt aufeinander folgen und inhaltlich zusammenhängen.
+**Auto-erkannt — kein Trigger von Albert nötig.**
 
-Trigger: Albert sagt „Block-Modus", „APs hängen zusammen" oder „Mini pro AP, Voll am Ende".
+**Erkennung beim Abschluss:**
+Hat der nächste AP in NAVIGATION.md / BACKLOG.md denselben Serien-Präfix wie der aktuelle?
+- Ja → Ketten-Modus aktiv, Pro-AP-Abschluss ausführen.
+- Nein (anderer Präfix, kein nächster AP, Themenwechsel) → Kettenende → Voll-Abschluss.
 
 **Pro AP (ca. 2 Min.):**
 1. session-log — 1 Zeile ✅
-2. NAVIGATION.md — Status → ✅
-3. PROJECT-STATUS.md — Nächster Schritt + HOOK-META synchronisieren
-4. Commit-Message ausgeben
+2. NAVIGATION.md — AP-Status → ✅
+3. PROJECT-STATUS.md — Nächster Schritt + HOOK-META synchronisieren.
+   HOOK-META `Nächster-Schritt` immer mit Kettensignal schreiben:
+   `Nächster-Schritt: NEXT-AP — Bezeichnung (CURRENT-AP ✅ YYYY-MM-DD)`
+   → Das ist das maschinenlesbare Signal für den Ketten-Modus-Check beim nächsten Faden-Start.
+4. Commit-Message ausgeben.
 
-**Am Block-Ende (einmalig, Voll-Abschluss):**
-5. BACKLOG-ARCHIV.md — alle Block-APs archivieren
-6. BACKLOG.md — alle Block-APs entfernen
-7. MEMORY.md — einmal aktualisieren
+**Am Kettenende (einmalig, automatisch als Voll-Abschluss):**
+5. BACKLOG-ARCHIV.md — alle Ketten-APs archivieren.
+6. BACKLOG.md — alle Ketten-APs entfernen.
+7. MEMORY.md — einmal aktualisieren.
+8. Specs prüfen (Schritt 1) — falls Spec-Dateien während der Kette geändert wurden.
 
-Nicht verzichtbar per AP (Hook liest diese Felder beim Session-Start):
-NAVIGATION.md, PROJECT-STATUS.md, session-log.
+Nicht verzichtbar pro AP (Hook liest diese Felder beim Session-Start):
+NAVIGATION.md, PROJECT-STATUS.md HOOK-META, session-log.
 
-Akzeptierte Inkonsistenz bis Block-Ende:
-Lücken-Alarm beim /start feuert für BACKLOG-ARCHIV — ist im Block-Modus erwartetes Verhalten.
+Akzeptierte Inkonsistenz bis Kettenende:
+Lücken-Alarm beim /start feuert für BACKLOG-ARCHIV — ist im Ketten-Modus erwartetes Verhalten.
 
 ---
 
