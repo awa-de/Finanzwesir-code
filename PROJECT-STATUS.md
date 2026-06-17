@@ -2,16 +2,16 @@
 Version: 1
 Stand: 2026-06-17
 Fokus-AP: APP-01 — prokrastinations-preis
-Nächster-Schritt: B1-AP-13 — Aktives 120-Monats-Fenster aus CSV bestimmen (B1-AP-12 ✅ 2026-06-17)
+Nächster-Schritt: B1-AP-14 — Stationen filtern, sortieren, Final Reveal mappen und Redaktions-Gate prüfen (B1-AP-13 ✅ 2026-06-17)
 Blocker: keine
 Letzter-Distill: 2026-06-15
 Kassensturz-Datum: 2026-06-15
 -->
-<!-- HOOK-META-SESSION: B1-AP-12 -->
+<!-- HOOK-META-SESSION: B1-AP-13 -->
 
 # PROJECT STATUS — Finanzwesir 2.0
 
-Stand: 2026-06-17 | Session: B1-AP-12 | Geändert von: Claude
+Stand: 2026-06-17 | Session: B1-AP-13 | Geändert von: Claude
 
 **Zweck:** Schneller Wiedereinstieg nach Pausen.
 **Zielgruppe:** Albert und Claude.
@@ -144,7 +144,7 @@ Stand: 2026-06-17 | Session: B1-AP-12 | Geändert von: Claude
 
 ## 3. Nächster sinnvoller Schritt
 
-- **B1-AP-13** — Aktives 120-Monats-Fenster aus CSV bestimmen (B1-AP-09 bis B1-AP-12 ✅ 2026-06-17)
+- **B1-AP-14** — Stationen filtern, sortieren, Final Reveal mappen und Redaktions-Gate prüfen (B1-AP-13 ✅ 2026-06-17)
 - **AP-20/21** (Mixed-Rhythm CV-Heuristik) — 🟡 Aktiv, Chart-Engine, parallel möglich
 
 ---
@@ -157,7 +157,7 @@ Stand: 2026-06-17 | Session: B1-AP-12 | Geändert von: Claude
 | Chart-Engine | Stabil, offene APs | Siehe `docs/steering/BACKLOG.md` |
 | Theme | In Entwicklung | `THEME-ASSEMBLY-CHECKLIST.md` |
 | CSS | Stabil | Siehe `docs/steering/BACKLOG.md` (CSS-N Items) |
-| Apps | Slice 6 ✅, AP-UX-01 ✅, B1-AP-01 bis AP-12 ✅ 2026-06-17 | B1-AP-13: Aktives 120-Monats-Fenster aus CSV bestimmen |
+| Apps | Slice 6 ✅, AP-UX-01 ✅, B1-AP-01 bis AP-13 ✅ 2026-06-17 | B1-AP-14: Stationen filtern, sortieren, Final Reveal mappen, Redaktions-Gate |
 | Content | Laufend | Redaktionsleitfaden aktiv |
 | Security | SECURITY-BASELINE.md App-Fabrik-gatefähig ✅ | Security-Sync-Regel + Gate-Prüffrage verankert (ST-13/ST-14) |
 
@@ -192,6 +192,9 @@ Vollständig im DECISION-LOG dokumentiert (`docs/steering/DECISION-LOG.md`):
 ---
 
 ## 8. Letzte Session
+
+2026-06-17 — B1-AP-13 abgeschlossen.
+`subtractMonths()` + `buildActiveJourneyWindow()` + `filterStationsForWindow()` + `buildJourneyStations()` in `app.js`. `activeWindow` in `appData` eingefroren. `dynamic_latest_month` → CSV-`latestMonth` aufgelöst. 3 `source_claimed_unchecked`-Stationen still gefiltert (4 sichtbare Stationen < `minVisibleStations:5` — Gate-Diagnose folgt in AP-14). Nächster Schritt: B1-AP-14.
 
 2026-06-17 — B1-AP-11 + B1-AP-12 abgeschlossen.
 `loadStations()` per `fetch` + `Promise.all` (AP-11); `validateStationsJson()` gegen `STATIONS_CONFIG_CONTRACT.md` (AP-12). Ungültige configs → Error(d) „Die Zeitreise kann gerade nicht geladen werden." Kein Fallback. Nur `app.js` geändert. Nächster Schritt: B1-AP-13.

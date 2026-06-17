@@ -170,3 +170,8 @@ FinanzwesirData.js, CSVParser.js, FwDateUtils.js — diese Session nicht berühr
 
 ### 2026-06-17 – ST-29 | Ketten-Modus auto-erkannt (start + abschluss-ritual)
 - [OK] start.md: Ketten-Modus-Check via HOOK-META-Muster; abschluss-ritual: Block-Modus → Ketten-Modus auto-erkannt via AP-Präfix-Vergleich + Kettenende-Erkennung + HOOK-META-Konvention.
+
+### 2026-06-17 - B1-AP-13 - AP-Wechsel
+
+### 2026-06-17 - B1-AP-13 - Aktives 120-Monats-Fenster und Stationenfilter
+- [OK] Keine Vorkommnisse

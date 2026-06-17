@@ -84,7 +84,7 @@ function marketTimeStrategy(msciData, monatlicheRate, startBetrag) {
 }
 
 // NEW — AppContext aus appData + Nutzerwerten (APP_SPEC §11)
-function buildAppContext(appData, monatlicheRate, startBetrag) {
+function buildAppContext(appData, monatlicheRate, startBetrag, stations) { // CHANGED — AP-13
   const fmt = new Intl.NumberFormat(appData.locale, {
     style: 'currency', currency: appData.currency, maximumFractionDigits: 0
   });
@@ -98,6 +98,8 @@ function buildAppContext(appData, monatlicheRate, startBetrag) {
     msciData:     appData.msciData,
     latestMonth:  appData.latestMonth,
     startMonth:   appData.startMonth,
+    activeWindow: appData.activeWindow,  // NEW — AP-13
+    stations:     stations || [],        // NEW — AP-13
     monatlicheRate,
     startBetrag,
     chartSeries,
@@ -146,6 +148,7 @@ function renderKpiCards(container, appContext) {
 
 // CHANGED — Slice 5: 4-Screen-Flow (war: flache Darstellung Slice 3/4)
 function renderContent(container, appData, options, stationsConfig) { // CHANGED — AP-11
+  const journeyStations = buildJourneyStations(stationsConfig, appData.activeWindow); // NEW — AP-13
   const initialRate = options.defaultRate;
   const startBetrag = options.startBetrag;
 
@@ -321,7 +324,7 @@ function renderContent(container, appData, options, stationsConfig) { // CHANGED
   let lastRenderedRateS3 = null;
 
   function renderS2(rate) {
-    const ctx = buildAppContext(appData, rate, startBetrag);
+    const ctx = buildAppContext(appData, rate, startBetrag, journeyStations); // CHANGED — AP-13
     kpiArea.textContent = '';
     renderKpiCards(kpiArea, ctx);
     chartEngine2.renderFromData(chartSection2, ctx.chartSeries, {
@@ -333,7 +336,7 @@ function renderContent(container, appData, options, stationsConfig) { // CHANGED
   }
 
   function renderS3(rate) {
-    const { chartSeries } = buildAppContext(appData, rate, startBetrag);
+    const { chartSeries } = buildAppContext(appData, rate, startBetrag, journeyStations); // CHANGED — AP-13
     chartEngine3.renderFromData(chartSection3, chartSeries, {
       type: 'line', features: { rangeControls: false, headline: false, verticalLine: 'last' } // CHANGED — Slice 6
     });
@@ -380,7 +383,7 @@ function renderContent(container, appData, options, stationsConfig) { // CHANGED
 
   slider.addEventListener('change', () => {
     const rate = clamp(parseInt(slider.value, 10), 50, 2000);
-    const ctx = buildAppContext(appData, rate, startBetrag);
+    const ctx = buildAppContext(appData, rate, startBetrag, journeyStations); // CHANGED — AP-13
     a11yRegion.textContent = ctx.a11ySummary; // Update nach Release (kein Screenreader-Spam)
   });
 
@@ -443,8 +446,8 @@ async function _loadDataImpl(url) {
     });
   });
 
-  const latestMonth = msciData[119].date.slice(0, 7);
-  const startMonth  = msciData[0].date.slice(0, 7);
+  const activeWindow = buildActiveJourneyWindow(msciData); // NEW — AP-13
+  const { latestMonth, startMonth } = activeWindow;
 
   const appData = Object.freeze({
     currency:     'EUR',
@@ -452,7 +455,8 @@ async function _loadDataImpl(url) {
     periodMonths: 120,
     msciData:     Object.freeze(msciData),
     latestMonth,
-    startMonth
+    startMonth,
+    activeWindow: Object.freeze(activeWindow) // NEW — AP-13
   });
 
   return { appData };
@@ -556,6 +560,47 @@ function validateStationsJson(json) {
     return { ok: false, code: 'invalid_value', detail: 'dynamic_latest_month: must appear exactly once, found ' + dynamicLatestCount };
 
   return { ok: true };
+}
+
+// NEW — AP-13: YYYY-MM Monatssubtraktion (FwDateUtils hat keine YYYY-MM-String-Funktion)
+function subtractMonths(yyyyMm, n) {
+  const year  = parseInt(yyyyMm.slice(0, 4), 10);
+  const month = parseInt(yyyyMm.slice(5, 7), 10) - 1; // 0-basiert
+  const total = year * 12 + month - n;
+  return Math.floor(total / 12) + '-' + String((total % 12) + 1).padStart(2, '0');
+}
+
+// NEW — AP-13: aktives 120-Monats-Fenster aus CSV ableiten (kein new Date(), kein fixer Zeitraum)
+function buildActiveJourneyWindow(msciData) {
+  const latestMonth = msciData[msciData.length - 1].date.slice(0, 7);
+  const startMonth  = subtractMonths(latestMonth, 119);
+  return { startMonth, latestMonth, periodMonths: 120 };
+}
+
+// NEW — AP-13: Stationen auf aktives Fenster filtern
+// - Stationen außerhalb [startMonth, latestMonth] werden ausgeschlossen
+// - source_claimed_unchecked wird still gefiltert (kein Config-Error — Gate prüft das in AP-14)
+// - dynamic_latest_month wird separat über buildJourneyStations verarbeitet
+function filterStationsForWindow(stations, window) {
+  return stations.filter(s => {
+    if (s.date === 'dynamic_latest_month') return false;
+    if (s.sourceStatus === 'source_claimed_unchecked') return false;
+    return s.date >= window.startMonth && s.date <= window.latestMonth;
+  });
+}
+
+// NEW — AP-13: Journey-Stationen aufbauen
+// Historische Stationen filtern + dynamic_latest_month auf latestMonth auflösen + ans Ende hängen
+// Keine Prioritätsauswahl (AP-14), keine Gate-Prüfung (AP-14)
+function buildJourneyStations(stationsConfig, window) {
+  const historicStations   = filterStationsForWindow(stationsConfig.stations, window);
+  const finalTemplate      = stationsConfig.stations.find(s => s.date === 'dynamic_latest_month');
+  const finalRevealStation = finalTemplate
+    ? Object.assign({}, finalTemplate, { date: window.latestMonth })
+    : null; // fehlt → AP-12-Validator hätte bereits Error(d) ausgelöst
+  return finalRevealStation
+    ? [...historicStations, finalRevealStation]
+    : historicStations;
 }
 
 // NEW — AP-11: Stations-JSON app-spezifisch laden
