@@ -2,16 +2,16 @@
 Version: 1
 Stand: 2026-06-17
 Fokus-AP: APP-01 — prokrastinations-preis
-Nächster-Schritt: B1-AP-15 — Transitions + Reduced Motion (B1-AP-14 ✅ 2026-06-17)
+Nächster-Schritt: B1-AP-14b — Screen-2-Chart auf feste X-Achse (B1-AP-14a ✅ 2026-06-17)
 Blocker: keine
 Letzter-Distill: 2026-06-15
 Kassensturz-Datum: 2026-06-15
 -->
-<!-- HOOK-META-SESSION: B1-AP-14 -->
+<!-- HOOK-META-SESSION: B1-AP-14a -->
 
 # PROJECT STATUS — Finanzwesir 2.0
 
-Stand: 2026-06-17 | Session: B1-AP-14 | Geändert von: Claude
+Stand: 2026-06-17 | Session: B1-AP-14a | Geändert von: Claude
 
 **Zweck:** Schneller Wiedereinstieg nach Pausen.
 **Zielgruppe:** Albert und Claude.
@@ -144,7 +144,7 @@ Stand: 2026-06-17 | Session: B1-AP-14 | Geändert von: Claude
 
 ## 3. Nächster sinnvoller Schritt
 
-- **B1-AP-14** — Stationen filtern, sortieren, Final Reveal mappen und Redaktions-Gate prüfen (B1-AP-13 ✅ 2026-06-17)
+- **B1-AP-14b** — Screen-2-Chart auf feste X-Achse mit wachsendem Pfad umstellen (B1-AP-14a ✅ 2026-06-17)
 - **AP-20/21** (Mixed-Rhythm CV-Heuristik) — 🟡 Aktiv, Chart-Engine, parallel möglich
 
 ---
@@ -157,7 +157,7 @@ Stand: 2026-06-17 | Session: B1-AP-14 | Geändert von: Claude
 | Chart-Engine | Stabil, offene APs | Siehe `docs/steering/BACKLOG.md` |
 | Theme | In Entwicklung | `THEME-ASSEMBLY-CHECKLIST.md` |
 | CSS | Stabil | Siehe `docs/steering/BACKLOG.md` (CSS-N Items) |
-| Apps | Slice 6 ✅, AP-UX-01 ✅, B1-AP-01 bis AP-13 ✅ 2026-06-17 | B1-AP-14: Stationen filtern, sortieren, Final Reveal mappen, Redaktions-Gate |
+| Apps | Slice 6 ✅, AP-UX-01 ✅, B1-AP-01 bis AP-14a ✅ 2026-06-17 | B1-AP-14b: Screen-2-Chart auf feste X-Achse umstellen |
 | Content | Laufend | Redaktionsleitfaden aktiv |
 | Security | SECURITY-BASELINE.md App-Fabrik-gatefähig ✅ | Security-Sync-Regel + Gate-Prüffrage verankert (ST-13/ST-14) |
 
@@ -472,14 +472,14 @@ Neue APs: DS-012, DS-013, DS-014.
 
 ## 9. Einstieg für nächste Session
 
-**Nächster Schritt: B1-AP-13 — Aktives 120-Monats-Fenster aus CSV bestimmen**
+**Nächster Schritt: B1-AP-14b — Screen-2-Chart auf feste X-Achse mit wachsendem Pfad umstellen**
 
-AP-UX-01, B1-AP-01 bis B1-AP-12 ✅ 2026-06-17. Stationen-JSON-Schicht komplett: `config/stations.de.json` geladen (AP-11) + Contract-validiert (AP-12). Nächster Coding-Slice: AP-13 (aktives 120-Monats-Fenster aus CSV).
+AP-UX-01, B1-AP-01 bis B1-AP-14a ✅ 2026-06-17. B1-AP-14 (Screen 2 komplett umgebaut) + B1-AP-14a (Chart-Orientierung dokumentiert). Nächster Coding-Slice: AP-14b (feste 10-Jahres-X-Achse, Linie wächst stationsweise, rechter Bereich leer).
 
 Operative Quellen:
-- `Apps/prokrastinations-preis/APP_SPEC.md` — V2.5 ✅ (AP-08b/AP-08c 2026-06-16)
-- `Apps/prokrastinations-preis/REDAKTIONS_GATE.md` — V1.1 ✅ (AP-07 + AP-08b/AP-08c 2026-06-16)
-- `Apps/prokrastinations-preis/QA_TEST_CASES.md` — V1.2 ✅ (AP-06 + AP-08b + AP-08c 2026-06-16)
+- `Apps/prokrastinations-preis/APP_SPEC.md` — V2.6 ✅ (B1-AP-14a: feste X-Achse + finale Marker, 2026-06-17)
+- `Apps/prokrastinations-preis/REDAKTIONS_GATE.md` — V1.2 ✅ (B1-AP-14a: G-C04 finale Marker-Regel, 2026-06-17)
+- `Apps/prokrastinations-preis/QA_TEST_CASES.md` — V1.3 ✅ (B1-AP-14a: TC-D06/D07/E04/E05/H06, 2026-06-17)
 - `Apps/prokrastinations-preis/ENTSCHEIDUNGSPROTOKOLL.md` — Architektur-Klammer B1-AP-01 ✅
 - `Apps/prokrastinations-preis/config/stations.de.json` — produktive Stationen-Konfiguration v2.1 (B1-AP-09 ✅ 2026-06-17)
 - `Apps/prokrastinations-preis/STATIONS_IMPLEMENTATION_PLAN.md` — Implementierungsplan Coding-Slices AP-11–AP-18 (B1-AP-10 ✅ 2026-06-17)

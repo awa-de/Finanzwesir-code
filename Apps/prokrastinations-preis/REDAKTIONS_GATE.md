@@ -1,4 +1,4 @@
-Stand: 2026-06-16 | V1.1 — AP-08b/AP-08c Konsistenz-Nachputz abgeschlossen | Geändert von: Claude
+Stand: 2026-06-17 | V1.2 — B1-AP-14a: G-C04 finale Marker-Regel ergänzt | Geändert von: Claude
 
 # Redaktions-Gate — prokrastinations-preis
 
@@ -408,6 +408,23 @@ Oder berechnete Zwischenwerte:
 Eingezahlt: {paidInAtStation}
 Depotwert damals: {portfolioValueAtStation}
 ```
+
+---
+
+### G-C04 — Finale Stationenmarker bleiben stille Erinnerungsmarker
+
+Regel: Finale Stationenmarker im Screen-3-Reveal sind stille, nicht-interaktive Erinnerungsmarker. Interaktive Marker, Tooltips, Labels oder Legenden sind nicht publikationsreif, weil sie die App in Richtung Marktchronik verschieben.
+
+Erlaubt:
+- nicht-interaktive Punkte oder Marker auf oder nah an der vollständigen Linie
+- kurzer Fade-in nach vollständiger Linie
+- summarischer Screenreader-Hinweis erst auf Screen 3
+
+Nicht erlaubt:
+- klick- oder tap-bare Marker
+- Hover-Tooltips, Labels, Legenden
+- nummerierte Marker, Event-Replay
+- Marker auf Screen 2
 
 ---
 

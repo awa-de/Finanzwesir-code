@@ -1,4 +1,4 @@
-Stand: 2026-06-16 | V1.2 — AP-08b/AP-08c Konsistenz-Nachputz abgeschlossen | Geändert von: Claude
+Stand: 2026-06-17 | V1.3 — B1-AP-14a: Testfälle feste X-Achse und finale Stationenmarker ergänzt | Geändert von: Claude
 
 # QA_TEST_CASES — prokrastinations-preis
 
@@ -389,6 +389,50 @@ Vollständige Test- und QA-Kriterien für die Stationen-Zeitreise.
 
 ---
 
+### TC-D06 — Feste 10-Jahres-X-Achse auf Screen 2
+
+**Typ:** Visuell / Automatisierbar
+**Priorität:** Muss
+
+**Schritte:**
+1. Screen 2 an erster Station öffnen.
+2. X-Achse des Charts prüfen.
+3. Zur nächsten Station weitergehen.
+4. X-Achse erneut prüfen.
+
+**Erwartetes Ergebnis:**
+- X-Achse zeigt bei jeder Station stets den vollständigen 120-Monats-Zeitrahmen.
+- X-Achse verändert sich nicht beim Stationswechsel.
+- Der rechte, noch nicht gezeichnete Bereich bleibt leer und unbekannt.
+
+**Fehlschlag, wenn:**
+- X-Achse mit jeder Station wächst (wachsende X-Achse).
+- X-Achse nur bis zur aktuellen Station reicht.
+- Rechter Bereich mit Daten gefüllt oder vorgreifend angedeutet wird.
+
+---
+
+### TC-D07 — Rechter Bereich der X-Achse bleibt leer und unbekannt
+
+**Typ:** Visuell
+**Priorität:** Muss
+
+**Schritte:**
+1. Screen 2 öffnen.
+2. Rechten Bereich des Charts prüfen (nach der aktuellen Station bis zum Achsenende).
+
+**Erwartetes Ergebnis:**
+- Rechter Bereich enthält keine Linie, keine Punkte, keine gestrichelten Vorschaupfade.
+- Kein blasser Vorabverlauf.
+- Der Bereich ist leer oder mit neutralem Hintergrund dargestellt.
+
+**Fehlschlag, wenn:**
+- Irgendeine Datenvorschau rechts der aktuellen Station sichtbar ist.
+- Gestrichelte Linie oder blasser Verlauf auf den späteren Verlauf hindeutet.
+- Y-Achse oder Labels spätere Werte verraten.
+
+---
+
 ## Gruppe E — Screen 3 Reveal
 
 ### TC-E01 — Vollständiger Chart erscheint erstmals auf Screen 3
@@ -449,6 +493,51 @@ Vollständige Test- und QA-Kriterien für die Stationen-Zeitreise.
 **Fehlschlag, wenn:**
 - Annahmen fehlen.
 - Text suggeriert: Die nächsten 10 Jahre werden genauso.
+
+---
+
+### TC-E04 — Finale Stationenmarker erscheinen erst auf Screen 3
+
+**Typ:** Regression / Visuell
+**Priorität:** Muss
+
+**Schritte:**
+1. Screen 2 vollständig durchlaufen.
+2. Screen 3 erreichen.
+3. Ablauf nach dem vollständigen Chart prüfen.
+
+**Erwartetes Ergebnis:**
+- Screen 2: keine Stationenmarker sichtbar.
+- Screen 3: nach vollständiger Linie erscheinen stille Marker der durchlaufenen Stationen (Fade-in oder sofort bei Reduced Motion).
+
+**Fehlschlag, wenn:**
+- Marker schon auf Screen 2 sichtbar sind.
+- Marker auf Screen 3 komplett fehlen.
+
+---
+
+### TC-E05 — Finale Stationenmarker sind nicht interaktiv
+
+**Typ:** A11y / Manuell / Visuell
+**Priorität:** Muss
+
+**Schritte:**
+1. Screen 3 öffnen.
+2. Stationenmarker per Maus/Tap und per Tastatur prüfen.
+3. Screenreader-Ausgabe der Marker prüfen.
+
+**Erwartetes Ergebnis:**
+- Kein Hover-Tooltip.
+- Kein Klick-/Tap-Event.
+- Keine Label-Texte an den Markern.
+- Keine Legende für Marker.
+- Marker sind nicht per Tab fokussierbar.
+
+**Fehlschlag, wenn:**
+- Marker auf Hover oder Tap reagieren.
+- Marker per Tastatur fokussierbar sind.
+- Marker beschriftet, nummeriert oder legendarisch erklärt werden.
+- Marker einzeln als interaktive Elemente für Screenreader ausgezeichnet sind.
 
 ---
 
@@ -693,6 +782,34 @@ Chart beschreibt vollständige Entwicklung über 120 Monate bis zum letzten CSV-
 **Fehlschlag, wenn:**
 - Live Region, `aria-label`, `figcaption` oder `visually-hidden` auf Screen 1/2 einen Depotwert oder die Gesamtaussage „X € bei Y € eingezahlt" enthalten.
 - Screenreader-Nutzer das finale Ergebnis vor dem Übergang zu Screen 3 erfährt.
+
+---
+
+### TC-H06 — StationenMarker nur auf Screen 3 für Screenreader erwähnt
+
+**Typ:** A11y / Manuell
+**Priorität:** Muss
+
+**Schritte:**
+1. Screenreader aktivieren.
+2. Zeitreise auf Screen 2 vollständig durchlaufen.
+3. Prüfen, ob Stationenmarker auf Screen 2 für Screenreader erwähnt werden.
+4. Zu Screen 3 wechseln.
+5. Prüfen, ob Marker zusammenfassend erwähnt werden.
+
+**Erwartetes Ergebnis:**
+- Screen 2: keine Erwähnung von Stationenmarkern.
+- Screen 3 (nach vollständiger Linie): kurze zusammenfassende Erwähnung, z. B.:
+  ```
+  Der vollständige Zehn-Jahres-Chart ist jetzt sichtbar. Kleine Markierungen zeigen die Stationen, die Sie eben durchlaufen haben.
+  ```
+- Keine Einzelauflistung der Marker.
+- Keine Marker-Interaktion für assistive Technologien.
+
+**Fehlschlag, wenn:**
+- Marker auf Screen 2 für Screenreader ankündigt oder zugänglich werden.
+- Marker auf Screen 3 einzeln als klickbare oder fokussierbare Elemente ausgezeichnet sind.
+- Jede Station als separater Screenreader-Eintrag mit eigenem Event-Text erscheint.
 
 ---
 

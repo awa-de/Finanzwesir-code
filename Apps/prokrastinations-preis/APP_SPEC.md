@@ -1,6 +1,6 @@
 # APP_SPEC — prokrastinations-preis
 
-Stand: 2026-06-17 | V2.5 — AP-08b/AP-08c Konsistenz-Nachputz abgeschlossen | Geändert von: Claude
+Stand: 2026-06-17 | V2.6 — B1-AP-14a: feste X-Achse Screen 2 und finale Stationenmarker Screen 3 dokumentiert | Geändert von: Claude
 
 ---
 
@@ -8,7 +8,7 @@ Stand: 2026-06-17 | V2.5 — AP-08b/AP-08c Konsistenz-Nachputz abgeschlossen | G
 
 | Feld | Wert |
 |---|---|
-| Version | V2.5 — AP-08b/AP-08c Konsistenz-Nachputz abgeschlossen |
+| Version | V2.6 — B1-AP-14a: feste X-Achse Screen 2 und finale Stationenmarker Screen 3 dokumentiert |
 | Phase | Konzept-Umbau auf Stationen-Zeitreise (AP-01 ✅, AP-02 ✅, AP-03 ✅, AP-04 ✅, AP-05 ✅, AP-06 ✅, AP-07 ✅, AP-08 ✅, AP-08b ✅, AP-08c ✅, AP-09 ✅, AP-10 ✅ Planungs-Phase abgeschlossen) |
 | Nächster Schritt | B1-AP-11 — Stationen-Loader implementieren (AP-09/AP-10 ✅ 2026-06-17) |
 | Code-Freigabe | Slice 0 ✅ 2026-06-04, Slice 1 ✅ 2026-06-05, Slice 2 ✅ 2026-06-05, Slice 6 ✅ 2026-06-16; Coding-Slices AP-11–AP-18 erst nach AP-10-Gate |
@@ -142,6 +142,7 @@ Die neue Logik (Stationen-Zeitreise) geht über die ursprüngliche Szenario-/Ver
 | Stationen-Button | Button | `Weiter investiert bleiben` | Screen 2 |
 | Mobile-Collapsible | Collapsible | `Zwischenstand anzeigen` → Eingezahlt + Depotwert damals | Screen 2 |
 | Entscheidungspunkt-Marker | VertikaleLinie | Markierung bei letztem Datenpunkt | Screen 3 |
+| StationenMarker (Reveal) | Marker | Stille, nicht-interaktive Marker der durchlaufenen Stationen | Screen 3 (nach vollständiger Linie) |
 | `eingezahlt` | KpiCard | `monatlicheRate × 120 + startBetrag` | Screen 3 |
 | `depotwertHeute` | KpiCard | Simulierter Depotwert am letzten Datenpunkt | Screen 3 |
 | `differenz` | KpiCard | `depotwertHeute − eingezahlt` (Gewinn oder Verlust) | Screen 3 |
@@ -666,6 +667,13 @@ Chart: Entwicklung des Sparplans bis März 2020. Die spätere Entwicklung ist no
 Chart: Vollständige Entwicklung des Sparplans über 120 Monate bis zum letzten verfügbaren Datenmonat.
 ```
 
+**StationenMarker im Reveal (Screen 3) — A11y:**
+Die finalen Stationenmarker dürfen erst auf Screen 3 für Screenreader erwähnt werden, z. B.:
+```
+Der vollständige Zehn-Jahres-Chart ist jetzt sichtbar. Kleine Markierungen zeigen die Stationen, die Sie eben durchlaufen haben.
+```
+Keine Einzelauflistung der Marker. Keine Marker-Interaktion für assistive Technologien. Keine Marker-Erwähnung auf Screen 2.
+
 **Keine Chart-Überladung:**
 - keine dichten Annotationen auf Mobile
 - keine Mikro-Labels an jedem Datenpunkt
@@ -1053,6 +1061,40 @@ Die App ist kein Single-Screen-Calculator. Sie führt den Nutzer als geführte Z
 - Screen 3 ist der **erste** vollständige Rückblick.
 - Screen 4 enthält **keine** Prognosekurve.
 - Finale KPI-Cards erscheinen **erst nach Abschluss der Zeitreise** auf Screen 3.
+
+**Chart-Orientierung Screen 2 — feste X-Achse:**
+
+Screen 2 nutzt eine feste 10-Jahres-X-Achse. Die X-Achse zeigt stets den vollständigen 120-Monats-Zeitrahmen. Die Linie wird nur bis zur aktuellen Station gezeichnet. Der rechte, nicht gezeichnete Bereich steht für noch unbekannte Zukunft — nicht für fehlende Daten.
+
+> Zeit bleibt stabil. Wissen wächst.
+
+Die feste Achse verrät nur den Zeitrahmen, den der Nutzer durch „10 Jahre zurückspringen" bereits kennt. Sie verrät nicht: späteren Verlauf, spätere Ereignisse, finale Depotwerte, finale Rendite, finale KPI-Cards, finalen Chartpfad oder konkrete spätere Stationen.
+
+Orientierungslogik Screen 2 (empfohlen):
+```
+Bekannt bis: <Stationsmonat>
+Station <n> von <gesamt>
+```
+
+**Finale Stationenmarker Screen 3:**
+
+Nach dem vollständigen Chart erscheinen die durchlaufenen Stationen als stille, nicht-interaktive Marker auf der vollständigen Linie.
+
+> Die Marker zeigen: Hier warst du eben. Sie erklären nicht erneut die Geschichte.
+
+Erlaubt:
+- kleine, nicht-interaktive Marker auf oder nah an der Linie
+- kurzer Fade-in nach vollständiger Linie
+
+Nicht erlaubt:
+- Labels, Tooltips, Klick-/Tap-Funktion, Legende
+- anklickbare Marker, Hover-Tooltips, Event-Legende, nummerierte Marker, Event-Replay
+
+Reveal-Ablauf Screen 3:
+1. Vollständige 10-Jahres-Linie erscheint
+2. Kurze Pause
+3. Stille Stationenmarker erscheinen (Fade-in; bei Reduced Motion: sofort, ohne Animation)
+4. KPI-Cards / Ergebnis
 
 ### 16.2 Screen-Texte
 

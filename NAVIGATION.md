@@ -1,5 +1,5 @@
 # NAVIGATION.md – Finanzwesir 2.0
-Stand: 2026-06-17 | Session: B1-AP-14 | Geändert von: Claude
+Stand: 2026-06-17 | Session: B1-AP-14a | Geändert von: Claude
 
 Für Claude: **Routing-Dokument.** Wird beim Session-Start (Schritt 2) gelesen.
 Gibt Pfade und Lese-Reihenfolgen vor — KEINE Verhaltensregeln (die stehen in CLAUDE.md).
@@ -167,10 +167,10 @@ Nach Abschluss: `/abschluss-ritual`.
 > und welche Datenfragen vor dem produktiven Bau offen sind.
 > Nur bei Quellen-, CSV-, Contract- oder Datenänderungsfragen zusätzlich `docs/data/` lesen.
 
-> [!note] B1 / prokrastinations-preis — Zeitreise-Umbau (B1-AP-01 bis AP-13 ✅ 2026-06-17)
-> `Apps/prokrastinations-preis/APP_SPEC.md` V2.5 (AP-08b/AP-08c Konsistenz-Nachputz, 2026-06-16) ist die operative Spec-Quelle.
+> [!note] B1 / prokrastinations-preis — Zeitreise-Umbau (B1-AP-01 bis AP-14a ✅ 2026-06-17)
+> `Apps/prokrastinations-preis/APP_SPEC.md` V2.6 (B1-AP-14a: feste X-Achse + finale Marker, 2026-06-17) ist die operative Spec-Quelle.
 > `Apps/prokrastinations-preis/ENTSCHEIDUNGSPROTOKOLL.md` (B1-AP-01, 2026-06-16) ist die verbindliche Architektur-Klammer für B1-AP-02 bis B1-AP-08c.
-> `Apps/prokrastinations-preis/MINI_SPEC_FROM_HAUPTDOKUMENT.md` — historisch; bei Widerspruch gilt APP_SPEC.md V2.5.
+> `Apps/prokrastinations-preis/MINI_SPEC_FROM_HAUPTDOKUMENT.md` — historisch; bei Widerspruch gilt APP_SPEC.md V2.6.
 > `SLICE_PLAN.md` aktuell (Slice-6 ✅ 2026-06-16 — Altstand, alte Ergebnisgrafik-Logik, kein Zielzustand). OA-01 entschieden. OA-02 entschieden: Pfad 2 via `renderFromData()`. B1-AP-03 ✅ — `STATIONS_CONFIG_CONTRACT.md`. B1-AP-04 ✅ — §23 UX/Heldenreise. B1-AP-05 ✅ — §14 A11y/Mobile. B1-AP-06 ✅ — `QA_TEST_CASES.md` V1.2. B1-AP-07 ✅ — `REDAKTIONS_GATE.md` V1.1. B1-AP-08 ✅ — Widersprüchliche Stellen bereinigt. B1-AP-08b ✅ 2026-06-16 — Konsistenz-Nachputz: APP_SPEC V2.5, a11y-Schema (revealA11ySummary/stationLiveMessage), A11y-Endwissens-Leak-Verbot (§14.1, TC-H05, G-A06b), Dez-2018-Rolle korrigiert, MINI_SPEC/SLICE_PLAN/STATIONS_CONTRACT/app.test.html/PROJECT-STATUS/NAVIGATION/Memory/BACKLOG/REGRESSION-MATRIX aktualisiert.
 > B1-AP-08c ✅ 2026-06-16 — Restdrift: APP_SPEC §8/§12/§19 Fallbacks; STATIONS_CONTRACT §4/§7 rote Visualregeln config-ungültig; QA TC-H05/TC-L02 erweitert; Memory/PROJECT-STATUS auf AP-09 synchronisiert.
 > B1-AP-09 ✅ 2026-06-17 — produktive `config/stations.de.json` angelegt (7 Stationen v2.1, 3 source_claimed_unchecked ehrlich gemeldet, Redaktions-Gate G-A02 noch nicht bestanden). Kein Code geändert.
@@ -180,6 +180,7 @@ Nach Abschluss: `/abschluss-ritual`.
 > B1-AP-12 ✅ 2026-06-17 — `validateStationsJson()` in `app.js` implementiert: Contract-Prüfung gegen `STATIONS_CONFIG_CONTRACT.md` (Pflichtfelder, Enums, No-Red-Coding, `dynamic_latest_month` genau einmal für `role=final_reveal`). Ungültige Konfiguration → Error(d) „Die Zeitreise kann gerade nicht geladen werden." Kein Fallback, kein Default.
 > B1-AP-13 ✅ 2026-06-17 — `subtractMonths()`, `buildActiveJourneyWindow()`, `filterStationsForWindow()`, `buildJourneyStations()` in `app.js` implementiert. `activeWindow` + `stations` in `appData`/AppContext. `dynamic_latest_month` → `latestMonth` aufgelöst. `source_claimed_unchecked` still gefiltert (3 Stationen; Gate-Diagnose folgt in AP-14).
 > B1-AP-14 ✅ 2026-06-17 — Stationen-Zeitreise: Screen 2 komplett umgebaut. 5 neue Hilfsfunktionen (`selectStationsForJourney`, `checkEditorialGate`, `buildVisibleChartSeries`, `calcStationIntermediate`, `renderStationCard`). `buildJourneyStations` um Prioritätsauswahl + Editorial Gate (G-A01, G-A05) erweitert. `renderJourneyStep` ersetzt `renderS2`. Endwissens-Verbot vollständig: `slider.change` entfernt, `a11ySummary` aus `buildAppContext` entfernt, ARIA Live Region erst auf Screen 3. h2S3: „Jetzt erst sieht es einfach aus." Journey-Button statt S2-Navigation. app.css: 8 neue Klassen (Station-Card, Collapsible, Journey-Button). app.test.html: AP-14-Szenarien AB–AE. Nächster Schritt: B1-AP-15 (Transitions + Reduced Motion) oder AP-18 (Error-UI für EditorialDegraded).
+> B1-AP-14a ✅ 2026-06-17 — UX-Entscheidung Chart-Orientierung dokumentiert: APP_SPEC.md V2.6 (feste X-Achse Screen 2, finale Stationenmarker Screen 3, §6/§14.2/§16.1), QA_TEST_CASES.md V1.3 (TC-D06/D07/E04/E05/H06), REDAKTIONS_GATE.md V1.2 (G-C04). Kein Code geändert. Nächster Schritt: B1-AP-14b — Screen-2-Chart auf feste X-Achse umstellen.
 > `Apps/prokrastinations-preis/config/stations.de.json` — produktive Stationen-Konfiguration v2.1 (B1-AP-09 ✅, AP-10a Flags bereinigt ✅ 2026-06-17)
 > `Apps/prokrastinations-preis/STATIONS_IMPLEMENTATION_PLAN.md` — Implementierungsplan für Stationen-Zeitreise Coding-Slices AP-11–AP-18, V1.1 (B1-AP-10 ✅, AP-10a Semantik bereinigt ✅ 2026-06-17)
 > B1 ist Pilot-2 (Daten-/Chart-/Story-Pilot). Pilot-1 ist `risiko-uebersetzer` (Calculator-Pilot) — entschieden E-02, 2026-05-28.

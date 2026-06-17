@@ -184,3 +184,11 @@ FinanzwesirData.js, CSVParser.js, FwDateUtils.js — diese Session nicht berühr
 - [OK] Keine Vorkommnisse
 
 ### 2026-06-17 - B1-AP-14 - AP-Wechsel
+
+### 2026-06-17 - B1-AP-14a — UX-Entscheidung Chart-Orientierung dokumentiert
+- [OK] APP_SPEC.md V2.5→V2.6: feste X-Achse Screen 2, Finale Stationenmarker Screen 3, StationenMarker-Output, Marker-A11y in §14.2 ergänzt
+- [OK] QA_TEST_CASES.md V1.2→V1.3: TC-D06 (feste X-Achse), TC-D07 (rechter Bereich leer), TC-E04 (Marker erst S3), TC-E05 (Marker nicht interaktiv), TC-H06 (Marker-A11y S3) ergänzt
+- [OK] REDAKTIONS_GATE.md V1.1→V1.2: G-C04 (finale Marker = stille Erinnerungsmarker) ergänzt
+- [OK] Kein Code geändert. ENTSCHEIDUNGSPROTOKOLL.md und STATIONS_IMPLEMENTATION_PLAN.md: keine Änderung nötig.
+
+### 2026-06-17 - B1-AP-15 — AP-Wechsel
