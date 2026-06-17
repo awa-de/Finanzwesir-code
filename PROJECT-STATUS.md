@@ -144,7 +144,7 @@ Stand: 2026-06-17 | Session: B1-AP-10a | Geändert von: Claude
 
 ## 3. Nächster sinnvoller Schritt
 
-- **B1-AP-11** — Stationen-Loader implementieren (B1-AP-09/AP-10 ✅ 2026-06-17)
+- **B1-AP-11** — Stationen-Loader implementieren (B1-AP-09/AP-10/AP-10a ✅ 2026-06-17)
 - **AP-20/21** (Mixed-Rhythm CV-Heuristik) — 🟡 Aktiv, Chart-Engine, parallel möglich
 
 ---
@@ -157,7 +157,7 @@ Stand: 2026-06-17 | Session: B1-AP-10a | Geändert von: Claude
 | Chart-Engine | Stabil, offene APs | Siehe `docs/steering/BACKLOG.md` |
 | Theme | In Entwicklung | `THEME-ASSEMBLY-CHECKLIST.md` |
 | CSS | Stabil | Siehe `docs/steering/BACKLOG.md` (CSS-N Items) |
-| Apps | Slice 6 ✅, AP-UX-01 ✅, B1-AP-01 bis AP-10 ✅ 2026-06-17 | B1-AP-11: Stationen-Loader implementieren |
+| Apps | Slice 6 ✅, AP-UX-01 ✅, B1-AP-01 bis AP-10a ✅ 2026-06-17 | B1-AP-11: Stationen-Loader implementieren |
 | Content | Laufend | Redaktionsleitfaden aktiv |
 | Security | SECURITY-BASELINE.md App-Fabrik-gatefähig ✅ | Security-Sync-Regel + Gate-Prüffrage verankert (ST-13/ST-14) |
 
@@ -193,8 +193,8 @@ Vollständig im DECISION-LOG dokumentiert (`docs/steering/DECISION-LOG.md`):
 
 ## 8. Letzte Session
 
-2026-06-17 — B1-AP-09/AP-10 abgeschlossen (B1-AP-10).
-produktive `config/stations.de.json` angelegt (7 Stationen v2.1, 3 source_claimed_unchecked, Redaktions-Gate G-A02 noch nicht bestanden) + `STATIONS_IMPLEMENTATION_PLAN.md` angelegt (§1–§11, Slices AP-11–AP-18, 6 Risiken R-01–R-06). Kein Code geändert. Nächster Schritt: B1-AP-11.
+2026-06-17 — B1-AP-09/AP-10/AP-10a abgeschlossen.
+produktive `config/stations.de.json` angelegt + Flag-Drift bereinigt (finalWobble = true, lateWobble entfernt). `STATIONS_IMPLEMENTATION_PLAN.md` V1.1 (§1–§11, Slices AP-11–AP-18, 6 Risiken; EditorialDegraded-Semantik + R-02 bereinigt). Kein Code geändert. Nächster Schritt: B1-AP-11.
 
 2026-06-16 — B1-AP-08c Restdrift bereinigt (B1-AP-08c).
 APP_SPEC §8/§12/§19 Fallback-Formulierungen korrigiert; STATIONS_CONFIG_CONTRACT rote Visualregeln endgültig config-ungültig; QA TC-H05 erweitert; PROJECT-STATUS/Memory auf V2.5/AP-09 synchronisiert. Kein Code geändert. Nächster Schritt: B1-AP-09.
