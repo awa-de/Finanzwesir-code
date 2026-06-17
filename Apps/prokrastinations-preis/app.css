@@ -269,6 +269,14 @@
   margin: 0;
 }
 
+/* NEW — AP-14b: Orientierungs-Chip (APP_SPEC §16.1) */
+.fw-app__journey-progress {
+  font-size: 0.8125rem;
+  color: var(--fw-color-muted, #555555);
+  text-align: center;
+  margin: var(--fw-space-sm, 0.5rem) 0 0;
+}
+
 /* Journey-Button (full-width mobile, auto ab 600px) */
 .fw-app__btn--journey {
   display: block;

@@ -192,3 +192,14 @@ FinanzwesirData.js, CSVParser.js, FwDateUtils.js â€” diese Session nicht berÃ¼hr
 - [OK] Kein Code geÃ¤ndert. ENTSCHEIDUNGSPROTOKOLL.md und STATIONS_IMPLEMENTATION_PLAN.md: keine Ã„nderung nÃ¶tig.
 
 ### 2026-06-17 - B1-AP-15 â€” AP-Wechsel
+
+### 2026-06-17 - B1-AP-14b — AP-Wechsel (neuer Thread)
+
+### 2026-06-17 — B1-AP-14b — X-Achse feste Spanne (Analyse + Peer-Review, kein Abschluss)
+- [FRICTION] Erster Fix (Post-Render Chart.getChart-Override) scheiterte an drei unabhängigen Ursachen: (1) new Chart() in ChartEngine._draw() steckt in requestAnimationFrame ? Canvas beim Erstrender nicht im DOM, (2) fwContext Object.freeze ? dataRange.max post-render nicht mutierbar, (3) _generateLinearTicks() nutzt context.dataRange.max als endLimit, nicht axis.max — axis.max-Override erzeugt leere unbeschriftete Fläche statt Jahresticks
+- [WIN] Vollständige Ursachenanalyse abgeschlossen: FwSmartScales.getTimeAxis ignoriert minTime/maxTime explizit, FwSmartXAxis.compute() bestimmt alles aus fwContext, bounds:'data' + afterBuildTicks kombiniert garantieren, dass Post-Render-Hacks nicht funktionieren können
+- [WIN] Architekturkonformer Lösungsweg identifiziert: displayRange in fwContext (Layer 3) als Erweiterung, ChartEngine features.xDisplayMax als Eingangsparameter — entspricht Domain/Range Separation (D3, Grafana, CloudWatch)
+- [WIN] Peer-Review-Dokument erstellt (docs/steering/PEER-REVIEW-B1-AP-14b-XAxis-Architecture.md) mit vollständigem Kontext für externen LLM-Review
+- Orientierungs-Chip (progressEl + CSS) implementiert und funktionsfähig — bleibt
+- X-Achsen-Code (Chart.getChart-Block) in app.js ist broken und uncommitted — muss vor nächstem AP ersetzt werden
+- B1-AP-14b: NICHT abgeschlossen. Wartet auf ChartEngine-Freigabe + displayRange-Implementierung

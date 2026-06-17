@@ -355,6 +355,11 @@ function renderContent(container, appData, options, stationsConfig) { // CHANGED
   chartSection2.className = 'fw-app__chart-section';
   screen2.appendChild(chartSection2);
 
+  // NEW — AP-14b: Orientierungs-Chip (APP_SPEC §16.1)
+  const progressEl = document.createElement('p');
+  progressEl.className = 'fw-app__journey-progress';
+  screen2.appendChild(progressEl);
+
   const journeyBtn = makeBtn('', 'fw-app__btn--journey'); // NEW — AP-14: Text wird in renderJourneyStep gesetzt
   screen2.appendChild(journeyBtn);
 
@@ -447,6 +452,23 @@ function renderContent(container, appData, options, stationsConfig) { // CHANGED
     chartEngine2.renderFromData(chartSection2, visibleSeries, {
       type: 'line', features: { rangeControls: false, headline: false }
     });
+    // NEW — AP-14b: feste X-Achse — max auf vollständige 10-Jahres-Spanne fixieren (APP_SPEC §16.1)
+    const canvas2 = chartSection2.querySelector('canvas');
+    if (canvas2) {
+      const chartInst2 = Chart.getChart(canvas2);
+      if (chartInst2 && chartInst2.options.scales && chartInst2.options.scales.x) {
+        const fullEnd = ctx.chartSeries[ctx.chartSeries.length - 1];
+        chartInst2.options.scales.x.max = new Date(fullEnd.month + '-01').getTime();
+        chartInst2.update('none');
+      }
+    }
+    // NEW — AP-14b: Orientierungs-Chip aktualisieren (APP_SPEC §16.1)
+    const n = stationIdx + 1;
+    const total = journeyStations.length;
+    const [yr, mo] = station.date.split('-');
+    const bekannt = new Intl.DateTimeFormat(appData.locale, { month: 'long', year: 'numeric' })
+      .format(new Date(parseInt(yr, 10), parseInt(mo, 10) - 1, 1));
+    progressEl.textContent = `Station ${n} von ${total} · Bekannt bis ${bekannt}`;
     journeyBtn.textContent = station.continueLabel || 'Weiter';
     a11yRegion.textContent = station.headline; // stationLiveMessage — kein Endwissen (APP_SPEC §14.1)
   }

@@ -3,15 +3,15 @@ Version: 1
 Stand: 2026-06-17
 Fokus-AP: APP-01 — prokrastinations-preis
 Nächster-Schritt: B1-AP-14b — Screen-2-Chart auf feste X-Achse (B1-AP-14a ✅ 2026-06-17)
-Blocker: keine
+Blocker: B1-AP-14b BLOCKED — Freigabe für ChartEngine.js / LineChartStrategy.js / FwSmartXAxis.js ausstehend
 Letzter-Distill: 2026-06-15
 Kassensturz-Datum: 2026-06-15
 -->
-<!-- HOOK-META-SESSION: B1-AP-14a -->
+<!-- HOOK-META-SESSION: B1-AP-14b -->
 
 # PROJECT STATUS — Finanzwesir 2.0
 
-Stand: 2026-06-17 | Session: B1-AP-14a | Geändert von: Claude
+Stand: 2026-06-17 | Session: B1-AP-14b | Geändert von: Claude
 
 **Zweck:** Schneller Wiedereinstieg nach Pausen.
 **Zielgruppe:** Albert und Claude.
@@ -144,7 +144,7 @@ Stand: 2026-06-17 | Session: B1-AP-14a | Geändert von: Claude
 
 ## 3. Nächster sinnvoller Schritt
 
-- **B1-AP-14b** — Screen-2-Chart auf feste X-Achse mit wachsendem Pfad umstellen (B1-AP-14a ✅ 2026-06-17)
+- **B1-AP-14b** 🟡 IN ARBEIT — X-Achsen-Kern-Fix BLOCKED: Freigabe für ChartEngine.js + LineChartStrategy.js + FwSmartXAxis.js nötig. Committable unabhängig: progressEl-Chip + CSS + Peer-Review-Dokument. ⚠️ app.js: broken Chart.getChart()-Block muss revertiert werden.
 - **AP-20/21** (Mixed-Rhythm CV-Heuristik) — 🟡 Aktiv, Chart-Engine, parallel möglich
 
 ---
@@ -157,7 +157,7 @@ Stand: 2026-06-17 | Session: B1-AP-14a | Geändert von: Claude
 | Chart-Engine | Stabil, offene APs | Siehe `docs/steering/BACKLOG.md` |
 | Theme | In Entwicklung | `THEME-ASSEMBLY-CHECKLIST.md` |
 | CSS | Stabil | Siehe `docs/steering/BACKLOG.md` (CSS-N Items) |
-| Apps | Slice 6 ✅, AP-UX-01 ✅, B1-AP-01 bis AP-14a ✅ 2026-06-17 | B1-AP-14b: Screen-2-Chart auf feste X-Achse umstellen |
+| Apps | Slice 6 ✅, AP-UX-01 ✅, B1-AP-01 bis AP-14a ✅ 2026-06-17 | B1-AP-14b 🟡 BLOCKED — ChartEngine-Freigabe für displayRange-Erweiterung ausstehend; progressEl ✅ committable |
 | Content | Laufend | Redaktionsleitfaden aktiv |
 | Security | SECURITY-BASELINE.md App-Fabrik-gatefähig ✅ | Security-Sync-Regel + Gate-Prüffrage verankert (ST-13/ST-14) |
 
@@ -165,7 +165,12 @@ Stand: 2026-06-17 | Session: B1-AP-14a | Geändert von: Claude
 
 ## 5. Blocker
 
-Keine akuten Blocker.
+**B1-AP-14b BLOCKED** — Alberts Freigabe für drei protected ChartEngine-Dateien ausstehend:
+- `ChartEngine.js` (Layer 2): `features.xDisplayMax` Parameter entgegennehmen + weiterleiten
+- `LineChartStrategy.js` (Layer 3): `fwContext.displayRange` packen (max + durationYears)
+- `FwSmartXAxis.js` (Layer 4): `displayRange?.max ?? dataRange.max` als endLimit nutzen
+
+Vollständige Begründung + Lösungsarchitektur: `docs/steering/PEER-REVIEW-B1-AP-14b-XAxis-Architecture.md`
 
 ---
 
@@ -192,6 +197,9 @@ Vollständig im DECISION-LOG dokumentiert (`docs/steering/DECISION-LOG.md`):
 ---
 
 ## 8. Letzte Session
+
+2026-06-17 — B1-AP-14b UNTERBROCHEN — ChartEngine displayRange BLOCKED (B1-AP-14b-Analyse).
+Post-Render `Chart.getChart()`-Override scheitert an 3 Ursachen: (1) RAF-Timing beim Erstrender, (2) `fwContext` Object.freeze, (3) `_generateLinearTicks()` nutzt `dataRange.max` als endLimit. Architekturkonformer Fix: `features.xDisplayMax` → `fwContext.displayRange` (L3) → `FwSmartXAxis` endLimit (L4). Alle drei Dateien protected → BLOCKED, Alberts Freigabe nötig. ✅ Erledigt und committable: progressEl-Orientierungslogik + `fw-app__journey-progress` CSS + `PEER-REVIEW-B1-AP-14b-XAxis-Architecture.md`. ⚠️ Nicht committable: `Chart.getChart()`-Block in `app.js` ist broken, muss revertiert werden. ATTEMPT-LOG gesetzt.
 
 2026-06-17 — B1-AP-13 abgeschlossen.
 `subtractMonths()` + `buildActiveJourneyWindow()` + `filterStationsForWindow()` + `buildJourneyStations()` in `app.js`. `activeWindow` in `appData` eingefroren. `dynamic_latest_month` → CSV-`latestMonth` aufgelöst. 3 `source_claimed_unchecked`-Stationen still gefiltert (4 sichtbare Stationen < `minVisibleStations:5` — Gate-Diagnose folgt in AP-14). Nächster Schritt: B1-AP-14.
@@ -472,9 +480,22 @@ Neue APs: DS-012, DS-013, DS-014.
 
 ## 9. Einstieg für nächste Session
 
-**Nächster Schritt: B1-AP-14b — Screen-2-Chart auf feste X-Achse mit wachsendem Pfad umstellen**
+**Nächster Schritt: B1-AP-14b — Screen-2-Chart feste X-Achse (BLOCKED — Freigabe ausstehend)**
 
-AP-UX-01, B1-AP-01 bis B1-AP-14a ✅ 2026-06-17. B1-AP-14 (Screen 2 komplett umgebaut) + B1-AP-14a (Chart-Orientierung dokumentiert). Nächster Coding-Slice: AP-14b (feste 10-Jahres-X-Achse, Linie wächst stationsweise, rechter Bereich leer).
+**Status: BLOCKED.** Session-Start erkennt BLOCKED aus ATTEMPT-LOG und feuert Abbruch-Trigger.
+
+**Was sofort zu klären ist (vor Code):**
+
+1. **Freigabe-Entscheidung (Pflicht):** Darf Claude `ChartEngine.js` (Layer 2), `LineChartStrategy.js` (Layer 3) und `FwSmartXAxis.js` (Layer 4) für die `displayRange`-Erweiterung ändern? → Alle drei protected.
+2. **app.js-Bereinigung:** Den broken `Chart.getChart()`-Block nach `chartEngine2.renderFromData()` revertieren oder durch leeren Platzhalter ersetzen — vor nächstem Commit.
+3. **Commit-Strategie:** progressEl-Chip + app.css + PEER-REVIEW-Dokument sind unabhängig committable (kein broken Code).
+
+**Architekturplan steht bereit:** `docs/steering/PEER-REVIEW-B1-AP-14b-XAxis-Architecture.md` — vollständige Analyse, Lösungsweg, 8 Statusfragen beantwortet.
+
+**Was ✅ erledigt ist (committable):**
+- `app.js`: progressEl DOM-Element + Text-Update (`Station n von m · Bekannt bis Monat Jahr`)
+- `app.css`: `.fw-app__journey-progress` Styling
+- `docs/steering/PEER-REVIEW-B1-AP-14b-XAxis-Architecture.md` (neu, untracked)
 
 Operative Quellen:
 - `Apps/prokrastinations-preis/APP_SPEC.md` — V2.6 ✅ (B1-AP-14a: feste X-Achse + finale Marker, 2026-06-17)
