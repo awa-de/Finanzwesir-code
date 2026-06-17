@@ -2,16 +2,16 @@
 Version: 1
 Stand: 2026-06-17
 Fokus-AP: APP-01 — prokrastinations-preis
-Nächster-Schritt: B1-AP-12 — Stations-JSON validieren (B1-AP-09/AP-10/AP-10a/AP-11 ✅ 2026-06-17)
+Nächster-Schritt: B1-AP-13 — Aktives 120-Monats-Fenster aus CSV bestimmen (B1-AP-12 ✅ 2026-06-17)
 Blocker: keine
 Letzter-Distill: 2026-06-15
 Kassensturz-Datum: 2026-06-15
 -->
-<!-- HOOK-META-SESSION: B1-AP-11 -->
+<!-- HOOK-META-SESSION: B1-AP-12 -->
 
 # PROJECT STATUS — Finanzwesir 2.0
 
-Stand: 2026-06-17 | Session: B1-AP-11 | Geändert von: Claude
+Stand: 2026-06-17 | Session: B1-AP-12 | Geändert von: Claude
 
 **Zweck:** Schneller Wiedereinstieg nach Pausen.
 **Zielgruppe:** Albert und Claude.
@@ -144,7 +144,7 @@ Stand: 2026-06-17 | Session: B1-AP-11 | Geändert von: Claude
 
 ## 3. Nächster sinnvoller Schritt
 
-- **B1-AP-11** — Stationen-Loader implementieren (B1-AP-09/AP-10/AP-10a ✅ 2026-06-17)
+- **B1-AP-13** — Aktives 120-Monats-Fenster aus CSV bestimmen (B1-AP-09 bis B1-AP-12 ✅ 2026-06-17)
 - **AP-20/21** (Mixed-Rhythm CV-Heuristik) — 🟡 Aktiv, Chart-Engine, parallel möglich
 
 ---
@@ -157,7 +157,7 @@ Stand: 2026-06-17 | Session: B1-AP-11 | Geändert von: Claude
 | Chart-Engine | Stabil, offene APs | Siehe `docs/steering/BACKLOG.md` |
 | Theme | In Entwicklung | `THEME-ASSEMBLY-CHECKLIST.md` |
 | CSS | Stabil | Siehe `docs/steering/BACKLOG.md` (CSS-N Items) |
-| Apps | Slice 6 ✅, AP-UX-01 ✅, B1-AP-01 bis AP-10a ✅ 2026-06-17 | B1-AP-11: Stationen-Loader implementieren |
+| Apps | Slice 6 ✅, AP-UX-01 ✅, B1-AP-01 bis AP-12 ✅ 2026-06-17 | B1-AP-13: Aktives 120-Monats-Fenster aus CSV bestimmen |
 | Content | Laufend | Redaktionsleitfaden aktiv |
 | Security | SECURITY-BASELINE.md App-Fabrik-gatefähig ✅ | Security-Sync-Regel + Gate-Prüffrage verankert (ST-13/ST-14) |
 
@@ -192,6 +192,9 @@ Vollständig im DECISION-LOG dokumentiert (`docs/steering/DECISION-LOG.md`):
 ---
 
 ## 8. Letzte Session
+
+2026-06-17 — B1-AP-11 + B1-AP-12 abgeschlossen.
+`loadStations()` per `fetch` + `Promise.all` (AP-11); `validateStationsJson()` gegen `STATIONS_CONFIG_CONTRACT.md` (AP-12). Ungültige configs → Error(d) „Die Zeitreise kann gerade nicht geladen werden." Kein Fallback. Nur `app.js` geändert. Nächster Schritt: B1-AP-13.
 
 2026-06-17 — B1-AP-09/AP-10/AP-10a abgeschlossen.
 produktive `config/stations.de.json` angelegt + Flag-Drift bereinigt (finalWobble = true, lateWobble entfernt). `STATIONS_IMPLEMENTATION_PLAN.md` V1.1 (§1–§11, Slices AP-11–AP-18, 6 Risiken; EditorialDegraded-Semantik + R-02 bereinigt). Kein Code geändert. Nächster Schritt: B1-AP-11.
@@ -466,9 +469,9 @@ Neue APs: DS-012, DS-013, DS-014.
 
 ## 9. Einstieg für nächste Session
 
-**Nächster Schritt: B1-AP-11 — Stationen-Loader implementieren**
+**Nächster Schritt: B1-AP-13 — Aktives 120-Monats-Fenster aus CSV bestimmen**
 
-AP-UX-01, B1-AP-01 bis B1-AP-10 ✅ 2026-06-17. Planungs-Phase Stationen-Zeitreise vollständig abgeschlossen: APP_SPEC.md V2.5, REDAKTIONS_GATE.md V1.1, QA_TEST_CASES.md V1.2, STATIONS_CONFIG_CONTRACT.md (AP-03), `config/stations.de.json` (AP-09), STATIONS_IMPLEMENTATION_PLAN.md AP-11–AP-18 (AP-10). Slice 6 ist Altstand (alte Ergebnisgrafik-Logik, nicht Zielzustand). Coding-Slices beginnen mit B1-AP-11 (Stationen-Loader).
+AP-UX-01, B1-AP-01 bis B1-AP-12 ✅ 2026-06-17. Stationen-JSON-Schicht komplett: `config/stations.de.json` geladen (AP-11) + Contract-validiert (AP-12). Nächster Coding-Slice: AP-13 (aktives 120-Monats-Fenster aus CSV).
 
 Operative Quellen:
 - `Apps/prokrastinations-preis/APP_SPEC.md` — V2.5 ✅ (AP-08b/AP-08c 2026-06-16)

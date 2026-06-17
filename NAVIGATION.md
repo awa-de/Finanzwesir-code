@@ -1,5 +1,5 @@
 # NAVIGATION.md – Finanzwesir 2.0
-Stand: 2026-06-17 | Session: B1-AP-11 | Geändert von: Claude
+Stand: 2026-06-17 | Session: B1-AP-12 | Geändert von: Claude
 
 Für Claude: **Routing-Dokument.** Wird beim Session-Start (Schritt 2) gelesen.
 Gibt Pfade und Lese-Reihenfolgen vor — KEINE Verhaltensregeln (die stehen in CLAUDE.md).
@@ -177,6 +177,7 @@ Nach Abschluss: `/abschluss-ritual`.
 > B1-AP-10 ✅ 2026-06-17 — `STATIONS_IMPLEMENTATION_PLAN.md` angelegt: Slices AP-11–AP-18 für Stationen-Loader und Stationenreise, 6 offene Risiken R-01–R-06. Nächster Schritt: B1-AP-11. Kein Code geändert.
 > B1-AP-10a ✅ 2026-06-17 — Konsistenz-Nachputz: `flags.finalWobble = true` + `flags.lateWobble` entfernt in `stations.de.json`; `STATIONS_IMPLEMENTATION_PLAN.md` V1.1 (EditorialDegraded-Semantik, R-02 erledigt, Drift-Notizen bereinigt). Kein Code geändert.
 > B1-AP-11 ✅ 2026-06-17 — `loadStations()` implementiert: `config/stations.de.json` per `fetch` parallel zur CSV geladen (`Promise.all`). HTTP- und Parse-Fehler → `Error(d)`, kein stiller Fallback. `stationsConfig` an `renderContent` übergeben (für AP-12 verfügbar). Nur `app.js` geändert. Nächster Schritt: B1-AP-12.
+> B1-AP-12 ✅ 2026-06-17 — `validateStationsJson()` in `app.js` implementiert: Contract-Prüfung gegen `STATIONS_CONFIG_CONTRACT.md` (Pflichtfelder, Enums, No-Red-Coding, `dynamic_latest_month` genau einmal für `role=final_reveal`). Ungültige Konfiguration → Error(d) „Die Zeitreise kann gerade nicht geladen werden." Kein Fallback, kein Default. Nächster Schritt: B1-AP-13.
 > `Apps/prokrastinations-preis/config/stations.de.json` — produktive Stationen-Konfiguration v2.1 (B1-AP-09 ✅, AP-10a Flags bereinigt ✅ 2026-06-17)
 > `Apps/prokrastinations-preis/STATIONS_IMPLEMENTATION_PLAN.md` — Implementierungsplan für Stationen-Zeitreise Coding-Slices AP-11–AP-18, V1.1 (B1-AP-10 ✅, AP-10a Semantik bereinigt ✅ 2026-06-17)
 > B1 ist Pilot-2 (Daten-/Chart-/Story-Pilot). Pilot-1 ist `risiko-uebersetzer` (Calculator-Pilot) — entschieden E-02, 2026-05-28.

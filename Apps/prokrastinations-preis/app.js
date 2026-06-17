@@ -11,6 +11,13 @@ const SLUG_WHITELIST = ['prokrastinations-preis'];
 // NEW — Fetch-Dedup-Cache: verhindert parallele Mehrfach-Requests für dieselbe URL (P-11)
 const _dataCache = new Map();
 
+// NEW — AP-12: Contract-Konstanten für Stations-JSON-Validator
+const _VALID_STATUS        = ['core', 'supporting', 'optional', 'archival', 'final'];
+const _VALID_ROLE          = ['shock', 'doubt', 'crisis', 'relief', 'geopolitical_shock', 'late_wobble', 'final_reveal'];
+const _VALID_SOURCE_STATUS = ['primary_verified', 'secondary_verified', 'source_claimed_unchecked', 'derived_from_app_data'];
+const _VALID_MOBILE_FIELDS = ['paidIn', 'portfolioValueAtStation'];
+const _CALC_VALUE_KEYS     = ['paidIn', 'portfolioValue', 'return', 'performance', 'gain', 'drawdown', 'finalValue'];
+
 function validateSlug(slug) {
   return typeof slug === 'string' && SLUG_WHITELIST.includes(slug.trim());
 }
@@ -451,12 +458,118 @@ async function _loadDataImpl(url) {
   return { appData };
 }
 
+// NEW — AP-12: Stations-JSON gegen STATIONS_CONFIG_CONTRACT.md validieren
+// Gibt { ok: true } oder { ok: false, code, detail } zurück — kein Wurf.
+function validateStationsJson(json) {
+  if (typeof json !== 'object' || json === null || Array.isArray(json))
+    return { ok: false, code: 'invalid_structure', detail: 'root is not an object' };
+
+  if (json.version !== '2.1')
+    return { ok: false, code: 'invalid_value', detail: 'version: expected "2.1", got: ' + json.version };
+  if (json.locale !== 'de-DE')
+    return { ok: false, code: 'invalid_value', detail: 'locale: expected "de-DE", got: ' + json.locale };
+  if (json.app !== 'prokrastinations-preis')
+    return { ok: false, code: 'invalid_value', detail: 'app: expected "prokrastinations-preis", got: ' + json.app };
+
+  if (typeof json.selectionPolicy !== 'object' || json.selectionPolicy === null || Array.isArray(json.selectionPolicy))
+    return { ok: false, code: 'missing_field', detail: 'selectionPolicy' };
+
+  if (typeof json.visualRules !== 'object' || json.visualRules === null || Array.isArray(json.visualRules))
+    return { ok: false, code: 'missing_field', detail: 'visualRules' };
+  const vr = json.visualRules;
+  if (vr.redCrashColor !== false)
+    return { ok: false, code: 'no_red_violation', detail: 'visualRules.redCrashColor must be false' };
+  if (vr.lossColoring !== false)
+    return { ok: false, code: 'no_red_violation', detail: 'visualRules.lossColoring must be false' };
+  if (vr.crashSegmentColoring !== false)
+    return { ok: false, code: 'no_red_violation', detail: 'visualRules.crashSegmentColoring must be false' };
+  if (vr.futurePreview !== false)
+    return { ok: false, code: 'invalid_value', detail: 'visualRules.futurePreview must be false' };
+  if (vr.stationValueMobile !== 'collapsible')
+    return { ok: false, code: 'invalid_value', detail: 'visualRules.stationValueMobile must be "collapsible"' };
+
+  if (typeof json.motionRules !== 'object' || json.motionRules === null || Array.isArray(json.motionRules))
+    return { ok: false, code: 'missing_field', detail: 'motionRules' };
+  if (json.motionRules.mode !== 'user_stepped')
+    return { ok: false, code: 'invalid_value', detail: 'motionRules.mode must be "user_stepped"' };
+
+  if (!Array.isArray(json.stations) || json.stations.length < 1)
+    return { ok: false, code: 'missing_field', detail: 'stations (array, min length 1)' };
+
+  let dynamicLatestCount = 0;
+  const _STR_FIELDS = ['id', 'headline', 'sourceLabel', 'sourceUrl', 'anchorText', 'continueLabel'];
+
+  for (let i = 0; i < json.stations.length; i++) {
+    const s = json.stations[i];
+    const p = 'station[' + i + ']';
+
+    for (const f of _STR_FIELDS) {
+      if (typeof s[f] !== 'string')
+        return { ok: false, code: 'missing_field', detail: p + '.' + f };
+    }
+
+    if (typeof s.date !== 'string')
+      return { ok: false, code: 'missing_field', detail: p + '.date' };
+    if (s.date === 'dynamic_latest_month') {
+      dynamicLatestCount++;
+      if (s.role !== 'final_reveal')
+        return { ok: false, code: 'invalid_value', detail: p + '.date: dynamic_latest_month only allowed for role=final_reveal' };
+    } else if (!/^\d{4}-\d{2}$/.test(s.date)) {
+      return { ok: false, code: 'invalid_value', detail: p + '.date: expected YYYY-MM or dynamic_latest_month, got: ' + s.date };
+    }
+
+    if (typeof s.priority !== 'number')
+      return { ok: false, code: 'missing_field', detail: p + '.priority' };
+
+    if (!_VALID_STATUS.includes(s.status))
+      return { ok: false, code: 'invalid_enum', detail: p + '.status: ' + s.status };
+    if (!_VALID_ROLE.includes(s.role))
+      return { ok: false, code: 'invalid_enum', detail: p + '.role: ' + s.role };
+    if (!_VALID_SOURCE_STATUS.includes(s.sourceStatus))
+      return { ok: false, code: 'invalid_enum', detail: p + '.sourceStatus: ' + s.sourceStatus };
+
+    if (typeof s.mobileIntermediate !== 'object' || s.mobileIntermediate === null || Array.isArray(s.mobileIntermediate))
+      return { ok: false, code: 'missing_field', detail: p + '.mobileIntermediate' };
+    if (typeof s.mobileIntermediate.label !== 'string')
+      return { ok: false, code: 'missing_field', detail: p + '.mobileIntermediate.label' };
+    if (!Array.isArray(s.mobileIntermediate.fields))
+      return { ok: false, code: 'missing_field', detail: p + '.mobileIntermediate.fields' };
+    for (const fn of s.mobileIntermediate.fields) {
+      if (!_VALID_MOBILE_FIELDS.includes(fn))
+        return { ok: false, code: 'invalid_value', detail: p + '.mobileIntermediate.fields: unknown field "' + fn + '"' };
+    }
+
+    if (typeof s.flags !== 'object' || s.flags === null || Array.isArray(s.flags))
+      return { ok: false, code: 'missing_field', detail: p + '.flags' };
+    if (s.flags.noRedColor !== true)
+      return { ok: false, code: 'no_red_violation', detail: p + '.flags.noRedColor must be true' };
+
+    for (const k of _CALC_VALUE_KEYS) {
+      if (typeof s[k] === 'number')
+        return { ok: false, code: 'calc_value_forbidden', detail: p + '.' + k + ' must not be a number in station objects' };
+    }
+  }
+
+  if (dynamicLatestCount === 0)
+    return { ok: false, code: 'missing_field', detail: 'dynamic_latest_month: no station found with date="dynamic_latest_month"' };
+  if (dynamicLatestCount > 1)
+    return { ok: false, code: 'invalid_value', detail: 'dynamic_latest_month: must appear exactly once, found ' + dynamicLatestCount };
+
+  return { ok: true };
+}
+
 // NEW — AP-11: Stations-JSON app-spezifisch laden
 async function loadStations() {
   try {
     const response = await fetch('config/stations.de.json');
     if (!response.ok) throw new Error('HTTP ' + response.status);
     const stationsConfig = JSON.parse(await response.text());
+    // NEW — AP-12: Contract-Validierung
+    const validation = validateStationsJson(stationsConfig);
+    if (!validation.ok) {
+      console.error('[fw-app] validateStationsJson:', validation.code, validation.detail);
+      return { error: 'd', message: 'Die Zeitreise kann gerade nicht geladen werden.' };
+    }
     return { stationsConfig };
   } catch (e) {
     console.error('[fw-app] loadStations error:', e);

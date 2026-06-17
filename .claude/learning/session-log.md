@@ -1,6 +1,9 @@
 # Session-Log — Finanzwesir 2.0
 Wird geleert nach /distill. Einträge: [FRICTION] [WIN] [PREF] [QUESTION] [OK]
 
+## 2026-06-17 – SESSION START (Faden 4) | Fokus: APP-01 — B1-AP-12 Stations-JSON validieren
+- FinanzwesirData.js, CSVParser.js, FwDateUtils.js — diese Session nicht berühren. ✓
+
 ## 2026-06-17 – B1-AP-11 abgeschlossen | CSV + Stations-JSON parallel laden
 - [OK] Keine Vorkommnisse — loadStations() + Promise.all sauber implementiert, alle Akzeptanzkriterien erfüllt
 - [OK] JSON.parse in AP-11 explizit approved (Gate-Frage 5 + Albert-OK); Plan-Formulierung „nur Fetch + Text" als „kein Content-Validate" interpretiert
@@ -31,6 +34,8 @@ Wird geleert nach /distill. Einträge: [FRICTION] [WIN] [PREF] [QUESTION] [OK]
 
 ## 2026-06-17 – SESSION START | Fokus: APP-01 — prokrastinations-preis
 - FinanzwesirData.js, CSVParser.js, FwDateUtils.js — diese Session nicht berühren. ✓
+
+## 2026-06-17 – B1-AP-12 abgeschlossen | validateStationsJson() + Error(d) — [OK] Keine Vorkommnisse
 
 ## 2026-06-16 – SESSION START | Fokus: APP-01 — prokrastinations-preis
 - FinanzwesirData.js, CSVParser.js, FwDateUtils.js — diese Session nicht berühren. ✓

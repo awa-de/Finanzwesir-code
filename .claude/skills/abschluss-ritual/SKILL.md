@@ -204,6 +204,31 @@ Bei jeder Änderung an Fokus, nächstem Schritt oder Blockern HOOK-META synchron
 
 ---
 
+## Block-Modus (sequenzielle AP-Kette)
+
+Wenn mehrere APs direkt aufeinander folgen und inhaltlich zusammenhängen.
+
+Trigger: Albert sagt „Block-Modus", „APs hängen zusammen" oder „Mini pro AP, Voll am Ende".
+
+**Pro AP (ca. 2 Min.):**
+1. session-log — 1 Zeile ✅
+2. NAVIGATION.md — Status → ✅
+3. PROJECT-STATUS.md — Nächster Schritt + HOOK-META synchronisieren
+4. Commit-Message ausgeben
+
+**Am Block-Ende (einmalig, Voll-Abschluss):**
+5. BACKLOG-ARCHIV.md — alle Block-APs archivieren
+6. BACKLOG.md — alle Block-APs entfernen
+7. MEMORY.md — einmal aktualisieren
+
+Nicht verzichtbar per AP (Hook liest diese Felder beim Session-Start):
+NAVIGATION.md, PROJECT-STATUS.md, session-log.
+
+Akzeptierte Inkonsistenz bis Block-Ende:
+Lücken-Alarm beim /start feuert für BACKLOG-ARCHIV — ist im Block-Modus erwartetes Verhalten.
+
+---
+
 ## Mini-Abschluss
 
 Nur Stand-Datum der berührten Steering-Dateien aktualisieren und Commit-Message erzeugen.
