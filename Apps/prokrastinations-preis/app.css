@@ -191,3 +191,94 @@
   white-space: nowrap;
   border: 0;
 }
+
+/* === NEW — AP-14: Stationen-Zeitreise (Screen 2) === */
+.fw-app__station-area {
+  margin-block: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.fw-app__station-source-label {
+  font-size: 0.75rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  opacity: 0.6;
+  margin: 0;
+}
+
+.fw-app__station-headline {
+  font-size: 1.125rem;
+  font-weight: 700;
+  margin: 0;
+  line-height: 1.3;
+}
+
+.fw-app__station-headline:focus {
+  outline: none;
+}
+
+.fw-app__station-anchor {
+  font-size: 0.9375rem;
+  line-height: 1.5;
+  margin: 0;
+  opacity: 0.85;
+}
+
+/* Collapsible Zwischenstand (APP_SPEC §14.5, visualRules.stationValueMobile = collapsible) */
+.fw-app__collapsible {
+  margin-block-start: 0.75rem;
+}
+
+.fw-app__collapsible-trigger {
+  background: none;
+  border: 1px solid currentColor;
+  border-radius: 4px;
+  cursor: pointer;
+  font: inherit;
+  font-size: 0.875rem;
+  opacity: 0.75;
+  padding: 0.375rem 0.75rem;
+}
+
+.fw-app__collapsible-trigger:hover,
+.fw-app__collapsible-trigger:focus-visible {
+  opacity: 1;
+}
+
+.fw-app__collapsible-content {
+  margin-block-start: 0.5rem;
+}
+
+.fw-app__intermediate-values {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.5rem 1rem;
+  margin: 0;
+}
+
+.fw-app__intermediate-values dt {
+  font-size: 0.75rem;
+  opacity: 0.65;
+}
+
+.fw-app__intermediate-values dd {
+  font-size: 1rem;
+  font-weight: 600;
+  margin: 0;
+}
+
+/* Journey-Button (full-width mobile, auto ab 600px) */
+.fw-app__btn--journey {
+  display: block;
+  width: 100%;
+  margin-block-start: 1rem;
+}
+
+@media (min-width: 600px) {
+  .fw-app__btn--journey {
+    display: inline-block;
+    width: auto;
+  }
+}

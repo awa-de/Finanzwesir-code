@@ -1,6 +1,13 @@
 # Session-Log — Finanzwesir 2.0
 Wird geleert nach /distill. Einträge: [FRICTION] [WIN] [PREF] [QUESTION] [OK]
 
+## 2026-06-17 – B1-AP-14 abgeschlossen | Stationen-Zeitreise: Screen 2 Umbau + Editorial Gate
+- [FRICTION] Patch-Quittung nur im Chat geschrieben, nicht als Datei — Albert musste nachfragen; danach als docs/steering/patches/PATCH-B1-AP-14-2026-06-17.md erstellt
+- [OK] Context-Compaction mid-session: Arbeit aus kompaktiertem Faden fortgesetzt; alle 6 Tasks vollständig umgesetzt
+- [OK] Endwissens-Verbot vollständig umgesetzt: slider.change entfernt, a11ySummary aus buildAppContext entfernt, ARIA Live Region erst auf Screen 3
+- [OK] Surgical-Check: 7 orphaned Symbole bereinigt (fmt, a11ySummary, renderS2, lastRenderedRateS2, btnS2Prev/Next-Wiring, fw-app__station-card-CSS)
+- [OK] Albert bestätigt: „Alles, wie spezifiziert" — EditorialDegraded-Warnung ×N = korrekt (je eine pro App-Instanz auf Testseite)
+
 ## 2026-06-17 – SESSION START (Faden 4) | Fokus: APP-01 — B1-AP-12 Stations-JSON validieren
 - FinanzwesirData.js, CSVParser.js, FwDateUtils.js — diese Session nicht berühren. ✓
 
@@ -175,3 +182,5 @@ FinanzwesirData.js, CSVParser.js, FwDateUtils.js — diese Session nicht berühr
 
 ### 2026-06-17 - B1-AP-13 - Aktives 120-Monats-Fenster und Stationenfilter
 - [OK] Keine Vorkommnisse
+
+### 2026-06-17 - B1-AP-14 - AP-Wechsel

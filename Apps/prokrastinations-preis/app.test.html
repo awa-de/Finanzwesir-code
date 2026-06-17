@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Testseite — prokrastinations-preis Slice 6</title>
+  <title>Testseite — prokrastinations-preis B1-AP-14 Stationen-Zeitreise</title>
   <link rel="stylesheet" href="./app.css">
   <style>
     /* Nur für Testseite — gehört nicht in app.css */
@@ -18,25 +18,22 @@
 </head>
 <body>
 
-  <h1>Testseite — prokrastinations-preis Slice 6</h1>
+  <h1>Testseite — prokrastinations-preis B1-AP-14 Stationen-Zeitreise</h1>
 
   <div class="test-warning">
     Muss über VSCode Live Server geöffnet werden (http://127.0.0.1:5500/...) — nicht als file://. ES-Module laden sonst nicht.
-  </div>
-
-  <div class="test-warning" style="background:#f8d7da; border-color:#f5c6cb;">
-    ALTSTAND — Slice 6 (2026-06-16). Dieser app.js-Stand implementiert die alte Ergebnisgrafik-Logik (Screen 2 mit KPI-Cards). Das ist nicht der Zielzustand. Zielzustand ist die Stationen-Zeitreise (Screen 2 = Teilchart + Stationen, Screen 3 = erster Reveal). Coding-APs für Stationen-Zeitreise folgen nach B1-AP-09/AP-10.
   </div>
 
   <!-- Szenario A: Minimal-Card mit gültiger Daten-URL -->
   <div class="test-section">
     <h2>A — Minimal-Card mit gültiger Daten-URL</h2>
     <p class="test-meta">
-      Erwartung: Loading → Content-State. Drei KpiCards sichtbar: „Eingezahlt", „Depotwert heute", „Gewinn / Verlust".<br>
-      Werte basieren auf Default 300 €/Monat, 120 Monate. „Differenz" mit Vorzeichen (+/−).<br>
-      ARIA Live Region vorhanden (DevTools → DOM: [data-fw-role="a11y-result"] enthält Screenreader-Text).<br>
-      Keine JS-Exception in DevTools-Konsole.<br>
-      Testfälle: T-01, T-12 (manuell: Wert in renderContent auf 2000 setzen → kein Crash), T-13 (auf 50 setzen → kein Crash)
+      Erwartung: Loading → Content-State. Screen 1 sichtbar mit Slider (300 €). Keine KpiCards (AP-14: entfernt von Screen 2).<br>
+      „10 Jahre zurückspringen" → Screen 2: erste Station-Card erscheint (Station aus stations.de.json).<br>
+      ARIA Live Region vorhanden (DevTools → DOM: [data-fw-role="a11y-result"]).<br>
+      Konsole: „[fw-app] Editorial Gate: EditorialDegraded …" erwartet (3 verifizierte Stationen &lt; 5 minimum).<br>
+      Keine weitere JS-Exception in DevTools-Konsole.<br>
+      Testfälle: T-01, AP-14-A01
     </p>
     <div class="kg-card">
       <div class="fw-app"
@@ -74,7 +71,7 @@
   <div class="test-section">
     <h2>D — Zwei gültige Container</h2>
     <p class="test-meta">
-      Erwartung: Beide im Content-State mit KpiCards, kein doppelter DOM-Node, keine Exception in Konsole.<br>
+      Erwartung: Beide im Content-State (Screen 1 sichtbar), kein doppelter DOM-Node, keine Exception in Konsole.<br>
       AK: A0-1, A0-7
     </p>
     <div class="kg-card">
@@ -96,7 +93,7 @@
     <h2>E — XSS-Versuch in data-fw-options</h2>
     <p class="test-meta">
       Erwartung: Kein Alert, kein innerHTML, App stabil. XSS-Wert → parseInt gibt NaN → Fallback 300 €.<br>
-      Slider startet bei 300 € (Default), KpiCards zeigen 300-€-Werte. Kein Script-Aufruf.<br>
+      Slider startet bei 300 € (Default). Kein Script-Aufruf, kein Alert, kein JS-Fehler.<br>
       Testfälle: T-08, T-10 | AK: A0-5, A0-8
     </p>
     <div class="kg-card">
@@ -258,8 +255,8 @@
   <div class="test-section">
     <h2>O — Maximalwert 2.000 €/Monat via defaultRate (T-12)</h2>
     <p class="test-meta">
-      Erwartung: Slider startet bei 2.000 €. KpiCards: Eingezahlt = 240.000 €. Kein Crash.<br>
-      Slider auf kleineren Wert ziehen → KpiCards aktualisieren sich live.<br>
+      Erwartung: Slider startet bei 2.000 €. „10 Jahre zurückspringen" → erste Station, Zwischenstand zeigt ≈ 240.000 € eingezahlt. Kein Crash.<br>
+      Slider auf kleineren Wert zurückziehen → S1 anzeigen, dann erneut in Journey starten → aktualisierte Werte.<br>
       Testfall: T-12
     </p>
     <div class="kg-card">
@@ -275,8 +272,8 @@
   <div class="test-section">
     <h2>P — Minimalwert 50 €/Monat via defaultRate (T-13)</h2>
     <p class="test-meta">
-      Erwartung: Slider startet bei 50 €. KpiCards: Eingezahlt = 6.000 €. Kein Crash.<br>
-      Slider auf größeren Wert ziehen → KpiCards aktualisieren sich live.<br>
+      Erwartung: Slider startet bei 50 €. „10 Jahre zurückspringen" → erste Station, Zwischenstand zeigt ≈ 6.000 € eingezahlt. Kein Crash.<br>
+      Slider auf größeren Wert ziehen → S1 anzeigen, dann erneut in Journey starten → aktualisierte Werte.<br>
       Testfall: T-13
     </p>
     <div class="kg-card">
@@ -297,10 +294,10 @@
     <h2>S — Slider auf Screen 1 (T-11)</h2>
     <p class="test-meta">
       Erwartung: Screen 1 sichtbar. Slider startet bei 300 €. Slider ziehen → Anzeige „X €/Monat" aktualisiert sich live.<br>
-      KpiCards und Chart sind auf Screen 1 NICHT sichtbar (erst auf Screen 2).<br>
-      ARIA Live Region aktualisiert sich nach Slider-Release (nicht bei jedem Tick).<br>
+      Station-Cards und Chart sind auf Screen 1 NICHT sichtbar (erst auf Screen 2).<br>
+      ARIA Live Region aktualisiert sich NICHT beim Slider (AP-14: slider.change entfernt — Endwissens-Verbot).<br>
       Viewport 375px: Slider bedienbar, kein horizontaler Overflow.<br>
-      Testfall: T-11
+      Testfall: T-11, AP-14-A11y-01
     </p>
     <div class="kg-card">
       <div class="fw-app"
@@ -369,15 +366,15 @@
   <!-- NEU — Slice 4: SparplanChart (U)                          -->
   <!-- ═══════════════════════════════════════════════════════════ -->
 
-  <!-- Szenario U: Slice 4/5 — SparplanChart (jetzt auf Screen 2) -->
+  <!-- Szenario U: AP-14 — Stationen-Zeitreise (Screen 2) -->
   <div class="test-section">
-    <h2>U — SparplanChart auf Screen 2 (Slice 4/5)</h2>
+    <h2>U — Station-Card + getrimmter Chart auf Screen 2 (AP-14)</h2>
     <p class="test-meta">
-      Erwartung: Screen 1 zuerst sichtbar (kein Chart). „Weiter →" klicken → Screen 2 erscheint.<br>
-      Chart erscheint unterhalb der KpiCards. Canvas sichtbar, 120 Datenpunkte (Liniendiagramm).<br>
-      Keine Range-Buttons, keine BAN/Headline, kein View-Toggle, keine Legende.<br>
-      Tooltip aktiv (Hover: Monat + EUR-Depotwert).<br>
-      Kein live Chart-Update während Slider auf Screen 1 — Chart rendert erst beim Wechsel zu Screen 2.<br>
+      Erwartung: Screen 1 zuerst sichtbar (kein Chart). „10 Jahre zurückspringen" → Screen 2: erste Station-Card erscheint.<br>
+      Unterhalb der Station-Card: getrimmter Chart (nur Daten bis zum Stations-Monat — kein Endwissen).<br>
+      Canvas sichtbar. Keine Range-Buttons, keine BAN/Headline. Keine KpiCards, keine AssumptionsBox.<br>
+      Journey-Button mit Text aus station.continueLabel. Kein „← Zurück"-Button auf Screen 2.<br>
+      Kein live Chart-Update während Slider auf Screen 1 — Rate wird erst beim S1→S2-Wechsel eingefroren.<br>
       Keine JS-Exception in Konsole.
     </p>
     <div class="kg-card">
@@ -392,29 +389,19 @@
   <!-- NEU — Slice 5: 4-Screen-Flow (V, W, X)                    -->
   <!-- ═══════════════════════════════════════════════════════════ -->
 
-  <!-- ENTWICKLUNGSNOTIZ — Slider-Chart-Kopplung (Entscheidung offen) -->
-  <div class="test-warning" style="border-color: #fd7e14; background: #fff8f0;">
-    <strong>Offene UX-Entscheidung (Slice 5 → Slice 7):</strong><br>
-    Ab Slice 5 aktualisiert sich Chart und KpiCards NICHT live während der Slider-Interaktion.
-    Der Slider steht auf Screen 1, Chart + KPIs erscheinen erst beim Wechsel zu Screen 2.
-    Das ist spec-konform (MINI_SPEC: Nutzer personalisiert zuerst, sieht dann den Beweis).<br>
-    <strong>Bitte beim Test bewusst evaluieren:</strong> Fühlt sich das richtig an?
-    Falls nicht → in Slice 7 änderbar: Chart-Update im Hintergrund bei Slider-Bewegung,
-    sichtbar sobald Screen 2 geöffnet wird.
-  </div>
-
   <!-- Szenario V: Screen-Flow vollständig (T-14) -->
   <div class="test-section">
     <h2>V — Screen-Flow 1→2→3→4 vollständig (T-14)</h2>
     <p class="test-meta">
       Erwartung:<br>
-      Screen 1: Headline + Subline + Slider + „Weiter →" sichtbar. Kein Chart, keine KPIs.<br>
-      „Weiter →" → Screen 2: Fokus liegt auf &lt;h2&gt; (DevTools → Accessibility: focused element).
-      KpiCards + Chart sichtbar. Buttons „← Zurück" und „Weiter →".<br>
-      „Weiter →" → Screen 3: Fokus auf &lt;h2&gt;. Chart mit VertikaleLinie am rechten Ende sichtbar. Subline vorhanden. Buttons „← Zurück" und „Weiter →".<br>
-      „Weiter →" → Screen 4: Fokus auf &lt;h2&gt;. PrimaryCta „Heute Marktzeit sammeln →" als Button sichtbar (href leer, NB-1). Nur „← Zurück".<br>
+      Screen 1: Headline + Subline + Slider + „10 Jahre zurückspringen" sichtbar. Kein Chart, keine KPIs.<br>
+      „10 Jahre zurückspringen" → Screen 2: Fokus auf &lt;h2&gt;. Station-Card (Quelle, Headline, Anker) + getrimmter Chart.
+      Journey-Button mit continueLabel. Kein „← Zurück".<br>
+      Journey-Button N×klicken → alle Stationen durch; letzter Click → Screen 3 erscheint.<br>
+      Screen 3: Fokus auf &lt;h2&gt; „Jetzt erst sieht es einfach aus." Chart mit VertikaleLinie. Buttons „← Zurück" und „Weiter →".<br>
+      Screen 4: Fokus auf &lt;h2&gt;. CTA „Heute Marktzeit sammeln →" sichtbar. Nur „← Zurück".<br>
       Kein JS-Fehler in Konsole. Viewport 375px, 768px, 1280px.<br>
-      Testfall: T-14
+      Testfall: T-14, AP-14-A02
     </p>
     <div class="kg-card">
       <div class="fw-app"
@@ -429,10 +416,12 @@
     <h2>W — Rate ändern → Screen 2 zeigt aktualisierte Werte</h2>
     <p class="test-meta">
       Testschritte:<br>
-      1. Slider auf 1.000 € → „Weiter →" → Screen 2: Eingezahlt = 120.000 €, Chart korrekt.<br>
-      2. „← Zurück" → Screen 1: Slider auf 500 € stellen.<br>
-      3. „Weiter →" → Screen 2: Eingezahlt = 60.000 €. Chart muss sich aktualisiert haben.<br>
-      Erwartung: KpiCards und Chart zeigen die neue Rate. Kein stale State. Kein JS-Fehler.
+      1. Slider auf 1.000 € → „10 Jahre zurückspringen" → Screen 2: getrimmter Chart bei Stations-Monat, Station-Card sichtbar.<br>
+      2. Alle Stationen durchklicken → Screen 3: vollständiger Chart (1.000 €-Berechnung) sichtbar.<br>
+      3. „← Zurück" → Screen 2: Zeitreise auf erster Station (activeStationIndex = 0, gleiche Rate).<br>
+      4. „← Zurück" auf Screen 3 führt zurück zu Screen 2 (kein Back auf Screen 2 selbst).<br>
+      Erwartung: Rate bleibt eingefroren auf dem S1-Wert. Neustart via Screen 1 → frische Rate. Kein JS-Fehler.<br>
+      Testfall: AP-14-A03
     </p>
     <div class="kg-card">
       <div class="fw-app"
@@ -446,9 +435,9 @@
   <div class="test-section">
     <h2>X — Zurück-Navigation durch alle Screens</h2>
     <p class="test-meta">
-      Testschritte: 1→2→3→4 komplett durchklicken, dann 4→3→2→1 zurückklicken.<br>
-      Erwartung: Jeder Schritt zeigt den korrekten Screen. Fokus liegt jeweils auf der &lt;h2&gt; (außer beim initialen Laden).<br>
-      Kein doppelter Chart, keine JS-Exception, kein Layout-Bruch.
+      Testschritte: S1 → alle S2-Stationen durchklicken → S3 → S4, dann S4→S3→S2→S3 (kein Back auf S2 möglich).<br>
+      Erwartung: Fokus liegt jeweils auf der &lt;h2&gt; (außer beim initialen Laden). Screen 2 hat keinen „← Zurück"-Button.<br>
+      S3→S2-Zurück: Zeitreise auf Station 0 zurückgesetzt. Kein doppelter Chart, keine JS-Exception.
     </p>
     <div class="kg-card">
       <div class="fw-app"
@@ -462,14 +451,13 @@
   <!-- NEU — Slice 6: VertikaleLinie + AssumptionsBox + CTA      -->
   <!-- ═══════════════════════════════════════════════════════════ -->
 
-  <!-- Szenario Y: AssumptionsBox auf Screen 2 und Screen 3 -->
+  <!-- Szenario Y: AssumptionsBox nur noch auf Screen 3 (AP-14: S2 hat keine AssumptionsBox mehr) -->
   <div class="test-section">
-    <h2>Y — AssumptionsBox auf Screen 2 und Screen 3 (APP_SPEC §19.8)</h2>
+    <h2>Y — AssumptionsBox nur auf Screen 3 (APP_SPEC §19.8, AP-14)</h2>
     <p class="test-meta">
-      Testschritte: 1→2→3 klicken.<br>
-      Erwartung Screen 2: AssumptionsBox sichtbar unter dem Chart. Text beginnt mit „Basis: MSCI World Index …".<br>
-      Erwartung Screen 3: AssumptionsBox ebenfalls sichtbar unter dem Chart. Identischer Text.<br>
-      Kein innerHTML, kein Stacktrace. Kein JS-Fehler in Konsole.
+      Testschritte: Alle S2-Stationen durchklicken → S3.<br>
+      Erwartung Screen 3: AssumptionsBox sichtbar unter dem Chart. Text beginnt mit „Basis: MSCI World Index …".<br>
+      Erwartung Screen 2: KEINE AssumptionsBox (AP-14: entfernt). Kein innerHTML, kein Stacktrace. Kein JS-Fehler in Konsole.
     </p>
     <div class="kg-card">
       <div class="fw-app"
@@ -505,6 +493,83 @@
       Erwartung: Button „Heute Marktzeit sammeln →" sichtbar als Primary-Button (blauer Hintergrund, weißer Text).<br>
       Kein href-Sprung (href leer, NB-1). Kein JS-Fehler in Konsole.<br>
       Viewport 375px: Button vollständig sichtbar, kein Overflow.
+    </p>
+    <div class="kg-card">
+      <div class="fw-app"
+           data-fw-app="prokrastinations-preis"
+           data-fw-data="../../Theme/assets/data/b1/msci-world-net-return-eur-monthly.csv">
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════════ -->
+  <!-- NEU — B1-AP-14: Stationen-Zeitreise                       -->
+  <!-- ═══════════════════════════════════════════════════════════ -->
+
+  <!-- Szenario AB: Erste Station-Card -->
+  <div class="test-section">
+    <h2>AB — Erste Station-Card erscheint auf Screen 2 (AP-14-A01)</h2>
+    <p class="test-meta">
+      Testschritte: „10 Jahre zurückspringen" klicken.<br>
+      Erwartung: Screen 2 zeigt erste Station. Sichtbar: sourceLabel (z.B. „TAGESSCHAU · 9. MÄRZ 2020"),
+      Headline, Anker-Text, Journey-Button mit continueLabel-Text.<br>
+      „Zwischenstand anzeigen"-Button vorhanden (Collapsible). Klick darauf: dl mit Eingezahlt + Depotwert-Werten erscheint.<br>
+      Kein Endwissen (kein finaler Depotwert, kein 120-Monats-Chart, keine Rendite).<br>
+      Kein JS-Fehler. Konsole: EditorialDegraded-Warnung (erwünscht — nur 3 verifizierte Stationen).
+    </p>
+    <div class="kg-card">
+      <div class="fw-app"
+           data-fw-app="prokrastinations-preis"
+           data-fw-data="../../Theme/assets/data/b1/msci-world-net-return-eur-monthly.csv">
+      </div>
+    </div>
+  </div>
+
+  <!-- Szenario AC: Journey komplett durchklicken -->
+  <div class="test-section">
+    <h2>AC — Journey komplett: alle Stationen → Final Reveal → S3 (AP-14-A02)</h2>
+    <p class="test-meta">
+      Testschritte: „10 Jahre zurückspringen" → Journey-Button so lange klicken, bis Screen 3 erscheint.<br>
+      Erwartung: Jede Station zeigt andere Headline + sourceLabel. Getrimmter Chart wächst mit jeder Station.<br>
+      Letzter Journey-Button (final_reveal-Station, „Ergebnis ansehen") → Screen 3 erscheint.<br>
+      Screen 3: vollständiger 120-Monats-Chart + VertikaleLinie. Erste Endwissens-Ausgabe in ARIA Live Region.<br>
+      Kein JS-Fehler, kein Layout-Bruch.
+    </p>
+    <div class="kg-card">
+      <div class="fw-app"
+           data-fw-app="prokrastinations-preis"
+           data-fw-data="../../Theme/assets/data/b1/msci-world-net-return-eur-monthly.csv">
+      </div>
+    </div>
+  </div>
+
+  <!-- Szenario AD: A11y — Station-Headline in Live Region, kein Endwissen -->
+  <div class="test-section">
+    <h2>AD — A11y: ARIA Live Region enthält nur Station-Headline (AP-14-A11y-01)</h2>
+    <p class="test-meta">
+      Testschritte: „10 Jahre zurückspringen" klicken.<br>
+      Erwartung: [data-fw-role="a11y-result"] enthält die Headline der ersten Station (z.B. „Börsenhandel an der Wall Street ausgesetzt").<br>
+      KEIN Depotwert, KEIN „€ eingezahlt"-Text in der Live Region auf Screen 2.<br>
+      Nach Journey-Button: Live Region aktualisiert sich auf die nächste Station-Headline.<br>
+      Erst auf Screen 3: Live Region enthält vollständigen Ergebnis-Text mit Depotwert.
+    </p>
+    <div class="kg-card">
+      <div class="fw-app"
+           data-fw-app="prokrastinations-preis"
+           data-fw-data="../../Theme/assets/data/b1/msci-world-net-return-eur-monthly.csv">
+      </div>
+    </div>
+  </div>
+
+  <!-- Szenario AE: Endwissens-Verbot -->
+  <div class="test-section">
+    <h2>AE — Endwissens-Verbot: S2 zeigt kein Endwissen (APP_SPEC §14.1)</h2>
+    <p class="test-meta">
+      Testschritte: „10 Jahre zurückspringen" → alle Stationen der Zeitreise prüfen.<br>
+      Verbotene Elemente auf KEINER Screen-2-Station: finale KPI-Cards, finale Depotwert-Summe,
+      vollständiger 120-Monats-Chart, finale Rendite, ARIA-Text mit finalem Eurobetrag.<br>
+      Erlaubt: Zwischenstand (paidIn + portfolioValueAtStation bis zum Stations-Monat).<br>
+      Test-Methode: DevTools DOM + Netzwerk-Tab; keine JS-Exception in Konsole.
     </p>
     <div class="kg-card">
       <div class="fw-app"

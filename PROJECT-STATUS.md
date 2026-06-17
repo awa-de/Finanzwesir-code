@@ -2,16 +2,16 @@
 Version: 1
 Stand: 2026-06-17
 Fokus-AP: APP-01 — prokrastinations-preis
-Nächster-Schritt: B1-AP-14 — Stationen filtern, sortieren, Final Reveal mappen und Redaktions-Gate prüfen (B1-AP-13 ✅ 2026-06-17)
+Nächster-Schritt: B1-AP-15 — Transitions + Reduced Motion (B1-AP-14 ✅ 2026-06-17)
 Blocker: keine
 Letzter-Distill: 2026-06-15
 Kassensturz-Datum: 2026-06-15
 -->
-<!-- HOOK-META-SESSION: B1-AP-13 -->
+<!-- HOOK-META-SESSION: B1-AP-14 -->
 
 # PROJECT STATUS — Finanzwesir 2.0
 
-Stand: 2026-06-17 | Session: B1-AP-13 | Geändert von: Claude
+Stand: 2026-06-17 | Session: B1-AP-14 | Geändert von: Claude
 
 **Zweck:** Schneller Wiedereinstieg nach Pausen.
 **Zielgruppe:** Albert und Claude.

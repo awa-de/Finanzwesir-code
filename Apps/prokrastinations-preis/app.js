@@ -85,9 +85,6 @@ function marketTimeStrategy(msciData, monatlicheRate, startBetrag) {
 
 // NEW — AppContext aus appData + Nutzerwerten (APP_SPEC §11)
 function buildAppContext(appData, monatlicheRate, startBetrag, stations) { // CHANGED — AP-13
-  const fmt = new Intl.NumberFormat(appData.locale, {
-    style: 'currency', currency: appData.currency, maximumFractionDigits: 0
-  });
   const { chartSeries, eingezahlt, depotwertHeute, differenz } =
     marketTimeStrategy(appData.msciData, monatlicheRate, startBetrag);
   return {
@@ -106,8 +103,8 @@ function buildAppContext(appData, monatlicheRate, startBetrag, stations) { // CH
     eingezahlt,
     depotwertHeute,
     differenz,
-    resultTone:  'neutral',
-    a11ySummary: `Wer vor 10 Jahren ${monatlicheRate} € monatlich investiert hätte, hätte heute ${fmt.format(depotwertHeute)} — bei ${fmt.format(eingezahlt)} eingezahlt.`
+    resultTone:  'neutral'
+    // a11ySummary entfernt — AP-14: endwissen erst in showScreen(3) ausgeben
   };
 }
 
@@ -146,11 +143,139 @@ function renderKpiCards(container, appContext) {
   container.appendChild(dl);
 }
 
+// NEW — AP-14: Prioritätsauswahl — Dramaturgie-Pflichtspots (crisis, falseResolution, late_wobble)
+// reservieren, Rest nach Priority auffüllen, Ergebnis date_asc sortieren
+function selectStationsForJourney(filteredStations, maxVisible) {
+  if (filteredStations.length <= maxVisible)
+    return filteredStations.slice().sort((a, b) => a.date < b.date ? -1 : 1);
+
+  const crisisStation  = filteredStations.reduce((best, s) =>
+    s.role === 'crisis' && (!best || s.priority > best.priority) ? s : best, null);
+  const falseResStation = filteredStations.find(s => s.flags && s.flags.falseResolution) || null;
+  const lateWobble     = filteredStations
+    .filter(s => s.role === 'late_wobble')
+    .sort((a, b) => a.date > b.date ? -1 : 1)[0] || null;
+
+  const reservedIds = new Set(
+    [crisisStation, falseResStation, lateWobble].filter(Boolean).map(s => s.id)
+  );
+  const reserved  = filteredStations.filter(s =>  reservedIds.has(s.id));
+  const remaining = filteredStations
+    .filter(s => !reservedIds.has(s.id))
+    .sort((a, b) => b.priority - a.priority);
+
+  const freeSlots = Math.max(0, maxVisible - reserved.length);
+  return [...reserved, ...remaining.slice(0, freeSlots)]
+    .sort((a, b) => a.date < b.date ? -1 : 1);
+}
+
+// NEW — AP-14: Gate A prüfen (G-A01, G-A05) — gibt GateOK oder EditorialDegraded
+function checkEditorialGate(selectedStations, finalReveal, selectionPolicy) {
+  const diagnose  = [];
+  const gateConf  = selectionPolicy.editorialGate || {};
+  const minCrisis = gateConf.minCrisisPriority || 95;
+  if (!selectedStations.some(s => s.role === 'crisis' && s.priority >= minCrisis))
+    diagnose.push('G-A01: Keine crisis-Station mit priority >= ' + minCrisis + ' im aktiven Fenster');
+  if (!finalReveal)
+    diagnose.push('G-A05: Kein Final-Reveal-Template (dynamic_latest_month) gefunden');
+  const minVisible = selectionPolicy.minVisibleStations || 5;
+  if (selectedStations.length < minVisible)
+    diagnose.push('Zu wenige sichtbare Stationen: ' + selectedStations.length + ' < ' + minVisible);
+  return diagnose.length === 0
+    ? { status: 'GateOK',          diagnose: [] }
+    : { status: 'EditorialDegraded', diagnose };
+}
+
+// NEW — AP-14: Chart bis zur Stations-Monat trimmen (visibleChartSeries — kein Endwissen)
+function buildVisibleChartSeries(chartSeries, stationMonth) {
+  return chartSeries.filter(p => p.month <= stationMonth);
+}
+
+// NEW — AP-14: Zwischenstand aus Sparplanberechnung (keine Zahlenwerte aus JSON)
+function calcStationIntermediate(chartSeries, stationMonth, monatlicheRate, startBetrag) {
+  const idx = chartSeries.findIndex(p => p.month === stationMonth);
+  if (idx < 0) return { paidIn: 0, portfolioValueAtStation: 0 };
+  return {
+    paidIn:                  monatlicheRate * (idx + 1) + startBetrag,
+    portfolioValueAtStation: chartSeries[idx].depotwert
+  };
+}
+
+// NEW — AP-14: Station-Card rendern (SafeDOM: textContent — Q-01, kein innerHTML)
+function renderStationCard(container, station, stationIntermediate, fmt) {
+  container.textContent = ''; // vorherige Station sauber ersetzen
+
+  const sourceLabel = document.createElement('p');
+  sourceLabel.className = 'fw-app__station-source-label';
+  sourceLabel.textContent = station.sourceLabel;
+  container.appendChild(sourceLabel);
+
+  const headline = document.createElement('h3');
+  headline.className = 'fw-app__station-headline';
+  headline.tabIndex = -1; // fokussierbar via JS (APP_SPEC §14.5 Fokusführung)
+  headline.textContent = station.headline;
+  container.appendChild(headline);
+
+  const anchor = document.createElement('p');
+  anchor.className = 'fw-app__station-anchor';
+  anchor.textContent = station.anchorText;
+  container.appendChild(anchor);
+
+  // Collapsible Zwischenstand (APP_SPEC §14.5, visualRules.stationValueMobile = collapsible)
+  const collapsibleId  = 'fw-collapsible-' + station.id;
+  const collapsibleWrap = document.createElement('div');
+  collapsibleWrap.className = 'fw-app__collapsible';
+
+  const trigger = document.createElement('button');
+  trigger.type  = 'button';
+  trigger.className = 'fw-app__collapsible-trigger';
+  trigger.textContent = station.mobileIntermediate.label;
+  trigger.setAttribute('aria-expanded', 'false');
+  trigger.setAttribute('aria-controls', collapsibleId);
+
+  const content = document.createElement('div');
+  content.id        = collapsibleId;
+  content.className = 'fw-app__collapsible-content';
+  content.setAttribute('hidden', '');
+
+  const dl = document.createElement('dl');
+  dl.className = 'fw-app__intermediate-values';
+
+  [
+    { label: 'Eingezahlt',       value: fmt.format(stationIntermediate.paidIn) },
+    { label: 'Depotwert damals', value: fmt.format(stationIntermediate.portfolioValueAtStation) }
+  ].forEach(({ label, value }) => {
+    const div = document.createElement('div');
+    const dt  = document.createElement('dt');
+    dt.textContent = label;
+    const dd  = document.createElement('dd');
+    dd.textContent = value;
+    div.appendChild(dt);
+    div.appendChild(dd);
+    dl.appendChild(div);
+  });
+
+  content.appendChild(dl);
+  collapsibleWrap.appendChild(trigger);
+  collapsibleWrap.appendChild(content);
+  container.appendChild(collapsibleWrap);
+
+  trigger.addEventListener('click', () => {
+    const isOpen = trigger.getAttribute('aria-expanded') === 'true';
+    trigger.setAttribute('aria-expanded', String(!isOpen));
+    trigger.textContent = !isOpen ? 'Zwischenstand ausblenden' : station.mobileIntermediate.label;
+    if (!isOpen) content.removeAttribute('hidden');
+    else         content.setAttribute('hidden', '');
+  });
+}
+
 // CHANGED — Slice 5: 4-Screen-Flow (war: flache Darstellung Slice 3/4)
 function renderContent(container, appData, options, stationsConfig) { // CHANGED — AP-11
   const journeyStations = buildJourneyStations(stationsConfig, appData.activeWindow); // NEW — AP-13
   const initialRate = options.defaultRate;
   const startBetrag = options.startBetrag;
+  let activeStationIndex = 0; // NEW — AP-14: Zeitreise-Zustand
+  let currentRate = initialRate; // NEW — AP-14: Rate wird bei S1→S2 eingefroren
 
   function makeBtn(text, extraClass) {
     const btn = document.createElement('button');
@@ -206,10 +331,10 @@ function renderContent(container, appData, options, stationsConfig) { // CHANGED
   sliderSection.appendChild(label);
   screen1.appendChild(sliderSection);
 
-  const btnS1Next = makeBtn('Weiter →', 'fw-app__btn--next');
+  const btnS1Next = makeBtn('10 Jahre zurückspringen', 'fw-app__btn--next'); // CHANGED — AP-14 (war: 'Weiter →')
   screen1.appendChild(btnS1Next);
 
-  // --- Screen 2 — Vergangenheit (KpiCards + Chart) ---
+  // --- Screen 2 — Stationen-Zeitreise (CHANGED — AP-14: war KpiCards + Chart) ---
   const screen2 = document.createElement('section');
   screen2.className = 'fw-app__screen';
   screen2.dataset.fwScreen = '2';
@@ -218,35 +343,20 @@ function renderContent(container, appData, options, stationsConfig) { // CHANGED
   const h2S2 = document.createElement('h2');
   h2S2.className = 'fw-app__screen-headline';
   h2S2.tabIndex = -1;
-  h2S2.textContent = 'Das wäre kein gerader Weg gewesen. Aber es wäre Marktzeit gewesen.';
+  h2S2.textContent = 'Im Rückblick sieht es klar aus. In Echtzeit war es eine Entscheidung.'; // CHANGED — AP-14
   screen2.appendChild(h2S2);
 
-  const kpiArea = document.createElement('div');
-  kpiArea.dataset.fwRole = 'kpi-area';
-  screen2.appendChild(kpiArea);
+  const stationArea = document.createElement('div'); // NEW — AP-14: Station-Card Container
+  stationArea.className = 'fw-app__station-area';
+  screen2.appendChild(stationArea);
 
-  const sublineS2 = document.createElement('p'); // NEW — Slice 6
-  sublineS2.className = 'fw-app__screen-subline';
-  sublineS2.textContent = 'MSCI World, 10 Jahre, monatliche Kursdaten — historische Entwicklung deines Depots.';
-  screen2.appendChild(sublineS2);
-
-  const chartSection2 = document.createElement('div');
+  const chartSection2 = document.createElement('div'); // CHANGED — AP-14: nur visibleChartSeries
   chartSection2.setAttribute('data-fw-appchart', 'sparplan-s2');
   chartSection2.className = 'fw-app__chart-section';
   screen2.appendChild(chartSection2);
 
-  const assumptionsS2 = document.createElement('aside'); // NEW — Slice 6: AssumptionsBox (APP_SPEC §19.8)
-  assumptionsS2.className = 'fw-app__assumptions';
-  assumptionsS2.textContent = 'Basis: MSCI World Index, monatliche Indexwerte, 10 Jahre rückwärts bis zum letzten vollständig verfügbaren Monat. Die Werte zeigen das Marktprinzip, keine konkrete ETF-Produktempfehlung. Vergangene Wertentwicklungen sind keine Garantie für die Zukunft. Keine Finanzberatung.';
-  screen2.appendChild(assumptionsS2);
-
-  const navS2 = document.createElement('div');
-  navS2.className = 'fw-app__screen-nav';
-  const btnS2Prev = makeBtn('← Zurück', 'fw-app__btn--prev');
-  const btnS2Next = makeBtn('Weiter →', 'fw-app__btn--next');
-  navS2.appendChild(btnS2Prev);
-  navS2.appendChild(btnS2Next);
-  screen2.appendChild(navS2);
+  const journeyBtn = makeBtn('', 'fw-app__btn--journey'); // NEW — AP-14: Text wird in renderJourneyStep gesetzt
+  screen2.appendChild(journeyBtn);
 
   // --- Screen 3 — Heute (Chart ohne VertikaleLinie — TODO Slice 6) ---
   const screen3 = document.createElement('section');
@@ -257,7 +367,7 @@ function renderContent(container, appData, options, stationsConfig) { // CHANGED
   const h2S3 = document.createElement('h2');
   h2S3.className = 'fw-app__screen-headline';
   h2S3.tabIndex = -1;
-  h2S3.textContent = 'Vor 10 Jahren ist weg. Heute nicht.';
+  h2S3.textContent = 'Jetzt erst sieht es einfach aus.'; // CHANGED — AP-14 (APP_SPEC §16.2; war: 'Vor 10 Jahren ist weg. Heute nicht.')
   screen3.appendChild(h2S3);
 
   const sublineS3 = document.createElement('p'); // NEW — Slice 6
@@ -317,30 +427,37 @@ function renderContent(container, appData, options, stationsConfig) { // CHANGED
   a11yRegion.className = 'fw-app__visually-hidden';
   container.appendChild(a11yRegion);
 
-  // NEW — Chart-Engines lazy je Screen: hidden canvas hat 0px → erst bei Sichtbarkeit rendern
+  // CHANGED — AP-14: Chart-Engines; lastRenderedRateS2 entfernt (orphaned by AP-14)
   const chartEngine2 = new ChartEngine();
   const chartEngine3 = new ChartEngine();
-  let lastRenderedRateS2 = null;
   let lastRenderedRateS3 = null;
 
-  function renderS2(rate) {
-    const ctx = buildAppContext(appData, rate, startBetrag, journeyStations); // CHANGED — AP-13
-    kpiArea.textContent = '';
-    renderKpiCards(kpiArea, ctx);
-    chartEngine2.renderFromData(chartSection2, ctx.chartSeries, {
+  // NEW — AP-14: Zeitreise-Schritt rendern (ersetzt renderS2)
+  // Kein Endwissen: nur Stations-Daten bis stationMonth sichtbar (APP_SPEC §14.1)
+  function renderJourneyStep(stationIdx) {
+    const station     = journeyStations[stationIdx];
+    const stationMonth = station.date.slice(0, 7); // 'YYYY-MM'
+    const ctx         = buildAppContext(appData, currentRate, startBetrag, journeyStations);
+    const fmtStation  = new Intl.NumberFormat(appData.locale, {
+      style: 'currency', currency: 'EUR', maximumFractionDigits: 0
+    });
+    const intermediate = calcStationIntermediate(ctx.chartSeries, stationMonth, currentRate, startBetrag);
+    renderStationCard(stationArea, station, intermediate, fmtStation);
+    const visibleSeries = buildVisibleChartSeries(ctx.chartSeries, stationMonth);
+    chartEngine2.renderFromData(chartSection2, visibleSeries, {
       type: 'line', features: { rangeControls: false, headline: false }
     });
-    lastRenderedRateS2 = rate;
-    lastRenderedRateS3 = null; // Rate geändert → S3 muss neu rendern
-    return ctx;
+    journeyBtn.textContent = station.continueLabel || 'Weiter';
+    a11yRegion.textContent = station.headline; // stationLiveMessage — kein Endwissen (APP_SPEC §14.1)
   }
 
   function renderS3(rate) {
-    const { chartSeries } = buildAppContext(appData, rate, startBetrag, journeyStations); // CHANGED — AP-13
-    chartEngine3.renderFromData(chartSection3, chartSeries, {
-      type: 'line', features: { rangeControls: false, headline: false, verticalLine: 'last' } // CHANGED — Slice 6
+    const ctx = buildAppContext(appData, rate, startBetrag, journeyStations); // CHANGED — AP-13
+    chartEngine3.renderFromData(chartSection3, ctx.chartSeries, {
+      type: 'line', features: { rangeControls: false, headline: false, verticalLine: 'last' }
     });
     lastRenderedRateS3 = rate;
+    return ctx; // CHANGED — AP-14: ctx für revealA11ySummary in showScreen(3)
   }
 
   // NEW — Screen-Controller (prefers-reduced-motion: hidden-Toggle ist direkt, kein CSS-Übergang)
@@ -355,21 +472,39 @@ function renderContent(container, appData, options, stationsConfig) { // CHANGED
       const h2 = allScreens[n - 1].querySelector('h2');
       if (h2) h2.focus();
     }
-    const rate = clamp(parseInt(slider.value, 10), 50, 2000);
-    if (n === 2 && rate !== lastRenderedRateS2) {
-      const ctx = renderS2(rate);
-      a11yRegion.textContent = ctx.a11ySummary;
+    if (n === 2) renderJourneyStep(activeStationIndex); // CHANGED — AP-14 (war: rate-basiertes renderS2)
+    if (n === 3 && currentRate !== lastRenderedRateS3) {
+      const ctx = renderS3(currentRate);
+      // ERST HIER: erstes Endwissen für Screenreader (APP_SPEC §14.1 revealA11ySummary)
+      const fmtReveal = new Intl.NumberFormat(appData.locale, {
+        style: 'currency', currency: 'EUR', maximumFractionDigits: 0
+      });
+      a11yRegion.textContent = `Wer vor 10 Jahren ${currentRate} € monatlich investiert hätte, hätte heute ${fmtReveal.format(ctx.depotwertHeute)} — bei ${fmtReveal.format(ctx.eingezahlt)} eingezahlt.`;
     }
-    if (n === 3 && rate !== lastRenderedRateS3) renderS3(rate);
   }
 
-  // NEW — Button-Wiring
-  btnS1Next.addEventListener('click', () => showScreen(2, true));
-  btnS2Prev.addEventListener('click', () => showScreen(1, true));
-  btnS2Next.addEventListener('click', () => showScreen(3, true));
+  // CHANGED — AP-14: Button-Wiring (btnS2Prev / btnS2Next entfernt — Screen 2 hat kein NavPanel)
+  btnS1Next.addEventListener('click', () => {
+    activeStationIndex = 0; // Zeitreise immer von vorne starten
+    currentRate = clamp(parseInt(slider.value, 10), 50, 2000); // Rate einfrieren
+    showScreen(2, true);
+  });
   btnS3Prev.addEventListener('click', () => showScreen(2, true));
   btnS3Next.addEventListener('click', () => showScreen(4, true));
   btnS4Prev.addEventListener('click', () => showScreen(3, true));
+
+  // NEW — AP-14: Journey-Button (nächste Station oder Finale-Reveal → S3)
+  journeyBtn.addEventListener('click', () => {
+    const isLast = activeStationIndex === journeyStations.length - 1;
+    if (isLast) {
+      showScreen(3, true);
+    } else {
+      activeStationIndex++;
+      renderJourneyStep(activeStationIndex);
+      const h2 = screen2.querySelector('h2');
+      if (h2) h2.focus();
+    }
+  });
 
   // Slider-Events: kein live Chart-Update (Chart auf Screen 2, Slider auf Screen 1)
   slider.addEventListener('input', () => {
@@ -377,15 +512,10 @@ function renderContent(container, appData, options, stationsConfig) { // CHANGED
     slider.setAttribute('aria-valuenow', String(rate));
     slider.setAttribute('aria-valuetext', rate + ' Euro pro Monat');
     valueDisplay.textContent = rate + ' €/Monat';
-    lastRenderedRateS2 = null; // Invalidiert für nächsten Screen-2-Besuch
-    lastRenderedRateS3 = null;
+    lastRenderedRateS3 = null; // Invalidiert für nächsten S3-Besuch
+    // currentRate wird erst bei btnS1Next eingefroren — kein Update hier
   });
-
-  slider.addEventListener('change', () => {
-    const rate = clamp(parseInt(slider.value, 10), 50, 2000);
-    const ctx = buildAppContext(appData, rate, startBetrag, journeyStations); // CHANGED — AP-13
-    a11yRegion.textContent = ctx.a11ySummary; // Update nach Release (kein Screenreader-Spam)
-  });
+  // slider.change entfernt — AP-14: war Endwissens-Leak via a11yRegion (APP_SPEC §14.1)
 
   // Initiale Anzeige: Screen 1, kein Focus-Steal beim Laden
   showScreen(1, false);
@@ -589,18 +719,21 @@ function filterStationsForWindow(stations, window) {
   });
 }
 
-// NEW — AP-13: Journey-Stationen aufbauen
-// Historische Stationen filtern + dynamic_latest_month auf latestMonth auflösen + ans Ende hängen
-// Keine Prioritätsauswahl (AP-14), keine Gate-Prüfung (AP-14)
+// CHANGED — AP-14: Journey-Stationen aufbauen (Prioritätsauswahl + Editorial Gate)
 function buildJourneyStations(stationsConfig, window) {
-  const historicStations   = filterStationsForWindow(stationsConfig.stations, window);
+  const allFiltered        = filterStationsForWindow(stationsConfig.stations, window);
+  const maxVisible         = stationsConfig.selectionPolicy.maxVisibleStations || 7;
+  const selectedHistoric   = selectStationsForJourney(allFiltered, maxVisible); // NEW — AP-14
   const finalTemplate      = stationsConfig.stations.find(s => s.date === 'dynamic_latest_month');
   const finalRevealStation = finalTemplate
     ? Object.assign({}, finalTemplate, { date: window.latestMonth })
-    : null; // fehlt → AP-12-Validator hätte bereits Error(d) ausgelöst
+    : null;
+  const gateResult = checkEditorialGate(selectedHistoric, finalRevealStation, stationsConfig.selectionPolicy); // NEW — AP-14
+  if (gateResult.status !== 'GateOK')
+    console.warn('[fw-app] Editorial Gate:', gateResult.status, gateResult.diagnose.join(' | '));
   return finalRevealStation
-    ? [...historicStations, finalRevealStation]
-    : historicStations;
+    ? [...selectedHistoric, finalRevealStation]
+    : selectedHistoric;
 }
 
 // NEW — AP-11: Stations-JSON app-spezifisch laden
