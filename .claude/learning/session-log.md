@@ -1,6 +1,15 @@
 # Session-Log — Finanzwesir 2.0
 Wird geleert nach /distill. Einträge: [FRICTION] [WIN] [PREF] [QUESTION] [OK]
 
+## 2026-06-17 – B1-AP-10a abgeschlossen | Konsistenz-Nachputz nach AP-09/AP-10
+- [OK] Keine Vorkommnisse — Abweichungen bekannt und im Prompt-Briefing vollständig beschrieben
+- [OK] stations.de.json: flags.finalWobble = true, flags.lateWobble entfernt (station_2025_04_tariff_shock)
+- [OK] STATIONS_IMPLEMENTATION_PLAN.md V1.1: Drift-Notiz, EditorialDegraded-Tabellenzeile, R-02, AP-12-Risiken, AP-11-Extra-Flags bereinigt
+- [OK] Kein Produktivcode geändert, AP-11 nicht gestartet
+
+## 2026-06-17 – SESSION START | Fokus: APP-01 — prokrastinations-preis (Faden 2)
+- FinanzwesirData.js, CSVParser.js, FwDateUtils.js — diese Session nicht berühren. ✓
+
 ## 2026-06-17 – B1-AP-09 abgeschlossen | stations.de.json angelegt
 - [OK] config/-Ordner + stations.de.json angelegt, 7 Stationen + Final Reveal, Contract-konform
 - [QUESTION] Flag-Diskrepanz April 2025: APP_SPEC §23.14 nennt finalWobble: true, AP-09-Brief (Albert) sagte lateWobble: true → Brief gefolgt (höchste Prio), Diskrepanz in STATIONS_IMPLEMENTATION_PLAN.md R-02 dokumentiert, vor AP-14 zu klären

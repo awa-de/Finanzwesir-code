@@ -1,4 +1,4 @@
-Stand: 2026-06-17 | V1.0 — AP-10 | Geändert von: Claude
+Stand: 2026-06-17 | V1.1 — AP-10a Konsistenz-Nachputz | Geändert von: Claude
 
 # Stations-Implementierungsplan — prokrastinations-preis
 
@@ -28,8 +28,8 @@ Ergebnis vor Beginn der Planung.
 
 **Konsequenz für AP-10:** kein harter Blocker. Die redaktionellen Quellenrisiken sind in §11 (Offene Risiken) dokumentiert. AP-10 wird planmäßig durchgeführt.
 
-**Kleinere Diskrepanz (kein Blocker, aber zu klären):**
-`APP_SPEC.md §23.14` nennt `flags.finalWobble: true` für die April-2025-Station. Die in AP-09 angelegte JSON folgt dem AP-09-Briefing (Albert) mit `finalWobble: false, lateWobble: true` für diese Station. Der Loader sollte bei der Zustandsbestimmung primär `role: "late_wobble"` prüfen, nicht `flags.finalWobble`, um diese Inkonsistenz zu neutralisieren. Vor AP-15 klären, welches Flag der Loader für die Animations- und Display-Logik nutzt.
+**April-2025-Flag-Drift: bereinigt in AP-10a.**
+`station_2025_04_tariff_shock` hat `role = late_wobble`; `flags.finalWobble = true` (Spec-konform laut APP_SPEC.md §23.14 und CONTRACT §7). `flags.lateWobble` wurde entfernt — es ist kein im Contract definiertes Flag. Keine Sonderlogik zur Neutralisierung nötig.
 
 ---
 
@@ -374,7 +374,7 @@ bei [eingezahlt] eingezahlt.
 | `Empty` | CSV valide, aber < 120 Zeilen | „Nicht genug Daten für die Berechnung." | Zeilenanzahl |
 | `Error(d)` | JSON nicht ladbar / nicht parsebar / Contract verletzt / No-Red-Rule verletzt | „Die Zeitreise kann gerade nicht geladen werden." | Fehlerdetail: welches Feld, welche Regel |
 | `Empty-Journey` | JSON valide, aber keine aktive Station im Fenster nach Gate | „Die Zeitreise ist aktuell nicht vollständig konfiguriert." | Gate-Status, fehlende Stationen |
-| `EditorialDegraded` | JSON valide, Gate B/C nicht erfüllt (aber A erfüllt) | Normale App (Gate B/C nicht release-blockierend) | Gate-Hinweis |
+| `EditorialDegraded` | JSON valide, Gate-A redaktionell nicht vollständig erfüllt (`source_claimed_unchecked` gefiltert, < `minVisibleStations` oder keine `crisis`-Station im Fenster) | Nutzerfreundlicher Error-State / Empty-Journey — kein normaler App-Betrieb im Produktivmodus | Gate-Hinweis mit Stationenliste |
 
 ### Hard Error (Error(d)) — Technische Ursachen
 
@@ -486,7 +486,7 @@ Wenn nach Filterung aller `source_claimed_unchecked`-Stationen zu wenige übrig 
 
 **Risiken:**
 - Zuviel Validierungslogik in AP-12 → Scope-Creep. AP-12 validiert Struktur; Gate-Logik kommt in AP-14.
-- `flags`-Validierung: nur `noRedColor` ist vertraglich Pflicht. Extra-Flags (`climax`, `lateWobble`, `finalReveal`) sind erlaubt und dürfen nicht als Fehler gewertet werden.
+- `flags`-Validierung: nur `noRedColor` ist vertraglich Pflicht. Extra-Flags (`climax`, `finalReveal`) sind erlaubt und dürfen nicht als Fehler gewertet werden.
 
 **Abbruchkriterien:**
 - Validierungslogik wächst über app.js hinaus (z.B. separate Datei nötig) → stoppen, AP-Scope neu abgrenzen
@@ -549,7 +549,7 @@ Wenn nach Filterung aller `source_claimed_unchecked`-Stationen zu wenige übrig 
 **Risiken:**
 - `source_claimed_unchecked` nach Filterung: wenn nur noch 3 Stationen sichtbar bleiben → `EditorialDegraded`, kein Crash
 - Selektion bei Prioritäts-Gleichstand: deterministischer Tie-Breaker nötig (z.B. älteres Datum bevorzugt)
-- Flag-Diskrepanz April 2025 (`finalWobble: false, lateWobble: true` in JSON, aber APP_SPEC.md §23.14 nennt `finalWobble: true`): Sortierpräferenz für `late_wobble`-Station am Ende soll auf `role: "late_wobble"` prüfen, nicht auf `flags.finalWobble`. Damit ist die Inkonsistenz neutralisiert.
+- April 2025: `role = late_wobble`; `flags.finalWobble = true` (bereinigt in AP-10a). Sortierpräferenz nutzt `role: "late_wobble"` — kein Sonderfall, keine Drift mehr.
 
 **Abbruchkriterien:**
 - Gate-Logik wächst über AP-14-Scope → stoppen, nachfragen
@@ -746,7 +746,7 @@ Bevor eine der protected/forbidden Dateien aus einem inhaltlichen Grund anfassen
 | ID | Risiko | Schwere | Empfehlung |
 |---|---|---|---|
 | R-01 | 3 Stationen `source_claimed_unchecked` (2018-02, 2018-12, 2020-11) blockieren Redaktions-Gate G-A02 | Hoch (Publikationsblockierer) | Quellenrecherche und -prüfung vor Launch. Separates Redaktions-AP. Business Insider 2018 und WiWo 2018 sind in REDAKTIONS_GATE.md als offene Punkte dokumentiert. |
-| R-02 | Flag-Diskrepanz April 2025: JSON hat `finalWobble: false, lateWobble: true`; APP_SPEC.md §23.14 nennt `finalWobble: true` | Mittel (betrifft Sortierpräferenz-Logik in AP-14) | In AP-14 auf `role: "late_wobble"` prüfen, nicht auf `flags.finalWobble`. Vor AP-14 mit Albert klären, ob das beabsichtigt ist. |
+| R-02 | ✅ Erledigt (AP-10a): `flags.finalWobble = true` in `stations.de.json` gesetzt, `flags.lateWobble` entfernt. Spec-konform laut APP_SPEC.md §23.14 und CONTRACT §7. | — | Kein Coding-Auftrag mehr. |
 | R-03 | CTA-Formulierung Screen 4 (E-04) noch offen | Niedrig (kein Launch-Blocker) | AP-17 setzt Platzhalter. Redaktionelle Entscheidung durch Albert vor Release. |
 | R-04 | Produktive MSCI-CSV noch nicht vorhanden | Hoch (alle Coding-APs benötigen Testdaten) | AP-11 bis AP-14 können mit Mock-CSV vorbereitet werden. Produktive CSV muss vor AP-15 vorhanden sein. |
 | R-05 | CORS-Verhalten von `config/stations.de.json` auf Produktivserver (Ghost.io) ungeklärt | Mittel | In AP-11 lokal testen. Vor Release prüfen, ob Ghost.io die Datei liefert oder ob ein anderer Pfad nötig ist. |

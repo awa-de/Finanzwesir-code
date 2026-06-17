@@ -160,8 +160,7 @@
       },
       "flags": {
         "falseResolution": false,
-        "finalWobble": false,
-        "lateWobble": true,
+        "finalWobble": true,
         "noRedColor": true
       }
     },

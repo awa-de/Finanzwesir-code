@@ -2,16 +2,16 @@
 Version: 1
 Stand: 2026-06-17
 Fokus-AP: APP-01 — prokrastinations-preis
-Nächster-Schritt: B1-AP-11 — Stationen-Loader implementieren (B1-AP-09/AP-10 ✅ 2026-06-17)
+Nächster-Schritt: B1-AP-11 — Stationen-Loader implementieren (B1-AP-09/AP-10/AP-10a ✅ 2026-06-17)
 Blocker: keine
 Letzter-Distill: 2026-06-15
 Kassensturz-Datum: 2026-06-15
 -->
-<!-- HOOK-META-SESSION: B1-AP-10 -->
+<!-- HOOK-META-SESSION: B1-AP-10a -->
 
 # PROJECT STATUS — Finanzwesir 2.0
 
-Stand: 2026-06-17 | Session: B1-AP-10 | Geändert von: Claude
+Stand: 2026-06-17 | Session: B1-AP-10a | Geändert von: Claude
 
 **Zweck:** Schneller Wiedereinstieg nach Pausen.
 **Zielgruppe:** Albert und Claude.
@@ -116,6 +116,8 @@ Stand: 2026-06-17 | Session: B1-AP-10 | Geändert von: Claude
 ✅ **B1-AP-08 Widersprüchliche Stellen bereinigt (2026-06-16):** 6 Dateien bereinigt: APP_SPEC Versionstabelle (V2.3→V2.4, Nächster Schritt auf AP-08 aktualisiert), SLICE_PLAN (V1.6→V2.4 + Redesign-Abschnitt Stationen-Zeitreise + Microcopy-Ref entfernt), MINI_SPEC (Header als Historisch, Screen 2→Stationen-Zeitreise, Screen 3→erster Reveal), SLICE_0_KICKOFF (Header als historisches Protokoll), SPEC_GATE_REPORT + Perplexity-Review (Archiv-Warnung). Kein Code geändert.
 
 ✅ **B1-AP-09/AP-10 abgeschlossen (2026-06-17):** produktive `config/stations.de.json` angelegt (7 Stationen v2.1, Rolling-Window-Policy, 3 source_claimed_unchecked, Redaktions-Gate G-A02 noch nicht bestanden) + `STATIONS_IMPLEMENTATION_PLAN.md` angelegt (Slices AP-11–AP-18, 6 Risiken R-01–R-06). Kein Code geändert.
+
+✅ **B1-AP-10a Konsistenz-Nachputz (2026-06-17):** `stations.de.json` Flag-Drift bereinigt (`finalWobble = true`, `lateWobble` entfernt bei April-2025-Station). `STATIONS_IMPLEMENTATION_PLAN.md` V1.1: EditorialDegraded-Semantik korrigiert, R-02 als erledigt, Drift-Notizen entfernt. Kein Code geändert.
 
 ---
 

@@ -15,7 +15,7 @@
 - [Audit-Trail Prinzip](project_audit_trail.md) — DECISION-LOG für Architektur, session-log für Schritte, audits/ für Evaluierungen; kein direkter Claude-Beschluss
 - [Review als eigenständige Datei](feedback_review_als_datei.md) — Bei Evaluierungen: kommentierte Datei liefern, Albert entscheidet selbst; kein direkter Claude-Beschluss
 - [Knappe konstante Namen statt Nummern](feedback_nummerierung.md) — AP-IDs nach Projekt-Schema (APP-01, ST-16...); Schritte/Abschnitte in Docs mit sprechenden Namen
-- [App-Fabrik Struktur und Zählmodell](project_app_fabrik_struktur.md) — 22+3=25 App-Ordner; B1 Slice-6 ✅, B1-AP-01/02 ✅ 2026-06-16 (Stationen-Zeitreise); B1-AP-03 nächster Schritt
+- [App-Fabrik Struktur und Zählmodell](project_app_fabrik_struktur.md) — 22+3=25 App-Ordner; B1 APP_SPEC V2.5 operativ; B1-AP-01 bis AP-10a ✅ 2026-06-17; B1-AP-11 nächster Schritt (Stationen-Loader)
 - [Datenlayer Governance](project_datenlayer.md) — docs/data/ + Theme/assets/data/b1/; Contract in docs/data/contracts/; AP-DATA-01/04/05 abgeschlossen 2026-06-04; Startdatum 2000-12-29; AP-DATA-09 (Rollout) offen
 - [CSVParser GATEKEEPER-Verhalten](project_csvparser_gatekeeper.md) — Wirft vor Rückgabe von rows wenn date-Spalte fehlt/ungültig; date-Checks in app.js sind toter Code; Error-State (b) erwarten
 - [Zahlen und Referenzen vor Output verifizieren](feedback_verifikation_vor_output.md) — Nie aus dem Kopf nennen; Quelle zuerst konsultieren (Dateianzahl, O-Verweise, Abschnittsnummern)
