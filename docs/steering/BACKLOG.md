@@ -1,5 +1,5 @@
 # BACKLOG – Finanzwesir 2.0
-Stand: 2026-06-16 | Session: B1-AP-08d | Geändert von: Claude
+Stand: 2026-06-17 | Session: B1-AP-10 | Geändert von: Claude
 
 **Regeln:**
 - ✅-Zeilen werden sofort nach `BACKLOG-ARCHIV.md` verschoben (append), dann hier gelöscht.
@@ -12,8 +12,6 @@ Stand: 2026-06-16 | Session: B1-AP-08d | Geändert von: Claude
 
 | ID       | Bereich | Titel                                     | Prio | Dep | Detail                              |
 |----------|---------|-------------------------------------------|------|-----|-------------------------------------|
-| B1-AP-09 | App     | B1 prokrastinations-preis — produktive `stations.de.json` anlegen (6 Stationen v2.1, Rolling-Window-Filterung, Redaktions-Gate G-A01–G-A10 bestehen) | H | — | Apps/prokrastinations-preis/STATIONS_CONFIG_CONTRACT.md + ENTSCHEIDUNGSPROTOKOLL.md |
-| B1-AP-10 | App     | B1 prokrastinations-preis — Stationen-Zeitreise Implementierungsplan (Slice-Plan 7+ für Stationen-Zeitreise, Pre-Code-Gate) | H | B1-AP-09 | Apps/prokrastinations-preis/SLICE_PLAN.md |
 | AP-20/21 | Engine  | Mixed-Rhythm CV-Heuristik (T5→T3→T6→T7)  | H    | —   | engine/detail/AP-20-DETAIL.md       |
 | AP-6c    | Engine  | Touch-Tooltip Smartphone-Test             | M    | —   | engine/detail/AP-6c-DETAIL.md       |
 | AP-22    | Engine  | Zero-Line lineWidth (~3 Zeilen Fix)       | L    | —   | —                                   |

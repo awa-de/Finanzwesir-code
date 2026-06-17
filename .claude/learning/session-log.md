@@ -1,6 +1,17 @@
 # Session-Log — Finanzwesir 2.0
 Wird geleert nach /distill. Einträge: [FRICTION] [WIN] [PREF] [QUESTION] [OK]
 
+## 2026-06-17 – B1-AP-09 abgeschlossen | stations.de.json angelegt
+- [OK] config/-Ordner + stations.de.json angelegt, 7 Stationen + Final Reveal, Contract-konform
+- [QUESTION] Flag-Diskrepanz April 2025: APP_SPEC §23.14 nennt finalWobble: true, AP-09-Brief (Albert) sagte lateWobble: true → Brief gefolgt (höchste Prio), Diskrepanz in STATIONS_IMPLEMENTATION_PLAN.md R-02 dokumentiert, vor AP-14 zu klären
+- [OK] stationValueDesktop: Prompt-Brief sagte "collapsible_or_focus_optional", Contract "hover_or_focus_optional" → Contract-Wert verwendet (Contract schlägt Brief laut AP-09-Briefing-Regel)
+- [OK] Redaktions-Gate ehrlich als nicht publikationsreif gemeldet (3 source_claimed_unchecked)
+
+## 2026-06-17 – B1-AP-10 abgeschlossen | STATIONS_IMPLEMENTATION_PLAN.md angelegt
+- [OK] Planungsdatei 753 Zeilen, alle Sections (§1–§11) vollständig
+- [OK] AP-11 bis AP-18 als Coding-Slices mit Zielen, Grenzen, Akzeptanzkriterien und Abbruchbedingungen vorbereitet
+- [OK] 6 offene Risiken ehrlich dokumentiert (R-01 bis R-06)
+
 ## 2026-06-17 – SESSION START | Fokus: APP-01 — prokrastinations-preis
 - FinanzwesirData.js, CSVParser.js, FwDateUtils.js — diese Session nicht berühren. ✓
 

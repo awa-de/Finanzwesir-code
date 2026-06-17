@@ -1,0 +1,192 @@
+{
+  "version": "2.1",
+  "locale": "de-DE",
+  "app": "prokrastinations-preis",
+  "selectionPolicy": {
+    "window": "rolling_120_months_from_latest_csv_month",
+    "minVisibleStations": 5,
+    "targetVisibleStations": 6,
+    "maxVisibleStations": 7,
+    "includeFinalReveal": true,
+    "sort": "date_asc",
+    "selection": "highest_priority_within_window",
+    "editorialGate": {
+      "requiresCrisis": true,
+      "crisisRole": "crisis",
+      "minCrisisPriority": 95
+    }
+  },
+  "visualRules": {
+    "redCrashColor": false,
+    "lossColoring": false,
+    "crashSegmentColoring": false,
+    "futurePreview": false,
+    "stationValueMobile": "collapsible",
+    "stationValueDesktop": "hover_or_focus_optional"
+  },
+  "motionRules": {
+    "mode": "user_stepped",
+    "betweenStations": "short_draw_animation",
+    "forcedWaitBeforeContinue": false,
+    "reducedMotion": "instant_step"
+  },
+  "stations": [
+    {
+      "id": "station_2018_02_volatility_shock",
+      "date": "2018-02",
+      "priority": 78,
+      "status": "core",
+      "role": "shock",
+      "headline": "Die ruhigen Börsenjahre enden abrupt",
+      "sourceLabel": "BUSINESS INSIDER · 6. FEBRUAR 2018",
+      "sourceUrl": "",
+      "sourceStatus": "source_claimed_unchecked",
+      "anchorText": "Nach Jahren steigender Kurse kommt plötzlich Unruhe zurück. War das der Anfang vom Ende?",
+      "continueLabel": "Weiter investiert bleiben",
+      "mobileIntermediate": {
+        "label": "Zwischenstand anzeigen",
+        "fields": ["paidIn", "portfolioValueAtStation"]
+      },
+      "flags": {
+        "falseResolution": false,
+        "finalWobble": false,
+        "noRedColor": true
+      }
+    },
+    {
+      "id": "station_2018_12_year_end_selloff",
+      "date": "2018-12",
+      "priority": 82,
+      "status": "core",
+      "role": "doubt",
+      "headline": "Das Jahr endet tief im Minus",
+      "sourceLabel": "WIRTSCHAFTSWOCHE · 31. DEZEMBER 2018",
+      "sourceUrl": "",
+      "sourceStatus": "source_claimed_unchecked",
+      "anchorText": "Ein ganzes Jahr Sparplan. Ein ganzes Jahr minus. Der Sparplan läuft weiter — aber die Belohnung ist nicht zu sehen.",
+      "continueLabel": "Weiter investiert bleiben",
+      "mobileIntermediate": {
+        "label": "Zwischenstand anzeigen",
+        "fields": ["paidIn", "portfolioValueAtStation"]
+      },
+      "flags": {
+        "falseResolution": false,
+        "finalWobble": false,
+        "noRedColor": true
+      }
+    },
+    {
+      "id": "station_2020_03_covid_crash",
+      "date": "2020-03",
+      "priority": 100,
+      "status": "core",
+      "role": "crisis",
+      "headline": "Börsenhandel an der Wall Street ausgesetzt",
+      "sourceLabel": "TAGESSCHAU · 9. MÄRZ 2020",
+      "sourceUrl": "https://www.tagesschau.de/wirtschaft/corona-wirtschaft-wallstreet-103.html",
+      "sourceStatus": "primary_verified",
+      "anchorText": "In der fertigen Rückblick-Grafik ist das später nur ein Knick. Heute fühlt es sich an wie ein freier Fall.",
+      "continueLabel": "Weiter investiert bleiben",
+      "mobileIntermediate": {
+        "label": "Zwischenstand anzeigen",
+        "fields": ["paidIn", "portfolioValueAtStation"]
+      },
+      "flags": {
+        "climax": true,
+        "falseResolution": false,
+        "finalWobble": false,
+        "noRedColor": true
+      }
+    },
+    {
+      "id": "station_2020_11_vaccine_relief",
+      "date": "2020-11",
+      "priority": 92,
+      "status": "core",
+      "role": "relief",
+      "headline": "Die Impfstoffnachricht löst Erleichterung aus",
+      "sourceLabel": "TAGESSCHAU · 9. NOVEMBER 2020",
+      "sourceUrl": "",
+      "sourceStatus": "source_claimed_unchecked",
+      "anchorText": "Wer durchgehalten hat, sieht das hier. Wer im März verkauft hat — nicht.",
+      "continueLabel": "Weiter investiert bleiben",
+      "mobileIntermediate": {
+        "label": "Zwischenstand anzeigen",
+        "fields": ["paidIn", "portfolioValueAtStation"]
+      },
+      "flags": {
+        "falseResolution": true,
+        "finalWobble": false,
+        "noRedColor": true
+      }
+    },
+    {
+      "id": "station_2022_02_ukraine_invasion",
+      "date": "2022-02",
+      "priority": 90,
+      "status": "core",
+      "role": "geopolitical_shock",
+      "headline": "Russland greift die Ukraine an",
+      "sourceLabel": "TAGESSCHAU · 24. FEBRUAR 2022",
+      "sourceUrl": "https://www.tagesschau.de/wirtschaft/ukraine-krieg-aktienkuse-dax-absturz-101.html",
+      "sourceStatus": "primary_verified",
+      "anchorText": "Krieg ist zurück in Europa. Energie, Inflation, Lieferketten — alles wird neu bewertet.",
+      "continueLabel": "Weiter investiert bleiben",
+      "mobileIntermediate": {
+        "label": "Zwischenstand anzeigen",
+        "fields": ["paidIn", "portfolioValueAtStation"]
+      },
+      "flags": {
+        "falseResolution": false,
+        "finalWobble": true,
+        "noRedColor": true
+      }
+    },
+    {
+      "id": "station_2025_04_tariff_shock",
+      "date": "2025-04",
+      "priority": 80,
+      "status": "core",
+      "role": "late_wobble",
+      "headline": "Trumps Zölle verursachen weltweiten Kursrutsch",
+      "sourceLabel": "TAGESSCHAU · 10. APRIL 2025",
+      "sourceUrl": "https://www.tagesschau.de/wirtschaft/weltwirtschaft/trump-zoelle-152.html",
+      "sourceStatus": "primary_verified",
+      "anchorText": "Auch kurz vor dem Ende kommt noch einmal Unsicherheit zurück. Ein Langfristchart fühlt sich nur im Nachhinein glatt an.",
+      "continueLabel": "Weiter investiert bleiben",
+      "mobileIntermediate": {
+        "label": "Zwischenstand anzeigen",
+        "fields": ["paidIn", "portfolioValueAtStation"]
+      },
+      "flags": {
+        "falseResolution": false,
+        "finalWobble": false,
+        "lateWobble": true,
+        "noRedColor": true
+      }
+    },
+    {
+      "id": "station_final_latest_month",
+      "date": "dynamic_latest_month",
+      "priority": 999,
+      "status": "final",
+      "role": "final_reveal",
+      "headline": "Jetzt kennst du das Ende",
+      "sourceLabel": "MSCI-Datenreihe",
+      "sourceUrl": "",
+      "sourceStatus": "derived_from_app_data",
+      "anchorText": "Die Strecke sieht im Rückblick einfacher aus, weil du sie jetzt vollständig siehst. Vor 10 Jahren kannte sie niemand.",
+      "continueLabel": "Ergebnis ansehen",
+      "mobileIntermediate": {
+        "label": "Zwischenstand anzeigen",
+        "fields": ["paidIn", "portfolioValueAtStation"]
+      },
+      "flags": {
+        "falseResolution": false,
+        "finalWobble": false,
+        "finalReveal": true,
+        "noRedColor": true
+      }
+    }
+  ]
+}

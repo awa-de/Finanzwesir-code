@@ -1,6 +1,6 @@
 # APP_SPEC — prokrastinations-preis
 
-Stand: 2026-06-16 | V2.5 — AP-08b/AP-08c Konsistenz-Nachputz abgeschlossen | Geändert von: Claude
+Stand: 2026-06-17 | V2.5 — AP-08b/AP-08c Konsistenz-Nachputz abgeschlossen | Geändert von: Claude
 
 ---
 
@@ -9,9 +9,9 @@ Stand: 2026-06-16 | V2.5 — AP-08b/AP-08c Konsistenz-Nachputz abgeschlossen | G
 | Feld | Wert |
 |---|---|
 | Version | V2.5 — AP-08b/AP-08c Konsistenz-Nachputz abgeschlossen |
-| Phase | Konzept-Umbau auf Stationen-Zeitreise (AP-01 ✅, AP-02 ✅, AP-03 ✅, AP-04 ✅, AP-05 ✅, AP-06 ✅, AP-07 ✅, AP-08 ✅, AP-08b ✅, AP-08c ✅ Konsistenz-Nachputz abgeschlossen) |
-| Nächster Schritt | B1-AP-09 — produktive `stations.de.json` anlegen |
-| Code-Freigabe | Slice 0 ✅ 2026-06-04, Slice 1 ✅ 2026-06-05, Slice 2 ✅ 2026-06-05, Slice 6 ✅ 2026-06-16; Slice 7+ erst nach AP-09/AP-10 und neuem Pre-Code-Gate |
+| Phase | Konzept-Umbau auf Stationen-Zeitreise (AP-01 ✅, AP-02 ✅, AP-03 ✅, AP-04 ✅, AP-05 ✅, AP-06 ✅, AP-07 ✅, AP-08 ✅, AP-08b ✅, AP-08c ✅, AP-09 ✅, AP-10 ✅ Planungs-Phase abgeschlossen) |
+| Nächster Schritt | B1-AP-11 — Stationen-Loader implementieren (AP-09/AP-10 ✅ 2026-06-17) |
+| Code-Freigabe | Slice 0 ✅ 2026-06-04, Slice 1 ✅ 2026-06-05, Slice 2 ✅ 2026-06-05, Slice 6 ✅ 2026-06-16; Coding-Slices AP-11–AP-18 erst nach AP-10-Gate |
 | Code-Stand | Slice 6 implementiert die alte Ergebnisgrafik-Logik (Screen 2 mit KPI-Cards). Dieser Stand ist nicht mehr Zielzustand. Coding für Stationen-Zeitreise folgt nach AP-09/AP-10. |
 | Grundlage | `Apps/prokrastinations-preis/ENTSCHEIDUNGSPROTOKOLL.md` (AP-01, 2026-06-16) |
 | Ersetzt | APP_SPEC V1.7 (Ergebnisgrafik-Logik — Screen 2 zeigte vollständigen Chart mit KPIs) |

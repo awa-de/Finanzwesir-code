@@ -1,17 +1,17 @@
 <!-- HOOK-META
 Version: 1
-Stand: 2026-06-16
+Stand: 2026-06-17
 Fokus-AP: APP-01 — prokrastinations-preis
-Nächster-Schritt: B1-AP-09 — produktive stations.de.json anlegen (B1-AP-08c ✅ 2026-06-16)
+Nächster-Schritt: B1-AP-11 — Stationen-Loader implementieren (B1-AP-09/AP-10 ✅ 2026-06-17)
 Blocker: keine
 Letzter-Distill: 2026-06-15
 Kassensturz-Datum: 2026-06-15
 -->
-<!-- HOOK-META-SESSION: B1-AP-08c -->
+<!-- HOOK-META-SESSION: B1-AP-10 -->
 
 # PROJECT STATUS — Finanzwesir 2.0
 
-Stand: 2026-06-16 | Session: B1-AP-08c | Geändert von: Claude
+Stand: 2026-06-17 | Session: B1-AP-10 | Geändert von: Claude
 
 **Zweck:** Schneller Wiedereinstieg nach Pausen.
 **Zielgruppe:** Albert und Claude.
@@ -115,6 +115,8 @@ Stand: 2026-06-16 | Session: B1-AP-08c | Geändert von: Claude
 
 ✅ **B1-AP-08 Widersprüchliche Stellen bereinigt (2026-06-16):** 6 Dateien bereinigt: APP_SPEC Versionstabelle (V2.3→V2.4, Nächster Schritt auf AP-08 aktualisiert), SLICE_PLAN (V1.6→V2.4 + Redesign-Abschnitt Stationen-Zeitreise + Microcopy-Ref entfernt), MINI_SPEC (Header als Historisch, Screen 2→Stationen-Zeitreise, Screen 3→erster Reveal), SLICE_0_KICKOFF (Header als historisches Protokoll), SPEC_GATE_REPORT + Perplexity-Review (Archiv-Warnung). Kein Code geändert.
 
+✅ **B1-AP-09/AP-10 abgeschlossen (2026-06-17):** produktive `config/stations.de.json` angelegt (7 Stationen v2.1, Rolling-Window-Policy, 3 source_claimed_unchecked, Redaktions-Gate G-A02 noch nicht bestanden) + `STATIONS_IMPLEMENTATION_PLAN.md` angelegt (Slices AP-11–AP-18, 6 Risiken R-01–R-06). Kein Code geändert.
+
 ---
 
 ## 2. Letzter stabiler Stand
@@ -140,7 +142,7 @@ Stand: 2026-06-16 | Session: B1-AP-08c | Geändert von: Claude
 
 ## 3. Nächster sinnvoller Schritt
 
-- **B1-AP-09** — produktive `stations.de.json` anlegen (B1-AP-08c ✅ 2026-06-16)
+- **B1-AP-11** — Stationen-Loader implementieren (B1-AP-09/AP-10 ✅ 2026-06-17)
 - **AP-20/21** (Mixed-Rhythm CV-Heuristik) — 🟡 Aktiv, Chart-Engine, parallel möglich
 
 ---
@@ -153,7 +155,7 @@ Stand: 2026-06-16 | Session: B1-AP-08c | Geändert von: Claude
 | Chart-Engine | Stabil, offene APs | Siehe `docs/steering/BACKLOG.md` |
 | Theme | In Entwicklung | `THEME-ASSEMBLY-CHECKLIST.md` |
 | CSS | Stabil | Siehe `docs/steering/BACKLOG.md` (CSS-N Items) |
-| Apps | Slice 6 ✅, AP-UX-01 ✅, B1-AP-01 bis AP-08c ✅ 2026-06-16 | B1-AP-09: produktive stations.de.json |
+| Apps | Slice 6 ✅, AP-UX-01 ✅, B1-AP-01 bis AP-10 ✅ 2026-06-17 | B1-AP-11: Stationen-Loader implementieren |
 | Content | Laufend | Redaktionsleitfaden aktiv |
 | Security | SECURITY-BASELINE.md App-Fabrik-gatefähig ✅ | Security-Sync-Regel + Gate-Prüffrage verankert (ST-13/ST-14) |
 
@@ -188,6 +190,9 @@ Vollständig im DECISION-LOG dokumentiert (`docs/steering/DECISION-LOG.md`):
 ---
 
 ## 8. Letzte Session
+
+2026-06-17 — B1-AP-09/AP-10 abgeschlossen (B1-AP-10).
+produktive `config/stations.de.json` angelegt (7 Stationen v2.1, 3 source_claimed_unchecked, Redaktions-Gate G-A02 noch nicht bestanden) + `STATIONS_IMPLEMENTATION_PLAN.md` angelegt (§1–§11, Slices AP-11–AP-18, 6 Risiken R-01–R-06). Kein Code geändert. Nächster Schritt: B1-AP-11.
 
 2026-06-16 — B1-AP-08c Restdrift bereinigt (B1-AP-08c).
 APP_SPEC §8/§12/§19 Fallback-Formulierungen korrigiert; STATIONS_CONFIG_CONTRACT rote Visualregeln endgültig config-ungültig; QA TC-H05 erweitert; PROJECT-STATUS/Memory auf V2.5/AP-09 synchronisiert. Kein Code geändert. Nächster Schritt: B1-AP-09.
@@ -459,16 +464,17 @@ Neue APs: DS-012, DS-013, DS-014.
 
 ## 9. Einstieg für nächste Session
 
-**Nächster Schritt: B1-AP-09 — produktive `stations.de.json` anlegen**
+**Nächster Schritt: B1-AP-11 — Stationen-Loader implementieren**
 
-AP-UX-01, B1-AP-01 bis B1-AP-08c ✅ 2026-06-16. Stationen-Zeitreise vollständig spec-seitig umgesetzt und Doku bereinigt: APP_SPEC.md V2.5 (AP-08b/AP-08c), REDAKTIONS_GATE.md V1.1 (AP-07 + AP-08b/AP-08c), QA_TEST_CASES.md V1.2 (AP-06 + AP-08b/AP-08c), STATIONS_CONFIG_CONTRACT.md (AP-03), UX/Heldenreise §23 (AP-04), A11y/Mobile §14 (AP-05), Doku-Bereinigung (AP-08 + AP-08b/AP-08c). Slice 6 ist Altstand (alte Ergebnisgrafik-Logik, nicht Zielzustand). Coding-Slices für Stationen-Zeitreise folgen nach AP-09/AP-10.
+AP-UX-01, B1-AP-01 bis B1-AP-10 ✅ 2026-06-17. Planungs-Phase Stationen-Zeitreise vollständig abgeschlossen: APP_SPEC.md V2.5, REDAKTIONS_GATE.md V1.1, QA_TEST_CASES.md V1.2, STATIONS_CONFIG_CONTRACT.md (AP-03), `config/stations.de.json` (AP-09), STATIONS_IMPLEMENTATION_PLAN.md AP-11–AP-18 (AP-10). Slice 6 ist Altstand (alte Ergebnisgrafik-Logik, nicht Zielzustand). Coding-Slices beginnen mit B1-AP-11 (Stationen-Loader).
 
 Operative Quellen:
 - `Apps/prokrastinations-preis/APP_SPEC.md` — V2.5 ✅ (AP-08b/AP-08c 2026-06-16)
 - `Apps/prokrastinations-preis/REDAKTIONS_GATE.md` — V1.1 ✅ (AP-07 + AP-08b/AP-08c 2026-06-16)
 - `Apps/prokrastinations-preis/QA_TEST_CASES.md` — V1.2 ✅ (AP-06 + AP-08b + AP-08c 2026-06-16)
 - `Apps/prokrastinations-preis/ENTSCHEIDUNGSPROTOKOLL.md` — Architektur-Klammer B1-AP-01 ✅
-- `Apps/prokrastinations-preis/SLICE_PLAN.md` — Slice-0/1/2/3/4/5/6 ✅ (Slice 6 = Altstand), B1-AP-09 als Nächster Schritt (AP-08b/AP-08c ✅)
+- `Apps/prokrastinations-preis/config/stations.de.json` — produktive Stationen-Konfiguration v2.1 (B1-AP-09 ✅ 2026-06-17)
+- `Apps/prokrastinations-preis/STATIONS_IMPLEMENTATION_PLAN.md` — Implementierungsplan Coding-Slices AP-11–AP-18 (B1-AP-10 ✅ 2026-06-17)
 - `Apps/prokrastinations-preis/STATIONS_CONFIG_CONTRACT.md` — Stations-JSON-Vertrag B1-AP-03 ✅
 
 Entschieden (nicht mehr offen):
