@@ -2,16 +2,16 @@
 Version: 1
 Stand: 2026-06-16
 Fokus-AP: APP-01 — prokrastinations-preis
-Nächster-Schritt: B1-AP-09 — produktive stations.de.json anlegen (B1-AP-08b ✅ 2026-06-16)
+Nächster-Schritt: B1-AP-09 — produktive stations.de.json anlegen (B1-AP-08c ✅ 2026-06-16)
 Blocker: keine
 Letzter-Distill: 2026-06-15
 Kassensturz-Datum: 2026-06-15
 -->
-<!-- HOOK-META-SESSION: B1-AP-08b -->
+<!-- HOOK-META-SESSION: B1-AP-08c -->
 
 # PROJECT STATUS — Finanzwesir 2.0
 
-Stand: 2026-06-16 | Session: B1-AP-08b | Geändert von: Claude
+Stand: 2026-06-16 | Session: B1-AP-08c | Geändert von: Claude
 
 **Zweck:** Schneller Wiedereinstieg nach Pausen.
 **Zielgruppe:** Albert und Claude.
@@ -140,7 +140,7 @@ Stand: 2026-06-16 | Session: B1-AP-08b | Geändert von: Claude
 
 ## 3. Nächster sinnvoller Schritt
 
-- **B1-AP-09** — produktive `stations.de.json` anlegen (B1-AP-08b ✅ 2026-06-16)
+- **B1-AP-09** — produktive `stations.de.json` anlegen (B1-AP-08c ✅ 2026-06-16)
 - **AP-20/21** (Mixed-Rhythm CV-Heuristik) — 🟡 Aktiv, Chart-Engine, parallel möglich
 
 ---
@@ -153,7 +153,7 @@ Stand: 2026-06-16 | Session: B1-AP-08b | Geändert von: Claude
 | Chart-Engine | Stabil, offene APs | Siehe `docs/steering/BACKLOG.md` |
 | Theme | In Entwicklung | `THEME-ASSEMBLY-CHECKLIST.md` |
 | CSS | Stabil | Siehe `docs/steering/BACKLOG.md` (CSS-N Items) |
-| Apps | Slice 6 ✅, AP-UX-01 ✅, B1-AP-01 bis AP-08b ✅ 2026-06-16 | B1-AP-09: produktive stations.de.json |
+| Apps | Slice 6 ✅, AP-UX-01 ✅, B1-AP-01 bis AP-08c ✅ 2026-06-16 | B1-AP-09: produktive stations.de.json |
 | Content | Laufend | Redaktionsleitfaden aktiv |
 | Security | SECURITY-BASELINE.md App-Fabrik-gatefähig ✅ | Security-Sync-Regel + Gate-Prüffrage verankert (ST-13/ST-14) |
 
@@ -188,6 +188,9 @@ Vollständig im DECISION-LOG dokumentiert (`docs/steering/DECISION-LOG.md`):
 ---
 
 ## 8. Letzte Session
+
+2026-06-16 — B1-AP-08c Restdrift bereinigt (B1-AP-08c).
+APP_SPEC §8/§12/§19 Fallback-Formulierungen korrigiert; STATIONS_CONFIG_CONTRACT rote Visualregeln endgültig config-ungültig; QA TC-H05 erweitert; PROJECT-STATUS/Memory auf V2.5/AP-09 synchronisiert. Kein Code geändert. Nächster Schritt: B1-AP-09.
 
 2026-06-16 — B1-AP-08 Widersprüchliche Stellen bereinigt (B1-AP-08).
 6 Dateien bereinigt: APP_SPEC Versionstabelle (V2.3→V2.4), SLICE_PLAN (V1.6→V2.4 + Redesign-Abschnitt + Microcopy-Ref), MINI_SPEC (Header als Historisch, Screen 2→Stationen-Zeitreise, Screen 3→erster Reveal), SLICE_0_KICKOFF (Header historisch), SPEC_GATE_REPORT + Perplexity-Review (Archiv-Warnung). Kein Code geändert. B1-AP-01 bis B1-AP-08 alle ✅.
@@ -458,14 +461,14 @@ Neue APs: DS-012, DS-013, DS-014.
 
 **Nächster Schritt: B1-AP-09 — produktive `stations.de.json` anlegen**
 
-AP-UX-01, B1-AP-01 bis B1-AP-08b ✅ 2026-06-16. Stationen-Zeitreise vollständig spec-seitig umgesetzt und Doku bereinigt: APP_SPEC.md V2.5 (AP-08b), REDAKTIONS_GATE.md V1.1 (AP-07 + AP-08b), QA_TEST_CASES.md V1.2 (AP-06 + AP-08b), STATIONS_CONFIG_CONTRACT.md (AP-03), UX/Heldenreise §23 (AP-04), A11y/Mobile §14 (AP-05), Doku-Bereinigung (AP-08 + AP-08b). Slice 6 ist Altstand (alte Ergebnisgrafik-Logik, nicht Zielzustand). Coding-Slices für Stationen-Zeitreise folgen nach AP-09/AP-10.
+AP-UX-01, B1-AP-01 bis B1-AP-08c ✅ 2026-06-16. Stationen-Zeitreise vollständig spec-seitig umgesetzt und Doku bereinigt: APP_SPEC.md V2.5 (AP-08b/AP-08c), REDAKTIONS_GATE.md V1.1 (AP-07 + AP-08b/AP-08c), QA_TEST_CASES.md V1.2 (AP-06 + AP-08b/AP-08c), STATIONS_CONFIG_CONTRACT.md (AP-03), UX/Heldenreise §23 (AP-04), A11y/Mobile §14 (AP-05), Doku-Bereinigung (AP-08 + AP-08b/AP-08c). Slice 6 ist Altstand (alte Ergebnisgrafik-Logik, nicht Zielzustand). Coding-Slices für Stationen-Zeitreise folgen nach AP-09/AP-10.
 
 Operative Quellen:
 - `Apps/prokrastinations-preis/APP_SPEC.md` — V2.5 ✅ (AP-08b/AP-08c 2026-06-16)
-- `Apps/prokrastinations-preis/REDAKTIONS_GATE.md` — V1.1 ✅ (AP-07 + AP-08b 2026-06-16)
+- `Apps/prokrastinations-preis/REDAKTIONS_GATE.md` — V1.1 ✅ (AP-07 + AP-08b/AP-08c 2026-06-16)
 - `Apps/prokrastinations-preis/QA_TEST_CASES.md` — V1.2 ✅ (AP-06 + AP-08b + AP-08c 2026-06-16)
 - `Apps/prokrastinations-preis/ENTSCHEIDUNGSPROTOKOLL.md` — Architektur-Klammer B1-AP-01 ✅
-- `Apps/prokrastinations-preis/SLICE_PLAN.md` — Slice-0/1/2/3/4/5/6 ✅ (Slice 6 = Altstand), B1-AP-09 als Nächster Schritt (AP-08b ✅)
+- `Apps/prokrastinations-preis/SLICE_PLAN.md` — Slice-0/1/2/3/4/5/6 ✅ (Slice 6 = Altstand), B1-AP-09 als Nächster Schritt (AP-08b/AP-08c ✅)
 - `Apps/prokrastinations-preis/STATIONS_CONFIG_CONTRACT.md` — Stations-JSON-Vertrag B1-AP-03 ✅
 
 Entschieden (nicht mehr offen):

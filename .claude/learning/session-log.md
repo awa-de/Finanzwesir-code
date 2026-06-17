@@ -4,6 +4,15 @@ Wird geleert nach /distill. Einträge: [FRICTION] [WIN] [PREF] [QUESTION] [OK]
 ## 2026-06-16 – SESSION START | Fokus: APP-01 — prokrastinations-preis
 - FinanzwesirData.js, CSVParser.js, FwDateUtils.js — diese Session nicht berühren. ✓
 
+## 2026-06-16 – B1-AP-08d abgeschlossen | Finaler Konsistenzschluss vor AP-09
+- [OK] 7 Dateien bereinigt, kein Code geändert, keine produktive JSON, keine neuen Strukturen
+- [OK] APP_SPEC §12: Error (d) + Empty-Journey-State in Diagramm + Tabelle + formale Grundregeln ergänzt
+- [OK] REDAKTIONS_GATE G-A06b: von „nur ARIA Live Region" auf alle A11y-Kanäle (aria-label, figcaption, visually-hidden, Chartbeschreibungen) erweitert — jetzt gleiche Breite wie TC-H05
+- [OK] SLICE_PLAN: Slice 7 / 8a / 8b Status → „Historischer Altplan — nicht aktueller nächster Auftrag"; Altplan-Notizen ergänzt
+- [OK] PROJECT-STATUS: HOOK-META-SESSION, §3, §4, §8 (neuer AP-08c-Eintrag), §9 auf AP-08c synchronisiert
+- [OK] NAVIGATION, QA_TEST_CASES, Memory-Frontmatter: AP-08b-Stand auf AP-08c korrigiert
+- [WIN] G-A06b und TC-H05 sind jetzt deckungsgleich — kein Gate-vs.-Test-Widerspruch mehr
+
 ## 2026-06-16 – B1-AP-08 abgeschlossen | Dokumentations-Bereinigung Stationen-Zeitreise
 - [OK] 6 Dateien bereinigt: APP_SPEC (Versionstabelle), SLICE_PLAN (V1.6→V2.4, Redesign-Abschnitt, Microcopy-Ref), MINI_SPEC (Screen 2+3), SLICE_0_KICKOFF (Header), SPEC_GATE_REPORT + Perplexity-Review (Archiv-Warnung)
 - [OK] Kein Code, keine produktive JSON, keine Versionskopien, keine Archivbewegungen

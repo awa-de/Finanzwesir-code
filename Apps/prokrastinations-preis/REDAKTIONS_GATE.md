@@ -1,4 +1,4 @@
-Stand: 2026-06-16 | V1.1 — AP-08b Konsistenz-Nachputz | Geändert von: Claude
+Stand: 2026-06-16 | V1.1 — AP-08b/AP-08c Konsistenz-Nachputz abgeschlossen | Geändert von: Claude
 
 # Redaktions-Gate — prokrastinations-preis
 
@@ -158,24 +158,39 @@ Begründung: Wenn Screen 2 das Ende verrät, ist der Hindsight-Bias-Beweis zerst
 
 ---
 
-### G-A06b — Kein Endwissens-Leak über A11y (Screenreader)
+### G-A06b — Kein Endwissens-Leak über A11y (alle assistiven und semantischen Ausgaben)
 
 **Typ:** Technisch / Manuell
 **Blockierend:** Ja
 
-Regel: Die ARIA Live Region darf auf Screen 1 und Screen 2 keinen Depotwert und kein finales Ergebnis ausgeben.
+Regel: Das Endwissens-Verbot gilt nicht nur visuell, sondern für alle assistiven und semantischen Ausgaben.
 
-Verboten auf Screen 2 in der Live Region:
+Geltungsbereich — alle folgenden Ausgabekanäle:
+- ARIA Live Region,
+- `aria-label`-Attribute,
+- `figcaption`-Texte,
+- `visually-hidden`-Texte,
+- Chartbeschreibungen,
+- Alt-/Ersatztexte,
+- sonstige Screenreader-Zusammenfassungen.
+
+**Verboten vor Screen 3** (in allen oben genannten Ausgabekanälen):
 - finaler Depotwert (`depotwertHeute`),
-- eingezahltes Gesamtkapital (`eingezahlt`),
-- Differenz / Gewinn (`differenz`),
-- jede Formulierung, die das Endergebnis der 10-Jahres-Reise nennt.
+- finales eingezahltes Gesamtkapital (`eingezahlt`),
+- finale Differenz / Gewinn (`differenz`),
+- finaler CSV-Endmonat als Reveal,
+- Formulierungen wie „hätte heute X €",
+- Chartbeschreibung, die den vollständigen 120-Monats-Rückblick nennt.
 
-Erlaubt auf Screen 2: `stationLiveMessage` — Stationsname und Kurzbeschreibung ohne Zahlen aus dem Endergebnis.
+**Erlaubt auf Screen 2:**
+- `stationLiveMessage` — Stationsname und Kurzbeschreibung ohne Zahlen aus dem Endergebnis,
+- Stationsname, Datum, Quellenlabel, kurze Ereignisbeschreibung,
+- Chartbeschreibung nur bis zur aktuellen Station,
+- Hinweis: „Die spätere Entwicklung ist noch nicht eingeblendet."
 
-Erst auf Screen 3: `revealA11ySummary` mit vollem Ergebnis in die Live Region schreiben.
+Erst auf Screen 3: `revealA11ySummary` mit vollem Ergebnis in die Live Region und alle finalen Werte in `figcaption`, `aria-label` und `visually-hidden` schreiben.
 
-Begründung: G-A06 gilt auch für Screenreader. Ein Endwissens-Leak über die Live Region zerstört den Hindsight-Bias-Beweis für Nutzer mit Seheinschränkung.
+Begründung: G-A06 gilt auch für alle A11y-Ausgabekanäle. Ein Endwissens-Leak über ARIA, `figcaption` oder `visually-hidden` zerstört den Hindsight-Bias-Beweis für Nutzer mit Seheinschränkung.
 
 Prüfung: → TC-H05 in `QA_TEST_CASES.md`.
 
@@ -509,4 +524,4 @@ AP-07 implementiert das nicht, sondern dokumentiert die Regel. Technische Umsetz
 | Offen | Business Insider 2018 oder WiWo 2018 ersetzen — Quellenentscheidung |
 | Offen | Finale Impfstoff-Quelle (November 2020) bestätigen |
 
-*AP-07 ✅ 2026-06-16, AP-08b ✅ 2026-06-16 | Nächster Schritt: B1-AP-09 — produktive `stations.de.json` anlegen*
+*AP-07 ✅ 2026-06-16, AP-08b ✅ 2026-06-16, AP-08c ✅ 2026-06-16 | Nächster Schritt: B1-AP-09 — produktive `stations.de.json` anlegen*

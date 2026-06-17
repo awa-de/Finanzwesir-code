@@ -103,9 +103,9 @@ Diese Frage ist nach B-01-Entscheidungen weiterhin offen.
 | **4** | SparplanChart | AppContext → Chart-Renderer | Slice 2 + OA-02 entschieden | ✅ 2026-06-11 |
 | **5** | 4-Screen-Flow (Button-getrieben) | Screen-Controller → Fokus-Management | Slice 2 + 3 | ✅ 2026-06-15 |
 | **6** | VertikaleLinie + AssumptionsBox | Chart-Erweiterung + TextBlock + PrimaryCta | Slice 4 + 5 | ✅ 2026-06-16 |
-| **7** | A11y-Härtung + Responsive | app.js, app.css | Slice 6 | Offen |
-| **8a** | QA / Testseite vollständig | app.test.html | Slice 7 | Offen |
-| **8b** | Ghost-Integrationstest | Ghost-Deploy | NB-4 (Bootstrapper + Upload-URL) | Offen |
+| **7** | A11y-Härtung + Responsive | app.js, app.css | Slice 6 | Historischer Altplan — nicht aktueller nächster Auftrag |
+| **8a** | QA / Testseite vollständig | app.test.html | Slice 7 | Historischer Altplan — nicht aktueller nächster Auftrag |
+| **8b** | Ghost-Integrationstest | Ghost-Deploy | NB-4 (Bootstrapper + Upload-URL) | Historischer Altplan — nicht aktueller nächster Auftrag |
 
 ---
 
@@ -355,6 +355,8 @@ Slice 4 und 5 abgeschlossen.
 
 ---
 
+> [!note] Altplan — Slice 7, 8a und 8b wurden vor dem Stationen-Zeitreise-Redesign geplant und sind kein aktueller nächster Auftrag. Coding-Slices für die Stationen-Zeitreise werden nach B1-AP-09/B1-AP-10 neu geplant.
+
 ## Slice 7 — A11y-Härtung + Responsive
 
 ### Was drin ist
@@ -369,7 +371,7 @@ Slice 4 und 5 abgeschlossen.
 
 ---
 
-> [!note] Altplan — Slice 8a und 8b wurden vor dem Stationen-Zeitreise-Redesign geplant. Sie sind kein aktueller Auftrag. Neue Slice-Planung folgt nach B1-AP-09/AP-10.
+> [!note] Altplan — Slice 7 (Beschreibung oben), 8a und 8b wurden vor dem Stationen-Zeitreise-Redesign geplant. Kein aktueller Auftrag. Coding-Slices für die Stationen-Zeitreise werden nach B1-AP-09/B1-AP-10 neu geplant.
 
 ## Slice 8a — QA / Testseite vollständig
 

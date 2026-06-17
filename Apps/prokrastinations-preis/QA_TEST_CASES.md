@@ -1,4 +1,4 @@
-Stand: 2026-06-16 | V1.2 — AP-08b Konsistenz-Nachputz | Geändert von: Claude
+Stand: 2026-06-16 | V1.2 — AP-08b/AP-08c Konsistenz-Nachputz abgeschlossen | Geändert von: Claude
 
 # QA_TEST_CASES — prokrastinations-preis
 

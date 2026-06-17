@@ -1,6 +1,6 @@
 ---
 name: app-fabrik-struktur-und-z-hlmodell
-description: "docs/App-Fabrik Steuerungsverzeichnis; 22+3=25 App-Ordner; B1 APP_SPEC V2.5 operativ (Stationen-Zeitreise); Slice-6 ✅ 2026-06-16 (Altstand); B1-AP-01 bis AP-08b ✅ 2026-06-16; B1-AP-09 nächster Schritt (produktive stations.de.json)"
+description: "docs/App-Fabrik Steuerungsverzeichnis; 22+3=25 App-Ordner; B1 APP_SPEC V2.5 operativ (Stationen-Zeitreise); Slice-6 ✅ 2026-06-16 (Altstand); B1-AP-01 bis AP-08c ✅ 2026-06-16; B1-AP-09 nächster Schritt (produktive stations.de.json)"
 metadata: 
   node_type: memory
   type: project

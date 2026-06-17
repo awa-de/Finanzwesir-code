@@ -1,6 +1,6 @@
 # APP_SPEC — prokrastinations-preis
 
-Stand: 2026-06-16 | V2.5 — AP-08b Konsistenz-Nachputz | Geändert von: Claude
+Stand: 2026-06-16 | V2.5 — AP-08b/AP-08c Konsistenz-Nachputz abgeschlossen | Geändert von: Claude
 
 ---
 
@@ -8,8 +8,8 @@ Stand: 2026-06-16 | V2.5 — AP-08b Konsistenz-Nachputz | Geändert von: Claude
 
 | Feld | Wert |
 |---|---|
-| Version | V2.5 — AP-08b Konsistenz-Nachputz |
-| Phase | Konzept-Umbau auf Stationen-Zeitreise (AP-01 ✅, AP-02 ✅, AP-03 ✅, AP-04 ✅, AP-05 ✅, AP-06 ✅, AP-07 ✅, AP-08 ✅, AP-08b Konsistenz-Nachputz) |
+| Version | V2.5 — AP-08b/AP-08c Konsistenz-Nachputz abgeschlossen |
+| Phase | Konzept-Umbau auf Stationen-Zeitreise (AP-01 ✅, AP-02 ✅, AP-03 ✅, AP-04 ✅, AP-05 ✅, AP-06 ✅, AP-07 ✅, AP-08 ✅, AP-08b ✅, AP-08c ✅ Konsistenz-Nachputz abgeschlossen) |
 | Nächster Schritt | B1-AP-09 — produktive `stations.de.json` anlegen |
 | Code-Freigabe | Slice 0 ✅ 2026-06-04, Slice 1 ✅ 2026-06-05, Slice 2 ✅ 2026-06-05, Slice 6 ✅ 2026-06-16; Slice 7+ erst nach AP-09/AP-10 und neuem Pre-Code-Gate |
 | Code-Stand | Slice 6 implementiert die alte Ergebnisgrafik-Logik (Screen 2 mit KPI-Cards). Dieser Stand ist nicht mehr Zielzustand. Coding für Stationen-Zeitreise folgt nach AP-09/AP-10. |
@@ -477,6 +477,8 @@ Init
        │         ├─ Stationen auf aktives Fenster filtern
        │         ├─ aktive Stationen sortieren
        │         ├─ finalen Reveal aus CSV erzeugen
+       │         ├─ Error (d)      (Stations-JSON nicht erreichbar / nicht parsebar / Contract ungültig)
+       │         ├─ Empty-Journey  (Stations-JSON valide, aber keine Station im aktiven Fenster oder Redaktions-Gate nicht publikationsreif)
        │         └─ Content
        ├─ Error (b)  (URL ungültig / Domain-Lock / CSV nicht parsebar)
        ├─ Error (c)  (CSV parsebar, unitKey ≠ CURRENCY_EUR)
@@ -491,10 +493,20 @@ Init
 | Error (b) | URL ungültig / Domain-Lock / CSV nicht parsebar | „Daten konnten nicht geladen werden. Bitte Seite neu laden." — `textContent`, kein Stacktrace |
 | Error (c) | CSV parsebar, aber `unitKey ≠ CURRENCY_EUR` (kein oder falscher Währungssuffix) | „Datenreihe hat keine oder ungültige Währungsangabe. Erwartet: EUR." — `textContent`, kein Stacktrace |
 | Empty | CSV valide, aber < 120 Datenzeilen oder Pflichtfelder fehlen | „Nicht genug Daten für die Berechnung. Bitte Datenquelle prüfen." — `textContent`, kein Stacktrace |
+| Error (d) | Stations-JSON nicht ladbar, nicht parsebar oder Contract ungültig | „Die Zeitreise kann gerade nicht geladen werden." — `textContent`, kein Stacktrace |
+| Empty-Journey | Stations-JSON valide, aber keine aktive Station im Fenster oder Redaktions-Gate nicht publikationsreif | „Die Zeitreise ist aktuell nicht vollständig konfiguriert." — `textContent`, kein Stacktrace |
 
 **Ungültige `data-fw-options`-Werte:** Fallback auf internen Default, kein Error-State.
 
-**Stations-JSON-Fehler:** Kein synthetischer Fallback, keine Ersatzstationen. Bei ungültiger oder fehlender Config: nutzerfreundlicher Error-/Empty-State. Dev: Gate-Fehler sichtbar. Details: STATIONS_CONFIG_CONTRACT.md §12. Technische Implementierung folgt in Coding-AP.
+**Error (d) und Empty-Journey-State — Grundregeln:**
+- Keine synthetische Ersatzreise.
+- Keine Ersatzstationen.
+- Keine stillen Defaults.
+- Produktivmodus: nutzerfreundlicher Fehler-/Empty-State (Texte: siehe Tabelle oben).
+- Dev-Modus: konkrete Gate-/Config-Hinweise (z. B. welche Station fehlt, welches Redaktions-Gate nicht bestanden wurde).
+- Das Redaktions-Gate entscheidet Publikationsreife — nicht der Nutzer im UI.
+- Details und Fehlerkonzept: `STATIONS_CONFIG_CONTRACT.md §12`.
+- Technische Implementierung folgt in Coding-AP.
 
 ---
 
