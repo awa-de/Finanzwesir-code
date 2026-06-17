@@ -2,6 +2,23 @@
 <!-- Token-Strategie: Hook liefert Fakten | Schritt 1 → Haiku-Dispatch | Synthese → Hauptinstanz -->
 <!-- CLAUDE_CODE_SUBAGENT_MODEL=haiku ist in settings.json gesetzt — gilt für alle Dispatches -->
 
+## Vorab — Warm-Start-Check (vor allem anderen)
+
+Lies die letzten 20 Zeilen von `.claude/learning/session-log.md`.
+
+Enthält die Datei einen Eintrag `## YYYY-MM-DD – SESSION START` mit dem **heutigen Datum**?
+
+**JA → WARM-START-Modus:**
+- Schreibe sofort in session-log.md: `### [AP-ID aus Hook-Output] — AP-Wechsel`
+- Layer-1-Fingerabdruck bestätigen (wie Schritt 0).
+- Ausgabe: `[WARM-START] AP-Wechsel | Jetzt: [Fokus-AP] | Faden läuft seit: [Datum des SESSION-START-Eintrags]`
+- **Alle weiteren Schritte entfallen** (kein Dispatch, kein BACKLOG-Lesen, kein Kassensturz).
+- Fertig.
+
+**NEIN → Kaltstart:** weiter mit „Vorab — Hook-Status-Check" unten.
+
+---
+
 ## Vorab — Hook-Status-Check
 
 Wenn Hook-Output `Hook-Status: DEGRADED` enthält:

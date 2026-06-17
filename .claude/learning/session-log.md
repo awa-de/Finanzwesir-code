@@ -161,3 +161,9 @@ FinanzwesirData.js, CSVParser.js, FwDateUtils.js — diese Session nicht berühr
 
 ## 2026-06-16 – AP-01 + AP-02 | Entscheidungsprotokoll + APP_SPEC V2.0
 - [OK] Keine Vorkommnisse — beide APs planmäßig: AP-01 ENTSCHEIDUNGSPROTOKOLL.md neu angelegt, AP-02 APP_SPEC.md V1.7→V2.0 nach Spec-Rewrite-Guard ohne Korrektur umgebaut
+
+## 2026-06-17 – SESSION START | Fokus: APP-01 — prokrastinations-preis
+`FinanzwesirData.js, CSVParser.js, FwDateUtils.js — diese Session nicht berühren. ✓`
+
+### 2026-06-17 – Process | /start Warm-Start-Modus
+- [OK] Warm-Start-Check in start.md verankert (Kaltstart vs. laufender Faden); Block-Modus in abschluss-ritual identifiziert aber nicht proaktiv gemeldet — Lücke erkannt.
