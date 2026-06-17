@@ -1,11 +1,12 @@
 # BACKLOG-ARCHIV – Finanzwesir 2.0
-Stand: 2026-06-17 | Session: B1-AP-10a | Geändert von: Claude
+Stand: 2026-06-17 | Session: B1-AP-11 | Geändert von: Claude
 
 Abgeschlossene Items, neueste zuerst (append-only).
 Archivierungs-Trigger: wenn > 200 Zeilen → neue Datei `BACKLOG-ARCHIV-YYYY.md` anlegen.
 
 | ID | Bereich | Titel | Abgeschlossen | Session |
 |----|---------|-------|---------------|---------|
+| B1-AP-11 | App | `loadStations()` implementiert: `config/stations.de.json` per `fetch` parallel zur CSV (`Promise.all`). HTTP- und Parse-Fehler → `Error(d)`, kein stiller Fallback, keine Ersatzstationen. `stationsConfig` an `renderContent` übergeben (für AP-12 verfügbar). Nur `app.js` geändert, keine UI-Änderung. | 2026-06-17 | B1-AP-11 |
 | B1-AP-10a | App | Konsistenz-Nachputz nach AP-09/AP-10: `stations.de.json` — `flags.finalWobble = true`, `flags.lateWobble` entfernt bei `station_2025_04_tariff_shock` (Spec-konform laut APP_SPEC.md §23.14 und CONTRACT §7). `STATIONS_IMPLEMENTATION_PLAN.md` V1.1 — EditorialDegraded-Tabellenzeile korrigiert (Gate-A, nicht Gate-B/C; kein „Normale App"), R-02 als erledigt markiert, Drift-Neutralisierungssatz entfernt, `lateWobble` aus Extra-Flags-Beispiel entfernt. Kein Produktivcode geändert. *(sofort erledigt)* | 2026-06-17 | B1-AP-10a |
 | B1-AP-10 | App | STATIONS_IMPLEMENTATION_PLAN.md angelegt: §1–§11 vollständig, Slices AP-11–AP-18 (Ziele, Grenzen, Akzeptanzkriterien, Abbruchbedingungen), AP-09-Vorprüfung, 6 offene Risiken R-01–R-06. Kein Produktivcode, keine UI-Änderungen. | 2026-06-17 | B1-AP-10 |
 | B1-AP-09 | App | produktive `config/stations.de.json` angelegt (7 Stationen v2.1, Rolling-Window-Policy, 3 source_claimed_unchecked ehrlich gemeldet, Redaktions-Gate G-A02 noch nicht bestanden). stationValueDesktop auf Contract-Wert `hover_or_focus_optional` korrigiert. Kein Code geändert. | 2026-06-17 | B1-AP-10 |

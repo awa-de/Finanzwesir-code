@@ -1,6 +1,14 @@
 # Session-Log — Finanzwesir 2.0
 Wird geleert nach /distill. Einträge: [FRICTION] [WIN] [PREF] [QUESTION] [OK]
 
+## 2026-06-17 – B1-AP-11 abgeschlossen | CSV + Stations-JSON parallel laden
+- [OK] Keine Vorkommnisse — loadStations() + Promise.all sauber implementiert, alle Akzeptanzkriterien erfüllt
+- [OK] JSON.parse in AP-11 explizit approved (Gate-Frage 5 + Albert-OK); Plan-Formulierung „nur Fetch + Text" als „kein Content-Validate" interpretiert
+- [OK] CSVParser.js, FinanzwesirData.js, ChartEngine unberührt; stationsConfig für AP-12 verfügbar
+
+## 2026-06-17 – SESSION START (Faden 3) | Fokus: APP-01 — B1-AP-11 Stationen-Loader
+- FinanzwesirData.js, CSVParser.js, FwDateUtils.js — diese Session nicht berühren. ✓
+
 ## 2026-06-17 – B1-AP-10a abgeschlossen | Konsistenz-Nachputz nach AP-09/AP-10
 - [OK] Keine Vorkommnisse — Abweichungen bekannt und im Prompt-Briefing vollständig beschrieben
 - [OK] stations.de.json: flags.finalWobble = true, flags.lateWobble entfernt (station_2025_04_tariff_shock)

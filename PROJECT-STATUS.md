@@ -2,16 +2,16 @@
 Version: 1
 Stand: 2026-06-17
 Fokus-AP: APP-01 — prokrastinations-preis
-Nächster-Schritt: B1-AP-11 — Stationen-Loader implementieren (B1-AP-09/AP-10/AP-10a ✅ 2026-06-17)
+Nächster-Schritt: B1-AP-12 — Stations-JSON validieren (B1-AP-09/AP-10/AP-10a/AP-11 ✅ 2026-06-17)
 Blocker: keine
 Letzter-Distill: 2026-06-15
 Kassensturz-Datum: 2026-06-15
 -->
-<!-- HOOK-META-SESSION: B1-AP-10a -->
+<!-- HOOK-META-SESSION: B1-AP-11 -->
 
 # PROJECT STATUS — Finanzwesir 2.0
 
-Stand: 2026-06-17 | Session: B1-AP-10a | Geändert von: Claude
+Stand: 2026-06-17 | Session: B1-AP-11 | Geändert von: Claude
 
 **Zweck:** Schneller Wiedereinstieg nach Pausen.
 **Zielgruppe:** Albert und Claude.

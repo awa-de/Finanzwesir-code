@@ -138,7 +138,7 @@ function renderKpiCards(container, appContext) {
 }
 
 // CHANGED — Slice 5: 4-Screen-Flow (war: flache Darstellung Slice 3/4)
-function renderContent(container, appData, options) {
+function renderContent(container, appData, options, stationsConfig) { // CHANGED — AP-11
   const initialRate = options.defaultRate;
   const startBetrag = options.startBetrag;
 
@@ -451,6 +451,19 @@ async function _loadDataImpl(url) {
   return { appData };
 }
 
+// NEW — AP-11: Stations-JSON app-spezifisch laden
+async function loadStations() {
+  try {
+    const response = await fetch('config/stations.de.json');
+    if (!response.ok) throw new Error('HTTP ' + response.status);
+    const stationsConfig = JSON.parse(await response.text());
+    return { stationsConfig };
+  } catch (e) {
+    console.error('[fw-app] loadStations error:', e);
+    return { error: 'd', message: 'Die Zeitreise kann gerade nicht geladen werden.' };
+  }
+}
+
 async function initApp(container, slug) {
   try {
     setState(container, 'loading');
@@ -464,21 +477,27 @@ async function initApp(container, slug) {
     renderLoading(container);
 
     const dataUrl = (container.dataset.fwData || '').trim();
-    const result  = await loadData(dataUrl);
+    const [csvResult, stationsResult] = await Promise.all([  // CHANGED — AP-11
+      loadData(dataUrl),
+      loadStations()
+    ]);
 
     clearContainer(container);
 
-    if (result.error === 'empty') {
+    if (csvResult.error === 'empty') {
       setState(container, 'empty');
-      renderError(container, result.message);
-    } else if (result.error) {
+      renderError(container, csvResult.message);
+    } else if (csvResult.error) {
       setState(container, 'error');
-      renderError(container, result.message);
+      renderError(container, csvResult.message);
+    } else if (stationsResult.error) {                       // NEW — AP-11
+      setState(container, 'error');
+      renderError(container, stationsResult.message);
     } else {
       setState(container, 'content');
-      const rawOptions = (container.dataset.fwOptions || '').trim(); // NEW
-      const options    = parseOptions(rawOptions);                    // NEW
-      renderContent(container, result.appData, options);              // CHANGED
+      const rawOptions = (container.dataset.fwOptions || '').trim();
+      const options    = parseOptions(rawOptions);
+      renderContent(container, csvResult.appData, options, stationsResult.stationsConfig); // CHANGED — AP-11
     }
 
   } catch (e) {
