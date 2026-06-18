@@ -1,4 +1,4 @@
-# Session-Log — Finanzwesir 2.0
+﻿﻿# Session-Log — Finanzwesir 2.0
 Wird geleert nach /distill. Einträge: [FRICTION] [WIN] [PREF] [QUESTION] [OK]
 
 ## 2026-06-17 – B1-AP-14 abgeschlossen | Stationen-Zeitreise: Screen 2 Umbau + Editorial Gate
@@ -281,3 +281,10 @@ FinanzwesirData.js, CSVParser.js, FwDateUtils.js — diese Session nicht berühr
 - [OK] Keine Engine-Dateien geändert; final_reveal-Guard (Zeile 200) bereits vorhanden — deckt dynamic_latest_month ab
 - [OK] Manueller Test durch Albert: alle Prüfschritte grün
 - [OK] Ergebnisprotokoll: docs/steering/patches/B1-AP-14c3_Screen3-Final-Reveal-Ringe_Ergebnis.md
+
+### 2026-06-18 — B1-AP-14c3b ✅ Final-Reveal-Guard gehärtet + Screen-3-Smoke-Test
+- [OK] isFinalRevealStation(): 5 Guards (role, date, status, flags.finalReveal, id-Substrings), alle defensiv
+- [OK] buildJourneyStationAnnotations: einfacher role-Guard ersetzt durch isFinalRevealStation(s)
+- [OK] Screen-2-Sicherheit statisch bestätigt (slice-Grenze strukturell, Guard = Defense-in-Depth)
+- [OK] Smoke-Test durch Albert: alle 6 Prüfschritte grün; Console-Einträge = erwartete Test-Szenarien
+- [OK] Ergebnisprotokoll: docs/steering/patches/B1-AP-14c3b_Final-Reveal-Guard_Screen3-Smoke_Ergebnis.md

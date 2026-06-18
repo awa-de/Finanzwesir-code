@@ -191,13 +191,29 @@ function buildVisibleChartSeries(chartSeries, stationMonth) {
   return chartSeries.filter(p => p.month <= stationMonth);
 }
 
+// NEW — B1-AP-14c3b: robuster Guard für Final-/Reveal-/Schluss-Stationen
+// Schließt eine Station aus, wenn eines der folgenden Merkmale zutrifft.
+// Alle Zugriffe defensiv — fehlende Felder (flags, id) werfen keinen Fehler.
+function isFinalRevealStation(s) {
+  if (s.role === 'final_reveal') return true;
+  if (s.date === 'dynamic_latest_month') return true;
+  if (s.status === 'final') return true;
+  if (s.flags && s.flags.finalReveal === true) return true;
+  if (s.id && (
+    s.id.includes('final_reveal') ||
+    s.id.includes('final_latest_month') ||
+    s.id.includes('station_final')
+  )) return true;
+  return false;
+}
+
 // NEW — B1-AP-14c1: Annotationen aus vergangenen Journey-Stations ableiten (kein Rendering)
 // Nur Stationen vor der aktuellen (pastStations = slice(0, currentIdx)).
 // markerY per Snapshot-Snap: passender Monatspunkt der sichtbaren Hauptserie.
 function buildJourneyStationAnnotations(pastStations, visibleSeries) {
   const events = [];
   for (const s of pastStations) {
-    if (s.role === 'final_reveal') continue; // Guard: final_reveal nie annotieren
+    if (isFinalRevealStation(s)) continue; // CHANGED — B1-AP-14c3b: robuster Guard
     const sMonth = s.date.slice(0, 7);
     const point = visibleSeries.find(p => p.month === sMonth); // Snapshot-Snap
     if (!point) continue; // kein Datenpunkt — keine künstliche Annotation
