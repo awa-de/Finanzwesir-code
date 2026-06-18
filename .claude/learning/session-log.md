@@ -304,3 +304,11 @@ FinanzwesirData.js, CSVParser.js, FwDateUtils.js — diese Session nicht berühr
 - [WIN] Albert: „Alles was wir an Rauschen rausbekommen können, müssen wir vernichten" — Spec-Drift vollständig bereinigt
 
 ### 2026-06-18 — B1-AP-15 — AP-Wechsel
+
+### 2026-06-18 — B1-AP-14d4 ✅ §16.3 UI-Primitive-Status synchronisiert
+- [OK] 13 von 16 Primitiven von „zu bauen" auf ✅ umgesetzt korrigiert; 1 ⚠️ (Stationen-Button / continueLabel), 1 ⏳ (Draw-Animation / Slice 6)
+- [WIN] Haiku-Scout lieferte präzise Zeilennachweise für alle Primitive — kein manuelles Durchsuchen nötig
+- [OK] Ergebnisprotokoll: docs/steering/patches/B1-AP-14d4_UI-Primitive-Status-Sync_Ergebnis.md
+
+### 2026-06-18 — B1-AP-15 — AP-Wechsel (neuer Faden)
+- Layer-1-Fingerabdruck: FinanzwesirData.js, CSVParser.js, FwDateUtils.js — diese Session nicht berühren. ✓

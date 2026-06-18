@@ -1,6 +1,6 @@
 # APP_SPEC — prokrastinations-preis
 
-Stand: 2026-06-18 | V2.8 — B1-AP-14d3: Pulse-Produktentscheidung dokumentiert (§14.6, §16.1, §16.3, §16.4) | Geändert von: Claude
+Stand: 2026-06-18 | V2.9 — B1-AP-14d4: §16.3 UI-Primitive-Status synchronisiert | Geändert von: Claude
 
 ---
 
@@ -8,7 +8,7 @@ Stand: 2026-06-18 | V2.8 — B1-AP-14d3: Pulse-Produktentscheidung dokumentiert 
 
 | Feld | Wert |
 |---|---|
-| Version | V2.7 — B1-AP-14a2: Progressive Domain LineChart und AP-14c-Marker-Zielbild dokumentiert |
+| Version | V2.9 — B1-AP-14d4: §16.3 UI-Primitive-Status synchronisiert (V2.8: AP-14d3 Pulse-Produktentscheidung) |
 | Phase | Konzept-Umbau auf Stationen-Zeitreise (AP-01 ✅, AP-02 ✅, AP-03 ✅, AP-04 ✅, AP-05 ✅, AP-06 ✅, AP-07 ✅, AP-08 ✅, AP-08b ✅, AP-08c ✅, AP-09 ✅, AP-10 ✅ Planungs-Phase abgeschlossen) |
 | Nächster Schritt | B1-AP-14b — Engine-Umbau Progressive Domain LineChart (B1-AP-14a2 ✅ 2026-06-18) |
 | Code-Freigabe | Slice 0 ✅ 2026-06-04, Slice 1 ✅ 2026-06-05, Slice 2 ✅ 2026-06-05, Slice 6 ✅ 2026-06-16; Coding-Slices AP-11–AP-18 erst nach AP-10-Gate |
@@ -1232,22 +1232,22 @@ Heute Marktzeit sammeln
 
 | Primitive | Zweck | Sichtbar ab | Status |
 |---|---|---|---|
-| Slider | monatliche Sparrate (Haupt-Eingabe) | Screen 1 | zu bauen |
-| Teleportationsbutton | Screen 1 → Screen 2 | Screen 1 | zu bauen |
-| SparplanChart (wachsend) | Teilansicht bis aktuelle Station | Screen 2 | zu bauen |
-| StationCard | Datum, Quellenlabel, Headline, Anleger-Anker | Screen 2 | zu bauen |
-| Stationen-Button | `Weiter investiert bleiben` | Screen 2 | zu bauen |
-| Mobile-Collapsible | `Zwischenstand anzeigen` → Eingezahlt + Depotwert damals | Screen 2 | zu bauen |
-| Marker-Pulse-Ring | Neu sedimentierter Ring pulst 1200 ms (1.8×, 2 Pulse) | Screen 2 | ✅ B1-AP-14c4 |
-| Draw-Animation | Chart wächst zur nächsten Station | Screen 2 | zu bauen |
-| SparplanChart (vollständig) | 120-Monate-Gesamtverlauf | Screen 3 | zu bauen |
-| VertikaleLinie | Entscheidungspunkt-Marker bei letztem Datenpunkt | Screen 3 | zu bauen |
-| KpiCard | eingezahlt / depotwertHeute / differenz | Screen 3 | zu bauen |
-| AssumptionsBox | Pflichthinweis: Vergangenheit ≠ Garantie | Screen 3 | zu bauen |
-| TextBlock | Microcopy pro Screen | je Screen | zu bauen |
-| PrimaryCta | Handlungsaufruf | Screen 4 | zu bauen |
-| ErrorState | Fehlermeldung auf Deutsch | jederzeit | zu bauen |
-| LoadingSkeleton | Platzhalter während Datenladen | Loading | zu bauen |
+| Slider | monatliche Sparrate (Haupt-Eingabe) | Screen 1 | ✅ umgesetzt |
+| Teleportationsbutton | Screen 1 → Screen 2 | Screen 1 | ✅ umgesetzt |
+| SparplanChart (wachsend) | Teilansicht bis aktuelle Station | Screen 2 | ✅ umgesetzt |
+| StationCard | Datum, Quellenlabel, Headline, Anleger-Anker | Screen 2 | ✅ umgesetzt |
+| Stationen-Button | `Weiter investiert bleiben` | Screen 2 | ⚠️ teilweise umgesetzt |
+| Mobile-Collapsible | `Zwischenstand anzeigen` → Eingezahlt + Depotwert damals | Screen 2 | ✅ umgesetzt |
+| Marker-Pulse-Ring | Neu sedimentierter Ring pulst 1200 ms (1.8×, 2 Pulse) | Screen 2 | ✅ umgesetzt (B1-AP-14c4) |
+| Draw-Animation | Chart wächst zur nächsten Station | Screen 2 | ⏳ bewusst offen |
+| SparplanChart (vollständig) | 120-Monate-Gesamtverlauf | Screen 3 | ✅ umgesetzt |
+| VertikaleLinie | Entscheidungspunkt-Marker bei letztem Datenpunkt | Screen 3 | ✅ umgesetzt |
+| KpiCard | eingezahlt / depotwertHeute / differenz | Screen 3 | ✅ umgesetzt |
+| AssumptionsBox | Pflichthinweis: Vergangenheit ≠ Garantie | Screen 3 | ✅ umgesetzt |
+| TextBlock | Microcopy pro Screen | je Screen | ✅ umgesetzt |
+| PrimaryCta | Handlungsaufruf | Screen 4 | ✅ umgesetzt |
+| ErrorState | Fehlermeldung auf Deutsch | jederzeit | ✅ umgesetzt |
+| LoadingSkeleton | Platzhalter während Datenladen | Loading | ✅ umgesetzt |
 
 ### 16.4 Screen-Übergänge und Stationen-Mechanik
 

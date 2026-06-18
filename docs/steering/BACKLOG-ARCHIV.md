@@ -1,11 +1,12 @@
 # BACKLOG-ARCHIV – Finanzwesir 2.0
-Stand: 2026-06-18 | Session: B1-AP-14c1 | Geändert von: Claude
+Stand: 2026-06-18 | Session: B1-AP-14d4 | Geändert von: Claude
 
 Abgeschlossene Items, neueste zuerst (append-only).
 Archivierungs-Trigger: wenn > 200 Zeilen → neue Datei `BACKLOG-ARCHIV-YYYY.md` anlegen.
 
 | ID | Bereich | Titel | Abgeschlossen | Session |
 |----|---------|-------|---------------|---------|
+| B1-AP-14d4 | App/Doku | §16.3 UI-Primitive-Tabelle synchronisiert: 13 Primitive von „zu bauen" auf ✅ umgesetzt; 1 ⚠️ Stationen-Button (continueLabel), 1 ⏳ Draw-Animation (Slice 6 offen). APP_SPEC V2.9. Kein Code geändert. *(sofort erledigt)* | 2026-06-18 | B1-AP-14d4 |
 | B1-AP-14c1 | App/Engine | Journey-Station-Annotationen als Datenvertrag: `buildJourneyStationAnnotations()` in app.js (Snapshot-Snap aus visibleSeries, final_reveal-Guard `role==='final_reveal'`, kein Punkt → keine Annotation); `annotations`-Durchreichung ChartEngine → WeakMap-State → BaseChartStrategy._createFwContext → fwContext.annotations (Object.freeze); LineChartStrategy übergibt `config.annotations`. Kein Rendering, kein Marker, kein Pulse. *(sofort erledigt)* | 2026-06-18 | B1-AP-14c1 |
 | B1-AP-14b4 | App/Engine | Diagnostics-Log-Cleanup FwSmartXAxis: 4 temporäre `[SNAPSHOT-X DIAG]`-console.log in `afterDataLimits`/`afterBuildTicks` entfernt. Keine Logikänderung, keine Achsen-Umbau. *(sofort erledigt)* | 2026-06-18 | B1-AP-14b4 |
 | B1-AP-14b3 | App | App-Anschluss Screen 2 Progressive Domain LineChart: `renderJourneyStep` an `xDisplayRange`, `yRangePolicy: 'cumulative-expand-zero'`, `yRangeResetKey: journeyRangeKey` angeschlossen. Manuelle Prüfschritte 1–4 bestanden. Nur app.js geändert, keine Engine-Dateien. *(sofort erledigt)* | 2026-06-18 | B1-AP-14b3 |

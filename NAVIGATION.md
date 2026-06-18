@@ -1,5 +1,5 @@
 # NAVIGATION.md – Finanzwesir 2.0
-Stand: 2026-06-18 | Session: B1-AP-14c4 | Geändert von: Claude
+Stand: 2026-06-18 | Session: B1-AP-14d4 | Geändert von: Claude
 
 Für Claude: **Routing-Dokument.** Wird beim Session-Start (Schritt 2) gelesen.
 Gibt Pfade und Lese-Reihenfolgen vor — KEINE Verhaltensregeln (die stehen in CLAUDE.md).
@@ -167,10 +167,10 @@ Nach Abschluss: `/abschluss-ritual`.
 > und welche Datenfragen vor dem produktiven Bau offen sind.
 > Nur bei Quellen-, CSV-, Contract- oder Datenänderungsfragen zusätzlich `docs/data/` lesen.
 
-> [!note] B1 / prokrastinations-preis — Zeitreise-Umbau (B1-AP-01 bis B1-AP-14c4 ✅ 2026-06-18)
-> `Apps/prokrastinations-preis/APP_SPEC.md` V2.7 (B1-AP-14a2: Progressive Domain LineChart + AP-14c-Marker-Zielbild, 2026-06-18) ist die operative Spec-Quelle.
+> [!note] B1 / prokrastinations-preis — Zeitreise-Umbau (B1-AP-01 bis B1-AP-14d4 ✅ 2026-06-18)
+> `Apps/prokrastinations-preis/APP_SPEC.md` V2.9 (B1-AP-14d4: §16.3 UI-Primitive-Status synchronisiert, 2026-06-18) ist die operative Spec-Quelle.
 > `Apps/prokrastinations-preis/ENTSCHEIDUNGSPROTOKOLL.md` (B1-AP-01, 2026-06-16) ist die verbindliche Architektur-Klammer für B1-AP-02 bis B1-AP-08c.
-> `Apps/prokrastinations-preis/MINI_SPEC_FROM_HAUPTDOKUMENT.md` — historisch; bei Widerspruch gilt APP_SPEC.md V2.7.
+> `Apps/prokrastinations-preis/MINI_SPEC_FROM_HAUPTDOKUMENT.md` — historisch; bei Widerspruch gilt APP_SPEC.md V2.9.
 > `SLICE_PLAN.md` aktuell (Slice-6 ✅ 2026-06-16 — Altstand, alte Ergebnisgrafik-Logik, kein Zielzustand). OA-01 entschieden. OA-02 entschieden: Pfad 2 via `renderFromData()`. B1-AP-03 ✅ — `STATIONS_CONFIG_CONTRACT.md`. B1-AP-04 ✅ — §23 UX/Heldenreise. B1-AP-05 ✅ — §14 A11y/Mobile. B1-AP-06 ✅ — `QA_TEST_CASES.md` V1.2. B1-AP-07 ✅ — `REDAKTIONS_GATE.md` V1.1. B1-AP-08 ✅ — Widersprüchliche Stellen bereinigt. B1-AP-08b ✅ 2026-06-16 — Konsistenz-Nachputz: APP_SPEC V2.5, a11y-Schema (revealA11ySummary/stationLiveMessage), A11y-Endwissens-Leak-Verbot (§14.1, TC-H05, G-A06b), Dez-2018-Rolle korrigiert, MINI_SPEC/SLICE_PLAN/STATIONS_CONTRACT/app.test.html/PROJECT-STATUS/NAVIGATION/Memory/BACKLOG/REGRESSION-MATRIX aktualisiert.
 > B1-AP-08c ✅ 2026-06-16 — Restdrift: APP_SPEC §8/§12/§19 Fallbacks; STATIONS_CONTRACT §4/§7 rote Visualregeln config-ungültig; QA TC-H05/TC-L02 erweitert; Memory/PROJECT-STATUS auf AP-09 synchronisiert.
 > B1-AP-09 ✅ 2026-06-17 — produktive `config/stations.de.json` angelegt (7 Stationen v2.1, 3 source_claimed_unchecked ehrlich gemeldet, Redaktions-Gate G-A02 noch nicht bestanden). Kein Code geändert.
@@ -193,6 +193,7 @@ Nach Abschluss: `/abschluss-ritual`.
 > B1-AP-14c4 ✅ 2026-06-18 — Screen-2-Pulse-Animation: `FwAnnotationPulsePlugin.js` NEU (WeakMap-State, afterDraw-Hook, 2-Pulse-Formel, 1200ms/1.8x); `ChartEngine.js` (annotationPulse-Option + Plugin-Injektion); `app.js` (renderJourneyStep aktiviert Pulse, Screen-3 ohne Pulse). chart.draw()-Pattern (canvas-ownership, Peer-Review-Befund). Nächster Schritt: B1-AP-15 — Transitions + Reduced Motion.
 > B1-AP-14d2 ✅ 2026-06-18 — Mini-QA AP-14-Block: Progressive Domain, Marker, Pulse, Reduced Motion, Screen 3, Regression. Gesamtstatus grün, keine Blocker. Ergebnisprotokoll: `docs/steering/patches/B1-AP-14d2_Mini-QA_Progressive-Domain_Marker_Pulse_Ergebnis.md`.
 > B1-AP-14d3 ✅ 2026-06-18 — Pulse-Produktentscheidung in Spec dokumentiert: APP_SPEC V2.8 (§14.6 reduced-motion-Bullet, §16.1 Pulse-Absatz mit konkreten Parametern, §16.3 Primitive-Tabelle, §16.4 Reduced-Motion-Tabelle); QA_TEST_CASES V1.5 (TC-I01 erweitert, Gruppe P TC-P01–TC-P05 neu). Kein Code geändert. Nächster Schritt: B1-AP-15 — Transitions + Reduced Motion.
+> B1-AP-14d4 ✅ 2026-06-18 — §16.3 UI-Primitive-Tabelle synchronisiert: 13 Primitive von „zu bauen" auf ✅ korrigiert; 1 ⚠️ Stationen-Button (continueLabel offen), 1 ⏳ Draw-Animation (Slice 6 offen). APP_SPEC V2.9. Kein Code geändert. Nächster Schritt: B1-AP-15 — Transitions + Reduced Motion.
 > `Apps/prokrastinations-preis/config/stations.de.json` — produktive Stationen-Konfiguration v2.1 (B1-AP-09 ✅, AP-10a Flags bereinigt ✅ 2026-06-17)
 > `Apps/prokrastinations-preis/STATIONS_IMPLEMENTATION_PLAN.md` — Implementierungsplan für Stationen-Zeitreise Coding-Slices AP-11–AP-18, V1.1 (B1-AP-10 ✅, AP-10a Semantik bereinigt ✅ 2026-06-17)
 > B1 ist Pilot-2 (Daten-/Chart-/Story-Pilot). Pilot-1 ist `risiko-uebersetzer` (Calculator-Pilot) — entschieden E-02, 2026-05-28.
