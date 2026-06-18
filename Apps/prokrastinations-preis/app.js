@@ -497,8 +497,10 @@ function renderContent(container, appData, options, stationsConfig) { // CHANGED
 
   function renderS3(rate) {
     const ctx = buildAppContext(appData, rate, startBetrag, journeyStations); // CHANGED — AP-13
+    const revealAnnotations = buildJourneyStationAnnotations(journeyStations, ctx.chartSeries); // NEW — B1-AP-14c3
     chartEngine3.renderFromData(chartSection3, ctx.chartSeries, {
-      type: 'line', features: { rangeControls: false, headline: false, verticalLine: 'last' }
+      type: 'line', features: { rangeControls: false, headline: false, verticalLine: 'last' },
+      annotations: { events: revealAnnotations } // NEW — B1-AP-14c3
     });
     lastRenderedRateS3 = rate;
     return ctx; // CHANGED — AP-14: ctx für revealA11ySummary in showScreen(3)

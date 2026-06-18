@@ -193,15 +193,15 @@ FinanzwesirData.js, CSVParser.js, FwDateUtils.js â€” diese Session nicht berÃ¼hr
 
 ### 2026-06-17 - B1-AP-15 â€” AP-Wechsel
 
-### 2026-06-17 - B1-AP-14b — AP-Wechsel (neuer Thread)
+### 2026-06-17 - B1-AP-14b ï¿½ AP-Wechsel (neuer Thread)
 
-### 2026-06-17 — B1-AP-14b — X-Achse feste Spanne (Analyse + Peer-Review, kein Abschluss)
-- [FRICTION] Erster Fix (Post-Render Chart.getChart-Override) scheiterte an drei unabhängigen Ursachen: (1) new Chart() in ChartEngine._draw() steckt in requestAnimationFrame ? Canvas beim Erstrender nicht im DOM, (2) fwContext Object.freeze ? dataRange.max post-render nicht mutierbar, (3) _generateLinearTicks() nutzt context.dataRange.max als endLimit, nicht axis.max — axis.max-Override erzeugt leere unbeschriftete Fläche statt Jahresticks
-- [WIN] Vollständige Ursachenanalyse abgeschlossen: FwSmartScales.getTimeAxis ignoriert minTime/maxTime explizit, FwSmartXAxis.compute() bestimmt alles aus fwContext, bounds:'data' + afterBuildTicks kombiniert garantieren, dass Post-Render-Hacks nicht funktionieren können
-- [WIN] Architekturkonformer Lösungsweg identifiziert: displayRange in fwContext (Layer 3) als Erweiterung, ChartEngine features.xDisplayMax als Eingangsparameter — entspricht Domain/Range Separation (D3, Grafana, CloudWatch)
-- [WIN] Peer-Review-Dokument erstellt (docs/steering/PEER-REVIEW-B1-AP-14b-XAxis-Architecture.md) mit vollständigem Kontext für externen LLM-Review
-- Orientierungs-Chip (progressEl + CSS) implementiert und funktionsfähig — bleibt
-- X-Achsen-Code (Chart.getChart-Block) in app.js ist broken und uncommitted — muss vor nächstem AP ersetzt werden
+### 2026-06-17 ï¿½ B1-AP-14b ï¿½ X-Achse feste Spanne (Analyse + Peer-Review, kein Abschluss)
+- [FRICTION] Erster Fix (Post-Render Chart.getChart-Override) scheiterte an drei unabhï¿½ngigen Ursachen: (1) new Chart() in ChartEngine._draw() steckt in requestAnimationFrame ? Canvas beim Erstrender nicht im DOM, (2) fwContext Object.freeze ? dataRange.max post-render nicht mutierbar, (3) _generateLinearTicks() nutzt context.dataRange.max als endLimit, nicht axis.max ï¿½ axis.max-Override erzeugt leere unbeschriftete Flï¿½che statt Jahresticks
+- [WIN] Vollstï¿½ndige Ursachenanalyse abgeschlossen: FwSmartScales.getTimeAxis ignoriert minTime/maxTime explizit, FwSmartXAxis.compute() bestimmt alles aus fwContext, bounds:'data' + afterBuildTicks kombiniert garantieren, dass Post-Render-Hacks nicht funktionieren kï¿½nnen
+- [WIN] Architekturkonformer Lï¿½sungsweg identifiziert: displayRange in fwContext (Layer 3) als Erweiterung, ChartEngine features.xDisplayMax als Eingangsparameter ï¿½ entspricht Domain/Range Separation (D3, Grafana, CloudWatch)
+- [WIN] Peer-Review-Dokument erstellt (docs/steering/PEER-REVIEW-B1-AP-14b-XAxis-Architecture.md) mit vollstï¿½ndigem Kontext fï¿½r externen LLM-Review
+- Orientierungs-Chip (progressEl + CSS) implementiert und funktionsfï¿½hig ï¿½ bleibt
+- X-Achsen-Code (Chart.getChart-Block) in app.js ist broken und uncommitted ï¿½ muss vor nï¿½chstem AP ersetzt werden
 - B1-AP-14b: NICHT abgeschlossen. Wartet auf ChartEngine-Freigabe + displayRange-Implementierung
 
 ## 2026-06-18 â€“ SESSION START | [KETTENMODUS] | Fokus: APP-01 â€” prokrastinations-preis
@@ -228,10 +228,10 @@ FinanzwesirData.js, CSVParser.js, FwDateUtils.js â€” diese Session nicht berÃ¼hr
 - [OK] Standard-LineCharts ohne xDisplayRange: alle Ã„nderungen hinter if-Guards, Fallback unverÃ¤ndert
 - [OK] Ergebnisprotokoll: docs/steering/patches/B1-AP-14b1_Axis-Domain-Contract_Ergebnis.md
 
-### 2026-06-18 — B1-AP-14b2 — AP-Wechsel
+### 2026-06-18 ï¿½ B1-AP-14b2 ï¿½ AP-Wechsel
 
-### 2026-06-18 — B1-AP-14b2 ? Y-Policy cumulative-expand-zero
-- [OK] FwSmartYAxis.js: cumulative-expand-zero-Block (rawMin=0, rawMax=max(current, rememberedMax)) — 7 Zeilen nach Leerdiagramm-Fallback
+### 2026-06-18 ï¿½ B1-AP-14b2 ? Y-Policy cumulative-expand-zero
+- [OK] FwSmartYAxis.js: cumulative-expand-zero-Block (rawMin=0, rawMax=max(current, rememberedMax)) ï¿½ 7 Zeilen nach Leerdiagramm-Fallback
 - [OK] BaseChartStrategy.js: yRangePolicy + yRangeMemory in fwContext-Struktur (2 Zeilen)
 - [OK] LineChartStrategy.js: config.yRangePolicy/yRangeMemory an _createFwContext weitergegeben (2 Zeilen)
 - [OK] ChartEngine.js: yRangePolicy parsen + validieren; axisMemory.yMaxSeen in WeakMap-State; yRangeMemory vor transform injizieren; yMaxSeen nach transform akkumulieren; Reset bei Key-Wechsel
@@ -275,3 +275,9 @@ FinanzwesirData.js, CSVParser.js, FwDateUtils.js â€” diese Session nicht berÃ¼hr
 - [OK] Lokale Map<month, snappedTimestamp> in LineChartStrategy.transform(): Marker-X = exakt snapped Hauptserienpunkt (war: midnight UTC, neu: noon UTC via getSnapshotSnap)
 - [OK] Nur LineChartStrategy.js geÃ¤ndert, app.js unberÃ¼hrt
 - [OK] Ergebnisprotokoll: docs/steering/patches/B1-AP-14c2b_Marker-X-Snapshot-Alignment_Ergebnis.md
+
+### 2026-06-18 â€” B1-AP-14c3 âœ… Screen-3-Final-Reveal-Ringe
+- [OK] renderS3(): 2 neue Zeilen â€” revealAnnotations aus buildJourneyStationAnnotations(journeyStations, ctx.chartSeries) + annotations-Ãœbergabe
+- [OK] Keine Engine-Dateien geÃ¤ndert; final_reveal-Guard (Zeile 200) bereits vorhanden â€” deckt dynamic_latest_month ab
+- [OK] Manueller Test durch Albert: alle PrÃ¼fschritte grÃ¼n
+- [OK] Ergebnisprotokoll: docs/steering/patches/B1-AP-14c3_Screen3-Final-Reveal-Ringe_Ergebnis.md
