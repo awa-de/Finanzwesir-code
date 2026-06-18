@@ -203,3 +203,12 @@ FinanzwesirData.js, CSVParser.js, FwDateUtils.js â€” diese Session nicht berÃ¼hr
 - Orientierungs-Chip (progressEl + CSS) implementiert und funktionsfähig — bleibt
 - X-Achsen-Code (Chart.getChart-Block) in app.js ist broken und uncommitted — muss vor nächstem AP ersetzt werden
 - B1-AP-14b: NICHT abgeschlossen. Wartet auf ChartEngine-Freigabe + displayRange-Implementierung
+
+## 2026-06-18 â€“ SESSION START | [KETTENMODUS] | Fokus: APP-01 â€” prokrastinations-preis
+
+### 2026-06-18 â€” B1-AP-14r â€” Rettungsbefund (read-only, keine Aenderungen)
+- [WIN] git blame widerlegte Commit-Message von d97231a: Chart.getChart()-Block war entgegen `Kein broken Code committed` tatsaechlich committed. ATTEMPT-LOG hatte brokenCode korrekt benannt.
+- [OK] RETTUNGSBEFUND-B1-AP-14r.md in docs/steering/ erstellt (1:1 Befunduebertragung).
+
+### 2026-06-18 â€” B1-AP-14b0 -- Post-Render-Hack revertiert
+- [OK] 10 Zeilen Chart.getChart()-Block (app.js:455-464) chirurgisch entfernt. progressEl, buildVisibleChartSeries, A11y-Sperre unberuehrt. Commit 402f3e8.

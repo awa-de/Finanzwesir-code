@@ -1,5 +1,5 @@
 # NAVIGATION.md – Finanzwesir 2.0
-Stand: 2026-06-17 | Session: B1-AP-14a | Geändert von: Claude
+Stand: 2026-06-18 | Session: B1-AP-14b0 | Geändert von: Claude
 
 Für Claude: **Routing-Dokument.** Wird beim Session-Start (Schritt 2) gelesen.
 Gibt Pfade und Lese-Reihenfolgen vor — KEINE Verhaltensregeln (die stehen in CLAUDE.md).
@@ -167,7 +167,7 @@ Nach Abschluss: `/abschluss-ritual`.
 > und welche Datenfragen vor dem produktiven Bau offen sind.
 > Nur bei Quellen-, CSV-, Contract- oder Datenänderungsfragen zusätzlich `docs/data/` lesen.
 
-> [!note] B1 / prokrastinations-preis — Zeitreise-Umbau (B1-AP-01 bis AP-14a ✅ 2026-06-17)
+> [!note] B1 / prokrastinations-preis — Zeitreise-Umbau (B1-AP-01 bis B1-AP-14b0 ✅ 2026-06-18)
 > `Apps/prokrastinations-preis/APP_SPEC.md` V2.6 (B1-AP-14a: feste X-Achse + finale Marker, 2026-06-17) ist die operative Spec-Quelle.
 > `Apps/prokrastinations-preis/ENTSCHEIDUNGSPROTOKOLL.md` (B1-AP-01, 2026-06-16) ist die verbindliche Architektur-Klammer für B1-AP-02 bis B1-AP-08c.
 > `Apps/prokrastinations-preis/MINI_SPEC_FROM_HAUPTDOKUMENT.md` — historisch; bei Widerspruch gilt APP_SPEC.md V2.6.
@@ -181,7 +181,8 @@ Nach Abschluss: `/abschluss-ritual`.
 > B1-AP-13 ✅ 2026-06-17 — `subtractMonths()`, `buildActiveJourneyWindow()`, `filterStationsForWindow()`, `buildJourneyStations()` in `app.js` implementiert. `activeWindow` + `stations` in `appData`/AppContext. `dynamic_latest_month` → `latestMonth` aufgelöst. `source_claimed_unchecked` still gefiltert (3 Stationen; Gate-Diagnose folgt in AP-14).
 > B1-AP-14 ✅ 2026-06-17 — Stationen-Zeitreise: Screen 2 komplett umgebaut. 5 neue Hilfsfunktionen (`selectStationsForJourney`, `checkEditorialGate`, `buildVisibleChartSeries`, `calcStationIntermediate`, `renderStationCard`). `buildJourneyStations` um Prioritätsauswahl + Editorial Gate (G-A01, G-A05) erweitert. `renderJourneyStep` ersetzt `renderS2`. Endwissens-Verbot vollständig: `slider.change` entfernt, `a11ySummary` aus `buildAppContext` entfernt, ARIA Live Region erst auf Screen 3. h2S3: „Jetzt erst sieht es einfach aus." Journey-Button statt S2-Navigation. app.css: 8 neue Klassen (Station-Card, Collapsible, Journey-Button). app.test.html: AP-14-Szenarien AB–AE. Nächster Schritt: B1-AP-15 (Transitions + Reduced Motion) oder AP-18 (Error-UI für EditorialDegraded).
 > B1-AP-14a ✅ 2026-06-17 — UX-Entscheidung Chart-Orientierung dokumentiert: APP_SPEC.md V2.6 (feste X-Achse Screen 2, finale Stationenmarker Screen 3, §6/§14.2/§16.1), QA_TEST_CASES.md V1.3 (TC-D06/D07/E04/E05/H06), REDAKTIONS_GATE.md V1.2 (G-C04). Kein Code geändert. Nächster Schritt: B1-AP-14b — Screen-2-Chart auf feste X-Achse umstellen.
-> B1-AP-14b 🟡 IN ARBEIT (2026-06-17) — Kern-Fix (feste 10-Jahres-X-Achse) NICHT erledigt. ✅ Committable: `progressEl`-Orientierungslogik + `fw-app__journey-progress` CSS + `docs/steering/PEER-REVIEW-B1-AP-14b-XAxis-Architecture.md`. ❌ Offen: `fwContext.displayRange`-Erweiterung erfordert Änderungen an ChartEngine.js (Layer 2), LineChartStrategy.js (Layer 3), FwSmartXAxis.js (Layer 4) — alle drei protected, Alberts explizite Freigabe ausstehend. ⚠️ app.js: broken `Chart.getChart()`-Block nach `chartEngine2.renderFromData()` muss vor weiterem Commit revertiert oder ersetzt werden. ATTEMPT-LOG: B1-AP-14b BLOCKED. Details + Architekturplan: `docs/steering/PEER-REVIEW-B1-AP-14b-XAxis-Architecture.md`.
+> B1-AP-14b0 ✅ 2026-06-18 — broken `Chart.getChart()`-Block aus app.js entfernt (commit 402f3e8). `progressEl`, `buildVisibleChartSeries`, A11y-Sperre unberührt. Rettungsbefund: `docs/steering/RETTUNGSBEFUND-B1-AP-14r.md`.
+> B1-AP-14b 🟡 IN ARBEIT — Kern-Fix (feste 10-Jahres-X-Achse) weiterhin offen. ❌ `fwContext.displayRange`-Erweiterung erfordert Änderungen an ChartEngine.js (Layer 2), LineChartStrategy.js (Layer 3), FwSmartXAxis.js (Layer 4) — alle drei protected, Alberts explizite Freigabe ausstehend. Architekturplan: `docs/steering/PEER-REVIEW-B1-AP-14b-XAxis-Architecture.md`.
 > `Apps/prokrastinations-preis/config/stations.de.json` — produktive Stationen-Konfiguration v2.1 (B1-AP-09 ✅, AP-10a Flags bereinigt ✅ 2026-06-17)
 > `Apps/prokrastinations-preis/STATIONS_IMPLEMENTATION_PLAN.md` — Implementierungsplan für Stationen-Zeitreise Coding-Slices AP-11–AP-18, V1.1 (B1-AP-10 ✅, AP-10a Semantik bereinigt ✅ 2026-06-17)
 > B1 ist Pilot-2 (Daten-/Chart-/Story-Pilot). Pilot-1 ist `risiko-uebersetzer` (Calculator-Pilot) — entschieden E-02, 2026-05-28.
