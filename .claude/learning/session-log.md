@@ -249,3 +249,12 @@ FinanzwesirData.js, CSVParser.js, FwDateUtils.js — diese Session nicht berühr
 - [OK] Ergebnisprotokoll: docs/steering/patches/B1-AP-14b3_App-Anschluss_Smoke-Test_Ergebnis.md
 
 ### 2026-06-18 — B1-AP-14c1 — AP-Wechsel
+
+### 2026-06-18 — B1-AP-14c1 ✅ Journey-Station-Annotationen als Datenvertrag
+- [FRICTION] AP-Name 'Marker + Pulse Screen 2' war zu breit — Scope im Prompt auf reinen Datenvertrag reduziert
+- [OK] buildJourneyStationAnnotations(pastStations, visibleSeries) in app.js — Snapshot-Snap, final_reveal-Guard, no-point-skip
+- [OK] ChartEngine: annotations aus Options parsen, in WeakMap-State speichern (kein Rendering)
+- [OK] BaseChartStrategy._createFwContext: annotations-Feld im Freeze
+- [OK] LineChartStrategy.transform: annotations an _createFwContext weitergereicht
+- [OK] Kein Marker, kein Scatter-Dataset, kein Pulse, kein CSS
+- [OK] Ergebnisprotokoll: docs/steering/patches/B1-AP-14c1_Journey-Station-Annotationen_Ergebnis.md

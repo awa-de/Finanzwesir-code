@@ -45,6 +45,7 @@ export class BaseChartStrategy {
             displayRange: params.displayRange || null, // NEW — B1-AP-14b1
             yRangePolicy: params.yRangePolicy || null, // NEW — B1-AP-14b2
             yRangeMemory: params.yRangeMemory || null, // NEW — B1-AP-14b2
+            annotations:  params.annotations  || null, // NEW — B1-AP-14c1
             infoSystem: params.infoSystem,
             dateSemantics: params.dateSemantics,
             viewMode: params.viewMode || 'history',

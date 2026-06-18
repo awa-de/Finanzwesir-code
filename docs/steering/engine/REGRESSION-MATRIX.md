@@ -1,4 +1,4 @@
-Stand: 2026-06-16 | Session: B1-AP-08b | Geändert von: Claude
+Stand: 2026-06-18 | Session: B1-AP-14c1 | Geändert von: Claude
 
 # Regression Matrix — Chart Engine
 
@@ -42,6 +42,9 @@ Immer mindestens einen passenden Regressionstest aus dieser Matrix prüfen.
 | REG-APP-001 | AppChart | renderFromData() — SparplanChart Slider-Update | Apps/prokrastinations-preis/app.test.html — Szenario U: Slider bewegen, Chart aktualisiert sich ohne DOM-Rebuild | Kein Range-Button, kein BAN, kein View-Toggle, Tooltip aktiv, A11y-Tabelle vorhanden; bestehende .financial-chart-module-Charts unberührt | ChartEngine.renderFromData(), FwRenderer._renderControls(), ChartEngine._draw() |
 | REG-APP-002 | AppChart | VertikaleLinie afterDraw-Plugin — Persistenz bei Smart-Update | Apps/prokrastinations-preis/app.test.html — Szenario W: Rate ändern → Chart aktualisiert sich → gestrichelte blaue Linie bleibt auf Screen 3 am letzten Datenpunkt | Linie bleibt nach chartInstance.update(); kein doppeltes Zeichnen; bestehende .financial-chart-module-Charts unberührt | ChartEngine._draw() (afterDraw-Plugin) |
 | | | **Hinweis REG-APP-001/002:** Diese Tests beschreiben den Slice-4/6-Altstand (alte Ergebnisgrafik-Logik, Screen 2 mit KPI-Cards). Sie sind nicht Zielzustand. Neue Regressionstests für Stationen-Zeitreise folgen nach B1-AP-10. | | | |
+| REG-APP-003 | AppChart | Progressive Domain — xDisplayRange fixiert X-Achse | Apps/prokrastinations-preis/app.test.html — Szenario AB (erste Station, kurze Zeitreihe) | X-Achse zeigt nur displayRange.min bis displayRange.max; Ticks gleichmäßig im sichtbaren Fenster; Standard-LineCharts (index_linien.html) unberührt | ChartEngine.renderFromData() xDisplayRange, LineChartStrategy, FwSmartXAxis.afterDataLimits |
+| REG-APP-004 | AppChart | yRangePolicy cumulative-expand-zero — Y-Achse schrumpft nicht | Apps/prokrastinations-preis/app.test.html — Szenarien AB→AC→AD (drei Stationen nacheinander mit steigendem Portfolio) | Y-Achse schrumpft bei Stationswechsel nie; expandiert bei neuem Maximum; Reset nur bei journeyRangeKey-Wechsel (andere Rate oder Zeitraum); Standard-LineCharts unberührt | ChartEngine WeakMap-State yMaxSeen, FwSmartYAxis cumulative-expand-zero |
+| REG-APP-005 | AppChart | Annotationen-Datenvertrag — fwContext.annotations korrekt befüllt | Apps/prokrastinations-preis/app.test.html — Szenario AC (zweite Station: 1 vergangene Station soll annotiert sein) | fwContext.annotations.events enthält genau 1 Eintrag mit korrektem x (Timestamp), y (Depotwert Snapshot-Snap), role, status='past'; final_reveal und aktuelle Station nicht enthalten; kein Marker sichtbar | app.js buildJourneyStationAnnotations(), ChartEngine, BaseChartStrategy._createFwContext |
 
 ---
 

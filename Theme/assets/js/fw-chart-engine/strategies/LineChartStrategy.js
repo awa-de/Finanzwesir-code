@@ -297,6 +297,7 @@ export class LineChartStrategy extends BaseChartStrategy {
             displayRange: displayRange, // NEW — B1-AP-14b1
             yRangePolicy: config.yRangePolicy || null, // NEW — B1-AP-14b2
             yRangeMemory: config.yRangeMemory || null, // NEW — B1-AP-14b2
+            annotations:  config.annotations  || null, // NEW — B1-AP-14c1
             viewMode: config.view || 'value',
             valueMode: formatMode,
             currency: currency,

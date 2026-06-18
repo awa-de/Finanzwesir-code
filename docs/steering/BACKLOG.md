@@ -1,5 +1,5 @@
 # BACKLOG – Finanzwesir 2.0
-Stand: 2026-06-17 | Session: B1-AP-14b | Geändert von: Claude
+Stand: 2026-06-18 | Session: B1-AP-14c1 | Geändert von: Claude
 
 **Regeln:**
 - ✅-Zeilen werden sofort nach `BACKLOG-ARCHIV.md` verschoben (append), dann hier gelöscht.
@@ -12,7 +12,6 @@ Stand: 2026-06-17 | Session: B1-AP-14b | Geändert von: Claude
 
 | ID       | Bereich | Titel                                     | Prio | Dep | Detail                              |
 |----------|---------|-------------------------------------------|------|-----|-------------------------------------|
-| B1-14b-ENG | App/Engine | ChartEngine displayRange-Erweiterung: `features.xDisplayMax` → `fwContext.displayRange` → `FwSmartXAxis` endLimit — benötigt Freigabe für 3 protected Dateien | H | — | Architektur + Details: `docs/steering/PEER-REVIEW-B1-AP-14b-XAxis-Architecture.md`; ATTEMPT-LOG: BLOCKED |
 | AP-20/21 | Engine  | Mixed-Rhythm CV-Heuristik (T5→T3→T6→T7)  | H    | —   | engine/detail/AP-20-DETAIL.md       |
 | AP-6c    | Engine  | Touch-Tooltip Smartphone-Test             | M    | —   | engine/detail/AP-6c-DETAIL.md       |
 | AP-22    | Engine  | Zero-Line lineWidth (~3 Zeilen Fix)       | L    | —   | —                                   |

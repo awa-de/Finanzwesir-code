@@ -1,5 +1,5 @@
 # Funktionierende Features (Nicht kaputt machen!)
-Stand: 2026-06-11 | Session: APP-01-Slice-4-Implementierung | Geändert von: Claude
+Stand: 2026-06-18 | Session: B1-AP-14c1 | Geändert von: Claude
 
 ## Hinweis
 
@@ -48,7 +48,9 @@ Die genaue technische Umsetzung darf Claude selbst analysieren.
 - FwSmartXAxis Kalender-Ticks SNAPSHOT (V9.0.0, AP-15): Einheitliche cursor-basierte Kalender-Ticks für ALLE Rhythmen. Kein Guard, keine Fallunterscheidung regulär/irregulär. `endLimit = dataRange.max + halfStep`.
 - FwSmartXAxis Kalender-Ticks PERIOD (V10.0.0, AP-13): Cursor-basierte Kalender-Ticks für PERIOD-Track. Konsistent mit SNAPSHOT.
 - FwSmartXAxis Quarter-End (V10.2.0, AP-18): Quartals-Ticks Mär/Jun/Sep/Dez, HY-Ticks Jun/Dez. Nur für rhythm=QUARTERLY/HALF_YEARLY.
-- **Diagnostik (temporär):** `[SNAPSHOT-X DIAG]` console.log in afterDataLimits/afterBuildTicks (AP-21 T0, wird in T7 entfernt).
+- FwSmartXAxis Progressive Domain (B1-AP-14b1): `xDisplayRange` als Top-Level-Option in `renderFromData`; `displayRange` in fwContext; `afterDataLimits` fixiert Achse auf displayRange.min/max; `afterBuildTicks` berechnet Ticks innerhalb des sichtbaren Fensters; `durationYears` aus displayRange. Standard-LineCharts ohne xDisplayRange vollständig unverändert.
+- yRangePolicy cumulative-expand-zero (B1-AP-14b2): `yRangePolicy: 'cumulative-expand-zero'` in renderFromData; WeakMap-State speichert yMaxSeen pro Container; Y-Achse expandiert kumulativ, schrumpft nie; Reset bei `yRangeResetKey`-Wechsel. Standard-Charts ohne yRangePolicy vollständig unverändert.
+- fwContext.annotations Datenvertrag (B1-AP-14c1): optionales `annotations`-Feld in renderFromData-Options; WeakMap-State speichert Annotationen pro Container; BaseChartStrategy._createFwContext leitet `annotations` in fwContext weiter. Kein Rendering — Datenbasis für Marker B1-AP-14c2.
 
 ## Layer 5: Renderer / Layout ✅
 

@@ -191,6 +191,31 @@ function buildVisibleChartSeries(chartSeries, stationMonth) {
   return chartSeries.filter(p => p.month <= stationMonth);
 }
 
+// NEW — B1-AP-14c1: Annotationen aus vergangenen Journey-Stations ableiten (kein Rendering)
+// Nur Stationen vor der aktuellen (pastStations = slice(0, currentIdx)).
+// markerY per Snapshot-Snap: passender Monatspunkt der sichtbaren Hauptserie.
+function buildJourneyStationAnnotations(pastStations, visibleSeries) {
+  const events = [];
+  for (const s of pastStations) {
+    if (s.role === 'final_reveal') continue; // Guard: final_reveal nie annotieren
+    const sMonth = s.date.slice(0, 7);
+    const point = visibleSeries.find(p => p.month === sMonth); // Snapshot-Snap
+    if (!point) continue; // kein Datenpunkt — keine künstliche Annotation
+    events.push({
+      id:       s.id,
+      type:     'journey-station',
+      month:    sMonth,
+      x:        new Date(sMonth + '-01').getTime(),
+      y:        point.depotwert,
+      source:   'journey-stations',
+      role:     s.role,
+      status:   'past',
+      headline: s.headline
+    });
+  }
+  return events;
+}
+
 // NEW — AP-14: Zwischenstand aus Sparplanberechnung (keine Zahlenwerte aus JSON)
 function calcStationIntermediate(chartSeries, stationMonth, monatlicheRate, startBetrag) {
   const idx = chartSeries.findIndex(p => p.month === stationMonth);
@@ -450,12 +475,14 @@ function renderContent(container, appData, options, stationsConfig) { // CHANGED
     renderStationCard(stationArea, station, intermediate, fmtStation);
     const visibleSeries = buildVisibleChartSeries(ctx.chartSeries, stationMonth);
     const journeyRangeKey = [currentRate, ctx.startMonth, ctx.latestMonth].join('|'); // NEW — AP-14b3
+    const journeyAnnotations = buildJourneyStationAnnotations(journeyStations.slice(0, stationIdx), visibleSeries); // NEW — B1-AP-14c1
     chartEngine2.renderFromData(chartSection2, visibleSeries, { // CHANGED — AP-14b3
       type: 'line',
       features: { rangeControls: false, headline: false },
       xDisplayRange: { min: ctx.startMonth, max: ctx.latestMonth },
       yRangePolicy: 'cumulative-expand-zero',
-      yRangeResetKey: journeyRangeKey
+      yRangeResetKey: journeyRangeKey,
+      annotations: { events: journeyAnnotations } // NEW — B1-AP-14c1
     });
     // NEW — AP-14b: Orientierungs-Chip aktualisieren (APP_SPEC §16.1)
     const n = stationIdx + 1;

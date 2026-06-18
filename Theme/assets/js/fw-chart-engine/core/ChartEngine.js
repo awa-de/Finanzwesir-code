@@ -170,6 +170,14 @@ export class ChartEngine {
             yRangeResetKey = options.yRangeResetKey !== undefined ? options.yRangeResetKey : null;
         }
 
+        // NEW — B1-AP-14c1: Annotationen (optional, kein Rendering)
+        var annotations = null;
+        if (options.annotations != null) {
+            if (typeof options.annotations === 'object' && !Array.isArray(options.annotations)) {
+                annotations = options.annotations;
+            }
+        }
+
         // WeakMap-State-Mechanik
         if (this._appChartStates.has(container)) {
             var state = this._appChartStates.get(container);
@@ -184,6 +192,7 @@ export class ChartEngine {
             var prevKey = state.config.yRangeResetKey;
             state.config.yRangePolicy = yRangePolicy;
             state.config.yRangeResetKey = yRangeResetKey;
+            state.config.annotations = annotations; // NEW — B1-AP-14c1
             if (yRangePolicy === 'cumulative-expand-zero') {
                 if (!state.axisMemory) {
                     state.axisMemory = { yMaxSeen: 0 };
@@ -198,7 +207,7 @@ export class ChartEngine {
                 data:          frozenData,
                 strategy:      this.strategies[type],
                 type:          type,
-                config:        { colors: {}, options: '', title: '', features: features, xDisplayRange: xDisplayRange, yRangePolicy: yRangePolicy, yRangeResetKey: yRangeResetKey }, // CHANGED — B1-AP-14b2
+                config:        { colors: {}, options: '', title: '', features: features, xDisplayRange: xDisplayRange, yRangePolicy: yRangePolicy, yRangeResetKey: yRangeResetKey, annotations: annotations }, // CHANGED — B1-AP-14c1
                 range:         'max',
                 view:          'value',
                 viewOptions:   [],
