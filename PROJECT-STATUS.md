@@ -2,16 +2,16 @@
 Version: 1
 Stand: 2026-06-18
 Fokus-AP: APP-01 — prokrastinations-preis
-Nächster-Schritt: B1-AP-14b — Engine-Umbau Progressive Domain LineChart (B1-AP-14a2 ✅ 2026-06-18)
+Nächster-Schritt: B1-AP-14b2 — Y-Policy + App-Anschluss Screen 2 (B1-AP-14b1 ✅ 2026-06-18)
 Blocker: keine
 Letzter-Distill: 2026-06-15
 Kassensturz-Datum: 2026-06-15
 -->
-<!-- HOOK-META-SESSION: B1-AP-14a2 -->
+<!-- HOOK-META-SESSION: B1-AP-14b1 -->
 
 # PROJECT STATUS — Finanzwesir 2.0
 
-Stand: 2026-06-18 | Session: B1-AP-14a2 | Geändert von: Claude
+Stand: 2026-06-18 | Session: B1-AP-14b1 | Geändert von: Claude
 
 **Zweck:** Schneller Wiedereinstieg nach Pausen.
 **Zielgruppe:** Albert und Claude.

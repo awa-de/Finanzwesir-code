@@ -1,5 +1,5 @@
 # NAVIGATION.md – Finanzwesir 2.0
-Stand: 2026-06-18 | Session: B1-AP-14a2 | Geändert von: Claude
+Stand: 2026-06-18 | Session: B1-AP-14b1 | Geändert von: Claude
 
 Für Claude: **Routing-Dokument.** Wird beim Session-Start (Schritt 2) gelesen.
 Gibt Pfade und Lese-Reihenfolgen vor — KEINE Verhaltensregeln (die stehen in CLAUDE.md).
@@ -183,7 +183,8 @@ Nach Abschluss: `/abschluss-ritual`.
 > B1-AP-14a ✅ 2026-06-17 — UX-Entscheidung Chart-Orientierung dokumentiert: APP_SPEC.md V2.6 (feste X-Achse Screen 2, finale Stationenmarker Screen 3, §6/§14.2/§16.1), QA_TEST_CASES.md V1.3 (TC-D06/D07/E04/E05/H06), REDAKTIONS_GATE.md V1.2 (G-C04). Kein Code geändert. Nächster Schritt: B1-AP-14b — Screen-2-Chart auf feste X-Achse umstellen.
 > B1-AP-14b0 ✅ 2026-06-18 — broken `Chart.getChart()`-Block aus app.js entfernt (commit 402f3e8). `progressEl`, `buildVisibleChartSeries`, A11y-Sperre unberührt. Rettungsbefund: `docs/steering/RETTUNGSBEFUND-B1-AP-14r.md`.
 > B1-AP-14a2 ✅ 2026-06-18 — Doku-Neuschnitt Progressive Domain LineChart: APP_SPEC V2.7 (§16.1 AP-14b-Architektur + AP-14c-Marker-Zielbild), QA_TEST_CASES V1.4 (Gruppe M TC-M01–TC-M12), ENTSCHEIDUNGSPROTOKOLL §12+§13, REDAKTIONS_GATE V1.3 (G-C04). Kein Code geändert. Nächster Schritt: B1-AP-14b — Engine-Umbau.
-> B1-AP-14b 🟡 IN ARBEIT — Kern-Fix (feste 10-Jahres-X-Achse) weiterhin offen. ❌ `fwContext.displayRange`-Erweiterung erfordert Änderungen an ChartEngine.js (Layer 2), LineChartStrategy.js (Layer 3), FwSmartXAxis.js (Layer 4) — alle drei protected, Alberts explizite Freigabe ausstehend. Architekturplan: `docs/steering/PEER-REVIEW-B1-AP-14b-XAxis-Architecture.md`.
+> B1-AP-14b1 ✅ 2026-06-18 — Axis Domain Contract: `xDisplayRange` Top-Level-Option in `renderFromData`; `displayRange` in `fwContext`; X-Scale + Ticks nutzen `displayRange`; `durationYears` aus `displayRange`. 4 Engine-Dateien (ChartEngine.js, BaseChartStrategy.js, LineChartStrategy.js, FwSmartXAxis.js). Standard-LineCharts ohne `xDisplayRange` unverändert. Nächster Schritt: B1-AP-14b2 — Y-Policy + App-Anschluss.
+> B1-AP-14b 🟡 IN ARBEIT — b1 (Axis Domain Contract) ✅. Offen: b2 (Y-Policy `yRangePolicy: 'cumulative-expand-zero'` + App-Anschluss Screen 2). Architekturplan: `docs/steering/PEER-REVIEW-B1-AP-14b-XAxis-Architecture.md`.
 > `Apps/prokrastinations-preis/config/stations.de.json` — produktive Stationen-Konfiguration v2.1 (B1-AP-09 ✅, AP-10a Flags bereinigt ✅ 2026-06-17)
 > `Apps/prokrastinations-preis/STATIONS_IMPLEMENTATION_PLAN.md` — Implementierungsplan für Stationen-Zeitreise Coding-Slices AP-11–AP-18, V1.1 (B1-AP-10 ✅, AP-10a Semantik bereinigt ✅ 2026-06-17)
 > B1 ist Pilot-2 (Daten-/Chart-/Story-Pilot). Pilot-1 ist `risiko-uebersetzer` (Calculator-Pilot) — entschieden E-02, 2026-05-28.

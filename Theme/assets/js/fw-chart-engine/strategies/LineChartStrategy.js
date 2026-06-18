@@ -266,6 +266,21 @@ export class LineChartStrategy extends BaseChartStrategy {
         // BAN-Headline berechnen (V14.0.0)
         const headline = this._computeHeadline(rows, data.columns, formatMode, currency);
 
+        // NEW — B1-AP-14b1: xDisplayRange → displayRange (Progressive Domain LineChart)
+        let displayRange = null;
+        let fwDurationYears = FwDateUtils.rangeToYears(config.range, snappedTimestamps[0], snappedTimestamps[snappedTimestamps.length - 1]);
+        if (config.xDisplayRange) {
+            const dispMinTs = FwDateUtils.getSnapshotSnap(FwDateUtils.parse(config.xDisplayRange.min + '-01').getTime(), rhythm);
+            const dispMaxTs = FwDateUtils.getSnapshotSnap(FwDateUtils.parse(config.xDisplayRange.max + '-01').getTime(), rhythm);
+            const drMin = snappedTimestamps[0];
+            const drMax = snappedTimestamps[snappedTimestamps.length - 1];
+            if (dispMinTs > drMin)      throw new Error('[LineChartStrategy] xDisplayRange.min liegt nach dataRange.min');
+            if (dispMaxTs < drMax)      throw new Error('[LineChartStrategy] xDisplayRange.max liegt vor dataRange.max');
+            if (dispMinTs >= dispMaxTs) throw new Error('[LineChartStrategy] xDisplayRange.min muss kleiner als max sein');
+            displayRange = { min: dispMinTs, max: dispMaxTs };
+            fwDurationYears = FwDateUtils.getDiffYears(dispMinTs, dispMaxTs);
+        }
+
         // Rucksack-Schnürung (Vollständiges Protokoll v1.4.0)
         // Wir setzen hier SNAPSHOT, um die Weiche in der SmartXAxis umzulegen.
         const fwContext = this._createFwContext({
@@ -278,7 +293,8 @@ export class LineChartStrategy extends BaseChartStrategy {
                 minY: globalMinY,
                 maxY: globalMaxY
             },
-            durationYears: FwDateUtils.rangeToYears(config.range, snappedTimestamps[0], snappedTimestamps[snappedTimestamps.length - 1]),
+            durationYears: fwDurationYears, // CHANGED — B1-AP-14b1: aus displayRange wenn vorhanden
+            displayRange: displayRange, // NEW — B1-AP-14b1
             viewMode: config.view || 'value',
             valueMode: formatMode,
             currency: currency,

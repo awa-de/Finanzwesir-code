@@ -228,8 +228,13 @@ export class FwSmartXAxis {
                 offset: false,
                 afterDataLimits: (axis) => {
                     console.log('[SNAPSHOT-X DIAG] afterDataLimits BEFORE:', { min: axis.min, max: axis.max });
-                    const range = axis.max - axis.min;
-                    axis.max += range * 0.05; // 5% Breathing Room
+                    if (fwContext.displayRange) { // NEW — B1-AP-14b1
+                        axis.min = fwContext.displayRange.min; // NEW
+                        axis.max = fwContext.displayRange.max; // NEW
+                    } else { // NEW
+                        const range = axis.max - axis.min;
+                        axis.max += range * 0.05; // 5% Breathing Room
+                    } // NEW
                     console.log('[SNAPSHOT-X DIAG] afterDataLimits AFTER:', { min: axis.min, max: axis.max });
                 },
                 afterBuildTicks: (axis) => {
@@ -412,7 +417,7 @@ export class FwSmartXAxis {
         // Halbe Step-Duration stellt sicher, dass der nächste Kalender-Tick (z.B. Jan 1)
         // noch generiert wird, ohne in den Breathing-Room hineinzulaufen.
         const halfStep = FwDateUtils.getStepDuration(context.rhythm) / 2;
-        const endLimit = (context.dataRange?.max ?? axis.max) + halfStep;
+        const endLimit = (context.displayRange?.max ?? context.dataRange?.max ?? axis.max) + halfStep; // CHANGED — B1-AP-14b1
         let safety = 0;
         while (cursor.getTime() <= endLimit && safety < 500) {
             safety++;

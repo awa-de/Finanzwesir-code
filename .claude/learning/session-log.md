@@ -217,3 +217,13 @@ FinanzwesirData.js, CSVParser.js, FwDateUtils.js — diese Session nicht berühr
 
 ### 2026-06-18 — B1-AP-14a2 ✅ Doku-Neuschnitt Progressive Domain LineChart
 - [OK] Keine Vorkommnisse — 4 Doku-Dateien aktualisiert (APP_SPEC V2.7, QA_TEST_CASES V1.4 Gruppe M, ENTSCHEIDUNGSPROTOKOLL §12+§13, REDAKTIONS_GATE V1.3 G-C04). 12 neue Testfälle TC-M01–M12. Kein Code, kein JSON geändert.
+
+### 2026-06-18 — B1-AP-14b — AP-Wechsel
+
+### 2026-06-18 — B1-AP-14b1 ✅ Axis Domain Contract
+- [OK] ChartEngine.js: xDisplayRange-Validierung + state.config-Passthrough (8 Zeilen)
+- [OK] BaseChartStrategy.js: displayRange als optionales Feld in _createFwContext (1 Zeile)
+- [OK] LineChartStrategy.js: xDisplayRange → displayRange (parse/snap/validate/durationYears) (15 Zeilen)
+- [OK] FwSmartXAxis.js: afterDataLimits nutzt displayRange; _generateLinearTicks endLimit erweitert (6 Zeilen)
+- [OK] Standard-LineCharts ohne xDisplayRange: alle Änderungen hinter if-Guards, Fallback unverändert
+- [OK] Ergebnisprotokoll: docs/steering/patches/B1-AP-14b1_Axis-Domain-Contract_Ergebnis.md

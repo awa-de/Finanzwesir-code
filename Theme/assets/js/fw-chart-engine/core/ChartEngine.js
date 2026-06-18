@@ -145,6 +145,19 @@ export class ChartEngine {
             verticalLine:  inputFeatures.verticalLine  // NEW — Slice 6
         });
 
+        // NEW — B1-AP-14b1: xDisplayRange-Validierung (optional, für narrative LineCharts)
+        var xDisplayRange = null;
+        if (options.xDisplayRange != null) {
+            var xdr = options.xDisplayRange;
+            var monthFmt = /^\d{4}-\d{2}$/;
+            if (typeof xdr !== 'object' || typeof xdr.min !== 'string' || typeof xdr.max !== 'string' ||
+                !monthFmt.test(xdr.min) || !monthFmt.test(xdr.max)) {
+                this.renderer.showError(container, 'xDisplayRange muss { min: "YYYY-MM", max: "YYYY-MM" } sein');
+                return;
+            }
+            xDisplayRange = { min: xdr.min, max: xdr.max };
+        }
+
         // WeakMap-State-Mechanik
         if (this._appChartStates.has(container)) {
             var state = this._appChartStates.get(container);
@@ -154,12 +167,13 @@ export class ChartEngine {
             }
             state.data = frozenData;
             state.config.features = features;
+            state.config.xDisplayRange = xDisplayRange; // NEW — B1-AP-14b1
         } else {
             var state = {
                 data:          frozenData,
                 strategy:      this.strategies[type],
                 type:          type,
-                config:        { colors: {}, options: '', title: '', features: features },
+                config:        { colors: {}, options: '', title: '', features: features, xDisplayRange: xDisplayRange }, // CHANGED — B1-AP-14b1
                 range:         'max',
                 view:          'value',
                 viewOptions:   [],
