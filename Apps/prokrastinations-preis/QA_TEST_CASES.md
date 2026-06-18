@@ -831,6 +831,8 @@ Chart beschreibt vollständige Entwicklung über 120 Monate bis zum letzten CSV-
 - Keine Draw-Animation.
 - Keine langen Übergänge.
 - Keine Parallax-/Dramatisierungseffekte.
+- Kein Pulse-Ring auf neu sedimentierten Marker-Ringen.
+- Marker-Ringe bleiben statisch sichtbar (Inhalt bleibt — nur Bewegung entfällt).
 - Alle Stationen und Inhalte bleiben vorhanden.
 - Nutzer behält Kontrolle.
 
@@ -1290,4 +1292,109 @@ Diese Stellen waren beim Anlegen von QA_TEST_CASES.md (AP-06) als offene Fundste
 
 ---
 
-*AP-06 ✅ 2026-06-16, AP-07 ✅ 2026-06-16, AP-08b ✅ 2026-06-16, AP-08c ✅ 2026-06-16 | B1-AP-14a2 ✅ 2026-06-18 | Nächster Schritt: B1-AP-14b — Engine-Umbau Progressive Domain LineChart*
+---
+
+## Gruppe P — Pulse (B1-AP-14c4)
+
+### TC-P01 — Station 1: kein Pulse
+
+**Typ:** Visuell / Manuell
+**Priorität:** Muss
+**Voraussetzung:** App geladen, Rate gewählt, Screen 2 aktiv — Station 1.
+
+**Schritte:**
+1. Screen 2 aufrufen, Station 1 ist aktiv.
+2. Chart beobachten.
+
+**Erwartetes Ergebnis:**
+- Kein Pulse-Ring sichtbar.
+- Keine Animation auf dem Chart.
+
+**Fehlschlag, wenn:**
+- Ein Ring pulst.
+
+---
+
+### TC-P02 — Station 2: genau ein Pulse (Station-1-Ring)
+
+**Typ:** Visuell / Manuell
+**Priorität:** Muss
+**Voraussetzung:** Station 2 aktiv.
+
+**Schritte:**
+1. Von Station 1 auf Station 2 wechseln.
+2. Chart beobachten.
+
+**Erwartetes Ergebnis:**
+- Genau ein Ring (Station-1-Marker) pulst einmalig (≈1200 ms, 2 Auswüchse).
+- Ring stoppt nach Ablauf — keine Endlosschleife.
+
+**Fehlschlag, wenn:**
+- Mehr als ein Ring pulst.
+- Pulse läuft endlos.
+- Kein Pulse sichtbar.
+
+---
+
+### TC-P03 — Station 3: nur neuer Ring pulst, älterer Ring still
+
+**Typ:** Visuell / Manuell
+**Priorität:** Muss
+**Voraussetzung:** Station 3 aktiv.
+
+**Schritte:**
+1. Zeitreise bis Station 3 durchlaufen.
+2. Chart beobachten.
+
+**Erwartetes Ergebnis:**
+- Nur Station-2-Ring pulst.
+- Station-1-Ring bleibt still.
+
+**Fehlschlag, wenn:**
+- Station-1-Ring pulst erneut.
+- Kein Ring pulst.
+
+---
+
+### TC-P04 — Screen 3: kein Pulse
+
+**Typ:** Visuell / Manuell
+**Priorität:** Muss
+**Voraussetzung:** Screen 3 sichtbar.
+
+**Schritte:**
+1. Zeitreise abschließen, Screen 3 aufrufen.
+2. Chart beobachten.
+
+**Erwartetes Ergebnis:**
+- Keine Pulse-Ringe auf historischen Marker-Ringen in Screen 3.
+- Ringe sind statisch sichtbar.
+
+**Fehlschlag, wenn:**
+- Ein Ring pulst auf Screen 3.
+
+---
+
+### TC-P05 — Reduced Motion: kein Pulse, Ringe sichtbar
+
+**Typ:** Visuell / Manuell (DevTools)
+**Priorität:** Muss
+**Voraussetzung:** DevTools → Rendering → `prefers-reduced-motion: reduce` aktiv.
+
+**Schritte:**
+1. App laden, Zeitreise starten.
+2. Mehrere Stationen durchlaufen.
+3. Chart auf Screen 2 beobachten.
+
+**Erwartetes Ergebnis:**
+- Kein Pulse-Ring sichtbar.
+- Marker-Ringe erscheinen statisch beim Stationswechsel.
+- Keine Fehlermeldung in Konsole.
+
+**Fehlschlag, wenn:**
+- Ein Ring pulst trotz Reduced Motion.
+- Marker-Ringe verschwinden (Inhalt entfernt).
+
+---
+
+*AP-06 ✅ 2026-06-16, AP-07 ✅ 2026-06-16, AP-08b ✅ 2026-06-16, AP-08c ✅ 2026-06-16 | B1-AP-14a2 ✅ 2026-06-18 | B1-AP-14c4 ✅ 2026-06-18 | B1-AP-14d3 ✅ 2026-06-18 | Nächster Schritt: B1-AP-15 — Transitions + Reduced Motion*

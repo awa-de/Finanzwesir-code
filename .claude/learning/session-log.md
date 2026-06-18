@@ -294,4 +294,13 @@ FinanzwesirData.js, CSVParser.js, FwDateUtils.js — diese Session nicht berühr
 - [WIN] Peer-Review (Perplexity+ChatGPT) → canvas-ownership-Diagnose → chart.draw() statt direktem Canvas-Schreiben in _standaloneLoop
 - [WIN] 2-Pulse-Formel Math.abs(Math.sin(progress×π×2)) — Echo-Effekt durch natürliches Alpha-Fade; Produktionswerte 1200ms/1.8x durch Albert freigegeben
 
+### 2026-06-18 — B1-AP-14d2 ✅ Mini-QA Progressive Domain + Marker + Pulse
+- [OK] Statische QA über gesamten AP-14-Block: 6 QA-Bereiche + Regression — alles grün, keine Blocker
+- [OK] Ergebnisprotokoll: docs/steering/patches/B1-AP-14d2_Mini-QA_Progressive-Domain_Marker_Pulse_Ergebnis.md
+
+### 2026-06-18 — B1-AP-14d3 ✅ Pulse-Produktentscheidung dokumentiert
+- [OK] APP_SPEC V2.7→V2.8: §14.6 (reduced-motion-Bullet), §16.1 (konkrete Parameter), §16.3 (Primitive-Zeile), §16.4 (Reduced-Motion-Zeile)
+- [OK] QA_TEST_CASES V1.4→V1.5: TC-I01 erweitert, Gruppe P (TC-P01–TC-P05) neu
+- [WIN] Albert: „Alles was wir an Rauschen rausbekommen können, müssen wir vernichten" — Spec-Drift vollständig bereinigt
+
 ### 2026-06-18 — B1-AP-15 — AP-Wechsel

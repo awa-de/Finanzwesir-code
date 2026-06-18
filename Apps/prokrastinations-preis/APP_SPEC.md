@@ -1,6 +1,6 @@
 # APP_SPEC — prokrastinations-preis
 
-Stand: 2026-06-18 | V2.7 — B1-AP-14a2: Progressive Domain LineChart und AP-14c-Marker-Zielbild dokumentiert | Geändert von: Claude
+Stand: 2026-06-18 | V2.8 — B1-AP-14d3: Pulse-Produktentscheidung dokumentiert (§14.6, §16.1, §16.3, §16.4) | Geändert von: Claude
 
 ---
 
@@ -771,6 +771,7 @@ Nicht erlaubt:
 
 Bei `prefers-reduced-motion` aktiv:
 - keine Draw-Animation zwischen Stationen
+- kein Pulse auf neu sedimentierten Marker-Ringen (Ringe bleiben statisch sichtbar)
 - kein langes Überblenden
 - kein Scroll-Jacking
 - keine Parallax- oder Dramatisierungseffekte
@@ -1157,7 +1158,23 @@ Eventdatum → Snapshot-Snap analog zur Hauptserie → Lookup des passenden Mona
 ```
 Nicht erlaubt: lineare Interpolation als Default, linker Floor-Snap als Default, geschätzte Zwischenwerte, künstliche Datenpunkte.
 
-**Pulse:** Pulse ist ephemerer Runtime-State — gehört nicht in `stations.de.json` und nicht dauerhaft in `fwContext`. Implementierung folgt außerhalb des Domain-State.
+**Pulse (B1-AP-14c4 ✅ 2026-06-18):**
+
+Pulse ist ephemerer Runtime-State — gehört nicht in `stations.de.json` und nicht dauerhaft in `fwContext`.
+
+Produktentscheidung (freigegeben Albert 2026-06-18):
+- Scope: Screen 2 only; Screen 3 kein Pulse
+- Welcher Ring pulst: nur der neu sedimentierte Ring (zuletzt hinzugekommen)
+- Ausgeschlossen: aktuelle Station, Zukunftsstationen, `final_reveal`
+- Pulse-Dauer: 1200 ms (2 Pulse à 600 ms)
+- Pulse-Form: `Math.abs(Math.sin(progress × π × 2))` — zwei Auswüchse; zweiter durch Alpha-Fade schwächer (Echo-Effekt)
+- Scale-Maximum: 1.8× (Ring wächst auf 180 % des Ausgangsradius)
+- Alpha-Fade: 1.0 → 0.0 über gesamte Dauer
+- Keine Endlosschleife: Pulse stoppt nach PULSE_DURATION
+
+`prefers-reduced-motion: reduce` → kein Pulse. Ringe bleiben statisch sichtbar.
+
+Implementierung: `FwAnnotationPulsePlugin.js` (WeakMap-State, `afterDraw`-Hook, `chart.draw()`-Pattern).
 
 ### 16.2 Screen-Texte
 
@@ -1221,6 +1238,7 @@ Heute Marktzeit sammeln
 | StationCard | Datum, Quellenlabel, Headline, Anleger-Anker | Screen 2 | zu bauen |
 | Stationen-Button | `Weiter investiert bleiben` | Screen 2 | zu bauen |
 | Mobile-Collapsible | `Zwischenstand anzeigen` → Eingezahlt + Depotwert damals | Screen 2 | zu bauen |
+| Marker-Pulse-Ring | Neu sedimentierter Ring pulst 1200 ms (1.8×, 2 Pulse) | Screen 2 | ✅ B1-AP-14c4 |
 | Draw-Animation | Chart wächst zur nächsten Station | Screen 2 | zu bauen |
 | SparplanChart (vollständig) | 120-Monate-Gesamtverlauf | Screen 3 | zu bauen |
 | VertikaleLinie | Entscheidungspunkt-Marker bei letztem Datenpunkt | Screen 3 | zu bauen |
@@ -1244,6 +1262,7 @@ Screens 1→2→3→4 per sichtbarem Button oder Tastatur (Enter/Space). Kein Au
 
 **Reduced Motion:**
 - Draw-Animation zwischen Stationen: deaktiviert bei `prefers-reduced-motion` → sofort zur nächsten Station
+- Marker-Pulse: deaktiviert bei `prefers-reduced-motion` → Ringe erscheinen statisch, kein Pulse
 - Screen-Flow-Übergänge: deaktiviert → direkt Zielzustand
 
 ### 16.5 Label-Konventionen (Krug — Alltagssprache)
