@@ -227,3 +227,13 @@ FinanzwesirData.js, CSVParser.js, FwDateUtils.js ‚Äî diese Session nicht ber√ºhr
 - [OK] FwSmartXAxis.js: afterDataLimits nutzt displayRange; _generateLinearTicks endLimit erweitert (6 Zeilen)
 - [OK] Standard-LineCharts ohne xDisplayRange: alle √Ñnderungen hinter if-Guards, Fallback unver√§ndert
 - [OK] Ergebnisprotokoll: docs/steering/patches/B1-AP-14b1_Axis-Domain-Contract_Ergebnis.md
+
+### 2026-06-18 ó B1-AP-14b2 ó AP-Wechsel
+
+### 2026-06-18 ó B1-AP-14b2 ? Y-Policy cumulative-expand-zero
+- [OK] FwSmartYAxis.js: cumulative-expand-zero-Block (rawMin=0, rawMax=max(current, rememberedMax)) ó 7 Zeilen nach Leerdiagramm-Fallback
+- [OK] BaseChartStrategy.js: yRangePolicy + yRangeMemory in fwContext-Struktur (2 Zeilen)
+- [OK] LineChartStrategy.js: config.yRangePolicy/yRangeMemory an _createFwContext weitergegeben (2 Zeilen)
+- [OK] ChartEngine.js: yRangePolicy parsen + validieren; axisMemory.yMaxSeen in WeakMap-State; yRangeMemory vor transform injizieren; yMaxSeen nach transform akkumulieren; Reset bei Key-Wechsel
+- [OK] Ergebnisprotokoll: docs/steering/patches/B1-AP-14b2_Y-Policy_cumulative-expand-zero_Ergebnis.md
+- [INFO] Kein App-Code geaendert. Kein Commit. Standardcharts vollstaendig unveraendert (opt-in Guard).

@@ -295,6 +295,8 @@ export class LineChartStrategy extends BaseChartStrategy {
             },
             durationYears: fwDurationYears, // CHANGED — B1-AP-14b1: aus displayRange wenn vorhanden
             displayRange: displayRange, // NEW — B1-AP-14b1
+            yRangePolicy: config.yRangePolicy || null, // NEW — B1-AP-14b2
+            yRangeMemory: config.yRangeMemory || null, // NEW — B1-AP-14b2
             viewMode: config.view || 'value',
             valueMode: formatMode,
             currency: currency,

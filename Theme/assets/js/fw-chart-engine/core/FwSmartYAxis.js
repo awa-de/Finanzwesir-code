@@ -146,6 +146,15 @@ export class FwSmartYAxis {
             return;
         }
 
+        // NEW — B1-AP-14b2: cumulative-expand-zero policy
+        // yMin = 0; yMax wächst nur, schrumpft nie. Memory kommt aus ChartEngine-State.
+        if (fwContext.yRangePolicy === 'cumulative-expand-zero') {
+            rawMin = 0;
+            const rememberedMax = (fwContext.yRangeMemory && fwContext.yRangeMemory.yMaxSeen > 0)
+                ? fwContext.yRangeMemory.yMaxSeen : 0;
+            rawMax = Math.max(rawMax, rememberedMax);
+        }
+
         // 2. Proportionaler Grace-Buffer (15% pro Seite, multiplikativ)
         let gracedMin = rawMin < 0 ? rawMin * 1.15 : rawMin;
         let gracedMax = rawMax > 0 ? rawMax * 1.15 : rawMax;

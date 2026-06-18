@@ -2,16 +2,16 @@
 Version: 1
 Stand: 2026-06-18
 Fokus-AP: APP-01 — prokrastinations-preis
-Nächster-Schritt: B1-AP-14b2 — Y-Policy + App-Anschluss Screen 2 (B1-AP-14b1 ✅ 2026-06-18)
+Nächster-Schritt: B1-AP-14b3 — App-Anschluss Screen 2 (B1-AP-14b2 ✅ 2026-06-18)
 Blocker: keine
 Letzter-Distill: 2026-06-15
 Kassensturz-Datum: 2026-06-15
 -->
-<!-- HOOK-META-SESSION: B1-AP-14b1 -->
+<!-- HOOK-META-SESSION: B1-AP-14b2 -->
 
 # PROJECT STATUS — Finanzwesir 2.0
 
-Stand: 2026-06-18 | Session: B1-AP-14b1 | Geändert von: Claude
+Stand: 2026-06-18 | Session: B1-AP-14b2 | Geändert von: Claude
 
 **Zweck:** Schneller Wiedereinstieg nach Pausen.
 **Zielgruppe:** Albert und Claude.
@@ -144,7 +144,7 @@ Stand: 2026-06-18 | Session: B1-AP-14b1 | Geändert von: Claude
 
 ## 3. Nächster sinnvoller Schritt
 
-- **B1-AP-14b** 🟡 Offen — Engine-Umbau Progressive Domain LineChart (xDisplayRange, displayRange, yRangePolicy). Wartet auf Alberts Freigabe für ChartEngine.js + LineChartStrategy.js + FwSmartXAxis.js. Architekturplan: `docs/steering/PEER-REVIEW-B1-AP-14b-XAxis-Architecture.md`
+- **B1-AP-14b3** 🟡 Offen — App-Anschluss Screen 2: xDisplayRange + yRangePolicy + yRangeResetKey in app.js; Re-Render-/WeakMap-Test; ggf. Diagnostik-Log-Cleanup
 - **AP-20/21** (Mixed-Rhythm CV-Heuristik) — 🟡 Aktiv, Chart-Engine, parallel möglich
 
 ---
@@ -199,6 +199,9 @@ Vollständig im DECISION-LOG dokumentiert (`docs/steering/DECISION-LOG.md`):
 ---
 
 ## 8. Letzte Session
+
+2026-06-18 — B1-AP-14b2 Y-Policy cumulative-expand-zero implementiert (B1-AP-14b2).
+4 Engine-Dateien geaendert: FwSmartYAxis (_performDynamicRescaling: rawMin=0, rawMax expandiert), BaseChartStrategy (yRangePolicy/yRangeMemory in fwContext), LineChartStrategy (Policy durch config weitergegeben), ChartEngine (axisMemory.yMaxSeen in WeakMap-State, Reset bei Key-Wechsel). Standardcharts unveraendert (opt-in Guard). Ergebnisprotokoll: docs/steering/patches/B1-AP-14b2_...md. Naechster Schritt: B1-AP-14b3 (App-Anschluss).
 
 2026-06-18 — B1-AP-14a2 Doku-Neuschnitt Progressive Domain LineChart (B1-AP-14a2).
 APP_SPEC V2.7 (§16.1 AP-14b-Architektur + AP-14c-Marker-Zielbild), ENTSCHEIDUNGSPROTOKOLL §12+§13, QA_TEST_CASES V1.4 Gruppe M (12 Testfälle TC-M01–M12), REDAKTIONS_GATE V1.3 (G-C04 Marker-Datenquelle). Kein Code, kein JSON geändert. Nächster Schritt: B1-AP-14b.

@@ -158,6 +158,18 @@ export class ChartEngine {
             xDisplayRange = { min: xdr.min, max: xdr.max };
         }
 
+        // NEW — B1-AP-14b2: yRangePolicy (optional, für cumulative Y-Achse)
+        var yRangePolicy = null;
+        var yRangeResetKey = null;
+        if (options.yRangePolicy != null) {
+            if (options.yRangePolicy !== 'cumulative-expand-zero') {
+                this.renderer.showError(container, 'yRangePolicy: nur "cumulative-expand-zero" erlaubt');
+                return;
+            }
+            yRangePolicy = options.yRangePolicy;
+            yRangeResetKey = options.yRangeResetKey !== undefined ? options.yRangeResetKey : null;
+        }
+
         // WeakMap-State-Mechanik
         if (this._appChartStates.has(container)) {
             var state = this._appChartStates.get(container);
@@ -168,16 +180,30 @@ export class ChartEngine {
             state.data = frozenData;
             state.config.features = features;
             state.config.xDisplayRange = xDisplayRange; // NEW — B1-AP-14b1
+            // NEW — B1-AP-14b2: yRangePolicy + Reset-Key update
+            var prevKey = state.config.yRangeResetKey;
+            state.config.yRangePolicy = yRangePolicy;
+            state.config.yRangeResetKey = yRangeResetKey;
+            if (yRangePolicy === 'cumulative-expand-zero') {
+                if (!state.axisMemory) {
+                    state.axisMemory = { yMaxSeen: 0 };
+                } else if (yRangeResetKey !== prevKey) {
+                    state.axisMemory.yMaxSeen = 0; // RESET bei Key-Wechsel
+                }
+            } else {
+                state.axisMemory = null;
+            }
         } else {
             var state = {
                 data:          frozenData,
                 strategy:      this.strategies[type],
                 type:          type,
-                config:        { colors: {}, options: '', title: '', features: features, xDisplayRange: xDisplayRange }, // CHANGED — B1-AP-14b1
+                config:        { colors: {}, options: '', title: '', features: features, xDisplayRange: xDisplayRange, yRangePolicy: yRangePolicy, yRangeResetKey: yRangeResetKey }, // CHANGED — B1-AP-14b2
                 range:         'max',
                 view:          'value',
                 viewOptions:   [],
                 benchmark:     null,
+                axisMemory:    yRangePolicy ? { yMaxSeen: 0 } : null, // NEW — B1-AP-14b2
                 chartInstance: null
             };
             this._appChartStates.set(container, state);
@@ -246,7 +272,19 @@ export class ChartEngine {
         runtimeConfig.benchmark = state.benchmark;
         runtimeConfig.view = state.view;
 
+        // NEW — B1-AP-14b2: Y-Memory für cumulative policy vor transform injizieren
+        if (state.config.yRangePolicy === 'cumulative-expand-zero' && state.axisMemory) {
+            runtimeConfig.yRangeMemory = { yMaxSeen: state.axisMemory.yMaxSeen };
+        }
+
         var chartData = state.strategy.transform(state.data, runtimeConfig);
+
+        // NEW — B1-AP-14b2: yMaxSeen nach transform akkumulieren
+        if (state.config.yRangePolicy === 'cumulative-expand-zero' && state.axisMemory) {
+            var dataMaxY = chartData.plugins.fwContext.dataRange.maxY;
+            if (dataMaxY > state.axisMemory.yMaxSeen) state.axisMemory.yMaxSeen = dataMaxY;
+        }
+
         var chartConfig = state.strategy.getChartConfig(chartData);
         var a11yData = state.strategy.getA11yData(state.data, runtimeConfig);
 
