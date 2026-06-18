@@ -227,7 +227,6 @@ export class FwSmartXAxis {
                 bounds: 'data',
                 offset: false,
                 afterDataLimits: (axis) => {
-                    console.log('[SNAPSHOT-X DIAG] afterDataLimits BEFORE:', { min: axis.min, max: axis.max });
                     if (fwContext.displayRange) { // NEW — B1-AP-14b1
                         axis.min = fwContext.displayRange.min; // NEW
                         axis.max = fwContext.displayRange.max; // NEW
@@ -235,17 +234,14 @@ export class FwSmartXAxis {
                         const range = axis.max - axis.min;
                         axis.max += range * 0.05; // 5% Breathing Room
                     } // NEW
-                    console.log('[SNAPSHOT-X DIAG] afterDataLimits AFTER:', { min: axis.min, max: axis.max });
                 },
                 afterBuildTicks: (axis) => {
-                    console.log('[SNAPSHOT-X DIAG] afterBuildTicks ENTRY:', { min: axis.min, max: axis.max });
                     // Runtime Zone-Detection: echte Canvas-Breite statt fwContext.width (immer 1000).
                     const runtimeWidth = axis.chart?.width || 1000;
                     const runtimeZone = runtimeWidth < 450 ? 'S' : (runtimeWidth < 900 ? 'M' : 'L');
                     const runtimeMatrix = this._getDensityMatrix(durationYears, runtimeZone, rhythm, semantics);
                     runtimeFormat = runtimeMatrix.format;
                     this._generateLinearTicks(axis, fwContext, runtimeMatrix);
-                    console.log('[SNAPSHOT-X DIAG] afterBuildTicks EXIT:', { min: axis.min, max: axis.max, tickCount: axis.ticks.length });
                 },
                 // V10.4.0: Chart.js generateTickLabels überschreibt Labels nach afterBuildTicks.
                 // afterTickToLabelConversion re-setzt unsere Kalender-Labels mit dem korrekten Format.

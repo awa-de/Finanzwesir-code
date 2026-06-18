@@ -247,3 +247,5 @@ FinanzwesirData.js, CSVParser.js, FwDateUtils.js — diese Session nicht berühr
 - [OFFEN] Manueller Browser-Smoke-Test durch Albert ausstehend
 - [OFFEN] Diagnostics-Log-Cleanup (FwSmartXAxis B1-AP-14b1) für Folge-AP
 - [OK] Ergebnisprotokoll: docs/steering/patches/B1-AP-14b3_App-Anschluss_Smoke-Test_Ergebnis.md
+
+### 2026-06-18 — B1-AP-14c1 — AP-Wechsel
