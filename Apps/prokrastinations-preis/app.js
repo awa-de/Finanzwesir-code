@@ -452,16 +452,6 @@ function renderContent(container, appData, options, stationsConfig) { // CHANGED
     chartEngine2.renderFromData(chartSection2, visibleSeries, {
       type: 'line', features: { rangeControls: false, headline: false }
     });
-    // NEW — AP-14b: feste X-Achse — max auf vollständige 10-Jahres-Spanne fixieren (APP_SPEC §16.1)
-    const canvas2 = chartSection2.querySelector('canvas');
-    if (canvas2) {
-      const chartInst2 = Chart.getChart(canvas2);
-      if (chartInst2 && chartInst2.options.scales && chartInst2.options.scales.x) {
-        const fullEnd = ctx.chartSeries[ctx.chartSeries.length - 1];
-        chartInst2.options.scales.x.max = new Date(fullEnd.month + '-01').getTime();
-        chartInst2.update('none');
-      }
-    }
     // NEW — AP-14b: Orientierungs-Chip aktualisieren (APP_SPEC §16.1)
     const n = stationIdx + 1;
     const total = journeyStations.length;
