@@ -1,4 +1,4 @@
-Stand: 2026-06-17 | V1.2 — B1-AP-14a: G-C04 finale Marker-Regel ergänzt | Geändert von: Claude
+Stand: 2026-06-18 | V1.3 — B1-AP-14a2: G-C04 Marker-Datenquelle und Snapshot-Snap ergänzt | Geändert von: Claude
 
 # Redaktions-Gate — prokrastinations-preis
 
@@ -415,8 +415,17 @@ Depotwert damals: {portfolioValueAtStation}
 
 Regel: Finale Stationenmarker im Screen-3-Reveal sind stille, nicht-interaktive Erinnerungsmarker. Interaktive Marker, Tooltips, Labels oder Legenden sind nicht publikationsreif, weil sie die App in Richtung Marktchronik verschieben.
 
+**Datenquelle (AP-14c):**
+- Marker werden ausschließlich aus den Journey-Stations (`stations.de.json`) abgeleitet
+- Keine neue `events.json` wird eingeführt
+- `final_reveal` wird nicht als Marker dargestellt
+- Aktuelle und Zukunftsstationen werden nicht markiert
+- Sichtbar sind nur vergangene Stationen: bei Station n Marker für Stationen 1 bis n−1
+
+**Marker-Y:** Snapshot-Snap — Lookup des passenden Monatsdatenpunkts in der Hauptserie. Keine lineare Interpolation, kein linker Floor-Snap als Default.
+
 Erlaubt:
-- nicht-interaktive Punkte oder Marker auf oder nah an der vollständigen Linie
+- nicht-interaktive Punkte oder Marker (offene Ringe, nicht rot) auf oder nah an der vollständigen Linie
 - kurzer Fade-in nach vollständiger Linie
 - summarischer Screenreader-Hinweis erst auf Screen 3
 
@@ -425,6 +434,7 @@ Nicht erlaubt:
 - Hover-Tooltips, Labels, Legenden
 - nummerierte Marker, Event-Replay
 - Marker auf Screen 2
+- separate `events.json` als Marker-Quelle
 
 ---
 
@@ -541,4 +551,4 @@ AP-07 implementiert das nicht, sondern dokumentiert die Regel. Technische Umsetz
 | Offen | Business Insider 2018 oder WiWo 2018 ersetzen — Quellenentscheidung |
 | Offen | Finale Impfstoff-Quelle (November 2020) bestätigen |
 
-*AP-07 ✅ 2026-06-16, AP-08b ✅ 2026-06-16, AP-08c ✅ 2026-06-16 | Nächster Schritt: B1-AP-09 — produktive `stations.de.json` anlegen*
+*AP-07 ✅ 2026-06-16, AP-08b ✅ 2026-06-16, AP-08c ✅ 2026-06-16 | B1-AP-14a2 ✅ 2026-06-18 | Nächster Schritt: B1-AP-14b — Engine-Umbau Progressive Domain LineChart*

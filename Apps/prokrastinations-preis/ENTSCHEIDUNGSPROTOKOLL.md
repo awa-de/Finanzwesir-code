@@ -1,6 +1,6 @@
 # Entscheidungsprotokoll — prokrastinations-preis
 
-Stand: 2026-06-16 | Session: AP-01 | Geändert von: Claude
+Stand: 2026-06-18 | Session: AP-14a2 | Geändert von: Claude
 
 Dieses Dokument ist die verbindliche gedankliche Klammer für AP-02 bis AP-08.  
 Es hält fest: was entschieden wurde, was verworfen wurde, warum, und welche Konsequenzen folgen.  
@@ -285,3 +285,114 @@ Wenn diese Bedingungen nicht erfüllt sind, ist die App redaktionell nicht publi
 | AP-06 | Testfälle aktualisieren | Stations-JSON lädt, Fensterfilter, Reveal aus CSV, kein Rot, Collapsible, kein KPI vor S3 |
 | AP-07 | Redaktions-Gate dokumentieren | Quellenstatus, Mindestkrise, Produktivfähigkeit, sichtbare Stationen |
 | AP-08 | Widersprüchliche Stellen bereinigen | Alle Stellen, die behaupten Screen 2 zeige vollständigen Chart mit KPIs |
+
+---
+
+## 12. AP-14b — Progressive Domain LineChart
+
+Beschlossen 2026-06-18 (B1-AP-14a2).
+
+### Grundentscheidung
+
+Der Chart-Umbau für Screen 2 ist kein App-Hack. Er führt einen offiziellen Achsenvertrag in der Chart-Engine ein.
+
+**Leitsatz:**
+> X zeigt den Zeithorizont. Linie zeigt den Wissensstand. Y zeigt den bisher bekannten Werteraum.
+
+**Produkt-Leitsatz:**
+> Zeit bleibt stabil. Wissen wächst. Der bekannte Werteraum wächst.
+
+### Achsenvertrag: dataRange vs. displayRange
+
+| Konzept | Bedeutung |
+|---|---|
+| `dataRange` | Tatsächlicher sichtbarer Datenbereich — endet in Screen 2 beim aktuellen Stationsmonat. Grundlage für sichtbare Linie, Tooltips, A11y und Y-Skalierung. |
+| `displayRange` | Intendierte Anzeige-Domain der X-Achse — umfasst das vollständige 10-Jahres-Fenster. Grundlage für X-Scale, X-Ticks und `durationYears`. |
+
+`displayRange` wird im `fwContext` optional ergänzt. Standard-LineCharts ohne `xDisplayRange` bleiben unverändert.
+
+### Öffentlicher API-Vertrag (Zielbild)
+
+```js
+chartEngine.renderFromData(container, visibleSeries, {
+  type: 'line',
+  features: { rangeControls: false, headline: false },
+  xDisplayRange: { min: ctx.startMonth, max: ctx.latestMonth },
+  yRangePolicy: 'cumulative-expand-zero'
+});
+```
+
+`xDisplayRange` ist Top-Level-Optionsfeld — nicht `features.xDisplayMax`, nicht nur `max`.
+
+### Y-Achsen-Vertrag
+
+`yRangePolicy: 'cumulative-expand-zero'`:
+- `yMin` immer `0`
+- `yMax` basiert ausschließlich auf dem bisher bekannten Datenpfad
+- `yMax` darf nur gleich bleiben oder nach oben expandieren — nie schrumpfen
+- Kein finaler Maximalwert vor Screen 3
+- Y-Achsen-Gedächtnis wird zurückgesetzt bei: Neustart der Zeitreise, Änderung der Sparrate
+
+### Verbotene Implementierungen
+
+Ausdrücklich nicht zulässig:
+
+- `Chart.getChart()`-Post-Render-Hack
+- nachträgliches `options.scales.x.max`
+- `chart.update('none')` als Achsenfix
+- `setTimeout`-/`requestAnimationFrame`-Kaschierung
+- Fake-Daten bis `latestMonth`
+- Dummy-Dataset für leeren Zukunftsbereich
+- transparente Zukunftslinie
+- neuer Chart-Typ nur für diese App
+- globale Chart.js-Hacks
+- Endwissens-Leak in Screen 2
+- Y-Achse auf finalen Maximalwert vorab setzen
+- Y-Achse während Screen 2 schrumpfen lassen
+
+---
+
+## 13. AP-14c — Event-Marker-Zielbild
+
+Beschlossen 2026-06-18 (B1-AP-14a2). Implementierung folgt nach AP-14b.
+
+### Datenquelle: Journey-Stations, keine events.json
+
+Für diese App wird keine neue `events.json` eingeführt.
+
+- `stations.de.json` bzw. die bestehenden Journey-Stations bleiben die redaktionelle Quelle
+- Event-Marker werden aus den Journey-Stations abgeleitet
+- `final_reveal` wird ausgeschlossen
+- Die aktuelle Station wird nicht markiert
+- Zukunftsstationen werden nicht markiert
+- Sichtbar sind nur vergangene Stationen: bei Station n sind Marker für Stationen 1 bis n−1 sichtbar
+
+**Begründung:** Die Marker sind in dieser App keine generischen Zusatzereignisse. Sie sind sedimentierte Stationen der Zeitreise. Eine separate `events.json` würde nur Synchronisationsrisiko erzeugen.
+
+### Marker-Y: Snapshot-Snap
+
+```
+Eventdatum → Snapshot-Snap analog zur Hauptserie → Lookup des passenden Monatsdatenpunkts → markerY aus Hauptserie
+```
+
+Nicht erlaubt:
+- lineare Interpolation als Default
+- linker Floor-Snap als Default
+- geschätzte Zwischenwerte
+- künstliche Datenpunkte
+
+### Marker-Visual
+
+- offener Ring
+- nicht rot
+- keine gefüllten dicken Punkte
+- keine Labels, Tooltips, Legende
+- keine Klick-/Tap-Funktion
+- keine Interaktion
+
+### Pulse (Zielbild für spätere Implementierung)
+
+- Pulse ist ephemerer Runtime-State
+- Pulse gehört nicht in `stations.de.json`
+- Pulse gehört nicht dauerhaft in `fwContext`
+- Implementierung folgt außerhalb des Domain-State

@@ -1,11 +1,11 @@
-Stand: 2026-06-17 | V1.3 — B1-AP-14a: Testfälle feste X-Achse und finale Stationenmarker ergänzt | Geändert von: Claude
+Stand: 2026-06-18 | V1.4 — B1-AP-14a2: Gruppe M Progressive Domain LineChart und AP-14c-Marker ergänzt | Geändert von: Claude
 
 # QA_TEST_CASES — prokrastinations-preis
 
 Vollständige Test- und QA-Kriterien für die Stationen-Zeitreise.
 
 **Bindende Quellen:**
-- `APP_SPEC.md` V2.5 (führende Spec)
+- `APP_SPEC.md` V2.7 (führende Spec)
 - `STATIONS_CONFIG_CONTRACT.md` (Felder, Enums, Fensterfilter, Redaktions-Gate)
 - `ENTSCHEIDUNGSPROTOKOLL.md` (dramaturgische Regeln)
 - `REDAKTIONS_GATE.md` (Gate-Regeln und Release-Checkliste — `QA_TEST_CASES.md` beschreibt das Wie der Prüfung, `REDAKTIONS_GATE.md` das Was)
@@ -30,6 +30,7 @@ Vollständige Test- und QA-Kriterien für die Stationen-Zeitreise.
 | J — Visual- und Ethikregeln | keine rote Codierung, keine Fake-Urgency |
 | K — Fehler- und Empty-States | JSON-/Datenfehler verständlich behandeln |
 | L — Regression gegen alte Logik | alte Screen-2-Ergebnisgrafik darf nicht zurückkehren |
+| M — Progressive Domain LineChart | xDisplayRange, yRangePolicy, keine Hacks, Marker-Y (AP-14b/AP-14c) |
 
 ---
 
@@ -1035,4 +1036,258 @@ Diese Stellen waren beim Anlegen von QA_TEST_CASES.md (AP-06) als offene Fundste
 
 ---
 
-*AP-06 ✅ 2026-06-16, AP-07 ✅ 2026-06-16, AP-08b ✅ 2026-06-16, AP-08c ✅ 2026-06-16 | Nächster Schritt: B1-AP-09 — produktive `stations.de.json` anlegen*
+---
+
+## Gruppe M — Progressive Domain LineChart (B1-AP-14b / AP-14c)
+
+### TC-M01 — Standard-LineChart ohne xDisplayRange bleibt unverändert
+
+**Typ:** Regression
+**Priorität:** Muss
+
+**Schritte:**
+1. Chart ohne `xDisplayRange`-Option rendern.
+2. Verhalten prüfen.
+
+**Erwartetes Ergebnis:**
+- Chart verhält sich wie bisher.
+- Kein Fehler, keine veränderte Achsenskalierung.
+- `xDisplayRange` ist ein optionales Opt-in.
+
+**Fehlschlag, wenn:**
+- Standard-LineCharts nach dem Engine-Umbau andere X-Achsen-Grenzen haben.
+- Engine-Änderung bricht bestehende Charts ohne `xDisplayRange`.
+
+---
+
+### TC-M02 — X-Achse zeigt vollständiges 10-Jahres-Fenster ab erster Station
+
+**Typ:** Visuell / Automatisierbar
+**Priorität:** Muss
+
+**Schritte:**
+1. Screen 2 an erster Station öffnen.
+2. X-Achsen-Start und -Ende prüfen.
+
+**Erwartetes Ergebnis:**
+- X-Achse reicht von `startMonth` bis `latestMonth`.
+- X-Achse entspricht `xDisplayRange: { min: startMonth, max: latestMonth }`.
+- Nicht nur bis zur ersten Station.
+
+**Fehlschlag, wenn:**
+- X-Achse endet an der aktuellen Station statt am `latestMonth`.
+- X-Achse wächst mit jeder Station mit (wachsende X-Achse).
+
+---
+
+### TC-M03 — Linie endet an aktueller Station, rechter Bereich bleibt leer
+
+**Typ:** Visuell
+**Priorität:** Muss
+
+**Schritte:**
+1. Screen 2 öffnen.
+2. Datenpunkte der Linie prüfen.
+3. Rechten Bereich (nach aktueller Station bis Achsenende) prüfen.
+
+**Erwartetes Ergebnis:**
+- Linie endet am aktuellen Stationsmonat.
+- Rechter Bereich enthält keine Linie, keine Punkte, keine Fake-Daten, kein Dummy-Dataset.
+- Keine transparente Zukunftslinie.
+
+**Fehlschlag, wenn:**
+- Linie mit `null`-Werten oder transparentem Dataset bis `latestMonth` aufgefüllt wird.
+- Gestrichelte oder blasse Linie rechts der aktuellen Station sichtbar ist.
+
+---
+
+### TC-M04 — Y-Achse startet bei 0
+
+**Typ:** Automatisierbar / Visuell
+**Priorität:** Muss
+
+**Schritte:**
+1. Screen 2 bei verschiedenen Stationen prüfen.
+2. Y-Achsen-Minimum prüfen.
+
+**Erwartetes Ergebnis:**
+- `yMin` ist immer `0`.
+- Y-Achse beginnt nicht bei einem anderen Wert.
+
+**Fehlschlag, wenn:**
+- Y-Achse beginnt bei einem positiven Wert (z. B. `auto-fit` des Chart.js-Defaults).
+- Y-Achse springt beim Stationswechsel auf ein neues Minimum.
+
+---
+
+### TC-M05 — Y-Achse expandiert nur nach oben, schrumpft nie
+
+**Typ:** Automatisierbar / Visuell
+**Priorität:** Muss
+
+**Schritte:**
+1. Screen 2 Stationen der Reihe nach durchlaufen.
+2. `yMax` nach jeder Station protokollieren.
+
+**Erwartetes Ergebnis:**
+- `yMax` ist bei jeder Station ≥ `yMax` der vorherigen Station.
+- `yMax` schrumpft nach einem Drawdown nicht zurück.
+- `yMax` berücksichtigt nur den bisher sichtbaren Datenpfad.
+
+**Fehlschlag, wenn:**
+- `yMax` nach einem Crash-Monat kleiner ist als vor der Crash-Station.
+- `yMax` auf den finalen Maximalwert der ganzen 120-Monate gesetzt ist (Endwissens-Leak).
+
+---
+
+### TC-M06 — Neustart der Zeitreise setzt Y-Achsen-Gedächtnis zurück
+
+**Typ:** Automatisierbar
+**Priorität:** Muss
+
+**Schritte:**
+1. Zeitreise bis Station 4 durchlaufen (`yMax` notieren).
+2. Zeitreise neu starten (z. B. zurück zu Screen 1, neuer Teleportationssprung).
+3. `yMax` an Station 1 der neuen Zeitreise prüfen.
+
+**Erwartetes Ergebnis:**
+- `yMax` nach Neustart entspricht nur dem Wertebereich bis Station 1.
+- Kein `yMax`-Carry-over aus dem vorherigen Durchlauf.
+
+**Fehlschlag, wenn:**
+- `yMax` nach Neustart noch den alten hohen Wert aus dem vorherigen Durchlauf zeigt.
+
+---
+
+### TC-M07 — Slider-Änderung (neue Sparrate) setzt Y-Achsen-Gedächtnis zurück
+
+**Typ:** Automatisierbar
+**Priorität:** Muss
+
+**Schritte:**
+1. Zeitreise bis Station 4 durchlaufen (`yMax` notieren).
+2. Slider auf neue Sparrate setzen.
+3. `yMax` an Station 1 der neuen Berechnung prüfen.
+
+**Erwartetes Ergebnis:**
+- `yMax` nach Sparraten-Änderung entspricht nur dem Wertebereich der neuen Berechnung bis zur aktuellen Station.
+- Kein `yMax`-Carry-over aus der vorherigen Berechnung.
+
+**Fehlschlag, wenn:**
+- `yMax` der alten Berechnung bleibt nach Sparraten-Änderung bestehen.
+
+---
+
+### TC-M08 — Keine Post-Render-Hacks in der X-Achsen-Implementierung
+
+**Typ:** Code-Review / Regression
+**Priorität:** Muss
+
+**Schritte:**
+1. Code-Review der Chart-Implementierung für Screen 2.
+2. Auf folgende Muster prüfen.
+
+**Erwartetes Ergebnis:**
+- Kein `Chart.getChart()`-Aufruf zur nachträglichen Achsenmanipulation.
+- Kein nachträgliches `options.scales.x.max`.
+- Kein `chart.update('none')` als Achsenfix.
+- Kein `setTimeout` oder `requestAnimationFrame` zur Achsen-Kaschierung.
+
+**Fehlschlag, wenn:**
+- Einer der genannten Muster im app.js-Code für Screen 2 vorhanden ist.
+
+---
+
+### TC-M09 — Keine Fake-Daten in der Linienserie
+
+**Typ:** Automatisierbar / Code-Review
+**Priorität:** Muss
+
+**Schritte:**
+1. `visibleSeries` für Screen 2 prüfen.
+2. Datenpunkte zählen und mit der aktuellen Station vergleichen.
+
+**Erwartetes Ergebnis:**
+- `visibleSeries` enthält nur echte Datenpunkte bis zur aktuellen Station.
+- Kein `null`-Padding, kein transparentes Dummy-Dataset bis `latestMonth`.
+- Der leere Rechtsbereich entsteht ausschließlich durch `xDisplayRange`, nicht durch Fake-Daten.
+
+**Fehlschlag, wenn:**
+- Dataset-Länge entspricht `latestMonth` statt aktueller Station.
+- Dummy-Datenpunkte mit `null`, `NaN` oder `0` rechts der aktuellen Station vorhanden sind.
+
+---
+
+### TC-M10 — Marker stammen ausschließlich aus Journey-Stations (AP-14c)
+
+**Typ:** Automatisierbar / Code-Review
+**Priorität:** Muss (für AP-14c-Implementierung)
+
+**Schritte:**
+1. Marker-Rendering prüfen.
+2. Datenquelle der Marker prüfen.
+
+**Erwartetes Ergebnis:**
+- Marker werden aus `stations.de.json` (Journey-Stations) abgeleitet.
+- Keine neue `events.json` eingeführt.
+- `final_reveal`-Station wird nicht als Marker dargestellt.
+- Aktuelle Station wird nicht markiert.
+- Zukunftsstationen werden nicht markiert.
+- Bei Station n sind Marker für Stationen 1 bis n−1 sichtbar.
+
+**Fehlschlag, wenn:**
+- Marker aus einer separaten `events.json` geladen werden.
+- `final_reveal` als Marker erscheint.
+- Aktuelle oder zukünftige Stationen markiert werden.
+
+---
+
+### TC-M11 — Marker-Y per Snapshot-Snap (AP-14c)
+
+**Typ:** Automatisierbar
+**Priorität:** Muss (für AP-14c-Implementierung)
+
+**Schritte:**
+1. Marker-Y-Koordinate für eine bekannte Station berechnen.
+2. Gegen den entsprechenden Monatsdatenpunkt der Hauptserie prüfen.
+
+**Erwartetes Ergebnis:**
+- `markerY` entspricht dem `depotwert`-Wert des passenden Stationsmonats in der Hauptserie.
+- Snapshot-Snap: kein Interpolieren zwischen Datenpunkten.
+- Kein linker Floor-Snap als Default.
+- Keine geschätzten Zwischenwerte.
+
+**Fehlschlag, wenn:**
+- Marker-Y durch lineare Interpolation berechnet wird.
+- Marker-Y auf einen Wert zeigt, der nicht im berechneten `chartSeries`-Array vorhanden ist.
+
+---
+
+### TC-M12 — Marker keine Interaktion, keine Labels (AP-14c)
+
+**Typ:** A11y / Visuell / Manuell
+**Priorität:** Muss (für AP-14c-Implementierung)
+
+**Schritte:**
+1. Screen 3 Stationenmarker per Maus/Tap prüfen.
+2. Screen 3 Stationenmarker per Tastatur prüfen.
+3. Screenreader-Ausgabe prüfen.
+4. Visual prüfen (Form, Farbe, Labels).
+
+**Erwartetes Ergebnis:**
+- Kein Hover-Tooltip, kein Klick-/Tap-Event.
+- Nicht per Tab fokussierbar.
+- Keine Label-Texte an den Markern.
+- Keine Legende für Marker.
+- Marker sind offene Ringe — nicht rot, nicht gefüllt.
+- Screenreader erhält nur eine summarische Erwähnung auf Screen 3, keine einzelnen Marker-Events.
+
+**Fehlschlag, wenn:**
+- Marker auf Hover, Tap oder Tastatur reagieren.
+- Marker als interaktive Elemente für assistive Technologien ausgezeichnet sind.
+- Marker beschriftet, nummeriert oder legendiert sind.
+- Marker rot oder als gefüllte Punkte dargestellt werden.
+
+---
+
+*AP-06 ✅ 2026-06-16, AP-07 ✅ 2026-06-16, AP-08b ✅ 2026-06-16, AP-08c ✅ 2026-06-16 | B1-AP-14a2 ✅ 2026-06-18 | Nächster Schritt: B1-AP-14b — Engine-Umbau Progressive Domain LineChart*

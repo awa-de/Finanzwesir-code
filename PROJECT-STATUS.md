@@ -2,16 +2,16 @@
 Version: 1
 Stand: 2026-06-18
 Fokus-AP: APP-01 — prokrastinations-preis
-Nächster-Schritt: B1-AP-14a2 — Doku-Neuschnitt Progressive Domain LineChart (B1-AP-14b0 ✅ 2026-06-18)
+Nächster-Schritt: B1-AP-14b — Engine-Umbau Progressive Domain LineChart (B1-AP-14a2 ✅ 2026-06-18)
 Blocker: keine
 Letzter-Distill: 2026-06-15
 Kassensturz-Datum: 2026-06-15
 -->
-<!-- HOOK-META-SESSION: B1-AP-14b0 -->
+<!-- HOOK-META-SESSION: B1-AP-14a2 -->
 
 # PROJECT STATUS — Finanzwesir 2.0
 
-Stand: 2026-06-18 | Session: B1-AP-14b0 | Geändert von: Claude
+Stand: 2026-06-18 | Session: B1-AP-14a2 | Geändert von: Claude
 
 **Zweck:** Schneller Wiedereinstieg nach Pausen.
 **Zielgruppe:** Albert und Claude.
@@ -144,8 +144,7 @@ Stand: 2026-06-18 | Session: B1-AP-14b0 | Geändert von: Claude
 
 ## 3. Nächster sinnvoller Schritt
 
-- **B1-AP-14a2** — Doku-Neuschnitt Progressive Domain LineChart + Event-Marker-Zielbild (keine Engine-Dateien nötig)
-- **B1-AP-14b** 🟡 Offen — X-Achsen-Kern-Fix wartet auf Alberts Freigabe für ChartEngine.js + LineChartStrategy.js + FwSmartXAxis.js. Architekturplan: `docs/steering/PEER-REVIEW-B1-AP-14b-XAxis-Architecture.md`
+- **B1-AP-14b** 🟡 Offen — Engine-Umbau Progressive Domain LineChart (xDisplayRange, displayRange, yRangePolicy). Wartet auf Alberts Freigabe für ChartEngine.js + LineChartStrategy.js + FwSmartXAxis.js. Architekturplan: `docs/steering/PEER-REVIEW-B1-AP-14b-XAxis-Architecture.md`
 - **AP-20/21** (Mixed-Rhythm CV-Heuristik) — 🟡 Aktiv, Chart-Engine, parallel möglich
 
 ---
@@ -158,7 +157,7 @@ Stand: 2026-06-18 | Session: B1-AP-14b0 | Geändert von: Claude
 | Chart-Engine | Stabil, offene APs | Siehe `docs/steering/BACKLOG.md` |
 | Theme | In Entwicklung | `THEME-ASSEMBLY-CHECKLIST.md` |
 | CSS | Stabil | Siehe `docs/steering/BACKLOG.md` (CSS-N Items) |
-| Apps | Slice 6 ✅, AP-UX-01 ✅, B1-AP-01 bis B1-AP-14b0 ✅ 2026-06-18 | B1-AP-14a2 (Doku) → B1-AP-14b1 (Engine, Freigabe nötig) |
+| Apps | Slice 6 ✅, AP-UX-01 ✅, B1-AP-01 bis B1-AP-14a2 ✅ 2026-06-18 | B1-AP-14b (Engine-Umbau, Alberts Freigabe nötig) |
 | Content | Laufend | Redaktionsleitfaden aktiv |
 | Security | SECURITY-BASELINE.md App-Fabrik-gatefähig ✅ | Security-Sync-Regel + Gate-Prüffrage verankert (ST-13/ST-14) |
 
@@ -166,11 +165,11 @@ Stand: 2026-06-18 | Session: B1-AP-14b0 | Geändert von: Claude
 
 ## 5. Blocker
 
-**Kein akuter Blocker.** B1-AP-14a2 (Doku-Neuschnitt) benötigt keine Engine-Dateien.
+**Kein akuter Blocker.** B1-AP-14a2 ✅ abgeschlossen 2026-06-18.
 
-**Engine-Freigabe ausstehend für B1-AP-14b1+:**
-- `ChartEngine.js` (Layer 2): `features.xDisplayMax` Parameter entgegennehmen + weiterleiten
-- `LineChartStrategy.js` (Layer 3): `fwContext.displayRange` packen (max + durationYears)
+**Engine-Freigabe ausstehend für B1-AP-14b:**
+- `ChartEngine.js` (Layer 2): `xDisplayRange: { min, max }` als Top-Level-Option entgegennehmen + weiterleiten
+- `LineChartStrategy.js` (Layer 3): `fwContext.displayRange` befüllen (min + max)
 - `FwSmartXAxis.js` (Layer 4): `displayRange?.max ?? dataRange.max` als endLimit nutzen
 
 Architekturplan: `docs/steering/PEER-REVIEW-B1-AP-14b-XAxis-Architecture.md` | Rettungsbefund: `docs/steering/RETTUNGSBEFUND-B1-AP-14r.md`
@@ -200,6 +199,9 @@ Vollständig im DECISION-LOG dokumentiert (`docs/steering/DECISION-LOG.md`):
 ---
 
 ## 8. Letzte Session
+
+2026-06-18 — B1-AP-14a2 Doku-Neuschnitt Progressive Domain LineChart (B1-AP-14a2).
+APP_SPEC V2.7 (§16.1 AP-14b-Architektur + AP-14c-Marker-Zielbild), ENTSCHEIDUNGSPROTOKOLL §12+§13, QA_TEST_CASES V1.4 Gruppe M (12 Testfälle TC-M01–M12), REDAKTIONS_GATE V1.3 (G-C04 Marker-Datenquelle). Kein Code, kein JSON geändert. Nächster Schritt: B1-AP-14b.
 
 2026-06-18 — B1-AP-14r Rettungsbefund + B1-AP-14b0 Rückbau (B1-AP-14b0).
 Rettungsbefund identifizierte: Commit d97231a hatte Chart.getChart()-Block entgegen Commit-Message committed (git blame bestätigt). B1-AP-14b0: 10 Zeilen Post-Render-Hack chirurgisch entfernt (app.js:455-464, commit 402f3e8). progressEl, buildVisibleChartSeries, A11y-Sperre unberührt. ATTEMPT-LOG bereinigt (kein offener BLOCKED mehr). Nächster Schritt: B1-AP-14a2 (Doku-Neuschnitt Progressive Domain LineChart).
@@ -486,30 +488,33 @@ Neue APs: DS-012, DS-013, DS-014.
 
 ## 9. Einstieg für nächste Session
 
-**Nächster Schritt: B1-AP-14a2 — Doku-Neuschnitt Progressive Domain LineChart + Event-Marker-Zielbild**
+**Nächster Schritt: B1-AP-14b — Engine-Umbau Progressive Domain LineChart**
 
-**Status: Kein Blocker.** ATTEMPT-LOG bereinigt. B1-AP-14b0 abgeschlossen (commit 402f3e8).
+**Status: Engine-Freigabe benötigt.** Alberts explizite Freigabe für `ChartEngine.js`, `LineChartStrategy.js`, `FwSmartXAxis.js` nötig, bevor Code geändert wird.
 
-**Was für B1-AP-14a2 zu tun ist:**
-- Spec/Doku für Progressive Domain LineChart ausarbeiten: `xDisplayRange` / `displayRange`-Konzept, `yRangePolicy: cumulative-expand-zero`, Event-Marker aus Journey-Stations
-- Abgrenzung: keine Post-Render-Hacks, keine neue `events.json`
-- Briefing-Dokument für folgende Implementierungs-APs (B1-AP-14b1/b2) erstellen
+**Was für B1-AP-14b zu tun ist:**
+- `xDisplayRange: { min, max }` in ChartEngine.js als neues Top-Level-Option entgegennehmen + an Strategie weiterleiten
+- `fwContext.displayRange` in LineChartStrategy.js befüllen
+- `FwSmartXAxis.js`: `displayRange?.max ?? dataRange.max` als endLimit nutzen
+- `yRangePolicy: 'cumulative-expand-zero'` implementieren (yMin=0, yMax nur nach oben expandierend)
+
+**Verbindliche Architektur (B1-AP-14a2 ✅ 2026-06-18):**
+- `ENTSCHEIDUNGSPROTOKOLL.md §12+§13` — Achsenvertrag, API-Zielbild, Verbotsliste (12 Items), AP-14c-Marker-Zielbild
+- `APP_SPEC.md V2.7 §16.1` — AP-14b und AP-14c inline dokumentiert
+- `QA_TEST_CASES.md V1.4 Gruppe M` — TC-M01–TC-M12 (xDisplayRange-Regression, Y-Achse, Fake-Daten, Post-Render-Hacks, Marker-Y Snapshot-Snap, keine Interaktion)
 
 **Was ✅ erledigt ist:**
 - `app.js`: progressEl-Orientierungslogik + `buildVisibleChartSeries` + A11y-Sperre
 - `app.css`: `.fw-app__journey-progress` Styling
 - `docs/steering/PEER-REVIEW-B1-AP-14b-XAxis-Architecture.md` — Architekturplan
 - `docs/steering/RETTUNGSBEFUND-B1-AP-14r.md` — vollständiger Rettungsbefund
-
-**Für B1-AP-14b1+ (Engine-Freigabe nötig):**
-1. Alberts explizite Freigabe für `ChartEngine.js`, `LineChartStrategy.js`, `FwSmartXAxis.js`
-2. Architekturplan: `docs/steering/PEER-REVIEW-B1-AP-14b-XAxis-Architecture.md`
+- B1-AP-14a2 ✅ — Doku-Neuschnitt komplett (4 führende Dokumente aktualisiert)
 
 Operative Quellen:
-- `Apps/prokrastinations-preis/APP_SPEC.md` — V2.6 ✅ (B1-AP-14a: feste X-Achse + finale Marker, 2026-06-17)
-- `Apps/prokrastinations-preis/REDAKTIONS_GATE.md` — V1.2 ✅ (B1-AP-14a: G-C04 finale Marker-Regel, 2026-06-17)
-- `Apps/prokrastinations-preis/QA_TEST_CASES.md` — V1.3 ✅ (B1-AP-14a: TC-D06/D07/E04/E05/H06, 2026-06-17)
-- `Apps/prokrastinations-preis/ENTSCHEIDUNGSPROTOKOLL.md` — Architektur-Klammer B1-AP-01 ✅
+- `Apps/prokrastinations-preis/APP_SPEC.md` — V2.7 ✅ (B1-AP-14a2: Progressive Domain LineChart + AP-14c-Marker-Zielbild, 2026-06-18)
+- `Apps/prokrastinations-preis/ENTSCHEIDUNGSPROTOKOLL.md` — §12+§13 AP-14b/AP-14c ✅ (2026-06-18)
+- `Apps/prokrastinations-preis/QA_TEST_CASES.md` — V1.4 ✅ (Gruppe M TC-M01–M12, 2026-06-18)
+- `Apps/prokrastinations-preis/REDAKTIONS_GATE.md` — V1.3 ✅ (G-C04 erweitert, 2026-06-18)
 - `Apps/prokrastinations-preis/config/stations.de.json` — produktive Stationen-Konfiguration v2.1 (B1-AP-09 ✅ 2026-06-17)
 - `Apps/prokrastinations-preis/STATIONS_IMPLEMENTATION_PLAN.md` — Implementierungsplan Coding-Slices AP-11–AP-18 (B1-AP-10 ✅ 2026-06-17)
 - `Apps/prokrastinations-preis/STATIONS_CONFIG_CONTRACT.md` — Stations-JSON-Vertrag B1-AP-03 ✅
@@ -519,6 +524,8 @@ Entschieden (nicht mehr offen):
 - OA-02 ✅: `renderFromData()` = offizieller zweiter Engine-Einstieg (Pfad 2, 2026-06-10)
 - AP-UX-01 ✅: Stationen-Zeitreise (3 Akte, Screen 2 = ohne Endwissen, Screen 3 = erster Reveal)
 - `config.features` = neutrale Fähigkeitswahl (kein `isAppChart`, kein `noRangeButtons`)
+- AP-14b Architektur ✅: dataRange/displayRange-Trennung, `xDisplayRange` als Top-Level-Option, `yRangePolicy: cumulative-expand-zero`
+- AP-14c Zielbild ✅: Journey-Stations als Marker-Quelle, Snapshot-Snap, kein events.json, offene Ringe, keine Interaktion
 
 **Parallel weiter offen:**
 - AP-20/21 (Mixed-Rhythm CV-Heuristik) — Chart-Engine

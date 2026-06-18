@@ -1,6 +1,6 @@
 # APP_SPEC — prokrastinations-preis
 
-Stand: 2026-06-17 | V2.6 — B1-AP-14a: feste X-Achse Screen 2 und finale Stationenmarker Screen 3 dokumentiert | Geändert von: Claude
+Stand: 2026-06-18 | V2.7 — B1-AP-14a2: Progressive Domain LineChart und AP-14c-Marker-Zielbild dokumentiert | Geändert von: Claude
 
 ---
 
@@ -8,9 +8,9 @@ Stand: 2026-06-17 | V2.6 — B1-AP-14a: feste X-Achse Screen 2 und finale Statio
 
 | Feld | Wert |
 |---|---|
-| Version | V2.6 — B1-AP-14a: feste X-Achse Screen 2 und finale Stationenmarker Screen 3 dokumentiert |
+| Version | V2.7 — B1-AP-14a2: Progressive Domain LineChart und AP-14c-Marker-Zielbild dokumentiert |
 | Phase | Konzept-Umbau auf Stationen-Zeitreise (AP-01 ✅, AP-02 ✅, AP-03 ✅, AP-04 ✅, AP-05 ✅, AP-06 ✅, AP-07 ✅, AP-08 ✅, AP-08b ✅, AP-08c ✅, AP-09 ✅, AP-10 ✅ Planungs-Phase abgeschlossen) |
-| Nächster Schritt | B1-AP-11 — Stationen-Loader implementieren (AP-09/AP-10 ✅ 2026-06-17) |
+| Nächster Schritt | B1-AP-14b — Engine-Umbau Progressive Domain LineChart (B1-AP-14a2 ✅ 2026-06-18) |
 | Code-Freigabe | Slice 0 ✅ 2026-06-04, Slice 1 ✅ 2026-06-05, Slice 2 ✅ 2026-06-05, Slice 6 ✅ 2026-06-16; Coding-Slices AP-11–AP-18 erst nach AP-10-Gate |
 | Code-Stand | Slice 6 implementiert die alte Ergebnisgrafik-Logik (Screen 2 mit KPI-Cards). Dieser Stand ist nicht mehr Zielzustand. Coding für Stationen-Zeitreise folgt nach AP-09/AP-10. |
 | Grundlage | `Apps/prokrastinations-preis/ENTSCHEIDUNGSPROTOKOLL.md` (AP-01, 2026-06-16) |
@@ -1076,6 +1076,49 @@ Bekannt bis: <Stationsmonat>
 Station <n> von <gesamt>
 ```
 
+**AP-14b — Architekturentscheidung: Progressive Domain LineChart (Zielbild, Implementierung folgt)**
+
+> X zeigt den Zeithorizont. Linie zeigt den Wissensstand. Y zeigt den bisher bekannten Werteraum.
+
+Der kommende Engine-Umbau führt einen offiziellen Achsenvertrag ein:
+
+| Konzept | Bedeutung |
+|---|---|
+| `dataRange` | Tatsächlicher sichtbarer Datenbereich — endet in Screen 2 beim aktuellen Stationsmonat. Grundlage für sichtbare Linie, Tooltips, A11y und Y-Skalierung. |
+| `displayRange` | Intendierte Anzeige-Domain der X-Achse — umfasst das vollständige 10-Jahres-Fenster. Grundlage für X-Scale, X-Ticks und `durationYears`. |
+
+Öffentliches API-Zielbild:
+
+```js
+chartEngine.renderFromData(container, visibleSeries, {
+  type: 'line',
+  features: { rangeControls: false, headline: false },
+  xDisplayRange: { min: ctx.startMonth, max: ctx.latestMonth },
+  yRangePolicy: 'cumulative-expand-zero'
+});
+```
+
+`xDisplayRange` ist Top-Level-Optionsfeld (`{ min, max }`) — nicht `features.xDisplayMax`, nicht nur `max`. `displayRange` wird im `fwContext` optional ergänzt. Standard-LineCharts ohne `xDisplayRange` bleiben unverändert.
+
+**`yRangePolicy: 'cumulative-expand-zero'`:**
+- `yMin` immer `0`
+- `yMax` basiert ausschließlich auf dem bisher bekannten Datenpfad (bis zur aktuellen Station)
+- `yMax` darf nur gleich bleiben oder nach oben expandieren — nie schrumpfen
+- Kein finaler Maximalwert vor Screen 3
+- Y-Achsen-Gedächtnis zurücksetzen bei: Neustart der Zeitreise, Änderung der Sparrate
+
+**Verbotene Implementierungen (AP-14b) — ausdrücklich nicht zulässig:**
+- `Chart.getChart()`-Post-Render-Hack
+- nachträgliches `options.scales.x.max`
+- `chart.update('none')` als Achsenfix
+- `setTimeout`-/`requestAnimationFrame`-Kaschierung
+- Fake-Daten bis `latestMonth`
+- Dummy-Dataset oder transparente Zukunftslinie
+- globale Chart.js-Hacks oder neuer Chart-Typ nur für diese App
+- Endwissens-Leak in Screen 2
+- Y-Achse auf finalen Maximalwert vorab setzen
+- Y-Achse während Screen 2 schrumpfen lassen
+
 **Finale Stationenmarker Screen 3:**
 
 Nach dem vollständigen Chart erscheinen die durchlaufenen Stationen als stille, nicht-interaktive Marker auf der vollständigen Linie.
@@ -1095,6 +1138,26 @@ Reveal-Ablauf Screen 3:
 2. Kurze Pause
 3. Stille Stationenmarker erscheinen (Fade-in; bei Reduced Motion: sofort, ohne Animation)
 4. KPI-Cards / Ergebnis
+
+**AP-14c — Marker-Zielbild (Implementierung folgt nach AP-14b)**
+
+Für diese App wird keine neue `events.json` eingeführt.
+
+**Datenquelle:**
+- Marker werden aus den bestehenden Journey-Stations (`stations.de.json`) abgeleitet
+- `final_reveal` wird ausgeschlossen
+- Aktuelle Station wird nicht markiert; Zukunftsstationen werden nicht markiert
+- Sichtbar sind nur vergangene Stationen: bei Station n Marker für Stationen 1 bis n−1
+
+Begründung: Die Marker sind in dieser App keine generischen Zusatzereignisse — sie sind sedimentierte Stationen der Zeitreise. Eine separate `events.json` würde nur Synchronisationsrisiko erzeugen.
+
+**Marker-Y (Snapshot-Snap):**
+```
+Eventdatum → Snapshot-Snap analog zur Hauptserie → Lookup des passenden Monatsdatenpunkts → markerY aus Hauptserie
+```
+Nicht erlaubt: lineare Interpolation als Default, linker Floor-Snap als Default, geschätzte Zwischenwerte, künstliche Datenpunkte.
+
+**Pulse:** Pulse ist ephemerer Runtime-State — gehört nicht in `stations.de.json` und nicht dauerhaft in `fwContext`. Implementierung folgt außerhalb des Domain-State.
 
 ### 16.2 Screen-Texte
 
@@ -1459,6 +1522,8 @@ Wenn diese Bedingungen nicht erfüllt sind, ist die App redaktionell nicht publi
 | Button `Weiter investiert bleiben` als Micro-Commitment erklärt? | ✅ §23.17 |
 | Screen 4 als Transfer ohne Verkaufsdruck beschrieben? | ✅ §23.18 |
 | P→B→N-Einordnung dokumentiert? | ✅ §23.19 |
+| AP-14b Progressive Domain LineChart dokumentiert? (`xDisplayRange`, `displayRange`, `dataRange`, `yRangePolicy`, Verbote) | ✅ §16.1 |
+| AP-14c Marker-Zielbild dokumentiert? (Journey-Stations, kein `events.json`, Snapshot-Snap, keine Interaktion) | ✅ §16.1 |
 
 **A11y- und Mobile-Gate (AP-05):** ✅ angewendet → §14
 
@@ -1486,7 +1551,7 @@ Wenn diese Bedingungen nicht erfüllt sind, ist die App redaktionell nicht publi
 
 ---
 
-*AP-06 ✅, AP-07 ✅, AP-08 ✅, AP-08b ✅, AP-08c ✅ 2026-06-16 | Nächster Schritt: B1-AP-09 — produktive `stations.de.json` anlegen*
+*AP-06 ✅, AP-07 ✅, AP-08 ✅, AP-08b ✅, AP-08c ✅ 2026-06-16 | B1-AP-14a2 ✅ 2026-06-18 | Nächster Schritt: B1-AP-14b — Engine-Umbau Progressive Domain LineChart*
 
 ---
 

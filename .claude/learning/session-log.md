@@ -212,3 +212,8 @@ FinanzwesirData.js, CSVParser.js, FwDateUtils.js — diese Session nicht berühr
 
 ### 2026-06-18 — B1-AP-14b0 -- Post-Render-Hack revertiert
 - [OK] 10 Zeilen Chart.getChart()-Block (app.js:455-464) chirurgisch entfernt. progressEl, buildVisibleChartSeries, A11y-Sperre unberuehrt. Commit 402f3e8.
+
+### 2026-06-18 — B1-AP-14a2 — AP-Wechsel
+
+### 2026-06-18 — B1-AP-14a2 ✅ Doku-Neuschnitt Progressive Domain LineChart
+- [OK] Keine Vorkommnisse — 4 Doku-Dateien aktualisiert (APP_SPEC V2.7, QA_TEST_CASES V1.4 Gruppe M, ENTSCHEIDUNGSPROTOKOLL §12+§13, REDAKTIONS_GATE V1.3 G-C04). 12 neue Testfälle TC-M01–M12. Kein Code, kein JSON geändert.
