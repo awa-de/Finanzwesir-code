@@ -267,3 +267,11 @@ FinanzwesirData.js, CSVParser.js, FwDateUtils.js — diese Session nicht berühr
 - [OK] FwRenderer._renderLegend: mainDatasets-Filter + continue-Guard (Originalindex für Chart.js bleibt erhalten)
 - [OK] Manueller Test durch Albert: alle Prüfschritte grün
 - [OK] Ergebnisprotokoll: docs/steering/patches/B1-AP-14c2_Annotation-Marker-Ringe_Ergebnis.md
+
+### 2026-06-18 — B1-AP-14c3 — AP-Wechsel
+
+### 2026-06-18 — B1-AP-14c2b ✅ Marker-X Snapshot-Alignment
+- [QUESTION] Testplan formulierte "kein Tooltip" — tatsächlich zeigt normaler Linien-Tooltip an Ringposition; Beschluss Option 1 (gewünscht)
+- [OK] Lokale Map<month, snappedTimestamp> in LineChartStrategy.transform(): Marker-X = exakt snapped Hauptserienpunkt (war: midnight UTC, neu: noon UTC via getSnapshotSnap)
+- [OK] Nur LineChartStrategy.js geändert, app.js unberührt
+- [OK] Ergebnisprotokoll: docs/steering/patches/B1-AP-14c2b_Marker-X-Snapshot-Alignment_Ergebnis.md

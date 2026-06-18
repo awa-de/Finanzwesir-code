@@ -263,13 +263,24 @@ export class LineChartStrategy extends BaseChartStrategy {
             datasets.push(dsConfig);
         }
 
+        // CHANGED — B1-AP-14c2b: Marker-X aus Hauptserienpunkt (Snapshot-Snap-Ausrichtung)
+        const _monthToSnappedX = new Map(
+            rows.map((r, idx) => [(r.Date || r.Datum).slice(0, 7), snappedTimestamps[idx]])
+        );
+
         // NEW — B1-AP-14c2: Marker-Dataset für Journey-Station-Annotationen
         if (config.annotations?.events?.length > 0) {
             datasets.push({
                 _fwAnnotationMarker: true,
                 label: '',
                 type: 'scatter',
-                data: config.annotations.events.map(e => ({ x: e.x, y: e.y })),
+                data: config.annotations.events
+                    .map(e => {
+                        const snappedX = _monthToSnappedX.get(e.month);
+                        if (snappedX === undefined) return null;
+                        return { x: snappedX, y: e.y };
+                    })
+                    .filter(pt => pt !== null),
                 pointStyle: 'circle',
                 pointRadius: 5,
                 pointHoverRadius: 0,

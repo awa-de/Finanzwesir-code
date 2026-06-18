@@ -2,12 +2,12 @@
 Version: 1
 Stand: 2026-06-18
 Fokus-AP: APP-01 — prokrastinations-preis
-Nächster-Schritt: B1-AP-14c3 — Screen-3-Final-Reveal-Ringe (B1-AP-14c2 ✅ 2026-06-18)
+Nächster-Schritt: B1-AP-14c3 — Screen-3-Final-Reveal-Ringe (B1-AP-14c2b ✅ 2026-06-18)
 Blocker: keine
 Letzter-Distill: 2026-06-15
 Kassensturz-Datum: 2026-06-15
 -->
-<!-- HOOK-META-SESSION: B1-AP-14c2 -->
+<!-- HOOK-META-SESSION: B1-AP-14c2b -->
 
 # PROJECT STATUS — Finanzwesir 2.0
 
@@ -145,6 +145,7 @@ Stand: 2026-06-18 | Session: B1-AP-14c2 | Geändert von: Claude
 ## 3. Nächster sinnvoller Schritt
 
 - **B1-AP-14c2** ✅ 2026-06-18 — Annotation-Marker-Ringe: offene Ringe als Scatter-Dataset (Petrol, transparent, kein Tooltip, kein Legendeneintrag)
+- **B1-AP-14c2b** ✅ 2026-06-18 — Marker-X Snapshot-Alignment: Marker-X exakt auf Hauptserienpunkt (noon UTC, via getSnapshotSnap); Linien-Tooltip an Ringposition bleibt (Beschluss)
 - **B1-AP-14c3** 🟡 Offen — Screen-3-Final-Reveal-Ringe (bewusst offen, kein Blocker)
 - **AP-20/21** (Mixed-Rhythm CV-Heuristik) — 🟡 Aktiv, Chart-Engine, parallel möglich
 
@@ -158,7 +159,7 @@ Stand: 2026-06-18 | Session: B1-AP-14c2 | Geändert von: Claude
 | Chart-Engine | Stabil, offene APs | Siehe `docs/steering/BACKLOG.md` |
 | Theme | In Entwicklung | `THEME-ASSEMBLY-CHECKLIST.md` |
 | CSS | Stabil | Siehe `docs/steering/BACKLOG.md` (CSS-N Items) |
-| Apps | Slice 6 ✅, AP-UX-01 ✅, B1-AP-01 bis B1-AP-14c2 ✅ 2026-06-18 | B1-AP-14c3 (Screen-3-Final-Reveal-Ringe) |
+| Apps | Slice 6 ✅, AP-UX-01 ✅, B1-AP-01 bis B1-AP-14c2b ✅ 2026-06-18 | B1-AP-14c3 (Screen-3-Final-Reveal-Ringe) |
 | Content | Laufend | Redaktionsleitfaden aktiv |
 | Security | SECURITY-BASELINE.md App-Fabrik-gatefähig ✅ | Security-Sync-Regel + Gate-Prüffrage verankert (ST-13/ST-14) |
 
@@ -193,6 +194,9 @@ Vollständig im DECISION-LOG dokumentiert (`docs/steering/DECISION-LOG.md`):
 ---
 
 ## 8. Letzte Session
+
+2026-06-18 — B1-AP-14c2b Marker-X Snapshot-Alignment (B1-AP-14c2b).
+LineChartStrategy.js: lokale Map<month, snappedTimestamp> aus rows + snappedTimestamps; Marker-X = exakt snapped Hauptserienpunkt (war: midnight UTC, neu: noon UTC). Beschluss: normaler Linien-Tooltip an Ringposition bleibt (Option 1, gewünscht). Ergebnisprotokoll: docs/steering/patches/B1-AP-14c2b_Marker-X-Snapshot-Alignment_Ergebnis.md. Nächster Schritt: B1-AP-14c3 (Screen-3-Final-Reveal-Ringe).
 
 2026-06-18 — B1-AP-14b3 App-Anschluss + Smoke-Test Progressive Domain LineChart (B1-AP-14b3).
 app.js: renderJourneyStep um xDisplayRange/yRangePolicy/yRangeResetKey erweitert (4 Zeilen). journeyRangeKey stabil für Journey-Run, reset bei neuer Rate. Manueller Smoke-Test Prüfschritte 1–4 ✅. Console: nur erwartete Test-Szenarien-Fehler. Ergebnisprotokoll: docs/steering/patches/B1-AP-14b3_App-Anschluss_Smoke-Test_Ergebnis.md. Nächster Schritt: B1-AP-14c1 (Marker + Pulse Screen 2).
