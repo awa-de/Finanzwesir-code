@@ -258,3 +258,12 @@ FinanzwesirData.js, CSVParser.js, FwDateUtils.js — diese Session nicht berühr
 - [OK] LineChartStrategy.transform: annotations an _createFwContext weitergereicht
 - [OK] Kein Marker, kein Scatter-Dataset, kein Pulse, kein CSS
 - [OK] Ergebnisprotokoll: docs/steering/patches/B1-AP-14c1_Journey-Station-Annotationen_Ergebnis.md
+
+### 2026-06-18 — B1-AP-14c2 — AP-Wechsel
+
+### 2026-06-18 — B1-AP-14c2 ✅ Annotation-Marker-Ringe (offene Ringe)
+- [OK] LineChartStrategy.transform: Scatter-Dataset aus fwContext.annotations.events (pointRadius 5, petrol, transparent fill)
+- [OK] LineChartStrategy.getChartConfig: forEach-Guard + tooltipConfig.filter = !_fwAnnotationMarker
+- [OK] FwRenderer._renderLegend: mainDatasets-Filter + continue-Guard (Originalindex für Chart.js bleibt erhalten)
+- [OK] Manueller Test durch Albert: alle Prüfschritte grün
+- [OK] Ergebnisprotokoll: docs/steering/patches/B1-AP-14c2_Annotation-Marker-Ringe_Ergebnis.md

@@ -331,15 +331,17 @@ export class FwRenderer {
             }
         } else {
             var datasets = chartConfig.data.datasets;
-            if (datasets.length < 2) return null;
+            var mainDatasets = datasets.filter(ds => !ds._fwAnnotationMarker); // NEW — B1-AP-14c2
+            if (mainDatasets.length < 2) return null;
             if (datasets.length > 12) return null;
-            
-            for (i = 0; i < datasets.length; i++) { 
-                items.push({ 
-                    text: datasets[i].label, 
-                    color: datasets[i].borderColor || datasets[i].backgroundColor, 
-                    index: i 
-                }); 
+
+            for (i = 0; i < datasets.length; i++) {
+                if (datasets[i]._fwAnnotationMarker) continue; // NEW — B1-AP-14c2
+                items.push({
+                    text: datasets[i].label,
+                    color: datasets[i].borderColor || datasets[i].backgroundColor,
+                    index: i
+                });
             }
         }
 

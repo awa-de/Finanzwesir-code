@@ -2,16 +2,16 @@
 Version: 1
 Stand: 2026-06-18
 Fokus-AP: APP-01 — prokrastinations-preis
-Nächster-Schritt: B1-AP-14c2 — Marker-Dataset + offene Ringe (B1-AP-14c1 ✅ 2026-06-18)
+Nächster-Schritt: B1-AP-14c3 — Screen-3-Final-Reveal-Ringe (B1-AP-14c2 ✅ 2026-06-18)
 Blocker: keine
 Letzter-Distill: 2026-06-15
 Kassensturz-Datum: 2026-06-15
 -->
-<!-- HOOK-META-SESSION: B1-AP-14c1 -->
+<!-- HOOK-META-SESSION: B1-AP-14c2 -->
 
 # PROJECT STATUS — Finanzwesir 2.0
 
-Stand: 2026-06-18 | Session: B1-AP-14c1 | Geändert von: Claude
+Stand: 2026-06-18 | Session: B1-AP-14c2 | Geändert von: Claude
 
 **Zweck:** Schneller Wiedereinstieg nach Pausen.
 **Zielgruppe:** Albert und Claude.
@@ -144,7 +144,8 @@ Stand: 2026-06-18 | Session: B1-AP-14c1 | Geändert von: Claude
 
 ## 3. Nächster sinnvoller Schritt
 
-- **B1-AP-14c1** 🟡 Offen — Marker + Pulse Screen 2 (Progressive Domain LineChart, AP-14c-Zielbild aus APP_SPEC V2.7 §16.1)
+- **B1-AP-14c2** ✅ 2026-06-18 — Annotation-Marker-Ringe: offene Ringe als Scatter-Dataset (Petrol, transparent, kein Tooltip, kein Legendeneintrag)
+- **B1-AP-14c3** 🟡 Offen — Screen-3-Final-Reveal-Ringe (bewusst offen, kein Blocker)
 - **AP-20/21** (Mixed-Rhythm CV-Heuristik) — 🟡 Aktiv, Chart-Engine, parallel möglich
 
 ---
@@ -157,7 +158,7 @@ Stand: 2026-06-18 | Session: B1-AP-14c1 | Geändert von: Claude
 | Chart-Engine | Stabil, offene APs | Siehe `docs/steering/BACKLOG.md` |
 | Theme | In Entwicklung | `THEME-ASSEMBLY-CHECKLIST.md` |
 | CSS | Stabil | Siehe `docs/steering/BACKLOG.md` (CSS-N Items) |
-| Apps | Slice 6 ✅, AP-UX-01 ✅, B1-AP-01 bis B1-AP-14b3 ✅ 2026-06-18 | B1-AP-14c1 (Marker + Pulse Screen 2) |
+| Apps | Slice 6 ✅, AP-UX-01 ✅, B1-AP-01 bis B1-AP-14c2 ✅ 2026-06-18 | B1-AP-14c3 (Screen-3-Final-Reveal-Ringe) |
 | Content | Laufend | Redaktionsleitfaden aktiv |
 | Security | SECURITY-BASELINE.md App-Fabrik-gatefähig ✅ | Security-Sync-Regel + Gate-Prüffrage verankert (ST-13/ST-14) |
 

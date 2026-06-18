@@ -263,6 +263,23 @@ export class LineChartStrategy extends BaseChartStrategy {
             datasets.push(dsConfig);
         }
 
+        // NEW — B1-AP-14c2: Marker-Dataset für Journey-Station-Annotationen
+        if (config.annotations?.events?.length > 0) {
+            datasets.push({
+                _fwAnnotationMarker: true,
+                label: '',
+                type: 'scatter',
+                data: config.annotations.events.map(e => ({ x: e.x, y: e.y })),
+                pointStyle: 'circle',
+                pointRadius: 5,
+                pointHoverRadius: 0,
+                pointHitRadius: 0,
+                pointBackgroundColor: 'transparent',
+                pointBorderColor: this.theme.colors.petrol,
+                pointBorderWidth: 1.5,
+            });
+        }
+
         // BAN-Headline berechnen (V14.0.0)
         const headline = this._computeHeadline(rows, data.columns, formatMode, currency);
 
@@ -326,6 +343,7 @@ export class LineChartStrategy extends BaseChartStrategy {
         const ciFont = t.fonts.body;
 
         transformedData.datasets.forEach(ds => {
+            if (ds._fwAnnotationMarker) return; // NEW — B1-AP-14c2
             ds.borderWidth = (ctx) => t.getLineWidth(ds._isBenchmark, ctx.chart.width);
             
             ds.pointRadius = (ctx) => {
@@ -350,6 +368,17 @@ export class LineChartStrategy extends BaseChartStrategy {
             ds.hoverRadius = (ctx) => t.getPointRadius(ctx.chart.width);
         });
 
+        // NEW — B1-AP-14c2: Tooltip-Filter für Annotation-Datasets
+        const tooltipConfig = FwSmartTooltips.configure(fwContext, {
+            titleFont: { family: ciFont },
+            bodyFont: { family: ciFont },
+            tooltipBg: t.tooltip.bg,
+            titleColor: t.tooltip.title,
+            bodyColor: t.tooltip.body,
+            borderColor: t.tooltip.border
+        });
+        tooltipConfig.filter = (item) => !item.dataset._fwAnnotationMarker;
+
         return {
             type: 'line',
             data: { datasets: transformedData.datasets },
@@ -366,14 +395,7 @@ export class LineChartStrategy extends BaseChartStrategy {
                         dash: [5, 5],
                         lineWidth: 1
                     },
-                    tooltip: FwSmartTooltips.configure(fwContext, {
-                        titleFont: { family: ciFont },
-                        bodyFont: { family: ciFont },
-                        tooltipBg: t.tooltip.bg,
-                        titleColor: t.tooltip.title,
-                        bodyColor: t.tooltip.body,
-                        borderColor: t.tooltip.border
-                    })
+                    tooltip: tooltipConfig
                 },
                 scales: { 
                     x: FwSmartScales.getTimeAxis(transformedData.meta.minTime, transformedData.meta.maxTime, { family: ciFont }, { plugins: { fwContext }, sourceTicks: transformedData.meta.sourceTicks }),
