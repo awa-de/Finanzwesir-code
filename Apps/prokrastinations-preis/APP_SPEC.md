@@ -1,6 +1,6 @@
 # APP_SPEC — prokrastinations-preis
 
-Stand: 2026-06-18 | V2.9 — B1-AP-14d4: §16.3 UI-Primitive-Status synchronisiert | Geändert von: Claude
+Stand: 2026-06-18 | V2.9 — B1-AP-14d4: §16.3 Status-Sync + §1 Status-Tabelle Nachputz | Geändert von: Claude
 
 ---
 
@@ -9,10 +9,10 @@ Stand: 2026-06-18 | V2.9 — B1-AP-14d4: §16.3 UI-Primitive-Status synchronisie
 | Feld | Wert |
 |---|---|
 | Version | V2.9 — B1-AP-14d4: §16.3 UI-Primitive-Status synchronisiert (V2.8: AP-14d3 Pulse-Produktentscheidung) |
-| Phase | Konzept-Umbau auf Stationen-Zeitreise (AP-01 ✅, AP-02 ✅, AP-03 ✅, AP-04 ✅, AP-05 ✅, AP-06 ✅, AP-07 ✅, AP-08 ✅, AP-08b ✅, AP-08c ✅, AP-09 ✅, AP-10 ✅ Planungs-Phase abgeschlossen) |
-| Nächster Schritt | B1-AP-14b — Engine-Umbau Progressive Domain LineChart (B1-AP-14a2 ✅ 2026-06-18) |
-| Code-Freigabe | Slice 0 ✅ 2026-06-04, Slice 1 ✅ 2026-06-05, Slice 2 ✅ 2026-06-05, Slice 6 ✅ 2026-06-16; Coding-Slices AP-11–AP-18 erst nach AP-10-Gate |
-| Code-Stand | Slice 6 implementiert die alte Ergebnisgrafik-Logik (Screen 2 mit KPI-Cards). Dieser Stand ist nicht mehr Zielzustand. Coding für Stationen-Zeitreise folgt nach AP-09/AP-10. |
+| Phase | Implementierung — Stationen-Zeitreise vollständig (B1-AP-11–AP-14c4 ✅ 2026-06-17/18); Engine-Erweiterungen (Progressive Domain, Annotation-Marker, Pulse) abgeschlossen; nächster Schritt: Transitions + Reduced Motion (B1-AP-15) |
+| Nächster Schritt | B1-AP-15 — Transitions + Reduced Motion (B1-AP-14d4 ✅ 2026-06-18) |
+| Code-Freigabe | Slice 0 ✅ 2026-06-04, Slice 1–2 ✅ 2026-06-05, Slice 4 ✅ 2026-06-11, Slice 5 ✅ 2026-06-15, Slice 6 ✅ 2026-06-16; B1-AP-11–AP-14c4 ✅ 2026-06-17/18 |
+| Code-Stand | Stationen-Zeitreise implementiert: `loadStations()`, `validateStationsJson()`, `renderJourneyStep()`, `buildJourneyStationAnnotations()`, `FwAnnotationPulsePlugin.js`. Screen 2 = Stationen ohne Endwissen; Screen 3 = erster Reveal; Screen 4 = CTA. |
 | Grundlage | `Apps/prokrastinations-preis/ENTSCHEIDUNGSPROTOKOLL.md` (AP-01, 2026-06-16) |
 | Ersetzt | APP_SPEC V1.7 (Ergebnisgrafik-Logik — Screen 2 zeigte vollständigen Chart mit KPIs) |
 

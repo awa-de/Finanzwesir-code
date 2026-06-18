@@ -305,9 +305,10 @@ FinanzwesirData.js, CSVParser.js, FwDateUtils.js — diese Session nicht berühr
 
 ### 2026-06-18 — B1-AP-15 — AP-Wechsel
 
-### 2026-06-18 — B1-AP-14d4 ✅ §16.3 UI-Primitive-Status synchronisiert
+### 2026-06-18 — B1-AP-14d4 ✅ §16.3 UI-Primitive-Status synchronisiert + §1 Status-Tabelle Nachputz
 - [OK] 13 von 16 Primitiven von „zu bauen" auf ✅ umgesetzt korrigiert; 1 ⚠️ (Stationen-Button / continueLabel), 1 ⏳ (Draw-Animation / Slice 6)
 - [WIN] Haiku-Scout lieferte präzise Zeilennachweise für alle Primitive — kein manuelles Durchsuchen nötig
+- [OK] §1 Status-Tabelle (Phase, Nächster Schritt, Code-Freigabe, Code-Stand) auf aktuellen Stand (B1-AP-14d4) synchronisiert
 - [OK] Ergebnisprotokoll: docs/steering/patches/B1-AP-14d4_UI-Primitive-Status-Sync_Ergebnis.md
 
 ### 2026-06-18 — B1-AP-15 — AP-Wechsel (neuer Faden)
