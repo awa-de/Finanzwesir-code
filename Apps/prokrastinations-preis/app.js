@@ -449,8 +449,13 @@ function renderContent(container, appData, options, stationsConfig) { // CHANGED
     const intermediate = calcStationIntermediate(ctx.chartSeries, stationMonth, currentRate, startBetrag);
     renderStationCard(stationArea, station, intermediate, fmtStation);
     const visibleSeries = buildVisibleChartSeries(ctx.chartSeries, stationMonth);
-    chartEngine2.renderFromData(chartSection2, visibleSeries, {
-      type: 'line', features: { rangeControls: false, headline: false }
+    const journeyRangeKey = [currentRate, ctx.startMonth, ctx.latestMonth].join('|'); // NEW — AP-14b3
+    chartEngine2.renderFromData(chartSection2, visibleSeries, { // CHANGED — AP-14b3
+      type: 'line',
+      features: { rangeControls: false, headline: false },
+      xDisplayRange: { min: ctx.startMonth, max: ctx.latestMonth },
+      yRangePolicy: 'cumulative-expand-zero',
+      yRangeResetKey: journeyRangeKey
     });
     // NEW — AP-14b: Orientierungs-Chip aktualisieren (APP_SPEC §16.1)
     const n = stationIdx + 1;

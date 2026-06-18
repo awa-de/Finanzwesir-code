@@ -237,3 +237,13 @@ FinanzwesirData.js, CSVParser.js, FwDateUtils.js — diese Session nicht berühr
 - [OK] ChartEngine.js: yRangePolicy parsen + validieren; axisMemory.yMaxSeen in WeakMap-State; yRangeMemory vor transform injizieren; yMaxSeen nach transform akkumulieren; Reset bei Key-Wechsel
 - [OK] Ergebnisprotokoll: docs/steering/patches/B1-AP-14b2_Y-Policy_cumulative-expand-zero_Ergebnis.md
 - [INFO] Kein App-Code geaendert. Kein Commit. Standardcharts vollstaendig unveraendert (opt-in Guard).
+
+### 2026-06-18 — B1-AP-14b3 — AP-Wechsel
+
+### 2026-06-18 — B1-AP-14b3 ✅ App-Anschluss + Smoke-Test Progressive Domain LineChart
+- [OK] app.js: renderJourneyStep — journeyRangeKey + xDisplayRange/yRangePolicy/yRangeResetKey (4 Zeilen neu)
+- [OK] visibleSeries, progressEl, Orientierungs-Chip, A11y-Sperre — unverändert
+- [OK] Keine Engine-Dateien, keine JSON, keine Marker
+- [OFFEN] Manueller Browser-Smoke-Test durch Albert ausstehend
+- [OFFEN] Diagnostics-Log-Cleanup (FwSmartXAxis B1-AP-14b1) für Folge-AP
+- [OK] Ergebnisprotokoll: docs/steering/patches/B1-AP-14b3_App-Anschluss_Smoke-Test_Ergebnis.md

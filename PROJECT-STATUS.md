@@ -2,16 +2,16 @@
 Version: 1
 Stand: 2026-06-18
 Fokus-AP: APP-01 — prokrastinations-preis
-Nächster-Schritt: B1-AP-14b3 — App-Anschluss Screen 2 (B1-AP-14b2 ✅ 2026-06-18)
+Nächster-Schritt: B1-AP-14c1 — Marker + Pulse Screen 2 (B1-AP-14b3 ✅ 2026-06-18)
 Blocker: keine
 Letzter-Distill: 2026-06-15
 Kassensturz-Datum: 2026-06-15
 -->
-<!-- HOOK-META-SESSION: B1-AP-14b2 -->
+<!-- HOOK-META-SESSION: B1-AP-14b3 -->
 
 # PROJECT STATUS — Finanzwesir 2.0
 
-Stand: 2026-06-18 | Session: B1-AP-14b2 | Geändert von: Claude
+Stand: 2026-06-18 | Session: B1-AP-14b3 | Geändert von: Claude
 
 **Zweck:** Schneller Wiedereinstieg nach Pausen.
 **Zielgruppe:** Albert und Claude.
@@ -144,7 +144,7 @@ Stand: 2026-06-18 | Session: B1-AP-14b2 | Geändert von: Claude
 
 ## 3. Nächster sinnvoller Schritt
 
-- **B1-AP-14b3** 🟡 Offen — App-Anschluss Screen 2: xDisplayRange + yRangePolicy + yRangeResetKey in app.js; Re-Render-/WeakMap-Test; ggf. Diagnostik-Log-Cleanup
+- **B1-AP-14c1** 🟡 Offen — Marker + Pulse Screen 2 (Progressive Domain LineChart, AP-14c-Zielbild aus APP_SPEC V2.7 §16.1)
 - **AP-20/21** (Mixed-Rhythm CV-Heuristik) — 🟡 Aktiv, Chart-Engine, parallel möglich
 
 ---
@@ -157,7 +157,7 @@ Stand: 2026-06-18 | Session: B1-AP-14b2 | Geändert von: Claude
 | Chart-Engine | Stabil, offene APs | Siehe `docs/steering/BACKLOG.md` |
 | Theme | In Entwicklung | `THEME-ASSEMBLY-CHECKLIST.md` |
 | CSS | Stabil | Siehe `docs/steering/BACKLOG.md` (CSS-N Items) |
-| Apps | Slice 6 ✅, AP-UX-01 ✅, B1-AP-01 bis B1-AP-14a2 ✅ 2026-06-18 | B1-AP-14b (Engine-Umbau, Alberts Freigabe nötig) |
+| Apps | Slice 6 ✅, AP-UX-01 ✅, B1-AP-01 bis B1-AP-14b3 ✅ 2026-06-18 | B1-AP-14c1 (Marker + Pulse Screen 2) |
 | Content | Laufend | Redaktionsleitfaden aktiv |
 | Security | SECURITY-BASELINE.md App-Fabrik-gatefähig ✅ | Security-Sync-Regel + Gate-Prüffrage verankert (ST-13/ST-14) |
 
@@ -165,14 +165,7 @@ Stand: 2026-06-18 | Session: B1-AP-14b2 | Geändert von: Claude
 
 ## 5. Blocker
 
-**Kein akuter Blocker.** B1-AP-14a2 ✅ abgeschlossen 2026-06-18.
-
-**Engine-Freigabe ausstehend für B1-AP-14b:**
-- `ChartEngine.js` (Layer 2): `xDisplayRange: { min, max }` als Top-Level-Option entgegennehmen + weiterleiten
-- `LineChartStrategy.js` (Layer 3): `fwContext.displayRange` befüllen (min + max)
-- `FwSmartXAxis.js` (Layer 4): `displayRange?.max ?? dataRange.max` als endLimit nutzen
-
-Architekturplan: `docs/steering/PEER-REVIEW-B1-AP-14b-XAxis-Architecture.md` | Rettungsbefund: `docs/steering/RETTUNGSBEFUND-B1-AP-14r.md`
+**Kein akuter Blocker.** B1-AP-14b3 ✅ abgeschlossen 2026-06-18.
 
 ---
 
@@ -199,6 +192,9 @@ Vollständig im DECISION-LOG dokumentiert (`docs/steering/DECISION-LOG.md`):
 ---
 
 ## 8. Letzte Session
+
+2026-06-18 — B1-AP-14b3 App-Anschluss + Smoke-Test Progressive Domain LineChart (B1-AP-14b3).
+app.js: renderJourneyStep um xDisplayRange/yRangePolicy/yRangeResetKey erweitert (4 Zeilen). journeyRangeKey stabil für Journey-Run, reset bei neuer Rate. Manueller Smoke-Test Prüfschritte 1–4 ✅. Console: nur erwartete Test-Szenarien-Fehler. Ergebnisprotokoll: docs/steering/patches/B1-AP-14b3_App-Anschluss_Smoke-Test_Ergebnis.md. Nächster Schritt: B1-AP-14c1 (Marker + Pulse Screen 2).
 
 2026-06-18 — B1-AP-14b2 Y-Policy cumulative-expand-zero implementiert (B1-AP-14b2).
 4 Engine-Dateien geaendert: FwSmartYAxis (_performDynamicRescaling: rawMin=0, rawMax expandiert), BaseChartStrategy (yRangePolicy/yRangeMemory in fwContext), LineChartStrategy (Policy durch config weitergegeben), ChartEngine (axisMemory.yMaxSeen in WeakMap-State, Reset bei Key-Wechsel). Standardcharts unveraendert (opt-in Guard). Ergebnisprotokoll: docs/steering/patches/B1-AP-14b2_...md. Naechster Schritt: B1-AP-14b3 (App-Anschluss).
