@@ -2,16 +2,16 @@
 Version: 1
 Stand: 2026-06-18
 Fokus-AP: APP-01 — prokrastinations-preis
-Nächster-Schritt: B1-AP-15 — Transitions + Reduced Motion (B1-AP-14c3b ✅ 2026-06-18)
+Nächster-Schritt: B1-AP-15 — Transitions + Reduced Motion (B1-AP-14c4 ✅ 2026-06-18)
 Blocker: keine
 Letzter-Distill: 2026-06-15
 Kassensturz-Datum: 2026-06-15
 -->
-<!-- HOOK-META-SESSION: B1-AP-14c3b -->
+<!-- HOOK-META-SESSION: B1-AP-14c4 -->
 
 # PROJECT STATUS — Finanzwesir 2.0
 
-Stand: 2026-06-18 | Session: B1-AP-14c3b | Geändert von: Claude
+Stand: 2026-06-18 | Session: B1-AP-14c4 | Geändert von: Claude
 
 **Zweck:** Schneller Wiedereinstieg nach Pausen.
 **Zielgruppe:** Albert und Claude.
@@ -148,6 +148,7 @@ Stand: 2026-06-18 | Session: B1-AP-14c3b | Geändert von: Claude
 - **B1-AP-14c2b** ✅ 2026-06-18 — Marker-X Snapshot-Alignment: Marker-X exakt auf Hauptserienpunkt (noon UTC, via getSnapshotSnap); Linien-Tooltip an Ringposition bleibt (Beschluss)
 - **B1-AP-14c3** ✅ 2026-06-18 — Screen-3-Final-Reveal-Ringe: stille Ringe auf vollständiger Linie, final_reveal ausgeschlossen, manueller Test grün
 - **B1-AP-14c3b** ✅ 2026-06-18 — Final-Reveal-Guard gehärtet: `isFinalRevealStation()` (5 Guards, defensiv), Smoke-Test grün
+- **B1-AP-14c4** ✅ 2026-06-18 — Screen-2-Pulse-Animation: `FwAnnotationPulsePlugin.js` NEU (WeakMap, afterDraw, 2-Pulse-Formel, 1200ms/1.8x), chart.draw()-Pattern
 - **B1-AP-15** — Transitions + Reduced Motion (nächster Schritt)
 - **AP-20/21** (Mixed-Rhythm CV-Heuristik) — 🟡 Aktiv, Chart-Engine, parallel möglich
 
@@ -161,7 +162,7 @@ Stand: 2026-06-18 | Session: B1-AP-14c3b | Geändert von: Claude
 | Chart-Engine | Stabil, offene APs | Siehe `docs/steering/BACKLOG.md` |
 | Theme | In Entwicklung | `THEME-ASSEMBLY-CHECKLIST.md` |
 | CSS | Stabil | Siehe `docs/steering/BACKLOG.md` (CSS-N Items) |
-| Apps | Slice 6 ✅, AP-UX-01 ✅, B1-AP-01 bis B1-AP-14c3b ✅ 2026-06-18 | B1-AP-15 (Transitions + Reduced Motion) |
+| Apps | Slice 6 ✅, AP-UX-01 ✅, B1-AP-01 bis B1-AP-14c4 ✅ 2026-06-18 | B1-AP-15 (Transitions + Reduced Motion) |
 | Content | Laufend | Redaktionsleitfaden aktiv |
 | Security | SECURITY-BASELINE.md App-Fabrik-gatefähig ✅ | Security-Sync-Regel + Gate-Prüffrage verankert (ST-13/ST-14) |
 
@@ -197,8 +198,11 @@ Vollständig im DECISION-LOG dokumentiert (`docs/steering/DECISION-LOG.md`):
 
 ## 8. Letzte Session
 
+2026-06-18 — B1-AP-14c4 Screen-2-Pulse-Animation (B1-AP-14c4).
+FwAnnotationPulsePlugin.js NEU: WeakMap-State per Chart-Instanz, afterDraw-Hook (letzter Hook), 2-Pulse-Formel Math.abs(Math.sin(progress×π×2)), Produktionswerte 1200ms/1.8x, chart.draw()-Pattern (canvas-ownership, Peer-Review-Befund Perplexity+ChatGPT). ChartEngine.js: annotationPulse-Option + Plugin-Injektion. app.js: renderJourneyStep aktiviert Pulse, Screen-3 ohne Pulse. 3 Dateien geändert. Ergebnisprotokoll: docs/steering/patches/B1-AP-14c4_Pulse_Screen2_reduced-motion_Ergebnis.md. Nächster Schritt: B1-AP-15 (Transitions + Reduced Motion).
+
 2026-06-18 — B1-AP-14c3b Final-Reveal-Guard gehärtet + Screen-3-Smoke-Test (B1-AP-14c3b).
-app.js: `isFinalRevealStation(s)` eingeführt (5 Guards: role, date, status, flags.finalReveal, id-Substrings; alle defensiv). `buildJourneyStationAnnotations`: einfacher role-Guard ersetzt. Screen-2 unverändert (slice-Grenze strukturell). Smoke-Test 6 Prüfschritte grün. Console-Einträge = erwartete Test-Szenarien. Ergebnisprotokoll: docs/steering/patches/B1-AP-14c3b_Final-Reveal-Guard_Screen3-Smoke_Ergebnis.md. Nächster Schritt: B1-AP-15 (Transitions + Reduced Motion).
+app.js: `isFinalRevealStation(s)` eingeführt (5 Guards: role, date, status, flags.finalReveal, id-Substrings; alle defensiv). `buildJourneyStationAnnotations`: einfacher role-Guard ersetzt. Screen-2 unverändert (slice-Grenze strukturell). Smoke-Test 6 Prüfschritte grün. Console-Einträge = erwartete Test-Szenarien. Ergebnisprotokoll: docs/steering/patches/B1-AP-14c3b_Final-Reveal-Guard_Screen3-Smoke_Ergebnis.md. Nächster Schritt: B1-AP-14c4 (Screen-2-Pulse-Animation).
 
 2026-06-18 — B1-AP-14c2b Marker-X Snapshot-Alignment (B1-AP-14c2b).
 LineChartStrategy.js: lokale Map<month, snappedTimestamp> aus rows + snappedTimestamps; Marker-X = exakt snapped Hauptserienpunkt (war: midnight UTC, neu: noon UTC). Beschluss: normaler Linien-Tooltip an Ringposition bleibt (Option 1, gewünscht). Ergebnisprotokoll: docs/steering/patches/B1-AP-14c2b_Marker-X-Snapshot-Alignment_Ergebnis.md. Nächster Schritt: B1-AP-14c3 (Screen-3-Final-Reveal-Ringe).

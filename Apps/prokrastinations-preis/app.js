@@ -498,7 +498,8 @@ function renderContent(container, appData, options, stationsConfig) { // CHANGED
       xDisplayRange: { min: ctx.startMonth, max: ctx.latestMonth },
       yRangePolicy: 'cumulative-expand-zero',
       yRangeResetKey: journeyRangeKey,
-      annotations: { events: journeyAnnotations } // NEW — B1-AP-14c1
+      annotations: { events: journeyAnnotations }, // NEW — B1-AP-14c1
+      annotationPulse: { enabled: true, mode: 'newly-added' } // NEW — B1-AP-14c4
     });
     // NEW — AP-14b: Orientierungs-Chip aktualisieren (APP_SPEC §16.1)
     const n = stationIdx + 1;

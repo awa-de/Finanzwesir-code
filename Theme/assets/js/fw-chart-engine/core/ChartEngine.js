@@ -65,6 +65,7 @@ import { LineChartStrategy } from '../strategies/LineChartStrategy.js';
 import { BarChartStrategy } from '../strategies/BarChartStrategy.js';
 import { PieChartStrategy } from '../strategies/PieChartStrategy.js';
 import { FwRenderer } from './FwRenderer.js';
+import { FwAnnotationPulsePlugin } from '../plugins/FwAnnotationPulsePlugin.js'; // NEW — B1-AP-14c4
 
 export class ChartEngine {
     constructor() {
@@ -178,6 +179,14 @@ export class ChartEngine {
             }
         }
 
+        // NEW — B1-AP-14c4: annotationPulse (ephemerer Runtime-State, kein Domain-State)
+        var annotationPulse = null;
+        if (options.annotationPulse != null &&
+            typeof options.annotationPulse === 'object' &&
+            options.annotationPulse.enabled === true) {
+            annotationPulse = options.annotationPulse;
+        }
+
         // WeakMap-State-Mechanik
         if (this._appChartStates.has(container)) {
             var state = this._appChartStates.get(container);
@@ -192,7 +201,8 @@ export class ChartEngine {
             var prevKey = state.config.yRangeResetKey;
             state.config.yRangePolicy = yRangePolicy;
             state.config.yRangeResetKey = yRangeResetKey;
-            state.config.annotations = annotations; // NEW — B1-AP-14c1
+            state.config.annotations = annotations;     // NEW — B1-AP-14c1
+            state.config.annotationPulse = annotationPulse; // NEW — B1-AP-14c4
             if (yRangePolicy === 'cumulative-expand-zero') {
                 if (!state.axisMemory) {
                     state.axisMemory = { yMaxSeen: 0 };
@@ -207,7 +217,7 @@ export class ChartEngine {
                 data:          frozenData,
                 strategy:      this.strategies[type],
                 type:          type,
-                config:        { colors: {}, options: '', title: '', features: features, xDisplayRange: xDisplayRange, yRangePolicy: yRangePolicy, yRangeResetKey: yRangeResetKey, annotations: annotations }, // CHANGED — B1-AP-14c1
+                config:        { colors: {}, options: '', title: '', features: features, xDisplayRange: xDisplayRange, yRangePolicy: yRangePolicy, yRangeResetKey: yRangeResetKey, annotations: annotations, annotationPulse: annotationPulse }, // CHANGED — B1-AP-14c4
                 range:         'max',
                 view:          'value',
                 viewOptions:   [],
@@ -323,6 +333,14 @@ export class ChartEngine {
                     ctx.restore();
                 }
             }];
+        }
+
+        // NEW — B1-AP-14c4: Pulse-Plugin für Screen-2-Marker (nur wenn annotationPulse.enabled)
+        if (runtimeConfig.annotationPulse?.enabled) {
+            if (!chartConfig.plugins) chartConfig.plugins = [];
+            chartConfig.plugins.push(FwAnnotationPulsePlugin);
+            if (!chartConfig.options.plugins) chartConfig.options.plugins = {};
+            chartConfig.options.plugins.fwAnnotationPulse = runtimeConfig.annotationPulse; // NEW
         }
 
         var strategyWantsNoTooltip = false;

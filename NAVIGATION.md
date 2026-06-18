@@ -1,5 +1,5 @@
 # NAVIGATION.md – Finanzwesir 2.0
-Stand: 2026-06-18 | Session: B1-AP-14c3b | Geändert von: Claude
+Stand: 2026-06-18 | Session: B1-AP-14c4 | Geändert von: Claude
 
 Für Claude: **Routing-Dokument.** Wird beim Session-Start (Schritt 2) gelesen.
 Gibt Pfade und Lese-Reihenfolgen vor — KEINE Verhaltensregeln (die stehen in CLAUDE.md).
@@ -167,7 +167,7 @@ Nach Abschluss: `/abschluss-ritual`.
 > und welche Datenfragen vor dem produktiven Bau offen sind.
 > Nur bei Quellen-, CSV-, Contract- oder Datenänderungsfragen zusätzlich `docs/data/` lesen.
 
-> [!note] B1 / prokrastinations-preis — Zeitreise-Umbau (B1-AP-01 bis B1-AP-14c3b ✅ 2026-06-18)
+> [!note] B1 / prokrastinations-preis — Zeitreise-Umbau (B1-AP-01 bis B1-AP-14c4 ✅ 2026-06-18)
 > `Apps/prokrastinations-preis/APP_SPEC.md` V2.7 (B1-AP-14a2: Progressive Domain LineChart + AP-14c-Marker-Zielbild, 2026-06-18) ist die operative Spec-Quelle.
 > `Apps/prokrastinations-preis/ENTSCHEIDUNGSPROTOKOLL.md` (B1-AP-01, 2026-06-16) ist die verbindliche Architektur-Klammer für B1-AP-02 bis B1-AP-08c.
 > `Apps/prokrastinations-preis/MINI_SPEC_FROM_HAUPTDOKUMENT.md` — historisch; bei Widerspruch gilt APP_SPEC.md V2.7.
@@ -189,7 +189,8 @@ Nach Abschluss: `/abschluss-ritual`.
 > B1-AP-14c2 ✅ 2026-06-18 — Annotation-Marker-Ringe: Scatter-Dataset aus fwContext.annotations.events (Petrol-Ring, transparent fill, pointRadius 5); forEach-Guard + tooltipConfig.filter in LineChartStrategy; mainDatasets-Legend-Filter in FwRenderer. Kein Tooltip, kein Legendeneintrag, keine Interaktion. 2 Engine-Dateien. Nächster Schritt: B1-AP-14c3 — Screen-3-Final-Reveal-Ringe.
 > B1-AP-14c2b ✅ 2026-06-18 — Marker-X Snapshot-Alignment: lokale `Map<month, snappedTimestamp>` aus `rows` + `snappedTimestamps` in `LineChartStrategy.transform()`; Marker-X exakt auf Hauptserienpunkt ausgerichtet (war: midnight UTC, neu: noon UTC via `getSnapshotSnap`). Beschluss: normaler Linien-Tooltip an Ringposition bleibt (gewünscht). Nur `LineChartStrategy.js`. Nächster Schritt: B1-AP-14c3 — Screen-3-Final-Reveal-Ringe.
 > B1-AP-14c3 ✅ 2026-06-18 — Screen-3-Final-Reveal-Ringe: `renderS3()` um `revealAnnotations` erweitert (2 Zeilen); `buildJourneyStationAnnotations(journeyStations, ctx.chartSeries)` — bestehender Helper, final_reveal-Guard greift. Keine Engine-Dateien geändert. Nächster Schritt: B1-AP-14c3b — Guard härten.
-> B1-AP-14c3b ✅ 2026-06-18 — Final-Reveal-Guard gehärtet: `isFinalRevealStation(s)` in `app.js` (5 Guards: role, date, status, flags.finalReveal, id-Substrings; alle defensiv). Screen-3-Smoke-Test grün. Nur `app.js`. Nächster Schritt: B1-AP-15 — Transitions + Reduced Motion.
+> B1-AP-14c3b ✅ 2026-06-18 — Final-Reveal-Guard gehärtet: `isFinalRevealStation(s)` in `app.js` (5 Guards: role, date, status, flags.finalReveal, id-Substrings; alle defensiv). Screen-3-Smoke-Test grün. Nur `app.js`. Nächster Schritt: B1-AP-14c4 — Screen-2-Pulse-Animation.
+> B1-AP-14c4 ✅ 2026-06-18 — Screen-2-Pulse-Animation: `FwAnnotationPulsePlugin.js` NEU (WeakMap-State, afterDraw-Hook, 2-Pulse-Formel, 1200ms/1.8x); `ChartEngine.js` (annotationPulse-Option + Plugin-Injektion); `app.js` (renderJourneyStep aktiviert Pulse, Screen-3 ohne Pulse). chart.draw()-Pattern (canvas-ownership, Peer-Review-Befund). Nächster Schritt: B1-AP-15 — Transitions + Reduced Motion.
 > `Apps/prokrastinations-preis/config/stations.de.json` — produktive Stationen-Konfiguration v2.1 (B1-AP-09 ✅, AP-10a Flags bereinigt ✅ 2026-06-17)
 > `Apps/prokrastinations-preis/STATIONS_IMPLEMENTATION_PLAN.md` — Implementierungsplan für Stationen-Zeitreise Coding-Slices AP-11–AP-18, V1.1 (B1-AP-10 ✅, AP-10a Semantik bereinigt ✅ 2026-06-17)
 > B1 ist Pilot-2 (Daten-/Chart-/Story-Pilot). Pilot-1 ist `risiko-uebersetzer` (Calculator-Pilot) — entschieden E-02, 2026-05-28.

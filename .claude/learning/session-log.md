@@ -288,3 +288,10 @@ FinanzwesirData.js, CSVParser.js, FwDateUtils.js — diese Session nicht berühr
 - [OK] Screen-2-Sicherheit statisch bestätigt (slice-Grenze strukturell, Guard = Defense-in-Depth)
 - [OK] Smoke-Test durch Albert: alle 6 Prüfschritte grün; Console-Einträge = erwartete Test-Szenarien
 - [OK] Ergebnisprotokoll: docs/steering/patches/B1-AP-14c3b_Final-Reveal-Guard_Screen3-Smoke_Ergebnis.md
+
+### 2026-06-18 — B1-AP-14c4 ✅ Screen-2-Pulse-Animation (FwAnnotationPulsePlugin.js)
+- [FRICTION] 3 Debug-Runden: prefers-reduced-motion-Guard blockierte auf Testsystem; _reducedMotion in Produktionsdatei vergessen → ReferenceError crash; Chrome DevTools kollabiert identische Logs → animations.size=0 wirkte irreführend
+- [WIN] Peer-Review (Perplexity+ChatGPT) → canvas-ownership-Diagnose → chart.draw() statt direktem Canvas-Schreiben in _standaloneLoop
+- [WIN] 2-Pulse-Formel Math.abs(Math.sin(progress×π×2)) — Echo-Effekt durch natürliches Alpha-Fade; Produktionswerte 1200ms/1.8x durch Albert freigegeben
+
+### 2026-06-18 — B1-AP-15 — AP-Wechsel
