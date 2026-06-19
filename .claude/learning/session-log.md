@@ -1,6 +1,12 @@
 ﻿﻿# Session-Log — Finanzwesir 2.0
 Wird geleert nach /distill. Einträge: [FRICTION] [WIN] [PREF] [QUESTION] [OK]
 
+## 2026-06-19 – SESSION START | [KETTENMODUS] | Fokus: APP-01 — prokrastinations-preis
+- FinanzwesirData.js, CSVParser.js, FwDateUtils.js — diese Session nicht berühren. ✓
+
+### 2026-06-19 — B1-AP-14e4 ✅
+- [OK] CenterTextPlugin nach `plugins/CenterTextPlugin.js` ausgelagert — 1:1-Übernahme (v1.6.1), Re-Export-Shim in `core/FwChartPlugins.js`; `PieChartStrategy.js`-Import umgestellt; alle 18 statischen Prüfpunkte grün, alle manuellen Tests bestätigt
+
 ## 2026-06-17 – B1-AP-14 abgeschlossen | Stationen-Zeitreise: Screen 2 Umbau + Editorial Gate
 - [FRICTION] Patch-Quittung nur im Chat geschrieben, nicht als Datei — Albert musste nachfragen; danach als docs/steering/patches/PATCH-B1-AP-14-2026-06-17.md erstellt
 - [OK] Context-Compaction mid-session: Arbeit aus kompaktiertem Faden fortgesetzt; alle 6 Tasks vollständig umgesetzt
