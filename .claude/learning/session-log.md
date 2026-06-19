@@ -370,3 +370,12 @@ FinanzwesirData.js, CSVParser.js, FwDateUtils.js — diese Session nicht berühr
 - [OK] NAVIGATION.md Engine-Routing-Block um Datenpfad-Verweis ergänzt (1 Zeile)
 - [OK] Kein Code, keine Protected Files, kein AP-15
 - [OK] Option B: Hinweis in AP-14e1-Ergebnis für CenterText/Crosshair-Neuzuordnung zu AP-14e4
+
+## 2026-06-19 – SESSION START | [KETTENMODUS] | Fokus: APP-01 — prokrastinations-preis
+
+### 2026-06-19 — B1-AP-14e5 ✅ CrosshairPlugin aus core nach plugins ausgelagert
+- [OK] plugins/CrosshairPlugin.js NEU angelegt — exakte Implementierung aus FwChartPlugins.js
+- [OK] LineChartStrategy.js Import auf ../plugins/CrosshairPlugin.js umgestellt
+- [OK] core/FwChartPlugins.js ist jetzt reiner Re-Export-Shim (CenterTextPlugin + CrosshairPlugin)
+- [OK] Keine Plugin-Implementierung mehr in core/FwChartPlugins.js
+- [OK] Ergebnisprotokoll: docs/steering/patches/AP-14e5_CrosshairPlugin-Auslagerung_Ergebnis.md

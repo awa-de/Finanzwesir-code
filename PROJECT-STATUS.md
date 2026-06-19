@@ -2,16 +2,16 @@
 Version: 1
 Stand: 2026-06-19
 Fokus-AP: APP-01 — prokrastinations-preis
-Nächster-Schritt: B1-AP-14e5 — CrosshairPlugin auslagern (B1-AP-14e4 ✅ 2026-06-19)
+Nächster-Schritt: B1-AP-14e6 — FwChartPlugins-Shim prüfen und entfernen (B1-AP-14e5 ✅ 2026-06-19)
 Blocker: keine
 Letzter-Distill: 2026-06-15
 Kassensturz-Datum: 2026-06-15
 -->
-<!-- HOOK-META-SESSION: B1-AP-14e4 -->
+<!-- HOOK-META-SESSION: B1-AP-14e5 -->
 
 # PROJECT STATUS — Finanzwesir 2.0
 
-Stand: 2026-06-19 | Session: B1-AP-14e4 | Geändert von: Claude
+Stand: 2026-06-19 | Session: B1-AP-14e5 | Geändert von: Claude
 
 **Zweck:** Schneller Wiedereinstieg nach Pausen.
 **Zielgruppe:** Albert und Claude.
