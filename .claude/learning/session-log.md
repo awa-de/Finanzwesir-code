@@ -322,3 +322,8 @@ FinanzwesirData.js, CSVParser.js, FwDateUtils.js — diese Session nicht berühr
 - [OK] Ergebnisprotokoll: docs/steering/patches/B1-AP-14e1_Chart-Plugin-Spec_Einbindung_Ergebnis.md
 - [NOTE] BACKLOG.md: kein passender Ort — nicht erzwungen
 - [NOTE] docs/spec/README.md: existiert nicht — nicht angelegt
+
+### 2026-06-19 — B1-AP-15 — AP-Wechsel (neuer Faden)
+- Layer-1-Fingerabdruck: FinanzwesirData.js, CSVParser.js, FwDateUtils.js — diese Session nicht berühren. ✓
+
+### 2026-06-19 — B1-AP-14f1 (AP-14e1-Befund) âœ… Plugin-Ist-Befund: 5 Plugins inventarisiert, fwVerticalLine-Bug bestätigt (ChartEngine._draw() Z.317 Ã¼berschreibt Strategie-Plugin-Arrays)
