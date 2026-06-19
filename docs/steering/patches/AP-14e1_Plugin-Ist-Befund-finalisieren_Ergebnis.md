@@ -2,6 +2,8 @@
 
 Stand: 2026-06-19 | Session: B1-AP-14e1 | Geändert von: Claude
 
+> **Hinweis (2026-06-19):** AP-14e3 wurde neu definiert als reiner Doku-AP (Engine-Datenpfad-Regressionsregel verankern). Die ursprünglich hier geplante CenterTextPlugin + CrosshairPlugin-Auslagerung läuft als **B1-AP-14e4** weiter.
+
 ---
 
 ## Kurzurteil

@@ -356,3 +356,11 @@ FinanzwesirData.js, CSVParser.js, FwDateUtils.js — diese Session nicht berühr
 - [OK] _toMonthKey-Helfer (Type-Guard) + _monthToSnappedX in if-Block verschoben
 - [WIN] CSVParser liefert Date-Objekt bei expectDate: true — normale CSV-LineCharts wieder fehlerfrei
 - [OK] Manueller Test: index_linien.html grün, Screen 2 + Screen 3 Marker korrekt
+
+### B1-AP-14e3 — AP-Wechsel
+
+### 2026-06-19 — B1-AP-14e3 ✅ Engine-Datenpfad-Regressionsregel verankert
+- [OK] CHART_ENGINE_REGRESSIONSREGELN.md NEU in docs/spec/ (renderFromData vs. _processContainer, verbotene Muster, Pflichtprüfung)
+- [OK] NAVIGATION.md Engine-Routing-Block um Datenpfad-Verweis ergänzt (1 Zeile)
+- [OK] Kein Code, keine Protected Files, kein AP-15
+- [OK] Option B: Hinweis in AP-14e1-Ergebnis für CenterText/Crosshair-Neuzuordnung zu AP-14e4

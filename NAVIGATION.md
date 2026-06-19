@@ -93,6 +93,7 @@ Bei `Hook-Status: DEGRADED` → sichtbar melden, nicht still fortfahren (→ `/s
 3. docs/steering/engine/detail/[AP-N]-DETAIL.md   ← Detail-Spec des AP
 4. docs/spec/[relevante Spec]        ← bindend, nicht verhandelbar
    → bei Plugin-Arbeit: docs/spec/CHART_PLUGIN_ARCHITEKTUR.md (WeakMap, afterDraw, reduced-motion, Canvas/Chart.js-Grenzen)
+   → bei Engine-Datenpfad-Arbeit: docs/spec/CHART_ENGINE_REGRESSIONSREGELN.md (renderFromData vs. _processContainer, Date-Typ-Normalisierung, Pflichtprüfung)
 5. docs/steering/engine/WORKING-FEATURES.md       ← Regressionswächter VOR der Arbeit
 6. docs/steering/engine/REGRESSION-MATRIX.md      ← vor Abschluss relevante Tests
 ```
@@ -199,6 +200,7 @@ Nach Abschluss: `/abschluss-ritual`.
 > B1-AP-14f1 ✅ 2026-06-19 — Plugin-Ist-Befund: 5 Chart.js-Plugins inventarisiert (CenterText, Crosshair, FwAnnotationPulse, fwVerticalLine, FwBarLayout). Hauptbefund: fwVerticalLine-Zuweisung in ChartEngine._draw() Z.317 überschreibt Strategie-Plugin-Arrays → CrosshairPlugin auf Screen 3 verloren (bestätigter Bug). Kein Code geändert. Ergebnisprotokoll: docs/steering/patches/AP-14e1_Plugin-Ist-Befund-finalisieren_Ergebnis.md. Nächster Schritt: B1-AP-14e2 — fwVerticalLine Bug-Fix + Auslagerung.
 > B1-AP-14e2 ✅ 2026-06-19 — fwVerticalLine-Plugin ausgelagert: `FwVerticalLinePlugin.js` NEU in `plugins/`; `ChartEngine._draw()` push statt Zuweisung → `CrosshairPlugin`-Bug behoben. Ergebnisprotokoll: `docs/steering/patches/AP-14e2_fwVerticalLine-Plugin-Auslagerung_Ergebnis.md`. Nächster Schritt: B1-AP-14c2c.
 > B1-AP-14c2c ✅ 2026-06-19 — LineChartStrategy Date-Objekt-Regression: `_toMonthKey`-Helfer (Type-Guard) + `_monthToSnappedX` in `if`-Block (nur bei Annotationen). CSVParser liefert `Date`-Objekt bei `expectDate: true`. Normale CSV-LineCharts wieder fehlerfrei. Nur `LineChartStrategy.js`. Ergebnisprotokoll: `docs/steering/patches/B1-AP-14c2c_LineChartStrategy_DateObjekt_Regression_Ergebnis.md`. Nächster Schritt: B1-AP-14e3.
+> B1-AP-14e3 ✅ 2026-06-19 — Engine-Datenpfad-Regressionsregel verankert: `docs/spec/CHART_ENGINE_REGRESSIONSREGELN.md` NEU (renderFromData vs. _processContainer, verbotene Date-Muster, Pflichtprüfungs-Checkliste, Protected-Files-Bestätigung); `NAVIGATION.md` Engine-Routing-Hint ergänzt. Kein Code. Ergebnisprotokoll: `docs/steering/patches/AP-14e3_Engine-Datenpfad-Regressionsregel_Ergebnis.md`. Nächster Schritt: B1-AP-14e4 — CenterTextPlugin auslagern.
 > `Apps/prokrastinations-preis/config/stations.de.json` — produktive Stationen-Konfiguration v2.1 (B1-AP-09 ✅, AP-10a Flags bereinigt ✅ 2026-06-17)
 > `Apps/prokrastinations-preis/STATIONS_IMPLEMENTATION_PLAN.md` — Implementierungsplan für Stationen-Zeitreise Coding-Slices AP-11–AP-18, V1.1 (B1-AP-10 ✅, AP-10a Semantik bereinigt ✅ 2026-06-17)
 > B1 ist Pilot-2 (Daten-/Chart-/Story-Pilot). Pilot-1 ist `risiko-uebersetzer` (Calculator-Pilot) — entschieden E-02, 2026-05-28.

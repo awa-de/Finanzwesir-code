@@ -1,11 +1,12 @@
 # BACKLOG-ARCHIV – Finanzwesir 2.0
-Stand: 2026-06-19 | Session: B1-AP-14c2c | Geändert von: Claude
+Stand: 2026-06-19 | Session: B1-AP-14e3 | Geändert von: Claude
 
 Abgeschlossene Items, neueste zuerst (append-only).
 Archivierungs-Trigger: wenn > 200 Zeilen → neue Datei `BACKLOG-ARCHIV-YYYY.md` anlegen.
 
 | ID | Bereich | Titel | Abgeschlossen | Session |
 |----|---------|-------|---------------|---------|
+| B1-AP-14e3 | Doku/Spec | Engine-Datenpfad-Regressionsregel verankert: `CHART_ENGINE_REGRESSIONSREGELN.md` NEU in `docs/spec/` (renderFromData vs. _processContainer, verbotene Date-Muster, Pflichtprüfungs-Checkliste); NAVIGATION.md Engine-Routing-Hint ergänzt. Kein Code. *(sofort erledigt)* | 2026-06-19 | B1-AP-14e3 |
 | B1-AP-14e2 | Engine | fwVerticalLine-Plugin ausgelagert: `FwVerticalLinePlugin.js` NEU in `plugins/`; `ChartEngine._draw()` push statt Zuweisung → `CrosshairPlugin`-Bug behoben. 2 Dateien. *(sofort erledigt)* | 2026-06-19 | B1-AP-14e2 |
 | B1-AP-14c2c | Engine | LineChartStrategy Date-Objekt-Regression: `_toMonthKey`-Helfer (Type-Guard) + `_monthToSnappedX` in `if`-Block (nur bei Annotationen). CSVParser liefert `Date`-Objekt bei `expectDate: true`. Nur `LineChartStrategy.js`. *(sofort erledigt)* | 2026-06-19 | B1-AP-14c2c |
 | B1-AP-14d4 | App/Doku | §16.3 UI-Primitive-Tabelle synchronisiert: 13 Primitive von „zu bauen" auf ✅ umgesetzt; 1 ⚠️ Stationen-Button (continueLabel), 1 ⏳ Draw-Animation (Slice 6 offen). APP_SPEC V2.9. Kein Code geändert. *(sofort erledigt)* | 2026-06-18 | B1-AP-14d4 |
