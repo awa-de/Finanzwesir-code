@@ -334,3 +334,11 @@ FinanzwesirData.js, CSVParser.js, FwDateUtils.js — diese Session nicht berühr
 - [OK] Beide Reviews (Perplexity + Claude) abgeglichen: 3 gemeinsame Muss-Patches (P1 Terminologie, P2 90-min-Regel streichen, P3 NAVIGATION-Fehlerfall im Writer)
 
 ### 2026-06-19 — B1-AP-14e2 — AP-Wechsel
+
+### 2026-06-19 — B1-AP-14e2 — AP-Wechsel (neuer Faden)
+- Layer-1-Fingerabdruck: FinanzwesirData.js, CSVParser.js, FwDateUtils.js — diese Session nicht berühren. ✓
+
+### 2026-06-19 — Zwischenaufgabe: abschluss-ritual Final-Paket installiert ✅
+- [OK] 4 Dateien verteilt: SKILL.md (ersetzt), abschluss-writer.md (neu), ABSCHLUSS-RITUAL-FINAL-ENTSCHEIDUNG.md (neu), README-INSTALLATION-FINAL.md (archiviert)
+- [OK] Quellverzeichnis abschluss_ritual_final_paket gelöscht
+- [PREF] Commit-Messages immer mit Umlauten — PowerShell-Terminal-Argument greift nicht, da Albert selbst committed
