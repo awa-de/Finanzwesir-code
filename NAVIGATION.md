@@ -1,5 +1,5 @@
 # NAVIGATION.md – Finanzwesir 2.0
-Stand: 2026-06-19 | Session: B1-AP-14e1 | Geändert von: Claude
+Stand: 2026-06-19 | Session: B1-AP-14c2c | Geändert von: Claude
 
 Für Claude: **Routing-Dokument.** Wird beim Session-Start (Schritt 2) gelesen.
 Gibt Pfade und Lese-Reihenfolgen vor — KEINE Verhaltensregeln (die stehen in CLAUDE.md).
@@ -197,6 +197,8 @@ Nach Abschluss: `/abschluss-ritual`.
 > B1-AP-14d4 ✅ 2026-06-18 — §16.3 UI-Primitive-Tabelle synchronisiert: 13 Primitive von „zu bauen" auf ✅ korrigiert; 1 ⚠️ Stationen-Button (continueLabel offen), 1 ⏳ Draw-Animation (Slice 6 offen). APP_SPEC V2.9. Kein Code geändert. Nächster Schritt: B1-AP-15 — Transitions + Reduced Motion.
 > B1-AP-14e1 ✅ 2026-06-19 — Doku-Nachputz: CHART_PLUGIN_ARCHITEKTUR.md in Steuerungsdateien eingebunden (NAVIGATION.md Chart-Engine-Routing Plugin-Hinweis + B1-Block, PROJECT-STATUS.md §8). Kein Code, kein CSS, kein JSON geändert. Nächster Schritt: B1-AP-15 — Transitions + Reduced Motion.
 > B1-AP-14f1 ✅ 2026-06-19 — Plugin-Ist-Befund: 5 Chart.js-Plugins inventarisiert (CenterText, Crosshair, FwAnnotationPulse, fwVerticalLine, FwBarLayout). Hauptbefund: fwVerticalLine-Zuweisung in ChartEngine._draw() Z.317 überschreibt Strategie-Plugin-Arrays → CrosshairPlugin auf Screen 3 verloren (bestätigter Bug). Kein Code geändert. Ergebnisprotokoll: docs/steering/patches/AP-14e1_Plugin-Ist-Befund-finalisieren_Ergebnis.md. Nächster Schritt: B1-AP-14e2 — fwVerticalLine Bug-Fix + Auslagerung.
+> B1-AP-14e2 ✅ 2026-06-19 — fwVerticalLine-Plugin ausgelagert: `FwVerticalLinePlugin.js` NEU in `plugins/`; `ChartEngine._draw()` push statt Zuweisung → `CrosshairPlugin`-Bug behoben. Ergebnisprotokoll: `docs/steering/patches/AP-14e2_fwVerticalLine-Plugin-Auslagerung_Ergebnis.md`. Nächster Schritt: B1-AP-14c2c.
+> B1-AP-14c2c ✅ 2026-06-19 — LineChartStrategy Date-Objekt-Regression: `_toMonthKey`-Helfer (Type-Guard) + `_monthToSnappedX` in `if`-Block (nur bei Annotationen). CSVParser liefert `Date`-Objekt bei `expectDate: true`. Normale CSV-LineCharts wieder fehlerfrei. Nur `LineChartStrategy.js`. Ergebnisprotokoll: `docs/steering/patches/B1-AP-14c2c_LineChartStrategy_DateObjekt_Regression_Ergebnis.md`. Nächster Schritt: B1-AP-14e3.
 > `Apps/prokrastinations-preis/config/stations.de.json` — produktive Stationen-Konfiguration v2.1 (B1-AP-09 ✅, AP-10a Flags bereinigt ✅ 2026-06-17)
 > `Apps/prokrastinations-preis/STATIONS_IMPLEMENTATION_PLAN.md` — Implementierungsplan für Stationen-Zeitreise Coding-Slices AP-11–AP-18, V1.1 (B1-AP-10 ✅, AP-10a Semantik bereinigt ✅ 2026-06-17)
 > B1 ist Pilot-2 (Daten-/Chart-/Story-Pilot). Pilot-1 ist `risiko-uebersetzer` (Calculator-Pilot) — entschieden E-02, 2026-05-28.

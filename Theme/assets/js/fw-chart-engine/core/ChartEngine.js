@@ -66,6 +66,7 @@ import { BarChartStrategy } from '../strategies/BarChartStrategy.js';
 import { PieChartStrategy } from '../strategies/PieChartStrategy.js';
 import { FwRenderer } from './FwRenderer.js';
 import { FwAnnotationPulsePlugin } from '../plugins/FwAnnotationPulsePlugin.js'; // NEW — B1-AP-14c4
+import { FwVerticalLinePlugin } from '../plugins/FwVerticalLinePlugin.js'; // NEW — B1-AP-14e2
 
 export class ChartEngine {
     constructor() {
@@ -312,27 +313,10 @@ export class ChartEngine {
         // CHANGED — Feature-Auswahl: headline === false → BAN unterdrücken
         if ((runtimeConfig.features || {}).headline === false) runtimeConfig.headline = null;
 
-        // NEW — Slice 6: VertikaleLinie als Chart.js-inline-Plugin (Option A: pixel-genau)
+        // CHANGED — B1-AP-14e2: FwVerticalLinePlugin ausgelagert, Push statt Überschreiben
         if ((runtimeConfig.features || {}).verticalLine === 'last') {
-            chartConfig.plugins = [{
-                id: 'fwVerticalLine',
-                afterDraw: function(chart) {
-                    var m = chart.getDatasetMeta(0);
-                    if (!m || !m.data || !m.data.length) return;
-                    var last = m.data[m.data.length - 1];
-                    var ctx = chart.ctx;
-                    var ca = chart.chartArea;
-                    ctx.save();
-                    ctx.beginPath();
-                    ctx.moveTo(last.x, ca.top);
-                    ctx.lineTo(last.x, ca.bottom);
-                    ctx.strokeStyle = '#0071bf';
-                    ctx.lineWidth = 2;
-                    ctx.setLineDash([4, 4]);
-                    ctx.stroke();
-                    ctx.restore();
-                }
-            }];
+            if (!chartConfig.plugins) chartConfig.plugins = [];
+            chartConfig.plugins.push(FwVerticalLinePlugin);
         }
 
         // NEW — B1-AP-14c4: Pulse-Plugin für Screen-2-Marker (nur wenn annotationPulse.enabled)

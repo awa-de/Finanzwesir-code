@@ -1,11 +1,13 @@
 # BACKLOG-ARCHIV – Finanzwesir 2.0
-Stand: 2026-06-18 | Session: B1-AP-14d4 | Geändert von: Claude
+Stand: 2026-06-19 | Session: B1-AP-14c2c | Geändert von: Claude
 
 Abgeschlossene Items, neueste zuerst (append-only).
 Archivierungs-Trigger: wenn > 200 Zeilen → neue Datei `BACKLOG-ARCHIV-YYYY.md` anlegen.
 
 | ID | Bereich | Titel | Abgeschlossen | Session |
 |----|---------|-------|---------------|---------|
+| B1-AP-14e2 | Engine | fwVerticalLine-Plugin ausgelagert: `FwVerticalLinePlugin.js` NEU in `plugins/`; `ChartEngine._draw()` push statt Zuweisung → `CrosshairPlugin`-Bug behoben. 2 Dateien. *(sofort erledigt)* | 2026-06-19 | B1-AP-14e2 |
+| B1-AP-14c2c | Engine | LineChartStrategy Date-Objekt-Regression: `_toMonthKey`-Helfer (Type-Guard) + `_monthToSnappedX` in `if`-Block (nur bei Annotationen). CSVParser liefert `Date`-Objekt bei `expectDate: true`. Nur `LineChartStrategy.js`. *(sofort erledigt)* | 2026-06-19 | B1-AP-14c2c |
 | B1-AP-14d4 | App/Doku | §16.3 UI-Primitive-Tabelle synchronisiert: 13 Primitive von „zu bauen" auf ✅ umgesetzt; 1 ⚠️ Stationen-Button (continueLabel), 1 ⏳ Draw-Animation (Slice 6 offen). APP_SPEC V2.9. Kein Code geändert. *(sofort erledigt)* | 2026-06-18 | B1-AP-14d4 |
 | B1-AP-14c1 | App/Engine | Journey-Station-Annotationen als Datenvertrag: `buildJourneyStationAnnotations()` in app.js (Snapshot-Snap aus visibleSeries, final_reveal-Guard `role==='final_reveal'`, kein Punkt → keine Annotation); `annotations`-Durchreichung ChartEngine → WeakMap-State → BaseChartStrategy._createFwContext → fwContext.annotations (Object.freeze); LineChartStrategy übergibt `config.annotations`. Kein Rendering, kein Marker, kein Pulse. *(sofort erledigt)* | 2026-06-18 | B1-AP-14c1 |
 | B1-AP-14b4 | App/Engine | Diagnostics-Log-Cleanup FwSmartXAxis: 4 temporäre `[SNAPSHOT-X DIAG]`-console.log in `afterDataLimits`/`afterBuildTicks` entfernt. Keine Logikänderung, keine Achsen-Umbau. *(sofort erledigt)* | 2026-06-18 | B1-AP-14b4 |

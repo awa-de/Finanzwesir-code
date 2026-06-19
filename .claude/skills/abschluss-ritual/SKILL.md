@@ -70,6 +70,21 @@ Wenn Claude unsicher ist:
 3. Kein stilles Raten.
 4. Kein Kettenmodus aus Hoffnung.
 
+### 0.5 Keine sichtbare Modus-Oszillation
+
+Claude denkt die Moduswahl intern durch. Sichtbar wird nur:
+
+- die klare Modusentscheidung, oder
+- eine Rückfrage, wenn die Entscheidung nicht sicher ist.
+
+Nicht sichtbar ausgeben:
+
+- „Ich überlege, ob Mini passt...“
+- „Vielleicht Voll, vielleicht Zwischenaufgabe...“
+- „Ich muss noch einmal nachdenken...“
+
+Wenn unsicher: fragen. Wenn sicher: knapp entscheiden.
+
 ---
 
 ## 1. Feste Pfade
@@ -114,6 +129,7 @@ Claude prüft zuerst Kontext, AP-Status und eigene Edit-History. Wenn das nicht 
 | Pfad A — Voll-Abschluss | Sicherheitsanker; bei Kettenende, Unsicherheit, Scope, Engine, Spec, Memory, Regression |
 | Pfad B — Ketten-Minimalabschluss | AP ist fertig, nächster AP derselben Serie folgt direkt |
 | Pfad C — Mini-Abschluss | Kleine Doku-/Steering-Korrektur ohne AP-/Projektstatuswirkung |
+| Pfad D — Housekeeping-Abschluss | Infrastruktur-/Aufräumaufgabe ohne AP-ID und ohne Änderung am fachlichen Projektstatus |
 
 ### 2.3 Sichere Erkennung ohne Rückfrage
 
@@ -125,10 +141,11 @@ Claude kann ohne Rückfrage entscheiden, wenn der Fall eindeutig ist:
 | Themenblock abgeschlossen, Kettenende, kein nächster Serien-AP | Voll-Abschluss |
 | Code-/Engine-/Spec-/Memory-/Backlog-/Scope-Relevanz | Voll-Abschluss |
 | Nur kleine Doku-/Header-Korrektur, keine AP-Wirkung | Mini-Abschluss |
+| Infrastruktur-/Housekeeping-Aufgabe ohne AP-ID, keine fachliche Projektstatusänderung, kein BACKLOG-AP | Housekeeping-Abschluss |
 
 ### 2.4 Rückfrage statt Raten
 
-Wenn Claude nicht sicher ist, genau diese Frage stellen:
+Wenn Claude nicht sicher ist, ob es Ketten-Minimalabschluss, Vollabschluss oder Miniabschluss ist, genau diese Frage stellen:
 
 ```text
 Ich bin beim Abschlussmodus nicht sicher.
@@ -138,6 +155,19 @@ Welche Art Abschluss soll ich machen?
 1. Ketten-Minimalabschluss — AP ist fertig, nächster AP folgt direkt
 2. Vollabschluss — Themenblock/Session sauber abschließen
 3. Miniabschluss — nur kleine Doku-/Steering-Korrektur
+
+Wenn du unsicher bist: Vollabschluss.
+```
+
+Wenn es wie eine Infrastruktur-/Housekeeping-Aufgabe ohne AP-ID aussieht, genau diese Frage stellen:
+
+```text
+Das wirkt wie eine Infrastruktur-/Housekeeping-Aufgabe ohne AP-ID.
+
+Soll ich einen schlanken Housekeeping-Abschluss machen?
+
+1. Ja — session-log + Commit, PROJECT-STATUS bleibt unverändert
+2. Nein — Vollabschluss
 
 Wenn du unsicher bist: Vollabschluss.
 ```
@@ -157,6 +187,7 @@ Wenn nur die technische Lage unklar ist, darf Claude gezielt prüfen:
 - HOOK-META aus den ersten 10–15 Zeilen von `PROJECT-STATUS.md`
 - konkrete AP-Zeile in `BACKLOG.md`
 - konkrete AP-Zeile in `NAVIGATION.md`
+- bei Housekeeping: gezielt prüfen, ob neue dauerhafte Steering-/Skill-/Agent-Dateien routing-relevant sind
 
 Nicht erlaubt:
 
@@ -382,11 +413,81 @@ Wenn keine Edit-History sicher verfügbar ist: kein Mini, sondern Voll-Abschluss
 
 ---
 
-## 6. Pfad A — Voll-Abschluss
+
+## 6. Pfad D — Housekeeping-Abschluss
+
+### 7.1 Zweck
+
+Housekeeping-Abschluss ist für Infrastruktur-/Aufräumaufgaben ohne AP-ID, die dokumentations- oder steuerungsnah sind, aber den fachlichen Projektstatus nicht ändern.
+
+Beispiele:
+
+- Skill installiert oder ersetzt
+- Agent installiert oder ersetzt
+- Steering-Doku ergänzt
+- temporäre Dateien/Verzeichnisse aufgeräumt
+- Review-Paket einsortiert
+- keine App-/Engine-Codeänderung
+- keine Änderung des fachlichen nächsten AP
+- kein BACKLOG-AP
+
+### 7.2 Voraussetzungen
+
+Housekeeping-Abschluss nur wenn:
+
+- keine formale AP-ID betroffen ist,
+- kein BACKLOG-Eintrag existiert oder aktualisiert werden muss,
+- `PROJECT-STATUS.md` fachlich unverändert bleiben kann,
+- keine App-/Engine-/Spec-Arbeit abgeschlossen wurde,
+- keine neue Projektentscheidung entstand, die sofort in MEMORY muss,
+- keine Routingänderung zwingend ist, außer sie wird gezielt geprüft.
+
+Wenn unsicher: Rückfrage nach Abschnitt 2.4 oder Voll-Abschluss.
+
+### 7.3 Pflichtschritte
+
+1. `.claude/learning/session-log.md`: knapper Eintrag zur Housekeeping-Aufgabe.
+2. `PROJECT-STATUS.md`: nur prüfen/ändern, wenn der fachliche nächste Schritt betroffen sein könnte.
+3. `NAVIGATION.md`: nur prüfen/ändern, wenn neue dauerhafte Steering-/Skill-/Agent-Dateien routing-relevant sind.
+4. `BACKLOG.md` und `BACKLOG-ARCHIV.md`: nicht anfassen, wenn keine AP-ID und kein formaler Sofort-erledigt-AP vorliegt.
+5. Commit-Message im kurzen oder mittleren Format ausgeben.
+
+### 7.4 Session-log-Format
+
+```markdown
+### YYYY-MM-DD — Housekeeping: [kurze Beschreibung] ✅
+- [OK] [knappe Ergebnisliste]
+```
+
+Optional bei stabiler Präferenz oder Korrektur:
+
+```markdown
+- [PREF] [knappe Präferenz]
+- [FRICTION] [knappe Korrektur]
+```
+
+Keine langen Erklärungen.
+
+### 7.5 Commit-Message für Housekeeping
+
+Kurz- bis Mittelformat:
+
+```text
+Abschluss-Ritual: Finalpaket installiert
+
+Bereiche: .claude/skills/abschluss-ritual/SKILL.md, .claude/agents/abschluss-writer.md
+Sicher: PROJECT-STATUS bleibt unverändert, kein BACKLOG-AP betroffen
+```
+
+Wenn mehrere Dateien betroffen sind, `Bereiche:` knapp halten. Keine lange Historie wiederholen.
+
+---
+
+## 7. Pfad A — Voll-Abschluss
 
 Voll-Abschluss ist der Sicherheitsanker. Hier nicht aggressiv tokenoptimieren.
 
-### 6.1 Auslöser
+### 7.1 Auslöser
 
 Voll-Abschluss bei:
 
@@ -400,8 +501,9 @@ Voll-Abschluss bei:
 - fehlender DoD-Klarheit
 - HOOK-META-/BACKLOG-/NAVIGATION-Widerspruch
 - nach spätestens 3 Ketten-Minimalabschlüssen mit offenen DEFERRED-Markern
+- Housekeeping-Fall, der doch fachlichen Projektstatus oder BACKLOG berührt
 
-### 6.2 Session-log zuerst
+### 7.2 Session-log zuerst
 
 Eintrag in `.claude/learning/session-log.md` mit Datum + AP-Titel.
 
@@ -432,7 +534,7 @@ Abbruchformat:
 - [OK] Abbruch ohne Vorkommnis / [FRICTION] Grund: ...
 ```
 
-### 6.3 Optionaler Abschluss-Scout
+### 7.3 Optionaler Abschluss-Scout
 
 Scout ist erlaubt, wenn mechanische Fundstellenrecherche hilft.
 
@@ -454,17 +556,17 @@ Abschluss-Scout (Haiku) wird gestartet: mechanische Fundstellenrecherche, keine 
 
 Scout liefert nur Fundstellen. Bewertung bleibt bei Sonnet.
 
-### 6.4 DoD und Regression
+### 7.4 DoD und Regression
 
 - `docs/steering/DEFINITION-OF-DONE.md` prüfen.
 - Bei Engine-Änderungen relevante Fälle aus `docs/steering/engine/REGRESSION-MATRIX.md` nennen.
 - Wenn visuelle Prüfung fehlt: Albert klar informieren.
 
-### 6.5 Specs
+### 7.5 Specs
 
 Betroffene Dateien in `docs/spec/` gezielt aktualisieren. Kein Vollrewrite.
 
-### 6.6 BACKLOG und Archiv
+### 7.6 BACKLOG und Archiv
 
 Normalfall:
 
@@ -480,7 +582,7 @@ Sofort-erledigt-Pfad:
 - direkt ins Archiv schreiben.
 - nicht in BACKLOG schreiben.
 
-### 6.7 Scope-Check
+### 7.7 Scope-Check
 
 Neuen Scope explizit behandeln:
 
@@ -489,7 +591,7 @@ Neuen Scope explizit behandeln:
 
 Nichts still verschwinden lassen.
 
-### 6.8 MEMORY
+### 7.8 MEMORY
 
 `.claude/memory/` nur aktualisieren bei stabilen Projektfakten, Entscheidungen oder wiederverwendbarem Feedback.
 
@@ -497,7 +599,7 @@ Nach Änderungen in `.claude/memory/`:
 
 - `python tools/check-memory-integrity.py` empfehlen oder ausführen, falls vorhanden.
 
-### 6.9 PROJECT-STATUS
+### 7.9 PROJECT-STATUS
 
 Bei jeder Änderung an Fokus, nächstem Schritt oder Blockern:
 
@@ -508,19 +610,19 @@ Bei jeder Änderung an Fokus, nächstem Schritt oder Blockern:
 
 Sichtbarer Text und HOOK-META dürfen nicht widersprechen.
 
-### 6.10 CLAUDE.md
+### 7.10 CLAUDE.md
 
 Nur wenn eine neue fundamentale, universelle Verhaltensregel entstanden ist. Sonst nicht.
 
 ---
 
-## 7. Commit-Message-Formate
+## 8. Commit-Message-Formate
 
 Ausgabe immer als reiner Text für VSCode Message-Feld.
 
 Keine Code-Blöcke. Keine git-Kommandos.
 
-### 7.1 Kurzformat für Pfad B und C
+### 8.1 Kurzformat für Pfad B, C und D
 
 ```text
 B1-AP-14e2: fwVerticalLine ausgelagert
@@ -531,11 +633,11 @@ Sicher: opt-in, Standardcharts unverändert, Smoke-Test grün
 
 Regeln:
 
-- Zeile 1: AP-ID + Ergebnis, knapp.
+- Zeile 1: AP-ID + Ergebnis, knapp; bei Housekeeping ohne AP-ID: Bereich + Ergebnis.
 - `Bereiche:` wichtigste Dateien.
-- `Sicher:` warum keine offensichtliche Regression.
+- `Sicher:` warum keine offensichtliche Regression oder kein Projektstatus-Drift.
 
-### 7.2 Langformat für Pfad A
+### 8.2 Langformat für Pfad A
 
 Pflichtfelder:
 
@@ -548,12 +650,13 @@ Pflichtfelder:
 
 ---
 
-## 8. Ausgabe-Disziplin
+## 9. Ausgabe-Disziplin
 
 Während des Abschlusses:
 
 - keine langen Erklärungen,
 - keine Schritt-für-Schritt-Erzählung,
+- keine sichtbare Modus-Oszillation,
 - nur melden, wenn Scout/Writer gestartet wird, ein Validator scheitert, eine Rückfrage nötig ist oder ein Abschluss blockiert ist.
 
 Am Ende:
@@ -564,6 +667,6 @@ Am Ende:
 
 ---
 
-## 9. Merksatz
+## 10. Merksatz
 
 > **Wir sparen nicht, indem wir Genauigkeit weglassen. Wir sparen, indem Claude nicht rät, nicht unnötig liest, nicht labert und mechanische Arbeit nicht mit Sonnet erledigt.**

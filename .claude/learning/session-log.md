@@ -342,3 +342,17 @@ FinanzwesirData.js, CSVParser.js, FwDateUtils.js — diese Session nicht berühr
 - [OK] 4 Dateien verteilt: SKILL.md (ersetzt), abschluss-writer.md (neu), ABSCHLUSS-RITUAL-FINAL-ENTSCHEIDUNG.md (neu), README-INSTALLATION-FINAL.md (archiviert)
 - [OK] Quellverzeichnis abschluss_ritual_final_paket gelöscht
 - [PREF] Commit-Messages immer mit Umlauten — PowerShell-Terminal-Argument greift nicht, da Albert selbst committed
+
+### 2026-06-19 — B1-AP-14e2 ✅ fwVerticalLine-Plugin ausgelagert
+- [OK] FwVerticalLinePlugin.js NEU in plugins/; ChartEngine._draw() push statt Überschreiben
+- [WIN] CrosshairPlugin-Bug behoben: war durch = Zuweisung verloren, jetzt erhalten
+- [OK] Manueller Test: Screen 3 VertikalLinie + Crosshair + Screen 2 Pulse — alle grün
+
+### 2026-06-19 — Zwischenaufgabe: chart-tests Pfadfehler behoben (18 HTML-Dateien) ✅
+- [OK] ./assets/ → ../assets/ und ./data/ → ../data/ (Bulk-Replace)
+- [NOTE] Fehler pre-existent aus früherem Umzug — nicht durch AP-14e2 verursacht
+
+### 2026-06-19 — B1-AP-14c2c ✅ LineChartStrategy Date-Objekt-Regression
+- [OK] _toMonthKey-Helfer (Type-Guard) + _monthToSnappedX in if-Block verschoben
+- [WIN] CSVParser liefert Date-Objekt bei expectDate: true — normale CSV-LineCharts wieder fehlerfrei
+- [OK] Manueller Test: index_linien.html grün, Screen 2 + Screen 3 Marker korrekt
