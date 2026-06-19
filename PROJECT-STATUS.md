@@ -1,17 +1,17 @@
 <!-- HOOK-META
 Version: 1
-Stand: 2026-06-18
+Stand: 2026-06-19
 Fokus-AP: APP-01 — prokrastinations-preis
-Nächster-Schritt: B1-AP-15 — Transitions + Reduced Motion (B1-AP-14d4 ✅ 2026-06-18)
+Nächster-Schritt: B1-AP-15 — Transitions + Reduced Motion (B1-AP-14e1 ✅ 2026-06-19)
 Blocker: keine
 Letzter-Distill: 2026-06-15
 Kassensturz-Datum: 2026-06-15
 -->
-<!-- HOOK-META-SESSION: B1-AP-14d4 -->
+<!-- HOOK-META-SESSION: B1-AP-14e1 -->
 
 # PROJECT STATUS — Finanzwesir 2.0
 
-Stand: 2026-06-18 | Session: B1-AP-14d4 | Geändert von: Claude
+Stand: 2026-06-19 | Session: B1-AP-14e1 | Geändert von: Claude
 
 **Zweck:** Schneller Wiedereinstieg nach Pausen.
 **Zielgruppe:** Albert und Claude.
@@ -197,6 +197,9 @@ Vollständig im DECISION-LOG dokumentiert (`docs/steering/DECISION-LOG.md`):
 ---
 
 ## 8. Letzte Session
+
+2026-06-19 — B1-AP-14e1 Doku-Nachputz: Chart-Plugin-Spec eingebunden (B1-AP-14e1).
+CHART_PLUGIN_ARCHITEKTUR.md in NAVIGATION.md (Chart-Engine-Routing Plugin-Hinweis + B1-Block) und PROJECT-STATUS.md §8 eingebunden. Kein Code, kein CSS, kein JSON geändert. Nächster Schritt: B1-AP-15 (Transitions + Reduced Motion).
 
 2026-06-18 — B1-AP-14c4 Screen-2-Pulse-Animation (B1-AP-14c4).
 FwAnnotationPulsePlugin.js NEU: WeakMap-State per Chart-Instanz, afterDraw-Hook (letzter Hook), 2-Pulse-Formel Math.abs(Math.sin(progress×π×2)), Produktionswerte 1200ms/1.8x, chart.draw()-Pattern (canvas-ownership, Peer-Review-Befund Perplexity+ChatGPT). ChartEngine.js: annotationPulse-Option + Plugin-Injektion. app.js: renderJourneyStep aktiviert Pulse, Screen-3 ohne Pulse. 3 Dateien geändert. Ergebnisprotokoll: docs/steering/patches/B1-AP-14c4_Pulse_Screen2_reduced-motion_Ergebnis.md. Nächster Schritt: B1-AP-15 (Transitions + Reduced Motion).

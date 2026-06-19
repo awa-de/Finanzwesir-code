@@ -1,5 +1,5 @@
 # NAVIGATION.md – Finanzwesir 2.0
-Stand: 2026-06-18 | Session: B1-AP-14d4 | Geändert von: Claude
+Stand: 2026-06-19 | Session: B1-AP-14e1 | Geändert von: Claude
 
 Für Claude: **Routing-Dokument.** Wird beim Session-Start (Schritt 2) gelesen.
 Gibt Pfade und Lese-Reihenfolgen vor — KEINE Verhaltensregeln (die stehen in CLAUDE.md).
@@ -92,6 +92,7 @@ Bei `Hook-Status: DEGRADED` → sichtbar melden, nicht still fortfahren (→ `/s
 2. docs/steering/BACKLOG-PROMPT.md   ← startet den Faden, gibt Kontext
 3. docs/steering/engine/detail/[AP-N]-DETAIL.md   ← Detail-Spec des AP
 4. docs/spec/[relevante Spec]        ← bindend, nicht verhandelbar
+   → bei Plugin-Arbeit: docs/spec/CHART_PLUGIN_ARCHITEKTUR.md (WeakMap, afterDraw, reduced-motion, Canvas/Chart.js-Grenzen)
 5. docs/steering/engine/WORKING-FEATURES.md       ← Regressionswächter VOR der Arbeit
 6. docs/steering/engine/REGRESSION-MATRIX.md      ← vor Abschluss relevante Tests
 ```
@@ -194,6 +195,7 @@ Nach Abschluss: `/abschluss-ritual`.
 > B1-AP-14d2 ✅ 2026-06-18 — Mini-QA AP-14-Block: Progressive Domain, Marker, Pulse, Reduced Motion, Screen 3, Regression. Gesamtstatus grün, keine Blocker. Ergebnisprotokoll: `docs/steering/patches/B1-AP-14d2_Mini-QA_Progressive-Domain_Marker_Pulse_Ergebnis.md`.
 > B1-AP-14d3 ✅ 2026-06-18 — Pulse-Produktentscheidung in Spec dokumentiert: APP_SPEC V2.8 (§14.6 reduced-motion-Bullet, §16.1 Pulse-Absatz mit konkreten Parametern, §16.3 Primitive-Tabelle, §16.4 Reduced-Motion-Tabelle); QA_TEST_CASES V1.5 (TC-I01 erweitert, Gruppe P TC-P01–TC-P05 neu). Kein Code geändert. Nächster Schritt: B1-AP-15 — Transitions + Reduced Motion.
 > B1-AP-14d4 ✅ 2026-06-18 — §16.3 UI-Primitive-Tabelle synchronisiert: 13 Primitive von „zu bauen" auf ✅ korrigiert; 1 ⚠️ Stationen-Button (continueLabel offen), 1 ⏳ Draw-Animation (Slice 6 offen). APP_SPEC V2.9. Kein Code geändert. Nächster Schritt: B1-AP-15 — Transitions + Reduced Motion.
+> B1-AP-14e1 ✅ 2026-06-19 — Doku-Nachputz: CHART_PLUGIN_ARCHITEKTUR.md in Steuerungsdateien eingebunden (NAVIGATION.md Chart-Engine-Routing Plugin-Hinweis + B1-Block, PROJECT-STATUS.md §8). Kein Code, kein CSS, kein JSON geändert. Nächster Schritt: B1-AP-15 — Transitions + Reduced Motion.
 > `Apps/prokrastinations-preis/config/stations.de.json` — produktive Stationen-Konfiguration v2.1 (B1-AP-09 ✅, AP-10a Flags bereinigt ✅ 2026-06-17)
 > `Apps/prokrastinations-preis/STATIONS_IMPLEMENTATION_PLAN.md` — Implementierungsplan für Stationen-Zeitreise Coding-Slices AP-11–AP-18, V1.1 (B1-AP-10 ✅, AP-10a Semantik bereinigt ✅ 2026-06-17)
 > B1 ist Pilot-2 (Daten-/Chart-/Story-Pilot). Pilot-1 ist `risiko-uebersetzer` (Calculator-Pilot) — entschieden E-02, 2026-05-28.

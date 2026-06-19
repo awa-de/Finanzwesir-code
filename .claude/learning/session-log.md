@@ -313,3 +313,12 @@ FinanzwesirData.js, CSVParser.js, FwDateUtils.js — diese Session nicht berühr
 
 ### 2026-06-18 — B1-AP-15 — AP-Wechsel (neuer Faden)
 - Layer-1-Fingerabdruck: FinanzwesirData.js, CSVParser.js, FwDateUtils.js — diese Session nicht berühren. ✓
+
+## 2026-06-19 – SESSION START | [KETTENMODUS] | Fokus: B1-AP-15 — Transitions + Reduced Motion
+
+### 2026-06-19 — B1-AP-14e1 ✅ Chart-Plugin-Spec in Steuerungsdateien eingebunden
+- [OK] NAVIGATION.md: Chart-Engine-Routing item 4 Plugin-Hinweis + B1-Block-Eintrag
+- [OK] PROJECT-STATUS.md: HOOK-META + Stand-Datum + §8-Eintrag aktualisiert
+- [OK] Ergebnisprotokoll: docs/steering/patches/B1-AP-14e1_Chart-Plugin-Spec_Einbindung_Ergebnis.md
+- [NOTE] BACKLOG.md: kein passender Ort — nicht erzwungen
+- [NOTE] docs/spec/README.md: existiert nicht — nicht angelegt
