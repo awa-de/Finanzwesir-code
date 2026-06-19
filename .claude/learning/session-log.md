@@ -326,4 +326,11 @@ FinanzwesirData.js, CSVParser.js, FwDateUtils.js — diese Session nicht berühr
 ### 2026-06-19 — B1-AP-15 — AP-Wechsel (neuer Faden)
 - Layer-1-Fingerabdruck: FinanzwesirData.js, CSVParser.js, FwDateUtils.js — diese Session nicht berühren. ✓
 
-### 2026-06-19 — B1-AP-14f1 (AP-14e1-Befund) âœ… Plugin-Ist-Befund: 5 Plugins inventarisiert, fwVerticalLine-Bug bestätigt (ChartEngine._draw() Z.317 Ã¼berschreibt Strategie-Plugin-Arrays)
+### 2026-06-19 — B1-AP-14f1 (AP-14e1-Befund) ✅ Plugin-Ist-Befund: 5 Plugins inventarisiert, fwVerticalLine-Bug bestätigt (ChartEngine._draw() Z.317 überschreibt Strategie-Plugin-Arrays)
+
+### 2026-06-19 — Zwischenaufgabe: abschluss-ritual V2.1 Peer-Review ✅
+- [WIN] Vollständige Redesign-Historie in docs/steering/abschluss-ritual-v2-redesign/ konsolidiert (6 Dateien)
+- [FRICTION] SKILL.md + abschluss-writer.md lagen in .claude/-Unterverzeichnis des Pakets — erst nach explizitem rekursivem find gefunden; erstes Review war ohne diese Dateien
+- [OK] Beide Reviews (Perplexity + Claude) abgeglichen: 3 gemeinsame Muss-Patches (P1 Terminologie, P2 90-min-Regel streichen, P3 NAVIGATION-Fehlerfall im Writer)
+
+### 2026-06-19 — B1-AP-14e2 — AP-Wechsel
