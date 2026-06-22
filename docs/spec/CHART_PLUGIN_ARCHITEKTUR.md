@@ -4,7 +4,7 @@
 **Status:** Verbindlicher Engine-Architekturvertrag  
 **Geltungsbereich:** `Theme/assets/js/fw-chart-engine/`  
 **Erstellt aus:** B1-AP-14 / `FwAnnotationPulsePlugin.js` / AP-14-Rettung  
-**Stand:** 2026-06-18
+**Stand:** 2026-06-22
 
 ---
 
@@ -609,4 +609,153 @@ Plugin muss docs/spec/CHART_PLUGIN_ARCHITEKTUR.md folgen:
 ```text
 Ein Chart-Plugin darf zeigen, was die Engine bereits weiß.
 Es darf der Engine nicht heimlich neues Wissen unterschieben.
+```
+
+---
+
+## 20. Plugin-Bestand, Barrel und Importregeln (Stand: AP-14e9, 2026-06-22)
+
+### 20.1 Aktiver Plugin-Bestand
+
+Nach Abschluss von B1-AP-14e2–AP-14e9 sind genau vier Plugins aktiv:
+
+```text
+CenterTextPlugin        — Doughnut/Pie-Chart-Zentrumstext
+CrosshairPlugin         — vertikale/horizontale Fadenkreuz-Linie
+FwAnnotationPulsePlugin — Pulse-Animation auf Annotationspunkten
+FwVerticalLinePlugin    — vertikale Trennlinie (z. B. Investitionszeitpunkt)
+```
+
+Ablageort:
+
+```text
+Theme/assets/js/fw-chart-engine/plugins/CenterTextPlugin.js
+Theme/assets/js/fw-chart-engine/plugins/CrosshairPlugin.js
+Theme/assets/js/fw-chart-engine/plugins/FwAnnotationPulsePlugin.js
+Theme/assets/js/fw-chart-engine/plugins/FwVerticalLinePlugin.js
+```
+
+### 20.2 Kanonischer Barrel
+
+```text
+Theme/assets/js/fw-chart-engine/plugins/index.js
+```
+
+Dieser Barrel ist der kanonische Exportpunkt für Plugin-Imports aus Engine und Strategies.
+
+Eigenschaften des Barrels:
+
+```text
+Enthält ausschließlich Named Re-Exports der vier aktiven Plugins.
+Enthält keine Logik.
+Enthält keine Registry.
+Ist kein Laufzeit-Schalter.
+Ruft kein Chart.register() auf.
+```
+
+### 20.3 Importregel
+
+Engine-Dateien und Strategies importieren aktive Plugins über den Barrel:
+
+```js
+import { FwAnnotationPulsePlugin, FwVerticalLinePlugin } from '../plugins/index.js';
+import { CrosshairPlugin } from '../plugins/index.js';
+import { CenterTextPlugin } from '../plugins/index.js';
+```
+
+Direktimporte aus einzelnen Plugin-Dateien sind erlaubt, wenn nur ein einzelnes Plugin gezielt benötigt wird. Bevorzugt bleibt der Barrel.
+
+### 20.4 Importzyklus-Verbot
+
+Plugin-Dateien dürfen keine Engine-Dateien importieren.
+
+Verboten:
+
+```text
+Plugin importiert aus core/
+Plugin importiert aus strategies/
+Plugin importiert aus plugins/index.js
+```
+
+Erlaubt:
+
+```text
+Plugin importiert externe Bibliotheken (z. B. Chart.js)
+```
+
+Ziel: kein Zyklus `ChartEngine → plugins/index.js → Plugin → Engine/Core/Strategy`.
+
+### 20.5 Verbotene Mechanismen
+
+Für alle Plugin-Arbeit in dieser Engine ausdrücklich verboten:
+
+```text
+Plugin-Registry (statisch oder dynamisch)
+Runtime-Registry
+Auto-Registration
+globales Chart.register()
+implizite Plugin-Aktivierung ohne Optionsfeld
+Plugin-Liste als zentraler Laufzeit-Schalter
+```
+
+Plugins sind opt-in (→ §4). Jedes Plugin wird ausschließlich dort aktiviert, wo eine App oder Strategie es explizit über Optionen anfordert.
+
+### 20.6 Entfernte und nicht aktive Elemente
+
+Folgende Elemente existieren nicht mehr und dürfen nicht reaktiviert werden:
+
+**core/FwChartPlugins.js**
+
+```text
+War ein reiner Re-Export-Shim ohne eigene Logik.
+Entfernt in B1-AP-14e6 (2026-06-22).
+Alle Imports wurden auf die direkten Plugin-Dateien oder den Barrel umgestellt.
+```
+
+**FwBarLayoutPlugin**
+
+```text
+War ein Inline-Plugin in BarChartStrategy.js.
+Entfernt in B1-AP-14e8 (2026-06-22) nach verschärftem Dead-State-Nachweis.
+Ursache: Plugin schrieb chart._fwGeometry.halfBarPixel,
+aber kein produktiver JS-Code las diesen Wert.
+FwSmartXAxis.afterFit() berechnet halfBarPixel eigenständig.
+Reaktivierung nur über eigenen Design-AP.
+```
+
+**chart._fwGeometry als aktiver Kommunikationskanal**
+
+```text
+_fwGeometry war eine frühere Designidee für den Datenaustausch Plugin → Achse.
+Der Kanal wurde nie produktiv verdrahtet.
+FwSmartXAxis.afterFit() liest _fwGeometry nicht.
+_fwGeometry darf nicht ohne eigenen Design-AP wieder eingeführt werden.
+```
+
+Spec-Drift-Hinweis:
+
+```text
+docs/spec/Dokumentation Die Baendigung der X-Achse I.md und
+docs/spec/Dokumentation Die Baendigung der X-Achse III.md
+beschreiben _fwGeometry als aktiven Plugin-Achse-Kanal.
+Diese Dokumente beschreiben die ursprüngliche Designintention, nicht den aktuellen Code.
+Die Divergenz ist bekannt (AP-14e7-Befund) und bewusst als Designhistorie erhalten.
+Maßgeblich ist der aktuelle Implementierungsstand.
+```
+
+### 20.7 BarChart-Hybrid-Warnung
+
+`BarChartStrategy` ist ein Hybrid mit zwei Modi:
+
+```text
+History-Modus:  Zeitachse (monatliche Datenpunkte, X = Datum)
+Ranking-Modus:  Kategorieachse (Vergleichs-Items, X = Label)
+```
+
+Diese Strategy ist eine Sonderzone.
+
+```text
+Alte X-Achsen-Ideen dürfen in BarChartStrategy nicht beiläufig reaktiviert werden.
+Änderungen an BarChart-Achse, _originalDate, dateSemantics,
+BOP-Ankern oder semantischem X-Mapping brauchen einen eigenen Design-/Regression-AP.
 ```

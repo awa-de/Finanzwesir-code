@@ -1,5 +1,5 @@
 # NAVIGATION.md – Finanzwesir 2.0
-Stand: 2026-06-19 | Session: B1-AP-14c2c | Geändert von: Claude
+Stand: 2026-06-22 | Session: B1-AP-14e10 | Geändert von: Claude
 
 Für Claude: **Routing-Dokument.** Wird beim Session-Start (Schritt 2) gelesen.
 Gibt Pfade und Lese-Reihenfolgen vor — KEINE Verhaltensregeln (die stehen in CLAUDE.md).
@@ -92,7 +92,7 @@ Bei `Hook-Status: DEGRADED` → sichtbar melden, nicht still fortfahren (→ `/s
 2. docs/steering/BACKLOG-PROMPT.md   ← startet den Faden, gibt Kontext
 3. docs/steering/engine/detail/[AP-N]-DETAIL.md   ← Detail-Spec des AP
 4. docs/spec/[relevante Spec]        ← bindend, nicht verhandelbar
-   → bei Plugin-Arbeit: docs/spec/CHART_PLUGIN_ARCHITEKTUR.md (WeakMap, afterDraw, reduced-motion, Canvas/Chart.js-Grenzen)
+   → bei Plugin-Arbeit: docs/spec/CHART_PLUGIN_ARCHITEKTUR.md (WeakMap, afterDraw, reduced-motion, Canvas/Chart.js-Grenzen, Barrel: plugins/index.js, Importzyklus-Verbot)
    → bei Engine-Datenpfad-Arbeit: docs/spec/CHART_ENGINE_REGRESSIONSREGELN.md (renderFromData vs. _processContainer, Date-Typ-Normalisierung, Pflichtprüfung)
 5. docs/steering/engine/WORKING-FEATURES.md       ← Regressionswächter VOR der Arbeit
 6. docs/steering/engine/REGRESSION-MATRIX.md      ← vor Abschluss relevante Tests
@@ -207,6 +207,7 @@ Nach Abschluss: `/abschluss-ritual`.
 > B1-AP-14e7 ✅ 2026-06-22 — FwBarLayoutPlugin im BarChart-Hybrid vollständig geprüft: `_fwGeometry` ist dead state — Plugin schreibt, niemand liest. `FwSmartXAxis.afterFit()` berechnet `halfBarPixel` eigenständig. Beide Modi (History/Zeit + Ranking/Kategorie) klassifiziert. Kein Code. Ergebnisprotokoll: `docs/steering/patches/AP-14e7_FwBarLayoutPlugin-Hybrid-Pruefung_Ergebnis.md`. Nächster Schritt: B1-AP-14e8 — FwBarLayoutPlugin-Dead-State nachweisen und entfernen.
 > B1-AP-14e8 ✅ 2026-06-22 — FwBarLayoutPlugin-Dead-State nachgewiesen und entfernt: 11 Zeilen inline-Plugin aus `BarChartStrategy.js` gelöscht. Alle 10 Grün-Kriterien + alle 14 Tests bestätigt. Ergebnisprotokoll: `docs/steering/patches/AP-14e8_FwBarLayoutPlugin-Dead-State-entfernen_Ergebnis.md`. Nächster Schritt: B1-AP-14e9 — Plugin-Barrel anlegen.
 > B1-AP-14e9 ✅ 2026-06-22 — Plugin-Barrel angelegt: `plugins/index.js` NEU — 4 Re-Exports; Imports in `ChartEngine.js`, `LineChartStrategy.js`, `PieChartStrategy.js` auf Barrel umgestellt. Alle manuellen Tests bestätigt. Ergebnisprotokoll: `docs/steering/patches/AP-14e9_Plugin-Barrel_Ergebnis.md`. Nächster Schritt: B1-AP-14e10 — Plugin-Spec und Steuerdateien synchronisieren.
+> B1-AP-14e10 ✅ 2026-06-22 — Plugin-Spec, Spec-Drift und Steuerdateien synchronisiert: `CHART_PLUGIN_ARCHITEKTUR.md` §20 NEU (aktiver Plugin-Bestand, kanonischer Barrel, Importzyklus-Verbot, verbotene Mechanismen, entfernte Elemente inkl. FwBarLayoutPlugin/_fwGeometry-Drift, BarChart-Hybrid-Warnung); `NAVIGATION.md` Plugin-Routing-Hinweis ergänzt (Barrel + Importzyklus-Verbot). Kein Code geändert. Ergebnisprotokoll: `docs/steering/patches/AP-14e10_Plugin-Spec-und-Steuerdateien-Sync_Ergebnis.md`. Nächster Schritt: B1-AP-14e11 — Plugin-Architektur-QA mit Importzyklus-Gate.
 > `Apps/prokrastinations-preis/config/stations.de.json` — produktive Stationen-Konfiguration v2.1 (B1-AP-09 ✅, AP-10a Flags bereinigt ✅ 2026-06-17)
 > `Apps/prokrastinations-preis/STATIONS_IMPLEMENTATION_PLAN.md` — Implementierungsplan für Stationen-Zeitreise Coding-Slices AP-11–AP-18, V1.1 (B1-AP-10 ✅, AP-10a Semantik bereinigt ✅ 2026-06-17)
 > B1 ist Pilot-2 (Daten-/Chart-/Story-Pilot). Pilot-1 ist `risiko-uebersetzer` (Calculator-Pilot) — entschieden E-02, 2026-05-28.

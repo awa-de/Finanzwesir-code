@@ -41,3 +41,14 @@ Wird geleert nach /distill. Einträge: [FRICTION] [WIN] [PREF] [QUESTION] [OK]
 - [OK] abschluss-ritual/SKILL.md: §8.1 Langformat für Pfad A+B; §8.2 Kurzformat für Pfad C+D; §3.3 „im Kurzformat" → „im Langformat"
 - [WIN] LLM-Tauglichkeitstest: Kurzform versagt bei Kontext-Queries (z.B. „warum kein FwBarLayoutPlugin?"); Langform liefert selbsterklärende git-History für geplanten Projekt-Debrief
 - [PREF] Tokensparnen nicht auf Kosten des Kontextes — bewusste Design-Entscheidung bestätigt
+
+### B1-AP-14e10 — AP-Wechsel
+- FinanzwesirData.js, CSVParser.js, FwDateUtils.js — diese Session nicht berühren. ✓
+
+### 2026-06-22 — B1-AP-14e10 ✅
+- [OK] CHART_PLUGIN_ARCHITEKTUR.md §20 NEU: aktiver Plugin-Bestand (4 Plugins), kanonischer Barrel plugins/index.js, Importzyklus-Verbot, verbotene Mechanismen, entfernte Elemente (FwChartPlugins.js/FwBarLayoutPlugin/_fwGeometry-Drift), BarChart-Hybrid-Warnung.
+- [OK] NAVIGATION.md: Stand-Datum + Plugin-Routing-Hinweis (Barrel + Importzyklus-Verbot) + B1-AP-14e10-Eintrag angelegt.
+- [OK] PROJECT-STATUS.md: HOOK-META/SESSION/Stand/§4/§8 auf AP-14e10 synchronisiert.
+- [OK] Ergebnisprotokoll: docs/steering/patches/AP-14e10_Plugin-Spec-und-Steuerdateien-Sync_Ergebnis.md
+- [OK] X-Achsen-Drift (_fwGeometry): bewusst nicht geändert — in §20.6 dokumentiert als historische Designintention.
+- [OK] Kein Code geändert. Alle 16 Prüfpunkte grün.
