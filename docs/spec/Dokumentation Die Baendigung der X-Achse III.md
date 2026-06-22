@@ -1,4 +1,4 @@
-Dieses Dokument dient als ultimative Referenz für die geometrische Architektur der Finanzwesir Chart-Engine. Es fixiert den Wissensstand nach der erfolgreichen Lösung des Viewport-Clipping-Problems und dient als Blaupause für zukünftige Entwicklungen oder Re-Engineering-Prozesse.
+Dieses Dokument diente ursprünglich als Referenz für die geometrische Architektur der Finanzwesir Chart-Engine. Es fixiert den Wissensstand nach der erfolgreichen Lösung des Viewport-Clipping-Problems und diente als Blaupause für zukünftige Entwicklungen oder Re-Engineering-Prozesse. Für den aktuellen Implementierungsstand gilt der Statusbanner unten.
 
 ---
 

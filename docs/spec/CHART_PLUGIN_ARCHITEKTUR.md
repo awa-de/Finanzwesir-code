@@ -657,7 +657,7 @@ Es darf der Engine nicht heimlich neues Wissen unterschieben.
 
 ---
 
-## 20. Plugin-Bestand, Barrel und Importregeln (Stand: AP-14e10b, 2026-06-22)
+## 20. Plugin-Bestand, Barrel, Importregeln und Drift-Abgrenzung (Stand: AP-14e12, 2026-06-22)
 
 ### 20.1 Aktiver Plugin-Bestand
 
