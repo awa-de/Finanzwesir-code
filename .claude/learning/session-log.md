@@ -10,3 +10,6 @@ Wird geleert nach /distill. Einträge: [FRICTION] [WIN] [PREF] [QUESTION] [OK]
 - [OK] Patch-Quittung als Datei: docs/steering/patches/PATCH-kassensturz-archiv-query-2026-06-22.md
 - [FRICTION] Python-Tooling-Regel nicht proaktiv angewendet: 3 LLM-zentrische Optionen präsentiert bevor Memory-Regel abgerufen wurde; Gleicher Mechanismus wie feedback_strukturannahmen
 - [FRICTION] Blind losgelaufen: Python-Writer-Frage → sofort Full-Gate statt erst prüfen → begründen → entscheiden
+
+### 2026-06-22 — B1-AP-14e6 ✅
+- [OK] core/FwChartPlugins.js gelöscht — reiner Re-Export-Shim, keine produktiven Importe. Alle manuellen Tests bestätigt. Ergebnisprotokoll: docs/steering/patches/AP-14e6_FwChartPlugins-Shim-entfernen_Ergebnis.md
