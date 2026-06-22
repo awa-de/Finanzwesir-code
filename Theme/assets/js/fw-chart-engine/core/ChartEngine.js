@@ -65,8 +65,10 @@ import { LineChartStrategy } from '../strategies/LineChartStrategy.js';
 import { BarChartStrategy } from '../strategies/BarChartStrategy.js';
 import { PieChartStrategy } from '../strategies/PieChartStrategy.js';
 import { FwRenderer } from './FwRenderer.js';
-import { FwAnnotationPulsePlugin } from '../plugins/FwAnnotationPulsePlugin.js'; // NEW — B1-AP-14c4
-import { FwVerticalLinePlugin } from '../plugins/FwVerticalLinePlugin.js'; // NEW — B1-AP-14e2
+import { // CHANGED AP-14e9: Plugin-Barrel
+    FwAnnotationPulsePlugin,
+    FwVerticalLinePlugin
+} from '../plugins/index.js';
 
 export class ChartEngine {
     constructor() {

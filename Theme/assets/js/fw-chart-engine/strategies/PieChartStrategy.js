@@ -29,7 +29,7 @@
 import { BaseChartStrategy } from './BaseChartStrategy.js';
 import { FwTheme } from '../core/FwTheme.js';
 import { FwFormatUtils } from '../core/FwFormatUtils.js';
-import { CenterTextPlugin } from '../plugins/CenterTextPlugin.js'; // CHANGED AP-14e4
+import { CenterTextPlugin } from '../plugins/index.js'; // CHANGED AP-14e9: Plugin-Barrel
 import { FwLayoutRules } from '../core/FwLayoutRules.js'; 
 
 export class PieChartStrategy extends BaseChartStrategy {

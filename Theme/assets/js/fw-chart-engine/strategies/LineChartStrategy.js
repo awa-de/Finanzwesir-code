@@ -26,7 +26,7 @@ import { FwTheme } from '../core/FwTheme.js';
 import { FwSmartScales } from '../core/FwSmartScales.js';
 import { FwSmartTooltips } from '../core/FwSmartTooltips.js';
 import { FwDateUtils } from '../core/FwDateUtils.js';
-import { CrosshairPlugin } from '../plugins/CrosshairPlugin.js'; // CHANGED AP-14e5
+import { CrosshairPlugin } from '../plugins/index.js'; // CHANGED AP-14e9: Plugin-Barrel
 import { FwFormatUtils } from '../core/FwFormatUtils.js';
 
 export class LineChartStrategy extends BaseChartStrategy {

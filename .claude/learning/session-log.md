@@ -29,3 +29,15 @@ Wird geleert nach /distill. Einträge: [FRICTION] [WIN] [PREF] [QUESTION] [OK]
 - [OK] Phase 2: FwBarLayoutPlugin-Definition (Z.238–247) + plugins:[FwBarLayoutPlugin]-Einbindung aus BarChartStrategy.js entfernt — 11 Zeilen dead code.
 - [OK] Restprüfung per grep: kein FwBarLayoutPlugin / _fwGeometry / fwBarLayout in JS-Dateien mehr.
 - [OK] Ergebnisprotokoll: docs/steering/patches/AP-14e8_FwBarLayoutPlugin-Dead-State-entfernen_Ergebnis.md
+
+### B1-AP-14e9 — AP-Wechsel
+- FinanzwesirData.js, CSVParser.js, FwDateUtils.js — diese Session nicht berühren. ✓
+
+### 2026-06-22 — B1-AP-14e9 ✅
+- [OK] `plugins/index.js` NEU — kanonischer Plugin-Barrel, 4 Named Re-Exports (CenterTextPlugin, CrosshairPlugin, FwAnnotationPulsePlugin, FwVerticalLinePlugin). Kein FwBarLayoutPlugin.
+- [OK] Imports vereinheitlicht: ChartEngine.js (2→1 Multiline), LineChartStrategy.js, PieChartStrategy.js auf `../plugins/index.js` umgestellt. Alle statischen Prüfungen grün, alle manuellen Tests bestanden.
+
+### 2026-06-22 — Housekeeping: Commit-Message Langformat eingeführt ✅
+- [OK] abschluss-ritual/SKILL.md: §8.1 Langformat für Pfad A+B; §8.2 Kurzformat für Pfad C+D; §3.3 „im Kurzformat" → „im Langformat"
+- [WIN] LLM-Tauglichkeitstest: Kurzform versagt bei Kontext-Queries (z.B. „warum kein FwBarLayoutPlugin?"); Langform liefert selbsterklärende git-History für geplanten Projekt-Debrief
+- [PREF] Tokensparnen nicht auf Kosten des Kontextes — bewusste Design-Entscheidung bestätigt
