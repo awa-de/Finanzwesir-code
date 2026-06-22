@@ -4,8 +4,8 @@ Stand: 2026-06-19
 Fokus-AP: APP-01 — prokrastinations-preis
 Nächster-Schritt: B1-AP-14e6 — FwChartPlugins-Shim prüfen und entfernen (B1-AP-14e5 ✅ 2026-06-19)
 Blocker: keine
-Letzter-Distill: 2026-06-15
-Kassensturz-Datum: 2026-06-15
+Letzter-Distill: 2026-06-22
+Kassensturz-Datum: 2026-06-22
 -->
 <!-- HOOK-META-SESSION: B1-AP-14e5 -->
 

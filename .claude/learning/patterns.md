@@ -1,5 +1,5 @@
 # Patterns — Finanzwesir 2.0
-Stand: 2026-06-15 | Muster mit ≥2 Belegen (Normal) oder ≥1 Beleg (High-Impact) werden Kandidaten. Nur Alberts OK → Promotion.
+Stand: 2026-06-22 | Muster mit ≥2 Belegen (Normal) oder ≥1 Beleg (High-Impact) werden Kandidaten. Nur Alberts OK → Promotion.
 
 ---
 
@@ -28,6 +28,8 @@ Stand: 2026-06-15 | Muster mit ≥2 Belegen (Normal) oder ≥1 Beleg (High-Impac
 - feedback_engine_layer_grenzen.md → promoted 2026-06-15 (Distill 7: [P] 2 Belege — Layer-Verschmutzung in frühen Engine-Entwürfen, APP-01 Slice-4)
 - feedback_arbeitsweise.md → ergänzt 2026-06-15 (Distill 7: PREF OA-02-Nachputz — Git-Commit als reiner Text, kein Staging)
 - project_comp_arch.md → ergänzt 2026-06-15 (Distill 7: PREF Slice-4-Gate — config.features-Doktrin, neutrale Boolean-Flags)
+- feedback_patch_quittung_workflow.md → verstärkt 2026-06-22 (Distill 8: F1+F2 beide nach Distill-7-Promotion — 2 Belege Normal → Zwei-Schritte-Pflicht + Namensregel explizit)
+- feedback_sprache_kein_denglisch.md → ergänzt 2026-06-22 (Distill 8: PREF P1 — Commit-Messages: Umlaute in Claudes Text-Output sicherstellen, da Albert selbst committed)
 
 ---
 
@@ -57,6 +59,8 @@ Stand: 2026-06-15 | Muster mit ≥2 Belegen (Normal) oder ≥1 Beleg (High-Impac
 - [M] Stand-Datum im Hauptpatch vergessen — bei Mehrfach-Datei-Patches steht das Stand-Datum-Update nicht auf der mentalen Checkliste; separater Nachpatch nötig (OA-02-Dissens-1, 2026-06-09) — 1 Beleg, Normal
 - [N] Code-Marker in Dokumentationsdateien — `// NEW`-Marker in .md-Dateien eingefügt; CLAUDE.md-Regel „im Code" gilt nicht für Doku-Dateien (OA-02-Dissens-3, 2026-06-10) — 1 Beleg, Normal
 - [O] Handover-Lücke: Umgebungsabhängigkeiten fehlen — `app.test.html` brauchte Chart.js CDN-Script-Tag, nicht im Handover dokumentiert; erst beim Browser-Test erkannt (APP-01 Slice 4, 2026-06-11) — 1 Beleg, Normal
+- [P2] Seiteneffekte von Patches proaktiv benennen — Albert war besorgt wegen Fetch-Cache-Verlust, weil Seiteneffekte nicht erklärt wurden; erst auf Nachfrage bestätigt. Bei Patches die Verhalten berühren das andere Komponenten nutzen: Seiteneffekte proaktiv im Patch-Echo nennen (APP-01 Slice 5, 2026-06-15) — 1 Beleg, Normal
+- [P3] AP-Brief-Scope vor Gate klären — AP-Name „Marker + Pulse Screen 2" war zu breit; Scope erst während Umsetzung auf reinen Datenvertrag reduziert. Wenn AP-Brief mehrere Konzepte umfasst: Scope-Grenze explizit vor Gate-Start klären (B1-AP-14c1, 2026-06-18) — 1 Beleg, Normal
 
 ---
 
