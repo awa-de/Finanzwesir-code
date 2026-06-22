@@ -1,6 +1,29 @@
 # Dokumentation: Die Bändigung der X-Achse (Version 33.1.0)
 
-Dieses Dokument beschreibt die Lösung des „Viewport-Clipping-Problems“ und der „Tick-Synchronisation“ in der Finanzwesir Bar-Chart-Engine.
+> **Status nach B1-AP-14e12 (2026-06-22): Historische Designintention / nicht aktueller Implementierungsvertrag**
+>
+> Dieses Dokument bleibt als Design- und Entstehungsdokument erhalten.
+> Es ist aber nicht mehr vollständig deckungsgleich mit dem aktuellen Implementierungsstand der ChartEngine.
+>
+> Für Chart.js-Plugins gilt jetzt vorrangig:
+>
+> - `docs/spec/CHART_PLUGIN_ARCHITEKTUR.md`
+> - `docs/spec/CHART_ENGINE_REGRESSIONSREGELN.md`
+>
+> Insbesondere gilt:
+>
+> - `FwBarLayoutPlugin` ist entfernt.
+> - `chart._fwGeometry` ist kein aktiver Kommunikationskanal.
+> - `Chart.register()` ist in der Finanzwesir-ChartEngine nicht architekturkonform.
+> - Plugin-Implementierungen liegen unter `Theme/assets/js/fw-chart-engine/plugins/`.
+> - Aktive Plugins werden über `plugins/index.js` importiert.
+>
+> Reaktivierung alter Mechanismen nur über eigenen Design-AP.
+>
+> Die in diesem Dokument beschriebene Plugin-`beforeUpdate`-zu-`_fwGeometry`-Idee wurde nicht produktiv verdrahtet.
+> Die aktuelle Balkengeometrie wird eigenständig in `FwSmartXAxis.afterFit()` berechnet.
+
+Dieses Dokument beschreibt die Lösung des „Viewport-Clipping-Problems” und der „Tick-Synchronisation” in der Finanzwesir Bar-Chart-Engine.
 
 ---
 

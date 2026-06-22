@@ -10,6 +10,30 @@ Dieses Dokument dient als ultimative Referenz für die geometrische Architektur 
 
 **Kernziel:** 100% visuelle Integrität auf High-Resolution-Displays (4K) bei gleichzeitiger Wahrung der semantischen Daten-Wahrheit.
 
+> **Status nach B1-AP-14e12 (2026-06-22): Historische Designintention / nicht aktueller Implementierungsvertrag**
+>
+> Dieses Dokument bleibt als Design- und Entstehungsdokument erhalten.
+> Es ist aber nicht mehr vollständig deckungsgleich mit dem aktuellen Implementierungsstand der ChartEngine.
+>
+> Für Chart.js-Plugins gilt jetzt vorrangig:
+>
+> - `docs/spec/CHART_PLUGIN_ARCHITEKTUR.md`
+> - `docs/spec/CHART_ENGINE_REGRESSIONSREGELN.md`
+>
+> Insbesondere gilt:
+>
+> - `FwBarLayoutPlugin` ist entfernt.
+> - `chart._fwGeometry` ist kein aktiver Kommunikationskanal.
+> - `Chart.register()` ist in der Finanzwesir-ChartEngine nicht architekturkonform.
+> - Plugin-Implementierungen liegen unter `Theme/assets/js/fw-chart-engine/plugins/`.
+> - Aktive Plugins werden über `plugins/index.js` importiert.
+>
+> Reaktivierung alter Mechanismen nur über eigenen Design-AP.
+>
+> Die Aussagen zu `FwBarLayoutPlugin` und `_fwGeometry` beschreiben die frühere Designidee.
+> Der aktuelle Code nutzt diese Architektur nicht.
+> `FwBarLayoutPlugin` wurde in AP-14e8 nach Dead-State-Nachweis entfernt.
+
 ---
 
 ## 1. Das Konzept (Executive Summary / ELI5)

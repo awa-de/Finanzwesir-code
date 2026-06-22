@@ -1,5 +1,5 @@
 # NAVIGATION.md – Finanzwesir 2.0
-Stand: 2026-06-22 | Session: B1-AP-14e11 | Geändert von: Claude
+Stand: 2026-06-22 | Session: B1-AP-14e12 | Geändert von: Claude
 
 Für Claude: **Routing-Dokument.** Wird beim Session-Start (Schritt 2) gelesen.
 Gibt Pfade und Lese-Reihenfolgen vor — KEINE Verhaltensregeln (die stehen in CLAUDE.md).
@@ -92,7 +92,8 @@ Bei `Hook-Status: DEGRADED` → sichtbar melden, nicht still fortfahren (→ `/s
 2. docs/steering/BACKLOG-PROMPT.md   ← startet den Faden, gibt Kontext
 3. docs/steering/engine/detail/[AP-N]-DETAIL.md   ← Detail-Spec des AP
 4. docs/spec/[relevante Spec]        ← bindend, nicht verhandelbar
-   → bei Plugin-Arbeit: docs/spec/CHART_PLUGIN_ARCHITEKTUR.md (WeakMap, afterDraw, reduced-motion, Canvas/Chart.js-Grenzen, Barrel: plugins/index.js, Importzyklus-Verbot)
+   → bei Plugin-Arbeit: docs/spec/CHART_PLUGIN_ARCHITEKTUR.md (WeakMap, afterDraw, reduced-motion, Canvas/Chart.js-Grenzen, Barrel: plugins/index.js, Importzyklus-Verbot, §20.3 selektive Barrel-Imports, §20.8 _originalDate-Abgrenzung)
+   → Alte X-Achsen-Dokumente (I/II/III in docs/spec/) sind nur historische Designintention — bei _fwGeometry / FwBarLayoutPlugin / Chart.register gilt ausschließlich CHART_PLUGIN_ARCHITEKTUR.md (AP-14e12 hat Statusbanner gesetzt)
    → bei Engine-Datenpfad-Arbeit: docs/spec/CHART_ENGINE_REGRESSIONSREGELN.md (renderFromData vs. _processContainer, Date-Typ-Normalisierung, Pflichtprüfung)
 5. docs/steering/engine/WORKING-FEATURES.md       ← Regressionswächter VOR der Arbeit
 6. docs/steering/engine/REGRESSION-MATRIX.md      ← vor Abschluss relevante Tests
@@ -208,7 +209,8 @@ Nach Abschluss: `/abschluss-ritual`.
 > B1-AP-14e8 ✅ 2026-06-22 — FwBarLayoutPlugin-Dead-State nachgewiesen und entfernt: 11 Zeilen inline-Plugin aus `BarChartStrategy.js` gelöscht. Alle 10 Grün-Kriterien + alle 14 Tests bestätigt. Ergebnisprotokoll: `docs/steering/patches/AP-14e8_FwBarLayoutPlugin-Dead-State-entfernen_Ergebnis.md`. Nächster Schritt: B1-AP-14e9 — Plugin-Barrel anlegen.
 > B1-AP-14e9 ✅ 2026-06-22 — Plugin-Barrel angelegt: `plugins/index.js` NEU — 4 Re-Exports; Imports in `ChartEngine.js`, `LineChartStrategy.js`, `PieChartStrategy.js` auf Barrel umgestellt. Alle manuellen Tests bestätigt. Ergebnisprotokoll: `docs/steering/patches/AP-14e9_Plugin-Barrel_Ergebnis.md`. Nächster Schritt: B1-AP-14e10 — Plugin-Spec und Steuerdateien synchronisieren.
 > B1-AP-14e10 ✅ 2026-06-22 — Plugin-Spec, Spec-Drift und Steuerdateien synchronisiert: `CHART_PLUGIN_ARCHITEKTUR.md` §20 NEU (aktiver Plugin-Bestand, kanonischer Barrel, Importzyklus-Verbot, verbotene Mechanismen, entfernte Elemente inkl. FwBarLayoutPlugin/_fwGeometry-Drift, BarChart-Hybrid-Warnung); `NAVIGATION.md` Plugin-Routing-Hinweis ergänzt (Barrel + Importzyklus-Verbot). Kein Code geändert. Ergebnisprotokoll: `docs/steering/patches/AP-14e10_Plugin-Spec-und-Steuerdateien-Sync_Ergebnis.md`. Nächster Schritt: B1-AP-14e11 — Plugin-Architektur-QA mit Importzyklus-Gate.
-> B1-AP-14e11 ✅ 2026-06-22 — Plugin-Architektur-QA Importzyklus-Gate: alle 4 Plugin-Dateien ohne Imports (kein Zyklus), Barrel sauber (4 Re-Exports, kein Chart.register, kein FwBarLayoutPlugin), alle Engine/Strategy-Imports über `../plugins/index.js`, 0 Altpfade (FwChartPlugins/FwBarLayoutPlugin/fwBarLayout/_fwGeometry), 0 verbotene Mechanismen, 14/14 Spec-vs-Repo-Prüfpunkte grün. FREIGABE: Plugin-Refactoring-Kette B1-AP-14e1–14e11 abgeschlossen. Ergebnisprotokoll: `docs/steering/patches/AP-14e11_Plugin-Architektur-QA_Importzyklus-Gate_Ergebnis.md`. Nächster Schritt: B1-AP-15 — Transitions + Reduced Motion.
+> B1-AP-14e11 ✅ 2026-06-22 — Plugin-Architektur-QA Importzyklus-Gate: alle 4 Plugin-Dateien ohne Imports (kein Zyklus), Barrel sauber (4 Re-Exports, kein Chart.register, kein FwBarLayoutPlugin), alle Engine/Strategy-Imports über `../plugins/index.js`, 0 Altpfade (FwChartPlugins/FwBarLayoutPlugin/fwBarLayout/_fwGeometry), 0 verbotene Mechanismen, 14/14 Spec-vs-Repo-Prüfpunkte grün. FREIGABE: Plugin-Refactoring-Kette B1-AP-14e1–14e11 abgeschlossen. Ergebnisprotokoll: `docs/steering/patches/AP-14e11_Plugin-Architektur-QA_Importzyklus-Gate_Ergebnis.md`. Nächster Schritt: B1-AP-14e12 — Spec-Drift und Audit-Lücken schließen.
+> B1-AP-14e12 ✅ 2026-06-22 — Spec-Drift und Audit-Lücken endgültig geschlossen: X-Achsen-Docs I/II/III mit Statusbannern als historische Designintention markiert; CHART_PLUGIN_ARCHITEKTUR.md §4 Opt-in-Klärung, §18 §20-Regeln, §20.3 selektive Barrel-Imports, §20.6 alle 3 Docs als Drift-Stellen, §20.8 _originalDate-Abgrenzung zu _fwGeometry ergänzt. Kein Code geändert. Ergebnisprotokoll: `docs/steering/patches/AP-14e12_Spec-Drift-und-Audit-Luecken-endgueltig-schliessen_Ergebnis.md`. Nächster Schritt: B1-AP-15 — Transitions + Reduced Motion.
 > `Apps/prokrastinations-preis/config/stations.de.json` — produktive Stationen-Konfiguration v2.1 (B1-AP-09 ✅, AP-10a Flags bereinigt ✅ 2026-06-17)
 > `Apps/prokrastinations-preis/STATIONS_IMPLEMENTATION_PLAN.md` — Implementierungsplan für Stationen-Zeitreise Coding-Slices AP-11–AP-18, V1.1 (B1-AP-10 ✅, AP-10a Semantik bereinigt ✅ 2026-06-17)
 > B1 ist Pilot-2 (Daten-/Chart-/Story-Pilot). Pilot-1 ist `risiko-uebersetzer` (Calculator-Pilot) — entschieden E-02, 2026-05-28.

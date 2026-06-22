@@ -1,11 +1,12 @@
 # BACKLOG-ARCHIV – Finanzwesir 2.0
-Stand: 2026-06-22 | Session: B1-AP-14e11 | Geändert von: Claude
+Stand: 2026-06-22 | Session: B1-AP-14e12 | Geändert von: Claude
 
 Abgeschlossene Items, neueste zuerst (append-only).
 Archivierungs-Trigger: wenn > 200 Zeilen → neue Datei `BACKLOG-ARCHIV-YYYY.md` anlegen.
 
 | ID | Bereich | Titel | Abgeschlossen | Session |
 |----|---------|-------|---------------|---------|
+| B1-AP-14e12 | Doku/Spec | Spec-Drift und Audit-Lücken endgültig geschlossen: X-Achsen-Docs I/II/III mit Statusbannern als historische Designintention markiert; `CHART_PLUGIN_ARCHITEKTUR.md` §4 Opt-in-Klärung, §18 §20-Kurzregeln erweitert, §20.3 selektive Barrel-Imports, §20.6 alle 3 Drift-Docs, §20.8 NEU (_originalDate-Abgrenzung zu _fwGeometry). 9 ChatGPT/Perplexity-Audit-Befunde geschlossen. Kein Code geändert. Ergebnisprotokoll: `docs/steering/patches/AP-14e12_Spec-Drift-und-Audit-Luecken-endgueltig-schliessen_Ergebnis.md`. *(sofort erledigt)* | 2026-06-22 | B1-AP-14e12 |
 | B1-AP-14e11 | Doku/QA | Plugin-Architektur-QA Importzyklus-Gate: alle 4 Plugin-Dateien ohne Imports (kein Zyklus), Barrel sauber (4 Re-Exports, kein Chart.register, kein FwBarLayoutPlugin), alle Engine/Strategy-Imports über Barrel, 0 Altpfade (FwChartPlugins/FwBarLayoutPlugin/fwBarLayout/_fwGeometry), 0 verbotene Mechanismen, 14/14 Spec-vs-Repo-Prüfpunkte grün. FREIGABE: Plugin-Refactoring-Kette AP-14e1–14e11 abgeschlossen. Ergebnisprotokoll: `docs/steering/patches/AP-14e11_Plugin-Architektur-QA_Importzyklus-Gate_Ergebnis.md`. *(sofort erledigt)* | 2026-06-22 | B1-AP-14e11 |
 | B1-AP-14e10b | Doku/Spec | CHART_PLUGIN_ARCHITEKTUR.md nachgeschärft: §3-Ausnahme für Inline-Plugins durch „Stand ab AP-14e10b" ersetzt (Chart.js-Plugins ausschließlich unter plugins/, Ausnahmen nur über Design-AP); §20.3 Direktimport-Regel geschärft (Barrel verbindlicher Standard; Direktimporte nur begründeter Sonderfall mit Protokollpflicht); §20 Heading Stand AP-14e9 → AP-14e10b. Kein Code geändert. Ergebnisprotokoll: `docs/steering/patches/AP-14e10b_CHART_PLUGIN_ARCHITEKTUR-Nachschaerfung_Ergebnis.md`. *(sofort erledigt)* | 2026-06-22 | B1-AP-14e10b |
 | B1-AP-14e10 | Doku/Spec | Plugin-Spec, Spec-Drift und Steuerdateien synchronisiert: `CHART_PLUGIN_ARCHITEKTUR.md` §20 NEU (aktiver Plugin-Bestand, kanonischer Barrel plugins/index.js, Importzyklus-Verbot, verbotene Mechanismen, entfernte Elemente inkl. FwBarLayoutPlugin/_fwGeometry-Drift, BarChart-Hybrid-Warnung); `NAVIGATION.md` Plugin-Routing-Hinweis ergänzt. Kein Code geändert. Ergebnisprotokoll: `docs/steering/patches/AP-14e10_Plugin-Spec-und-Steuerdateien-Sync_Ergebnis.md`. *(sofort erledigt)* | 2026-06-22 | B1-AP-14e10 |

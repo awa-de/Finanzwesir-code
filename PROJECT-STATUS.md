@@ -2,16 +2,16 @@
 Version: 1
 Stand: 2026-06-22
 Fokus-AP: APP-01 — prokrastinations-preis
-Nächster-Schritt: B1-AP-15 — Transitions + Reduced Motion (B1-AP-14e11 ✅ 2026-06-22)
+Nächster-Schritt: B1-AP-15 — Transitions + Reduced Motion (B1-AP-14e12 ✅ 2026-06-22)
 Blocker: keine
 Letzter-Distill: 2026-06-22
 Kassensturz-Datum: 2026-06-22
 -->
-<!-- HOOK-META-SESSION: B1-AP-14e11 -->
+<!-- HOOK-META-SESSION: B1-AP-14e12 -->
 
 # PROJECT STATUS — Finanzwesir 2.0
 
-Stand: 2026-06-22 | Session: B1-AP-14e11 | Geändert von: Claude
+Stand: 2026-06-22 | Session: B1-AP-14e12 | Geändert von: Claude
 
 **Zweck:** Schneller Wiedereinstieg nach Pausen.
 **Zielgruppe:** Albert und Claude.
@@ -149,6 +149,7 @@ Stand: 2026-06-22 | Session: B1-AP-14e11 | Geändert von: Claude
 - **B1-AP-14c3** ✅ 2026-06-18 — Screen-3-Final-Reveal-Ringe: stille Ringe auf vollständiger Linie, final_reveal ausgeschlossen, manueller Test grün
 - **B1-AP-14c3b** ✅ 2026-06-18 — Final-Reveal-Guard gehärtet: `isFinalRevealStation()` (5 Guards, defensiv), Smoke-Test grün
 - **B1-AP-14c4** ✅ 2026-06-18 — Screen-2-Pulse-Animation: `FwAnnotationPulsePlugin.js` NEU (WeakMap, afterDraw, 2-Pulse-Formel, 1200ms/1.8x), chart.draw()-Pattern
+- **B1-AP-14e12** ✅ 2026-06-22 — Spec-Drift + Audit-Lücken geschlossen: X-Achsen-Docs I/II/III historisch markiert; CHART_PLUGIN_ARCHITEKTUR.md §4/§18/§20.3/§20.6/§20.8 ergänzt. Kein Code geändert.
 - **B1-AP-15** — Transitions + Reduced Motion (nächster Schritt)
 - **AP-20/21** (Mixed-Rhythm CV-Heuristik) — 🟡 Aktiv, Chart-Engine, parallel möglich
 
@@ -162,7 +163,7 @@ Stand: 2026-06-22 | Session: B1-AP-14e11 | Geändert von: Claude
 | Chart-Engine | Stabil, offene APs | Siehe `docs/steering/BACKLOG.md` |
 | Theme | In Entwicklung | `THEME-ASSEMBLY-CHECKLIST.md` |
 | CSS | Stabil | Siehe `docs/steering/BACKLOG.md` (CSS-N Items) |
-| Apps | Slice 6 ✅, AP-UX-01 ✅, B1-AP-01 bis B1-AP-14e11 ✅ 2026-06-22 | B1-AP-15 — Transitions + Reduced Motion |
+| Apps | Slice 6 ✅, AP-UX-01 ✅, B1-AP-01 bis B1-AP-14e12 ✅ 2026-06-22 | B1-AP-15 — Transitions + Reduced Motion |
 | Content | Laufend | Redaktionsleitfaden aktiv |
 | Security | SECURITY-BASELINE.md App-Fabrik-gatefähig ✅ | Security-Sync-Regel + Gate-Prüffrage verankert (ST-13/ST-14) |
 
@@ -197,6 +198,9 @@ Vollständig im DECISION-LOG dokumentiert (`docs/steering/DECISION-LOG.md`):
 ---
 
 ## 8. Letzte Session
+
+2026-06-22 — B1-AP-14e12 Spec-Drift und Audit-Lücken endgültig geschlossen ✅.
+X-Achsen-Docs I/II/III mit Statusbannern als historische Designintention markiert. CHART_PLUGIN_ARCHITEKTUR.md: §4 Opt-in-Klärung (Strategy-Default), §18 §20-Kurzregeln erweitert (8 neue Punkte), §20.3 selektive Barrel-Imports erklärt, §20.6 Spec-Drift-Hinweis auf alle 3 Docs ausgeweitet, §20.8 NEU (_originalDate-Abgrenzung zu _fwGeometry). NAVIGATION.md: Plugin-Routing-Hinweis, AP-14e12-Eintrag im B1-Block. Alle 9 Audit-Befunde geschlossen. Kein Code, kein CSS, kein JSON geändert. Ergebnisprotokoll: docs/steering/patches/AP-14e12_Spec-Drift-und-Audit-Luecken-endgueltig-schliessen_Ergebnis.md. Nächster Schritt: B1-AP-15 — Transitions + Reduced Motion.
 
 2026-06-22 — B1-AP-14e11 Plugin-Architektur-QA Importzyklus-Gate ✅.
 Kein Importzyklus: alle 4 Plugin-Dateien ohne Imports. Barrel sauber (4 Re-Exports, kein Chart.register). Alle Engine/Strategy-Imports über Barrel. 0 Altpfade, 0 verbotene Mechanismen. 14/14 Spec-vs-Repo-Prüfpunkte grün. FREIGABE: Plugin-Refactoring-Kette B1-AP-14e1–14e11 abgeschlossen. Ergebnisprotokoll: docs/steering/patches/AP-14e11_Plugin-Architektur-QA_Importzyklus-Gate_Ergebnis.md. Nächster Schritt: B1-AP-15 — Transitions + Reduced Motion.

@@ -5,6 +5,29 @@
 **Methodik:** Occam's Razor, Inversion, Via Negativa, Devil's Advocate  
 **Zielgruppe:** Product Managers, Engineers, Decision Makers
 
+> **Status nach B1-AP-14e12 (2026-06-22): Historische Blueprint-Dokumentation / nicht aktueller Implementierungsvertrag**
+>
+> Dieses Dokument bleibt als Design- und Entstehungsdokument erhalten.
+> Es ist aber nicht mehr vollständig deckungsgleich mit dem aktuellen Implementierungsstand der ChartEngine.
+>
+> Für Chart.js-Plugins gilt jetzt vorrangig:
+>
+> - `docs/spec/CHART_PLUGIN_ARCHITEKTUR.md`
+> - `docs/spec/CHART_ENGINE_REGRESSIONSREGELN.md`
+>
+> Insbesondere gilt:
+>
+> - `FwBarLayoutPlugin` ist entfernt.
+> - `chart._fwGeometry` ist kein aktiver Kommunikationskanal.
+> - `Chart.register()` ist in der Finanzwesir-ChartEngine nicht architekturkonform.
+> - Plugin-Implementierungen liegen unter `Theme/assets/js/fw-chart-engine/plugins/`.
+> - Aktive Plugins werden über `plugins/index.js` importiert.
+>
+> Reaktivierung alter Mechanismen nur über eigenen Design-AP.
+>
+> Die in diesem Dokument enthaltenen `Chart.register(...)`-Beispiele sind historische Re-Engineering-Blueprints.
+> Sie sind nach AP-14e10b/AP-14e12 kein zulässiges Muster für die Finanzwesir-ChartEngine.
+
 ---
 
 ## Executive Summary

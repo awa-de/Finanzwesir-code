@@ -146,6 +146,21 @@ Plugin wirkt auf alle LineCharts.
 Plugin wirkt auf Screen 3, obwohl nur Screen 2 gewollt ist.
 ```
 
+Opt-in bedeutet: kein globales Plugin-Register und keine automatische Aktivierung über alle Charts.
+
+Eine Strategy darf ein Plugin als charttypischen lokalen Bestandteil ihrer Chart-Konfiguration einbinden,
+wenn das Plugin dort semantisch zum Charttyp gehört und die Plugin-Optionen weiterhin respektiert werden.
+
+Beispiele:
+
+```text
+LineChartStrategy kann CrosshairPlugin lokal als Teil von chartConfig.plugins einbinden.
+PieChartStrategy kann CenterTextPlugin lokal als Teil von chartConfig.plugins einbinden.
+ChartEngine ergänzt FwVerticalLinePlugin / FwAnnotationPulsePlugin nur bei passender Runtime-Option.
+```
+
+Diese lokale Einbindung ist kein Verstoß gegen die Opt-in-Regel, solange kein Plugin global wirkt.
+
 ---
 
 ## 5. Plugin-State ist ephemer
@@ -620,6 +635,15 @@ Plugin muss docs/spec/CHART_PLUGIN_ARCHITEKTUR.md folgen:
 - keine Post-Render-Hacks
 - kein chart.update('none') als Animationstreiber
 - Ergebnisprotokoll dokumentiert Scope, State, Hook, Tests
+- Plugin-Implementierungen liegen ausschließlich unter plugins/ (ein Plugin = eine Datei)
+- Engine/Strategies importieren aktive Plugins grundsätzlich über ../plugins/index.js
+- selektiver Named Import aus dem Barrel ist korrekt (nur genutztes Plugin importieren)
+- Plugin-Dateien importieren nie aus core/, strategies/ oder plugins/index.js
+- keine Inline-Plugins, keine Plugin-Registry, kein globales Chart.register()
+- kein FwBarLayoutPlugin, kein chart._fwGeometry als aktiver Kommunikationskanal
+- _originalDate ist Tooltip-/Snapshot-Metadatum, kein Plugin-Kommunikationskanal
+- BarChartStrategy ist Hybrid-Sonderzone: Änderungen an _originalDate, dateSemantics, axisType,
+  viewMode, BOP-Ankern oder semantischem X-Mapping nur über eigenen Design-/Regression-AP
 ```
 
 ---
@@ -692,6 +716,21 @@ Ein solcher Sonderfall muss im Ergebnisprotokoll des jeweiligen AP dokumentiert 
 Plugin-Dateien selbst importieren nie aus plugins/index.js.
 ```
 
+Selektive Named Imports sind korrekt.
+
+Ein Konsument importiert aus `plugins/index.js` nur die Plugins, die er tatsächlich verwendet.
+
+```text
+Beispiele nach AP-14e9:
+- ChartEngine.js importiert FwAnnotationPulsePlugin und FwVerticalLinePlugin,
+  weil nur diese Engine-seitig dynamisch in chartConfig.plugins ergänzt werden.
+- LineChartStrategy.js importiert CrosshairPlugin.
+- PieChartStrategy.js importiert CenterTextPlugin.
+```
+
+Nicht erforderlich und nicht gewünscht: dass ChartEngine.js alle vier Plugins importiert,
+obwohl zwei davon Strategy-lokal verwendet werden.
+
 ### 20.4 Importzyklus-Verbot
 
 Plugin-Dateien dürfen keine Engine-Dateien importieren.
@@ -759,15 +798,25 @@ FwSmartXAxis.afterFit() liest _fwGeometry nicht.
 _fwGeometry darf nicht ohne eigenen Design-AP wieder eingeführt werden.
 ```
 
-Spec-Drift-Hinweis:
+Spec-Drift-Hinweis (Stand: AP-14e12, 2026-06-22):
 
 ```text
-docs/spec/Dokumentation Die Baendigung der X-Achse I.md und
+Alle drei X-Achsen-Dokumente beschreiben die ursprüngliche Designintention, nicht den aktuellen Code.
+Sie sind mit Statusbannern versehen (AP-14e12). Maßgeblich ist der aktuelle Implementierungsstand.
+
+docs/spec/Dokumentation Die Baendigung der X-Achse I.md
+  enthält historische Plugin-beforeUpdate-zu-_fwGeometry-Designideen.
+  _fwGeometry wurde nicht produktiv verdrahtet.
+  FwSmartXAxis.afterFit() berechnet halfBarPixel eigenständig.
+
+docs/spec/Dokumentation Die Baendigung der X-Achse II.md
+  enthält historische Re-Engineering-Blueprints,
+  unter anderem Chart.register(...)-Beispiele.
+  Diese Beispiele sind nach AP-14e10b/AP-14e12 kein zulässiges Muster.
+
 docs/spec/Dokumentation Die Baendigung der X-Achse III.md
-beschreiben _fwGeometry als aktiven Plugin-Achse-Kanal.
-Diese Dokumente beschreiben die ursprüngliche Designintention, nicht den aktuellen Code.
-Die Divergenz ist bekannt (AP-14e7-Befund) und bewusst als Designhistorie erhalten.
-Maßgeblich ist der aktuelle Implementierungsstand.
+  enthält historische FwBarLayoutPlugin- und _fwGeometry-Architektur.
+  FwBarLayoutPlugin wurde in AP-14e8 nach Dead-State-Nachweis entfernt.
 ```
 
 ### 20.7 BarChart-Hybrid-Warnung
@@ -785,4 +834,43 @@ Diese Strategy ist eine Sonderzone.
 Alte X-Achsen-Ideen dürfen in BarChartStrategy nicht beiläufig reaktiviert werden.
 Änderungen an BarChart-Achse, _originalDate, dateSemantics,
 BOP-Ankern oder semantischem X-Mapping brauchen einen eigenen Design-/Regression-AP.
+```
+
+### 20.8 Erlaubte Strategy-Metadaten und Abgrenzung zu _fwGeometry
+
+Die ChartEngine nutzt interne Metadaten, um Achsen-, Tooltip- und View-Semantik korrekt abzubilden.
+
+Erlaubte Strategy-/fwContext-/Datenpunkt-Metadaten:
+
+```text
+_originalDate           — Datenpunkt-Metadatum für Tooltip-/Snapshot-Semantik
+dateSemantics           — Strategy-Metadatum für Achseninterpretation
+axisType                — Strategy-Metadatum
+viewMode                — fwContext-Metadatum
+BOP-Anker / getBopAnchor  — Datumsnormalisierung via FwDateUtils
+semantisches X-Mapping    — Strategy-/Achsen-Semantik
+```
+
+Diese Felder sind erlaubt, weil sie:
+
+```text
+zur Strategy-/Tooltip-/Achsen-Semantik gehören,
+nicht von Plugins geschrieben werden,
+keinen Plugin-zu-Achse-Kommunikationskanal bilden,
+nicht mit chart._fwGeometry identisch sind.
+```
+
+Abgrenzung:
+
+```text
+_originalDate ist Datenpunkt-Metadatum (z. B. für Tooltip-/Snapshot-Semantik).
+chart._fwGeometry war eine alte Plugin-zu-Achse-Geometrieidee — kein aktiver Kanal.
+Beides darf nicht gleichgesetzt werden.
+```
+
+Regel:
+
+```text
+Diese Felder dürfen nicht ohne eigenen Design-/Regression-AP erweitert,
+umgedeutet oder als Vorbild für neue Plugin-Kommunikationskanäle genutzt werden.
 ```

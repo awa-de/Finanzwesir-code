@@ -75,3 +75,24 @@ Wird geleert nach /distill. Einträge: [FRICTION] [WIN] [PREF] [QUESTION] [OK]
 - [OK] Kein DEFERRED aufgelöst — kein MEMORY-CHECK / SPEC-CHECK / WORKING-FEATURES-CHECK ausstehend
 - [WIN] Plugin-Refactoring-Kette AP-14e1–14e11 vollständig abgeschlossen: FREIGABE erteilt
 - [OK] Voll-Abschluss ausgeführt: NAVIGATION, PROJECT-STATUS, BACKLOG-ARCHIV synchronisiert. Nächster Schritt: B1-AP-15.
+
+### B1-AP-15 — AP-Wechsel
+- FinanzwesirData.js, CSVParser.js, FwDateUtils.js — diese Session nicht berühren. ✓
+
+### B1-AP-14e12 — AP-Wechsel (Doku-only, nach Kontextgrenze)
+- FinanzwesirData.js, CSVParser.js, FwDateUtils.js — diese Session nicht berühren. ✓
+
+### 2026-06-22 — B1-AP-14e12 ✅
+- [OK] Alle 3 X-Achsen-Docs: Statusbanner als historische Designintention gesetzt (I: _fwGeometry-beforeUpdate-Zusatz, II: Chart.register-Zusatz, III: FwBarLayoutPlugin-Zusatz)
+- [OK] CHART_PLUGIN_ARCHITEKTUR.md §4: Opt-in-Klärung — Strategy-lokale Plugin-Einbindung kein Verstoß
+- [OK] CHART_PLUGIN_ARCHITEKTUR.md §18: 8 neue §20-Kurzregeln (Barrel, selektiver Import, kein Chart.register, _originalDate, BarChartStrategy-Sonderzone)
+- [OK] CHART_PLUGIN_ARCHITEKTUR.md §20.3: Selektive Barrel-Imports explizit als korrekt dokumentiert (Beispiele nach AP-14e9)
+- [OK] CHART_PLUGIN_ARCHITEKTUR.md §20.6: Alle 3 X-Achsen-Docs als Drift-Stellen benannt (vorher: nur I+III)
+- [OK] CHART_PLUGIN_ARCHITEKTUR.md §20.8 NEU: _originalDate vs. _fwGeometry-Abgrenzung; erlaubte Strategy-/fwContext-Metadaten; Regel kein Design-AP ohne Erweiterung
+- [OK] NAVIGATION.md: Plugin-Routing-Hinweis mit §20.3/§20.8-Verweis + historische X-Achsen-Docs-Notiz; B1-AP-14e12-Eintrag
+- [OK] PROJECT-STATUS.md + HOOK-META: HOOK-META-SESSION, Nächster-Schritt, Stand-Datum, §3, §4 Apps-Zeile, §8 Eintrag
+- [OK] Ergebnisprotokoll: docs/steering/patches/AP-14e12_Spec-Drift-und-Audit-Luecken-endgueltig-schliessen_Ergebnis.md
+- [WIN] 9 Audit-Befunde (ChatGPT + Perplexity/Claude) vollständig geschlossen — kein Code geändert
+- [WIN] CHART_PLUGIN_ARCHITEKTUR.md ist jetzt vollständig: alle aktiven Plugins, Barrel-Pattern, Import-Semantik, erlaubte Metadaten, Drift-Dokumente — kein Audit-Leck mehr
+
+### 2026-06-22 — Kettenabschluss ✅ | RECONCILED: B1-AP-14e12
