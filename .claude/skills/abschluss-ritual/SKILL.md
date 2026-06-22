@@ -225,7 +225,7 @@ Bei jedem Ketten-Minimalabschluss sofort erledigen:
 3. `PROJECT-STATUS.md`: nächster Schritt + HOOK-META synchronisieren.
 4. `docs/steering/BACKLOG.md`: erledigten AP entfernen.
 5. `docs/steering/BACKLOG-ARCHIV.md`: erledigten AP eintragen.
-6. Commit-Message im Kurzformat ausgeben.
+6. Commit-Message im Langformat ausgeben.
 
 ### 3.4 Deferred nur für Reflexion
 
@@ -622,7 +622,56 @@ Ausgabe immer als reiner Text für VSCode Message-Feld.
 
 Keine Code-Blöcke. Keine git-Kommandos.
 
-### 8.1 Kurzformat für Pfad B, C und D
+### 8.1 Langformat für Pfad A und B (Voll-Abschluss und Ketten-Minimalabschluss)
+
+Pflichtfelder:
+
+- Zeile 1: AP-ID + Ergebnis, 50–72 Zeichen.
+- Was war das Problem / der Ausgangszustand?
+- Wie wurde es gelöst?
+- Warum ist die Lösung sicher (keine Regressionen)?
+- Betroffene Bereiche: Datei (Methode/Abschnitt)
+- Kontext: Kette / Spec / Tested
+
+Hintergrund: Die Langform ist Pflicht für alle Abschlüsse mit Projektgeschichte.
+Ziel ist eine spätere Debrief-Analyse („Was haben wir gemacht und warum?") —
+git-History muss sich selbst erklären, kein Nachschlagen in anderen Artefakten nötig.
+
+Beispiel:
+
+```text
+feat(B1-AP-14e9): Plugin-Barrel anlegen — plugins/index.js als kanonischer Exportpunkt
+
+Was war das Problem?
+Nach AP-14e6 (Shim entfernt) und AP-14e8 (FwBarLayoutPlugin als Dead State entfernt)
+importierten ChartEngine.js, LineChartStrategy.js und PieChartStrategy.js ihre Plugins
+noch direkt aus einzelnen Plugin-Dateien — kein zentraler Exportpunkt, inkonsistente
+Importstruktur.
+
+Wie wurde es gelöst?
+plugins/index.js NEU: 4 Named Re-Exports (CenterTextPlugin, CrosshairPlugin,
+FwAnnotationPulsePlugin, FwVerticalLinePlugin). Kein FwBarLayoutPlugin — AP-14e8 hat
+diesen Dead State entfernt. Kein Chart.register(), keine Registry, keine Logik.
+Alle 3 Konsumenten auf ../plugins/index.js umgestellt.
+
+Warum ist die Lösung sicher (keine Regressionen)?
+ES-Modul-Re-Exports sind semantisch identisch zu Direktimporten. Plugin-Implementierungen
+unverändert. BarChartStrategy.js nicht berührt. Alle manuellen Tests bestanden.
+
+Betroffene Bereiche:
+  plugins/index.js (NEU)
+  core/ChartEngine.js (Import Z.68-71)
+  strategies/LineChartStrategy.js (Import Z.29)
+  strategies/PieChartStrategy.js (Import Z.32)
+
+Kontext:
+  Kette AP-14e1–14e11 | AP-14e9
+  Getestet: Screen 2 Pulse, Screen 3 Crosshair+VerticalLine, Doughnut, BarChart History+Ranking
+```
+
+### 8.2 Kurzformat für Pfad C und D (Mini und Housekeeping)
+
+Nur für Korrekturen ohne Projektgeschichte (Tipp-/Doku-Fix, Infrastruktur).
 
 ```text
 B1-AP-14e2: fwVerticalLine ausgelagert
@@ -636,17 +685,6 @@ Regeln:
 - Zeile 1: AP-ID + Ergebnis, knapp; bei Housekeeping ohne AP-ID: Bereich + Ergebnis.
 - `Bereiche:` wichtigste Dateien.
 - `Sicher:` warum keine offensichtliche Regression oder kein Projektstatus-Drift.
-
-### 8.2 Langformat für Pfad A
-
-Pflichtfelder:
-
-- Zeile 1: Typ + Zusammenfassung, 50–72 Zeichen.
-- Was war das Problem?
-- Wie wurde es gelöst?
-- Warum ist die Lösung sicher?
-- Betroffene Bereiche: Datei (Methode/Abschnitt)
-- Kontext: Issue / Spec / Tested
 
 ---
 
