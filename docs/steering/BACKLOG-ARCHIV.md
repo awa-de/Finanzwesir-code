@@ -1,11 +1,13 @@
 # BACKLOG-ARCHIV – Finanzwesir 2.0
-Stand: 2026-06-22 | Session: B1-AP-14e6 | Geändert von: Claude
+Stand: 2026-06-22 | Session: B1-AP-14e8 | Geändert von: Claude
 
 Abgeschlossene Items, neueste zuerst (append-only).
 Archivierungs-Trigger: wenn > 200 Zeilen → neue Datei `BACKLOG-ARCHIV-YYYY.md` anlegen.
 
 | ID | Bereich | Titel | Abgeschlossen | Session |
 |----|---------|-------|---------------|---------|
+| B1-AP-14e8 | Engine | FwBarLayoutPlugin-Dead-State nachgewiesen und entfernt: 11 Zeilen inline-Plugin aus `BarChartStrategy.js` gelöscht. Alle 10 Grün-Kriterien + alle 14 Tests bestätigt. Ergebnisprotokoll: `docs/steering/patches/AP-14e8_FwBarLayoutPlugin-Dead-State-entfernen_Ergebnis.md`. *(sofort erledigt)* | 2026-06-22 | B1-AP-14e8 |
+| B1-AP-14e7 | Engine | FwBarLayoutPlugin im BarChart-Hybrid vollständig geprüft: `_fwGeometry` ist dead state — schreibt, niemand liest. `FwSmartXAxis.afterFit()` berechnet `halfBarPixel` eigenständig. Beide Modi klassifiziert. Kein Code. Ergebnisprotokoll: `docs/steering/patches/AP-14e7_FwBarLayoutPlugin-Hybrid-Pruefung_Ergebnis.md`. *(sofort erledigt)* | 2026-06-22 | B1-AP-14e7 |
 | B1-AP-14e6 | Engine | FwChartPlugins-Shim gelöscht: `core/FwChartPlugins.js` entfernt — reiner Re-Export-Shim ohne produktive Importe; alle manuellen Tests bestätigt. Ergebnisprotokoll: `docs/steering/patches/AP-14e6_FwChartPlugins-Shim-entfernen_Ergebnis.md`. *(sofort erledigt)* | 2026-06-22 | B1-AP-14e6 |
 | B1-AP-14e5 | Engine | CrosshairPlugin ausgelagert: `plugins/CrosshairPlugin.js` NEU; `core/FwChartPlugins.js` reiner Re-Export-Shim; `LineChartStrategy.js` Import aktualisiert. Alle manuellen Tests bestätigt. *(sofort erledigt)* | 2026-06-19 | B1-AP-14e5 |
 | B1-AP-14e4 | Engine | CenterTextPlugin ausgelagert: `plugins/CenterTextPlugin.js` NEU; `core/FwChartPlugins.js` Re-Export-Shim; `PieChartStrategy.js` Import aktualisiert. Alle manuellen Tests bestätigt. *(sofort erledigt)* | 2026-06-19 | B1-AP-14e4 |

@@ -235,17 +235,6 @@ export class BarChartStrategy extends BaseChartStrategy {
         const t = this.theme;
         const ciFont = t.fonts.body;
 
-        const FwBarLayoutPlugin = {
-            id: 'fwBarLayout',
-            beforeUpdate: (chart) => {
-                const xScale = chart.scales.x;
-                if (!xScale || !chart.data.datasets[0]?.data.length) return;
-                const dataCount = chart.data.datasets[0].data.length;
-                const pixelPerSlot = xScale.width / dataCount;
-                chart._fwGeometry = { halfBarPixel: (pixelPerSlot * 0.8 * 0.9) / 2 };
-            }
-        };
-
         const xAxisConfig = fwContext.axisType === 'time'
             ? FwSmartScales.getTimeAxis(meta.minTime, meta.maxTime, { color: t.colors.textMuted }, {
                 plugins: { fwContext },
@@ -263,7 +252,6 @@ export class BarChartStrategy extends BaseChartStrategy {
                 labels: (fwContext.axisType === 'category') ? transformedData.labels : [], 
                 datasets: transformedData.datasets 
             },
-            plugins: [FwBarLayoutPlugin],
             options: {
                 responsive: true, maintainAspectRatio: false,
                 elements: {
