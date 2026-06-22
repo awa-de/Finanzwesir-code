@@ -45,6 +45,24 @@ Wird geleert nach /distill. Einträge: [FRICTION] [WIN] [PREF] [QUESTION] [OK]
 ### B1-AP-14e10 — AP-Wechsel
 - FinanzwesirData.js, CSVParser.js, FwDateUtils.js — diese Session nicht berühren. ✓
 
+### 2026-06-22 — B1-AP-14e10b ✅
+- [OK] §3-Ausnahme für kleine Engine-interne Chart.js-Plugins ersetzt durch „Stand ab AP-14e10b": Pflicht-Ablageort plugins/, Ein Plugin = eine Datei, Inline/Core nicht mehr architekturkonform, Ausnahmen nur über Design-AP.
+- [OK] §20.3 Direktimport-Regel geschärft: „grundsätzlich über den Barrel"; Direktimporte nur begründeter Sonderfall mit Protokollpflicht; Plugin-Dateien nie aus plugins/index.js.
+- [OK] §20 Heading: Stand AP-14e9 → AP-14e10b.
+- [OK] Ergebnisprotokoll: docs/steering/patches/AP-14e10b_CHART_PLUGIN_ARCHITEKTUR-Nachschaerfung_Ergebnis.md
+- [OK] Keine Codeänderung, keine Steuerdateien geändert. Alle 16 Prüfpunkte grün.
+
+### 2026-06-22 — B1-AP-14e11 ✅
+- [OK] Importzyklus-Gate: GRÜN — alle 4 Plugin-Dateien enthalten kein einziges import-Statement (verifiziert per grep + Dateilesen).
+- [OK] Barrel: 4 Named Re-Exports, keine Logik, kein Chart.register(), kein FwBarLayoutPlugin. Sauber.
+- [OK] Engine/Strategies: alle 3 Plugin-Imports über '../plugins/index.js' — kein Direktimport aus Einzeldateien.
+- [OK] Altpfade: FwChartPlugins (kein File im core), FwBarLayoutPlugin, fwBarLayout, _fwGeometry — alle 0 produktive Treffer.
+- [OK] halfBarPixel: nur in FwSmartXAxis.afterFit() — aktive eigenständige Achsenberechnung, kein Plugin-Bezug.
+- [OK] Verbotene Mechanismen: Chart.register, PluginRegistry, RuntimeRegistry — alle 0 Treffer.
+- [OK] Spec-vs-Repo: alle 14 Prüfpunkte grün. Alle 11 AP-Protokolle (AP-14e1 bis AP-14e10b) vorhanden.
+- [WIN] FREIGABE: Plugin-Refactoring-Kette AP-14e1 bis AP-14e11 abgeschlossen. Commit kann vorbereitet werden.
+- [OK] Ergebnisprotokoll: docs/steering/patches/AP-14e11_Plugin-Architektur-QA_Importzyklus-Gate_Ergebnis.md
+
 ### 2026-06-22 — B1-AP-14e10 ✅
 - [OK] CHART_PLUGIN_ARCHITEKTUR.md §20 NEU: aktiver Plugin-Bestand (4 Plugins), kanonischer Barrel plugins/index.js, Importzyklus-Verbot, verbotene Mechanismen, entfernte Elemente (FwChartPlugins.js/FwBarLayoutPlugin/_fwGeometry-Drift), BarChart-Hybrid-Warnung.
 - [OK] NAVIGATION.md: Stand-Datum + Plugin-Routing-Hinweis (Barrel + Importzyklus-Verbot) + B1-AP-14e10-Eintrag angelegt.
@@ -52,3 +70,8 @@ Wird geleert nach /distill. Einträge: [FRICTION] [WIN] [PREF] [QUESTION] [OK]
 - [OK] Ergebnisprotokoll: docs/steering/patches/AP-14e10_Plugin-Spec-und-Steuerdateien-Sync_Ergebnis.md
 - [OK] X-Achsen-Drift (_fwGeometry): bewusst nicht geändert — in §20.6 dokumentiert als historische Designintention.
 - [OK] Kein Code geändert. Alle 16 Prüfpunkte grün.
+
+### 2026-06-22 — Kettenabschluss ✅ | RECONCILED: B1-AP-14e10 B1-AP-14e10b B1-AP-14e11
+- [OK] Kein DEFERRED aufgelöst — kein MEMORY-CHECK / SPEC-CHECK / WORKING-FEATURES-CHECK ausstehend
+- [WIN] Plugin-Refactoring-Kette AP-14e1–14e11 vollständig abgeschlossen: FREIGABE erteilt
+- [OK] Voll-Abschluss ausgeführt: NAVIGATION, PROJECT-STATUS, BACKLOG-ARCHIV synchronisiert. Nächster Schritt: B1-AP-15.

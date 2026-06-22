@@ -84,9 +84,29 @@ Plugin-Logik direkt in FwSmartXAxis.js / FwSmartYAxis.js
 Plugin-Logik als Inline-Hack nach chart.render()
 ```
 
-Ausnahme:
+### Stand ab AP-14e10b
 
-Kleine ChartEngine-interne Plugins, die ausschließlich als technische Hilfsfunktion für genau einen vorhandenen Engine-Call dienen, dürfen in der bestehenden Engine-Struktur bleiben, wenn sie dort bereits etabliert sind. Neue wiederverwendbare oder app-übergreifend relevante Plugin-Logik gehört aber in `plugins/`.
+Ab AP-14e10b gilt für Chart.js-Plugins strenger:
+
+```text
+Chart.js-Plugin-Implementierungen liegen ausschließlich unter
+Theme/assets/js/fw-chart-engine/plugins/.
+
+Ein Plugin = eine Datei.
+
+Inline-Plugins in Strategies, Plugin-Implementierungen in core/
+oder technische Re-Export-Shims wie core/FwChartPlugins.js sind
+nicht mehr architekturkonform.
+
+Ausnahmen benötigen einen eigenen Design-AP mit dokumentierter Begründung.
+```
+
+Wichtig:
+
+```text
+Technische Hilfsfunktionen ohne Chart.js id und ohne Chart.js Lifecycle-Hook
+sind keine Plugins. Sie müssen entsprechend anders benannt und dokumentiert werden.
+```
 
 ---
 
@@ -613,7 +633,7 @@ Es darf der Engine nicht heimlich neues Wissen unterschieben.
 
 ---
 
-## 20. Plugin-Bestand, Barrel und Importregeln (Stand: AP-14e9, 2026-06-22)
+## 20. Plugin-Bestand, Barrel und Importregeln (Stand: AP-14e10b, 2026-06-22)
 
 ### 20.1 Aktiver Plugin-Bestand
 
@@ -655,7 +675,7 @@ Ruft kein Chart.register() auf.
 
 ### 20.3 Importregel
 
-Engine-Dateien und Strategies importieren aktive Plugins über den Barrel:
+Engine-Dateien und Strategies importieren aktive Plugins grundsätzlich über den Barrel:
 
 ```js
 import { FwAnnotationPulsePlugin, FwVerticalLinePlugin } from '../plugins/index.js';
@@ -663,7 +683,14 @@ import { CrosshairPlugin } from '../plugins/index.js';
 import { CenterTextPlugin } from '../plugins/index.js';
 ```
 
-Direktimporte aus einzelnen Plugin-Dateien sind erlaubt, wenn nur ein einzelnes Plugin gezielt benötigt wird. Bevorzugt bleibt der Barrel.
+Regel:
+
+```text
+Der Barrel ist der Standardimportpfad für Engine und Strategies.
+Direktimporte aus einzelnen Plugin-Dateien sind nur als begründeter Sonderfall erlaubt.
+Ein solcher Sonderfall muss im Ergebnisprotokoll des jeweiligen AP dokumentiert werden.
+Plugin-Dateien selbst importieren nie aus plugins/index.js.
+```
 
 ### 20.4 Importzyklus-Verbot
 

@@ -2,16 +2,16 @@
 Version: 1
 Stand: 2026-06-22
 Fokus-AP: APP-01 — prokrastinations-preis
-Nächster-Schritt: B1-AP-14e11 — Plugin-Architektur-QA mit Importzyklus-Gate (B1-AP-14e10 ✅ 2026-06-22)
+Nächster-Schritt: B1-AP-15 — Transitions + Reduced Motion (B1-AP-14e11 ✅ 2026-06-22)
 Blocker: keine
 Letzter-Distill: 2026-06-22
 Kassensturz-Datum: 2026-06-22
 -->
-<!-- HOOK-META-SESSION: B1-AP-14e10 -->
+<!-- HOOK-META-SESSION: B1-AP-14e11 -->
 
 # PROJECT STATUS — Finanzwesir 2.0
 
-Stand: 2026-06-22 | Session: B1-AP-14e10 | Geändert von: Claude
+Stand: 2026-06-22 | Session: B1-AP-14e11 | Geändert von: Claude
 
 **Zweck:** Schneller Wiedereinstieg nach Pausen.
 **Zielgruppe:** Albert und Claude.
@@ -162,7 +162,7 @@ Stand: 2026-06-22 | Session: B1-AP-14e10 | Geändert von: Claude
 | Chart-Engine | Stabil, offene APs | Siehe `docs/steering/BACKLOG.md` |
 | Theme | In Entwicklung | `THEME-ASSEMBLY-CHECKLIST.md` |
 | CSS | Stabil | Siehe `docs/steering/BACKLOG.md` (CSS-N Items) |
-| Apps | Slice 6 ✅, AP-UX-01 ✅, B1-AP-01 bis B1-AP-14e10 ✅ 2026-06-22 | B1-AP-14e11 (Plugin-Architektur-QA mit Importzyklus-Gate) |
+| Apps | Slice 6 ✅, AP-UX-01 ✅, B1-AP-01 bis B1-AP-14e11 ✅ 2026-06-22 | B1-AP-15 — Transitions + Reduced Motion |
 | Content | Laufend | Redaktionsleitfaden aktiv |
 | Security | SECURITY-BASELINE.md App-Fabrik-gatefähig ✅ | Security-Sync-Regel + Gate-Prüffrage verankert (ST-13/ST-14) |
 
@@ -197,6 +197,9 @@ Vollständig im DECISION-LOG dokumentiert (`docs/steering/DECISION-LOG.md`):
 ---
 
 ## 8. Letzte Session
+
+2026-06-22 — B1-AP-14e11 Plugin-Architektur-QA Importzyklus-Gate ✅.
+Kein Importzyklus: alle 4 Plugin-Dateien ohne Imports. Barrel sauber (4 Re-Exports, kein Chart.register). Alle Engine/Strategy-Imports über Barrel. 0 Altpfade, 0 verbotene Mechanismen. 14/14 Spec-vs-Repo-Prüfpunkte grün. FREIGABE: Plugin-Refactoring-Kette B1-AP-14e1–14e11 abgeschlossen. Ergebnisprotokoll: docs/steering/patches/AP-14e11_Plugin-Architektur-QA_Importzyklus-Gate_Ergebnis.md. Nächster Schritt: B1-AP-15 — Transitions + Reduced Motion.
 
 2026-06-22 — B1-AP-14e10 Plugin-Spec und Steuerdateien synchronisiert.
 CHART_PLUGIN_ARCHITEKTUR.md §20 NEU: aktiver Plugin-Bestand (4 Plugins), kanonischer Barrel plugins/index.js, Importzyklus-Verbot, verbotene Mechanismen (Registry/Chart.register/Auto-Registration), entfernte Elemente (FwChartPlugins.js/FwBarLayoutPlugin/_fwGeometry-Drift), BarChart-Hybrid-Warnung. NAVIGATION.md Plugin-Routing-Hinweis ergänzt (Barrel + Importzyklus-Verbot). Kein Code geändert. Ergebnisprotokoll: docs/steering/patches/AP-14e10_Plugin-Spec-und-Steuerdateien-Sync_Ergebnis.md. Nächster Schritt: B1-AP-14e11 — Plugin-Architektur-QA mit Importzyklus-Gate.
