@@ -109,6 +109,8 @@ Wird geleert nach /distill. Einträge: [FRICTION] [WIN] [PREF] [QUESTION] [OK]
 ## 2026-06-23 – SESSION START | [KETTENMODUS] | Fokus: APP-01 — prokrastinations-preis
 - FinanzwesirData.js, CSVParser.js, FwDateUtils.js — diese Session nicht berühren. ✓
 
+### B1-AP-15b — AP-Wechsel | Fokus: Reduced Motion chart.update()
+
 ### 2026-06-23 — Housekeeping: Chronik-System eingebunden ✅
 - [OK] Schritt 1 (Realtest): 7× OK, Exit 0 — Validator sauber
 - [OK] Schritt 2 (NAVIGATION.md): 4 neue Routing-Einträge — /chronik-check, CHRONIK-SPEZIFIKATION.md, CHRONIK-PROMPT.md, Archiv/Chroniken/
@@ -116,4 +118,11 @@ Wird geleert nach /distill. Einträge: [FRICTION] [WIN] [PREF] [QUESTION] [OK]
 - [OK] Schritt 4 (/archivieren verzahnt): SKILL-ARCHIVIEREN-SPEZIFIKATION.md — Chronik als Klassifikationsfall + Zielpfad ergänzt
 - [OK] Schritt 5 (Legacy-Frontmatter): beteiligte in 2 Dateien korrigiert (Perplexity führte den Faden; chatgpt+claude waren Material); schlagworte bestätigt. Validator: 7× OK
 - [WIN] Chronik-System vollständig integriert: SSoT, Prompt, Validator, Routing, /archivieren-Verzahnung, Legacy-Klassifikation — alles konsistent
+
+### 2026-06-23 — B1-AP-15b ✅ | ChartEngine Reduced Motion Fix
+- [OK] `_prefersReducedMotion()` NEU in ChartEngine.js — defensiv (typeof window + matchMedia != null + try/catch); Konvention aus FwAnnotationPulsePlugin.js übernommen
+- [OK] Initial-Render: `animation = false` vor `new Chart(canvas, chartConfig)` im requestAnimationFrame-Callback bei reduced motion
+- [OK] Update-Pfad: `chart.update('none')` statt `chart.update()` bei reduced motion
+- [OK] Beide Datenpfade abgedeckt: renderFromData() + _processContainer()
+- [WIN] Alle Tests bestätigt (DevTools Reduced Motion an/aus, Range-Wechsel, App-Pfad prokrastinations-preis)
 

@@ -1,5 +1,5 @@
 # Funktionierende Features (Nicht kaputt machen!)
-Stand: 2026-06-18 | Session: B1-AP-14c1 | Geändert von: Claude
+Stand: 2026-06-23 | Session: B1-AP-15b | Geändert von: Claude
 
 ## Hinweis
 
@@ -17,7 +17,7 @@ Die genaue technische Umsetzung darf Claude selbst analysieren.
 
 - Auswahl des Charts, Laden von CSVs und Wechsel von Ansichten funktioniert.
 - Grundlogik „Chart wird gerendert, wenn ich X tue" ist stabil.
-- Smart Updates: View-/Range-Wechsel nutzen `chart.update()` (flüssige Animation, kein Flackern).
+- Smart Updates: View-/Range-Wechsel nutzen `chart.update()` (flüssige Animation, kein Flackern). Bei prefers-reduced-motion: reduce: `chart.update('none')` + Initial-Render `animation: false` via `_prefersReducedMotion()` (B1-AP-15b).
 - Error Boundary: Fehlerhafte CSVs zeigen einen Platzhalter, die restliche Seite bleibt stabil.
 - Legend Toggle: Klick auf Legende blendet Datasets ein/aus.
 - `renderFromData()` (Slice 4, 2026-06-11): Zweiter offizieller Engine-Einstieg für app-berechnete Daten ohne CSV-Fetch. Validierung + Mapping + Deep-Freeze + WeakMap-State. `features.rangeControls: false` → keine Range-Buttons. `features.headline: false` → kein BAN. Slider-Smart-Update via `chart.update()` (kein DOM-Rebuild). Bestehende `.financial-chart-module`-Charts unverändert.

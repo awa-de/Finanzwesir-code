@@ -1,11 +1,12 @@
 # BACKLOG-ARCHIV – Finanzwesir 2.0
-Stand: 2026-06-23 | Session: B1-AP-15a | Geändert von: Claude
+Stand: 2026-06-23 | Session: B1-AP-15b | Geändert von: Claude
 
 Abgeschlossene Items, neueste zuerst (append-only).
 Archivierungs-Trigger: wenn > 200 Zeilen → neue Datei `BACKLOG-ARCHIV-YYYY.md` anlegen.
 
 | ID | Bereich | Titel | Abgeschlossen | Session |
 |----|---------|-------|---------------|---------|
+| B1-AP-15b | Engine/A11y | ChartEngine Reduced Motion Fix: `_prefersReducedMotion()` NEU in `ChartEngine.js` (defensiv: typeof window + matchMedia + try/catch); Initial-Render `animation = false` bei prefers-reduced-motion: reduce; Update-Pfad `chart.update('none')` statt `chart.update()`. Beide Datenpfade abgedeckt. Alle Tests bestätigt. Ergebnisprotokoll: `docs/steering/patches/B1-AP-15b_ChartEngine_Reduced-Motion-Fix_Ergebnis.md`. *(sofort erledigt)* | 2026-06-23 | B1-AP-15b |
 | B1-AP-15a | Audit | Motion-Befund (kein Code): Screen-Transitions ✅ (hidden-Toggle direkt), Pulse ✅ (RM-Guard `_reducedMotion()` in `FwAnnotationPulsePlugin.js`), Draw-Animation ⏳ (bewusst offen), RM-Lücke: `chart.update()` ignoriert prefers-reduced-motion → `chart.update('none')` als Fix für AP-15b. CSS-RM-Block in app.css Z.110–115 ist toter Code. `motionRules.reducedMotion` in stations.de.json nicht ausgelesen. Ergebnisprotokoll: `docs/steering/patches/B1-AP-15a_Motion-Befund_Ergebnis.md`. *(sofort erledigt)* | 2026-06-23 | B1-AP-15a |
 | B1-AP-14e12 | Doku/Spec | Spec-Drift und Audit-Lücken endgültig geschlossen: X-Achsen-Docs I/II/III mit Statusbannern als historische Designintention markiert; `CHART_PLUGIN_ARCHITEKTUR.md` §4 Opt-in-Klärung, §18 §20-Kurzregeln erweitert, §20.3 selektive Barrel-Imports, §20.6 alle 3 Drift-Docs, §20.8 NEU (_originalDate-Abgrenzung zu _fwGeometry). 9 ChatGPT/Perplexity-Audit-Befunde geschlossen. Kein Code geändert. Ergebnisprotokoll: `docs/steering/patches/AP-14e12_Spec-Drift-und-Audit-Luecken-endgueltig-schliessen_Ergebnis.md`. *(sofort erledigt)* | 2026-06-22 | B1-AP-14e12 |
 | B1-AP-14e11 | Doku/QA | Plugin-Architektur-QA Importzyklus-Gate: alle 4 Plugin-Dateien ohne Imports (kein Zyklus), Barrel sauber (4 Re-Exports, kein Chart.register, kein FwBarLayoutPlugin), alle Engine/Strategy-Imports über Barrel, 0 Altpfade (FwChartPlugins/FwBarLayoutPlugin/fwBarLayout/_fwGeometry), 0 verbotene Mechanismen, 14/14 Spec-vs-Repo-Prüfpunkte grün. FREIGABE: Plugin-Refactoring-Kette AP-14e1–14e11 abgeschlossen. Ergebnisprotokoll: `docs/steering/patches/AP-14e11_Plugin-Architektur-QA_Importzyklus-Gate_Ergebnis.md`. *(sofort erledigt)* | 2026-06-22 | B1-AP-14e11 |

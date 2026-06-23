@@ -360,8 +360,8 @@ export class ChartEngine {
             this._updateLegend(container, chartConfig, meta.interactiveFilters, state);
             this.renderer._updateBAN(container, meta.headline || null, runtimeConfig); // BAN V5.0.0
 
-            state.chartInstance.update();
-            
+            state.chartInstance.update(this._prefersReducedMotion() ? 'none' : undefined); // CHANGED B1-AP-15b
+
         } else {
             var dom = this.renderer.setupStructure(
                 container, 
@@ -380,6 +380,10 @@ export class ChartEngine {
             if (typeof Chart === 'undefined') throw new Error("Chart.js Library nicht geladen!");
 
             requestAnimationFrame(() => {
+                if (this._prefersReducedMotion()) { // NEW B1-AP-15b
+                    if (!chartConfig.options) chartConfig.options = {};
+                    chartConfig.options.animation = false;
+                }
                 state.chartInstance = new Chart(canvas, chartConfig);
                 this._bindEvents(container, dom.controls, state);
                 this._bindLegendEvents(container, state.chartInstance, state);
@@ -468,6 +472,16 @@ export class ChartEngine {
         if (idx === -1) return null;
         var val = optionsStr.substring(idx + key.length + 1).split(',')[0].trim();
         return val;
+    }
+
+    _prefersReducedMotion() { // NEW B1-AP-15b
+        try {
+            return typeof window !== 'undefined' &&
+                   window.matchMedia != null &&
+                   window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        } catch (e) {
+            return false;
+        }
     }
 
     _parseConfig(container) {
