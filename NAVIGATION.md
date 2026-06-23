@@ -1,5 +1,5 @@
 # NAVIGATION.md – Finanzwesir 2.0
-Stand: 2026-06-22 | Session: B1-AP-14e12 | Geändert von: Claude
+Stand: 2026-06-23 | Session: CHRONIK-EINBINDUNG | Geändert von: Claude
 
 Für Claude: **Routing-Dokument.** Wird beim Session-Start (Schritt 2) gelesen.
 Gibt Pfade und Lese-Reihenfolgen vor — KEINE Verhaltensregeln (die stehen in CLAUDE.md).
@@ -33,6 +33,7 @@ Albert kann sie auch explizit aufrufen.
 |---|---|---|
 | `/abschluss-ritual [AP-N]` | Nach Abschluss einer Aufgabe | Claude bietet proaktiv an; oder Albert sagt „fertig" |
 | `/archivieren [was archivieren?]` | Kontrollierte Überführung von Material in Archive | Albert ruft explizit auf; Claude schlägt vor wenn Rohmaterial/Belegmaterial entstanden ist |
+| `/chronik-check [Pfad]` | Frontmatter einer neuen Chronik gegen CHRONIK-SPEZIFIKATION.md prüfen | Albert ruft explizit auf; nach Ablage einer neuen Chronik |
 | `/decompose` | Wenn eine Ideensammlung in Tasks zerlegt werden soll | Albert sagt „jetzt zerlegen" |
 | `/manual-test-plan [AP-N]` | Bei komplexen visuellen Testfällen | Claude schlägt vor; oder Albert ruft explizit auf |
 | `/spec-rewrite-guard [Datei]` | Vor Änderungen an `docs/spec/`-Dateien | Claude startet automatisch bei Spec-Edits |
@@ -306,6 +307,8 @@ Manuelle Aktivierung: `/spec-rewrite-guard docs/spec/[Dateiname]`
 | Föderierter Archivkatalog | `Archiv/legacy-map.md` | Zentrale Steuerkarte: 16 Archivorte, Zielrollen, Drift-Risiken, Pilotkandidaten |
 | Archiv-Sonderfälle | `docs/steering/ARCHIV-SONDERFAELLE.md` | Arbeitsliste für Archiv-Sonderfälle — Entscheidungen bei Albert, kein Claude-Handeln ohne AP |
 | Skill /archivieren Spezifikation | `docs/steering/SKILL-ARCHIVIEREN-SPEZIFIKATION.md` | Spec für SKILL-ARCHIV-02: Phasen, Klassifikationslogik, Gates, Abgrenzung zu distill/kassensturz/start/abschluss-ritual |
+| Chronik-Spezifikation (SSoT) | `docs/steering/CHRONIK-SPEZIFIKATION.md` | SSoT: Definition, Frontmatter-Vertrag, Namensregel, Ablage, Workflow für Chroniken |
+| Chronik-Prompt (Werkzeug) | `docs/steering/CHRONIK-PROMPT.md` | Copy-paste-Prompt für Chronik-Erstellung; enthält geschlossene Vokabel inline |
 | Patch-Quittungen | `docs/steering/patches/` | Committed Patch-Quittungen nach Full-Gates (Archiv, nicht operativ) |
 | Handover-Braindumps | `docs/steering/handovers/` | Vollständige Übergabedokumente für Faden-Übergaben bei komplexen Gates (Spec-Trace-Prompt, Revisionshistorie, Binding Decisions) |
 
@@ -330,6 +333,7 @@ Details und Archivvertrag: `docs/steering/ARCHIV-STRATEGIE.md`
 | Historische Chart-Engine-Materialien | `Archiv/Chart-Engine-Historie/` |
 | Historische Design-Materialien | `Archiv/Design/` |
 | Making-of-Rahmen (Kapitelrahmen, Belegverweise) | `Archiv/making-of/` |
+| Chroniken (chronist-v1 + legacy) | `Archiv/Chroniken/` |
 
 ## Niemals in Git
 

@@ -1,3 +1,17 @@
+---
+chronik_id: Archiv_2026-06-09_Projektchronik_OA02-bis-Archivstrategie
+datum: 2026-06-09
+projekt: finanzwesir-code
+thema: oa02-bis-archivstrategie
+beteiligte: [nutzer, perplexity]
+typ: chronik
+standard: legacy
+faden_typ: mischform
+status_am_ende: abgeschlossen
+quellenlage: mit-anhaengen
+schlagworte: [richtungswechsel, annahme-verworfen, konzept-vs-umsetzung]
+---
+
 # Projektchronik: Von OA-02 zur Archivstrategie
 ## Finanzwesir-code — Gesprächsfaden 07.–09. Juni 2026
 

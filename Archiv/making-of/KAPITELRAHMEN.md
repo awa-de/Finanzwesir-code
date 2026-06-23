@@ -61,7 +61,7 @@ Mögliche Belege (aus legacy-map.md):
 
 - `Archiv/Chart-Engine-Historie/` — Teil von `Archiv/` (Zielrolle: ROOT_KURATION + MAKING_OF_BELEG; Making-of-Wert: hoch)
 - `docs/spec/archiv/` — LOKALER_KONTEXT + MAKING_OF_BELEG; Spec-Versionen v1/v12/v13 für HTML-Karten und Ticks/Labels; 4 Dateien, 47 KB — Pilotbewertung (AP 9): `docs/spec/archiv/PILOT-BEWERTUNG.md`
-- `Archiv/Peer Review Arbeitspakete/Archiv_oa-02-chronik-archaeologie.md` — HIST + MAKING_OF_BELEG; OA-02-Entscheidungsreifung von app-lokalem Adapter bis Bridge-API; Querverweis Kapitel 06; 2026-06-09
+- `Archiv/Chroniken/legacy/Archiv_oa-02-chronik-archaeologie.md` — HIST + MAKING_OF_BELEG; OA-02-Entscheidungsreifung von app-lokalem Adapter bis Bridge-API; Querverweis Kapitel 06; 2026-06-09
 
 Status: Rahmen
 
@@ -133,8 +133,8 @@ Mögliche Belege (aus legacy-map.md):
 
 - `Archiv/Peer Review Arbeitspakete/` — Teil von `Archiv/` (ROOT_KURATION + MAKING_OF_BELEG); Peer-Review-Material zu Arbeitspaketen; Making-of-Wert: hoch
 - `Archiv/Peer Review Migration/` — Teil von `Archiv/` (ROOT_KURATION + MAKING_OF_BELEG); Peer-Review-Material zur Migration; Making-of-Wert: hoch
-- `Archiv/Peer Review Arbeitspakete/Archiv_2026-06-09_Projektchronik_OA02-bis-Archivstrategie.md` — HIST + MAKING_OF_BELEG; Perplexity-Chronik: OA-02-Entscheidungsweg und Archivstrategie-Entstehung; Multi-LLM-Methodik dokumentiert; 2026-06-09
-- `Archiv/Peer Review Arbeitspakete/Archiv_oa-02-chronik-archaeologie.md` — HIST + MAKING_OF_BELEG; Archäologische Analyse des OA-02-Denkprozesses (Irrwege, Bridge-API-Reifung); 2026-06-09
+- `Archiv/Chroniken/legacy/Archiv_2026-06-09_Projektchronik_OA02-bis-Archivstrategie.md` — HIST + MAKING_OF_BELEG; Perplexity-Chronik: OA-02-Entscheidungsweg und Archivstrategie-Entstehung; Multi-LLM-Methodik dokumentiert; 2026-06-09
+- `Archiv/Chroniken/legacy/Archiv_oa-02-chronik-archaeologie.md` — HIST + MAKING_OF_BELEG; Archäologische Analyse des OA-02-Denkprozesses (Irrwege, Bridge-API-Reifung); 2026-06-09
 
 Status: Rahmen
 

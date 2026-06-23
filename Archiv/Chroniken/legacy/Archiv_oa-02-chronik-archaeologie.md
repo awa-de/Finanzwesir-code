@@ -1,3 +1,17 @@
+---
+chronik_id: Archiv_oa-02-chronik-archaeologie
+datum: 2026-06-09
+projekt: finanzwesir-code
+thema: oa-02-entscheidungsfaden
+beteiligte: [nutzer, perplexity]
+typ: chronik
+standard: legacy
+faden_typ: entscheidungsfindung
+status_am_ende: abgeschlossen
+quellenlage: mit-anhaengen
+schlagworte: [richtungswechsel, annahme-verworfen, konzept-vs-umsetzung, scope-drift]
+---
+
 # OA-02 Chronik und Archäologie des Entscheidungsfadens
 
 Diese Chronik rekonstruiert ausführlich, wie sich der Arbeitsfaden zu OA-02 entwickelt hat, welche Denkbewegungen darin stattgefunden haben, welche Irrwege sich gezeigt haben, welche Korrekturen vorgenommen wurden und zu welchen belastbaren Beschlüssen die Arbeit schließlich geführt hat. Sie ist bewusst nicht nur als technische Zusammenfassung geschrieben, sondern als **arbeitsgeschichtliches Dokument**: Sie soll später nachvollziehbar machen, wie die Argumentation gereift ist, welche Fehlannahmen sich als teuer oder unproduktiv erwiesen und an welchen Stellen besonders gute architektonische Entscheidungen getroffen wurden.[file:126][file:127]

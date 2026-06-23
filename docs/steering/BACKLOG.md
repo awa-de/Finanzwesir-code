@@ -1,5 +1,5 @@
 # BACKLOG – Finanzwesir 2.0
-Stand: 2026-06-18 | Session: B1-AP-14c1 | Geändert von: Claude
+Stand: 2026-06-23 | Session: CHRONIK-SPEC-01 | Geändert von: Claude
 
 **Regeln:**
 - ✅-Zeilen werden sofort nach `BACKLOG-ARCHIV.md` verschoben (append), dann hier gelöscht.
@@ -35,6 +35,7 @@ Stand: 2026-06-18 | Session: B1-AP-14c1 | Geändert von: Claude
 | AP-SEC-1 | Engine  | Domain-Lock Validierungsfunktion implementieren| M    | AP-DOC-1     | —                                                 |
 | ST-01    | System  | Scope-Creep-Erkennung stärken — proaktiver Mid-Work-Check nach jedem Patch + Selftest-Szenario Pfad 14 | H | — | — |
 | ST-02    | System  | Selftest: Szenario „Protected Path direkt" ergänzen — Pfad 11, PROTECTED_PATHS.json-Protokoll vs. CLAUDE.md-Tabu-Regel | H | — | — |
+| CHR-1    | System  | Chronik-Validierung automatisieren: git-pre-commit-Hook (ruft `validate_chronik.py`) + maschinenlesbarer Chronik-Index — erst wenn Chronik-Volumen es rechtfertigt | L | — | Engine vorhanden: `.claude/skills/chronik-check/validate_chronik.py` |
 | CL-04    | Cleanup | theme/CLAUDE.md schreiben                      | M    | —            | —                                                 |
 | CL-05    | Cleanup | apps/CLAUDE.md schreiben                       | M    | —            | —                                                 |
 | CL-06    | Cleanup | Duktus-Analyse Blog-Texte lesen                | M    | —            | —                                                 |

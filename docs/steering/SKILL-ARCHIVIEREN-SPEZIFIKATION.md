@@ -1,4 +1,4 @@
-Stand: 2026-06-09 | Session: SKILL-ARCHIV-05 | Geändert von: Claude
+Stand: 2026-06-23 | Session: CHRONIK-EINBINDUNG | Geändert von: Claude
 
 # Spezifikation — Skill /archivieren
 
@@ -179,6 +179,10 @@ Ist es durch aktive Regel oder Spec überholt?
 Dient es späterer Prozessauswertung?
   → POSTMORTEM → lokales oder Root-Archiv je nach Scope
 
+Ist es eine Chronik (Output des Chronik-Prompts)?
+  → HIST + MAKING_OF_BELEG → Archiv/Chroniken/chronist-v1/
+    (Altbestand ohne Chronik-Prompt-Standard: → Archiv/Chroniken/legacy/)
+
 Ist es unklar?
   → ZU_PRUEFEN → nicht verschieben, Befund melden
 ```
@@ -196,6 +200,7 @@ Wenn mehrere Kategorien zutreffen: explizit benennen.
 | Projektweite Querschnittsentscheidung | `Archiv/[Themeninsel]/` (z.B. `Archiv/Peer Review Arbeitspakete/`) |
 | Subsystemnahe Entstehungsgeschichte | `[Subsystem]/Archiv/` (z.B. `Apps/prokrastinations-preis/Archiv/`, `docs/spec/archiv/`) |
 | Aktive Wahrheit | Nie ins Archiv als einzige Quelle — aktive Datei aktualisieren |
+| Chronik-Output (Ergebnis des Chronik-Prompts) | `Archiv/Chroniken/chronist-v1/` (Altbestand: `Archiv/Chroniken/legacy/`) |
 | Unklar | Nicht verschieben — `ZU_PRUEFEN`, Befund melden |
 
 Neuer `local/`-Unterordner: nur nach expliziter Freigabe im aktuellen `/archivieren`-Block oder durch gesonderten AP-Auftrag anlegen. Nicht pauschal, nicht automatisch.

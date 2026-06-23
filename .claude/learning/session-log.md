@@ -96,3 +96,15 @@ Wird geleert nach /distill. Einträge: [FRICTION] [WIN] [PREF] [QUESTION] [OK]
 - [WIN] CHART_PLUGIN_ARCHITEKTUR.md ist jetzt vollständig: alle aktiven Plugins, Barrel-Pattern, Import-Semantik, erlaubte Metadaten, Drift-Dokumente — kein Audit-Leck mehr
 
 ### 2026-06-22 — Kettenabschluss ✅ | RECONCILED: B1-AP-14e12
+
+## 2026-06-23 – SESSION START | [KETTENMODUS] | Fokus: APP-01 — prokrastinations-preis
+- FinanzwesirData.js, CSVParser.js, FwDateUtils.js — diese Session nicht berühren. ✓
+
+### 2026-06-23 — Housekeeping: Chronik-System eingebunden ✅
+- [OK] Schritt 1 (Realtest): 7× OK, Exit 0 — Validator sauber
+- [OK] Schritt 2 (NAVIGATION.md): 4 neue Routing-Einträge — /chronik-check, CHRONIK-SPEZIFIKATION.md, CHRONIK-PROMPT.md, Archiv/Chroniken/
+- [OK] Schritt 3 (Casing-Fix): Archiv/chroniken/ → Archiv/Chroniken/ an 3 Stellen in CHRONIK-SPEZIFIKATION.md
+- [OK] Schritt 4 (/archivieren verzahnt): SKILL-ARCHIVIEREN-SPEZIFIKATION.md — Chronik als Klassifikationsfall + Zielpfad ergänzt
+- [OK] Schritt 5 (Legacy-Frontmatter): beteiligte in 2 Dateien korrigiert (Perplexity führte den Faden; chatgpt+claude waren Material); schlagworte bestätigt. Validator: 7× OK
+- [WIN] Chronik-System vollständig integriert: SSoT, Prompt, Validator, Routing, /archivieren-Verzahnung, Legacy-Klassifikation — alles konsistent
+
