@@ -113,6 +113,15 @@ Wird geleert nach /distill. Einträge: [FRICTION] [WIN] [PREF] [QUESTION] [OK]
 ### 2026-06-22 — Kettenabschluss ✅ | RECONCILED: B1-AP-14e12
 
 ## 2026-06-23 – SESSION START | [KETTENMODUS] | Fokus: APP-01 — prokrastinations-preis
+
+### B1-AP-15e — AP-Wechsel
+
+### 2026-06-23 — B1-AP-15e ✅ | Motion Mini-QA abgeschlossen
+- [OK] Statische Code-Analyse: alle 4 Gates (Git-Arbeitsbaum, AP-15b, AP-15c, AP-15d) positiv
+- [OK] Browser-Smoke-Test durch Albert bestätigt: prefers-reduced-motion an/aus, Screen 1→2→3, Range-Wechsel
+- [WIN] AP-15-Motion-Komplex vollständig: 5 Sub-APs (15a–15e) grün, kein Drift, kein Endwissens-Leak
+
+### 2026-06-23 — Kettenabschluss ✅ | RECONCILED: B1-AP-15e
 - FinanzwesirData.js, CSVParser.js, FwDateUtils.js — diese Session nicht berühren. ✓
 
 ### B1-AP-15b — AP-Wechsel | Fokus: Reduced Motion chart.update()
