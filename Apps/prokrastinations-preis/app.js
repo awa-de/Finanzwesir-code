@@ -689,6 +689,13 @@ function validateStationsJson(json) {
     return { ok: false, code: 'missing_field', detail: 'motionRules' };
   if (json.motionRules.mode !== 'user_stepped')
     return { ok: false, code: 'invalid_value', detail: 'motionRules.mode must be "user_stepped"' };
+  // CHANGED: AP-15c — betweenStations, forcedWaitBeforeContinue, reducedMotion hart validiert
+  if (json.motionRules.betweenStations !== 'short_draw_animation')
+    return { ok: false, code: 'invalid_value', detail: 'motionRules.betweenStations must be "short_draw_animation"' };
+  if (json.motionRules.forcedWaitBeforeContinue !== false)
+    return { ok: false, code: 'invalid_value', detail: 'motionRules.forcedWaitBeforeContinue must be false' };
+  if (json.motionRules.reducedMotion !== 'instant_step')
+    return { ok: false, code: 'invalid_value', detail: 'motionRules.reducedMotion must be "instant_step"' };
 
   if (!Array.isArray(json.stations) || json.stations.length < 1)
     return { ok: false, code: 'missing_field', detail: 'stations (array, min length 1)' };

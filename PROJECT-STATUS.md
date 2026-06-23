@@ -2,16 +2,16 @@
 Version: 1
 Stand: 2026-06-23
 Fokus-AP: APP-01 — prokrastinations-preis
-Nächster-Schritt: B1-AP-15c — motionRules Validation Hardening (B1-AP-15b ✅ 2026-06-23)
+Nächster-Schritt: B1-AP-15d — Dead CSS Reduced-Motion Cleanup (B1-AP-15c ✅ 2026-06-23)
 Blocker: keine
 Letzter-Distill: 2026-06-22
 Kassensturz-Datum: 2026-06-22
 -->
-<!-- HOOK-META-SESSION: B1-AP-15b -->
+<!-- HOOK-META-SESSION: B1-AP-15c -->
 
 # PROJECT STATUS — Finanzwesir 2.0
 
-Stand: 2026-06-23 | Session: B1-AP-15b | Geändert von: Claude
+Stand: 2026-06-23 | Session: B1-AP-15c | Geändert von: Claude
 
 **Zweck:** Schneller Wiedereinstieg nach Pausen.
 **Zielgruppe:** Albert und Claude.

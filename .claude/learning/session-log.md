@@ -126,3 +126,8 @@ Wird geleert nach /distill. Einträge: [FRICTION] [WIN] [PREF] [QUESTION] [OK]
 - [OK] Beide Datenpfade abgedeckt: renderFromData() + _processContainer()
 - [WIN] Alle Tests bestätigt (DevTools Reduced Motion an/aus, Range-Wechsel, App-Pfad prokrastinations-preis)
 
+### 2026-06-23 — B1-AP-15c ✅ | motionRules Validation Hardening
+- [OK] 3 neue Guards in validateStationsJson(): betweenStations, forcedWaitBeforeContinue, reducedMotion
+- [OK] Positiv-Test: App läuft durch; Negativ-Test: Fehler-Overlay korrekt ausgelöst (reducedMotion BROKEN_TEST)
+- [WIN] Patch minimal und stilkonsistent — 3 Zeilen, exakter Stil der Nachbarn in validateStationsJson()
+
