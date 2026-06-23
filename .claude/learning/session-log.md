@@ -1,6 +1,15 @@
 ﻿# Session-Log — Finanzwesir 2.0
 Wird geleert nach /distill. Einträge: [FRICTION] [WIN] [PREF] [QUESTION] [OK]
 
+## 2026-06-23 – SESSION START | [KETTENMODUS] | Fokus: APP-01 — prokrastinations-preis
+
+### 2026-06-23 — B1-AP-15a ✅ Motion-Befund
+- [OK] Audit-AP abgeschlossen, kein Code geändert
+- [OK] Ergebnisprotokoll: docs/steering/patches/B1-AP-15a_Motion-Befund_Ergebnis.md
+- [WIN] Einziger echter RM-Gap: chart.update() ignoriert prefers-reduced-motion → chart.update('none') als Lösung identifiziert (B1-AP-15b)
+- [OK] Pulse: vollständig korrekt implementiert inkl. RM-Guard
+- [OK] Screen-Transitions: bereits ohne Animation (hidden-Toggle)
+
 ## 2026-06-22 – SESSION START | [KETTENMODUS] | Fokus: APP-01 — prokrastinations-preis
 - FinanzwesirData.js, CSVParser.js, FwDateUtils.js — diese Session nicht berühren. ✓
 

@@ -1,17 +1,17 @@
 <!-- HOOK-META
 Version: 1
-Stand: 2026-06-22
+Stand: 2026-06-23
 Fokus-AP: APP-01 — prokrastinations-preis
-Nächster-Schritt: B1-AP-15 — Transitions + Reduced Motion (B1-AP-14e12 ✅ 2026-06-22)
+Nächster-Schritt: B1-AP-15b — Reduced Motion chart.update() (B1-AP-15a ✅ 2026-06-23)
 Blocker: keine
 Letzter-Distill: 2026-06-22
 Kassensturz-Datum: 2026-06-22
 -->
-<!-- HOOK-META-SESSION: B1-AP-14e12 -->
+<!-- HOOK-META-SESSION: B1-AP-15a -->
 
 # PROJECT STATUS — Finanzwesir 2.0
 
-Stand: 2026-06-22 | Session: B1-AP-14e12 | Geändert von: Claude
+Stand: 2026-06-23 | Session: B1-AP-15a | Geändert von: Claude
 
 **Zweck:** Schneller Wiedereinstieg nach Pausen.
 **Zielgruppe:** Albert und Claude.
@@ -150,7 +150,8 @@ Stand: 2026-06-22 | Session: B1-AP-14e12 | Geändert von: Claude
 - **B1-AP-14c3b** ✅ 2026-06-18 — Final-Reveal-Guard gehärtet: `isFinalRevealStation()` (5 Guards, defensiv), Smoke-Test grün
 - **B1-AP-14c4** ✅ 2026-06-18 — Screen-2-Pulse-Animation: `FwAnnotationPulsePlugin.js` NEU (WeakMap, afterDraw, 2-Pulse-Formel, 1200ms/1.8x), chart.draw()-Pattern
 - **B1-AP-14e12** ✅ 2026-06-22 — Spec-Drift + Audit-Lücken geschlossen: X-Achsen-Docs I/II/III historisch markiert; CHART_PLUGIN_ARCHITEKTUR.md §4/§18/§20.3/§20.6/§20.8 ergänzt. Kein Code geändert.
-- **B1-AP-15** — Transitions + Reduced Motion (nächster Schritt)
+- **B1-AP-15a** ✅ 2026-06-23 — Motion-Befund (Audit, kein Code): Screen-Transitions ✅, Pulse ✅ (RM-Guard), RM-Lücke chart.update() identifiziert. Ergebnisprotokoll: `docs/steering/patches/B1-AP-15a_Motion-Befund_Ergebnis.md`
+- **B1-AP-15b** — Reduced Motion chart.update('none') (nächster Schritt)
 - **AP-20/21** (Mixed-Rhythm CV-Heuristik) — 🟡 Aktiv, Chart-Engine, parallel möglich
 
 ---
@@ -163,7 +164,7 @@ Stand: 2026-06-22 | Session: B1-AP-14e12 | Geändert von: Claude
 | Chart-Engine | Stabil, offene APs | Siehe `docs/steering/BACKLOG.md` |
 | Theme | In Entwicklung | `THEME-ASSEMBLY-CHECKLIST.md` |
 | CSS | Stabil | Siehe `docs/steering/BACKLOG.md` (CSS-N Items) |
-| Apps | Slice 6 ✅, AP-UX-01 ✅, B1-AP-01 bis B1-AP-14e12 ✅ 2026-06-22 | B1-AP-15 — Transitions + Reduced Motion |
+| Apps | Slice 6 ✅, AP-UX-01 ✅, B1-AP-01 bis B1-AP-15a ✅ 2026-06-23 | B1-AP-15b — Reduced Motion chart.update() |
 | Content | Laufend | Redaktionsleitfaden aktiv |
 | Security | SECURITY-BASELINE.md App-Fabrik-gatefähig ✅ | Security-Sync-Regel + Gate-Prüffrage verankert (ST-13/ST-14) |
 
