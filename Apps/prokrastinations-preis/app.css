@@ -107,13 +107,6 @@
   margin-top: var(--fw-space-md, 1rem);
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .fw-app__slider,
-  .fw-app__slider-value {
-    transition: none;
-  }
-}
-
 /* === Slice 5: Screen-Flow === */
 /* CHANGED — Slice 6: visuell dominant (war: 1.2em) */
 .fw-app__screen-headline {

@@ -48,6 +48,12 @@ Wird geleert nach /distill. Einträge: [FRICTION] [WIN] [PREF] [QUESTION] [OK]
 
 ### 2026-06-22 — Housekeeping: Commit-Message Langformat eingeführt ✅
 - [OK] abschluss-ritual/SKILL.md: §8.1 Langformat für Pfad A+B; §8.2 Kurzformat für Pfad C+D; §3.3 „im Kurzformat" → „im Langformat"
+
+### 2026-06-23 — B1-AP-15d ✅ | Dead CSS Reduced-Motion Cleanup
+- [OK] @media (prefers-reduced-motion: reduce)-Block entfernt (app.css Z.110–115, 7 Zeilen): .fw-app__slider + .fw-app__slider-value hatten keine aktive transition — Block war toter Code
+- [OK] AP-15b-Gate: _prefersReducedMotion() Z.477–485 + chart.update('none') Z.363 in ChartEngine.js vorhanden
+- [OK] AP-15c-Gate: motionRules-Validierung Z.688–698 in app.js vorhanden
+- [WIN] Chirurgischer Patch: 0 neue CSS-Regeln, 0 JS-Änderungen, Ergebnisprotokoll vollständig
 - [WIN] LLM-Tauglichkeitstest: Kurzform versagt bei Kontext-Queries (z.B. „warum kein FwBarLayoutPlugin?"); Langform liefert selbsterklärende git-History für geplanten Projekt-Debrief
 - [PREF] Tokensparnen nicht auf Kosten des Kontextes — bewusste Design-Entscheidung bestätigt
 
@@ -131,3 +137,5 @@ Wird geleert nach /distill. Einträge: [FRICTION] [WIN] [PREF] [QUESTION] [OK]
 - [OK] Positiv-Test: App läuft durch; Negativ-Test: Fehler-Overlay korrekt ausgelöst (reducedMotion BROKEN_TEST)
 - [WIN] Patch minimal und stilkonsistent — 3 Zeilen, exakter Stil der Nachbarn in validateStationsJson()
 
+
+## 2026-06-23 – SESSION START | [KETTENMODUS] | Fokus: APP-01 — B1-AP-15d
