@@ -1,6 +1,19 @@
 ﻿# Session-Log — Finanzwesir 2.0
 Wird geleert nach /distill. Einträge: [FRICTION] [WIN] [PREF] [QUESTION] [OK]
 
+## 2026-06-24 – SESSION START | [KETTENMODUS] | Fokus: APP-01 — prokrastinations-preis
+- FinanzwesirData.js, CSVParser.js, FwDateUtils.js — diese Session nicht berühren. ✓
+
+### 2026-06-24 — B1-AP-18b ✅ renderError role=alert Minifix
+- [OK] +1 Zeile app.js: p.setAttribute('role', 'alert') in renderError(); §14.13-Lücke geschlossen
+- [OK] DOM-A11y-Mini-QA durch Albert: 12 role="alert"-Elemente, 4 distinkte Texte bestätigt
+- [OK] kein Screenreader-Volltest — Browser-QA = DOM-Minitest; Volltest bleibt AP-19
+
+### 2026-06-24 — B1-AP-18c ✅ Mini-QA / AP-18-Abschluss / AP-19-Übergabe
+- [OK] AP-18 Gesamtstatus GRÜN mit offenen Nicht-Blockern; kein weiterer AP-18d nötig
+- [OK] 7 offene Punkte klassifiziert (G1 href, source_claimed_unchecked, produktive CSV, Error-State-d-Harness, Empty-Journey, Screenreader-Volltest, showScreen(3,false)-Hardening)
+- [OK] Übergabeliste für separaten B1-AP-19-Faden vorbereitet
+
 ## 2026-06-23 – SESSION START | [KETTENMODUS] | Fokus: APP-01 — prokrastinations-preis
 
 ### 2026-06-23 — B1-AP-15a ✅ Motion-Befund

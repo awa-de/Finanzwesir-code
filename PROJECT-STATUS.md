@@ -2,12 +2,12 @@
 Version: 1
 Stand: 2026-06-24
 Fokus-AP: APP-01 — prokrastinations-preis
-Nächster-Schritt: B1-AP-18b — Error-/Empty-State A11y-Minifix (B1-AP-18a ✅ 2026-06-24)
+Nächster-Schritt: B1-AP-19 — App-QA / Abschluss-Faden (B1-AP-18c ✅ 2026-06-24)
 Blocker: keine
 Letzter-Distill: 2026-06-22
 Kassensturz-Datum: 2026-06-22
 -->
-<!-- HOOK-META-SESSION: B1-AP-18a -->
+<!-- HOOK-META-SESSION: B1-AP-18c -->
 
 # PROJECT STATUS — Finanzwesir 2.0
 

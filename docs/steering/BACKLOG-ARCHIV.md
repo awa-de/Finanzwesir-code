@@ -1,11 +1,13 @@
 # BACKLOG-ARCHIV – Finanzwesir 2.0
-Stand: 2026-06-24 | Session: B1-AP-18a | Geändert von: Claude
+Stand: 2026-06-24 | Session: B1-AP-18c | Geändert von: Claude
 
 Abgeschlossene Items, neueste zuerst (append-only).
 Archivierungs-Trigger: wenn > 200 Zeilen → neue Datei `BACKLOG-ARCHIV-YYYY.md` anlegen.
 
 | ID | Bereich | Titel | Abgeschlossen | Session |
 |----|---------|-------|---------------|---------|
+| B1-AP-18c | QA/Abschluss | Mini-QA / AP-18-Abschluss / AP-19-Übergabe: AP-18b statisch + DOM-Mini-QA bestätigt; AP-18 Gesamtstatus GRÜN mit offenen Nicht-Blockern; 7 offene Punkte klassifiziert (G1 href, source_claimed_unchecked, produktive CSV, Error-State-d-Harness, Empty-Journey, Screenreader-Volltest, showScreen(3,false)-Hardening); Übergabeliste für AP-19-Faden vorbereitet. Ergebnisprotokoll: `docs/steering/patches/B1-AP-18c_Mini-QA_AP-18-Abschluss_AP-19-Uebergabe_Ergebnis.md`. *(sofort erledigt)* | 2026-06-24 | B1-AP-18c |
+| B1-AP-18b | App/A11y | renderError role=alert Minifix: p.setAttribute('role', 'alert') in renderError() eingefügt (+1 Zeile app.js); §14.13-Lücke geschlossen; DOM-A11y-Mini-QA durch Albert bestätigt (12 role="alert"-Elemente, 4 distinkte Texte); kein Screenreader-Volltest (bleibt AP-19). Ergebnisprotokoll: `docs/steering/patches/B1-AP-18b_renderError-role-alert-Minifix_Ergebnis.md`. *(sofort erledigt)* | 2026-06-24 | B1-AP-18b |
 | B1-AP-18a | QA/Triage | Error-/Empty-/QA-Readiness-Befund (Triage): Fehlerflächenkarte erstellt; 5 Top-Risiken (GELB); renderError() kein role="alert" → AP-18b-Kandidat (1 Zeile, Light-Gate); alle Error-/Empty-States stabil, kein Crash; source_claimed_unchecked Stationen editorial-Gap; test-data/-Fixtures vollständig. Ergebnisprotokoll: `docs/steering/patches/B1-AP-18a_Error-Empty-QA-Readiness-Befund_Ergebnis.md`. *(sofort erledigt)* | 2026-06-24 | B1-AP-18a |
 | B1-AP-16c | App/Screen-4 | Screen-4-Transfer-Text gemäß APP_SPEC hergestellt: Headline „Heute beginnt wieder ein Chart, dessen Ende niemand kennt." (APP_SPEC §16.2); Bodytext als `<p class="fw-app__screen-subline">` eingefügt; finaler CTA „Heute Marktzeit sammeln →" unverändert. Ergebnisprotokoll: `docs/steering/patches/B1-AP-16c_Screen-4-Transfer-Text-gemaess-APP-SPEC_Ergebnis.md`. *(sofort erledigt)* | 2026-06-24 | B1-AP-16c |
 | B1-AP-16d | QA/Mini-QA | Reveal-/Transfer-Mini-QA: 18-Punkte-Checkliste S1→S2→S3→S4→S3 durch Albert bestätigt; statische Code-Prüfung grün; AP-15-Motion intakt; AP-16-Komplex (16a–16d) vollständig. Ergebnisprotokoll: `docs/steering/patches/B1-AP-16d_Reveal-Transfer-Mini-QA_Ergebnis.md`. *(sofort erledigt)* | 2026-06-24 | B1-AP-16d |

@@ -40,6 +40,7 @@ function renderLoading(container) {
 
 function renderError(container, message) {
   const p = document.createElement('p');
+  p.setAttribute('role', 'alert'); // NEW — AP-18b §14.13
   p.textContent = message; // SafeDOM: textContent, niemals innerHTML (Q-01)
   container.appendChild(p);
 }
