@@ -486,6 +486,7 @@ function renderContent(container, appData, options, stationsConfig) { // CHANGED
   const chartEngine2 = new ChartEngine();
   const chartEngine3 = new ChartEngine();
   let lastRenderedRateS3 = null;
+  let lastRevealA11yText = ''; // NEW — AP-17b
 
   // NEW — AP-14: Zeitreise-Schritt rendern (ersetzt renderS2)
   // Kein Endwissen: nur Stations-Daten bis stationMonth sichtbar (APP_SPEC §14.1)
@@ -553,7 +554,10 @@ function renderContent(container, appData, options, stationsConfig) { // CHANGED
       const fmtReveal = new Intl.NumberFormat(appData.locale, {
         style: 'currency', currency: 'EUR', maximumFractionDigits: 0
       });
-      a11yRegion.textContent = `Wer vor 10 Jahren ${currentRate} € monatlich investiert hätte, hätte heute ${fmtReveal.format(ctx.depotwertHeute)} — bei ${fmtReveal.format(ctx.eingezahlt)} eingezahlt.`;
+      lastRevealA11yText = `Wer vor 10 Jahren ${currentRate} € monatlich investiert hätte, hätte heute ${fmtReveal.format(ctx.depotwertHeute)} — bei ${fmtReveal.format(ctx.eingezahlt)} eingezahlt.`; // CHANGED — AP-17b
+      a11yRegion.textContent = lastRevealA11yText;
+    } else if (n === 3 && lastRevealA11yText) { // NEW — AP-17b: re-announce bei Rückkehr zu S3
+      a11yRegion.textContent = lastRevealA11yText;
     }
   }
 
@@ -575,8 +579,8 @@ function renderContent(container, appData, options, stationsConfig) { // CHANGED
     } else {
       activeStationIndex++;
       renderJourneyStep(activeStationIndex);
-      const h2 = screen2.querySelector('h2');
-      if (h2) h2.focus();
+      const h3 = stationArea.querySelector('h3'); // CHANGED — AP-17b: Fokus auf Stations-h3 (APP_SPEC §14.5 Variante B)
+      (h3 ?? screen2.querySelector('h2'))?.focus();
     }
   });
 

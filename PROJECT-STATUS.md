@@ -2,16 +2,16 @@
 Version: 1
 Stand: 2026-06-24
 Fokus-AP: APP-01 — prokrastinations-preis
-Nächster-Schritt: B1-AP-17b — Navigation/Fokus minimal reparieren (B1-AP-17a ✅ 2026-06-24)
+Nächster-Schritt: B1-AP-18 — nächster Implementierungs-AP (B1-AP-17c ✅ 2026-06-24)
 Blocker: keine
 Letzter-Distill: 2026-06-22
 Kassensturz-Datum: 2026-06-22
 -->
-<!-- HOOK-META-SESSION: B1-AP-17a -->
+<!-- HOOK-META-SESSION: B1-AP-17c -->
 
 # PROJECT STATUS — Finanzwesir 2.0
 
-Stand: 2026-06-24 | Session: B1-AP-17a | Geändert von: Claude
+Stand: 2026-06-24 | Session: B1-AP-17c | Geändert von: Claude
 
 **Zweck:** Schneller Wiedereinstieg nach Pausen.
 **Zielgruppe:** Albert und Claude.
@@ -171,7 +171,7 @@ Stand: 2026-06-24 | Session: B1-AP-17a | Geändert von: Claude
 | Chart-Engine | Stabil, offene APs | Siehe `docs/steering/BACKLOG.md` |
 | Theme | In Entwicklung | `THEME-ASSEMBLY-CHECKLIST.md` |
 | CSS | Stabil | Siehe `docs/steering/BACKLOG.md` (CSS-N Items) |
-| Apps | Slice 6 ✅, AP-UX-01 ✅, B1-AP-01 bis B1-AP-17a ✅ 2026-06-24 | B1-AP-17b — Navigation/Fokus minimal reparieren |
+| Apps | Slice 6 ✅, AP-UX-01 ✅, B1-AP-01 bis B1-AP-17c ✅ 2026-06-24 | B1-AP-18 — nächster Implementierungs-AP |
 | Content | Laufend | Redaktionsleitfaden aktiv |
 | Security | SECURITY-BASELINE.md App-Fabrik-gatefähig ✅ | Security-Sync-Regel + Gate-Prüffrage verankert (ST-13/ST-14) |
 
@@ -207,8 +207,8 @@ Vollständig im DECISION-LOG dokumentiert (`docs/steering/DECISION-LOG.md`):
 
 ## 8. Letzte Session
 
-2026-06-24 — B1-AP-17a Navigation/Zurück-Weiter/Fokus-Befund ✅.
-Statische Code-Analyse + Browser-QA durch Albert bestätigt. Hauptflow, State-Flow, Endwissensgrenze und KPI-Idempotenz GRÜN. currentRate eingefroren nach S1→S2 — renderS3 läuft genau einmal pro Session, kein Duplikations-Risiko. 3 GELB-Befunde nicht-blockierend: S4 cta href='' (NB-1 bekannt), A11y reveal-Summary nicht re-announced bei S3-Rückkehr, Fokus auf h2 statt h3 bei Stationswechsel. Ergebnisprotokoll: docs/steering/patches/B1-AP-17a_Navigation-Zurueck-Weiter-Fokus-Befund_Ergebnis.md. Nächster Schritt: B1-AP-17b — Navigation/Fokus minimal reparieren.
+2026-06-24 — B1-AP-17-Komplex abgeschlossen (B1-AP-17a, B1-AP-17b, B1-AP-17c) ✅.
+B1-AP-17a: Navigation/Fokus-Befund, 3 GELB-Befunde (G1 href='', G2 Live-Region, G3 Fokus h3) — nicht-blockierend. B1-AP-17b: G2 + G3 minimal repariert (5 Zeilen app.js, renderS3-Guard erhalten, kein KPI-Duplikat). B1-AP-17c: G2 + G3 statisch verifiziert + Browser-Tests A–C durch Albert bestätigt; AD-G2 Restrisiko dokumentiert. AP-17 Gesamtstatus: GRÜN. G1 href="" bewusst offen (wartet auf Ziel-URL). Nächster Schritt: B1-AP-18.
 
 2026-06-24 — AP-16-Komplex abgeschlossen (B1-AP-16c, B1-AP-16d).
 B1-AP-16c: Screen-4-Headline + Bodytext auf APP_SPEC §16.2 gesetzt; `<p class="fw-app__screen-subline">` NEU; finaler CTA unverändert. Alle Tests grün. B1-AP-16d: Reveal-/Transfer-Mini-QA — 18-Punkte-Checkliste (S1→S2→S3→S4→S3) durch Albert bestätigt, alle statischen Prüfpunkte grün, AP-15-Motion intakt. AP-16-Komplex (16a–16d) vollständig. Nächster Schritt: B1-AP-17a — Navigation/Zurück-Weiter/Fokus-Befund.

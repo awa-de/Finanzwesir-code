@@ -199,3 +199,19 @@ Wird geleert nach /distill. Einträge: [FRICTION] [WIN] [PREF] [QUESTION] [OK]
 - [OK] Hauptflow, State-Flow, Endwissensgrenze, KPI-Idempotenz GRÜN
 - [OK] 3 GELB-Befunde nicht-blockierend: S4 cta href='' (NB-1), A11y Re-Announce S3-Rückkehr, Fokus h2 statt h3 bei Stationswechsel
 - [WIN] currentRate-Einfrierung nach S1→S2 macht renderS3-Guard strukturell robust — KPI-Idempotenz strukturell gesichert, nicht nur defensiv
+
+### 2026-06-24 — B1-AP-17b ✅ | A11y-/Fokus-Minifix umgesetzt
+- [OK] G2: lastRevealA11yText + else-if-Zweig — Live-Region bei jedem S3-Eintritt (5 Zeilen app.js)
+- [OK] G3: stationArea.querySelector('h3')-Fokus mit h2-Fallback nach Stationswechsel
+- [OK] renderS3-Guard erhalten, kein KPI-Duplikat, kein Endwissens-Leak
+- [WIN] Haiku-Dispatch für Gates 1–4 vor Patch — vollständige Faktensammlung ohne Sonnet-Overhead
+
+### 2026-06-24 — B1-AP-17c ✅ | A11y-/Fokus-Mini-QA abgeschlossen
+- [OK] G2 + G3 statisch verifiziert; Browser-Tests A–C durch Albert bestätigt
+- [OK] AD-G2 bewertet: Restrisiko dokumentiert (heute nicht auslösbar, kein showScreen(3,false)-Pfad)
+- [OK] AP-17 Gesamtstatus: GRÜN
+
+### 2026-06-24 — Kettenabschluss ✅ | RECONCILED: B1-AP-17b B1-AP-17c
+
+### B1-AP-17b — AP-Wechsel
+- FinanzwesirData.js, CSVParser.js, FwDateUtils.js — diese Session nicht berühren. ✓
