@@ -418,13 +418,17 @@ function renderContent(container, appData, options, stationsConfig) { // CHANGED
 
   const sublineS3 = document.createElement('p'); // NEW — Slice 6
   sublineS3.className = 'fw-app__screen-subline';
-  sublineS3.textContent = 'Derselbe Verlauf — der Strich markiert den letzten verfügbaren Monat, also heute.';
+  sublineS3.textContent = 'Die Strecke wirkt im Rückblick ruhiger, weil du das Ende jetzt kennst. Vor 10 Jahren kannte sie niemand.'; // CHANGED — B1-AP-16b (APP_SPEC §16.2)
   screen3.appendChild(sublineS3);
 
   const chartSection3 = document.createElement('div');
   chartSection3.setAttribute('data-fw-appchart', 'sparplan-s3'); // CHANGED — Slice 6: VertikaleLinie via features
   chartSection3.className = 'fw-app__chart-section';
   screen3.appendChild(chartSection3);
+
+  const kpiContainerS3 = document.createElement('div'); // NEW — B1-AP-16b: KPI-Mount-Point (APP_SPEC §6, §23.6)
+  kpiContainerS3.className = 'fw-app__kpi-slot';
+  screen3.appendChild(kpiContainerS3);
 
   const assumptionsS3 = document.createElement('aside'); // NEW — Slice 6: AssumptionsBox (APP_SPEC §19.8)
   assumptionsS3.className = 'fw-app__assumptions';
@@ -434,7 +438,7 @@ function renderContent(container, appData, options, stationsConfig) { // CHANGED
   const navS3 = document.createElement('div');
   navS3.className = 'fw-app__screen-nav';
   const btnS3Prev = makeBtn('← Zurück', 'fw-app__btn--prev');
-  const btnS3Next = makeBtn('Weiter →', 'fw-app__btn--next');
+  const btnS3Next = makeBtn('Meine nächsten 10 Jahre starten', 'fw-app__btn--next'); // CHANGED — B1-AP-16b (E-04)
   navS3.appendChild(btnS3Prev);
   navS3.appendChild(btnS3Next);
   screen3.appendChild(navS3);
@@ -520,6 +524,8 @@ function renderContent(container, appData, options, stationsConfig) { // CHANGED
       annotations: { events: revealAnnotations } // NEW — B1-AP-14c3
     });
     lastRenderedRateS3 = rate;
+    kpiContainerS3.textContent = ''; // CHANGED — B1-AP-16b: clear vor re-render (kein Duplikat)
+    renderKpiCards(kpiContainerS3, ctx); // NEW — B1-AP-16b: KPI-Cards sichtbar (APP_SPEC §6, §23.6)
     return ctx; // CHANGED — AP-14: ctx für revealA11ySummary in showScreen(3)
   }
 

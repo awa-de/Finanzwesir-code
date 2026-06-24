@@ -158,3 +158,14 @@ Wird geleert nach /distill. Einträge: [FRICTION] [WIN] [PREF] [QUESTION] [OK]
 - [OK] Datenflusskarte + Seiteneffektanalyse: keine AP-15-Regression, kein Tabu-Bereich, getrennte ChartEngines
 - [OK] Reparaturkette B1-AP-16b/c/d definiert; Voraussetzung E-04 (CTA-Label) vor AP-16b klaeren
 - [WIN] Haiku-Subagenten Spec-Scout + Code-Scout -- vollstaendige Faktensammlung ohne Sonnet-Overhead
+
+### B1-AP-16b — AP-Wechsel
+- FinanzwesirData.js, CSVParser.js, FwDateUtils.js — diese Session nicht berühren. ✓
+
+### 2026-06-24 — B1-AP-16b ✅ | Screen-3-Reveal gemäß APP_SPEC vervollständigt
+- [OK] KPI-Container (div.fw-app__kpi-slot) nach chartSection3 in Screen-3-DOM eingefügt; Reihenfolge: Chart → KPI-Cards → AssumptionsBox (APP_SPEC §23.6)
+- [OK] renderKpiCards(kpiContainerS3, ctx) in renderS3() aufgerufen; textContent=''-Clear schützt vor Duplikat bei Rate-Wechsel
+- [OK] Subline auf APP_SPEC §16.2 gesetzt (exakter Wortlaut)
+- [OK] S3→S4 CTA auf E-04 gesetzt: „Meine nächsten 10 Jahre starten" (kein Pfeil — abweichend von ←/→-Konvention, da E-04 explizit benannt)
+- [OK] Alle 5 Testfälle durch Albert bestätigt
+- [WIN] Haiku-Dispatch für alle 6 Gate-Prüfungen — vollständige Faktensammlung vor Patch, kein Raten
