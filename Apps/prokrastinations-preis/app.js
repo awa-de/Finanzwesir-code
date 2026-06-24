@@ -452,8 +452,13 @@ function renderContent(container, appData, options, stationsConfig) { // CHANGED
   const h2S4 = document.createElement('h2');
   h2S4.className = 'fw-app__screen-headline';
   h2S4.tabIndex = -1;
-  h2S4.textContent = 'Wenn du jetzt wieder wartest, wird heute in zehn Jahren wieder der verpasste Zeitpunkt sein.';
+  h2S4.textContent = 'Heute beginnt wieder ein Chart, dessen Ende niemand kennt.'; // CHANGED — B1-AP-16c (APP_SPEC §16.2)
   screen4.appendChild(h2S4);
+
+  const bodyS4 = document.createElement('p'); // NEW — B1-AP-16c (APP_SPEC §16.2)
+  bodyS4.className = 'fw-app__screen-subline';
+  bodyS4.textContent = 'Die letzten 10 Jahre sehen im Rückblick leichter aus, als sie sich unterwegs angefühlt hätten. Die nächsten 10 Jahre werden anders schwierig sein. Aber sie beginnen genauso: ohne fertigen Chart.';
+  screen4.appendChild(bodyS4);
 
   const cta = document.createElement('a'); // CHANGED — Slice 6: finales CTA-Styling; href leer (NB-1)
   cta.className = 'fw-app__cta';

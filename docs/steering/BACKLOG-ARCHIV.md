@@ -1,11 +1,13 @@
 # BACKLOG-ARCHIV – Finanzwesir 2.0
-Stand: 2026-06-24 | Session: B1-AP-16b | Geändert von: Claude
+Stand: 2026-06-24 | Session: B1-AP-16d | Geändert von: Claude
 
 Abgeschlossene Items, neueste zuerst (append-only).
 Archivierungs-Trigger: wenn > 200 Zeilen → neue Datei `BACKLOG-ARCHIV-YYYY.md` anlegen.
 
 | ID | Bereich | Titel | Abgeschlossen | Session |
 |----|---------|-------|---------------|---------|
+| B1-AP-16c | App/Screen-4 | Screen-4-Transfer-Text gemäß APP_SPEC hergestellt: Headline „Heute beginnt wieder ein Chart, dessen Ende niemand kennt." (APP_SPEC §16.2); Bodytext als `<p class="fw-app__screen-subline">` eingefügt; finaler CTA „Heute Marktzeit sammeln →" unverändert. Ergebnisprotokoll: `docs/steering/patches/B1-AP-16c_Screen-4-Transfer-Text-gemaess-APP-SPEC_Ergebnis.md`. *(sofort erledigt)* | 2026-06-24 | B1-AP-16c |
+| B1-AP-16d | QA/Mini-QA | Reveal-/Transfer-Mini-QA: 18-Punkte-Checkliste S1→S2→S3→S4→S3 durch Albert bestätigt; statische Code-Prüfung grün; AP-15-Motion intakt; AP-16-Komplex (16a–16d) vollständig. Ergebnisprotokoll: `docs/steering/patches/B1-AP-16d_Reveal-Transfer-Mini-QA_Ergebnis.md`. *(sofort erledigt)* | 2026-06-24 | B1-AP-16d |
 | B1-AP-16b | App/Reveal | Screen-3-Reveal gemäß APP_SPEC vervollständigt: KPI-Container (div.fw-app__kpi-slot) nach chartSection3 eingefügt; renderKpiCards(kpiContainerS3, ctx) in renderS3() aufgerufen; Subline auf APP_SPEC §16.2; S3→S4 CTA E-04: „Meine nächsten 10 Jahre starten". Alle 5 Testfälle grün. Ergebnisprotokoll: `docs/steering/patches/B1-AP-16b_Screen-3-Reveal-gemaess-APP-SPEC_Ergebnis.md`. *(sofort erledigt)* | 2026-06-24 | B1-AP-16b |
 | B1-AP-16a | Audit | Reveal-/Transfer-Contract-Audit (kein Code): APP_SPEC Screen-3/4 Soll-Vertrag extrahiert; `renderKpiCards()` vorhanden aber nie aufgerufen, kein DOM-Container; Screen-4-Texte spec-fremd; 5 Abweichungen; Datenflusskarte + Seiteneffektanalyse; Reparaturkette B1-AP-16b/c/d. Ergebnisprotokoll: `docs/steering/patches/B1-AP-16a_Reveal-Transfer-Contract-Audit_Ergebnis.md`. *(sofort erledigt)* | 2026-06-24 | B1-AP-16a |
 | B1-AP-15d | App/CSS | Dead CSS Reduced-Motion Cleanup: wirkungsloser `@media (prefers-reduced-motion: reduce)`-Block aus `app.css` entfernt (Z.110–115, 7 Zeilen) — `.fw-app__slider` und `.fw-app__slider-value` hatten keine aktive `transition`. Keine neuen CSS-Regeln eingeführt. AP-15b-Gate + AP-15c-Gate grün. Ergebnisprotokoll: `docs/steering/patches/B1-AP-15d_Dead-CSS-Reduced-Motion-Cleanup_Ergebnis.md`. *(sofort erledigt)* | 2026-06-23 | B1-AP-15d |

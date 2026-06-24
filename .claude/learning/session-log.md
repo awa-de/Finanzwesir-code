@@ -162,6 +162,27 @@ Wird geleert nach /distill. Einträge: [FRICTION] [WIN] [PREF] [QUESTION] [OK]
 ### B1-AP-16b — AP-Wechsel
 - FinanzwesirData.js, CSVParser.js, FwDateUtils.js — diese Session nicht berühren. ✓
 
+### B1-AP-16c — AP-Wechsel
+- FinanzwesirData.js, CSVParser.js, FwDateUtils.js — diese Session nicht berühren. ✓
+
+### 2026-06-24 — B1-AP-16c ✅ | Screen-4-Transfer-Text gemäß APP_SPEC hergestellt
+- [OK] Headline ersetzt: „Heute beginnt wieder ein Chart, dessen Ende niemand kennt." (APP_SPEC §16.2)
+- [OK] Bodytext NEU als `<p class="fw-app__screen-subline">` eingefügt (APP_SPEC §16.2): „Die letzten 10 Jahre sehen im Rückblick leichter aus..."
+- [OK] Finaler CTA „Heute Marktzeit sammeln →" unverändert
+- [OK] Alle Tests bestätigt. Ergebnisprotokoll: docs/steering/patches/B1-AP-16c_Screen-4-Transfer-Text-gemaess-APP-SPEC_Ergebnis.md
+- [WIN] DOM-Konvention: bestehende .fw-app__screen-subline-Klasse wiederverwendet — null Zeilen CSS-Änderung
+
+### B1-AP-16d — AP-Wechsel
+- FinanzwesirData.js, CSVParser.js, FwDateUtils.js — diese Session nicht berühren. ✓
+
+### 2026-06-24 — B1-AP-16d ✅ | Reveal-/Transfer-Mini-QA abgeschlossen
+- [OK] Alle statischen Prüfpunkte grün: KPI-Container, renderKpiCards, Duplikatschutz, S3-Subline, S3→S4 CTA, S4 Headline/Bodytext/CTA, kein Chart/KPI/Prognose auf S4
+- [OK] 18-Punkte-Checkliste S1→S2→S3→S4→S3 durch Albert bestätigt
+- [OK] AP-15-Motion-Fixes intakt; Endwissensgrenze Screen 2 intakt
+- [WIN] Reveal-/Transfer-Komplex AP-16a–16d vollständig abgeschlossen
+
+### 2026-06-24 — Kettenabschluss ✅ | RECONCILED: B1-AP-16c B1-AP-16d
+
 ### 2026-06-24 — B1-AP-16b ✅ | Screen-3-Reveal gemäß APP_SPEC vervollständigt
 - [OK] KPI-Container (div.fw-app__kpi-slot) nach chartSection3 in Screen-3-DOM eingefügt; Reihenfolge: Chart → KPI-Cards → AssumptionsBox (APP_SPEC §23.6)
 - [OK] renderKpiCards(kpiContainerS3, ctx) in renderS3() aufgerufen; textContent=''-Clear schützt vor Duplikat bei Rate-Wechsel

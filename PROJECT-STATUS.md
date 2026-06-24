@@ -2,16 +2,16 @@
 Version: 1
 Stand: 2026-06-24
 Fokus-AP: APP-01 — prokrastinations-preis
-Nächster-Schritt: B1-AP-16c — Screen-4-Transfer-Text herstellen (B1-AP-16b ✅ 2026-06-24)
+Nächster-Schritt: B1-AP-17a — Navigation/Zurück-Weiter/Fokus-Befund (B1-AP-16d ✅ 2026-06-24)
 Blocker: keine
 Letzter-Distill: 2026-06-22
 Kassensturz-Datum: 2026-06-22
 -->
-<!-- HOOK-META-SESSION: B1-AP-16b -->
+<!-- HOOK-META-SESSION: B1-AP-16d -->
 
 # PROJECT STATUS — Finanzwesir 2.0
 
-Stand: 2026-06-24 | Session: B1-AP-16b | Geändert von: Claude
+Stand: 2026-06-24 | Session: B1-AP-16d | Geändert von: Claude
 
 **Zweck:** Schneller Wiedereinstieg nach Pausen.
 **Zielgruppe:** Albert und Claude.
@@ -152,7 +152,13 @@ Stand: 2026-06-24 | Session: B1-AP-16b | Geändert von: Claude
 - **B1-AP-14e12** ✅ 2026-06-22 — Spec-Drift + Audit-Lücken geschlossen: X-Achsen-Docs I/II/III historisch markiert; CHART_PLUGIN_ARCHITEKTUR.md §4/§18/§20.3/§20.6/§20.8 ergänzt. Kein Code geändert.
 - **B1-AP-15a** ✅ 2026-06-23 — Motion-Befund (Audit, kein Code): Screen-Transitions ✅, Pulse ✅ (RM-Guard), RM-Lücke chart.update() identifiziert. Ergebnisprotokoll: `docs/steering/patches/B1-AP-15a_Motion-Befund_Ergebnis.md`
 - **B1-AP-15b** ✅ 2026-06-23 — ChartEngine Reduced Motion Fix: `_prefersReducedMotion()` NEU; Initial-Render `animation = false`; Update-Pfad `chart.update('none')`. Alle Tests bestätigt.
-- **B1-AP-15c** — `motionRules` Validation Hardening (nur nach Freigabe)
+- **B1-AP-15c** ✅ 2026-06-23 — motionRules Validation Hardening: 3 Guards in validateStationsJson() (betweenStations, forcedWaitBeforeContinue, reducedMotion). Alle Tests bestätigt.
+- **B1-AP-15d** ✅ 2026-06-23 — Dead CSS Reduced-Motion Cleanup: @media-Block entfernt (app.css Z.110–115, toter Code).
+- **B1-AP-15e** ✅ 2026-06-23 — Motion Mini-QA: Browser-Smoke-Test bestätigt, AP-15-Komplex vollständig.
+- **B1-AP-16a** ✅ 2026-06-24 — Reveal-/Transfer-Contract-Audit: 5 Abweichungen identifiziert, Reparaturkette 16b/c/d definiert.
+- **B1-AP-16b** ✅ 2026-06-24 — Screen-3-Reveal: KPI-Container + renderKpiCards + Subline + S3→S4-CTA gem. APP_SPEC. Alle 5 Tests grün.
+- **B1-AP-16c** ✅ 2026-06-24 — Screen-4-Transfer-Text: Headline + Bodytext gem. APP_SPEC §16.2. Alle Tests grün.
+- **B1-AP-16d** ✅ 2026-06-24 — Reveal-/Transfer-Mini-QA: 18-Punkte-Checkliste durch Albert bestätigt. AP-16-Komplex vollständig.
 - **AP-20/21** (Mixed-Rhythm CV-Heuristik) — 🟡 Aktiv, Chart-Engine, parallel möglich
 
 ---
@@ -165,7 +171,7 @@ Stand: 2026-06-24 | Session: B1-AP-16b | Geändert von: Claude
 | Chart-Engine | Stabil, offene APs | Siehe `docs/steering/BACKLOG.md` |
 | Theme | In Entwicklung | `THEME-ASSEMBLY-CHECKLIST.md` |
 | CSS | Stabil | Siehe `docs/steering/BACKLOG.md` (CSS-N Items) |
-| Apps | Slice 6 ✅, AP-UX-01 ✅, B1-AP-01 bis B1-AP-15e ✅ 2026-06-23 | B1-AP-16a — Screen-4-Befund / No-Forecast |
+| Apps | Slice 6 ✅, AP-UX-01 ✅, B1-AP-01 bis B1-AP-16d ✅ 2026-06-24 | B1-AP-17a — Navigation/Zurück-Weiter/Fokus-Befund |
 | Content | Laufend | Redaktionsleitfaden aktiv |
 | Security | SECURITY-BASELINE.md App-Fabrik-gatefähig ✅ | Security-Sync-Regel + Gate-Prüffrage verankert (ST-13/ST-14) |
 
@@ -200,6 +206,9 @@ Vollständig im DECISION-LOG dokumentiert (`docs/steering/DECISION-LOG.md`):
 ---
 
 ## 8. Letzte Session
+
+2026-06-24 — AP-16-Komplex abgeschlossen (B1-AP-16c, B1-AP-16d).
+B1-AP-16c: Screen-4-Headline + Bodytext auf APP_SPEC §16.2 gesetzt; `<p class="fw-app__screen-subline">` NEU; finaler CTA unverändert. Alle Tests grün. B1-AP-16d: Reveal-/Transfer-Mini-QA — 18-Punkte-Checkliste (S1→S2→S3→S4→S3) durch Albert bestätigt, alle statischen Prüfpunkte grün, AP-15-Motion intakt. AP-16-Komplex (16a–16d) vollständig. Nächster Schritt: B1-AP-17a — Navigation/Zurück-Weiter/Fokus-Befund.
 
 2026-06-22 — B1-AP-14e12 Spec-Drift und Audit-Lücken endgültig geschlossen ✅.
 X-Achsen-Docs I/II/III mit Statusbannern als historische Designintention markiert. CHART_PLUGIN_ARCHITEKTUR.md: §4 Opt-in-Klärung (Strategy-Default), §18 §20-Kurzregeln erweitert (8 neue Punkte), §20.3 selektive Barrel-Imports erklärt, §20.6 Spec-Drift-Hinweis auf alle 3 Docs ausgeweitet, §20.8 NEU (_originalDate-Abgrenzung zu _fwGeometry). NAVIGATION.md: Plugin-Routing-Hinweis, AP-14e12-Eintrag im B1-Block. Alle 9 Audit-Befunde geschlossen. Kein Code, kein CSS, kein JSON geändert. Ergebnisprotokoll: docs/steering/patches/AP-14e12_Spec-Drift-und-Audit-Luecken-endgueltig-schliessen_Ergebnis.md. Nächster Schritt: B1-AP-15 — Transitions + Reduced Motion.
