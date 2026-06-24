@@ -1,5 +1,5 @@
 # NAVIGATION.md – Finanzwesir 2.0
-Stand: 2026-06-24 | Session: B1-AP-16d | Geändert von: Claude
+Stand: 2026-06-24 | Session: B1-AP-17a | Geändert von: Claude
 
 Für Claude: **Routing-Dokument.** Wird beim Session-Start (Schritt 2) gelesen.
 Gibt Pfade und Lese-Reihenfolgen vor — KEINE Verhaltensregeln (die stehen in CLAUDE.md).
@@ -221,6 +221,7 @@ Nach Abschluss: `/abschluss-ritual`.
 > B1-AP-16b ✅ 2026-06-24 — Screen-3-Reveal vervollständigt: KPI-Container (div.fw-app__kpi-slot) nach chartSection3 in Screen-3-DOM eingefügt; renderKpiCards(kpiContainerS3, ctx) in renderS3() aufgerufen mit textContent=''-Clear (kein Duplikat); Subline auf APP_SPEC §16.2 gesetzt; S3→S4 CTA auf E-04: „Meine nächsten 10 Jahre starten". Alle 5 Testfälle grün. Ergebnisprotokoll: `docs/steering/patches/B1-AP-16b_Screen-3-Reveal-gemaess-APP-SPEC_Ergebnis.md`. Nächster Schritt: B1-AP-16c — Screen-4-Transfer-Text herstellen.
 > B1-AP-16c ✅ 2026-06-24 — Screen-4-Transfer-Text gemäß APP_SPEC hergestellt: Headline „Heute beginnt wieder ein Chart, dessen Ende niemand kennt." (APP_SPEC §16.2); Bodytext als `<p class="fw-app__screen-subline">` eingefügt; finaler CTA „Heute Marktzeit sammeln →" unverändert. Ergebnisprotokoll: `docs/steering/patches/B1-AP-16c_Screen-4-Transfer-Text-gemaess-APP-SPEC_Ergebnis.md`.
 > B1-AP-16d ✅ 2026-06-24 — Reveal-/Transfer-Mini-QA: 18-Punkte-Checkliste S1→S2→S3→S4→S3 durch Albert bestätigt; alle statischen Prüfpunkte grün; AP-15-Motion intakt; AP-16-Komplex vollständig. Ergebnisprotokoll: `docs/steering/patches/B1-AP-16d_Reveal-Transfer-Mini-QA_Ergebnis.md`. Nächster Schritt: B1-AP-17a — Navigation/Zurück-Weiter/Fokus-Befund.
+> B1-AP-17a ✅ 2026-06-24 — Navigation/Zurück-Weiter/Fokus-Befund: statische Code-Analyse + Browser-QA durch Albert bestätigt; Hauptflow/State-Flow/Endwissensgrenze/KPI-Idempotenz GRÜN; 3 GELB-Befunde nicht-blockierend (S4 cta href='', A11y Re-Announce S3-Rückkehr, Fokus h2 statt h3). Ergebnisprotokoll: `docs/steering/patches/B1-AP-17a_Navigation-Zurueck-Weiter-Fokus-Befund_Ergebnis.md`. Nächster Schritt: B1-AP-17b — Navigation/Fokus minimal reparieren.
 > `Apps/prokrastinations-preis/config/stations.de.json` — produktive Stationen-Konfiguration v2.1 (B1-AP-09 ✅, AP-10a Flags bereinigt ✅ 2026-06-17)
 > `Apps/prokrastinations-preis/STATIONS_IMPLEMENTATION_PLAN.md` — Implementierungsplan für Stationen-Zeitreise Coding-Slices AP-11–AP-18, V1.1 (B1-AP-10 ✅, AP-10a Semantik bereinigt ✅ 2026-06-17)
 > B1 ist Pilot-2 (Daten-/Chart-/Story-Pilot). Pilot-1 ist `risiko-uebersetzer` (Calculator-Pilot) — entschieden E-02, 2026-05-28.
