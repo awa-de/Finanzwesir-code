@@ -148,3 +148,13 @@ Wird geleert nach /distill. Einträge: [FRICTION] [WIN] [PREF] [QUESTION] [OK]
 
 
 ## 2026-06-23 – SESSION START | [KETTENMODUS] | Fokus: APP-01 — B1-AP-15d
+
+## 2026-06-24 – SESSION START | [KETTENMODUS] | Fokus: APP-01 — prokrastinations-preis
+
+### 2026-06-24 - B1-AP-16a - Reveal-/Transfer-Contract-Audit
+- [OK] APP_SPEC Screen-3/4 Soll-Vertrag vollstaendig extrahiert (Spec-Scout Haiku)
+- [OK] app.js Ist-Zustand rekonstruiert: renderKpiCards() definiert (Z.112-144), nie aufgerufen, kein DOM-Container in Screen-3-DOM (Code-Scout Haiku)
+- [OK] 5 Abweichungen identifiziert: KPI fehlt komplett, Subline falsch, S3-CTA generisch, S4-Headline falsch, S4-Bodytext fehlt
+- [OK] Datenflusskarte + Seiteneffektanalyse: keine AP-15-Regression, kein Tabu-Bereich, getrennte ChartEngines
+- [OK] Reparaturkette B1-AP-16b/c/d definiert; Voraussetzung E-04 (CTA-Label) vor AP-16b klaeren
+- [WIN] Haiku-Subagenten Spec-Scout + Code-Scout -- vollstaendige Faktensammlung ohne Sonnet-Overhead

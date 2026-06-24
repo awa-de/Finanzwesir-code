@@ -1,17 +1,17 @@
 <!-- HOOK-META
 Version: 1
-Stand: 2026-06-23
+Stand: 2026-06-24
 Fokus-AP: APP-01 — prokrastinations-preis
-Nächster-Schritt: B1-AP-16a — Screen-4-Befund / No-Forecast / Transfer auf heute (B1-AP-15e ✅ 2026-06-23)
+Nächster-Schritt: B1-AP-16b — Screen-3-Reveal vervollständigen (B1-AP-16a ✅ 2026-06-24)
 Blocker: keine
 Letzter-Distill: 2026-06-22
 Kassensturz-Datum: 2026-06-22
 -->
-<!-- HOOK-META-SESSION: B1-AP-15e -->
+<!-- HOOK-META-SESSION: B1-AP-16a -->
 
 # PROJECT STATUS — Finanzwesir 2.0
 
-Stand: 2026-06-23 | Session: B1-AP-15e | Geändert von: Claude
+Stand: 2026-06-24 | Session: B1-AP-16a | Geändert von: Claude
 
 **Zweck:** Schneller Wiedereinstieg nach Pausen.
 **Zielgruppe:** Albert und Claude.
