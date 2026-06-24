@@ -1,11 +1,12 @@
 # BACKLOG-ARCHIV – Finanzwesir 2.0
-Stand: 2026-06-24 | Session: B1-AP-17c | Geändert von: Claude
+Stand: 2026-06-24 | Session: B1-AP-18a | Geändert von: Claude
 
 Abgeschlossene Items, neueste zuerst (append-only).
 Archivierungs-Trigger: wenn > 200 Zeilen → neue Datei `BACKLOG-ARCHIV-YYYY.md` anlegen.
 
 | ID | Bereich | Titel | Abgeschlossen | Session |
 |----|---------|-------|---------------|---------|
+| B1-AP-18a | QA/Triage | Error-/Empty-/QA-Readiness-Befund (Triage): Fehlerflächenkarte erstellt; 5 Top-Risiken (GELB); renderError() kein role="alert" → AP-18b-Kandidat (1 Zeile, Light-Gate); alle Error-/Empty-States stabil, kein Crash; source_claimed_unchecked Stationen editorial-Gap; test-data/-Fixtures vollständig. Ergebnisprotokoll: `docs/steering/patches/B1-AP-18a_Error-Empty-QA-Readiness-Befund_Ergebnis.md`. *(sofort erledigt)* | 2026-06-24 | B1-AP-18a |
 | B1-AP-16c | App/Screen-4 | Screen-4-Transfer-Text gemäß APP_SPEC hergestellt: Headline „Heute beginnt wieder ein Chart, dessen Ende niemand kennt." (APP_SPEC §16.2); Bodytext als `<p class="fw-app__screen-subline">` eingefügt; finaler CTA „Heute Marktzeit sammeln →" unverändert. Ergebnisprotokoll: `docs/steering/patches/B1-AP-16c_Screen-4-Transfer-Text-gemaess-APP-SPEC_Ergebnis.md`. *(sofort erledigt)* | 2026-06-24 | B1-AP-16c |
 | B1-AP-16d | QA/Mini-QA | Reveal-/Transfer-Mini-QA: 18-Punkte-Checkliste S1→S2→S3→S4→S3 durch Albert bestätigt; statische Code-Prüfung grün; AP-15-Motion intakt; AP-16-Komplex (16a–16d) vollständig. Ergebnisprotokoll: `docs/steering/patches/B1-AP-16d_Reveal-Transfer-Mini-QA_Ergebnis.md`. *(sofort erledigt)* | 2026-06-24 | B1-AP-16d |
 | B1-AP-17a | A11y/Navigation | Navigation/Zurück-Weiter/Fokus-Befund: statische Code-Analyse + Browser-QA; Hauptflow/Endwissensgrenze/KPI-Idempotenz GRÜN; 3 GELB-Befunde nicht-blockierend (G1 href='', G2 Live-Region, G3 Fokus h3). Status: GELB/nicht-blockierend. Ergebnisprotokoll: `docs/steering/patches/B1-AP-17a_Navigation-Zurueck-Weiter-Fokus-Befund_Ergebnis.md`. *(sofort erledigt)* | 2026-06-24 | B1-AP-17a |

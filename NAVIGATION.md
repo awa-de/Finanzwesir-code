@@ -1,5 +1,5 @@
 # NAVIGATION.md – Finanzwesir 2.0
-Stand: 2026-06-24 | Session: B1-AP-17a | Geändert von: Claude
+Stand: 2026-06-24 | Session: B1-AP-18a | Geändert von: Claude
 
 Für Claude: **Routing-Dokument.** Wird beim Session-Start (Schritt 2) gelesen.
 Gibt Pfade und Lese-Reihenfolgen vor — KEINE Verhaltensregeln (die stehen in CLAUDE.md).
@@ -223,7 +223,8 @@ Nach Abschluss: `/abschluss-ritual`.
 > B1-AP-16d ✅ 2026-06-24 — Reveal-/Transfer-Mini-QA: 18-Punkte-Checkliste S1→S2→S3→S4→S3 durch Albert bestätigt; alle statischen Prüfpunkte grün; AP-15-Motion intakt; AP-16-Komplex vollständig. Ergebnisprotokoll: `docs/steering/patches/B1-AP-16d_Reveal-Transfer-Mini-QA_Ergebnis.md`. Nächster Schritt: B1-AP-17a — Navigation/Zurück-Weiter/Fokus-Befund.
 > B1-AP-17a ✅ 2026-06-24 — Navigation/Zurück-Weiter/Fokus-Befund: statische Code-Analyse + Browser-QA durch Albert bestätigt; Hauptflow/State-Flow/Endwissensgrenze/KPI-Idempotenz GRÜN; 3 GELB-Befunde nicht-blockierend (S4 cta href='', A11y Re-Announce S3-Rückkehr, Fokus h2 statt h3). Ergebnisprotokoll: `docs/steering/patches/B1-AP-17a_Navigation-Zurueck-Weiter-Fokus-Befund_Ergebnis.md`. Nächster Schritt: B1-AP-17b — Navigation/Fokus minimal reparieren.
 > B1-AP-17b ✅ 2026-06-24 — A11y-/Fokus-Minifix: G2 (Live-Region Re-Announce bei S3-Rückkehr via lastRevealA11yText + else-if) + G3 (Fokus auf Stations-h3 bei Stationswechsel mit h2-Fallback) minimal repariert; 5 Zeilen app.js; renderS3-Guard erhalten; kein KPI-Duplikat; kein Endwissens-Leak. Ergebnisprotokoll: `docs/steering/patches/B1-AP-17b_A11y-Fokus-Minifix_Ergebnis.md`. Nächster Schritt: B1-AP-17c — A11y-/Fokus-Mini-QA.
-> B1-AP-17c ✅ 2026-06-24 — A11y-/Fokus-Mini-QA: G2 + G3 statisch verifiziert + Browser-Tests A–C durch Albert bestätigt; AD-G2 bewertet (Restrisiko dokumentiert, heute nicht auslösbar); G1 href="" bewusst offen (wartet auf Ziel-URL); AP-17 Gesamtstatus GRÜN. Ergebnisprotokoll: `docs/steering/patches/B1-AP-17c_A11y-Fokus-Mini-QA_Ergebnis.md`. Nächster Schritt: B1-AP-18.
+> B1-AP-17c ✅ 2026-06-24 — A11y-/Fokus-Mini-QA: G2 + G3 statisch verifiziert + Browser-Tests A–C durch Albert bestätigt; AD-G2 bewertet (Restrisiko dokumentiert, heute nicht auslösbar); G1 href="" bewusst offen (wartet auf Ziel-URL); AP-17 Gesamtstatus GRÜN. Ergebnisprotokoll: `docs/steering/patches/B1-AP-17c_A11y-Fokus-Mini-QA_Ergebnis.md`. Nächster Schritt: B1-AP-18a — Error-/Empty-/QA-Readiness-Befund.
+> B1-AP-18a ✅ 2026-06-24 — Error-/Empty-/QA-Readiness-Befund (Triage): Fehlerflächenkarte erstellt; 5 Top-Risiken (GELB); renderError() kein role="alert" → AP-18b-Kandidat; alle Error-/Empty-States stabil, kein Crash; source_claimed_unchecked Stationen editorial-Gap; test-data/-Fixtures vollständig. Ergebnisprotokoll: `docs/steering/patches/B1-AP-18a_Error-Empty-QA-Readiness-Befund_Ergebnis.md`. Nächster Schritt: B1-AP-18b — Error-/Empty-State A11y-Minifix.
 > `Apps/prokrastinations-preis/config/stations.de.json` — produktive Stationen-Konfiguration v2.1 (B1-AP-09 ✅, AP-10a Flags bereinigt ✅ 2026-06-17)
 > `Apps/prokrastinations-preis/STATIONS_IMPLEMENTATION_PLAN.md` — Implementierungsplan für Stationen-Zeitreise Coding-Slices AP-11–AP-18, V1.1 (B1-AP-10 ✅, AP-10a Semantik bereinigt ✅ 2026-06-17)
 > B1 ist Pilot-2 (Daten-/Chart-/Story-Pilot). Pilot-1 ist `risiko-uebersetzer` (Calculator-Pilot) — entschieden E-02, 2026-05-28.

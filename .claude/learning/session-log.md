@@ -215,3 +215,12 @@ Wird geleert nach /distill. Einträge: [FRICTION] [WIN] [PREF] [QUESTION] [OK]
 
 ### B1-AP-17b — AP-Wechsel
 - FinanzwesirData.js, CSVParser.js, FwDateUtils.js — diese Session nicht berühren. ✓
+
+### B1-AP-18 — AP-Wechsel
+- FinanzwesirData.js, CSVParser.js, FwDateUtils.js — diese Session nicht berühren. ✓
+
+### 2026-06-24 — B1-AP-18a ✅ | Error-/Empty-/QA-Readiness-Befund
+- [OK] Fehlerflächenkarte: alle 5 Error-States (a/b/c/d/Empty) + Loading + Chart-Catch-All kontrolliert; kein Crash, kein Stacktrace im UI
+- [OK] 5 Top-Risiken (GELB): role="alert"-Lücke in renderError() (AP-18b), source_claimed_unchecked Editorial-Gap, CSV fehlt (AP-DATA-09), Error-d nicht isolierbar, Empty-Journey kein UI
+- [OK] Status GELB, kein Blocker; AP-18b empfohlen (1 Zeile, Light-Gate)
+- [WIN] Haiku-Triple-Dispatch — vollständige Faktensammlung (git-Status, APP_SPEC, app.js, app.css, stations.de.json, app.test.html) ohne Sonnet-Overhead

@@ -2,12 +2,12 @@
 Version: 1
 Stand: 2026-06-24
 Fokus-AP: APP-01 — prokrastinations-preis
-Nächster-Schritt: B1-AP-18 — nächster Implementierungs-AP (B1-AP-17c ✅ 2026-06-24)
+Nächster-Schritt: B1-AP-18b — Error-/Empty-State A11y-Minifix (B1-AP-18a ✅ 2026-06-24)
 Blocker: keine
 Letzter-Distill: 2026-06-22
 Kassensturz-Datum: 2026-06-22
 -->
-<!-- HOOK-META-SESSION: B1-AP-17c -->
+<!-- HOOK-META-SESSION: B1-AP-18a -->
 
 # PROJECT STATUS — Finanzwesir 2.0
 
@@ -206,6 +206,9 @@ Vollständig im DECISION-LOG dokumentiert (`docs/steering/DECISION-LOG.md`):
 ---
 
 ## 8. Letzte Session
+
+2026-06-24 — B1-AP-18a Triage abgeschlossen ✅.
+Error-/Empty-/QA-Readiness-Befund: Fehlerflächenkarte erstellt, 5 Top-Risiken (GELB); renderError() kein role="alert" → AP-18b-Kandidat (1 Zeile, Light-Gate); alle Error-/Empty-States stabil, kein Crash; source_claimed_unchecked Editorial-Gap. Nächster Schritt: B1-AP-18b — Error-/Empty-State A11y-Minifix.
 
 2026-06-24 — B1-AP-17-Komplex abgeschlossen (B1-AP-17a, B1-AP-17b, B1-AP-17c) ✅.
 B1-AP-17a: Navigation/Fokus-Befund, 3 GELB-Befunde (G1 href='', G2 Live-Region, G3 Fokus h3) — nicht-blockierend. B1-AP-17b: G2 + G3 minimal repariert (5 Zeilen app.js, renderS3-Guard erhalten, kein KPI-Duplikat). B1-AP-17c: G2 + G3 statisch verifiziert + Browser-Tests A–C durch Albert bestätigt; AD-G2 Restrisiko dokumentiert. AP-17 Gesamtstatus: GRÜN. G1 href="" bewusst offen (wartet auf Ziel-URL). Nächster Schritt: B1-AP-18.
