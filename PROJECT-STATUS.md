@@ -2,16 +2,16 @@
 Version: 1
 Stand: 2026-06-25
 Fokus-AP: APP-01 — prokrastinations-preis
-Nächster-Schritt: B1-AP-19 — App-QA / Abschluss-Faden (B1-STATIONS-v3.0 ✅ 2026-06-25)
+Nächster-Schritt: AP-01 — Globaler 80%-Wächter in CLAUDE.md (AP-00 ✅ 2026-06-25)
 Blocker: keine
 Letzter-Distill: 2026-06-22
 Kassensturz-Datum: 2026-06-22
 -->
-<!-- HOOK-META-SESSION: B1-STATIONS-v3.0 -->
+<!-- HOOK-META-SESSION: AP-00 -->
 
 # PROJECT STATUS — Finanzwesir 2.0
 
-Stand: 2026-06-25 | Session: B1-STATIONS-v3.0 | Geändert von: Claude
+Stand: 2026-06-25 | Session: AP-00 | Geändert von: Claude
 
 **Zweck:** Schneller Wiedereinstieg nach Pausen.
 **Zielgruppe:** Albert und Claude.

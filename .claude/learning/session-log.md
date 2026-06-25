@@ -280,3 +280,13 @@ Wird geleert nach /distill. Einträge: [FRICTION] [WIN] [PREF] [QUESTION] [OK]
 - [OK] etf-aera-vorbei MINI_SPEC: Slug passiv-paradox → etf-aera-vorbei, offener Konzeptkonflikt dokumentiert
 - [OK] ETF-Apps-Hauptdokument: H1 + G3 Slugs/Titel an 7 Stellen bereinigt, v6.1 eingetragen
 - [OK] Ergebnisprotokoll: PATCH-heldenreise-app-mapping-drift-fix-2026-06-25.md (GELB)
+
+### B1-AP-19 — AP-Wechsel (neuer Faden)
+
+### 2026-06-25 — AP-00 ✅ | Steuerungsblock Einstiegspunkt-Anamnese
+- [OK] Befundprotokoll: docs/steering/patches/AP-00_steuerungsblock-einstiegspunkt-anamnese_Ergebnis.md
+- [OK] Autoritäten-Gate GRÜN: CLAUDE.md = Verhalten, NAVIGATION.md = Routing, Trennung klar und stabil
+- [OK] App-Arbeitskette vollständig aufgezeichnet (12 Pfad-Schritte + Skills-Mapping)
+- [OK] 3 Drift-Stellen: app-spec-create SKILL.md fehlt, spec-mode-architecture nicht in NAVIGATION-Tabelle, kein Steuerungsblock-Check in App-Route
+- [OK] Stichprobe (prokrastinations-preis, etf-vergleich, plan-generator): Steuerungsblock implizit in Prosa, kein einheitliches Format
+- [WIN] Fehlerflächenkarte vollständig: 5 Zielorte (CLAUDE.md, NAVIGATION.md, heldenreise, tech-spec-app, app-spec-create); 8 Folge-APs AP-01–AP-08 definiert

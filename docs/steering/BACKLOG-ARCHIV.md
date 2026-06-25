@@ -1,11 +1,12 @@
 # BACKLOG-ARCHIV – Finanzwesir 2.0
-Stand: 2026-06-24 | Session: B1-AP-18c | Geändert von: Claude
+Stand: 2026-06-25 | Session: AP-00 | Geändert von: Claude
 
 Abgeschlossene Items, neueste zuerst (append-only).
 Archivierungs-Trigger: wenn > 200 Zeilen → neue Datei `BACKLOG-ARCHIV-YYYY.md` anlegen.
 
 | ID | Bereich | Titel | Abgeschlossen | Session |
 |----|---------|-------|---------------|---------|
+| AP-00 | App-Fabrik/Anamnese | Steuerungsblock Einstiegspunkt-Anamnese: Befundprotokoll erstellt; Autoritäten-Gate GRÜN (CLAUDE.md=Verhalten, NAVIGATION.md=Routing); App-Arbeitskette aufgezeichnet (12 Schritte); 3 Drift-Stellen identifiziert (app-spec-create SKILL.md fehlt, spec-mode-architecture nicht in NAVIGATION-Tabelle, kein Steuerungsblock-Check in Route); Stichprobe 3 Apps — Steuerungsblock implizit, kein einheitliches Format; 8 Folge-APs AP-01–AP-08 definiert. Ergebnisprotokoll: `docs/steering/patches/AP-00_steuerungsblock-einstiegspunkt-anamnese_Ergebnis.md`. *(sofort erledigt)* | 2026-06-25 | AP-00 |
 | B1-STATIONS-v3.0 | App/Integration | Stations-JSON-Migration v2.1 → v3.0: stations.de.json ersetzt (7 Stationen, 6 Felder); validateStationsJson() für v3.0 neu; filterStationsForWindow() vereinfacht (date.slice(0,7)); buildJourneyStations() chronologisch + synthetischer Final-Reveal aus CSV; selectStationsForJourney() + checkEditorialGate() entfernt; formatSourceLine() NEU; renderStationCard() + renderJourneyStep() hardcoded Labels; alle 7 Stationen sichtbar (kein sourceStatus-Filter → volle Dramaturgie 2016–2026). Alle Tests grün. Ergebnisprotokoll: `Apps/prokrastinations-preis/B1-STATIONS-v3.0_ergebnisprotokoll.md`. *(sofort erledigt)* | 2026-06-25 | B1-STATIONS-v3.0 |
 | B1-UX-01 | App/Analyse | Psychologische Wirkungs-Anamnese (kein Code): 5 Hauptbefunde; Status GELB; Kern: dramaturgischer Bogen durch source_claimed_unchecked-Filter gebrochen (technisch behoben durch B1-STATIONS-v3.0); 4 Folge-APs vorgeschlagen (UX-02 Copy, UX-03 Quellen, UX-04 Design, UX-05 CTA). Ergebnisprotokoll: `Apps/prokrastinations-preis/B1-UX-01_wirkungs-anamnese.md`. *(sofort erledigt)* | 2026-06-25 | B1-UX-01 |
 | B1-AP-18c | QA/Abschluss | Mini-QA / AP-18-Abschluss / AP-19-Übergabe: AP-18b statisch + DOM-Mini-QA bestätigt; AP-18 Gesamtstatus GRÜN mit offenen Nicht-Blockern; 7 offene Punkte klassifiziert (G1 href, source_claimed_unchecked, produktive CSV, Error-State-d-Harness, Empty-Journey, Screenreader-Volltest, showScreen(3,false)-Hardening); Übergabeliste für AP-19-Faden vorbereitet. Ergebnisprotokoll: `docs/steering/patches/B1-AP-18c_Mini-QA_AP-18-Abschluss_AP-19-Uebergabe_Ergebnis.md`. *(sofort erledigt)* | 2026-06-24 | B1-AP-18c |

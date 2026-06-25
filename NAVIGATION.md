@@ -1,5 +1,5 @@
 # NAVIGATION.md – Finanzwesir 2.0
-Stand: 2026-06-24 | Session: B1-AP-18c | Geändert von: Claude
+Stand: 2026-06-25 | Session: AP-00 | Geändert von: Claude
 
 Für Claude: **Routing-Dokument.** Wird beim Session-Start (Schritt 2) gelesen.
 Gibt Pfade und Lese-Reihenfolgen vor — KEINE Verhaltensregeln (die stehen in CLAUDE.md).
@@ -329,6 +329,7 @@ Manuelle Aktivierung: `/spec-rewrite-guard docs/spec/[Dateiname]`
 | Chronik-Prompt (Werkzeug) | `docs/steering/CHRONIK-PROMPT.md` | Copy-paste-Prompt für Chronik-Erstellung; enthält geschlossene Vokabel inline |
 | Patch-Quittungen | `docs/steering/patches/` | Committed Patch-Quittungen nach Full-Gates (Archiv, nicht operativ) |
 | Handover-Braindumps | `docs/steering/handovers/` | Vollständige Übergabedokumente für Faden-Übergaben bei komplexen Gates (Spec-Trace-Prompt, Revisionshistorie, Binding Decisions) |
+| Steuerungsblock-Anamnese AP-00 | `docs/steering/patches/AP-00_steuerungsblock-einstiegspunkt-anamnese_Ergebnis.md` | Befund: Einstiegspunkte für globalen 80%-Wächter (CLAUDE.md), Routing-Hinweis (NAVIGATION.md), Skills; 8 Folge-APs AP-01–AP-08 (AP-00 ✅ 2026-06-25) |
 
 ## Archivstrategie / Kontext-Hygiene
 
