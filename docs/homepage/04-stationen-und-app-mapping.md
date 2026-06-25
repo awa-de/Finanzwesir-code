@@ -14,16 +14,17 @@ Sie dient als Brücke zwischen Konzept, Text und späterer statischer HTML-Seite
 | 1 | „Ich warte noch auf den richtigen Zeitpunkt.“ | Market-Timing-Simulator | Warten ist keine Strategie. | App-Spec prüfen |
 | 2 | „Was, wenn direkt nach dem Kauf der Crash kommt?“ | Crash-Reaktions-Test | Verhalten ist wichtiger als ETF. | App-Spec prüfen |
 | 3 | „Mehr ETFs machen mein Depot sicherer.“ | Diversifikations-Detektor | Mehr ist oft nur mehr Meinung. | App-Spec prüfen |
-| 4 | „Ein ETF ist zu simpel.“ | Einfachheits-App / 1 ETF vs. 5 ETFs | Einfachheit ist robust. | App-Spec fehlt/klären |
-| 5 | „Vielleicht ist die ETF-Ära vorbei.“ | ETF-Ära-App | Alternativen werden nicht besser. | App fehlt |
+| 4 | „Ein ETF ist zu simpel.” | Komplexitätsentlarver (1 ETF vs. 5 ETFs) | Einfachheit ist robust. | App vorhanden (`komplexitaets-entlarver`) |
+| 5 | „Vielleicht ist die ETF-Ära vorbei.” | ETF-Ära vorbei | Alternativen werden nicht besser. | App vorhanden (`etf-aera-vorbei`) |
 | 6 | „Vielleicht ändert der Staat die Regeln.“ | Regulatorik-App | Robustheit schlägt fragile Optimierung. | App vorhanden, Einbettung nötig |
 | 7 | „Wie viel Risiko halte ich wirklich aus?“ | Risiko-Übersetzer | Risiko muss tragbar dosiert werden. | App-Spec prüfen |
-| 8 | „Was mache ich jetzt konkret?“ | Plan-Generator | Start klein, aber starte. | App fehlt |
+| 8 | „Was mache ich jetzt konkret?” | Plan-Generator | Start klein, aber starte. | App vorhanden (`plan-generator`) |
 
 ## Vertiefungs-Apps
 
 Diese Apps gehören nicht automatisch in den Hauptpfad. Sie können später in Artikeln, im Werkzeugkasten oder in Vertiefungsbereichen verwendet werden.
 
+- ETF-Vergleich / ETF-Feinschliff-Entgifter (`etf-vergleich`) — Funnel-Master-App D4; Blockade: „Ich muss erst den optimalen ETF finden"; könnte eigenen Stationsslot erhalten
 - Weltkarte ETF-Indizes
 - Kostenkiller TER
 - Replizierer vs. Swapper

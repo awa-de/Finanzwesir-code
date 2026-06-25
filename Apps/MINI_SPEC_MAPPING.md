@@ -2,11 +2,11 @@
 
 Stand: 2026-05-19 | Quelle: docs/App-Fabrik/ETF-Apps-Hauptdokument.md
 
-Mapping aller 21 Haupt-App-Abschnitte aus dem Hauptdokument auf die 24 realen App-Ordner unter `/Apps/`.
+Mapping aller 22 Haupt-App-Abschnitte aus dem Hauptdokument auf die 25 realen App-Ordner unter `/Apps/`.
 
 ---
 
-## Tabelle: Alle 24 App-Ordner
+## Tabelle: Alle 25 App-Ordner
 
 | Block | App-ID | App-Titel | Slug | App-Ordner | Mini-Spec vorhanden | Modulrolle | Status |
 |-------|--------|-----------|------|------------|---------------------|------------|--------|
@@ -25,13 +25,14 @@ Mapping aller 21 Haupt-App-Abschnitte aus dem Hauptdokument auf die 24 realen Ap
 | D/E | D1 | ETF-Namensdecoder | `etf-namensdecoder` | `/Apps/etf-namensdecoder/` | ✅ | Haupt-App | Dokumentiert |
 | D/E | D2 | Replizierer vs. Swapper | `replizierer-swapper` | `/Apps/replizierer-swapper/` | ✅ | Haupt-App | Dokumentiert |
 | D/E | D3 | Kostenkiller (TER-Rechner) | `kostenkiller-ter` | `/Apps/kostenkiller-ter/` | ✅ | Haupt-App | Dokumentiert |
+| D/E | D4 | ETF-Vergleich / ETF-Feinschliff-Entgifter | `etf-vergleich` | `/Apps/etf-vergleich/` | ✅ | Haupt-App | Dokumentiert |
 | D/E | E1 | ESG-Spiegel | `esg-spiegel` | `/Apps/esg-spiegel/` | ✅ | Haupt-App | Dokumentiert |
 | F | F1 | Renditekiller (Volatilitäts-Dämpfer) | `renditekiller-volatilitaet` | `/Apps/renditekiller-volatilitaet/` | ✅ | Haupt-App | Dokumentiert |
 | F | F2 | Thesaurierer vs. Ausschütter | `thesaurierer-rennen` | `/Apps/thesaurierer-rennen/` | ✅ | Haupt-App | Dokumentiert |
 | G | G1 | Regulatorisches Risiko Dashboard | `regulatorik-dashboard` | `/Apps/regulatorik-dashboard/` | ✅ | Haupt-App | Dokumentiert |
 | G | G2 | Rendite-Kalibrierung | `rendite-kalibrierung` | `/Apps/rendite-kalibrierung/` | ✅ | Haupt-App | Dokumentiert |
-| G | G3 | Das Passiv-Paradox | `passiv-paradox` | `/Apps/passiv-paradox/` | ✅ | Haupt-App | Dokumentiert |
-| H | H1 | ETF-Reifegrad-Test & Start-Konfigurator | `etf-reifegrad-finale` | `/Apps/etf-reifegrad-finale/` | ✅ | Haupt-App | Dokumentiert |
+| G | G3 | ETF-Ära vorbei | `etf-aera-vorbei` | `/Apps/etf-aera-vorbei/` | ✅ | Haupt-App | Dokumentiert |
+| H | H1 | Plan-Generator | `plan-generator` | `/Apps/plan-generator/` | ✅ | Haupt-App | Dokumentiert |
 | B | B4 | Der alte Euro | `der-alte-euro` | `/Apps/der-alte-euro/` | ✅ | Mechanik-Mini-App | Dokumentiert |
 | B | B5 | Depot-Kipppunkt | `depot-kipppunkt` | `/Apps/depot-kipppunkt/` | ✅ | Statuswechsel-App | Dokumentiert |
 
@@ -57,7 +58,7 @@ Fachlicher Zusammenhang:
 
 ---
 
-## Status aller 24 MINI_SPEC_FROM_HAUPTDOKUMENT.md
+## Status aller 25 MINI_SPEC_FROM_HAUPTDOKUMENT.md
 
 | App-Ordner | MINI_SPEC-Status | Notizen |
 |---|---|---|
@@ -65,14 +66,15 @@ Fachlicher Zusammenhang:
 | `diversifikations-detektor` | ✅ Erstellt | Haupt-App C1 |
 | `esg-spiegel` | ✅ Erstellt | Haupt-App E1 |
 | `etf-namensdecoder` | ✅ Erstellt | Haupt-App D1 |
-| `etf-reifegrad-finale` | ✅ Erstellt | Haupt-App H1 |
+| `plan-generator` | ✅ Erstellt | Haupt-App H1 |
 | `geburtsjahrlos` | ✅ Erstellt | Haupt-App B2 |
 | `investment-universum` | ✅ Erstellt | Gegenperspektive zu C1 |
 | `komplexitaets-entlarver` | ✅ Erstellt | Haupt-App C2 |
 | `kostenkiller-ter` | ✅ Erstellt | Haupt-App D3 |
+| `etf-vergleich` | ✅ Erstellt | Funnel-Master-App D4 |
 | `market-timing-simulator` | ✅ Erstellt | Haupt-App B3 |
 | `markt-kam-zurueck` | ✅ Erstellt | Haupt-App A3 |
-| `passiv-paradox` | ✅ Erstellt | Haupt-App G3 |
+| `etf-aera-vorbei` | ✅ Erstellt | Haupt-App G3 |
 | `prokrastinations-preis` | ✅ Erstellt | Haupt-App B1; APP_SPEC.md vorhanden (nicht überschrieben) |
 | `regulatorik-dashboard` | ✅ Erstellt | Haupt-App G1 |
 | `rendite-kalibrierung` | ✅ Erstellt | Haupt-App G2 |
@@ -90,8 +92,8 @@ Fachlicher Zusammenhang:
 
 ## Zusammenfassung
 
-- **21 Haupt-App-Abschnitte** aus ETF-Apps-Hauptdokument dokumentiert (inkl. B4 Der alte Euro, B5 Depot-Kipppunkt)
+- **22 Haupt-App-Abschnitte** aus ETF-Apps-Hauptdokument dokumentiert (inkl. B4 Der alte Euro, B5 Depot-Kipppunkt, D4 ETF-Vergleich)
 - **3 Multi-Modul-Abschnitte** mit Zugehörigkeit zur Master-App dokumentiert
-- **24 MINI_SPEC_FROM_HAUPTDOKUMENT.md Dateien** erstellt (keine Überschreibung bestehender Dateien)
+- **25 MINI_SPEC_FROM_HAUPTDOKUMENT.md Dateien** erstellt (keine Überschreibung bestehender Dateien)
 - **1 APP_SPEC.md** vorhanden (`prokrastinations-preis`) — nicht berührt
 - **Alle Umlaute** (ä, ö, ü, ß) korrekt geschrieben

@@ -257,6 +257,15 @@ Wird geleert nach /distill. Einträge: [FRICTION] [WIN] [PREF] [QUESTION] [OK]
 
 ### B1-AP-19 — AP-Wechsel
 
+## 2026-06-25 – SESSION START | [KETTENMODUS] | Fokus: APP-01 — prokrastinations-preis
+- FinanzwesirData.js, CSVParser.js, FwDateUtils.js — diese Session nicht berühren. ✓
+
+### 2026-06-25 — Housekeeping: App-Mapping Konsistenzprüfung & Ordner-Umbenennung ✅
+- [OK] 04-stationen-und-app-mapping.md gegen Apps/ geprüft: Stationen 4/5/8 bestätigt und Status gesetzt
+- [OK] Doubletten aufgelöst: passiv-paradox → etf-aera-vorbei, etf-reifegrad-finale → plan-generator
+- [OK] MINI_SPEC_MAPPING.md: D4 etf-vergleich aufgenommen, Zähler 24→25, Umbenennungen nachgezogen
+- [OK] Ergebnisbericht: docs/steering/patches/PATCH-app-mapping-housekeeping-2026-06-25.md
+
 ### 2026-06-24 — B1-AP-18a ✅ | Error-/Empty-/QA-Readiness-Befund
 - [OK] Fehlerflächenkarte: alle 5 Error-States (a/b/c/d/Empty) + Loading + Chart-Catch-All kontrolliert; kein Crash, kein Stacktrace im UI
 - [OK] 5 Top-Risiken (GELB): role="alert"-Lücke in renderError() (AP-18b), source_claimed_unchecked Editorial-Gap, CSV fehlt (AP-DATA-09), Error-d nicht isolierbar, Empty-Journey kein UI
