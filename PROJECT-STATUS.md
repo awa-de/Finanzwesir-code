@@ -2,16 +2,16 @@
 Version: 1
 Stand: 2026-06-25
 Fokus-AP: APP-01 — prokrastinations-preis
-Nächster-Schritt: AP-01 — Globaler 80%-Wächter in CLAUDE.md (AP-00 ✅ 2026-06-25)
+Nächster-Schritt: AP-02 — Routing-Hinweis in NAVIGATION.md (AP-01 ✅ 2026-06-25)
 Blocker: keine
 Letzter-Distill: 2026-06-22
 Kassensturz-Datum: 2026-06-22
 -->
-<!-- HOOK-META-SESSION: AP-00 -->
+<!-- HOOK-META-SESSION: AP-01b -->
 
 # PROJECT STATUS — Finanzwesir 2.0
 
-Stand: 2026-06-25 | Session: AP-00 | Geändert von: Claude
+Stand: 2026-06-25 | Session: AP-01b | Geändert von: Claude
 
 **Zweck:** Schneller Wiedereinstieg nach Pausen.
 **Zielgruppe:** Albert und Claude.

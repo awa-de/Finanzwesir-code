@@ -290,3 +290,14 @@ Wird geleert nach /distill. Einträge: [FRICTION] [WIN] [PREF] [QUESTION] [OK]
 - [OK] 3 Drift-Stellen: app-spec-create SKILL.md fehlt, spec-mode-architecture nicht in NAVIGATION-Tabelle, kein Steuerungsblock-Check in App-Route
 - [OK] Stichprobe (prokrastinations-preis, etf-vergleich, plan-generator): Steuerungsblock implizit in Prosa, kein einheitliches Format
 - [WIN] Fehlerflächenkarte vollständig: 5 Zielorte (CLAUDE.md, NAVIGATION.md, heldenreise, tech-spec-app, app-spec-create); 8 Folge-APs AP-01–AP-08 definiert
+
+## 2026-06-25 – SESSION START | [KETTENMODUS] | Fokus: APP-01 — prokrastinations-preis
+- FinanzwesirData.js, CSVParser.js, FwDateUtils.js — diese Session nicht berühren. ✓
+
+### 2026-06-25 — AP-01 ✅ | Globaler 80%-Wächter CLAUDE.md
+- [OK] CLAUDE.md § APP-ARBEIT: Verhaltensregel eingebaut (Stand v2.1.3, chirurgisch 1 Zeile)
+- [OK] Ergebnisprotokoll: AP-01_globaler-80-prozent-steuerungsblock-waechter_Ergebnis.md — GRÜN
+
+### 2026-06-25 — AP-01b ✅ | CLAUDE.md-Regel verdichtet
+- [OK] Verhaltensregel: 4-Satz-Fassung auf 3-Satz-Kurzform verdichtet; Details an App-Spec/Routing/Skills delegiert
+- [OK] Ergebnisprotokoll: AP-01b_steuerungsblock-regel-verdichten_Ergebnis.md — GRÜN

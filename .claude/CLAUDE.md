@@ -1,6 +1,6 @@
 # CLAUDE.md – Finanzwesir 2.0
 
-Stand: 2026-05-11 | v2.1.2 | Geändert von: Albert
+Stand: 2026-06-25 | v2.1.3 | Geändert von: Claude
 
 \---
 
@@ -154,6 +154,7 @@ Bei „jetzt zerlegen" → Skill `/decompose` automatisch starten.
 
 „Stopp. Ich lese `APP-INTERFACE.md` und `SECURITY-BASELINE.md` jetzt."
 Bestätigung ausgeben → Full-Gate (immer, keine Ausnahme).
+APP-ARBEIT: Keine Code-, UX-, Daten- oder Spec-Detailarbeit ohne geprüften lokalen App-Steuerungsblock. Der Block gilt als 80%-Entwurf; bei unklarem Zweck, unklarer Barriere oder verletzten Nicht-Zielen stoppen und mit Albert klären. Details regeln App-Spec, Routing und App-Fabrik-Skills.
 
 \---
 

@@ -1,5 +1,5 @@
 # NAVIGATION.md – Finanzwesir 2.0
-Stand: 2026-06-25 | Session: AP-00 | Geändert von: Claude
+Stand: 2026-06-25 | Session: AP-01b | Geändert von: Claude
 
 Für Claude: **Routing-Dokument.** Wird beim Session-Start (Schritt 2) gelesen.
 Gibt Pfade und Lese-Reihenfolgen vor — KEINE Verhaltensregeln (die stehen in CLAUDE.md).
@@ -330,6 +330,7 @@ Manuelle Aktivierung: `/spec-rewrite-guard docs/spec/[Dateiname]`
 | Patch-Quittungen | `docs/steering/patches/` | Committed Patch-Quittungen nach Full-Gates (Archiv, nicht operativ) |
 | Handover-Braindumps | `docs/steering/handovers/` | Vollständige Übergabedokumente für Faden-Übergaben bei komplexen Gates (Spec-Trace-Prompt, Revisionshistorie, Binding Decisions) |
 | Steuerungsblock-Anamnese AP-00 | `docs/steering/patches/AP-00_steuerungsblock-einstiegspunkt-anamnese_Ergebnis.md` | Befund: Einstiegspunkte für globalen 80%-Wächter (CLAUDE.md), Routing-Hinweis (NAVIGATION.md), Skills; 8 Folge-APs AP-01–AP-08 (AP-00 ✅ 2026-06-25) |
+| Steuerungsblock-Wächter AP-01 / AP-01b | `docs/steering/patches/AP-01b_steuerungsblock-regel-verdichten_Ergebnis.md` | CLAUDE.md § APP-ARBEIT: globaler 80%-Wächter eingebaut, auf 3-Satz-Kurzform verdichtet. Regel: kein Code ohne geprüften Steuerungsblock (80%-Entwurf), Klärung bei Lücke. (AP-01 ✅ 2026-06-25, AP-01b ✅ 2026-06-25) |
 
 ## Archivstrategie / Kontext-Hygiene
 
