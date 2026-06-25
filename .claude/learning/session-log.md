@@ -4,6 +4,19 @@ Wird geleert nach /distill. Einträge: [FRICTION] [WIN] [PREF] [QUESTION] [OK]
 ## 2026-06-24 – SESSION START | [KETTENMODUS] | Fokus: APP-01 — prokrastinations-preis
 - FinanzwesirData.js, CSVParser.js, FwDateUtils.js — diese Session nicht berühren. ✓
 
+### 2026-06-25 — B1-STATIONS-v3.0 ✅ Stations-JSON Migration
+- [OK] stations.de.json: v2.1 → v3.0 (7 Stationen, 6 Felder je Station, YYYY-MM-DD)
+- [OK] app.js: validateStationsJson() komplett neu für v3.0; filterStationsForWindow() vereinfacht (slice(0,7)); buildJourneyStations() neu (chronologisch, synthetischer Final-Reveal); isFinalRevealStation() auf 1 Zeile; selectStationsForJourney() + checkEditorialGate() entfernt
+- [OK] app.js: formatSourceLine() neu — baut Quellenzeile aus source + date; renderStationCard() nutzt formatSourceLine; mobileIntermediate-Zugriffe hardcoded; journeyBtn.textContent hardcoded nach isFinalReveal
+- [OK] app.test.html: Beschreibungen A, U, V, AB, AC aktualisiert (kein sourceLabel/continueLabel/EditorialDegraded mehr)
+- [WIN] v3.0-Migration löst das Kern-Problem aus B1-UX-01: alle 7 Stationen sichtbar (kein source_claimed_unchecked-Filter), volle Dramaturgie-Strecke 2016–2026
+- [OK] Befund (Phase 1) + Integration (Phase 2) in einer Session durchgezogen
+
+### 2026-06-25 — B1-UX-01 ✅ Psychologische Wirkungs-Anamnese
+- [OK] Analyse-only-AP, kein Code, keine Spec-Änderung
+- [OK] Ergebnis: 5 Hauptbefunde, Status GELB; Befunddatei: Apps/prokrastinations-preis/B1-UX-01_wirkungs-anamnese.md
+- [WIN] Kern: 4/7 Stationen gefiltert (source_claimed_unchecked) → dramaturgischer Bogen gebrochen; wird durch v3.0-Migration behoben
+
 ### 2026-06-24 — B1-AP-18b ✅ renderError role=alert Minifix
 - [OK] +1 Zeile app.js: p.setAttribute('role', 'alert') in renderError(); §14.13-Lücke geschlossen
 - [OK] DOM-A11y-Mini-QA durch Albert: 12 role="alert"-Elemente, 4 distinkte Texte bestätigt
@@ -231,6 +244,18 @@ Wird geleert nach /distill. Einträge: [FRICTION] [WIN] [PREF] [QUESTION] [OK]
 
 ### B1-AP-18 — AP-Wechsel
 - FinanzwesirData.js, CSVParser.js, FwDateUtils.js — diese Session nicht berühren. ✓
+
+### B1-UX-01 — AP-Wechsel | Psychologische Wirkungs-Anamnese
+
+### 2026-06-24 — B1-UX-01 ✅ | Wirkungs-Anamnese Prokrastinationspreis-App
+- [OK] APP_SPEC V2.9, stations.de.json v2.1, app.js, app.css vollständig gelesen
+- [OK] 5 Hauptbefunde identifiziert (2 redaktionell, 1 Copy, 1 Design, 1 Produkt)
+- [OK] Ergebnisprotokoll: Apps/prokrastinations-preis/B1-UX-01_wirkungs-anamnese.md (GELB, kein Blocker)
+- [WIN] Kritischer Fund: 4/7 Stationen source_claimed_unchecked → gefiltert → Dramaturgischer Bogen gebrochen (keine falsche Auflösung, kein Anlauf)
+- [WIN] Screen-2-Headline spoilt das App-Fazit vor der Zeitreise → psychologisch kontraproduktiv
+- [OK] 4 Folge-APs sauber abgeleitet: B1-UX-02 (Copy), B1-UX-03 (Quellenverifizierung), B1-UX-04 (Design), B1-UX-05 (CTA/Funnel)
+
+### B1-AP-19 — AP-Wechsel
 
 ### 2026-06-24 — B1-AP-18a ✅ | Error-/Empty-/QA-Readiness-Befund
 - [OK] Fehlerflächenkarte: alle 5 Error-States (a/b/c/d/Empty) + Loading + Chart-Catch-All kontrolliert; kein Crash, kein Stacktrace im UI

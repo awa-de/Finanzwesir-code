@@ -31,8 +31,7 @@
       Erwartung: Loading → Content-State. Screen 1 sichtbar mit Slider (300 €). Keine KpiCards (AP-14: entfernt von Screen 2).<br>
       „10 Jahre zurückspringen" → Screen 2: erste Station-Card erscheint (Station aus stations.de.json).<br>
       ARIA Live Region vorhanden (DevTools → DOM: [data-fw-role="a11y-result"]).<br>
-      Konsole: „[fw-app] Editorial Gate: EditorialDegraded …" erwartet (3 verifizierte Stationen &lt; 5 minimum).<br>
-      Keine weitere JS-Exception in DevTools-Konsole.<br>
+      Konsole: keine JS-Exception (v3.0: kein Editorial Gate mehr).<br>
       Testfälle: T-01, AP-14-A01
     </p>
     <div class="kg-card">
@@ -373,7 +372,7 @@
       Erwartung: Screen 1 zuerst sichtbar (kein Chart). „10 Jahre zurückspringen" → Screen 2: erste Station-Card erscheint.<br>
       Unterhalb der Station-Card: getrimmter Chart (nur Daten bis zum Stations-Monat — kein Endwissen).<br>
       Canvas sichtbar. Keine Range-Buttons, keine BAN/Headline. Keine KpiCards, keine AssumptionsBox.<br>
-      Journey-Button mit Text aus station.continueLabel. Kein „← Zurück"-Button auf Screen 2.<br>
+      Journey-Button: „Weiter investiert bleiben" (letzte Station: „Ergebnis ansehen"). Kein „← Zurück"-Button auf Screen 2.<br>
       Kein live Chart-Update während Slider auf Screen 1 — Rate wird erst beim S1→S2-Wechsel eingefroren.<br>
       Keine JS-Exception in Konsole.
     </p>
@@ -396,7 +395,7 @@
       Erwartung:<br>
       Screen 1: Headline + Subline + Slider + „10 Jahre zurückspringen" sichtbar. Kein Chart, keine KPIs.<br>
       „10 Jahre zurückspringen" → Screen 2: Fokus auf &lt;h2&gt;. Station-Card (Quelle, Headline, Anker) + getrimmter Chart.
-      Journey-Button mit continueLabel. Kein „← Zurück".<br>
+      Journey-Button: „Weiter investiert bleiben". Kein „← Zurück".<br>
       Journey-Button N×klicken → alle Stationen durch; letzter Click → Screen 3 erscheint.<br>
       Screen 3: Fokus auf &lt;h2&gt; „Jetzt erst sieht es einfach aus." Chart mit VertikaleLinie. Buttons „← Zurück" und „Weiter →".<br>
       Screen 4: Fokus auf &lt;h2&gt;. CTA „Heute Marktzeit sammeln →" sichtbar. Nur „← Zurück".<br>
@@ -511,11 +510,11 @@
     <h2>AB — Erste Station-Card erscheint auf Screen 2 (AP-14-A01)</h2>
     <p class="test-meta">
       Testschritte: „10 Jahre zurückspringen" klicken.<br>
-      Erwartung: Screen 2 zeigt erste Station. Sichtbar: sourceLabel (z.B. „TAGESSCHAU · 9. MÄRZ 2020"),
-      Headline, Anker-Text, Journey-Button mit continueLabel-Text.<br>
+      Erwartung: Screen 2 zeigt erste Station. Sichtbar: Quellenzeile (z.B. „Zeit Online · 9. November 2016"),
+      Headline, Anker-Text, Journey-Button „Weiter investiert bleiben".<br>
       „Zwischenstand anzeigen"-Button vorhanden (Collapsible). Klick darauf: dl mit Eingezahlt + Depotwert-Werten erscheint.<br>
       Kein Endwissen (kein finaler Depotwert, kein 120-Monats-Chart, keine Rendite).<br>
-      Kein JS-Fehler. Konsole: EditorialDegraded-Warnung (erwünscht — nur 3 verifizierte Stationen).
+      Kein JS-Fehler. Konsole: keine EditorialDegraded-Warnung (v3.0: kein Gate).
     </p>
     <div class="kg-card">
       <div class="fw-app"
@@ -530,8 +529,8 @@
     <h2>AC — Journey komplett: alle Stationen → Final Reveal → S3 (AP-14-A02)</h2>
     <p class="test-meta">
       Testschritte: „10 Jahre zurückspringen" → Journey-Button so lange klicken, bis Screen 3 erscheint.<br>
-      Erwartung: Jede Station zeigt andere Headline + sourceLabel. Getrimmter Chart wächst mit jeder Station.<br>
-      Letzter Journey-Button (final_reveal-Station, „Ergebnis ansehen") → Screen 3 erscheint.<br>
+      Erwartung: Jede Station zeigt andere Headline + Quellenzeile. Getrimmter Chart wächst mit jeder Station.<br>
+      Letzter Journey-Button (synthetische Final-Reveal-Station, „Ergebnis ansehen") → Screen 3 erscheint.<br>
       Screen 3: vollständiger 120-Monats-Chart + VertikaleLinie. Erste Endwissens-Ausgabe in ARIA Live Region.<br>
       Kein JS-Fehler, kein Layout-Bruch.
     </p>

@@ -1,637 +1,381 @@
-Stand: 2026-06-16 | Geändert von: Claude | Session: AP-03 / AP-07 / AP-08c Nachputz
+Stand: 2026-06-25 | Zweck: Minimaler Event-Pin-Vertrag für Screen 2 der Prokrastinationspreis-App
 
-# Stations-JSON-Datenvertrag — prokrastinations-preis
+# Stations-JSON-Datenvertrag — Minimalversion
 
----
+## 1. Zweck
 
-## 1. Zweck der Stationsbibliothek
+`Apps/prokrastinations-preis/config/stations.de.json` enthält belegte historische Event-Pins für eine Finanzzeitreihe.
 
-Die Stationsbibliothek beschreibt redaktionelle Haltepunkte für Screen 2 der App.
+Ein Event-Pin markiert einen Nachrichtenmoment, der für Anleger damals emotional relevant war: Furcht, Zweifel, Panik, Erleichterung, Euphorie, Gier oder FOMO.
 
-Sie beantwortet:
-- An welchen historischen Punkten hält die Zeitreise an?
-- Welche Headline wird gezeigt?
-- Welcher Anleger-Anker wird gezeigt?
-- Welche Quelle stützt den redaktionellen Kontext?
-- Welche Station ist Klimax, falsche Auflösung oder finaler Wackler?
+Die App zeigt keine allgemeine Weltchronik. Sie zeigt wenige belegte Momente entlang des Charts, in denen Anleger emotional versucht waren, ihre langfristige Strategie zu verlassen.
 
-Die Stationsbibliothek ist kein Performance-Datensatz und keine zweite Marktdatenquelle.
+`sourceUrl` bleibt als redaktioneller Prüfanker in der JSON, wird aber in der App nicht sichtbar gerendert.
 
----
-
-## 2. Geplanter Dateipfad
-
-Vorgesehener produktiver Pfad:
+## 2. Produktiver Dateipfad
 
 ```text
 Apps/prokrastinations-preis/config/stations.de.json
 ```
 
-AP-03 legt diese JSON-Datei noch nicht produktiv an. AP-03 definiert nur den Vertrag.
+## 3. Minimalprinzip
 
----
+Die JSON enthält nur das, was für Event-Pins zwingend gebraucht wird:
 
-## 3. Top-Level-Struktur
+- Zeitpunkt im Chart
+- Medium als Quelle
+- 1:1-Headline des Mediums
+- ein kurzer KI-Satz: „Was geht ab?“
+- URL als interner Prüfanker
+
+Alles andere gehört nicht in den Event-Datensatz.
+
+Formatierungen gehören nicht in die JSON. Die Chart-/UI-Strategie entscheidet über Darstellung und baut die sichtbare Quellenzeile aus `source` und `date`.
+
+## 4. Top-Level-Struktur
 
 ```json
 {
-  "version": "2.1",
+  "version": "3.0",
   "locale": "de-DE",
   "app": "prokrastinations-preis",
-  "selectionPolicy": {},
-  "visualRules": {},
-  "motionRules": {},
   "stations": []
 }
 ```
 
----
-
-## 4. Top-Level-Felder
-
 ### `version`
 
-Typ: String | Pflicht: ja
+Typ: String  
+Pflicht: ja
+
+Vertragsversion dieser JSON-Struktur.
 
 ```json
-"version": "2.1"
+"version": "3.0"
 ```
-
-Redaktionelle Vertrags-/Config-Version. Keine Dateiversionierung im Dateinamen.
-
----
 
 ### `locale`
 
-Typ: String | Pflicht: ja | Erlaubter Wert in V1:
+Typ: String  
+Pflicht: ja  
+Erlaubter Wert:
 
 ```json
 "locale": "de-DE"
 ```
 
----
-
 ### `app`
 
-Typ: String | Pflicht: ja | Erlaubter Wert:
+Typ: String  
+Pflicht: ja  
+Erlaubter Wert:
 
 ```json
 "app": "prokrastinations-preis"
 ```
 
-Wenn `app` nicht passt, muss die Config als ungültig gelten.
-
----
-
-### `selectionPolicy`
-
-Typ: Object | Pflicht: ja
-
-Beschreibt, wie aktive Stationen aus der Bibliothek ausgewählt werden.
-
-```json
-"selectionPolicy": {
-  "window": "rolling_120_months_from_latest_csv_month",
-  "minVisibleStations": 5,
-  "targetVisibleStations": 6,
-  "maxVisibleStations": 7,
-  "includeFinalReveal": true,
-  "sort": "date_asc",
-  "selection": "highest_priority_within_window",
-  "editorialGate": {
-    "requiresCrisis": true,
-    "crisisRole": "crisis",
-    "minCrisisPriority": 95
-  }
-}
-```
-
----
-
-### `visualRules`
-
-Typ: Object | Pflicht: ja
-
-```json
-"visualRules": {
-  "redCrashColor": false,
-  "lossColoring": false,
-  "crashSegmentColoring": false,
-  "futurePreview": false,
-  "stationValueMobile": "collapsible",
-  "stationValueDesktop": "hover_or_focus_optional"
-}
-```
-
-**Pflichtregeln:**
-- `redCrashColor` muss `false` sein.
-- `lossColoring` muss `false` sein.
-- `crashSegmentColoring` muss `false` sein.
-- `futurePreview` muss `false` sein.
-- `stationValueMobile` muss `"collapsible"` sein.
-
-Wenn diese Werte in der JSON anders gesetzt sind, ist die Config ungültig. Kein stiller Override, kein Fallback auf sichere Defaults. Die App zeigt Config-Error. Technische Fehlerbehandlung folgt in Coding-AP.
-
----
-
-### `motionRules`
-
-Typ: Object | Pflicht: ja
-
-```json
-"motionRules": {
-  "mode": "user_stepped",
-  "betweenStations": "short_draw_animation",
-  "forcedWaitBeforeContinue": false,
-  "reducedMotion": "instant_step"
-}
-```
-
-**Pflichtregeln:**
-- Kein langes passives Autoplay.
-- Nutzer löst den Schritt zur nächsten Station aus.
-- Keine erzwungene Wartezeit.
-- Reduced Motion zeigt den nächsten Zustand sofort.
-
----
-
 ### `stations`
 
-Typ: Array | Pflicht: ja | Mindestlänge im Dokument: 1
+Typ: Array  
+Pflicht: ja
 
-Produktiv sichtbar nach Filter: abhängig vom Redaktions-Gate.
+Enthält historische Event-Pins in chronologischer Reihenfolge.  
+Die App darf zusätzlich nach `date` aufsteigend sortieren.  
+Manuelle Priorisierung gibt es nicht.
 
-Enthält redaktionelle Stationen und optional ein Template für den finalen Reveal.
+## 5. Sichtbarer Zielblock
 
----
+Eine Station erscheint in der App als kompakter Quellenblock:
 
-## 5. Station-Objekt
+```text
+Tagesschau · 24. Februar 2022
+
+Russland greift die Ukraine an
+Krieg ist zurück in Europa. Energie, Inflation, Lieferketten — alles wird neu bewertet.
+```
+
+Die JSON speichert dafür nur die Rohinformationen:
 
 ```json
 {
-  "id": "station_2020_03_covid_crash",
-  "date": "2020-03",
-  "priority": 100,
-  "status": "core",
-  "role": "crisis",
-  "headline": "Börsenhandel an der Wall Street ausgesetzt",
-  "sourceLabel": "TAGESSCHAU · 9. MÄRZ 2020",
-  "sourceUrl": "https://www.tagesschau.de/wirtschaft/corona-wirtschaft-wallstreet-103.html",
-  "sourceStatus": "primary_verified",
-  "anchorText": "In der fertigen Rückblick-Grafik ist das später nur ein Knick. Heute fühlt es sich an wie ein freier Fall.",
-  "continueLabel": "Weiter investiert bleiben",
-  "mobileIntermediate": {
-    "label": "Zwischenstand anzeigen",
-    "fields": ["paidIn", "portfolioValueAtStation"]
-  },
-  "flags": {
-    "falseResolution": false,
-    "finalWobble": false,
-    "noRedColor": true
-  }
+  "source": "Tagesschau",
+  "date": "2022-02-24",
+  "headline": "Russland greift die Ukraine an",
+  "anchorText": "Krieg ist zurück in Europa. Energie, Inflation, Lieferketten — alles wird neu bewertet."
 }
 ```
 
----
+Die sichtbare Quellenzeile wird nicht als fertiger String gespeichert. Die Chart-/UI-Strategie erzeugt sie aus `source` und `date`.
+
+Sichtbar gerendert werden:
+
+- `source`, formatiert durch die Strategie
+- `date`, formatiert durch die Strategie
+- `headline`
+- `anchorText`
+
+Nicht sichtbar gerendert wird:
+
+- `sourceUrl`
 
 ## 6. Pflichtfelder pro Station
 
-| Feld | Typ | Pflicht | Bedeutung |
-|---|---|---|---|
-| `id` | String | ja | eindeutige technische ID |
-| `date` | String | ja | `YYYY-MM` oder Sonderwert `dynamic_latest_month` |
-| `priority` | Number | ja | redaktionelle Priorität 1–999 |
-| `status` | String | ja | redaktioneller Status |
-| `role` | String | ja | dramaturgische Rolle |
-| `headline` | String | ja | kurze sichtbare Headline |
-| `sourceLabel` | String | ja | sichtbares Quellenlabel oder Datenquelle |
-| `sourceUrl` | String | ja | URL oder leerer String bei derived/final |
-| `sourceStatus` | String | ja | Quellenstatus-Enum |
-| `anchorText` | String | ja | Anleger-Anker in Alltagssprache |
-| `continueLabel` | String | ja | Button-Text |
-| `mobileIntermediate` | Object | ja | mobile Zwischenstand-Regel |
-| `flags` | Object | ja | dramaturgische/visuelle Flags |
+Jede Station hat genau diese Felder:
 
----
+```json
+{
+  "id": "station_2022_02_24_ukraine_invasion",
+  "date": "2022-02-24",
+  "source": "Tagesschau",
+  "headline": "Russland greift die Ukraine an",
+  "anchorText": "Krieg ist zurück in Europa. Energie, Inflation, Lieferketten — alles wird neu bewertet.",
+  "sourceUrl": "https://www.tagesschau.de/..."
+}
+```
 
-## 7. Feldregeln pro Station
+Keine weiteren Felder in historischen Event-Pins.
+
+## 7. Feldregeln
 
 ### `id`
 
-Muss eindeutig sein. Empfohlenes Format:
+Fachtyp: String  
+Pflicht: ja
+
+Stabile technische ID der Station.
+
+Format:
 
 ```text
-station_YYYY_MM_slug
+station_YYYY_MM_DD_slug
 ```
 
-Beispiele:
-```text
-station_2020_03_covid_crash
-station_2025_04_tariff_shock
-station_final_latest_month
-```
+Regeln:
 
----
+- beginnt mit `station_`
+- Datumsteil entspricht `date`
+- nur Kleinbuchstaben, Zahlen und `_`
+- keine Leerzeichen
+- nach Veröffentlichung nicht ohne Grund ändern
+
+Beispiel:
+
+```json
+"id": "station_2022_02_24_ukraine_invasion"
+```
 
 ### `date`
 
-Erlaubt:
-```text
-YYYY-MM
-dynamic_latest_month
-```
+Fachtyp: DateOnly  
+Pflicht: ja  
+JSON-Serialisierung: ISO-Datum `YYYY-MM-DD`
+
+`date` ist der Tag, an dem der Anleger diesen Nachrichtenmoment im deutschsprachigen Mainstream wahrnehmen konnte.
 
 Regeln:
-- Normale Stationen müssen `YYYY-MM` verwenden.
-- `dynamic_latest_month` ist nur für den finalen Reveal erlaubt.
-- Normale Stationen werden nur angezeigt, wenn `date` zwischen `startMonth` und `latestMonth` liegt.
-- `dynamic_latest_month` wird aus der CSV erzeugt und nicht als historisches Datum interpretiert.
 
----
+- historische Stationen verwenden immer ein tagesgenaues Datum
+- keine Monatsstrings
+- keine Uhrzeit
+- keine Zeitzone
+- in der Regel identisch mit dem Veröffentlichungsdatum der Quelle
+- die ChartEngine nutzt `date` für die X-Achse
+- für Monatsfenster wird der Monat aus `date.slice(0, 7)` abgeleitet
 
-### `priority`
+Erlaubt:
 
-Typ: Number | Empfohlene Skala: 1–100 | Sonderfall finaler Reveal: 999
-
-| Bereich | Bedeutung |
-|---|---|
-| 95–100 | Klimax / strukturell zentrale Krise |
-| 80–94 | Kernstation |
-| 60–79 | unterstützende Station |
-| 1–59 | optional / Archivkandidat |
-| 999 | finaler Reveal |
-
----
-
-### `status`
-
-Erlaubte Werte:
-```text
-core
-supporting
-optional
-archival
-final
+```json
+"date": "2022-02-24"
 ```
 
-| Wert | Bedeutung |
-|---|---|
-| `core` | soll im aktiven Fenster bevorzugt angezeigt werden |
-| `supporting` | kann angezeigt werden, wenn Platz im Stationenbogen ist |
-| `optional` | Reserve |
-| `archival` | bleibt in Bibliothek, wird meist nicht angezeigt |
-| `final` | dynamischer Reveal |
+Nicht erlaubt:
 
----
-
-### `role`
-
-Erlaubte Werte:
-```text
-shock
-doubt
-crisis
-relief
-geopolitical_shock
-late_wobble
-final_reveal
+```json
+"date": "2022-02"
 ```
 
-| Wert | Bedeutung |
-|---|---|
-| `shock` | erster Bruch der Normalität |
-| `doubt` | längere Zermürbung / Geduldsprüfung |
-| `crisis` | Klimax der Zeitreise |
-| `relief` | Erholung / falsche Auflösung |
-| `geopolitical_shock` | externer politischer Schock |
-| `late_wobble` | letzter Wackler vor dem Reveal |
-| `final_reveal` | dynamische Schlussstation |
+Hinweis: JSON kennt keinen nativen Date-Typ. Fachlich ist `date` ein DateOnly. Technisch wird es als ISO-String gespeichert und muss von Loader/Validator als Datum validiert werden.
 
-Für spätere Erweiterungen: neue Rollen nur nach Spec-Änderung ergänzen.
+### `source`
 
----
+Fachtyp: String  
+Pflicht: ja
+
+Name des Mediums.
+
+Regeln:
+
+- nur das Medium eintragen
+- keine Datumsangabe
+- keine typografische Formatierung
+- keine künstliche Versalschreibung
+- Medium so schreiben, wie es sich selbst nennt oder im DACH-Raum eindeutig bekannt ist
+- die Chart-/UI-Strategie entscheidet später über Darstellung und baut daraus zusammen mit `date` die sichtbare Quellenzeile
+
+Beispiele:
+
+```json
+"source": "Tagesschau"
+```
+
+```json
+"source": "Handelsblatt"
+```
+
+```json
+"source": "NDR"
+```
+
+```json
+"source": "Zeit Online"
+```
+
+```json
+"source": "Der Spiegel"
+```
 
 ### `headline`
 
-Sichtbarer kurzer Text.
+Fachtyp: String  
+Pflicht: ja
+
+Die Headline des verlinkten Mediums. 1:1.
 
 Regeln:
-- Maximal ca. 70 Zeichen.
-- Klare Alltagssprache.
-- Keine langen Zitate.
-- Keine alarmistische Übertreibung.
-- Keine Prognose.
-- Keine Clickbait-Formulierung.
 
----
+- nicht umformulieren
+- nicht kürzen
+- nicht übersetzen
+- nicht dramaturgisch verbessern
+- keine LLM-Zusammenfassung verwenden
+- keine Suchmaschinen-Zusammenfassung verwenden
+- keine Headline aus einem anderen Medium übernehmen
+- wenn Titel und Untertitel getrennt sind: nur den Haupttitel verwenden
+- wenn die echte Headline nicht sicher feststellbar ist: Quelle verwerfen und weitersuchen
 
-### `sourceLabel`
+Beispiel:
 
-Sichtbares Quellenlabel. Format:
-
-```text
-QUELLE · DATUM
+```json
+"headline": "Russland greift die Ukraine an"
 ```
-
-Beispiele:
-```text
-TAGESSCHAU · 9. MÄRZ 2020
-WIRTSCHAFTSWOCHE · 31. DEZEMBER 2018
-MSCI-Datenreihe
-```
-
----
-
-### `sourceUrl`
-
-String.
-
-Regeln:
-- Vollständige URL, wenn eine externe Quelle verwendet wird.
-- Leerer String erlaubt bei `sourceStatus = derived_from_app_data`.
-- Keine URL-Validierung gegen die CSV-Domain-Regel. Stationsquellen sind redaktionelle Links, keine Marktdatenquelle.
-- Externe Links dürfen nicht zur Datenberechnung verwendet werden.
-
----
-
-### `sourceStatus`
-
-Erlaubte Werte:
-```text
-primary_verified
-secondary_verified
-source_claimed_unchecked
-derived_from_app_data
-```
-
-| Wert | Bedeutung |
-|---|---|
-| `primary_verified` | Primärquelle geprüft, direkt erreichbar, Inhalt passt |
-| `secondary_verified` | Sekundärquelle geprüft, direkt erreichbar, Inhalt passt |
-| `source_claimed_unchecked` | Quelle behauptet/plausibel, aber noch nicht final geprüft |
-| `derived_from_app_data` | aus CSV/App-Daten abgeleitet |
-
-Produktiv sichtbare Stationen dürfen nicht dauerhaft `source_claimed_unchecked` sein.
-
----
 
 ### `anchorText`
 
-Der Anleger-Anker versetzt den Nutzer in die damalige Unsicherheit.
+Fachtyp: String  
+Pflicht: ja
+
+Ein KI-generierter Satz: „Was geht ab?“
+
+`anchorText` ist die kurze Essenz des Artikels für die Anlegerperspektive.
 
 Regeln:
-- Alltagssprache.
-- Kein Fachjargon.
-- Keine Schamformeln.
-- Keine Fake-Urgency.
-- Keine Zukunftsvorschau.
-- Keine Formulierung, die den späteren Ausgang verrät, außer beim finalen Reveal.
 
-Gute Muster:
-```text
-In der fertigen Rückblick-Grafik ist das später nur ein Knick. Heute fühlt es sich an wie ein freier Fall.
-```
-```text
-Ein ganzes Jahr Sparplan. Ein ganzes Jahr minus. Der Sparplan läuft weiter — aber die Belohnung ist nicht zu sehen.
-```
+- ein Satz; zwei sehr kurze Sätze nur wenn nötig
+- maximal 130 Zeichen inklusive Leerzeichen
+- erklärt die damalige Anlegeremotion
+- muss sachlich vom Artikel getragen sein
+- keine Zukunftsvorschau
+- kein späteres Wissen
+- keine Anlageempfehlung
+- kein Moralton
+- kein Fachjargon
+- keine Schamformel
 
-Verbotene Muster:
-```text
-Wer jetzt verkauft, ist selbst schuld.
-Nur wer jetzt durchhält, wird reich.
-Danach wird alles wieder gut.
-```
-
----
-
-### `continueLabel`
-
-Button-Text.
-
-Standardwert für normale Stationen:
-```text
-Weiter investiert bleiben
-```
-
-Finaler Reveal:
-```text
-Ergebnis ansehen
-```
-
-Der Label-Wechsel beim finalen Reveal ist bewusst. Er signalisiert: Jetzt kommt ein anderer Zustand.
-
----
-
-### `mobileIntermediate`
-
-Pflichtobjekt. Standard:
+Gutes Beispiel:
 
 ```json
-"mobileIntermediate": {
-  "label": "Zwischenstand anzeigen",
-  "fields": ["paidIn", "portfolioValueAtStation"]
-}
+"anchorText": "Krieg ist zurück in Europa. Energie, Inflation, Lieferketten — alles wird neu bewertet."
 ```
+
+### `sourceUrl`
+
+Fachtyp: String  
+Pflicht: ja
+
+Direkter Link zur Quelle.
 
 Regeln:
-- Werte werden berechnet, nicht in der JSON gespeichert.
-- Auf Mobile werden Werte nicht permanent angezeigt.
-- `fields` darf nur erlaubte berechnete Feldnamen enthalten.
 
-Erlaubte `fields` in V1:
-```text
-paidIn
-portfolioValueAtStation
-```
+- vollständige URL
+- frei erreichbar oder mindestens Headline, Datum und Kontext frei prüfbar
+- muss zu `source`, `date` und `headline` passen
+- keine Suchergebnisse
+- keine Archivlisten
+- keine Social-Media-Links
+- keine unprüfbare Paywall
 
----
+`sourceUrl` wird nicht sichtbar gerendert. Sie bleibt als interner Prüfanker in der JSON.
 
-### `flags`
+## 8. Was ein Event qualifiziert
 
-Pflichtobjekt. Standard:
+Ein Event ist nur zulässig, wenn alle Bedingungen erfüllt sind:
 
-```json
-"flags": {
-  "falseResolution": false,
-  "finalWobble": false,
-  "noRedColor": true
-}
-```
+1. Es liegt im gesuchten Zeitraum.
+2. Es hat klaren Bezug zu Börse, Kursen, Anlegerstimmung, Weltwirtschaft, Zinsen, Inflation, Banken, Energie, Lieferketten, IPO-/Tech-/KI-Euphorie oder Marktliquidität.
+3. Es konnte Anleger damals emotional zu falschem Handeln verleiten: verkaufen, pausieren, hektisch kaufen, FOMO, Flucht in Sicherheit.
+4. Es wurde in einem deutschsprachigen Mainstream-Medium aus dem DACH-Raum berichtet.
+5. Die Quelle ist frei prüfbar.
+6. Die Headline ist sicher 1:1 feststellbar.
+7. Das Veröffentlichungsdatum ist tagesgenau feststellbar.
 
-**`falseResolution`**
+Wenn Quelle, Datum oder Headline nicht sauber prüfbar sind: Quelle verwerfen und weitersuchen.
 
-Typ: Boolean. Nur eine Station im aktiven Bogen sollte `true` haben. Aktuell: Impfstoff-Erleichterung November 2020.
+## 9. Quellenpräferenz
 
-Wenn `falseResolution = true`, darf der Ankertext nicht ankündigen, dass später noch ein Rückschlag kommt.
+Bevorzugt:
 
-**`finalWobble`**
+1. Tagesschau / ARD / ZDF / Deutschlandfunk
+2. Der Spiegel / Zeit Online / FAZ / Süddeutsche Zeitung
+3. Handelsblatt / Wirtschaftswoche, nur wenn frei prüfbar
+4. Deutsche Welle
+5. NZZ / SRF / ORF
 
-Typ: Boolean. Markiert späte Unsicherheitsstationen nach der falschen Auflösung.
+Mainstream ist hier ein Filter: Was dort auftaucht, war groß genug, um normale Anleger damals emotional zu erreichen.
 
-Beispiele: Ukraine / 2022, Zoll-Schock / 2025.
+## 10. Sortierung
 
-**`noRedColor`**
+Stationen werden chronologisch nach `date` sortiert.
 
-Typ: Boolean | Pflichtwert: `true`
+Die Reihenfolge im JSON soll chronologisch sein. Die App darf zusätzlich nach `date` aufsteigend sortieren.
 
-Wenn eine Station `noRedColor: false` setzt, ist die Config ungültig. Kein stiller Override, kein Ignorieren. Vertraglich gilt: rote Codierung ist verboten — ohne Ausnahme.
+Keine manuelle Gewichtung. Keine Rollenlogik.
 
----
-
-## 8. Finaler Reveal
-
-Der finale Reveal ist kein normales historisches Nachrichtenereignis.
-
-Er kann als Template in der JSON stehen:
+## 11. Gültiges Beispiel
 
 ```json
 {
-  "id": "station_final_latest_month",
-  "date": "dynamic_latest_month",
-  "priority": 999,
-  "status": "final",
-  "role": "final_reveal",
-  "headline": "Jetzt kennst du das Ende",
-  "sourceLabel": "MSCI-Datenreihe",
-  "sourceUrl": "",
-  "sourceStatus": "derived_from_app_data",
-  "anchorText": "Die Strecke sieht im Rückblick einfacher aus, weil du sie jetzt vollständig siehst. Vor 10 Jahren kannte sie niemand.",
-  "continueLabel": "Ergebnis ansehen",
-  "mobileIntermediate": {
-    "label": "Zwischenstand anzeigen",
-    "fields": ["paidIn", "portfolioValueAtStation"]
-  },
-  "flags": {
-    "falseResolution": false,
-    "finalWobble": false,
-    "noRedColor": true
-  }
+  "id": "station_2022_02_24_ukraine_invasion",
+  "date": "2022-02-24",
+  "source": "Tagesschau",
+  "headline": "Russland greift die Ukraine an",
+  "anchorText": "Krieg ist zurück in Europa. Energie, Inflation, Lieferketten — alles wird neu bewertet.",
+  "sourceUrl": "https://www.tagesschau.de/..."
 }
 ```
 
-Regeln:
-- Das tatsächliche Datum kommt aus `latestMonth` der CSV.
-- Der finale Depotwert kommt aus der Sparplanberechnung.
-- Finaler Reveal wird immer nach den historischen Stationen gezeigt.
-- Finale KPI-Cards erscheinen erst nach Abschluss dieses Reveals auf Screen 3.
-
----
-
-## 9. Fensterfilter
-
-Das aktive Fenster wird ausschließlich aus der CSV bestimmt:
-
-```text
-latestMonth = letzter valider CSV-Monat
-startMonth  = latestMonth − 119 Monate
-```
-
-Filterregel:
-```text
-startMonth <= station.date <= latestMonth
-```
-
-Nicht angezeigt werden:
-- Stationen vor `startMonth`
-- Stationen nach `latestMonth`
-- Stationen mit ungültigem Datum
-- Stationen mit `sourceStatus = source_claimed_unchecked` im Produktivmodus
-- Stationen, die gegen Visual- oder Pflichtregeln verstoßen
-
-Der finale Reveal wird gesondert aus `dynamic_latest_month` erzeugt.
-
----
-
-## 10. Sortierung und Auswahl
-
-Nach Filterung:
-1. Stationen nach `date` aufsteigend sortieren.
-2. Wenn mehr als `maxVisibleStations` im Fenster liegen:
-   - Stationen mit höchster Priorität behalten
-   - dramaturgische Reihenfolge nach Datum wiederherstellen
-   - `crisis`-Station bevorzugen
-   - `falseResolution`-Station bevorzugen
-   - `late_wobble`-Station am Ende bevorzugen
-3. Finaler Reveal wird zusätzlich angehängt.
-
-Die Auswahl darf die Zeitlogik nicht brechen. Am Ende muss die sichtbare Reihenfolge immer chronologisch sein.
-
----
-
-## 11. Redaktions-Gate
-
-Vor Veröffentlichung muss gelten:
-
-- [ ] Mindestens eine sichtbare Station hat `role = "crisis"` und `priority >= 95`.
-- [ ] Sichtbare Stationen haben keinen `sourceStatus = "source_claimed_unchecked"`.
-- [ ] Alle sichtbaren Stationen liegen im aktiven CSV-Fenster.
-- [ ] Es gibt genau einen finalen Reveal.
-- [ ] Keine Station erlaubt rote Codierung.
-- [ ] `visualRules.redCrashColor = false`.
-- [ ] `visualRules.lossColoring = false`.
-- [ ] `visualRules.crashSegmentColoring = false`.
-- [ ] Mobile-Zwischenstand ist `collapsible`.
-- [ ] Finale KPIs erscheinen erst nach der Zeitreise.
-
-Wenn das Redaktions-Gate nicht bestanden ist, ist die App nicht publikationsreif.
-
-Vollständige Ausarbeitung: `REDAKTIONS_GATE.md` (→ AP-07). `STATIONS_CONFIG_CONTRACT.md` definiert die JSON-Struktur; `REDAKTIONS_GATE.md` definiert die Publikationsreife.
-
----
-
-## 12. Fehler- und Empty-State-Konzept
-
-AP-03 baut keine Implementierung, benennt aber die Fehlerfälle:
-
-| Fehler | Erwartetes Verhalten |
-|---|---|
-| JSON nicht ladbar | nutzerfreundlicher Error-State |
-| JSON parsebar, aber `app` falsch | Config-Error |
-| Pflichtfeld fehlt | Config-Error |
-| Stationenarray leer | Empty-Journey-State oder Config-Error nach Contract-Validierung; keine Ersatzstationen |
-| keine `crisis` im aktiven Fenster | Redaktions-Gate nicht bestanden |
-| sichtbare Station mit ungeprüfter Quelle | Redaktions-Gate nicht bestanden |
-| `dynamic_latest_month` fehlt | Config-Error — kein synthetischer Default; App zeigt Error-State |
-| rote Visualregel auf `true` | Config ungültig — kein stiller Override; App zeigt Config-Error |
-
-Die genaue technische Fehlerbehandlung folgt in Coding-APs.
-
----
-
-## 13. Beispiel: gültiger Ausschnitt
+## 12. Ungültiges Beispiel
 
 ```json
 {
-  "id": "station_2020_03_covid_crash",
-  "date": "2020-03",
-  "priority": 100,
-  "status": "core",
-  "role": "crisis",
-  "headline": "Börsenhandel an der Wall Street ausgesetzt",
-  "sourceLabel": "TAGESSCHAU · 9. MÄRZ 2020",
-  "sourceUrl": "https://www.tagesschau.de/wirtschaft/corona-wirtschaft-wallstreet-103.html",
-  "sourceStatus": "primary_verified",
-  "anchorText": "In der fertigen Rückblick-Grafik ist das später nur ein Knick. Heute fühlt es sich an wie ein freier Fall.",
-  "continueLabel": "Weiter investiert bleiben",
-  "mobileIntermediate": {
-    "label": "Zwischenstand anzeigen",
-    "fields": ["paidIn", "portfolioValueAtStation"]
-  },
-  "flags": {
-    "falseResolution": false,
-    "finalWobble": false,
-    "noRedColor": true
-  }
+  "id": "station_2022_02_ukraine_invasion",
+  "date": "2022-02",
+  "source": "Internet · Februar 2022",
+  "headline": "Krieg ist zurück in Europa",
+  "anchorText": "Danach fallen die Kurse, aber später erholt sich alles wieder.",
+  "sourceUrl": "https://example.com"
 }
 ```
 
----
+Warum ungültig:
 
-## 14. Offene Punkte für Folge-APs
+- `date` ist nicht tagesgenau
+- `source` enthält kein sauber benanntes Medium
+- `source` enthält Datum und Formatierung
+- `headline` ist nicht als 1:1-Medienheadline belegt
+- `anchorText` enthält späteres Wissen
 
-| AP | Offener Punkt |
-|---|---|
-| AP-09 | Produktive `stations.de.json` anlegen (redaktionelle Stationsliste befüllen) |
-| AP-11 | Stations-JSON-Loader implementieren (fetch, validieren gegen diesen Vertrag) |
-| AP-12 | Fensterfilter und Auswahllogik implementieren |
-| Coding-AP | Technische Fehlerbehandlung bei Config-Error und Empty-State implementieren |
+## 13. Migrationshinweis
+
+Diese Minimalversion ist das Zielschema.
+
+Die Datenstruktur bleibt klein, weil sie nur Event-Pins beschreibt. UI-Regeln, Auswahlheuristiken, Button-Texte und Visual-Regeln gehören in Code oder separate App-Konfiguration, nicht in historische Eventdaten.

@@ -11,12 +11,7 @@ const SLUG_WHITELIST = ['prokrastinations-preis'];
 // NEW — Fetch-Dedup-Cache: verhindert parallele Mehrfach-Requests für dieselbe URL (P-11)
 const _dataCache = new Map();
 
-// NEW — AP-12: Contract-Konstanten für Stations-JSON-Validator
-const _VALID_STATUS        = ['core', 'supporting', 'optional', 'archival', 'final'];
-const _VALID_ROLE          = ['shock', 'doubt', 'crisis', 'relief', 'geopolitical_shock', 'late_wobble', 'final_reveal'];
-const _VALID_SOURCE_STATUS = ['primary_verified', 'secondary_verified', 'source_claimed_unchecked', 'derived_from_app_data'];
-const _VALID_MOBILE_FIELDS = ['paidIn', 'portfolioValueAtStation'];
-const _CALC_VALUE_KEYS     = ['paidIn', 'portfolioValue', 'return', 'performance', 'gain', 'drawdown', 'finalValue'];
+// CHANGED — B1-STATIONS-v3.0: v2.1-Konstanten entfernt (kein priority/role/sourceStatus in v3.0)
 
 function validateSlug(slug) {
   return typeof slug === 'string' && SLUG_WHITELIST.includes(slug.trim());
@@ -144,68 +139,17 @@ function renderKpiCards(container, appContext) {
   container.appendChild(dl);
 }
 
-// NEW — AP-14: Prioritätsauswahl — Dramaturgie-Pflichtspots (crisis, falseResolution, late_wobble)
-// reservieren, Rest nach Priority auffüllen, Ergebnis date_asc sortieren
-function selectStationsForJourney(filteredStations, maxVisible) {
-  if (filteredStations.length <= maxVisible)
-    return filteredStations.slice().sort((a, b) => a.date < b.date ? -1 : 1);
-
-  const crisisStation  = filteredStations.reduce((best, s) =>
-    s.role === 'crisis' && (!best || s.priority > best.priority) ? s : best, null);
-  const falseResStation = filteredStations.find(s => s.flags && s.flags.falseResolution) || null;
-  const lateWobble     = filteredStations
-    .filter(s => s.role === 'late_wobble')
-    .sort((a, b) => a.date > b.date ? -1 : 1)[0] || null;
-
-  const reservedIds = new Set(
-    [crisisStation, falseResStation, lateWobble].filter(Boolean).map(s => s.id)
-  );
-  const reserved  = filteredStations.filter(s =>  reservedIds.has(s.id));
-  const remaining = filteredStations
-    .filter(s => !reservedIds.has(s.id))
-    .sort((a, b) => b.priority - a.priority);
-
-  const freeSlots = Math.max(0, maxVisible - reserved.length);
-  return [...reserved, ...remaining.slice(0, freeSlots)]
-    .sort((a, b) => a.date < b.date ? -1 : 1);
-}
-
-// NEW — AP-14: Gate A prüfen (G-A01, G-A05) — gibt GateOK oder EditorialDegraded
-function checkEditorialGate(selectedStations, finalReveal, selectionPolicy) {
-  const diagnose  = [];
-  const gateConf  = selectionPolicy.editorialGate || {};
-  const minCrisis = gateConf.minCrisisPriority || 95;
-  if (!selectedStations.some(s => s.role === 'crisis' && s.priority >= minCrisis))
-    diagnose.push('G-A01: Keine crisis-Station mit priority >= ' + minCrisis + ' im aktiven Fenster');
-  if (!finalReveal)
-    diagnose.push('G-A05: Kein Final-Reveal-Template (dynamic_latest_month) gefunden');
-  const minVisible = selectionPolicy.minVisibleStations || 5;
-  if (selectedStations.length < minVisible)
-    diagnose.push('Zu wenige sichtbare Stationen: ' + selectedStations.length + ' < ' + minVisible);
-  return diagnose.length === 0
-    ? { status: 'GateOK',          diagnose: [] }
-    : { status: 'EditorialDegraded', diagnose };
-}
+// CHANGED — B1-STATIONS-v3.0: selectStationsForJourney + checkEditorialGate entfernt
+// v3.0: alle gefilterten Stationen chronologisch, kein priority-/role-basiertes Gate
 
 // NEW — AP-14: Chart bis zur Stations-Monat trimmen (visibleChartSeries — kein Endwissen)
 function buildVisibleChartSeries(chartSeries, stationMonth) {
   return chartSeries.filter(p => p.month <= stationMonth);
 }
 
-// NEW — B1-AP-14c3b: robuster Guard für Final-/Reveal-/Schluss-Stationen
-// Schließt eine Station aus, wenn eines der folgenden Merkmale zutrifft.
-// Alle Zugriffe defensiv — fehlende Felder (flags, id) werfen keinen Fehler.
+// CHANGED — B1-STATIONS-v3.0: finaler Reveal ist synthetisch (isFinalReveal-Flag)
 function isFinalRevealStation(s) {
-  if (s.role === 'final_reveal') return true;
-  if (s.date === 'dynamic_latest_month') return true;
-  if (s.status === 'final') return true;
-  if (s.flags && s.flags.finalReveal === true) return true;
-  if (s.id && (
-    s.id.includes('final_reveal') ||
-    s.id.includes('final_latest_month') ||
-    s.id.includes('station_final')
-  )) return true;
-  return false;
+  return s.isFinalReveal === true;
 }
 
 // NEW — B1-AP-14c1: Annotationen aus vergangenen Journey-Stations ableiten (kein Rendering)
@@ -243,13 +187,23 @@ function calcStationIntermediate(chartSeries, stationMonth, monatlicheRate, star
   };
 }
 
-// NEW — AP-14: Station-Card rendern (SafeDOM: textContent — Q-01, kein innerHTML)
+// NEW — B1-STATIONS-v3.0: Quellenzeile aus station.source + station.date erzeugen
+// Synthetische Final-Reveal-Stationen (isFinalReveal) zeigen nur das Medium ohne Datum.
+function formatSourceLine(station) {
+  if (station.isFinalReveal) return station.source;
+  const [y, m, d] = station.date.split('-');
+  const datePart = new Intl.DateTimeFormat('de-DE', { day: 'numeric', month: 'long', year: 'numeric' })
+    .format(new Date(parseInt(y, 10), parseInt(m, 10) - 1, parseInt(d, 10)));
+  return station.source ? station.source + ' · ' + datePart : datePart;
+}
+
+// CHANGED — B1-STATIONS-v3.0: sourceLabel → formatSourceLine; mobileIntermediate → hardcoded
 function renderStationCard(container, station, stationIntermediate, fmt) {
   container.textContent = ''; // vorherige Station sauber ersetzen
 
   const sourceLabel = document.createElement('p');
   sourceLabel.className = 'fw-app__station-source-label';
-  sourceLabel.textContent = station.sourceLabel;
+  sourceLabel.textContent = formatSourceLine(station); // CHANGED — B1-STATIONS-v3.0
   container.appendChild(sourceLabel);
 
   const headline = document.createElement('h3');
@@ -271,7 +225,7 @@ function renderStationCard(container, station, stationIntermediate, fmt) {
   const trigger = document.createElement('button');
   trigger.type  = 'button';
   trigger.className = 'fw-app__collapsible-trigger';
-  trigger.textContent = station.mobileIntermediate.label;
+  trigger.textContent = 'Zwischenstand anzeigen'; // CHANGED — B1-STATIONS-v3.0
   trigger.setAttribute('aria-expanded', 'false');
   trigger.setAttribute('aria-controls', collapsibleId);
 
@@ -305,7 +259,7 @@ function renderStationCard(container, station, stationIntermediate, fmt) {
   trigger.addEventListener('click', () => {
     const isOpen = trigger.getAttribute('aria-expanded') === 'true';
     trigger.setAttribute('aria-expanded', String(!isOpen));
-    trigger.textContent = !isOpen ? 'Zwischenstand ausblenden' : station.mobileIntermediate.label;
+    trigger.textContent = !isOpen ? 'Zwischenstand ausblenden' : 'Zwischenstand anzeigen'; // CHANGED — B1-STATIONS-v3.0
     if (!isOpen) content.removeAttribute('hidden');
     else         content.setAttribute('hidden', '');
   });
@@ -519,7 +473,7 @@ function renderContent(container, appData, options, stationsConfig) { // CHANGED
     const bekannt = new Intl.DateTimeFormat(appData.locale, { month: 'long', year: 'numeric' })
       .format(new Date(parseInt(yr, 10), parseInt(mo, 10) - 1, 1));
     progressEl.textContent = `Station ${n} von ${total} · Bekannt bis ${bekannt}`;
-    journeyBtn.textContent = station.continueLabel || 'Weiter';
+    journeyBtn.textContent = station.isFinalReveal ? 'Ergebnis ansehen' : 'Weiter investiert bleiben'; // CHANGED — B1-STATIONS-v3.0
     a11yRegion.textContent = station.headline; // stationLiveMessage — kein Endwissen (APP_SPEC §14.1)
   }
 
@@ -671,109 +625,39 @@ async function _loadDataImpl(url) {
   return { appData };
 }
 
-// NEW — AP-12: Stations-JSON gegen STATIONS_CONFIG_CONTRACT.md validieren
+// CHANGED — B1-STATIONS-v3.0: Validator für STATIONS_CONFIG_CONTRACT.md v3.0
 // Gibt { ok: true } oder { ok: false, code, detail } zurück — kein Wurf.
 function validateStationsJson(json) {
   if (typeof json !== 'object' || json === null || Array.isArray(json))
     return { ok: false, code: 'invalid_structure', detail: 'root is not an object' };
 
-  if (json.version !== '2.1')
-    return { ok: false, code: 'invalid_value', detail: 'version: expected "2.1", got: ' + json.version };
+  if (json.version !== '3.0')
+    return { ok: false, code: 'invalid_value', detail: 'version: expected "3.0", got: ' + json.version };
   if (json.locale !== 'de-DE')
     return { ok: false, code: 'invalid_value', detail: 'locale: expected "de-DE", got: ' + json.locale };
   if (json.app !== 'prokrastinations-preis')
     return { ok: false, code: 'invalid_value', detail: 'app: expected "prokrastinations-preis", got: ' + json.app };
 
-  if (typeof json.selectionPolicy !== 'object' || json.selectionPolicy === null || Array.isArray(json.selectionPolicy))
-    return { ok: false, code: 'missing_field', detail: 'selectionPolicy' };
-
-  if (typeof json.visualRules !== 'object' || json.visualRules === null || Array.isArray(json.visualRules))
-    return { ok: false, code: 'missing_field', detail: 'visualRules' };
-  const vr = json.visualRules;
-  if (vr.redCrashColor !== false)
-    return { ok: false, code: 'no_red_violation', detail: 'visualRules.redCrashColor must be false' };
-  if (vr.lossColoring !== false)
-    return { ok: false, code: 'no_red_violation', detail: 'visualRules.lossColoring must be false' };
-  if (vr.crashSegmentColoring !== false)
-    return { ok: false, code: 'no_red_violation', detail: 'visualRules.crashSegmentColoring must be false' };
-  if (vr.futurePreview !== false)
-    return { ok: false, code: 'invalid_value', detail: 'visualRules.futurePreview must be false' };
-  if (vr.stationValueMobile !== 'collapsible')
-    return { ok: false, code: 'invalid_value', detail: 'visualRules.stationValueMobile must be "collapsible"' };
-
-  if (typeof json.motionRules !== 'object' || json.motionRules === null || Array.isArray(json.motionRules))
-    return { ok: false, code: 'missing_field', detail: 'motionRules' };
-  if (json.motionRules.mode !== 'user_stepped')
-    return { ok: false, code: 'invalid_value', detail: 'motionRules.mode must be "user_stepped"' };
-  // CHANGED: AP-15c — betweenStations, forcedWaitBeforeContinue, reducedMotion hart validiert
-  if (json.motionRules.betweenStations !== 'short_draw_animation')
-    return { ok: false, code: 'invalid_value', detail: 'motionRules.betweenStations must be "short_draw_animation"' };
-  if (json.motionRules.forcedWaitBeforeContinue !== false)
-    return { ok: false, code: 'invalid_value', detail: 'motionRules.forcedWaitBeforeContinue must be false' };
-  if (json.motionRules.reducedMotion !== 'instant_step')
-    return { ok: false, code: 'invalid_value', detail: 'motionRules.reducedMotion must be "instant_step"' };
-
   if (!Array.isArray(json.stations) || json.stations.length < 1)
     return { ok: false, code: 'missing_field', detail: 'stations (array, min length 1)' };
-
-  let dynamicLatestCount = 0;
-  const _STR_FIELDS = ['id', 'headline', 'sourceLabel', 'sourceUrl', 'anchorText', 'continueLabel'];
 
   for (let i = 0; i < json.stations.length; i++) {
     const s = json.stations[i];
     const p = 'station[' + i + ']';
 
-    for (const f of _STR_FIELDS) {
-      if (typeof s[f] !== 'string')
-        return { ok: false, code: 'missing_field', detail: p + '.' + f };
-    }
-
-    if (typeof s.date !== 'string')
-      return { ok: false, code: 'missing_field', detail: p + '.date' };
-    if (s.date === 'dynamic_latest_month') {
-      dynamicLatestCount++;
-      if (s.role !== 'final_reveal')
-        return { ok: false, code: 'invalid_value', detail: p + '.date: dynamic_latest_month only allowed for role=final_reveal' };
-    } else if (!/^\d{4}-\d{2}$/.test(s.date)) {
-      return { ok: false, code: 'invalid_value', detail: p + '.date: expected YYYY-MM or dynamic_latest_month, got: ' + s.date };
-    }
-
-    if (typeof s.priority !== 'number')
-      return { ok: false, code: 'missing_field', detail: p + '.priority' };
-
-    if (!_VALID_STATUS.includes(s.status))
-      return { ok: false, code: 'invalid_enum', detail: p + '.status: ' + s.status };
-    if (!_VALID_ROLE.includes(s.role))
-      return { ok: false, code: 'invalid_enum', detail: p + '.role: ' + s.role };
-    if (!_VALID_SOURCE_STATUS.includes(s.sourceStatus))
-      return { ok: false, code: 'invalid_enum', detail: p + '.sourceStatus: ' + s.sourceStatus };
-
-    if (typeof s.mobileIntermediate !== 'object' || s.mobileIntermediate === null || Array.isArray(s.mobileIntermediate))
-      return { ok: false, code: 'missing_field', detail: p + '.mobileIntermediate' };
-    if (typeof s.mobileIntermediate.label !== 'string')
-      return { ok: false, code: 'missing_field', detail: p + '.mobileIntermediate.label' };
-    if (!Array.isArray(s.mobileIntermediate.fields))
-      return { ok: false, code: 'missing_field', detail: p + '.mobileIntermediate.fields' };
-    for (const fn of s.mobileIntermediate.fields) {
-      if (!_VALID_MOBILE_FIELDS.includes(fn))
-        return { ok: false, code: 'invalid_value', detail: p + '.mobileIntermediate.fields: unknown field "' + fn + '"' };
-    }
-
-    if (typeof s.flags !== 'object' || s.flags === null || Array.isArray(s.flags))
-      return { ok: false, code: 'missing_field', detail: p + '.flags' };
-    if (s.flags.noRedColor !== true)
-      return { ok: false, code: 'no_red_violation', detail: p + '.flags.noRedColor must be true' };
-
-    for (const k of _CALC_VALUE_KEYS) {
-      if (typeof s[k] === 'number')
-        return { ok: false, code: 'calc_value_forbidden', detail: p + '.' + k + ' must not be a number in station objects' };
-    }
+    if (typeof s.id !== 'string' || s.id.trim() === '')
+      return { ok: false, code: 'missing_field', detail: p + '.id' };
+    if (typeof s.date !== 'string' || !/^\d{4}-\d{2}-\d{2}$/.test(s.date))
+      return { ok: false, code: 'invalid_value', detail: p + '.date: expected YYYY-MM-DD, got: ' + s.date };
+    if (typeof s.source !== 'string' || s.source.trim() === '')
+      return { ok: false, code: 'missing_field', detail: p + '.source' };
+    if (typeof s.headline !== 'string' || s.headline.trim() === '')
+      return { ok: false, code: 'missing_field', detail: p + '.headline' };
+    if (typeof s.anchorText !== 'string' || s.anchorText.trim() === '')
+      return { ok: false, code: 'missing_field', detail: p + '.anchorText' };
+    if (typeof s.sourceUrl !== 'string' || !/^https?:\/\//.test(s.sourceUrl))
+      return { ok: false, code: 'invalid_value', detail: p + '.sourceUrl: must start with http:// or https://' };
   }
-
-  if (dynamicLatestCount === 0)
-    return { ok: false, code: 'missing_field', detail: 'dynamic_latest_month: no station found with date="dynamic_latest_month"' };
-  if (dynamicLatestCount > 1)
-    return { ok: false, code: 'invalid_value', detail: 'dynamic_latest_month: must appear exactly once, found ' + dynamicLatestCount };
 
   return { ok: true };
 }
@@ -793,33 +677,30 @@ function buildActiveJourneyWindow(msciData) {
   return { startMonth, latestMonth, periodMonths: 120 };
 }
 
-// NEW — AP-13: Stationen auf aktives Fenster filtern
-// - Stationen außerhalb [startMonth, latestMonth] werden ausgeschlossen
-// - source_claimed_unchecked wird still gefiltert (kein Config-Error — Gate prüft das in AP-14)
-// - dynamic_latest_month wird separat über buildJourneyStations verarbeitet
+// CHANGED — B1-STATIONS-v3.0: date ist YYYY-MM-DD → slice(0,7) für Fenstervergleich
+// Kein sourceStatus-Filter, kein dynamic_latest_month in v3.0
 function filterStationsForWindow(stations, window) {
   return stations.filter(s => {
-    if (s.date === 'dynamic_latest_month') return false;
-    if (s.sourceStatus === 'source_claimed_unchecked') return false;
-    return s.date >= window.startMonth && s.date <= window.latestMonth;
+    const month = s.date.slice(0, 7); // YYYY-MM-DD → YYYY-MM
+    return month >= window.startMonth && month <= window.latestMonth;
   });
 }
 
-// CHANGED — AP-14: Journey-Stationen aufbauen (Prioritätsauswahl + Editorial Gate)
+// CHANGED — B1-STATIONS-v3.0: chronologische Sortierung, synthetischer Final-Reveal aus CSV
+// Kein selectionPolicy/priority/editorialGate — alle gefilterten Stationen erscheinen
 function buildJourneyStations(stationsConfig, window) {
-  const allFiltered        = filterStationsForWindow(stationsConfig.stations, window);
-  const maxVisible         = stationsConfig.selectionPolicy.maxVisibleStations || 7;
-  const selectedHistoric   = selectStationsForJourney(allFiltered, maxVisible); // NEW — AP-14
-  const finalTemplate      = stationsConfig.stations.find(s => s.date === 'dynamic_latest_month');
-  const finalRevealStation = finalTemplate
-    ? Object.assign({}, finalTemplate, { date: window.latestMonth })
-    : null;
-  const gateResult = checkEditorialGate(selectedHistoric, finalRevealStation, stationsConfig.selectionPolicy); // NEW — AP-14
-  if (gateResult.status !== 'GateOK')
-    console.warn('[fw-app] Editorial Gate:', gateResult.status, gateResult.diagnose.join(' | '));
-  return finalRevealStation
-    ? [...selectedHistoric, finalRevealStation]
-    : selectedHistoric;
+  const filtered = filterStationsForWindow(stationsConfig.stations, window);
+  const sorted   = filtered.slice().sort((a, b) => a.date < b.date ? -1 : 1);
+  const finalReveal = {
+    id:            'station_final_reveal',
+    date:          window.latestMonth,
+    source:        'MSCI-Datenreihe',
+    headline:      'Jetzt kennst du das Ende',
+    anchorText:    'Die Strecke sieht im Rückblick einfacher aus, weil du sie jetzt vollständig siehst. Vor 10 Jahren kannte sie niemand.',
+    sourceUrl:     '',
+    isFinalReveal: true
+  };
+  return [...sorted, finalReveal];
 }
 
 // NEW — AP-11: Stations-JSON app-spezifisch laden
