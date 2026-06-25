@@ -260,6 +260,8 @@ Wird geleert nach /distill. Einträge: [FRICTION] [WIN] [PREF] [QUESTION] [OK]
 ## 2026-06-25 – SESSION START | [KETTENMODUS] | Fokus: APP-01 — prokrastinations-preis
 - FinanzwesirData.js, CSVParser.js, FwDateUtils.js — diese Session nicht berühren. ✓
 
+### B1-AP-19 — AP-Wechsel (neuer Faden)
+
 ### 2026-06-25 — Housekeeping: App-Mapping Konsistenzprüfung & Ordner-Umbenennung ✅
 - [OK] 04-stationen-und-app-mapping.md gegen Apps/ geprüft: Stationen 4/5/8 bestätigt und Status gesetzt
 - [OK] Doubletten aufgelöst: passiv-paradox → etf-aera-vorbei, etf-reifegrad-finale → plan-generator
@@ -271,3 +273,10 @@ Wird geleert nach /distill. Einträge: [FRICTION] [WIN] [PREF] [QUESTION] [OK]
 - [OK] 5 Top-Risiken (GELB): role="alert"-Lücke in renderError() (AP-18b), source_claimed_unchecked Editorial-Gap, CSV fehlt (AP-DATA-09), Error-d nicht isolierbar, Empty-Journey kein UI
 - [OK] Status GELB, kein Blocker; AP-18b empfohlen (1 Zeile, Light-Gate)
 - [WIN] Haiku-Triple-Dispatch — vollständige Faktensammlung (git-Status, APP_SPEC, app.js, app.css, stations.de.json, app.test.html) ohne Sonnet-Overhead
+
+### 2026-06-25 — Housekeeping: Heldenreise App-Mapping Drift-Fix ✅
+- [OK] etf-vergleich (D4) in Homepage-Hauptpfad als Station 5; Stationen 5–8 → 6–9
+- [OK] plan-generator MINI_SPEC: Slug etf-reifegrad-finale → plan-generator, Früherer Arbeitstitel ergänzt
+- [OK] etf-aera-vorbei MINI_SPEC: Slug passiv-paradox → etf-aera-vorbei, offener Konzeptkonflikt dokumentiert
+- [OK] ETF-Apps-Hauptdokument: H1 + G3 Slugs/Titel an 7 Stellen bereinigt, v6.1 eingetragen
+- [OK] Ergebnisprotokoll: PATCH-heldenreise-app-mapping-drift-fix-2026-06-25.md (GELB)

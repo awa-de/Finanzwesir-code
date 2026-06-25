@@ -10,21 +10,21 @@ Sie dient als Brücke zwischen Konzept, Text und späterer statischer HTML-Seite
 
 | Station | Blockade des Nutzers | App / Modul | Erkenntnis | Status |
 |---:|---|---|---|---|
-| 0 | „Ich weiß, dass ich investieren sollte, aber ich tue es nicht.“ | Hero / Spiegel | Mein Problem ist die Entscheidung. | Text nötig |
-| 1 | „Ich warte noch auf den richtigen Zeitpunkt.“ | Market-Timing-Simulator | Warten ist keine Strategie. | App-Spec prüfen |
-| 2 | „Was, wenn direkt nach dem Kauf der Crash kommt?“ | Crash-Reaktions-Test | Verhalten ist wichtiger als ETF. | App-Spec prüfen |
-| 3 | „Mehr ETFs machen mein Depot sicherer.“ | Diversifikations-Detektor | Mehr ist oft nur mehr Meinung. | App-Spec prüfen |
+| 0 | „Ich weiß, dass ich investieren sollte, aber ich tue es nicht.” | Hero / Spiegel | Mein Problem ist die Entscheidung. | Text nötig |
+| 1 | „Ich warte noch auf den richtigen Zeitpunkt.” | Market-Timing-Simulator | Warten ist keine Strategie. | App-Spec prüfen |
+| 2 | „Was, wenn direkt nach dem Kauf der Crash kommt?” | Crash-Reaktions-Test | Verhalten ist wichtiger als ETF. | App-Spec prüfen |
+| 3 | „Mehr ETFs machen mein Depot sicherer.” | Diversifikations-Detektor | Mehr ist oft nur mehr Meinung. | App-Spec prüfen |
 | 4 | „Ein ETF ist zu simpel.” | Komplexitätsentlarver (1 ETF vs. 5 ETFs) | Einfachheit ist robust. | App vorhanden (`komplexitaets-entlarver`) |
-| 5 | „Vielleicht ist die ETF-Ära vorbei.” | ETF-Ära vorbei | Alternativen werden nicht besser. | App vorhanden (`etf-aera-vorbei`) |
-| 6 | „Vielleicht ändert der Staat die Regeln.“ | Regulatorik-App | Robustheit schlägt fragile Optimierung. | App vorhanden, Einbettung nötig |
-| 7 | „Wie viel Risiko halte ich wirklich aus?“ | Risiko-Übersetzer | Risiko muss tragbar dosiert werden. | App-Spec prüfen |
-| 8 | „Was mache ich jetzt konkret?” | Plan-Generator | Start klein, aber starte. | App vorhanden (`plan-generator`) |
+| 5 | „Ich kann noch nicht starten, weil ich erst den optimalen ETF finden muss.” | ETF-Vergleich / ETF-Feinschliff-Entgifter | ETF-Details sind real, aber nicht der Startgrund. | App vorhanden (`etf-vergleich`) |
+| 6 | „Vielleicht ist die ETF-Ära vorbei.” | ETF-Ära vorbei | Alternativen werden nicht besser. | App vorhanden (`etf-aera-vorbei`) |
+| 7 | „Vielleicht ändert der Staat die Regeln.” | Regulatorik-App | Robustheit schlägt fragile Optimierung. | App vorhanden, Einbettung nötig |
+| 8 | „Wie viel Risiko halte ich wirklich aus?” | Risiko-Übersetzer | Risiko muss tragbar dosiert werden. | App-Spec prüfen |
+| 9 | „Was mache ich jetzt konkret?” | Plan-Generator | Start klein, aber starte. | App vorhanden (`plan-generator`) |
 
 ## Vertiefungs-Apps
 
 Diese Apps gehören nicht automatisch in den Hauptpfad. Sie können später in Artikeln, im Werkzeugkasten oder in Vertiefungsbereichen verwendet werden.
 
-- ETF-Vergleich / ETF-Feinschliff-Entgifter (`etf-vergleich`) — Funnel-Master-App D4; Blockade: „Ich muss erst den optimalen ETF finden"; könnte eigenen Stationsslot erhalten
 - Weltkarte ETF-Indizes
 - Kostenkiller TER
 - Replizierer vs. Swapper
@@ -37,8 +37,14 @@ Diese Apps gehören nicht automatisch in den Hauptpfad. Sie können später in A
 - Komplexitäts-Entlarver
 - Investment-Universum
 
+Hinweis: D4 `etf-vergleich` ist kein technischer Vertiefungspfad, sondern das Exit-Gate aus der Produktoptimierung. Die App beendet die ETF-Feinsuche und führt Richtung Plan-Generator.
+
 ## Entscheidungskriterium
 
-Eine App gehört nur dann in den Homepage-Hauptpfad, wenn sie eine zentrale Blockade zerstört und den Nutzer logisch zur nächsten Station führt.
+Eine App gehört in den Homepage-Hauptpfad, wenn sie eine zentrale psychologische Blockade zerstört und den Nutzer logisch zur nächsten Station führt.
+
+Die Heldenreise hat Vorrang vor Nummerierungsbequemlichkeit. Wenn eine neue Station nötig wird, verschiebt sich die Nummerierung — die Dramaturgie bleibt.
+
+Mentor-Apps werden nicht zu Vertiefungs-Apps degradiert, weil ein neuer Stationsslot unbequem ist.
 
 Wenn eine App nur interessant ist, aber keine Blockade im Funnel beseitigt, gehört sie nicht in den Hauptpfad.

@@ -45,7 +45,7 @@ HOOK
     G3 Passiv-Paradox (optional, ergänzend)
   ↓
 [H] PLAN GEBEN & CTA
-    H1 ETF-Reifegrad-Test + Start-Konfigurator
+    H1 Plan-Generator
 ```
 
 > A1, A2 und A3 werden als zusammenhängender Block „Risiko überleben" geführt. A1 bleibt inhaltlich „Risiko klären", rückt aber dramaturgisch vor A2/A3. F1 und F2 bilden den Block F „Mechanismen verstehen". Block B ist als „Marktzeit statt Timing" mit 5 Apps (B1–B5) gefasst; B4 „Der alte Euro" und B5 „Depot-Kipppunkt" sind aus dem früheren Block F in Block B verschoben.
@@ -80,7 +80,7 @@ Block G muss **anders klingen** als der Rest: nicht motivierend, nicht vereinfac
 | 16 | Replizierer vs. Swapper | D2 | ★★ | Mittel | Hoch | 🟨 offen |
 | 17 | Thesaurierer vs. Ausschütter | F2 | ★ | Gering | Gering | 🟨 offen |
 | 18 | Weltdepot-Baukasten | C3 | ★ | Mittel | Mittel | 🟨 offen |
-| 19 | ETF-Reifegrad-Test + Konfigurator | H1 | ★ | 🔥 Hoch | Hoch | 🟨 offen |
+| 19 | Plan-Generator | H1 | ★ | 🔥 Hoch | Hoch | 🟨 offen |
 | 20 | Der alte Euro | B4 | — | Mittel | Gering | 🟨 offen |
 | 21 | Depot-Kipppunkt | B5 | — | 🔥 Hoch | Gering | 🟨 offen |
 | 22 | ETF-Vergleich / ETF-Feinschliff-Entgifter | D4 | — | Mittel | Mittel | 🟨 offen |
@@ -1007,7 +1007,7 @@ Punchline: „Die Marktrendite könnte kleiner werden. Deine Alternativen auch."
 
 ## G3 – Das Passiv-Paradox (Ergänzungs-App)
 
-**Slug:** `passiv-paradox`
+**Slug:** `etf-aera-vorbei`
 **KI-Konsens:** ★ (Perplexity)
 **Folienbezug:** Übergreifend (akademische Systemkritik)
 **Funnel-Position:** Systemkritische Einwände (unter G2 einbettbar)
@@ -1042,9 +1042,10 @@ Eher als **interaktiver Erklärungstext** (Accordion/Aufklappbereich) unter G2 d
 
 ---
 
-## H1 – ETF-Reifegrad-Test & Start-Konfigurator
+## H1 – Plan-Generator
 
-**Slug:** `etf-reifegrad-finale`
+**Slug:** `plan-generator`
+**Früherer Arbeitstitel:** ETF-Reifegrad-Test & Start-Konfigurator
 **KI-Konsens:** ★ (ChatGPT Meta-Idee)
 **Folienbezug:** Gesamtpräsentation (Finale)
 **Funnel-Position:** CTA / Abschluss des Funnels
@@ -1136,7 +1137,7 @@ Jede App muss:
 | C2 Komplexitätsentlarver | `komplexitaets-entlarver` |
 | D3 TER-Rechner | `kostenkiller-ter` |
 | E1 ESG-Spiegel | `esg-spiegel` |
-| G3 Passiv-Paradox | `passiv-paradox` |
+| G3 Passiv-Paradox | `etf-aera-vorbei` |
 
 ## Phase 3b – Mechanismus-Kette (nach Phase 3, vor Abschluss)
 
@@ -1149,7 +1150,7 @@ Jede App muss:
 
 | App | Slug |
 |---|---|
-| H1 ETF-Reifegrad-Test | `etf-reifegrad-finale` |
+| H1 Plan-Generator | `plan-generator` |
 | F1 Renditekiller | `renditekiller-volatilitaet` |
 | C3 Weltdepot-Baukasten | `weltdepot-baukasten` |
 | D2 Replizierer/Swapper | `replizierer-swapper` |
@@ -1168,4 +1169,5 @@ Jede App muss:
 | 4.0 | 2026-05-18 | B1 von Verlustzähler zu Marktzeit-App umgerahmt (neu: „Marktzeit schlägt Timing / Lieber heute als morgen", MSCI-World-Monatsdaten, 4-Screen-Flow). B2 bereinigt: Kindersparplan, vor-10-Jahren-Motiv und Warte-Button entfernt, Fokus auf rollierende 30-Jahres-Zeiträume mit inflationsbereinigten Realwerten. + F3 „Der alte Euro" (Mechanik-Mini-App, Slug: der-alte-euro). + F4 „Depot-Kipppunkt" (Statuswechsel-App, Slug: depot-kipppunkt). Rollenformel verankert: B1→B2→Der alte Euro→Depot-Kipppunkt. 1-Million-App verworfen. Master-Prioritätsliste auf 21 Apps erweitert. |
 | 5.0 | 2026-05-18 | Block B umbenannt zu „Marktzeit statt Timing". F3 „Der alte Euro" → B4, F4 „Depot-Kipppunkt" → B5; beide aus Block F in Block B verschoben. Block-B-Intro-Text und dramaturgische Rollenformel ergänzt. Funnel-Diagramm, Master-Prioritätsliste, Entwicklungsreihenfolge und alle Funnel-Positionen in B1–B3 aktualisiert. Block F enthält jetzt nur noch F1/F2. B1-APP_SPEC.md, SLICE_0_KICKOFF.md und SLICE_PLAN.md mit VERALTET-Header versehen (alte Mechanik, kein Code ohne neue APP_SPEC). MINI_SPECs aller betroffenen Apps konsistent aktualisiert. |
 | 6.0 | 2026-05-19 | + D4 ETF-Vergleich / ETF-Feinschliff-Entgifter (`etf-vergleich`). Exit-Gate aus Block D. Funnel-Diagramm D/E-Zeile ergänzt. D4-Abschnitt nach D3 eingefügt. Master-Prioritätsliste auf 22 Apps erweitert. E1 ESG bleibt Spezialpfad, keine Pflichtstation. |
+| 6.1 | 2026-06-25 | Slug-Drift nach Ordner-Umbenennungen bereinigt: H1 `etf-reifegrad-finale` → `plan-generator`; G3 `passiv-paradox` → `etf-aera-vorbei`. Kanonische Titel und Metadaten in H1-Abschnitt, Master-Prioritätsliste, Phase-3- und Phase-4-Tabelle nachgezogen. |
 

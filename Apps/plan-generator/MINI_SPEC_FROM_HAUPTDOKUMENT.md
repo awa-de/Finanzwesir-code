@@ -1,16 +1,17 @@
-# MINI_SPEC_FROM_HAUPTDOKUMENT — ETF-Reifegrad-Test & Start-Konfigurator
+# MINI_SPEC_FROM_HAUPTDOKUMENT — Plan-Generator
 
 > Quelle: `docs/App-Fabrik/ETF-Apps-Hauptdokument.md`
 > Status: Roh-Mini-Spec aus Hauptdokument, noch nicht APP_SPEC
 
 ---
 
-## H1 – ETF-Reifegrad-Test & Start-Konfigurator
+## H1 – Plan-Generator
 
-**Slug:** `etf-reifegrad-finale`
+**Slug:** `plan-generator`
+**Früherer Arbeitstitel:** ETF-Reifegrad-Test & Start-Konfigurator
 **KI-Konsens:** ★ (ChatGPT Meta-Idee)
 **Folienbezug:** Gesamtpräsentation (Finale)
-**Funnel-Position:** CTA / Abschluss des Funnels
+**Funnel-Position:** CTA / Abschluss der Heldenreise
 **Priorität:** #18
 
 ### Aufbau: Zwei Stufen
@@ -43,8 +44,9 @@ Ergebnis:
 - Quelle: `docs/App-Fabrik/ETF-Apps-Hauptdokument.md`
 - Block: H – Plan geben & CTA
 - App-ID: H1
-- App-Titel: ETF-Reifegrad-Test & Start-Konfigurator
-- Slug laut Hauptdokument: `etf-reifegrad-finale`
-- Zugeordneter App-Ordner: `/Apps/etf-reifegrad-finale/`
+- App-Titel: Plan-Generator
+- Früherer Arbeitstitel: ETF-Reifegrad-Test & Start-Konfigurator
+- Slug: `plan-generator`
+- Zugeordneter App-Ordner: `/Apps/plan-generator/`
 - Modulrolle: Haupt-App
 - Status: Roh-Mini-Spec aus Hauptdokument, noch nicht APP_SPEC

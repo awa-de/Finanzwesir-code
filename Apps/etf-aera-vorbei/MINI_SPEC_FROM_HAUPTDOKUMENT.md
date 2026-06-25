@@ -1,13 +1,14 @@
-# MINI_SPEC_FROM_HAUPTDOKUMENT — Das Passiv-Paradox
+# MINI_SPEC_FROM_HAUPTDOKUMENT — ETF-Ära vorbei
 
 > Quelle: `docs/App-Fabrik/ETF-Apps-Hauptdokument.md`
 > Status: Roh-Mini-Spec aus Hauptdokument, noch nicht APP_SPEC
 
 ---
 
-## G3 – Das Passiv-Paradox (Ergänzungs-App)
+## G3 – ETF-Ära vorbei
 
-**Slug:** `passiv-paradox`
+**Slug:** `etf-aera-vorbei`
+**Früherer Arbeitstitel / Unteraspekt:** Das Passiv-Paradox
 **KI-Konsens:** ★ (Perplexity)
 **Folienbezug:** Übergreifend (akademische Systemkritik)
 **Funnel-Position:** Systemkritische Einwände (unter G2 einbettbar)
@@ -41,8 +42,10 @@ Eher als **interaktiver Erklärungstext** (Accordion/Aufklappbereich) unter G2 d
 - Quelle: `docs/App-Fabrik/ETF-Apps-Hauptdokument.md`
 - Block: G – Systemkritische Einwände
 - App-ID: G3
-- App-Titel: Das Passiv-Paradox
-- Slug laut Hauptdokument: `passiv-paradox`
-- Zugeordneter App-Ordner: `/Apps/passiv-paradox/`
+- App-Titel: ETF-Ära vorbei
+- Früherer Arbeitstitel / Unteraspekt: Das Passiv-Paradox
+- Slug: `etf-aera-vorbei`
+- Zugeordneter App-Ordner: `/Apps/etf-aera-vorbei/`
 - Modulrolle: Haupt-App
 - Status: Roh-Mini-Spec aus Hauptdokument, noch nicht APP_SPEC
+- Offener Konzeptkonflikt: Dateiinhalt beschreibt Das Passiv-Paradox (akademische Systemkritik), nicht die übergeordnete ETF-Ära-Frage (G2). Echte inhaltliche Klärung etf-aera-vorbei vs. passiv-paradox steht aus.
