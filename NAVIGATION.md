@@ -1,5 +1,5 @@
 # NAVIGATION.md – Finanzwesir 2.0
-Stand: 2026-06-26 | Session: AP-03 | Geändert von: Claude
+Stand: 2026-06-26 | Session: AP-06b | Geändert von: Claude
 
 Für Claude: **Routing-Dokument.** Wird beim Session-Start (Schritt 2) gelesen.
 Gibt Pfade und Lese-Reihenfolgen vor — KEINE Verhaltensregeln (die stehen in CLAUDE.md).
@@ -50,6 +50,7 @@ Albert kann sie auch explizit aufrufen.
 | `/heldenreise` | Beweisdramaturgie für APP_SPEC.md: Heldenreise, Tufte, Krug, FAANG, Ethik-Gate — Pflicht bei App-Fabrik-Apps | Nur manuell (Albert) — Claude startet nie automatisch |
 | `/tech-spec-app {slug}` | technische APP_SPEC erstellen oder prüfen (18 Pflichtabschnitte: App-Familie, Inputs/Outputs, State-Modell, AppContext, A11y, Sicherheit, Testfälle) | Manuell (Albert) oder durch /app-spec-create |
 | `/app-spec-create {slug}` | vollständige APP_SPEC erstellen: tech-spec-app + heldenreise + Spec-Gate-Checkliste (5 Phasen) | Nur manuell (Albert) — kein Auto-Trigger |
+| `/spec-mode-architecture` | Allgemeiner Architektur-Spec-Modus; erzeugt technische Spezifikationen, Edge-Cases, Testszenarien; für App-Specs nur ergänzend, kein Ersatz für `app-spec-create` und lokalen App-Steuerungsblock | Manuell |
 
 ---
 
@@ -334,6 +335,7 @@ Manuelle Aktivierung: `/spec-rewrite-guard docs/spec/[Dateiname]`
 | Steuerungsblock-Wächter AP-01 / AP-01b | `docs/steering/patches/AP-01b_steuerungsblock-regel-verdichten_Ergebnis.md` | CLAUDE.md § APP-ARBEIT: globaler 80%-Wächter eingebaut, auf 3-Satz-Kurzform verdichtet. Regel: kein Code ohne geprüften Steuerungsblock (80%-Entwurf), Klärung bei Lücke. (AP-01 ✅ 2026-06-25, AP-01b ✅ 2026-06-25) |
 | Steuerungsblock-Routing AP-02 | `docs/steering/patches/AP-02_routing-hinweis-app-steuerungsblock_Ergebnis.md` | NAVIGATION.md § „App bauen / ändern": Zeile 11 ergänzt — APP_SPEC.md → Steuerungsblock lesen; Fallback MINI_SPEC_FROM_HAUPTDOKUMENT.md; Verweis auf CLAUDE.md § APP-ARBEIT. Nur Routing, kein Verhaltensgebot. (AP-02 ✅ 2026-06-26) |
 | Steuerungsblock-Template AP-03 | `docs/steering/patches/AP-03_app-steuerungsblock-template_Ergebnis.md` | `docs/App-Fabrik/APP_SPEC_STEUERUNGSBLOCK_TEMPLATE.md` NEU — 11 Abschnitte: 80%-Nordstern, Standardblock APP_SPEC.md (7 Felder + LLM-Selbsttest), Vorläuferblock MINI_SPEC, LLM-Prüfscore (4 Kriterien, 8/8-Regel), 9 Stop-Auslöser, Qualitätskriterien, Ergebnisprotokoll-Anforderung für Folge-APs. (AP-03 ✅ 2026-06-26) |
+| app-spec-create Skill AP-06 / AP-06b | `docs/steering/patches/AP-06b_app-spec-create-skill-nachputz_Ergebnis.md` | `.claude/skills/app-spec-create/SKILL.md` NEU — 4 Phasen: Steuerungsblock-Wächter (Phase 0, LLM-Prüfscore AP-03-konform, 80%-Entwurf, Stop bei Score ≤ 5/8 oder Kriterium 3 ≠ 2), tech-spec-app (Phase 1), heldenreise (Phase 2), Spec-Gate (Phase 3). Abgrenzung zu spec-mode-architecture/tech-spec-app/heldenreise als Teilwerkzeuge. `NAVIGATION.md` Skill-Tabelle: spec-mode-architecture eingeordnet. AP-06b: 4 Nachputz-Edits (Score-Regel, Stop-Regel, Mini-Spec-Ableitung, Spec-Gate). (AP-06 ✅ 2026-06-26, AP-06b ✅ 2026-06-26) |
 
 ## Archivstrategie / Kontext-Hygiene
 

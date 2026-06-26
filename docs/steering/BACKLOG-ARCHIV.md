@@ -1,11 +1,13 @@
 # BACKLOG-ARCHIV – Finanzwesir 2.0
-Stand: 2026-06-26 | Session: AP-03 | Geändert von: Claude
+Stand: 2026-06-26 | Session: AP-06b | Geändert von: Claude
 
 Abgeschlossene Items, neueste zuerst (append-only).
 Archivierungs-Trigger: wenn > 200 Zeilen → neue Datei `BACKLOG-ARCHIV-YYYY.md` anlegen.
 
 | ID | Bereich | Titel | Abgeschlossen | Session |
 |----|---------|-------|---------------|---------|
+| AP-06b | App-Fabrik/Steuerung | `.claude/skills/app-spec-create/SKILL.md` 4 Nachputz-Edits: Mini-Spec-Ableitung abgesichert (nur aus vorhandenen Aussagen, nichts erfinden), Score-Regel 6–7/8 auf Kriterium 3 = 2 verschärft, Spec-Gate präzisiert (Score ≥ 6/8 + Kriterium 3 = 2), Stop-Regel logisch korrigiert (weder APP_SPEC noch MINI_SPEC). Ergebnisprotokoll: `docs/steering/patches/AP-06b_app-spec-create-skill-nachputz_Ergebnis.md`. *(sofort erledigt)* | 2026-06-26 | AP-06b |
+| AP-06 | App-Fabrik/Steuerung | `.claude/skills/app-spec-create/SKILL.md` NEU — Koordinator für APP_SPEC-Erstellung: 4 Phasen (Steuerungsblock-Wächter → tech-spec-app → heldenreise → Spec-Gate); LLM-Prüfscore AP-03-konform; Abgrenzung zu spec-mode-architecture/tech-spec-app/heldenreise; Stop-Regeln. `NAVIGATION.md` Skill-Tabelle: spec-mode-architecture eingeordnet. Ergebnisprotokoll: `docs/steering/patches/AP-06_app-spec-create-skill_Ergebnis.md`. *(sofort erledigt)* | 2026-06-26 | AP-06 |
 | AP-03 | App-Fabrik/Steuerung | `docs/App-Fabrik/APP_SPEC_STEUERUNGSBLOCK_TEMPLATE.md` NEU — kanonisches Format für lokalen App-Steuerungsblock: 11 Abschnitte (80%-Nordstern, Standardblock APP_SPEC.md 7 Felder + LLM-Selbsttest, Vorläuferblock MINI_SPEC, LLM-Prüfscore 4 Kriterien 8/8-Regel, 9 Stop-Auslöser, Qualitätskriterien, Ergebnisprotokoll-Anforderung). Ergebnisprotokoll: `docs/steering/patches/AP-03_app-steuerungsblock-template_Ergebnis.md`. *(sofort erledigt)* | 2026-06-26 | AP-03 |
 | AP-02 | App-Fabrik/Steuerung | NAVIGATION.md § „App bauen / ändern": Zeile 11 ergänzt — APP_SPEC.md → lokalen Steuerungsblock lesen; Fallback MINI_SPEC_FROM_HAUPTDOKUMENT.md; Verweis auf CLAUDE.md § APP-ARBEIT. Nur Routing, kein Verhaltensgebot. Nummerierung 11→12/13/14 angepasst. Ergebnisprotokoll: `docs/steering/patches/AP-02_routing-hinweis-app-steuerungsblock_Ergebnis.md`. *(sofort erledigt)* | 2026-06-26 | AP-02 |
 | AP-01b | App-Fabrik/Steuerung | CLAUDE.md § APP-ARBEIT: Verhaltensregel auf 3-Satz-Kurzform verdichtet; Detailfelder ausgelagert an App-Spec/Routing/Skills. Ergebnisprotokoll: `docs/steering/patches/AP-01b_steuerungsblock-regel-verdichten_Ergebnis.md`. *(sofort erledigt)* | 2026-06-25 | AP-01b |

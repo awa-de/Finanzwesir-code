@@ -2,16 +2,16 @@
 Version: 1
 Stand: 2026-06-26
 Fokus-AP: APP-01 — prokrastinations-preis
-Nächster-Schritt: AP-06 — app-spec-create Skill klären/anlegen (AP-03 ✅ 2026-06-26)
+Nächster-Schritt: AP-07 — Steuerungsblock-Wächter in heldenreise + tech-spec-app (AP-06b ✅ 2026-06-26)
 Blocker: keine
 Letzter-Distill: 2026-06-22
 Kassensturz-Datum: 2026-06-22
 -->
-<!-- HOOK-META-SESSION: AP-03 -->
+<!-- HOOK-META-SESSION: AP-06b -->
 
 # PROJECT STATUS — Finanzwesir 2.0
 
-Stand: 2026-06-26 | Session: AP-03 | Geändert von: Claude
+Stand: 2026-06-26 | Session: AP-06b | Geändert von: Claude
 
 **Zweck:** Schneller Wiedereinstieg nach Pausen.
 **Zielgruppe:** Albert und Claude.

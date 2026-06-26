@@ -318,3 +318,16 @@ Wird geleert nach /distill. Einträge: [FRICTION] [WIN] [PREF] [QUESTION] [OK]
 ### 2026-06-26 — AP-03 ✅ | App-Steuerungsblock-Template
 - [OK] `docs/App-Fabrik/APP_SPEC_STEUERUNGSBLOCK_TEMPLATE.md` NEU — 11 Abschnitte: 80%-Nordstern, Standardblock APP_SPEC.md (7 Felder + LLM-Selbsttest), Vorläuferblock MINI_SPEC, LLM-Prüfscore (4 Kriterien, 8/8-Regel), 9 Stop-Auslöser, Qualitätskriterien, Ergebnisprotokoll-Anforderung
 - [OK] Ergebnisprotokoll: `docs/steering/patches/AP-03_app-steuerungsblock-template_Ergebnis.md` — GRÜN
+
+### 2026-06-26 — APP-01 / AP-06 — AP-Wechsel (WARM-START neuer Faden)
+- FinanzwesirData.js, CSVParser.js, FwDateUtils.js — diese Session nicht berühren. ✓
+- Neuer Faden; AP-03 abgeschlossen; nächster AP-06 (app-spec-create Skill klären)
+
+### 2026-06-26 — AP-06 ✅ | app-spec-create Skill angelegt + spec-mode-architecture eingeordnet
+- [OK] .claude/skills/app-spec-create/SKILL.md NEU (Fall A) — 4 Phasen: Steuerungsblock-Wächter Phase 0, tech-spec-app Phase 1, heldenreise Phase 2, Spec-Gate Phase 3; LLM-Prüfscore-Pflicht; Abgrenzung zu spec-mode-architecture/tech-spec-app/heldenreise; Stop-Regeln
+- [OK] NAVIGATION.md Skill-Tabelle: spec-mode-architecture-Zeile ergänzt (nur ergänzend, kein Ersatz für app-spec-create)
+- [OK] Ergebnisprotokoll: docs/steering/patches/AP-06_app-spec-create-skill_Ergebnis.md — GRÜN
+
+### 2026-06-26 — AP-06b ✅ | app-spec-create Skill Nachputz
+- [OK] 4 chirurgische Edits: Mini-Spec-Ableitung abgesichert (nur aus vorhandenen Aussagen, nichts erfinden), Score-Regel 6-7/8 AP-03-konform (Kriterium 3 = 2), Spec-Gate praezisiert (Score >= 6/8 + Kriterium 3 = 2), Stop-Regel logisch korrigiert (weder APP_SPEC noch MINI_SPEC)
+- [OK] Ergebnisprotokoll: docs/steering/patches/AP-06b_app-spec-create-skill-nachputz_Ergebnis.md — GRÜN
