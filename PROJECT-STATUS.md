@@ -1,17 +1,17 @@
 <!-- HOOK-META
 Version: 1
-Stand: 2026-06-25
+Stand: 2026-06-26
 Fokus-AP: APP-01 — prokrastinations-preis
-Nächster-Schritt: AP-02 — Routing-Hinweis in NAVIGATION.md (AP-01 ✅ 2026-06-25)
+Nächster-Schritt: AP-03 — Standardformat Steuerungsblock + Prüfscore (AP-02 ✅ 2026-06-26)
 Blocker: keine
 Letzter-Distill: 2026-06-22
 Kassensturz-Datum: 2026-06-22
 -->
-<!-- HOOK-META-SESSION: AP-01b -->
+<!-- HOOK-META-SESSION: AP-02 -->
 
 # PROJECT STATUS — Finanzwesir 2.0
 
-Stand: 2026-06-25 | Session: AP-01b | Geändert von: Claude
+Stand: 2026-06-26 | Session: AP-02 | Geändert von: Claude
 
 **Zweck:** Schneller Wiedereinstieg nach Pausen.
 **Zielgruppe:** Albert und Claude.

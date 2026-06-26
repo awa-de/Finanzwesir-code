@@ -301,3 +301,12 @@ Wird geleert nach /distill. Einträge: [FRICTION] [WIN] [PREF] [QUESTION] [OK]
 ### 2026-06-25 — AP-01b ✅ | CLAUDE.md-Regel verdichtet
 - [OK] Verhaltensregel: 4-Satz-Fassung auf 3-Satz-Kurzform verdichtet; Details an App-Spec/Routing/Skills delegiert
 - [OK] Ergebnisprotokoll: AP-01b_steuerungsblock-regel-verdichten_Ergebnis.md — GRÜN
+
+## 2026-06-26 – SESSION START | [KETTENMODUS] | Fokus: APP-01 — prokrastinations-preis
+- FinanzwesirData.js, CSVParser.js, FwDateUtils.js — diese Session nicht berühren. ✓
+
+### 2026-06-26 — AP-02 ✅ | Routing-Hinweis App-Steuerungsblock in NAVIGATION.md
+- [OK] NAVIGATION.md § „App bauen / ändern (Apps/)": neue Zeile 11 — APP_SPEC.md → Steuerungsblock lesen; Fallback MINI_SPEC_FROM_HAUPTDOKUMENT.md; Verweis auf .claude/CLAUDE.md § APP-ARBEIT
+- [OK] Nummerierung sauber angepasst: 11→12, 12→13, 13→14
+- [OK] Kein Verhaltensgebot in NAVIGATION.md — reiner Routing-Hinweis (WO, nicht WIE)
+- [OK] Ergebnisprotokoll: docs/steering/patches/AP-02_routing-hinweis-app-steuerungsblock_Ergebnis.md — GRÜN

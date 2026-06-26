@@ -1,5 +1,5 @@
 # NAVIGATION.md – Finanzwesir 2.0
-Stand: 2026-06-25 | Session: AP-01b | Geändert von: Claude
+Stand: 2026-06-26 | Session: AP-02 | Geändert von: Claude
 
 Für Claude: **Routing-Dokument.** Wird beim Session-Start (Schritt 2) gelesen.
 Gibt Pfade und Lese-Reihenfolgen vor — KEINE Verhaltensregeln (die stehen in CLAUDE.md).
@@ -154,8 +154,9 @@ Nach Abschluss: `/abschluss-ritual`.
 8. docs/App-Fabrik/CHART_ENGINE_ROLE_AND_INTEGRATION.md ← Architekturprinzipien P-01–P-10 (bei Daten/Kontext/A11y-Fragen)
 9. docs/App-Fabrik/APP_FOLDER_STRUCTURE.md        ← Kanonische Dateiliste pro App-Ordner (Phase 0/1/2)
 10. Apps/[App-Name]/                              ← App-spezifischer Code + Prototypen
-11. Apps/[App-Name]/SLICE_PLAN.md (wenn vorhanden) ← Slice-Struktur + freigegebener Umfang (vor Implementierung lesen)
-12. bei externer Datenquelle (CSV / historische Indexdaten / ETF-/Makrodaten) zusätzlich:
+11. Apps/[App-Name]/APP_SPEC.md → lokalen Steuerungsblock lesen; falls keine APP_SPEC existiert: MINI_SPEC_FROM_HAUPTDOKUMENT.md. Verhalten siehe .claude/CLAUDE.md § APP-ARBEIT.
+12. Apps/[App-Name]/SLICE_PLAN.md (wenn vorhanden) ← Slice-Struktur + freigegebener Umfang (vor Implementierung lesen)
+13. bei externer Datenquelle (CSV / historische Indexdaten / ETF-/Makrodaten) zusätzlich:
     - `docs/data/README.md`
     - `docs/data/DATENQUELLEN-GOVERNANCE.md`
     - `docs/data/SOURCE-TIERS.md`
@@ -233,7 +234,7 @@ Nach Abschluss: `/abschluss-ritual`.
 > `Apps/prokrastinations-preis/STATIONS_CONFIG_CONTRACT.md` — Event-Pin-Datenvertrag v3.0 (6 Felder, YYYY-MM-DD; B1-STATIONS-v3.0 ✅ 2026-06-25)
 > `Apps/prokrastinations-preis/STATIONS_IMPLEMENTATION_PLAN.md` — Implementierungsplan für Stationen-Zeitreise Coding-Slices AP-11–AP-18, V1.1 (B1-AP-10 ✅, AP-10a Semantik bereinigt ✅ 2026-06-17)
 > B1 ist Pilot-2 (Daten-/Chart-/Story-Pilot). Pilot-1 ist `risiko-uebersetzer` (Calculator-Pilot) — entschieden E-02, 2026-05-28.
-13. bei Chart-Nutzung: relevante Chart-Engine-Spec + WORKING-FEATURES.md
+14. bei Chart-Nutzung: relevante Chart-Engine-Spec + WORKING-FEATURES.md
 ```
 
 Claude gibt Bestätigung aus bevor es weitergeht: „APP-INTERFACE.md ✓, SECURITY-BASELINE.md ✓."
