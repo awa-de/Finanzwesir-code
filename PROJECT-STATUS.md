@@ -2,16 +2,16 @@
 Version: 1
 Stand: 2026-06-26
 Fokus-AP: APP-01 — prokrastinations-preis
-Nächster-Schritt: AP-08 — Muster-Einbau prokrastinations-preis (AP-05 ✅ 2026-06-26)
+Nächster-Schritt: AP-09 — Muster-Review und Template-Schärfung (AP-08 ✅ 2026-06-26)
 Blocker: keine
 Letzter-Distill: 2026-06-22
 Kassensturz-Datum: 2026-06-22
 -->
-<!-- HOOK-META-SESSION: AP-05 -->
+<!-- HOOK-META-SESSION: AP-08 -->
 
 # PROJECT STATUS — Finanzwesir 2.0
 
-Stand: 2026-06-26 | Session: AP-05 | Geändert von: Claude
+Stand: 2026-06-26 | Session: AP-08/AP-10 | Geändert von: Claude
 
 **Zweck:** Schneller Wiedereinstieg nach Pausen.
 **Zielgruppe:** Albert und Claude.
@@ -118,6 +118,8 @@ Stand: 2026-06-26 | Session: AP-05 | Geändert von: Claude
 ✅ **B1-AP-09/AP-10 abgeschlossen (2026-06-17):** produktive `config/stations.de.json` angelegt (7 Stationen v2.1, Rolling-Window-Policy, 3 source_claimed_unchecked, Redaktions-Gate G-A02 noch nicht bestanden) + `STATIONS_IMPLEMENTATION_PLAN.md` angelegt (Slices AP-11–AP-18, 6 Risiken R-01–R-06). Kein Code geändert.
 
 ✅ **B1-AP-10a Konsistenz-Nachputz (2026-06-17):** `stations.de.json` Flag-Drift bereinigt (`finalWobble = true`, `lateWobble` entfernt bei April-2025-Station). `STATIONS_IMPLEMENTATION_PLAN.md` V1.1: EditorialDegraded-Semantik korrigiert, R-02 als erledigt, Drift-Notizen entfernt. Kein Code geändert.
+
+✅ **App-Fabrik Steuerungsblock Muster-Einbau abgeschlossen (AP-08/AP-10b/c/d, 2026-06-26):** `Apps/prokrastinations-preis/APP_SPEC.md` hat jetzt ersten lokalen Steuerungsblock (Seed-basiert, mechanisch eingebaut): Barriere Verpasster-Zug + Wartestrategie + Hindsight Bias, 5 Muss-Kriterien, 5 Nicht-Ziele, LLM-Prüfscore 8/8-Regel. Tool `tools/app_fabrik/insert_steuerungsblock_from_seed.py` produktionsbereit (UTF-8-robust, Seed-Metadaten bereinigt, Nordstern-Begriff korrekt). Nächster Schritt: AP-09 Muster-Review.
 
 ---
 

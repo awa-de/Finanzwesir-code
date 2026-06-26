@@ -374,3 +374,24 @@ Wird geleert nach /distill. Einträge: [FRICTION] [WIN] [PREF] [QUESTION] [OK]
 - [OK] Inventar gelesen (25 Apps, 0 GRÜN, 24 GELB, 1 ROT) — keine App-Dateien geöffnet
 - [OK] APP_STEUERUNGSBLOCK_ROLLOUT_PLAN.md NEU — AP-08 Muster, AP-09 Review, AP-10 Batch A (14), AP-11 Batch B (8), AP-12 Sonderfall etf-vergleich, AP-13 ROT plan-generator gesperrt
 - [OK] Ergebnisprotokoll: docs/steering/patches/AP-05_app-steuerungsblock-rollout-plan_Ergebnis.md
+
+### 2026-06-26 — APP-01 / AP-08 — AP-Wechsel (WARM-START neuer Faden)
+- FinanzwesirData.js, CSVParser.js, FwDateUtils.js — diese Session nicht berühren. ✓
+
+### 2026-06-26 — AP-08 ✅ | Muster-Steuerungsblock prokrastinations-preis formuliert
+- [OK] Steuerungsblock-Entwurf manuell aus §2 (Zweck, Nicht-Ziele) + §23 (Beweisdramaturgie, Nutzerwiderstand) abgeleitet
+- [OK] Barrieren: Verpasster-Zug-Syndrom, Wartestrategie, Hindsight Bias — alle drei in §23 klar dokumentiert
+- [OK] Kanonischer Einbau via Seed-Tool in AP-10c (manueller Entwurf durch Seed-Block ersetzt)
+- [OK] Ergebnisprotokoll: docs/steering/patches/AP-08_muster-einbau-prokrastinations-preis_Ergebnis.md
+
+### 2026-06-26 — AP-10b ✅ | Tool-Nachputz: Seed-Metadaten aus lokalem Block entfernen
+- [OK] remove_seed_only_metadata() in insert_steuerungsblock_from_seed.py: Status, Verteilungsstatus, Klärungsbedarf vor Verteilung entfernt
+- [OK] Dry-Run prokrastinations-preis GRÜN
+
+### 2026-06-26 — AP-10c ✅ | UTF-8-Ausgabe + kontrollierter Write prokrastinations-preis
+- [OK] configure_utf8_stdio() ergänzt — kein PYTHONIOENCODING mehr nötig
+- [OK] Dry-Run GRÜN → --write → Apps/prokrastinations-preis/APP_SPEC.md Steuerungsblock aus Seed eingebaut
+
+### 2026-06-26 — AP-10d ✅ | Nordstern-Begriff + Protokoll-Nachputz
+- [OK] redaktionellen Nordstern → Steuerungsblock in APP_SPEC und Seed-Datei
+- [OK] Protokolltexte: alle 3 Seed-Metadaten korrekt benannt
