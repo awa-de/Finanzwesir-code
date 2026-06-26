@@ -35,6 +35,23 @@ Immer wenn eine technische App-Spec erstellt oder geprüft wird:
 
 Pflicht bei jeder App-Fabrik-App.
 
+## Steuerungsblock-Wächter
+
+Bei App-Fabrik-App-Arbeit zuerst den lokalen App-Steuerungsblock lesen:
+
+1. `Apps/{slug}/APP_SPEC.md` → Abschnitt `Steuerungsblock: Zweck, Barriere, Prüfregeln`
+2. Falls keine APP_SPEC existiert: `Apps/{slug}/MINI_SPEC_FROM_HAUPTDOKUMENT.md` → `Vorläufiger Steuerungsblock`
+3. Prüfmaßstab: `docs/App-Fabrik/APP_SPEC_STEUERUNGSBLOCK_TEMPLATE.md`
+4. Verhalten: `.claude/CLAUDE.md` § APP-ARBEIT
+
+Vor technischer Spec-Arbeit stoppen, wenn:
+- kein Steuerungsblock vorhanden ist
+- Zweck oder Barriere unklar ist
+- Nicht-Ziele fehlen, unklar sind oder verletzt werden
+- die technische Umsetzung über die Muss-Kriterien oder Nicht-Ziele hinausdriftet
+
+Für vollständige APP_SPEC-Erstellung: `app-spec-create` verwenden; `tech-spec-app` ist Phase 1, nicht Gesamtprozess.
+
 ## Pflichtquellen
 
 Für jede App unter /Apps/{slug}/ müssen diese Quellen geprüft werden:
@@ -156,13 +173,16 @@ Dann:
 4. Technische Pflichtstruktur vollständig anlegen.
 5. Danach heldenreise anwenden.
 
-### Fall C — keine Mini-Spec vorhanden
+### Fall C — weder APP_SPEC mit Steuerungsblock noch MINI_SPEC vorhanden
 
 Dann abbrechen mit Meldung:
 
-Für /Apps/{slug}/ fehlt MINI_SPEC_FROM_HAUPTDOKUMENT.md.
+Für /Apps/{slug}/ fehlt sowohl eine APP_SPEC.md mit Steuerungsblock als auch eine MINI_SPEC_FROM_HAUPTDOKUMENT.md.
 Bitte zuerst Mini-Spec aus ETF-Apps-Hauptdokument erzeugen.
 Keine APP_SPEC.md aus dem Nichts erstellen.
+
+Wenn eine belastbare APP_SPEC.md mit Steuerungsblock existiert, ist fehlende Mini-Spec kein Abbruchgrund — als Scope-Fund dokumentieren.
+Wenn keine belastbare APP_SPEC.md existiert, bleibt die Mini-Spec Pflichtquelle für den fachlichen Rohkern.
 
 ## APP_SPEC.md — technische Pflichtstruktur
 
@@ -174,6 +194,12 @@ Eine technische APP_SPEC.md muss mindestens diese Abschnitte enthalten:
 - Kein Code-Freigabe-Dokument
 - Grundlage für Spec-Gate
 - Quelle: MINI_SPEC_FROM_HAUPTDOKUMENT.md
+
+Pflicht-Vorabschnitt: Steuerungsblock: Zweck, Barriere, Prüfregeln
+Pflicht gemäß `docs/App-Fabrik/APP_SPEC_STEUERUNGSBLOCK_TEMPLATE.md`.
+Steht vor allen technischen Detailabschnitten.
+- Enthält: Zweck, psychologische Barriere, falscher Glaubenssatz, Zielzustand, Muss-Kriterien, Nicht-Ziele, LLM-Selbsttest
+- Bei fehlendem oder schwachem Block: stoppen, mit Albert klären
 
 2. Zweck und Nutzerfrage
 - Welche konkrete Nutzerfrage beantwortet die App?

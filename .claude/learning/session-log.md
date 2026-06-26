@@ -331,3 +331,17 @@ Wird geleert nach /distill. Einträge: [FRICTION] [WIN] [PREF] [QUESTION] [OK]
 ### 2026-06-26 — AP-06b ✅ | app-spec-create Skill Nachputz
 - [OK] 4 chirurgische Edits: Mini-Spec-Ableitung abgesichert (nur aus vorhandenen Aussagen, nichts erfinden), Score-Regel 6-7/8 AP-03-konform (Kriterium 3 = 2), Spec-Gate praezisiert (Score >= 6/8 + Kriterium 3 = 2), Stop-Regel logisch korrigiert (weder APP_SPEC noch MINI_SPEC)
 - [OK] Ergebnisprotokoll: docs/steering/patches/AP-06b_app-spec-create-skill-nachputz_Ergebnis.md — GRÜN
+
+### 2026-06-26 — APP-01 / AP-07 — AP-Wechsel (WARM-START neuer Faden)
+- FinanzwesirData.js, CSVParser.js, FwDateUtils.js — diese Session nicht berühren. ✓
+- Neuer Faden; AP-06b abgeschlossen; nächster AP-07 (Steuerungsblock-Wächter in heldenreise + tech-spec-app)
+
+### 2026-06-26 — AP-07 ✅ | Steuerungsblock-Wächter in tech-spec-app und heldenreise
+- [OK] Wächter-Abschnitt in tech-spec-app/SKILL.md eingefügt (nach § Wann verwenden?, vor § Pflichtquellen)
+- [OK] Wächter-Abschnitt in heldenreise/SKILL.md eingefügt (Backslash-Escape-Stil gespiegelt)
+- [OK] Ergebnisprotokoll: docs/steering/patches/AP-07_steuerungsblock-waechter-tech-heldenreise_Ergebnis.md — GRÜN
+
+### 2026-06-26 — AP-07b-mini ✅ | tech-spec-app Pflicht-Vorabschnitt + Fall C
+- [OK] Unnummerierter Pflicht-Vorabschnitt Steuerungsblock zwischen §1 (Status) und §2 (Zweck) eingefügt — keine Renummerierung
+- [OK] Fall C Stop-Logik präzisiert: Abbruch nur wenn weder APP_SPEC mit Steuerungsblock noch MINI_SPEC vorhanden
+- [FRICTION] Batch-PowerShell-Umbenennung (§2–§18 → §3–§19) abgelehnt — Lösung: unnummerierter Einschub statt Renummerierung

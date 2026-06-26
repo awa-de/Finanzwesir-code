@@ -54,6 +54,32 @@ Pflicht bei App-Fabrik-Apps.
 
 
 
+\## Steuerungsblock-Wächter
+
+Bei App-Fabrik-App-Arbeit zuerst den lokalen App-Steuerungsblock lesen:
+
+1\. `Apps/{slug}/APP\_SPEC.md` → Abschnitt `Steuerungsblock: Zweck, Barriere, Prüfregeln`
+
+2\. Falls keine APP\_SPEC existiert: `Apps/{slug}/MINI\_SPEC\_FROM\_HAUPTDOKUMENT.md` → `Vorläufiger Steuerungsblock`
+
+3\. Prüfmaßstab: `docs/App-Fabrik/APP\_SPEC\_STEUERUNGSBLOCK\_TEMPLATE.md`
+
+4\. Verhalten: `.claude/CLAUDE.md` § APP-ARBEIT
+
+Vor Beweisdramaturgie stoppen, wenn:
+
+\- Zweck oder Barriere unklar ist
+
+\- falscher Glaubenssatz und Zielzustand nicht unterscheidbar sind
+
+\- Nicht-Ziele fehlen, unklar sind oder verletzt werden
+
+\- die vorgeschlagene Heldenreise eine andere App-Rolle erzeugt als der Steuerungsblock erlaubt
+
+Für vollständige APP\_SPEC-Erstellung: `app-spec-create` verwenden; `heldenreise` ist Phase 2, nicht Gesamtprozess.
+
+
+
 \## Grundhaltung
 
 
