@@ -2,16 +2,16 @@
 Version: 1
 Stand: 2026-06-26
 Fokus-AP: APP-01 — prokrastinations-preis
-Nächster-Schritt: AP-07b — 04_CLAUDE_WORKFLOW_DRAFT.md Steuerungsblock-Pflichtschritt (AP-07b-mini ✅ 2026-06-26)
+Nächster-Schritt: AP-04 — Inventar Steuerungsblöcke über alle Apps (AP-07d ✅ 2026-06-26)
 Blocker: keine
 Letzter-Distill: 2026-06-22
 Kassensturz-Datum: 2026-06-22
 -->
-<!-- HOOK-META-SESSION: AP-07b-mini -->
+<!-- HOOK-META-SESSION: AP-07d -->
 
 # PROJECT STATUS — Finanzwesir 2.0
 
-Stand: 2026-06-26 | Session: AP-07b-mini | Geändert von: Claude
+Stand: 2026-06-26 | Session: AP-07d | Geändert von: Claude
 
 **Zweck:** Schneller Wiedereinstieg nach Pausen.
 **Zielgruppe:** Albert und Claude.
@@ -206,6 +206,9 @@ Vollständig im DECISION-LOG dokumentiert (`docs/steering/DECISION-LOG.md`):
 ---
 
 ## 8. Letzte Session
+
+2026-06-26 — AP-07c + AP-07d Steuerungsblock-Workflow-Kette abgeschlossen ✅.
+AP-07c: `04_CLAUDE_WORKFLOW_DRAFT.md` Phase 2 — Schritt 2.0 Pflichtschritt Steuerungsblock eingefügt; `app-spec-create` als koordinierendes Werkzeug; `spec-mode-architecture` nur ergänzend. AP-07d: 4 Konsistenz-Korrekturen (Betriebssystem-Abschnitt, APP_SPEC-Mindestliste, Skills-Tabelle, Nächster-Schritt-Abschnitt). Nächster Schritt: AP-04 — Inventar Steuerungsblöcke über alle Apps.
 
 2026-06-26 — AP-02 + AP-03 Steuerungsblock-Serie abgeschlossen ✅.
 AP-02: NAVIGATION.md Zeile 11 — Routing zu lokalem Steuerungsblock (APP_SPEC.md / MINI_SPEC). AP-03: `docs/App-Fabrik/APP_SPEC_STEUERUNGSBLOCK_TEMPLATE.md` NEU (11 Abschnitte, 80%-Nordstern, LLM-Prüfscore 8/8-Regel). Nächster Schritt: AP-06 — app-spec-create Skill klären/anlegen.

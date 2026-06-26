@@ -345,3 +345,16 @@ Wird geleert nach /distill. Einträge: [FRICTION] [WIN] [PREF] [QUESTION] [OK]
 - [OK] Unnummerierter Pflicht-Vorabschnitt Steuerungsblock zwischen §1 (Status) und §2 (Zweck) eingefügt — keine Renummerierung
 - [OK] Fall C Stop-Logik präzisiert: Abbruch nur wenn weder APP_SPEC mit Steuerungsblock noch MINI_SPEC vorhanden
 - [FRICTION] Batch-PowerShell-Umbenennung (§2–§18 → §3–§19) abgelehnt — Lösung: unnummerierter Einschub statt Renummerierung
+
+### 2026-06-26 — APP-01 / AP-07b — AP-Wechsel (WARM-START neuer Faden)
+- FinanzwesirData.js, CSVParser.js, FwDateUtils.js — diese Session nicht berühren. ✓
+
+### 2026-06-26 — AP-07c ✅ | Workflow Phase 2 Steuerungsblock-Sync
+- [OK] Phase 2 `04_CLAUDE_WORKFLOW_DRAFT.md`: Schritt 2.0 Pflichtschritt eingefügt — Quellen APP_SPEC.md / MINI_SPEC, Prüfmaßstab APP_SPEC_STEUERUNGSBLOCK_TEMPLATE.md, Stop-Regel
+- [OK] Werkzeug-Zeile: app-spec-create koordinierend eingetragen; spec-mode-architecture nur ergänzend abgegrenzt
+
+### 2026-06-26 — AP-07d ✅ | Workflow-Konsistenz-Nachputz
+- [OK] Betriebssystem-Abschnitt (Z.32): spec-mode-architecture → app-spec-create koordiniert + spec-mode-architecture ergänzend
+- [OK] APP_SPEC-Mindestliste: Steuerungsblock: Zweck, Barriere, Prüfregeln ✅ ergänzt
+- [OK] Skills-Tabelle: Phase 2 app-spec-create Koordinator + Phase 2 ergänzend spec-mode-architecture
+- [OK] Nächster-Schritt-Abschnitt: per app-spec-create; spec-mode-architecture nur ergänzend

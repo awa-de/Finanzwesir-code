@@ -1,5 +1,5 @@
 # NAVIGATION.md – Finanzwesir 2.0
-Stand: 2026-06-26 | Session: AP-06b | Geändert von: Claude
+Stand: 2026-06-26 | Session: AP-07d | Geändert von: Claude
 
 Für Claude: **Routing-Dokument.** Wird beim Session-Start (Schritt 2) gelesen.
 Gibt Pfade und Lese-Reihenfolgen vor — KEINE Verhaltensregeln (die stehen in CLAUDE.md).
@@ -336,6 +336,8 @@ Manuelle Aktivierung: `/spec-rewrite-guard docs/spec/[Dateiname]`
 | Steuerungsblock-Routing AP-02 | `docs/steering/patches/AP-02_routing-hinweis-app-steuerungsblock_Ergebnis.md` | NAVIGATION.md § „App bauen / ändern": Zeile 11 ergänzt — APP_SPEC.md → Steuerungsblock lesen; Fallback MINI_SPEC_FROM_HAUPTDOKUMENT.md; Verweis auf CLAUDE.md § APP-ARBEIT. Nur Routing, kein Verhaltensgebot. (AP-02 ✅ 2026-06-26) |
 | Steuerungsblock-Template AP-03 | `docs/steering/patches/AP-03_app-steuerungsblock-template_Ergebnis.md` | `docs/App-Fabrik/APP_SPEC_STEUERUNGSBLOCK_TEMPLATE.md` NEU — 11 Abschnitte: 80%-Nordstern, Standardblock APP_SPEC.md (7 Felder + LLM-Selbsttest), Vorläuferblock MINI_SPEC, LLM-Prüfscore (4 Kriterien, 8/8-Regel), 9 Stop-Auslöser, Qualitätskriterien, Ergebnisprotokoll-Anforderung für Folge-APs. (AP-03 ✅ 2026-06-26) |
 | app-spec-create Skill AP-06 / AP-06b | `docs/steering/patches/AP-06b_app-spec-create-skill-nachputz_Ergebnis.md` | `.claude/skills/app-spec-create/SKILL.md` NEU — 4 Phasen: Steuerungsblock-Wächter (Phase 0, LLM-Prüfscore AP-03-konform, 80%-Entwurf, Stop bei Score ≤ 5/8 oder Kriterium 3 ≠ 2), tech-spec-app (Phase 1), heldenreise (Phase 2), Spec-Gate (Phase 3). Abgrenzung zu spec-mode-architecture/tech-spec-app/heldenreise als Teilwerkzeuge. `NAVIGATION.md` Skill-Tabelle: spec-mode-architecture eingeordnet. AP-06b: 4 Nachputz-Edits (Score-Regel, Stop-Regel, Mini-Spec-Ableitung, Spec-Gate). (AP-06 ✅ 2026-06-26, AP-06b ✅ 2026-06-26) |
+| Steuerungsblock-Wächter Skills AP-07 / AP-07b-mini | `docs/steering/patches/AP-07_steuerungsblock-waechter-tech-heldenreise_Ergebnis.md` | `tech-spec-app/SKILL.md` + `heldenreise/SKILL.md`: je ein Steuerungsblock-Wächter-Abschnitt eingefügt (Pflichtlektüre lokaler APP_SPEC/MINI_SPEC, Verweis auf AP-03-Template, Stop-Bedingungen, app-spec-create als Gesamtprozess). `tech-spec-app`: unnummerierter Pflicht-Vorabschnitt zwischen §1 und §2 + Fall C Stop-Logik präzisiert. (AP-07 ✅ 2026-06-26, AP-07b-mini ✅ 2026-06-26) |
+| Steuerungsblock-Workflow AP-07c / AP-07d | `docs/steering/patches/AP-07c_workflow-phase2-steuerungsblock-sync_Ergebnis.md` | `04_CLAUDE_WORKFLOW_DRAFT.md`: Phase 2 Schritt 2.0 Pflichtschritt Steuerungsblock (Quellen APP_SPEC.md/MINI_SPEC, Prüfmaßstab `APP_SPEC_STEUERUNGSBLOCK_TEMPLATE.md`, Stop-Regel); APP_SPEC-Mindestliste +Steuerungsblock-Eintrag; Skills-Tabelle + Nächster-Schritt auf `app-spec-create` umgestellt; `spec-mode-architecture` nur ergänzend. (AP-07c ✅ 2026-06-26, AP-07d ✅ 2026-06-26) |
 
 ## Archivstrategie / Kontext-Hygiene
 

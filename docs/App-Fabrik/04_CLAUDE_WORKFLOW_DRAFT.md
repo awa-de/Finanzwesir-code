@@ -29,7 +29,7 @@ Das Claude-Betriebssystem (CLAUDE.md, Gates, Skills, Commands) ist für allgemei
 
 - `/intake` erfasst neue App-Aufgaben
 - `01-process-extreme-ownership` prüft das Briefing
-- `spec-mode-architecture` erzeugt die APP_SPEC.md
+- `app-spec-create` koordiniert die APP_SPEC-Erstellung; `spec-mode-architecture` unterstützt technische Architekturfragen ergänzend
 - `/pre-code-gate full` ist Pflicht vor jedem App-Code
 - `impl-mode-workpackages` schneidet Arbeitspakete
 - `code-quality-faang-review` ist das Code-Qualitätsgate
@@ -136,9 +136,21 @@ Ohne Spec ist kein Gate möglich. Ohne Gate schreibt Claude keinen App-Code.
 
 **Ziel:** Vollständige technische Spezifikation für die App als Grundlage für Gate und Implementierung.
 
-**Werkzeug:** `spec-mode-architecture`
+**Werkzeug:** `app-spec-create` koordiniert; `spec-mode-architecture` für technische Architekturfragen (ergänzend, kein Ersatz für `app-spec-create`, lokalen Steuerungsblock, `tech-spec-app` oder `heldenreise`)
 
 ```
+2.0 Pflichtschritt: Lokalen App-Steuerungsblock prüfen
+
+    Vor Spec-, Architektur-, UX- oder Detailarbeit den lokalen Steuerungsblock lesen:
+
+    a) Apps/{slug}/APP_SPEC.md → Abschnitt „Steuerungsblock: Zweck, Barriere, Prüfregeln"
+    b) Falls keine APP_SPEC: Apps/{slug}/MINI_SPEC_FROM_HAUPTDOKUMENT.md → „Vorläufiger Steuerungsblock"
+
+    Prüfmaßstab: docs/App-Fabrik/APP_SPEC_STEUERUNGSBLOCK_TEMPLATE.md
+
+    Stoppen, wenn Zweck, Barriere oder Nicht-Ziele fehlen, unklar oder widersprüchlich sind.
+    → Nicht weitermachen. Albert klären lassen.
+
 2.1 APP_SPEC.md erstellen unter /Apps/[slug]/APP_SPEC.md
 
 2.2 Pflichtabschnitte:
@@ -564,6 +576,7 @@ Ohne Spec ist kein Gate möglich. Ohne Gate schreibt Claude keinen App-Code.
 | Reise eines Inputs / Datenpunkts (P-10) | ✅ |
 | Testfälle | ✅ |
 | Offene Fragen (Entscheidung / Arbeitsannahme / offen) | ✅ |
+| Steuerungsblock: Zweck, Barriere, Prüfregeln | ✅ |
 
 ---
 
@@ -678,7 +691,8 @@ Für `prokrastinations-preis`:
 | Session-Start | `/start` | Projektzustand laden, BLOCKED prüfen |
 | Phase 0 | `/intake` | Arbeitspaket erfassen |
 | Phase 1 | `01-process-extreme-ownership` | Briefing auf Lücken und Scope-Risiken prüfen |
-| Phase 2 | `spec-mode-architecture` | APP_SPEC.md erzeugen |
+| Phase 2 | `app-spec-create` | APP_SPEC.md-Erstellung koordinieren |
+| Phase 2 ergänzend | `spec-mode-architecture` | technische Architekturfragen klären |
 | Phase 3 | `/pre-code-gate full` | Full-Gate (immer bei App-Arbeit) |
 | Phase 4 | `impl-mode-workpackages` | Arbeitspakete schneiden |
 | Phase 5 | `/patch-quittung` | Quittung nach jedem Patch |
@@ -696,7 +710,7 @@ Nach Freigabe dieser V0.2 durch Albert:
 
 1. **BACKLOG-AP prüfen** für Pilot 1 (`prokrastinations-preis`): Existiert bereits ein AP in `docs/steering/BACKLOG.md`? → bestehenden AP verwenden. Falls nicht → neuen AP im bestehenden Backlog anlegen. Keine parallele Backlog-Struktur anlegen.
 2. **Phase 0 starten** — App-Ordner sichten, APP_INVENTORY prüfen, APP-INTERFACE.md lesen
-3. **APP_SPEC.md erstellen** — per `spec-mode-architecture`, mit AppContext-Schema (Arch-06) und A11y-Vertrag Calculator (Arch-07) als Pflichtabschnitte
+3. **APP_SPEC.md erstellen** — per `app-spec-create`; `spec-mode-architecture` nur ergänzend für technische Architekturfragen; mit AppContext-Schema (Arch-06) und A11y-Vertrag Calculator (Arch-07) als Pflichtabschnitte
 4. **Spec Gate** — Albert bestätigt Spec
 5. **Pilot 1 bauen**
 

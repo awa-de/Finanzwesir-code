@@ -1,11 +1,13 @@
 # BACKLOG-ARCHIV – Finanzwesir 2.0
-Stand: 2026-06-26 | Session: AP-07b-mini | Geändert von: Claude
+Stand: 2026-06-26 | Session: AP-07d | Geändert von: Claude
 
 Abgeschlossene Items, neueste zuerst (append-only).
 Archivierungs-Trigger: wenn > 200 Zeilen → neue Datei `BACKLOG-ARCHIV-YYYY.md` anlegen.
 
 | ID | Bereich | Titel | Abgeschlossen | Session |
 |----|---------|-------|---------------|---------|
+| AP-07d | App-Fabrik/Steuerung | `04_CLAUDE_WORKFLOW_DRAFT.md` 4 Konsistenz-Korrekturen: Betriebssystem-Abschnitt (`app-spec-create` koordiniert, `spec-mode-architecture` ergänzend); APP_SPEC-Mindestliste (Steuerungsblock-Eintrag ✅); Skills-Tabelle (Phase 2 `app-spec-create` Koordinator + ergänzend); Nächster-Schritt-Abschnitt (per `app-spec-create`). Ergebnisprotokoll: `docs/steering/patches/AP-07d_workflow-konsistenz-nachputz_Ergebnis.md`. *(sofort erledigt)* | 2026-06-26 | AP-07d |
+| AP-07c | App-Fabrik/Steuerung | `04_CLAUDE_WORKFLOW_DRAFT.md` Phase 2 synchronisiert: Schritt 2.0 Pflichtschritt Steuerungsblock eingefügt (Quellen APP_SPEC.md/MINI_SPEC, Prüfmaßstab `APP_SPEC_STEUERUNGSBLOCK_TEMPLATE.md`, Stop-Regel); `app-spec-create` als koordinierendes Werkzeug; `spec-mode-architecture` nur ergänzend abgegrenzt. Ergebnisprotokoll: `docs/steering/patches/AP-07c_workflow-phase2-steuerungsblock-sync_Ergebnis.md`. *(sofort erledigt)* | 2026-06-26 | AP-07c |
 | AP-07b-mini | App-Fabrik/Steuerung | `.claude/skills/tech-spec-app/SKILL.md` 2 chirurgische Edits: unnummerierter Pflicht-Vorabschnitt Steuerungsblock zwischen §1 und §2 eingefügt (Pflichtquellen-Verweis, Stop-Regel, Verweis auf APP_SPEC_STEUERUNGSBLOCK_TEMPLATE.md); Fall C Stop-Logik präzisiert (stoppen wenn weder APP_SPEC mit Steuerungsblock noch MINI_SPEC vorhanden). Keine Renummerierung §1–§18. *(sofort erledigt)* | 2026-06-26 | AP-07b-mini |
 | AP-07 | App-Fabrik/Steuerung | `.claude/skills/tech-spec-app/SKILL.md` + `.claude/skills/heldenreise/SKILL.md`: je ein `Steuerungsblock-Wächter`-Abschnitt eingefügt — Pflichtlektüre lokaler APP_SPEC.md/MINI_SPEC, Verweis auf AP-03-Template und CLAUDE.md § APP-ARBEIT, Stop-Bedingungen, Hinweis app-spec-create als Gesamtprozess. Ergebnisprotokoll: `docs/steering/patches/AP-07_steuerungsblock-waechter-tech-heldenreise_Ergebnis.md`. *(sofort erledigt)* | 2026-06-26 | AP-07 |
 | AP-06b | App-Fabrik/Steuerung | `.claude/skills/app-spec-create/SKILL.md` 4 Nachputz-Edits: Mini-Spec-Ableitung abgesichert (nur aus vorhandenen Aussagen, nichts erfinden), Score-Regel 6–7/8 auf Kriterium 3 = 2 verschärft, Spec-Gate präzisiert (Score ≥ 6/8 + Kriterium 3 = 2), Stop-Regel logisch korrigiert (weder APP_SPEC noch MINI_SPEC). Ergebnisprotokoll: `docs/steering/patches/AP-06b_app-spec-create-skill-nachputz_Ergebnis.md`. *(sofort erledigt)* | 2026-06-26 | AP-06b |
