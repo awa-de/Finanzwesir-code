@@ -358,3 +358,11 @@ Wird geleert nach /distill. Einträge: [FRICTION] [WIN] [PREF] [QUESTION] [OK]
 - [OK] APP_SPEC-Mindestliste: Steuerungsblock: Zweck, Barriere, Prüfregeln ✅ ergänzt
 - [OK] Skills-Tabelle: Phase 2 app-spec-create Koordinator + Phase 2 ergänzend spec-mode-architecture
 - [OK] Nächster-Schritt-Abschnitt: per app-spec-create; spec-mode-architecture nur ergänzend
+
+### 2026-06-26 — APP-01 / AP-04 — AP-Wechsel (WARM-START neuer Faden)
+- FinanzwesirData.js, CSVParser.js, FwDateUtils.js — diese Session nicht berühren. ✓
+
+### 2026-06-26 — AP-04 ✅ | App-Steuerungsblock-Inventar
+- [OK] 25 App-Ordner per Shell inventarisiert (grep-first, keine Volllektüre)
+- [OK] APP_STEUERUNGSBLOCK_INVENTORY.md NEU — 0 GRÜN, 24 GELB, 1 ROT (plan-generator)
+- [OK] Ergebnisprotokoll: docs/steering/patches/AP-04_app-steuerungsblock-inventar_Ergebnis.md

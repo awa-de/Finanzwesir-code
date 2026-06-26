@@ -2,16 +2,16 @@
 Version: 1
 Stand: 2026-06-26
 Fokus-AP: APP-01 — prokrastinations-preis
-Nächster-Schritt: AP-04 — Inventar Steuerungsblöcke über alle Apps (AP-07d ✅ 2026-06-26)
+Nächster-Schritt: AP-05 — Vorschlagsliste Steuerungsblock-Einbau (AP-04 ✅ 2026-06-26)
 Blocker: keine
 Letzter-Distill: 2026-06-22
 Kassensturz-Datum: 2026-06-22
 -->
-<!-- HOOK-META-SESSION: AP-07d -->
+<!-- HOOK-META-SESSION: AP-04 -->
 
 # PROJECT STATUS — Finanzwesir 2.0
 
-Stand: 2026-06-26 | Session: AP-07d | Geändert von: Claude
+Stand: 2026-06-26 | Session: AP-04 | Geändert von: Claude
 
 **Zweck:** Schneller Wiedereinstieg nach Pausen.
 **Zielgruppe:** Albert und Claude.
