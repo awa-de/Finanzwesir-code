@@ -310,3 +310,11 @@ Wird geleert nach /distill. Einträge: [FRICTION] [WIN] [PREF] [QUESTION] [OK]
 - [OK] Nummerierung sauber angepasst: 11→12, 12→13, 13→14
 - [OK] Kein Verhaltensgebot in NAVIGATION.md — reiner Routing-Hinweis (WO, nicht WIE)
 - [OK] Ergebnisprotokoll: docs/steering/patches/AP-02_routing-hinweis-app-steuerungsblock_Ergebnis.md — GRÜN
+
+### 2026-06-26 — APP-01 — AP-Wechsel (WARM-START neuer Faden)
+- FinanzwesirData.js, CSVParser.js, FwDateUtils.js — diese Session nicht berühren. ✓
+- AP-02 bereits abgeschlossen; nächster AP offen — wartet auf Alberts Richtung
+
+### 2026-06-26 — AP-03 ✅ | App-Steuerungsblock-Template
+- [OK] `docs/App-Fabrik/APP_SPEC_STEUERUNGSBLOCK_TEMPLATE.md` NEU — 11 Abschnitte: 80%-Nordstern, Standardblock APP_SPEC.md (7 Felder + LLM-Selbsttest), Vorläuferblock MINI_SPEC, LLM-Prüfscore (4 Kriterien, 8/8-Regel), 9 Stop-Auslöser, Qualitätskriterien, Ergebnisprotokoll-Anforderung
+- [OK] Ergebnisprotokoll: `docs/steering/patches/AP-03_app-steuerungsblock-template_Ergebnis.md` — GRÜN

@@ -2,16 +2,16 @@
 Version: 1
 Stand: 2026-06-26
 Fokus-AP: APP-01 — prokrastinations-preis
-Nächster-Schritt: AP-03 — Standardformat Steuerungsblock + Prüfscore (AP-02 ✅ 2026-06-26)
+Nächster-Schritt: AP-06 — app-spec-create Skill klären/anlegen (AP-03 ✅ 2026-06-26)
 Blocker: keine
 Letzter-Distill: 2026-06-22
 Kassensturz-Datum: 2026-06-22
 -->
-<!-- HOOK-META-SESSION: AP-02 -->
+<!-- HOOK-META-SESSION: AP-03 -->
 
 # PROJECT STATUS — Finanzwesir 2.0
 
-Stand: 2026-06-26 | Session: AP-02 | Geändert von: Claude
+Stand: 2026-06-26 | Session: AP-03 | Geändert von: Claude
 
 **Zweck:** Schneller Wiedereinstieg nach Pausen.
 **Zielgruppe:** Albert und Claude.
@@ -206,6 +206,9 @@ Vollständig im DECISION-LOG dokumentiert (`docs/steering/DECISION-LOG.md`):
 ---
 
 ## 8. Letzte Session
+
+2026-06-26 — AP-02 + AP-03 Steuerungsblock-Serie abgeschlossen ✅.
+AP-02: NAVIGATION.md Zeile 11 — Routing zu lokalem Steuerungsblock (APP_SPEC.md / MINI_SPEC). AP-03: `docs/App-Fabrik/APP_SPEC_STEUERUNGSBLOCK_TEMPLATE.md` NEU (11 Abschnitte, 80%-Nordstern, LLM-Prüfscore 8/8-Regel). Nächster Schritt: AP-06 — app-spec-create Skill klären/anlegen.
 
 2026-06-24 — B1-AP-18a Triage abgeschlossen ✅.
 Error-/Empty-/QA-Readiness-Befund: Fehlerflächenkarte erstellt, 5 Top-Risiken (GELB); renderError() kein role="alert" → AP-18b-Kandidat (1 Zeile, Light-Gate); alle Error-/Empty-States stabil, kein Crash; source_claimed_unchecked Editorial-Gap. Nächster Schritt: B1-AP-18b — Error-/Empty-State A11y-Minifix.

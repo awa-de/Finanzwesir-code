@@ -1,5 +1,5 @@
 # NAVIGATION.md – Finanzwesir 2.0
-Stand: 2026-06-26 | Session: AP-02 | Geändert von: Claude
+Stand: 2026-06-26 | Session: AP-03 | Geändert von: Claude
 
 Für Claude: **Routing-Dokument.** Wird beim Session-Start (Schritt 2) gelesen.
 Gibt Pfade und Lese-Reihenfolgen vor — KEINE Verhaltensregeln (die stehen in CLAUDE.md).
@@ -332,6 +332,8 @@ Manuelle Aktivierung: `/spec-rewrite-guard docs/spec/[Dateiname]`
 | Handover-Braindumps | `docs/steering/handovers/` | Vollständige Übergabedokumente für Faden-Übergaben bei komplexen Gates (Spec-Trace-Prompt, Revisionshistorie, Binding Decisions) |
 | Steuerungsblock-Anamnese AP-00 | `docs/steering/patches/AP-00_steuerungsblock-einstiegspunkt-anamnese_Ergebnis.md` | Befund: Einstiegspunkte für globalen 80%-Wächter (CLAUDE.md), Routing-Hinweis (NAVIGATION.md), Skills; 8 Folge-APs AP-01–AP-08 (AP-00 ✅ 2026-06-25) |
 | Steuerungsblock-Wächter AP-01 / AP-01b | `docs/steering/patches/AP-01b_steuerungsblock-regel-verdichten_Ergebnis.md` | CLAUDE.md § APP-ARBEIT: globaler 80%-Wächter eingebaut, auf 3-Satz-Kurzform verdichtet. Regel: kein Code ohne geprüften Steuerungsblock (80%-Entwurf), Klärung bei Lücke. (AP-01 ✅ 2026-06-25, AP-01b ✅ 2026-06-25) |
+| Steuerungsblock-Routing AP-02 | `docs/steering/patches/AP-02_routing-hinweis-app-steuerungsblock_Ergebnis.md` | NAVIGATION.md § „App bauen / ändern": Zeile 11 ergänzt — APP_SPEC.md → Steuerungsblock lesen; Fallback MINI_SPEC_FROM_HAUPTDOKUMENT.md; Verweis auf CLAUDE.md § APP-ARBEIT. Nur Routing, kein Verhaltensgebot. (AP-02 ✅ 2026-06-26) |
+| Steuerungsblock-Template AP-03 | `docs/steering/patches/AP-03_app-steuerungsblock-template_Ergebnis.md` | `docs/App-Fabrik/APP_SPEC_STEUERUNGSBLOCK_TEMPLATE.md` NEU — 11 Abschnitte: 80%-Nordstern, Standardblock APP_SPEC.md (7 Felder + LLM-Selbsttest), Vorläuferblock MINI_SPEC, LLM-Prüfscore (4 Kriterien, 8/8-Regel), 9 Stop-Auslöser, Qualitätskriterien, Ergebnisprotokoll-Anforderung für Folge-APs. (AP-03 ✅ 2026-06-26) |
 
 ## Archivstrategie / Kontext-Hygiene
 

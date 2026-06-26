@@ -1,11 +1,13 @@
 # BACKLOG-ARCHIV – Finanzwesir 2.0
-Stand: 2026-06-25 | Session: AP-00 | Geändert von: Claude
+Stand: 2026-06-26 | Session: AP-03 | Geändert von: Claude
 
 Abgeschlossene Items, neueste zuerst (append-only).
 Archivierungs-Trigger: wenn > 200 Zeilen → neue Datei `BACKLOG-ARCHIV-YYYY.md` anlegen.
 
 | ID | Bereich | Titel | Abgeschlossen | Session |
 |----|---------|-------|---------------|---------|
+| AP-03 | App-Fabrik/Steuerung | `docs/App-Fabrik/APP_SPEC_STEUERUNGSBLOCK_TEMPLATE.md` NEU — kanonisches Format für lokalen App-Steuerungsblock: 11 Abschnitte (80%-Nordstern, Standardblock APP_SPEC.md 7 Felder + LLM-Selbsttest, Vorläuferblock MINI_SPEC, LLM-Prüfscore 4 Kriterien 8/8-Regel, 9 Stop-Auslöser, Qualitätskriterien, Ergebnisprotokoll-Anforderung). Ergebnisprotokoll: `docs/steering/patches/AP-03_app-steuerungsblock-template_Ergebnis.md`. *(sofort erledigt)* | 2026-06-26 | AP-03 |
+| AP-02 | App-Fabrik/Steuerung | NAVIGATION.md § „App bauen / ändern": Zeile 11 ergänzt — APP_SPEC.md → lokalen Steuerungsblock lesen; Fallback MINI_SPEC_FROM_HAUPTDOKUMENT.md; Verweis auf CLAUDE.md § APP-ARBEIT. Nur Routing, kein Verhaltensgebot. Nummerierung 11→12/13/14 angepasst. Ergebnisprotokoll: `docs/steering/patches/AP-02_routing-hinweis-app-steuerungsblock_Ergebnis.md`. *(sofort erledigt)* | 2026-06-26 | AP-02 |
 | AP-01b | App-Fabrik/Steuerung | CLAUDE.md § APP-ARBEIT: Verhaltensregel auf 3-Satz-Kurzform verdichtet; Detailfelder ausgelagert an App-Spec/Routing/Skills. Ergebnisprotokoll: `docs/steering/patches/AP-01b_steuerungsblock-regel-verdichten_Ergebnis.md`. *(sofort erledigt)* | 2026-06-25 | AP-01b |
 | AP-01 | App-Fabrik/Steuerung | CLAUDE.md § APP-ARBEIT: globaler 80%-Wächter eingebaut — kein Code ohne geprüften lokalen Steuerungsblock (80%-Entwurf); Klärungspflicht bei unklarem Zweck/Barriere/Nicht-Zielen. Ergebnisprotokoll: `docs/steering/patches/AP-01_globaler-80-prozent-steuerungsblock-waechter_Ergebnis.md`. *(sofort erledigt)* | 2026-06-25 | AP-01 |
 | AP-00 | App-Fabrik/Anamnese | Steuerungsblock Einstiegspunkt-Anamnese: Befundprotokoll erstellt; Autoritäten-Gate GRÜN (CLAUDE.md=Verhalten, NAVIGATION.md=Routing); App-Arbeitskette aufgezeichnet (12 Schritte); 3 Drift-Stellen identifiziert (app-spec-create SKILL.md fehlt, spec-mode-architecture nicht in NAVIGATION-Tabelle, kein Steuerungsblock-Check in Route); Stichprobe 3 Apps — Steuerungsblock implizit, kein einheitliches Format; 8 Folge-APs AP-01–AP-08 definiert. Ergebnisprotokoll: `docs/steering/patches/AP-00_steuerungsblock-einstiegspunkt-anamnese_Ergebnis.md`. *(sofort erledigt)* | 2026-06-25 | AP-00 |
