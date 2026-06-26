@@ -1,11 +1,12 @@
 # BACKLOG-ARCHIV – Finanzwesir 2.0
-Stand: 2026-06-26 | Session: AP-04 | Geändert von: Claude
+Stand: 2026-06-26 | Session: AP-05 | Geändert von: Claude
 
 Abgeschlossene Items, neueste zuerst (append-only).
 Archivierungs-Trigger: wenn > 200 Zeilen → neue Datei `BACKLOG-ARCHIV-YYYY.md` anlegen.
 
 | ID | Bereich | Titel | Abgeschlossen | Session |
 |----|---------|-------|---------------|---------|
+| AP-05 | App-Fabrik/Steuerung | `docs/App-Fabrik/APP_STEUERUNGSBLOCK_ROLLOUT_PLAN.md` NEU — Priorisierung für Einbau lokaler Steuerungsblöcke: AP-08 Muster-Einbau prokrastinations-preis, AP-09 Muster-Review + Template-Schärfung, AP-10 Batch A (14 Apps: Kernbotschaft+Problem), AP-11 Batch B (8 Apps: nur Kernbotschaft), AP-12 Sonderfall etf-vergleich (reichstes Material), AP-13 ROT plan-generator (gesperrt bis fachliche Klärung). Ergebnisprotokoll: `docs/steering/patches/AP-05_app-steuerungsblock-rollout-plan_Ergebnis.md`. *(sofort erledigt)* | 2026-06-26 | AP-05 |
 | AP-04 | App-Fabrik/Steuerung | `docs/App-Fabrik/APP_STEUERUNGSBLOCK_INVENTORY.md` NEU — Scan-Inventar 25 App-Ordner (grep-first, keine Volllektüre): 0 GRÜN, 24 GELB (Mini-Spec mit Kernbotschaft ± Problem vorhanden), 1 ROT (plan-generator — kein steuerungsblock-ähnliches Material). Kein einziger expliziter Steuerungsblock in keiner APP_SPEC. Ergebnisprotokoll: `docs/steering/patches/AP-04_app-steuerungsblock-inventar_Ergebnis.md`. *(sofort erledigt)* | 2026-06-26 | AP-04 |
 | AP-07d | App-Fabrik/Steuerung | `04_CLAUDE_WORKFLOW_DRAFT.md` 4 Konsistenz-Korrekturen: Betriebssystem-Abschnitt (`app-spec-create` koordiniert, `spec-mode-architecture` ergänzend); APP_SPEC-Mindestliste (Steuerungsblock-Eintrag ✅); Skills-Tabelle (Phase 2 `app-spec-create` Koordinator + ergänzend); Nächster-Schritt-Abschnitt (per `app-spec-create`). Ergebnisprotokoll: `docs/steering/patches/AP-07d_workflow-konsistenz-nachputz_Ergebnis.md`. *(sofort erledigt)* | 2026-06-26 | AP-07d |
 | AP-07c | App-Fabrik/Steuerung | `04_CLAUDE_WORKFLOW_DRAFT.md` Phase 2 synchronisiert: Schritt 2.0 Pflichtschritt Steuerungsblock eingefügt (Quellen APP_SPEC.md/MINI_SPEC, Prüfmaßstab `APP_SPEC_STEUERUNGSBLOCK_TEMPLATE.md`, Stop-Regel); `app-spec-create` als koordinierendes Werkzeug; `spec-mode-architecture` nur ergänzend abgegrenzt. Ergebnisprotokoll: `docs/steering/patches/AP-07c_workflow-phase2-steuerungsblock-sync_Ergebnis.md`. *(sofort erledigt)* | 2026-06-26 | AP-07c |

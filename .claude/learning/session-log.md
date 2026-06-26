@@ -366,3 +366,11 @@ Wird geleert nach /distill. Einträge: [FRICTION] [WIN] [PREF] [QUESTION] [OK]
 - [OK] 25 App-Ordner per Shell inventarisiert (grep-first, keine Volllektüre)
 - [OK] APP_STEUERUNGSBLOCK_INVENTORY.md NEU — 0 GRÜN, 24 GELB, 1 ROT (plan-generator)
 - [OK] Ergebnisprotokoll: docs/steering/patches/AP-04_app-steuerungsblock-inventar_Ergebnis.md
+
+### 2026-06-26 — APP-01 / AP-05 — AP-Wechsel (WARM-START neuer Faden)
+- FinanzwesirData.js, CSVParser.js, FwDateUtils.js — diese Session nicht berühren. ✓
+
+### 2026-06-26 — AP-05 ✅ | App-Steuerungsblock-Rollout-Plan
+- [OK] Inventar gelesen (25 Apps, 0 GRÜN, 24 GELB, 1 ROT) — keine App-Dateien geöffnet
+- [OK] APP_STEUERUNGSBLOCK_ROLLOUT_PLAN.md NEU — AP-08 Muster, AP-09 Review, AP-10 Batch A (14), AP-11 Batch B (8), AP-12 Sonderfall etf-vergleich, AP-13 ROT plan-generator gesperrt
+- [OK] Ergebnisprotokoll: docs/steering/patches/AP-05_app-steuerungsblock-rollout-plan_Ergebnis.md
