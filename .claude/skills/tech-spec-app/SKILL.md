@@ -198,7 +198,7 @@ Eine technische APP_SPEC.md muss mindestens diese Abschnitte enthalten:
 Pflicht-Vorabschnitt: Steuerungsblock: Zweck, Barriere, Prüfregeln
 Pflicht gemäß `docs/App-Fabrik/APP_SPEC_STEUERUNGSBLOCK_TEMPLATE.md`.
 Steht vor allen technischen Detailabschnitten.
-- Enthält: Zweck, psychologische Barriere, falscher Glaubenssatz, Zielzustand, Muss-Kriterien, Nicht-Ziele, LLM-Selbsttest
+- Enthält: Zweck, psychologische Barriere, falscher Glaubenssatz, Zielzustand, Muss-Kriterien, Nicht-Ziele, LLM-Prüfscore pro Änderung
 - Bei fehlendem oder schwachem Block: stoppen, mit Albert klären
 
 2. Zweck und Nutzerfrage

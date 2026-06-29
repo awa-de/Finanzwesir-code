@@ -1,17 +1,17 @@
 <!-- HOOK-META
 Version: 1
-Stand: 2026-06-26
+Stand: 2026-06-29
 Fokus-AP: APP-01 — prokrastinations-preis
-Nächster-Schritt: AP-09 — Muster-Review und Template-Schärfung (AP-08 ✅ 2026-06-26)
+Nächster-Schritt: AP-09 — Muster-Review und Template-Schärfung (AP-11b ✅ 2026-06-29)
 Blocker: keine
 Letzter-Distill: 2026-06-29
 Kassensturz-Datum: 2026-06-29
 -->
-<!-- HOOK-META-SESSION: AP-08 -->
+<!-- HOOK-META-SESSION: AP-11b -->
 
 # PROJECT STATUS — Finanzwesir 2.0
 
-Stand: 2026-06-26 | Session: AP-08/AP-10 | Geändert von: Claude
+Stand: 2026-06-29 | Session: AP-11b | Geändert von: Claude
 
 **Zweck:** Schneller Wiedereinstieg nach Pausen.
 **Zielgruppe:** Albert und Claude.

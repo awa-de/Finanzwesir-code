@@ -1,6 +1,6 @@
 # APP_SPEC_STEUERUNGSBLOCK_TEMPLATE
 
-Stand: 2026-06-26 | Version: 1.0 | Status: Arbeitsfassung
+Stand: 2026-06-29 | Version: 1.1 | Status: Arbeitsfassung
 
 ---
 
@@ -27,9 +27,9 @@ Dieses Template sagt **WIE** ein Block aussieht.
 
 ---
 
-## 3. 80%-Nordstern — Leitprinzip
+## 3. Gültigkeitsstufe — Block gilt als Arbeitsfassung
 
-Jeder lokale Steuerungsblock gilt bei Erstellung als **80%-Nordstern**.
+Jeder lokale Steuerungsblock gilt bei Erstellung als **Arbeitsfassung (80%-Entwurf)**.
 
 Das bedeutet:
 
@@ -62,8 +62,6 @@ Bei MINI_SPEC: reduzierten Vorläuferblock verwenden (→ § 6).
 ```markdown
 ## Steuerungsblock: Zweck, Barriere, Prüfregeln
 
-**Status:** 80%-Nordstern / Arbeitsfassung
-
 **Diese App existiert, um:**  
 [ein Satz: Was soll beim Nutzer kippen?]
 
@@ -86,12 +84,28 @@ Bei MINI_SPEC: reduzierten Vorläuferblock verwenden (→ § 6).
 - [welche naheliegende Drift verboten ist]
 - [welche Nachbar-App nicht vermischt werden darf]
 
-**LLM-Selbsttest vor jeder Änderung:**  
-1. Entfernt diese Änderung die definierte Barriere?
-2. Stärkt diese Änderung den Zielzustand?
-3. Vermeidet diese Änderung alle Nicht-Ziele?
-4. Bleibt die App in ihrer Mentorrolle innerhalb der Heldenreise?
-5. Wenn nein bei einer der Fragen: Änderung nicht durchführen.
+**LLM-Prüfscore pro Änderung:**
+
+Bewerte vor der Umsetzung von 0–2:
+
+1. **Barriere-Abbau:** Entfernt die Änderung die definierte psychologische Hürde?
+2. **Zielzustand:** Führt die Änderung zum gewünschten Nutzerzustand?
+3. **Nicht-Ziele:** Vermeidet die Änderung alle verbotenen Drifts?
+4. **Mentorrolle:** Stärkt die Änderung die Rolle dieser App in der Heldenreise?
+
+**Score-Regel:**
+
+- **8/8** = umsetzen
+- **6–7/8** = nur umsetzen, wenn `Nicht-Ziele = 2/2`
+- **≤5/8** = nicht umsetzen
+- **jede Nicht-Ziel-Verletzung** = stoppen
+
+**Wichtig:**
+
+- Punkt 3 ist ein KO-Kriterium.
+- Eine Änderung mit `Nicht-Ziele < 2/2` darf nicht umgesetzt werden, auch wenn der Gesamtscore hoch wirkt.
+- Der Score ersetzt nicht den Steuerungsblock, sondern zwingt das LLM, jede Änderung gegen Barriere, Zielzustand, Nicht-Ziele und Heldenreise-Rolle zu prüfen.
+- Bei Unsicherheit: nicht umsetzen, sondern Klärungsbedarf markieren.
 ```
 
 ---
@@ -100,10 +114,10 @@ Bei MINI_SPEC: reduzierten Vorläuferblock verwenden (→ § 6).
 
 Für Apps ohne `APP_SPEC.md`:
 
+Vorläuferblöcke sind Arbeitsfassungen. Dieser Reifegrad wird nicht als lokales `Status`-Feld in die spätere APP_SPEC übernommen.
+
 ```markdown
 ## Vorläufiger Steuerungsblock
-
-**Status:** Vorläufiger 80%-Nordstern — vollständiger Block in APP_SPEC.md erwartet
 
 **Diese App existiert, um:**  
 [...]
@@ -144,6 +158,8 @@ Vor jeder Änderung an Code, UX, Daten oder Spec: Score berechnen.
 - **≤ 5/8** → Änderung nicht umsetzen
 - **Kriterium 3 = 0** → sofort stoppen, unabhängig vom Gesamt-Score
 - **Steuerungsblock unklar oder schwach** → stoppen, mit Albert klären, vor Prüfscore-Anwendung
+
+**Merksatz:** Der Score ersetzt nicht den Steuerungsblock, sondern zwingt das LLM, jede Änderung gegen Barriere, Zielzustand, Nicht-Ziele und Heldenreise-Rolle zu prüfen.
 
 ---
 
@@ -199,3 +215,21 @@ Jedes Ergebnisprotokoll eines AP, das App-Specs, Mini-Specs, Skills oder App-Cod
 - Stop nötig: ja/nein
 - Falls Stop: Klärungsbedarf mit Albert: [Beschreibung]
 ```
+
+---
+
+## 12. Seed-Metadaten-Trennung
+
+Der lokale Steuerungsblock stammt aus der Seed-Datei (`Apps/APP_STEUERUNGSBLOCK_SEEDS_repo_abgeglichen.md`).
+
+**Beim mechanischen Einbau in eine lokale `APP_SPEC.md` werden folgende Seed-Felder entfernt — sie gehören nicht in die lokale APP_SPEC:**
+
+- `Status` (Seed-Arbeitsstand wie „freigegeben", „Entwurf", „gesperrt")
+- `Verteilungsstatus` (ob der Seed verteilt wurde)
+- `Klärungsbedarf vor Verteilung` (redaktionelle Fragen vor der Verteilung)
+
+Diese Felder sind redaktionelle Metadaten der Seed-Datei, nicht Bestandteil des lokalen App-Steuerungsblocks.
+
+Die lokale APP_SPEC übernimmt keine Seed-Metadaten. Der Steuerungsblock beginnt nach den Quellenkommentaren mit `**Rolle:**` oder, falls keine Rolle definiert ist, mit `**Diese App existiert, um:**`.
+
+**Regel:** Mechanische Verteilung bedeutet keine Umformulierung des Seed-Inhalts. Nur die Seed-Metadaten werden entfernt — der Kern (Zweck, Barriere, Muss-Kriterien, Nicht-Ziele, Score) wird unverändert übernommen.
