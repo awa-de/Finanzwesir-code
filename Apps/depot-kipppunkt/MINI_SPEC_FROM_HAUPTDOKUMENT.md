@@ -15,6 +15,68 @@
 
 ---
 
+## Steuerungsblock: Zweck, Barriere, Prüfregeln
+
+<!-- Quelle: Apps/APP_STEUERUNGSBLOCK_SEEDS_repo_abgeglichen.md / Seed depot-kipppunkt -->
+<!-- Mechanisch eingefügt. Nicht frei formulieren. -->
+
+**Rolle:** B5 — Statuswechsel-App / Depot als Mitverdiener  
+
+**Diese App existiert, um:**  
+Sparen vom Gefühl des Konsumverzichts in die Vorstellung eines zweiten Einkommensstroms zu drehen.
+
+**Zu entfernende psychologische Barriere:**  
+Sparen fühlt sich wie Verzicht an, weil der spätere Statuswechsel nicht sichtbar ist.
+
+**Falscher Glaubenssatz vorher:**  
+„Nur mein Job verdient Geld. Das Depot ist ein abstrakter Zukunftstopf.“
+
+**Zielzustand nach der App:**  
+„Irgendwann bringt mein Depot rechnerisch pro Jahr mehr ein als mein Job. Sparen baut einen Mitverdiener.“
+
+**Muss-Kriterien für jede Umsetzung:**  
+- Vergleich heutiges Job-Netto pro Jahr vs. rechnerischer Depot-Ertrag pro Jahr.
+- Schnittpunkt / Kipppunkt sichtbar machen.
+- Transparenzsatz: keine Prognose, keine Steuerplanung, keine Rentenplanung.
+- Fortschrittsmarken möglich: 25 %, 50 %, 75 %, 100 %.
+
+**Nicht-Ziele / harte Verbote:**  
+- Keine Finanzfreiheit berechnen.
+- Keine Entnahmerate.
+- Keine Steuerdetails, Sozialabgaben, Gehaltssteigerung, Inflation.
+- Keine Sparratendynamik.
+- Keine historischen MSCI-Pfade.
+- Keine Renditedebatte.
+
+---
+
+Dieser Prüfscore ist **kein app-spezifischer Inhalt**, sondern ein verbindliches Standard-Gate für jede spätere Änderung an einer App.
+
+Er wird bei der späteren Verteilung in jeden lokalen Steuerungsblock übernommen und dort **unverändert** verwendet.
+
+**LLM-Prüfscore pro Änderung:**
+
+Bewerte vor der Umsetzung von 0–2:
+
+1. **Barriere-Abbau:** Entfernt die Änderung die definierte psychologische Hürde?
+2. **Zielzustand:** Führt die Änderung zum gewünschten Nutzerzustand?
+3. **Nicht-Ziele:** Vermeidet die Änderung alle verbotenen Drifts?
+4. **Mentorrolle:** Stärkt die Änderung die Rolle dieser App in der Heldenreise?
+
+**Score-Regel:**
+
+- **8/8** = umsetzen
+- **6–7/8** = nur umsetzen, wenn `Nicht-Ziele = 2/2`
+- **≤5/8** = nicht umsetzen
+- **jede Nicht-Ziel-Verletzung** = stoppen
+
+**Wichtig:**
+
+- Punkt 3 ist ein KO-Kriterium.
+- Eine Änderung mit `Nicht-Ziele < 2/2` darf nicht umgesetzt werden, auch wenn der Gesamtscore hoch wirkt.
+- Der Score ersetzt nicht den Steuerungsblock, sondern zwingt das LLM, jede Änderung gegen Barriere, Zielzustand, Nicht-Ziele und Heldenreise-Rolle zu prüfen.
+- Bei Unsicherheit: nicht umsetzen, sondern Klärungsbedarf markieren.
+
 ## Problem, das gelöst wird
 
 Sparen fühlt sich für viele Menschen wie Konsumverzicht an. Diese App zeigt einen anderen Blick: Aus Sparen wird mit der Zeit eine zweite Einkommensquelle. Irgendwann kann das Depot rechnerisch mehr pro Jahr erwirtschaften als der heutige Job.

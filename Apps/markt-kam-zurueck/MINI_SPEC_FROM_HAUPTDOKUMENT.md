@@ -17,6 +17,68 @@
 
 ---
 
+## Steuerungsblock: Zweck, Barriere, Prüfregeln
+
+<!-- Quelle: Apps/APP_STEUERUNGSBLOCK_SEEDS_repo_abgeglichen.md / Seed markt-kam-zurueck -->
+<!-- Mechanisch eingefügt. Nicht frei formulieren. -->
+
+**Rolle:** A3 — Ausstiegsfolgen-App  
+
+**Diese App existiert, um:**  
+sichtbar zu machen, dass der teuerste Verlust oft nicht der Crash ist, sondern die verpasste Erholung nach dem Ausstieg.
+
+**Zu entfernende psychologische Barriere:**  
+Verkaufen fühlt sich im Verlust wie Rettung an; die spätere Rückkehr in den Markt wird überschätzt.
+
+**Falscher Glaubenssatz vorher:**  
+„Wenn es schlimm wird, verkaufe ich halt. Später kann ich ja wieder einsteigen.“
+
+**Zielzustand nach der App:**  
+„Der Ausstieg kann teurer sein als der Crash. Meine ETF-Dosis muss so gewählt sein, dass ich meinen schlimmsten Abschnitt durchhalte.“
+
+**Muss-Kriterien für jede Umsetzung:**  
+- Nutzer wählt zuerst sein Startjahr selbst.
+- Verlusttoleranz / Ausstiegspunkt wird sichtbar.
+- App zeigt Ausstiegswert, heutige Erholung und verpasste Erholung.
+- Optionaler Härtetest kommt erst nach dem persönlichen Ergebnis.
+- Ton ernst und konfrontativ, aber nicht manipulativ.
+
+**Nicht-Ziele / harte Verbote:**  
+- Kein fest vorgegebenes Katastrophenjahr als Start.
+- Kein Trading-, Stop-Loss- oder Re-Entry-Simulator.
+- Keine Drawdown-Theorie im Haupt-UI.
+- Keine Panikmache.
+- Keine Nutzerbeschämung.
+
+---
+
+Dieser Prüfscore ist **kein app-spezifischer Inhalt**, sondern ein verbindliches Standard-Gate für jede spätere Änderung an einer App.
+
+Er wird bei der späteren Verteilung in jeden lokalen Steuerungsblock übernommen und dort **unverändert** verwendet.
+
+**LLM-Prüfscore pro Änderung:**
+
+Bewerte vor der Umsetzung von 0–2:
+
+1. **Barriere-Abbau:** Entfernt die Änderung die definierte psychologische Hürde?
+2. **Zielzustand:** Führt die Änderung zum gewünschten Nutzerzustand?
+3. **Nicht-Ziele:** Vermeidet die Änderung alle verbotenen Drifts?
+4. **Mentorrolle:** Stärkt die Änderung die Rolle dieser App in der Heldenreise?
+
+**Score-Regel:**
+
+- **8/8** = umsetzen
+- **6–7/8** = nur umsetzen, wenn `Nicht-Ziele = 2/2`
+- **≤5/8** = nicht umsetzen
+- **jede Nicht-Ziel-Verletzung** = stoppen
+
+**Wichtig:**
+
+- Punkt 3 ist ein KO-Kriterium.
+- Eine Änderung mit `Nicht-Ziele < 2/2` darf nicht umgesetzt werden, auch wenn der Gesamtscore hoch wirkt.
+- Der Score ersetzt nicht den Steuerungsblock, sondern zwingt das LLM, jede Änderung gegen Barriere, Zielzustand, Nicht-Ziele und Heldenreise-Rolle zu prüfen.
+- Bei Unsicherheit: nicht umsetzen, sondern Klärungsbedarf markieren.
+
 ## Strategische Einordnung
 
 A3 ergänzt A1 und A2 zu einer psychologischen Durchhalte-Kette:

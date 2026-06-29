@@ -1,11 +1,12 @@
 # BACKLOG-ARCHIV – Finanzwesir 2.0
-Stand: 2026-06-29 | Session: AP-11b | Geändert von: Claude
+Stand: 2026-06-29 | Session: AP-12c | Geändert von: Claude
 
 Abgeschlossene Items, neueste zuerst (append-only).
 Archivierungs-Trigger: wenn > 200 Zeilen → neue Datei `BACKLOG-ARCHIV-YYYY.md` anlegen.
 
 | ID | Bereich | Titel | Abgeschlossen | Session |
 |----|---------|-------|---------------|---------|
+| AP-12a/b/c | App-Fabrik/Steuerung | Ankerinventar (AP-12a): alle 7 Batch-A-Mini-Specs vorhanden, alle Seed-Blöcke vorhanden, einheitliche Ankerregel abgeleitet. Python-Tool `insert_steuerungsblock_into_minispec_from_seed.py` (AP-12b): Dry-run 7/7 GRÜN. Batch-A-Write (AP-12c): 7 `MINI_SPEC_FROM_HAUPTDOKUMENT.md` angereichert (430 Einfügungen), Marker-QA bestanden, APP_SPEC unberührt. Protokoll: `docs/steering/patches/AP-12c_minispec-steuerungsblock-rollout_Ergebnis.md`. *(sofort erledigt)* | 2026-06-29 | AP-12c |
 | AP-11/11a/11b | App-Fabrik/Steuerung | `docs/App-Fabrik/APP_SPEC_STEUERUNGSBLOCK_TEMPLATE.md` V1.0→V1.1: Nordstern als lokaler Begriff entfernt (§3/§5/§6); echter 4-Kriterien-LLM-Prüfscore in §5 + §7 verankert; §12 Seed-Metadaten-Regel neu; `.claude/skills/tech-spec-app/SKILL.md` LLM-Selbsttest → LLM-Prüfscore pro Änderung synchronisiert. Ergebnisprotokoll: `docs/steering/patches/AP-11b_score-block-korrektur_Ergebnis.md`. *(sofort erledigt)* | 2026-06-29 | AP-11-template-sync |
 | AP-10d | App-Fabrik/Steuerung | `Apps/prokrastinations-preis/APP_SPEC.md` + Seed + Tool-Protokolltext: `redaktionellen Nordstern` → `Steuerungsblock` in Score-Satz; alle 3 Seed-Metadaten korrekt benannt. Ergebnisprotokoll: `docs/steering/patches/AP-10d_nordstern-begriff-und-protokoll-nachputz_Ergebnis.md`. *(sofort erledigt)* | 2026-06-26 | AP-10d |
 | AP-10c | App-Fabrik/Steuerung | `tools/app_fabrik/insert_steuerungsblock_from_seed.py`: configure_utf8_stdio() ergänzt. Dry-Run GRÜN → --write → `Apps/prokrastinations-preis/APP_SPEC.md` hat jetzt Steuerungsblock aus Seed (7 Felder + Score-Abschnitt, alle Seed-Metadaten entfernt). Ergebnisprotokoll: `docs/steering/patches/AP-10_mechanischer-einbau-prokrastinations-preis-aus-seed_Ergebnis.md`. *(sofort erledigt)* | 2026-06-26 | AP-10c |

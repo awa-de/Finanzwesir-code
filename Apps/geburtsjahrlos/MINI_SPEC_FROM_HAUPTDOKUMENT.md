@@ -16,6 +16,67 @@
 
 ---
 
+## Steuerungsblock: Zweck, Barriere, Prüfregeln
+
+<!-- Quelle: Apps/APP_STEUERUNGSBLOCK_SEEDS_repo_abgeglichen.md / Seed geburtsjahrlos -->
+<!-- Mechanisch eingefügt. Nicht frei formulieren. -->
+
+**Rolle:** B2 — historische Robustheit / Börsenepoche als Los  
+
+**Diese App existiert, um:**  
+zu zeigen, dass die erlebte Börsenepoche ein Los ist, keine persönliche Leistung und kein persönliches Versagen.
+
+**Zu entfernende psychologische Barriere:**  
+Der Nutzer bewertet Strategien und eigene Entscheidungen anhand eines einzelnen historischen Startzeitpunkts.
+
+**Falscher Glaubenssatz vorher:**  
+„Mein Ergebnis zeigt, ob ich gut oder schlecht investiert habe.“
+
+**Zielzustand nach der App:**  
+„Startjahre sind Schicksal. Ich brauche einen Plan, der verschiedene Epochen überlebt, statt eine perfekte Epoche zu verlangen.“
+
+**Muss-Kriterien für jede Umsetzung:**  
+- Rollierende historische Zeiträume sichtbar machen.
+- Börsenepoche als Los darstellen, nicht als Können.
+- Inflations-/Kaufkraftlogik prüfen, falls in der Mini-Spec verbindlich.
+- Klare Abgrenzung zu B1: hier geht es um Epochenvergleich, nicht um das verfügbare Heute.
+
+**Nicht-Ziele / harte Verbote:**  
+- Kein Kindersparplan.
+- Kein „vor 10 Jahren vs. heute“-Motiv.
+- Keine Prokrastinationskosten-App.
+- Keine Optimierung des besten Startjahres.
+- Keine persönliche Schuldlogik.
+
+---
+
+Dieser Prüfscore ist **kein app-spezifischer Inhalt**, sondern ein verbindliches Standard-Gate für jede spätere Änderung an einer App.
+
+Er wird bei der späteren Verteilung in jeden lokalen Steuerungsblock übernommen und dort **unverändert** verwendet.
+
+**LLM-Prüfscore pro Änderung:**
+
+Bewerte vor der Umsetzung von 0–2:
+
+1. **Barriere-Abbau:** Entfernt die Änderung die definierte psychologische Hürde?
+2. **Zielzustand:** Führt die Änderung zum gewünschten Nutzerzustand?
+3. **Nicht-Ziele:** Vermeidet die Änderung alle verbotenen Drifts?
+4. **Mentorrolle:** Stärkt die Änderung die Rolle dieser App in der Heldenreise?
+
+**Score-Regel:**
+
+- **8/8** = umsetzen
+- **6–7/8** = nur umsetzen, wenn `Nicht-Ziele = 2/2`
+- **≤5/8** = nicht umsetzen
+- **jede Nicht-Ziel-Verletzung** = stoppen
+
+**Wichtig:**
+
+- Punkt 3 ist ein KO-Kriterium.
+- Eine Änderung mit `Nicht-Ziele < 2/2` darf nicht umgesetzt werden, auch wenn der Gesamtscore hoch wirkt.
+- Der Score ersetzt nicht den Steuerungsblock, sondern zwingt das LLM, jede Änderung gegen Barriere, Zielzustand, Nicht-Ziele und Heldenreise-Rolle zu prüfen.
+- Bei Unsicherheit: nicht umsetzen, sondern Klärungsbedarf markieren.
+
 ## Problem, das gelöst wird
 
 Viele Anleger glauben unbewusst, langfristiges Investieren liefere ein planbares Standardergebnis. B2 zeigt: Selbst 30 Jahre ETF-Sparen sind keine Einheitsstrecke. Dieselbe Strategie, dieselbe Sparrate und dieselbe Laufzeit führten historisch zu sehr unterschiedlichen realen Endwerten — nicht wegen Fehlern, sondern wegen Börsenepoche.

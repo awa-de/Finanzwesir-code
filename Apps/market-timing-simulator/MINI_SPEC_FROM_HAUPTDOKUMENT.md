@@ -13,6 +13,67 @@
 **Funnel-Position:** Timing zerstören
 **Priorität:** #8
 
+## Steuerungsblock: Zweck, Barriere, Prüfregeln
+
+<!-- Quelle: Apps/APP_STEUERUNGSBLOCK_SEEDS_repo_abgeglichen.md / Seed market-timing-simulator -->
+<!-- Mechanisch eingefügt. Nicht frei formulieren. -->
+
+**Rolle:** B3 — Timing-Illusions-App  
+
+**Diese App existiert, um:**  
+den Nutzer die Unmöglichkeit des perfekten Einstiegs selbst erleben zu lassen, statt Timing nur argumentativ zu widerlegen.
+
+**Zu entfernende psychologische Barriere:**  
+Die Kontrollillusion, dass der Nutzer durch Warten und Beobachten einen besseren Einstiegspunkt finden kann.
+
+**Falscher Glaubenssatz vorher:**  
+„Ich warte noch auf den Rücksetzer und steige dann besser ein.“
+
+**Zielzustand nach der App:**  
+„Ich erkenne den perfekten Einstieg erst hinterher. Eine robuste Regel ist besser als mein Timing-Gefühl.“
+
+**Muss-Kriterien für jede Umsetzung:**  
+- Nutzer trifft Timing-Entscheidungen unter unvollständiger Information.
+- Ergebnis wird gegen eine einfache Regel / Sparplanlogik kalibriert.
+- Die App zeigt Scheitern der Timing-Kontrolle ohne Spott.
+- Keine Signale, keine Tipps, keine Mustererkennung als Belohnung.
+
+**Nicht-Ziele / harte Verbote:**  
+- Kein Trading-Spiel.
+- Keine technische Analyse.
+- Keine Kauf-/Verkaufssignale.
+- Keine Optimierung des besten Einstiegs.
+- Keine Prognose.
+
+---
+
+Dieser Prüfscore ist **kein app-spezifischer Inhalt**, sondern ein verbindliches Standard-Gate für jede spätere Änderung an einer App.
+
+Er wird bei der späteren Verteilung in jeden lokalen Steuerungsblock übernommen und dort **unverändert** verwendet.
+
+**LLM-Prüfscore pro Änderung:**
+
+Bewerte vor der Umsetzung von 0–2:
+
+1. **Barriere-Abbau:** Entfernt die Änderung die definierte psychologische Hürde?
+2. **Zielzustand:** Führt die Änderung zum gewünschten Nutzerzustand?
+3. **Nicht-Ziele:** Vermeidet die Änderung alle verbotenen Drifts?
+4. **Mentorrolle:** Stärkt die Änderung die Rolle dieser App in der Heldenreise?
+
+**Score-Regel:**
+
+- **8/8** = umsetzen
+- **6–7/8** = nur umsetzen, wenn `Nicht-Ziele = 2/2`
+- **≤5/8** = nicht umsetzen
+- **jede Nicht-Ziel-Verletzung** = stoppen
+
+**Wichtig:**
+
+- Punkt 3 ist ein KO-Kriterium.
+- Eine Änderung mit `Nicht-Ziele < 2/2` darf nicht umgesetzt werden, auch wenn der Gesamtscore hoch wirkt.
+- Der Score ersetzt nicht den Steuerungsblock, sondern zwingt das LLM, jede Änderung gegen Barriere, Zielzustand, Nicht-Ziele und Heldenreise-Rolle zu prüfen.
+- Bei Unsicherheit: nicht umsetzen, sondern Klärungsbedarf markieren.
+
 ### Problem, das gelöst wird
 
 Fast jeder wartet auf „den richtigen Zeitpunkt". Diese App lässt den User es selbst versuchen – und scheitern.

@@ -15,6 +15,68 @@
 
 ---
 
+## Steuerungsblock: Zweck, Barriere, Prüfregeln
+
+<!-- Quelle: Apps/APP_STEUERUNGSBLOCK_SEEDS_repo_abgeglichen.md / Seed der-alte-euro -->
+<!-- Mechanisch eingefügt. Nicht frei formulieren. -->
+
+**Rolle:** B4 — Mechanik der Marktzeit / Zinseszins sichtbar machen  
+
+**Diese App existiert, um:**  
+zu zeigen, was Zeit im Inneren eines einzelnen investierten Euros bewirkt: Ein alter Euro arbeitet nicht allein, sondern mit seinen Erträgen und den Erträgen auf frühere Erträge.
+
+**Zu entfernende psychologische Barriere:**  
+„Früh anfangen“ klingt wie moralische Mahnung; der Nutzer sieht nicht, warum frühes Geld strukturell anders arbeitet.
+
+**Falscher Glaubenssatz vorher:**  
+„Ein Euro bleibt im Kern ein Euro, nur mit etwas Rendite obendrauf.“
+
+**Zielzustand nach der App:**  
+„Ich sehe: Zeit macht aus einem Euro ein kleines Team. Der ursprüngliche Euro wird relativ kleiner, seine Ertragsfamilie größer.“
+
+**Muss-Kriterien für jede Umsetzung:**  
+- Ein Euro wird über 10, 20, 30 und 40 Jahre gezeigt.
+- Gestapelte Balken trennen ursprünglichen Euro, Ertrag auf den Euro und Ertrag auf frühere Erträge.
+- Nur wenige Renditeannahmen, keine freie Parameterorgie.
+- Zinseszins wird gezeigt, nicht theoretisch erklärt.
+
+**Nicht-Ziele / harte Verbote:**  
+- Kein Heute-vs.-Später-Vergleich.
+- Keine Opportunitätskosten.
+- Keine historische MSCI-World-Simulation.
+- Keine Sparrate, kein Depot, kein Einkommen.
+- Keine ETF-Produktentscheidung.
+- Keine Thesaurierer-vs.-Ausschütter-Debatte.
+
+---
+
+Dieser Prüfscore ist **kein app-spezifischer Inhalt**, sondern ein verbindliches Standard-Gate für jede spätere Änderung an einer App.
+
+Er wird bei der späteren Verteilung in jeden lokalen Steuerungsblock übernommen und dort **unverändert** verwendet.
+
+**LLM-Prüfscore pro Änderung:**
+
+Bewerte vor der Umsetzung von 0–2:
+
+1. **Barriere-Abbau:** Entfernt die Änderung die definierte psychologische Hürde?
+2. **Zielzustand:** Führt die Änderung zum gewünschten Nutzerzustand?
+3. **Nicht-Ziele:** Vermeidet die Änderung alle verbotenen Drifts?
+4. **Mentorrolle:** Stärkt die Änderung die Rolle dieser App in der Heldenreise?
+
+**Score-Regel:**
+
+- **8/8** = umsetzen
+- **6–7/8** = nur umsetzen, wenn `Nicht-Ziele = 2/2`
+- **≤5/8** = nicht umsetzen
+- **jede Nicht-Ziel-Verletzung** = stoppen
+
+**Wichtig:**
+
+- Punkt 3 ist ein KO-Kriterium.
+- Eine Änderung mit `Nicht-Ziele < 2/2` darf nicht umgesetzt werden, auch wenn der Gesamtscore hoch wirkt.
+- Der Score ersetzt nicht den Steuerungsblock, sondern zwingt das LLM, jede Änderung gegen Barriere, Zielzustand, Nicht-Ziele und Heldenreise-Rolle zu prüfen.
+- Bei Unsicherheit: nicht umsetzen, sondern Klärungsbedarf markieren.
+
 ## Problem, das gelöst wird
 
 „Früh anfangen" klingt wie eine moralische Mahnung. Diese App zeigt, warum frühes Geld tatsächlich mächtiger wird: Nicht der eine Euro wird magisch größer, sondern seine Erträge erzeugen wieder Erträge.
