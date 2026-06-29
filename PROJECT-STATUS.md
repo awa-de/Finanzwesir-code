@@ -2,16 +2,16 @@
 Version: 1
 Stand: 2026-06-29
 Fokus-AP: APP-01 — prokrastinations-preis
-Nächster-Schritt: AP-12d — QA/Review und Commit-Vorbereitung (AP-12c ✅ 2026-06-29)
+Nächster-Schritt: AP-12e — PowerShell/UTF-8-Learning und Kettenposition in technischen Prompt nachtragen (AP-12d-addendum ✅ 2026-06-29)
 Blocker: keine
 Letzter-Distill: 2026-06-29
 Kassensturz-Datum: 2026-06-29
 -->
-<!-- HOOK-META-SESSION: AP-12c -->
+<!-- HOOK-META-SESSION: AP-12d-addendum -->
 
 # PROJECT STATUS — Finanzwesir 2.0
 
-Stand: 2026-06-29 | Session: AP-11b | Geändert von: Claude
+Stand: 2026-06-29 | Session: AP-12d-addendum | Geändert von: Claude
 
 **Zweck:** Schneller Wiedereinstieg nach Pausen.
 **Zielgruppe:** Albert und Claude.

@@ -4,6 +4,8 @@ Wird geleert nach /distill. EintrÃ¤ge: [FRICTION] [WIN] [PREF] [QUESTION] [OK]
 ## 2026-06-29 â€“ SESSION START | [KETTENMODUS] | Fokus: APP-01 â€” prokrastinations-preis
 - FinanzwesirData.js, CSVParser.js, FwDateUtils.js â€” diese Session nicht berÃ¼hren. âœ“
 
+### APP-01 â€” AP-Wechsel
+
 ### 2026-06-29 â€” Kassensturz KW 27 + Distill 9 âœ…
 - [OK] Kassensturz: 51 APs, 33 abgeschlossen seit KW 26, kein BLOCKED â€” Trend: besser
 - [OK] Distill 9: 2 Promotions (feedback_verbalisierung_vor_aktion + feedback_kontext_vs_tokens), 1 Reoccurrence (python_powershell_tooling), 1 neues Observing [Q], [L] promoted
@@ -30,30 +32,38 @@ Wird geleert nach /distill. EintrÃ¤ge: [FRICTION] [WIN] [PREF] [QUESTION] [OK]
 
 ### APP-01 â€” prokrastinations-preis â€” AP-Wechsel (neuer Faden)
 
-### 2026-06-29 — AP-12a MINI_SPEC-Ankerinventar
-- [OK] Alle 7 Batch-A-Mini-Specs und Seed-Blöcke vorhanden
-- [OK] Keine vorhandenen Steuerungsblöcke, keine alten Strukturen
+### 2026-06-29 ï¿½ AP-12a MINI_SPEC-Ankerinventar
+- [OK] Alle 7 Batch-A-Mini-Specs und Seed-Blï¿½cke vorhanden
+- [OK] Keine vorhandenen Steuerungsblï¿½cke, keine alten Strukturen
 - [OK] Einheitliche Ankerregel: nach letztem Bold-Metadaten-Feld (inkl. ---) vor erster H2/H3-Fachsektion
-- [WIN] Status GRÜN — AP-12b (Python-Tool Seed?MINI_SPEC) freigegeben
+- [WIN] Status GRï¿½N ï¿½ AP-12b (Python-Tool Seed?MINI_SPEC) freigegeben
 - [OK] Protokoll: docs/steering/patches/AP-12a_minispec-ankerinventar_Ergebnis.md
 
-### 2026-06-29 — AP-12b Python-Tool Seed -> MINI_SPEC
+### 2026-06-29 ï¿½ AP-12b Python-Tool Seed -> MINI_SPEC
 - [OK] Separates Tool gebaut: tools/app_fabrik/insert_steuerungsblock_into_minispec_from_seed.py
-- [OK] Dry-run 7/7 GRUEN — Anker, Pflichtmarker, Negativmarker alle korrekt
+- [OK] Dry-run 7/7 GRUEN ï¿½ Anker, Pflichtmarker, Negativmarker alle korrekt
 - [OK] Git-Diff bestaetigt: kein Mini-Spec geaendert
-- [WIN] Status GRUEN — AP-12c (Batch-A Write) freigegeben
+- [WIN] Status GRUEN ï¿½ AP-12c (Batch-A Write) freigegeben
 - [OK] Protokoll: docs/steering/patches/AP-12b_minispec-tool_Ergebnis.md
 
 ### 2026-06-29 - AP-12c Batch-A Write
-- [OK] Dry-run 7/7 GRUEN bestätigt
-- [OK] Write ausgeführt: 7 MINI_SPEC_FROM_HAUPTDOKUMENT.md mit Steuerungsblock angereichert (430 Zeilen)
+- [OK] Dry-run 7/7 GRUEN bestï¿½tigt
+- [OK] Write ausgefï¿½hrt: 7 MINI_SPEC_FROM_HAUPTDOKUMENT.md mit Steuerungsblock angereichert (430 Zeilen)
 - [OK] Marker-QA: alle Pflichtmarker vorhanden, alle verbotenen Marker abwesend
-- [OK] APP_SPEC unberührt, keine manuelle Reparatur
+- [OK] APP_SPEC unberï¿½hrt, keine manuelle Reparatur
 - [WARN] LF/CRLF-Warnung: Python schreibt LF, Git normalisiert bei Commit (autocrlf=true) - kein Blocker
 - [WIN] Status GRUEN - AP-12d (QA/Review + Commit-Vorbereitung) freigegeben
 - [OK] Protokoll: docs/steering/patches/AP-12c_minispec-steuerungsblock-rollout_Ergebnis.md
 
-### 2026-06-29 — AP-12a/b/c ? | Ketten-Minimalabschluss
-- NAVIGATION.md: AP-12a/b/c Eintrag hinzugefügt
+### 2026-06-29 ï¿½ AP-12a/b/c ? | Ketten-Minimalabschluss
+- NAVIGATION.md: AP-12a/b/c Eintrag hinzugefï¿½gt
 - BACKLOG-ARCHIV.md: AP-12a/b/c als Einheit archiviert
-- PROJECT-STATUS.md HOOK-META: Nächster-Schritt ? AP-12d (AP-12c ? 2026-06-29)
+- PROJECT-STATUS.md HOOK-META: Nï¿½chster-Schritt ? AP-12d (AP-12c ? 2026-06-29)
+
+### 2026-06-29 â€” AP-12d QA/Review + AP-12d-addendum
+- [OK] QA: Commit a434231 retrospektiv â€” 7/7 GRUEN, 430 Einfuegungen, APP_SPEC unberuehrt
+- [OK] GELB aufgeloest: Trailing-Whitespace (Markdown-Soft-Breaks) akzeptiert, TAKTISCHER_STARTPROMPT-Commit akzeptiert
+- [OK] AP-12 final GRUEN â€” Rollout Batch A abgeschlossen
+- [OK] Protokolle: docs/steering/patches/AP-12d_* + AP-12d-addendum_* geschrieben
+
+### 2026-06-29 â€” AP-12 Kettenabschluss âœ… | RECONCILED: AP-12a AP-12b AP-12c AP-12d AP-12d-addendum
