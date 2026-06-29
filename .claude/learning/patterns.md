@@ -1,5 +1,5 @@
 # Patterns — Finanzwesir 2.0
-Stand: 2026-06-22 | Muster mit ≥2 Belegen (Normal) oder ≥1 Beleg (High-Impact) werden Kandidaten. Nur Alberts OK → Promotion.
+Stand: 2026-06-29 | Distill 9 | Muster mit ≥2 Belegen (Normal) oder ≥1 Beleg (High-Impact) werden Kandidaten. Nur Alberts OK → Promotion.
 
 ---
 
@@ -18,7 +18,7 @@ Stand: 2026-06-22 | Muster mit ≥2 Belegen (Normal) oder ≥1 Beleg (High-Impac
 - feedback_verbote_explizit_formulieren.md → promoted 2026-05-10 (Distill 2: PREF AF-08 — Verbote als Verbote formulieren)
 - feedback_glob_vs_read.md → promoted (Bekannte Pfade direkt lesen, nie Glob) | Reoccurrence 2026-05-10 (APP-01-spec-gate: Glob bei bekanntem Pfad SECURITY-BASELINE.md → Albert korrigierte)
 - feedback_spec_verbote_scope.md → promoted 2026-06-03 (Distill 5: Spec-Verbote zu breit formuliert — High-Impact, 1 Beleg)
-- feedback_python_powershell_tooling.md → promoted 2026-06-05 (Distill 6: Python für Datei-Inhalte, PowerShell für Dateisystem/Git — 2 Belege PREF)
+- feedback_python_powershell_tooling.md → promoted 2026-06-05 (Distill 6: Python für Datei-Inhalte, PowerShell für Dateisystem/Git — 2 Belege PREF) | Reoccurrence 2026-06-22 (Kassensturz-Archiv-Query: Tooling-Memory nicht proaktiv abgerufen — 3 LLM-Optionen präsentiert statt Python-Regel zu prüfen)
 - feedback_gate_scope_dialog.md → promoted 2026-06-05 (Distill 6: Gate-Dialog als Scope-Klärungs-Kanal — 1 Beleg PREF)
 - feedback_csvparser_vertrauenswuerdig.md → promoted 2026-06-05 (Distill 6: Parser-Output vollständig vertrauenswürdig — 1 Beleg PREF)
 - feedback_edit_vorab_lesen.md → promoted 2026-06-05 (Distill 6: Edit-Vorab-Lesen — 2 Belege Normal)
@@ -30,6 +30,8 @@ Stand: 2026-06-22 | Muster mit ≥2 Belegen (Normal) oder ≥1 Beleg (High-Impac
 - project_comp_arch.md → ergänzt 2026-06-15 (Distill 7: PREF Slice-4-Gate — config.features-Doktrin, neutrale Boolean-Flags)
 - feedback_patch_quittung_workflow.md → verstärkt 2026-06-22 (Distill 8: F1+F2 beide nach Distill-7-Promotion — 2 Belege Normal → Zwei-Schritte-Pflicht + Namensregel explizit)
 - feedback_sprache_kein_denglisch.md → ergänzt 2026-06-22 (Distill 8: PREF P1 — Commit-Messages: Umlaute in Claudes Text-Output sicherstellen, da Albert selbst committed)
+- feedback_verbalisierung_vor_aktion.md → promoted 2026-06-29 (Distill 9: 2 Belege [L]+FRICTION2 — Ansatz verbalisieren vor Gate/Aktion; verwandt: [[feedback_gate_scope_dialog]])
+- feedback_kontext_vs_tokens.md → promoted 2026-06-29 (Distill 9: PREF B1-AP-15d — Langformat für LLM-lesbare git-History; Kontext > Token-Effizienz)
 
 ---
 
@@ -55,12 +57,12 @@ Stand: 2026-06-22 | Muster mit ≥2 Belegen (Normal) oder ≥1 Beleg (High-Impac
 - [I] Ordnerstruktur schrittweise erweitert — msci/ → msci-world/ → index/msci-world/ zweimal erweitert; Endstruktur im Dialog statt vorab geklärt (data-raw-Infrastruktur, 2026-06-04) — 1 Beleg, Normal
 - [J] Contract-Vorschau falscher Standardwert — Vorschau zeigte 1234,56 ohne EUR-Suffix; erst nach CSVParser-Analyse korrigiert (AP-DATA-01, 2026-06-04) — 1 Beleg, Normal
 - [K] Externer Pfad ungeprüft übernommen — Python312\python.exe aus ChatGPT-Quelle direkt verwendet → mehrfache abgelehnte Tool-Calls; Albert klärte: python ist im PATH. Externe Umgebungsangaben vor Ausführung prüfen. (ST-19-Fix, 2026-06-06) — 1 Beleg, Normal
-- [L] Riskante Operation ohne Vorbriefing gestartet — Albert stoppte vor NAVIGATION.md-Edit: „Erkläre erst in eigenen Worten." Nach Erklärung Freigabe. Bei signifikanten Edits erst Absicht verbalisieren, dann ausführen. Verwandt: [[feedback_gate_scope_dialog]]. (Archiv/local/-Verschiebung, 2026-06-08) — 1 Beleg, Normal
 - [M] Stand-Datum im Hauptpatch vergessen — bei Mehrfach-Datei-Patches steht das Stand-Datum-Update nicht auf der mentalen Checkliste; separater Nachpatch nötig (OA-02-Dissens-1, 2026-06-09) — 1 Beleg, Normal
 - [N] Code-Marker in Dokumentationsdateien — `// NEW`-Marker in .md-Dateien eingefügt; CLAUDE.md-Regel „im Code" gilt nicht für Doku-Dateien (OA-02-Dissens-3, 2026-06-10) — 1 Beleg, Normal
 - [O] Handover-Lücke: Umgebungsabhängigkeiten fehlen — `app.test.html` brauchte Chart.js CDN-Script-Tag, nicht im Handover dokumentiert; erst beim Browser-Test erkannt (APP-01 Slice 4, 2026-06-11) — 1 Beleg, Normal
 - [P2] Seiteneffekte von Patches proaktiv benennen — Albert war besorgt wegen Fetch-Cache-Verlust, weil Seiteneffekte nicht erklärt wurden; erst auf Nachfrage bestätigt. Bei Patches die Verhalten berühren das andere Komponenten nutzen: Seiteneffekte proaktiv im Patch-Echo nennen (APP-01 Slice 5, 2026-06-15) — 1 Beleg, Normal
 - [P3] AP-Brief-Scope vor Gate klären — AP-Name „Marker + Pulse Screen 2" war zu breit; Scope erst während Umsetzung auf reinen Datenvertrag reduziert. Wenn AP-Brief mehrere Konzepte umfasst: Scope-Grenze explizit vor Gate-Start klären (B1-AP-14c1, 2026-06-18) — 1 Beleg, Normal
+- [Q] Komplexere Lösung vorgeschlagen wenn einfachere verfügbar — Batch-Umbenennung §2–§18 vorgeschlagen, unnummerierter Einschub war ausreichend und chirurgischer. Vor Batch-Operationen auf Spec/Doc: strukturell einfachere Alternative prüfen. (AP-07b-mini, 2026-06-26) — 1 Beleg, Normal
 
 ---
 

@@ -40,3 +40,5 @@
 - [Memory-Portabilität](project_memory_portability.md) — Symlink-Loesung: Brain auf NAS (Heim-PC) und Nextcloud (Laptop) portabel; Setup einmalig via tools/setup-memory-junction.ps1
 - [P→B→N als App-Building-Layer](project_pbn_strategy.md) — Proven=Tailwind, Better=ein Nutzenmoment pro Familie (10v10-Test), New=isoliert; AF-21/22/23 in Umsetzung
 - [Memory-Symlink Setup](feedback_memory_schreibpfad.md) — SYMLINKD bestätigt: C:\Users\...\memory\ → NAS; Harness-Pfad korrekt, kein besonderes Verhalten nötig
+- [Verbalisierung vor Aktion](feedback_verbalisierung_vor_aktion.md) — Erst Ansatz verbalisieren, dann Gate/Edit/Aktion — nicht direkt in die Ausführung springen
+- [Kontext vor Token-Effizienz](feedback_kontext_vs_tokens.md) — Outputs lieber selbsterklärend als kurz wenn LLM-Lesbarkeit oder git-History auf dem Spiel steht

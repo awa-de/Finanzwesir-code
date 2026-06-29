@@ -4,8 +4,8 @@ Stand: 2026-06-26
 Fokus-AP: APP-01 — prokrastinations-preis
 Nächster-Schritt: AP-09 — Muster-Review und Template-Schärfung (AP-08 ✅ 2026-06-26)
 Blocker: keine
-Letzter-Distill: 2026-06-22
-Kassensturz-Datum: 2026-06-22
+Letzter-Distill: 2026-06-29
+Kassensturz-Datum: 2026-06-29
 -->
 <!-- HOOK-META-SESSION: AP-08 -->
 
