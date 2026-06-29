@@ -67,3 +67,12 @@ Wird geleert nach /distill. Einträge: [FRICTION] [WIN] [PREF] [QUESTION] [OK]
 - [OK] Protokolle: docs/steering/patches/AP-12d_* + AP-12d-addendum_* geschrieben
 
 ### 2026-06-29 — AP-12 Kettenabschluss ✅ | RECONCILED: AP-12a AP-12b AP-12c AP-12d AP-12d-addendum
+
+### AP-12e — AP-Wechsel
+
+### 2026-06-29 — AP-13/Batch-B Kettenabschluss ✅ | RECONCILED: AP-13a AP-13b AP-13c AP-13d AP-13e
+- [OK] 7 Batch-B MINI_SPECs angereichert (diversifikations-detektor, esg-spiegel, etf-namensdecoder, komplexitaets-entlarver, kostenkiller-ter, rendite-kalibrierung, renditekiller-volatilitaet)
+- [OK] Inventar, Batch-Schnitt, Dry-run, Write+QA, Review+Commit — alle 5 APs GRÜN
+- [FRICTION] regulatorik-dashboard: "BEREITS GEBAUT" war kein Fertigstellungsstatus — Drift-Sonderpfad AP-14a
+- [FRICTION] prokrastinations-preis: Kat C durch Albert auf P-Sonderpfad korrigiert — AP-15a
+- [WIN] UnicodeEncodeError cp1252 durch sys.stdout utf-8-Wrapping geloest

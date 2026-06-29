@@ -1,11 +1,12 @@
 # BACKLOG-ARCHIV – Finanzwesir 2.0
-Stand: 2026-06-29 | Session: AP-12d-addendum | Geändert von: Claude
+Stand: 2026-06-29 | Session: AP-13/Batch-B | Geändert von: Claude
 
 Abgeschlossene Items, neueste zuerst (append-only).
 Archivierungs-Trigger: wenn > 200 Zeilen → neue Datei `BACKLOG-ARCHIV-YYYY.md` anlegen.
 
 | ID | Bereich | Titel | Abgeschlossen | Session |
 |----|---------|-------|---------------|---------|
+| AP-13a/b/c/d/e | App-Fabrik/Steuerung | Inventar 25 Apps (AP-13a): 7 Kat-A done, 12 Kat-B, 2 D, 3 H. Batch-Schnitt (AP-13b): 7 Kandidaten geschnitten, Sonderpfade AP-14a (regulatorik-dashboard Drift) + AP-15a (prokrastinations-preis Pilot) zurückgestellt. Ankerinventar+Dry-run (AP-13c): 7/7 GRÜN, Validierung=True. Batch-B-Write+QA (AP-13d): 7/7 GRÜN, 420 Einfügungen, APP_SPEC unberührt. Review+Commit-Vorbereitung (AP-13e): Stichproben 7/7 GRÜN, kein Fremd-Content, Commit-Kandidatenliste bereit. Protokoll: `docs/steering/patches/AP-13e_batch-b-review-commit-vorbereitung_Ergebnis.md`. *(sofort erledigt)* | 2026-06-29 | AP-13/Batch-B |
 | AP-12d/d-addendum | App-Fabrik/Steuerung | QA/Review (AP-12d): Commit a434231 retrospektiv — 7/7 Slugs GRÜN, 430 Einfügungen bestätigt, APP_SPEC unberührt. Trailing-Whitespace (Markdown-Soft-Breaks) + TAKTISCHER_STARTPROMPT-Commit-Scope als GELB dokumentiert. Addendum (AP-12d-addendum): GELB durch Nutzerentscheidung aufgelöst, AP-12 final GRÜN. Protokolle: `docs/steering/patches/AP-12d_qa-review-commit-vorbereitung_Ergebnis.md`, `docs/steering/patches/AP-12d-addendum_gelb-entscheidung-aufloesen_Ergebnis.md`. *(sofort erledigt)* | 2026-06-29 | AP-12d-addendum |
 | AP-12a/b/c | App-Fabrik/Steuerung | Ankerinventar (AP-12a): alle 7 Batch-A-Mini-Specs vorhanden, alle Seed-Blöcke vorhanden, einheitliche Ankerregel abgeleitet. Python-Tool `insert_steuerungsblock_into_minispec_from_seed.py` (AP-12b): Dry-run 7/7 GRÜN. Batch-A-Write (AP-12c): 7 `MINI_SPEC_FROM_HAUPTDOKUMENT.md` angereichert (430 Einfügungen), Marker-QA bestanden, APP_SPEC unberührt. Protokoll: `docs/steering/patches/AP-12c_minispec-steuerungsblock-rollout_Ergebnis.md`. *(sofort erledigt)* | 2026-06-29 | AP-12c |
 | AP-11/11a/11b | App-Fabrik/Steuerung | `docs/App-Fabrik/APP_SPEC_STEUERUNGSBLOCK_TEMPLATE.md` V1.0→V1.1: Nordstern als lokaler Begriff entfernt (§3/§5/§6); echter 4-Kriterien-LLM-Prüfscore in §5 + §7 verankert; §12 Seed-Metadaten-Regel neu; `.claude/skills/tech-spec-app/SKILL.md` LLM-Selbsttest → LLM-Prüfscore pro Änderung synchronisiert. Ergebnisprotokoll: `docs/steering/patches/AP-11b_score-block-korrektur_Ergebnis.md`. *(sofort erledigt)* | 2026-06-29 | AP-11-template-sync |
