@@ -8,6 +8,15 @@ Wird geleert nach /distill. Einträge: [FRICTION] [WIN] [PREF] [QUESTION] [OK]
 
 ## 2026-06-30 – SESSION START | [KETTENMODUS] | Fokus: APP-01 — prokrastinations-preis
 
+### AP-14a — AP-Wechsel
+
+### 2026-06-30 — AP-14a Drift-Schutz-Inventar regulatorik-dashboard ✅
+- [OK] Materialinventar: 14 Dateien, 12 davon zum etf-wahlurnen-rechner-Projekt gehörig
+- [OK] Drift-Diagnose: CLAUDE.md falsche Projektidentität, Seed REKONSTRUIERT/ZU PRÜFEN, kein LLM-Prüfscore
+- [OK] Seed-Herkunft geklärt: AP-08 (2026-06-26) aus MINI_SPEC abgeleitet, nicht frisch formuliert
+- [OK] Alberts Entscheidungen: Ordner → etf-wahlurnen-rechner / Unterordner regulatorik-dashboard / CLAUDE.md auflösen / Seed-Status bleibt bis APP_SPEC-AP
+- [WIN] AP-14b Prompt vollständig vorbereitet (scratchpad)
+
 ### 2026-06-30 — Kettenabschluss AP-15 ✅ | RECONCILED: AP-15a AP-15b AP-15c
 - Pilot-Sonderfall prokrastinations-preis vollständig abgeschlossen
 - MINI_SPEC + APP_SPEC beide mit Steuerungsblock, Seed-Status nachgeführt, V2.5→V2.9 migriert
