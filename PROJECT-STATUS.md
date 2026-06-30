@@ -1,17 +1,17 @@
 <!-- HOOK-META
 Version: 1
-Stand: 2026-06-29
-Fokus-AP: APP-01 — prokrastinations-preis
-Nächster-Schritt: AP-15a — prokrastinations-preis MINI_SPEC ↔ APP_SPEC Pilot-Abgleich (AP-13/Batch-B ✅ 2026-06-29)
+Stand: 2026-06-30
+Fokus-AP: APP-01 — prokrastinations-preis / Steuerungsblock-Kette
+Nächster-Schritt: AP-14a — regulatorik-dashboard Drift-Schutz-Sonderpfad (AP-15/prokrastinations-preis ✅ 2026-06-30)
 Blocker: keine
 Letzter-Distill: 2026-06-29
 Kassensturz-Datum: 2026-06-29
 -->
-<!-- HOOK-META-SESSION: AP-13/Batch-B -->
+<!-- HOOK-META-SESSION: AP-15/prokrastinations-preis -->
 
 # PROJECT STATUS — Finanzwesir 2.0
 
-Stand: 2026-06-29 | Session: AP-13/Batch-B | Geändert von: Claude
+Stand: 2026-06-30 | Session: AP-15/prokrastinations-preis | Geändert von: Claude
 
 **Zweck:** Schneller Wiedereinstieg nach Pausen.
 **Zielgruppe:** Albert und Claude.

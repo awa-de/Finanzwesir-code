@@ -1,6 +1,6 @@
 ---
 name: app-fabrik-struktur-und-z-hlmodell
-description: "docs/App-Fabrik Steuerungsverzeichnis; 22+3=25 App-Ordner; B1 APP_SPEC V2.9 operativ (Stationen-Zeitreise); B1-AP-01 bis B1-AP-14e12 ✅ 2026-06-22; nächster Schritt B1-AP-15 — Transitions + Reduced Motion"
+description: "docs/App-Fabrik Steuerungsverzeichnis; 22+3=25 App-Ordner; B1 APP_SPEC V2.9 operativ; B1-AP-14e12 ✅ 2026-06-22, B1-AP-15x ✅ 2026-06-23, B1-AP-16d ✅ 2026-06-24; AP-15a/b/c Steuerungsblock-Pilot prokrastinations-preis ✅ 2026-06-30; nächster AP-Kette: AP-14a (regulatorik-dashboard)"
 metadata: 
   node_type: memory
   type: project

@@ -6,6 +6,41 @@ Wird geleert nach /distill. Einträge: [FRICTION] [WIN] [PREF] [QUESTION] [OK]
 
 ### APP-01 — AP-Wechsel
 
+## 2026-06-30 – SESSION START | [KETTENMODUS] | Fokus: APP-01 — prokrastinations-preis
+
+### 2026-06-30 — Kettenabschluss AP-15 ✅ | RECONCILED: AP-15a AP-15b AP-15c
+- Pilot-Sonderfall prokrastinations-preis vollständig abgeschlossen
+- MINI_SPEC + APP_SPEC beide mit Steuerungsblock, Seed-Status nachgeführt, V2.5→V2.9 migriert
+- BACKLOG-ARCHIV + NAVIGATION + PROJECT-STATUS aktualisiert
+
+### 2026-06-30 — AP-15c Review und Commit-Vorbereitung ✅
+- [OK] Gates 1–4: alle bestanden; kein Staging, APP_SPEC unberührt
+- [OK] Stichproben-Review: 21/21 GRÜN (alle Marker, Inhalte, Score, Kreuzcheck)
+- [OK] Versions-QA: 0 V2.5-Reste, 6 V2.9-Treffer, deprecated Text erhalten
+- [OK] Seed-Status: 1 Zeile geändert, kein Fachinhalt, kein Fremdblock
+- [OK] Diff: 3 Dateien, APP_SPEC/Tool/andere Apps nicht geändert, Whitespace akzeptiert
+- [OK] Commit-Kandidatenliste: 5 Pflichtkandidaten, session-log optional
+- [OK] Commit-Message vorbereitet
+- [WIN] Pilot-Sonderfall AP-15a/b/c vollständig GRÜN — bereit für Commit+Abschlussritual
+
+### 2026-06-30 — AP-15b MINI_SPEC-Nachführung und Seed-Status ✅
+- [OK] Steuerungsblock in MINI_SPEC eingefügt (Standard-Tool, 1/1 GRÜN)
+- [OK] V2.5-Verweise → V2.9 aktualisiert (6 Stellen, 0 V2.5-Reste)
+- [OK] Deprecated Screen-4-Text: Struktur erhalten, nur Versionsverweis aktualisiert
+- [OK] Seed-Verteilungsstatus: „Nicht verteilt" → „Verteilt in APP_SPEC und MINI_SPEC (AP-15b)"
+- [OK] Marker-QA: 15/15 Positiv-Marker OK, 7/7 Negativ-Marker abwesend
+- [OK] Scope: APP_SPEC unberührt, kein Tool geändert, kein Commit
+- [OK] Protokoll: docs/steering/patches/AP-15b_prokrastinations-preis_minispec-nachfuehrung-seed-status_Ergebnis.md
+- [WIN] Pilot-Sonderfall vollständig geschlossen: MINI_SPEC und APP_SPEC beide mit Steuerungsblock
+- Offene redaktionelle Entscheidung: deprecated Screen-4-Durchstrich-Text (kein Blocker für AP-15c)
+
+### 2026-06-30 — AP-15a Pilot-Inventar und Abgleichsdiagnose ✅
+- [OK] Gate 1–5: alle bestanden; AP-13 GRÜN bestätigt; alle 3 Pflichtdateien vorhanden
+- [OK] Steuerungsblock-Lage: MINI_SPEC=nein / APP_SPEC=ja (aus Seed, identisch) / Seed=ja
+- [OK] Hauptbefund: MINI_SPEC historisch (V2.5-Verweis, deprecated text), kein Widerspruch zwischen Seed und APP_SPEC
+- [OK] Empfehlung: AP-15b — MINI_SPEC Steuerungsblock-Insertion + 3 Pilot-Nachführungspunkte (V-Verweis, deprecated text, Seed-Status)
+- [OK] Protokoll: docs/steering/patches/AP-15a_prokrastinations-preis_pilot-inventar-abgleichsdiagnose_Ergebnis.md
+
 ### 2026-06-29 — Kassensturz KW 27 + Distill 9 ✅
 - [OK] Kassensturz: 51 APs, 33 abgeschlossen seit KW 26, kein BLOCKED — Trend: besser
 - [OK] Distill 9: 2 Promotions (feedback_verbalisierung_vor_aktion + feedback_kontext_vs_tokens), 1 Reoccurrence (python_powershell_tooling), 1 neues Observing [Q], [L] promoted

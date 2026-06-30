@@ -128,7 +128,7 @@ Bewerte vor der Umsetzung von 0–2:
 
 **Status:** GESICHERT, aber vor Einbau redaktionell final prüfen  
 **Rolle:** B1 — Marktzeit-Entscheidungspunkt / geführte Stationen-Zeitreise  
-**Verteilungsstatus:** Nicht verteilt
+**Verteilungsstatus:** Verteilt in APP_SPEC und MINI_SPEC (AP-15b)
 
 **Diese App existiert, um:**  
 aus Bedauern über das verpasste Gestern eine Entscheidung für das verfügbare Heute zu machen.

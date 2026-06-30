@@ -1,7 +1,7 @@
 # MINI_SPEC_FROM_HAUPTDOKUMENT — Marktzeit schlägt Timing / Lieber heute als morgen
 
 > Quelle: `docs/App-Fabrik/ETF-Apps-Hauptdokument.md` + `aktuelles Projekt/04_ZUSATZTEXT_B1_REWRITE_MARKTZEIT.md`
-> Status: Historisch — abgeleitet aus Planungsphase Mai 2026. Bei Widerspruch gilt `APP_SPEC.md` V2.5.
+> Status: Historisch — abgeleitet aus Planungsphase Mai 2026. Bei Widerspruch gilt `APP_SPEC.md` V2.9.
 > Letzte Änderung: 2026-06-16 — Screen-Flow an Stationen-Zeitreise angepasst (AP-08)
 
 ---
@@ -13,6 +13,76 @@
 **Modulrolle:** Haupt-App im Marktzeit-Block
 
 ---
+
+## Steuerungsblock: Zweck, Barriere, Prüfregeln
+
+<!-- Quelle: Apps/APP_STEUERUNGSBLOCK_SEEDS_repo_abgeglichen.md / Seed prokrastinations-preis -->
+<!-- Mechanisch eingefügt. Nicht frei formulieren. -->
+
+**Rolle:** B1 — Marktzeit-Entscheidungspunkt / geführte Stationen-Zeitreise  
+
+**Diese App existiert, um:**  
+aus Bedauern über das verpasste Gestern eine Entscheidung für das verfügbare Heute zu machen.
+
+**Zu entfernende psychologische Barriere:**  
+Die Rückblick-Illusion: Im Nachhinein wirkt ein guter Einstiegszeitpunkt logisch und erkennbar; in Echtzeit fühlt er sich aber unsicher, unfertig und falsch an.
+
+**Falscher Glaubenssatz vorher:**  
+„Ein guter Einstiegszeitpunkt müsste sich heute so klar anfühlen, wie er im Rückblick aussieht.“
+
+**Zielzustand nach der App:**  
+„Rückblick täuscht. Heute fühlt sich nicht wie der richtige Zeitpunkt an — aber genau so fühlte es sich damals auch an. Ich kann nicht mit Endwissen starten, aber ich kann heute anfangen.“
+
+**Kernsatz der App:**  
+„Im Rückblick sieht Mut aus wie Logik. In Echtzeit war es eine Entscheidung.“
+
+**Ton / Haltung:**  
+Kölsches-Grundgesetz-Haltung: realistischer Fatalismus plus Optimismus. Nicht: „Alles wird gut.“ Sondern: „Et kütt wie et kütt — und trotzdem ist Anfangen besser als auf Gewissheit zu warten.“
+
+**Muss-Kriterien für jede Umsetzung:**  
+- Die App ist eine geführte historische Stationen-Zeitreise, kein Verlustzähler.
+- Screen 2 zeigt nur Wissen aus damaliger Perspektive; kein vollständiger Chart, keine finalen KPIs, kein Endwissen.
+- Screen 3 ist der erste vollständige Reveal: erst dort darf der Rückblick logisch wirken.
+- Screen 4 überträgt die Einsicht auf heute: Auch heute beginnt wieder ein Chart, dessen Ende niemand kennt.
+- Echte historische Daten und echte Stationen; keine Prognose und keine erfundene Dramatisierung.
+- Ton ruhig, entlastend, fatalistisch-optimistisch; nicht beschämend.
+
+**Nicht-Ziele / harte Verbote:**  
+- Kein moralischer Strafzettel, kein Verlustzähler-Ton als Hauptmechanik.
+- Kein Countdown, keine Fake-Urgency, keine Scham, keine rote Panikcodierung.
+- Keine Zukunftsprognose, keine glatte Zukunftskurve, keine Zahlenversprechen.
+- Kein historischer Epochen-Fächer; das gehört zu `geburtsjahrlos`.
+- Keine Kohortenanalyse.
+- Keine Produktempfehlung.
+
+---
+
+Dieser Prüfscore ist **kein app-spezifischer Inhalt**, sondern ein verbindliches Standard-Gate für jede spätere Änderung an einer App.
+
+Er wird bei der späteren Verteilung in jeden lokalen Steuerungsblock übernommen und dort **unverändert** verwendet.
+
+**LLM-Prüfscore pro Änderung:**
+
+Bewerte vor der Umsetzung von 0–2:
+
+1. **Barriere-Abbau:** Entfernt die Änderung die definierte psychologische Hürde?
+2. **Zielzustand:** Führt die Änderung zum gewünschten Nutzerzustand?
+3. **Nicht-Ziele:** Vermeidet die Änderung alle verbotenen Drifts?
+4. **Mentorrolle:** Stärkt die Änderung die Rolle dieser App in der Heldenreise?
+
+**Score-Regel:**
+
+- **8/8** = umsetzen
+- **6–7/8** = nur umsetzen, wenn `Nicht-Ziele = 2/2`
+- **≤5/8** = nicht umsetzen
+- **jede Nicht-Ziel-Verletzung** = stoppen
+
+**Wichtig:**
+
+- Punkt 3 ist ein KO-Kriterium.
+- Eine Änderung mit `Nicht-Ziele < 2/2` darf nicht umgesetzt werden, auch wenn der Gesamtscore hoch wirkt.
+- Der Score ersetzt nicht den Steuerungsblock, sondern zwingt das LLM, jede Änderung gegen Barriere, Zielzustand, Nicht-Ziele und Heldenreise-Rolle zu prüfen.
+- Bei Unsicherheit: nicht umsetzen, sondern Klärungsbedarf markieren.
 
 ## Problem, das gelöst wird
 
@@ -99,7 +169,7 @@ Microcopy:
 
 > „Das wäre kein gerader Weg gewesen. Aber es wäre Marktzeit gewesen."
 
-→ Führende Quelle: `APP_SPEC.md` V2.5 §16.1–§16.4
+→ Führende Quelle: `APP_SPEC.md` V2.9 §16.1–§16.4
 
 ### Screen 3 — Erster vollständiger Reveal
 
@@ -114,7 +184,7 @@ Text:
 
 > „Vor 10 Jahren ist weg. Heute nicht."
 
-→ Führende Quelle: `APP_SPEC.md` V2.5 §16.1–§16.4
+→ Führende Quelle: `APP_SPEC.md` V2.9 §16.1–§16.4
 
 ### Screen 4 — Nicht weiter warten
 
@@ -122,7 +192,7 @@ Keine Zukunftsprognose als glatte Kurve.
 
 Kernaussage:
 
-> ~~„Wenn du jetzt wieder wartest, wird heute in zehn Jahren wieder der verpasste Zeitpunkt sein."~~ *(historischer Planungsentwurf — zu druckvoll; verbindliche Microcopy in `APP_SPEC.md` V2.5 §23.16)*
+> ~~„Wenn du jetzt wieder wartest, wird heute in zehn Jahren wieder der verpasste Zeitpunkt sein."~~ *(historischer Planungsentwurf — zu druckvoll; verbindliche Microcopy in `APP_SPEC.md` V2.9 §23.16)*
 
 ---
 
@@ -156,7 +226,7 @@ B2 ist die Kohorten-/Epochen-App.
 
 ## CTA
 
-Aktive Kandidaten laut `APP_SPEC.md` V2.5 §21:
+Aktive Kandidaten laut `APP_SPEC.md` V2.9 §21:
 
 > „Heute Marktzeit sammeln"
 
@@ -187,4 +257,4 @@ Final redaktionell offen — keine Entscheidung in dieser Datei. Maßgebend ist 
 - Slug laut Hauptdokument: `prokrastinations-preis`
 - Zugeordneter App-Ordner: `/Apps/prokrastinations-preis/`
 - Modulrolle: Haupt-App
-- Status: Historisch — bei Widerspruch gilt `APP_SPEC.md` V2.5
+- Status: Historisch — bei Widerspruch gilt `APP_SPEC.md` V2.9
