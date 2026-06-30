@@ -1,6 +1,16 @@
 # Session-Log — Finanzwesir 2.0
 Wird geleert nach /distill. Einträge: [FRICTION] [WIN] [PREF] [QUESTION] [OK]
 
+## 2026-06-30 – SESSION START | [KETTENMODUS] | Fokus: AP-14b — etf-wahlurnen-rechner
+
+### AP-14b — AP-Wechsel
+### AP-14c — AP-Wechsel
+### AP-14d — AP-Wechsel
+### AP-14e — AP-Wechsel
+### 2026-06-30 — Kettenabschluss AP-14b–e ✅ | RECONCILED: AP-14b AP-14c AP-14d AP-14e
+- [OK] Ordnungsblock regulatorik-dashboard — Triage (14b), Wissenssicherung CLAUDE.md→Anamnese+DEV_QA (14c), 8× git mv R100 + CLAUDE.md-Entschärfung (14d), Struktur-Review + Commit-Vorbereitung (14e)
+- [OK] Alle 4 APs GRÜN, Direktbestand bereinigt (7 Dateien + Altmaterial/), CLAUDE.md entschärft durch Umbenennung
+
 ## 2026-06-29 – SESSION START | [KETTENMODUS] | Fokus: APP-01 — prokrastinations-preis
 - FinanzwesirData.js, CSVParser.js, FwDateUtils.js — diese Session nicht berühren. ✓
 

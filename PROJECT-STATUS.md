@@ -1,17 +1,17 @@
 <!-- HOOK-META
 Version: 1
 Stand: 2026-06-30
-Fokus-AP: APP-01 — prokrastinations-preis / Steuerungsblock-Kette
-Nächster-Schritt: AP-14b — etf-wahlurnen-rechner Ordnerstruktur + CLAUDE.md-Auflösung (AP-14a ✅ 2026-06-30)
+Fokus-AP: AP-14f — regulatorik-dashboard / Steuerungsblock-Anamnese
+Nächster-Schritt: AP-14f — regulatorik-dashboard Identitäts- und Steuerungsblock-Anamnese (AP-14b–e ✅ 2026-06-30)
 Blocker: keine
 Letzter-Distill: 2026-06-29
 Kassensturz-Datum: 2026-06-29
 -->
-<!-- HOOK-META-SESSION: AP-15/prokrastinations-preis -->
+<!-- HOOK-META-SESSION: AP-14e/regulatorik-dashboard -->
 
 # PROJECT STATUS — Finanzwesir 2.0
 
-Stand: 2026-06-30 | Session: AP-15/prokrastinations-preis | Geändert von: Claude
+Stand: 2026-06-30 | Session: AP-14b-e/regulatorik-dashboard | Geändert von: Claude
 
 **Zweck:** Schneller Wiedereinstieg nach Pausen.
 **Zielgruppe:** Albert und Claude.
