@@ -884,37 +884,77 @@ Der Nutzer glaubt, die Ausschüttungsart sei eine über Erfolg oder Misserfolg e
 
 ## regulatorik-dashboard
 
-**Status:** REKONSTRUIERT / ZU PRÜFEN  
-**Rolle:** G1 — Systemrisiken einordnen  
+**Status:** GESICHERT — redaktionell geprüft (AP-14f/AP-14g 2026-06-30)
+**Rolle:** G1 — Systemkritische Einwände
+**Arbeitsidentität:** Abgabenpolitik
+**Mechanik / Metapher:** ETF-Wahlurne (Steuerpolitik wird indirekt an der Wahlurne entschieden — Metapher, nicht App-Identität)
 **Verteilungsstatus:** Nicht verteilt
 
-**Diese App existiert, um:**  
-Regulierung, Steuern und politische Eingriffe als reale Faktoren sichtbar zu machen, ohne daraus Lähmung oder Weltuntergang abzuleiten.
+**Diese App existiert, um:**
+zu zeigen, dass Abgabenpolitik kein Naturgesetz ist — sie ist politisch gemacht, kann sich ändern und beeinflusst die ETF-Rente stärker als Produktkosten. Die App macht Szenarien und Größenordnungen sichtbar, nicht präzise Prognosen.
 
-**Zu entfernende psychologische Barriere:**  
-Systemrisiken werden als Grund benutzt, gar nicht zu handeln.
+**Zu entfernende psychologische Barriere:**
+Abgabenpolitische Eingriffe fühlen sich unkontrollierbar und damit lähmend an:
+„Wenn der Staat die Regeln jederzeit ändern kann — warum dann langfristig planen?"
 
-**Falscher Glaubenssatz vorher:**  
-„Der Staat, Steuern oder Regulierung machen langfristiges Investieren ohnehin sinnlos.“
+**Falscher Glaubenssatz vorher:**
+„Weil Abgabenpolitik unplanbar ist, ist jede langfristige ETF-Strategie unsicher bis sinnlos."
 
-**Zielzustand nach der App:**  
-„Systemrisiken sind real. Ich kann sie einpreisen und robust planen, statt mich lähmen zu lassen.“
+**Zielzustand nach der App:**
+„Abgabenrisiko ist real und nicht planbar — aber es ist nicht unsichtbar. Die App zeigt, was S0 bis S3 als Größenordnung bedeuten: Hunderte Euro Unterschied pro Monat über Jahrzehnte. Das ändert Beträge und Details. Es zerstört nicht die einfache Strategie: breit diversifiziert, regelmäßig, günstig."
 
-**Muss-Kriterien für jede Umsetzung:**  
-- Mehrere Regulierungs-/Steuer-Szenarien nüchtern zeigen.
-- Keine politische Kampfrhetorik.
-- Keine exakten Rechtsversprechen.
-- Keine Handlungslähmung.
-- Handlungsspielraum sichtbar lassen.
+**Kernsatz der App:**
+„Das Risiko ist real. Aber es zerstört nicht deine Strategie — nur die Details."
 
-**Nicht-Ziele / harte Verbote:**  
-- Keine Rechts- oder Steuerberatung.
-- Kein politischer Rant.
-- Keine Untergangs-App.
-- Keine Lähmung durch Worst-Case-Übergewichtung.
+**Muss-Kriterien für jede Umsetzung:**
+- Vier Steuerszenarien S0–S3 mit deutschen Bezügen und Größenordnungen (keine Scheinpräzision).
+- S0 = DE vor 2009 (Hauptframing: deutsches Recht bis 31.12.2008 — nicht UK ISA oder Roth IRA).
+- S1 = aktuelles deutsches Recht (Referenzlinie, wertungsneutral).
+- S2 / S3 als Gedankenexperiment (politisch diskutiert, nicht als Prognose).
+- Rechenmodell transparent und aufklappbar (Annahmen und Modellgrenzen sichtbar).
+- Kassenbon-Einstieg als didaktischer Kern (zeigt wer wieviel vom Zuwachs bekommt).
+- Keine Empörung erzeugen: Die Zahlen wirken allein.
 
-**Klärungsbedarf vor Verteilung:**  
-- Konkrete Szenarien aus Mini-Spec prüfen.
+**Nicht-Ziele / harte Verbote:**
+- Keine Steuer- oder Abgabenberatung.
+- Keine politische Kampagne.
+- Keine Parteipolitik, keine Parteiennennung, keine Wahlempfehlung.
+- Keine Prognose künftiger Gesetzgebung.
+- Keine Planbarkeitsbehauptung (Abgabenpolitik ist nicht planbar).
+- Keine Scheinpräzision (keine zwei Nachkommastellen als Wahrheit).
+- Kein Versprechen, dass Abgabenrisiko harmlos ist.
+- Keine Katastrophisierung.
+- Kein technischer Vertrag aus dem HTML-Mockup `etf-wahlurnen-rechner.html`.
+- Kein Sequence-of-Returns-Risiko ohne expliziten Modellvorbehalt.
+
+**Tonalität / Framing-Regeln:**
+- Fakt / Modell / Interpretation immer explizit trennen.
+  - Fakt: Abgaben beeinflussen die Nachsteuerrendite.
+  - Modell: Wir vergleichen vier vereinfachte Regime.
+  - Interpretation: Abgabenpolitik ist ein langfristiger Renditehebel.
+- Alle quantitativen Kernaussagen mit Modellkontext: „In diesem Modell..." / „Als Größenordnung..."
+- S0 als historische Kalibrierung — nicht als politische Forderung.
+- S2 / S3 als „Was wäre wenn" — nicht als Drohung.
+- Keine Sätze, die als Aktivismus oder Empörungsappell lesbar sind.
+- Primäre Nutzerreaktion: Klarheit und Handlungsfähigkeit — nicht Empörung.
+
+**LLM-Prüfscore pro Änderung:**
+Standard-Gate aus Abschnitt 2.1 unverändert übernehmen. Zusätzlich app-spezifisch prüfen:
+
+1. Erkennt ein LLM, dass Abgabenpolitik die Arbeitsidentität ist (nicht Steuerpolitik als alleiniger Begriff, nicht Regulatorik als Titel)?
+2. Erkennt ein LLM, dass ETF-Wahlurne Mechanik-Metapher ist, nicht App-Identität?
+3. Erkennt ein LLM, dass die App keine politische Kampagne ist?
+4. Erkennt ein LLM, dass sie keine präzise Prognose liefert (nur Szenarien und Größenordnungen)?
+5. Erkennt ein LLM, dass Abgabenrisiko nicht planbar, aber sichtbar und einordenbar ist?
+6. Erkennt ein LLM, dass etf-wahlurnen-rechner.html ein Mockup ist, kein technischer Vertrag?
+7. Erkennt ein LLM, dass S0 deutsches Recht vor 2009 ist, nicht ISA / Roth IRA?
+8. Erkennt ein LLM, dass Modell-Aussagen (z. B. „306 €/Monat Unterschied") Modell-Ergebnisse sind, keine Fakten?
+
+Score-Regel: wie Abschnitt 2.1. Jede Verletzung von Frage 3 (keine Kampagne) oder 4 (keine Prognose) stoppt die Änderung — KO-Kriterium.
+
+**Klärungsbedarf vor Verteilung:**
+- App-Titel für Ghost.io-Überschrift: Arbeitstitel bleibt `regulatorik-dashboard`. Ob ein kommunikativerer Titel (z. B. „Steuerpolitik und deine ETF-Rente") sinnvoller ist, klärt AP-14h.
+- MINI_SPEC-Neufassung: AP-14h.
 
 ---
 

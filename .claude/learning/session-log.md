@@ -7,6 +7,8 @@ Wird geleert nach /distill. Einträge: [FRICTION] [WIN] [PREF] [QUESTION] [OK]
 ### AP-14c — AP-Wechsel
 ### AP-14d — AP-Wechsel
 ### AP-14e — AP-Wechsel
+### AP-14f — AP-Wechsel
+
 ### 2026-06-30 — Kettenabschluss AP-14b–e ✅ | RECONCILED: AP-14b AP-14c AP-14d AP-14e
 - [OK] Ordnungsblock regulatorik-dashboard — Triage (14b), Wissenssicherung CLAUDE.md→Anamnese+DEV_QA (14c), 8× git mv R100 + CLAUDE.md-Entschärfung (14d), Struktur-Review + Commit-Vorbereitung (14e)
 - [OK] Alle 4 APs GRÜN, Direktbestand bereinigt (7 Dateien + Altmaterial/), CLAUDE.md entschärft durch Umbenennung
@@ -130,3 +132,19 @@ Wird geleert nach /distill. Einträge: [FRICTION] [WIN] [PREF] [QUESTION] [OK]
 - [FRICTION] regulatorik-dashboard: "BEREITS GEBAUT" war kein Fertigstellungsstatus — Drift-Sonderpfad AP-14a
 - [FRICTION] prokrastinations-preis: Kat C durch Albert auf P-Sonderpfad korrigiert — AP-15a
 - [WIN] UnicodeEncodeError cp1252 durch sys.stdout utf-8-Wrapping geloest
+
+### 2026-06-30 — AP-14f ✅ — regulatorik-dashboard Identitätsanamnese
+- [OK] Anamnese aus 6 Pflichtquellen: Abgabenpolitik als Identität, ETF-Wahlurne als Mechanik-Metapher abgegrenzt, 8 LLM-Prüffragen formuliert
+- [FRICTION] python3 → python (Windows-Store-Umleitung); durch Albert korrigiert; Memory aktualisiert
+
+### AP-14g — AP-Wechsel
+
+### 2026-06-30 — AP-14g ✅ — regulatorik-dashboard Seed-Entwurf
+- [OK] Seed-Block 885–919 → 885–959 überarbeitet: Abgabenpolitik, Tonalitätsregeln, Nicht-Ziele, Framing-Regeln, 8 LLM-Prüffragen final
+- [FRICTION] PowerShell Measure-Object-Line lieferte 817 statt 1191 Zeilen — Messfehler, in AP-14g-review geklärt
+
+### AP-14g-review — AP-Wechsel
+
+### 2026-06-30 — AP-14g-review ✅ — Seed-Review + Commit-Vorbereitung | DEFERRED: MEMORY-CHECK
+- [OK] GESICHERT bestätigt, Drift-Schutz 8/8, Marker 14/15 (1 wortlautähnlich OK), 0/9 gesperrt
+- [OK] Zeilenzahl-Widerspruch als Messfehler erklärt — unkritisch; Commit-Kandidaten + Message bereit
