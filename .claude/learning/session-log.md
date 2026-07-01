@@ -148,3 +148,25 @@ Wird geleert nach /distill. Einträge: [FRICTION] [WIN] [PREF] [QUESTION] [OK]
 ### 2026-06-30 — AP-14g-review ✅ — Seed-Review + Commit-Vorbereitung | DEFERRED: MEMORY-CHECK
 - [OK] GESICHERT bestätigt, Drift-Schutz 8/8, Marker 14/15 (1 wortlautähnlich OK), 0/9 gesperrt
 - [OK] Zeilenzahl-Widerspruch als Messfehler erklärt — unkritisch; Commit-Kandidaten + Message bereit
+
+## 2026-07-01 – SESSION START | [KETTENMODUS] | Fokus: AP-14h — regulatorik-dashboard MINI_SPEC-Neufassung aus Seed
+
+### 2026-07-01 — AP-14h ✅ — regulatorik-dashboard MINI_SPEC-Neufassung aus Seed
+- [OK] Gates 1–4: alle GRÜN (Git sauber, AP-14g-review GRÜN, Seed GESICHERT, Pflichtquellen vorhanden)
+- [OK] Alte MINI_SPEC verworfen: falsche Identität (Regulatorisches Risiko Dashboard), BEREITS GEBAUT, Wahrscheinlichkeitstabelle, kein Steuerungsblock
+- [OK] Neue MINI_SPEC: Abgabenpolitik als Identität, ETF-Wahlurne als Mechanik/Metapher, S0–S3 mit Referenzzahlen, Steuerungsblock mit 8 LLM-Prüffragen + KO-Kriterien
+- [OK] Marker-QA: 16/16 GRÜN (Zwischenfund: Steuerberatung-Match korrigiert)
+- [OK] Gesperrte Formulierungen: 0/8 Treffer
+- [OK] Scope: nur MINI_SPEC + Protokoll geändert, Seed/HTML/APP_SPEC unberührt
+- [WIN] Vollständige Neufassung aus Seed — App-Fabrik-tauglich, kein Drift zurück zu alter Identität
+
+### 2026-07-01 — AP-14i ✅ — MINI_SPEC-Review / App-Fabrik-Readiness / Commit-Vorbereitung
+- [OK] Gates 1–3: alle GRÜN (Git sauber, AP-14h GRÜN, MINI_SPEC neu gefasst bestätigt)
+- [OK] Altlasten-QA: 11/11 abwesend — Roh-MINI_SPEC vollständig beseitigt
+- [OK] Identitäts-/Drift-QA: 8/8 GRÜN
+- [OK] LLM-Selbsttest: 16/16 (weit über Mindestscore 12/16, KO-Kriterien 3+4 beide 2/2)
+- [OK] Marker-QA: 18/18 GRÜN, gesperrte Formulierungen 0/17 Treffer
+- [OK] Commit-Vorbereitung: Kandidaten + Message bereit
+- [WIN] AP-14h akzeptiert — MINI_SPEC App-Fabrik-tauglich, Commit freigegeben
+
+### 2026-07-01 — Kettenabschluss AP-14h/i ✅ | RECONCILED: AP-14h AP-14i

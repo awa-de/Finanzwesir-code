@@ -1,13 +1,13 @@
 <!-- HOOK-META
 Version: 1
-Stand: 2026-06-30
-Fokus-AP: AP-14g-review — regulatorik-dashboard / Seed-Review (abgeschlossen)
-Nächster-Schritt: AP-14h — regulatorik-dashboard MINI_SPEC-Neufassung aus Seed (AP-14g-review ✅ 2026-06-30)
+Stand: 2026-07-01
+Fokus-AP: AP-14i — regulatorik-dashboard MINI_SPEC-Review / App-Fabrik-Readiness (abgeschlossen)
+Nächster-Schritt: AP-14j — regulatorik-dashboard APP_SPEC-Vorbereitung / Scope-Schnitt (AP-14i ✅ 2026-07-01)
 Blocker: keine
 Letzter-Distill: 2026-06-29
 Kassensturz-Datum: 2026-06-29
 -->
-<!-- HOOK-META-SESSION: AP-14f/g/g-review/regulatorik-dashboard -->
+<!-- HOOK-META-SESSION: AP-14h/i/regulatorik-dashboard -->
 
 # PROJECT STATUS — Finanzwesir 2.0
 
