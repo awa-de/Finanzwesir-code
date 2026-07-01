@@ -1,8 +1,9 @@
 ---
 name: App-Architektur (beschlossen)
 description: Wie interaktive Apps in Ghost eingebettet werden, zwei Rendering-Welten, Design-API-Konzept
-type: project
-originSessionId: 65c4fd2d-4f10-4cdc-a47d-a43bfb91883f
+metadata:
+  type: project
+  originSessionId: 65c4fd2d-4f10-4cdc-a47d-a43bfb91883f
 ---
 Apps sind HTML+JS-Widgets, die als HTML-Card in Ghost-Seiten eingebettet werden.
 Ghost-Seite stellt screen.css + Tailwind bereit — Apps erben alle Styles automatisch.

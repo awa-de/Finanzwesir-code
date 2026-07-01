@@ -1,8 +1,9 @@
 ---
 name: Selbstlernendes System
 description: Implementierungsstand und Architektur des selbstlernenden Systems (Learning-Pipeline, Lastabwurf, Skills).
-type: project
-originSessionId: e2680e4e-9aef-4de1-af0a-81e298533eff
+metadata:
+  type: project
+  originSessionId: e2680e4e-9aef-4de1-af0a-81e298533eff
 ---
 Selbstlernendes System vollständig implementiert am 2026-05-08 (Faden 3 nach Planung + Kritik-Härtung).
 

@@ -1,8 +1,9 @@
 ---
 name: Design-API Konzept (beschlossen)
 description: Zentraler Komponentenbaukasten für interaktive App-Elemente — Kern-Architekturentscheidung
-type: project
-originSessionId: 65c4fd2d-4f10-4cdc-a47d-a43bfb91883f
+metadata:
+  type: project
+  originSessionId: 65c4fd2d-4f10-4cdc-a47d-a43bfb91883f
 ---
 Alle 18+ Apps nutzen dieselben CSS-Selektoren aus einem zentralen Baukasten.
 Kein App erfindet eigene Chips, Slider oder Cards — alle bedienen sich aus der Design-API.

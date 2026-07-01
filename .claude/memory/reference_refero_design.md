@@ -1,8 +1,9 @@
 ---
 name: Design-Ressourcen Refero.design
 description: Refero.design URLs für Styling-Entscheidungen bei Website und Apps — prüfen, nicht zwingend verwenden
-type: reference
-originSessionId: cd9a9200-e638-4c92-bb5a-ed97274a5a2a
+metadata:
+  type: reference
+  originSessionId: cd9a9200-e638-4c92-bb5a-ed97274a5a2a
 ---
 Zwei URLs als Pflicht-Check bei Styling-Entscheidungen für Website und Apps:
 

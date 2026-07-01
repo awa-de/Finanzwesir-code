@@ -1,8 +1,9 @@
 ---
 name: Projektsteuerung Synthese aktiviert
 description: CLAUDE.md v2.0 live seit 2026-05-08 — Wissenschaftler-Grundmodell, Invarianten, semantische Namen, Commands-Ordner
-type: project
-originSessionId: fe492953-0f83-4810-b454-e50f8ffb07a7
+metadata:
+  type: project
+  originSessionId: fe492953-0f83-4810-b454-e50f8ffb07a7
 ---
 Neue Projektsteuerungsarchitektur aktiv. CLAUDE.md v2.0 seit 2026-05-08 live.
 

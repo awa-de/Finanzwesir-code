@@ -1,8 +1,9 @@
 ---
 name: Subagenten-Setup v2.1.2
 description: Haiku-Agenten für mechanische Zuarbeit — SSoT, Dispatch-Quittung, Rückfall-Regel, beobachtbare Kriterien
-type: project
-originSessionId: 492326c1-737a-40c4-9506-ed8a635c986b
+metadata:
+  type: project
+  originSessionId: 492326c1-737a-40c4-9506-ed8a635c986b
 ---
 Subagenten-Setup v2.1.1 installiert am 2026-05-10 (ST-10).
 abschluss-scout ergänzt am 2026-05-10 (ST-11).

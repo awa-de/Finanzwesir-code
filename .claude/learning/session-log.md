@@ -170,3 +170,26 @@ Wird geleert nach /distill. Einträge: [FRICTION] [WIN] [PREF] [QUESTION] [OK]
 - [WIN] AP-14h akzeptiert — MINI_SPEC App-Fabrik-tauglich, Commit freigegeben
 
 ### 2026-07-01 — Kettenabschluss AP-14h/i ✅ | RECONCILED: AP-14h AP-14i
+
+### AP-14j — AP-Wechsel
+
+### 2026-07-01 — AP-16 ✅ — Steuerungsblock-Rollout Statusabgleich und Restliste
+- [OK] Historische Inventur AP-13a/AP-13b wiedergefunden, per Python-Check gegen alle 25 realen MINI_SPECs verifiziert — 100% Übereinstimmung
+- [OK] Status: 16 Apps erledigt (Batch A/B + 2 Sonderfälle), 4 offen (Batch-C-Kandidaten), 5 unklar (Sonderfälle/Companion-Module)
+- [WIN] Restliste vollständig aus Bestandsprotokollen rekonstruierbar, keine Neuerfindung der Arbeit nötig
+
+### 2026-07-01 — AP-17 ✅ — Steuerungsblock-Rollout Batch C
+- [OK] Bestehendes Tool gefunden und direkt genutzt: insert_steuerungsblock_into_minispec_from_seed.py
+- [OK] Dry-run 4/4 GRÜN, Write 4/4 GRÜN (etf-aera-vorbei, replizierer-swapper, thesaurierer-rennen, weltdepot-baukasten), Marker-QA + Scope-QA bestanden
+- [WIN] Kein neues Tool nötig — bewährtes Batch-A/B-Werkzeug direkt wiederverwendbar
+
+### 2026-07-01 — AP-18 ✅ — unabhängiger Review Steuerungsblock-Rollout Batch C
+- [OK] Unabhängige Prüfung ohne Übernahme der AP-17-Selbstauskunft: Marker-QA, Seed-Zeilen-Abgleich (19/19 + 18/18 je App), Scope-QA — alle 4 GRÜN
+- [WIN] Zusätzlicher Idempotenz-Check (erneuter Dry-run) bestätigt unabhängig, dass die Steuerungsblöcke tatsächlich vorhanden sind
+
+### 2026-07-01 — Kettenabschluss AP-16/17/18 ✅ | RECONCILED: AP-16 AP-17 AP-18
+- [OK] NAVIGATION.md, BACKLOG-ARCHIV.md, PROJECT-STATUS.md (HOOK-META + sichtbarer Text) aktualisiert
+- [OK] BACKLOG.md: neuer Klärungs-AP AF-24 für 5 unklare Sonder-/Companion-Fälle aufgenommen (Scope-Check, nicht verworfen)
+- [OK] MEMORY: project_app_fabrik_struktur.md + MEMORY.md-Index auf aktuellen Stand gebracht
+- [FRICTION] Memory-Integritätscheck meldete 8 vorbestehende Fehler (metadata.type fehlt in 8 Dateien) und 1 veraltete Prüfregel (ST-18-Merge-Hinweis-Text existierte nirgends) — auf Alberts Wunsch sofort repariert: Frontmatter in 8 Dateien auf `metadata:`-Block umgestellt, valid_types im Checker um reference/user ergänzt, veraltete ST-18-Regel entfernt (Symlink-Setup hat das Divergenz-Problem strukturell gelöst). Check jetzt 42/42 GRÜN.
+- [WIN] AP-14j bleibt als eigener, unberührter Faden bestehen — kein Vermischen zweier paralleler Threads in einer AP-ID

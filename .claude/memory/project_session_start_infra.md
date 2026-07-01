@@ -1,8 +1,9 @@
 ---
 name: Session-Start-Infrastruktur
 description: Wie Session-Start technisch funktioniert — Hook-Architektur, HOOK-META, /start-Command, getestete Alternativen
-type: project
-originSessionId: 1c8b5766-b556-472d-baec-d8e09cea9321
+metadata:
+  type: project
+  originSessionId: 1c8b5766-b556-472d-baec-d8e09cea9321
 ---
 Albert tippt `/start` als erstes in jeden neuen Faden. Claude führt die Sequenz aus und gibt aus:
 `SESSION-START ✓ | Fokus: [...] | Aktive APs: [...] | BLOCKED: [...]`

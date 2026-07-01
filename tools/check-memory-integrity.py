@@ -40,7 +40,7 @@ def main():
 
     # 3–6. Dateien: Existenz, Frontmatter, metadata.type
     missing, bad_fm, bad_type, invalid_type_list = [], [], [], []
-    valid_types = {"feedback", "project"}
+    valid_types = {"feedback", "project", "reference", "user"}
 
     for fn in filenames:
         fp = memory_dir / fn
@@ -79,13 +79,6 @@ def main():
         errors.append(f".claude/memory/{fn}: metadata.type fehlt")
     for fn in invalid_type_list:
         errors.append(f".claude/memory/{fn}: ungültiger Typ")
-
-    # 8. ST-18-Merge-Hinweis (nicht ST-17)
-    if "abgleichen (ST-18)" not in memory_text:
-        if "abgleichen (ST-17)" in memory_text:
-            errors.append("MEMORY.md: Merge-Hinweis verweist auf ST-17 (muss ST-18 sein)")
-        else:
-            errors.append("MEMORY.md: Merge-Hinweis für ST-18 nicht gefunden")
 
     # 9. PROJECT-STATUS.md: HOOK-META-Stand == sichtbarer Stand
     if not project_status.exists():

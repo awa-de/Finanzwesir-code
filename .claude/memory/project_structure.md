@@ -1,8 +1,9 @@
 ---
 name: Projektstruktur und Kontext
 description: Wer, was, wie — Grunddaten zum Finanzwesir 2.0 Projekt
-type: project
-originSessionId: 42d11711-f328-4811-81c9-716ccdfa866c
+metadata:
+  type: project
+  originSessionId: 42d11711-f328-4811-81c9-716ccdfa866c
 ---
 Albert Warnecke (Finanzwesir) baut Finanzwesir 2.0 auf Ghost.io. Einpersonen-Projekt, KI-first.
 

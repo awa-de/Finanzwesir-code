@@ -14,6 +14,66 @@
 **Funnel-Position:** Systemkritische Einwände (unter G2 einbettbar)
 **Priorität:** #14
 
+## Steuerungsblock: Zweck, Barriere, Prüfregeln
+
+<!-- Quelle: Apps/APP_STEUERUNGSBLOCK_SEEDS_repo_abgeglichen.md / Seed etf-aera-vorbei -->
+<!-- Mechanisch eingefügt. Nicht frei formulieren. -->
+
+**Rolle:** Zweifel prüfen / ETF-Ära-Skepsis einordnen  
+
+**Diese App existiert, um:**  
+berechtigte ETF-Skepsis von lähmender Ausrede zu trennen.
+
+**Zu entfernende psychologische Barriere:**  
+Der Nutzer benutzt „Vielleicht funktioniert ETF-Investieren künftig nicht mehr“ als Grund, gar nicht zu starten.
+
+**Falscher Glaubenssatz vorher:**  
+„Die gute ETF-Zeit ist vorbei; deshalb bringt ein einfacher Weltportfolio-Plan nichts mehr.“
+
+**Zielzustand nach der App:**  
+„Ich sehe, welche ETF-Risiken real sind, welche übertrieben sind und welche Konsequenzen sie für einen robusten Plan haben.“
+
+**Muss-Kriterien für jede Umsetzung:**  
+- Skepsis ernst nehmen, nicht abwinken.
+- Argumente strukturieren: Bewertungen, Konzentration, Regulierung, passives Volumen, Zukunftsrenditen.
+- Ergebnis muss zur robusten Planung führen, nicht zur Lähmung.
+- Keine Garantien.
+
+**Nicht-Ziele / harte Verbote:**  
+- Kein ETF-Marketing.
+- Kein Untergangsnarrativ.
+- Keine Prognose.
+- Keine komplexe Kapitalmarkttheorie im Hauptpfad.
+
+---
+
+Dieser Prüfscore ist **kein app-spezifischer Inhalt**, sondern ein verbindliches Standard-Gate für jede spätere Änderung an einer App.
+
+Er wird bei der späteren Verteilung in jeden lokalen Steuerungsblock übernommen und dort **unverändert** verwendet.
+
+**LLM-Prüfscore pro Änderung:**
+
+Bewerte vor der Umsetzung von 0–2:
+
+1. **Barriere-Abbau:** Entfernt die Änderung die definierte psychologische Hürde?
+2. **Zielzustand:** Führt die Änderung zum gewünschten Nutzerzustand?
+3. **Nicht-Ziele:** Vermeidet die Änderung alle verbotenen Drifts?
+4. **Mentorrolle:** Stärkt die Änderung die Rolle dieser App in der Heldenreise?
+
+**Score-Regel:**
+
+- **8/8** = umsetzen
+- **6–7/8** = nur umsetzen, wenn `Nicht-Ziele = 2/2`
+- **≤5/8** = nicht umsetzen
+- **jede Nicht-Ziel-Verletzung** = stoppen
+
+**Wichtig:**
+
+- Punkt 3 ist ein KO-Kriterium.
+- Eine Änderung mit `Nicht-Ziele < 2/2` darf nicht umgesetzt werden, auch wenn der Gesamtscore hoch wirkt.
+- Der Score ersetzt nicht den Steuerungsblock, sondern zwingt das LLM, jede Änderung gegen Barriere, Zielzustand, Nicht-Ziele und Heldenreise-Rolle zu prüfen.
+- Bei Unsicherheit: nicht umsetzen, sondern Klärungsbedarf markieren.
+
 ### Problem, das gelöst wird
 
 Der bildungsorientierteste Einwand: Wenn alle passiv investieren, werden Märkte ineffizient. Aktive Anleger könnten das ausnutzen. Warum dann trotzdem passiv?

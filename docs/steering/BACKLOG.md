@@ -1,5 +1,5 @@
 # BACKLOG – Finanzwesir 2.0
-Stand: 2026-06-23 | Session: CHRONIK-SPEC-01 | Geändert von: Claude
+Stand: 2026-07-01 | Session: AP-16/17/18 | Geändert von: Claude
 
 **Regeln:**
 - ✅-Zeilen werden sofort nach `BACKLOG-ARCHIV.md` verschoben (append), dann hier gelöscht.
@@ -57,6 +57,7 @@ Stand: 2026-06-23 | Session: CHRONIK-SPEC-01 | Geändert von: Claude
 | AF-21    | App-Fabrik | App-Familien P→B→N-Standards ausarbeiten              | M    | —       | docs/App-Fabrik/PBN-FAMILY-STANDARDS.md anlegen: 6-7 Familien je mit Proven-Muster, Better-Satz, Tailwind-Komponenten-Liste |
 | AF-22    | App-Fabrik | P→B→N-Block in APP_SPEC-Template integrieren          | M    | AF-21   | Pflichtabschnitt in APP_SPEC.md-Vorlage + 10v10-Test-Feld |
 | AF-23    | App-Fabrik | Pincus-Check als Pre-Code-Quality-Gate dokumentieren  | L    | AF-22   | 4-Punkte-Checkliste in .claude/commands/ oder CLAUDE.md §6 App-Arbeit |
+| AF-24    | App-Fabrik | Klärungs-AP: 5 unklare Steuerungsblock-Apps (plan-generator, etf-vergleich, investment-universum, rollierende-sparplaene, weltkarte-etf-indizes) | M | — | docs/steering/patches/AP-16_steuerungsblock-rollout_statusabgleich-restliste_Ergebnis.md Abschnitt „Unklare Apps" |
 
 ---
 
