@@ -11,6 +11,80 @@
 Dieser App-Ordner ist **kein eigenständiger Haupt-App-Abschnitt**.
 Er gehört fachlich zur Master-App **B2 Geburtsjahrlos** (Ordner: `/Apps/geburtsjahrlos/`).
 
+## Steuerungsblock: Zweck, Barriere, Prüfregeln
+
+<!-- Quelle: Apps/APP_STEUERUNGSBLOCK_SEEDS_repo_abgeglichen.md / Seed rollierende-sparplaene -->
+<!-- Mechanisch eingefügt. Nicht frei formulieren. -->
+
+**Rolle:** Companion / Erweiterungsmodul zu historischer Startjahrlogik  
+
+**Diese App existiert, um:**  
+mehrere Startzeitpunkte systematisch vergleichbar zu machen, damit ein einzelnes Beispiel nicht als Wahrheit missverstanden wird.
+
+**Zu entfernende psychologische Barriere:**  
+Der Nutzer verallgemeinert aus einem ausgewählten Zeitraum und hält diesen für repräsentativ.
+
+**Falscher Glaubenssatz vorher:**  
+„Wenn ein Beispielzeitraum überzeugt, ist die Sache bewiesen.“
+
+**Zielzustand nach der App:**  
+„Ich sehe die Bandbreite historischer Verläufe und verstehe, warum robuste Regeln wichtiger sind als ein schönes Einzelbeispiel.“
+
+**Muss-Kriterien für jede Umsetzung:**  
+- Rollierende Zeiträume statt cherry-picking.
+- Klare Verbindung zu Startjahr-/Epochenlogik.
+- Ergebnis als Bandbreite, nicht als Prognose.
+- Keine Überladung mit Statistikbegriffen.
+
+**Nicht-Ziele / harte Verbote:**  
+- Kein weiterer Prokrastinationspreis.
+- Kein Kindersparplan-Rest.
+- Keine Zukunftsprognose.
+- Keine Optimierung auf bestes Startjahr.
+
+---
+
+Dieser Prüfscore ist **kein app-spezifischer Inhalt**, sondern ein verbindliches Standard-Gate für jede spätere Änderung an einer App.
+
+Er wird bei der späteren Verteilung in jeden lokalen Steuerungsblock übernommen und dort **unverändert** verwendet.
+
+**LLM-Prüfscore pro Änderung:**
+
+Bewerte vor der Umsetzung von 0–2:
+
+1. **Barriere-Abbau:** Entfernt die Änderung die definierte psychologische Hürde?
+2. **Zielzustand:** Führt die Änderung zum gewünschten Nutzerzustand?
+3. **Nicht-Ziele:** Vermeidet die Änderung alle verbotenen Drifts?
+4. **Mentorrolle:** Stärkt die Änderung die Rolle dieser App in der Heldenreise?
+
+**Score-Regel:**
+
+- **8/8** = umsetzen
+- **6–7/8** = nur umsetzen, wenn `Nicht-Ziele = 2/2`
+- **≤5/8** = nicht umsetzen
+- **jede Nicht-Ziel-Verletzung** = stoppen
+
+**Wichtig:**
+
+- Punkt 3 ist ein KO-Kriterium.
+- Eine Änderung mit `Nicht-Ziele < 2/2` darf nicht umgesetzt werden, auch wenn der Gesamtscore hoch wirkt.
+- Der Score ersetzt nicht den Steuerungsblock, sondern zwingt das LLM, jede Änderung gegen Barriere, Zielzustand, Nicht-Ziele und Heldenreise-Rolle zu prüfen.
+- Bei Unsicherheit: nicht umsetzen, sondern Klärungsbedarf markieren.
+
+## Warnhinweis für spätere APP_SPEC-Erstellung
+
+Diese MINI_SPEC enthält einen Steuerungsblock aus der Seed-Datei. Der Block konserviert den aktuellen Rollout-Stand, ersetzt aber keine spätere APP_SPEC-Prüfung.
+
+Vor einer APP_SPEC-Erstellung muss ein LLM ausdrücklich prüfen:
+
+- Ist diese App eine eigenständige Haupt-App, ein Companion-Modul, ein Funnel-Finale oder eine Visualisierung?
+- Welche Parent-App oder Nutzerreise ist betroffen?
+- Deckt der Steuerungsblock nur den aktuellen Seed-Stand ab oder braucht die spätere APP_SPEC eine strukturelle Neubewertung?
+- Darf aus dieser MINI_SPEC überhaupt direkt eine APP_SPEC entstehen?
+
+STOP-Regel:
+Wenn diese Rollenprüfung nicht durchgeführt wurde, darf keine APP_SPEC erstellt werden.
+
 ### Modulrolle
 
 Companion-/Detailmodul zu B2. Vertieft die historische Epochen-Ansicht mit rollierenden 30-Jahres-Sparplanzeiträumen.

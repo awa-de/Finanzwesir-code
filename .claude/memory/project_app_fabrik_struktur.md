@@ -1,6 +1,6 @@
 ---
 name: app-fabrik-struktur-und-z-hlmodell
-description: "docs/App-Fabrik Steuerungsverzeichnis; 22+3=25 App-Ordner; B1 APP_SPEC V2.9 operativ; B1-AP-14e12 ✅ 2026-06-22, B1-AP-15x ✅ 2026-06-23, B1-AP-16d ✅ 2026-06-24; Steuerungsblock-Rollout: Batch A (AP-12) + Batch B (AP-13) + Sonderfall regulatorik-dashboard (AP-14) + Sonderfall prokrastinations-preis (AP-15) + Batch C (AP-16/17/18) alle ✅ bis 2026-07-01, 18/25 Apps mit Steuerungsblock; Restbestand 5 unklare Sonder-/Companion-Fälle offen (BACKLOG AF-24); parallel offener AP: AP-14j (regulatorik-dashboard APP_SPEC-Vorbereitung)"
+description: "docs/App-Fabrik Steuerungsverzeichnis; 22+3=25 App-Ordner; B1 APP_SPEC V2.9 operativ; B1-AP-14e12 ✅ 2026-06-22, B1-AP-15x ✅ 2026-06-23, B1-AP-16d ✅ 2026-06-24; Steuerungsblock-Rollout: Batch A (AP-12) + Batch B (AP-13) + Sonderfall regulatorik-dashboard (AP-14) + Sonderfall prokrastinations-preis (AP-15) + Batch C (AP-16/17/18) + Sonderbatch D ohne plan-generator (AP-20/AP-20b/AP-21) alle ✅ bis 2026-07-01, 22/25 Apps mit Steuerungsblock; nur noch plan-generator ungeklärt (Seed GESPERRT, BACKLOG AF-24); parallel offener AP: AP-14j (regulatorik-dashboard APP_SPEC-Vorbereitung)"
 metadata: 
   node_type: memory
   type: project

@@ -10,6 +10,80 @@
 Dieser App-Ordner ist **kein eigenständiger Haupt-App-Abschnitt** im Hauptdokument.
 Er gehört fachlich zur Master-App-Familie **C1 Diversifikations-Detektor + C3 Weltdepot-Baukasten** (Ordner: `/Apps/diversifikations-detektor/` und `/Apps/weltdepot-baukasten/`).
 
+## Steuerungsblock: Zweck, Barriere, Prüfregeln
+
+<!-- Quelle: Apps/APP_STEUERUNGSBLOCK_SEEDS_repo_abgeglichen.md / Seed weltkarte-etf-indizes -->
+<!-- Mechanisch eingefügt. Nicht frei formulieren. -->
+
+**Rolle:** Companion-App / visuelles Lernmodul  
+
+**Diese App existiert, um:**  
+ETF-Indexnamen in eine sichtbare Weltkarte zu übersetzen.
+
+**Zu entfernende psychologische Barriere:**  
+Indexnamen klingen global, neutral und eindeutig; der Nutzer sieht die tatsächliche Länder- und Regionenlogik nicht.
+
+**Falscher Glaubenssatz vorher:**  
+„World, ACWI oder Emerging Markets sagt mir schon intuitiv, was wirklich drin ist.“
+
+**Zielzustand nach der App:**  
+„Ich sehe, welche Welt ich mit einem Index wirklich kaufe — und welche nicht.“
+
+**Muss-Kriterien für jede Umsetzung:**  
+- Indexgewichtungen geografisch sichtbar machen.
+- Begriffe wie World, ACWI, EM, Europe etc. alltagstauglich übersetzen.
+- Keine moralische Länderwertung.
+- Als Lernmodul, nicht als Produktempfehlung.
+
+**Nicht-Ziele / harte Verbote:**  
+- Keine politische Bewertung von Ländern.
+- Kein ETF-Ranking.
+- Keine Prognose über Gewinnerregionen.
+- Keine Empfehlung bestimmter Regionenquoten.
+
+---
+
+Dieser Prüfscore ist **kein app-spezifischer Inhalt**, sondern ein verbindliches Standard-Gate für jede spätere Änderung an einer App.
+
+Er wird bei der späteren Verteilung in jeden lokalen Steuerungsblock übernommen und dort **unverändert** verwendet.
+
+**LLM-Prüfscore pro Änderung:**
+
+Bewerte vor der Umsetzung von 0–2:
+
+1. **Barriere-Abbau:** Entfernt die Änderung die definierte psychologische Hürde?
+2. **Zielzustand:** Führt die Änderung zum gewünschten Nutzerzustand?
+3. **Nicht-Ziele:** Vermeidet die Änderung alle verbotenen Drifts?
+4. **Mentorrolle:** Stärkt die Änderung die Rolle dieser App in der Heldenreise?
+
+**Score-Regel:**
+
+- **8/8** = umsetzen
+- **6–7/8** = nur umsetzen, wenn `Nicht-Ziele = 2/2`
+- **≤5/8** = nicht umsetzen
+- **jede Nicht-Ziel-Verletzung** = stoppen
+
+**Wichtig:**
+
+- Punkt 3 ist ein KO-Kriterium.
+- Eine Änderung mit `Nicht-Ziele < 2/2` darf nicht umgesetzt werden, auch wenn der Gesamtscore hoch wirkt.
+- Der Score ersetzt nicht den Steuerungsblock, sondern zwingt das LLM, jede Änderung gegen Barriere, Zielzustand, Nicht-Ziele und Heldenreise-Rolle zu prüfen.
+- Bei Unsicherheit: nicht umsetzen, sondern Klärungsbedarf markieren.
+
+## Warnhinweis für spätere APP_SPEC-Erstellung
+
+Diese MINI_SPEC enthält einen Steuerungsblock aus der Seed-Datei. Der Block konserviert den aktuellen Rollout-Stand, ersetzt aber keine spätere APP_SPEC-Prüfung.
+
+Vor einer APP_SPEC-Erstellung muss ein LLM ausdrücklich prüfen:
+
+- Ist diese App eine eigenständige Haupt-App, ein Companion-Modul, ein Funnel-Finale oder eine Visualisierung?
+- Welche Parent-App oder Nutzerreise ist betroffen?
+- Deckt der Steuerungsblock nur den aktuellen Seed-Stand ab oder braucht die spätere APP_SPEC eine strukturelle Neubewertung?
+- Darf aus dieser MINI_SPEC überhaupt direkt eine APP_SPEC entstehen?
+
+STOP-Regel:
+Wenn diese Rollenprüfung nicht durchgeführt wurde, darf keine APP_SPEC erstellt werden.
+
 ### Modulrolle
 Companion-App
 

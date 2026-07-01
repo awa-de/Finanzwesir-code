@@ -193,3 +193,16 @@ Wird geleert nach /distill. Einträge: [FRICTION] [WIN] [PREF] [QUESTION] [OK]
 - [OK] MEMORY: project_app_fabrik_struktur.md + MEMORY.md-Index auf aktuellen Stand gebracht
 - [FRICTION] Memory-Integritätscheck meldete 8 vorbestehende Fehler (metadata.type fehlt in 8 Dateien) und 1 veraltete Prüfregel (ST-18-Merge-Hinweis-Text existierte nirgends) — auf Alberts Wunsch sofort repariert: Frontmatter in 8 Dateien auf `metadata:`-Block umgestellt, valid_types im Checker um reference/user ergänzt, veraltete ST-18-Regel entfernt (Symlink-Setup hat das Divergenz-Problem strukturell gelöst). Check jetzt 42/42 GRÜN.
 - [WIN] AP-14j bleibt als eigener, unberührter Faden bestehen — kein Vermischen zweier paralleler Threads in einer AP-ID
+
+## 2026-07-01 – SESSION START | [KETTENMODUS] | Fokus: AP-14j — regulatorik-dashboard APP_SPEC-Vorbereitung / Scope-Schnitt
+
+### AP-20 — GELB — Sonderbatch D: plan-generator GESPERRT im Seed erkannt, kein Write (keine Teilübertragung)
+### AP-20b — AP-Wechsel
+### 2026-07-01 — AP-20b ✅ — Sonderbatch D ohne plan-generator: Steuerungsblock + APP_SPEC-Stoppwarnung geschrieben (4/4 GRÜN)
+### AP-21 — AP-Wechsel
+
+### 2026-07-01 — Kettenabschluss AP-20/AP-20b/AP-21 ✅ | RECONCILED: AP-20 AP-20b AP-21
+- [OK] AP-20 GELB (kein Write, plan-generator seed-gesperrt), AP-20b GRÜN (4/4 Apps: etf-vergleich, investment-universum, rollierende-sparplaene, weltkarte-etf-indizes — Steuerungsblock + APP_SPEC-Stoppwarnhinweis), AP-21 GRÜN (unabhängiger harter Seed-Provenienz-Abgleich, bidirektional, 0 Abweichungen)
+- [OK] NAVIGATION.md, BACKLOG.md (AF-24 auf plan-generator verengt), BACKLOG-ARCHIV.md, PROJECT-STATUS.md (HOOK-META + sichtbarer Text) aktualisiert
+- [OK] MEMORY: project_app_fabrik_struktur.md Zähler auf 22/25 (Steuerungsblock) aktualisiert
+- [WIN] plan-generator bleibt bewusst unberührt — Klärung als eigener AP-22 vorgemerkt, kein Vermischen mit diesem Rollout

@@ -23,6 +23,82 @@
 
 ---
 
+## Steuerungsblock: Zweck, Barriere, Prüfregeln
+
+<!-- Quelle: Apps/APP_STEUERUNGSBLOCK_SEEDS_repo_abgeglichen.md / Seed etf-vergleich -->
+<!-- Mechanisch eingefügt. Nicht frei formulieren. -->
+
+**Rolle:** D4 — ETF-Feinschliff-Entgifter / Exit-Gate aus Produktoptimierung  
+
+**Diese App existiert, um:**  
+den Nutzer aus der ETF-Produktoptimierung herauszuführen, sobald die Unterschiede innerhalb solider Kandidaten nicht mehr der Grund sein dürfen, den Start zu vertagen.
+
+**Zu entfernende psychologische Barriere:**  
+Produktdetails wirken kontrollierbar; deshalb werden sie als legitime Startbremse benutzt.
+
+**Falscher Glaubenssatz vorher:**  
+„Ich kann noch nicht starten, weil ich erst den optimalen ETF finden muss.“
+
+**Zielzustand nach der App:**  
+„ETF-Feinschliff ist real, aber nicht der Wald. Innerhalb solider Kandidaten ist der laufende Sparplan wichtiger als die perfekte Produktnuance.“
+
+**Muss-Kriterien für jede Umsetzung:**  
+- Typische Produktdetails einsammeln: TER, Ausschüttung, Replikation, Fondsgröße, Anbieter.
+- Unterschiede nicht leugnen, sondern gegen den Haupthebel Start kalibrieren.
+- Als Exit-Gate aus D1–D3 funktionieren.
+- Nicht-Ziele explizit übernehmen und hart schützen.
+
+**Nicht-Ziele / harte Verbote:**  
+- Nicht sagen: „TER ist egal.“
+- Nicht sagen: „Alle ETFs sind gleich.“
+- Kein Einzelsieger.
+- Keine Affiliate- oder Ranking-Inszenierung.
+- Keine neue Perfektionsmaschine bauen.
+- Keine Startverzögerung durch noch mehr Vergleichstiefe.
+
+---
+
+Dieser Prüfscore ist **kein app-spezifischer Inhalt**, sondern ein verbindliches Standard-Gate für jede spätere Änderung an einer App.
+
+Er wird bei der späteren Verteilung in jeden lokalen Steuerungsblock übernommen und dort **unverändert** verwendet.
+
+**LLM-Prüfscore pro Änderung:**
+
+Bewerte vor der Umsetzung von 0–2:
+
+1. **Barriere-Abbau:** Entfernt die Änderung die definierte psychologische Hürde?
+2. **Zielzustand:** Führt die Änderung zum gewünschten Nutzerzustand?
+3. **Nicht-Ziele:** Vermeidet die Änderung alle verbotenen Drifts?
+4. **Mentorrolle:** Stärkt die Änderung die Rolle dieser App in der Heldenreise?
+
+**Score-Regel:**
+
+- **8/8** = umsetzen
+- **6–7/8** = nur umsetzen, wenn `Nicht-Ziele = 2/2`
+- **≤5/8** = nicht umsetzen
+- **jede Nicht-Ziel-Verletzung** = stoppen
+
+**Wichtig:**
+
+- Punkt 3 ist ein KO-Kriterium.
+- Eine Änderung mit `Nicht-Ziele < 2/2` darf nicht umgesetzt werden, auch wenn der Gesamtscore hoch wirkt.
+- Der Score ersetzt nicht den Steuerungsblock, sondern zwingt das LLM, jede Änderung gegen Barriere, Zielzustand, Nicht-Ziele und Heldenreise-Rolle zu prüfen.
+- Bei Unsicherheit: nicht umsetzen, sondern Klärungsbedarf markieren.
+
+## Warnhinweis für spätere APP_SPEC-Erstellung
+
+Diese MINI_SPEC enthält einen Steuerungsblock aus der Seed-Datei. Der Block konserviert den aktuellen Rollout-Stand, ersetzt aber keine spätere APP_SPEC-Prüfung.
+
+Vor einer APP_SPEC-Erstellung muss ein LLM ausdrücklich prüfen:
+
+- Ist diese App eine eigenständige Haupt-App, ein Companion-Modul, ein Funnel-Finale oder eine Visualisierung?
+- Welche Parent-App oder Nutzerreise ist betroffen?
+- Deckt der Steuerungsblock nur den aktuellen Seed-Stand ab oder braucht die spätere APP_SPEC eine strukturelle Neubewertung?
+- Darf aus dieser MINI_SPEC überhaupt direkt eine APP_SPEC entstehen?
+
+STOP-Regel:
+Wenn diese Rollenprüfung nicht durchgeführt wurde, darf keine APP_SPEC erstellt werden.
+
 ## Einordnung im Gesamttrichter
 
 Diese App bekommt die Kennung:

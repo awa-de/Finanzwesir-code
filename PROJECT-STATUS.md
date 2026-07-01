@@ -3,16 +3,16 @@ Version: 1
 Stand: 2026-07-01
 Fokus-AP: AP-14i — regulatorik-dashboard MINI_SPEC-Review / App-Fabrik-Readiness (abgeschlossen)
 Nächster-Schritt: AP-14j — regulatorik-dashboard APP_SPEC-Vorbereitung / Scope-Schnitt (AP-14i ✅ 2026-07-01)
-Nebenabschluss: AP-16/17/18 — Steuerungsblock-Rollout Statusabgleich + Batch C + unabhängiger Review (✅ 2026-07-01); Folge-Klärung siehe BACKLOG AF-24
+Nebenabschluss: AP-16/17/18 — Steuerungsblock-Rollout Statusabgleich + Batch C + unabhängiger Review (✅ 2026-07-01); AP-20/AP-20b/AP-21 — Sonderbatch D ohne plan-generator + unabhängiger Seed-Provenienz-Review (✅ 2026-07-01); Restklärung plan-generator siehe BACKLOG AF-24
 Blocker: keine
 Letzter-Distill: 2026-06-29
 Kassensturz-Datum: 2026-06-29
 -->
-<!-- HOOK-META-SESSION: AP-16/17/18 -->
+<!-- HOOK-META-SESSION: AP-20/AP-20b/AP-21 -->
 
 # PROJECT STATUS — Finanzwesir 2.0
 
-Stand: 2026-07-01 | Session: AP-16/17/18 | Geändert von: Claude
+Stand: 2026-07-01 | Session: AP-20/AP-20b/AP-21 | Geändert von: Claude
 
 **Zweck:** Schneller Wiedereinstieg nach Pausen.
 **Zielgruppe:** Albert und Claude.
@@ -122,7 +122,7 @@ Stand: 2026-07-01 | Session: AP-16/17/18 | Geändert von: Claude
 
 ✅ **App-Fabrik Steuerungsblock Muster-Einbau abgeschlossen (AP-08/AP-10b/c/d, 2026-06-26):** `Apps/prokrastinations-preis/APP_SPEC.md` hat jetzt ersten lokalen Steuerungsblock (Seed-basiert, mechanisch eingebaut): Barriere Verpasster-Zug + Wartestrategie + Hindsight Bias, 5 Muss-Kriterien, 5 Nicht-Ziele, LLM-Prüfscore 8/8-Regel. Tool `tools/app_fabrik/insert_steuerungsblock_from_seed.py` produktionsbereit (UTF-8-robust, Seed-Metadaten bereinigt, Nordstern-Begriff korrekt). Nächster Schritt: AP-09 Muster-Review.
 
-✅ **MINI_SPEC Steuerungsblock-Rollout Batch A/B/C + regulatorik-dashboard + prokrastinations-preis abgeschlossen (AP-12–AP-18, 2026-06-29 bis 2026-07-01):** 18 von 25 Apps haben jetzt einen vollständigen lokalen Steuerungsblock in `MINI_SPEC_FROM_HAUPTDOKUMENT.md`: Batch A (AP-12, 7 Apps), Batch B (AP-13, 7 Apps), Sonderfall regulatorik-dashboard (AP-14, MINI_SPEC komplett aus Seed neu gefasst), Sonderfall prokrastinations-preis (AP-15, MINI_SPEC nachgeführt), Batch C (AP-16 Statusabgleich, AP-17 Write, AP-18 unabhängiger Review — etf-aera-vorbei, replizierer-swapper, thesaurierer-rennen, weltdepot-baukasten). Restbestand: 5 Sonder-/Companion-Fälle ungeklärt (plan-generator, etf-vergleich, investment-universum, rollierende-sparplaene, weltkarte-etf-indizes) → BACKLOG AF-24.
+✅ **MINI_SPEC Steuerungsblock-Rollout Batch A/B/C + Sonderbatch D + regulatorik-dashboard + prokrastinations-preis abgeschlossen (AP-12–AP-21, 2026-06-29 bis 2026-07-01):** 22 von 25 Apps haben jetzt einen vollständigen lokalen Steuerungsblock in `MINI_SPEC_FROM_HAUPTDOKUMENT.md`: Batch A (AP-12, 7 Apps), Batch B (AP-13, 7 Apps), Sonderfall regulatorik-dashboard (AP-14, MINI_SPEC komplett aus Seed neu gefasst), Sonderfall prokrastinations-preis (AP-15, MINI_SPEC nachgeführt), Batch C (AP-16 Statusabgleich, AP-17 Write, AP-18 unabhängiger Review — etf-aera-vorbei, replizierer-swapper, thesaurierer-rennen, weltdepot-baukasten), Sonderbatch D (AP-20 Dry-run deckte GESPERRT-Status von plan-generator auf, AP-20b Write für die 4 verteilungsreifen Apps — etf-vergleich, investment-universum, rollierende-sparplaene, weltkarte-etf-indizes — inkl. neuem APP_SPEC-Stoppwarnhinweis, AP-21 unabhängiger harter Seed-Provenienz-Review). Restbestand: nur noch `plan-generator` ungeklärt (Seed GESPERRT, Kernfelder reine Klärungsfrage-Platzhalter) → BACKLOG AF-24.
 
 ---
 
