@@ -1,6 +1,6 @@
 ---
 name: app-fabrik-struktur-und-z-hlmodell
-description: "docs/App-Fabrik Steuerungsverzeichnis; 22+3=25 App-Ordner; B1 APP_SPEC V2.9 operativ; B1-AP-14e12 ✅ 2026-06-22, B1-AP-15x ✅ 2026-06-23, B1-AP-16d ✅ 2026-06-24; Steuerungsblock-Rollout: Batch A (AP-12) + Batch B (AP-13) + Sonderfall regulatorik-dashboard (AP-14) + Sonderfall prokrastinations-preis (AP-15) + Batch C (AP-16/17/18) + Sonderbatch D ohne plan-generator (AP-20/AP-20b/AP-21) alle ✅ bis 2026-07-01, 22/25 Apps mit Steuerungsblock; nur noch plan-generator ungeklärt (Seed GESPERRT, BACKLOG AF-24); parallel offener AP: AP-14j (regulatorik-dashboard APP_SPEC-Vorbereitung)"
+description: "docs/App-Fabrik Steuerungsverzeichnis; 22+3=25 App-Ordner; B1 APP_SPEC V2.9 operativ; B1-AP-14e12 ✅ 2026-06-22, B1-AP-15x ✅ 2026-06-23, B1-AP-16d ✅ 2026-06-24; Steuerungsblock-Rollout VOLLSTÄNDIG (25/25 Apps, AP-12 bis AP-25a, ✅ 2026-07-01): Batch A (AP-12) + Batch B (AP-13) + Sonderfall regulatorik-dashboard (AP-14) + Sonderfall prokrastinations-preis (AP-15) + Batch C (AP-16/17/18) + Sonderbatch D ohne plan-generator (AP-20/AP-20b/AP-21) + plan-generator-Sonderfall (AP-22–AP-25a, Rolle H1/Funnel-Finale, Seed-Datei bleibt read-only, eigener Entscheidungsblock statt Seed-Provenienz) + regulatorik-dashboard als zweiter formal anerkannter Sonderfall (eigenes 8-Fragen-Format); parallel offener AP: AP-14j (regulatorik-dashboard APP_SPEC-Vorbereitung)"
 metadata: 
   node_type: memory
   type: project
@@ -28,6 +28,18 @@ docs/App-Fabrik ist das Steuerungsverzeichnis für die App-Fabrik — kein Code,
 **Multi-Modul-Master-Apps:**
 - B2 Geburtsjahrlos → Erweiterungsmodul: rollierende-sparplaene
 - C1 Diversifikations-Detektor → Companion: weltkarte-etf-indizes; Gegenperspektive: investment-universum
+
+## Steuerungsblock-Rollout abgeschlossen (2026-07-01, AP-12–AP-25a)
+
+Alle 25 App-Ordner haben jetzt einen lokalen Steuerungsblock in `MINI_SPEC_FROM_HAUPTDOKUMENT.md`:
+
+- 23 Apps mechanisch aus der zentralen Seed-Datei (`Apps/APP_STEUERUNGSBLOCK_SEEDS_repo_abgeglichen.md`) über `tools/app_fabrik/insert_steuerungsblock_into_minispec_from_seed.py` eingefügt, wortgleich verifiziert.
+- **plan-generator** (H1, Funnel-Finale/Abschlussmodul): Sonderfall *ohne* Seed-Provenienz. Die zentrale Seed-Datei blieb bewusst read-only (GESPERRT-Zustand unverändert); der lokale Block wurde stattdessen redaktionell aus AP-22-Klärung + Nutzerentscheidung + AP-23a-Korrektur erstellt. Enthält einen eigenen offenen Entscheidungsblock „Wie konkret darf der finale Plan werden?" (6 Punkte) mit LLM-STOP-Regel — vor jeder APP_SPEC-Erstellung mit Albert zu klären.
+- **regulatorik-dashboard** (G1): zweiter, bereits in AP-14h/AP-14i unabhängig geprüfter Sonderfall — Seed-Provenienz vorhanden, aber bewusst erweitertes Format (H3-Gliederung statt Bold-Felder, eigener 8-Fragen-LLM-Prüfscore 0–2/16 statt geteiltem 4-Kriterien-Score).
+
+**Why:** Read-only-Charakter der zentralen Seed-Datei ist eine harte Regel — auch redaktionell begründete Neufassungen dürfen sie nicht anfassen (AP-23 hat das versehentlich verletzt, AP-23a hat es korrigiert).
+
+**How to apply:** Bei künftiger Arbeit an `plan-generator` oder `regulatorik-dashboard` zuerst deren lokalen Steuerungsblock in der jeweiligen MINI_SPEC lesen, nicht die zentrale Seed-Datei als Quelle erwarten.
 
 ## Rollenformel App-Sequenz (verbindlich seit 2026-05-18)
 

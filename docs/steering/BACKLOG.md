@@ -57,7 +57,6 @@ Stand: 2026-07-01 | Session: AP-16/17/18 | Geändert von: Claude
 | AF-21    | App-Fabrik | App-Familien P→B→N-Standards ausarbeiten              | M    | —       | docs/App-Fabrik/PBN-FAMILY-STANDARDS.md anlegen: 6-7 Familien je mit Proven-Muster, Better-Satz, Tailwind-Komponenten-Liste |
 | AF-22    | App-Fabrik | P→B→N-Block in APP_SPEC-Template integrieren          | M    | AF-21   | Pflichtabschnitt in APP_SPEC.md-Vorlage + 10v10-Test-Feld |
 | AF-23    | App-Fabrik | Pincus-Check als Pre-Code-Quality-Gate dokumentieren  | L    | AF-22   | 4-Punkte-Checkliste in .claude/commands/ oder CLAUDE.md §6 App-Arbeit |
-| AF-24    | App-Fabrik | Klärungs-AP: plan-generator Seed-Sperre (GESPERRT, Kernfelder nur Klärungsbedarf-Platzhalter) — 4 der ursprünglich 5 unklaren Apps bereits via AP-20b/AP-21 mit Steuerungsblock + APP_SPEC-Stoppwarnhinweis versorgt | M | — | docs/steering/patches/AP-21_review_sonderbatch-d-ohne-plan-generator_seed-provenienz_Ergebnis.md |
 
 ---
 

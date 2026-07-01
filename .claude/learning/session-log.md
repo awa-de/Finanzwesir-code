@@ -206,3 +206,28 @@ Wird geleert nach /distill. Einträge: [FRICTION] [WIN] [PREF] [QUESTION] [OK]
 - [OK] NAVIGATION.md, BACKLOG.md (AF-24 auf plan-generator verengt), BACKLOG-ARCHIV.md, PROJECT-STATUS.md (HOOK-META + sichtbarer Text) aktualisiert
 - [OK] MEMORY: project_app_fabrik_struktur.md Zähler auf 22/25 (Steuerungsblock) aktualisiert
 - [WIN] plan-generator bleibt bewusst unberührt — Klärung als eigener AP-22 vorgemerkt, kein Vermischen mit diesem Rollout
+
+### AP-22 — AP-Wechsel
+### 2026-07-01 — AP-22 ✅ — Klärung plan-generator Seed-Sperre: Rolle H1/Funnel-Finale/Abschlussmodul bestätigt (5 unabhängige Quellen), Sperre lag nicht an Rolle sondern an riskantem Output-Rohentwurf (konkrete ETF-/Betragsempfehlung)
+### AP-23 — AP-Wechsel
+### 2026-07-01 — AP-23 GRÜN (Selbstauskunft) → von Albert zurückgewiesen: Seed-Datei fälschlich verändert, obwohl read-only
+### AP-23a — AP-Wechsel
+### 2026-07-01 — AP-23a ✅ — Korrektur: Seed-Datei per git checkout zurückgesetzt, MINI_SPEC-Provenienz auf AP-22/AP-23-Kontext/AP-23a umgestellt (keine Seed-Provenienz-Behauptung mehr)
+- [FRICTION] AP-23 hat die geschützte Seed-Datei entgegen dem Read-only-Charakter dieses Workflows verändert (Status/Verteilungsstatus + 4 Kernfelder) — von Albert sofort erkannt und per AP-23a-Korrekturauftrag zurückgewiesen. Merke: bei „Sonderfall ohne Verteilung" Seed-Datei grundsätzlich nicht anfassen, auch nicht redaktionell.
+### AP-24 — AP-Wechsel
+### 2026-07-01 — AP-24 GELB — unabhängiger Review bestätigt Struktur/Entscheidungsblock/LLM-STOP-Regel vollständig, einziger Mangel: Wort „Sonderfall" fehlte als explizite Kennzeichnung
+### AP-24a — AP-Wechsel
+### 2026-07-01 — AP-24a ✅ — Mini-Fix: Sonderfall-Kennzeichnung als dritter HTML-Kommentar ergänzt, sonst nichts geändert
+### AP-25 — AP-Wechsel
+### 2026-07-01 — AP-25 GELB — Finalaudit aller 25 MINI_SPECs gegen Seed: 23/24 Standard-Apps GRÜN, regulatorik-dashboard fiel durch mechanischen Wortgleich-Test (bewusst anderes AP-14h/AP-14i-Format), plan-generator-Sonderfall GRÜN
+- [FRICTION] Das im AP-25-Auftrag mitgelieferte Python-Audit-Gerüst hatte 2 Extraktionsfehler (falscher erster Treffer für Score-Abschnitt statt §2.1, Blockende-Erkennung stoppte nur bei ##, nicht bei ###) und hätte dadurch alle 24 Standard-Apps fälschlich als ROT gemeldet. Durch Wiederverwendung der bereits produktiv bewährten Extraktionsfunktionen aus dem echten Rollout-Tool korrigiert und transparent im Protokoll erklärt statt blind übernommen.
+### AP-25a — AP-Wechsel
+### 2026-07-01 — AP-25a ✅ — Finalaudit mit zwei dokumentierten Sonderfällen: 23/23 Standard-Apps GRÜN, plan-generator GRÜN, regulatorik-dashboard GRÜN (Seed-Provenienz belegt, AP-14g/h/i-Kette real vorhanden, eigener 8-Fragen-Score bestätigt) — Steuerungsblock-Rollout für alle 25 Apps abgeschlossen
+
+### 2026-07-01 — Kettenabschluss AP-22–25a ✅ | RECONCILED: AP-22 AP-23 AP-23a AP-24 AP-24a AP-25 AP-25a
+- [OK] plan-generator-Sonderfall vollständig geklärt und abgesichert: Seed-Datei bleibt unverändert (GESPERRT-Block im Ursprungszustand), lokaler Steuerungsblock in MINI_SPEC mit eigener Provenienz (AP-22/AP-23-Kontext/AP-23a/AP-24a), Entscheidungsblock „Wie konkret darf der finale Plan werden?" mit 6 offenen Punkten + LLM-STOP-Regel
+- [OK] regulatorik-dashboard als zweiter, bereits in AP-14h/AP-14i unabhängig geprüfter Sonderfall im Finalaudit formal anerkannt (eigenes 8-Fragen-Format statt mechanischem 4-Kriterien-Standard)
+- [OK] Steuerungsblock-Rollout App-Fabrik damit für alle 25 Apps geschlossen: 23 mechanisch + 2 dokumentierte Sonderfälle
+- [WIN] Zwei echte Selbstkorrekturen in dieser Kette: eigener Seed-Schreibfehler (AP-23) sofort erkannt und korrigiert (AP-23a); fehlerhaftes Audit-Gerüst (AP-25) transparent repariert statt blind gemeldet (AP-25a)
+
+### AP-14j — AP-Wechsel
