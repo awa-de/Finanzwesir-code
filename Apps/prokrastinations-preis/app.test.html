@@ -578,6 +578,75 @@
     </div>
   </div>
 
+  <!-- ═══════════════════════════════════════════════════════════ -->
+  <!-- NEU — AP-prokrast-03d: FwChartTextPlugin isolierter Smart-Update-Test -->
+  <!-- Ruft ChartEngine DIREKT auf — nicht über app.js. Keine Screen-4-Integration, -->
+  <!-- keine Produktentscheidung für Rubikon. Reiner Engine-/Plugin-Regressionstest. -->
+  <!-- ═══════════════════════════════════════════════════════════ -->
+
+  <!-- Szenario AF: FwChartTextPlugin Smart-Update-Testfall (AP-prokrast-03d) -->
+  <div class="test-section">
+    <h2>AF — FwChartTextPlugin Smart-Update-Testfall (AP-prokrast-03d, isoliert von app.js)</h2>
+    <p class="test-meta">
+      Testschritte: Seite laden (Initialrender mit <code>chartText.annotations = []</code>) → Button
+      „Annotation einblenden" klicken (zweiter <code>renderFromData()</code>-Aufruf mit gefüllten Annotationen).<br>
+      Erwartung: Nach Initialrender ist kein Canvas-Text sichtbar (Plugin bereits registriert, aber
+      <code>annotations</code> leer). Nach Klick erscheint zweizeiliger Text „Test-Annotation / Zeile 2"
+      bei x=0.75/y=0.35 relativ zur ChartArea — ohne dass der Chart neu aufgebaut wird (Smart Update,
+      kein Flackern, keine neue Achse). Kein JS-Fehler in Konsole.<br>
+      Synthetische Testdaten, keine echten Finanzdaten. Reiner Engine-/Plugin-Regressionstest für AP-prokrast-03d.
+    </p>
+    <div class="kg-card">
+      <div id="fwChartTextTest" class="fw-app__chart-section" data-fw-appchart></div>
+      <button id="fwChartTextTestBtn" type="button" style="margin-top: 0.75rem; display: block; position: relative;">Annotation einblenden (2. renderFromData-Aufruf)</button>
+    </div>
+    <script type="module">
+      import { ChartEngine } from '../../Theme/assets/js/fw-chart-engine/core/ChartEngine.js';
+
+      const fwChartTextContainer = document.getElementById('fwChartTextTest');
+      const fwChartTextBtn = document.getElementById('fwChartTextTestBtn');
+      const fwChartTextEngine = new ChartEngine();
+
+      // Synthetische Testdaten — kein Bezug zu echten Finanzdaten, nur für Plugin-Smoke-Test
+      const fwChartTextTestSeries = [];
+      let fwChartTextBase = 100;
+      for (let i = 0; i < 24; i++) {
+        const y = 2024 + Math.floor(i / 12);
+        const m = String((i % 12) + 1).padStart(2, '0');
+        fwChartTextBase += (Math.random() - 0.3) * 5;
+        fwChartTextTestSeries.push({ month: `${y}-${m}`, depotwert: Math.max(fwChartTextBase, 1) });
+      }
+
+      // Initialrender: Plugin registriert, aber ohne sichtbare Annotationen
+      // rangeControls/headline deaktiviert — analog zur echten Screen-2/3-Nutzung in app.js,
+      // dieses Szenario testet nur FwChartTextPlugin, nicht die Range-/BAN-Features.
+      fwChartTextEngine.renderFromData(fwChartTextContainer, fwChartTextTestSeries, {
+        type: 'line',
+        features: { rangeControls: false, headline: false },
+        chartText: { enabled: true, annotations: [] }
+      });
+
+      fwChartTextBtn.addEventListener('click', () => {
+        // Zweiter renderFromData()-Aufruf: nur Annotationen ändern sich, Plugin war bereits registriert
+        fwChartTextEngine.renderFromData(fwChartTextContainer, fwChartTextTestSeries, {
+          type: 'line',
+          features: { rangeControls: false, headline: false },
+          chartText: {
+            enabled: true,
+            annotations: [{
+              id: 'smoke-test',
+              text: 'Test-Annotation\nZeile 2',
+              x: 0.75,
+              y: 0.35,
+              align: 'center',
+              baseline: 'middle'
+            }]
+          }
+        });
+      });
+    </script>
+  </div>
+
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script type="module" src="./app.js"></script>
 </body>

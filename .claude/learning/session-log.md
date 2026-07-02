@@ -262,3 +262,33 @@ Wird geleert nach /distill. Einträge: [FRICTION] [WIN] [PREF] [QUESTION] [OK]
 - [OK] Reiner Analyse-/Architektur-Faden ohne jede Code-/Spec-/CSS-/Datenänderung — 6 Ergebnisprotokolle unter docs/steering/patches/, 1 Drehbuch + 1 AP-01-Befund unter Apps/prokrastinations-preis/
 - [OK] Kein Konflikt mit dem parallel laufenden AP-14j-Faden (regulatorik-dashboard) — beide Themenblöcke sauber getrennt, AP-14j bleibt unberührter nächster Schritt für die App-Fabrik-Kette
 - [WIN] Zwei echte Selbstkorrekturen entlang der Kette: 800ms-Stille und Future-Ticks wurden zunächst ehrlich als offen geführt und in AP-02d sichtbar (nicht still) nachgezogen, sobald der Steuerfaden entschied
+
+## 2026-07-02 – SESSION START | [KETTENMODUS] | Fokus: offen — kein Anschluss-AP definiert
+- [FRICTION] Kettenmodus-Regel griff auf veraltete PROJECT-STATUS.md-Angabe zurück: HOOK-META "Nächster-Schritt" verwies auf AP-14j, obwohl dieser AP am 2026-07-01 vom Nutzer verworfen wurde (Chronik + 8 Ergebnisprotokolle AP-16 bis AP-25a bestätigten unabhängig "Ausdrücklich nicht nächster AP: AP-14j"). PROJECT-STATUS.md HOOK-META Zeile 5 war seit dem Verwurf nicht nachgezogen worden — von Albert sofort korrigiert. Merke: Kettenmodus-Trigger prüft nur Datumsmuster, nicht inhaltliche Gültigkeit des referenzierten Naechster-Schritt-Feldes.
+
+### 2026-07-02 — AP-prokrast-03a ✅ — Architektur-Anamnese Rubikon, X-Achse, Plugin-Vertrag
+- [OK] `xDisplayRange`→`fwContext.displayRange`→`axis.min/max` direkt am Code verifiziert (nicht nur aus AP-02c übernommen) — trägt Rubikon-Zukunftsraum ohne Engine-Änderung; `FwVerticalLinePlugin` unverändert wiederverwendbar
+- [OK] Lösungspfad A (App-Layer, keine Engine-/Plugin-Änderung) empfohlen, Lösungspfad B (neues Plugin) nur mit Masterfaden-Freigabe
+
+### 2026-07-02 — AP-prokrast-03b ✅ — Rubikon-Reveal Architekturvorschläge + Peer-Review-Dossier
+- [WIN] Entscheidender Fund: `ChartEngine.js` hat bereits einen Smart-Update-Mechanismus (B1-AP-15b) mit automatischer Reduced-Motion-Erkennung — Reveal über zwei `renderFromData()`-Aufrufe ohne Engine-Änderung möglich
+- [OK] `FwAnnotationPulsePlugin` direkt am Code als für persistente ✅/❓-Symbole ungeeignet nachgewiesen (transient, Kreisringe statt Glyphen, RM-Komplettausstieg) — Vorschlag B verworfen, Vorschlag D (neues Plugin) favorisiert
+
+### 2026-07-02 — AP-prokrast-03c ✅ — Peer Review Rubikon-Reveal + Canvas-Text-Plugin (`FwChartTextPlugin.js`)
+- [OK] Enger V1-Vertrag für neues Plugin geschnitten: `plotFraction` relativ zu `chartArea`, persistent, nicht-interaktiv, kein Card-to-Point
+- [OK] Präzisierung gegenüber AP-03b: für strukturierte Config reicht neue Plugin-Datei + Barrel-Export nicht — zusätzlicher additiver `ChartEngine.js`-Patch nötig (Muster: `annotationPulse`)
+
+### 2026-07-02 — AP-prokrast-03d ✅ — FwChartTextPlugin.js Minimum-Implementierung
+- [OK] `FwChartTextPlugin.js` neu gebaut, `ChartEngine.js`+`plugins/index.js` additiv erweitert (6 Touchpoints), Smart-Update-Zweig unangetastet; isolierter Plugin-Unit-Test 14/14 grün
+- [FRICTION] Testszenario (Szenario AF in `app.test.html`) hatte zwei eigene CSS-Bugs (fehlende `fw-app__chart-section`-Klasse führte zu Layout-Overlap; inline `height:300px` kollidierte mit injizierter `.fw-chart-canvas-container{height:400px}`-Regel) — beide durch Albert im manuellen Browsertest gefunden, von Claude korrekt als Testharness-Bug statt Plugin-/Engine-Bug diagnostiziert und behoben
+- [PREF] Albert wollte `app.test.html` als dauerhaftes Testszenario statt Wegwerf-Skript — explizit angewiesen, im Protokoll als Abweichung dokumentiert
+- [WIN] Nach beiden Fixes: Smart-Update-Pflichttestfall (leer registrieren → Annotationen per zweitem Aufruf befüllen) im echten Browser bestätigt, nicht nur am Code hergeleitet — Status von GELB auf GRÜN hochgestuft
+
+### 2026-07-02 — AP-prokrast-03e ✅ — Abschluss-QA FwChartTextPlugin.js Claims-vs-Files
+- [OK] Alle Claims aus AP-03d unabhängig gegen die Dateien verifiziert (u. a. `git diff --stat` über alle "unverändert"-Behauptungen mit Leerausgabe) — keine Abweichung, kein Card-to-Point-Fund, A11y-Übergabe an AP-03f dokumentiert
+- [OK] Commit vor AP-03f empfohlen
+
+### 2026-07-02 — Kettenabschluss AP-prokrast-03a–03e ✅ | RECONCILED: AP-prokrast-03a AP-prokrast-03b AP-prokrast-03c AP-prokrast-03d AP-prokrast-03e
+- [OK] Reiner Analyse-/Peer-Review-/isolierter-Implementierungs-Faden: `FwChartTextPlugin.js` neu, `ChartEngine.js`+`plugins/index.js` additiv, `app.test.html` um Testszenario erweitert (autorisiert) — `app.js`/`app.css`/Strategies/Scales/Specs durchgängig unverändert (per `git diff` bestätigt)
+- [WIN] Zweistufige Selbstkorrektur in AP-03d: zwei reale CSS-Bugs im eigenen Testszenario gefunden und transparent als Testharness-Fehler (nicht Plugin-Fehler) diagnostiziert und behoben, bevor der Smart-Update-Testfall tatsächlich im Browser bestätigt wurde
+- [OK] Nächster fachlicher Schritt von Albert bestätigt: AP-prokrast-03f — Screen-4 Rubikon-Reveal Integration mit `FwChartTextPlugin` (wartet auf Nutzer-OK)

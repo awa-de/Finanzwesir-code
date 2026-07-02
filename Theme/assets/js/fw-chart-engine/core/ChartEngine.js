@@ -67,6 +67,7 @@ import { PieChartStrategy } from '../strategies/PieChartStrategy.js';
 import { FwRenderer } from './FwRenderer.js';
 import { // CHANGED AP-14e9: Plugin-Barrel
     FwAnnotationPulsePlugin,
+    FwChartTextPlugin, // NEW — AP-prokrast-03d
     FwVerticalLinePlugin
 } from '../plugins/index.js';
 
@@ -190,6 +191,14 @@ export class ChartEngine {
             annotationPulse = options.annotationPulse;
         }
 
+        // NEW — AP-prokrast-03d: chartText (persistente Canvas-Text-Annotationen, kein Domain-State)
+        var chartText = null;
+        if (options.chartText != null &&
+            typeof options.chartText === 'object' &&
+            options.chartText.enabled === true) {
+            chartText = options.chartText;
+        }
+
         // WeakMap-State-Mechanik
         if (this._appChartStates.has(container)) {
             var state = this._appChartStates.get(container);
@@ -206,6 +215,7 @@ export class ChartEngine {
             state.config.yRangeResetKey = yRangeResetKey;
             state.config.annotations = annotations;     // NEW — B1-AP-14c1
             state.config.annotationPulse = annotationPulse; // NEW — B1-AP-14c4
+            state.config.chartText = chartText; // NEW — AP-prokrast-03d
             if (yRangePolicy === 'cumulative-expand-zero') {
                 if (!state.axisMemory) {
                     state.axisMemory = { yMaxSeen: 0 };
@@ -220,7 +230,7 @@ export class ChartEngine {
                 data:          frozenData,
                 strategy:      this.strategies[type],
                 type:          type,
-                config:        { colors: {}, options: '', title: '', features: features, xDisplayRange: xDisplayRange, yRangePolicy: yRangePolicy, yRangeResetKey: yRangeResetKey, annotations: annotations, annotationPulse: annotationPulse }, // CHANGED — B1-AP-14c4
+                config:        { colors: {}, options: '', title: '', features: features, xDisplayRange: xDisplayRange, yRangePolicy: yRangePolicy, yRangeResetKey: yRangeResetKey, annotations: annotations, annotationPulse: annotationPulse, chartText: chartText }, // CHANGED — AP-prokrast-03d
                 range:         'max',
                 view:          'value',
                 viewOptions:   [],
@@ -327,6 +337,14 @@ export class ChartEngine {
             chartConfig.plugins.push(FwAnnotationPulsePlugin);
             if (!chartConfig.options.plugins) chartConfig.options.plugins = {};
             chartConfig.options.plugins.fwAnnotationPulse = runtimeConfig.annotationPulse; // NEW
+        }
+
+        // NEW — AP-prokrast-03d: FwChartTextPlugin (persistente Canvas-Text-Annotationen, nur wenn chartText.enabled)
+        if (runtimeConfig.chartText?.enabled) {
+            if (!chartConfig.plugins) chartConfig.plugins = [];
+            chartConfig.plugins.push(FwChartTextPlugin);
+            if (!chartConfig.options.plugins) chartConfig.options.plugins = {};
+            chartConfig.options.plugins.fwChartText = runtimeConfig.chartText;
         }
 
         var strategyWantsNoTooltip = false;
