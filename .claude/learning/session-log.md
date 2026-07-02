@@ -231,3 +231,34 @@ Wird geleert nach /distill. Einträge: [FRICTION] [WIN] [PREF] [QUESTION] [OK]
 - [WIN] Zwei echte Selbstkorrekturen in dieser Kette: eigener Seed-Schreibfehler (AP-23) sofort erkannt und korrigiert (AP-23a); fehlerhaftes Audit-Gerüst (AP-25) transparent repariert statt blind gemeldet (AP-25a)
 
 ### AP-14j — AP-Wechsel
+
+## 2026-07-01 – SESSION START | [KETTENMODUS] | Fokus: AP-14j — regulatorik-dashboard APP_SPEC-Vorbereitung / Scope-Schnitt
+
+### 2026-07-01 — AP-prokrast-01 ✅ — Befund/Anamnese prokrastinations-preis
+- [OK] Screen-1-Copy stimmt bereits mit dem (später als amtlich bestätigten) Drehbuch überein; drei B1-UX-01-Befunde (Screen-2-Headline, Screen-4-CTA href, visuelles Vakuum) weiterhin offen
+- [OK] Größte Lücke erkannt: Screen 4 hat im Ist-Code keinen Chart — Rubikon-Mechanik (Kartenschrumpf, Zukunftsraum) komplett neu gegenüber alter APP_SPEC §16
+
+### 2026-07-01 — AP-prokrast-02a ✅ — Quelleninventur und Datei-Wahrheit
+- [OK] Alle 8 Pflichtquellen gefunden und gelesen; Drehbuch amtlich, aber untracked; Repo-Namensdiskrepanz (Finanzwesir 2.0 vs. Finanzwesir-code) als GELB-Grund benannt
+- [FRICTION] Beide GELB-Gründe vom Steuerfaden vor AP-02b als „kein Blocker" übersteuert — in Folge-APs korrekt übernommen
+
+### 2026-07-02 — AP-prokrast-02b ✅ — Soll-/Ist-/Architektur-Konfliktmatrix
+- [OK] Konflikt- und Beat-/Mechanik-Matrix vollständig; 800ms-Stille dort noch als offene Produktentscheidung geführt (später vom Steuerfaden entschieden)
+- [WIN] Screen-1-Ist-Code erweist sich als wortgleich mit neuem Drehbuch — AP-01-Copy-Befund dadurch gegenstandslos
+
+### 2026-07-02 — AP-prokrast-02c ✅ — Architektur-Kontrakt, Rucksack-/Context-Prüfung, Datenwahrheit Zukunftsraum
+- [WIN] Am realen Engine-Code nachgewiesen: `xDisplayRange`/`displayRange` hat keine Obergrenzenprüfung, `FwVerticalLinePlugin` positioniert sich bereits am letzten echten Datenpunkt — Rubikon-Zukunftsraum und Gegenwartslinie ohne Chart-Engine-Codeänderung erreichbar
+- [OK] Card-to-Point-Koordinaten-API fehlt nachweislich (kein Rückgabewert aus `ChartEngine.renderFromData()`) — als Kontrakt-Kandidat markiert, nicht entschieden
+
+### 2026-07-02 — AP-prokrast-02d ✅ — Migrationsschnitt, AP-Schnitt, Rücklaufkapsel
+- [OK] Senior-Engineering-Schnitt: Rubikon-Minimum (Screen 4) als nächster Haupt-AP statt Card-to-Point (höchste DOM↔Canvas-Kopplungsgefahr); genau ein nächster Haupt-AP empfohlen (AP-prokrast-03)
+- [OK] Steuerfaden-Entscheidungen (Future-Ticks Pflicht, parametrische Domain 120/120, 800ms bleibt bei Reduced Motion) sichtbar in Rücklaufkapsel verankert
+
+### 2026-07-02 — AP-prokrast-02e ✅ — Abschluss-QA Claims-vs-Files
+- [WIN] Unabhängige Verifikation aller AP-02c-Kernbehauptungen direkt am Engine-Code (nicht nur Vorgänger-Protokoll vertraut) — kein Widerspruch gefunden; Git-Chain-of-Custody über alle 5 APs lückenlos
+- [OK] Rücklaufkapsel unverändert freigegeben; AP-prokrast-03 wartet auf Nutzer-OK
+
+### 2026-07-02 — Kettenabschluss AP-prokrast-01–02e ✅ | RECONCILED: AP-prokrast-01 AP-prokrast-02a AP-prokrast-02b AP-prokrast-02c AP-prokrast-02d AP-prokrast-02e
+- [OK] Reiner Analyse-/Architektur-Faden ohne jede Code-/Spec-/CSS-/Datenänderung — 6 Ergebnisprotokolle unter docs/steering/patches/, 1 Drehbuch + 1 AP-01-Befund unter Apps/prokrastinations-preis/
+- [OK] Kein Konflikt mit dem parallel laufenden AP-14j-Faden (regulatorik-dashboard) — beide Themenblöcke sauber getrennt, AP-14j bleibt unberührter nächster Schritt für die App-Fabrik-Kette
+- [WIN] Zwei echte Selbstkorrekturen entlang der Kette: 800ms-Stille und Future-Ticks wurden zunächst ehrlich als offen geführt und in AP-02d sichtbar (nicht still) nachgezogen, sobald der Steuerfaden entschied

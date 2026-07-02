@@ -42,3 +42,4 @@
 - [Memory-Symlink Setup](feedback_memory_schreibpfad.md) — SYMLINKD bestätigt: C:\Users\...\memory\ → NAS; Harness-Pfad korrekt, kein besonderes Verhalten nötig
 - [Verbalisierung vor Aktion](feedback_verbalisierung_vor_aktion.md) — Erst Ansatz verbalisieren, dann Gate/Edit/Aktion — nicht direkt in die Ausführung springen
 - [Kontext vor Token-Effizienz](feedback_kontext_vs_tokens.md) — Outputs lieber selbsterklärend als kurz wenn LLM-Lesbarkeit oder git-History auf dem Spiel steht
+- [prokrastinations-preis: neues amtliches Drehbuch](project_prokrastinations_preis_drehbuch.md) — ersetzt APP_SPEC §16, Datei untracked (kein Autoritätsverlust); xDisplayRange trägt Rubikon bereits; nächster Schritt AP-prokrast-03 wartet auf OK
