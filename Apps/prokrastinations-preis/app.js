@@ -398,7 +398,7 @@ function renderContent(container, appData, options, stationsConfig) { // CHANGED
   navS3.appendChild(btnS3Next);
   screen3.appendChild(navS3);
 
-  // --- Screen 4 — Entscheidung ---
+  // --- Screen 4 — Rubikon (stehender Zustand, CHANGED — AP-prokrast-03h: kein Morph mehr) ---
   const screen4 = document.createElement('section');
   screen4.className = 'fw-app__screen';
   screen4.dataset.fwScreen = '4';
@@ -410,15 +410,67 @@ function renderContent(container, appData, options, stationsConfig) { // CHANGED
   h2S4.textContent = 'Heute beginnt wieder ein Chart, dessen Ende niemand kennt.'; // CHANGED — B1-AP-16c (APP_SPEC §16.2)
   screen4.appendChild(h2S4);
 
-  const bodyS4 = document.createElement('p'); // NEW — B1-AP-16c (APP_SPEC §16.2)
-  bodyS4.className = 'fw-app__screen-subline';
-  bodyS4.textContent = 'Die letzten 10 Jahre sehen im Rückblick leichter aus, als sie sich unterwegs angefühlt hätten. Die nächsten 10 Jahre werden anders schwierig sein. Aber sie beginnen genauso: ohne fertigen Chart.';
-  screen4.appendChild(bodyS4);
+  const chartSection4 = document.createElement('div'); // NEW — AP-prokrast-03f: Rubikon-Chart
+  chartSection4.setAttribute('data-fw-appchart', 'sparplan-s4');
+  chartSection4.className = 'fw-app__chart-section';
+
+  // NEW — AP-prokrast-03h2: Wrapper für Chart + DOM-Text-Overlay, damit rubikonText per CSS
+  // in das rechte leere Zukunftsfeld gelegt werden kann, ohne den ChartEngine-eigenen
+  // Container (chartSection4) zu berühren — kein Eingriff in Chart.js-/Renderer-DOM.
+  const screen4ChartWrap = document.createElement('div');
+  screen4ChartWrap.className = 'fw-app__rubikon-chart-wrap';
+  screen4ChartWrap.appendChild(chartSection4);
+
+  // CHANGED — AP-prokrast-03h2: semantischer Rubikon-Text bleibt DOM, wird aber visuell als
+  // Overlay in die rechte Chart-Hälfte gelegt (statt als Absatz unter dem Chart). Zwei Text-
+  // Varianten im DOM (lang/kurz), CSS-Breakpoint entscheidet über Sichtbarkeit — kein JS-Zweig,
+  // keine zweite hidden-Steuerung nötig.
+  const rubikonText = document.createElement('div');
+  rubikonText.className = 'fw-app__rubikon-text';
+  rubikonText.setAttribute('hidden', '');
+
+  const rubikonLong = document.createElement('div');
+  rubikonLong.className = 'fw-app__rubikon-variant fw-app__rubikon-variant--long';
+  [
+    'Die letzten zehn Jahre sind gelaufen.',
+    'Die nächsten zehn sind leer.\nNoch.',
+    'Nicht weil nichts passiert —\nsondern weil niemand weiß, was.',
+    'Andere Krisen. Gleiche Zumutung.\nDer Job bleibt:\ndranbleiben, wenn es nervt.'
+  ].forEach(line => {
+    const p = document.createElement('p');
+    p.className = 'fw-app__screen-subline fw-app__rubikon-line';
+    p.textContent = line;
+    rubikonLong.appendChild(p);
+  });
+  const rubikonLongFootnote = document.createElement('p'); // NEW — AP-prokrast-03h: Prognose-Abgrenzung
+  rubikonLongFootnote.className = 'fw-app__rubikon-footnote';
+  rubikonLongFootnote.textContent = 'Keine Vorhersage. Nur Markterfahrung.';
+  rubikonLong.appendChild(rubikonLongFootnote);
+  rubikonText.appendChild(rubikonLong);
+
+  // NEW — AP-prokrast-03h2: kompakte Mobile-Fassung — engeres rechtes Overlay-Feld auf 375px
+  // reicht für die lange Fassung nicht; CSS-Breakpoint blendet long aus, short ein.
+  const rubikonShort = document.createElement('div');
+  rubikonShort.className = 'fw-app__rubikon-variant fw-app__rubikon-variant--short';
+  [
+    'Die nächsten 10 Jahre sind leer.\nNoch.',
+    'Die Linie fehlt noch.\nDie Aufgabe nicht:\ndranbleiben.'
+  ].forEach(line => {
+    const p = document.createElement('p');
+    p.className = 'fw-app__screen-subline fw-app__rubikon-line';
+    p.textContent = line;
+    rubikonShort.appendChild(p);
+  });
+  rubikonText.appendChild(rubikonShort);
+
+  screen4ChartWrap.appendChild(rubikonText);
+  screen4.appendChild(screen4ChartWrap);
 
   const cta = document.createElement('a'); // CHANGED — Slice 6: finales CTA-Styling; href leer (NB-1)
   cta.className = 'fw-app__cta';
   cta.href = '';
   cta.textContent = 'Heute Marktzeit sammeln →';
+  cta.setAttribute('hidden', ''); // CHANGED — AP-prokrast-03h: CTA erst nach Text + weiterer 800ms-Stille sichtbar
   screen4.appendChild(cta);
 
   const navS4 = document.createElement('div');
@@ -440,8 +492,13 @@ function renderContent(container, appData, options, stationsConfig) { // CHANGED
   // CHANGED — AP-14: Chart-Engines; lastRenderedRateS2 entfernt (orphaned by AP-14)
   const chartEngine2 = new ChartEngine();
   const chartEngine3 = new ChartEngine();
+  const chartEngine4 = new ChartEngine(); // NEW — AP-prokrast-03f
   let lastRenderedRateS3 = null;
   let lastRevealA11yText = ''; // NEW — AP-17b
+  let screen4TextTimer = null; // CHANGED — AP-prokrast-03h (war: screen4Timer, ein Morph-Timer): Timer für Text-Reveal nach 800ms
+  let screen4CtaTimer = null; // NEW — AP-prokrast-03h: Timer für CTA-Reveal nach weiterer 800ms-Stille
+  let screen4RevealedRate = null; // Rate, für die S4 zuletzt final gerendert wurde (analog lastRenderedRateS3)
+  const RUBIKON_A11Y_TEXT = 'Die letzten zehn Jahre sind gelaufen. Die nächsten zehn Jahre sind bewusst leer, weil niemand weiß, was passiert. Der Handlungsrahmen ist: dranbleiben, wenn es nervt.'; // CHANGED — AP-prokrast-03h
 
   // NEW — AP-14: Zeitreise-Schritt rendern (ersetzt renderS2)
   // Kein Endwissen: nur Stations-Daten bis stationMonth sichtbar (APP_SPEC §14.1)
@@ -490,10 +547,53 @@ function renderContent(container, appData, options, stationsConfig) { // CHANGED
     return ctx; // CHANGED — AP-14: ctx für revealA11ySummary in showScreen(3)
   }
 
+  // CHANGED — AP-prokrast-03h: kein Morph mehr. Screen 4 rendert den finalen 20-Jahres-Rubikon-Zustand
+  // in einem einzigen renderFromData()-Aufruf — links echte Vergangenheit, Mitte Rubikon/Heute
+  // (FwVerticalLinePlugin), rechts leerer Zukunftsraum (kein Zukunftspunkt, kein Dummy, kein zweites
+  // Dataset). Kein Canvas-Text mehr (FwChartTextPlugin bleibt ungenutzt) — der semantische Haupttext
+  // steht ausschließlich im DOM (`rubikonText`).
+  function renderScreen4Chart() {
+    const ctx = buildAppContext(appData, currentRate, startBetrag, journeyStations);
+    chartEngine4.renderFromData(chartSection4, ctx.chartSeries, {
+      type: 'line',
+      features: { rangeControls: false, headline: false, verticalLine: 'last' },
+      xDisplayRange: { min: ctx.startMonth, max: addMonths(ctx.latestMonth, 119) }
+    });
+  }
+
+  // CHANGED — AP-prokrast-03h: Beat-Sequenz für den stehenden Rubikon-Screen —
+  // Chart sofort final, 800ms Stille, DOM-Text erscheint (genau eine aria-live-Aktualisierung),
+  // 800ms Stille, CTA erscheint. Kein Replay, solange currentRate unverändert (analog lastRenderedRateS3).
+  function revealScreen4() {
+    if (screen4TextTimer) { clearTimeout(screen4TextTimer); screen4TextTimer = null; }
+    if (screen4CtaTimer)  { clearTimeout(screen4CtaTimer);  screen4CtaTimer  = null; }
+    if (screen4RevealedRate === currentRate) {
+      a11yRegion.textContent = RUBIKON_A11Y_TEXT; // erneute Ansage bei Rückkehr, analog S3 — kein erneuter Reveal
+      return;
+    }
+    rubikonText.setAttribute('hidden', '');
+    cta.setAttribute('hidden', '');
+    renderScreen4Chart();
+    screen4TextTimer = setTimeout(() => {
+      screen4TextTimer = null;
+      rubikonText.removeAttribute('hidden');
+      a11yRegion.textContent = RUBIKON_A11Y_TEXT; // genau eine Aktualisierung beim Erscheinen des Texts
+      screen4CtaTimer = setTimeout(() => {
+        screen4CtaTimer = null;
+        cta.removeAttribute('hidden');
+        screen4RevealedRate = currentRate;
+      }, 800);
+    }, 800);
+  }
+
   // NEW — Screen-Controller (prefers-reduced-motion: hidden-Toggle ist direkt, kein CSS-Übergang)
   const allScreens = [screen1, screen2, screen3, screen4];
 
   function showScreen(n, focus) {
+    if (n !== 4) { // CHANGED — AP-prokrast-03h: Timer-Cleanup bei Screen-Wechsel weg von S4 (zwei Timer statt einem)
+      if (screen4TextTimer) { clearTimeout(screen4TextTimer); screen4TextTimer = null; }
+      if (screen4CtaTimer)  { clearTimeout(screen4CtaTimer);  screen4CtaTimer  = null; }
+    }
     allScreens.forEach((s, i) => {
       if (i + 1 === n) s.removeAttribute('hidden');
       else s.setAttribute('hidden', '');
@@ -514,6 +614,7 @@ function renderContent(container, appData, options, stationsConfig) { // CHANGED
     } else if (n === 3 && lastRevealA11yText) { // NEW — AP-17b: re-announce bei Rückkehr zu S3
       a11yRegion.textContent = lastRevealA11yText;
     }
+    if (n === 4) revealScreen4(); // NEW — AP-prokrast-03f
   }
 
   // CHANGED — AP-14: Button-Wiring (btnS2Prev / btnS2Next entfernt — Screen 2 hat kein NavPanel)
@@ -667,6 +768,14 @@ function subtractMonths(yyyyMm, n) {
   const year  = parseInt(yyyyMm.slice(0, 4), 10);
   const month = parseInt(yyyyMm.slice(5, 7), 10) - 1; // 0-basiert
   const total = year * 12 + month - n;
+  return Math.floor(total / 12) + '-' + String((total % 12) + 1).padStart(2, '0');
+}
+
+// NEW — AP-prokrast-03f: YYYY-MM Monatsaddition (Gegenstück zu subtractMonths, nur lokal in app.js — nicht FwDateUtils.js, Tabu-Zone)
+function addMonths(yyyyMm, n) {
+  const year  = parseInt(yyyyMm.slice(0, 4), 10);
+  const month = parseInt(yyyyMm.slice(5, 7), 10) - 1; // 0-basiert
+  const total = year * 12 + month + n;
   return Math.floor(total / 12) + '-' + String((total % 12) + 1).padStart(2, '0');
 }
 

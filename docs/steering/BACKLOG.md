@@ -1,5 +1,5 @@
 # BACKLOG – Finanzwesir 2.0
-Stand: 2026-07-01 | Session: AP-16/17/18 | Geändert von: Claude
+Stand: 2026-07-03 | Session: AP-prokrast-03f-03i | Geändert von: Claude
 
 **Regeln:**
 - ✅-Zeilen werden sofort nach `BACKLOG-ARCHIV.md` verschoben (append), dann hier gelöscht.
@@ -57,6 +57,7 @@ Stand: 2026-07-01 | Session: AP-16/17/18 | Geändert von: Claude
 | AF-21    | App-Fabrik | App-Familien P→B→N-Standards ausarbeiten              | M    | —       | docs/App-Fabrik/PBN-FAMILY-STANDARDS.md anlegen: 6-7 Familien je mit Proven-Muster, Better-Satz, Tailwind-Komponenten-Liste |
 | AF-22    | App-Fabrik | P→B→N-Block in APP_SPEC-Template integrieren          | M    | AF-21   | Pflichtabschnitt in APP_SPEC.md-Vorlage + 10v10-Test-Feld |
 | AF-23    | App-Fabrik | Pincus-Check als Pre-Code-Quality-Gate dokumentieren  | L    | AF-22   | 4-Punkte-Checkliste in .claude/commands/ oder CLAUDE.md §6 App-Arbeit |
+| AP-23    | Engine  | Chart.js-Version zwischen Dev/Test-CDN (`Theme/index.html`, `app.test.html`, ungepinntes `<script src="https://cdn.jsdelivr.net/npm/chart.js">`) und lokal vendorter Produktionsversion 4.5.0 synchronisieren/pinnen — Drift-Risiko bei künftigen Chart.js-Majors | L | — | docs/steering/patches/AP-prokrast-03g_klaerung-forschung_rubikon-reveal_scale-animation_Ergebnis.md |
 
 ---
 

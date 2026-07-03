@@ -283,3 +283,53 @@
     width: auto;
   }
 }
+
+/* CHANGED — AP-prokrast-03h2: Rubikon-Text als DOM-Overlay im rechten Zukunftsfeld
+   (war: Absatz unter dem Chart, AP-prokrast-03h). chartSection4 bleibt unverändert
+   ChartEngine-eigen — nur der zusätzliche Wrapper trägt die Positionierung. */
+.fw-app__rubikon-chart-wrap {
+  position: relative;
+}
+
+.fw-app__rubikon-text {
+  position: absolute;
+  /* NEW — AP-prokrast-03h2 (Nachtrag): Position über Custom Properties einstellbar —
+     --fw-rubikon-text-top größer = weiter nach unten, kleiner = weiter nach oben.
+     --fw-rubikon-text-left größer = weiter nach rechts, kleiner = weiter nach links.
+     Direkt in DevTools am Element testbar, dann hier übernehmen — kein Selektor-Suchen nötig. */
+  --fw-rubikon-text-top: 14%;
+  --fw-rubikon-text-left: 62%;
+  top: var(--fw-rubikon-text-top);
+  left: var(--fw-rubikon-text-left);
+  right: 3%;
+  pointer-events: none; /* reiner Lesetext, blockiert keine Chart-Interaktion darunter */
+}
+
+.fw-app__rubikon-variant--short {
+  display: none;
+}
+
+@media (max-width: 480px) {
+  .fw-app__rubikon-variant--long {
+    display: none;
+  }
+  .fw-app__rubikon-variant--short {
+    display: block;
+  }
+  .fw-app__rubikon-text {
+    --fw-rubikon-text-top: 10%;
+    --fw-rubikon-text-left: 68%; /* CHANGED — AP-prokrast-03h2 (Nachtrag 2): Albert-Feedback S-Zone — Text begann links der blauen Linie, weiter nach rechts verschoben (war 56%) */
+    right: 2%;
+    font-size: 0.85em;
+  }
+}
+
+.fw-app__rubikon-line {
+  white-space: pre-line; /* erlaubt bewusste Zeilenumbrüche (\n) innerhalb eines Absatzes, bleibt responsiv umbruchfähig */
+}
+
+.fw-app__rubikon-footnote {
+  font-size: 0.75em;
+  color: var(--fw-color-muted, #555555);
+  margin: 0;
+}

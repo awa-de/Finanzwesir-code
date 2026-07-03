@@ -292,3 +292,36 @@ Wird geleert nach /distill. Einträge: [FRICTION] [WIN] [PREF] [QUESTION] [OK]
 - [OK] Reiner Analyse-/Peer-Review-/isolierter-Implementierungs-Faden: `FwChartTextPlugin.js` neu, `ChartEngine.js`+`plugins/index.js` additiv, `app.test.html` um Testszenario erweitert (autorisiert) — `app.js`/`app.css`/Strategies/Scales/Specs durchgängig unverändert (per `git diff` bestätigt)
 - [WIN] Zweistufige Selbstkorrektur in AP-03d: zwei reale CSS-Bugs im eigenen Testszenario gefunden und transparent als Testharness-Fehler (nicht Plugin-Fehler) diagnostiziert und behoben, bevor der Smart-Update-Testfall tatsächlich im Browser bestätigt wurde
 - [OK] Nächster fachlicher Schritt von Albert bestätigt: AP-prokrast-03f — Screen-4 Rubikon-Reveal Integration mit `FwChartTextPlugin` (wartet auf Nutzer-OK)
+
+## 2026-07-02 – SESSION START | [KETTENMODUS] | Fokus: AP-prokrast-03f
+
+### 2026-07-02 — AP-prokrast-03f ✅ — Screen-4 Rubikon-Reveal Integration mit FwChartTextPlugin
+- [OK] Reveal fachlich vollständig integriert (Chart-Mount, zwei renderFromData()-Aufrufe, xDisplayRange-Zukunftsraum, FwChartTextPlugin, A11y-DOM-Kopie, CTA-Reveal) — kein Engine-/Plugin-Diff, additiv, 83 Zeilen
+- [FRICTION] Albert testete manuell im Browser und fand: Reveal-Bewegung wirkt zackig/ruckartig statt smooth — AP-03b hatte "Smart Update ist bereits in Screen 2 erprobt" als Beleg genutzt, das war irreführend (Screen 2 ändert xDisplayRange nie zwischen Renderaufrufen, der Achsen-Animationspfad wurde vor AP-03f nie tatsächlich durchlaufen)
+- [WIN] Root Cause direkt am Code + zwei Spec-Dokumenten identifiziert (nicht geraten): Chart.js animiert Scale-Bounds nicht, nur Datensatz-Elemente — Albert bestätigte neuen Architektur-AP statt Nachschärfen im laufenden AP
+
+### 2026-07-02 — AP-prokrast-03g ✅ — Klärung/Forschung Rubikon-Reveal Scale-Animation
+- [WIN] Root Cause auf Chart.js-4.5.0-Quellcode-Ebene verifiziert (nicht nur Vermutung): `_updateLayout()` und `_updateDatasets(mode)` sind strukturell getrennte Codepfade — Skalen durchlaufen nie den Animator. Vier unabhängige Quellen konvergierten (offizielle Doku, Chart.js-Kernquelle, chartjs-plugin-zoom-Quellcode, offenes GitHub-Issue)
+- [OK] Alberts Risikohinweis ("Chart.js setzt sich aggressiv durch bei Sonderwegen") bestätigte sich direkt im Projekt-Spec (`CHART_PLUGIN_ARCHITEKTUR.md §6.3`) — rAF/`update('none')`-Tween für AP-03h explizit verworfen, C2 (gestufte Renderaufrufe) als spec-konformer Mittelweg empfohlen
+
+### 2026-07-02 — AP-prokrast-03h ✅ — Stehender Rubikon-Screen Rückspiegel → Horizont
+- [OK] Masterfaden-Entscheidung umgesetzt: C2/Morph-Idee vollständig verworfen, Screen 4 zeigt ab Eintritt sofort den finalen 20-Jahres-Zustand; alte Morph-Funktionen komplett entfernt statt nur überschrieben
+- [FRICTION] Albert lehnte Text-unter-dem-Chart als Endzustand ab, verwies auf FwChartTextPlugin — direkter Konflikt mit der A11y-Pflicht dieses APs (Haupttext muss DOM sein). Konflikt nicht eigenmächtig gelöst, sondern als klärungsbedürftiger Punkt an Albert vorgelegt und auf dessen Anweisung an die Steuerungsebene zurückgegeben (kein Code-Patch im laufenden AP)
+
+### 2026-07-02 — AP-prokrast-03h2 ✅ — DOM-Overlay Rubikon-Text ins rechte Zukunftsfeld
+- [OK] Masterfaden löste den AP-03h-Konflikt: DOM-Overlay statt Canvas — neuer Wrapper (screen4ChartWrap) legt rubikonText per CSS position:absolute über die rechte Chart-Hälfte, ohne den ChartEngine-eigenen Container zu berühren
+- [FRICTION] Zwei Nachjustierungsrunden nach Alberts Live-Feedback: Desktop-Abstand zur blauen Linie zu gering (54%→62%), danach S-Zone-Text begann links der Linie (56%→68%)
+- [WIN] CSS-Custom-Properties (--fw-rubikon-text-top/-left) auf Alberts Wunsch eingebaut — Nachjustierung lief danach in einer Zeile statt neuem Full-Gate-Zyklus; Albert konnte in DevTools selbst vortesten
+- [OK] Alle 18 QA-Punkte (S/M/L-Breakpoints, Konsole, CTA-Timing, Re-Entry) von Albert bestätigt — Konsolenfehler korrekt als bekannte, absichtlich fehlerhafte Testkarten (AP-03e) identifiziert, kein neuer Fehler
+
+### 2026-07-02 — AP-prokrast-03i ✅ — Abschluss-QA Screen 4 Claims-vs-Files
+- [OK] Alle Claims aus AP-03f–03h2 unabhängig gegen den Code verifiziert (Grep-Mindestliste, Diff-Hunk-Analyse für Screen-1–3-Unversehrtheit) — keine No-Go-Verletzung, Scope sauber (nur app.js/app.css)
+- [OK] AP-03h2-Protokoll enthält chronologische Nachtrag-Stufen mit historisch korrekten GELB-Zwischenständen — als nachvollziehbare Entwicklungsspur bewertet, nicht als Widerspruch; Screen 4 als commitfähig eingestuft
+
+### 2026-07-02 — Kettenabschluss AP-prokrast-03f–03i ✅ | RECONCILED: AP-prokrast-03f AP-prokrast-03g AP-prokrast-03h AP-prokrast-03h2 AP-prokrast-03i
+- [OK] Screen 4 (Rubikon-Reveal) vollständig von Morph/C2 auf stehenden Zustand mit DOM-Overlay-Text umgestellt, ausschließlich app.js/app.css geändert, kein Engine-/Plugin-/Strategy-/Spec-Diff über die gesamte Kette
+- [WIN] Zwei echte Architektur-Sackgassen (Achsenanimation nicht nativ möglich; Canvas-Text verletzt A11y-Pflicht) wurden jeweils sauber an Albert/Masterfaden zurückgegeben statt eigenmächtig umgangen — beide Male kam eine bessere, spec-konforme Lösung zurück (Produktentscheidung "stehender Screen" statt Animation; DOM-Overlay statt Canvas)
+- [OK] Alle 18 QA-Punkte von Albert im Browser bestätigt, AP-prokrast-03i bestätigt Commitfähigkeit unabhängig — nächster Schritt: Commit nach Alberts Freigabe
+
+### 2026-07-03 — Nachtrag Abschluss-Ritual: BACKLOG-Eintrag AP-23 (Chart.js CDN-Drift)
+- [OK] Auf Alberts Anweisung Nebenfund aus AP-03g als BACKLOG-Item AP-23 (Engine, Prio L) erfasst statt nur in Protokoll dokumentiert — Scope-Check-Prinzip: nichts still verschwinden lassen
