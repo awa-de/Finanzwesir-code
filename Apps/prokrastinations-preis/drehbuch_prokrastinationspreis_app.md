@@ -116,7 +116,11 @@ Darunter der Button:
 
 ## Screen 4 — Der Rubikon
 
-### Beat 1 — X-Achse verlängert sich *(500ms)*
+> **Amtlicher Hinweis (AP-prokrast-04a, 2026-07-03):** Die folgende Beat-Choreografie (Beat 1–3, teilweise Beat 5) wurde durch die finale Masterfaden-Entscheidung aus AP-prokrast-03g/03h/03h2 abgelöst und ist **nicht mehr aktives Soll**. Der real gebaute und freigegebene Endzustand steht in `APP_SPEC.md` §16.1a. Diese Beats bleiben als historische Dramaturgie-Vorlage stehen, nicht als Bauauftrag. Details je Beat siehe Anmerkungen unten.
+
+### Beat 1 — X-Achse verlängert sich *(500ms)* — **abgelöst, nicht gebaut**
+
+> Root Cause (AP-prokrast-03g, am Chart.js-4.5.0-Quellcode verifiziert): Chart.js animiert Skalen-Grenzen strukturell nicht — nur Datensatz-Elemente durchlaufen den Animator. Eine smoothe X-Achsen-Verlängerung ist mit der Chart-Engine nicht erreichbar. Masterfaden-Entscheidung (AP-prokrast-03h): kein Morph, keine Achsenanimation, keine C2-Staffelung. Screen 4 zeigt den finalen Rubikon-Zustand stattdessen sofort, stehend.
 
 Der Nutzer klickt. Die X-Achse fährt nach rechts — 10 neue Jahre öffnen sich. Der bestehende Chart schrumpft dadurch automatisch nach links zusammen. Die blaue Linie bleibt stehen, wo sie ist. Sie wird zur Grenze zwischen dem, was war, und dem, was kommt.
 
@@ -124,7 +128,9 @@ Der leere Zukunftsraum öffnet sich. Keine Linie, keine Prognose, keine Fantasie
 
 ---
 
-### Beat 2 — Symbole erscheinen *(300ms Pause nach Beat 1, dann fade in)*
+### Beat 2 — Symbole erscheinen *(300ms Pause nach Beat 1, dann fade in)* — **offen, nie entschieden**
+
+> Status: Dieses Beat wurde in der AP-prokrast-03-Kette **weder gebaut noch explizit verworfen** — anders als Beat 1/3, für die es eine dokumentierte Masterfaden-Gegenentscheidung gibt. Die ✅/❓-Symbolik ist eine offene Produktentscheidung, kein abgelöster Ansatz. Muss vor einem eventuellen Bau erneut mit Albert geklärt werden.
 
 Direkt an der blauen Linie, auf Höhe der Chartlinie:
 
@@ -135,7 +141,9 @@ Kein Text. Keine Erklärung. Der Nutzer versteht es in unter einer Sekunde, auf 
 
 ---
 
-### Beat 3 — Ein Satz erscheint *(fade in)*
+### Beat 3 — Ein Satz erscheint *(fade in)* — **Textposition abgelöst**
+
+> AP-prokrast-03h2 (Masterfaden-Entscheidung nach Alberts Feedback): Der Text steht nicht unter dem Chart, sondern als DOM-Overlay im rechten, leeren Zukunftsraum des Charts selbst (→ `APP_SPEC.md` §16.1a). Semantisch bleibt es echter DOM-Text (A11y-Pflicht), nur die visuelle Position wurde verändert.
 
 Unter dem Chart:
 
@@ -143,11 +151,13 @@ Unter dem Chart:
 
 ---
 
-### Beat 4 — Stille *(800ms)*
+### Beat 4 — Stille *(800ms)* — Grundidee erhalten, Timing erweitert
 
 Nichts passiert. Der Nutzer sitzt mit dem leeren Raum und dem Satz. Kein Button, keine Ablenkung.
 
 Das ist die psychologische Arbeit. Dieses kurze Aushalten ist der Kern der App.
+
+> Im gebauten Endzustand (`APP_SPEC.md` §16.1a) gibt es **zwei** 800ms-Stille-Momente statt einem: vor dem Text-Reveal und vor dem CTA-Reveal. Die Grundidee (Stille als psychologische Arbeit) ist unverändert, nur die Zahl der Beats.
 
 ---
 
@@ -176,7 +186,7 @@ Das ist die psychologische Arbeit. Dieses kurze Aushalten ist der Kern der App.
 - Kein „Meine Regeln festlegen"-Screen
 - Keine Folklore, keine Zitate, keine Belehrung
 - Keine Erklärung, was die blaue Linie bedeutet — ✅ ❓ reichen
-- Kein zusätzlicher Text im Zukunftsraum
+- ~~Kein zusätzlicher Text im Zukunftsraum~~ — **überholt:** Der gebaute Endzustand platziert den Rubikon-Haupttext bewusst als DOM-Overlay im rechten Zukunftsraum (`APP_SPEC.md` §16.1a, AP-prokrast-03h2). Diese Regel galt für die ursprüngliche Beat-3-Variante (Text unter dem Chart) und ist durch die Textposition-Entscheidung überholt.
 
 ---
 
@@ -186,8 +196,8 @@ Das ist die psychologische Arbeit. Dieses kurze Aushalten ist der Kern der App.
 |---|---|---|
 | Kartenwechsel-Animation (Beat A–C) | Hoch | Kern der psychologischen Wirkung — zuerst bauen |
 | KPI-Karten mit Verzögerung (Screen 3) | Hoch | Erst Linie, dann Zahl |
-| X-Achsen-Verlängerung (Screen 4 Beat 1) | Hoch | Zukunftsraum Mobile-Breite vor Go-Live testen |
-| ✅ ❓ an blauer Linie | Mittel | Fallback: Textkarte unter Chart auf Mobile |
+| ~~X-Achsen-Verlängerung (Screen 4 Beat 1)~~ | — | überholt: abgelöst durch AP-prokrast-03h (kein Morph, keine Achsenanimation) — Zukunftsraum steht sofort, kein separater Mobile-Testschritt für die Animation nötig |
+| ✅ ❓ an blauer Linie | offen | ungebaut, nicht entschieden (siehe Beat 2) — vor Bau erneut mit Albert klären |
 | Stille Beat 4 — 800ms | Fest | Nicht kürzen |
 | `showScreen()` Transition | Mittel | Aktuell nur hidden-Toggle, kein Übergang |
 

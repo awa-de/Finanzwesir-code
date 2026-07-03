@@ -12,7 +12,7 @@ Stand: 2026-06-18 | V2.9 — B1-AP-14d4: §16.3 Status-Sync + §1 Status-Tabelle
 | Phase | Implementierung — Stationen-Zeitreise vollständig (B1-AP-11–AP-14c4 ✅ 2026-06-17/18); Engine-Erweiterungen (Progressive Domain, Annotation-Marker, Pulse) abgeschlossen; nächster Schritt: Transitions + Reduced Motion (B1-AP-15) |
 | Nächster Schritt | B1-AP-15 — Transitions + Reduced Motion (B1-AP-14d4 ✅ 2026-06-18) |
 | Code-Freigabe | Slice 0 ✅ 2026-06-04, Slice 1–2 ✅ 2026-06-05, Slice 4 ✅ 2026-06-11, Slice 5 ✅ 2026-06-15, Slice 6 ✅ 2026-06-16; B1-AP-11–AP-14c4 ✅ 2026-06-17/18 |
-| Code-Stand | Stationen-Zeitreise implementiert: `loadStations()`, `validateStationsJson()`, `renderJourneyStep()`, `buildJourneyStationAnnotations()`, `FwAnnotationPulsePlugin.js`. Screen 2 = Stationen ohne Endwissen; Screen 3 = erster Reveal; Screen 4 = CTA. |
+| Code-Stand | Stationen-Zeitreise implementiert: `loadStations()`, `validateStationsJson()`, `renderJourneyStep()`, `buildJourneyStationAnnotations()`, `FwAnnotationPulsePlugin.js`. Screen 2 = Stationen ohne Endwissen; Screen 3 = erster Reveal; Screen 4 = Rubikon-Chart (echte Vergangenheit + leerer, datenfreier Zukunftsraum) + DOM-Overlay-Text + CTA (AP-prokrast-03f–03i ✅ 2026-07-02, siehe §16.1a). |
 | Grundlage | `Apps/prokrastinations-preis/ENTSCHEIDUNGSPROTOKOLL.md` (AP-01, 2026-06-16) |
 | Ersetzt | APP_SPEC V1.7 (Ergebnisgrafik-Logik — Screen 2 zeigte vollständigen Chart mit KPIs) |
 
@@ -1124,7 +1124,7 @@ Die App ist kein Single-Screen-Calculator. Sie führt den Nutzer als geführte Z
 | 1 — Frage / Teleportation | Akt 1: Aufbruch | Nutzer personalisiert die Reise und springt 10 Jahre zurück | Slider + Subtext + Teleportationsbutton |
 | 2 — Zeitreise | Akt 2: Reise | Nutzer erlebt die historische Strecke ohne Endwissen | wachsender SparplanChart + Stationstexte + Button |
 | 3 — Rückblick / Reveal | Akt 3: Rückkehr | Jetzt erst erscheint der vollständige Rückblick | vollständiger SparplanChart + KPI-Cards + AssumptionsBox |
-| 4 — Entscheidung | Akt 3: Transfer | Erkenntnis wird auf heute übertragen | Microcopy + PrimaryCta, keine Prognosekurve |
+| 4 — Entscheidung | Akt 3: Transfer | Erkenntnis wird auf heute übertragen | Rubikon-Chart (echte Vergangenheit + leerer Zukunftsraum) + DOM-Overlay-Text + Microcopy + PrimaryCta, keine Prognosekurve |
 
 **Harte Grenzen:**
 - Screen 2 zeigt **nicht** den vollständigen Chart.
@@ -1247,6 +1247,32 @@ Produktentscheidung (freigegeben Albert 2026-06-18):
 
 Implementierung: `FwAnnotationPulsePlugin.js` (WeakMap-State, `afterDraw`-Hook, `chart.draw()`-Pattern).
 
+### 16.1a Screen 4 — Rubikon-Chart und Zukunftsraum (finale Produktentscheidung, AP-prokrast-03f–03i ✅ 2026-07-02)
+
+Screen 4 zeigt beim Eintritt sofort den finalen, stehenden Rubikon-Zustand — kein Morph, keine Achsenanimation, keine gestufte C2-Staffelung. Ein einziger `renderFromData()`-Aufruf rendert das Ziel-Layout.
+
+**Chart-Aufbau:**
+- Links: echte, gemessene 10-Jahres-Vergangenheit (dieselbe Datenserie wie Screen 3).
+- Mitte: `FwVerticalLinePlugin`-Linie am letzten echten Datenpunkt — Grenze zwischen Vergangenheit und Zukunft.
+- Rechts: leerer Zukunftsraum über `xDisplayRange` (Domain um 120 Monate erweitert). Keine Linie, keine Prognose, keine Zukunftsdaten in diesem Bereich — nur Achsenraum ohne Dataset-Punkte.
+
+**Haupttext (A11y-Pflicht):**
+Der semantische Screen-4-Haupttext ist ein echter DOM-Textblock (kein Canvas-Text), weil er zentral und barrierefrei zugänglich sein muss. Er wird per CSS (`position:absolute`, `--fw-rubikon-text-top`/`--fw-rubikon-text-left` als nachjustierbare Custom Properties) visuell in den rechten, leeren Zukunftsraum des Charts gelegt — bleibt aber technisch außerhalb des Chart-DOM, den `ChartEngine`/`FwRenderer` verwalten.
+
+`FwChartTextPlugin.js` (AP-prokrast-03c/03d) ist ein vorhandener, isolierter Canvas-Text-Plugin-Baustein für persistente Chart-Annotationen. Er wurde für Screen 4 gebaut und getestet, ist aber **nicht** die Lösung für den Screen-4-Haupttext — der A11y-Konflikt (Canvas-Text ist für Screenreader unerreichbar) wurde zugunsten des DOM-Overlays entschieden. Der Plugin-Baustein bleibt für andere, zukünftige Anwendungsfälle nutzbar.
+
+**Reveal-Timing (zwei Stille-Momente, kein Chart-Reveal):**
+1. Finaler Rubikon-Chart ist sofort sichtbar (kein Fade-in der Datenlinie).
+2. 800ms Stille.
+3. Rubikon-Text erscheint im rechten Zukunftsfeld (DOM-Overlay).
+4. Eine A11y-Live-Region-Aktualisierung begleitet den Text-Reveal.
+5. 800ms Stille.
+6. CTA erscheint.
+
+**Nachgelagerte Pflichtteile (nicht Teil dieses Standes, bleiben offen):**
+- Card-to-Point bleibt Pflicht (noch nicht gebaut).
+- Screen-3-Timing-Reveal bleibt Pflicht (noch nicht gebaut).
+
 ### 16.2 Screen-Texte
 
 **Screen 1 — Frage / Teleportation:**
@@ -1279,6 +1305,8 @@ Die Strecke wirkt im Rückblick ruhiger, weil du das Ende jetzt kennst. Vor 10 J
 ```
 
 **Screen 4 — Entscheidung:**
+
+Text erscheint im Rubikon-Chart als DOM-Overlay im rechten Zukunftsfeld (Reveal-Timing und Chart-Architektur → §16.1a), nicht als eigener Screen-Abschnitt darunter.
 
 Empfohlene Headline:
 ```
@@ -1316,6 +1344,8 @@ Heute Marktzeit sammeln
 | KpiCard | eingezahlt / depotwertHeute / differenz | Screen 3 | ✅ umgesetzt |
 | AssumptionsBox | Pflichthinweis: Vergangenheit ≠ Garantie | Screen 3 | ✅ umgesetzt |
 | TextBlock | Microcopy pro Screen | je Screen | ✅ umgesetzt |
+| RubikonChart (echte Vergangenheit + leerer Zukunftsraum) | stehender Endzustand, ein `renderFromData()`-Aufruf, `xDisplayRange` | Screen 4 | ✅ umgesetzt (AP-prokrast-03f/03h) |
+| Rubikon-Text (DOM-Overlay im rechten Zukunftsfeld) | A11y-Haupttext, CSS-Overlay über Chart, kein Canvas | Screen 4 | ✅ umgesetzt (AP-prokrast-03h2) |
 | PrimaryCta | Handlungsaufruf | Screen 4 | ✅ umgesetzt |
 | ErrorState | Fehlermeldung auf Deutsch | jederzeit | ✅ umgesetzt |
 | LoadingSkeleton | Platzhalter während Datenladen | Loading | ✅ umgesetzt |
@@ -1407,7 +1437,7 @@ Die vollständigen Test- und QA-Kriterien für die Stationen-Zeitreise sind in `
 - Mobile-Zwischenstand ist Collapsible, keine permanenten Mini-KPIs
 - Keine rote Crash-Codierung
 - `prefers-reduced-motion` entfernt Bewegung, nicht Inhalte
-- Screen 4 zeigt keine Prognose
+- Screen 4 zeigt einen Rubikon-Chart (echte Vergangenheit + leerer, datenfreier Zukunftsraum) — keine Prognose, keine Zukunftsdaten, keine fortgeschriebene Linie
 - Screenreader erfährt den finalen Depotwert erst auf Screen 3 (`revealA11ySummary` — kein A11y-Endwissens-Leak)
 
 Die Testfälle T-01–T-40 (unten) sind eine ergänzende Kurzreferenz; maßgebend für Abnahme und QA ist `QA_TEST_CASES.md`.
@@ -1457,7 +1487,7 @@ Die Testfälle T-01–T-40 (unten) sind eine ergänzende Kurzreferenz; maßgeben
 | T-18 | Screen 2 — Stationen-Button ausgelöst | Chart wächst zur nächsten Station |
 | T-19 | Screen 3 — erstmals vollständiger Chart | Vollständiger Chart erscheint mit KPI-Cards |
 | T-20 | Screen 3 — Entscheidungspunkt-Marker | VertikaleLinie bei letztem Datenpunkt sichtbar |
-| T-21 | Screen 4 — keine Prognose | Kein Zukunftschart, keine fortgeschriebene Linie |
+| T-21 | Screen 4 — keine Prognose | Zukunftsraum im Rubikon-Chart bleibt leer: keine fortgeschriebene Linie, keine Zukunftsdaten, keine Prognosekurve |
 
 ### Mobile-Collapsible
 
@@ -2034,7 +2064,7 @@ Claude entscheidet diesen CTA nicht selbst, solange die Spec redaktionell offen 
 
 **Was Screen 4 nicht enthält:**
 - Keine Zukunftsprognose
-- Keinen Zukunftschart
+- Keine Zukunftsdaten oder fortgeschriebene Linie im Zukunftsraum des Rubikon-Charts (§16.1a) — der Zukunftsraum bleibt vollständig leer
 - Keine neue Zahl
 - Keinen Countdown
 - Keine Beschämung für Zögern

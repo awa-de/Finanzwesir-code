@@ -325,3 +325,35 @@ Wird geleert nach /distill. Einträge: [FRICTION] [WIN] [PREF] [QUESTION] [OK]
 
 ### 2026-07-03 — Nachtrag Abschluss-Ritual: BACKLOG-Eintrag AP-23 (Chart.js CDN-Drift)
 - [OK] Auf Alberts Anweisung Nebenfund aus AP-03g als BACKLOG-Item AP-23 (Engine, Prio L) erfasst statt nur in Protokoll dokumentiert — Scope-Check-Prinzip: nichts still verschwinden lassen
+
+## 2026-07-03 – SESSION START | [KETTENMODUS] | Fokus: AP-prokrast-03i — Abschluss-QA Screen 4 Claims-vs-Files (abgeschlossen)
+
+### AP-prokrast-04a — AP-Wechsel
+
+### 2026-07-03 — AP-prokrast-04a ✅ — Soll-/Spec-Synchronisierung nach Rubikon-Entscheidung
+- [OK] APP_SPEC.md (§16.1a neu, §16.3-Primitive-Tabelle, T-21, §23.18) und Drehbuch (Beat 1/3 als abgelöst, Beat 2 als offen, Beat 4 als timing-erweitert markiert) auf finalen AP-03f–03i-Stand synchronisiert; kein app.js/app.css/Engine/Plugin/Strategy berührt
+- [WIN] Full-Gate-Advocatus-Diaboli-Frage deckte zwei Fallen auf, bevor sie unterging: Beat-2-Symbolik (✅/❓) nie entschieden statt abgelöst, und QA_TEST_CASES.md liegt außerhalb des Write-Scopes und bleibt unsynchronisiert
+- [PREF] Albert bestätigte diesen Fund als wichtig ("Wären beinahe unter den Tisch gefallen") und verlangte explizit eine prominente Verankerung mit Eskalationspflicht über zwei Ebenen (AP-04b → Rücklaufkapsel → Masterfaden/Albert), nicht nur beiläufige Erwähnung im Protokoll
+
+### AP-prokrast-04b — AP-Wechsel
+
+### 2026-07-03 — AP-prokrast-04b ✅ — Abschluss-QA Claims-vs-Files (read-only)
+- [OK] Unabhängige Verifikation aller AP-04a-Claims gegen reale Dateien (inkl. Code-Stichprobe app.js/app.css) über dispatchten abschluss-scout + eigene Direkt-Greps — keine Abweichung, Scope sauber, GRÜN mit Rücklauf-Freigabe
+- [WIN] Konkrete Fundstelle für Eskalationspunkt 2 lokalisiert: QA_TEST_CASES.md:557 trägt noch die alte Formulierung "Kein Zukunftschart.", identisch zur in APP_SPEC.md bereits korrigierten Altformulierung
+
+### AP-prokrast-04c — AP-Wechsel
+
+### 2026-07-03 — AP-prokrast-04c ✅ — Rücklaufkapsel an Masterfaden
+- [OK] AP-04a+04b konsolidiert, Eskalationspunkte prominent mit Beleg weitergereicht (2. Ebene erreicht: direkt an Albert in dieser Kapsel), drei gleichrangige Kandidaten für den nächsten Haupt-AP zur Wahl gestellt (Beat-2-Klärung / QA_TEST_CASES.md-Sync / Card-to-Point) statt einseitiger Festlegung
+- [OK] Kettenende erreicht — kein Nachfolge-AP derselben Serie ist von Albert bestätigt, Wahl steht noch aus
+
+### 2026-07-03 — Housekeeping: /chronik-check zwei neue Chroniken ✅
+- [OK] CHRONIK-2026-07-03-ap-prokrast-04-nebenfaden.md: Exit 0, keine Warnung
+- [OK] CHRONIK-2026-07-03-ap-prokrast-03-rubikon-screen.md: Warnung "Autor-Signal claude" korrekt aufgelöst (beteiligte um `claude` ergänzt, Zeile 65 direkter Faden-Akteur); Warnung "Autor-Signal perplexity" bewusst nicht übernommen — Body belegt Perplexity eindeutig als zitiertes externes Review-Material, nicht als direkter Teilnehmer (nur Frontmatter geändert, Body unangetastet)
+
+### 2026-07-03 — Kettenabschluss AP-prokrast-04a–04c ✅ | RECONCILED: AP-prokrast-04a AP-prokrast-04b AP-prokrast-04c
+- [OK] Voll-Abschluss: NAVIGATION.md (neuer Block-Eintrag + Stand), PROJECT-STATUS.md (HOOK-META + sichtbarer Text, inkl. Backfill des fehlenden AP-prokrast-03f–03i-Absatzes), BACKLOG.md (2 neue Einträge AP-26/AP-27 für die eskalierten offenen Punkte), BACKLOG-ARCHIV.md (neue Kette-Zeile) aktualisiert
+- [OK] MEMORY: project_prokrastinations_preis_drehbuch.md auf synchronisierten Stand gebracht (Drehbuch bleibt Soll nur noch für Screen 2/3), neue feedback_eskalation_mehrstufig.md angelegt (Alberts Vorgabe zur mehrstufigen Eskalationspflicht), MEMORY.md-Index aktualisiert, Integritätscheck 46/46 GRÜN
+- [WIN] Scope-Check konsequent angewendet: beide von Albert als nicht-übersehbar markierten Punkte sind jetzt nicht nur im AP-04c-Protokoll, sondern zusätzlich dauerhaft in BACKLOG.md UND in MEMORY sichtbar — drei unabhängige Fundorte statt einem
+
+### AP-prokrast-03i — AP-Wechsel

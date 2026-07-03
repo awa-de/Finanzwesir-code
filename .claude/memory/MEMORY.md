@@ -42,6 +42,7 @@
 - [Memory-Symlink Setup](feedback_memory_schreibpfad.md) — SYMLINKD bestätigt: C:\Users\...\memory\ → NAS; Harness-Pfad korrekt, kein besonderes Verhalten nötig
 - [Verbalisierung vor Aktion](feedback_verbalisierung_vor_aktion.md) — Erst Ansatz verbalisieren, dann Gate/Edit/Aktion — nicht direkt in die Ausführung springen
 - [Kontext vor Token-Effizienz](feedback_kontext_vs_tokens.md) — Outputs lieber selbsterklärend als kurz wenn LLM-Lesbarkeit oder git-History auf dem Spiel steht
-- [prokrastinations-preis: neues amtliches Drehbuch](project_prokrastinations_preis_drehbuch.md) — ersetzt APP_SPEC §16, Datei untracked (kein Autoritätsverlust); xDisplayRange trägt Rubikon bereits; Screen 4 seit AP-prokrast-03i commitfähig
+- [prokrastinations-preis: Drehbuch vs. APP_SPEC](project_prokrastinations_preis_drehbuch.md) — Screen 4 seit AP-prokrast-04a in APP_SPEC §16.1a synchronisiert (operative Spec); Screen 2/3 weiterhin Drehbuch als Soll; offen: Beat-2-Symbolik (BACKLOG AP-26), QA_TEST_CASES.md-Sync (BACKLOG AP-27)
 - [Chart.js animiert Skalen-Grenzen nicht nativ](project_chartjs_scale_animation_limit.md) — nur Datensatz-Elemente werden interpoliert, min/max/Ticks springen sofort; verifiziert an Chart.js-4.5.0-Quellcode (AP-prokrast-03g)
 - [CSS Custom Properties für nachjustierbare Positionen](feedback_css_custom_properties_tuning.md) — bei absehbarem Iterationsbedarf (Overlay-Position etc.) sofort --fw-*-Properties statt harter Selektor-Werte anbieten
+- [Eskalation in mehrstufigen AP-Ketten](feedback_eskalation_mehrstufig.md) — offene, entscheidungsbedürftige Punkte müssen durch jede Verdichtungsstufe aktiv und prominent bis zu Albert durchgereicht werden, nicht nur einmal dokumentiert
