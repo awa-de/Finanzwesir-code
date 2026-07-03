@@ -1,5 +1,5 @@
 # BACKLOG – Finanzwesir 2.0
-Stand: 2026-07-03 | Session: AP-prokrast-04a-04c | Geändert von: Claude
+Stand: 2026-07-03 | Session: AP-prokrast-05a-05e | Geändert von: Claude
 
 **Regeln:**
 - ✅-Zeilen werden sofort nach `BACKLOG-ARCHIV.md` verschoben (append), dann hier gelöscht.
@@ -59,7 +59,6 @@ Stand: 2026-07-03 | Session: AP-prokrast-04a-04c | Geändert von: Claude
 | AF-23    | App-Fabrik | Pincus-Check als Pre-Code-Quality-Gate dokumentieren  | L    | AF-22   | 4-Punkte-Checkliste in .claude/commands/ oder CLAUDE.md §6 App-Arbeit |
 | AP-23    | Engine  | Chart.js-Version zwischen Dev/Test-CDN (`Theme/index.html`, `app.test.html`, ungepinntes `<script src="https://cdn.jsdelivr.net/npm/chart.js">`) und lokal vendorter Produktionsversion 4.5.0 synchronisieren/pinnen — Drift-Risiko bei künftigen Chart.js-Majors | L | — | docs/steering/patches/AP-prokrast-03g_klaerung-forschung_rubikon-reveal_scale-animation_Ergebnis.md |
 | AP-26    | App     | prokrastinations-preis Screen 4 — ✅/❓-Symbolik (Drehbuch Beat 2) klären: weder gebaut noch verworfen, echte offene Produktentscheidung, muss vor einem eventuellen Bau mit Albert geklärt werden | M | — | Apps/prokrastinations-preis/drehbuch_prokrastinationspreis_app.md (Zeile 131–133), docs/steering/patches/AP-prokrast-04a_soll-spec-synchronisierung_Ergebnis.md |
-| AP-27    | App     | prokrastinations-preis `QA_TEST_CASES.md` auf AP-prokrast-04a-Stand synchronisieren — Zeile 557/TC-F01 trägt noch die alte Formulierung „Kein Zukunftschart.", die in `APP_SPEC.md` bereits korrigiert wurde | M | — | Apps/prokrastinations-preis/QA_TEST_CASES.md:557, docs/steering/patches/AP-prokrast-04b_abschluss-qa_claims-vs-files_Ergebnis.md |
 
 ---
 

@@ -544,25 +544,31 @@ Vollständige Test- und QA-Kriterien für die Stationen-Zeitreise.
 
 ## Gruppe F — Screen 4 Transfer
 
-### TC-F01 — Screen 4 enthält keine Prognose
+### TC-F01 — Screen 4 zeigt keine Prognose im Rubikon-Chart
 
 **Typ:** Manuell / Regression
 **Priorität:** Muss
+**Hintergrund:** Screen 4 zeigt einen Rubikon-Chart: links echte, gemessene Vergangenheit, in der Mitte die `FwVerticalLinePlugin`-Linie am letzten echten Datenmonat, rechts ein leerer, datenfreier Zukunftsraum über `xDisplayRange` (APP_SPEC §16.1a). Der Chart selbst ist kein Fehler und kein „Zukunftschart" im verbotenen Sinn — verboten sind ausschließlich Zukunftsdaten, eine fortgeschriebene Linie oder eine Prognose im rechten Zukunftsraum.
 
 **Schritte:**
 1. Screen 4 öffnen.
-2. Visuals und Texte prüfen.
+2. Chart-Aufbau prüfen: links Vergangenheit, Mitte Rubikon-Linie, rechts Zukunftsraum.
+3. Rechten Zukunftsraum gezielt auf Datenpunkte, Linien oder Ticks prüfen.
+4. Übrige Visuals und Texte prüfen.
 
 **Erwartetes Ergebnis:**
-- Kein Zukunftschart.
-- Keine fortgeschriebene Linie.
-- Keine Renditeannahme.
-- Keine simulierten nächsten 10 Jahre.
+- Rubikon-Chart ist sichtbar, rechter Zukunftsraum enthält keine Linie und keine Datenpunkte.
+- Future-Ticks/Zeitmarken im rechten Zukunftsraum sind vorhanden (Pflicht, keine Prognose — reine Achsenbeschriftung ohne Dataset).
+- Kein Dummy-Dataset, kein `null`-Padding als Datentrick, keine transparente Zukunftslinie im Zukunftsraum.
+- Keine Renditeannahme, keine simulierten nächsten 10 Jahre, kein Forecast-Korridor, keine Prognosekurve.
 - Transfer auf heutige Entscheidung.
 
 **Fehlschlag, wenn:**
-- App eine Zukunftsentwicklung zeigt.
+- Der rechte Zukunftsraum enthält eine Linie, Punkte, ein Dummy-Dataset oder `null`-Padding als Datentrick.
+- Future-Ticks fehlen oder wurden unterdrückt.
+- App eine Zukunftsentwicklung oder Prognosekurve zeigt.
 - Screen 4 wie eine Prognose wirkt.
+- Der Rubikon-Chart als solcher wird als Fehler behandelt (ein Chart auf Screen 4 ist gewollt, nicht verboten).
 
 ---
 
@@ -586,6 +592,67 @@ Vollständige Test- und QA-Kriterien für die Stationen-Zeitreise.
 - Text Druck erzeugt.
 - Nutzer beschämt wird.
 - CTA wie Verkaufsdruck klingt.
+
+---
+
+### TC-F03 — Rubikon-Haupttext ist DOM, Timing folgt zwei Stille-Momenten
+
+**Typ:** A11y / Manuell / Regression
+**Priorität:** Muss
+**Hintergrund:** Der Screen-4-Haupttext ist ein echter DOM-Textblock (kein Canvas-Text), weil er barrierefrei zugänglich sein muss (APP_SPEC §16.1a). Reveal-Ablauf: Rubikon-Chart sofort vollständig sichtbar → 800ms Stille → Text erscheint (+ A11y-Live-Region) → 800ms Stille → CTA erscheint.
+
+**Schritte:**
+1. Screen 4 öffnen, Eintrittszeitpunkt notieren.
+2. Prüfen, ob der Rubikon-Chart sofort vollständig sichtbar ist (kein Fade-in der Datenlinie).
+3. Zeit bis zum Erscheinen des Rubikon-Texts messen.
+4. Zeit bis zum Erscheinen der CTA messen.
+5. Mit DOM-Inspektor/Screenreader prüfen, ob der Rubikon-Text ein echtes DOM-Element ist (kein Canvas-Zeichenobjekt).
+6. A11y-Live-Region beim Text-Reveal prüfen.
+7. Während der ersten 800ms-Pause (nach Chart, vor Text): CTA per DOM-Inspektor prüfen (sichtbar? im Accessibility Tree?) und per Tab-Taste anspringen versuchen, ob `document.activeElement` die CTA werden kann.
+8. Während der zweiten 800ms-Pause (nach Text, vor CTA-Reveal): dieselbe CTA-Prüfung aus Schritt 7 wiederholen.
+9. Nach dem CTA-Reveal: dieselbe CTA-Prüfung ein drittes Mal mit umgekehrtem Erwartungswert wiederholen.
+
+**Erwartetes Ergebnis:**
+- Rubikon-Chart ist beim Eintritt sofort vollständig sichtbar.
+- Rubikon-Text erscheint nach ca. 800ms Stille im rechten Zukunftsfeld, als DOM-Element, für Screenreader erreichbar.
+- Genau eine A11y-Live-Region-Aktualisierung begleitet den Text-Reveal.
+- CTA erscheint nach weiteren ca. 800ms Stille, nach dem Text.
+- Während beider 800ms-Pausen (vor Text und vor CTA-Reveal) ist die CTA nicht sichtbar, nicht per Tab erreichbar, kann nicht `document.activeElement` werden und ist nicht im Accessibility Tree erreichbar (DOM-/Fokus-Mini-QA, kein Screenreader-Volltest) — technisch über das `hidden`-Attribut umgesetzt.
+- Erst nach dem CTA-Reveal ist die CTA sichtbar, per Tab erreichbar und im Accessibility Tree erreichbar.
+
+**Fehlschlag, wenn:**
+- Rubikon-Text nur als Canvas-Zeichnung existiert (nicht im DOM, für Screenreader unerreichbar).
+- Text oder CTA ohne die 800ms-Stille-Pausen sofort erscheinen.
+- CTA vor oder gleichzeitig mit dem Text erscheint.
+- Keine A11y-Live-Region-Aktualisierung beim Text-Reveal.
+- CTA ist während einer der beiden 800ms-Pausen sichtbar, per Tab erreichbar oder kann `document.activeElement` werden.
+- CTA ist während einer der beiden 800ms-Pausen im Accessibility Tree erreichbar oder wird vorzeitig durch einen Screenreader angekündigt.
+
+---
+
+### TC-F04 — Timing und Reihenfolge auf Screen 4 sind unabhängig von Reduced Motion
+
+**Typ:** A11y / Manuell (DevTools)
+**Priorität:** Muss
+**Voraussetzung:** DevTools → Rendering → `prefers-reduced-motion: reduce` aktiv.
+**Hintergrund:** Der Screen-4-Reveal läuft über zwei 800ms-Timer und direktes Ein-/Ausblenden per `hidden`-Attribut, nicht über CSS-Übergänge. Es gibt keine Draw-Animation der Rubikon-Chart-Linie und keinen Fade der Textelemente — die Timing-Logik ist bereits bewegungsneutral und muss durch Reduced Motion nicht verändert werden.
+
+**Schritte:**
+1. Reduced Motion aktivieren.
+2. Screen 4 öffnen, Ablauf beobachten.
+3. Reduced Motion deaktivieren, Screen 4 erneut öffnen, Ablauf vergleichen.
+
+**Erwartetes Ergebnis:**
+- Rubikon-Chart erscheint in beiden Fällen sofort vollständig.
+- Reihenfolge Chart → 800ms Stille → Text/A11y → 800ms Stille → CTA ist in beiden Fällen identisch.
+- Kein sichtbarer oder zeitlicher Unterschied im Screen-4-Reveal zwischen aktivem und inaktivem Reduced Motion.
+- Die CTA-Nicht-Erreichbarkeit während beider 800ms-Pausen (TC-F03) gilt unverändert auch bei aktivem Reduced Motion — keine frühere Sichtbarkeit, Fokussierbarkeit oder Accessibility-Tree-Erreichbarkeit der CTA.
+
+**Fehlschlag, wenn:**
+- Reduced Motion die 800ms-Pausen verkürzt, verlängert oder entfernt.
+- Reduced Motion die Reihenfolge Text-vor-CTA verändert.
+- Reduced Motion Inhalte (Text, CTA) unterdrückt statt nur Bewegung zu entfernen.
+- CTA ist im Reduced-Motion-Modus während der Pausen früher sichtbar, fokussierbar oder im Accessibility Tree erreichbar als im Normalmodus.
 
 ---
 

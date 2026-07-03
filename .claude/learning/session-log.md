@@ -357,3 +357,26 @@ Wird geleert nach /distill. Einträge: [FRICTION] [WIN] [PREF] [QUESTION] [OK]
 - [WIN] Scope-Check konsequent angewendet: beide von Albert als nicht-übersehbar markierten Punkte sind jetzt nicht nur im AP-04c-Protokoll, sondern zusätzlich dauerhaft in BACKLOG.md UND in MEMORY sichtbar — drei unabhängige Fundorte statt einem
 
 ### AP-prokrast-03i — AP-Wechsel
+
+### AP-prokrast-04c — AP-Wechsel
+
+### 2026-07-03 — AP-prokrast-05a ✅ — QA_TEST_CASES.md Rubikon-Synchronisierung
+- [OK] TC-F01 neu gefasst (Rubikon-Chart korrekt statt „Kein Zukunftschart."), TC-F03/TC-F04 neu ergänzt (DOM-Haupttext, 800ms-Timing, Reduced-Motion-Invarianz)
+- [WIN] Manuelle Browser-Verifikation durch Albert (DOM-Inspektor-Snippets) bestätigte DOM-Struktur, Responsive-Variantenschaltung (long/short) und Timing direkt am Code
+
+### 2026-07-03 — AP-prokrast-05b ✅ — Abschluss-QA Claims-vs-Files
+- [OK] Alle AP-05a-Claims unabhängig bestanden; Status GELB wegen einer realen, bereits in AP-02d entschiedenen, aber nie getesteten Anforderung: CTA-Fokus während der 800ms-Pausen fehlte in QA_TEST_CASES.md
+
+### 2026-07-03 — AP-prokrast-05c ✅ — Light-Gate-Minifix CTA-Fokus während Rubikon-Pausen
+- [OK] TC-F03 um drei Prüfschritte (Pause 1/2/nach Reveal) + Erwartetes-Ergebnis-/Fehlschlag-Zeilen ergänzt, TC-F04 minimal um Reduced-Motion-Erbschaft ergänzt, TC-F01 nicht angefasst, kein Code
+
+### 2026-07-03 — AP-prokrast-05d ✅ — Re-QA Claims-vs-Files nach CTA-Fokus-Nachputz
+- [OK] AP-05c unabhängig gegen reale Dateien bestätigt, AP-05b-GELB-Fund vollständig geschlossen, Rücklauf an AP-05e freigegeben
+
+### 2026-07-03 — AP-prokrast-05e ✅ — Rücklaufkapsel an Masterfaden
+- [OK] Kette AP-05a–05e verdichtet, Gesamtstatus GRÜN, Regressionsrisiko niedrig; Empfehlung: nächster Haupt-AP vom Masterfaden neu zu schneiden (Kandidaten BACKLOG AP-26, Card-to-Point, Screen-3-Timing-Reveal)
+
+### 2026-07-03 — Kettenabschluss AP-prokrast-05a–05e ✅ | RECONCILED: AP-prokrast-05a AP-prokrast-05b AP-prokrast-05c AP-prokrast-05d AP-prokrast-05e
+- [WIN] Zweistufige Abschluss-QA (05b/05d) fing eine reale, bereits andernorts (AP-02d) entschiedene, aber nie in QA_TEST_CASES.md getestete Anforderung ab (CTA-Fokus während Rubikon-Pausen) und schloss sie sauber (05c), ohne TC-F01 erneut zu öffnen oder eine Produktentscheidung zu treffen
+- [OK] Über die gesamte Kette ausschließlich `Apps/prokrastinations-preis/QA_TEST_CASES.md` geändert — kein App-Code, keine Spec, kein Drehbuch, keine Stationsdaten, keine Engine-/Plugin-/Strategy-Datei
+- [OK] BACKLOG AP-27 damit erledigt (QA_TEST_CASES.md-Sync); BACKLOG AP-26 (Beat-2-Symbolik) bleibt offen
