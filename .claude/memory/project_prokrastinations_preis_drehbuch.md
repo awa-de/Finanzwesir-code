@@ -1,6 +1,6 @@
 ---
 name: project-prokrastinations-preis-drehbuch
-description: "prokrastinations-preis: Drehbuch war Soll-Quelle für Screen 4; seit AP-prokrast-04a (2026-07-03) ist APP_SPEC.md §16.1a die synchronisierte, operative Spec für den gebauten Rubikon-Endstand; QA_TEST_CASES.md seit AP-prokrast-05a-05e (2026-07-03) ebenfalls synchron inkl. CTA-Fokus-Testabdeckung — Drehbuch bleibt für Screen 2/3 amtlich, Card-to-Point/Screen-3-Timing/Beat-2-Symbolik weiterhin offen"
+description: "prokrastinations-preis: Drehbuch war Soll-Quelle für Screen 4; seit AP-prokrast-04a (2026-07-03) ist APP_SPEC.md §16.1a die synchronisierte, operative Spec für den gebauten Rubikon-Endstand; QA_TEST_CASES.md seit AP-prokrast-05a-05e (2026-07-03) ebenfalls synchron inkl. CTA-Fokus-Testabdeckung; Beat-2-✅/❓-Symbolik seit AP-prokrast-06a-06d (2026-07-03/04) entschieden (visueller Canvas-Chart-Marker, kein DOM/A11y, Bau offen) — Drehbuch bleibt für Screen 2/3 amtlich, Card-to-Point/Screen-3-Timing weiterhin offen"
 metadata: 
   node_type: memory
   type: project

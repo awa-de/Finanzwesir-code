@@ -128,16 +128,16 @@ Der leere Zukunftsraum öffnet sich. Keine Linie, keine Prognose, keine Fantasie
 
 ---
 
-### Beat 2 — Symbole erscheinen *(300ms Pause nach Beat 1, dann fade in)* — **offen, nie entschieden**
+### Beat 2 — Symbole erscheinen *(300ms Pause nach Beat 1, dann fade in)* — **gesetzt: visueller Chart-Marker (AP-prokrast-06b, 2026-07-03)**
 
-> Status: Dieses Beat wurde in der AP-prokrast-03-Kette **weder gebaut noch explizit verworfen** — anders als Beat 1/3, für die es eine dokumentierte Masterfaden-Gegenentscheidung gibt. Die ✅/❓-Symbolik ist eine offene Produktentscheidung, kein abgelöster Ansatz. Muss vor einem eventuellen Bau erneut mit Albert geklärt werden.
+> Status: Dieses Beat wurde in der AP-prokrast-03-Kette weder gebaut noch explizit verworfen. AP-prokrast-04a bis AP-prokrast-06a dokumentierten die ✅/❓-Symbolik durchgängig als offene, ungeklärte Produktentscheidung (AP-06a: Status GELB, Empfehlung „streichen"). Mit AP-prokrast-06b hat Albert diese Frage bindend entschieden — Korrektur durch bindende Nutzerentscheidung nach AP-06a-GELB, keine Wiederherstellung eines vorher schon final entschiedenen, dann verlorenen Fakts: Die Symbole bleiben, aber ausschließlich als rein visueller, nicht-interaktiver Canvas-Marker im Chart, gebaut über `FwChartTextPlugin.js` — ohne DOM-Präsenz und ohne A11y-Anspruch.
 
-Direkt an der blauen Linie, auf Höhe der Chartlinie:
+Direkt an der blauen Rubikon-Linie:
 
-- Links: ✅ — klein, grün
-- Rechts: ❓ — klein, gedämpft grau
+- Links der Linie: ✅ — klein
+- Rechts der Linie: ❓ — klein
 
-Kein Text. Keine Erklärung. Der Nutzer versteht es in unter einer Sekunde, auf jedem Gerät.
+Die Symbole sind reine Canvas-Chart-Marker (kein DOM-Knoten, keine aria-Semantik, kein Fokus, keine Live-Region). Die semantische Hauptaussage von Screen 4 trägt weiterhin ausschließlich der DOM-Haupttext (`APP_SPEC.md` §16.1a); die Symbole ersetzen ihn nicht und tragen keine eigene Erklärungslast. Positionierung links/rechts der Linie muss auf allen Breakpoints S, M und L gewährleistet sein.
 
 ---
 
@@ -174,7 +174,7 @@ Das ist die psychologische Arbeit. Dieses kurze Aushalten ist der Kern der App.
 | Eventkarte | Groß, volle Breite im Content-Rahmen | Volle Breite, gleiche Hierarchie |
 | Kartenwechsel-Animation | Schrumpft Richtung Chartpunkt | Gleich — vereinfacht falls nötig |
 | Zukunftsraum | Mindestens halbe Chartbreite | Mindestens ein Drittel Chartbreite — **vor Go-Live testen** |
-| ✅ ❓ | Direkt an der Linie, auf Chartlinie-Höhe | Unter dem Chart als Textkarte, falls zu eng |
+| ✅ ❓ | Canvas-Chart-Marker links/rechts der blauen Rubikon-Linie (`FwChartTextPlugin.js`) | Gleich — Positionierung muss auch auf kleinen Screens links/rechts der Linie gewährleistet sein, kein DOM-Fallback |
 | KPI-Karten | Verzögert, nebeneinander | Verzögert, untereinander |
 | Stille Beat 4 | 800ms | 800ms — nicht kürzen |
 
@@ -197,7 +197,7 @@ Das ist die psychologische Arbeit. Dieses kurze Aushalten ist der Kern der App.
 | Kartenwechsel-Animation (Beat A–C) | Hoch | Kern der psychologischen Wirkung — zuerst bauen |
 | KPI-Karten mit Verzögerung (Screen 3) | Hoch | Erst Linie, dann Zahl |
 | ~~X-Achsen-Verlängerung (Screen 4 Beat 1)~~ | — | überholt: abgelöst durch AP-prokrast-03h (kein Morph, keine Achsenanimation) — Zukunftsraum steht sofort, kein separater Mobile-Testschritt für die Animation nötig |
-| ✅ ❓ an blauer Linie | offen | ungebaut, nicht entschieden (siehe Beat 2) — vor Bau erneut mit Albert klären |
+| ✅ ❓ an blauer Linie | gesetzt (AP-prokrast-06b, 2026-07-03) | Bau noch offen — Canvas-Marker via `FwChartTextPlugin.js`, links/rechts der Linie, S/M/L Pflicht, kein DOM, kein A11y-Anspruch (siehe Beat 2) |
 | Stille Beat 4 — 800ms | Fest | Nicht kürzen |
 | `showScreen()` Transition | Mittel | Aktuell nur hidden-Toggle, kein Übergang |
 

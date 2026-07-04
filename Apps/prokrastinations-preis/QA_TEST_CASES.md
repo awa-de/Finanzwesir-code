@@ -656,6 +656,33 @@ Vollständige Test- und QA-Kriterien für die Stationen-Zeitreise.
 
 ---
 
+### TC-F05 — ✅/❓-Chart-Marker sind visuell, nicht DOM/A11y-pflichtig
+
+**Typ:** Visuell / Manuell (DevTools)
+**Priorität:** Muss
+**Hintergrund:** AP-prokrast-06b (2026-07-03, Spec-Sync auf bindend gesetzten Sollstand): Screen 4 zeigt ✅ links und ❓ rechts der blauen Rubikon-Linie als rein visuelle Canvas-Chart-Marker, gezeichnet über `FwChartTextPlugin.js` (APP_SPEC §16.1a). Die Marker sind keine Datenpunkte, keine Future-Line, keine Prognose, keine Interaktion und kein CTA-Ersatz. Sie sind kein DOM-Inhalt und keine A11y-Anforderung — die semantische Hauptaussage von Screen 4 trägt weiterhin ausschließlich der DOM-Haupttext (TC-F03).
+
+**Schritte:**
+1. Screen 4 auf Viewport S, M und L öffnen.
+2. Prüfen, ob ✅ links und ❓ rechts der blauen Rubikon-Linie im Chart sichtbar sind.
+3. Mit DOM-Inspektor prüfen, ob die Symbole als DOM-Knoten existieren.
+4. Mit Screenreader/Accessibility-Tree prüfen, ob die Symbole dort erscheinen.
+5. Rechten Zukunftsraum erneut auf Datenpunkte, Linien oder Ticks prüfen (Abgrenzung zu TC-F01).
+
+**Erwartetes Ergebnis:**
+- ✅ links und ❓ rechts der Linie sind auf S, M und L sichtbar und korrekt positioniert.
+- Die Symbole sind reine Canvas-Zeichnung — kein DOM-Knoten, kein Accessibility-Tree-Eintrag, keine Live-Region-Aktualisierung.
+- Der rechte Zukunftsraum enthält weiterhin keine Datenpunkte, keine Linie, keine Prognose (TC-F01 bleibt unverändert gültig).
+- Der DOM-Haupttext (TC-F03) bleibt unverändert die einzige semantische Erklärungsschicht.
+
+**Fehlschlag, wenn:**
+- Die Symbole auf einem der drei Breakpoints fehlen oder nicht mehr links/rechts der Linie stehen.
+- Die Symbole als DOM-Knoten, aria-Element oder Live-Region-Inhalt implementiert wurden.
+- Die Symbole Datenpunkte, eine Future-Line oder eine Prognose erzeugen.
+- Die Symbole interaktiv sind oder Fokus erhalten können.
+
+---
+
 ## Gruppe G — Mobile und Collapsible
 
 ### TC-G01 — Mobile zeigt keine permanenten Mini-KPIs je Station

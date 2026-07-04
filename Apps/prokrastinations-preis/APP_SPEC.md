@@ -1269,6 +1269,9 @@ Der semantische Screen-4-Haupttext ist ein echter DOM-Textblock (kein Canvas-Tex
 5. 800ms Stille.
 6. CTA erscheint.
 
+**Chart-Marker ✅/❓ (AP-prokrast-06b, 2026-07-03 — Spec-Sync auf bindend gesetzten Sollstand):**
+Zusätzlich zum Chart-Aufbau zeigt Screen 4 ein kleines, rein visuelles Symbolpaar direkt an der blauen Rubikon-Linie: ✅ links der Linie, ❓ rechts der Linie. Die Marker werden über `FwChartTextPlugin.js` als persistente Canvas-Annotation gezeichnet (siehe Plugin-Header: opt-in, keine Animation, keine Events, keine DOM-Brücke) — sie sind kein DOM-Inhalt, keine Live-Region-Aktualisierung und keine A11y-Anforderung, keine Datenpunkte, keine Future-Line und keine Prognose. Ihre Positionierung links/rechts der Linie muss auf allen Breakpoints (S, M, L) gewährleistet sein. Der semantische Haupttext bleibt ausschließlich beim DOM-Overlay-Text (oben); die Marker ersetzen ihn nicht und tragen keine eigene Erklärungslast. Bau steht noch aus (dieser AP synchronisiert nur die Soll-Dokumentation, siehe `AP-prokrast-06b_regression-sync_symbolik-chartmarker_Ergebnis.md`).
+
 **Nachgelagerte Pflichtteile (nicht Teil dieses Standes, bleiben offen):**
 - Card-to-Point bleibt Pflicht (noch nicht gebaut).
 - Screen-3-Timing-Reveal bleibt Pflicht (noch nicht gebaut).
@@ -1346,6 +1349,7 @@ Heute Marktzeit sammeln
 | TextBlock | Microcopy pro Screen | je Screen | ✅ umgesetzt |
 | RubikonChart (echte Vergangenheit + leerer Zukunftsraum) | stehender Endzustand, ein `renderFromData()`-Aufruf, `xDisplayRange` | Screen 4 | ✅ umgesetzt (AP-prokrast-03f/03h) |
 | Rubikon-Text (DOM-Overlay im rechten Zukunftsfeld) | A11y-Haupttext, CSS-Overlay über Chart, kein Canvas | Screen 4 | ✅ umgesetzt (AP-prokrast-03h2) |
+| RubikonSymbolMarkers (✅ links / ❓ rechts der blauen Linie) | rein visueller Canvas-Chart-Marker über `FwChartTextPlugin.js`, kein DOM, kein A11y-Anspruch, S/M/L Pflicht | Screen 4 | ⏳ Soll gesetzt (AP-prokrast-06b), Bau offen |
 | PrimaryCta | Handlungsaufruf | Screen 4 | ✅ umgesetzt |
 | ErrorState | Fehlermeldung auf Deutsch | jederzeit | ✅ umgesetzt |
 | LoadingSkeleton | Platzhalter während Datenladen | Loading | ✅ umgesetzt |

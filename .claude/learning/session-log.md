@@ -380,3 +380,27 @@ Wird geleert nach /distill. Einträge: [FRICTION] [WIN] [PREF] [QUESTION] [OK]
 - [WIN] Zweistufige Abschluss-QA (05b/05d) fing eine reale, bereits andernorts (AP-02d) entschiedene, aber nie in QA_TEST_CASES.md getestete Anforderung ab (CTA-Fokus während Rubikon-Pausen) und schloss sie sauber (05c), ohne TC-F01 erneut zu öffnen oder eine Produktentscheidung zu treffen
 - [OK] Über die gesamte Kette ausschließlich `Apps/prokrastinations-preis/QA_TEST_CASES.md` geändert — kein App-Code, keine Spec, kein Drehbuch, keine Stationsdaten, keine Engine-/Plugin-/Strategy-Datei
 - [OK] BACKLOG AP-27 damit erledigt (QA_TEST_CASES.md-Sync); BACKLOG AP-26 (Beat-2-Symbolik) bleibt offen
+
+### AP-prokrast-05e — AP-Wechsel
+
+### 2026-07-04 — AP-prokrast-06a ✅ — Symbolik-Entscheidung ✅/❓ Beat 2
+- [QUESTION] Status GELB: Datei-Historie (AP-04a–05e) zeigte die Symbolik durchgängig als offen/nie entschieden; eigene Empfehlung war Option B (streichen), Fallback D (parken) — Albert entschied danach abweichend außerhalb der Datei-Historie
+
+### 2026-07-04 — AP-prokrast-06b ✅ — Regression-Sync ✅/❓ als Chart-Marker
+- [FRICTION] Auftrag nannte den Vorgang „Regression" (bereits entschiedene, dann verlorene Wahrheit) — widersprach der Quellenlage aus AP-06a; vor dem Schreiben mit Albert geklärt und im Protokoll ehrlich als „Korrektur durch bindende Nutzerentscheidung nach AP-06a-GELB" dokumentiert statt als falsche Historie
+- [OK] APP_SPEC.md, Drehbuch und QA_TEST_CASES.md minimal und additiv synchronisiert: ✅ links / ❓ rechts der blauen Rubikon-Linie als reiner Canvas-Chart-Marker über FwChartTextPlugin.js, kein DOM, keine A11y-Pflicht, S/M/L-Pflicht dokumentiert
+
+### 2026-07-04 — AP-prokrast-06c ✅ — Abschluss-QA Regression-Sync ✅/❓
+- [OK] Alle AP-06b-Claims unabhängig gegen reale Dateien bestätigt (Diff-Check: reine Additivität), Restsatz „✅ ❓ reichen" im Drehbuch als nicht-blockierend bewertet, Rücklauf freigegeben
+
+### 2026-07-04 — AP-prokrast-06d ✅ — Rücklaufkapsel an Masterfaden
+- [OK] Kette AP-06a–06d verdichtet, Gesamtstatus GRÜN, Regressionsrisiko niedrig (reine Doku-Ebene, kein Code); Empfehlung: AP-prokrast-07 — Bau RubikonSymbolMarkers über FwChartTextPlugin.js; BACKLOG AP-26 vom Masterfaden auf „entschieden, Bau offen" nachziehen
+
+### 2026-07-04 — Kettenabschluss AP-prokrast-06a–06d ✅ | RECONCILED: AP-prokrast-06a AP-prokrast-06b AP-prokrast-06c AP-prokrast-06d
+- [WIN] Trotz nachträglicher Nutzerentscheidung gegen die eigene AP-06a-Empfehlung wurde die Historie nicht verfälscht — AP-06b/06c dokumentieren durchgängig „Korrektur durch bindende Nutzerentscheidung nach AP-06a-GELB" statt einer falschen „schon immer so entschieden"-Erzählung
+- [OK] Über die gesamte Kette geändert: `Apps/prokrastinations-preis/APP_SPEC.md`, `drehbuch_prokrastinationspreis_app.md`, `QA_TEST_CASES.md` (alle drei rein additiv bzw. auf exakt 3 Symbolik-Stellen im Drehbuch begrenzt) — kein App-Code, keine Engine-/Plugin-/Strategy-Datei, keine Stationsdaten
+- [OK] BACKLOG AP-26 (Beat-2-Symbolik) auf „entschieden, Bau offen" nachgezogen; NAVIGATION.md, PROJECT-STATUS.md (HOOK-META + sichtbarer Fokus, inkl. nachgeholtem AP-05a–05e-Eintrag), BACKLOG-ARCHIV.md und die MEMORY-Datei zur App im selben Abschluss-Ritual synchronisiert
+
+### 2026-07-04 — Nachtrag zum Abschluss-Ritual: falsche Commit-Status-Aussage
+- [FRICTION] Satz „Commit für die gesamte Kette weiterhin ausstehend" aus PROJECT-STATUS.md-HOOK-META unreflektiert übernommen und in Rücklaufkapsel AP-06d sowie eigenen PROJECT-STATUS.md-/NAVIGATION.md-Edits weitergeschrieben, obwohl AP-prokrast-03a–05e laut `git log` (a399b5f/ffacc13/c633f82/a735981) längst einzeln committed waren; Satz stand bereits so in den Commits c633f82/a735981 einer früheren Session — trotz `git log --oneline -5` in jedem Unter-AP nie gegen die Behauptung geprüft; von Albert bemerkt und nachgefragt, alle Fundstellen korrigiert
+- [FRICTION] Auf Alberts „notiere das als Pattern" sofort zwei Memory-Dateien unter `.claude/memory/` angelegt statt zu prüfen, ob ein session-log-Eintrag (projekteigenes Pattern-Vokabular, später via `/distill`) gemeint war — nach Rückfrage bestätigt: nur session-log gewünscht, beide Memory-Dateien wieder entfernt
