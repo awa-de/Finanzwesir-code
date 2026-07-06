@@ -11,14 +11,13 @@
 - [Surgical-Check gilt für alle Edits](feedback_surgical_check.md) — Gilt für jeden Patch (auch .md/.json), nicht nur Code; „nur Kosmetik" ist die Falle
 - [Design-Ressourcen: Refero.design](reference_refero_design.md) — styles.refero.design + MCP: Pflicht-Check bei CSS/Design/App-Styling-Entscheidungen
 - [Ankündigung ohne Ausführung](feedback_ankuendigung_ohne_ausfuehrung.md) — Nie „notiert/geschrieben" sagen ohne tatsächlichen Write-Tool-Call; mentaler ≠ physischer Schritt
-- [Keine Strukturannahmen ohne Verifikation](feedback_strukturannahmen.md) — Vor „X ist vorhanden"-Aussagen die Datei lesen, nie erinnern; reoccurrences 2026-06-03/04/05
+- [Gründlichkeit vor Tempo](feedback_gruendlichkeit_vor_tempo.md) — Struktur/Zahlen/Status/Konventionen immer in diesem Moment prüfen, nie aus Vorlage/Erinnerung; ersetzt feedback_strukturannahmen + feedback_verifikation_vor_output (2026-07-06)
 - [Audit-Trail Prinzip](project_audit_trail.md) — DECISION-LOG für Architektur, session-log für Schritte, audits/ für Evaluierungen; kein direkter Claude-Beschluss
 - [Review als eigenständige Datei](feedback_review_als_datei.md) — Bei Evaluierungen: kommentierte Datei liefern, Albert entscheidet selbst; kein direkter Claude-Beschluss
 - [Knappe konstante Namen statt Nummern](feedback_nummerierung.md) — AP-IDs nach Projekt-Schema (APP-01, ST-16...); Schritte/Abschnitte in Docs mit sprechenden Namen
 - [App-Fabrik Struktur und Zählmodell](project_app_fabrik_struktur.md) — 22+3=25 App-Ordner; B1 APP_SPEC V2.9 operativ; Steuerungsblock-Rollout VOLLSTÄNDIG 25/25 (AP-12–AP-25a, ✅ 2026-07-01); 2 Sonderfälle: plan-generator (kein Seed-Provenienz) + regulatorik-dashboard (eigenes 8-Fragen-Format)
 - [Datenlayer Governance](project_datenlayer.md) — docs/data/ + Theme/assets/data/b1/; Contract in docs/data/contracts/; AP-DATA-01/04/05 abgeschlossen 2026-06-04; Startdatum 2000-12-29; AP-DATA-09 (Rollout) offen
 - [CSVParser GATEKEEPER-Verhalten](project_csvparser_gatekeeper.md) — Wirft vor Rückgabe von rows wenn date-Spalte fehlt/ungültig; date-Checks in app.js sind toter Code; Error-State (b) erwarten
-- [Zahlen und Referenzen vor Output verifizieren](feedback_verifikation_vor_output.md) — Nie aus dem Kopf nennen; Quelle zuerst konsultieren (Dateianzahl, O-Verweise, Abschnittsnummern)
 - [Pilot-Status vorsichtig abstufend formulieren](feedback_pilot_status_sprache.md) — „Arbeitsfassung für Pilot-1" statt „freigegeben"; Pilot ≠ Kanonisierung
 - [Technische Verbote explizit formulieren](feedback_verbote_explizit_formulieren.md) — Verbote als Verbote schreiben, nicht abschwächen; Gegenstück: [[feedback-spec-verbote-scope]]
 - [Subagenten-Setup v2.1.2](project_subagent_setup.md) — SSoT in subagent-dispatch/SKILL.md; 4 Agenten aktiv; Dispatch-Quittung + Rückfall-Regel Pflicht
@@ -46,3 +45,4 @@
 - [Chart.js animiert Skalen-Grenzen nicht nativ](project_chartjs_scale_animation_limit.md) — nur Datensatz-Elemente werden interpoliert, min/max/Ticks springen sofort; verifiziert an Chart.js-4.5.0-Quellcode (AP-prokrast-03g)
 - [CSS Custom Properties für nachjustierbare Positionen](feedback_css_custom_properties_tuning.md) — bei absehbarem Iterationsbedarf (Overlay-Position etc.) sofort --fw-*-Properties statt harter Selektor-Werte anbieten
 - [Eskalation in mehrstufigen AP-Ketten](feedback_eskalation_mehrstufig.md) — offene, entscheidungsbedürftige Punkte müssen durch jede Verdichtungsstufe aktiv und prominent bis zu Albert durchgereicht werden, nicht nur einmal dokumentiert
+- [app.test.html dauerhaft](feedback_test_html_dauerhaft.md) — Testszenarien bleiben nach Verifikation eingebaut, kein Wegwerf-Skript

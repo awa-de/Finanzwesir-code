@@ -1,0 +1,41 @@
+---
+name: feedback-gruendlichkeit-vor-tempo
+description: "Vor jeder Aussage über Struktur, Zahlen, Zustand oder bestehende Konvention die Quelle in diesem Moment prüfen — nie aus Erinnerung, Vorlage oder Tempo behaupten"
+metadata: 
+  node_type: memory
+  type: feedback
+  originSessionId: e7cbd7dc-2859-4d18-a3e4-fb07cad77ddd
+---
+
+Wenn eine Aussage mechanisch prüfbar ist (Datei lesen, grep, git log, zählen), wird sie in genau diesem Moment geprüft — nicht aus dem Kopf, nicht aus einer Vorlage, nicht aus einer früheren Session übernommen.
+
+**Why:** Wiederkehrende Fehlerquelle seit Mai 2026, mind. 4 Ausprägungen — jeweils weil Tempo vor Prüfung ging. Zwei separate Memories (feedback-strukturannahmen, feedback-verifikation-vor-output) haben das trotz je mehrerer Reoccurrences nicht abgestellt — am 2026-07-06 zu dieser Datei zusammengeführt.
+
+*Struktur/Pfade/Existenz:*
+- 2026-06-03: NAVIGATION.md-Textreferenz angenommen statt verifiziert
+- 2026-06-04: CSVParser-Pfad falsch angenommen (fw-chart-engine/*.js statt data/)
+- 2026-06-05: hasRequiredColumns date-Prüfung fälschlich als toter Code angenommen
+- 2026-06-06: Klassifizierungsbaum „bereits in /start vorhanden" — war er nicht
+- 2026-06-08: legacy-map als leer angenommen — hatte 349 Bytes Inhalt
+- 2026-06-10: FwRenderer-Pfad falsch angenommen (renderer/ statt core/)
+
+*Zahlen/Referenzen:*
+- 2026-05-10: Prinzipien-Zählung falsch (4 statt 2 Dateien)
+- 2026-05-10: falsche O-Verweise O-02/O-03 in §4/§5 eingetragen
+- 2026-06-08: Gate-Output nannte ARCHIV-STRATEGIE.md statt ARCHIV-INVENTAR.md
+
+*Zustand/Status:*
+- 2026-07-04 + 2026-07-06: Commit-Status aus PROJECT-STATUS.md/HOOK-META unreflektiert übernommen — zweimal identisch, obwohl `git log` sofort das Gegenteil zeigte
+- 2026-06-30: python3 statt python verwendet (Windows-Store-Umleitung) — Umgebungskonvention war bereits geklärt (ST-19), nicht abgerufen
+
+*Bestehende Entscheidung/Konvention übersehen:*
+- 2026-07-04: Memory-Datei angelegt statt zu prüfen, ob session-log (bereits dokumentierte Routing-Regel, project_audit_trail.md) gemeint war
+
+**How to apply:**
+- Pfad-/Struktur-Aussagen → Read/Grep, nicht erinnern.
+- Zahlen/Abschnittsverweise → zählen/nachlesen, nicht schätzen.
+- Status-Aussagen (committed? erledigt? vorhanden?) → git log/Datei direkt prüfen — auch wenn eine Vorlage das schon behauptet.
+- Vor dem Anlegen eines neuen Artefakts prüfen, ob dafür schon eine Routing-Regel existiert.
+- Gemeinsamer Auslöser ist Tempo, nicht fehlendes Wissen — diese Datei ersetzt vier Einzel-Erinnerungen durch eine Gewohnheit. Für den mechanisch prüfbaren Spezialfall Commit-Status siehe zusätzlich die feste Checkliste in `.claude/skills/kassensturz/SKILL.md` und `.claude/skills/abschluss-ritual/SKILL.md`.
+
+Verwandt: [[feedback-glob-vs-read]]

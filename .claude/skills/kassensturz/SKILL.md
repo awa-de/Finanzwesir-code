@@ -22,6 +22,7 @@ Trigger: Automatisch wenn /start an einem Montag ausgeführt wird, ODER manuell 
 
 2. `.claude/ATTEMPT-LOG.json` lesen
 3. `PROJECT-STATUS.md` — letzte Session lesen
+3a. Wenn PROJECT-STATUS.md/HOOK-META eine Commit-Status-Aussage enthält („Commit steht aus“ o.ä.): vor Übernahme in „Abweichungen“/„Empfehlung“ gegen `git log --oneline -5` prüfen, nicht ungeprüft weiterreichen (Reoccurrence 2026-07-04/2026-07-06, siehe [[feedback-gruendlichkeit-vor-tempo]]).
 4. Output erzeugen (Format unten)
 5. Abschlussfrage stellen
 

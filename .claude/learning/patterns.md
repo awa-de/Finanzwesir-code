@@ -1,5 +1,5 @@
 # Patterns — Finanzwesir 2.0
-Stand: 2026-06-29 | Distill 9 | Muster mit ≥2 Belegen (Normal) oder ≥1 Beleg (High-Impact) werden Kandidaten. Nur Alberts OK → Promotion.
+Stand: 2026-07-06 | Distill 10 | Muster mit ≥2 Belegen (Normal) oder ≥1 Beleg (High-Impact) werden Kandidaten. Nur Alberts OK → Promotion.
 
 ---
 
@@ -32,6 +32,10 @@ Stand: 2026-06-29 | Distill 9 | Muster mit ≥2 Belegen (Normal) oder ≥1 Beleg
 - feedback_sprache_kein_denglisch.md → ergänzt 2026-06-22 (Distill 8: PREF P1 — Commit-Messages: Umlaute in Claudes Text-Output sicherstellen, da Albert selbst committed)
 - feedback_verbalisierung_vor_aktion.md → promoted 2026-06-29 (Distill 9: 2 Belege [L]+FRICTION2 — Ansatz verbalisieren vor Gate/Aktion; verwandt: [[feedback_gate_scope_dialog]])
 - feedback_kontext_vs_tokens.md → promoted 2026-06-29 (Distill 9: PREF B1-AP-15d — Langformat für LLM-lesbare git-History; Kontext > Token-Effizienz)
+- feedback_strukturannahmen.md → zusammengeführt in feedback_gruendlichkeit_vor_tempo.md, 2026-07-06 (Distill 10) — Historie (6 Reoccurrences) im neuen Dokument erhalten
+- feedback_verifikation_vor_output.md → zusammengeführt in feedback_gruendlichkeit_vor_tempo.md, 2026-07-06 (Distill 10) — Historie (1 Reoccurrence) im neuen Dokument erhalten
+- feedback_gruendlichkeit_vor_tempo.md → promoted 2026-07-06 (Distill 10: Zusammenlegung der beiden obigen Dateien nach 3. wiederkehrendem Versagen derselben Ursache — Commit-Status ×2 identisch am 2026-07-04 und 2026-07-06 trotz dokumentierter erster Korrektur, plus python3/python und Memory-vs-session-log als weitere Ausprägungen. Zusätzlich mechanischer Schutz für den Commit-Status-Fall in `.claude/skills/kassensturz/SKILL.md` + `.claude/skills/abschluss-ritual/SKILL.md` — dort wird git log jetzt zwingend vor jeder Commit-Status-Aussage geprüft, statt sich auf Erinnerung zu verlassen)
+- feedback_test_html_dauerhaft.md → promoted 2026-07-06 (Distill 10: PREF AP-prokrast-03d — app.test.html bleibt dauerhaftes Testszenario)
 
 ---
 
@@ -63,6 +67,17 @@ Stand: 2026-06-29 | Distill 9 | Muster mit ≥2 Belegen (Normal) oder ≥1 Beleg
 - [P2] Seiteneffekte von Patches proaktiv benennen — Albert war besorgt wegen Fetch-Cache-Verlust, weil Seiteneffekte nicht erklärt wurden; erst auf Nachfrage bestätigt. Bei Patches die Verhalten berühren das andere Komponenten nutzen: Seiteneffekte proaktiv im Patch-Echo nennen (APP-01 Slice 5, 2026-06-15) — 1 Beleg, Normal
 - [P3] AP-Brief-Scope vor Gate klären — AP-Name „Marker + Pulse Screen 2" war zu breit; Scope erst während Umsetzung auf reinen Datenvertrag reduziert. Wenn AP-Brief mehrere Konzepte umfasst: Scope-Grenze explizit vor Gate-Start klären (B1-AP-14c1, 2026-06-18) — 1 Beleg, Normal
 - [Q] Komplexere Lösung vorgeschlagen wenn einfachere verfügbar — Batch-Umbenennung §2–§18 vorgeschlagen, unnummerierter Einschub war ausreichend und chirurgischer. Vor Batch-Operationen auf Spec/Doc: strukturell einfachere Alternative prüfen. (AP-07b-mini, 2026-06-26) — 1 Beleg, Normal
+- [R] „BEREITS GEBAUT" als Statuswort missverstanden — regulatorik-dashboard trug diesen Vermerk, der kein Fertigstellungsstatus war, sondern nur eine grobe Notiz; führte zu Drift-Sonderpfad AP-14a. (AP-13, 2026-06-29) — 1 Beleg, Normal
+- [S] App-Kategorie fehleingeordnet — prokrastinations-preis in Kat C statt P-Sonderpfad eingeordnet, von Albert korrigiert. (AP-13/15a, 2026-06-29) — 1 Beleg, Normal
+- [T] PowerShell Measure-Object -Line lieferte falsche Zeilenzahl — Messfehler, in Folge-AP geklärt, kein Fachfehler. (AP-14g, 2026-06-30) — 1 Beleg, Normal
+- [U] Memory-Integritätscheck fand 8 vorbestehende Frontmatter-Fehler + 1 veraltete Prüfregel, sofort auf Alberts Wunsch repariert. (AP-16–18, 2026-07-01) — 1 Beleg, Normal
+- [V] Mitgeliefertes Python-Audit-Gerüst hatte 2 Extraktionsfehler und hätte alle Standard-Apps fälschlich als ROT gemeldet — durch Wiederverwendung bewährter Extraktionsfunktionen transparent korrigiert statt blind übernommen. (AP-25, 2026-07-01) — 1 Beleg, Normal
+- [W] Eigene GELB-Einschätzung (Repo-Namensdiskrepanz) vom Steuerfaden als „kein Blocker" übersteuert, in Folge-APs korrekt übernommen. (AP-prokrast-02a, 2026-07-01) — 1 Beleg, Normal
+- [X] Kettenmodus-Trigger prüft nur Datumsmuster, nicht inhaltliche Gültigkeit des HOOK-META-Felds „Nächster-Schritt" — führte kurzzeitig zu falschem AP-14j-Bezug, von Albert korrigiert. Systemschwäche der /start-Sequenz, nicht nur ein Einzelfehler. (2026-07-02) — 1 Beleg, Normal
+- [Y] Eigenes Testszenario hatte 2 CSS-Bugs (Layout-Overlap, Höhen-Kollision) — von Albert im Browser gefunden, korrekt als Testharness- statt Plugin-/Engine-Fehler diagnostiziert und behoben. (AP-prokrast-03d, 2026-07-02) — 1 Beleg, Normal
+- [Z] Peer-Review-Beleg „Smart Update ist bereits in Screen 2 erprobt" war irreführend — der betroffene Achsen-Animationspfad wurde vor der Behauptung nie tatsächlich durchlaufen. Vor Wiederverwendung eines Belegs aus Vor-AP: prüfen, ob der konkrete Codepfad wirklich identisch durchlaufen wurde. (AP-prokrast-03f, 2026-07-02) — 1 Beleg, Normal
+- [AA] Auftrag benannte einen Vorgang fälschlich als „Regression" (verlorene, bereits entschiedene Wahrheit) statt als „Korrektur nach bindender Nutzerentscheidung" — vor dem Schreiben geklärt, Historie ehrlich dokumentiert statt der falschen Rahmung gefolgt. (AP-prokrast-06b, 2026-07-04) — 1 Beleg, Normal
+- [AB] Beat-2-Symbolik (✅/❓) laut Datei-Historie durchgängig offen; eigene Empfehlung „streichen" von Albert außerhalb der Datei-Historie überstimmt. (AP-prokrast-06a, 2026-07-04) — resolved: Symbole bleiben als reiner Canvas-Marker ohne DOM/A11y-Anspruch, in APP_SPEC/Drehbuch/QA_TEST_CASES verankert (AP-06b)
 
 ---
 
@@ -70,3 +85,4 @@ Stand: 2026-06-29 | Distill 9 | Muster mit ≥2 Belegen (Normal) oder ≥1 Beleg
 
 - KI-Tool-Präferenz (Perplexity > ChatGPT > Gemini) — retired 2026-05-09 | Grund: Einzelpräferenz, kein universelles Verhaltensmuster
 - Klassifizierungsbaum bleibt in CLAUDE.md — retired 2026-05-09 | Grund: bereits in CLAUDE.md verankert, kein separates Memory nötig
+- Geschützte Seed-Datei trotz Read-only verändert (AP-23, 2026-07-01) — retired 2026-07-06 | Grund: einmaliges Missverständnis über den Sonderfall-Workflow, sofort korrigiert (AP-23a), kein wiederkehrendes Muster

@@ -278,6 +278,8 @@ Nach HOOK-META-Änderung:
 - sichtbaren Text und HOOK-META auf Widerspruch prüfen,
 - falls Validator vorhanden: ausführen.
 
+Wenn der Text eine Commit-Status-Aussage enthält („committed“, „Commit steht aus“, „noch nicht committed“): vorher `git log --oneline -5` gegen die Behauptung prüfen, nicht aus einer Vorlage oder Vorgänger-Session übernehmen (Reoccurrence 2026-07-04/2026-07-06, siehe [[feedback-gruendlichkeit-vor-tempo]]).
+
 ### 3.7 BACKLOG / ARCHIV
 
 BACKLOG und BACKLOG-ARCHIV dürfen im Kettenmodus nicht deferred werden.
@@ -609,6 +611,8 @@ Bei jeder Änderung an Fokus, nächstem Schritt oder Blockern:
 - Validator ausführen, falls vorhanden.
 
 Sichtbarer Text und HOOK-META dürfen nicht widersprechen.
+
+Commit-Status-Aussagen immer gegen `git log --oneline -5` prüfen, bevor sie geschrieben werden — auch wenn eine Vorlage oder ein Vorgänger-Text das bereits behauptet.
 
 ### 7.10 CLAUDE.md
 
