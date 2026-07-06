@@ -550,14 +550,24 @@ function renderContent(container, appData, options, stationsConfig) { // CHANGED
   // CHANGED — AP-prokrast-03h: kein Morph mehr. Screen 4 rendert den finalen 20-Jahres-Rubikon-Zustand
   // in einem einzigen renderFromData()-Aufruf — links echte Vergangenheit, Mitte Rubikon/Heute
   // (FwVerticalLinePlugin), rechts leerer Zukunftsraum (kein Zukunftspunkt, kein Dummy, kein zweites
-  // Dataset). Kein Canvas-Text mehr (FwChartTextPlugin bleibt ungenutzt) — der semantische Haupttext
-  // steht ausschließlich im DOM (`rubikonText`).
+  // Dataset). Der semantische Haupttext steht ausschließlich im DOM (`rubikonText`); die Canvas-Marker
+  // (FwChartTextPlugin, RubikonSymbolMarkers) sind rein dekorativ und tragen keine eigene Erklärungslast.
   function renderScreen4Chart() {
     const ctx = buildAppContext(appData, currentRate, startBetrag, journeyStations);
     chartEngine4.renderFromData(chartSection4, ctx.chartSeries, {
       type: 'line',
       features: { rangeControls: false, headline: false, verticalLine: 'last' },
-      xDisplayRange: { min: ctx.startMonth, max: addMonths(ctx.latestMonth, 119) }
+      xDisplayRange: { min: ctx.startMonth, max: addMonths(ctx.latestMonth, 119) },
+      // NEW — AP-prokrast-07a: RubikonSymbolMarkers — ✅ links / ❓ rechts der blauen Rubikon-Linie.
+      // anchor:'lastPoint' bindet beide an denselben Datenpunkt wie FwVerticalLinePlugin (dataset 0,
+      // verticalLine:'last') — keine zweite, divergierende Zeitberechnung.
+      chartText: {
+        enabled: true,
+        annotations: [
+          { text: '✅', anchor: 'lastPoint', offsetX: -14, y: 0.08, align: 'right' },
+          { text: '❓', anchor: 'lastPoint', offsetX: 14,  y: 0.08, align: 'left'  }
+        ]
+      }
     });
   }
 

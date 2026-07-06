@@ -25,9 +25,13 @@
  * Aktivierung: chart.options.plugins.fwChartText = { enabled: true, annotations: [...] }
  * Deaktivierung: Feld weglassen oder enabled: false setzen.
  *
- * Annotation-Felder: id (optional), text, x, y (Pflicht: text/x/y),
+ * Annotation-Felder: id (optional), text, x, y (Pflicht: text/y; x nur Pflicht ohne anchor),
  * align, baseline, fontSize, fontWeight, color, lineHeight, offsetX, offsetY (optional).
  * plotFraction: x=0/y=0 = chartArea.left/top, x=1/y=1 = chartArea.right/bottom.
+ *
+ * anchor (optional): 'lastPoint' bindet die x-Position an den letzten Datenpunkt von
+ * anchorDatasetIndex (Default 0) statt an plotFraction — dieselbe Referenz wie
+ * FwVerticalLinePlugin. offsetX wirkt dann als Pixel-Versatz von diesem Punkt, a.x wird ignoriert.
  */
 
 // NEW — AP-prokrast-03d
@@ -43,15 +47,26 @@ function _isFiniteNumber(v) {
 
 // Defensive Validierung — ungültige Annotationen werden übersprungen, nicht geworfen
 function _isValidAnnotation(a) {
-    return a != null &&
-           typeof a === 'object' &&
-           typeof a.text === 'string' && a.text.length > 0 &&
-           _isFiniteNumber(a.x) &&
-           _isFiniteNumber(a.y);
+    if (a == null || typeof a !== 'object') return false;
+    if (typeof a.text !== 'string' || a.text.length === 0) return false;
+    if (!_isFiniteNumber(a.y)) return false;
+    if (a.anchor === 'lastPoint') return true;
+    return _isFiniteNumber(a.x);
+}
+
+// NEW — AP-prokrast-07a: anchor: 'lastPoint' — liefert die Pixel-x-Position des letzten
+// Datenpunkts, dieselbe Referenz wie FwVerticalLinePlugin. null = Datensatz (noch) nicht bereit.
+function _resolveAnchorX(chart, a) {
+    var datasetIndex = _isFiniteNumber(a.anchorDatasetIndex) ? a.anchorDatasetIndex : 0;
+    var meta = chart.getDatasetMeta(datasetIndex);
+    if (!meta || !meta.data || !meta.data.length) return null;
+    var last = meta.data[meta.data.length - 1];
+    if (!last || typeof last.x !== 'number') return null;
+    return last.x;
 }
 
 // Zeichnet eine Annotation — mehrzeilig via '\n', Blockausrichtung über baseline
-function _drawAnnotation(ctx, chartArea, a) {
+function _drawAnnotation(ctx, chartArea, a, anchorX) {
     var align      = (a.align === 'left' || a.align === 'right') ? a.align : DEFAULT_ALIGN;
     var baseline   = (a.baseline === 'top' || a.baseline === 'bottom') ? a.baseline : DEFAULT_BASELINE;
     var fontSize   = _isFiniteNumber(a.fontSize) ? a.fontSize : DEFAULT_FONT_SIZE;
@@ -61,8 +76,8 @@ function _drawAnnotation(ctx, chartArea, a) {
     var offsetX    = _isFiniteNumber(a.offsetX) ? a.offsetX : 0;
     var offsetY    = _isFiniteNumber(a.offsetY) ? a.offsetY : 0;
 
-    var px = chartArea.left + chartArea.width  * a.x + offsetX;
-    var py = chartArea.top  + chartArea.height * a.y + offsetY;
+    var px = (anchorX !== null) ? anchorX + offsetX : chartArea.left + chartArea.width * a.x + offsetX;
+    var py = chartArea.top + chartArea.height * a.y + offsetY;
 
     var lines = String(a.text).split('\n');
     var n = lines.length;
@@ -108,7 +123,12 @@ export const FwChartTextPlugin = {
         for (var i = 0; i < annotations.length; i++) {
             var a = annotations[i];
             if (!_isValidAnnotation(a)) continue;
-            _drawAnnotation(ctx, chartArea, a);
+            var anchorX = null; // NEW — AP-prokrast-07a
+            if (a.anchor === 'lastPoint') {
+                anchorX = _resolveAnchorX(chart, a);
+                if (anchorX === null) continue; // Datensatz noch nicht bereit — überspringen, kein Crash
+            }
+            _drawAnnotation(ctx, chartArea, a, anchorX);
         }
         ctx.restore();
     }

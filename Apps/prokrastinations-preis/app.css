@@ -297,8 +297,8 @@
      --fw-rubikon-text-top größer = weiter nach unten, kleiner = weiter nach oben.
      --fw-rubikon-text-left größer = weiter nach rechts, kleiner = weiter nach links.
      Direkt in DevTools am Element testbar, dann hier übernehmen — kein Selektor-Suchen nötig. */
-  --fw-rubikon-text-top: 14%;
-  --fw-rubikon-text-left: 62%;
+  --fw-rubikon-text-top: 14.9%; /* CHANGED — AP-prokrast-07c (Nachtrag): Albert-Nachmessung DevTools — gilt jetzt nur noch für L (>1024px), M hat eigene Regel weiter unten */
+  --fw-rubikon-text-left: 55.2%; /* CHANGED — AP-prokrast-07c (Nachtrag): Albert-Nachmessung DevTools — gilt jetzt nur noch für L (>1024px), M hat eigene Regel weiter unten */
   top: var(--fw-rubikon-text-top);
   left: var(--fw-rubikon-text-left);
   right: 3%;
@@ -317,10 +317,20 @@
     display: block;
   }
   .fw-app__rubikon-text {
-    --fw-rubikon-text-top: 10%;
-    --fw-rubikon-text-left: 68%; /* CHANGED — AP-prokrast-03h2 (Nachtrag 2): Albert-Feedback S-Zone — Text begann links der blauen Linie, weiter nach rechts verschoben (war 56%) */
+    --fw-rubikon-text-top: 14.8%; /* CHANGED — AP-prokrast-07c (Nachtrag): Albert-Nachmessung DevTools */
+    --fw-rubikon-text-left: 66.2%; /* CHANGED — AP-prokrast-07c (Nachtrag): Albert-Nachmessung DevTools — Text war 5.2px zu weit links (war 64%) */
     right: 2%;
     font-size: 0.85em;
+  }
+}
+
+/* NEW — AP-prokrast-07c (Nachtrag): eigene M-Stufe, da Basisregel M und L nicht gleichzeitig
+   treffen konnte (Albert-Nachmessung DevTools). Grenzen angelehnt an Tailwind md/lg
+   (docs/design-system/spec/03-LAYOUT-UND-RESPONSIVE.md). L bleibt auf der Basisregel. */
+@media (min-width: 481px) and (max-width: 1024px) {
+  .fw-app__rubikon-text {
+    --fw-rubikon-text-left: 56.3%; /* CHANGED — AP-prokrast-07c (Nachtrag 2): Albert-Nachmessung DevTools, war 55.8% */
+    --fw-rubikon-text-top: 14.9%;
   }
 }
 

@@ -28,7 +28,8 @@ Stand: 2026-07-04 | Session: AP-prokrast-06a-06d | Geändert von: Claude
 | TMPL-1   | Theme   | Ghost-Template bauen (Phase 2, 14 Items)       | H    | —            | theme-build/THEME-ASSEMBLY-CHECKLIST.md           |
 | AP-19    | Engine  | PERIOD_TABLES DRY-Refactoring                  | M    | AP-18 ✅     | engine/detail/AP-19-DETAIL.md                     |
 | DS-012   | Design  | Tailwind-Config kanonisch in DESIGN-SYSTEM.md  | H    | —            | —                                                 |
-| DS-013   | Design  | Ghost screen.css-Einbindung prüfen + master-template Token-Duplikat klären | M | — | —                              |
+| DS-013   | Design  | Ghost screen.css-Einbindung prüfen + master-template Token-Duplikat klären | M | — | — |
+| DS-FOLLOWUP-07 | Design | Nach Anbindung der echten CI-Fonts / Theme-Bridge (DS-012/DS-013): Rubikon-Positionierung `prokrastinations-preis` Screen 4 (`RubikonSymbolMarkers`, DOM-Text `rubikonText`) auf S/M/L mit `tools/rubikon-symbol-markers-diagnose.js` neu messen und ggf. feinjustieren — Font-Wechsel ändert Zeichenbreiten, aktuelle Werte basieren auf Browser-Fallback-`sans-serif` | L | DS-012, DS-013 | docs/steering/patches/AP-prokrast-07d_qa-nachtrag_ruecklaufkapsel_Ergebnis.md |
 | DS-014   | Design  | 07-APP-KOMPONENTEN.md — Design-API Baukasten   | H    | DS-012       | Blocker für alle App-Entwicklung                  |
 | CSS-5    | CSS     | Farb-Audit + screen.css Verifikation           | M    | CSS-3 ✅     | —                                                 |
 | AP-DOC-1 | Engine  | Basis/Prompts/ bereinigen (5 Dateien)          | H    | —            | engine/detail/AP-DOC-1-DETAIL.md                  |
@@ -58,7 +59,6 @@ Stand: 2026-07-04 | Session: AP-prokrast-06a-06d | Geändert von: Claude
 | AF-22    | App-Fabrik | P→B→N-Block in APP_SPEC-Template integrieren          | M    | AF-21   | Pflichtabschnitt in APP_SPEC.md-Vorlage + 10v10-Test-Feld |
 | AF-23    | App-Fabrik | Pincus-Check als Pre-Code-Quality-Gate dokumentieren  | L    | AF-22   | 4-Punkte-Checkliste in .claude/commands/ oder CLAUDE.md §6 App-Arbeit |
 | AP-23    | Engine  | Chart.js-Version zwischen Dev/Test-CDN (`Theme/index.html`, `app.test.html`, ungepinntes `<script src="https://cdn.jsdelivr.net/npm/chart.js">`) und lokal vendorter Produktionsversion 4.5.0 synchronisieren/pinnen — Drift-Risiko bei künftigen Chart.js-Majors | L | — | docs/steering/patches/AP-prokrast-03g_klaerung-forschung_rubikon-reveal_scale-animation_Ergebnis.md |
-| AP-26    | App     | prokrastinations-preis Screen 4 — ✅/❓-Symbolik (Drehbuch Beat 2): Produktentscheidung getroffen (AP-prokrast-06a-06d, 2026-07-03/04) — ✅ links / ❓ rechts der blauen Rubikon-Linie als rein visueller Canvas-Chart-Marker über `FwChartTextPlugin.js`, kein DOM/A11y, S/M/L-Pflicht dokumentiert (APP_SPEC §16.1a, Drehbuch, QA_TEST_CASES TC-F05). Nur noch Bau offen | M | — | docs/steering/patches/AP-prokrast-06a_symbolik-beat2_entscheidung_Ergebnis.md, docs/steering/patches/AP-prokrast-06b_regression-sync_symbolik-chartmarker_Ergebnis.md, docs/steering/patches/AP-prokrast-06d_ruecklaufkapsel_Ergebnis.md |
 
 ---
 
