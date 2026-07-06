@@ -12,6 +12,7 @@
 
 export { CenterTextPlugin } from './CenterTextPlugin.js';
 export { CrosshairPlugin } from './CrosshairPlugin.js';
+export { FwAnchorMeasurementPlugin } from './FwAnchorMeasurementPlugin.js';
 export { FwAnnotationPulsePlugin } from './FwAnnotationPulsePlugin.js';
 export { FwChartTextPlugin } from './FwChartTextPlugin.js';
 export { FwVerticalLinePlugin } from './FwVerticalLinePlugin.js';

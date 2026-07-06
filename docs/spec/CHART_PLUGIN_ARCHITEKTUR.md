@@ -4,7 +4,7 @@
 **Status:** Verbindlicher Engine-Architekturvertrag  
 **Geltungsbereich:** `Theme/assets/js/fw-chart-engine/`  
 **Erstellt aus:** B1-AP-14 / `FwAnnotationPulsePlugin.js` / AP-14-Rettung  
-**Stand:** 2026-06-22
+**Stand:** 2026-07-06
 
 ---
 
@@ -657,17 +657,18 @@ Es darf der Engine nicht heimlich neues Wissen unterschieben.
 
 ---
 
-## 20. Plugin-Bestand, Barrel, Importregeln und Drift-Abgrenzung (Stand: AP-14e12, 2026-06-22)
+## 20. Plugin-Bestand, Barrel, Importregeln und Drift-Abgrenzung (Stand: AP-prokrast-08b, 2026-07-06)
 
 ### 20.1 Aktiver Plugin-Bestand
 
-Nach Abschluss von B1-AP-14e2–AP-14e9 sind genau vier Plugins aktiv:
+Nach Abschluss von B1-AP-14e2–AP-14e9 waren genau vier Plugins aktiv; seit AP-prokrast-08b (Card-to-Point-Motion, `prokrastinations-preis` Screen 2) sind es fünf:
 
 ```text
-CenterTextPlugin        — Doughnut/Pie-Chart-Zentrumstext
-CrosshairPlugin         — vertikale/horizontale Fadenkreuz-Linie
-FwAnnotationPulsePlugin — Pulse-Animation auf Annotationspunkten
-FwVerticalLinePlugin    — vertikale Trennlinie (z. B. Investitionszeitpunkt)
+CenterTextPlugin          — Doughnut/Pie-Chart-Zentrumstext
+CrosshairPlugin           — vertikale/horizontale Fadenkreuz-Linie
+FwAnnotationPulsePlugin   — Pulse-Animation auf Annotationspunkten
+FwVerticalLinePlugin      — vertikale Trennlinie (z. B. Investitionszeitpunkt)
+FwAnchorMeasurementPlugin — meldet Pixel-Koordinaten von Datenpunkten per Callback an die App (afterDraw, kein Rückkanal außer onMeasurement)
 ```
 
 Ablageort:
@@ -677,6 +678,7 @@ Theme/assets/js/fw-chart-engine/plugins/CenterTextPlugin.js
 Theme/assets/js/fw-chart-engine/plugins/CrosshairPlugin.js
 Theme/assets/js/fw-chart-engine/plugins/FwAnnotationPulsePlugin.js
 Theme/assets/js/fw-chart-engine/plugins/FwVerticalLinePlugin.js
+Theme/assets/js/fw-chart-engine/plugins/FwAnchorMeasurementPlugin.js
 ```
 
 ### 20.2 Kanonischer Barrel
@@ -721,9 +723,10 @@ Selektive Named Imports sind korrekt.
 Ein Konsument importiert aus `plugins/index.js` nur die Plugins, die er tatsächlich verwendet.
 
 ```text
-Beispiele nach AP-14e9:
-- ChartEngine.js importiert FwAnnotationPulsePlugin und FwVerticalLinePlugin,
-  weil nur diese Engine-seitig dynamisch in chartConfig.plugins ergänzt werden.
+Beispiele nach AP-14e9 / AP-prokrast-08b:
+- ChartEngine.js importiert FwAnnotationPulsePlugin, FwVerticalLinePlugin und
+  FwAnchorMeasurementPlugin, weil nur diese Engine-seitig dynamisch in
+  chartConfig.plugins ergänzt werden.
 - LineChartStrategy.js importiert CrosshairPlugin.
 - PieChartStrategy.js importiert CenterTextPlugin.
 ```

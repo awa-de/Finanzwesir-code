@@ -45,6 +45,18 @@ function clamp(val, min, max) {
   return Math.min(max, Math.max(min, val));
 }
 
+// NEW — AP-prokrast-08b: Reduced-Motion-Check für Card-to-Point (Muster aus
+// CHART_PLUGIN_ARCHITEKTUR.md §9 übernommen, hier für app-seitige DOM-Motion)
+function prefersReducedMotion() {
+  try {
+    return typeof window !== 'undefined' &&
+           window.matchMedia != null &&
+           window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  } catch (e) {
+    return false;
+  }
+}
+
 // NEW — data-fw-options Parsing: Whitelist defaultRate + startBetrag (APP_SPEC §9, Q-02)
 function parseOptions(raw) {
   const opts = { defaultRate: 300, startBetrag: 0 };
@@ -272,6 +284,10 @@ function renderContent(container, appData, options, stationsConfig) { // CHANGED
   const startBetrag = options.startBetrag;
   let activeStationIndex = 0; // NEW — AP-14: Zeitreise-Zustand
   let currentRate = initialRate; // NEW — AP-14: Rate wird bei S1→S2 eingefroren
+  // CHANGED — AP-prokrast-08b2: explizite State Machine statt Boolean+Measurement-Cache
+  // (war: currentStationAnchorMeasurement + stationTransitionInProgress aus AP-08b).
+  // Zustände: 'idle' | 'chart-revealing' | 'point-pulsing-ready' | 'card-flying' | 'next-card-entering'
+  let journeyState = 'idle';
 
   function makeBtn(text, extraClass) {
     const btn = document.createElement('button');
@@ -500,20 +516,25 @@ function renderContent(container, appData, options, stationsConfig) { // CHANGED
   let screen4RevealedRate = null; // Rate, für die S4 zuletzt final gerendert wurde (analog lastRenderedRateS3)
   const RUBIKON_A11Y_TEXT = 'Die letzten zehn Jahre sind gelaufen. Die nächsten zehn Jahre sind bewusst leer, weil niemand weiß, was passiert. Der Handlungsrahmen ist: dranbleiben, wenn es nervt.'; // CHANGED — AP-prokrast-03h
 
-  // NEW — AP-14: Zeitreise-Schritt rendern (ersetzt renderS2)
-  // Kein Endwissen: nur Stations-Daten bis stationMonth sichtbar (APP_SPEC §14.1)
-  function renderJourneyStep(stationIdx) {
-    const station     = journeyStations[stationIdx];
-    const stationMonth = station.date.slice(0, 7); // 'YYYY-MM'
-    const ctx         = buildAppContext(appData, currentRate, startBetrag, journeyStations);
-    const fmtStation  = new Intl.NumberFormat(appData.locale, {
-      style: 'currency', currency: 'EUR', maximumFractionDigits: 0
-    });
-    const intermediate = calcStationIntermediate(ctx.chartSeries, stationMonth, currentRate, startBetrag);
-    renderStationCard(stationArea, station, intermediate, fmtStation);
+  // NEW — AP-prokrast-08b4a: Chart-Teil von renderJourneyStep() aufgetrennt — kein
+  // Karten-DOM-Update, kein Progress-Chip, kein Button-Text, keine Live-Region. Grund:
+  // Gate-5-Befund aus AP-08b4/08b4a — enterNextCard() rief bisher das gekoppelte
+  // renderJourneyStep() auf, wodurch der Chart-Wachstum auf Station X+1 UNGEGATED lief,
+  // während die neue Karte X+1 schon sichtbar war (Chart baute sich sichtbar hinter der
+  // bereits neuen Karte auf). Mit dieser Trennung kann der Chart-Teil für X+1 zuerst per
+  // chartSettled abgewartet werden, bevor die Karte X+1 erscheint (s. enterNextCard()).
+  // options.chartSettled ist optional — ohne sie verhält sich dieser Aufruf identisch zum
+  // bisherigen "idle"-Rendering (kein Gate nötig, da dabei keine Karte in Konkurrenz steht).
+  // anchorMeasurement bleibt IMMER aktiv (No-op-Bootstrap, Gate 2 aus AP-08b4a: HÄRTEN,
+  // nicht ersetzt — s. Ergebnisprotokoll AP-prokrast-08b4a für Begründung und Folgepflicht).
+  function renderJourneyChartOnly(stationIdx, renderOptions) {
+    const station      = journeyStations[stationIdx];
+    const stationMonth  = station.date.slice(0, 7); // 'YYYY-MM'
+    const ctx           = buildAppContext(appData, currentRate, startBetrag, journeyStations);
     const visibleSeries = buildVisibleChartSeries(ctx.chartSeries, stationMonth);
     const journeyRangeKey = [currentRate, ctx.startMonth, ctx.latestMonth].join('|'); // NEW — AP-14b3
     const journeyAnnotations = buildJourneyStationAnnotations(journeyStations.slice(0, stationIdx), visibleSeries); // NEW — B1-AP-14c1
+    const lastPoint = visibleSeries[visibleSeries.length - 1]; // NEW — AP-prokrast-08b2 (Bugfix): Anker-Bootstrap, s. Kommentar oben
     chartEngine2.renderFromData(chartSection2, visibleSeries, { // CHANGED — AP-14b3
       type: 'line',
       features: { rangeControls: false, headline: false },
@@ -521,8 +542,37 @@ function renderContent(container, appData, options, stationsConfig) { // CHANGED
       yRangePolicy: 'cumulative-expand-zero',
       yRangeResetKey: journeyRangeKey,
       annotations: { events: journeyAnnotations }, // NEW — B1-AP-14c1
-      annotationPulse: { enabled: true, mode: 'newly-added' } // NEW — B1-AP-14c4
+      annotationPulse: { enabled: true, mode: 'newly-added' }, // NEW — B1-AP-14c4
+      anchorMeasurement: {
+        enabled: true,
+        anchors: [{ id: station.id, x: new Date(stationMonth + '-01').getTime(), y: lastPoint.depotwert }],
+        onAnchorMeasurement: () => {}
+      },
+      // NEW — AP-prokrast-08b4a: optionales Chart-Settled-Gate für diesen Aufruf — wird von
+      // enterNextCard() gesetzt (Zyklus 2), bleibt bei der einfachen "idle"-Nutzung (Screen-2-
+      // Ersteintritt) unbenutzt, da dort keine Karte auf dieses Signal wartet.
+      ...(renderOptions?.chartSettled ? { chartSettled: renderOptions.chartSettled } : {}),
+      // NEW — AP-prokrast-08b5: Screen-2-Journey-Chart rendert instant/final, kein Chart.js-
+      // Default-Tweening — der Chart ist hier nur der ruhige Kontext, die semantische
+      // Bewegung übernehmen Pulse + Card-to-Point (nicht das Wachsen/Einschwingen der Linie).
+      // Gilt für jeden Aufruf dieser Funktion (Ersteintritt UND Zyklus-2-Übergang), da
+      // renderJourneyChartOnly() ausschließlich Teil der Screen-2-Journey-Choreografie ist.
+      renderMotion: { mode: 'instant' }
     });
+  }
+
+  // NEW — AP-prokrast-08b4a: Karten-/Chip-/Button-/Live-Region-Teil von renderJourneyStep()
+  // aufgetrennt — keine Chart-Berührung. Wird von renderJourneyStep() (idle-Fall) und von
+  // enterNextCard() (erst NACH chartSettled für die neue Station) genutzt.
+  function renderJourneyCardOnly(stationIdx) {
+    const station     = journeyStations[stationIdx];
+    const stationMonth = station.date.slice(0, 7);
+    const ctx         = buildAppContext(appData, currentRate, startBetrag, journeyStations);
+    const fmtStation  = new Intl.NumberFormat(appData.locale, {
+      style: 'currency', currency: 'EUR', maximumFractionDigits: 0
+    });
+    const intermediate = calcStationIntermediate(ctx.chartSeries, stationMonth, currentRate, startBetrag);
+    renderStationCard(stationArea, station, intermediate, fmtStation);
     // NEW — AP-14b: Orientierungs-Chip aktualisieren (APP_SPEC §16.1)
     const n = stationIdx + 1;
     const total = journeyStations.length;
@@ -532,6 +582,16 @@ function renderContent(container, appData, options, stationsConfig) { // CHANGED
     progressEl.textContent = `Station ${n} von ${total} · Bekannt bis ${bekannt}`;
     journeyBtn.textContent = station.isFinalReveal ? 'Ergebnis ansehen' : 'Weiter investiert bleiben'; // CHANGED — B1-STATIONS-v3.0
     a11yRegion.textContent = station.headline; // stationLiveMessage — kein Endwissen (APP_SPEC §14.1)
+  }
+
+  // NEW — AP-14: Zeitreise-Schritt rendern (ersetzt renderS2)
+  // Kein Endwissen: nur Stations-Daten bis stationMonth sichtbar (APP_SPEC §14.1)
+  // CHANGED — AP-prokrast-08b4a: reine Kombination aus Chart- und Karten-Teil, ohne Gate —
+  // für den "idle"-Fall (Screen-2-Ersteintritt), bei dem keine Karte auf ein Chart-Settled-
+  // Signal wartet. Der gegatete Übergang X→X+1 läuft über enterNextCard() (Klick-Handler).
+  function renderJourneyStep(stationIdx) {
+    renderJourneyChartOnly(stationIdx);
+    renderJourneyCardOnly(stationIdx);
   }
 
   function renderS3(rate) {
@@ -637,17 +697,231 @@ function renderContent(container, appData, options, stationsConfig) { // CHANGED
   btnS3Next.addEventListener('click', () => showScreen(4, true));
   btnS4Prev.addEventListener('click', () => showScreen(3, true));
 
-  // NEW — AP-14: Journey-Button (nächste Station oder Finale-Reveal → S3)
+  // NEW — AP-prokrast-08b2/08b3: Chart-Reveal VOR dem Card-Flight. Aktualisiert den Chart auf
+  // denselben Datenstand wie renderJourneyStep(stationIdx), aber mit der aktuellen Station
+  // bereits als (pulsierende) Vergangenheits-Annotation eingeschleust — ihr Zielpunkt muss
+  // final sichtbar/pulsierend existieren, BEVOR die Karte dorthin fliegen darf (Klick →
+  // Chart-Reveal → Chart-Settled → Pulse/Punkt final → Card-Flight → nächste Karte).
+  // Card/Progress/Button bleiben unverändert stehen — nur der Chart wird hier aktualisiert.
+  // CHANGED — AP-prokrast-08b3: onPointReady wird NICHT mehr direkt aus dem
+  // AnchorMeasurement-Callback aufgerufen (measurement.visible === true beweist nur, dass der
+  // Punkt in der ChartArea liegt — afterDraw feuert auch während einer noch laufenden
+  // Chart.js-Animation, s. Ergebnisprotokoll „Ausgangsproblem"). Stattdessen wird die zuletzt
+  // gemeldete Messung nur zwischengespeichert; erst wenn chartSettled (Chart.js'
+  // animation.onComplete, von der ChartEngine vermittelt) meldet, dass die Update-Animation
+  // für diesen Zyklus abgeschlossen ist, wird die Messung als verbindlich behandelt und
+  // onPointReady aufgerufen (mit Messung oder — falls keine gültige vorliegt — mit null als
+  // ruhigem Fallback, nie mit einem Flug ins Nirgendwo).
+  function revealCurrentStationPoint(stationIdx, onPointReady) {
+    const station = journeyStations[stationIdx];
+    const stationMonth = station.date.slice(0, 7);
+    const targetAnchorId = station.id; // NEW — AP-prokrast-08b3: explizite Anchor-Zielregel
+    const ctx = buildAppContext(appData, currentRate, startBetrag, journeyStations);
+    const visibleSeries = buildVisibleChartSeries(ctx.chartSeries, stationMonth);
+    const journeyRangeKey = [currentRate, ctx.startMonth, ctx.latestMonth].join('|');
+    // CHANGED — AP-prokrast-08b2 (war: slice(0, stationIdx) in renderJourneyStep): die aktuelle
+    // Station wird HIER bereits als Vergangenheits-Annotation eingeschleust, damit ihr Punkt
+    // als "newly-added" erkannt wird und pulst (FwAnnotationPulsePlugin, unverändert).
+    const annotationsIncludingCurrent = buildJourneyStationAnnotations(journeyStations.slice(0, stationIdx + 1), visibleSeries);
+    const lastPoint = visibleSeries[visibleSeries.length - 1];
+
+    let latestMeasurement = null; // NEW — AP-prokrast-08b3: nur Zwischenspeicher, erst bei chartSettled verbindlich
+
+    chartEngine2.renderFromData(chartSection2, visibleSeries, {
+      type: 'line',
+      features: { rangeControls: false, headline: false },
+      xDisplayRange: { min: ctx.startMonth, max: ctx.latestMonth },
+      yRangePolicy: 'cumulative-expand-zero',
+      yRangeResetKey: journeyRangeKey,
+      annotations: { events: annotationsIncludingCurrent },
+      annotationPulse: { enabled: true, mode: 'newly-added' },
+      // NEW — AP-prokrast-08b2/08b3: misst denselben Punkt, der jetzt pulst. Der Callback
+      // speichert nur zwischen — er entscheidet NICHT mehr selbst über den Flugstart
+      // (das war der AP-08b3-Fehler: afterDraw feuert auch mid-Animation).
+      anchorMeasurement: {
+        enabled: true,
+        anchors: [{ id: targetAnchorId, x: new Date(stationMonth + '-01').getTime(), y: lastPoint.depotwert }],
+        onAnchorMeasurement: (measurements) => {
+          latestMeasurement = measurements.find(mm => mm.id === targetAnchorId) || null;
+        }
+      },
+      // NEW — AP-prokrast-08b3: Chart-Settled-Gate. onSettled feuert erst, wenn Chart.js seine
+      // Update-Animation für diesen Zyklus abgeschlossen hat (oder synchron bei Reduced
+      // Motion) — s. ChartEngine.js _emitChartSettled(). Erst dann zählt die zuletzt
+      // gemeldete Messung als verbindlich.
+      chartSettled: {
+        enabled: true,
+        onSettled: () => {
+          const m = latestMeasurement;
+          if (m && m.id === targetAnchorId && m.visible) {
+            onPointReady(m);
+          } else {
+            onPointReady(null); // ruhiger Fallback — kein Flug ohne verbindliches, finales Ziel
+          }
+        }
+      },
+      // NEW — AP-prokrast-08b5: instant/final statt Chart.js-Default-Tweening — der pulsierende
+      // Punkt X muss sofort an seiner finalen Position stehen, nicht während des Chart.js-
+      // Einschwingens gemessen werden. chartSettled feuert dadurch synchron (s. ChartEngine.js),
+      // was auch die vorherige Race-Condition-Klasse (mid-Animation-Messung) strukturell entschärft.
+      renderMotion: { mode: 'instant' }
+    });
+  }
+
+  // NEW — AP-prokrast-08b (Nachtrag): liest den zentralen Fluggeschwindigkeits-Schalter
+  // (--fw-card-to-point-flight-duration, auf .fw-app) aus. Einzige Stelle, die CSS-Transition
+  // und JS-Timing synchron hält — Nachjustieren braucht nur eine Änderung in app.css.
+  function getFlightDurationMs() {
+    const raw = getComputedStyle(container).getPropertyValue('--fw-card-to-point-flight-duration').trim();
+    const n = parseFloat(raw);
+    if (!Number.isFinite(n)) return 450; // Fallback, falls CSS-Variable fehlt
+    const isSecondsUnit = raw.endsWith('s') && !raw.endsWith('ms'); // "0.45s" vs. "450ms"
+    return isSecondsUnit ? n * 1000 : n;
+  }
+
+  // NEW — AP-prokrast-08b: Card-to-Point — visueller Flug-Clone (Beat A). Die echte Karte
+  // bleibt während des Flugs unverändert im DOM sichtbar (semantische Quelle, kein Fokus-/
+  // Live-Region-/Tastatur-Risiko, da sich am realen DOM währenddessen nichts ändert). Erst
+  // nach Ablauf der Fluganimation ruft der Aufrufer onComplete() — Zielpunkt/Pulse (Beat B)
+  // und die nächste Station (Beat C) rendern gemeinsam erst danach (renderJourneyStep()).
+  function flyCardToPoint(measurement, onComplete) {
+    const originRectAbs = stationArea.getBoundingClientRect();
+    const chartRectAbs  = chartSection2.getBoundingClientRect();
+    const screenRectAbs = screen2.getBoundingClientRect();
+
+    const originLeft = originRectAbs.left - screenRectAbs.left;
+    const originTop  = originRectAbs.top  - screenRectAbs.top;
+    const chartLeft  = chartRectAbs.left  - screenRectAbs.left;
+    const chartTop   = chartRectAbs.top   - screenRectAbs.top;
+
+    const targetX = chartLeft + measurement.x;
+    const targetY = chartTop  + measurement.y;
+    const originCenterX = originLeft + originRectAbs.width / 2;
+    const originCenterY = originTop  + originRectAbs.height / 2;
+
+    // Klon: rein visuell, semantisch unsichtbar — echte Karte bleibt unverändert stehen
+    const clone = stationArea.cloneNode(true);
+    clone.removeAttribute('id');
+    clone.setAttribute('aria-hidden', 'true');
+    clone.setAttribute('inert', '');
+    clone.classList.add('fw-app__station-area--flight-clone');
+    clone.querySelectorAll('[id]').forEach(el => el.removeAttribute('id')); // keine doppelten IDs während der Überlappung
+    clone.querySelectorAll('[aria-controls]').forEach(el => el.removeAttribute('aria-controls'));
+    clone.querySelectorAll('button, [tabindex]').forEach(el => {
+      el.setAttribute('tabindex', '-1');
+      if (el.tagName === 'BUTTON') el.disabled = true;
+    });
+    clone.style.left = originLeft + 'px';
+    clone.style.top = originTop + 'px';
+    clone.style.width = originRectAbs.width + 'px';
+    clone.style.setProperty('--fw-flight-delta-x', (targetX - originCenterX) + 'px');
+    clone.style.setProperty('--fw-flight-delta-y', (targetY - originCenterY) + 'px');
+    screen2.appendChild(clone);
+
+    requestAnimationFrame(() => {
+      clone.classList.add('fw-app__station-area--flight-active');
+    });
+
+    // CHANGED — AP-prokrast-08b (Nachtrag): Timeout folgt dem zentralen Schalter
+    // (--fw-card-to-point-flight-duration) statt eines hart verdrahteten Werts —
+    // verhindert Drift zwischen CSS-Transition-Dauer und JS-Timing.
+    setTimeout(() => {
+      clone.remove();
+      onComplete();
+    }, getFlightDurationMs() + 20); // kleiner Puffer über der CSS-Transition-Dauer
+  }
+
+  // NEW — AP-prokrast-08b3/08b4a: Journey-Button-State-Machine, zwei gegatete Render-Zyklen
+  // pro Klick — idle → chart-revealing → chart-settled → point-ready-final → (card-flying →)
+  // next-chart-revealing → next-card-entering → idle.
+  // CHANGED — AP-prokrast-08b3 (war: point-pulsing-ready direkt nach erstem visible
+  // measurement, AP-08b2): Der Flug darf erst starten, wenn der Chart TATSÄCHLICH final
+  // steht (Chart-Settled-Gate aus revealCurrentStationPoint(), s.d.), nicht schon beim ersten
+  // measurement.visible === true — das bewies nur "Punkt liegt in der ChartArea", nicht
+  // "Chart-Animation ist fertig". Reduced Motion überspringt nur card-flying, nie die
+  // kausale Reihenfolge (Chart/Punkt erscheinen in jedem Fall zuerst, final, vor der Karte).
+  // CHANGED — AP-prokrast-08b4a: zweiter Render-Zyklus (Chart-Wachstum auf die neue Station
+  // X+1 nach dem Flug) war bis hierhin ungegated (Gate-5-Befund) — enterNextCard() ist jetzt
+  // selbst ein kleiner gegateter Zyklus (next-chart-revealing → next-card-entering), der
+  // denselben chartSettled-Contract wiederverwendet wie Zyklus 1.
   journeyBtn.addEventListener('click', () => {
     const isLast = activeStationIndex === journeyStations.length - 1;
     if (isLast) {
       showScreen(3, true);
-    } else {
-      activeStationIndex++;
-      renderJourneyStep(activeStationIndex);
-      const h3 = stationArea.querySelector('h3'); // CHANGED — AP-17b: Fokus auf Stations-h3 (APP_SPEC §14.5 Variante B)
-      (h3 ?? screen2.querySelector('h2'))?.focus();
+      return;
     }
+    if (journeyState !== 'idle') return; // Schutz gegen non-idle-Klicks (kein Button-Disable, kein Fokusverlust-Risiko)
+
+    let pointReadyHandled = false; // Schutz gegen Mehrfachaufrufe von handlePointReady (Settled-Signal + Fallback-Timer)
+    let fallbackTimer = null;
+    journeyState = 'chart-revealing';
+
+    // CHANGED — AP-prokrast-08b4a: Gate-5-Fix (AP-08b4/08b4a-Befund) — der Chart-Wachstum auf
+    // die neue Station X+1 lief bisher UNGEGATED (renderJourneyStep() rief Chart+Karte
+    // gekoppelt auf), wodurch der Chart sich sichtbar hinter der bereits neuen Karte X+1
+    // aufbaute. Jetzt: Chart-Teil für X+1 zuerst (renderJourneyChartOnly, mit eigenem
+    // chartSettled-Gate, derselbe Contract wie Zyklus 1 aus revealCurrentStationPoint()),
+    // Karten-Teil (renderJourneyCardOnly) erst danach. Kein neuer Mechanismus — Wieder-
+    // verwendung des bestehenden chartSettled-Contracts aus AP-08b3.
+    function enterNextCard() {
+      journeyState = 'next-chart-revealing';
+      const nextIndex = activeStationIndex + 1;
+
+      let nextSettledHandled = false; // Schutz gegen Mehrfachaufrufe, analog Zyklus 1
+      let nextFallbackTimer = null;
+
+      function finishNextCard() {
+        if (nextSettledHandled) return;
+        nextSettledHandled = true;
+        if (nextFallbackTimer) { clearTimeout(nextFallbackTimer); nextFallbackTimer = null; }
+        journeyState = 'next-card-entering';
+        activeStationIndex = nextIndex;
+        renderJourneyCardOnly(activeStationIndex);
+        journeyState = 'idle';
+        const h3 = stationArea.querySelector('h3'); // CHANGED — AP-17b: Fokus auf Stations-h3 (APP_SPEC §14.5 Variante B)
+        (h3 ?? screen2.querySelector('h2'))?.focus();
+      }
+
+      // Sicherheitsnetz, analog Zyklus 1 (Begründung s. dort) — reiner Hängenbleibschutz,
+      // kein primärer Sequenzmechanismus.
+      nextFallbackTimer = setTimeout(finishNextCard, 1200);
+
+      renderJourneyChartOnly(nextIndex, {
+        chartSettled: { enabled: true, onSettled: finishNextCard }
+      });
+    }
+
+    // CHANGED — AP-prokrast-08b3: wird erst aufgerufen, NACHDEM revealCurrentStationPoint()
+    // intern bereits chartSettled + targetAnchorId + visible geprüft hat (s.d.) — measurement
+    // ist hier entweder ein verbindliches, finales Ziel oder null (ruhiger Fallback).
+    function handlePointReady(measurement) {
+      if (pointReadyHandled) return;
+      pointReadyHandled = true;
+      if (fallbackTimer) { clearTimeout(fallbackTimer); fallbackTimer = null; }
+      journeyState = 'chart-settled'; // Chart.js-Animation für diesen Zyklus ist abgeschlossen (oder Reduced-Motion-Sofortpfad)
+
+      // NEW — AP-prokrast-08b2/08b3: Card-to-Point nur bei gemessenem, finalem, sichtbarem
+      // Ziel und ohne Reduced Motion. Ohne gültiges Ziel (measurement === null, Fallback-Timeout) oder bei
+      // Reduced Motion: ruhiger Übergang zur nächsten Station ohne Flug (Chart/Punkt sind
+      // bereits sichtbar — kein Flug ins Nirgendwo, kein Steckenbleiben).
+      if (!prefersReducedMotion() && measurement && measurement.visible) {
+        journeyState = 'point-ready-final'; // NEW — AP-prokrast-08b3: Ziel ist final, gate-geprüft — Flug ist jetzt sicher
+        journeyState = 'card-flying';
+        flyCardToPoint(measurement, enterNextCard);
+      } else {
+        enterNextCard();
+      }
+    }
+
+    // CHANGED — AP-prokrast-08b3: Sicherheitsnetz von 1500ms auf 1200ms gesenkt (Prüfauftrag
+    // aus diesem AP) — bewusst NICHT auf 600–800ms, da Chart.js' Standard-Animationsdauer
+    // (~1000ms, keine Strategie setzt hier eine kürzere) sonst das reale chartSettled-Signal
+    // regelmäßig überholen und in jedem normalen Durchlauf fälschlich den Fallback statt des
+    // echten Gates auslösen würde. Reines Hängenbleibschutz-Netz, kein primärer
+    // Sequenzmechanismus — der Regelfall ist der chartSettled-Callback aus revealCurrentStationPoint().
+    fallbackTimer = setTimeout(() => handlePointReady(null), 1200);
+
+    revealCurrentStationPoint(activeStationIndex, handlePointReady);
   });
 
   // Slider-Events: kein live Chart-Update (Chart auf Screen 2, Slider auf Screen 1)

@@ -1,5 +1,5 @@
 # BACKLOG – Finanzwesir 2.0
-Stand: 2026-07-04 | Session: AP-prokrast-06a-06d | Geändert von: Claude
+Stand: 2026-07-06 | Session: AP-prokrast-08c | Geändert von: Claude
 
 **Regeln:**
 - ✅-Zeilen werden sofort nach `BACKLOG-ARCHIV.md` verschoben (append), dann hier gelöscht.
@@ -30,6 +30,9 @@ Stand: 2026-07-04 | Session: AP-prokrast-06a-06d | Geändert von: Claude
 | DS-012   | Design  | Tailwind-Config kanonisch in DESIGN-SYSTEM.md  | H    | —            | —                                                 |
 | DS-013   | Design  | Ghost screen.css-Einbindung prüfen + master-template Token-Duplikat klären | M | — | — |
 | DS-FOLLOWUP-07 | Design | Nach Anbindung der echten CI-Fonts / Theme-Bridge (DS-012/DS-013): Rubikon-Positionierung `prokrastinations-preis` Screen 4 (`RubikonSymbolMarkers`, DOM-Text `rubikonText`) auf S/M/L mit `tools/rubikon-symbol-markers-diagnose.js` neu messen und ggf. feinjustieren — Font-Wechsel ändert Zeichenbreiten, aktuelle Werte basieren auf Browser-Fallback-`sans-serif` | L | DS-012, DS-013 | docs/steering/patches/AP-prokrast-07d_qa-nachtrag_ruecklaufkapsel_Ergebnis.md |
+| DS-FOLLOWUP-08 | Design | Nach Anbindung der echten CI-Fonts / Theme-Bridge (DS-012/DS-013): Card-to-Point-Fluggeschwindigkeit `prokrastinations-preis` Screen 2 (zentraler CSS-Schalter `--fw-card-to-point-flight-duration`, aktuell 1350ms nach zwei Alberts-Anweisungen von ursprünglich 300ms verlangsamt) im Live-Server nachjustieren — Wert ist ein Zwischenstand, keine finale UX-Abnahme | L | DS-012, DS-013 | docs/steering/patches/AP-prokrast-08b_anchor-measurement_card-to-point_implementierung_Ergebnis.md |
+| AP-prokrast-08-FOLLOWUP-A | Engine | No-op-Bootstrap-Workaround entscheiden — `FwAnchorMeasurementPlugin` wird in `renderJourneyChartOnly()` mit leerem Callback aktiviert, nur um Chart.js zur Plugin-Registrierung beim Initial-Render zu zwingen (Chart.js liest `chartConfig.plugins` nur bei `new Chart()`, `ChartEngine._draw()`-Smart-Update-Pfad reassigned nie `.plugins`); Masterfaden-Entscheidung nötig: BEHALTEN (dokumentierter Workaround), HÄRTEN (echter Engine-Contract, z.B. explizites `ensurePlugins`) oder anderer Ansatz | M | — | docs/steering/patches/AP-prokrast-08b4a_architektur-gate_anchormeasurement_chartsettled_Ergebnis.md |
+| AP-prokrast-08-FOLLOWUP-B | Engine | `chartSettled`-Contract in `ChartEngine._draw()`: Creation-Pfad hat anders als der Update-Pfad keinen synchronen `_emitChartSettled()`-Fallback bei `animation:false` (Reduced Motion / `renderMotion:'instant'`) — aktuell folgenlos, da `app.js` `chartSettled` nur auf dem Update-Pfad setzt; vor jeder Plattform-Dokumentation des Contracts schließen | M | — | docs/steering/patches/AP-prokrast-08c_abschluss-qa_architektur_claims_masterkapsel_Ergebnis.md |
 | DS-014   | Design  | 07-APP-KOMPONENTEN.md — Design-API Baukasten   | H    | DS-012       | Blocker für alle App-Entwicklung                  |
 | CSS-5    | CSS     | Farb-Audit + screen.css Verifikation           | M    | CSS-3 ✅     | —                                                 |
 | AP-DOC-1 | Engine  | Basis/Prompts/ bereinigen (5 Dateien)          | H    | —            | engine/detail/AP-DOC-1-DETAIL.md                  |

@@ -66,6 +66,7 @@ import { BarChartStrategy } from '../strategies/BarChartStrategy.js';
 import { PieChartStrategy } from '../strategies/PieChartStrategy.js';
 import { FwRenderer } from './FwRenderer.js';
 import { // CHANGED AP-14e9: Plugin-Barrel
+    FwAnchorMeasurementPlugin, // NEW — AP-prokrast-08b
     FwAnnotationPulsePlugin,
     FwChartTextPlugin, // NEW — AP-prokrast-03d
     FwVerticalLinePlugin
@@ -199,6 +200,54 @@ export class ChartEngine {
             chartText = options.chartText;
         }
 
+        // NEW — AP-prokrast-08b: anchorMeasurement (optional, misst explizit angeforderte
+        // Datenanker; kein Domain-State, kein direkter Plugin→App-Kanal — der App-Callback
+        // wird separat in state.anchorMeasurementCallback gehalten, nie an Chart.js/das
+        // Plugin durchgereicht; siehe _emitAnchorMeasurements())
+        var anchorMeasurement = null;
+        var anchorMeasurementCallback = null;
+        if (options.anchorMeasurement != null &&
+            typeof options.anchorMeasurement === 'object' &&
+            options.anchorMeasurement.enabled === true) {
+            var rawAnchors = Array.isArray(options.anchorMeasurement.anchors) ? options.anchorMeasurement.anchors : [];
+            anchorMeasurement = { enabled: true, anchors: rawAnchors };
+            if (typeof options.anchorMeasurement.onAnchorMeasurement === 'function') {
+                anchorMeasurementCallback = options.anchorMeasurement.onAnchorMeasurement;
+            }
+        }
+
+        // NEW — AP-prokrast-08b3: chartSettled (optional, opt-in Lifecycle-Signal — feuert,
+        // wenn Chart.js seine Update-Animation für diesen Zyklus abgeschlossen hat, oder
+        // synchron bei Reduced Motion). Reines Signal ohne Payload, kein Chart.js-Objekt,
+        // kein Domain-State. App-Callback separat in state.chartSettledCallback gehalten,
+        // analog anchorMeasurementCallback — nie an Chart.js durchgereicht.
+        var chartSettled = null;
+        var chartSettledCallback = null;
+        if (options.chartSettled != null &&
+            typeof options.chartSettled === 'object' &&
+            options.chartSettled.enabled === true) {
+            chartSettled = { enabled: true };
+            if (typeof options.chartSettled.onSettled === 'function') {
+                chartSettledCallback = options.chartSettled.onSettled;
+            }
+        }
+
+        // NEW — AP-prokrast-08b5: renderMotion (optional, opt-in Render-Auftrag an den
+        // Manager — WIE dieser eine Renderlauf ausgeführt wird, nicht WAS der Chart
+        // semantisch ist. Gehört bewusst NICHT in fwContext/den Rucksack (Semantik für
+        // Achsen/Tooltips/Layout) und NICHT in LineChartStrategy (die bleibt für den
+        // Normalfall mit Chart.js-Default-Animation gebaut). mode:'default' (fehlend oder
+        // explizit) ändert nichts am bisherigen Verhalten. mode:'instant' unterdrückt
+        // Chart.js-Tweening ausschließlich für diesen einen renderFromData()-Aufruf —
+        // wiederverwendet denselben update('none')-Mechanismus, der bereits für Reduced
+        // Motion existiert, ohne Reduced Motion selbst zu verändern.
+        var renderMotion = null;
+        if (options.renderMotion != null &&
+            typeof options.renderMotion === 'object' &&
+            options.renderMotion.mode === 'instant') {
+            renderMotion = { mode: 'instant' };
+        }
+
         // WeakMap-State-Mechanik
         if (this._appChartStates.has(container)) {
             var state = this._appChartStates.get(container);
@@ -216,6 +265,11 @@ export class ChartEngine {
             state.config.annotations = annotations;     // NEW — B1-AP-14c1
             state.config.annotationPulse = annotationPulse; // NEW — B1-AP-14c4
             state.config.chartText = chartText; // NEW — AP-prokrast-03d
+            state.config.anchorMeasurement = anchorMeasurement; // NEW — AP-prokrast-08b
+            state.anchorMeasurementCallback = anchorMeasurementCallback; // NEW — AP-prokrast-08b
+            state.config.chartSettled = chartSettled; // NEW — AP-prokrast-08b3
+            state.chartSettledCallback = chartSettledCallback; // NEW — AP-prokrast-08b3
+            state.config.renderMotion = renderMotion; // NEW — AP-prokrast-08b5
             if (yRangePolicy === 'cumulative-expand-zero') {
                 if (!state.axisMemory) {
                     state.axisMemory = { yMaxSeen: 0 };
@@ -230,13 +284,15 @@ export class ChartEngine {
                 data:          frozenData,
                 strategy:      this.strategies[type],
                 type:          type,
-                config:        { colors: {}, options: '', title: '', features: features, xDisplayRange: xDisplayRange, yRangePolicy: yRangePolicy, yRangeResetKey: yRangeResetKey, annotations: annotations, annotationPulse: annotationPulse, chartText: chartText }, // CHANGED — AP-prokrast-03d
+                config:        { colors: {}, options: '', title: '', features: features, xDisplayRange: xDisplayRange, yRangePolicy: yRangePolicy, yRangeResetKey: yRangeResetKey, annotations: annotations, annotationPulse: annotationPulse, chartText: chartText, anchorMeasurement: anchorMeasurement, chartSettled: chartSettled, renderMotion: renderMotion }, // CHANGED — AP-prokrast-08b5
                 range:         'max',
                 view:          'value',
                 viewOptions:   [],
                 benchmark:     null,
                 axisMemory:    yRangePolicy ? { yMaxSeen: 0 } : null, // NEW — B1-AP-14b2
-                chartInstance: null
+                chartInstance: null,
+                anchorMeasurementCallback: anchorMeasurementCallback, // NEW — AP-prokrast-08b
+                chartSettledCallback: chartSettledCallback // NEW — AP-prokrast-08b3
             };
             this._appChartStates.set(container, state);
         }
@@ -347,6 +403,45 @@ export class ChartEngine {
             chartConfig.options.plugins.fwChartText = runtimeConfig.chartText;
         }
 
+        // NEW — AP-prokrast-08b: FwAnchorMeasurementPlugin (misst Anker, meldet über
+        // ChartEngine-Vermittlung — onMeasurement zeigt auf _emitAnchorMeasurements(),
+        // nie auf den App-Callback direkt; siehe state.anchorMeasurementCallback)
+        if (runtimeConfig.anchorMeasurement?.enabled) {
+            if (!chartConfig.plugins) chartConfig.plugins = [];
+            chartConfig.plugins.push(FwAnchorMeasurementPlugin);
+            if (!chartConfig.options.plugins) chartConfig.options.plugins = {};
+            var self = this;
+            chartConfig.options.plugins.fwAnchorMeasurement = {
+                enabled: true,
+                anchors: runtimeConfig.anchorMeasurement.anchors,
+                onMeasurement: function(rawMeasurements) {
+                    self._emitAnchorMeasurements(container, state, rawMeasurements);
+                }
+            };
+        }
+
+        // NEW — AP-prokrast-08b3: opt-in Chart-Settled-Signal über Chart.js' natives
+        // animation.onComplete — kein neues Plugin, kein neuer Kommunikationskanal, sondern
+        // die von Chart.js selbst dokumentierte Lifecycle-Callback für "Animation fertig".
+        // Komponiert einen eventuell von der Strategie bereits gesetzten onComplete, statt
+        // ihn zu überschreiben (aktuell setzt keine Strategie einen onComplete — geprüft).
+        // .options wird bei jedem _draw()-Aufruf frisch an Chart.js übergeben (im Gegensatz
+        // zu .plugins, das nur bei new Chart() gelesen wird) — deshalb ist hier kein
+        // Bootstrap-Workaround wie bei FwAnchorMeasurementPlugin nötig.
+        if (runtimeConfig.chartSettled?.enabled) {
+            var existingAnimation = chartConfig.options.animation;
+            var existingOnComplete = (existingAnimation && typeof existingAnimation === 'object')
+                ? existingAnimation.onComplete
+                : null;
+            var self = this;
+            chartConfig.options.animation = Object.assign({}, existingAnimation, {
+                onComplete: function(animationContext) {
+                    if (typeof existingOnComplete === 'function') existingOnComplete(animationContext);
+                    self._emitChartSettled(container, state);
+                }
+            });
+        }
+
         var strategyWantsNoTooltip = false;
         if (chartConfig.options && 
             chartConfig.options.plugins && 
@@ -373,12 +468,28 @@ export class ChartEngine {
         if (state.chartInstance) {
             state.chartInstance.data = chartConfig.data;
             state.chartInstance.options = chartConfig.options;
-            
+
             this._updateUIState(container, state);
             this._updateLegend(container, chartConfig, meta.interactiveFilters, state);
             this.renderer._updateBAN(container, meta.headline || null, runtimeConfig); // BAN V5.0.0
 
-            state.chartInstance.update(this._prefersReducedMotion() ? 'none' : undefined); // CHANGED B1-AP-15b
+            var reducedMotionUpdate = this._prefersReducedMotion(); // CHANGED — AP-prokrast-08b3: einmal ausgewertet, für Settled-Signal wiederverwendet
+            // NEW — AP-prokrast-08b5: renderMotion.mode 'instant' wirkt für diesen einen
+            // Renderlauf wie Reduced Motion — kein globaler Zustand, kein Screen-/App-Wissen
+            // hier in der Engine, nur ein neutraler Render-Auftrag aus den Options dieses
+            // konkreten Aufrufs. Reduced Motion selbst bleibt unverändert (globale System-
+            // Präferenz, unabhängig von renderMotion).
+            var instantUpdate = reducedMotionUpdate || runtimeConfig.renderMotion?.mode === 'instant';
+            state.chartInstance.update(instantUpdate ? 'none' : undefined); // CHANGED B1-AP-15b / AP-prokrast-08b5
+
+            // CHANGED — AP-prokrast-08b3/08b5: bei 'none' (Reduced Motion ODER
+            // renderMotion.mode === 'instant') läuft keine Chart.js-Animation, also feuert
+            // animation.onComplete nicht — das Update ist aber bereits synchron abgeschlossen,
+            // sobald .update() zurückkehrt. Settled-Signal hier direkt nachreichen, statt auf
+            // einen nie kommenden onComplete zu warten (sonst bliebe die Sequenz stecken).
+            if (instantUpdate && runtimeConfig.chartSettled?.enabled) {
+                this._emitChartSettled(container, state);
+            }
 
         } else {
             var dom = this.renderer.setupStructure(
@@ -398,7 +509,10 @@ export class ChartEngine {
             if (typeof Chart === 'undefined') throw new Error("Chart.js Library nicht geladen!");
 
             requestAnimationFrame(() => {
-                if (this._prefersReducedMotion()) { // NEW B1-AP-15b
+                // CHANGED — AP-prokrast-08b5: renderMotion.mode 'instant' unterdrückt auch bei
+                // der Erst-Erstellung (new Chart()) die Einblend-/Wachstumsanimation, analog
+                // Reduced Motion — kein zweiter Mechanismus, dieselbe Weiche.
+                if (this._prefersReducedMotion() || runtimeConfig.renderMotion?.mode === 'instant') { // NEW B1-AP-15b / AP-prokrast-08b5
                     if (!chartConfig.options) chartConfig.options = {};
                     chartConfig.options.animation = false;
                 }
@@ -407,6 +521,40 @@ export class ChartEngine {
                 this._bindLegendEvents(container, state.chartInstance, state);
             });
         }
+    }
+
+    // NEW — AP-prokrast-08b: Vermittlungsmethode — übersetzt Canvas-relative Pixel (vom
+    // Plugin gemessen) in Container-relative Pixel (Standard-DOM-Geometrie, keine Chart.js-
+    // Internals) und ruft erst danach den echten App-Callback auf. Der App-Callback selbst
+    // wird nie an das Plugin/Chart.js durchgereicht (state.anchorMeasurementCallback lebt
+    // ausschließlich hier in der ChartEngine).
+    _emitAnchorMeasurements(container, state, rawMeasurements) {
+        var callback = state.anchorMeasurementCallback;
+        if (typeof callback !== 'function') return;
+        var canvas = container.querySelector('canvas');
+        if (!canvas) return;
+        var canvasRect = canvas.getBoundingClientRect();
+        var containerRect = container.getBoundingClientRect();
+        var offsetX = canvasRect.left - containerRect.left;
+        var offsetY = canvasRect.top - containerRect.top;
+        var measurements = rawMeasurements.map(function(m) {
+            return Object.freeze({
+                id: m.id,
+                x: m.x + offsetX,
+                y: m.y + offsetY,
+                visible: m.visible,
+                coordinateSpace: 'chart-container'
+            });
+        });
+        callback(Object.freeze(measurements));
+    }
+
+    // NEW — AP-prokrast-08b3: Vermittlungsmethode für das Chart-Settled-Lifecycle-Signal.
+    // Reines "fertig"-Signal ohne Argumente — kein Chart.js-Objekt, keine Scales, kein
+    // DatasetMeta, kein chartArea gelangt an die App.
+    _emitChartSettled(container, state) {
+        var callback = state.chartSettledCallback;
+        if (typeof callback === 'function') callback();
     }
 
     _updateLegend(container, chartConfig, interactiveFilters, state) {
