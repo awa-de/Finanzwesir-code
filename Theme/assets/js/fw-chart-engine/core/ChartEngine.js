@@ -512,13 +512,28 @@ export class ChartEngine {
                 // CHANGED — AP-prokrast-08b5: renderMotion.mode 'instant' unterdrückt auch bei
                 // der Erst-Erstellung (new Chart()) die Einblend-/Wachstumsanimation, analog
                 // Reduced Motion — kein zweiter Mechanismus, dieselbe Weiche.
-                if (this._prefersReducedMotion() || runtimeConfig.renderMotion?.mode === 'instant') { // NEW B1-AP-15b / AP-prokrast-08b5
+                // CHANGED — AP-prokrast-09b: in eine Variable gehoben (war: inline im if), damit
+                // derselbe Wert auch für den chartSettled-Nachreichpfad unten wiederverwendet
+                // werden kann, analog 'instantUpdate' im Update-Zweig oben.
+                var instantCreate = this._prefersReducedMotion() || runtimeConfig.renderMotion?.mode === 'instant'; // NEW B1-AP-15b / AP-prokrast-08b5
+                if (instantCreate) {
                     if (!chartConfig.options) chartConfig.options = {};
                     chartConfig.options.animation = false;
                 }
                 state.chartInstance = new Chart(canvas, chartConfig);
                 this._bindEvents(container, dom.controls, state);
                 this._bindLegendEvents(container, state.chartInstance, state);
+
+                // NEW — AP-prokrast-09b: analog zum Update-Zweig (s. 'instantUpdate' oben) —
+                // bei instant/Reduced-Motion wird chartConfig.options.animation auf false gesetzt,
+                // ein zuvor gesetzter animation.onComplete (s.o., chartSettled-Aktivierung) geht
+                // dadurch verloren und feuert nie. Der Chart-Zustand ist nach new Chart() aber
+                // bereits final. chartSettled wird deshalb auch im Creation-Zweig synchron
+                // nachgereicht — schließt die in AP-prokrast-09a dokumentierte Creation-Pfad-
+                // Lücke. Kein neuer Mechanismus, reine Wiederverwendung von _emitChartSettled().
+                if (instantCreate && runtimeConfig.chartSettled?.enabled) {
+                    this._emitChartSettled(container, state);
+                }
             });
         }
     }

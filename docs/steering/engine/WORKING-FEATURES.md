@@ -1,5 +1,5 @@
 # Funktionierende Features (Nicht kaputt machen!)
-Stand: 2026-07-06 | Session: AP-prokrast-08a-08c | Geändert von: Claude
+Stand: 2026-07-06 | Session: AP-prokrast-09d | Geändert von: Claude
 
 ## Hinweis
 
@@ -21,7 +21,7 @@ Die genaue technische Umsetzung darf Claude selbst analysieren.
 - Error Boundary: Fehlerhafte CSVs zeigen einen Platzhalter, die restliche Seite bleibt stabil.
 - Legend Toggle: Klick auf Legende blendet Datasets ein/aus.
 - `renderFromData()` (Slice 4, 2026-06-11): Zweiter offizieller Engine-Einstieg für app-berechnete Daten ohne CSV-Fetch. Validierung + Mapping + Deep-Freeze + WeakMap-State. `features.rangeControls: false` → keine Range-Buttons. `features.headline: false` → kein BAN. Slider-Smart-Update via `chart.update()` (kein DOM-Rebuild). Bestehende `.financial-chart-module`-Charts unverändert.
-- `anchorMeasurement`/`chartSettled`/`renderMotion` (AP-prokrast-08b/08b3/08b5, 2026-07-06): Drei neue opt-in `renderFromData()`-Contracts für DOM↔Canvas-Koordination (Card-to-Point auf Screen 2 `prokrastinations-preis`). `anchorMeasurement` meldet Pixel-Koordinaten von Datenpunkten per Callback (kein direkter Chart.js-Internals-Zugriff aus der App nötig). `chartSettled` meldet zuverlässig, wann eine Chart-Animation fertig ist (nicht nur, wann ein Punkt sichtbar ist). `renderMotion: {mode:'instant'}` schaltet Chart.js' Default-Tweening für einzelne Render-Aufrufe ab. Bestehende Charts ohne diese Optionen vollständig unverändert. Details: `docs/steering/patches/AP-prokrast-08a…08c_*_Ergebnis.md`.
+- `anchorMeasurement`/`chartSettled`/`renderMotion` (AP-prokrast-08b/08b3/08b5, 2026-07-06): Drei neue opt-in `renderFromData()`-Contracts für DOM↔Canvas-Koordination (Card-to-Point auf Screen 2 `prokrastinations-preis`). `anchorMeasurement` meldet Pixel-Koordinaten von Datenpunkten per Callback (kein direkter Chart.js-Internals-Zugriff aus der App nötig). `chartSettled` meldet zuverlässig, wann eine Chart-Animation fertig ist (nicht nur, wann ein Punkt sichtbar ist) — feuert seit AP-prokrast-09b (2026-07-06) synchron sowohl beim Update als auch beim allerersten Chart-Render (Creation-Pfad), wenn Reduced Motion/`renderMotion:'instant'` aktiv ist; für `prokrastinations-preis` aktuell folgenlos, da dort kein Aufrufer `chartSettled` beim Ersteintritt setzt. `renderMotion: {mode:'instant'}` schaltet Chart.js' Default-Tweening für einzelne Render-Aufrufe ab. Bestehende Charts ohne diese Optionen vollständig unverändert. AnchorMeasurement-Registrierung (No-op-Bootstrap in `app.js`) bleibt offene Masterfaden-Entscheidung (BACKLOG AP-prokrast-08-FOLLOWUP-A). Details: `docs/steering/patches/AP-prokrast-08a…08c_*_Ergebnis.md`, `AP-prokrast-09a…09d_*_Ergebnis.md`.
 
 ## Layer 3: Chart Strategies
 
