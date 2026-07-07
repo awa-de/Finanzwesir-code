@@ -22,7 +22,7 @@ Vollständige Test- und QA-Kriterien für die Stationen-Zeitreise.
 | B — Rolling Window und Stationenfilter | aktives 120-Monats-Fenster korrekt bilden |
 | C — Screen-Flow | 4 Screens / 3 Akte korrekt abbilden |
 | D — Screen 2 Stationen-Zeitreise | Teilchart, Stationstexte, Button, kein Endwissen |
-| E — Screen 3 Reveal | vollständiger Chart und KPI-Cards erst nach Zeitreise |
+| E — Screen 3 Reveal | vollständiger Chart und KPI-Cards erst nach Zeitreise; Kontinuitäts-Reveal-Bridge und Timing (AP-prokrast-10) |
 | F — Screen 4 Transfer | heutige Entscheidung ohne Prognose |
 | G — Mobile und Collapsible | Zwischenstand mobil aufklappbar, keine Zahlenfliegen |
 | H — Accessibility | Tastatur, Fokus, Screenreader, Chart-A11y |
@@ -450,6 +450,7 @@ Vollständige Test- und QA-Kriterien für die Stationen-Zeitreise.
 - Erst Screen 3 zeigt den vollständigen 120-Monats-Chart.
 - Screen 3 fühlt sich erkennbar wie der Reveal an.
 - Vorher war das Ende nicht sichtbar.
+- Chart und Ergebnislinie erscheinen beim Screen-3-Eintritt sofort und still — kein Fade-in, kein Leerframe (`renderMotion:'instant'`, AP-prokrast-10a–10d, s. `APP_SPEC.md` §16.1b). Timing/Reihenfolge der Bridge-Zeile und KPI-Karten: s. TC-E06.
 
 **Fehlschlag, wenn:**
 - Vollständiger Chart schon auf Screen 2 sichtbar war.
@@ -470,6 +471,7 @@ Vollständige Test- und QA-Kriterien für die Stationen-Zeitreise.
 - Screen 2: keine finalen KPI-Cards.
 - Screen 3: finale KPI-Cards sichtbar.
 - Werte basieren auf Sparplanberechnung und CSV.
+- KPI-Cards erscheinen erst nach der Screen-3-Bridge-Phase (~800ms), nicht gleichzeitig mit Chart/Ergebnislinie — Details/Timing s. TC-E06/TC-E07 (AP-prokrast-10).
 
 **Fehlschlag, wenn:**
 - Finale KPIs vorher sichtbar sind.
@@ -505,15 +507,18 @@ Vollständige Test- und QA-Kriterien für die Stationen-Zeitreise.
 **Schritte:**
 1. Screen 2 vollständig durchlaufen.
 2. Screen 3 erreichen.
-3. Ablauf nach dem vollständigen Chart prüfen.
+3. Chart und Marker beim Screen-3-Eintritt prüfen.
 
 **Erwartetes Ergebnis:**
 - Screen 2: keine Stationenmarker sichtbar.
-- Screen 3: nach vollständiger Linie erscheinen stille Marker der durchlaufenen Stationen (Fade-in oder sofort bei Reduced Motion).
+- Screen 3: Marker der durchlaufenen Stationen erscheinen zusammen mit dem vollständigen Chart — sofort und still, kein separater verzögerter Fade-in-Schritt (`renderMotion:'instant'`, AP-prokrast-10a–10d).
 
 **Fehlschlag, wenn:**
 - Marker schon auf Screen 2 sichtbar sind.
 - Marker auf Screen 3 komplett fehlen.
+- Marker sichtbar zeitversetzt zum Chart erscheinen (weder mit dem Chart zusammen noch dauerhaft synchron).
+
+**Hinweis (AP-prokrast-11b, 2026-07-07):** Die frühere Formulierung „nach vollständiger Linie erscheinen stille Marker (Fade-in)" beschrieb einen separaten, verzögerten Marker-Reveal-Schritt. Diese Formulierung passte nicht zur seit AP-prokrast-10 geltenden Renderlogik (Chart inkl. Marker rendert synchron und still über `renderS3()`/`renderMotion:'instant'`) und wurde entsprechend präzisiert. Ob dieser Mismatch bereits vor AP-10 bestand oder erst durch AP-10 entstand, ist nicht abschließend geklärt (s. AP-prokrast-11a, Offene Punkte).
 
 ---
 
@@ -539,6 +544,60 @@ Vollständige Test- und QA-Kriterien für die Stationen-Zeitreise.
 - Marker per Tastatur fokussierbar sind.
 - Marker beschriftet, nummeriert oder legendarisch erklärt werden.
 - Marker einzeln als interaktive Elemente für Screenreader ausgezeichnet sind.
+
+---
+
+### TC-E06 — Kontinuitäts-Reveal: Bridge-Zeile und Timing (AP-prokrast-10)
+
+**Typ:** Regression / Visuell / Timing
+**Priorität:** Muss
+
+**Hintergrund:** Screen 3 ist seit AP-prokrast-10a–10d ✅ (2026-07-07) kein eigenständiger Neustart mehr, sondern ein Kontinuitäts-Reveal (Variante B++, `APP_SPEC.md` §16.1b). Chart und Ergebnislinie erscheinen sofort/still; darunter erscheint zunächst eine Screen-3-lokale Bridge-Zeile, bevor KPI-Karten und Disclaimer folgen.
+
+**Schritte:**
+1. Screen 2 vollständig durchlaufen bis zur letzten Station, Stationszeile („Station X von Y · Bekannt bis Z") notieren.
+2. Auf „Ergebnis ansehen" klicken, zu Screen 3 wechseln.
+3. Sofort nach dem Wechsel: Chart, Ergebnislinie und die Bridge-Zeile unter dem Chart prüfen.
+4. Nach ca. 800ms: KPI-Karten und Disclaimer prüfen.
+
+**Erwartetes Ergebnis:**
+- Chart und Ergebnislinie sind beim Screen-3-Eintritt sofort vollständig und ohne Fade-in/Leerframe sichtbar.
+- Direkt darunter erscheint zunächst dieselbe Zeile wie zuletzt auf Screen 2 (identischer Text, identische Formel).
+- KPI-Karten und Disclaimer sind in diesem Moment noch nicht sichtbar.
+- Nach ca. 800ms wird die Bridge-Zeile ausgeblendet, KPI-Karten und Disclaimer erscheinen per Fade (~800ms).
+- Screen 2 bleibt dabei unverändert (`progressEl` wird nicht verschoben, kein Screen-2-Ergebnismodus).
+
+**Fehlschlag, wenn:**
+- Chart/Ergebnislinie erst verzögert oder eingeblendet erscheinen (Rückfall auf den verworfenen Text→Chart→KPI-Timing-Reveal).
+- Die Bridge-Zeile fehlt oder zeigt einen anderen Text als die letzte Screen-2-Stationszeile.
+- KPI-Karten/Disclaimer gleichzeitig mit dem Chart erscheinen (keine Bridge-Phase).
+- `progressEl` auf Screen 2 verschwindet, sich verschiebt oder dupliziert wird.
+- Screen 2 sichtbar in einen Ergebnis-Screen umgebaut wird.
+
+---
+
+### TC-E07 — Kontinuitäts-Reveal unter Reduced Motion (AP-prokrast-10)
+
+**Typ:** Manuell / Reduced Motion
+**Priorität:** Muss
+
+**Hintergrund:** Unter `prefers-reduced-motion: reduce` läuft kein Bridge-Timer. Die Bridge-Zeile darf nie sichtbar werden; KPI-Karten und Disclaimer müssen sofort im Endzustand stehen.
+
+**Schritte:**
+1. Reduced Motion aktivieren.
+2. Screen 2 vollständig durchlaufen, auf „Ergebnis ansehen" klicken.
+3. Screen 3 unmittelbar nach dem Wechsel prüfen.
+4. Reduced Motion deaktivieren, Vorgang wiederholen, Ablauf mit TC-E06 vergleichen.
+
+**Erwartetes Ergebnis:**
+- Bei aktivem Reduced Motion: Bridge-Zeile wird zu keinem Zeitpunkt sichtbar; Chart, Ergebnislinie, KPI-Karten und Disclaimer stehen sofort im Endzustand.
+- Kein Depotwert-/Ergebnis-Leak vor Screen 3 (A11y-Summary erscheint weiterhin erst mit dem Screen-3-Endzustand, s. TC-H05).
+- Bei inaktivem Reduced Motion läuft der reguläre Bridge-Ablauf aus TC-E06.
+
+**Fehlschlag, wenn:**
+- Die Bridge-Zeile unter Reduced Motion sichtbar wird oder ein Timer feuert.
+- KPI-Karten/Disclaimer unter Reduced Motion verzögert erscheinen.
+- Reduced Motion Inhalte unterdrückt statt nur Bewegung/Timing zu entfernen.
 
 ---
 
@@ -1491,4 +1550,4 @@ Diese Stellen waren beim Anlegen von QA_TEST_CASES.md (AP-06) als offene Fundste
 
 ---
 
-*AP-06 ✅ 2026-06-16, AP-07 ✅ 2026-06-16, AP-08b ✅ 2026-06-16, AP-08c ✅ 2026-06-16 | B1-AP-14a2 ✅ 2026-06-18 | B1-AP-14c4 ✅ 2026-06-18 | B1-AP-14d3 ✅ 2026-06-18 | Nächster Schritt: B1-AP-15 — Transitions + Reduced Motion*
+*AP-06 ✅ 2026-06-16, AP-07 ✅ 2026-06-16, AP-08b ✅ 2026-06-16, AP-08c ✅ 2026-06-16 | B1-AP-14a2 ✅ 2026-06-18 | B1-AP-14c4 ✅ 2026-06-18 | B1-AP-14d3 ✅ 2026-06-18 | AP-prokrast-10a–10d ✅ 2026-07-07 (Gruppe E: TC-E01/E02/E04 präzisiert, TC-E06/TC-E07 neu — Kontinuitäts-Reveal) | AP-prokrast-11b ✅ 2026-07-07 (Spec-/QA-Sync) | Nächster Schritt: B1-AP-15 — Transitions + Reduced Motion*

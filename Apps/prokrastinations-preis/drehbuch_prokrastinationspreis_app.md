@@ -91,7 +91,18 @@ Die SaaS-Karte — das Ereignis, das heute noch groß wirkt — läuft dieselbe 
 
 ## Screen 3 — Der Rückspiegel
 
-### Einstieg
+> **Amtlicher Hinweis (AP-prokrast-10, 2026-07-07):** Der folgende Einstiegs-Ablauf (Zuerst-Satz → Dann-Chart → Dann-KPI) wurde durch die finale Masterfaden-Entscheidung aus AP-prokrast-10b/10d abgelöst und ist **nicht mehr aktives Soll**. Der real gebaute und freigegebene Endzustand steht in `APP_SPEC.md` §16.1b. Dieser Ablauf bleibt als historische Dramaturgie-Vorlage stehen, nicht als Bauauftrag.
+
+### HISTORISCHER_STAND — NICHT AKTUELLER SOLLSTAND
+
+Status: HISTORISCH / INAKTIV / DURCH SPÄTEREN AP ERSETZT
+Gültigkeit: NICHT MEHR AKTUELL
+Darf als Implementierungsauftrag verwendet werden: NEIN
+Darf als QA-Soll verwendet werden: NEIN
+Darf als offene Aufgabe interpretiert werden: NEIN
+Zweck dieses Blocks: Forensik / Entscheidungsverlauf / Nachvollziehbarkeit
+
+### Einstieg (historisch — Text→Chart→KPI-Timing-Reveal)
 
 Die SaaS-Karte verschwindet. Dann:
 
@@ -111,6 +122,35 @@ Die Reihenfolge ist Absicht: erst die Linie verstehen, dann die Zahl sehen.
 
 Darunter der Button:
 > *Die nächsten 10 Jahre*
+
+Dieser Ablauf war zunächst technisch als Text→Chart→KPI-Timing-Reveal umgesetzt (AP-prokrast-10b, erster Durchgang), wurde aber nach Nutzerfeedback verworfen — er fühlte sich wie ein Screen-Neustart an, nicht wie eine Fortsetzung der Zeitreise. Dieser Block ist kein aktueller Auftrag und kein gültiger Sollstand.
+
+Ersetzt durch: AKTUELLER_SOLLSTAND unten.
+
+### AKTUELLER_SOLLSTAND — GÜLTIGER ENDSTAND (Kontinuitäts-Reveal, Variante B++, AP-prokrast-10a–10d ✅ 2026-07-07)
+
+Status: AKTIV / ABGENOMMEN / GÜLTIG
+Gültigkeit: AKTUELLER SOLLSTAND
+Darf als Implementierungsauftrag verwendet werden: JA, falls ein späterer AP darauf Bezug nimmt
+Darf als QA-Soll verwendet werden: JA
+Darf als offene Aufgabe interpretiert werden: NEIN
+Zweck dieses Blocks: gültige Produkt-/Spec-/QA-Wahrheit
+
+Screen 2 endet mit der letzten Station der Zeitreise. Klick auf „Ergebnis ansehen" führt weiter nach Screen 3. Screen 3 wirkt beim Eintritt wie ein Anschluss an Screen 2, nicht wie ein Neustart.
+
+Chart und Ergebnislinie sind sofort, vollständig und still sichtbar — kein Fade-in, kein Leerframe.
+
+Darunter erscheint zunächst dieselbe Zeile, die zuletzt auf Screen 2 stand: *Station X von Y · Bekannt bis Z* (Screen-3-lokale Bridge, keine Verschiebung des Screen-2-Elements). Diese Zeile hält 800ms die Kontinuität zu Screen 2.
+
+Danach verdichten sich KPI-Karten (Eingezahlt / Depotwert heute / Gewinn-Verlust) und der Disclaimer per 800ms-Fade zum Ergebnis.
+
+Reduced Motion: kein Zwischenschritt — KPI-Karten und Disclaimer stehen sofort im Endzustand, die Bridge-Zeile wird nie sichtbar.
+
+Verbindlicher Screen-3-Text (unverändert, `APP_SPEC.md` §16.2):
+> *Jetzt erst sieht es einfach aus.*
+> *Die Strecke wirkt im Rückblick ruhiger, weil du das Ende jetzt kennst. Vor 10 Jahren kannte sie niemand.*
+
+Details/Herleitung: `APP_SPEC.md` §16.1b, `docs/steering/patches/AP-prokrast-10a_*` bis `AP-prokrast-10d_*`.
 
 ---
 
@@ -195,7 +235,7 @@ Das ist die psychologische Arbeit. Dieses kurze Aushalten ist der Kern der App.
 | Punkt | Priorität | Notiz |
 |---|---|---|
 | Kartenwechsel-Animation (Beat A–C) | Hoch | Kern der psychologischen Wirkung — zuerst bauen |
-| KPI-Karten mit Verzögerung (Screen 3) | Hoch | Erst Linie, dann Zahl |
+| KPI-Karten mit Verzögerung (Screen 3) | gebaut (AP-prokrast-10a–10d ✅ 2026-07-07) | überholt: „Erst Linie, dann Zahl" galt für den verworfenen Text→Chart→KPI-Timing-Reveal. Aktiver Sollstand: Chart+Linie sofort/still, dann Bridge-Zeile (800ms), dann KPI+Disclaimer per 800ms-Fade — Details siehe Screen-3-Abschnitt oben / `APP_SPEC.md` §16.1b |
 | ~~X-Achsen-Verlängerung (Screen 4 Beat 1)~~ | — | überholt: abgelöst durch AP-prokrast-03h (kein Morph, keine Achsenanimation) — Zukunftsraum steht sofort, kein separater Mobile-Testschritt für die Animation nötig |
 | ✅ ❓ an blauer Linie | gesetzt (AP-prokrast-06b, 2026-07-03) | Bau noch offen — Canvas-Marker via `FwChartTextPlugin.js`, links/rechts der Linie, S/M/L Pflicht, kein DOM, kein A11y-Anspruch (siehe Beat 2) |
 | Stille Beat 4 — 800ms | Fest | Nicht kürzen |

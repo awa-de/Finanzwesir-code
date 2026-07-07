@@ -1205,11 +1205,24 @@ Nicht erlaubt:
 - Labels, Tooltips, Klick-/Tap-Funktion, Legende
 - anklickbare Marker, Hover-Tooltips, Event-Legende, nummerierte Marker, Event-Replay
 
-Reveal-Ablauf Screen 3:
+### HISTORISCHER_STAND — NICHT AKTUELLER SOLLSTAND
+
+Status: HISTORISCH / INAKTIV / DURCH SPÄTEREN AP ERSETZT
+Gültigkeit: NICHT MEHR AKTUELL
+Darf als Implementierungsauftrag verwendet werden: NEIN
+Darf als QA-Soll verwendet werden: NEIN
+Darf als offene Aufgabe interpretiert werden: NEIN
+Zweck dieses Blocks: Forensik / Entscheidungsverlauf / Nachvollziehbarkeit
+
+Ursprünglich geplanter Reveal-Ablauf Screen 3 (vor AP-prokrast-10):
 1. Vollständige 10-Jahres-Linie erscheint
 2. Kurze Pause
 3. Stille Stationenmarker erscheinen (Fade-in; bei Reduced Motion: sofort, ohne Animation)
 4. KPI-Cards / Ergebnis
+
+Dieser Ablauf wurde nie in dieser Form gebaut. AP-prokrast-10 hat für Screen 3 zunächst einen anderen, ebenfalls verworfenen Text→Chart→KPI-Timing-Reveal umgesetzt und ihn nach Nutzerfeedback zur finalen Variante B++ (Kontinuitäts-Reveal) weiterentwickelt. Dieser Block ist kein aktueller Auftrag und kein gültiger Sollstand.
+
+Ersetzt durch: §16.1b — Kontinuitäts-Reveal (Variante B++, AP-prokrast-10a–10d ✅ 2026-07-07)
 
 **AP-14c — Marker-Zielbild (Implementierung folgt nach AP-14b)**
 
@@ -1272,9 +1285,65 @@ Der semantische Screen-4-Haupttext ist ein echter DOM-Textblock (kein Canvas-Tex
 **Chart-Marker ✅/❓ (AP-prokrast-06b, 2026-07-03 — Spec-Sync auf bindend gesetzten Sollstand):**
 Zusätzlich zum Chart-Aufbau zeigt Screen 4 ein kleines, rein visuelles Symbolpaar direkt an der blauen Rubikon-Linie: ✅ links der Linie, ❓ rechts der Linie. Die Marker werden über `FwChartTextPlugin.js` als persistente Canvas-Annotation gezeichnet (siehe Plugin-Header: opt-in, keine Animation, keine Events, keine DOM-Brücke) — sie sind kein DOM-Inhalt, keine Live-Region-Aktualisierung und keine A11y-Anforderung, keine Datenpunkte, keine Future-Line und keine Prognose. Ihre Positionierung links/rechts der Linie muss auf allen Breakpoints (S, M, L) gewährleistet sein. Der semantische Haupttext bleibt ausschließlich beim DOM-Overlay-Text (oben); die Marker ersetzen ihn nicht und tragen keine eigene Erklärungslast. Bau steht noch aus (dieser AP synchronisiert nur die Soll-Dokumentation, siehe `AP-prokrast-06b_regression-sync_symbolik-chartmarker_Ergebnis.md`).
 
-**Nachgelagerte Pflichtteile (nicht Teil dieses Standes, bleiben offen):**
+### HISTORISCHER_STAND — NICHT AKTUELLER SOLLSTAND
+
+Status: HISTORISCH / INAKTIV / DURCH SPÄTEREN AP ERSETZT
+Gültigkeit: NICHT MEHR AKTUELL
+Darf als Implementierungsauftrag verwendet werden: NEIN
+Darf als QA-Soll verwendet werden: NEIN
+Darf als offene Aufgabe interpretiert werden: NEIN
+Zweck dieses Blocks: Forensik / Entscheidungsverlauf / Nachvollziehbarkeit
+
+Zum Zeitpunkt dieses Standes (AP-prokrast-03f–03i, 2026-07-02) waren zwei Punkte als „nachgelagert, noch offen" notiert:
 - Card-to-Point bleibt Pflicht (noch nicht gebaut).
 - Screen-3-Timing-Reveal bleibt Pflicht (noch nicht gebaut).
+
+Dieser Block bleibt zur Nachvollziehbarkeit stehen. Er ist kein aktueller Auftrag und kein gültiger Sollstand.
+
+Ersetzt durch: AKTUELLER_SOLLSTAND unten.
+
+### AKTUELLER_SOLLSTAND — GÜLTIGER ENDSTAND (Stand 2026-07-07)
+
+Status: AKTIV / ABGENOMMEN / GÜLTIG
+Gültigkeit: AKTUELLER SOLLSTAND
+Darf als Implementierungsauftrag verwendet werden: JA, falls ein späterer AP darauf Bezug nimmt
+Darf als QA-Soll verwendet werden: JA
+Darf als offene Aufgabe interpretiert werden: NEIN
+Zweck dieses Blocks: gültige Produkt-/Spec-/QA-Wahrheit
+
+Beide oben genannten Punkte sind erledigt — beide anders umgesetzt als ursprünglich naheliegend geplant, beide Abweichungen sind gewünscht und abgenommen:
+
+- **Card-to-Point** ist seit AP-prokrast-08a–08c ✅ (2026-07-06) gebaut und abgenommen. Umsetzung: architekturkonformer `AnchorMeasurement`-/`ChartEngine`-Contract (`FwAnchorMeasurementPlugin.js`, `chartSettled`, `renderMotion`, Flight-Clone-Logik) — kein direkter Zugriff aus `app.js` auf Chart.js-Internals (`chart.scales`, `getPixelForValue`, `chartArea`). Details: `docs/steering/patches/AP-prokrast-08a_*` bis `AP-prokrast-08c_*`.
+- **Screen-3-Reveal** ist seit AP-prokrast-10a–10d ✅ (2026-07-07) gebaut und abgenommen — als Kontinuitäts-Reveal (Variante B++), nicht als ursprünglich geplanter Timing-Reveal. Details: §16.1b unten, `docs/steering/patches/AP-prokrast-10a_*` bis `AP-prokrast-10d_*`.
+
+Keine weitere Card-to-Point- oder Screen-3-Reveal-Arbeit aus dieser Liste offen.
+
+### 16.1b Screen 3 — Kontinuitäts-Reveal (finale Produktentscheidung, AP-prokrast-10a–10d ✅ 2026-07-07)
+
+Screen 3 bleibt der Ergebnis-Screen (Akt 3: Rückkehr, §16.1). Screen 2 bleibt Journey/Zeitreise — kein Umbau zu einem Ergebnis-Screen. Klick auf „Ergebnis ansehen" wechselt weiter von Screen 2 nach Screen 3.
+
+**Ursprünglicher Plan (historisch, s. §16.1 „HISTORISCHER_STAND" und §16.1a „HISTORISCHER_STAND" oben):** ein gestufter Reveal, zunächst als Text→Chart→KPI-Timing-Reveal umgesetzt. Nach Umsetzungstest fühlte sich dieser Zwischenstand laut Nutzerfeedback wie ein Screen-Neustart an, nicht wie eine Fortsetzung der Zeitreise.
+
+**Finale Variante B++ — Kontinuitäts-Reveal:**
+
+Screen 3 wirkt beim Eintritt wie eine Fortsetzung von Screen 2, nicht wie ein Neustart.
+
+1. Chart und Ergebnislinie (`features.verticalLine:'last'`) erscheinen beim Screen-3-Eintritt sofort, vollständig und still — kein Leerframe, keine Kurslinien-Neuaufbauanimation (`renderMotion:{mode:'instant'}`).
+2. Unter dem Chart erscheint zunächst eine Screen-3-lokale Bridge-Zeile: „Station X von Y · Bekannt bis Z" — derselbe Text und dieselbe Formel wie die letzte Screen-2-Stationszeile (`formatStationProgress()`), damit der Übergang als Fortsetzung wirkt.
+3. Die Bridge bleibt 800ms sichtbar.
+4. Danach erscheinen KPI-Karten + AssumptionsBox per 800ms-Fade (CSS-Variable `--fw-screen3-reveal-fade-duration`).
+
+**Reduced Motion:** kein Timer, Bridge nie sichtbar, KPI-Karten + AssumptionsBox sofort im Endzustand.
+
+**Ausdrücklich nicht Teil dieser Entscheidung:**
+- kein Screen-2-Ergebnismodus
+- kein Verschieben von `progressEl` (bleibt auf Screen 2, unverändert an Ort und Funktion)
+- keine CSS-Overlay-Linie für die Ergebnislinie
+- keine Chart.js-Internals in `app.js`
+- keine Engine-/Plugin-Änderung
+- keine neue Text-/Headline-Entscheidung (Screen-3-Text unverändert, s. §16.2)
+
+Details/Herleitung: `docs/steering/patches/AP-prokrast-10a_*` bis `AP-prokrast-10d_*`.
 
 ### 16.2 Screen-Texte
 
