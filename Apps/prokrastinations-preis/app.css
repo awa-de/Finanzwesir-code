@@ -14,6 +14,11 @@
      Klon-Entfernung/des Stationswechsels, damit CSS-Transition und JS-Timing nie auseinanderlaufen.
      Vorläufiger Wert; endgültige Feinjustierung erst nach CI-Font-Anbindung sinnvoll (→ BACKLOG DS-FOLLOWUP-08). */
   --fw-card-to-point-flight-duration: 1350ms;
+  /* CHANGED — AP-prokrast-10b (Kontinuitäts-Reveal, war: für Chart+KPI-Karten): Fade-Dauer
+     für KPI-Karten + Disclaimer nach der Bridge-Haltephase auf Screen 3, nachjustierbar
+     analog --fw-card-to-point-flight-duration. Auf Alberts Wunsch von 400ms auf 800ms
+     verlangsamt (Nachtrag, kein Gate). */
+  --fw-screen3-reveal-fade-duration: 800ms;
 }
 
 /* === Loading === */
@@ -381,4 +386,30 @@
   font-size: 0.75em;
   color: var(--fw-color-muted, #555555);
   margin: 0;
+}
+
+/* CHANGED — AP-prokrast-10b (Kontinuitäts-Reveal, war: auch .fw-app__chart-section
+   [data-fw-appchart="sparplan-s3"] hier enthalten): der Chart selbst startet nicht mehr
+   unsichtbar — er erscheint beim Screen-3-Eintritt sofort und still (app.js renderS3()).
+   Nur KPI-Slot und Disclaimer starten unsichtbar (opacity:0) — das app.js-seitige
+   hidden-Attribut steuert dabei den Accessibility-Tree/die Semantik, opacity:0 verhindert
+   einen Flash zwischen dem Entfernen von hidden und dem Setzen der Sichtbar-Klasse (Muster
+   analog .fw-app__station-area--flight-clone). Sie ersetzen nach einer kurzen Bridge-
+   Haltephase (app.js) die Screen-3-lokale „Station X von Y"-Bridge-Zeile. */
+.fw-app__kpi-slot,
+.fw-app__assumptions {
+  opacity: 0;
+  transition: opacity var(--fw-screen3-reveal-fade-duration, 400ms) ease-in;
+}
+
+.fw-app__kpi-slot.fw-app__screen3-reveal--visible,
+.fw-app__assumptions.fw-app__screen3-reveal--visible {
+  opacity: 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fw-app__kpi-slot,
+  .fw-app__assumptions {
+    transition: none;
+  }
 }

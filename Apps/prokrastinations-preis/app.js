@@ -395,15 +395,30 @@ function renderContent(container, appData, options, stationsConfig) { // CHANGED
   const chartSection3 = document.createElement('div');
   chartSection3.setAttribute('data-fw-appchart', 'sparplan-s3'); // CHANGED — Slice 6: VertikaleLinie via features
   chartSection3.className = 'fw-app__chart-section';
+  // CHANGED — AP-prokrast-10b (Kontinuitäts-Reveal): kein hidden mehr — Chart erscheint
+  // beim Screen-3-Eintritt sofort vollständig und still (kein Zwischenframe, keine
+  // Kurslinien-Neuaufbauanimation). Nur Bridge/KPI/Disclaimer sind gestuft (s.u.).
   screen3.appendChild(chartSection3);
+
+  // NEW — AP-prokrast-10b: Kontinuitäts-Bridge — zeigt beim Screen-3-Eintritt zunächst
+  // denselben Zeilentext wie die letzte Screen-2-Stationszeile (formatStationProgress()),
+  // damit der Übergang wie eine Fortsetzung wirkt statt wie ein Neustart. Kein Verschieben
+  // von progressEl — eigenes, Screen-3-lokales Element an derselben unteren Stelle, wo
+  // danach KPI-Karten + Disclaimer erscheinen.
+  const bridgeS3 = document.createElement('p');
+  bridgeS3.className = 'fw-app__journey-progress fw-app__screen3-bridge';
+  bridgeS3.setAttribute('hidden', ''); // NEW — AP-prokrast-10b: startet hidden (kein Text vor erstem Reveal), analog KPI/Disclaimer
+  screen3.appendChild(bridgeS3);
 
   const kpiContainerS3 = document.createElement('div'); // NEW — B1-AP-16b: KPI-Mount-Point (APP_SPEC §6, §23.6)
   kpiContainerS3.className = 'fw-app__kpi-slot';
+  kpiContainerS3.setAttribute('hidden', ''); // NEW — AP-prokrast-10b: startet hidden, erscheint erst nach der Bridge-Phase
   screen3.appendChild(kpiContainerS3);
 
   const assumptionsS3 = document.createElement('aside'); // NEW — Slice 6: AssumptionsBox (APP_SPEC §19.8)
   assumptionsS3.className = 'fw-app__assumptions';
   assumptionsS3.textContent = 'Basis: MSCI World Index, monatliche Indexwerte, 10 Jahre rückwärts bis zum letzten vollständig verfügbaren Monat. Die Werte zeigen das Marktprinzip, keine konkrete ETF-Produktempfehlung. Vergangene Wertentwicklungen sind keine Garantie für die Zukunft. Keine Finanzberatung.';
+  assumptionsS3.setAttribute('hidden', ''); // NEW — AP-prokrast-10b: startet hidden, erscheint zusammen mit KPI nach der Bridge-Phase
   screen3.appendChild(assumptionsS3);
 
   const navS3 = document.createElement('div');
@@ -509,11 +524,12 @@ function renderContent(container, appData, options, stationsConfig) { // CHANGED
   const chartEngine2 = new ChartEngine();
   const chartEngine3 = new ChartEngine();
   const chartEngine4 = new ChartEngine(); // NEW — AP-prokrast-03f
-  let lastRenderedRateS3 = null;
+  let screen3RevealedRate = null; // CHANGED — AP-prokrast-10b (war: lastRenderedRateS3): Rate, für die Screen 3 zuletzt vollständig enthüllt wurde (Bridge→KPI/Disclaimer)
+  let screen3BridgeTimer = null; // CHANGED — AP-prokrast-10b Kontinuitäts-Reveal (war: screen3ChartTimer + screen3KpiTimer): einziger Timer für die Bridge-Haltephase vor KPI/Disclaimer
   let lastRevealA11yText = ''; // NEW — AP-17b
   let screen4TextTimer = null; // CHANGED — AP-prokrast-03h (war: screen4Timer, ein Morph-Timer): Timer für Text-Reveal nach 800ms
   let screen4CtaTimer = null; // NEW — AP-prokrast-03h: Timer für CTA-Reveal nach weiterer 800ms-Stille
-  let screen4RevealedRate = null; // Rate, für die S4 zuletzt final gerendert wurde (analog lastRenderedRateS3)
+  let screen4RevealedRate = null; // Rate, für die S4 zuletzt final gerendert wurde (analog screen3RevealedRate)
   const RUBIKON_A11Y_TEXT = 'Die letzten zehn Jahre sind gelaufen. Die nächsten zehn Jahre sind bewusst leer, weil niemand weiß, was passiert. Der Handlungsrahmen ist: dranbleiben, wenn es nervt.'; // CHANGED — AP-prokrast-03h
 
   // NEW — AP-prokrast-08b4a: Chart-Teil von renderJourneyStep() aufgetrennt — kein
@@ -561,6 +577,19 @@ function renderContent(container, appData, options, stationsConfig) { // CHANGED
     });
   }
 
+  // NEW — AP-prokrast-10b: „Station X von Y · Bekannt bis Z" — extrahiert aus
+  // renderJourneyCardOnly() (war dort inline), damit Screen 2 (progressEl) und der neue
+  // Screen-3-Bridge-Text (bridgeS3) dieselbe Formel nutzen, ohne sie zu duplizieren.
+  function formatStationProgress(stationIdx) {
+    const station = journeyStations[stationIdx];
+    const n = stationIdx + 1;
+    const total = journeyStations.length;
+    const [yr, mo] = station.date.split('-');
+    const bekannt = new Intl.DateTimeFormat(appData.locale, { month: 'long', year: 'numeric' })
+      .format(new Date(parseInt(yr, 10), parseInt(mo, 10) - 1, 1));
+    return `Station ${n} von ${total} · Bekannt bis ${bekannt}`;
+  }
+
   // NEW — AP-prokrast-08b4a: Karten-/Chip-/Button-/Live-Region-Teil von renderJourneyStep()
   // aufgetrennt — keine Chart-Berührung. Wird von renderJourneyStep() (idle-Fall) und von
   // enterNextCard() (erst NACH chartSettled für die neue Station) genutzt.
@@ -573,13 +602,7 @@ function renderContent(container, appData, options, stationsConfig) { // CHANGED
     });
     const intermediate = calcStationIntermediate(ctx.chartSeries, stationMonth, currentRate, startBetrag);
     renderStationCard(stationArea, station, intermediate, fmtStation);
-    // NEW — AP-14b: Orientierungs-Chip aktualisieren (APP_SPEC §16.1)
-    const n = stationIdx + 1;
-    const total = journeyStations.length;
-    const [yr, mo] = station.date.split('-');
-    const bekannt = new Intl.DateTimeFormat(appData.locale, { month: 'long', year: 'numeric' })
-      .format(new Date(parseInt(yr, 10), parseInt(mo, 10) - 1, 1));
-    progressEl.textContent = `Station ${n} von ${total} · Bekannt bis ${bekannt}`;
+    progressEl.textContent = formatStationProgress(stationIdx); // CHANGED — AP-prokrast-10b (war: inline berechnet)
     journeyBtn.textContent = station.isFinalReveal ? 'Ergebnis ansehen' : 'Weiter investiert bleiben'; // CHANGED — B1-STATIONS-v3.0
     a11yRegion.textContent = station.headline; // stationLiveMessage — kein Endwissen (APP_SPEC §14.1)
   }
@@ -594,17 +617,94 @@ function renderContent(container, appData, options, stationsConfig) { // CHANGED
     renderJourneyCardOnly(stationIdx);
   }
 
+  // CHANGED — AP-prokrast-10b (Kontinuitäts-Reveal): reine Chart-Berechnung/-Rendering,
+  // inklusive Ergebnis-/Endlinie (features.verticalLine:'last', bestehende Option). Läuft
+  // synchron und sofort beim Screen-3-Eintritt (s. revealScreen3()) — kein separates Timing
+  // für den Chart selbst, da FwVerticalLinePlugin die Linie statisch bei jedem afterDraw an
+  // der aktuellen X-Position zeichnet und keine eigene Animationsfähigkeit besitzt (geprüft
+  // am realen Plugin-Code). Ein zweiter renderFromData()-Aufruf könnte die Linie ohnehin nicht
+  // nachträglich aktivieren — ChartEngine._draw() liest .plugins nur beim allerersten
+  // new Chart()-Aufruf, nie im Update-Pfad (state.chartInstance.update() ändert nur
+  // .data/.options). Deshalb: Linie von Anfang an registrieren, Chart komplett und still.
   function renderS3(rate) {
     const ctx = buildAppContext(appData, rate, startBetrag, journeyStations); // CHANGED — AP-13
     const revealAnnotations = buildJourneyStationAnnotations(journeyStations, ctx.chartSeries); // NEW — B1-AP-14c3
     chartEngine3.renderFromData(chartSection3, ctx.chartSeries, {
       type: 'line', features: { rangeControls: false, headline: false, verticalLine: 'last' },
-      annotations: { events: revealAnnotations } // NEW — B1-AP-14c3
+      annotations: { events: revealAnnotations }, // NEW — B1-AP-14c3
+      // NEW — AP-prokrast-10b: instant/final — kein Chart.js-Default-Tweening. Die Linie war
+      // am Ende von Screen 2 (letzte, synthetische Station = letzter Datenmonat) bereits
+      // vollständig sichtbar; ein erneutes Einschwingen hier wäre eine "Kurslinien-Neuauf-
+      // bauanimation", die der Kontinuitäts-Reveal ausdrücklich vermeiden soll.
+      renderMotion: { mode: 'instant' }
     });
-    lastRenderedRateS3 = rate;
-    kpiContainerS3.textContent = ''; // CHANGED — B1-AP-16b: clear vor re-render (kein Duplikat)
-    renderKpiCards(kpiContainerS3, ctx); // NEW — B1-AP-16b: KPI-Cards sichtbar (APP_SPEC §6, §23.6)
-    return ctx; // CHANGED — AP-14: ctx für revealA11ySummary in showScreen(3)
+    return ctx; // CHANGED — AP-14: ctx für revealA11ySummary in revealScreen3()
+  }
+
+  // CHANGED — AP-prokrast-10b (Nachsteuerung, Variante B++ — Kontinuitäts-Reveal statt
+  // Text→Chart→KPI-Timing-Reveal): Chart + Ergebnis-/Endlinie erscheinen beim Screen-3-
+  // Eintritt sofort, vollständig und still (kein hidden/Fade auf dem Chart mehr — s.
+  // renderS3()). Nur der untere Bereich ist gestuft: ein Screen-3-lokales Bridge-Element
+  // („Station X von Y · Bekannt bis Z", dieselbe Formel wie Screen 2s progressEl, s.
+  // formatStationProgress()) zeigt zunächst dieselbe Zeile wie der letzte Screen-2-Zustand,
+  // bevor es nach einer kurzen Haltephase durch KPI-Karten + Disclaimer ersetzt wird. Kein
+  // Verschieben von progressEl, keine Screen-2-Änderung. Kein Replay, solange currentRate
+  // unverändert (analog screen4RevealedRate). Reduced Motion: kein Timer, Bridge bleibt
+  // unsichtbar, KPI/Disclaimer sofort im Endzustand.
+  function revealScreen3(rate) {
+    if (screen3BridgeTimer) { clearTimeout(screen3BridgeTimer); screen3BridgeTimer = null; }
+
+    if (screen3RevealedRate === rate) {
+      if (lastRevealA11yText) a11yRegion.textContent = lastRevealA11yText; // erneute Ansage bei Rückkehr, analog Screen 4
+      return;
+    }
+
+    const ctx = renderS3(rate); // Chart + Ergebnislinie sofort, vollständig, still
+
+    // Neue Rate oder Ersteintritt: KPI/Disclaimer wieder in den Ausgangszustand versetzen
+    kpiContainerS3.setAttribute('hidden', '');
+    kpiContainerS3.classList.remove('fw-app__screen3-reveal--visible');
+    kpiContainerS3.textContent = ''; // alte KPI-Karten aus vorherigem Reveal entfernen
+    assumptionsS3.setAttribute('hidden', '');
+    assumptionsS3.classList.remove('fw-app__screen3-reveal--visible');
+
+    const reduced = prefersReducedMotion();
+
+    function revealResult() {
+      screen3BridgeTimer = null;
+      bridgeS3.setAttribute('hidden', ''); // Bridge ausblenden (kein eigener Fade-out nötig)
+      renderKpiCards(kpiContainerS3, ctx); // NEW — B1-AP-16b: KPI-Cards (APP_SPEC §6, §23.6)
+      kpiContainerS3.removeAttribute('hidden');
+      assumptionsS3.removeAttribute('hidden');
+      if (reduced) {
+        kpiContainerS3.classList.add('fw-app__screen3-reveal--visible');
+        assumptionsS3.classList.add('fw-app__screen3-reveal--visible');
+      } else {
+        requestAnimationFrame(() => {
+          kpiContainerS3.classList.add('fw-app__screen3-reveal--visible');
+          assumptionsS3.classList.add('fw-app__screen3-reveal--visible');
+        });
+      }
+
+      // ERST HIER: erstes Endwissen für Screenreader (APP_SPEC §14.1 revealA11ySummary) —
+      // Ansage fällt zeitlich mit dem sichtbaren KPI-/Disclaimer-Reveal zusammen
+      const fmtReveal = new Intl.NumberFormat(appData.locale, {
+        style: 'currency', currency: 'EUR', maximumFractionDigits: 0
+      });
+      lastRevealA11yText = `Wer vor 10 Jahren ${rate} € monatlich investiert hätte, hätte heute ${fmtReveal.format(ctx.depotwertHeute)} — bei ${fmtReveal.format(ctx.eingezahlt)} eingezahlt.`; // CHANGED — AP-17b
+      a11yRegion.textContent = lastRevealA11yText;
+
+      screen3RevealedRate = rate;
+    }
+
+    if (reduced) {
+      bridgeS3.setAttribute('hidden', ''); // kein Zwischenzustand sichtbar bei Reduced Motion
+      revealResult();
+    } else {
+      bridgeS3.textContent = formatStationProgress(activeStationIndex); // Kontinuität zur letzten Screen-2-Zeile
+      bridgeS3.removeAttribute('hidden');
+      screen3BridgeTimer = setTimeout(revealResult, 800);
+    }
   }
 
   // CHANGED — AP-prokrast-03h: kein Morph mehr. Screen 4 rendert den finalen 20-Jahres-Rubikon-Zustand
@@ -633,7 +733,7 @@ function renderContent(container, appData, options, stationsConfig) { // CHANGED
 
   // CHANGED — AP-prokrast-03h: Beat-Sequenz für den stehenden Rubikon-Screen —
   // Chart sofort final, 800ms Stille, DOM-Text erscheint (genau eine aria-live-Aktualisierung),
-  // 800ms Stille, CTA erscheint. Kein Replay, solange currentRate unverändert (analog lastRenderedRateS3).
+  // 800ms Stille, CTA erscheint. Kein Replay, solange currentRate unverändert (analog screen3RevealedRate).
   function revealScreen4() {
     if (screen4TextTimer) { clearTimeout(screen4TextTimer); screen4TextTimer = null; }
     if (screen4CtaTimer)  { clearTimeout(screen4CtaTimer);  screen4CtaTimer  = null; }
@@ -664,6 +764,9 @@ function renderContent(container, appData, options, stationsConfig) { // CHANGED
       if (screen4TextTimer) { clearTimeout(screen4TextTimer); screen4TextTimer = null; }
       if (screen4CtaTimer)  { clearTimeout(screen4CtaTimer);  screen4CtaTimer  = null; }
     }
+    if (n !== 3) { // CHANGED — AP-prokrast-10b (war: zwei Timer): kein Bridge-Reveal-Timer darf in einem versteckten Screen 3 feuern
+      if (screen3BridgeTimer) { clearTimeout(screen3BridgeTimer); screen3BridgeTimer = null; }
+    }
     allScreens.forEach((s, i) => {
       if (i + 1 === n) s.removeAttribute('hidden');
       else s.setAttribute('hidden', '');
@@ -673,17 +776,7 @@ function renderContent(container, appData, options, stationsConfig) { // CHANGED
       if (h2) h2.focus();
     }
     if (n === 2) renderJourneyStep(activeStationIndex); // CHANGED — AP-14 (war: rate-basiertes renderS2)
-    if (n === 3 && currentRate !== lastRenderedRateS3) {
-      const ctx = renderS3(currentRate);
-      // ERST HIER: erstes Endwissen für Screenreader (APP_SPEC §14.1 revealA11ySummary)
-      const fmtReveal = new Intl.NumberFormat(appData.locale, {
-        style: 'currency', currency: 'EUR', maximumFractionDigits: 0
-      });
-      lastRevealA11yText = `Wer vor 10 Jahren ${currentRate} € monatlich investiert hätte, hätte heute ${fmtReveal.format(ctx.depotwertHeute)} — bei ${fmtReveal.format(ctx.eingezahlt)} eingezahlt.`; // CHANGED — AP-17b
-      a11yRegion.textContent = lastRevealA11yText;
-    } else if (n === 3 && lastRevealA11yText) { // NEW — AP-17b: re-announce bei Rückkehr zu S3
-      a11yRegion.textContent = lastRevealA11yText;
-    }
+    if (n === 3) revealScreen3(currentRate); // CHANGED — AP-prokrast-10b Kontinuitäts-Reveal (war: Text→Chart→KPI-Timing-Reveal)
     if (n === 4) revealScreen4(); // NEW — AP-prokrast-03f
   }
 
@@ -930,7 +1023,7 @@ function renderContent(container, appData, options, stationsConfig) { // CHANGED
     slider.setAttribute('aria-valuenow', String(rate));
     slider.setAttribute('aria-valuetext', rate + ' Euro pro Monat');
     valueDisplay.textContent = rate + ' €/Monat';
-    lastRenderedRateS3 = null; // Invalidiert für nächsten S3-Besuch
+    screen3RevealedRate = null; // CHANGED — AP-prokrast-10b (war: lastRenderedRateS3 = null) — Invalidiert für nächsten S3-Besuch
     // currentRate wird erst bei btnS1Next eingefroren — kein Update hier
   });
   // slider.change entfernt — AP-14: war Endwissens-Leak via a11yRegion (APP_SPEC §14.1)
