@@ -237,7 +237,7 @@ Das ist die psychologische Arbeit. Dieses kurze Aushalten ist der Kern der App.
 | Kartenwechsel-Animation (Beat A–C) | Hoch | Kern der psychologischen Wirkung — zuerst bauen |
 | KPI-Karten mit Verzögerung (Screen 3) | gebaut (AP-prokrast-10a–10d ✅ 2026-07-07) | überholt: „Erst Linie, dann Zahl" galt für den verworfenen Text→Chart→KPI-Timing-Reveal. Aktiver Sollstand: Chart+Linie sofort/still, dann Bridge-Zeile (800ms), dann KPI+Disclaimer per 800ms-Fade — Details siehe Screen-3-Abschnitt oben / `APP_SPEC.md` §16.1b |
 | ~~X-Achsen-Verlängerung (Screen 4 Beat 1)~~ | — | überholt: abgelöst durch AP-prokrast-03h (kein Morph, keine Achsenanimation) — Zukunftsraum steht sofort, kein separater Mobile-Testschritt für die Animation nötig |
-| ✅ ❓ an blauer Linie | gesetzt (AP-prokrast-06b, 2026-07-03) | Bau noch offen — Canvas-Marker via `FwChartTextPlugin.js`, links/rechts der Linie, S/M/L Pflicht, kein DOM, kein A11y-Anspruch (siehe Beat 2) |
+| ✅ ❓ an blauer Linie | gebaut und abgenommen (AP-prokrast-07a–07d ✅ 2026-07-06) | überholt: „Bau noch offen" galt bis AP-prokrast-06b. Aktiver Sollstand: Canvas-Marker via `FwChartTextPlugin.js`, links/rechts der Linie, S/M/L geprüft, TC-F05 für aktuellen Fallback-Font-Stand bestanden, rein visuell — kein DOM, kein A11y-Anspruch (siehe Beat 2). Neumessung nach CI-Font-/Theme-Bridge-Anbindung ist Folgeauftrag von DS-012/DS-013, kein neuer Rubikon-Bau-AP |
 | Stille Beat 4 — 800ms | Fest | Nicht kürzen |
 | `showScreen()` Transition | Mittel | Aktuell nur hidden-Toggle, kein Übergang |
 
