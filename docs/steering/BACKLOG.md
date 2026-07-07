@@ -1,5 +1,5 @@
 # BACKLOG – Finanzwesir 2.0
-Stand: 2026-07-07 | Session: AP-prokrast-12c | Geändert von: Claude
+Stand: 2026-07-07 | Session: AP-prokrast-14c | Geändert von: Claude
 
 **Regeln:**
 - ✅-Zeilen werden sofort nach `BACKLOG-ARCHIV.md` verschoben (append), dann hier gelöscht.
@@ -33,6 +33,7 @@ Stand: 2026-07-07 | Session: AP-prokrast-12c | Geändert von: Claude
 | DS-FOLLOWUP-08 | Design | Nach Anbindung der echten CI-Fonts / Theme-Bridge (DS-012/DS-013): Card-to-Point-Fluggeschwindigkeit `prokrastinations-preis` Screen 2 (zentraler CSS-Schalter `--fw-card-to-point-flight-duration`, aktuell 1350ms nach zwei Alberts-Anweisungen von ursprünglich 300ms verlangsamt) im Live-Server nachjustieren — Wert ist ein Zwischenstand, keine finale UX-Abnahme | L | DS-012, DS-013 | docs/steering/patches/AP-prokrast-08b_anchor-measurement_card-to-point_implementierung_Ergebnis.md |
 | AP-prokrast-08-FOLLOWUP-A | Engine | No-op-Bootstrap-Workaround entscheiden — `FwAnchorMeasurementPlugin` wird in `renderJourneyChartOnly()` mit leerem Callback aktiviert, nur um Chart.js zur Plugin-Registrierung beim Initial-Render zu zwingen. AP-prokrast-09a hat geprüft: ein unconditional Plugin-Push wäre technisch möglich, widerspricht aber dem in `CHART_PLUGIN_ARCHITEKTUR.md` §4 dokumentierten Muster („ChartEngine ergänzt ... nur bei passender Runtime-Option") — reiner Codefix wäre Spec-Drift. Masterfaden-Entscheidung nötig zwischen A) eigener Engine+Spec-AP mit Full-Gate (ändert `ChartEngine.js` + `CHART_PLUGIN_ARCHITEKTUR.md` §4/§20 gemeinsam, volle Regressionsprüfung über alle 4 Plugins + 3 Chart-Typen) oder B) No-op-Bootstrap bewusst als offizieller AnchorMeasurement-Contract-Bestandteil in §21 dokumentieren (kein Code ändert sich) | M | — | docs/steering/patches/AP-prokrast-09d_ruecklaufkapsel_Ergebnis.md |
 | DS-014   | Design  | 07-APP-KOMPONENTEN.md — Design-API Baukasten   | H    | DS-012       | Blocker für alle App-Entwicklung                  |
+| DS-015   | Design  | Farbrollen-Entscheidung für App-CI-Theme-Bridge: Primary (`--color-blau` vs. `--color-petrol` vs. andere), Error-Familie (`--color-error-border/-bg/-text`, Aufbau auf `--color-purpur` oder neu), ggf. Surface (`--color-bg-faint` wiederverwenden vs. `--color-surface` neu) — Albert-Entscheidung, danach `screen.css` Abschnitt 1 ergänzen. Blockiert AP-prokrast-15 (CI-/Theme-Bridge Umsetzung Stufe 1) | H | DS-012, DS-013 | docs/steering/patches/AP-prokrast-14b_ci-theme-bridge_zielkontrakt-analyse_Ergebnis.md, AP-prokrast-14c_ruecklaufkapsel_master_Ergebnis.md |
 | CSS-5    | CSS     | Farb-Audit + screen.css Verifikation           | M    | CSS-3 ✅     | —                                                 |
 | AP-DOC-1 | Engine  | Basis/Prompts/ bereinigen (5 Dateien)          | H    | —            | engine/detail/AP-DOC-1-DETAIL.md                  |
 | AP-SEC-1 | Engine  | Domain-Lock Validierungsfunktion implementieren| M    | AP-DOC-1     | —                                                 |
