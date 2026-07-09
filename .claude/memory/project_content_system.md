@@ -40,4 +40,4 @@ published_at:
 
 **Rollen:** Artikeltext/Bilder/Rechtstexte → Obsidian (Content-Repo). App-Code/Spec/technische Doku → VSCode+Claude (Code-Repo, `docs/editorial/`). Ghost-Upload immer manuell, kein Automatisierungsexport.
 
-**Bekannte offene Diskrepanz (2026-07-09):** Die 25 App-Skelette unter `content/posts/apps/<app_slug>/index.md` wurden vor Kenntnis dieser Doku nach einem von Albert wörtlich vorgegebenen Template ohne `published_at`-Feld angelegt. Die Doku listet `published_at:` als Pflichtfeld im Standard. Nicht rückwirkend korrigiert (Surgical-Check — keine Vorgabe dazu erhalten). Bei nächster Berührung dieser Dateien gezielt klären, ob `published_at:` nachgezogen werden soll.
+**published_at-Diskrepanz (2026-07-09, vollständig behoben):** Die 25 App-Skelette plus `content/_vorlagen/app-artikel.md` waren zunächst ohne `published_at`-Feld angelegt worden (Albert-Template ohne dieses Feld). Nachgezogen: leeres `published_at:` in allen 25 `index.md` und in der Vorlage ergänzt (kein Datum, da noch nicht publiziert). Frontmatter jetzt vollständig standardkonform — Vorlage ist die maßgebliche Quelle für alle künftigen Artikel.

@@ -1,4 +1,8 @@
 /* CHANGED — Slice 5 (war: Slice 3/4) */
+/* CHANGED — AP-prokrast-17: CI-Farbtokens (--fw-color-Namensraum) → Kontrakt-Rollen-/Farbtokens (--color-Namensraum),
+   Fallbacks = tokens.css-FINAL (docs/steering/design/CI-POOL-ROLLENKONTRAKT.md §1/§8; tokens.css ist die SSoT).
+   Bewusst NICHT migriert: --fw-font-base (Kontrakt §9 Font-Ausklammerung + Rubikon-Kopplung DS-FOLLOWUP-07),
+   --fw-space-* und alle Mechanik-Tokens (--fw-* = ausschließlich App-Mechanik, Kontrakt §2/§4). */
 
 /* === Basis === */
 .fw-app {
@@ -7,8 +11,8 @@
   width: 100%;
   min-height: 200px;
   font-family: var(--fw-font-base, sans-serif);
-  color: var(--fw-color-text, #1a1a1a);
-  background: var(--fw-color-bg, #ffffff);
+  color: var(--color-text, #272727);
+  background: var(--color-bg, #ffffff);
   /* NEW — AP-prokrast-08b (Nachtrag): zentraler Schalter für die Card-to-Point-Fluggeschwindigkeit.
      Einzige Stelle zum Nachjustieren — app.js liest denselben Wert für das Timing der
      Klon-Entfernung/des Stationswechsels, damit CSS-Transition und JS-Timing nie auseinanderlaufen.
@@ -28,16 +32,16 @@
 
 /* === Error === */
 .fw-app[data-fw-state="error"] {
-  border: 1px solid var(--fw-color-error-border, #c62828);
-  background: var(--fw-color-error-bg, #fff8f8);
+  border: 1px solid var(--color-error-border, #c62828);
+  background: var(--color-error-bg, #fff8f8);
   padding: var(--fw-space-md, 1rem);
-  color: var(--fw-color-error-text, #b71c1c);
+  color: var(--color-error-text, #b71c1c);
 }
 
 /* === Empty === */
 .fw-app[data-fw-state="empty"] {
   padding: var(--fw-space-md, 1rem);
-  color: var(--fw-color-muted, #555555);
+  color: var(--color-text-muted, #666666);
 }
 
 /* === Content === */
@@ -57,21 +61,21 @@
 
 .fw-app__kpi-card {
   flex: 1 1 140px;
-  background: var(--fw-color-surface, #f5f5f5);
+  background: var(--color-surface, #fafafa);
   border-radius: 4px;
   padding: var(--fw-space-sm, 0.5rem) var(--fw-space-md, 1rem);
 }
 
 .fw-app__kpi-card dt {
   font-size: 0.8em;
-  color: var(--fw-color-muted, #555555);
+  color: var(--color-text-muted, #666666);
   margin-bottom: 0.25em;
 }
 
 .fw-app__kpi-card dd {
   font-size: 1.4em;
   font-weight: bold;
-  color: var(--fw-color-text, #1a1a1a);
+  color: var(--color-text, #272727);
   margin: 0;
 }
 
@@ -90,21 +94,21 @@
 
 .fw-app__slider-label-text {
   font-size: 0.9em;
-  color: var(--fw-color-muted, #555555);
+  color: var(--color-text-muted, #666666);
   flex-shrink: 0;
 }
 
 .fw-app__slider {
   flex: 1 1 160px;
   min-width: 0;
-  accent-color: var(--fw-color-primary, #0071bf);
+  accent-color: var(--color-primary, #218380);
   cursor: pointer;
 }
 
 .fw-app__slider-value {
   font-size: 1em;
   font-weight: bold;
-  color: var(--fw-color-text, #1a1a1a);
+  color: var(--color-text, #272727);
   min-width: 7ch;
   text-align: right;
   flex-shrink: 0;
@@ -129,7 +133,7 @@
 .fw-app__screen-headline {
   font-size: 1.5em;
   font-weight: bold;
-  color: var(--fw-color-text, #1a1a1a);
+  color: var(--color-text, #272727);
   margin: 0 0 var(--fw-space-sm, 0.5rem);
 }
 
@@ -138,7 +142,7 @@
 }
 
 .fw-app__screen-subline {
-  color: var(--fw-color-muted, #555555);
+  color: var(--color-text-muted, #666666);
   font-size: 0.9em;
   margin: 0 0 var(--fw-space-md, 1rem);
 }
@@ -151,17 +155,17 @@
 
 .fw-app__btn {
   padding: 0.5rem 1.25rem;
-  border: 1px solid var(--fw-color-primary, #0071bf);
+  border: 1px solid var(--color-primary, #218380);
   border-radius: 4px;
   background: transparent;
-  color: var(--fw-color-primary, #0071bf);
+  color: var(--color-primary, #218380);
   font-size: 0.95em;
   cursor: pointer;
 }
 
 .fw-app__btn--next {
-  background: var(--fw-color-primary, #0071bf);
-  color: var(--fw-color-bg, #ffffff);
+  background: var(--color-primary, #218380);
+  color: var(--color-bg, #ffffff);
   margin-left: auto;
 }
 
@@ -170,8 +174,8 @@
   display: inline-block;
   margin-top: var(--fw-space-md, 1rem);
   padding: 0.75rem 1.5rem;
-  background: var(--fw-color-primary, #0071bf);
-  color: var(--fw-color-bg, #ffffff);
+  background: var(--color-primary, #218380);
+  color: var(--color-bg, #ffffff);
   border-radius: 4px;
   text-decoration: none;
   font-weight: bold;
@@ -183,8 +187,8 @@
 /* === Slice 6: AssumptionsBox (APP_SPEC §19.8) === */
 .fw-app__assumptions {
   font-size: 0.8em;
-  color: var(--fw-color-muted, #555555);
-  border-left: 3px solid var(--fw-color-muted, #555555);
+  color: var(--color-text-muted, #666666);
+  border-left: 3px solid var(--color-text-muted, #666666);
   padding: var(--fw-space-sm, 0.5rem) var(--fw-space-md, 1rem);
   margin-top: var(--fw-space-md, 1rem);
 }
@@ -282,7 +286,7 @@
 /* NEW — AP-14b: Orientierungs-Chip (APP_SPEC §16.1) */
 .fw-app__journey-progress {
   font-size: 0.8125rem;
-  color: var(--fw-color-muted, #555555);
+  color: var(--color-text-muted, #666666);
   text-align: center;
   margin: var(--fw-space-sm, 0.5rem) 0 0;
 }
@@ -384,7 +388,7 @@
 
 .fw-app__rubikon-footnote {
   font-size: 0.75em;
-  color: var(--fw-color-muted, #555555);
+  color: var(--color-text-muted, #666666);
   margin: 0;
 }
 
