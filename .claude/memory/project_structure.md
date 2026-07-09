@@ -32,8 +32,8 @@ Albert Warnecke (Finanzwesir) baut Finanzwesir 2.0 auf Ghost.io. Einpersonen-Pro
 - Branch: `master`
 - Remote: `git@github.com:awa-de/Finanzwesir-code.git` (privat)
 - SSH: Windows OpenSSH, `git config core.sshCommand = C:/Windows/System32/OpenSSH/ssh.exe`
-- Nicht versioniert: `Theme/data/`, `Theme/chart-tests/`, `content/`, `Archiv/`, `Active Campaign Liste/`
-- Separates Content-Repo geplant (noch nicht angelegt)
+- Nicht versioniert im Code-Repo: `Theme/data/`, `Theme/chart-tests/`, `content/`, `Archiv/`, `Active Campaign Liste/` (Root-`.gitignore` schließt `content/` komplett aus)
+- Separates Content-Repo `Finanzwesir-content` existiert bereits aktiv (`content/.git`, eigener Remote, GitHub privat) — kein Platzhalter mehr. Details: [[project-content-system]]
 
 ## Arbeitsverzeichnis
 

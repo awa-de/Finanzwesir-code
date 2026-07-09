@@ -1,6 +1,8 @@
 # Memory Index — Finanzwesir 2.0
 
 - [Projektstruktur und Kontext](project_structure.md) — Wer, was, wo: Ghost.io, Einpersonen, Live Server, Arbeitsverzeichnis
+- [Content-System-Architektur](project_content_system.md) — Zwei getrennte Git-Repos (Code/Content) in einem Ordner; content/-Struktur; Frontmatter-Standard inkl. offener published_at-Diskrepanz
+- [content/ nie in Code-Repo-Commit-Messages](feedback_content_repo_scope.md) — content/ gehört zum separaten Content-Repo, nie unter „Bereiche:" oder Commit-Status-Aussagen des Code-Repos listen
 - [App-Architektur (beschlossen)](project_app_architecture.md) — HTML-Card-Einbettung, Ghost liefert screen.css+Tailwind, zwei Rendering-Welten (HTML+Canvas), kein Dark Mode in Apps
 - [Design-API Konzept](project_design_api.md) — Zentraler Baukasten interaktiver UI-Elemente, alle Apps nutzen dieselben Selektoren, Zustände vollständig definieren
 - [Arbeitsweise mit Albert](feedback_arbeitsweise.md) — Sachlich-direkt, kein Smalltalk, Freigabe vor Aktionen, primitiver Dev-Workflow (VSCode+Live Server), Git-Commit durch Albert
