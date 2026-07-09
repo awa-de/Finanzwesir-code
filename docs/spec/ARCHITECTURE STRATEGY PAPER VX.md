@@ -52,7 +52,7 @@ Hier ist die vollständige Inventurliste der Architektur:
 | **Layer 2** | **The Manager**<br>(State & Orchestration) | `ChartEngine.js` | **State Holder.**<br>Verwaltet Interaktionen, Zeiträume und steuert den Render-Zyklus.<br>**Error Boundary:** `_processContainer()` umschließt den gesamten Render-Zyklus mit try-catch. Bei Fehler wird ein neutraler Platzhalter angezeigt (via `renderer.showError()`), die restliche Seite bleibt funktionsfähig.<br>**Smart Updates:** Re-Renders (View-/Range-Wechsel) nutzen `chart.update()` statt destroy/recreate — bewahrt Chart.js-Animationen. Nur der Erstaufbau nutzt `new Chart()`. |
 | **Layer 3** | **The Brains**<br>(Logik & Strategie) | `_TemplateStrategy.js`<br>`BaseChartStrategy.js`<br>`LineChartStrategy.js`<br>`BarChartStrategy.js`<br>`PieChartStrategy.js`<br>`FwChartPlugins.js` | **Transformation.**<br>Wandeln neutrale Daten in spezifische Chart-Konfigurationen um. Packen den "Context-Rucksack".<br>**Legend Toggle:** `BaseChartStrategy.handleLegendClick()` schaltet Datasets ein/aus via `meta.hidden` + `chart.update()`. |
 | **Layer 4** | **The Curator**<br>(Mathematik & Analyse) | `FwSmartScales.js`<br>`FwDateUtils.js` | **Intelligence.**<br>`SmartScales` berechnet Achsen und Ticks (Platz). Kennt keine Pixel — nur Zeiteinheiten und Zahlenräume.<br>`DateUtils` erkennt Rhythmen (Zeit-Intelligenz). |
-| **Layer 5** | **The Face**<br>(UI & Design) | `FwRenderer.js`<br>`FwLayoutRules.js`<br>`FwFormatUtils.js`<br>`FwTheme.js` | **Assembly & Finish.**<br>`Renderer` baut HTML, enthält `_sanitize()` und `_renderA11yTable()`.<br>`LayoutRules` entscheidet über Pixel-Dimensionen und übersetzt Context in Text.<br>`Theme` liefert Farben (aktuell hardcoded; geplant: CSS-Variables Bridge, siehe KDR 14). |
+| **Layer 5** | **The Face**<br>(UI & Design) | `FwRenderer.js`<br>`FwLayoutRules.js`<br>`FwFormatUtils.js`<br>`FwTheme.js` | **Assembly & Finish.**<br>`Renderer` baut HTML, enthält `_sanitize()` und `_renderA11yTable()`.<br>`LayoutRules` entscheidet über Pixel-Dimensionen und übersetzt Context in Text.<br>`Theme` liefert Farben aus `tokens.css` per CSS-Variables Bridge (implementiert und an alle Strategien durchgeleitet, siehe KDR 14). |
 
 
 
@@ -145,10 +145,10 @@ Hier ist die vollständige Inventurliste der Architektur:
 ### KDR 14: CSS-Variables Bridge (Design-Hoheit beim Theme)
 * **Kontext:** Wer bestimmt die Farben — das JavaScript oder das CSS?
 * **Entscheidung:** Das Ghost-Theme (CSS) hat die Design-Hoheit. Die Engine liest Farben zur Laufzeit.
-    1. **Architektur:** `FwTheme.init()` liest CSS-Custom-Properties (`--color-petrol`, `--color-text`, etc.) via `getComputedStyle()` aus. Hardcodierte Hex-Werte im Constructor dienen als Fallback für Test-HTMLs ohne `screen.css`.
-    2. **Status:** Implementiert (2026-02-25, CSS-3). Alle Engine-Dateien tokenisiert. Verbleibende Hex-Werte in Utility-Dateien sind defensive Fallbacks (Injection-Pattern: Strategy übergibt Tokens, Utility hat Fallback).
+    1. **Architektur:** `FwTheme.init()` liest CSS-Custom-Properties (`--color-petrol`, `--color-text`, etc.) via `getComputedStyle()` aus `tokens.css` aus. `ChartEngine` erzeugt den `FwTheme`-Renderer als Composition Root und reicht die init()'te Instanz per Constructor Injection an alle drei Strategien durch (Graceful Default: `constructor(theme = new FwTheme())` bleibt eigenständig testbar). Hardcodierte Hex-Werte im Constructor dienen als Fallback für Test-HTMLs ohne geladene `tokens.css`.
+    2. **Status:** Implementiert (2026-02-25, CSS-3) und durchgeleitet (2026-07-09, AP-16/16c): alle drei Strategien erhalten dieselbe `FwTheme`-Instanz, Null-Delta zwischen `tokens.css` und Fallback-Konstanten belegt (Null-Delta-QA, AP-16c). Verbleibende Hex-Werte in Utility-Dateien sind defensive Fallbacks (Injection-Pattern: Strategy übergibt Tokens, Utility hat Fallback).
     3. **Init-Reihenfolge (bindend):** `new FwTheme()` → `theme.init()` → `_injectStyles()`. Dokumentiert in `FwRenderer.constructor()` und `ChartEngine.js`.
-    4. **Konsequenz:** Farbänderungen erfordern nur eine Änderung in `screen.css :root`. Kein JavaScript-Eingriff nötig.
+    4. **Konsequenz:** Farbänderungen erfordern nur eine Änderung in `tokens.css` (Single Source of Truth seit AP-16; `screen.css` bindet sie per `@import` ein). Kein JavaScript-Eingriff nötig.
 * **Begründung:** 100% Trennung von Logik und Design. Das CMS-Theme steuert die Corporate Identity, die Engine passt sich an. Kein Designer muss JavaScript anfassen.
 
 ---
