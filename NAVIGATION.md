@@ -123,16 +123,19 @@ Nach Abschluss: THEME-ASSEMBLY-CHECKLIST.md abhaken → `/abschluss-ritual`.
 
 ```
 1. docs/steering/design/CSS-KONVENTIONEN.md       ← bindend für alle CSS-Arbeit
-2. docs/steering/BACKLOG.md                       ← offene DS-N / CSS-N Issues
-3. docs/design-system/spec/                       ← Tokens, Komponenten-Specs
-4. Theme/assets/css/screen.css
+2. docs/steering/design/CI-POOL-ROLLENKONTRAKT.md ← verbindliche Farb-/Rollen-/Benennungsregeln (Leitern 50–900, Nutzungsregeln)
+3. docs/steering/BACKLOG.md                       ← offene DS-N / CSS-N Issues
+4. docs/design-system/spec/                       ← Komponenten-Specs
+5. Theme/assets/css/tokens.css                    ← Single Source of Truth: Farb-/Font-/Schatten-Tokens (AP-prokrast-16)
+6. Theme/assets/css/screen.css                    ← importiert tokens.css, konsumiert nur per var()/color-mix
 ```
 
 Regeln (nie brechen):
-- Eine CSS-Wahrheit: `Theme/assets/css/screen.css`
+- Token-Wahrheit: `Theme/assets/css/tokens.css` (Farben/Fonts/Schatten). `screen.css` importiert sie via `@import` und konsumiert nur.
 - Keine `fw-*` Klassen in `screen.css` definieren oder überschreiben
-- Hex-Werte nur im Token-Abschnitt
+- Hex-Werte nur in `tokens.css` (Token-Definitionen)
 - Keine externen Font-Quellen
+- Chart-Engine liest dieselben Tokens: `FwTheme.init()` bridged `tokens.css`, das eine init()'te Theme wird per Composition Root an alle 3 Strategien durchgereicht (AP-prokrast-16c)
 
 **Design-Ressourcen (bei Styling-Entscheidungen prüfen):**
 - https://styles.refero.design/ — Komponenten-Galerie, Stil-Referenzen

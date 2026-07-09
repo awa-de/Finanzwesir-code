@@ -75,15 +75,22 @@ import { // CHANGED AP-14e9: Plugin-Barrel
 export class ChartEngine {
     constructor() {
         this.parser = new CSVParser();
-        this.strategies = {
-            'line': new LineChartStrategy(),
-            'bar': new BarChartStrategy(),
-            'pie': new PieChartStrategy()
-        };
         // KDR-14: FwTheme.init() läuft im FwRenderer-Constructor.
         // Reihenfolge: new FwTheme() → theme.init() → _injectStyles().
         // So liest die Bridge die CSS-Tokens, bevor Styles generiert werden.
+        // CHANGED — AP-16c (protected-Begründung: Masterentscheidung Theme-Durchleitung;
+        // Regressionstest = Harness AP-16-abnahme.html + Null-Delta-Kriterium): Renderer VOR den
+        // Strategien erzeugen und dessen init()'te FwTheme-Instanz als EINE Quelle der Wahrheit an die
+        // Strategie-Konstruktoren durchreichen (Composition Root + Constructor Injection). Vorher erzeugte
+        // jede Strategie eine eigene, nie init()'te FwTheme-Instanz (zweite Wahrheitsquelle, 16b-Befund).
+        // KDR 14.3 unverändert: die FwRenderer-interne Init-Reihenfolge bleibt gleich.
         this.renderer = new FwRenderer();
+        var theme = this.renderer.theme;
+        this.strategies = {
+            'line': new LineChartStrategy(theme),
+            'bar': new BarChartStrategy(theme),
+            'pie': new PieChartStrategy(theme)
+        };
         this._appChartStates = new WeakMap(); // NEW — AppChart State-Registry
     }
 

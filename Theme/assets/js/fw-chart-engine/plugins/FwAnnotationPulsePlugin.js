@@ -104,7 +104,7 @@ export const FwAnnotationPulsePlugin = {
                 animations:  new Map(),   // id → startTime (performance.now())
                 positions:   new Map(),   // id → { x, y } — gecacht aus Chart.js-Elementen
                 rafPending:  false,
-                borderColor: '#006273',
+                borderColor: '#218380', // CHANGED — AP-16b: defensiver Petrol-Fallback (KDR 14.2); realer Token via dataset.pointBorderColor
                 borderWidth: 1.5,
                 baseRadius:  5
             });
@@ -119,7 +119,7 @@ export const FwAnnotationPulsePlugin = {
             if (el) newPositions.set(id, { x: el.x, y: el.y });
         }
         state.positions   = newPositions;
-        state.borderColor = (typeof dataset.pointBorderColor === 'string') ? dataset.pointBorderColor : '#006273';
+        state.borderColor = (typeof dataset.pointBorderColor === 'string') ? dataset.pointBorderColor : '#218380'; // CHANGED — AP-16b: defensiver Petrol-Fallback (KDR 14.2), war '#006273'
         state.borderWidth = dataset.pointBorderWidth || 1.5;
         state.baseRadius  = dataset.pointRadius || 5;
 

@@ -1,0 +1,93 @@
+/*
+ * assets/css/tokens.css
+ * Finanzwesir Design-System — Single Source of Truth für Farben, Fonts, Schatten.
+ *
+ * QUELLE (verbindlich):
+ *   - docs/steering/design/CI-POOL-ROLLENKONTRAKT.md  (Rollenmodell, Namensräume, Nutzungsregeln)
+ *   - docs/steering/patches/AP-prokrast-15c_farbleiter-generierung_Ergebnis.md  (finale Leiter-Hexwerte)
+ *
+ * ÄNDERUNGSVERBOT: Diese Werte sind FINAL (visuell abgenommen). Änderung nur per
+ *   Masterentscheidung (Albert). Kein „nebenbei"-Tuning einzelner Stufen.
+ *
+ * Reines CSS, kein Tailwind-Bezug (@theme/@layer bewusst NICHT hier — das ist Theme-Build/T1).
+ * screen.css bindet diese Datei per @import ein; FwTheme.js liest die Brand-/UI-Tokens per Bridge.
+ */
+
+:root {
+    /* ===== Brand-Leiter Petrol (Seed 600 = #218380, Alias --color-petrol) ===== */
+    --color-petrol-50: #F4FBFB;
+    --color-petrol-100: #DAF6F4;
+    --color-petrol-200: #B4EEEB;
+    --color-petrol-300: #89E2DE;
+    --color-petrol-400: #64CDC9;
+    --color-petrol-500: #49B3AF;
+    --color-petrol-600: #218380;
+    --color-petrol-700: #357270;
+    --color-petrol-800: #325A58;
+    --color-petrol-900: #2F4A48;
+
+    /* ===== Brand-Leiter Gelb (Seed 500 = #DFC805, Alias --color-gelb) ===== */
+    --color-gelb-50: #FDFCEE;
+    --color-gelb-100: #FDF8CF;
+    --color-gelb-200: #FCF09C;
+    --color-gelb-300: #F6E25E;
+    --color-gelb-400: #EAD329;
+    --color-gelb-500: #DFC805;
+    --color-gelb-600: #AB9A13;
+    --color-gelb-700: #80741A;
+    --color-gelb-800: #675E21;
+    --color-gelb-900: #554E24;
+
+    /* ===== Brand-Leiter Purpur (Seed 900 = #8D0267, Alias --color-purpur) ===== */
+    --color-purpur-50: #FCF3F7;
+    --color-purpur-100: #FBE8F2;
+    --color-purpur-200: #F9D0E6;
+    --color-purpur-300: #F7A9D5;
+    --color-purpur-400: #F172C1;
+    --color-purpur-500: #E844B1;
+    --color-purpur-600: #D7169F;
+    --color-purpur-700: #B90088;
+    --color-purpur-800: #9A0071;
+    --color-purpur-900: #8D0267;
+
+    /* ===== Blau — keine Ramp (E2), nur Seed 700 ===== */
+    --color-blau-700: #0071BF;
+
+    /* ===== Aliase Vollfarben (Kurzname → Seed-Stufe) ===== */
+    --color-petrol: var(--color-petrol-600);
+    --color-gelb: var(--color-gelb-500);
+    --color-purpur: var(--color-purpur-900);
+    --color-blau: var(--color-blau-700);
+
+    /* ===== Semantische Rollen (Kontrakt §1.1) ===== */
+    --color-primary: var(--color-petrol-600);
+    --color-link: var(--color-blau-700);
+    --color-surface: var(--color-bg-faint);
+
+    /* ===== Neutral-Familie (Bestand aus screen.css) ===== */
+    --color-text: #272727;
+    --color-text-sec: #4C4C4C;
+    --color-text-muted: #666666;
+    --color-text-disabled: #888888;
+    --color-bg: #FFFFFF;
+    --color-bg-faint: #FAFAFA;
+    --color-border: #E7ECEF;
+
+    /* ===== Error-Set (zentralisiert, Kontrakt §1.2) ===== */
+    --color-error-text: #B71C1C;
+    --color-error-border: #C62828;
+    --color-error-bg: #FFF8F8;
+
+    /* ===== Bridge-only (nur JS/Chart-Engine, keine Utility) ===== */
+    --color-grid: #E7ECEF;
+    --color-zero-line: #999999;
+    --color-loader-bg: #F3F3F3;
+
+    /* ===== Fonts ===== */
+    --font-display: 'Archivo Black', sans-serif;
+    --font-body: 'Source Sans Pro', sans-serif;
+
+    /* ===== Schatten (Bestand, zwei benannte Zusatzstufen) ===== */
+    --shadow-soft: 0 4px 20px -2px rgba(39, 39, 39, 0.05);
+    --shadow-hover: 0 10px 25px -5px rgba(39, 39, 39, 0.1);
+}

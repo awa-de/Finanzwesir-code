@@ -28,9 +28,9 @@ import { FwSmartTooltips } from '../core/FwSmartTooltips.js';
 import { FwFormatUtils } from '../core/FwFormatUtils.js';
 
 export class BarChartStrategy extends BaseChartStrategy {
-    constructor() {
+    constructor(theme = new FwTheme()) { // CHANGED — AP-16c: Constructor Injection + Graceful Default (Standalone ohne Engine nutzt eigenes Fallback-Theme, KDR 14.2)
         super();
-        this.theme = new FwTheme();
+        this.theme = theme; // CHANGED — AP-16c: war new FwTheme() (nie init()'t); Composition Root (ChartEngine) reicht init()'te Instanz durch
         this.UNIT_MAP = {
             'UNIT_PERCENT': { mode: 'percent', currency: 'PERCENT' },
             'CURRENCY_EUR': { mode: 'value', currency: 'EUR' },

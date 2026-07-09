@@ -33,10 +33,10 @@ import { CenterTextPlugin } from '../plugins/index.js'; // CHANGED AP-14e9: Plug
 import { FwLayoutRules } from '../core/FwLayoutRules.js'; 
 
 export class PieChartStrategy extends BaseChartStrategy {
-    constructor() {
+    constructor(theme = new FwTheme()) { // CHANGED — AP-16c: Constructor Injection + Graceful Default (Standalone ohne Engine nutzt eigenes Fallback-Theme, KDR 14.2)
         super();
-        this.theme = new FwTheme();
-        
+        this.theme = theme; // CHANGED — AP-16c: war new FwTheme() (nie init()'t); Composition Root (ChartEngine) reicht init()'te Instanz durch
+
         // 1. UNIT MAP: Standard für alle Strategien
         this.UNIT_MAP = {
             'UNIT_NONE':    { mode: 'value', currency: '' }, // V11.2.0: Neutraler Skalar

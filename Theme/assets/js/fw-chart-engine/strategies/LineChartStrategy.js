@@ -30,9 +30,9 @@ import { CrosshairPlugin } from '../plugins/index.js'; // CHANGED AP-14e9: Plugi
 import { FwFormatUtils } from '../core/FwFormatUtils.js';
 
 export class LineChartStrategy extends BaseChartStrategy {
-    constructor() {
+    constructor(theme = new FwTheme()) { // CHANGED — AP-16c: Constructor Injection + Graceful Default (Standalone ohne Engine nutzt eigenes Fallback-Theme, KDR 14.2)
         super();
-        this.theme = new FwTheme();
+        this.theme = theme; // CHANGED — AP-16c: war new FwTheme() (nie init()'t); Composition Root (ChartEngine) reicht init()'te Instanz durch
         this.UNIT_MAP = {
             'UNIT_PERCENT': { mode: 'percent', currency: 'PERCENT' },
             'CURRENCY_EUR': { mode: 'value', currency: 'EUR' },
@@ -410,6 +410,9 @@ export class LineChartStrategy extends BaseChartStrategy {
                         dash: [5, 5],
                         lineWidth: 1
                     },
+                    // NEW — AP-16b: Theme-Token für die Ergebnislinie (KDR 14.2 "Strategy übergibt Tokens";
+                    // FwVerticalLinePlugin hat #0071BF nur als defensiven Fallback). Option ist harmlos, wenn Plugin nicht gepusht wird.
+                    fwVerticalLine: { color: t.colors.blau },
                     tooltip: tooltipConfig
                 },
                 scales: { 

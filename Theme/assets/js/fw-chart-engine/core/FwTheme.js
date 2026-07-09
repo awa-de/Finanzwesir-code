@@ -30,14 +30,16 @@ export class FwTheme {
     // 1. FARB-TOKENS (Hardcoded Defaults — überschrieben durch init())
     this.colors = {
       petrol: '#218380',
-      petrol50: '#90C1BF',
-      petrol80: '#4D9C99',
-      petrol20: '#D3E6E6',
+      // CHANGED — AP-16: Ramp-Slots lesen jetzt die neuen Tailwind-Stufen (JS-Key-Namen unverändert,
+      // Wert = gemappte neue Stufe; byte-identisch zu tokens.css). Mapping: 50→-400, 80→-500, 20→-200.
+      petrol50: '#64CDC9', // war #90C1BF (Alt-petrol-50) → petrol-400
+      petrol80: '#49B3AF', // war #4D9C99 (Alt-petrol-80) → petrol-500
+      petrol20: '#B4EEEB', // war #D3E6E6 (Alt-petrol-20) → petrol-200
       blau: '#0071BF',
       purpur: '#8D0267',
-      purpur80: '#C57EB2',
+      purpur80: '#F172C1', // CHANGED — AP-16: war #C57EB2 (Alt-purpur-80) → purpur-400 (Data-Viz-Palette)
       gelb: '#DFC805',
-      gelb80: '#F9EF9E',
+      gelb80: '#FCF09C', // CHANGED — AP-16: war #F9EF9E (Alt-gelb-80) → gelb-200
       text: '#272727',
       textSec: '#4C4C4C',
       textMuted: '#666666',
@@ -121,14 +123,15 @@ export class FwTheme {
 
     // Brand Colors
     this.colors.petrol = read('--color-petrol', this.colors.petrol);
-    this.colors.petrol80 = read('--color-petrol-80', this.colors.petrol80);
-    this.colors.petrol50 = read('--color-petrol-50', this.colors.petrol50);
-    this.colors.petrol20 = read('--color-petrol-20', this.colors.petrol20);
+    // CHANGED — AP-16: gelesene CSS-Var auf neue Stufen-Namen umgestellt (Mapping wie Konstruktor)
+    this.colors.petrol80 = read('--color-petrol-500', this.colors.petrol80);
+    this.colors.petrol50 = read('--color-petrol-400', this.colors.petrol50);
+    this.colors.petrol20 = read('--color-petrol-200', this.colors.petrol20);
     this.colors.blau = read('--color-blau', this.colors.blau);
     this.colors.purpur = read('--color-purpur', this.colors.purpur);
-    this.colors.purpur80 = read('--color-purpur-80', this.colors.purpur80);
+    this.colors.purpur80 = read('--color-purpur-400', this.colors.purpur80); // CHANGED — AP-16
     this.colors.gelb = read('--color-gelb', this.colors.gelb);
-    this.colors.gelb80 = read('--color-gelb-80', this.colors.gelb80);
+    this.colors.gelb80 = read('--color-gelb-200', this.colors.gelb80); // CHANGED — AP-16
 
     // UI Colors
     this.colors.text = read('--color-text', this.colors.text);

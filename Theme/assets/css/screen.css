@@ -14,46 +14,12 @@
 
 
 /* ==========================================================================
-   1. TOKENS — Einzige Stelle mit Hex-Werten
+   1. TOKENS — ausgelagert nach tokens.css (Single Source of Truth)
+   Farb-, Font- und Schatten-Tokens leben seit AP-prokrast-16 in tokens.css.
+   Diese Datei konsumiert sie nur noch via var()/color-mix.
    ========================================================================== */
 
-:root {
-    /* Brand Colors */
-    --color-petrol: #218380;
-    --color-petrol-80: #4D9C99;
-    --color-petrol-50: #90C1BF;
-    --color-petrol-20: #D3E6E6;
-    --color-petrol-tint: rgba(33, 131, 128, 0.08);
-    --color-petrol-30: rgba(33, 131, 128, 0.3);
-
-    --color-blau: #0071BF;
-
-    --color-gelb: #DFC805;
-    --color-gelb-80: #F9EF9E;
-    --color-gelb-tint: rgba(223, 200, 5, 0.08);
-    --color-gelb-30: rgba(223, 200, 5, 0.3);
-
-    --color-purpur: #8D0267;
-    --color-purpur-80: #C57EB2;
-    --color-purpur-tint: rgba(141, 2, 103, 0.08);
-    --color-purpur-30: rgba(141, 2, 103, 0.3);
-
-    /* UI Colors */
-    --color-text: #272727;
-    --color-text-sec: #4C4C4C;
-    --color-text-muted: #666666;
-    --color-text-disabled: #888888;
-    --color-bg: #FFFFFF;
-    --color-bg-faint: #FAFAFA;
-    --color-border: #E7ECEF;
-    --color-grid: #E7ECEF;
-    --color-zero-line: #999999;
-    --color-loader-bg: #F3F3F3;
-
-    /* Shadows */
-    --shadow-soft: 0 4px 20px -2px rgba(39, 39, 39, 0.05);
-    --shadow-hover: 0 10px 25px -5px rgba(39, 39, 39, 0.1);
-}
+@import url("tokens.css"); /* NEW — AP-prokrast-16: zentrale Token-Quelle */
 
 
 /* ==========================================================================
@@ -239,7 +205,7 @@ body {
     display: block;
     text-align: center;
     font-size: 0.9rem;
-    color: #666;
+    color: var(--color-text-muted); /* CHANGED — AP-16: Caption-Farbe tokenisiert (war #666) */
     font-family: 'Source Sans Pro', sans-serif;
     margin-bottom: 2.5rem;
     font-style: normal;
@@ -427,12 +393,12 @@ body {
 /* --- Info/Warn Box Backgrounds --- */
 
 .box-petrol {
-    background-color: var(--color-petrol-tint);
-    border: 1px solid var(--color-petrol-20);
+    background-color: color-mix(in srgb, var(--color-petrol-600) 8%, transparent); /* CHANGED — AP-16: -tint entfällt, Alpha per color-mix (pixel-identisch zu rgba(33,131,128,0.08)) */
+    border: 1px solid var(--color-petrol-200); /* CHANGED — AP-16: -20 → -200 (bewusste Deko-Drift P13) */
 }
 
 .box-purpur {
-    background-color: var(--color-purpur-tint);
+    background-color: color-mix(in srgb, var(--color-purpur-900) 8%, transparent); /* CHANGED — AP-16: -tint entfällt, Alpha per color-mix (pixel-identisch zu rgba(141,2,103,0.08)) */
     border-left: 4px solid var(--color-purpur);
 }
 
