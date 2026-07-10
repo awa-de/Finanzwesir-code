@@ -250,7 +250,7 @@ Quelle: AP-15b-Auftrag Kettenposition + Rücklaufkapsel Empfehlung/Anschluss. **
 
 **Font-Bridge-Ausklammerung (verbindlich):** Die Font-Bridge in `FwChartTextPlugin.js` wird **NICHT** in AP-16 gefixt, sondern nur zusammen mit einer **Rubikon-Nachmessung** in einem eigenen Mini-AP — ein Font-Wechsel ändert die Textmetrik und damit die Markerpositionen (verknüpft mit DS-FOLLOWUP-07).
 
-**Bridge-Migration Chart-Engine (P15):** `FwTheme.init()` liest 20 benannte `--color-*`-Properties — alle Namen ändern sich. Zusätzlich zu schließende Bridge-Lücken in AP-16: `FwVerticalLinePlugin` (Farbe hartcodiert), `FwAnnotationPulsePlugin` (`#006273`, Ersatz = Petrol-Vollton, § 7.8). `FwChartTextPlugin` (Font) siehe Ausklammerung oben.
+**Bridge-Migration Chart-Engine (P15):** `FwTheme.init()` liest 19 `--color-*`-Properties in 20 Farb-Tokens (`linesDark` wird aus `textSec` abgeleitet, nicht aus CSS gelesen) — alle anderen Namen ändern sich. Zusätzlich zu schließende Bridge-Lücken in AP-16: `FwVerticalLinePlugin` (Farbe hartcodiert), `FwAnnotationPulsePlugin` (`#006273`, Ersatz = Petrol-Vollton, § 7.8). `FwChartTextPlugin` (Font) siehe Ausklammerung oben.
 
 ---
 

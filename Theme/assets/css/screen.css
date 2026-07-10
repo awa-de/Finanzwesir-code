@@ -3,7 +3,7 @@
  * Finanzwesir Ghost Theme — Consolidated Styles
  *
  * Sieben Abschnitte in bindender Reihenfolge (E4):
- *   1. TOKENS        — Einzige Stelle mit Hex-Werten
+ *   1. TOKENS        — @import aus tokens.css (Single Source of Truth)
  *   2. FONTS         — @font-face, lokal, DSGVO-konform
  *   3. BASE          — Body, HTML, globale Resets
  *   4. GHOST CONTENT — Alles unter .gh-content

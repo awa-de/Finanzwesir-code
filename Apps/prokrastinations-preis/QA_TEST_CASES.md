@@ -1,4 +1,4 @@
-Stand: 2026-06-18 | V1.4 — B1-AP-14a2: Gruppe M Progressive Domain LineChart und AP-14c-Marker ergänzt | Geändert von: Claude
+Stand: 2026-07-10 | V1.6 — AP-prokrast-17c: Übersicht mit Body synchronisiert (Gruppe P) | Geändert von: Claude
 
 # QA_TEST_CASES — prokrastinations-preis
 
@@ -31,6 +31,8 @@ Vollständige Test- und QA-Kriterien für die Stationen-Zeitreise.
 | K — Fehler- und Empty-States | JSON-/Datenfehler verständlich behandeln |
 | L — Regression gegen alte Logik | alte Screen-2-Ergebnisgrafik darf nicht zurückkehren |
 | M — Progressive Domain LineChart | xDisplayRange, yRangePolicy, keine Hacks, Marker-Y (AP-14b/AP-14c) |
+| P — Pulse | genau ein aktiver Pulse-Ring pro Stationswechsel, kein Puls auf Screen 3, kein Puls unter Reduced Motion (B1-AP-14c4) |
+| N — CI-Farbtoken / Theme-Auflösung | `tokens.css`-SSoT-Auflösung, Petrol-Primary, Null-Delta Error-States, keine Altlast (AP-prokrast-17) |
 
 ---
 
@@ -1167,6 +1169,9 @@ Chart beschreibt vollständige Entwicklung über 120 Monate bis zum letzten CSV-
 - Fehlende Quellenstatus im Produktivmodus (TC-A03)
 - Stations-JSON nicht ladbar (TC-K01)
 - Redaktions-Gate Mindestkrise (TC-K02)
+- Token-Auflösung + ΔE-Drift via `tools/ci-token-check.js` (TC-N01)
+- `tokens.css`-Bindungsreihenfolge im Dev-Harness (TC-N05)
+- Keine `--fw-color-*`-Altlast, Mechanik/Font/Spacing-Zählung (TC-N07)
 
 ### Eher manuell / visuell
 
@@ -1178,6 +1183,9 @@ Chart beschreibt vollständige Entwicklung über 120 Monate bis zum letzten CSV-
 - Tonalität / keine Scham (TC-J02, TC-F02)
 - Screen 4 wirkt nicht wie Verkaufsdruck (TC-F02)
 - Screen 1 teleportiert dramaturgisch (TC-C02)
+- Primary Petrol statt Blau, ΔE-Drift-Wirkung im UI (TC-N02, TC-N03)
+- Kein CSS-Leak in den Ghost-Kontext (TC-N06)
+- S/M/L-Farb-Viewport-Matrix (TC-N08)
 
 ---
 
@@ -1547,6 +1555,219 @@ Diese Stellen waren beim Anlegen von QA_TEST_CASES.md (AP-06) als offene Fundste
 **Fehlschlag, wenn:**
 - Ein Ring pulst trotz Reduced Motion.
 - Marker-Ringe verschwinden (Inhalt entfernt).
+
+---
+
+---
+
+## Gruppe N — CI-Farbtoken / Theme-Auflösung (AP-prokrast-17)
+
+**Hintergrund:** AP-prokrast-17 (✅ 2026-07-09, committed `6ea9704`) hat `app.css` von CI-Farbtoken `--fw-color-*` (nirgends definiert, reine Fallback-Hexe) auf Kontrakt-Tokens `--color-*` migriert (24 Referenzen / 8 Rollen; SSoT `Theme/assets/css/tokens.css`, Kontrakt: `docs/steering/design/CI-POOL-ROLLENKONTRAKT.md`). `app.test.html` bindet `tokens.css` zusätzlich als `<link>` (Dev-Harness, Fork 1 Variante A) — Ghost-/Produktionsbindung bleibt offenes To-do **T1**. Bewusst NICHT migriert: `--fw-font-base` (Fork 5, Font-/Rubikon-Kopplung DS-FOLLOWUP-07 + `AP-prokrast-17-FOLLOWUP-FONT`), `--fw-space-*` (Fork 2, T1), alle Mechanik-`--fw-*`-Tokens (Tabu, App-Mechanik).
+
+### TC-N01 — Tokens lösen zur Laufzeit aus `tokens.css` auf
+
+**Typ:** Automatisierbar / Manuell (DevTools)
+**Priorität:** Muss
+**Voraussetzung:** `app.test.html` im VSCode-Live-Server geöffnet (lädt `tokens.css` VOR `app.css`).
+
+**Schritte:**
+1. `app.test.html` im Live-Server öffnen.
+2. DevTools-Konsole öffnen, Inhalt von `tools/ci-token-check.js` einfügen (Auto-Lauf: `fwTokenCheck()`).
+3. Ausgabetabelle (5 Rollen: Fließtext, Gedämpft, Surface, Primary, Hintergrund) prüfen.
+
+**Erwartetes Ergebnis:**
+- Für alle 5 geprüften Rollen zeigt die Spalte `Match` ✅ (aufgelöster Wert == Kontrakt-FINAL-Sollwert aus `tokens.css`, nicht die Fallback-Hexe).
+- Konsole meldet vorab „tokens.css geladen ... ✅ ja" (`--color-primary` in `:root` vorhanden).
+
+**Fehlschlag, wenn:**
+- Mindestens ein `Match` zeigt ❌ (aufgelöster Wert kommt aus dem hartcodierten `var()`-Fallback statt aus `tokens.css`).
+- „tokens.css geladen" meldet ❌ NEIN.
+
+**Status:** bestätigt (Albert, 2026-07-09) — Konsolen-ΔE-Gegenprobe im Live-Server, alle 5 Tokens `Match ✅` (s. AP-17-Ergebnisprotokoll §8).
+
+---
+
+### TC-N02 — Primary ist Petrol, nicht Blau (Fork 4)
+
+**Typ:** Visuell
+**Priorität:** Muss
+
+**Schritte:**
+1. Screen 1 Slider-Accent-Farbe prüfen.
+2. Alle Buttons (Rand + Fläche) über alle Screens prüfen.
+3. `--next`-Button auf Screen 2 prüfen.
+4. CTA auf Screen 4 prüfen.
+
+**Erwartetes Ergebnis:**
+- Alle genannten Elemente zeigen Petrol `#218380` (Kontrakt-FINAL, §1.1-Anomalie-Korrektur), nicht mehr Blau `#0071bf`.
+
+**Fehlschlag, wenn:**
+- Irgendeines der genannten Elemente noch Blau `#0071bf` zeigt.
+
+**Status:** bestätigt (Albert, 2026-07-09) — „Buttons/Slider Petrol und lesbar" (AP-17-Ergebnisprotokoll §8).
+
+---
+
+### TC-N03 — Erwartete Drifts bleiben in dokumentierten Grenzen (muted/text/surface)
+
+**Typ:** Visuell / Automatisierbar
+**Priorität:** Soll
+**Voraussetzung:** TC-N01 bestanden.
+
+**Schritte:**
+1. Sublines/Labels/Fußnoten (`--color-text-muted`) prüfen: Soll `#666666` (vorher `#555555`).
+2. Fließtext (`--color-text`) prüfen: Soll `#272727` (vorher `#1a1a1a`).
+3. KPI-Card-Fläche (`--color-surface`) prüfen: Soll `#fafafa` (vorher `#f5f5f5`).
+4. `ci-token-check.js`-ΔE76-Werte gegen Referenz aus AP-17 §8 vergleichen: Gedämpft 7,05 · Fließtext 6,37 · Surface 1,73.
+
+**Erwartetes Ergebnis:**
+- Alle drei Werte lösen auf die genannten Neu-Werte auf.
+- Visuell nur eine minimale, bei genauem Hinsehen erkennbare Verschiebung (ΔE76 im dokumentierten Bereich), keine grobe Fehlfarbe.
+
+**Fehlschlag, wenn:**
+- Ein Wert löst weder auf Alt- noch auf Neu-Wert auf (Tippfehler/falsches Mapping).
+- Visuell eine deutlich andere Farbe als beschrieben erscheint.
+
+**Status:** bestätigt (Albert, 2026-07-09) — „Fließtext/Surface keine wahrnehmbare Änderung" + ΔE-Werte (AP-17-Ergebnisprotokoll §8).
+
+---
+
+### TC-N04 — Error-States Null-Delta, keine rote Codierung
+
+**Typ:** Regression
+**Priorität:** Muss
+**Voraussetzung:** Ein Fehlerzustand ist auslösbar (z. B. TC-K01/TC-A02).
+**Querverweis:** TC-J01 (keine rote Crash-Codierung), TC-D05.
+
+**Schritte:**
+1. Fehlerzustand auslösen.
+2. `--color-error-text` (`#b71c1c`), `--color-error-border` (`#c62828`), `--color-error-bg` (`#fff8f8`) prüfen.
+3. Prüfen, dass diese Fehlerfarben nicht mit der in TC-J01 verbotenen roten Chart-Crash-Codierung vermischt werden.
+
+**Erwartetes Ergebnis:**
+- Alle drei Error-Token lösen unverändert (Null-Delta) auf dieselben Hex-Werte wie vor der Migration auf.
+- Die Farbmigration führt zu keiner neuen oder veränderten roten Codierung im Chart (TC-J01 bleibt unberührt gültig).
+
+**Fehlschlag, wenn:**
+- Ein Error-Token-Wert weicht vom Alt-Wert ab.
+- Die Migration führt eine rote Chart-Codierung ein oder verstärkt sie.
+
+**Status:** teilweise — Null-Delta code-seitig verifiziert (AP-prokrast-17b, statischer Abgleich Alt-/Neu-Fallback in `app.css`); ein Live-Fehlerzustand wurde in der AP-17-Abnahme nicht explizit ausgelöst/geprüft — offen.
+
+---
+
+### TC-N05 — `tokens.css` löst in der App-Card-Kaskade auf; App-eigene Produktions-Integration bleibt offenes To-do T1
+
+**Typ:** Automatisierbar / Manuell
+**Priorität:** Muss
+**Hintergrund:** `tokens.css` liegt bereits doppelt in der Kaskade: direkt als `<link>` in `app.test.html` (Dev-Harness, Fork 1 Variante A) und transitiv über `screen.css` (`@import`, AP-16-Design — `screen.css` ist das produktive Ghost-Stylesheet). Das ist kein Fehler, sondern die von AP-16 beabsichtigte Bindung. Offen bleibt ausschließlich die **eigene** Produktions-/Ghost-Integration der App selbst (`.hbs`-Auslieferung der App-Card, Tailwind-Build-Kette) — nicht die Token-Bindung.
+
+**Schritte:**
+1. `app.test.html`-Quelltext prüfen: Reihenfolge der `<link>`-Tags.
+2. Prüfen, dass `--color-*` innerhalb `.fw-app` im Dev-Harness auf die `tokens.css`-Werte auflöst (nicht auf den `var()`-Fallback).
+3. Feststellen (nicht als Fehler werten), dass `screen.css` `tokens.css` per `@import` einbindet — das ist die bestehende Ghost-Kaskade, kein separater Prod-Pfad der App.
+
+**Erwartetes Ergebnis:**
+- `<link rel="stylesheet" href="../../Theme/assets/css/tokens.css">` steht in `app.test.html` vor `<link ... href="./app.css">`.
+- `--color-*`-Werte innerhalb `.fw-app` lösen im Dev-Harness auf die `tokens.css`-Werte auf (TC-N01).
+- Die App selbst hat noch **keine eigene** Ghost-/Produktions-Einbindung (kein `.hbs`, kein Tailwind-Build für die App-Card) — das bleibt offenes To-do **T1**.
+
+**Fehlschlag, wenn:**
+- `tokens.css` fehlt in `app.test.html` oder steht nach `app.css`.
+- `--color-*` innerhalb `.fw-app` löst im Dev-Harness auf den Fallback statt auf `tokens.css` auf.
+- Die App bereits ohne Freigabe/AP produktiv in Ghost eingebunden wäre (T1 wäre dann fälschlich schon erledigt).
+
+**Status:** verifiziert (AP-prokrast-19, Repo-Grep + Korrektur nach AP-18-Review) — `tokens.css` bindet doppelt: direkt in `app.test.html` (Dev-Harness) und transitiv über `screen.css` (`@import`, produktive Ghost-Kaskade, AP-16-Design). Kein `.hbs` im Repo vorhanden — die App-eigene Ghost-/Produktions-Integration ist real ungeprüft und bleibt T1, unabhängig von der Token-Bindung.
+
+---
+
+### TC-N06 — Kein CSS-Leak in den Ghost-Kontext
+
+**Typ:** Visuell
+**Priorität:** Muss
+
+**Schritte:**
+1. `app.test.html` öffnen (Szenario-Absatz „Artikeltext neben `.fw-app`", vgl. Szenario G).
+2. Artikeltext/Überschrift/Hintergrund außerhalb `.fw-app` prüfen.
+
+**Erwartetes Ergebnis:**
+- Schriftgröße, Farbe und Abstände von Text außerhalb `.fw-app` sind unverändert (wie auf einer normalen Ghost-Seite).
+- `tokens.css` und `app.css` färben nur innerhalb `.fw-app`.
+
+**Fehlschlag, wenn:**
+- Text/Überschrift/Hintergrund außerhalb `.fw-app` sichtbar durch `tokens.css` oder die Migration verändert ist.
+
+**Status:** bestätigt (Albert, 2026-07-09) — „CSS-Leak-Check (Szenario G) unauffällig" (AP-17-Ergebnisprotokoll §8).
+
+---
+
+### TC-N07 — Keine `--fw-color-*`-Altlast, Mechanik/Font/Spacing erhalten
+
+**Typ:** Regression / Automatisierbar / Code-Review
+**Priorität:** Muss
+
+**Schritte:**
+1. `app.css` auf `var(--fw-color-` durchsuchen.
+2. `var(--fw-font-base` und `var(--fw-space-` zählen.
+3. Mechanik-Tokens (`flight-duration`, `screen3-reveal`, `flight-delta-x/-y`, `rubikon-text-top/left`) auf Vorhandensein prüfen.
+
+**Erwartetes Ergebnis:**
+- 0 Treffer für `var(--fw-color-`.
+- Genau 24 Treffer für `var(--color-` (8 Rollen: bg×3, error-bg×1, error-border×1, error-text×1, primary×5, surface×1, text×4, text-muted×8).
+- `var(--fw-font-base` genau 1× vorhanden (bewusst nicht migriert, Fork 5).
+- `var(--fw-space-` genau 19× vorhanden (bewusst nicht migriert, Fork 2).
+- Alle Mechanik-`--fw-*`-Tokens unverändert vorhanden.
+
+**Fehlschlag, wenn:**
+- Ein `var(--fw-color-`-Treffer verblieben ist.
+- Die Zählung für `--color-`, `--fw-font-base` oder `--fw-space-` von den obigen Werten abweicht.
+- Eine Mechanik-Variable fehlt oder wurde umbenannt.
+
+**Status:** verifiziert (AP-prokrast-17b, Grep gegen die reale Datei, 2026-07-10) — alle Zahlen bestätigt: 0 / 24 / 1 / 19.
+
+---
+
+### TC-N08 — S/M/L-Farb-Viewport-Matrix
+
+**Typ:** Visuell
+**Priorität:** Soll
+**Hintergrund:** AP-17 §8/§9 markiert diesen Punkt ausdrücklich als offen — die Farbabnahme erfolgte visuell, aber nicht systematisch pro Breakpoint protokolliert.
+
+**Schritte:**
+1. `app.test.html` bei 375px, 768px, 1280px öffnen.
+2. Bei jeder Breite: Primary/Petrol (Buttons, Slider, CTA), muted, text, surface, Error-States gegen TC-N02–N04 prüfen.
+3. Ergebnis je Breite dokumentieren.
+
+**Erwartetes Ergebnis:**
+- Alle Farbrollen zeigen bei allen drei Breiten dasselbe Ergebnis wie TC-N01–N04.
+- Keine breakpointspezifische Farbregression.
+
+**Fehlschlag, wenn:**
+- Eine Farbrolle weicht bei einem Breakpoint vom Ergebnis der anderen Breakpoints ab.
+
+**Status:** offen — noch nicht durchgeführt (AP-17-Ergebnisprotokoll §8/§9 Restliste).
+
+---
+
+### TC-N09 — Font bewusst nicht migriert, Rubikon-Position stabil
+
+**Typ:** Regression
+**Priorität:** Muss
+**Querverweis:** DS-FOLLOWUP-07, `AP-prokrast-17-FOLLOWUP-FONT` (BACKLOG.md).
+
+**Schritte:**
+1. `--fw-font-base` in `app.css` prüfen (soll unverändert `var(--fw-font-base, sans-serif)`).
+2. Screen-4-Rubikon-Text-Position (✅/❓-Marker, DOM-Haupttext) gegen den Stand vor AP-17 vergleichen (s. `tools/rubikon-symbol-markers-diagnose.js`, TC-F05).
+
+**Erwartetes Ergebnis:**
+- `--fw-font-base` ist unverändert, Fallback bleibt `sans-serif`.
+- Die in AP-07a/07c/07d gemessene Rubikon-Position ist unverändert (kein Font-Wechsel, keine geänderte Zeichenbreite).
+
+**Fehlschlag, wenn:**
+- `--fw-font-base` wurde migriert oder der Fallback geändert (das wäre bereits die eigenständige Font-Migration, s. `AP-prokrast-17-FOLLOWUP-FONT`).
+- Die Rubikon-Position hat sich gegenüber dem AP-07-Stand verschoben, obwohl kein Font-Wechsel stattfand.
+
+**Status:** verifiziert (AP-prokrast-17b, Code-Check) — `--fw-font-base` unverändert (1× vorhanden, Fallback `sans-serif`); eine erneute empirische Rubikon-Positionsmessung nach AP-17 wurde nicht durchgeführt (nicht nötig, da kein Font-Wechsel stattfand) — offen im Sinne einer erneuten Messung, nicht im Sinne eines Verdachts.
 
 ---
 

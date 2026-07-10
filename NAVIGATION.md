@@ -133,7 +133,7 @@ Nach Abschluss: THEME-ASSEMBLY-CHECKLIST.md abhaken → `/abschluss-ritual`.
 Regeln (nie brechen):
 - Token-Wahrheit: `Theme/assets/css/tokens.css` (Farben/Fonts/Schatten). `screen.css` importiert sie via `@import` und konsumiert nur.
 - Keine `fw-*` Klassen in `screen.css` definieren oder überschreiben
-- Hex-Werte nur in `tokens.css` (Token-Definitionen)
+- CI-Marken-Hexe ausschließlich in `tokens.css`; in `screen.css` verbleiben dokumentierte Neutral-Beinahe-Dubletten (`#f9fafb`, `#f3f4f6`) bis zur Tokenisierung in **T1**
 - Keine externen Font-Quellen
 - Chart-Engine liest dieselben Tokens: `FwTheme.init()` bridged `tokens.css`, das eine init()'te Theme wird per Composition Root an alle 3 Strategien durchgereicht (AP-prokrast-16c)
 
