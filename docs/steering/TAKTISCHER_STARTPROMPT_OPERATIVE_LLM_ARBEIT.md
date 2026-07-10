@@ -1,4 +1,4 @@
-# Taktischer Startprompt V3.0 — operative LLM-Führung mit Anamnese, Datei-Wahrheit, Modell-Arbeitsteilung und Drift-Schutz
+# Taktischer Startprompt V3.1 — operative LLM-Führung mit Anamnese, Datei-Wahrheit, Modell-Arbeitsteilung und Drift-Schutz
 
 ## Zweck dieser Datei
 
@@ -10,6 +10,8 @@ Dieser Prompt sagt: *Wie arbeiten wir operativ, damit der Faden fokussiert, toke
 Er ist fachthemen-unabhängig und gilt für Konzeptarbeit, Code-Arbeit, UX-Arbeit, Datenarbeit, QA, Debugging, Prompt-Erstellung, Rollouts und Übergaben.
 
 Diese V3.0 ersetzt V2.0 vollständig. Sie ist keine Anhäufung zusätzlicher Abschnitte, sondern eine geschärfte Fassung: Erkenntnisse aus zwei realen Rollout-Iterationen (Token-Disziplin, Datei-Wahrheit-Fehler) sind direkt in die bestehenden Regeln eingearbeitet, nicht angehängt.
+
+**V3.1 (2026-07-10):** Die Output-Regeln für Prompt-Erstellung wurden um drei im Betrieb (CI-Kette 15a–19) bewährte Punkte ergänzt — selbsttragende Prompts, Ablageort der Startprompt-Dateien, Selbst-Identifikation bei Modellwechsel.
 
 ---
 
@@ -267,9 +269,11 @@ Das neue LLM soll nicht bei null anfangen und nicht frei improvisieren.
 Wenn ein Prompt für ein ausführendes LLM verlangt wird:
 
 1. Zuerst knapp sagen, was der AP enthalten wird; auf OK warten, außer ausdrücklich sofort verlangt.
-2. Dann downloadbare Markdown-Datei mit sprechendem, AP-bezogenem Dateinamen erzeugen.
+2. Dann downloadbare Markdown-Datei mit sprechendem, AP-bezogenem Dateinamen erzeugen — Ablageort: `Archiv/local/muss noch eingeordnet werden/`.
 3. Der Prompt muss enthalten: Aufgabenrahmen mit früher Negativabgrenzung, Kettenposition (Vorgänger/nächster AP je Status), Scope dreistufig, Gates, Stop-Regeln, Pflicht zum Wiederlesen nach Write, Ergebnisprotokoll-Struktur, „Weiter nur nach Nutzer-OK".
 4. Bei Synchronisierungen: Positiv- und Negativkriterien aufnehmen. Bei Toolarbeit: vorhandenes Tool zuerst prüfen. Bei Batcharbeit: Dry-run vor Write.
+5. **Selbsttragend:** Der Prompt baut den nötigen Arbeitsmodus (Anamnese zuerst, Datei-Wahrheit, Wiederlesen nach Write, Werkzeugwahl, Stop-/QA-Regeln, Statussprache, „Weiter nur nach Nutzer-OK") **selbst ein**. Kein Verweis auf diesen taktischen Startprompt oder andere externe Dokumente als Voraussetzung — das ausführende LLM bekommt ausschließlich diesen einen Prompt und muss allein damit arbeiten können.
+6. **Bei Modellwechsel:** Als Schritt 0 des Prompts eine **Selbst-Identifikation** verlangen („Ich bin …") samt Stopp, falls das falsche Modell läuft — so ist der geforderte Wechsel (z. B. auf Opus/Fable) verifiziert, bevor gearbeitet wird.
 
 ---
 

@@ -142,13 +142,14 @@ Hier ist die vollständige Inventurliste der Architektur:
 * **Status:** Vollständig implementiert (2026-02-19). Alle drei Strategien liefern tabellarische Daten: Line/Bar History (letzte 20 Zeilen + Summary), Bar Ranking (alle Perioden), Pie (alle Segmente aufgelöst, kein „Weitere…"-Aggregat). Formatierung via `FwFormatUtils.formatSmart()` (de-DE).
 * **Begründung:** Barrierefreiheit ist keine Option, sondern Grundanforderung. Nielsen Heuristik 7: "Flexibility and efficiency of use."
 
-### KDR 14: CSS-Variables Bridge (Design-Hoheit beim Theme)
+### KDR 14: CSS-Variables Bridge (Design-Hoheit beim Theme) — Farbe implementiert, Font-Parität als Ziel (Code offen)
 * **Kontext:** Wer bestimmt die Farben — das JavaScript oder das CSS?
 * **Entscheidung:** Das Ghost-Theme (CSS) hat die Design-Hoheit. Die Engine liest Farben zur Laufzeit.
     1. **Architektur:** `FwTheme.init()` liest CSS-Custom-Properties (`--color-petrol`, `--color-text`, etc.) via `getComputedStyle()` aus `tokens.css` aus. `ChartEngine` erzeugt den `FwRenderer` als Composition Root und reicht die init()'te Instanz per Constructor Injection an alle drei Strategien durch (Graceful Default: `constructor(theme = new FwTheme())` bleibt eigenständig testbar). Hardcodierte Hex-Werte im Constructor dienen als Fallback für Test-HTMLs ohne geladene `tokens.css`.
     2. **Status:** Implementiert (2026-02-25, CSS-3) und durchgeleitet (2026-07-09, AP-16/16c): alle drei Strategien erhalten dieselbe `FwTheme`-Instanz, Null-Delta zwischen `tokens.css` und Fallback-Konstanten belegt (Null-Delta-QA, AP-16c). Verbleibende Hex-Werte in Utility-Dateien sind defensive Fallbacks (Injection-Pattern: Strategy übergibt Tokens, Utility hat Fallback).
     3. **Init-Reihenfolge (bindend):** `new FwTheme()` → `theme.init()` → `_injectStyles()`. Dokumentiert in `FwRenderer.constructor()` und `ChartEngine.js`.
     4. **Konsequenz:** Farbänderungen erfordern nur eine Änderung in `tokens.css` (Single Source of Truth seit AP-16; `screen.css` bindet sie per `@import` ein). Kein JavaScript-Eingriff nötig.
+    5. **Font-Parität (Ziel, festgelegt 2026-07-10):** Fonts sollen exakt denselben Mechanismus nutzen wie Farben — `FwTheme.init()` liest zusätzlich `--font-display`/`--font-body` aus `tokens.css` via `getComputedStyle()`, dieselbe Composition-Root-/Constructor-Injection-Kette, derselbe Constructor-Hardcode als Fallback, dieselbe Init-Reihenfolge. **Status: Spec-Parität festgelegt 2026-07-10 — Code-Umsetzung offen.** `FwTheme.init()` liest heute nachweislich nur Farben (`this.fonts` bleibt fest im Constructor definiert, s. `AP-prokrast-17-FONT-ANAMNESE_font-einbindung-breite-inventur_Ergebnis.md`). Umsetzung folgt in einem eigenen Font-Code-Migrations-AP, gekoppelt an eine Rubikon-Nachmessung S/M/L (Font-Wechsel ändert Textmetrik — siehe `FwChartTextPlugin`-Ausklammerung, `CI-POOL-ROLLENKONTRAKT.md` § 9).
 * **Begründung:** 100% Trennung von Logik und Design. Das CMS-Theme steuert die Corporate Identity, die Engine passt sich an. Kein Designer muss JavaScript anfassen.
 
 ---

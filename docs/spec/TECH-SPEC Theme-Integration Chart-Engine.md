@@ -173,20 +173,18 @@ Charts brauchen eine Mindestbreite von ca. **300px**, um sinnvoll angezeigt zu w
 
 ### 5.4 Fonts
 
-Die Engine nutzt zwei Schriftarten (hardcoded in `FwTheme.js`):
+Die Engine nutzt zwei Schriftarten:
 
 | Zweck | Font | Gewichte |
 |:------|:-----|:---------|
 | Fließtext, Labels, Tooltips | Source Sans Pro | 400, 600, 700 |
 | Überschriften (optional) | Archivo Black | 400 |
 
-**Das Theme muss diese Fonts laden** (via Google Fonts oder lokal in `assets/fonts/`):
+**Ist-Zustand (umgesetzt seit AP-16):** Beide Schriftarten sind lokal als WOFF2 hinterlegt (`assets/fonts/*.woff2`) und werden ausschließlich über `@font-face` in `screen.css` Abschnitt 2 geladen — DSGVO-konform, kein Drittanbieter-Zugriff. Ein Theme-Builder muss hierfür nichts mehr tun; die frühere Empfehlung, Fonts optional über Google Fonts nachzuladen, ist überholt und entfällt.
 
-```html
-<link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;600;700&family=Archivo+Black&display=swap" rel="stylesheet">
-```
+Die Font-**Namen** sind zusätzlich als CSS-Custom-Properties in `tokens.css` hinterlegt (`--font-display`, `--font-body`, Single Source of Truth analog zu `--color-*`).
 
-**DSGVO-Hinweis:** Für die lokale Einbindung die WOFF2-Dateien herunterladen und in `assets/fonts/` ablegen, dann via `@font-face` in `screen.css` einbinden.
+**Ziel-Mechanismus (Font-Parität zu Farben, festgelegt 2026-07-10, Code-Umsetzung offen):** Analog zur Farb-Bridge (KDR 14, `docs/spec/ARCHITECTURE STRATEGY PAPER VX.md`) soll `FwTheme.init()` künftig auch `--font-display`/`--font-body` per `getComputedStyle()` aus `tokens.css` lesen, statt sie dauerhaft im Constructor hartzucodieren. **Heutiger Ist-Stand:** `FwTheme.init()` liest ausschließlich Farben; `this.fonts` bleibt fest im Constructor definiert. Migration folgt in einem eigenen Font-Code-AP, gekoppelt an eine Rubikon-Nachmessung S/M/L (Font-Wechsel ändert Textmetrik).
 
 ---
 
