@@ -257,7 +257,7 @@ export class FwSmartXAxis {
                 grid: { display: false, drawBorder: true },
                 ticks: {
                     align: 'center', autoSkip: false,
-                    font: (ctx) => FwLayoutRules.getResponsiveFont(ctx),
+                    font: (ctx) => FwLayoutRules.getResponsiveFont(ctx, fontConfig.family), // CHANGED — AP-prokrast-17-FONT-CODE-A: Token-Font durchgereicht
                     color: fontConfig.color
                 },
                 adapters: { date: { locale: 'de-DE' } }
@@ -380,7 +380,7 @@ export class FwSmartXAxis {
             grid: { display: false, drawBorder: true },
             ticks: {
                 align: 'center', autoSkip: false,
-                font: (ctx) => FwLayoutRules.getResponsiveFont(ctx),
+                font: (ctx) => FwLayoutRules.getResponsiveFont(ctx, fontConfig.family), // CHANGED — AP-prokrast-17-FONT-CODE-A: Token-Font durchgereicht
                 color: fontConfig.color
             },
             adapters: { date: { locale: 'de-DE' } }

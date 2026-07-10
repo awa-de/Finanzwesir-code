@@ -145,6 +145,12 @@ export class FwTheme {
     this.colors.zeroLine = read('--color-zero-line', this.colors.zeroLine);
     this.colors.loaderBg = read('--color-loader-bg', this.colors.loaderBg);
 
+    // NEW — AP-prokrast-17-FONT-CODE-A: Fonts aus tokens.css lesen (KDR 14 Punkt 5, Farb-Parität).
+    // Constructor-Hardcode (this.fonts, s.o.) bleibt Fallback für Test-HTMLs ohne tokens.css.
+    // heading hat in Pfad A (Canvas) noch keinen Consumer — bewusste Parität für Write-AP B/Headlines.
+    this.fonts.body = read('--font-body', this.fonts.body);
+    this.fonts.heading = read('--font-display', this.fonts.heading);
+
     // linesDark folgt textSec (identischer Wert, semantisch getrennter Name)
     this.colors.linesDark = this.colors.textSec;
 

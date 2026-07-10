@@ -109,12 +109,12 @@ export class FwSmartTooltips {
             backgroundColor: styleConfig.tooltipBg || '#FFFFFF',
             titleColor: styleConfig.titleColor || '#272727',
             titleFont: (ctx) => {
-                const base = FwLayoutRules.getResponsiveFont(ctx);
+                const base = FwLayoutRules.getResponsiveFont(ctx, styleConfig.titleFont && styleConfig.titleFont.family); // CHANGED — AP-prokrast-17-FONT-CODE-A: toter titleFont-Param jetzt lebendig (Token-Font)
                 return { ...base, weight: 'bold' };
             },
 
             bodyColor: styleConfig.bodyColor || '#4C4C4C',
-            bodyFont: (ctx) => FwLayoutRules.getResponsiveFont(ctx),
+            bodyFont: (ctx) => FwLayoutRules.getResponsiveFont(ctx, styleConfig.bodyFont && styleConfig.bodyFont.family), // CHANGED — AP-prokrast-17-FONT-CODE-A: toter bodyFont-Param jetzt lebendig (Token-Font)
 
             borderColor: styleConfig.borderColor || '#E7ECEF',
             borderWidth: 1,

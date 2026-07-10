@@ -236,7 +236,7 @@ export class BarChartStrategy extends BaseChartStrategy {
         const ciFont = t.fonts.body;
 
         const xAxisConfig = fwContext.axisType === 'time'
-            ? FwSmartScales.getTimeAxis(meta.minTime, meta.maxTime, { color: t.colors.textMuted }, {
+            ? FwSmartScales.getTimeAxis(meta.minTime, meta.maxTime, { color: t.colors.textMuted, family: ciFont }, { // CHANGED — AP-prokrast-17-FONT-CODE-A: family ergänzt (Token-Font für Bar-Zeitachse A1)
                 plugins: { fwContext },
                 sourceTicks: meta.sourceTicks,
                 useNativeTime: true
@@ -269,7 +269,7 @@ export class BarChartStrategy extends BaseChartStrategy {
                     x: xAxisConfig,
                     y: FwSmartScales.getSmartYAxis(fwContext, {
                         color: t.colors.textMuted,
-                        font: { family: ciFont },
+                        family: ciFont, // CHANGED — AP-prokrast-17-FONT-CODE-A: flach (war font:{family}, tote nested Form) für FwSmartYAxis-Consumer
                         gridColor: t.colors.grid,
                         zeroLineColor: t.colors.zeroLine
                     })

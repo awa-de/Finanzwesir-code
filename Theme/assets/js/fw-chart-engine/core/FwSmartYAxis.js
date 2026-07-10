@@ -114,7 +114,7 @@ export class FwSmartYAxis {
 
             ticks: {
                 maxTicksLimit: zone.maxTicks,
-                font: (context) => FwLayoutRules.getResponsiveFont(context),
+                font: (context) => FwLayoutRules.getResponsiveFont(context, fontConfig.family), // CHANGED — AP-prokrast-17-FONT-CODE-A: toter family-Param jetzt lebendig (Token-Font)
                 color: fontConfig.color,
                 padding: 6,
                 callback: (value, index, values) => {

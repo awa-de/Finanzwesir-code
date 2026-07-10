@@ -14,9 +14,10 @@ import { FwDateUtils } from './FwDateUtils.js';
 import { FwFormatUtils } from './FwFormatUtils.js';
 import { FwTheme } from './FwTheme.js';
 
-// KDR-14: Font-Token aus FwTheme. init() wird hier NICHT aufgerufen —
-// FwLayoutRules nutzt nur fonts.body (statisch im Constructor definiert).
-// Falls init() künftig Fonts überschreibt, muss diese Stelle angepasst werden.
+// CHANGED — AP-prokrast-17-FONT-CODE-A: Fonts kommen primär als Parameter aus der injizierten,
+// init()'ten FwTheme (via fontConfig/styleConfig der Strategien — dieselbe Kette wie die Farben).
+// Diese modul-lokale _theme-Instanz wird NICHT init()'t und dient nur noch als Fallback, wenn
+// kein family übergeben wird (z.B. Standalone/Test ohne Composition Root).
 const _theme = new FwTheme();
 
 export class FwLayoutRules {
@@ -27,11 +28,11 @@ export class FwLayoutRules {
         return chart?.width || 1000; 
     }
 
-    static getResponsiveFont(ctx) {
+    static getResponsiveFont(ctx, family) { // CHANGED — AP-prokrast-17-FONT-CODE-A: family aus injizierter init()'ter Theme durchgereicht
         const width = this._getCSSWidth(ctx);
-        const family = _theme.fonts.body;
-        if (width < 450) return { size: 11, family };
-        return { size: 12, family };
+        const resolvedFamily = family || _theme.fonts.body; // CHANGED — _theme.fonts.body nur noch Fallback
+        if (width < 450) return { size: 11, family: resolvedFamily };
+        return { size: 12, family: resolvedFamily };
     }
 
     /**
