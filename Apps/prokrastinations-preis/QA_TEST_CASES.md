@@ -1708,22 +1708,22 @@ Diese Stellen waren beim Anlegen von QA_TEST_CASES.md (AP-06) als offene Fundste
 
 **Schritte:**
 1. `app.css` auf `var(--fw-color-` durchsuchen.
-2. `var(--fw-font-base` und `var(--fw-space-` zählen.
+2. `var(--fw-font-base`, `var(--font-body` und `var(--fw-space-` zählen.
 3. Mechanik-Tokens (`flight-duration`, `screen3-reveal`, `flight-delta-x/-y`, `rubikon-text-top/left`) auf Vorhandensein prüfen.
 
 **Erwartetes Ergebnis:**
 - 0 Treffer für `var(--fw-color-`.
 - Genau 24 Treffer für `var(--color-` (8 Rollen: bg×3, error-bg×1, error-border×1, error-text×1, primary×5, surface×1, text×4, text-muted×8).
-- `var(--fw-font-base` genau 1× vorhanden (bewusst nicht migriert, Fork 5).
+- `var(--fw-font-base` genau 0× (zu `--font-body` migriert, AP-prokrast-17-FONT-CODE-B); `var(--font-body` genau 1× vorhanden.
 - `var(--fw-space-` genau 19× vorhanden (bewusst nicht migriert, Fork 2).
 - Alle Mechanik-`--fw-*`-Tokens unverändert vorhanden.
 
 **Fehlschlag, wenn:**
 - Ein `var(--fw-color-`-Treffer verblieben ist.
-- Die Zählung für `--color-`, `--fw-font-base` oder `--fw-space-` von den obigen Werten abweicht.
+- Die Zählung für `--color-`, `var(--fw-font-base`, `var(--font-body` oder `--fw-space-` von den obigen Werten abweicht.
 - Eine Mechanik-Variable fehlt oder wurde umbenannt.
 
-**Status:** verifiziert (AP-prokrast-17b, Grep gegen die reale Datei, 2026-07-10) — alle Zahlen bestätigt: 0 / 24 / 1 / 19.
+**Status:** aktualisiert für AP-prokrast-17-FONT-CODE-B (Font-Migration `--fw-font-base`→`--font-body`). Neuer Soll verifiziert per Zählung gegen die reale Datei (2026-07-11): `--fw-color-` 0 / `--color-` 24 / `var(--fw-font-base` 0 / `var(--font-body` 1 / `--fw-space-` 19.
 
 ---
 
@@ -1749,25 +1749,26 @@ Diese Stellen waren beim Anlegen von QA_TEST_CASES.md (AP-06) als offene Fundste
 
 ---
 
-### TC-N09 — Font bewusst nicht migriert, Rubikon-Position stabil
+### TC-N09 — Font zu `--font-body` migriert, Rubikon-Nachmessung fällig
 
 **Typ:** Regression
 **Priorität:** Muss
 **Querverweis:** DS-FOLLOWUP-07, `AP-prokrast-17-FOLLOWUP-FONT` (BACKLOG.md).
 
 **Schritte:**
-1. `--fw-font-base` in `app.css` prüfen (soll unverändert `var(--fw-font-base, sans-serif)`).
-2. Screen-4-Rubikon-Text-Position (✅/❓-Marker, DOM-Haupttext) gegen den Stand vor AP-17 vergleichen (s. `tools/rubikon-symbol-markers-diagnose.js`, TC-F05).
+1. `app.css` prüfen: `.fw-app`-Fließtext zieht `var(--font-body, sans-serif)`; keine `var(--fw-font-base`-Referenz mehr vorhanden (die Migrations-Notiz im Kopf-Kommentar zählt nicht).
+2. Screen-4-Rubikon-Text-Position (✅/❓-Marker, DOM-Haupttext) nach dem Font-Wechsel neu messen (s. `tools/rubikon-symbol-markers-diagnose.js`, TC-F05) und gegen den AP-07-Stand vergleichen.
 
 **Erwartetes Ergebnis:**
-- `--fw-font-base` ist unverändert, Fallback bleibt `sans-serif`.
-- Die in AP-07a/07c/07d gemessene Rubikon-Position ist unverändert (kein Font-Wechsel, keine geänderte Zeichenbreite).
+- `.fw-app` nutzt `var(--font-body, sans-serif)`; keine `var(--fw-font-base`-Referenz mehr.
+- Der HTML-UI-Text trägt jetzt den CI-Font (Source Sans Pro über `tokens.css`) statt System-`sans-serif`.
+- Die Rubikon-DOM-Textposition kann sich durch den Font-Wechsel (geänderte Zeichenbreite) verschoben haben — eine Nachmessung S/M/L ist fällig (DS-FOLLOWUP-07).
 
 **Fehlschlag, wenn:**
-- `--fw-font-base` wurde migriert oder der Fallback geändert (das wäre bereits die eigenständige Font-Migration, s. `AP-prokrast-17-FOLLOWUP-FONT`).
-- Die Rubikon-Position hat sich gegenüber dem AP-07-Stand verschoben, obwohl kein Font-Wechsel stattfand.
+- In `app.css` verbleibt eine `var(--fw-font-base`-Referenz oder ein Font-Hardcode.
+- Der Fließtext trägt weiterhin System-`sans-serif` statt `--font-body`.
 
-**Status:** verifiziert (AP-prokrast-17b, Code-Check) — `--fw-font-base` unverändert (1× vorhanden, Fallback `sans-serif`); eine erneute empirische Rubikon-Positionsmessung nach AP-17 wurde nicht durchgeführt (nicht nötig, da kein Font-Wechsel stattfand) — offen im Sinne einer erneuten Messung, nicht im Sinne eines Verdachts.
+**Status:** aktualisiert für AP-prokrast-17-FONT-CODE-B (Font-Migration `--fw-font-base`→`--font-body`). Code-seitig verifiziert (Zählung gegen die reale Datei, 2026-07-11): 0 `var(--fw-font-base`, `.fw-app` zieht `var(--font-body, sans-serif)`. Rubikon-Nachmessung nach dem Font-Wechsel offen — jetzt sachlich nötig (Font hat gewechselt), nicht mehr nur vorsorglich (DS-FOLLOWUP-07).
 
 ---
 

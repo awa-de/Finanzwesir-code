@@ -184,7 +184,7 @@ Die Engine nutzt zwei Schriftarten:
 
 Die Font-**Namen** sind zusätzlich als CSS-Custom-Properties in `tokens.css` hinterlegt (`--font-display`, `--font-body`, Single Source of Truth analog zu `--color-*`).
 
-**Ziel-Mechanismus (Font-Parität zu Farben, festgelegt 2026-07-10, Code-Umsetzung offen):** Analog zur Farb-Bridge (KDR 14, `docs/spec/ARCHITECTURE STRATEGY PAPER VX.md`) soll `FwTheme.init()` künftig auch `--font-display`/`--font-body` per `getComputedStyle()` aus `tokens.css` lesen, statt sie dauerhaft im Constructor hartzucodieren. **Heutiger Ist-Stand:** `FwTheme.init()` liest ausschließlich Farben; `this.fonts` bleibt fest im Constructor definiert. Migration folgt in einem eigenen Font-Code-AP, gekoppelt an eine Rubikon-Nachmessung S/M/L (Font-Wechsel ändert Textmetrik).
+**Mechanismus (Font-Parität zu Farben, implementiert 2026-07-11):** Analog zur Farb-Bridge (KDR 14, `docs/spec/ARCHITECTURE STRATEGY PAPER VX.md`) liest `FwTheme.init()` jetzt real auch `--font-display`/`--font-body` per `getComputedStyle()` aus `tokens.css`, statt sie dauerhaft im Constructor hartzucodieren (Constructor-Hardcode bleibt Fallback für Test-HTMLs ohne geladene `tokens.css`). **Ist-Stand:** umgesetzt für Canvas (Pfad A) und HTML-UI (Pfad B) am Piloten `prokrastinations-preis`, unabhängig reviewt und browserverifiziert (s. `docs/steering/patches/AP-prokrast-17-FONT-CODE-A-CANVAS_Ergebnis.md` u.a.). Rollout auf den übrigen App-Pool offen. Rubikon-Nachmessung S/M/L (Font-Wechsel ändert Textmetrik) jetzt sachlich fällig, s. DS-FOLLOWUP-07.
 
 ---
 

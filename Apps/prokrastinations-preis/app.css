@@ -1,8 +1,9 @@
 /* CHANGED — Slice 5 (war: Slice 3/4) */
 /* CHANGED — AP-prokrast-17: CI-Farbtokens (--fw-color-Namensraum) → Kontrakt-Rollen-/Farbtokens (--color-Namensraum),
    Fallbacks = tokens.css-FINAL (docs/steering/design/CI-POOL-ROLLENKONTRAKT.md §1/§8; tokens.css ist die SSoT).
-   Bewusst NICHT migriert: --fw-font-base (Kontrakt §9 Font-Ausklammerung + Rubikon-Kopplung DS-FOLLOWUP-07),
-   --fw-space-* und alle Mechanik-Tokens (--fw-* = ausschließlich App-Mechanik, Kontrakt §2/§4). */
+   --fw-font-base in AP-prokrast-17-FONT-CODE-B zu --font-body migriert (HTML-UI-Font über tokens.css, KDR 14;
+   Rubikon-Nachmessung dadurch fällig → DS-FOLLOWUP-07). Weiterhin NICHT migriert: --fw-space-* und alle
+   Mechanik-Tokens (--fw-* = ausschließlich App-Mechanik, Kontrakt §2/§4). */
 
 /* === Basis === */
 .fw-app {
@@ -10,7 +11,7 @@
   box-sizing: border-box;
   width: 100%;
   min-height: 200px;
-  font-family: var(--fw-font-base, sans-serif);
+  font-family: var(--font-body, sans-serif); /* CHANGED — AP-prokrast-17-FONT-CODE-B: Namens-Mismatch behoben, HTML-UI-Font über tokens.css (Source Sans Pro), analog Canvas-Pfad KDR 14 */
   color: var(--color-text, #272727);
   background: var(--color-bg, #ffffff);
   /* NEW — AP-prokrast-08b (Nachtrag): zentraler Schalter für die Card-to-Point-Fluggeschwindigkeit.

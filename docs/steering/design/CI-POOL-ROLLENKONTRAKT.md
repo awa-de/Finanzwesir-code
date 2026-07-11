@@ -1,4 +1,4 @@
-Stand: 2026-07-10 | Session: AP-prokrast-17-FONT-SPEC-PARITÄT | Geändert von: Claude
+Stand: 2026-07-11 07:45 | Session: AP-prokrast-17-FONT-SPEC-HEBUNG | Geändert von: Claude
 
 # CI-Pool Rollen- und Benennungskontrakt
 
@@ -252,7 +252,7 @@ Quelle: AP-15b-Auftrag Kettenposition + Rücklaufkapsel Empfehlung/Anschluss. **
 
 **Bridge-Migration Chart-Engine (P15):** `FwTheme.init()` liest 19 `--color-*`-Properties in 20 Farb-Tokens (`linesDark` wird aus `textSec` abgeleitet, nicht aus CSS gelesen) — alle anderen Namen ändern sich. Zusätzlich zu schließende Bridge-Lücken in AP-16: `FwVerticalLinePlugin` (Farbe hartcodiert), `FwAnnotationPulsePlugin` (`#006273`, Ersatz = Petrol-Vollton, § 7.8). `FwChartTextPlugin` (Font) siehe Ausklammerung oben.
 
-**Font-Bridge-Zielmechanismus (Parität zu Farbe, festgelegt 2026-07-10):** Analog zur Farb-Bridge oben soll `FwTheme.init()` künftig zusätzlich `--font-display`/`--font-body` aus `tokens.css` lesen (voller Mechanismus: `docs/spec/ARCHITECTURE STRATEGY PAPER VX.md`, KDR 14 Punkt 5). **Status: Ziel festgelegt, Code-Umsetzung offen.** Die Font-Bridge-Ausklammerung oben (Z.251) bleibt unverändert gültig — sie beschreibt, warum diese Migration bewusst noch nicht ausgeführt wurde (Rubikon-Metrik-Kopplung), nicht ob sie kommt.
+**Font-Bridge-Mechanismus (Parität zu Farbe, implementiert 2026-07-11):** Analog zur Farb-Bridge oben liest `FwTheme.init()` jetzt zusätzlich `--font-display`/`--font-body` aus `tokens.css` (voller Mechanismus: `docs/spec/ARCHITECTURE STRATEGY PAPER VX.md`, KDR 14 Punkt 5). **Status: umgesetzt (2026-07-11, AP-prokrast-17-FONT-CODE-A/B)** — Mechanismus + Pilot `prokrastinations-preis`, App-Pool-Rollout offen. Die Font-Bridge-Ausklammerung oben (Z.251) galt für `FwChartTextPlugin.js` (Rubikon-Marker, A6) — die ist durch diese Migration **aufgelöst**: der Font-Wechsel hat stattgefunden, die dort beschriebene Rubikon-Nachmessung ist jetzt sachlich fällig statt nur vorsorglich (DS-FOLLOWUP-07, Backlog).
 
 ---
 
