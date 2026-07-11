@@ -26,3 +26,7 @@ node_modules/
 content/
 Inhalte alte Site/
 Rechtliche Seiten/
+
+# TESTENV: lokale Wegwerf-Experimente
+tests/scratch/*
+!tests/scratch/README.md

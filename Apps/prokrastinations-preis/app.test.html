@@ -7,36 +7,58 @@
   <!-- NEW — AP-prokrast-17: CI-Tokens-SSoT (tokens.css, Kontrakt-FINAL) VOR app.css, damit --color-* im
        App-Laufzeitkontext auflösen. Nur Dev-Harness-Bindung; Ghost-/Produktions-Einbindung bleibt To-do T1. -->
   <link rel="stylesheet" href="../../Theme/assets/css/tokens.css">
+  <link rel="stylesheet" href="../../tests/shared/test-page.css">
   <link rel="stylesheet" href="./app.css">
+  <script src="../../tests/shared/test-page.js" defer></script>
   <style>
-    /* Nur für Testseite — gehört nicht in app.css */
-    body { font-family: sans-serif; max-width: 960px; margin: 2rem auto; padding: 0 1rem; color: #222; }
-    .test-warning { background: #fff3cd; border: 1px solid #ffc107; padding: 0.75rem 1rem; margin-bottom: 2rem; border-radius: 4px; font-weight: bold; }
-    .test-section { border: 1px dashed #ccc; margin-bottom: 2rem; padding: 1rem; border-radius: 4px; }
-    .test-section > h2 { margin-top: 0; font-size: 1rem; color: #333; }
-    .test-meta { font-size: 0.8rem; color: #666; margin-bottom: 0.75rem; }
+    /* Nur fuer diese Testseite -- kg-card-Chrome, gehoert nicht in app.css oder Shared CSS */
     .kg-card { background: #f9f9f9; padding: 1rem; border-radius: 4px; }
     .kg-card + .kg-card { margin-top: 1rem; }
   </style>
 </head>
-<body>
+<body class="fw-test-page"
+      data-fw-test-template="1">
 
-  <h1>Testseite — prokrastinations-preis B1-AP-14 Stationen-Zeitreise</h1>
+  <header class="fw-test-header">
+    <h1>Testseite — prokrastinations-preis B1-AP-14 Stationen-Zeitreise</h1>
 
-  <div class="test-warning">
-    Muss über VSCode Live Server geöffnet werden (http://127.0.0.1:5500/...) — nicht als file://. ES-Module laden sonst nicht.
-  </div>
+    <p class="fw-test-instruction">
+      Muss über VSCode Live Server geöffnet werden (http://127.0.0.1:5500/...) — nicht als file://. ES-Module laden sonst nicht.
+    </p>
+
+    <div class="fw-test-runtime-status"
+         data-fw-runtime-status
+         role="status"
+         aria-live="polite">
+      Bereit – bisher kein JavaScript-Fehler erkannt.
+    </div>
+
+    <section class="fw-test-errors"
+             data-fw-test-errors
+             aria-live="assertive"
+             hidden>
+      <h2>Technische Fehler</h2>
+      <ol data-fw-test-error-list></ol>
+    </section>
+  </header>
+
+  <main class="fw-test-main">
 
   <!-- Szenario A: Minimal-Card mit gültiger Daten-URL -->
-  <div class="test-section">
+  <div class="fw-test-case"
+     data-fw-test-case>
     <h2>A — Minimal-Card mit gültiger Daten-URL</h2>
-    <p class="test-meta">
-      Erwartung: Loading → Content-State. Screen 1 sichtbar mit Slider (300 €). Keine KpiCards (AP-14: entfernt von Screen 2).<br>
-      „10 Jahre zurückspringen" → Screen 2: erste Station-Card erscheint (Station aus stations.de.json).<br>
-      ARIA Live Region vorhanden (DevTools → DOM: [data-fw-role="a11y-result"]).<br>
-      Konsole: keine JS-Exception (v3.0: kein Editorial Gate mehr).<br>
-      Testfälle: T-01, AP-14-A01
-    </p>
+
+    <div class="fw-test-expected" data-fw-expected-behavior>
+      <h3>Erwartetes Verhalten</h3>
+      <ul>
+      <li>Erwartung: Loading → Content-State. Screen 1 sichtbar mit Slider (300 €). Keine KpiCards (AP-14: entfernt von Screen 2).</li>
+      <li>„10 Jahre zurückspringen" → Screen 2: erste Station-Card erscheint (Station aus stations.de.json).</li>
+      <li>ARIA Live Region vorhanden (DevTools → DOM: [data-fw-role="a11y-result"]).</li>
+      <li>Konsole: keine JS-Exception (v3.0: kein Editorial Gate mehr).</li>
+      <li>Testfälle: T-01, AP-14-A01</li>
+      </ul>
+    </div>
     <div class="kg-card">
       <div class="fw-app"
            data-fw-app="prokrastinations-preis"
@@ -46,36 +68,51 @@
   </div>
 
   <!-- Szenario B: Ungültiger Slug -->
-  <div class="test-section">
+  <div class="fw-test-case"
+     data-fw-test-case>
     <h2>B — Ungültiger Slug</h2>
-    <p class="test-meta">
-      Erwartung: Error-State (a), Meldung „Diese App konnte nicht geladen werden.", kein Stack-Trace im UI.<br>
-      Testfälle: T-02 | AK: A0-2
-    </p>
+
+    <div class="fw-test-expected" data-fw-expected-behavior>
+      <h3>Erwartetes Verhalten</h3>
+      <ul>
+      <li>Erwartung: Error-State (a), Meldung „Diese App konnte nicht geladen werden.", kein Stack-Trace im UI.</li>
+      <li>Testfälle: T-02 | AK: A0-2</li>
+      </ul>
+    </div>
     <div class="kg-card">
       <div class="fw-app" data-fw-app="ungueltig-slug"></div>
     </div>
   </div>
 
   <!-- Szenario C: Fehlender Slug -->
-  <div class="test-section">
+  <div class="fw-test-case"
+     data-fw-test-case>
     <h2>C — Fehlender Slug (kein data-fw-app)</h2>
-    <p class="test-meta">
-      Erwartung: Error-State (a), Meldung auf Deutsch, kein Stack-Trace im UI.<br>
-      AK: A0-2
-    </p>
+
+    <div class="fw-test-expected" data-fw-expected-behavior>
+      <h3>Erwartetes Verhalten</h3>
+      <ul>
+      <li>Erwartung: Error-State (a), Meldung auf Deutsch, kein Stack-Trace im UI.</li>
+      <li>AK: A0-2</li>
+      </ul>
+    </div>
     <div class="kg-card">
       <div class="fw-app"></div>
     </div>
   </div>
 
   <!-- Szenario D: Zwei gültige Container -->
-  <div class="test-section">
+  <div class="fw-test-case"
+     data-fw-test-case>
     <h2>D — Zwei gültige Container</h2>
-    <p class="test-meta">
-      Erwartung: Beide im Content-State (Screen 1 sichtbar), kein doppelter DOM-Node, keine Exception in Konsole.<br>
-      AK: A0-1, A0-7
-    </p>
+
+    <div class="fw-test-expected" data-fw-expected-behavior>
+      <h3>Erwartetes Verhalten</h3>
+      <ul>
+      <li>Erwartung: Beide im Content-State (Screen 1 sichtbar), kein doppelter DOM-Node, keine Exception in Konsole.</li>
+      <li>AK: A0-1, A0-7</li>
+      </ul>
+    </div>
     <div class="kg-card">
       <div class="fw-app"
            data-fw-app="prokrastinations-preis"
@@ -91,13 +128,18 @@
   </div>
 
   <!-- Szenario E: XSS-Versuch in data-fw-options -->
-  <div class="test-section">
+  <div class="fw-test-case"
+     data-fw-test-case>
     <h2>E — XSS-Versuch in data-fw-options</h2>
-    <p class="test-meta">
-      Erwartung: Kein Alert, kein innerHTML, App stabil. XSS-Wert → parseInt gibt NaN → Fallback 300 €.<br>
-      Slider startet bei 300 € (Default). Kein Script-Aufruf, kein Alert, kein JS-Fehler.<br>
-      Testfälle: T-08, T-10 | AK: A0-5, A0-8
-    </p>
+
+    <div class="fw-test-expected" data-fw-expected-behavior>
+      <h3>Erwartetes Verhalten</h3>
+      <ul>
+      <li>Erwartung: Kein Alert, kein innerHTML, App stabil. XSS-Wert → parseInt gibt NaN → Fallback 300 €.</li>
+      <li>Slider startet bei 300 € (Default). Kein Script-Aufruf, kein Alert, kein JS-Fehler.</li>
+      <li>Testfälle: T-08, T-10 | AK: A0-5, A0-8</li>
+      </ul>
+    </div>
     <div class="kg-card">
       <div class="fw-app"
            data-fw-app="prokrastinations-preis"
@@ -108,24 +150,34 @@
   </div>
 
   <!-- Szenario F: Fehlendes data-fw-data -->
-  <div class="test-section">
+  <div class="fw-test-case"
+     data-fw-test-case>
     <h2>F — Fehlendes data-fw-data</h2>
-    <p class="test-meta">
-      Erwartung: Error-State (b), Meldung „Daten konnten nicht geladen werden. Bitte Seite neu laden."<br>
-      Testfälle: T-03 (URL leer)
-    </p>
+
+    <div class="fw-test-expected" data-fw-expected-behavior>
+      <h3>Erwartetes Verhalten</h3>
+      <ul>
+      <li>Erwartung: Error-State (b), Meldung „Daten konnten nicht geladen werden. Bitte Seite neu laden."</li>
+      <li>Testfälle: T-03 (URL leer)</li>
+      </ul>
+    </div>
     <div class="kg-card">
       <div class="fw-app" data-fw-app="prokrastinations-preis"></div>
     </div>
   </div>
 
   <!-- Szenario G: CSS-Leak-Check -->
-  <div class="test-section">
+  <div class="fw-test-case"
+     data-fw-test-case>
     <h2>G — CSS-Leak-Check</h2>
-    <p class="test-meta">
-      Erwartung: Artikeltext, Überschriften und Absätze neben .fw-app visuell unverändert. app.css darf keine Ghost-Elemente beeinflussen.<br>
-      AK: A0-9, A0-10
-    </p>
+
+    <div class="fw-test-expected" data-fw-expected-behavior>
+      <h3>Erwartetes Verhalten</h3>
+      <ul>
+      <li>Erwartung: Artikeltext, Überschriften und Absätze neben .fw-app visuell unverändert. app.css darf keine Ghost-Elemente beeinflussen.</li>
+      <li>AK: A0-9, A0-10</li>
+      </ul>
+    </div>
     <article>
       <h2>Normaler Artikeltext (h2 außerhalb .fw-app)</h2>
       <p>Dieser Absatz soll durch app.css nicht beeinflusst werden. Schriftgröße, Farbe und Abstände müssen wie auf einer normalen Ghost-Seite aussehen.</p>
@@ -144,13 +196,18 @@
   <!-- ═══════════════════════════════════════════════════════════ -->
 
   <!-- Szenario H: Ungültige Domain → Error (b) -->
-  <div class="test-section">
+  <div class="fw-test-case"
+     data-fw-test-case>
     <h2>H — Ungültige Domain (nicht finanzwesir.com)</h2>
-    <p class="test-meta">
-      Erwartung: Error-State (b), Meldung „Daten konnten nicht geladen werden. Bitte Seite neu laden."<br>
-      CSVParser GATEKEEPER schlägt an — keine Verbindung zu Fremd-URL.<br>
-      Testfall: T-03
-    </p>
+
+    <div class="fw-test-expected" data-fw-expected-behavior>
+      <h3>Erwartetes Verhalten</h3>
+      <ul>
+      <li>Erwartung: Error-State (b), Meldung „Daten konnten nicht geladen werden. Bitte Seite neu laden."</li>
+      <li>CSVParser GATEKEEPER schlägt an — keine Verbindung zu Fremd-URL.</li>
+      <li>Testfall: T-03</li>
+      </ul>
+    </div>
     <div class="kg-card">
       <div class="fw-app"
            data-fw-app="prokrastinations-preis"
@@ -160,12 +217,18 @@
   </div>
 
   <!-- Szenario I: Nicht erreichbare URL (404) → Error (b) -->
-  <div class="test-section">
+  <div class="fw-test-case"
+     data-fw-test-case
+     data-fw-test-allow-missing-ref="./test-data/nonexistent.csv">
     <h2>I — Nicht erreichbare URL (404)</h2>
-    <p class="test-meta">
-      Erwartung: Error-State (b), Meldung „Daten konnten nicht geladen werden. Bitte Seite neu laden."<br>
-      Testfall: T-04
-    </p>
+
+    <div class="fw-test-expected" data-fw-expected-behavior>
+      <h3>Erwartetes Verhalten</h3>
+      <ul>
+      <li>Erwartung: Error-State (b), Meldung „Daten konnten nicht geladen werden. Bitte Seite neu laden."</li>
+      <li>Testfall: T-04</li>
+      </ul>
+    </div>
     <div class="kg-card">
       <div class="fw-app"
            data-fw-app="prokrastinations-preis"
@@ -175,12 +238,17 @@
   </div>
 
   <!-- Szenario J: CSV nicht parsebar (ungültiges Datumsformat) → Error (b) -->
-  <div class="test-section">
+  <div class="fw-test-case"
+     data-fw-test-case>
     <h2>J — CSV nicht parsebar</h2>
-    <p class="test-meta">
-      Erwartung: Error-State (b), Meldung „Daten konnten nicht geladen werden. Bitte Seite neu laden."<br>
-      Testfall: T-05
-    </p>
+
+    <div class="fw-test-expected" data-fw-expected-behavior>
+      <h3>Erwartetes Verhalten</h3>
+      <ul>
+      <li>Erwartung: Error-State (b), Meldung „Daten konnten nicht geladen werden. Bitte Seite neu laden."</li>
+      <li>Testfall: T-05</li>
+      </ul>
+    </div>
     <div class="kg-card">
       <div class="fw-app"
            data-fw-app="prokrastinations-preis"
@@ -190,12 +258,17 @@
   </div>
 
   <!-- Szenario K: CSV < 120 Zeilen → Empty -->
-  <div class="test-section">
+  <div class="fw-test-case"
+     data-fw-test-case>
     <h2>K — CSV mit weniger als 120 Datenzeilen</h2>
-    <p class="test-meta">
-      Erwartung: Empty-State, Meldung „Nicht genug Daten für die Berechnung. Bitte Datenquelle prüfen."<br>
-      Testfall: T-06
-    </p>
+
+    <div class="fw-test-expected" data-fw-expected-behavior>
+      <h3>Erwartetes Verhalten</h3>
+      <ul>
+      <li>Erwartung: Empty-State, Meldung „Nicht genug Daten für die Berechnung. Bitte Datenquelle prüfen."</li>
+      <li>Testfall: T-06</li>
+      </ul>
+    </div>
     <div class="kg-card">
       <div class="fw-app"
            data-fw-app="prokrastinations-preis"
@@ -205,12 +278,17 @@
   </div>
 
   <!-- Szenario L: Fehlende index_value-Spalte → Empty -->
-  <div class="test-section">
+  <div class="fw-test-case"
+     data-fw-test-case>
     <h2>L — CSV ohne index_value-Spalte</h2>
-    <p class="test-meta">
-      Erwartung: Empty-State, Meldung „Nicht genug Daten für die Berechnung. Bitte Datenquelle prüfen."<br>
-      Testfall: T-07
-    </p>
+
+    <div class="fw-test-expected" data-fw-expected-behavior>
+      <h3>Erwartetes Verhalten</h3>
+      <ul>
+      <li>Erwartung: Empty-State, Meldung „Nicht genug Daten für die Berechnung. Bitte Datenquelle prüfen."</li>
+      <li>Testfall: T-07</li>
+      </ul>
+    </div>
     <div class="kg-card">
       <div class="fw-app"
            data-fw-app="prokrastinations-preis"
@@ -220,12 +298,17 @@
   </div>
 
   <!-- Szenario M: Kein EUR-Suffix → Error (c) -->
-  <div class="test-section">
+  <div class="fw-test-case"
+     data-fw-test-case>
     <h2>M — CSV ohne Währungssuffix (unitKey ≠ CURRENCY_EUR)</h2>
-    <p class="test-meta">
-      Erwartung: Error-State (c), Meldung „Datenreihe hat keine oder ungültige Währungsangabe. Erwartet: EUR."<br>
-      Testfall: T-07a
-    </p>
+
+    <div class="fw-test-expected" data-fw-expected-behavior>
+      <h3>Erwartetes Verhalten</h3>
+      <ul>
+      <li>Erwartung: Error-State (c), Meldung „Datenreihe hat keine oder ungültige Währungsangabe. Erwartet: EUR."</li>
+      <li>Testfall: T-07a</li>
+      </ul>
+    </div>
     <div class="kg-card">
       <div class="fw-app"
            data-fw-app="prokrastinations-preis"
@@ -235,12 +318,17 @@
   </div>
 
   <!-- Szenario N: USD-Suffix → Error (c) -->
-  <div class="test-section">
+  <div class="fw-test-case"
+     data-fw-test-case>
     <h2>N — CSV mit USD-Suffix statt EUR</h2>
-    <p class="test-meta">
-      Erwartung: Error-State (c), Meldung „Datenreihe hat keine oder ungültige Währungsangabe. Erwartet: EUR."<br>
-      Testfall: T-07b
-    </p>
+
+    <div class="fw-test-expected" data-fw-expected-behavior>
+      <h3>Erwartetes Verhalten</h3>
+      <ul>
+      <li>Erwartung: Error-State (c), Meldung „Datenreihe hat keine oder ungültige Währungsangabe. Erwartet: EUR."</li>
+      <li>Testfall: T-07b</li>
+      </ul>
+    </div>
     <div class="kg-card">
       <div class="fw-app"
            data-fw-app="prokrastinations-preis"
@@ -254,13 +342,18 @@
   <!-- ═══════════════════════════════════════════════════════════ -->
 
   <!-- Szenario O: T-12 — Maximalwert 2.000 €/Monat -->
-  <div class="test-section">
+  <div class="fw-test-case"
+     data-fw-test-case>
     <h2>O — Maximalwert 2.000 €/Monat via defaultRate (T-12)</h2>
-    <p class="test-meta">
-      Erwartung: Slider startet bei 2.000 €. „10 Jahre zurückspringen" → erste Station, Zwischenstand zeigt ≈ 240.000 € eingezahlt. Kein Crash.<br>
-      Slider auf kleineren Wert zurückziehen → S1 anzeigen, dann erneut in Journey starten → aktualisierte Werte.<br>
-      Testfall: T-12
-    </p>
+
+    <div class="fw-test-expected" data-fw-expected-behavior>
+      <h3>Erwartetes Verhalten</h3>
+      <ul>
+      <li>Erwartung: Slider startet bei 2.000 €. „10 Jahre zurückspringen" → erste Station, Zwischenstand zeigt ≈ 240.000 € eingezahlt. Kein Crash.</li>
+      <li>Slider auf kleineren Wert zurückziehen → S1 anzeigen, dann erneut in Journey starten → aktualisierte Werte.</li>
+      <li>Testfall: T-12</li>
+      </ul>
+    </div>
     <div class="kg-card">
       <div class="fw-app"
            data-fw-app="prokrastinations-preis"
@@ -271,13 +364,18 @@
   </div>
 
   <!-- Szenario P: T-13 — Minimalwert 50 €/Monat -->
-  <div class="test-section">
+  <div class="fw-test-case"
+     data-fw-test-case>
     <h2>P — Minimalwert 50 €/Monat via defaultRate (T-13)</h2>
-    <p class="test-meta">
-      Erwartung: Slider startet bei 50 €. „10 Jahre zurückspringen" → erste Station, Zwischenstand zeigt ≈ 6.000 € eingezahlt. Kein Crash.<br>
-      Slider auf größeren Wert ziehen → S1 anzeigen, dann erneut in Journey starten → aktualisierte Werte.<br>
-      Testfall: T-13
-    </p>
+
+    <div class="fw-test-expected" data-fw-expected-behavior>
+      <h3>Erwartetes Verhalten</h3>
+      <ul>
+      <li>Erwartung: Slider startet bei 50 €. „10 Jahre zurückspringen" → erste Station, Zwischenstand zeigt ≈ 6.000 € eingezahlt. Kein Crash.</li>
+      <li>Slider auf größeren Wert ziehen → S1 anzeigen, dann erneut in Journey starten → aktualisierte Werte.</li>
+      <li>Testfall: T-13</li>
+      </ul>
+    </div>
     <div class="kg-card">
       <div class="fw-app"
            data-fw-app="prokrastinations-preis"
@@ -292,15 +390,20 @@
   <!-- ═══════════════════════════════════════════════════════════ -->
 
   <!-- Szenario S: T-11 — Slider-Interaktion (ab Slice 5: kein live Chart-Update mehr) -->
-  <div class="test-section">
+  <div class="fw-test-case"
+     data-fw-test-case>
     <h2>S — Slider auf Screen 1 (T-11)</h2>
-    <p class="test-meta">
-      Erwartung: Screen 1 sichtbar. Slider startet bei 300 €. Slider ziehen → Anzeige „X €/Monat" aktualisiert sich live.<br>
-      Station-Cards und Chart sind auf Screen 1 NICHT sichtbar (erst auf Screen 2).<br>
-      ARIA Live Region aktualisiert sich NICHT beim Slider (AP-14: slider.change entfernt — Endwissens-Verbot).<br>
-      Viewport 375px: Slider bedienbar, kein horizontaler Overflow.<br>
-      Testfall: T-11, AP-14-A11y-01
-    </p>
+
+    <div class="fw-test-expected" data-fw-expected-behavior>
+      <h3>Erwartetes Verhalten</h3>
+      <ul>
+      <li>Erwartung: Screen 1 sichtbar. Slider startet bei 300 €. Slider ziehen → Anzeige „X €/Monat" aktualisiert sich live.</li>
+      <li>Station-Cards und Chart sind auf Screen 1 NICHT sichtbar (erst auf Screen 2).</li>
+      <li>ARIA Live Region aktualisiert sich NICHT beim Slider (AP-14: slider.change entfernt — Endwissens-Verbot).</li>
+      <li>Viewport 375px: Slider bedienbar, kein horizontaler Overflow.</li>
+      <li>Testfall: T-11, AP-14-A11y-01</li>
+      </ul>
+    </div>
     <div class="kg-card">
       <div class="fw-app"
            data-fw-app="prokrastinations-preis"
@@ -310,12 +413,17 @@
   </div>
 
   <!-- Szenario T: T-09 — defaultRate ungültiger Typ → Fallback -->
-  <div class="test-section">
+  <div class="fw-test-case"
+     data-fw-test-case>
     <h2>T — defaultRate:abc (T-09 — Fallback auf Default)</h2>
-    <p class="test-meta">
-      Erwartung: parseInt("abc") = NaN → Fallback 300. Slider startet bei 300 €. Kein Error-State, kein Crash.<br>
-      Testfall: T-09
-    </p>
+
+    <div class="fw-test-expected" data-fw-expected-behavior>
+      <h3>Erwartetes Verhalten</h3>
+      <ul>
+      <li>Erwartung: parseInt("abc") = NaN → Fallback 300. Slider startet bei 300 €. Kein Error-State, kein Crash.</li>
+      <li>Testfall: T-09</li>
+      </ul>
+    </div>
     <div class="kg-card">
       <div class="fw-app"
            data-fw-app="prokrastinations-preis"
@@ -330,15 +438,20 @@
   <!-- ═══════════════════════════════════════════════════════════ -->
 
   <!-- Szenario Q: CSV ohne date-Header → Error (b) via CSVParser-GATEKEEPER -->
-  <div class="test-section">
+  <div class="fw-test-case"
+     data-fw-test-case>
     <h2>Q — CSV ohne date-Spalte (CSVParser-GATEKEEPER)</h2>
-    <p class="test-meta">
-      Erwartung: Error-State (b), Meldung „Daten konnten nicht geladen werden. Bitte Seite neu laden."<br>
-      CSV hat index_value-Daten (EUR), aber keine date-Spalte.<br>
-      CSVParser-GATEKEEPER wirft für fehlende/ungültige date-Spalte — app.js-Validierung wird nicht erreicht.<br>
-      Console: CSVParser-Fehler + app.js-catch-Log erwartet (kein Stacktrace im UI).<br>
-      Testfall: T-05 (Erweiterung)
-    </p>
+
+    <div class="fw-test-expected" data-fw-expected-behavior>
+      <h3>Erwartetes Verhalten</h3>
+      <ul>
+      <li>Erwartung: Error-State (b), Meldung „Daten konnten nicht geladen werden. Bitte Seite neu laden."</li>
+      <li>CSV hat index_value-Daten (EUR), aber keine date-Spalte.</li>
+      <li>CSVParser-GATEKEEPER wirft für fehlende/ungültige date-Spalte — app.js-Validierung wird nicht erreicht.</li>
+      <li>Console: CSVParser-Fehler + app.js-catch-Log erwartet (kein Stacktrace im UI).</li>
+      <li>Testfall: T-05 (Erweiterung)</li>
+      </ul>
+    </div>
     <div class="kg-card">
       <div class="fw-app"
            data-fw-app="prokrastinations-preis"
@@ -348,14 +461,19 @@
   </div>
 
   <!-- Szenario R: CSV mit index_value = 0 in letzten 120 Zeilen → Empty -->
-  <div class="test-section">
+  <div class="fw-test-case"
+     data-fw-test-case>
     <h2>R — CSV mit ungültigem index_value (0,00 EUR)</h2>
-    <p class="test-meta">
-      Erwartung: Empty-State, Meldung „Nicht genug Daten für die Berechnung. Bitte Datenquelle prüfen."<br>
-      CSV hat 120 Zeilen, date + index_value vorhanden (EUR), letzter Wert 0,00 EUR.<br>
-      hasInvalidRows = true (index_value <= 0) → Empty, kein Crash, keine JS-Exception in Konsole.<br>
-      Testfall: T-07 (Erweiterung)
-    </p>
+
+    <div class="fw-test-expected" data-fw-expected-behavior>
+      <h3>Erwartetes Verhalten</h3>
+      <ul>
+      <li>Erwartung: Empty-State, Meldung „Nicht genug Daten für die Berechnung. Bitte Datenquelle prüfen."</li>
+      <li>CSV hat 120 Zeilen, date + index_value vorhanden (EUR), letzter Wert 0,00 EUR.</li>
+      <li>hasInvalidRows = true (index_value <= 0) → Empty, kein Crash, keine JS-Exception in Konsole.</li>
+      <li>Testfall: T-07 (Erweiterung)</li>
+      </ul>
+    </div>
     <div class="kg-card">
       <div class="fw-app"
            data-fw-app="prokrastinations-preis"
@@ -369,16 +487,21 @@
   <!-- ═══════════════════════════════════════════════════════════ -->
 
   <!-- Szenario U: AP-14 — Stationen-Zeitreise (Screen 2) -->
-  <div class="test-section">
+  <div class="fw-test-case"
+     data-fw-test-case>
     <h2>U — Station-Card + getrimmter Chart auf Screen 2 (AP-14)</h2>
-    <p class="test-meta">
-      Erwartung: Screen 1 zuerst sichtbar (kein Chart). „10 Jahre zurückspringen" → Screen 2: erste Station-Card erscheint.<br>
-      Unterhalb der Station-Card: getrimmter Chart (nur Daten bis zum Stations-Monat — kein Endwissen).<br>
-      Canvas sichtbar. Keine Range-Buttons, keine BAN/Headline. Keine KpiCards, keine AssumptionsBox.<br>
-      Journey-Button: „Weiter investiert bleiben" (letzte Station: „Ergebnis ansehen"). Kein „← Zurück"-Button auf Screen 2.<br>
-      Kein live Chart-Update während Slider auf Screen 1 — Rate wird erst beim S1→S2-Wechsel eingefroren.<br>
-      Keine JS-Exception in Konsole.
-    </p>
+
+    <div class="fw-test-expected" data-fw-expected-behavior>
+      <h3>Erwartetes Verhalten</h3>
+      <ul>
+      <li>Erwartung: Screen 1 zuerst sichtbar (kein Chart). „10 Jahre zurückspringen" → Screen 2: erste Station-Card erscheint.</li>
+      <li>Unterhalb der Station-Card: getrimmter Chart (nur Daten bis zum Stations-Monat — kein Endwissen).</li>
+      <li>Canvas sichtbar. Keine Range-Buttons, keine BAN/Headline. Keine KpiCards, keine AssumptionsBox.</li>
+      <li>Journey-Button: „Weiter investiert bleiben" (letzte Station: „Ergebnis ansehen"). Kein „← Zurück"-Button auf Screen 2.</li>
+      <li>Kein live Chart-Update während Slider auf Screen 1 — Rate wird erst beim S1→S2-Wechsel eingefroren.</li>
+      <li>Keine JS-Exception in Konsole.</li>
+      </ul>
+    </div>
     <div class="kg-card">
       <div class="fw-app"
            data-fw-app="prokrastinations-preis"
@@ -392,19 +515,23 @@
   <!-- ═══════════════════════════════════════════════════════════ -->
 
   <!-- Szenario V: Screen-Flow vollständig (T-14) -->
-  <div class="test-section">
+  <div class="fw-test-case"
+     data-fw-test-case>
     <h2>V — Screen-Flow 1→2→3→4 vollständig (T-14)</h2>
-    <p class="test-meta">
-      Erwartung:<br>
-      Screen 1: Headline + Subline + Slider + „10 Jahre zurückspringen" sichtbar. Kein Chart, keine KPIs.<br>
-      „10 Jahre zurückspringen" → Screen 2: Fokus auf &lt;h2&gt;. Station-Card (Quelle, Headline, Anker) + getrimmter Chart.
-      Journey-Button: „Weiter investiert bleiben". Kein „← Zurück".<br>
-      Journey-Button N×klicken → alle Stationen durch; letzter Click → Screen 3 erscheint.<br>
-      Screen 3: Fokus auf &lt;h2&gt; „Jetzt erst sieht es einfach aus." Chart mit VertikaleLinie. Buttons „← Zurück" und „Weiter →".<br>
-      Screen 4: Fokus auf &lt;h2&gt;. CTA „Heute Marktzeit sammeln →" sichtbar. Nur „← Zurück".<br>
-      Kein JS-Fehler in Konsole. Viewport 375px, 768px, 1280px.<br>
-      Testfall: T-14, AP-14-A02
-    </p>
+
+    <div class="fw-test-expected" data-fw-expected-behavior>
+      <h3>Erwartetes Verhalten</h3>
+      <ul>
+      <li>Erwartung:</li>
+      <li>Screen 1: Headline + Subline + Slider + „10 Jahre zurückspringen" sichtbar. Kein Chart, keine KPIs.</li>
+      <li>„10 Jahre zurückspringen" → Screen 2: Fokus auf &lt;h2&gt;. Station-Card (Quelle, Headline, Anker) + getrimmter Chart. Journey-Button: „Weiter investiert bleiben". Kein „← Zurück".</li>
+      <li>Journey-Button N×klicken → alle Stationen durch; letzter Click → Screen 3 erscheint.</li>
+      <li>Screen 3: Fokus auf &lt;h2&gt; „Jetzt erst sieht es einfach aus." Chart mit VertikaleLinie. Buttons „← Zurück" und „Weiter →".</li>
+      <li>Screen 4: Fokus auf &lt;h2&gt;. CTA „Heute Marktzeit sammeln →" sichtbar. Nur „← Zurück".</li>
+      <li>Kein JS-Fehler in Konsole. Viewport 375px, 768px, 1280px.</li>
+      <li>Testfall: T-14, AP-14-A02</li>
+      </ul>
+    </div>
     <div class="kg-card">
       <div class="fw-app"
            data-fw-app="prokrastinations-preis"
@@ -414,17 +541,22 @@
   </div>
 
   <!-- Szenario W: Rate ändern und Screen 2 erneut besuchen -->
-  <div class="test-section">
+  <div class="fw-test-case"
+     data-fw-test-case>
     <h2>W — Rate ändern → Screen 2 zeigt aktualisierte Werte</h2>
-    <p class="test-meta">
-      Testschritte:<br>
-      1. Slider auf 1.000 € → „10 Jahre zurückspringen" → Screen 2: getrimmter Chart bei Stations-Monat, Station-Card sichtbar.<br>
-      2. Alle Stationen durchklicken → Screen 3: vollständiger Chart (1.000 €-Berechnung) sichtbar.<br>
-      3. „← Zurück" → Screen 2: Zeitreise auf erster Station (activeStationIndex = 0, gleiche Rate).<br>
-      4. „← Zurück" auf Screen 3 führt zurück zu Screen 2 (kein Back auf Screen 2 selbst).<br>
-      Erwartung: Rate bleibt eingefroren auf dem S1-Wert. Neustart via Screen 1 → frische Rate. Kein JS-Fehler.<br>
-      Testfall: AP-14-A03
-    </p>
+
+    <div class="fw-test-expected" data-fw-expected-behavior>
+      <h3>Erwartetes Verhalten</h3>
+      <ul>
+      <li>Testschritte:</li>
+      <li>1. Slider auf 1.000 € → „10 Jahre zurückspringen" → Screen 2: getrimmter Chart bei Stations-Monat, Station-Card sichtbar.</li>
+      <li>2. Alle Stationen durchklicken → Screen 3: vollständiger Chart (1.000 €-Berechnung) sichtbar.</li>
+      <li>3. „← Zurück" → Screen 2: Zeitreise auf erster Station (activeStationIndex = 0, gleiche Rate).</li>
+      <li>4. „← Zurück" auf Screen 3 führt zurück zu Screen 2 (kein Back auf Screen 2 selbst).</li>
+      <li>Erwartung: Rate bleibt eingefroren auf dem S1-Wert. Neustart via Screen 1 → frische Rate. Kein JS-Fehler.</li>
+      <li>Testfall: AP-14-A03</li>
+      </ul>
+    </div>
     <div class="kg-card">
       <div class="fw-app"
            data-fw-app="prokrastinations-preis"
@@ -434,13 +566,18 @@
   </div>
 
   <!-- Szenario X: Zurück-Navigation -->
-  <div class="test-section">
+  <div class="fw-test-case"
+     data-fw-test-case>
     <h2>X — Zurück-Navigation durch alle Screens</h2>
-    <p class="test-meta">
-      Testschritte: S1 → alle S2-Stationen durchklicken → S3 → S4, dann S4→S3→S2→S3 (kein Back auf S2 möglich).<br>
-      Erwartung: Fokus liegt jeweils auf der &lt;h2&gt; (außer beim initialen Laden). Screen 2 hat keinen „← Zurück"-Button.<br>
-      S3→S2-Zurück: Zeitreise auf Station 0 zurückgesetzt. Kein doppelter Chart, keine JS-Exception.
-    </p>
+
+    <div class="fw-test-expected" data-fw-expected-behavior>
+      <h3>Erwartetes Verhalten</h3>
+      <ul>
+      <li>Testschritte: S1 → alle S2-Stationen durchklicken → S3 → S4, dann S4→S3→S2→S3 (kein Back auf S2 möglich).</li>
+      <li>Erwartung: Fokus liegt jeweils auf der &lt;h2&gt; (außer beim initialen Laden). Screen 2 hat keinen „← Zurück"-Button.</li>
+      <li>S3→S2-Zurück: Zeitreise auf Station 0 zurückgesetzt. Kein doppelter Chart, keine JS-Exception.</li>
+      </ul>
+    </div>
     <div class="kg-card">
       <div class="fw-app"
            data-fw-app="prokrastinations-preis"
@@ -454,13 +591,18 @@
   <!-- ═══════════════════════════════════════════════════════════ -->
 
   <!-- Szenario Y: AssumptionsBox nur noch auf Screen 3 (AP-14: S2 hat keine AssumptionsBox mehr) -->
-  <div class="test-section">
+  <div class="fw-test-case"
+     data-fw-test-case>
     <h2>Y — AssumptionsBox nur auf Screen 3 (APP_SPEC §19.8, AP-14)</h2>
-    <p class="test-meta">
-      Testschritte: Alle S2-Stationen durchklicken → S3.<br>
-      Erwartung Screen 3: AssumptionsBox sichtbar unter dem Chart. Text beginnt mit „Basis: MSCI World Index …".<br>
-      Erwartung Screen 2: KEINE AssumptionsBox (AP-14: entfernt). Kein innerHTML, kein Stacktrace. Kein JS-Fehler in Konsole.
-    </p>
+
+    <div class="fw-test-expected" data-fw-expected-behavior>
+      <h3>Erwartetes Verhalten</h3>
+      <ul>
+      <li>Testschritte: Alle S2-Stationen durchklicken → S3.</li>
+      <li>Erwartung Screen 3: AssumptionsBox sichtbar unter dem Chart. Text beginnt mit „Basis: MSCI World Index …".</li>
+      <li>Erwartung Screen 2: KEINE AssumptionsBox (AP-14: entfernt). Kein innerHTML, kein Stacktrace. Kein JS-Fehler in Konsole.</li>
+      </ul>
+    </div>
     <div class="kg-card">
       <div class="fw-app"
            data-fw-app="prokrastinations-preis"
@@ -470,15 +612,20 @@
   </div>
 
   <!-- Szenario Z: VertikaleLinie auf Screen 3 -->
-  <div class="test-section">
+  <div class="fw-test-case"
+     data-fw-test-case>
     <h2>Z — VertikaleLinie im Chart auf Screen 3 (APP_SPEC §14.2)</h2>
-    <p class="test-meta">
-      Testschritte: 1→2→3 klicken.<br>
-      Erwartung: Gestrichelte blaue Linie am rechten Ende des Charts (letzter Datenpunkt = heute).<br>
-      Subline vorhanden: „Derselbe Verlauf — der Strich markiert den letzten verfügbaren Monat, also heute."<br>
-      Linie bleibt nach Rate-Wechsel und erneutem Screen-3-Besuch sichtbar.<br>
-      Kein JS-Fehler in Konsole. Viewport 375px, 768px, 1280px.
-    </p>
+
+    <div class="fw-test-expected" data-fw-expected-behavior>
+      <h3>Erwartetes Verhalten</h3>
+      <ul>
+      <li>Testschritte: 1→2→3 klicken.</li>
+      <li>Erwartung: Gestrichelte blaue Linie am rechten Ende des Charts (letzter Datenpunkt = heute).</li>
+      <li>Subline vorhanden: „Derselbe Verlauf — der Strich markiert den letzten verfügbaren Monat, also heute."</li>
+      <li>Linie bleibt nach Rate-Wechsel und erneutem Screen-3-Besuch sichtbar.</li>
+      <li>Kein JS-Fehler in Konsole. Viewport 375px, 768px, 1280px.</li>
+      </ul>
+    </div>
     <div class="kg-card">
       <div class="fw-app"
            data-fw-app="prokrastinations-preis"
@@ -488,14 +635,19 @@
   </div>
 
   <!-- Szenario AA: PrimaryCta auf Screen 4 -->
-  <div class="test-section">
+  <div class="fw-test-case"
+     data-fw-test-case>
     <h2>AA — PrimaryCta auf Screen 4 (APP_SPEC §19.10)</h2>
-    <p class="test-meta">
-      Testschritte: 1→2→3→4 klicken.<br>
-      Erwartung: Button „Heute Marktzeit sammeln →" sichtbar als Primary-Button (blauer Hintergrund, weißer Text).<br>
-      Kein href-Sprung (href leer, NB-1). Kein JS-Fehler in Konsole.<br>
-      Viewport 375px: Button vollständig sichtbar, kein Overflow.
-    </p>
+
+    <div class="fw-test-expected" data-fw-expected-behavior>
+      <h3>Erwartetes Verhalten</h3>
+      <ul>
+      <li>Testschritte: 1→2→3→4 klicken.</li>
+      <li>Erwartung: Button „Heute Marktzeit sammeln →" sichtbar als Primary-Button (blauer Hintergrund, weißer Text).</li>
+      <li>Kein href-Sprung (href leer, NB-1). Kein JS-Fehler in Konsole.</li>
+      <li>Viewport 375px: Button vollständig sichtbar, kein Overflow.</li>
+      </ul>
+    </div>
     <div class="kg-card">
       <div class="fw-app"
            data-fw-app="prokrastinations-preis"
@@ -509,16 +661,20 @@
   <!-- ═══════════════════════════════════════════════════════════ -->
 
   <!-- Szenario AB: Erste Station-Card -->
-  <div class="test-section">
+  <div class="fw-test-case"
+     data-fw-test-case>
     <h2>AB — Erste Station-Card erscheint auf Screen 2 (AP-14-A01)</h2>
-    <p class="test-meta">
-      Testschritte: „10 Jahre zurückspringen" klicken.<br>
-      Erwartung: Screen 2 zeigt erste Station. Sichtbar: Quellenzeile (z.B. „Zeit Online · 9. November 2016"),
-      Headline, Anker-Text, Journey-Button „Weiter investiert bleiben".<br>
-      „Zwischenstand anzeigen"-Button vorhanden (Collapsible). Klick darauf: dl mit Eingezahlt + Depotwert-Werten erscheint.<br>
-      Kein Endwissen (kein finaler Depotwert, kein 120-Monats-Chart, keine Rendite).<br>
-      Kein JS-Fehler. Konsole: keine EditorialDegraded-Warnung (v3.0: kein Gate).
-    </p>
+
+    <div class="fw-test-expected" data-fw-expected-behavior>
+      <h3>Erwartetes Verhalten</h3>
+      <ul>
+      <li>Testschritte: „10 Jahre zurückspringen" klicken.</li>
+      <li>Erwartung: Screen 2 zeigt erste Station. Sichtbar: Quellenzeile (z.B. „Zeit Online · 9. November 2016"), Headline, Anker-Text, Journey-Button „Weiter investiert bleiben".</li>
+      <li>„Zwischenstand anzeigen"-Button vorhanden (Collapsible). Klick darauf: dl mit Eingezahlt + Depotwert-Werten erscheint.</li>
+      <li>Kein Endwissen (kein finaler Depotwert, kein 120-Monats-Chart, keine Rendite).</li>
+      <li>Kein JS-Fehler. Konsole: keine EditorialDegraded-Warnung (v3.0: kein Gate).</li>
+      </ul>
+    </div>
     <div class="kg-card">
       <div class="fw-app"
            data-fw-app="prokrastinations-preis"
@@ -528,15 +684,20 @@
   </div>
 
   <!-- Szenario AC: Journey komplett durchklicken -->
-  <div class="test-section">
+  <div class="fw-test-case"
+     data-fw-test-case>
     <h2>AC — Journey komplett: alle Stationen → Final Reveal → S3 (AP-14-A02)</h2>
-    <p class="test-meta">
-      Testschritte: „10 Jahre zurückspringen" → Journey-Button so lange klicken, bis Screen 3 erscheint.<br>
-      Erwartung: Jede Station zeigt andere Headline + Quellenzeile. Getrimmter Chart wächst mit jeder Station.<br>
-      Letzter Journey-Button (synthetische Final-Reveal-Station, „Ergebnis ansehen") → Screen 3 erscheint.<br>
-      Screen 3: vollständiger 120-Monats-Chart + VertikaleLinie. Erste Endwissens-Ausgabe in ARIA Live Region.<br>
-      Kein JS-Fehler, kein Layout-Bruch.
-    </p>
+
+    <div class="fw-test-expected" data-fw-expected-behavior>
+      <h3>Erwartetes Verhalten</h3>
+      <ul>
+      <li>Testschritte: „10 Jahre zurückspringen" → Journey-Button so lange klicken, bis Screen 3 erscheint.</li>
+      <li>Erwartung: Jede Station zeigt andere Headline + Quellenzeile. Getrimmter Chart wächst mit jeder Station.</li>
+      <li>Letzter Journey-Button (synthetische Final-Reveal-Station, „Ergebnis ansehen") → Screen 3 erscheint.</li>
+      <li>Screen 3: vollständiger 120-Monats-Chart + VertikaleLinie. Erste Endwissens-Ausgabe in ARIA Live Region.</li>
+      <li>Kein JS-Fehler, kein Layout-Bruch.</li>
+      </ul>
+    </div>
     <div class="kg-card">
       <div class="fw-app"
            data-fw-app="prokrastinations-preis"
@@ -546,15 +707,20 @@
   </div>
 
   <!-- Szenario AD: A11y — Station-Headline in Live Region, kein Endwissen -->
-  <div class="test-section">
+  <div class="fw-test-case"
+     data-fw-test-case>
     <h2>AD — A11y: ARIA Live Region enthält nur Station-Headline (AP-14-A11y-01)</h2>
-    <p class="test-meta">
-      Testschritte: „10 Jahre zurückspringen" klicken.<br>
-      Erwartung: [data-fw-role="a11y-result"] enthält die Headline der ersten Station (z.B. „Börsenhandel an der Wall Street ausgesetzt").<br>
-      KEIN Depotwert, KEIN „€ eingezahlt"-Text in der Live Region auf Screen 2.<br>
-      Nach Journey-Button: Live Region aktualisiert sich auf die nächste Station-Headline.<br>
-      Erst auf Screen 3: Live Region enthält vollständigen Ergebnis-Text mit Depotwert.
-    </p>
+
+    <div class="fw-test-expected" data-fw-expected-behavior>
+      <h3>Erwartetes Verhalten</h3>
+      <ul>
+      <li>Testschritte: „10 Jahre zurückspringen" klicken.</li>
+      <li>Erwartung: [data-fw-role="a11y-result"] enthält die Headline der ersten Station (z.B. „Börsenhandel an der Wall Street ausgesetzt").</li>
+      <li>KEIN Depotwert, KEIN „€ eingezahlt"-Text in der Live Region auf Screen 2.</li>
+      <li>Nach Journey-Button: Live Region aktualisiert sich auf die nächste Station-Headline.</li>
+      <li>Erst auf Screen 3: Live Region enthält vollständigen Ergebnis-Text mit Depotwert.</li>
+      </ul>
+    </div>
     <div class="kg-card">
       <div class="fw-app"
            data-fw-app="prokrastinations-preis"
@@ -564,15 +730,19 @@
   </div>
 
   <!-- Szenario AE: Endwissens-Verbot -->
-  <div class="test-section">
+  <div class="fw-test-case"
+     data-fw-test-case>
     <h2>AE — Endwissens-Verbot: S2 zeigt kein Endwissen (APP_SPEC §14.1)</h2>
-    <p class="test-meta">
-      Testschritte: „10 Jahre zurückspringen" → alle Stationen der Zeitreise prüfen.<br>
-      Verbotene Elemente auf KEINER Screen-2-Station: finale KPI-Cards, finale Depotwert-Summe,
-      vollständiger 120-Monats-Chart, finale Rendite, ARIA-Text mit finalem Eurobetrag.<br>
-      Erlaubt: Zwischenstand (paidIn + portfolioValueAtStation bis zum Stations-Monat).<br>
-      Test-Methode: DevTools DOM + Netzwerk-Tab; keine JS-Exception in Konsole.
-    </p>
+
+    <div class="fw-test-expected" data-fw-expected-behavior>
+      <h3>Erwartetes Verhalten</h3>
+      <ul>
+      <li>Testschritte: „10 Jahre zurückspringen" → alle Stationen der Zeitreise prüfen.</li>
+      <li>Verbotene Elemente auf KEINER Screen-2-Station: finale KPI-Cards, finale Depotwert-Summe, vollständiger 120-Monats-Chart, finale Rendite, ARIA-Text mit finalem Eurobetrag.</li>
+      <li>Erlaubt: Zwischenstand (paidIn + portfolioValueAtStation bis zum Stations-Monat).</li>
+      <li>Test-Methode: DevTools DOM + Netzwerk-Tab; keine JS-Exception in Konsole.</li>
+      </ul>
+    </div>
     <div class="kg-card">
       <div class="fw-app"
            data-fw-app="prokrastinations-preis"
@@ -588,17 +758,18 @@
   <!-- ═══════════════════════════════════════════════════════════ -->
 
   <!-- Szenario AF: FwChartTextPlugin Smart-Update-Testfall (AP-prokrast-03d) -->
-  <div class="test-section">
+  <div class="fw-test-case"
+     data-fw-test-case>
     <h2>AF — FwChartTextPlugin Smart-Update-Testfall (AP-prokrast-03d, isoliert von app.js)</h2>
-    <p class="test-meta">
-      Testschritte: Seite laden (Initialrender mit <code>chartText.annotations = []</code>) → Button
-      „Annotation einblenden" klicken (zweiter <code>renderFromData()</code>-Aufruf mit gefüllten Annotationen).<br>
-      Erwartung: Nach Initialrender ist kein Canvas-Text sichtbar (Plugin bereits registriert, aber
-      <code>annotations</code> leer). Nach Klick erscheint zweizeiliger Text „Test-Annotation / Zeile 2"
-      bei x=0.75/y=0.35 relativ zur ChartArea — ohne dass der Chart neu aufgebaut wird (Smart Update,
-      kein Flackern, keine neue Achse). Kein JS-Fehler in Konsole.<br>
-      Synthetische Testdaten, keine echten Finanzdaten. Reiner Engine-/Plugin-Regressionstest für AP-prokrast-03d.
-    </p>
+
+    <div class="fw-test-expected" data-fw-expected-behavior>
+      <h3>Erwartetes Verhalten</h3>
+      <ul>
+      <li>Testschritte: Seite laden (Initialrender mit <code>chartText.annotations = []</code>) → Button „Annotation einblenden" klicken (zweiter <code>renderFromData()</code>-Aufruf mit gefüllten Annotationen).</li>
+      <li>Erwartung: Nach Initialrender ist kein Canvas-Text sichtbar (Plugin bereits registriert, aber <code>annotations</code> leer). Nach Klick erscheint zweizeiliger Text „Test-Annotation / Zeile 2" bei x=0.75/y=0.35 relativ zur ChartArea — ohne dass der Chart neu aufgebaut wird (Smart Update, kein Flackern, keine neue Achse). Kein JS-Fehler in Konsole.</li>
+      <li>Synthetische Testdaten, keine echten Finanzdaten. Reiner Engine-/Plugin-Regressionstest für AP-prokrast-03d.</li>
+      </ul>
+    </div>
     <div class="kg-card">
       <div id="fwChartTextTest" class="fw-app__chart-section" data-fw-appchart></div>
       <button id="fwChartTextTestBtn" type="button" style="margin-top: 0.75rem; display: block; position: relative;">Annotation einblenden (2. renderFromData-Aufruf)</button>
@@ -650,7 +821,9 @@
     </script>
   </div>
 
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  </main>
+
+  <script src="../../Theme/assets/js/vendor/chart.umd.min.js"></script>
   <script type="module" src="./app.js"></script>
 </body>
 </html>

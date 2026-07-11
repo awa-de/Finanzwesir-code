@@ -1,0 +1,158 @@
+/*
+ * tests/shared/test-page.css
+ * Gemeinsames Testseiten-Chrome für alle dauerhaften Testseiten (docs/testing/TEST_PAGE_STANDARD.md §11).
+ *
+ * Gestaltet AUSSCHLIESSLICH die Test-/Orientierungsschicht (Header, Erwartungsblock,
+ * Laufzeitstatus, Fehlerbox, Launcher-Übersicht). Greift NIE in die zu prüfende App oder
+ * den zu prüfenden Chart ein — keine Regeln für .kg-card, .fw-app, .financial-chart-module,
+ * [data-fw-app], [data-fw-appchart], Canvas oder App-/Engine-interne Klassen.
+ *
+ * Nutzt vorhandene CI-Tokens aus tokens.css mit neutralen Fallbacks, damit die Datei auch
+ * ladbar bleibt, wenn eine Testseite (noch) keine tokens.css einbindet.
+ */
+
+.fw-test-page {
+  font-family: var(--font-body, 'Source Sans Pro', sans-serif);
+  color: var(--color-text, #272727);
+  background: var(--color-bg, #ffffff);
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 1.5rem 1rem 4rem;
+  line-height: 1.5;
+}
+
+.fw-test-header {
+  margin-bottom: 2rem;
+  padding-bottom: 1rem;
+  border-bottom: 2px solid var(--color-border, #e7ecef);
+}
+
+.fw-test-header h1 {
+  font-size: 1.4rem;
+  margin: 0 0 0.75rem;
+}
+
+.fw-test-instruction {
+  font-size: 0.9rem;
+  color: var(--color-text-muted, #666666);
+  margin: 0 0 1rem;
+}
+
+.fw-test-runtime-status {
+  font-size: 0.85rem;
+  font-weight: 700;
+  padding: 0.6rem 0.9rem;
+  border-radius: 6px;
+  background: var(--color-bg-faint, #fafafa);
+  border: 1px solid var(--color-border, #e7ecef);
+  color: var(--color-text, #272727);
+}
+
+.fw-test-runtime-status.is-error {
+  background: var(--color-error-bg, #fff8f8);
+  border-color: var(--color-error-border, #c62828);
+  color: var(--color-error-text, #b71c1c);
+}
+
+.fw-test-errors {
+  margin-top: 1rem;
+  padding: 0.75rem 1rem;
+  border-radius: 6px;
+  background: var(--color-error-bg, #fff8f8);
+  border: 2px solid var(--color-error-border, #c62828);
+  color: var(--color-error-text, #b71c1c);
+}
+
+.fw-test-errors[hidden] {
+  display: none;
+}
+
+.fw-test-errors h2 {
+  font-size: 1rem;
+  margin: 0 0 0.5rem;
+}
+
+.fw-test-errors ol {
+  margin: 0;
+  padding-left: 1.25rem;
+  font-family: ui-monospace, Consolas, monospace;
+  font-size: 0.8rem;
+}
+
+.fw-test-main {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.fw-test-case {
+  border: 1px dashed var(--color-border, #e7ecef);
+  border-radius: 8px;
+  padding: 1.25rem;
+}
+
+.fw-test-case h2 {
+  margin-top: 0;
+  font-size: 1.1rem;
+}
+
+.fw-test-expected {
+  background: var(--color-bg-faint, #fafafa);
+  border: 1px solid var(--color-border, #e7ecef);
+  border-radius: 6px;
+  padding: 0.75rem 1rem;
+  margin: 0.75rem 0 1.25rem;
+}
+
+.fw-test-expected h3 {
+  margin: 0 0 0.5rem;
+  font-size: 0.95rem;
+}
+
+.fw-test-expected ul {
+  margin: 0;
+  padding-left: 1.25rem;
+  font-size: 0.9rem;
+}
+
+/* ===== Launcher (tests/index.html) — .fw-test-index, ebenfalls reine Orientierungsschicht ===== */
+
+.fw-test-index-group {
+  margin-bottom: 2rem;
+}
+
+.fw-test-index-group h2 {
+  font-size: 1.05rem;
+  border-bottom: 1px solid var(--color-border, #e7ecef);
+  padding-bottom: 0.4rem;
+}
+
+.fw-test-index-list {
+  list-style: none;
+  margin: 0.75rem 0 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.fw-test-index-list li a {
+  color: var(--color-link, #0071bf);
+  text-decoration: none;
+}
+
+.fw-test-index-list li a:hover {
+  text-decoration: underline;
+}
+
+.fw-test-index-empty {
+  color: var(--color-text-muted, #666666);
+  font-size: 0.9rem;
+  font-style: italic;
+}
+
+@media (max-width: 480px) {
+  .fw-test-page {
+    padding: 1rem 0.75rem 3rem;
+  }
+}

@@ -90,18 +90,18 @@ Apps werden NICHT als vollständiger HTML-Code eingefügt. Stattdessen ein einze
 
 ```html
 <!-- App ohne eigene Daten (reine Berechnung aus User-Inputs): -->
-<div class="fw-app" data-app="sparplan-rechner"></div>
+<div class="fw-app" data-fw-app="sparplan-rechner"></div>
 
 <!-- App mit Zeitreihen-Daten (CSV): -->
 <div class="fw-app"
-     data-app="etf-wahlurnen-rechner"
-     data-csv="https://www.finanzwesir.com/assets/data/msci-world.csv">
+     data-fw-app="etf-wahlurnen-rechner"
+     data-fw-data="https://www.finanzwesir.com/assets/data/msci-world.csv">
 </div>
 ```
 
 Das Theme lädt die App-Logik automatisch. Design-System und Fonts kommen aus dem Theme — die App fügt sich nahtlos ein.
 
-**CSV aktualisieren:** Neue CSV hochladen → URL im `data-csv` anpassen. Kein weiterer Eingriff nötig.
+**CSV aktualisieren:** Neue CSV hochladen → URL im `data-fw-data` anpassen. Kein weiterer Eingriff nötig.
 
 **Charts (Chart-Engine):**
 

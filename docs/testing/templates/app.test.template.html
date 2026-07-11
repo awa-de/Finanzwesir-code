@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Testseite — __APP_TITLE__</title>
+
+  <link rel="stylesheet" href="../../Theme/assets/css/tokens.css">
+  <link rel="stylesheet" href="../../tests/shared/test-page.css">
+  <link rel="stylesheet" href="./app.css">
+
+  <script src="../../tests/shared/test-page.js" defer></script>
+</head>
+<body class="fw-test-page"
+      data-fw-test-template="1">
+
+  <header class="fw-test-header">
+    <h1>Testseite: __APP_TITLE__</h1>
+
+    <p class="fw-test-instruction">
+      Seite über einen lokalen Webserver öffnen, die unten beschriebenen Schritte ausführen
+      und das sichtbare Ergebnis mit „Erwartetes Verhalten" vergleichen.
+    </p>
+
+    <div class="fw-test-runtime-status"
+         data-fw-runtime-status
+         role="status"
+         aria-live="polite">
+      Bereit – bisher kein JavaScript-Fehler erkannt.
+    </div>
+
+    <section class="fw-test-errors"
+             data-fw-test-errors
+             aria-live="assertive"
+             hidden>
+      <h2>Technische Fehler</h2>
+      <ol data-fw-test-error-list></ol>
+    </section>
+  </header>
+
+  <main class="fw-test-main">
+    <section class="fw-test-case"
+             data-fw-test-case>
+      <h2>Hauptverhalten</h2>
+
+      <section class="fw-test-expected"
+               data-fw-expected-behavior>
+        <h3>Erwartetes Verhalten</h3>
+        <ul>
+          <li>__ERWARTUNG_1__</li>
+          <li>__ERWARTUNG_2__</li>
+          <li>__ERWARTUNG_3__</li>
+        </ul>
+      </section>
+
+      <p>
+        Artikeltext vor der App. Er muss durch das App-CSS visuell unverändert bleiben.
+      </p>
+
+      <div class="kg-card">
+        <div class="fw-app"
+             data-fw-app="__APP_SLUG__">
+        </div>
+      </div>
+
+      <p>
+        Artikeltext nach der App. Er muss durch das App-CSS visuell unverändert bleiben.
+      </p>
+
+      <!--
+        Optionale App-Datenattribute (nur ergänzen, wenn die konkrete App sie benötigt):
+        data-fw-data="[repo-relative oder erlaubte finanzwesir.com-URL zur CSV]"
+        data-fw-config="[repo-relative oder erlaubte finanzwesir.com-URL zur JSON-Config]"
+        data-fw-options="[key:value, key:value]"
+        Attributsyntax, Whitelist-Prinzip und Sicherheitsregeln: docs/spec/APP-INTERFACE.md §3.1/§5/§7.
+      -->
+    </section>
+  </main>
+
+  <script type="module" src="./app.js"></script>
+</body>
+</html>

@@ -190,3 +190,15 @@ Wird geleert nach /distill. Einträge: [FRICTION] [WIN] [PREF] [QUESTION] [OK]
 - [OK] Voll-Abschluss: `docs/steering/BACKLOG.md` (TESTENV-1-Zeile aktualisiert, bleibt aktiv — Initiative nicht abgeschlossen, nur Phase 1), `PROJECT-STATUS.md` (Fokus-AP + Nächster-Schritt + Nebenabschluss + Stand-Header + HOOK-META-SESSION synchronisiert; dabei zusätzlich eine stale Commit-Status-Behauptung aus der Vorsession korrigiert: HEAD ist `77f3229`, nicht mehr `dbe5007` — die AP-prokrast-17-FONT-CODE-B+SPEC-HEBUNG-Kette war bereits committed, PROJECT-STATUS behauptete noch „uncommitted"). `NAVIGATION.md` geprüft (Scout-Suche nach „TESTENV"): keine Treffer, keine Änderung nötig — TESTENV-Ketten werden konsistent zu den bisherigen AP-prokrast-Sub-Ketten nicht einzeln geroutet. `.claude/memory/`: kein neuer Eintrag nötig (App-Ordner-Zahl 25 bereits in `project_app_fabrik_struktur.md` dokumentiert, keine neue stabile Erkenntnis darüber hinaus).
 
 ### TESTENV-1a–TESTENV-1aFRF — AP-Wechsel
+
+### TESTENV-1a-Kette — AP-Wechsel
+
+### 2026-07-11 — Kettenabschluss TESTENV-1b–1eA ✅ (GELB) | RECONCILED: TESTENV-1b TESTENV-1bF TESTENV-1bR TESTENV-1bRF TESTENV-1c TESTENV-1cF TESTENV-1d TESTENV-1eA
+- [OK] TESTENV-1b (Harness-Vertrag, GRÜN) → TESTENV-1bF (Vertrag drastisch minimalisiert auf Ghost-nahen Standard, alter Vertrag gelöscht) → TESTENV-1bR (unabhängiger Review, GELB, 2 Findings) → TESTENV-1bRF (Findings geschlossen, GRÜN). Kanonisch: `docs/testing/TEST_PAGE_STANDARD.md`.
+- [OK] TESTENV-1c (Infrastruktur gebaut: Template, Shared CSS/JS, `tools/check-test-pages.py`, Launcher, Scratch-Zone; 6 Positiv-/22 Negativtests GRÜN, realer Lauf 6 Strukturfehler dokumentiert, kein Altbestand migriert) → TESTENV-1cF (Checker-Lücke geschlossen: `data-fw-test-allow-missing-ref` für bewusst fehlende lokale Referenzen; 6→5 Strukturfehler).
+- [OK] TESTENV-1d (Altbestand klassifiziert: 14 KEEP, 1 MERGE, 6 DELETE, 2 OUTSIDE, 0 UNKLAR — Python-Faktenmatrix + CSV-Overlap + Haiku-Grobsortierung, keine Quelldatei verändert).
+- [WIN] TESTENV-1eA (App-Testseite migriert, 32 Testfälle vollständig erhalten — Auftragsannahme „34" war Zählfehler, mit Albert auf 32 korrigiert; 5→2 Strukturfehler). Die 2 verbleibenden Befunde sind bewusste Negativtests der App selbst (Szenario C: absichtlich fehlendes `data-fw-app`; Szenario AF: direkter ChartEngine-Aufruf statt Ghost-Card) — mit Albert abgestimmt unverändert gelassen, dokumentiert statt „repariert".
+- [OK] Nachtrag: Albert hat den Browser-Smoke-Test real durchgeführt (bestanden) und `TESTENV-1eA` fachlich freigegeben.
+- [OK] Kein Commit über die gesamte Kette (git log geprüft: HEAD weiterhin `37ab2f9`) — Commit-Freigabe liegt bei Albert. `NAVIGATION.md` bewusst nicht angefasst (TESTENV-Ketten werden konsistent nicht einzeln geroutet). `BACKLOG.md` TESTENV-1-Zeile aktualisiert (bleibt aktiv, Phase 5 läuft). Kein Distill, kein Kassensturz fällig.
+
+### TESTENV-1b–1eA — AP-Wechsel
