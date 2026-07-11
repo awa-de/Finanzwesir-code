@@ -161,6 +161,7 @@
   background: transparent;
   color: var(--color-primary, #218380);
   font-size: 0.95em;
+  font-family: inherit; /* NEW — TESTENV-1g: <button> erbt font-family nicht automatisch (CI-Audit-Fund TESTENV-1f §9) */
   cursor: pointer;
 }
 

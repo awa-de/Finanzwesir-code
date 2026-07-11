@@ -107,6 +107,7 @@
 .fw-test-expected h3 {
   margin: 0 0 0.5rem;
   font-size: 0.95rem;
+  color: var(--color-text, #272727);
 }
 
 .fw-test-expected ul {
