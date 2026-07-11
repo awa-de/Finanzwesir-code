@@ -1,11 +1,14 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FwSmartXAxis V8.3 — Density Matrix Test Suite (Calendar Ticks)</title>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FwSmartXAxis V8.3 — Density Matrix Test Suite (Calendar Ticks)</title>
+
+  <link rel="stylesheet" href="../../Theme/assets/css/tokens.css">
+  <link rel="stylesheet" href="../shared/test-page.css">
+  <script src="../shared/test-page.js" defer></script>
+  <style>
         body {
             font-family: 'Source Sans Pro', sans-serif;
             padding: 2rem;
@@ -62,224 +65,364 @@
         .intro p { color: #1565c0; }
     </style>
 </head>
-<body>
+<body class="fw-test-page" data-fw-test-template="1">
 
-    <h1>FwSmartXAxis V8.3 — Density Matrix Test Suite (Calendar Ticks)</h1>
-    <div class="intro">
-        <p>
-            <strong>Zweck:</strong> Systematischer Test der Table-Driven Strategy Selection (V8.0.0).
-            Jeder Chart testet einen spezifischen Pfad durch die Density-Matrix-Tabellen.
-            6 Rhythmen &times; verschiedene Dauern &times; SNAPSHOT (Line) + PERIOD (Bar).
-        </p>
-        <p>
-            <strong>Prüfkriterium:</strong> X-Achsen-Labels müssen zum Rhythmus und zur Dauer passen.
-            Keine chaotischen Labels, keine Überlappung, keine leere Achse.
-        </p>
+  <header class="fw-test-header">
+    <h1>Testseite: FwSmartXAxis V8.3 — Density Matrix Test Suite (Calendar Ticks)</h1>
+
+    <div class="fw-test-runtime-status" data-fw-runtime-status role="status" aria-live="polite">
+      Bereit – bisher kein JavaScript-Fehler erkannt.
     </div>
 
-    <!-- ============================================================ -->
-    <h2>A. SNAPSHOT DEFAULT — Tägliche &amp; monatliche Daten (Line)</h2>
-    <p>Diese Charts nutzen die DEFAULT-Tabelle in SNAPSHOT_TABLES. Kein rhythm-spezifischer Override.</p>
-    <!-- ============================================================ -->
+    <section class="fw-test-errors" data-fw-test-errors aria-live="assertive" hidden>
+      <h2>Technische Fehler</h2>
+      <ol data-fw-test-error-list></ol>
+    </section>
+  </header>
 
-    <h3>snap_period_daily_7d.csv</h3>
+  <main class="fw-test-main">
+    <p class="fw-test-intro"><strong>Zweck:</strong> Systematischer Test der Table-Driven Strategy Selection (V8.0.0).
+            Jeder Chart testet einen spezifischen Pfad durch die Density-Matrix-Tabellen.
+            6 Rhythmen &times; verschiedene Dauern &times; SNAPSHOT (Line) + PERIOD (Bar).</p>
+    <p class="fw-test-intro"><strong>Prüfkriterium:</strong> X-Achsen-Labels müssen zum Rhythmus und zur Dauer passen.
+            Keine chaotischen Labels, keine Überlappung, keine leere Achse.</p>
+    <p class="fw-test-intro">Diese Charts nutzen die DEFAULT-Tabelle in SNAPSHOT_TABLES. Kein rhythm-spezifischer Override.</p>
+    <section class="fw-test-case" data-fw-test-case>
+      <div class="fw-test-expected" data-fw-expected-behavior>
+        <h3>Erwartetes Verhalten</h3>
+        <ul>
+        <li>Erwartung: Tages-Labels (Zone L: jeden Tag, Zone S: alle 3 Tage). 7 Datenpunkte, jeder sichtbar auf L.</li>
+        </ul>
+      </div>
+<h3>snap_period_daily_7d.csv</h3>
     <h4>A1. DAILY, 7 Tage (~0,02 Jahre) — Line</h4>
     <p>
         <strong>Rhythmus:</strong> DAILY (Delta ~1 Tag).<br>
         <span class="table-path">Pfad: SNAPSHOT_TABLES.DAILY → Zeile 1 (maxYears: 0.04) → unit: day, stepSize: { L: 1, S: 3 }</span><br>
         <span class="expect">Erwartung: Tages-Labels (Zone L: jeden Tag, Zone S: alle 3 Tage). 7 Datenpunkte, jeder sichtbar auf L.</span>
     </p>
-    <div class="financial-chart-module"
+    <div class="kg-card">
+<div class="financial-chart-module"
          data-type="line"
          data-title="A1. Daily 7d"
-         data-csv="./data/snap_period_daily_7d.csv"
+         data-csv="../fixtures/engine/snap_period_daily_7d.csv"
          data-colors="Tech ETF: #0071BF">
     </div>
+</div>
+    </section>
 
-    <h3>snap_period_daily_90d.csv</h3>
+    <section class="fw-test-case" data-fw-test-case>
+      <div class="fw-test-expected" data-fw-expected-behavior>
+        <h3>Erwartetes Verhalten</h3>
+        <ul>
+        <li>Erwartung: Wöchentliche Ticks (step 7, Zone L). Gleichmäßiges Raster alle 7 Tage. Kein Chaos.</li>
+        </ul>
+      </div>
+<h3>snap_period_daily_90d.csv</h3>
     <h4>A2. DAILY, 90 Tage (~0,25 Jahre) — Line</h4>
     <p>
         <strong>Rhythmus:</strong> DAILY (Delta ~1 Tag). Boundary-Test: 90/365 = 0,247 &lt; 0,25.<br>
         <span class="table-path">Pfad: SNAPSHOT_TABLES.DAILY → Zeile 2 (maxYears: 0.25) → unit: day, stepSize: { L: 7 }</span><br>
         <span class="expect">Erwartung: Wöchentliche Ticks (step 7, Zone L). Gleichmäßiges Raster alle 7 Tage. Kein Chaos.</span>
     </p>
-    <div class="financial-chart-module"
+    <div class="kg-card">
+<div class="financial-chart-module"
          data-type="line"
          data-title="A2. Daily 90d (Boundary 0.25y)"
-         data-csv="./data/snap_period_daily_90d.csv"
+         data-csv="../fixtures/engine/snap_period_daily_90d.csv"
          data-colors="Aktien Welt: #218380">
     </div>
+</div>
+    </section>
 
-    <h3>snap_period_monthly_4m.csv</h3>
+    <section class="fw-test-case" data-fw-test-case>
+      <div class="fw-test-expected" data-fw-expected-behavior>
+        <h3>Erwartetes Verhalten</h3>
+        <ul>
+        <li>Erwartung: Monats-Labels. 4 Datenpunkte, ca. 4 Labels (Jan–Apr '24).</li>
+        </ul>
+      </div>
+<h3>snap_period_monthly_4m.csv</h3>
     <h4>A3. MONTHLY, 4 Monate (~0,33 Jahre) — Line</h4>
     <p>
         <strong>Rhythmus:</strong> MONTHLY (Delta ~30 Tage). Dauer &gt; 0,25y.<br>
         <span class="table-path">Pfad: SNAPSHOT_TABLES.MONTHLY (= SNAPSHOT_BASE) → Zeile 1 (maxYears: 1.5) → unit: month</span><br>
         <span class="expect">Erwartung: Monats-Labels. 4 Datenpunkte, ca. 4 Labels (Jan–Apr '24).</span>
     </p>
-    <div class="financial-chart-module"
+    <div class="kg-card">
+<div class="financial-chart-module"
          data-type="line"
          data-title="A3. Monthly 4m"
-         data-csv="./data/snap_period_monthly_4m.csv"
+         data-csv="../fixtures/engine/snap_period_monthly_4m.csv"
          data-colors="Portfolio: #7B2D8E">
     </div>
+</div>
+    </section>
 
-    <h3>snap_period_monthly_30m.csv</h3>
+    <section class="fw-test-case" data-fw-test-case>
+      <div class="fw-test-expected" data-fw-expected-behavior>
+        <h3>Erwartetes Verhalten</h3>
+        <ul>
+        <li>Erwartung: Quartals-Labels über 2,5 Jahre. Ca. 10 Labels.</li>
+        </ul>
+      </div>
+<h3>snap_period_monthly_30m.csv</h3>
     <h4>A4. MONTHLY, 30 Monate (~2,5 Jahre) — Line</h4>
     <p>
         <strong>Rhythmus:</strong> MONTHLY (Delta ~30 Tage). Dauer &gt; 1,5y.<br>
         <span class="table-path">Pfad: SNAPSHOT_TABLES.MONTHLY (= SNAPSHOT_BASE) → Zeile 2 (maxYears: 5.0) → unit: quarter</span><br>
         <span class="expect">Erwartung: Quartals-Labels über 2,5 Jahre. Ca. 10 Labels.</span>
     </p>
-    <div class="financial-chart-module"
+    <div class="kg-card">
+<div class="financial-chart-module"
          data-type="line"
          data-title="A4. Monthly 30m"
-         data-csv="./data/snap_period_monthly_30m.csv"
+         data-csv="../fixtures/engine/snap_period_monthly_30m.csv"
          data-colors="Anleihen Mix: #F4A261">
     </div>
+</div>
+    </section>
 
-    <h3>snap_period_quarterly_3y.csv</h3>
+    <section class="fw-test-case" data-fw-test-case>
+      <div class="fw-test-expected" data-fw-expected-behavior>
+        <h3>Erwartetes Verhalten</h3>
+        <ul>
+        <li>Erwartung: Quartals-Labels. 12 Datenpunkte, ca. 12 Labels.</li>
+        </ul>
+      </div>
+<h3>snap_period_quarterly_3y.csv</h3>
     <h4>A5. QUARTERLY, 3 Jahre — Line</h4>
     <p>
         <strong>Rhythmus:</strong> QUARTERLY (Delta ~91 Tage). Kein eigenes Override → DEFAULT.<br>
         <span class="table-path">Pfad: SNAPSHOT_TABLES.QUARTERLY (= SNAPSHOT_BASE) → Zeile 2 (maxYears: 5.0) → unit: quarter</span><br>
         <span class="expect">Erwartung: Quartals-Labels. 12 Datenpunkte, ca. 12 Labels.</span>
     </p>
-    <div class="financial-chart-module"
+    <div class="kg-card">
+<div class="financial-chart-module"
          data-type="line"
          data-title="A5. Quarterly 3y"
-         data-csv="./data/snap_period_quarterly_3y.csv"
+         data-csv="../fixtures/engine/snap_period_quarterly_3y.csv"
          data-colors="Anleihen Mix: #E63946">
     </div>
+</div>
 
     <!-- ============================================================ -->
     <h2>B. SNAPSHOT WEEKLY — Der Regressions-Fix (Line)</h2>
     <p>Diese Charts nutzen die WEEKLY-Tabelle in SNAPSHOT_TABLES. Vor V8 gab es keinen WEEKLY-Pfad — tägliches Label-Chaos war die Folge (Regression 4).</p>
     <!-- ============================================================ -->
+    </section>
 
-    <h3>snap_period_weekly_3m.csv</h3>
+    <section class="fw-test-case" data-fw-test-case>
+      <div class="fw-test-expected" data-fw-expected-behavior>
+        <h3>Erwartetes Verhalten</h3>
+        <ul>
+        <li>Erwartung: Monatliche Labels (Jan, Feb, Mär '24). NICHT tägliches Chaos wie vor V8. Tooltip: "Woche vom ..."</li>
+        </ul>
+      </div>
+<h3>snap_period_weekly_3m.csv</h3>
     <h4>B1. WEEKLY, 13 Wochen (~0,25 Jahre) — Line — DER REGRESSION-4-FIX</h4>
     <p>
         <strong>Rhythmus:</strong> WEEKLY (Delta ~7 Tage). Dauer &lt; 0,5y.<br>
         <span class="table-path">Pfad: SNAPSHOT_TABLES.WEEKLY → Zeile 1 (maxYears: 0.5) → unit: month, step: 1</span><br>
         <span class="expect">Erwartung: Monatliche Labels (Jan, Feb, Mär '24). NICHT tägliches Chaos wie vor V8. Tooltip: "Woche vom ..."</span>
     </p>
-    <div class="financial-chart-module"
+    <div class="kg-card">
+<div class="financial-chart-module"
          data-type="line"
          data-title="B1. Weekly 3m (Regression 4 Fix)"
-         data-csv="./data/snap_period_weekly_3m.csv"
+         data-csv="../fixtures/engine/snap_period_weekly_3m.csv"
          data-colors="MSCI World: #0071BF">
     </div>
+</div>
+    </section>
 
-    <h3>snap_period_weekly_6m.csv</h3>
+    <section class="fw-test-case" data-fw-test-case>
+      <div class="fw-test-expected" data-fw-expected-behavior>
+        <h3>Erwartetes Verhalten</h3>
+        <ul>
+        <li>Erwartung: Monatliche Labels (Jan–Jul '24). Boundary: exakt 0,5y trifft noch Zeile 1.</li>
+        </ul>
+      </div>
+<h3>snap_period_weekly_6m.csv</h3>
     <h4>B2. WEEKLY, 26 Wochen (~0,5 Jahre) — Line — Boundary-Test</h4>
     <p>
         <strong>Rhythmus:</strong> WEEKLY (Delta ~7 Tage). Genau an der 0,5y-Schwelle.<br>
         <span class="table-path">Pfad: SNAPSHOT_TABLES.WEEKLY → Zeile 1 (0.5 &le; 0.5) → unit: month, step: 1</span><br>
         <span class="expect">Erwartung: Monatliche Labels (Jan–Jul '24). Boundary: exakt 0,5y trifft noch Zeile 1.</span>
     </p>
-    <div class="financial-chart-module"
+    <div class="kg-card">
+<div class="financial-chart-module"
          data-type="line"
          data-title="B2. Weekly 6m (Boundary 0.5y)"
-         data-csv="./data/snap_period_weekly_6m.csv"
+         data-csv="../fixtures/engine/snap_period_weekly_6m.csv"
          data-colors="MSCI World: #218380">
     </div>
+</div>
+    </section>
 
-    <h3>snap_period_weekly_18m.csv</h3>
+    <section class="fw-test-case" data-fw-test-case>
+      <div class="fw-test-expected" data-fw-expected-behavior>
+        <h3>Erwartetes Verhalten</h3>
+        <ul>
+        <li>Erwartung: Monatliche Labels (Zone L: jeden Monat, Zone S: Quartal). Ca. 18 Labels auf Desktop.</li>
+        </ul>
+      </div>
+<h3>snap_period_weekly_18m.csv</h3>
     <h4>B3. WEEKLY, 78 Wochen (~1,5 Jahre) — Line</h4>
     <p>
         <strong>Rhythmus:</strong> WEEKLY (Delta ~7 Tage). Dauer &gt; 0,5y, &le; 1,5y.<br>
         <span class="table-path">Pfad: SNAPSHOT_TABLES.WEEKLY → Zeile 2 (maxYears: 1.5) → unit: month, step: zone-abh.</span><br>
         <span class="expect">Erwartung: Monatliche Labels (Zone L: jeden Monat, Zone S: Quartal). Ca. 18 Labels auf Desktop.</span>
     </p>
-    <div class="financial-chart-module"
+    <div class="kg-card">
+<div class="financial-chart-module"
          data-type="line"
          data-title="B3. Weekly 18m"
-         data-csv="./data/snap_period_weekly_18m.csv"
+         data-csv="../fixtures/engine/snap_period_weekly_18m.csv"
          data-colors="MSCI World: #7B2D8E">
     </div>
+</div>
+    </section>
 
-    <h3>snap_period_weekly_2y.csv</h3>
+    <section class="fw-test-case" data-fw-test-case>
+      <div class="fw-test-expected" data-fw-expected-behavior>
+        <h3>Erwartetes Verhalten</h3>
+        <ul>
+        <li>Erwartung: Quartals-Labels über 2 Jahre. Ca. 8 Labels. Tooltip: "Woche vom ..."</li>
+        </ul>
+      </div>
+<h3>snap_period_weekly_2y.csv</h3>
     <h4>B4. WEEKLY, 104 Wochen (~2 Jahre) — Line</h4>
     <p>
         <strong>Rhythmus:</strong> WEEKLY (Delta ~7 Tage). Dauer &gt; 1,5y.<br>
         <span class="table-path">Pfad: SNAPSHOT_TABLES.WEEKLY → Zeile 3 (maxYears: 5.0) → unit: quarter</span><br>
         <span class="expect">Erwartung: Quartals-Labels über 2 Jahre. Ca. 8 Labels. Tooltip: "Woche vom ..."</span>
     </p>
-    <div class="financial-chart-module"
+    <div class="kg-card">
+<div class="financial-chart-module"
          data-type="line"
          data-title="B4. Weekly 2y"
-         data-csv="./data/snap_period_weekly_2y.csv"
+         data-csv="../fixtures/engine/snap_period_weekly_2y.csv"
          data-colors="MSCI World: #F4A261">
     </div>
+</div>
 
     <!-- ============================================================ -->
     <h2>C. SNAPSHOT HALF_YEARLY (Line)</h2>
     <p>Diese Charts nutzen die HALF_YEARLY-Tabelle in SNAPSHOT_TABLES. Vor V8 war das ein if-else Override.</p>
     <!-- ============================================================ -->
+    </section>
 
-    <h3>snap_period_half_yearly_4y.csv</h3>
+    <section class="fw-test-case" data-fw-test-case>
+      <div class="fw-test-expected" data-fw-expected-behavior>
+        <h3>Erwartetes Verhalten</h3>
+        <ul>
+        <li>Erwartung: 8 Ticks an echten Datenpositionen (Jun/Dez). Labels: "Jun '20", "Dez '20", ... Kein Kalender-Offset.</li>
+        </ul>
+      </div>
+<h3>snap_period_half_yearly_4y.csv</h3>
     <h4>C1. HALF_YEARLY, 4 Jahre — Line — Data-Anchored</h4>
     <p>
         <strong>Rhythmus:</strong> HALF_YEARLY (Delta ~182 Tage). Dauer &le; 5y.<br>
         <span class="table-path">Pfad: SNAPSHOT_TABLES.HALF_YEARLY → Zeile 1 → mode: HALF_YEAR → Data-Anchored (jeder Datenpunkt = Tick)</span><br>
         <span class="expect">Erwartung: 8 Ticks an echten Datenpositionen (Jun/Dez). Labels: "Jun '20", "Dez '20", ... Kein Kalender-Offset.</span>
     </p>
-    <div class="financial-chart-module"
+    <div class="kg-card">
+<div class="financial-chart-module"
          data-type="line"
          data-title="C1. Half-Yearly 4y"
-         data-csv="./data/snap_period_half_yearly_4y.csv"
+         data-csv="../fixtures/engine/snap_period_half_yearly_4y.csv"
          data-colors="Dividenden ETF: #218380">
     </div>
+</div>
+    </section>
 
-    <h3>snap_period_half_yearly_12y.csv</h3>
+    <section class="fw-test-case" data-fw-test-case>
+      <div class="fw-test-expected" data-fw-expected-behavior>
+        <h3>Erwartetes Verhalten</h3>
+        <ul>
+        <li>Erwartung: Ticks an Dez-Datenpunkten alle 5 Jahre. Labels: "2012", "2015", "2020" + letzter Punkt. Kein Jan-1-Offset.</li>
+        </ul>
+      </div>
+<h3>snap_period_half_yearly_12y.csv</h3>
     <h4>C2. HALF_YEARLY, 12 Jahre — Line — Data-Anchored</h4>
     <p>
         <strong>Rhythmus:</strong> HALF_YEARLY (Delta ~182 Tage). Dauer &gt; 10y.<br>
         <span class="table-path">Pfad: SNAPSHOT_TABLES.HALF_YEARLY → Zeile 3 → mode: YEAR, step: 5 → Data-Anchored (1/5y, Dez-Punkte)</span><br>
         <span class="expect">Erwartung: Ticks an Dez-Datenpunkten alle 5 Jahre. Labels: "2012", "2015", "2020" + letzter Punkt. Kein Jan-1-Offset.</span>
     </p>
-    <div class="financial-chart-module"
+    <div class="kg-card">
+<div class="financial-chart-module"
          data-type="line"
          data-title="C2. Half-Yearly 12y"
-         data-csv="./data/snap_period_half_yearly_12y.csv"
+         data-csv="../fixtures/engine/snap_period_half_yearly_12y.csv"
          data-colors="Dividenden ETF: #7B2D8E">
     </div>
+</div>
 
     <!-- ============================================================ -->
     <h2>D. SNAPSHOT YEARLY (Line)</h2>
     <p>Diese Charts nutzen die YEARLY-Tabelle in SNAPSHOT_TABLES. D1/D2: reguläre Stichtage → Data-Anchored (V8.2). D3: irreguläre Stichtage → Standard-Kalenderticks (V8.3).</p>
     <!-- ============================================================ -->
+    </section>
 
-    <h3>snap_period_yearly_8y.csv</h3>
+    <section class="fw-test-case" data-fw-test-case>
+      <div class="fw-test-expected" data-fw-expected-behavior>
+        <h3>Erwartetes Verhalten</h3>
+        <ul>
+        <li>Erwartung: 8 Ticks an Dez-31-Datenpunkten. Labels: "2016", "2017", ..., "2023". Tick = Tooltip = Label.</li>
+        </ul>
+      </div>
+<h3>snap_period_yearly_8y.csv</h3>
     <h4>D1. YEARLY, 8 Jahre — Line — Data-Anchored</h4>
     <p>
         <strong>Rhythmus:</strong> YEARLY (Delta ~365 Tage). Dauer &le; 10y.<br>
         <span class="table-path">Pfad: SNAPSHOT_TABLES.YEARLY → Zeile 1 → mode: YEAR, step: 1 → Data-Anchored (jedes Jahr)</span><br>
         <span class="expect">Erwartung: 8 Ticks an Dez-31-Datenpunkten. Labels: "2016", "2017", ..., "2023". Tick = Tooltip = Label.</span>
     </p>
-    <div class="financial-chart-module"
+    <div class="kg-card">
+<div class="financial-chart-module"
          data-type="line"
          data-title="D1. Yearly 8y"
-         data-csv="./data/snap_period_yearly_8y.csv"
+         data-csv="../fixtures/engine/snap_period_yearly_8y.csv"
          data-colors="Sparplan: #218380">
     </div>
+</div>
+    </section>
 
-    <h3>snap_period_yearly_25y.csv</h3>
+    <section class="fw-test-case" data-fw-test-case>
+      <div class="fw-test-expected" data-fw-expected-behavior>
+        <h3>Erwartetes Verhalten</h3>
+        <ul>
+        <li>Erwartung: Ticks an Dez-31-Datenpunkten alle 5 Jahre (2000, 2005, 2010, 2015, 2020) + letzter Punkt (2024).</li>
+        </ul>
+      </div>
+<h3>snap_period_yearly_25y.csv</h3>
     <h4>D2. YEARLY, 25 Jahre — Line — Data-Anchored</h4>
     <p>
         <strong>Rhythmus:</strong> YEARLY (Delta ~365 Tage). Dauer &gt; 10y.<br>
         <span class="table-path">Pfad: SNAPSHOT_TABLES.YEARLY → Zeile 2 → mode: YEAR, step: 5 → Data-Anchored (1/5y + Anker)</span><br>
         <span class="expect">Erwartung: Ticks an Dez-31-Datenpunkten alle 5 Jahre (2000, 2005, 2010, 2015, 2020) + letzter Punkt (2024).</span>
     </p>
-    <div class="financial-chart-module"
+    <div class="kg-card">
+<div class="financial-chart-module"
          data-type="line"
          data-title="D2. Yearly 25y"
-         data-csv="./data/snap_period_yearly_25y.csv"
+         data-csv="../fixtures/engine/snap_period_yearly_25y.csv"
          data-colors="Sparplan: #E63946">
     </div>
+</div>
+    </section>
 
-    <h3>snap_period_yearly_irregular.csv</h3>
+    <section class="fw-test-case" data-fw-test-case>
+      <div class="fw-test-expected" data-fw-expected-behavior>
+        <h3>Erwartetes Verhalten</h3>
+        <ul>
+        <li>Erwartung: Proportionale Zeitachse. Kalenderticks im Jahresrhythmus (erster Tick evtl. 2016, da Daten erst Mär 2015 starten).
+        Datenpunkte an echten Positionen. Linie durchgezogen von 2018 zu 2020 (kein Gap-Marker). Tooltip: echtes Datum.</li>
+        </ul>
+      </div>
+<h3>snap_period_yearly_irregular.csv</h3>
     <h4>D3. YEARLY, 9 Jahre, unregelmäßige Stichtage — Line — Kalenderticks (V8.3)</h4>
     <p>
         <strong>Rhythmus:</strong> YEARLY (durchschnittl. Delta ~1,3 Jahre). Stichtage: Mär, Aug, Dez, Nov, Feb, Jun, Dez, Jan.<br>
@@ -287,134 +430,219 @@
         <span class="expect">Erwartung: Proportionale Zeitachse. Kalenderticks im Jahresrhythmus (erster Tick evtl. 2016, da Daten erst Mär 2015 starten).
         Datenpunkte an echten Positionen. Linie durchgezogen von 2018 zu 2020 (kein Gap-Marker). Tooltip: echtes Datum.</span>
     </p>
-    <div class="financial-chart-module"
+    <div class="kg-card">
+<div class="financial-chart-module"
          data-type="line"
          data-title="D3. Yearly Irregular (Kalenderticks)"
-         data-csv="./data/snap_period_yearly_irregular.csv"
+         data-csv="../fixtures/engine/snap_period_yearly_irregular.csv"
          data-colors="Unregelmäßig: #E76F51">
     </div>
+</div>
 
     <!-- ============================================================ -->
     <h2>E. PERIOD (Bar Charts) — Gleiche Daten, anderer Track</h2>
     <p>Diese Charts nutzen PERIOD_TABLES. Selbe CSVs wie oben, aber als Balken. Testet den PERIOD-Pfad (afterBuildTicks, Key-Dedup, BOP-Anchoring).</p>
     <!-- ============================================================ -->
+    </section>
 
-    <h3>snap_period_weekly_3m.csv</h3>
+    <section class="fw-test-case" data-fw-test-case>
+      <div class="fw-test-expected" data-fw-expected-behavior>
+        <h3>Erwartetes Verhalten</h3>
+        <ul>
+        <li>Erwartung: Wöchentliche Balken mit einem Label pro Woche. Nano-Fallback (&le;7) greift nicht (13 Punkte &gt; 7).</li>
+        </ul>
+      </div>
+<h3>snap_period_weekly_3m.csv</h3>
     <h4>E1. WEEKLY, 13 Wochen — Bar — PERIOD DEFAULT Pfad</h4>
     <p>
         <strong>Rhythmus:</strong> WEEKLY (Delta ~7 Tage). Als Bar Chart → PERIOD-Track.<br>
         <span class="table-path">Pfad: PERIOD_TABLES.DEFAULT → Zone-Tabelle → Zeile 1 (maxYears: 0.25) → unit: week</span><br>
         <span class="expect">Erwartung: Wöchentliche Balken mit einem Label pro Woche. Nano-Fallback (&le;7) greift nicht (13 Punkte &gt; 7).</span>
     </p>
-    <div class="financial-chart-module"
+    <div class="kg-card">
+<div class="financial-chart-module"
          data-type="bar"
          data-title="E1. Weekly 3m (Bar)"
-         data-csv="./data/snap_period_weekly_3m.csv"
+         data-csv="../fixtures/engine/snap_period_weekly_3m.csv"
          data-colors="MSCI World: #0071BF">
     </div>
+</div>
+    </section>
 
-    <h3>snap_period_half_yearly_4y.csv</h3>
+    <section class="fw-test-case" data-fw-test-case>
+      <div class="fw-test-expected" data-fw-expected-behavior>
+        <h3>Erwartetes Verhalten</h3>
+        <ul>
+        <li>Erwartung: Halbjahres-Balken mit Quartals-Dedup (2 Labels/Jahr). Polymorphes Format: Zone S = "MMM", Zone M/L = "MMM 'yy".</li>
+        </ul>
+      </div>
+<h3>snap_period_half_yearly_4y.csv</h3>
     <h4>E2. HALF_YEARLY, 4 Jahre — Bar — PERIOD HALF_YEARLY Tabelle</h4>
     <p>
         <strong>Rhythmus:</strong> HALF_YEARLY (Delta ~182 Tage). Als Bar Chart → PERIOD HALF_YEARLY Override.<br>
         <span class="table-path">Pfad: PERIOD_TABLES.HALF_YEARLY → Zeile 1 (maxYears: 5.0) → unit: quarter, mode: HALF_YEAR, format: zone-abh.</span><br>
         <span class="expect">Erwartung: Halbjahres-Balken mit Quartals-Dedup (2 Labels/Jahr). Polymorphes Format: Zone S = "MMM", Zone M/L = "MMM 'yy".</span>
     </p>
-    <div class="financial-chart-module"
+    <div class="kg-card">
+<div class="financial-chart-module"
          data-type="bar"
          data-title="E2. Half-Yearly 4y (Bar)"
-         data-csv="./data/snap_period_half_yearly_4y.csv"
+         data-csv="../fixtures/engine/snap_period_half_yearly_4y.csv"
          data-colors="Dividenden ETF: #218380">
     </div>
+</div>
+    </section>
 
-    <h3>snap_period_yearly_25y.csv</h3>
+    <section class="fw-test-case" data-fw-test-case>
+      <div class="fw-test-expected" data-fw-expected-behavior>
+        <h3>Erwartetes Verhalten</h3>
+        <ul>
+        <li>Erwartung: Jahresbalken mit Label alle 5 Jahre. 25 Balken, ~6 Labels.</li>
+        </ul>
+      </div>
+<h3>snap_period_yearly_25y.csv</h3>
     <h4>E3. YEARLY, 25 Jahre — Bar — PERIOD YEARLY Tabelle</h4>
     <p>
         <strong>Rhythmus:</strong> YEARLY (Delta ~365 Tage). Als Bar Chart → PERIOD YEARLY Override.<br>
         <span class="table-path">Pfad: PERIOD_TABLES.YEARLY → Zeile 2 (maxYears: Infinity) → unit: year, step: 5, format: 'yyyy'</span><br>
         <span class="expect">Erwartung: Jahresbalken mit Label alle 5 Jahre. 25 Balken, ~6 Labels.</span>
     </p>
-    <div class="financial-chart-module"
+    <div class="kg-card">
+<div class="financial-chart-module"
          data-type="bar"
          data-title="E3. Yearly 25y (Bar)"
-         data-csv="./data/snap_period_yearly_25y.csv"
+         data-csv="../fixtures/engine/snap_period_yearly_25y.csv"
          data-colors="Sparplan: #7B2D8E">
     </div>
+</div>
+    </section>
 
-    <h3>snap_period_monthly_30m.csv</h3>
+    <section class="fw-test-case" data-fw-test-case>
+      <div class="fw-test-expected" data-fw-expected-behavior>
+        <h3>Erwartetes Verhalten</h3>
+        <ul>
+        <li>Erwartung: Quartals-Labels für 30 Monatsbalken. Key-Dedup: ein Label pro Quartal.</li>
+        </ul>
+      </div>
+<h3>snap_period_monthly_30m.csv</h3>
     <h4>E4. MONTHLY, 30 Monate — Bar — PERIOD DEFAULT Zone-Tabelle</h4>
     <p>
         <strong>Rhythmus:</strong> MONTHLY (Delta ~30 Tage). Als Bar Chart → PERIOD DEFAULT → Zone-Tabelle.<br>
         <span class="table-path">Pfad: PERIOD_TABLES.DEFAULT → Zone L: PERIOD_TABLE_L → Zeile 3 (maxYears: 5.0) → unit: quarter, format: "MMM 'yy"</span><br>
         <span class="expect">Erwartung: Quartals-Labels für 30 Monatsbalken. Key-Dedup: ein Label pro Quartal.</span>
     </p>
-    <div class="financial-chart-module"
+    <div class="kg-card">
+<div class="financial-chart-module"
          data-type="bar"
          data-title="E4. Monthly 30m (Bar)"
-         data-csv="./data/snap_period_monthly_30m.csv"
+         data-csv="../fixtures/engine/snap_period_monthly_30m.csv"
          data-colors="Anleihen Mix: #F4A261">
     </div>
+</div>
 
     <!-- ============================================================ -->
     <h2>F. Edge Cases</h2>
     <!-- ============================================================ -->
+    </section>
 
-    <h3>snap_period_single_point.csv</h3>
+    <section class="fw-test-case" data-fw-test-case>
+      <div class="fw-test-expected" data-fw-expected-behavior>
+        <h3>Erwartetes Verhalten</h3>
+        <ul>
+        <li>Erwartung: Kein Absturz. Ein Punkt sichtbar. Label für den einen Datenpunkt.</li>
+        </ul>
+      </div>
+<h3>snap_period_single_point.csv</h3>
     <h4>F1. Einzelner Datenpunkt — Line</h4>
     <p>
         <strong>Rhythmus:</strong> Undefiniert (nur 1 Punkt, kein Delta berechenbar). Fallback: MONTHLY.<br>
         <span class="table-path">Pfad: SNAPSHOT_TABLES.DEFAULT (MONTHLY Fallback) → Zeile 2 → unit: month</span><br>
         <span class="expect">Erwartung: Kein Absturz. Ein Punkt sichtbar. Label für den einen Datenpunkt.</span>
     </p>
-    <div class="financial-chart-module"
+    <div class="kg-card">
+<div class="financial-chart-module"
          data-type="line"
          data-title="F1. Single Point"
-         data-csv="./data/snap_period_single_point.csv"
+         data-csv="../fixtures/engine/snap_period_single_point.csv"
          data-colors="Einzelwert: #E63946">
     </div>
+</div>
+    </section>
 
-    <h3>snap_period_single_point.csv</h3>
+    <section class="fw-test-case" data-fw-test-case>
+      <div class="fw-test-expected" data-fw-expected-behavior>
+        <h3>Erwartetes Verhalten</h3>
+        <ul>
+        <li>Erwartung: Kein Absturz. Ein Balken sichtbar, zentriert auf der Achse.</li>
+        </ul>
+      </div>
+<h3>snap_period_single_point.csv</h3>
     <h4>F2. Einzelner Datenpunkt — Bar</h4>
     <p>
         <strong>Rhythmus:</strong> Undefiniert (nur 1 Punkt). Fallback: MONTHLY.<br>
         <span class="table-path">Pfad: PERIOD_TABLES.DEFAULT → Zone-Tabelle → Einzelpunkt-Fallback in afterFit (halbe Periodenlänge)</span><br>
         <span class="expect">Erwartung: Kein Absturz. Ein Balken sichtbar, zentriert auf der Achse.</span>
     </p>
-    <div class="financial-chart-module"
+    <div class="kg-card">
+<div class="financial-chart-module"
          data-type="bar"
          data-title="F2. Single Point (Bar)"
-         data-csv="./data/snap_period_single_point.csv"
+         data-csv="../fixtures/engine/snap_period_single_point.csv"
          data-colors="Einzelwert: #7B2D8E">
     </div>
+</div>
+    </section>
 
-    <h3>snap_period_daily_7d.csv</h3>
+    <section class="fw-test-case" data-fw-test-case>
+      <div class="fw-test-expected" data-fw-expected-behavior>
+        <h3>Erwartetes Verhalten</h3>
+        <ul>
+        <li>Erwartung: 7 Balken, jeder mit eigenem Label. Nano-Fallback umgeht Key-Dedup.</li>
+        </ul>
+      </div>
+<h3>snap_period_daily_7d.csv</h3>
     <h4>F3. DAILY, 7 Tage — Bar — Nano-Fallback</h4>
     <p>
         <strong>Rhythmus:</strong> DAILY (Delta ~1 Tag). Als Bar mit 7 Datenpunkten.<br>
         <span class="table-path">Pfad: PERIOD_TABLES.DEFAULT → Zone-Tabelle. afterBuildTicks: Nano-Fallback (&le;7 Punkte → jeden Balken labeln).</span><br>
         <span class="expect">Erwartung: 7 Balken, jeder mit eigenem Label. Nano-Fallback umgeht Key-Dedup.</span>
     </p>
-    <div class="financial-chart-module"
+    <div class="kg-card">
+<div class="financial-chart-module"
          data-type="bar"
          data-title="F3. Daily 7d (Bar, Nano-Fallback)"
-         data-csv="./data/snap_period_daily_7d.csv"
+         data-csv="../fixtures/engine/snap_period_daily_7d.csv"
          data-colors="Tech ETF: #0071BF">
     </div>
+</div>
+    </section>
 
-    <h3>snap_period_yearly_irregular.csv</h3>
+    <section class="fw-test-case" data-fw-test-case>
+      <div class="fw-test-expected" data-fw-expected-behavior>
+        <h3>Erwartetes Verhalten</h3>
+        <ul>
+        <li>Erwartung: PERIOD-Track nutzt Kalender-Grenzen + BOP-Anchoring.</li>
+        </ul>
+      </div>
+<h3>snap_period_yearly_irregular.csv</h3>
     <h4>F4. YEARLY, 9 Jahre, unregelmäßige Stichtage — Bar — PERIOD-Track</h4>
     <p>
         <strong>Rhythmus:</strong> YEARLY (durchschnittl. Delta ~1,3 Jahre). Selbe CSV als Bar.<br>
         <span class="table-path">Pfad: PERIOD_TABLES.YEARLY → Zeile 1 → unit: year, step: 1, format: 'yyyy'</span><br>
         <span class="expect">Erwartung: PERIOD-Track nutzt Kalender-Grenzen + BOP-Anchoring.</span>
     </p>
-    <div class="financial-chart-module"
+    <div class="kg-card">
+<div class="financial-chart-module"
          data-type="bar"
          data-title="F4. Yearly Irregular (Bar)"
-         data-csv="./data/snap_period_yearly_irregular.csv"
+         data-csv="../fixtures/engine/snap_period_yearly_irregular.csv"
          data-colors="Unregelmäßig: #2A9D8F">
     </div>
+</div>
+    </section>
+  </main>
 
-    <script type="module" src="./assets/js/fw-chart-engine/index.js"></script>
+  <script src="../../Theme/assets/js/vendor/chart.umd.min.js"></script>
+  <script type="module" src="../../Theme/assets/js/fw-chart-engine/index.js"></script>
 </body>
 </html>

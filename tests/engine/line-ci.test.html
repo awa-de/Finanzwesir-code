@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FW Line Color Permutation Suite</title>
+
+  <link rel="stylesheet" href="../../Theme/assets/css/tokens.css">
+  <link rel="stylesheet" href="../shared/test-page.css">
+  <script src="../shared/test-page.js" defer></script>
+  <style>
+        body { 
+            font-family: 'Source Sans Pro', sans-serif; 
+            padding: 2rem; 
+            max-width: 1200px; 
+            margin: 0 auto; 
+            background-color: #f4f4f4; 
+            color: #333;
+        }
+        h1 { color: #218380; border-bottom: 3px solid #218380; padding-bottom: 10px; }
+        
+        /* Hervorgehobene Sektions-Header mit Dateinamen (Blaues Theme für Linien) */
+        h2 { 
+            margin-top: 4rem; 
+            background: #e3f2fd; 
+            padding: 15px; 
+            border-left: 8px solid #1565c0; 
+            color: #0d47a1; 
+            font-family: monospace; 
+            font-size: 1.4rem;
+        }
+
+        h3 { margin-top: 1.5rem; color: #555; border-bottom: 1px solid #ddd; padding-bottom: 5px; }
+        p { color: #666; font-size: 0.9rem; margin-bottom: 1rem; }
+        
+        .status-badge { display: inline-block; padding: 2px 6px; border-radius: 4px; font-weight: bold; font-size: 0.8em; margin-right: 5px; }
+        .badge-success { background: #e8f5e9; color: #2e7d32; border: 1px solid #c8e6c9; }
+        .badge-warning { background: #fff3e0; color: #ef6c00; border: 1px solid #ffe0b2; }
+        .badge-error { background: #ffebee; color: #c62828; border: 1px solid #ffcdd2; }
+
+        .financial-chart-module {
+            border: 1px solid #ddd;
+            padding: 1rem;
+            margin-bottom: 2rem;
+            background: #fff;
+            min-height: 400px; 
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            border-radius: 8px; 
+            container-type: inline-size;
+            container-name: fw-chart;
+        }
+    </style>
+</head>
+<body class="fw-test-page" data-fw-test-template="1">
+
+  <header class="fw-test-header">
+    <h1>Testseite: FW Line Color Permutation Suite</h1>
+
+    <div class="fw-test-runtime-status" data-fw-runtime-status role="status" aria-live="polite">
+      Bereit – bisher kein JavaScript-Fehler erkannt.
+    </div>
+
+    <section class="fw-test-errors" data-fw-test-errors aria-live="assertive" hidden>
+      <h2>Technische Fehler</h2>
+      <ol data-fw-test-error-list></ol>
+    </section>
+  </header>
+
+  <main class="fw-test-main">
+    <p class="fw-test-intro">Systematischer Test der Farb-Logik und des Gatekeepers bei Zeitreihen (V10.7.0).</p>
+    <section class="fw-test-case" data-fw-test-case>
+      <div class="fw-test-expected" data-fw-expected-behavior>
+        <h3>Erwartetes Verhalten</h3>
+        <ul>
+        <li>Der Klassiker. Wir wollen gezielt "World" (Blau), "EM" (Magenta) und "ACWI" (Petrol) färben.</li>
+        <li><span class="status-badge badge-success">Valid</span> Wir definieren 3 spezifische Farben. Die anderen 5 Linien müssen automatisch aufgefüllt werden.</li>
+        <li><span class="status-badge badge-warning">Default</span> Keine Farben. Das Chart muss die Palette durchlaufen.</li>
+        <li><span class="status-badge badge-error">Toxic</span> "World" ist Blau (OK), aber "EM" ist Neon-Rot (#FF0000). Gatekeeper muss ALLES verwerfen.</li>
+        </ul>
+      </div>
+<h2>📄 test_data-Liniendiagramm.csv (8 Linien)</h2>
+    <p>Der Klassiker. Wir wollen gezielt "World" (Blau), "EM" (Magenta) und "ACWI" (Petrol) färben.</p>
+
+    <h3>1.1. Alles CI-Konform (Specific Mapping)</h3>
+    <p><span class="status-badge badge-success">Valid</span> Wir definieren 3 spezifische Farben. Die anderen 5 Linien müssen automatisch aufgefüllt werden.</p>
+    <div class="kg-card">
+<div class="financial-chart-module"
+         data-type="line"
+         data-title="1.1 Manuelle Zuweisung"
+         data-csv="../fixtures/engine/test_data-Liniendiagramm.csv"
+         data-colors="World: #0071BF, EM: #8D0267, ACWI: #218380"
+         data-options="range:5y, benchmark:ACWI">
+    </div>
+</div>
+
+    <h3>1.2. Nichts angegeben (Full Rotation)</h3>
+    <p><span class="status-badge badge-warning">Default</span> Keine Farben. Das Chart muss die Palette durchlaufen.</p>
+    <div class="kg-card">
+<div class="financial-chart-module"
+         data-type="line"
+         data-title="1.2 Default Palette"
+         data-csv="../fixtures/engine/test_data-Liniendiagramm.csv">
+    </div>
+</div>
+
+    <h3>1.3. Teilweise CI-Konform (Toxic Injection)</h3>
+    <p><span class="status-badge badge-error">Toxic</span> "World" ist Blau (OK), aber "EM" ist Neon-Rot (#FF0000). Gatekeeper muss ALLES verwerfen.</p>
+    <div class="kg-card">
+<div class="financial-chart-module"
+         data-type="line"
+         data-title="1.3 Gatekeeper Reject"
+         data-csv="../fixtures/engine/test_data-Liniendiagramm.csv"
+         data-colors="World: #0071BF, EM: #FF0000">
+    </div>
+</div>
+    </section>
+
+    <section class="fw-test-case" data-fw-test-case>
+      <div class="fw-test-expected" data-fw-expected-behavior>
+        <h3>Erwartetes Verhalten</h3>
+        <ul>
+        <li>Big Data Test. Tech Titan A, BioTech B, Energy C, Crypto D, Gold E.</li>
+        <li><span class="status-badge badge-success">Valid</span> Wir heben "Gold E" (#DFC805) und "Crypto D" (#333333/Grau) hervor.</li>
+        <li><span class="status-badge badge-warning">Default</span> Standard Rotation.</li>
+        <li><span class="status-badge badge-error">Toxic</span> "Crypto D" soll Neon-Grün (#00FF00) sein. Darf nicht passieren.</li>
+        </ul>
+      </div>
+<h2>📄 scenario_7_bigdata_ISO.csv (5 Linien)</h2>
+    <p>Big Data Test. Tech Titan A, BioTech B, Energy C, Crypto D, Gold E.</p>
+
+    <h3>2.1. Alles CI-Konform (Spotlight)</h3>
+    <p><span class="status-badge badge-success">Valid</span> Wir heben "Gold E" (#DFC805) und "Crypto D" (#333333/Grau) hervor.</p>
+    <div class="kg-card">
+<div class="financial-chart-module"
+         data-type="line"
+         data-title="2.1 Spotlight Colors"
+         data-csv="../fixtures/engine/scenario_7_bigdata_ISO.csv"
+         data-colors="Gold E: #DFC805, Crypto D: #333333">
+    </div>
+</div>
+
+    <h3>2.2. Nichts angegeben</h3>
+    <p><span class="status-badge badge-warning">Default</span> Standard Rotation.</p>
+    <div class="kg-card">
+<div class="financial-chart-module"
+         data-type="line"
+         data-title="2.2 Default"
+         data-csv="../fixtures/engine/scenario_7_bigdata_ISO.csv">
+    </div>
+</div>
+
+    <h3>2.3. Toxic Injection</h3>
+    <p><span class="status-badge badge-error">Toxic</span> "Crypto D" soll Neon-Grün (#00FF00) sein. Darf nicht passieren.</p>
+    <div class="kg-card">
+<div class="financial-chart-module"
+         data-type="line"
+         data-title="2.3 Gatekeeper Reject"
+         data-csv="../fixtures/engine/scenario_7_bigdata_ISO.csv"
+         data-colors="Gold E: #DFC805, Crypto D: #00FF00">
+    </div>
+</div>
+    </section>
+
+    <section class="fw-test-case" data-fw-test-case>
+      <div class="fw-test-expected" data-fw-expected-behavior>
+        <h3>Erwartetes Verhalten</h3>
+        <ul>
+        <li>Spaghetti Stress. Daten: A bis J. Testet, ob die Palette bei vielen Linien sauber rotiert.</li>
+        <li><span class="status-badge badge-success">Valid</span> A (#218380) und B (#0071BF) sind definiert. C-J müssen automatisch folgen.</li>
+        <li><span class="status-badge badge-warning">Default</span> Alle 10 Linien müssen unterscheidbare CI-Farben haben.</li>
+        <li><span class="status-badge badge-error">Toxic</span> "A" ist Giftrot (#FF0000). Erwartung: Chart sieht exakt aus wie 3.2 (Fallback).</li>
+        </ul>
+      </div>
+<h2>📄 bd_ranking_stress.csv (10 Linien)</h2>
+    <p>Spaghetti Stress. Daten: A bis J. Testet, ob die Palette bei vielen Linien sauber rotiert.</p>
+
+    <h3>3.1. Alles CI-Konform (Start Definition)</h3>
+    <p><span class="status-badge badge-success">Valid</span> A (#218380) und B (#0071BF) sind definiert. C-J müssen automatisch folgen.</p>
+    <div class="kg-card">
+<div class="financial-chart-module"
+         data-type="line"
+         data-title="3.1 Start Definition"
+         data-csv="../fixtures/engine/bd_ranking_stress.csv"
+         data-colors="A: #218380, B: #0071BF">
+    </div>
+</div>
+
+    <h3>3.2. Nichts angegeben</h3>
+    <p><span class="status-badge badge-warning">Default</span> Alle 10 Linien müssen unterscheidbare CI-Farben haben.</p>
+    <div class="kg-card">
+<div class="financial-chart-module"
+         data-type="line"
+         data-title="3.2 Full Rotation"
+         data-csv="../fixtures/engine/bd_ranking_stress.csv">
+    </div>
+</div>
+
+    <h3>3.3. Toxic Injection</h3>
+    <p><span class="status-badge badge-error">Toxic</span> "A" ist Giftrot (#FF0000). Erwartung: Chart sieht exakt aus wie 3.2 (Fallback).</p>
+    <div class="kg-card">
+<div class="financial-chart-module"
+         data-type="line"
+         data-title="3.3 Gatekeeper Reject"
+         data-csv="../fixtures/engine/bd_ranking_stress.csv"
+         data-colors="A: #FF0000">
+    </div>
+</div>
+    </section>
+  </main>
+
+  <script src="../../Theme/assets/js/vendor/chart.umd.min.js"></script>
+  <script type="module" src="../../Theme/assets/js/fw-chart-engine/index.js"></script>
+</body>
+</html>

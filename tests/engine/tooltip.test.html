@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tooltip-CSV Test Suite — Line + Bar</title>
+
+  <link rel="stylesheet" href="../../Theme/assets/css/tokens.css">
+  <link rel="stylesheet" href="../shared/test-page.css">
+  <script src="../shared/test-page.js" defer></script>
+  <style>
+        body {
+            font-family: 'Source Sans Pro', sans-serif;
+            padding: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+        h1 { color: #218380; border-bottom: 3px solid #218380; padding-bottom: 10px; }
+
+        h2 {
+            margin-top: 4rem;
+            background: #e8f5e9;
+            padding: 15px;
+            border-left: 8px solid #218380;
+            color: #1b5e20;
+            font-size: 1.4rem;
+        }
+
+        h3 {
+            margin-top: 1.5rem;
+            background: #fff3e0;
+            padding: 10px 15px;
+            border-left: 6px solid #ef6c00;
+            color: #e65100;
+            font-family: monospace;
+            font-size: 1.1rem;
+        }
+
+        h4 { margin-top: 1rem; color: #555; border-bottom: 1px solid #ddd; padding-bottom: 5px; }
+        p { color: #666; font-size: 0.9rem; margin-bottom: 1rem; }
+        .expect { color: #1b5e20; font-weight: bold; }
+        .table-path { color: #0d47a1; font-family: monospace; font-size: 0.85rem; }
+
+        .financial-chart-module {
+            border: 1px solid #ddd;
+            padding: 1rem;
+            margin-bottom: 2rem;
+            background: #fff;
+            min-height: 400px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            border-radius: 8px;
+            container-type: inline-size;
+            container-name: fw-chart;
+        }
+
+        .intro {
+            background: #e3f2fd;
+            border: 1px solid #90caf9;
+            border-radius: 8px;
+            padding: 1rem 1.5rem;
+            margin-bottom: 2rem;
+        }
+        .intro p { color: #1565c0; }
+    </style>
+</head>
+<body class="fw-test-page" data-fw-test-template="1">
+
+  <header class="fw-test-header">
+    <h1>Testseite: Tooltip-CSV Test Suite — Line + Bar</h1>
+
+    <div class="fw-test-runtime-status" data-fw-runtime-status role="status" aria-live="polite">
+      Bereit – bisher kein JavaScript-Fehler erkannt.
+    </div>
+
+    <section class="fw-test-errors" data-fw-test-errors aria-live="assertive" hidden>
+      <h2>Technische Fehler</h2>
+      <ol data-fw-test-error-list></ol>
+    </section>
+  </header>
+
+  <main class="fw-test-main">
+    <p class="fw-test-intro"><strong>Zweck:</strong> Alle <code>tool_tip_*.csv</code> Dateien als Line- und Bar-Chart.
+            Prim&auml;r f&uuml;r AP-9 (Regression 4: WEEKLY &lt; 1 Jahr) und allgemeine Tooltip-Pr&uuml;fung.</p>
+    <section class="fw-test-case" data-fw-test-case>
+      <div class="fw-test-expected" data-fw-expected-behavior>
+        <h3>Erwartetes Verhalten</h3>
+        <ul>
+        <li><strong>Daten:</strong> MSCI World, wöchentlich (Mo), Dez 2023 – M&auml;r 2024, EUR-Werte.<br>
+        <span class="expect">Kerntest f&uuml;r Regression 4: X-Achse soll monatliche Labels zeigen, NICHT t&auml;gliches Chaos.</span></li>
+        </ul>
+      </div>
+<h2>1. tool_tip_weekly_stress.csv — WEEKLY, 14 Punkte, ~91 Tage (AP-9)</h2>
+    <p>
+        <strong>Daten:</strong> MSCI World, wöchentlich (Mo), Dez 2023 – M&auml;r 2024, EUR-Werte.<br>
+        <span class="expect">Kerntest f&uuml;r Regression 4: X-Achse soll monatliche Labels zeigen, NICHT t&auml;gliches Chaos.</span>
+    </p>
+    <!-- ============================================================ -->
+
+    <h3>1a. Line</h3>
+    <div class="kg-card">
+<div class="financial-chart-module"
+         data-type="line"
+         data-title="Weekly Stress — Line (AP-9)"
+         data-csv="../fixtures/engine/tool_tip_weekly_stress.csv"
+         data-colors="MSCI World: #0071BF">
+    </div>
+</div>
+
+    <h3>1b. Bar</h3>
+    <div class="kg-card">
+<div class="financial-chart-module"
+         data-type="bar"
+         data-title="Weekly Stress — Bar (AP-9)"
+         data-csv="../fixtures/engine/tool_tip_weekly_stress.csv"
+         data-colors="MSCI World: #0071BF">
+    </div>
+</div>
+
+    <!-- ============================================================ -->
+    </section>
+
+    <section class="fw-test-case" data-fw-test-case>
+      <div class="fw-test-expected" data-fw-expected-behavior>
+        <h3>Erwartetes Verhalten</h3>
+        <ul>
+        <li><strong>Daten:</strong> Value, wöchentlich (Mo), Dez 2023 – M&auml;r 2024, gro&szlig;e Werte (27k–44k) mit Schwankungen.<br>
+        <span class="expect">Zweiter WEEKLY-Test. Selber Zeitraum wie weekly_stress, andere Werte.</span></li>
+        </ul>
+      </div>
+<h2>2. tool_tip_weekly_ranges.csv — WEEKLY, 13 Punkte, ~91 Tage, hohe Volatilit&auml;t</h2>
+    <p>
+        <strong>Daten:</strong> Value, wöchentlich (Mo), Dez 2023 – M&auml;r 2024, gro&szlig;e Werte (27k–44k) mit Schwankungen.<br>
+        <span class="expect">Zweiter WEEKLY-Test. Selber Zeitraum wie weekly_stress, andere Werte.</span>
+    </p>
+    <!-- ============================================================ -->
+
+    <h3>2a. Line</h3>
+    <div class="kg-card">
+<div class="financial-chart-module"
+         data-type="line"
+         data-title="Weekly Ranges — Line"
+         data-csv="../fixtures/engine/tool_tip_weekly_ranges.csv"
+         data-colors="Value: #218380">
+    </div>
+</div>
+
+    <h3>2b. Bar</h3>
+    <div class="kg-card">
+<div class="financial-chart-module"
+         data-type="bar"
+         data-title="Weekly Ranges — Bar"
+         data-csv="../fixtures/engine/tool_tip_weekly_ranges.csv"
+         data-colors="Value: #218380">
+    </div>
+</div>
+
+    <!-- ============================================================ -->
+    </section>
+
+    <section class="fw-test-case" data-fw-test-case>
+      <div class="fw-test-expected" data-fw-expected-behavior>
+        <h3>Erwartetes Verhalten</h3>
+        <ul>
+        <li><strong>Daten:</strong> Portfolio A, monatlich mit L&uuml;cken (M&auml;r, Apr, Jul fehlen), Jan–Dez 2024, EUR-Werte (50k–54k).<br>
+        <span class="expect">Test: Wie verhält sich die Achse bei fehlenden Monaten?</span></li>
+        </ul>
+      </div>
+<h2>3. tool_tip_monthly_gaps.csv — MONTHLY mit L&uuml;cken, 9 Punkte, ~11 Monate</h2>
+    <p>
+        <strong>Daten:</strong> Portfolio A, monatlich mit L&uuml;cken (M&auml;r, Apr, Jul fehlen), Jan–Dez 2024, EUR-Werte (50k–54k).<br>
+        <span class="expect">Test: Wie verhält sich die Achse bei fehlenden Monaten?</span>
+    </p>
+    <!-- ============================================================ -->
+
+    <h3>3a. Line</h3>
+    <div class="kg-card">
+<div class="financial-chart-module"
+         data-type="line"
+         data-title="Monthly Gaps — Line"
+         data-csv="../fixtures/engine/tool_tip_monthly_gaps.csv"
+         data-colors="Portfolio A: #7B2D8E">
+    </div>
+</div>
+
+    <h3>3b. Bar</h3>
+    <div class="kg-card">
+<div class="financial-chart-module"
+         data-type="bar"
+         data-title="Monthly Gaps — Bar"
+         data-csv="../fixtures/engine/tool_tip_monthly_gaps.csv"
+         data-colors="Portfolio A: #7B2D8E">
+    </div>
+</div>
+
+    <!-- ============================================================ -->
+    </section>
+
+    <section class="fw-test-case" data-fw-test-case>
+      <div class="fw-test-expected" data-fw-expected-behavior>
+        <h3>Erwartetes Verhalten</h3>
+        <ul>
+        <li><strong>Daten:</strong> Wert, nur 2 Punkte (Jan + Jun 2024), Minimaltest.<br>
+        <span class="expect">Edge Case: Nur Start und Ende. Kein Absturz, sinnvolle Achse.</span></li>
+        </ul>
+      </div>
+<h2>4. tool_tip_minimal_data.csv — 2 Datenpunkte, 6 Monate</h2>
+    <p>
+        <strong>Daten:</strong> Wert, nur 2 Punkte (Jan + Jun 2024), Minimaltest.<br>
+        <span class="expect">Edge Case: Nur Start und Ende. Kein Absturz, sinnvolle Achse.</span>
+    </p>
+    <!-- ============================================================ -->
+
+    <h3>4a. Line</h3>
+    <div class="kg-card">
+<div class="financial-chart-module"
+         data-type="line"
+         data-title="Minimal Data — Line"
+         data-csv="../fixtures/engine/tool_tip_minimal_data.csv"
+         data-colors="Wert: #E63946">
+    </div>
+</div>
+
+    <h3>4b. Bar</h3>
+    <div class="kg-card">
+<div class="financial-chart-module"
+         data-type="bar"
+         data-title="Minimal Data — Bar"
+         data-csv="../fixtures/engine/tool_tip_minimal_data.csv"
+         data-colors="Wert: #E63946">
+    </div>
+</div>
+
+    <!-- ============================================================ -->
+    </section>
+
+    <section class="fw-test-case" data-fw-test-case>
+      <div class="fw-test-expected" data-fw-expected-behavior>
+        <h3>Erwartetes Verhalten</h3>
+        <ul>
+        <li><strong>Daten:</strong> 15 Assets, ein Stichtag (2024-12-31), kleine Prozentwerte.<br>
+        <span class="expect">Bar: Ranking-Ansicht sinnvoll. Line: 15 Linien mit je 1 Punkt (Edge Case).</span></li>
+        </ul>
+      </div>
+<h2>5. tool_tip_ranking_noise.csv — 15 Assets, 1 Periode (Ranking)</h2>
+    <p>
+        <strong>Daten:</strong> 15 Assets, ein Stichtag (2024-12-31), kleine Prozentwerte.<br>
+        <span class="expect">Bar: Ranking-Ansicht sinnvoll. Line: 15 Linien mit je 1 Punkt (Edge Case).</span>
+    </p>
+    <!-- ============================================================ -->
+
+    <h3>5a. Line</h3>
+    <div class="kg-card">
+<div class="financial-chart-module"
+         data-type="line"
+         data-title="Ranking Noise — Line"
+         data-csv="../fixtures/engine/tool_tip_ranking_noise.csv"
+         data-colors="Asset 01: #0071BF, Asset 02: #218380, Asset 03: #7B2D8E, Asset 04: #E63946, Asset 05: #F4A261, Asset 06: #2A9D8F, Asset 07: #264653, Asset 08: #E76F51, Asset 09: #606C38, Asset 10: #DDA15E, Asset 11: #BC6C25, Asset 12: #0077B6, Asset 13: #023E8A, Asset 14: #48CAE4, Asset 15: #90BE6D">
+    </div>
+</div>
+
+    <h3>5b. Bar</h3>
+    <div class="kg-card">
+<div class="financial-chart-module"
+         data-type="bar"
+         data-title="Ranking Noise — Bar"
+         data-csv="../fixtures/engine/tool_tip_ranking_noise.csv"
+         data-colors="Asset 01: #0071BF, Asset 02: #218380, Asset 03: #7B2D8E, Asset 04: #E63946, Asset 05: #F4A261, Asset 06: #2A9D8F, Asset 07: #264653, Asset 08: #E76F51, Asset 09: #606C38, Asset 10: #DDA15E, Asset 11: #BC6C25, Asset 12: #0077B6, Asset 13: #023E8A, Asset 14: #48CAE4, Asset 15: #90BE6D">
+    </div>
+</div>
+    </section>
+  </main>
+
+  <script src="../../Theme/assets/js/vendor/chart.umd.min.js"></script>
+  <script type="module" src="../../Theme/assets/js/fw-chart-engine/index.js"></script>
+</body>
+</html>

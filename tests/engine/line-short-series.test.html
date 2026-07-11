@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FW Engine Workbench - Daily Interval Stresstest</title>
+
+  <link rel="stylesheet" href="../../Theme/assets/css/tokens.css">
+  <link rel="stylesheet" href="../shared/test-page.css">
+  <script src="../shared/test-page.js" defer></script>
+  <style>
+        body { 
+            font-family: 'Source Sans Pro', sans-serif; 
+            padding: 2rem; 
+            max-width: 1200px; 
+            margin: 0 auto; 
+            background-color: #f4f4f4; 
+        }
+
+        /* Mobile Optimierung */
+        @media (max-width: 480px) { body { padding: 10px; } }
+
+        .financial-chart-module {
+            border: 1px solid #ddd;
+            padding: 1rem;
+            margin-bottom: 2rem;
+            background: #fff;
+            min-height: 400px; 
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            position: relative;
+            border-radius: 8px; 
+            container-type: inline-size;
+            container-name: fw-chart;
+        }
+        h3 { margin-top: 0; color: #333; border-bottom: 2px solid #eee; padding-bottom: 0.5rem;}
+        p { color: #666; font-size: 0.9rem; margin-bottom: 1rem; }
+        .tag { display: inline-block; background: #e0e0e0; padding: 2px 6px; border-radius: 4px; font-size: 0.8em; margin-right: 5px; }
+        .tag-red { background: #ffebee; color: #c62828; }
+        .tag-green { background: #e8f5e9; color: #2e7d32; }
+    </style>
+</head>
+<body class="fw-test-page" data-fw-test-template="1">
+
+  <header class="fw-test-header">
+    <h1>Testseite: FW Engine Workbench - Daily Interval Stresstest</h1>
+
+    <div class="fw-test-runtime-status" data-fw-runtime-status role="status" aria-live="polite">
+      Bereit – bisher kein JavaScript-Fehler erkannt.
+    </div>
+
+    <section class="fw-test-errors" data-fw-test-errors aria-live="assertive" hidden>
+      <h2>Technische Fehler</h2>
+      <ol data-fw-test-error-list></ol>
+    </section>
+  </header>
+
+  <main class="fw-test-main">
+    <p class="fw-test-intro"><strong>Fokus: "Pulse & Flow" Strategie (Zone Zero).</strong><br>
+        Wir testen Zeiträume &lt; 1 Jahr mit täglichen Daten. 
+        Ziel: Reduktion von "Visual Noise" durch radikales Filtern auf Monats-Anker (1.) oder Zwei-Wochen-Takt (1./15.).</p>
+    <section class="fw-test-case" data-fw-test-case>
+      <div class="fw-test-expected" data-fw-expected-behavior>
+        <h3>Erwartetes Verhalten</h3>
+        <ul>
+        <li><span class="tag tag-green">Baseline</span>
+        Ein klassischer 3-Monats-Chart. 
+        <strong>Erwartung:</strong> Auf Mobile nur 3 Labels (1. Jan, 1. Feb, 1. Mär). Auf Desktop max. 6 Labels (inkl. 15.).
+        Keine Überlappung erlaubt.</li>
+        </ul>
+      </div>
+<h3>1. Der Standard (90 Tage)</h3>
+    <p>
+        <span class="tag tag-green">Baseline</span>
+        Ein klassischer 3-Monats-Chart. 
+        <strong>Erwartung:</strong> Auf Mobile nur 3 Labels (1. Jan, 1. Feb, 1. Mär). Auf Desktop max. 6 Labels (inkl. 15.).
+        Keine Überlappung erlaubt.
+    </p>
+    <div class="kg-card">
+<div class="financial-chart-module" 
+         data-type="bar"
+         data-title="Asset Value (90 Tage Standard)" 
+         data-csv="../fixtures/engine/bd_kurz_daily_90d.csv"
+         data-colors="Asset Value: #0071BF"
+         data-options="range:max"> 
+    </div>
+</div>
+    </section>
+
+    <section class="fw-test-case" data-fw-test-case>
+      <div class="fw-test-expected" data-fw-expected-behavior>
+        <h3>Erwartetes Verhalten</h3>
+        <ul>
+        <li><span class="tag">Asymmetric Start</span>
+        Startet am 12.03., endet 31.08. 
+        <strong>Test:</strong> Findet der Algorithmus den "1. April" als ersten echten Anker, oder zeigt er stur den Startwert?
+        Bei ~6 Monaten muss die Achse ruhig bleiben.</li>
+        </ul>
+      </div>
+<h3>2. Die Langstrecke (173 Tage, Mid-Start)</h3>
+    <p>
+        <span class="tag">Asymmetric Start</span>
+        Startet am 12.03., endet 31.08. 
+        <strong>Test:</strong> Findet der Algorithmus den "1. April" als ersten echten Anker, oder zeigt er stur den Startwert?
+        Bei ~6 Monaten muss die Achse ruhig bleiben.
+    </p>
+    <div class="kg-card">
+<div class="financial-chart-module" 
+         data-type="bar"
+         data-title="Asset Value (173 Tage Asymmetrisch)" 
+         data-csv="../fixtures/engine/bd_kurz_173d_mid_mid.csv"
+         data-colors="Asset Value: #218380"
+         data-options="range:max"> 
+    </div>
+</div>
+    </section>
+
+    <section class="fw-test-case" data-fw-test-case>
+      <div class="fw-test-expected" data-fw-expected-behavior>
+        <h3>Erwartetes Verhalten</h3>
+        <ul>
+        <li><span class="tag tag-red">UX Stress</span>
+        Vom 15.11. bis 28.01.
+        <strong>Test:</strong> Wie wird der "1. Jan" dargestellt? 
+        Reicht "1. Jan" oder brauchen wir hier zwingend das Jahr zur Orientierung?</li>
+        </ul>
+      </div>
+<h3>3. Der Jahreswechsel (75 Tage)</h3>
+    <p>
+        <span class="tag tag-red">UX Stress</span>
+        Vom 15.11. bis 28.01.
+        <strong>Test:</strong> Wie wird der "1. Jan" dargestellt? 
+        Reicht "1. Jan" oder brauchen wir hier zwingend das Jahr zur Orientierung?
+    </p>
+    <div class="kg-card">
+<div class="financial-chart-module" 
+         data-type="bar"
+         data-title="Asset Value (Jahreswechsel)" 
+         data-csv="../fixtures/engine/bd_kurz_turn_year.csv"
+         data-colors="Asset Value: #DFC805"
+         data-options="range:max"> 
+    </div>
+</div>
+    </section>
+
+    <section class="fw-test-case" data-fw-test-case>
+      <div class="fw-test-expected" data-fw-expected-behavior>
+        <h3>Erwartetes Verhalten</h3>
+        <ul>
+        <li><span class="tag">Short Duration</span>
+        23. Jan bis 06. Mär.
+        Kurzer Februar dazwischen. Ein sehr kurzer Zeitraum für "Monats-Anker". 
+        Auf Mobile dürften hier nur "1. Feb" und "1. Mär" erscheinen. Reicht das zur Orientierung?</li>
+        </ul>
+      </div>
+<h3>4. Der Krumme (44 Tage)</h3>
+    <p>
+        <span class="tag">Short Duration</span>
+        23. Jan bis 06. Mär.
+        Kurzer Februar dazwischen. Ein sehr kurzer Zeitraum für "Monats-Anker". 
+        Auf Mobile dürften hier nur "1. Feb" und "1. Mär" erscheinen. Reicht das zur Orientierung?
+    </p>
+    <div class="kg-card">
+<div class="financial-chart-module" 
+         data-type="bar"
+         data-title="Asset Value (44 Tage Krumm)" 
+         data-csv="../fixtures/engine/bd_kurz_44d_awkward.csv"
+         data-colors="Asset Value: #8D0267"
+         data-options="range:max"> 
+    </div>
+</div>
+    </section>
+
+    <section class="fw-test-case" data-fw-test-case>
+      <div class="fw-test-expected" data-fw-expected-behavior>
+        <h3>Erwartetes Verhalten</h3>
+        <ul>
+        <li><span class="tag tag-red">Fallback Test</span>
+        Nur 13 Tage (07.05. - 19.05.). Kein "1. des Monats" enthalten!
+        <strong>Härtetest:</strong> Die Strategie "Monats-Anker" würde hier ein leeres Chart liefern. 
+        Hier muss eine Fallback-Logik greifen (z.B. Wochen oder Tage), sonst bleibt die Achse weiß.</li>
+        </ul>
+      </div>
+<h3>5. Der Mikro-Burst (13 Tage)</h3>
+    <p>
+        <span class="tag tag-red">Fallback Test</span>
+        Nur 13 Tage (07.05. - 19.05.). Kein "1. des Monats" enthalten!
+        <strong>Härtetest:</strong> Die Strategie "Monats-Anker" würde hier ein leeres Chart liefern. 
+        Hier muss eine Fallback-Logik greifen (z.B. Wochen oder Tage), sonst bleibt die Achse weiß.
+    </p>
+    <div class="kg-card">
+<div class="financial-chart-module" 
+         data-type="bar"
+         data-title="Asset Value (13 Tage Micro)" 
+         data-csv="../fixtures/engine/bd_kurz_13d_micro.csv"
+         data-colors="Asset Value: #FF5733"
+         data-options="range:max"> 
+    </div>
+</div>
+    </section>
+  </main>
+
+  <script src="../../Theme/assets/js/vendor/chart.umd.min.js"></script>
+  <script type="module" src="../../Theme/assets/js/fw-chart-engine/index.js"></script>
+</body>
+</html>

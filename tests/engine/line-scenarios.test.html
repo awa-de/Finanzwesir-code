@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FW Engine Workbench - Stresstest</title>
+
+  <link rel="stylesheet" href="../../Theme/assets/css/tokens.css">
+  <link rel="stylesheet" href="../shared/test-page.css">
+  <script src="../shared/test-page.js" defer></script>
+  <style>
+        body { 
+            font-family: 'Source Sans Pro', sans-serif; 
+            padding: 2rem; 
+            max-width: 1200px; /* Zone L Testing */
+            margin: 0 auto; 
+            background-color: #f4f4f4; 
+        }
+
+        /* Mobile Optimierung */
+        @media (max-width: 480px) { body { padding: 10px; } }
+
+        .financial-chart-module {
+            border: 1px solid #ddd;
+            padding: 1rem;
+            margin-bottom: 2rem;
+            background: #fff;
+            min-height: 400px; 
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            position: relative;
+            border-radius: 8px; 
+            container-type: inline-size;
+            container-name: fw-chart;
+        }
+        h3 { margin-top: 0; color: #333; border-bottom: 2px solid #eee; padding-bottom: 0.5rem;}
+        p { color: #666; font-size: 0.9rem; margin-bottom: 1rem; }
+    </style>
+</head>
+<body class="fw-test-page" data-fw-test-template="1">
+
+  <header class="fw-test-header">
+    <h1>Testseite: FW Engine Workbench - Stresstest</h1>
+
+    <div class="fw-test-runtime-status" data-fw-runtime-status role="status" aria-live="polite">
+      Bereit – bisher kein JavaScript-Fehler erkannt.
+    </div>
+
+    <section class="fw-test-errors" data-fw-test-errors aria-live="assertive" hidden>
+      <h2>Technische Fehler</h2>
+      <ol data-fw-test-error-list></ol>
+    </section>
+  </header>
+
+  <main class="fw-test-main">
+    <p class="fw-test-intro">Automated Scenario Generation for Phase 5 Quality Assurance.</p>
+    <section class="fw-test-case" data-fw-test-case>
+      <div class="fw-test-expected" data-fw-expected-behavior>
+        <h3>Erwartetes Verhalten</h3>
+        <ul>
+        <li>Standardfall. Prüft ob "Zone E" sauber auf 5-Jahres-Intervalle schaltet (2000, 2005...).</li>
+        </ul>
+      </div>
+<h3>1. Scenario: The Long Run (25 Jahre)</h3>
+    <p>Standardfall. Prüft ob "Zone E" sauber auf 5-Jahres-Intervalle schaltet (2000, 2005...).</p>
+    <div class="kg-card">
+<div class="financial-chart-module" 
+         data-type="line"
+         data-title="Langzeit-Vergleich (25 Jahre)" 
+         data-csv="../fixtures/engine/scenario_1_long_25y.csv"
+         data-colors="Volatile Asset: #0071BF, Steady Asset: #218380"
+         data-options="range:max, benchmark:ACWI"> 
+    </div>
+</div>
+    </section>
+
+    <section class="fw-test-case" data-fw-test-case>
+      <div class="fw-test-expected" data-fw-expected-behavior>
+        <h3>Erwartetes Verhalten</h3>
+        <ul>
+        <li>Der kritische Bereich. Desktop sollte Halbjahre zeigen, Mobile muss auf Jahre (2020, 2021...) wechseln.</li>
+        </ul>
+      </div>
+<h3>2. Scenario: Medium Term (4 Jahre)</h3>
+    <p>Der kritische Bereich. Desktop sollte Halbjahre zeigen, Mobile muss auf Jahre (2020, 2021...) wechseln.</p>
+    <div class="kg-card">
+<div class="financial-chart-module" 
+         data-type="line"
+         data-title="Mittelfristig (4 Jahre)" 
+         data-csv="../fixtures/engine/scenario_2_medium_4y.csv"
+         data-colors="Asset 1: #8D0267"
+         data-options="range:max"> 
+    </div>
+</div>
+    </section>
+
+    <section class="fw-test-case" data-fw-test-case>
+      <div class="fw-test-expected" data-fw-expected-behavior>
+        <h3>Erwartetes Verhalten</h3>
+        <ul>
+        <li>Testet die Lesbarkeit von kurzen Labels ("Jan '24").</li>
+        </ul>
+      </div>
+<h3>3. Scenario: Short Term (14 Monate)</h3>
+    <p>Testet die Lesbarkeit von kurzen Labels ("Jan '24").</p>
+    <div class="kg-card">
+<div class="financial-chart-module" 
+         data-type="line"
+         data-title="Kurzläufer (14 Monate)" 
+         data-csv="../fixtures/engine/scenario_3_short_14m.csv"
+         data-colors="Asset 1: #DFC805"
+         data-options="range:max"> 
+    </div>
+</div>
+    </section>
+
+    <section class="fw-test-case" data-fw-test-case>
+      <div class="fw-test-expected" data-fw-expected-behavior>
+        <h3>Erwartetes Verhalten</h3>
+        <ul>
+        <li>Startet hoch, crasht hart, erholt sich. Prüft, ob die Achse unten nicht abgeschnitten wird.</li>
+        </ul>
+      </div>
+<h3>4. Scenario: The Crash (2008 Style)</h3>
+    <p>Startet hoch, crasht hart, erholt sich. Prüft, ob die Achse unten nicht abgeschnitten wird.</p>
+    <div class="kg-card">
+<div class="financial-chart-module" 
+         data-type="line"
+         data-title="Crash & Recovery" 
+         data-csv="../fixtures/engine/scenario_4_crash.csv"
+         data-colors="Crash Asset: #F172C1"
+         data-options="range:max"> 
+    </div>
+</div>
+    </section>
+
+    <section class="fw-test-case" data-fw-test-case>
+      <div class="fw-test-expected" data-fw-expected-behavior>
+        <h3>Erwartetes Verhalten</h3>
+        <ul>
+        <li>Asset bewegt sich nicht. Y-Achse sollte trotzdem sinnvoll skalieren (nicht 99.999 - 100.001).</li>
+        </ul>
+      </div>
+<h3>5. Scenario: Flatline (Zero Volatility)</h3>
+    <p>Asset bewegt sich nicht. Y-Achse sollte trotzdem sinnvoll skalieren (nicht 99.999 - 100.001).</p>
+    <div class="kg-card">
+<div class="financial-chart-module" 
+         data-type="line"
+         data-title="Konstante Entwicklung" 
+         data-csv="../fixtures/engine/scenario_5_flat.csv"
+         data-colors="Flat Asset: #333333"
+         data-options="range:max"> 
+    </div>
+</div>
+    </section>
+
+    <section class="fw-test-case" data-fw-test-case>
+      <div class="fw-test-expected" data-fw-expected-behavior>
+        <h3>Erwartetes Verhalten</h3>
+        <ul>
+        <li>Werte wie 1,0001. Prüft, ob der CSV-Parser das deutsche Komma und die Präzision frisst.</li>
+        </ul>
+      </div>
+<h3>6. Scenario: Micro Moves (4 Decimals)</h3>
+    <p>Werte wie 1,0001. Prüft, ob der CSV-Parser das deutsche Komma und die Präzision frisst.</p>
+    <div class="kg-card">
+<div class="financial-chart-module" 
+         data-type="line"
+         data-title="Mikro-Bewegungen" 
+         data-csv="../fixtures/engine/scenario_6_decimals.csv"
+         data-colors="Micro Mover: #49B3AF"
+         data-options="range:max"> 
+    </div>
+</div>
+    </section>
+
+    <section class="fw-test-case" data-fw-test-case>
+      <div class="fw-test-expected" data-fw-expected-behavior>
+        <h3>Erwartetes Verhalten</h3>
+        <ul>
+        <li>Testet die Grenzen der Staggered Animation. 5 Linien, hohe Datendichte. Cap (2s) muss greifen.</li>
+        </ul>
+      </div>
+<h3>7. Scenario: Animation Stress Test (Big Data)</h3>
+    <p>Testet die Grenzen der Staggered Animation. 5 Linien, hohe Datendichte. Cap (2s) muss greifen.</p>
+    <div class="kg-card">
+<div class="financial-chart-module" 
+         data-type="line"
+         data-title="Big Data Animation (Stress Test)" 
+         data-csv="../fixtures/engine/scenario_7_bigdata.csv"
+         data-colors="Tech Titan A: #FF5733, BioTech B: #33FF57, Energy C: #3357FF, Crypto D: #FF33A1, Gold E: #FFD700"
+         data-options="range:max"> 
+    </div>
+</div>
+    </section>
+  </main>
+
+  <script src="../../Theme/assets/js/vendor/chart.umd.min.js"></script>
+  <script type="module" src="../../Theme/assets/js/fw-chart-engine/index.js"></script>
+</body>
+</html>

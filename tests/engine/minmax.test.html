@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Y-Achse V2.0 — MinMax Edge Cases</title>
+
+  <link rel="stylesheet" href="../../Theme/assets/css/tokens.css">
+  <link rel="stylesheet" href="../shared/test-page.css">
+  <script src="../shared/test-page.js" defer></script>
+  <style>
+        body {
+            font-family: 'Source Sans Pro', sans-serif;
+            padding: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            background-color: #f4f4f4;
+        }
+
+        @media (max-width: 480px) {
+            body { padding: 10px; }
+        }
+
+        .financial-chart-module {
+            border: 1px solid #ddd;
+            padding: 1rem;
+            margin-bottom: 2rem;
+            background: #fff;
+            min-height: 400px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            position: relative;
+            border-radius: 8px;
+            container-type: inline-size;
+            container-name: fw-chart;
+        }
+
+        h3, h2 { margin-top: 0; color: #333; }
+        h3 { font-family: monospace; font-size: 1em; color: #555; margin-bottom: 0.3rem; }
+        .container { margin-bottom: 3rem; }
+        hr { border: 0; border-top: 1px solid #ccc; margin: 2rem 0; }
+        .expect { color: #666; font-size: 0.9em; }
+        .section-header { color: #0071BF; border-bottom: 2px solid #0071BF; padding-bottom: 0.3rem; }
+    </style>
+</head>
+<body class="fw-test-page" data-fw-test-template="1">
+
+  <header class="fw-test-header">
+    <h1>Testseite: Y-Achse V2.0 — MinMax Edge Cases</h1>
+
+    <div class="fw-test-runtime-status" data-fw-runtime-status role="status" aria-live="polite">
+      Bereit – bisher kein JavaScript-Fehler erkannt.
+    </div>
+
+    <section class="fw-test-errors" data-fw-test-errors aria-live="assertive" hidden>
+      <h2>Technische Fehler</h2>
+      <ol data-fw-test-error-list></ol>
+    </section>
+  </header>
+
+  <main class="fw-test-main">
+    <p class="fw-test-intro">Testseite für <strong>TIGHT FRAME + Richtungs-Filter + Universal Clearance + Enhanced Magnetic Zero</strong></p>
+    <section class="fw-test-case" data-fw-test-case>
+      <div class="fw-test-expected" data-fw-expected-behavior>
+        <h3>Erwartetes Verhalten</h3>
+        <ul>
+        <li>Erwartung: Clearance expandiert min auf -20. Nulllinie klar sichtbar, nicht am Canvas-Rand.</li>
+        </ul>
+      </div>
+<h3>minmax_linie_asym.csv</h3>
+        <h2>L1. Asymmetrisch mit Nulldurchgang (Line, max)</h2>
+        <p>Fonds Alpha: 12,5 bis 155%, ein Dip auf -3,5%. <span class="expect">Erwartung: Clearance expandiert min auf -20. Nulllinie klar sichtbar, nicht am Canvas-Rand.</span></p>
+        <div class="kg-card">
+<div class="financial-chart-module"
+             data-type="line"
+             data-title="Linie: Einmaliger Nulldurchgang"
+             data-csv="../fixtures/engine/minmax_linie_asym.csv"
+             data-colors="Fonds Alpha: #0071BF"
+             data-options="range:max">
+        </div>
+</div>
+    </section>
+
+    <section class="fw-test-case" data-fw-test-case>
+      <div class="fw-test-expected" data-fw-expected-behavior>
+        <h3>Erwartetes Verhalten</h3>
+        <ul>
+        <li>Erwartung: Clearance expandiert max auf +20. Symmetrischer Gegentest zu L1.</li>
+        </ul>
+      </div>
+<h3>minmax_linie_asym_spiegel.csv</h3>
+        <h2>L2. Spiegelbild: Negativ mit Positivdurchgang (Line, max)</h2>
+        <p>Fonds Beta: -12,5 bis -155%, ein Spike auf +3,5%. <span class="expect">Erwartung: Clearance expandiert max auf +20. Symmetrischer Gegentest zu L1.</span></p>
+        <div class="kg-card">
+<div class="financial-chart-module"
+             data-type="line"
+             data-title="Linie: Spiegelbild — Einmaliger Positivdurchgang"
+             data-csv="../fixtures/engine/minmax_linie_asym_spiegel.csv"
+             data-colors="Fonds Beta: #8D0267"
+             data-options="range:max">
+        </div>
+</div>
+    </section>
+
+    <section class="fw-test-case" data-fw-test-case>
+      <div class="fw-test-expected" data-fw-expected-behavior>
+        <h3>Erwartetes Verhalten</h3>
+        <ul>
+        <li>Erwartung: Achse rein negativ, KEIN Clipping bei -88%. Testet ceil-Richtungsfilter (Spiegel des rawMin=88 Bugs).</li>
+        </ul>
+      </div>
+<h3>minmax_linie_allneg.csv</h3>
+        <h2>L3. Alle Werte negativ, fern von Null (Line, max)</h2>
+        <p>Crashfonds: -12% bis -88%. <span class="expect">Erwartung: Achse rein negativ, KEIN Clipping bei -88%. Testet ceil-Richtungsfilter (Spiegel des rawMin=88 Bugs).</span></p>
+        <div class="kg-card">
+<div class="financial-chart-module"
+             data-type="line"
+             data-title="Linie: Komplett im Minus"
+             data-csv="../fixtures/engine/minmax_linie_allneg.csv"
+             data-colors="Crashfonds: #8D0267"
+             data-options="range:max">
+        </div>
+</div>
+    </section>
+
+    <section class="fw-test-case" data-fw-test-case>
+      <div class="fw-test-expected" data-fw-expected-behavior>
+        <h3>Erwartetes Verhalten</h3>
+        <ul>
+        <li>Erwartung: Enge symmetrische Rahmung um Null. KEINE Bar-Clearance (ist Line). Magnetische Null irrelevant (Daten kreuzen Null).</li>
+        </ul>
+      </div>
+<h3>minmax_linie_nullpendel.csv</h3>
+        <h2>L4. Pendeln um Null (Line, max)</h2>
+        <p>Geldmarktfonds: -2% bis +3%, eng um Null. <span class="expect">Erwartung: Enge symmetrische Rahmung um Null. KEINE Bar-Clearance (ist Line). Magnetische Null irrelevant (Daten kreuzen Null).</span></p>
+        <div class="kg-card">
+<div class="financial-chart-module"
+             data-type="line"
+             data-title="Linie: Oszillation um Null"
+             data-csv="../fixtures/engine/minmax_linie_nullpendel.csv"
+             data-colors="Geldmarktfonds: #218380"
+             data-options="range:max">
+        </div>
+</div>
+    </section>
+
+    <section class="fw-test-case" data-fw-test-case>
+      <div class="fw-test-expected" data-fw-expected-behavior>
+        <h3>Erwartetes Verhalten</h3>
+        <ul>
+        <li>Erwartung: Magnetische Null greift (rawMin=0,5 &lt; 15% von span=3,5). Y-Achse beginnt bei 0.</li>
+        </ul>
+      </div>
+<h3>minmax_linie_nullnah.csv</h3>
+        <h2>L5. Alle positiv, nah an Null (Line, max)</h2>
+        <p>Tagesgeld Plus: 0,5% bis 4%. <span class="expect">Erwartung: Magnetische Null greift (rawMin=0,5 &lt; 15% von span=3,5). Y-Achse beginnt bei 0.</span></p>
+        <div class="kg-card">
+<div class="financial-chart-module"
+             data-type="line"
+             data-title="Linie: Nahe Null, alle positiv"
+             data-csv="../fixtures/engine/minmax_linie_nullnah.csv"
+             data-colors="Tagesgeld Plus: #218380"
+             data-options="range:max">
+        </div>
+</div>
+    </section>
+
+    <section class="fw-test-case" data-fw-test-case>
+      <div class="fw-test-expected" data-fw-expected-behavior>
+        <h3>Erwartetes Verhalten</h3>
+        <ul>
+        <li>Erwartung: Achse geht von ~-50 bis ~15. Die 8-12% Werte werden flach, aber lesbar (nicht zu einer Linie). Outlier dominiert die Skalierung.</li>
+        </ul>
+      </div>
+<h3>minmax_linie_outlier.csv</h3>
+        <h2>L6. Flache Daten mit Crash-Outlier (Line, max)</h2>
+        <p>Defensive Strategie: 8-12%, einmal -45%. <span class="expect">Erwartung: Achse geht von ~-50 bis ~15. Die 8-12% Werte werden flach, aber lesbar (nicht zu einer Linie). Outlier dominiert die Skalierung.</span></p>
+        <div class="kg-card">
+<div class="financial-chart-module"
+             data-type="line"
+             data-title="Linie: Ein Crash-Outlier"
+             data-csv="../fixtures/engine/minmax_linie_outlier.csv"
+             data-colors="Defensive Strategie: #0071BF"
+             data-options="range:max">
+        </div>
+</div>
+    </section>
+
+    <section class="fw-test-case" data-fw-test-case>
+      <div class="fw-test-expected" data-fw-expected-behavior>
+        <h3>Erwartetes Verhalten</h3>
+        <ul>
+        <li>Erwartung: Voller Bereich sichtbar, Nulldurchgang klar erkennbar. Clearance triggert NICHT (|-100| &ge; step=50). Grace expandiert oben stärker als unten (multiplikativ).</li>
+        </ul>
+      </div>
+<h3>minmax_linie_steilrampe.csv</h3>
+        <h2>L7. Steilrampe: Negativ zu stark Positiv (Line, max)</h2>
+        <p>Turnaround Fonds: -60% bis +200%. <span class="expect">Erwartung: Voller Bereich sichtbar, Nulldurchgang klar erkennbar. Clearance triggert NICHT (|-100| &ge; step=50). Grace expandiert oben stärker als unten (multiplikativ).</span></p>
+        <div class="kg-card">
+<div class="financial-chart-module"
+             data-type="line"
+             data-title="Linie: Turnaround von -60 auf +200"
+             data-csv="../fixtures/engine/minmax_linie_steilrampe.csv"
+             data-colors="Turnaround Fonds: #8D0267"
+             data-options="range:max">
+        </div>
+</div>
+    </section>
+
+    <section class="fw-test-case" data-fw-test-case>
+      <div class="fw-test-expected" data-fw-expected-behavior>
+        <h3>Erwartetes Verhalten</h3>
+        <ul>
+        <li>Erwartung: KEIN Magnet (85 &gt;&gt; 15% von span=7). Achse eng um 85-92, NICHT bei 0 starten. Testet _tightBound floor mit positivem rawMin fern von Null.</li>
+        </ul>
+      </div>
+<h3>minmax_linie_plateau.csv</h3>
+        <h2>L8. Enges Plateau fern von Null (Line, max)</h2>
+        <p>Dividendenfonds: 85% bis 92%. <span class="expect">Erwartung: KEIN Magnet (85 &gt;&gt; 15% von span=7). Achse eng um 85-92, NICHT bei 0 starten. Testet _tightBound floor mit positivem rawMin fern von Null.</span></p>
+        <div class="kg-card">
+<div class="financial-chart-module"
+             data-type="line"
+             data-title="Linie: Enges Band fern von Null"
+             data-csv="../fixtures/engine/minmax_linie_plateau.csv"
+             data-colors="Dividendenfonds: #DFC805"
+             data-options="range:max">
+        </div>
+</div>
+    
+
+
+    <!-- ============================================================ -->
+    </section>
+
+    <h2 class="section-header">Balkendiagramme</h2>
+    <!-- ============================================================ -->
+
+    <section class="fw-test-case" data-fw-test-case>
+      <div class="fw-test-expected" data-fw-expected-behavior>
+        <h3>Erwartetes Verhalten</h3>
+        <ul>
+        <li>Erwartung: -20 / 180, Tick bei -20 sichtbar. Clearance greift (|-2,9| &lt; step).</li>
+        </ul>
+      </div>
+<h3>test_data.csv</h3>
+        <h2>B0. Referenzfall (Bar, 1J)</h2>
+        <p>Bitcoin +155%, Anleihen -2,9%. <span class="expect">Erwartung: -20 / 180, Tick bei -20 sichtbar. Clearance greift (|-2,9| &lt; step).</span></p>
+        <div class="kg-card">
+<div class="financial-chart-module"
+             data-type="bar"
+             data-title="Referenzfall: Asymmetrische Jahresrenditen"
+             data-csv="../fixtures/engine/test_data.csv"
+             data-colors="Gold: #DFC805, Bitcoin: #8D0267, MSCI World: #0071BF, Anleihen (Global): #218380"
+             data-options="range:1y, mode:evolution">
+        </div>
+</div>
+    </section>
+
+    <section class="fw-test-case" data-fw-test-case>
+      <div class="fw-test-expected" data-fw-expected-behavior>
+        <h3>Erwartetes Verhalten</h3>
+        <ul>
+        <li>Erwartung: -80 / 10, Tick bei +10 sichtbar.</li>
+        </ul>
+      </div>
+<h3>minmax_inverse.csv</h3>
+        <h2>B1. Inverse Asymmetrie (Bar, 1J)</h2>
+        <p>Leveraged ETF -72%, Tagesgeld +3,2%. Clearance greift auf der <strong>Oberseite</strong> (max). <span class="expect">Erwartung: -80 / 10, Tick bei +10 sichtbar.</span></p>
+        <div class="kg-card">
+<div class="financial-chart-module"
+             data-type="bar"
+             data-title="Inverse: Grosser Verlust, kleiner Gewinn"
+             data-csv="../fixtures/engine/minmax_inverse.csv"
+             data-colors="Leveraged ETF: #8D0267, Tagesgeld: #218380"
+             data-options="range:1y, mode:evolution">
+        </div>
+</div>
+    </section>
+
+    <section class="fw-test-case" data-fw-test-case>
+      <div class="fw-test-expected" data-fw-expected-behavior>
+        <h3>Erwartetes Verhalten</h3>
+        <ul>
+        <li>Erwartung: min expandiert auf -100. Stresstest: Grosses leeres Grid-Feld fuer winzigen Stummel.</li>
+        </ul>
+      </div>
+<h3>minmax_extrem.csv</h3>
+        <h2>B2. Extremes Verhaeltnis (Bar, 1J)</h2>
+        <p>Memecoin +500%, Sparbuch -0,3%. Step=100. <span class="expect">Erwartung: min expandiert auf -100. Stresstest: Grosses leeres Grid-Feld fuer winzigen Stummel.</span></p>
+        <div class="kg-card">
+<div class="financial-chart-module"
+             data-type="bar"
+             data-title="Extrem: Memecoin vs Sparbuch"
+             data-csv="../fixtures/engine/minmax_extrem.csv"
+             data-colors="Memecoin: #8D0267, Sparbuch: #218380"
+             data-options="range:1y, mode:evolution">
+        </div>
+</div>
+    </section>
+
+    <section class="fw-test-case" data-fw-test-case>
+      <div class="fw-test-expected" data-fw-expected-behavior>
+        <h3>Erwartetes Verhalten</h3>
+        <ul>
+        <li>Erwartung: -20 / ~120. Clearance triggert NICHT (|boundary| = step, nicht &lt; step).</li>
+        </ul>
+      </div>
+<h3>minmax_grenzfall.csv</h3>
+        <h2>B3. Grenzfall: Exakt 1 Step (Bar, 1J) — KEIN Trigger</h2>
+        <p>Aktienfonds +95%, Anleihe -18%. Tight Bound gibt -20 = step. <span class="expect">Erwartung: -20 / ~120. Clearance triggert NICHT (|boundary| = step, nicht &lt; step).</span></p>
+        <div class="kg-card">
+<div class="financial-chart-module"
+             data-type="bar"
+             data-title="Grenzfall: Minor Side exakt 1 Step"
+             data-csv="../fixtures/engine/minmax_grenzfall.csv"
+             data-colors="Aktienfonds: #0071BF, Anleihe: #218380"
+             data-options="range:1y, mode:evolution">
+        </div>
+</div>
+    </section>
+
+    <section class="fw-test-case" data-fw-test-case>
+      <div class="fw-test-expected" data-fw-expected-behavior>
+        <h3>Erwartetes Verhalten</h3>
+        <ul>
+        <li>Erwartung: ~-5 / ~8. Normaler Betrieb, keine Expansion.</li>
+        </ul>
+      </div>
+<h3>minmax_beide_klein.csv</h3>
+        <h2>B4. Beide Seiten klein (Bar, 1J) — KEIN Trigger</h2>
+        <p>Fonds A +4,5%, Fonds B -4,2%, Fonds C +7,1%. Kleiner Step, beide Seiten &gt; 1 Step. <span class="expect">Erwartung: ~-5 / ~8. Normaler Betrieb, keine Expansion.</span></p>
+        <div class="kg-card">
+<div class="financial-chart-module"
+             data-type="bar"
+             data-title="Symmetrisch klein: Keine Expansion"
+             data-csv="../fixtures/engine/minmax_beide_klein.csv"
+             data-colors="Fonds A: #0071BF, Fonds B: #8D0267, Fonds C: #218380"
+             data-options="range:1y, mode:evolution">
+        </div>
+</div>
+    </section>
+
+    <section class="fw-test-case" data-fw-test-case>
+      <div class="fw-test-expected" data-fw-expected-behavior>
+        <h3>Erwartetes Verhalten</h3>
+        <ul>
+        <li>Erwartung: min expandiert auf -20.000. Grosses Grid-Feld fuer kleinen Negativbalken.</li>
+        </ul>
+      </div>
+<h3>minmax_euro_asym.csv</h3>
+        <h2>B5. Euro-Werte asymmetrisch (Bar, 1J)</h2>
+        <p>Portfolio 125.000 EUR, Gebuehren -400 EUR. Step=20.000. <span class="expect">Erwartung: min expandiert auf -20.000. Grosses Grid-Feld fuer kleinen Negativbalken.</span></p>
+        <div class="kg-card">
+<div class="financial-chart-module"
+             data-type="bar"
+             data-title="Euro: Portfolio vs Gebuehren"
+             data-csv="../fixtures/engine/minmax_euro_asym.csv"
+             data-colors="Portfoliowert: #0071BF, Gebuehren: #8D0267"
+             data-options="range:1y, mode:evolution">
+        </div>
+</div>
+    </section>
+  </main>
+
+  <script src="../../Theme/assets/js/vendor/chart.umd.min.js"></script>
+  <script type="module" src="../../Theme/assets/js/fw-chart-engine/index.js"></script>
+</body>
+</html>

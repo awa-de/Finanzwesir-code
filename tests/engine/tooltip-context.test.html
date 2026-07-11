@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FW Engine Workbench - Tooltip Context Stresstest</title>
+
+  <link rel="stylesheet" href="../../Theme/assets/css/tokens.css">
+  <link rel="stylesheet" href="../shared/test-page.css">
+  <script src="../shared/test-page.js" defer></script>
+  <style>
+        body { 
+            font-family: 'Source Sans Pro', sans-serif; 
+            padding: 2rem; 
+            max-width: 1200px; 
+            margin: 0 auto; 
+            background-color: #f4f4f4; 
+        }
+
+        /* Mobile Optimierung */
+        @media (max-width: 480px) { body { padding: 10px; } }
+
+        .financial-chart-module {
+            border: 1px solid #ddd;
+            padding: 1rem;
+            margin-bottom: 2rem;
+            background: #fff;
+            min-height: 400px; 
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            position: relative;
+            border-radius: 8px; 
+            container-type: inline-size;
+            container-name: fw-chart;
+        }
+        h2 { color: #218380; border-bottom: 2px solid #218380; padding-bottom: 5px; margin-top: 40px; }
+        h3 { margin-top: 0; color: #333; border-bottom: 1px solid #eee; padding-bottom: 0.5rem;}
+        p { color: #666; font-size: 0.9rem; margin-bottom: 1rem; }
+        .tag { display: inline-block; background: #e0e0e0; padding: 2px 6px; border-radius: 4px; font-size: 0.8em; margin-right: 5px; }
+        .tag-red { background: #ffebee; color: #c62828; }
+        .tag-green { background: #e8f5e9; color: #2e7d32; }
+        .tag-orange { background: #fff3e0; color: #ef6c00; }
+        .tag-blue { background: #e3f2fd; color: #1565c0; }
+    </style>
+</head>
+<body class="fw-test-page" data-fw-test-template="1">
+
+  <header class="fw-test-header">
+    <h1>Testseite: FW Engine Workbench - Tooltip Context Stresstest</h1>
+
+    <div class="fw-test-runtime-status" data-fw-runtime-status role="status" aria-live="polite">
+      Bereit – bisher kein JavaScript-Fehler erkannt.
+    </div>
+
+    <section class="fw-test-errors" data-fw-test-errors aria-live="assertive" hidden>
+      <h2>Technische Fehler</h2>
+      <ol data-fw-test-error-list></ol>
+    </section>
+  </header>
+
+  <main class="fw-test-main">
+    <p class="fw-test-intro"><strong>Fokus: "Context-Aware Tooltips".</strong><br>
+        Wir testen, ob der Tooltip intelligent auf die Daten reagiert. 
+        Er soll nicht mehr stur der Achse folgen, sondern die Granularität (Micro, Weekly, Yearly) der Daten verstehen.</p>
+    <section class="fw-test-case" data-fw-test-case>
+      <div class="fw-test-expected" data-fw-expected-behavior>
+        <h3>Erwartetes Verhalten</h3>
+        <ul>
+        <li><span class="tag tag-blue">Micro</span> <span class="tag">Line</span>
+        Exakt 12 Tage tägliche Daten.
+        <strong>Test:</strong> 
+        Achse Mobile: Start/Mitte/Ende. 
+        Tooltip: Zeigt jeden Tag ("Mo, 1. Jan '24").</li>
+        <li><span class="tag tag-orange">Weekly Transition</span> <span class="tag">Multi-Asset</span>
+        25 Tage. Hier schaltet die Achse auf Wochen-Modus.
+        <strong>Test:</strong> 
+        Achse: Nur Montage.
+        Tooltip: "Mo, 5. Feb" oder "Woche vom..."? (Desktop). 
+        Werden beide Assets (MSCI World, EM) sauber untereinander gelistet?</li>
+        <li><span class="tag tag-red">Data Gap</span>
+        Massive Lücken im Jahr 2023.
+        <strong>Test:</strong> 
+        Chart: Zeigt echte Lücken (keine Interpolation über Monate).
+        Tooltip: Erscheint NUR exakt über dem Punkt. Datum muss stimmen (kein "Geister-Datum").</li>
+        </ul>
+      </div>
+<h2>1. Linien-Charts (Time Series)</h2>
+
+    <h3>1.1. Der Micro-Test (12 Tage)</h3>
+    <p>
+        <span class="tag tag-blue">Micro</span> <span class="tag">Line</span>
+        Exakt 12 Tage tägliche Daten.
+        <strong>Test:</strong> 
+        Achse Mobile: Start/Mitte/Ende. 
+        Tooltip: Zeigt jeden Tag ("Mo, 1. Jan '24").
+    </p>
+    <div class="kg-card">
+<div class="financial-chart-module" 
+         data-type="line"
+         data-title="Portfolio (Micro 12d)" 
+         data-csv="../fixtures/engine/tt_micro_daily_12d.csv"
+         data-colors="Portfolio: #0071BF"
+         data-options="range:max"> 
+    </div>
+</div>
+
+    <h3>1.2. Der Transition-Test (25 Tage, 2 Assets)</h3>
+    <p>
+        <span class="tag tag-orange">Weekly Transition</span> <span class="tag">Multi-Asset</span>
+        25 Tage. Hier schaltet die Achse auf Wochen-Modus.
+        <strong>Test:</strong> 
+        Achse: Nur Montage.
+        Tooltip: "Mo, 5. Feb" oder "Woche vom..."? (Desktop). 
+        Werden beide Assets (MSCI World, EM) sauber untereinander gelistet?
+    </p>
+    <div class="kg-card">
+<div class="financial-chart-module" 
+         data-type="line"
+         data-title="MSCI vs EM (25 Tage)" 
+         data-csv="../fixtures/engine/tt_transition_weekly_25d.csv"
+         data-colors="MSCI World: #0071BF, Emerging Markets: #218380"
+         data-options="range:max"> 
+    </div>
+</div>
+
+    <h3>1.3. Der Lücken-Test (Irregular)</h3>
+    <p>
+        <span class="tag tag-red">Data Gap</span>
+        Massive Lücken im Jahr 2023.
+        <strong>Test:</strong> 
+        Chart: Zeigt echte Lücken (keine Interpolation über Monate).
+        Tooltip: Erscheint NUR exakt über dem Punkt. Datum muss stimmen (kein "Geister-Datum").
+    </p>
+    <div class="kg-card">
+<div class="financial-chart-module" 
+         data-type="line"
+         data-title="Private Equity (Irregular)" 
+         data-csv="../fixtures/engine/tt_gap_test_irregular.csv"
+         data-colors="Private Equity: #8D0267"
+         data-options="range:max"> 
+    </div>
+</div>
+    </section>
+
+    <section class="fw-test-case" data-fw-test-case>
+      <div class="fw-test-expected" data-fw-expected-behavior>
+        <h3>Erwartetes Verhalten</h3>
+        <ul>
+        <li><span class="tag tag-green">High Precision</span> <span class="tag">Bar</span>
+        Tägliche Daten, 4 Monate. 4 Nachkommastellen.
+        <strong>Test:</strong> 
+        Achse: Zeigt nur Monatsanfang (oder 1./15. auf Desktop).
+        Tooltip: Zeigt jeden einzelnen Balken mit vollen 4 Nachkommastellen?</li>
+        <li><span class="tag tag-blue">Strategic</span> <span class="tag">Multi-Bar</span>
+        3 Jahre, monatliche Daten. 3 Assets.
+        <strong>Test:</strong> 
+        Achse: "Jan '20", "Jan '21".
+        Tooltip: "Januar 2020" (Langform auf Desktop?).</li>
+        <li><span class="tag tag-green">Zone E</span> <span class="tag">Yearly</span>
+        25 Jahre Immobilien.
+        <strong>Test:</strong> 
+        Achse: Alle 5 Jahre.
+        Tooltip: NUR "2000" (Kein "31.12.2000").</li>
+        </ul>
+      </div>
+<h2>2. Balken-Charts (Time Series)</h2>
+
+    <h3>2.1. Der Short-Term Precision Test (4 Monate)</h3>
+    <p>
+        <span class="tag tag-green">High Precision</span> <span class="tag">Bar</span>
+        Tägliche Daten, 4 Monate. 4 Nachkommastellen.
+        <strong>Test:</strong> 
+        Achse: Zeigt nur Monatsanfang (oder 1./15. auf Desktop).
+        Tooltip: Zeigt jeden einzelnen Balken mit vollen 4 Nachkommastellen?
+    </p>
+    <div class="kg-card">
+<div class="financial-chart-module" 
+         data-type="bar"
+         data-title="Bitcoin (High Precision)" 
+         data-csv="../fixtures/engine/tt_short_monthly_start_4m.csv"
+         data-colors="Bitcoin: #F7931A"
+         data-options="range:max"> 
+    </div>
+</div>
+
+    <h3>2.2. Der Strategische Test (3 Jahre Monthly)</h3>
+    <p>
+        <span class="tag tag-blue">Strategic</span> <span class="tag">Multi-Bar</span>
+        3 Jahre, monatliche Daten. 3 Assets.
+        <strong>Test:</strong> 
+        Achse: "Jan '20", "Jan '21".
+        Tooltip: "Januar 2020" (Langform auf Desktop?).
+    </p>
+    <div class="kg-card">
+<div class="financial-chart-module" 
+         data-type="bar"
+         data-title="Edelmetalle (3 Jahre)" 
+         data-csv="../fixtures/engine/tt_strategic_3y_monthly.csv"
+         data-colors="Gold: #DFC805, Silber: #C0C0C0, Bronze: #CD7F32"
+         data-options="range:max"> 
+    </div>
+</div>
+
+    <h3>2.3. Der Langzeit-Test (25 Jahre Yearly)</h3>
+    <p>
+        <span class="tag tag-green">Zone E</span> <span class="tag">Yearly</span>
+        25 Jahre Immobilien.
+        <strong>Test:</strong> 
+        Achse: Alle 5 Jahre.
+        Tooltip: NUR "2000" (Kein "31.12.2000").
+    </p>
+    <div class="kg-card">
+<div class="financial-chart-module" 
+         data-type="bar"
+         data-title="Immobilie (25 Jahre)" 
+         data-csv="../fixtures/engine/tt_long_yearly_25y.csv"
+         data-colors="Immobilie: #218380"
+         data-options="range:max"> 
+    </div>
+</div>
+    </section>
+
+    <section class="fw-test-case" data-fw-test-case>
+      <div class="fw-test-expected" data-fw-expected-behavior>
+        <h3>Erwartetes Verhalten</h3>
+        <ul>
+        <li>Tortendiagramm „Aktuelle Verteilungen“ mit 5 Assets (Gold, Bitcoin, MSCI World, Anleihen, Immobilien), feste CI-Farben je Asset.</li>
+        </ul>
+      </div>
+<h3>3. Asset Allokation (Torte)</h3>
+    <div class="chart-wrapper">
+        <div class="kg-card">
+<div class="financial-chart-module"
+             data-type="pie"
+             data-title="Aktuelle Verteilungen" 
+             data-csv="../fixtures/engine/test_data_torte.csv"
+             data-colors="Gold: #DFC805, Bitcoin: #8D0267, MSCI World: #0071BF, Anleihen (Global): #218380, Immobilien: #64CDC9">
+        </div>
+</div>
+    </div>
+    </section>
+  </main>
+
+  <script src="../../Theme/assets/js/vendor/chart.umd.min.js"></script>
+  <script type="module" src="../../Theme/assets/js/fw-chart-engine/index.js"></script>
+</body>
+</html>

@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AP-16 Abnahme — Kaskaden-Harness (tokens.css + screen.css)</title>
+
+  <link rel="stylesheet" href="../../Theme/assets/css/tokens.css">
+  <link rel="stylesheet" href="../shared/test-page.css">
+  <script src="../shared/test-page.js" defer></script>
+
+  <!-- ECHTE KASKADE: screen.css importiert tokens.css. Dadurch läuft FwTheme.init() im
+       FwRenderer gegen echte CSS-Variablen (nicht Fallbacks) und die Website-Elemente
+       (.box-petrol/.box-purpur/.ci-link) werden direkt CSS-getrieben gerendert. -->
+  <link rel="stylesheet" href="../../Theme/assets/css/screen.css">
+
+  <!-- Nur Seiten-Layout des Harness selbst (überschreibt KEINE CI-Tokens/-Farben). -->
+  <style>
+    .hint { background: var(--color-bg-faint); border: 1px solid var(--color-border); border-radius: 8px; padding: .8rem 1rem; font-size: .9rem; margin: .6rem 0; }
+    .expect { font-size: .85rem; color: var(--color-text-muted); margin: .2rem 0 .8rem; }
+    #cascade-indicator, #bridge-indicator { font-weight: 700; padding: 1rem 1.2rem; border-radius: 8px; margin: 1rem 0; font-family: ui-monospace, Consolas, monospace; }
+    .cas-ok { background: color-mix(in srgb, var(--color-petrol-600) 12%, transparent); border: 2px solid var(--color-petrol-600); color: var(--color-petrol-900); }
+    .cas-bad { background: var(--color-error-bg); border: 2px solid var(--color-error-border); color: var(--color-error-text); }
+    .demo-boxes { display: flex; flex-wrap: wrap; gap: 1rem; }
+    .demo-boxes > div { flex: 1; min-width: 240px; padding: 1rem 1.2rem; border-radius: 10px; }
+    .financial-chart-module { border: 1px solid var(--color-border); border-radius: 10px; padding: 1rem; margin: 1rem 0; container-type: inline-size; container-name: fw-chart; min-height: 380px; }
+    .fw-app-host { border: 1px dashed var(--color-petrol-400); border-radius: 10px; padding: 1rem; margin: 1rem 0; min-height: 360px; }
+    code { background: var(--color-bg-faint); padding: 1px 5px; border-radius: 3px; font-family: ui-monospace, Consolas, monospace; }
+  </style>
+</head>
+<body class="fw-test-page" data-fw-test-template="1">
+
+  <header class="fw-test-header">
+    <h1>Testseite: AP-16 Abnahme — Kaskaden-Harness (tokens.css + screen.css)</h1>
+
+    <div class="fw-test-runtime-status" data-fw-runtime-status role="status" aria-live="polite">
+      Bereit – bisher kein JavaScript-Fehler erkannt.
+    </div>
+
+    <section class="fw-test-errors" data-fw-test-errors aria-live="assertive" hidden>
+      <h2>Technische Fehler</h2>
+      <ol data-fw-test-error-list></ol>
+    </section>
+  </header>
+
+  <main class="fw-test-main">
+
+    <div class="hint">
+      <b>Zweck:</b> Diese Seite lädt <code>screen.css</code> (das <code>tokens.css</code> importiert) und die Chart-Engine
+      aus lokalem <code>vendor/chart.umd.min.js</code> — <b>kein CDN</b>.
+      <br><br>
+      <b>Seit AP-16c (Theme-Durchleitung):</b> Die Composition Root (<code>ChartEngine</code>) reicht das EINE init()'te
+      <code>FwTheme</code> (aus <code>FwRenderer</code>, KDR 14.3) per Constructor Injection an alle drei Strategien durch.
+      Damit lesen auch Chart-Serien-/Achsen-/Tooltip-Farben die <b>Live-CSS-Kaskade</b> — nicht mehr eigene, nie init()'te
+      Fallback-Themes. <b>Erwartetes sichtbares Delta: NULL</b>, weil die init()'ten Werte (tokens.css) byte-identisch zu den
+      Fallbacks sind. Standalone-Test-HTMLs ohne Engine funktionieren per Graceful Default weiter (Fallback-Pfad, KDR 14.2).
+      Beide Indikatoren unten müssen <b>AKTIV</b> bzw. <b>LIVE</b> zeigen.
+    </div>
+
+    <div id="cascade-indicator">Kaskade-Indikator wird geprüft …</div>
+    <div id="bridge-indicator">Chart-Bridge-Indikator wird geprüft …</div>
+
+    <!-- Abschnitt 1 ist ein reiner CSS-Kaskaden-Demo (keine Chart-/App-Card) und wird
+         bewusst nicht als data-fw-test-case markiert -- der Checker prueft nur Ghost-Card-
+         gestuetzte Test-/Erwartungs-Struktur, kein bloßer Farbabgleich. -->
+    <h2>1 — Website-Elemente (ECHTE Live-CSS-Kaskade aus screen.css/tokens.css)</h2>
+    <p class="expect">Erwartung: <code>.box-petrol</code> petrolfarbener Tint-Hintergrund + Border; <code>.box-purpur</code> purpurner Tint + linke Kante; Link blau, Hover petrol. Diese Farben kommen direkt aus <code>var(--color-*)</code>/<code>color-mix()</code>.</p>
+    <div class="demo-boxes">
+      <div class="box-petrol">
+        <b>Info / Merke.</b> <code>.box-petrol</code> — Hintergrund <code>color-mix(petrol-600 8%)</code>, Border <code>petrol-200</code>.
+      </div>
+      <div class="box-purpur">
+        <b>Achtung / Vorsicht.</b> <code>.box-purpur</code> — Hintergrund <code>color-mix(purpur-900 8%)</code>, linke Kante <code>purpur</code>.
+      </div>
+    </div>
+    <p style="margin-top:1rem">Beispiel-Link: <a href="#" class="ci-link">Ein Finanzwesir-Link</a> (blau; Hover → petrol, Unterstreichung dicker).</p>
+
+    <section class="fw-test-case" data-fw-test-case>
+      <div class="fw-test-expected" data-fw-expected-behavior>
+        <h3>Erwartetes Verhalten</h3>
+        <ul>
+          <li>Erwartung: 10 Serien (A–J), Farben aus <code>theme.getColor(i)</code>. Slot 5 = <b>purpur-400 #F172C1</b> (sichtbar pinker als früher), Slot 6 = petrol-400 #64CDC9, Slot 7 = gelb-200 #FCF09C. <i>Seit AP-16c kaskaden-live aus dem durchgereichten init()'ten Theme (Werte = tokens.css, Null-Delta zum vorherigen Fallback).</i></li>
+        </ul>
+      </div>
+      <h2>2 — Multi-Serie-Balken OHNE data-colors → Auto-Palette (Slots 5–7)</h2>
+      <div class="kg-card">
+      <div class="financial-chart-module"
+           data-type="bar"
+           data-title="Multi-Serie 10 (Auto-Palette)"
+           data-csv="../fixtures/engine/bd_ranking_stress.csv">
+      </div>
+      </div>
+    </section>
+
+    <section class="fw-test-case" data-fw-test-case>
+      <div class="fw-test-expected" data-fw-expected-behavior>
+        <h3>Erwartetes Verhalten</h3>
+        <ul>
+          <li>Erwartung: <b>positive Balken Petrol #218380, negative Balken Purpur #8D0267</b>. Die Testdaten (<code>bd_many_years.csv</code>, eine Wertspalte) enthalten mehrere deutlich negative Perioden — beide Ampel-Farben müssen sichtbar sein.</li>
+        </ul>
+      </div>
+      <h2>3 — Single-Asset-Balken → Vorzeichen-Ampel (Petrol/Purpur)</h2>
+      <div class="kg-card">
+      <div class="financial-chart-module"
+           data-type="bar"
+           data-title="Single-Asset (Vorzeichen-Ampel, gemischt +/−)"
+           data-csv="../fixtures/engine/bd_many_years.csv">
+      </div>
+      </div>
+    </section>
+
+    <section class="fw-test-case" data-fw-test-case>
+      <div class="fw-test-expected" data-fw-expected-behavior>
+        <h3>Erwartetes Verhalten</h3>
+        <ul>
+          <li>Erwartung: 9 Positionen → Top 5 + <b>„Weitere…"-Segment</b> (Aggregation ab &gt;6 Segmenten, <code>MAX_SLICES=5</code>). <b>Kein separater Tooltip (so gewollt):</b> beim Überfahren eines Segments erscheinen dessen Name + % als <b>Center-Text in der Torten-Mitte</b>, immer in der Textfarbe (schwarz). <b>Klick auf „Weitere…" öffnet das Pop-up „Weitere Positionen".</b></li>
+        </ul>
+      </div>
+      <h2>4 — Torte + „Weitere…"-Aggregation + Pop-up</h2>
+      <div class="kg-card">
+      <div class="financial-chart-module"
+           data-type="pie"
+           data-title="Allokation (9 Positionen → Weitere…)"
+           data-csv="../fixtures/engine/test_data_torte.csv">
+      </div>
+      </div>
+    </section>
+
+    <section class="fw-test-case" data-fw-test-case>
+      <div class="fw-test-expected" data-fw-expected-behavior>
+        <h3>Erwartetes Verhalten</h3>
+        <ul>
+          <li>Erwartung: blaue gestrichelte Linie am letzten Punkt. Farbe kommt aus <code>LineChartStrategy → options.plugins.fwVerticalLine.color = t.colors.blau</code> (AP-16b), das Plugin hat <code>#0071BF</code> nur als Fallback. Dies testet die Bridge-Konsolidierung.</li>
+        </ul>
+      </div>
+      <h2>5 — Ergebnislinie (FwVerticalLinePlugin → Theme-Blau via Strategy-Token)</h2>
+      <div class="kg-card">
+      <div id="vline-chart" class="fw-app-host" data-fw-appchart></div>
+      </div>
+    </section>
+
+    <section class="fw-test-case" data-fw-test-case>
+      <div class="fw-test-expected" data-fw-expected-behavior>
+        <h3>Erwartetes Verhalten</h3>
+        <ul>
+          <li>Erwartung: Beim Laden pulsiert einmalig ein Ring am Stations-Marker. Die Ringfarbe ist der Marker-<code>pointBorderColor</code> = <b>Petrol</b> (Strategy-Token). Die AP-16b-Änderung betraf nur den <i>defensiven Fallback</i> (alte Teal-Sonderfarbe → Petrol <code>#218380</code>) — am zuverlässigsten per Code + App-Kontext (AP-17) zu prüfen. Falls kein Marker erscheint, rendert die Linie trotzdem normal.</li>
+        </ul>
+      </div>
+      <h2>6 — Annotation-Pulse (FwAnnotationPulsePlugin → Petrol)</h2>
+      <div class="kg-card">
+      <div id="pulse-chart" class="fw-app-host" data-fw-appchart></div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Lokale Chart.js (global, vor der Engine) — KEIN CDN -->
+  <script src="../../Theme/assets/js/vendor/chart.umd.min.js"></script>
+  <!-- Engine-Auto-Init für alle .financial-chart-module -->
+  <script type="module" src="../../Theme/assets/js/fw-chart-engine/index.js"></script>
+
+  <!-- Kaskade-Indikator + renderFromData-Fälle (Ergebnislinie, Pulse) -->
+  <script type="module">
+    import { ChartEngine } from '../../Theme/assets/js/fw-chart-engine/core/ChartEngine.js';
+
+    // --- Kaskade-Indikator: beweist, dass tokens.css/screen.css geladen sind ---
+    const ind = document.getElementById('cascade-indicator');
+    const petrol600 = getComputedStyle(document.documentElement).getPropertyValue('--color-petrol-600').trim();
+    if (petrol600.toUpperCase() === '#218380') {
+        ind.textContent = 'Kaskade AKTIV ✓  —  --color-petrol-600 = ' + petrol600 + '  (tokens.css/screen.css geladen)';
+        ind.className = 'cas-ok';
+    } else {
+        ind.textContent = 'KASKADE INAKTIV ✗  —  --color-petrol-600 = "' + (petrol600 || 'leer') + '"  (Fallback-Pfad, screen.css nicht geladen?)';
+        ind.className = 'cas-bad';
+    }
+
+    // --- Testreihe (monatlich, kumulativ steigend) für die App-Pfad-Charts ---
+    function buildSeries() {
+        const out = [];
+        let v = 1000;
+        for (let y = 2022; y <= 2023; y++) {
+            for (let m = 1; m <= 12; m++) {
+                v = Math.round(v * 1.02 + 40);
+                out.push({ month: y + '-' + String(m).padStart(2, '0'), depotwert: v });
+            }
+        }
+        return out;
+    }
+    const series = buildSeries();
+    const firstMonth = series[0].month;
+    const lastMonth  = series[series.length - 1].month;
+
+    const eng = new ChartEngine();
+
+    // --- Chart-Bridge-Indikator (AP-16c): Read-only Identitäts-Check ohne neuen globalen Zustand.
+    // Nutzen alle drei Strategien dieselbe (init()'te) FwTheme-Instanz wie der Renderer? ---
+    const bind = document.getElementById('bridge-indicator');
+    const sameTheme = !!(eng.strategies && eng.renderer
+        && eng.strategies.line.theme === eng.renderer.theme
+        && eng.strategies.bar.theme  === eng.renderer.theme
+        && eng.strategies.pie.theme  === eng.renderer.theme);
+    if (sameTheme) {
+        bind.textContent = "Chart-Bridge: LIVE ✓  —  alle 3 Strategien nutzen das init()'te FwRenderer-Theme (Durchleitung aktiv)";
+        bind.className = 'cas-ok';
+    } else {
+        bind.textContent = "Chart-Bridge: FALLBACK ✗  —  Strategie-Theme ≠ Renderer-Theme (Durchleitung inaktiv)";
+        bind.className = 'cas-bad';
+    }
+
+    // Fall 5 — Ergebnislinie (verticalLine:'last')
+    try {
+        eng.renderFromData(document.getElementById('vline-chart'), series, {
+            type: 'line',
+            features: { rangeControls: false, headline: false, verticalLine: 'last' },
+            xDisplayRange: { min: firstMonth, max: lastMonth },
+            yRangePolicy: 'cumulative-expand-zero'
+        });
+    } catch (e) { console.error('[Harness] Ergebnislinie:', e); }
+
+    // Fall 6 — Annotation-Pulse (minimaler Marker, pulst einmalig beim Laden)
+    try {
+        const markMonth = series[Math.floor(series.length * 0.6)].month;
+        const markPoint = series.find(p => p.month === markMonth);
+        eng.renderFromData(document.getElementById('pulse-chart'), series, {
+            type: 'line',
+            features: { rangeControls: false, headline: false },
+            xDisplayRange: { min: firstMonth, max: lastMonth },
+            yRangePolicy: 'cumulative-expand-zero',
+            annotations: { events: [{
+                id: 'harness-station-1', type: 'journey-station', month: markMonth,
+                x: new Date(markMonth + '-01').getTime(), y: markPoint.depotwert,
+                source: 'journey-stations', role: 'past'
+            }] },
+            annotationPulse: { enabled: true, mode: 'newly-added' }
+        });
+    } catch (e) { console.error('[Harness] Pulse:', e); }
+  </script>
+
+</body>
+</html>

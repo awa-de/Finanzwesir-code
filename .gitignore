@@ -12,10 +12,6 @@ Archiv/local/
 # Kein Tracking von App-Datenmaterial
 data-raw/
 
-# Chart-Engine Dev-Ordner — nicht versionieren
-Theme/data/
-Theme/chart-tests/
-
 node_modules/
 .env
 .env.local

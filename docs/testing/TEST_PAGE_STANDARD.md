@@ -1,6 +1,6 @@
 # Finanzwesir Test Page Standard
 
-Stand: 2026-07-11 | Standard-Version: 1 | Geändert von: Claude (Sonnet)
+Stand: 2026-07-11 | Standard-Version: 2 (TESTENV-1eB: §10.2 + §12.7-Erweiterung) | Geändert von: Claude (Sonnet)
 
 > Normativer Standard. Kein Projekttagebuch. Die Wörter **MUSS**, **DARF**, **DARF NICHT**
 > und **SOLL** sind im Sinne von RFC 2119 zu lesen. **SOLL** wird nur bei bewusst begründeter
@@ -364,6 +364,28 @@ Keine Textheuristik über Begriffe wie „404" oder „Negativtest", keine globa
 Ausnahme nach Dateiname oder Ordner — ausschließlich der exakte, testfalllokale Stringvergleich
 entscheidet.
 
+### 10.2 Bewusst fehlendes Pflichtattribut `data-fw-app` (`data-fw-test-allow-missing-app-id`)
+
+`data-fw-test-allow-missing-app-id` ist ein optionales, wertloses Attribut ausschließlich für ein
+Element mit `data-fw-test-case`. Es erlaubt genau **eine** `.fw-app` in diesem Testfall, die
+bewusst kein oder ein leeres `data-fw-app` trägt — z. B. ein Negativtest für den Error-State bei
+fehlendem Slug. Anders als `data-fw-test-allow-missing-ref` (§10.1) ist kein Wertevergleich nötig,
+da es keine Datei-/Pfadreferenz gibt, die eindeutig zugeordnet werden müsste — reine
+Präsenzprüfung.
+
+**Gültigkeitsbedingungen** (alle MÜSSEN erfüllt sein):
+
+1. Marker steht auf einem Element mit `data-fw-test-case`.
+2. Der Testfall enthält genau eine `.fw-app`.
+3. Diese `.fw-app` besitzt tatsächlich kein oder ein leeres `data-fw-app`.
+
+**Fehlerfälle** (Checker MUSS melden): Marker außerhalb von `data-fw-test-case`; Testfall mit
+Marker, aber ohne genau eine `.fw-app`; markierte `.fw-app`, die bereits ein nicht-leeres
+`data-fw-app` besitzt (Marker dann entfernen, nicht aufweichen).
+
+Kein generisches Capability-System, keine Ausnahme für andere Pflichtattribute (§7/§8) — der
+Marker deckt ausschließlich dieses eine, benannte Negativtest-Muster ab.
+
 ---
 
 ## 11. Shared CSS und Shared JavaScript
@@ -389,7 +411,11 @@ entscheidet.
 6. Jeder Testfall besitzt: eine Überschrift; genau einen nicht leeren Block
    `data-fw-expected-behavior`; mindestens eine `.kg-card`.
 7. Jede `.kg-card` enthält genau einen zulässigen Produktionscontainer: `.fw-app` oder
-   `.financial-chart-module`.
+   `.financial-chart-module`. Ausschließlich unter `tests/engine/` ist zusätzlich
+   `[data-fw-appchart]` zulässig (reiner Engine-/Plugin-Regressionstest ohne Ghost-Card, der die
+   Engine direkt per `<script type="module">` bootstrapt, Bestandsmuster seit
+   `AP-prokrast-03d`/`AP-16`) — außerhalb von `tests/engine/` bleibt `[data-fw-appchart]` ein
+   Strukturfehler.
 8. Pflichtattribute des jeweiligen Card-Vertrags sind vorhanden (§7/§8).
 9. Referenzierte lokale Dateien existieren.
 10. Pfade stimmen auch in Groß-/Kleinschreibung exakt.

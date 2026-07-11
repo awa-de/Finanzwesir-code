@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AP-13 — PERIOD-Track Bar-Charts: Irreguläre Daten + Ranking-Regression</title>
+
+  <link rel="stylesheet" href="../../Theme/assets/css/tokens.css">
+  <link rel="stylesheet" href="../shared/test-page.css">
+  <script src="../shared/test-page.js" defer></script>
+  <style>
+        body {
+            font-family: 'Source Sans Pro', sans-serif;
+            padding: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+        h1 { color: #218380; border-bottom: 3px solid #218380; padding-bottom: 10px; }
+
+        h2 {
+            margin-top: 4rem;
+            background: #e8f5e9;
+            padding: 15px;
+            border-left: 8px solid #218380;
+            color: #1b5e20;
+            font-size: 1.4rem;
+        }
+
+        h3 {
+            margin-top: 1.5rem;
+            background: #fff3e0;
+            padding: 10px 15px;
+            border-left: 6px solid #ef6c00;
+            color: #e65100;
+            font-family: monospace;
+            font-size: 1.1rem;
+        }
+
+        h4 { margin-top: 1rem; color: #555; border-bottom: 1px solid #ddd; padding-bottom: 5px; }
+        p { color: #666; font-size: 0.9rem; margin-bottom: 1rem; }
+        .expect { color: #1b5e20; font-weight: bold; }
+        .table-path { color: #0d47a1; font-family: monospace; font-size: 0.85rem; }
+
+        .financial-chart-module {
+            border: 1px solid #ddd;
+            padding: 1rem;
+            margin-bottom: 2rem;
+            background: #fff;
+            min-height: 400px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            border-radius: 8px;
+            container-type: inline-size;
+            container-name: fw-chart;
+        }
+
+        .intro {
+            background: #e3f2fd;
+            border: 1px solid #90caf9;
+            border-radius: 8px;
+            padding: 1rem 1.5rem;
+            margin-bottom: 2rem;
+        }
+        .intro p { color: #1565c0; }
+
+        .baseline {
+            background: #f1f8e9;
+            border: 2px solid #7cb342;
+            border-radius: 8px;
+            padding: 1rem 1.5rem;
+            margin-bottom: 1rem;
+        }
+        .baseline p { color: #33691e; }
+    </style>
+</head>
+<body class="fw-test-page" data-fw-test-template="1">
+
+  <header class="fw-test-header">
+    <h1>Testseite: AP-13 — PERIOD-Track Bar-Charts: Irreguläre Daten + Ranking-Regression</h1>
+
+    <div class="fw-test-runtime-status" data-fw-runtime-status role="status" aria-live="polite">
+      Bereit – bisher kein JavaScript-Fehler erkannt.
+    </div>
+
+    <section class="fw-test-errors" data-fw-test-errors aria-live="assertive" hidden>
+      <h2>Technische Fehler</h2>
+      <ol data-fw-test-error-list></ol>
+    </section>
+  </header>
+
+  <main class="fw-test-main">
+    <p class="fw-test-intro"><strong>Zweck:</strong> Testseite für AP-13 (PERIOD-Track Kalender-Ticks).
+            Alle 7 irregulären CSVs als Bar-Charts mit je 2 Assets.
+            Prüft gleichzeitig: (1) Kalender-Ticks im History-View, (2) Ranking-View (Asset-Vergleich) als Regressions-Check.</p>
+    <p class="fw-test-intro"><strong>Test-Anleitung:</strong> Jeder Chart hat einen Verlauf/Vergleich-Toggle (bei 2+ Assets).
+            Prüfe beide Ansichten. Die Baseline (B0) zeigt den Sollzustand mit regulären Daten.</p>
+    <section class="fw-test-case" data-fw-test-case>
+      <div class="fw-test-expected" data-fw-expected-behavior>
+        <h3>Erwartetes Verhalten</h3>
+        <ul>
+        <li>Erwartung History: Jährliche Balken, jährliche Ticks. Pos/Neg-Färbung deaktiviert (Multi-Asset).</li>
+        <li>Erwartung Ranking: Gruppierte Balken pro Asset. Toggle funktioniert.</li>
+        </ul>
+      </div>
+<h3>test_data_multibalken.csv</h3>
+    <h4>B0. Regulär, jährlich, 4 Assets — Referenz für korrektes Verhalten</h4>
+    <div class="baseline">
+        <p><strong>Nulllinie:</strong> Dieser Chart hat reguläre jährliche Intervalle und 4 Assets.
+        Dient als Referenz: Wenn dieser Chart nach der Änderung anders aussieht als vorher, gibt es eine Regression.</p>
+    </div>
+    <p>
+        <strong>Daten:</strong> 6 Punkte, 2020–2025, jährlich, 4 Assets (Gold, Krypto, Aktien, Anleihen).<br>
+        <strong>Rhythm-Detection:</strong> YEARLY (365d Intervalle).<br>
+        <span class="table-path">PERIOD_TABLES.YEARLY: unit year, stepSize 1.</span><br>
+        <span class="expect">Erwartung History: Jährliche Balken, jährliche Ticks. Pos/Neg-Färbung deaktiviert (Multi-Asset).</span><br>
+        <span class="expect">Erwartung Ranking: Gruppierte Balken pro Asset. Toggle funktioniert.</span>
+    </p>
+    <div class="kg-card">
+<div class="financial-chart-module"
+         data-type="bar"
+         data-title="B0. Baseline: Regulär Jährlich (4 Assets)"
+         data-csv="../fixtures/engine/test_data_multibalken.csv"
+         data-colors="Gold: #D4A843, Krypto: #E63946, Aktien: #218380, Anleihen: #0071BF">
+    </div>
+</div>
+
+    <!-- ============================================================ -->
+    <h2>B1–B7. Irreguläre Daten — PERIOD-Track (je 2 Assets)</h2>
+    <p>Alle CSVs haben jetzt ein zweites Asset. Prüfe History-View (Kalender-Ticks) UND Ranking-View (Asset-Vergleich).</p>
+    <!-- ============================================================ -->
+
+    <!-- B1: Crash CSV -->
+    </section>
+
+    <section class="fw-test-case" data-fw-test-case>
+      <div class="fw-test-expected" data-fw-expected-behavior>
+        <h3>Erwartetes Verhalten</h3>
+        <ul>
+        <li>Erwartung History: Gleichmäßige Quartals-Ticks (Jan/Apr/Jul/Okt) über gesamte Zeitspanne. KEIN Rhythmus-Wechsel.</li>
+        <li>Erwartung Ranking: Toggle auf "Vergleich" → gruppierte Balken pro Zeitpunkt. Beide Assets sichtbar.</li>
+        </ul>
+      </div>
+<h3>scenario_4_crash.csv</h3>
+    <h4>B1. Mixed-Rhythm Crash — 2 Assets (Crash Asset + Defensiv)</h4>
+    <p>
+        <strong>Daten:</strong> 22 Punkte, 2007–2012. Intervalle: 28d–365d. Crash Asset bricht ein, Defensiv bleibt stabil.<br>
+        <strong>Rhythm-Detection:</strong> QUARTERLY (avg ~87d).<br>
+        <span class="table-path">Density: 5y, Zone L → quarter/1/QUARTER/"MMM 'yy". BOP: No-Q-Policy → MONTHLY remap.</span><br>
+        <span class="expect">Erwartung History: Gleichmäßige Quartals-Ticks (Jan/Apr/Jul/Okt) über gesamte Zeitspanne. KEIN Rhythmus-Wechsel.</span><br>
+        <span class="expect">Erwartung Ranking: Toggle auf "Vergleich" → gruppierte Balken pro Zeitpunkt. Beide Assets sichtbar.</span>
+    </p>
+    <div class="kg-card">
+<div class="financial-chart-module"
+         data-type="bar"
+         data-title="B1. Mixed-Rhythm Crash (2 Assets)"
+         data-csv="../fixtures/engine/scenario_4_crash.csv"
+         data-colors="Crash Asset: #E63946, Defensiv: #218380">
+    </div>
+</div>
+
+    <!-- B2: Yearly irregular -->
+    </section>
+
+    <section class="fw-test-case" data-fw-test-case>
+      <div class="fw-test-expected" data-fw-expected-behavior>
+        <h3>Erwartetes Verhalten</h3>
+        <ul>
+        <li>Erwartung History: Jährliche Kalender-Ticks 2015–2024. Lücken bei fehlenden Jahren sichtbar.</li>
+        <li>Erwartung Ranking: Beide Assets nebeneinander pro Jahr.</li>
+        </ul>
+      </div>
+<h3>snap_period_yearly_irregular.csv</h3>
+    <h4>B2. Yearly Irregular — 2 Assets (Unregelmäßig + Benchmark)</h4>
+    <p>
+        <strong>Daten:</strong> 8 Punkte, 2015–2024, Stichtage wild verteilt.<br>
+        <strong>Rhythm-Detection:</strong> YEARLY (avg ~460d).<br>
+        <span class="table-path">PERIOD_TABLES.YEARLY: unit year, stepSize 1. BOP → Jahresstart.</span><br>
+        <span class="expect">Erwartung History: Jährliche Kalender-Ticks 2015–2024. Lücken bei fehlenden Jahren sichtbar.</span><br>
+        <span class="expect">Erwartung Ranking: Beide Assets nebeneinander pro Jahr.</span>
+    </p>
+    <div class="kg-card">
+<div class="financial-chart-module"
+         data-type="bar"
+         data-title="B2. Yearly Irregular (2 Assets)"
+         data-csv="../fixtures/engine/snap_period_yearly_irregular.csv"
+         data-colors="Unregelmäßig: #2A9D8F, Benchmark: #E76F51">
+    </div>
+</div>
+
+    <!-- B3: Monthly with gaps -->
+    </section>
+
+    <section class="fw-test-case" data-fw-test-case>
+      <div class="fw-test-expected" data-fw-expected-behavior>
+        <h3>Erwartetes Verhalten</h3>
+        <ul>
+        <li>Erwartung History: Monatliche Kalender-Ticks Jan–Dez. Lücken = keine Balken an Mär/Apr/Jul.</li>
+        <li>Erwartung Ranking: Portfolio A vs. B pro Monat.</li>
+        </ul>
+      </div>
+<h3>tool_tip_monthly_gaps.csv</h3>
+    <h4>B3. Monatlich mit Lücken — 2 Assets (Portfolio A + B)</h4>
+    <p>
+        <strong>Daten:</strong> 9 Punkte über 12 Monate. Mär, Apr, Jul fehlen.<br>
+        <strong>Rhythm-Detection:</strong> MONTHLY.<br>
+        <span class="table-path">Density: 1y, Zone L → month/1/MONTH/"MMM 'yy". BOP → Monatsstart.</span><br>
+        <span class="expect">Erwartung History: Monatliche Kalender-Ticks Jan–Dez. Lücken = keine Balken an Mär/Apr/Jul.</span><br>
+        <span class="expect">Erwartung Ranking: Portfolio A vs. B pro Monat.</span>
+    </p>
+    <div class="kg-card">
+<div class="financial-chart-module"
+         data-type="bar"
+         data-title="B3. Monthly Gaps (2 Assets)"
+         data-csv="../fixtures/engine/tool_tip_monthly_gaps.csv"
+         data-colors="Portfolio A: #218380, Portfolio B: #E63946">
+    </div>
+</div>
+
+    <!-- B4: Short irregular -->
+    </section>
+
+    <section class="fw-test-case" data-fw-test-case>
+      <div class="fw-test-expected" data-fw-expected-behavior>
+        <h3>Erwartetes Verhalten</h3>
+        <ul>
+        <li>Erwartung History: Monatliche Kalender-Ticks Jan–Dez 2023. Balken an BOP-Positionen.</li>
+        <li>Erwartung Ranking: 6 Balkenpaare an den Datenpunkten.</li>
+        </ul>
+      </div>
+<h3>tt_gap_test_irregular.csv</h3>
+    <h4>B4. Komplett Irregulär — 2 Assets (Private Equity + Infrastruktur)</h4>
+    <p>
+        <strong>Daten:</strong> 6 Punkte, Jan–Dez 2023. Intervalle: 73d, 108d, 50d, 77d, 56d.<br>
+        <strong>Rhythm-Detection:</strong> QUARTERLY (avg ~73d).<br>
+        <span class="table-path">Density: 1y, Zone L → month/1/MONTH/"MMM 'yy". BOP: No-Q-Policy → MONTHLY remap.</span><br>
+        <span class="expect">Erwartung History: Monatliche Kalender-Ticks Jan–Dez 2023. Balken an BOP-Positionen.</span><br>
+        <span class="expect">Erwartung Ranking: 6 Balkenpaare an den Datenpunkten.</span>
+    </p>
+    <div class="kg-card">
+<div class="financial-chart-module"
+         data-type="bar"
+         data-title="B4. Completely Irregular (2 Assets)"
+         data-csv="../fixtures/engine/tt_gap_test_irregular.csv"
+         data-colors="Private Equity: #7B2D8E, Infrastruktur: #0071BF">
+    </div>
+</div>
+
+    <!-- B5: Daily with holiday gap -->
+    </section>
+
+    <section class="fw-test-case" data-fw-test-case>
+      <div class="fw-test-expected" data-fw-expected-behavior>
+        <h3>Erwartetes Verhalten</h3>
+        <ul>
+        <li>Erwartung History: Wöchentliche Kalender-Ticks. Balken an Tagespositionen.</li>
+        <li>Erwartung Ranking: Asset Value vs. Hedge pro Tag (gegenläufige Balken).</li>
+        </ul>
+      </div>
+<h3>bd_kurz_19d_holiday_gap.csv</h3>
+    <h4>B5. Täglich mit Feiertagslücke — 2 Assets (Asset Value + Hedge)</h4>
+    <p>
+        <strong>Daten:</strong> 18 Punkte, 19 Tage. Lücke: 29. Mär → 2. Apr (Ostern). Hedge = leichte Gegenbewegung.<br>
+        <strong>Rhythm-Detection:</strong> DAILY.<br>
+        <span class="table-path">Density: 0.05y, Zone L → week/1/WEEKLY/"d. MMM". BOP → Identität (DAILY).</span><br>
+        <span class="expect">Erwartung History: Wöchentliche Kalender-Ticks. Balken an Tagespositionen.</span><br>
+        <span class="expect">Erwartung Ranking: Asset Value vs. Hedge pro Tag (gegenläufige Balken).</span>
+    </p>
+    <div class="kg-card">
+<div class="financial-chart-module"
+         data-type="bar"
+         data-title="B5. Daily Holiday Gap (2 Assets)"
+         data-csv="../fixtures/engine/bd_kurz_19d_holiday_gap.csv"
+         data-colors="Asset Value: #0071BF, Hedge: #E63946">
+    </div>
+</div>
+
+    <!-- B6: Quarterly with one gap -->
+    </section>
+
+    <section class="fw-test-case" data-fw-test-case>
+      <div class="fw-test-expected" data-fw-expected-behavior>
+        <h3>Erwartetes Verhalten</h3>
+        <ul>
+        <li>Erwartung History: Quartals-Ticks Jan/Apr/Jul/Okt. Q2 2023 = leere Tick-Position.</li>
+        <li>Erwartung Ranking: Sparplan vs. Festgeld pro Quartal.</li>
+        </ul>
+      </div>
+<h3>irregular_quarterly_one_gap.csv</h3>
+    <h4>B6. Quarterly mit 1 Lücke — 2 Assets (Sparplan + Festgeld)</h4>
+    <p>
+        <strong>Daten:</strong> 11 Punkte, Q1 2022 – Q4 2024. Q2 2023 fehlt. Festgeld = stetiges Wachstum.<br>
+        <strong>Rhythm-Detection:</strong> QUARTERLY.<br>
+        <span class="table-path">Density: 2.75y, Zone L → quarter/1/QUARTER/"MMM 'yy". BOP: No-Q-Policy → MONTHLY remap.</span><br>
+        <span class="expect">Erwartung History: Quartals-Ticks Jan/Apr/Jul/Okt. Q2 2023 = leere Tick-Position.</span><br>
+        <span class="expect">Erwartung Ranking: Sparplan vs. Festgeld pro Quartal.</span>
+    </p>
+    <div class="kg-card">
+<div class="financial-chart-module"
+         data-type="bar"
+         data-title="B6. Quarterly One Gap (2 Assets)"
+         data-csv="../fixtures/engine/irregular_quarterly_one_gap.csv"
+         data-colors="Sparplan: #218380, Festgeld: #D4A843">
+    </div>
+</div>
+
+    <!-- B7: Monthly scattered -->
+    </section>
+
+    <section class="fw-test-case" data-fw-test-case>
+      <div class="fw-test-expected" data-fw-expected-behavior>
+        <h3>Erwartetes Verhalten</h3>
+        <ul>
+        <li>Erwartung History: Quartals-Kalender-Ticks. Balken an BOP-Monaten, Lücken sichtbar.</li>
+        <li>Erwartung Ranking: Immobilienfonds vs. REIT pro Datenpunkt.</li>
+        </ul>
+      </div>
+<h3>irregular_monthly_scattered.csv</h3>
+    <h4>B7. Monatlich mit mehreren Lücken — 2 Assets (Immobilienfonds + REIT)</h4>
+    <p>
+        <strong>Daten:</strong> 14 Punkte über 24 Monate. Gestreute Lücken. REIT = ähnlicher Wachstumspfad.<br>
+        <strong>Rhythm-Detection:</strong> MONTHLY.<br>
+        <span class="table-path">Density: 2y, Zone L → quarter/1/QUARTER/"MMM 'yy". BOP → Monatsstart.</span><br>
+        <span class="expect">Erwartung History: Quartals-Kalender-Ticks. Balken an BOP-Monaten, Lücken sichtbar.</span><br>
+        <span class="expect">Erwartung Ranking: Immobilienfonds vs. REIT pro Datenpunkt.</span>
+    </p>
+    <div class="kg-card">
+<div class="financial-chart-module"
+         data-type="bar"
+         data-title="B7. Monthly Scattered (2 Assets)"
+         data-csv="../fixtures/engine/irregular_monthly_scattered.csv"
+         data-colors="Immobilienfonds: #F4A261, REIT: #2A9D8F">
+    </div>
+</div>
+    </section>
+  </main>
+
+  <script src="../../Theme/assets/js/vendor/chart.umd.min.js"></script>
+  <script type="module" src="../../Theme/assets/js/fw-chart-engine/index.js"></script>
+</body>
+</html>

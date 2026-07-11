@@ -256,6 +256,12 @@ def validate_references(root: Path, path: Path, dom: Node, exempt: frozenset = f
 MISSING_REF_ATTR = "data-fw-test-allow-missing-ref"
 LOCAL_DATA_ATTRS = ("data-fw-data", "data-fw-config", "data-csv")
 
+# TESTENV-1eB: Marker fuer bewusst fehlendes Pflichtattribut data-fw-app (kein
+# Datei-/Pfad-Bezug, deshalb kein Wertevergleich wie bei MISSING_REF_ATTR --
+# reine Praesenzpruefung mit 3 harten Gueltigkeitsbedingungen, siehe
+# docs/testing/TEST_PAGE_STANDARD.md §10.2).
+MISSING_APP_ID_ATTR = "data-fw-test-allow-missing-app-id"
+
 
 def find_local_data_refs_in_case(case: Node) -> List[Tuple[Node, str, str]]:
     """Alle lokalen Card-Datenreferenzen (Attributname, Rohwert) innerhalb eines Testfalls."""
@@ -332,7 +338,55 @@ def validate_allow_missing_markers(
     return findings, frozenset(exempt)
 
 
-def validate_test_page(root: Path, path: Path) -> List[str]:
+def validate_allow_missing_app_id_markers(
+    dom: Node, test_cases: List[Node]
+) -> Tuple[List[str], frozenset]:
+    """TESTENV-1eB, TEST_PAGE_STANDARD.md §10.2: MISSING_APP_ID_ATTR testfalllokal
+    pruefen. Erlaubt ausschliesslich, dass eine .fw-app in diesem Testfall bewusst
+    kein (oder ein leeres) data-fw-app traegt -- kein generisches Capability-System,
+    kein Wertevergleich (reine Praesenzpruefung, anders als MISSING_REF_ATTR).
+    Rueckgabe: (Findings, exempt-Menge aus id(node) der .fw-app, die von der
+    "ohne data-fw-app"-Pruefung in validate_test_page ausgenommen wird)."""
+    findings: List[str] = []
+    exempt: set = set()
+
+    test_case_ids = {id(c) for c in test_cases}
+    marker_nodes = [n for n in iter_descendants(dom) if has_attr(n, MISSING_APP_ID_ATTR)]
+
+    for n in marker_nodes:
+        if id(n) not in test_case_ids:
+            findings.append(
+                f"{MISSING_APP_ID_ATTR} darf nur auf einem Element mit data-fw-test-case stehen."
+            )
+
+    for idx, case in enumerate(test_cases, start=1):
+        if not has_attr(case, MISSING_APP_ID_ATTR):
+            continue
+        label = f"Testfall #{idx}"
+
+        fw_apps = [n for n in iter_descendants(case) if "fw-app" in get_class_tokens(n)]
+        if len(fw_apps) != 1:
+            findings.append(
+                f"{label}: {MISSING_APP_ID_ATTR} erfordert genau eine .fw-app in diesem "
+                f"Testfall, gefunden: {len(fw_apps)}."
+            )
+            continue
+
+        node = fw_apps[0]
+        app_slug = get_attr(node, "data-fw-app")
+        if app_slug:
+            findings.append(
+                f"{label}: {MISSING_APP_ID_ATTR} gesetzt, aber die .fw-app besitzt bereits "
+                f"ein nicht-leeres data-fw-app='{app_slug}' -- Marker entfernen."
+            )
+            continue
+
+        exempt.add(id(node))
+
+    return findings, frozenset(exempt)
+
+
+def validate_test_page(root: Path, path: Path, is_engine: bool = False) -> List[str]:
     """Vollstaendige Strukturpruefung einer einzelnen, an einem Standardort
     liegenden Testseite (docs/testing/TEST_PAGE_STANDARD.md §4/§5/§7/§8/§10/§12)."""
     findings: List[str] = []
@@ -400,6 +454,11 @@ def validate_test_page(root: Path, path: Path) -> List[str]:
     if not test_cases:
         findings.append("Kein Element mit data-fw-test-case gefunden (mindestens ein Testfall erforderlich).")
 
+    # §10.2 TEST_PAGE_STANDARD.md -- bewusst fehlendes data-fw-app (testfalllokal,
+    # vor der Container-Pruefung berechnet, damit die Ausnahme dort greifen kann).
+    app_id_findings, app_id_exempt = validate_allow_missing_app_id_markers(dom, test_cases)
+    findings.extend(app_id_findings)
+
     for idx, case in enumerate(test_cases, start=1):
         label = f"Testfall #{idx}"
 
@@ -428,18 +487,23 @@ def validate_test_page(root: Path, path: Path) -> List[str]:
             containers = [
                 n for n in iter_descendants(card)
                 if ("fw-app" in get_class_tokens(n)) or ("financial-chart-module" in get_class_tokens(n))
+                or (is_engine and has_attr(n, "data-fw-appchart"))
             ]
+            allowed_desc = (
+                ".fw-app, .financial-chart-module oder [data-fw-appchart]" if is_engine
+                else ".fw-app oder .financial-chart-module"
+            )
             if len(containers) != 1:
                 findings.append(
                     f"{label}, .kg-card #{kidx}: erwartet genau einen Produktionscontainer "
-                    f"(.fw-app oder .financial-chart-module), gefunden: {len(containers)}."
+                    f"({allowed_desc}), gefunden: {len(containers)}."
                 )
             else:
                 container = containers[0]
                 classes = get_class_tokens(container)
                 if "fw-app" in classes:
                     app_slug = get_attr(container, "data-fw-app")
-                    if not app_slug:
+                    if not app_slug and id(container) not in app_id_exempt:
                         findings.append(f"{label}, .kg-card #{kidx}: .fw-app ohne (nicht-leeres) data-fw-app.")
                 elif "financial-chart-module" in classes:
                     dtype = get_attr(container, "data-type")
@@ -450,6 +514,9 @@ def validate_test_page(root: Path, path: Path) -> List[str]:
                             f"{label}, .kg-card #{kidx}: ungueltiger data-type '{dtype}' "
                             f"(erlaubt: line, bar, pie)."
                         )
+                # [data-fw-appchart] (nur tests/engine/, §10.2/§7.3 TEST_PAGE_STANDARD.md):
+                # kein Ghost-Card-Vertrag, keine weiteren Pflichtattribute -- der Testfall
+                # bootstrapt die Engine direkt per <script type="module"> (Bestandsmuster).
 
     # §10.1 TEST_PAGE_STANDARD.md -- bewusst fehlende lokale Referenzen (testfalllokal)
     marker_findings, exempt = validate_allow_missing_markers(root, path, dom, test_cases)
@@ -619,7 +686,7 @@ def validate_repository(root: Path) -> Report:
             continue
 
         standard_pages.append(p)
-        page_findings = validate_test_page(root, p)
+        page_findings = validate_test_page(root, p, is_engine=(group == "Engine"))
         for msg in page_findings:
             findings.append((rel, msg))
 

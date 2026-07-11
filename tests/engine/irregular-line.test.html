@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AP-12 — Irreguläre Daten: X-Achsen-Stresstest</title>
+
+  <link rel="stylesheet" href="../../Theme/assets/css/tokens.css">
+  <link rel="stylesheet" href="../shared/test-page.css">
+  <script src="../shared/test-page.js" defer></script>
+  <style>
+        body {
+            font-family: 'Source Sans Pro', sans-serif;
+            padding: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+        h1 { color: #218380; border-bottom: 3px solid #218380; padding-bottom: 10px; }
+
+        h2 {
+            margin-top: 4rem;
+            background: #e8f5e9;
+            padding: 15px;
+            border-left: 8px solid #218380;
+            color: #1b5e20;
+            font-size: 1.4rem;
+        }
+
+        h3 {
+            margin-top: 1.5rem;
+            background: #fff3e0;
+            padding: 10px 15px;
+            border-left: 6px solid #ef6c00;
+            color: #e65100;
+            font-family: monospace;
+            font-size: 1.1rem;
+        }
+
+        h4 { margin-top: 1rem; color: #555; border-bottom: 1px solid #ddd; padding-bottom: 5px; }
+        p { color: #666; font-size: 0.9rem; margin-bottom: 1rem; }
+        .expect { color: #1b5e20; font-weight: bold; }
+        .table-path { color: #0d47a1; font-family: monospace; font-size: 0.85rem; }
+
+        .financial-chart-module {
+            border: 1px solid #ddd;
+            padding: 1rem;
+            margin-bottom: 2rem;
+            background: #fff;
+            min-height: 400px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            border-radius: 8px;
+            container-type: inline-size;
+            container-name: fw-chart;
+        }
+
+        .intro {
+            background: #e3f2fd;
+            border: 1px solid #90caf9;
+            border-radius: 8px;
+            padding: 1rem 1.5rem;
+            margin-bottom: 2rem;
+        }
+        .intro p { color: #1565c0; }
+
+        .regression {
+            background: #fce4ec;
+            border: 2px solid #e53935;
+            border-radius: 8px;
+            padding: 1rem 1.5rem;
+            margin-bottom: 1rem;
+        }
+        .regression p { color: #b71c1c; }
+    </style>
+</head>
+<body class="fw-test-page" data-fw-test-template="1">
+
+  <header class="fw-test-header">
+    <h1>Testseite: AP-12 — Irreguläre Daten: X-Achsen-Stresstest</h1>
+
+    <div class="fw-test-runtime-status" data-fw-runtime-status role="status" aria-live="polite">
+      Bereit – bisher kein JavaScript-Fehler erkannt.
+    </div>
+
+    <section class="fw-test-errors" data-fw-test-errors aria-live="assertive" hidden>
+      <h2>Technische Fehler</h2>
+      <ol data-fw-test-error-list></ol>
+    </section>
+  </header>
+
+  <main class="fw-test-main">
+    <p class="fw-test-intro"><strong>Zweck:</strong> Alle CSVs mit irregulären Intervallen, Lücken oder gemischten Rhythmen.
+            Testet den Mixed-Rhythm Guard (AP-12): <code>isRegularInterval()</code> in FwDateUtils V4.8.0
+            + erweiterter Guard in FwSmartXAxis V8.6.0.</p>
+    <p class="fw-test-intro"><strong>Kern-Frage:</strong> Fallen Mixed-Rhythm-Daten korrekt auf Kalender-Ticks zurück,
+            während reguläre Daten mit einer einzelnen Lücke weiterhin Data-Anchored bleiben?</p>
+    <section class="fw-test-case" data-fw-test-case>
+      <div class="fw-test-expected" data-fw-expected-behavior>
+        <h3>Erwartetes Verhalten</h3>
+        <ul>
+        <li>Erwartung: Regelmäßige Kalender-Quartals-Ticks (Jan/Apr/Jul/Oct). Gleichmäßiges Raster.</li>
+        </ul>
+      </div>
+<h3>scenario_4_crash.csv</h3>
+    <h4>A1. Mixed-Rhythm Crash — DER AP-12 Regressions-Fall</h4>
+    <div class="regression">
+        <p><strong>REGRESSION (vor V8.6):</strong> Zeigte 16 chaotische Data-Anchored Ticks.
+        V8.5 Guard prüfte nur Tag-im-Monat (alle am 1. = "regulär"). V8.6 entfernt Data-Anchored für QUARTERLY/MONTHLY komplett.</p>
+    </div>
+    <p>
+        <strong>Daten:</strong> 22 Punkte, 2007–2012, alle am 1. des Monats.
+        Intervalle: 28d (monatlich) bis 365d (jährlich). Crash-Szenario mit verdichteten Daten in der Krise.<br>
+        <strong>Rhythm-Detection:</strong> QUARTERLY (9/20 Diffs im 80–140d Band).<br>
+        <span class="table-path">V8.6: QUARTERLY → immer Kalender-Ticks. Data-Anchored für Q/M komplett entfernt.</span><br>
+        <span class="expect">Erwartung: Regelmäßige Kalender-Quartals-Ticks (Jan/Apr/Jul/Oct). Gleichmäßiges Raster.</span>
+    </p>
+    <div class="kg-card">
+<div class="financial-chart-module"
+         data-type="line"
+         data-title="A1. Mixed-Rhythm Crash (AP-12)"
+         data-csv="../fixtures/engine/scenario_4_crash.csv"
+         data-colors="Crash Asset: #E63946">
+    </div>
+</div>
+
+    <!-- A2: Yearly irregular -->
+    </section>
+
+    <section class="fw-test-case" data-fw-test-case>
+      <div class="fw-test-expected" data-fw-expected-behavior>
+        <h3>Erwartetes Verhalten</h3>
+        <ul>
+        <li>Erwartung: Proportionale Zeitachse, Kalenderticks im Jahresrhythmus. Kein Data-Anchored.</li>
+        </ul>
+      </div>
+<h3>snap_period_yearly_irregular.csv</h3>
+    <h4>A2. Yearly mit irregulären Stichtagen — anderer Guard (isRegularSeries)</h4>
+    <p>
+        <strong>Daten:</strong> 8 Punkte, 2015–2024, Stichtage wild verteilt (Mär/Aug/Dez/Nov/Feb/Jun/Jan).<br>
+        <strong>Rhythm-Detection:</strong> YEARLY (Durchschnitt ~460d).<br>
+        <span class="table-path">Guard: YEARLY-Pfad → isRegularSeries = false → Kalender-Ticks (nicht vom AP-12 Guard betroffen)</span><br>
+        <span class="expect">Erwartung: Proportionale Zeitachse, Kalenderticks im Jahresrhythmus. Kein Data-Anchored.</span>
+    </p>
+    <div class="kg-card">
+<div class="financial-chart-module"
+         data-type="line"
+         data-title="A2. Yearly Irregular"
+         data-csv="../fixtures/engine/snap_period_yearly_irregular.csv"
+         data-colors="Unregelmäßig: #E76F51">
+    </div>
+</div>
+
+    <!-- A3: Monthly with gaps -->
+    </section>
+
+    <section class="fw-test-case" data-fw-test-case>
+      <div class="fw-test-expected" data-fw-expected-behavior>
+        <h3>Erwartetes Verhalten</h3>
+        <ul>
+        <li>Erwartung: Kalender-Monatsticks. Lücken als proportionale Abstände in der Linie, Ticks gleichmäßig.</li>
+        </ul>
+      </div>
+<h3>tool_tip_monthly_gaps.csv</h3>
+    <h4>A3. Monatlich mit Lücken — 2 fehlende Monate</h4>
+    <p>
+        <strong>Daten:</strong> 9 Punkte über 12 Monate, jeweils am 1. Mär+Apr und Jul fehlen.<br>
+        <strong>Rhythm-Detection:</strong> MONTHLY (Mehrheit der Diffs 28–31d).<br>
+        <span class="table-path">V8.6: MONTHLY → immer Kalender-Ticks. Gleichmäßiges Monatsraster.</span><br>
+        <span class="expect">Erwartung: Kalender-Monatsticks. Lücken als proportionale Abstände in der Linie, Ticks gleichmäßig.</span>
+    </p>
+    <div class="kg-card">
+<div class="financial-chart-module"
+         data-type="line"
+         data-title="A3. Monthly with Gaps"
+         data-csv="../fixtures/engine/tool_tip_monthly_gaps.csv"
+         data-colors="Portfolio A: #218380">
+    </div>
+</div>
+
+    <!-- A4: Short irregular -->
+    </section>
+
+    <section class="fw-test-case" data-fw-test-case>
+      <div class="fw-test-expected" data-fw-expected-behavior>
+        <h3>Erwartetes Verhalten</h3>
+        <ul>
+        <li>Erwartung: Kalender-Ticks. Punkte an echten Positionen auf proportionaler Zeitachse.</li>
+        </ul>
+      </div>
+<h3>tt_gap_test_irregular.csv</h3>
+    <h4>A4. Komplett irregulär — 5 Punkte, wilde Abstände</h4>
+    <p>
+        <strong>Daten:</strong> 5 Punkte, Jan–Dez 2023. Intervalle: 73d, 158d, 77d, 56d.<br>
+        <strong>Rhythm-Detection:</strong> QUARTERLY (158d im Q-Band, Rest nicht).<br>
+        <span class="table-path">Guard: Weniger als 3 Punkte nach Sortierung? Nein, 5. isRegularDayPattern = false (1./15./20./5./31.) → sofort Kalender-Ticks</span><br>
+        <span class="expect">Erwartung: Kalender-Ticks. Punkte an echten Positionen auf proportionaler Zeitachse.</span>
+    </p>
+    <div class="kg-card">
+<div class="financial-chart-module"
+         data-type="line"
+         data-title="A4. Completely Irregular (5 pts)"
+         data-csv="../fixtures/engine/tt_gap_test_irregular.csv"
+         data-colors="Private Equity: #7B2D8E">
+    </div>
+</div>
+
+    <!-- A5: Daily with holiday gap -->
+    </section>
+
+    <section class="fw-test-case" data-fw-test-case>
+      <div class="fw-test-expected" data-fw-expected-behavior>
+        <h3>Erwartetes Verhalten</h3>
+        <ul>
+        <li>Erwartung: Tages-Labels (Nano-Fallback bei &le;7 oder reguläre Tages-Ticks). Lücke als kleiner Sprung sichtbar.</li>
+        </ul>
+      </div>
+<h3>bd_kurz_19d_holiday_gap.csv</h3>
+    <h4>A5. Täglich mit Feiertagslücke — 1 Tag fehlt (Ostern)</h4>
+    <p>
+        <strong>Daten:</strong> 18 Punkte, 19 Tage. Lücke: 29. Mär → 2. Apr (Karfreitag/Ostermontag).<br>
+        <strong>Rhythm-Detection:</strong> DAILY (Durchschnitt ~1,1d).<br>
+        <span class="table-path">Guard: DAILY → kein QUARTERLY/MONTHLY-Guard, geht direkt in Kalender-Ticks. AP-12 nicht betroffen.</span><br>
+        <span class="expect">Erwartung: Tages-Labels (Nano-Fallback bei &le;7 oder reguläre Tages-Ticks). Lücke als kleiner Sprung sichtbar.</span>
+    </p>
+    <div class="kg-card">
+<div class="financial-chart-module"
+         data-type="line"
+         data-title="A5. Daily with Holiday Gap"
+         data-csv="../fixtures/engine/bd_kurz_19d_holiday_gap.csv"
+         data-colors="Asset Value: #0071BF">
+    </div>
+</div>
+
+    <!-- A6: Quarterly with one gap (NEW) -->
+    </section>
+
+    <section class="fw-test-case" data-fw-test-case>
+      <div class="fw-test-expected" data-fw-expected-behavior>
+        <h3>Erwartetes Verhalten</h3>
+        <ul>
+        <li>Erwartung: Gleichmäßiges Quartals-Raster (Jan/Apr/Jul/Oct). Lücke Q2 2023 nur in der Linie sichtbar, Ticks bleiben rhythmisch.</li>
+        </ul>
+      </div>
+<h3>irregular_quarterly_one_gap.csv</h3>
+    <h4>A6. Quarterly mit 1 Lücke — Kalender-Ticks (V8.6)</h4>
+    <p>
+        <strong>Daten:</strong> 11 Punkte, Q1 2022 – Q4 2024, alle am 1. Q2 2023 fehlt.<br>
+        <strong>Rhythm-Detection:</strong> QUARTERLY (Mehrheit der Diffs ~91d).<br>
+        <span class="table-path">V8.6: QUARTERLY → immer Kalender-Ticks. Kein Data-Anchored (User-Entscheidung AP-12).</span><br>
+        <span class="expect">Erwartung: Gleichmäßiges Quartals-Raster (Jan/Apr/Jul/Oct). Lücke Q2 2023 nur in der Linie sichtbar, Ticks bleiben rhythmisch.</span>
+    </p>
+    <div class="kg-card">
+<div class="financial-chart-module"
+         data-type="line"
+         data-title="A6. Quarterly One Gap (Calendar Ticks V8.6)"
+         data-csv="../fixtures/engine/irregular_quarterly_one_gap.csv"
+         data-colors="Sparplan: #218380">
+    </div>
+</div>
+
+    <!-- A7: Monthly scattered (NEW) -->
+    </section>
+
+    <section class="fw-test-case" data-fw-test-case>
+      <div class="fw-test-expected" data-fw-expected-behavior>
+        <h3>Erwartetes Verhalten</h3>
+        <ul>
+        <li>Erwartung: Kalender-Monatsticks. Lücken als proportionale Abstände in der Linie sichtbar, Ticks rhythmisch.</li>
+        </ul>
+      </div>
+<h3>irregular_monthly_scattered.csv</h3>
+    <h4>A7. Monatlich mit mehreren Lücken — Kalender-Ticks (V8.6)</h4>
+    <p>
+        <strong>Daten:</strong> 14 Punkte über 24 Monate, alle am 1. Aber 5 von 13 Diffs sind 61–92d (Doppel-/Dreifach-Monate).<br>
+        <strong>Rhythm-Detection:</strong> MONTHLY (7/13 Diffs im 25–35d Band gewinnt).<br>
+        <span class="table-path">V8.6: MONTHLY → immer Kalender-Ticks. Gleichmäßiges Raster unabhängig von Datenlücken.</span><br>
+        <span class="expect">Erwartung: Kalender-Monatsticks. Lücken als proportionale Abstände in der Linie sichtbar, Ticks rhythmisch.</span>
+    </p>
+    <div class="kg-card">
+<div class="financial-chart-module"
+         data-type="line"
+         data-title="A7. Monthly Scattered (Calendar Ticks V8.6)"
+         data-csv="../fixtures/engine/irregular_monthly_scattered.csv"
+         data-colors="Immobilienfonds: #F4A261">
+    </div>
+</div>
+
+    <!-- ============================================================ -->
+    </section>
+  </main>
+
+  <script src="../../Theme/assets/js/vendor/chart.umd.min.js"></script>
+  <script type="module" src="../../Theme/assets/js/fw-chart-engine/index.js"></script>
+</body>
+</html>
