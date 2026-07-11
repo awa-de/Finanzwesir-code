@@ -1,6 +1,6 @@
 # Finanzwesir Test Page Standard
 
-Stand: 2026-07-11 | Standard-Version: 2 (TESTENV-1eB: §10.2 + §12.7-Erweiterung) | Geändert von: Claude (Sonnet)
+Stand: 2026-07-11 | Standard-Version: 3 (AP-apptest-01: §14 Launcher-Erzeugung präzisiert) | Geändert von: Claude (Sonnet)
 
 > Normativer Standard. Kein Projekttagebuch. Die Wörter **MUSS**, **DARF**, **DARF NICHT**
 > und **SOLL** sind im Sinne von RFC 2119 zu lesen. **SOLL** wird nur bei bewusst begründeter
@@ -478,6 +478,10 @@ Pflichten:
 - Shared Test CSS/JS einbinden.
 - Keine CDN-Laufzeitabhängigkeit.
 - Nach dem Write python tools/check-test-pages.py ausführen.
+- Nach grünem Strukturcheck zusätzlich python tools/check-test-pages.py --write-index
+  ausführen, um tests/index.html neu zu erzeugen.
+- tests/index.html niemals manuell bearbeiten — es entsteht ausschließlich durch
+  --write-index (§13).
 - Der Checker beweist nur Strukturkorrektheit. Manuelle Sicht- und Bedienprüfung bleibt
   erforderlich.
 ```

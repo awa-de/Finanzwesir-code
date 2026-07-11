@@ -425,6 +425,12 @@ Mindestens:
 - Error-State
 - Empty-State
 
+Hinweis zum Handoff: Diese Testfälle sind die fachliche Grundlage für die spätere
+Testseite `app.test.html`. Deren Bau folgt ausschließlich
+`docs/testing/TEST_PAGE_STANDARD.md` — `tech-spec-app` erzeugt selbst keine
+`app.test.html` (siehe „Nie tun"). Eine separate `QA_TEST_CASES.md` ist nur bei
+realer Komplexität nötig, nicht pauschal für jede App.
+
 17. Offene Fragen
 Trennen:
 - Blocker

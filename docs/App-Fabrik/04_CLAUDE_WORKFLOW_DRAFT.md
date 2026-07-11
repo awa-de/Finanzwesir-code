@@ -303,6 +303,15 @@ Ohne Spec ist kein Gate möglich. Ohne Gate schreibt Claude keinen App-Code.
     Implementierung erfolgt Slice für Slice gemäß Slice-Plan aus Phase 4.
     Kein nächster Slice ohne: lokalen Test, /patch-quittung und Alberts Bestätigung.
 
+5.1b Testseite pflegen (Pflicht, docs/testing/TEST_PAGE_STANDARD.md):
+    - Apps/{slug}/app.test.html gleichzeitig mit app.js/app.css erstellen oder
+      aktualisieren.
+    - Kanonisches Template docs/testing/templates/app.test.template.html verwenden.
+    - python tools/check-test-pages.py ausführen.
+    - Nach grünem Strukturcheck: python tools/check-test-pages.py --write-index
+      (erzeugt tests/index.html neu — nie manuell bearbeiten).
+    - Browserprüfung durch Albert bleibt zusätzlich erforderlich (Phase 7).
+
 5.2 App-Fabrik-Standard einhalten (03_APP_FACTORY_STANDARD_DRAFT.md):
     - Vanilla JS, clientseitig, kein Backend (A-03)
     - App.js enthält nur app-spezifische Logik — kein Shell-Code

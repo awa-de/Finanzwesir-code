@@ -21,8 +21,8 @@ Dieser Plan gibt Albert eine konkrete Checkliste — kein Raten, kein Vergessen.
 **Betroffene Datei(en):** [Liste]
 
 **Primärer Testfall:**
-- HTML-Testdatei: `Theme/chart-tests/[datei].html`
-- CSV: `Theme/data/[datei].csv`
+- Testseite: `Apps/{slug}/app.test.html` (App) oder `tests/engine/[datei].test.html` (Chart-Engine)
+- Testdaten: `Apps/{slug}/test-data/[datei].csv` (App) oder `tests/fixtures/engine/[datei].csv` (Engine) — Ablageorte gemäß docs/testing/TEST_PAGE_STANDARD.md §3
 - Chart-Typ: [Line / Bar / Pie]
 - Datums-Rhythmus: [täglich / wöchentlich / monatlich / jährlich]
 
