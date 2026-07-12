@@ -276,7 +276,9 @@ Nach HOOK-META-Änderung:
 
 - geschriebenen HOOK-META-Block prüfen,
 - sichtbaren Text und HOOK-META auf Widerspruch prüfen,
-- falls Validator vorhanden: ausführen.
+- Validator **unbedingt** ausführen (kein „falls vorhanden" — der Riegel existiert seit 2026-07-12):
+  `python tools/check-project-status-hook-meta.py PROJECT-STATUS.md --expect-current-ap CURRENT-AP --expect-date YYYY-MM-DD`
+  Exit ≠ 0 → HOOK-META ist verriegelt: **Ritual stoppt sofort**, kein Commit, Fehlermeldung wörtlich an Albert. Kein Durchwinken. Der Validator setzt die Feld-Whitelist und die Längengrenzen hart durch — er ist der Riegel gegen stille Phantom-Felder (Lehre aus `Nebenabschluss`, das ~14.000 Zeichen groß wurde, weil das Schema nie maschinell durchgesetzt war).
 
 Wenn der Text eine Commit-Status-Aussage enthält („committed“, „Commit steht aus“, „noch nicht committed“): vorher `git log --oneline -5` gegen die Behauptung prüfen, nicht aus einer Vorlage oder Vorgänger-Session übernehmen (Reoccurrence 2026-07-04/2026-07-06, siehe [[feedback-gruendlichkeit-vor-tempo]]).
 
@@ -287,10 +289,12 @@ BACKLOG und BACKLOG-ARCHIV dürfen im Kettenmodus nicht deferred werden.
 Mechanische Regel:
 
 - Aus `BACKLOG.md` genau die Zeile für `CURRENT-AP` entfernen.
-- In `BACKLOG-ARCHIV.md` genau eine Archiv-Zeile für `CURRENT-AP` append.
+- In `BACKLOG-ARCHIV.md` genau eine Archiv-Zeile für `CURRENT-AP` **ans Ende** anhängen — read-frei über das Tool, nie per Voll-Read:
+  `python tools/append-log-line.py docs/steering/BACKLOG-ARCHIV.md --line "<Archiv-Zeile>" --unless-contains "<CURRENT-AP-ID>"`
+  Das Tool hängt ans Dateiende an (neueste unten) und überspringt bei bereits vorhandener AP-ID (Dublettensperre). Das Archiv wird dabei nie in den Kontext gelesen.
 - Wenn AP-Zeile nicht eindeutig ist: Voll-Abschluss.
 
-Archiv-Zeilen müssen dem vorhandenen Tabellenformat in `BACKLOG-ARCHIV.md` entsprechen. Wenn das Tabellenformat unklar ist: gezielt Kopfzeile und eine passende Nachbarzeile lesen, nicht raten.
+Die Archiv-Zeile folgt dem Tabellenformat aus dem Writer-Kontrakt (`abschluss-writer.md` §5). Das Format ist dort dokumentiert — kein Nachbarzeilen-Lesen aus dem Archiv nötig.
 
 ### 3.8 BACKLOG-FAIL Recovery
 

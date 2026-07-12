@@ -44,7 +44,7 @@ Du darfst:
 4. Eine exakt bezeichnete AP-Zeile aus `docs/steering/BACKLOG.md` entfernen.
 5. Eine exakt übergebene Archiv-Zeile an `docs/steering/BACKLOG-ARCHIV.md` anhängen.
 6. Einen Stand-Header in exakt genannten Steering-Dateien setzen.
-7. Einen vorhandenen Validator ausführen, wenn die Hauptinstanz den Befehl vorgibt.
+7. Den von der Hauptinstanz vorgegebenen HOOK-META-Validator ausführen (`tools/check-project-status-hook-meta.py`). Bei Exit ≠ 0: `FAIL: HOOK-META verriegelt` mitsamt der Fehlerausgabe zurückmelden und stoppen — nicht weiterarbeiten, nichts committen.
 8. Die geschriebenen kritischen Inhalte zurückmelden.
 
 ---
@@ -107,10 +107,9 @@ operations:
     literal: "| B1-AP-14e2 | ... |"
     require_exactly_one_match: true
 
-  - file: "docs/steering/BACKLOG-ARCHIV.md"
-    action: "append_exact_line"
-    literal: "| B1-AP-14e2 | B1 | Ergebnis ... | 2026-06-19 | B1-AP-14e2 |"
-    template_reference: "Muss exakt dem bestehenden BACKLOG-ARCHIV-Tabellenformat entsprechen"
+  - run: "python tools/append-log-line.py docs/steering/BACKLOG-ARCHIV.md --line \"| B1-AP-14e2 | B1 | Ergebnis ... | 2026-06-19 | B1-AP-14e2 |\" --unless-contains \"B1-AP-14e2\""
+    # haengt die von der Hauptinstanz gelieferte Archiv-Zeile read-frei ans Dateiende an
+    # (neueste unten); Dublettensperre per AP-ID. Kein Voll-Read des Archivs.
 
   - run: "python tools/check-project-status-hook-meta.py PROJECT-STATUS.md --expect-current-ap B1-AP-14e2 --expect-date 2026-06-19"
 ```
@@ -121,7 +120,7 @@ Nur so arbeiten. Keine eigene Zielbildung.
 
 ## 5. BACKLOG-ARCHIV-Template
 
-Der Writer formuliert keine Archivzeile. Die Hauptinstanz muss die vollständige Zeile liefern.
+Der Writer formuliert keine Archivzeile. Die Hauptinstanz muss die vollständige Zeile liefern. Das Anhängen erfolgt read-frei über `tools/append-log-line.py` (ans Dateiende, neueste unten; Dublettensperre per `--unless-contains AP-ID`) — der Writer liest das Archiv dabei nicht.
 
 Die Zeile muss dem vorhandenen Tabellenformat in `docs/steering/BACKLOG-ARCHIV.md` entsprechen.
 

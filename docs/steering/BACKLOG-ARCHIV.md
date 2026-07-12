@@ -1,8 +1,8 @@
 # BACKLOG-ARCHIV – Finanzwesir 2.0
 Stand: 2026-07-12 | Session: AP-tailwind-01 → Fable-Runde | Geändert von: Claude
 
-Abgeschlossene Items, neueste zuerst (append-only).
-Archivierungs-Trigger: wenn > 200 Zeilen → neue Datei `BACKLOG-ARCHIV-YYYY.md` anlegen.
+Abgeschlossene Items (append-only, **neueste unten**). Jede Zeile ist datiert (Spalte „Abgeschlossen") — die physische Reihenfolge ist für die Forensik unerheblich, es wird ausschließlich ans Ende angehängt (read-frei über `tools/append-log-line.py`, nie per Voll-Read). Altbestand oberhalb dieser Umstellung (2026-07-12) steht noch in umgekehrter Reihenfolge; das ist unkritisch, da jede Zeile datiert ist.
+Rotation: bei Bedarf in Jahres-Segmente `BACKLOG-ARCHIV-YYYY.md` (Mechanik gemeinsam mit der session-log-Rotation).
 
 | ID | Bereich | Titel | Abgeschlossen | Session |
 |----|---------|-------|---------------|---------|
@@ -224,3 +224,4 @@ Archivierungs-Trigger: wenn > 200 Zeilen → neue Datei `BACKLOG-ARCHIV-YYYY.md`
 | CL-14 | Cleanup | Abschluss-Ritual: Schritte semantisch benennen (kein Nummern-Drift) | 2026-05-08 | CLAUDE.md v2.0 Neubau |
 | CL-01 | Cleanup | Git-Repo-Ort entscheiden | 2026-05-04 | Git-Migration |
 | CL-02 | Cleanup | git init ausführen | 2026-05-04 | Git-Migration |
+| RITUAL-OPT-1 | Steering/Infrastruktur | Abschluss-Ritual + PROJECT-STATUS tokensparend umgebaut. HOOK-META-Phantomfeld 'Nebenabschluss' (14k Zeichen, seit 2026-07-01 unbemerkt) entfernt + enforcing-Validator 'tools/check-project-status-hook-meta.py' (Feld-Whitelist/Längen/Blockgröße/Datei-Größen-Riegel) gebaut und unbedingt ins Ritual §3.6 + Writer verdrahtet. PROJECT-STATUS §1/§3/§8 getrimmt 108→19,4 KB (−82%). Read-freies Append-Tool 'tools/append-log-line.py' (Dublettensperre) + BACKLOG-ARCHIV-Invariante 'neueste unten' (Archiv-Read/Abschluss ~36k→0 Tokens, in §3.7 + Writer verdrahtet). Log-Rotation 'tools/rotate-log.py' (Jahres-Segmente) + distill Schritt7 löschen→archivieren (Rohlog erhalten). Sofort-erledigt, kein BACKLOG-AP. Punkte 6-9 offen als RITUAL-OPT-2. Uncommitted. | 2026-07-12 | RITUAL-OPT (Fable-Analyse→Umbau) |

@@ -1,5 +1,5 @@
 # Session-Log — Finanzwesir 2.0
-Wird geleert nach /distill. Einträge: [FRICTION] [WIN] [PREF] [QUESTION] [OK]
+Wird nach /distill ins Jahres-Segment rotiert (Rohlog erhalten). Einträge: [FRICTION] [WIN] [PREF] [QUESTION] [OK]
 
 ### 2026-07-06 — Housekeeping: Distill 10 + mechanischer Commit-Status-Schutz ✅
 - [OK] feedback_strukturannahmen.md + feedback_verifikation_vor_output.md zu feedback_gruendlichkeit_vor_tempo.md zusammengeführt (4 Kategorien, Historie erhalten, beide Altdateien gelöscht); feedback_test_html_dauerhaft.md neu (PREF)
@@ -252,3 +252,15 @@ Wird geleert nach /distill. Einträge: [FRICTION] [WIN] [PREF] [QUESTION] [OK]
 - [OK] `NAVIGATION.md`/`docs/steering/BACKLOG.md` nur gegengelesen (Diff), keine Nacharbeit nötig — beide bereits konsistent von Fable aktualisiert. Kein Commit in diesem Schritt — Fables Commit-Message deckt AP-tailwind-01 + Design-Ablage-Konsolidierung, dieser Abschluss kommt in denselben Commit. Commit-Freigabe liegt bei Albert.
 
 ### AP-tailwind-01 → Fable-Runde — AP-Wechsel
+
+### 2026-07-12 — RITUAL-OPT-1 ✅ | Abschluss-Ritual + PROJECT-STATUS tokensparend umgebaut
+- [OK] HOOK-META-Phantomfeld `Nebenabschluss` (14k Zeichen, seit 2026-07-01 unbemerkt gewuchert) entfernt; Block 16.982→411 Bytes. Ursache: Schema war nie maschinell durchgesetzt.
+- [OK] Enforcing-Validator `tools/check-project-status-hook-meta.py` gebaut (Feld-Whitelist, Feldlängen 160/240, Blockgröße 600, Datei-Größen-Riegel WARN>30/FAIL>50 KB) + unbedingt in Ritual §3.6 + Writer verdrahtet (Exit≠0 stoppt Ritual). 6 Tests grün.
+- [OK] PROJECT-STATUS §1/§3/§8 getrimmt: 108→19,4 KB (−82%). §8 „Letzte Session" war ein append-only-Log (330 Zeilen), getarnt als Snapshot-Sektion.
+- [OK] Read-freies Append-Tool `tools/append-log-line.py` (Dublettensperre) gebaut; BACKLOG-ARCHIV-Invariante „neueste zuerst"→„append-only, neueste unten" (jede Zeile datiert → Reihenfolge forensisch egal); Archiv-Read pro Abschluss ~36k→~0 Tokens. In Ritual §3.7 + Writer verdrahtet.
+- [OK] Log-Rotation `tools/rotate-log.py` (Jahres-Segmente, Carry-Forward für undatierte Marker); distill Schritt 7 „löschen"→„archivieren" (Rohlog bleibt für Forensik erhalten). Live-Log bewusst unberührt — erst distillen, dann rotieren.
+- [WIN] Leitprinzip etabliert: append-only-Logs read-frei anhängen + nie voll lesen; Snapshots klein halten + größen-validiert. Batching ist unnötig, wenn der Einzel-Append read-frei ist (Kostenmodell: teuer ist der Modell-Read, nicht der Schreibvorgang).
+- [FRICTION] Datei wurde zwischenzeitlich von VSCode/Claude-Desktop auf CRLF umgestellt + Zeilen verschoben → Schnitte auf inhaltsbasierte Grenzen umgestellt (robust gegen Verschiebung). Albert hat Claude Desktop abgestellt.
+- [OK] kassensturz/distill-Kollision auf Alberts Nachfrage geprüft: Archiv-Query ist datumsbasiert (order-agnostisch, sicher); distill-Verdichtung unangetastet, nur Schlussschritt löschen→archivieren.
+- [QUESTION] „Append-only read-frei + Snapshot klein" als CLAUDE.md-Prinzip? Kandidat für Regelaufnahme-Schutz-Gate — nicht unilateral aufgenommen.
+- [OK] Punkte 6–9 offen (Folge-AP RITUAL-OPT-2): NAVIGATION gezielter Read, start/Hook (PROTECTED_PATHS zuerst), Matrix-Automatik-Review, DECISION-LOG-Append + optionaler Archiv-Jahres-Split. Handover via /uebergabe.

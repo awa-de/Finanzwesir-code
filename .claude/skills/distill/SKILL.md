@@ -64,7 +64,7 @@ Erst nach Alberts j → Verschieben nach `.claude/learning/patterns-archiv.md`.
 Kein Eintrag wird unilateral gelöscht.
 
 **7. Abschluss**
-- session-log.md leeren (nur Header-Zeilen behalten)
+- session-log.md **rotieren statt löschen**: `python tools/rotate-log.py .claude/learning/session-log.md --keep-last 0` — verschiebt die (jetzt destillierten) Roh-Einträge ins Jahres-Segment `.claude/learning/session-log-archiv/session-log-YYYY.md` und behält nur die Header-Zeilen. Der Rohlog bleibt damit für die spätere Forensik erhalten, statt gelöscht zu werden. **Erst hier ausführen**, nachdem die Muster extrahiert sind (Schritte 2–6) — nie vorher, sonst wird die Verdichtung übersprungen.
 - patterns.md Stand-Datum aktualisieren
 - `PROJECT-STATUS.md` HOOK-META-Feld `Letzter-Distill:` auf heutiges Datum (YYYY-MM-DD) setzen (Pflicht — Edit-Tool)
 - Ausgabe: „Distill abgeschlossen. [N] Kandidaten promoted, [M] retired, [K] observing."
