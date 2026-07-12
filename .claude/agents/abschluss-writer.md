@@ -39,10 +39,10 @@ Du bist nur der Schreiber.
 Du darfst:
 
 1. Eine exakt übergebene Zeile an `.claude/learning/session-log.md` anhängen.
-2. Eine exakt bezeichnete AP-Zeile in `NAVIGATION.md` mechanisch auf ✅ setzen.
+2. Eine exakt übergebene AP-Zeile read-frei an `NAVIGATION.md` anhängen (Normalfall, `tools/append-log-line.py`) oder eine bestehende 🟡-Zeile read-frei auf ✅ flippen (Sonderfall, `tools/replace-matched-line.py`).
 3. Einen exakt übergebenen HOOK-META-Block in `PROJECT-STATUS.md` ersetzen.
-4. Eine exakt bezeichnete AP-Zeile aus `docs/steering/BACKLOG.md` entfernen.
-5. Eine exakt übergebene Archiv-Zeile an `docs/steering/BACKLOG-ARCHIV.md` anhängen.
+4. Eine exakt bezeichnete AP-Zeile read-frei aus `docs/steering/BACKLOG.md` entfernen (`tools/replace-matched-line.py`).
+5. Eine exakt übergebene Archiv-Zeile read-frei an `docs/steering/BACKLOG-ARCHIV.md` anhängen (`tools/append-log-line.py`).
 6. Einen Stand-Header in exakt genannten Steering-Dateien setzen.
 7. Den von der Hauptinstanz vorgegebenen HOOK-META-Validator ausführen (`tools/check-project-status-hook-meta.py`). Bei Exit ≠ 0: `FAIL: HOOK-META verriegelt` mitsamt der Fehlerausgabe zurückmelden und stoppen — nicht weiterarbeiten, nichts committen.
 8. Die geschriebenen kritischen Inhalte zurückmelden.
@@ -83,12 +83,15 @@ operations:
     literal: "### 2026-06-19 — B1-AP-14e2 ✅ | DEFERRED: MEMORY-CHECK SPEC-CHECK"
     echo: true
 
-  - file: "NAVIGATION.md"
-    action: "replace_exact_ap_status"
-    ap: "B1-AP-14e2"
-    from_contains: "B1-AP-14e2"
-    to_status: "✅"
-    require_exactly_one_match: true
+  - run: "python tools/append-log-line.py NAVIGATION.md --line \"> B1-AP-14e3 ✅ 2026-06-19 — Ergebnis ...\" --unless-contains \"B1-AP-14e3\""
+    # Normalfall: NAVIGATION.md ist ueberwiegend Append-only-Verlauf (jede AP-Zeile
+    # wird fertig mit ✅ geschrieben). Read-frei ans Dateiende, kein Voll-Read.
+
+  - run: "python tools/replace-matched-line.py NAVIGATION.md --replace-containing \"B1-AP-14e2 🟡\" --with \"> B1-AP-14e2 ✅ 2026-06-19 — Ergebnis ...\""
+    # Sonderfall: nur wenn eine bestehende 🟡-Zeile (in Arbeit / teilweise abgenommen)
+    # auf ✅ geflippt werden muss. Bricht mit FAIL ab bei 0 oder >1 Treffern
+    # (require_exactly_one_match ist im Tool erzwungen, kein Parameter noetig).
+    # Read-frei: der Writer sieht den Dateiinhalt nie, nur die OK/FAIL-Zeile.
 
   - file: "PROJECT-STATUS.md"
     action: "replace_hook_meta"
@@ -101,11 +104,10 @@ operations:
       Blocker: keine
       -->
 
-  - file: "docs/steering/BACKLOG.md"
-    action: "remove_exact_line"
-    ap: "B1-AP-14e2"
-    literal: "| B1-AP-14e2 | ... |"
-    require_exactly_one_match: true
+  - run: "python tools/replace-matched-line.py docs/steering/BACKLOG.md --remove-containing \"B1-AP-14e2\""
+    # Ersetzt die fruehere Edit-basierte "remove_exact_line"-Aktion. Bricht mit FAIL
+    # ab bei 0 oder >1 Treffern fuer die AP-ID (Eindeutigkeit im Tool erzwungen).
+    # Read-frei: kein Voll-Read von BACKLOG.md noetig.
 
   - run: "python tools/append-log-line.py docs/steering/BACKLOG-ARCHIV.md --line \"| B1-AP-14e2 | B1 | Ergebnis ... | 2026-06-19 | B1-AP-14e2 |\" --unless-contains \"B1-AP-14e2\""
     # haengt die von der Hauptinstanz gelieferte Archiv-Zeile read-frei ans Dateiende an
@@ -171,19 +173,28 @@ Kritische Edits:
 - `docs/steering/BACKLOG.md`
 - `docs/steering/BACKLOG-ARCHIV.md`
 
-Für NAVIGATION ist ein PASS nur erlaubt, wenn exakt eine Zeile geändert wurde:
+Für NAVIGATION und BACKLOG-Entfernung meldest du die Tool-Ausgabe von `tools/append-log-line.py` bzw. `tools/replace-matched-line.py` unverändert weiter (OK/FAIL-Zeile, kein Dateiinhalt):
 
 ```text
 NAVIGATION:
-PASS: 1 Zeile auf ✅ gesetzt
+OK: 1 Zeile an NAVIGATION.md angehaengt (ans Ende, read-frei).
 ```
 
-oder
+oder (Sonderfall Flip):
 
 ```text
 NAVIGATION:
-FAIL: AP-Zeile nicht eindeutig gefunden oder mehr als ein Treffer
+OK: 1 Zeile ersetzt fuer 'B1-AP-14e2 🟡' in NAVIGATION.md (read-frei).
 ```
+
+oder bei Fehler:
+
+```text
+NAVIGATION:
+FAIL: 2 Treffer fuer 'B1-AP-14e2' in NAVIGATION.md — nicht eindeutig.
+```
+
+Exit ≠ 0 von `tools/replace-matched-line.py` (NAVIGATION-Flip oder BACKLOG-Entfernung): sofort stoppen, Tool-Ausgabe unverändert melden, keine Reparaturversuche.
 
 ---
 
@@ -196,10 +207,8 @@ Sofort stoppen bei:
 - Validator FAIL.
 - Literal nach dem Schreiben nicht exakt auffindbar.
 - Datei existiert nicht.
-- AP-Zeile in NAVIGATION.md nicht eindeutig — mehr als ein Treffer für AP-ID.
-- NAVIGATION-Änderung würde mehr als eine Zeile betreffen.
-- BACKLOG-Literal nicht exakt gefunden.
-- BACKLOG-Entfernung würde mehr als eine Zeile betreffen.
+- `tools/replace-matched-line.py` meldet FAIL (0 oder >1 Treffer) für NAVIGATION-Flip oder BACKLOG-Entfernung.
+- `tools/append-log-line.py` meldet FAIL für NAVIGATION- oder ARCHIV-Append.
 - ARCHIV-Append kann nicht bestätigt werden.
 - ARCHIV-Literal entspricht keinem Markdown-Tabellenformat.
 - Anweisung verlangt Interpretation statt Literal-Edit.

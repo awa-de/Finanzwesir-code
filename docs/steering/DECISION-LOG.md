@@ -1,4 +1,4 @@
-**Stand:** 2026-06-10 | **Session:** OA-02-Nachputz | **Geändert von:** Claude
+**Stand:** 2026-07-12 | **Session:** RITUAL-OPT-2 | **Geändert von:** Claude
 
 # Decision Log — Finanzwesir 2.0
 
@@ -8,6 +8,7 @@
 **Wann aktualisieren:** Wenn eine neue Architekturentscheidung getroffen wird.
 **Gehört hier hinein:** Entscheidungen mit Problem, Begründung, Konsequenz und Invariante.
 **Gehört nicht hier hinein:** Kleine Bugfixes, reine Statusnotizen, offene Tagesaufgaben.
+**Anhängen:** read-frei über `tools/append-block.py` (Block-Text vorher in eine Scratch-Datei schreiben, dann `python tools/append-block.py docs/steering/DECISION-LOG.md --block-file <scratch-datei> --unless-contains "<D-ID>"`) — kein Read+Edit der ganzen Datei nötig. Neuer Eintrag als `## D-XX: Titel` beginnen, das Tool ergänzt die Trennlinie automatisch.
 
 ---
 

@@ -1,17 +1,17 @@
 <!-- HOOK-META
 Version: 1
 Stand: 2026-07-12
-Fokus-AP: RITUAL-OPT-1 ✅ — Abschluss-Ritual tokensparend umgebaut: HOOK-META-Riegel, PROJECT-STATUS -82 %, read-freie Log-Appends, Log-Rotation (2026-07-12)
-Nächster-Schritt: offen — RITUAL-OPT-2 (NAVIGATION/start/Matrix) oder AP-tailwind-02 (Pilotmigration); Albert wählt (RITUAL-OPT-1 ✅ 2026-07-12)
+Fokus-AP: RITUAL-OPT-2 ✅ — Ritual/Start vollständig read-frei: NAVIGATION/BACKLOG-Flip, Hook übernimmt BACKLOG-Extraktion, Archiv rotiert (2026-07-12)
+Nächster-Schritt: offen — AP-tailwind-02 (Pilotmigration) ist der stehende Kandidat; Albert wählt (RITUAL-OPT-2 ✅ 2026-07-12)
 Blocker: keine
 Letzter-Distill: 2026-07-06
 Kassensturz-Datum: 2026-07-06
 -->
-<!-- HOOK-META-SESSION: AP-tailwind-01 → Fable-Runde -->
+<!-- HOOK-META-SESSION: RITUAL-OPT-2 -->
 
 # PROJECT STATUS — Finanzwesir 2.0
 
-Stand: 2026-07-12 | Session: AP-tailwind-01 → Fable-Runde | Geändert von: Claude
+Stand: 2026-07-12 | Session: RITUAL-OPT-2 | Geändert von: Claude
 
 **Zweck:** Schneller Wiedereinstieg nach Pausen.
 **Zielgruppe:** Albert und Claude.
@@ -24,14 +24,14 @@ Stand: 2026-07-12 | Session: AP-tailwind-01 → Fable-Runde | Geändert von: Cla
 
 ## 1. Aktueller Fokus
 
-**Nächster Schritt:** RITUAL-OPT-2 (Ritual-Feinschliff) oder AP-tailwind-02 (Pilotmigration) — Albert wählt. Details: HOOK-META oben + docs/steering/BACKLOG.md.
+**Nächster Schritt:** offen — AP-tailwind-02 (Pilotmigration) ist der stehende Kandidat; Albert wählt. Details: HOOK-META oben + docs/steering/BACKLOG.md.
 
 Letzte Meilensteine (je eine Zeile — Volltext in BACKLOG-ARCHIV.md):
+- **RITUAL-OPT-2** (2026-07-12) ✅ Ritual + Start vollständig read-frei: NAVIGATION/BACKLOG-Flip/Remove, Hook übernimmt BACKLOG-Extraktion, BACKLOG-ARCHIV datumsbasiert rotiert (219→12 Zeilen), DECISION-LOG-Tool
 - **RITUAL-OPT-1** (2026-07-12) ✅ Abschluss-Ritual tokensparend umgebaut: HOOK-META-Riegel, PROJECT-STATUS -82 %, read-freie Log-Appends, Log-Rotation
 - **AP-tailwind-01** (2026-07-12) ✅ Tailwind-App-Baukasten V0.1 als verbindlicher Design-Vertrag freigegeben (committed ca21de2)
 - **AP-apptest-01/02** (2026-07-11) ✅ Testseiten-Handoff-Lücke geschlossen, unabhängig geprüft
 - **TESTENV-1** (2026-07-11) ✅ Konsolidierte Testumgebungs-Initiative vollständig abgeschlossen
-- **Font-Bridge** (2026-07-10/11) ✅ Chart-Engine + HTML-UI ziehen Schrift aus tokens.css (Pilot prokrastinations-preis)
 
 ---
 

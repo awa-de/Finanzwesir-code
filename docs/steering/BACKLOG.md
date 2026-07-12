@@ -1,5 +1,5 @@
 # BACKLOG – Finanzwesir 2.0
-Stand: 2026-07-12 | Session: design-ablage-konsolidierung | Geändert von: Claude
+Stand: 2026-07-12 | Session: RITUAL-OPT-2 | Geändert von: Claude
 
 **Regeln:**
 - ✅-Zeilen werden sofort nach `BACKLOG-ARCHIV.md` verschoben (append), dann hier gelöscht.
@@ -15,7 +15,6 @@ Stand: 2026-07-12 | Session: design-ablage-konsolidierung | Geändert von: Claud
 | AP-20/21 | Engine  | Mixed-Rhythm CV-Heuristik (T5→T3→T6→T7)  | H    | —   | engine/detail/AP-20-DETAIL.md       |
 | AP-6c    | Engine  | Touch-Tooltip Smartphone-Test             | M    | —   | engine/detail/AP-6c-DETAIL.md       |
 | AP-22    | Engine  | Zero-Line lineWidth (~3 Zeilen Fix)       | L    | —   | —                                   |
-| RITUAL-OPT-2 | Steering/Infra | Abschluss-Ritual-Optimierung Teil 2: NAVIGATION gezielter AP-Zeilen-Read statt Voll-Read; start/session-start.ps1 (Haiku-Dispatch→Hook-Regex-Felder, PROTECTED_PATHS zuerst); REGRESSION-MATRIX Automatik-Review (Gate-Deckung je Eintrag) | M | RITUAL-OPT-1 ✅ | optional: DECISION-LOG auf append-log-line.py, BACKLOG-ARCHIV Jahres-Split |
 | TESTENV-1-FOLLOWUP-BORDER | CSS | `.financial-chart-module { border: 1px solid #ddd }` — Legacy-Hardcode (kein CI-Token) auf mehreren migrierten Engine-Testseiten, gefunden mit `fwCiAudit()`. Fix bewusst zurückgestellt bis zur Tailwind-Arbeit (Alberts Entscheidung, 2026-07-11) | L | DS-012 | tools/ci-token-check.js (`fwCiAudit()`, Fund 2026-07-11) |
 
 ---

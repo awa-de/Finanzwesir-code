@@ -232,7 +232,7 @@ Bei Zweifel: Rückfrage oder Voll-Abschluss.
 Bei jedem Ketten-Minimalabschluss sofort erledigen:
 
 1. `.claude/learning/session-log.md`: AP-Eintrag.
-2. `NAVIGATION.md`: AP-Status auf ✅ setzen.
+2. `NAVIGATION.md`: AP-Zeile read-frei anhängen oder bestehende 🟡-Zeile auf ✅ flippen (→ 3.6a).
 3. `PROJECT-STATUS.md`: nächster Schritt + HOOK-META synchronisieren.
 4. `docs/steering/BACKLOG.md`: erledigten AP entfernen.
 5. `docs/steering/BACKLOG-ARCHIV.md`: erledigten AP eintragen.
@@ -295,13 +295,26 @@ Nach HOOK-META-Änderung:
 
 Wenn der Text eine Commit-Status-Aussage enthält („committed“, „Commit steht aus“, „noch nicht committed“): vorher `git log --oneline -5` gegen die Behauptung prüfen, nicht aus einer Vorlage oder Vorgänger-Session übernehmen (Reoccurrence 2026-07-04/2026-07-06, siehe [[feedback-gruendlichkeit-vor-tempo]]).
 
+### 3.6a NAVIGATION.md
+
+`NAVIGATION.md` ist überwiegend Append-only-Verlauf (jede AP-Zeile wird bereits fertig mit ✅ geschrieben) — kein Voll-Read nötig, auch nicht für den Haiku-Writer:
+
+- **Normalfall (Append):** neue AP-Zeile read-frei ans Ende anhängen:
+  `python tools/append-log-line.py NAVIGATION.md --line "<AP-Zeile>" --unless-contains "<CURRENT-AP-ID>"`
+- **Sonderfall (Flip):** nur wenn eine bestehende 🟡-Zeile (in Arbeit / teilweise abgenommen) auf ✅ aktualisiert werden muss:
+  `python tools/replace-matched-line.py NAVIGATION.md --replace-containing "<CURRENT-AP-ID> 🟡" --with "<neue AP-Zeile>"`
+  Bricht mit FAIL ab bei 0 oder >1 Treffern — Eindeutigkeit ist im Tool erzwungen, kein Vollscan zur Prüfung nötig.
+- Wenn unklar, ob Append oder Flip zutrifft: Voll-Abschluss.
+
 ### 3.7 BACKLOG / ARCHIV
 
 BACKLOG und BACKLOG-ARCHIV dürfen im Kettenmodus nicht deferred werden.
 
 Mechanische Regel:
 
-- Aus `BACKLOG.md` genau die Zeile für `CURRENT-AP` entfernen.
+- Aus `BACKLOG.md` genau die Zeile für `CURRENT-AP` entfernen — read-frei über das Tool, nie per Voll-Read:
+  `python tools/replace-matched-line.py docs/steering/BACKLOG.md --remove-containing "<CURRENT-AP-ID>"`
+  Bricht mit FAIL ab bei 0 oder >1 Treffern.
 - In `BACKLOG-ARCHIV.md` genau eine Archiv-Zeile für `CURRENT-AP` **ans Ende** anhängen — read-frei über das Tool, nie per Voll-Read:
   `python tools/append-log-line.py docs/steering/BACKLOG-ARCHIV.md --line "<Archiv-Zeile>" --unless-contains "<CURRENT-AP-ID>"`
   Das Tool hängt ans Dateiende an (neueste unten) und überspringt bei bereits vorhandener AP-ID (Dublettensperre). Das Archiv wird dabei nie in den Kontext gelesen.
@@ -328,9 +341,9 @@ Haiku darf mechanische Edits ausführen, wenn Sonnet Zielstrings exakt vorgibt.
 Haiku darf:
 
 - session-log-Zeile anhängen
-- NAVIGATION-Zeile auf ✅ setzen
+- NAVIGATION-Zeile anhängen oder 🟡→✅ flippen (read-frei, § 3.6a)
 - HOOK-META-Literal ersetzen
-- BACKLOG-Zeile entfernen
+- BACKLOG-Zeile entfernen (read-frei, § 3.7)
 - ARCHIV-Zeile append
 
 Haiku darf nicht:

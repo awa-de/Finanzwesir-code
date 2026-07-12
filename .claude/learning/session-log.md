@@ -264,3 +264,18 @@ Wird nach /distill ins Jahres-Segment rotiert (Rohlog erhalten). Einträge: [FRI
 - [OK] kassensturz/distill-Kollision auf Alberts Nachfrage geprüft: Archiv-Query ist datumsbasiert (order-agnostisch, sicher); distill-Verdichtung unangetastet, nur Schlussschritt löschen→archivieren.
 - [QUESTION] „Append-only read-frei + Snapshot klein" als CLAUDE.md-Prinzip? Kandidat für Regelaufnahme-Schutz-Gate — nicht unilateral aufgenommen.
 - [OK] Punkte 6–9 offen (Folge-AP RITUAL-OPT-2): NAVIGATION gezielter Read, start/Hook (PROTECTED_PATHS zuerst), Matrix-Automatik-Review, DECISION-LOG-Append + optionaler Archiv-Jahres-Split. Handover via /uebergabe.
+
+## 2026-07-12 – RITUAL-OPT-2 Ritual-Rest + start-Umbau (Übergabe, läuft noch)
+- [FRICTION] Alberts Beobachtung: der Voll-Abschluss-Lauf war teuer (Opus-Reasoning + Doppelverifikation) → §0.6 Aufwand-nach-Schwierigkeit + §1 Ein-Zeiler eingebaut; Ersparnis bisher nur geschätzt, nicht gemessen.
+- [OK] RITUAL-OPT-1 + Feinschliff committed (3 Tools, Snapshot-Trim -92 %, §0.6-Regel, §1-Ein-Zeiler). Übergabe an Sonnet für Punkte 6-8 + start/Hook.
+## 2026-07-12 – SESSION START | [KETTENMODUS] | Fokus: RITUAL-OPT-2 (Ritual-Rest + start-Umbau, läuft aus Übergabe)
+### 2026-07-12 – RITUAL-OPT-2 ✅ | Ritual + Start vollständig read-frei, alle 4 Punkte abgeschlossen
+- [OK] Punkt 6: NAVIGATION.md-Writer auf append-log-line.py/replace-matched-line.py umgestellt (kein Voll-Read mehr); BACKLOG.md-Entfernung ebenfalls read-frei.
+- [OK] Punkt 7: session-start.ps1 übernimmt Aktive-APs/Archiv-seit-Log per PowerShell-Regex; Haiku-Dispatch nur noch für NAVIGATION.md (bewusst, Fließtext-Risiko).
+- [FRICTION] PowerShell 5.1 parst .ps1-Dateien ohne BOM nicht als UTF-8 — Emoji-Literal im Regex-Quelltext korrumpiert, gefixt via [char]::ConvertFromUtf32().
+- [OK] Punkt 8: REGRESSION-MATRIX Automatik-Gate-Spalte ergänzt — kein Eintrag hat ein automatisches Gate, Matrix ehrlich vollständig manuell.
+- [OK] Punkt 9: append-block.py (mehrzeilige DECISION-LOG-Blöcke) und rotate-table-log.py (datumsbasierte Tabellen-Rotation) neu gebaut.
+- [FRICTION] Erster Spalten-Transformationsversuch (REGRESSION-MATRIX) hatte fehlende Pipe-Trennung — per git checkout zurückgesetzt, korrigiert.
+- [WIN] Reverse-Order-Altbestand-Risiko in BACKLOG-ARCHIV.md vor der echten Rotation erkannt und im Tool-Design (Datumsauswahl statt Position) vermieden — mit Fixture verifiziert.
+- [WIN] kassensturz-archiv-query.py Regression (segment-blind nach Rotation) gefunden und behoben, bevor sie real auftrat; zusätzlich vorbestehenden UTF-8-Stdout-Bug im selben Skript mitbehoben.
+- [PREF] Albert wählte bei Rückfrage die aggressive größenbasierte Rotationsvariante (145→27 KB) statt der sanften zeilenbasierten — Modell-Kontext-Lesekosten sind nach Punkt 1/7 ohnehin irrelevant, Dateigröße ist reine Hygiene.

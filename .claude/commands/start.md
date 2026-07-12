@@ -65,25 +65,23 @@ Hook-Output enthält `BLOCKED-APs`. Wenn nicht „keine":
 Lies: `.claude/memory/MEMORY.md`
 Gilt für diese Session als Hintergrundkontext. Einzelne Memory-Files bei Bedarf nachladen.
 
-## Schritt 2 — Haiku-Dispatch: Lücken und Backlog
+## Schritt 2 — Haiku-Dispatch: NAVIGATION-Status
+
+`Archiv-seit-Log` (Lücken-Alarm) und `Aktive-APs` (Zählprüfung) liefert der Hook seit RITUAL-OPT-2 bereits mechanisch (PowerShell-Regex auf die sauberen Markdown-Tabellen in `BACKLOG.md`/`BACKLOG-ARCHIV.md`) — kein Dispatch mehr nötig. `NAVIGATION.md` ist Fließtext ohne Tabellenformat und bleibt deshalb beim Haiku-Dispatch (Blind-Regex auf Prosa hätte ein stilles Fehlerkennungsrisiko, das der DEGRADED-Mechanismus nicht abfangen würde).
 
 Dispatch an `spec-scout` (läuft auf Haiku per settings.json):
 
-> Lies diese 3 Dateien und gib strukturierten Text zurück. Kein Urteil — nur Fakten.
+> Lies `NAVIGATION.md` und gib strukturierten Text zurück. Kein Urteil — nur Fakten.
 >
-> 1. `NAVIGATION.md` → extrahiere: alle AP-IDs mit Status (Liste)
-> 2. `docs/steering/BACKLOG-ARCHIV.md` → extrahiere: alle AP-IDs die nach [Datum des letzten session-log-Eintrags aus Hook-Output] hinzugefügt wurden
-> 3. `docs/steering/BACKLOG.md` → extrahiere: alle aktiven AP-IDs mit Kurzbezeichnung
+> Extrahiere: alle AP-IDs mit Status (Liste).
 >
 > Ausgabe-Format:
 > AKTIVE_APS: [AP-1, AP-2, ...]
-> ARCHIV_SEIT_LETZTEM_LOG: [AP-X, ...]
-> BACKLOG_AKTIV: [AP-1 Bezeichnung, ...]
 
 ## Schritt 3 — Hauptinstanz: Urteile
 
-**Lücken-Alarm** (AP-ID-Abgleich aus Dispatch-Ergebnis):
-Für jede AP-ID in `ARCHIV_SEIT_LETZTEM_LOG`:
+**Lücken-Alarm** (AP-ID-Abgleich aus Hook-Output-Feld `Archiv-seit-Log`):
+Für jede AP-ID in `Archiv-seit-Log` (wenn nicht „keine"):
 `Kein session-log-Eintrag für [AP-ID]. Abschluss-Ritual vollständig ausgeführt?`
 
 **Distill-Empfehlung** (Schwellen aus Hook-Output, nur ausgeben wenn erreicht):
@@ -98,11 +96,13 @@ Wende Kommunikationsstil ab jetzt an.
 
 ## Schritt 5 — Ausgabe
 
+`Aktive APs: [Y]` und die Zählprüfung `[N]` kommen direkt aus Hook-Output-Feld `Aktive-APs` (Anzahl + ID-Liste aus `BACKLOG.md`-Abschnitt „Aktiv") — keine eigene Zählung nötig.
+
 Erste Zeile:
 `SESSION-START ✓ | Fokus: [X] | Aktive APs: [Y] | Log: [Z] Einträge | BLOCKED: [keine oder AP-ID]`
 
 Direkt danach:
-`Zählprüfung: „Du hast [N] aktive APs (🟡). Stimmt diese Zahl?"`
+`Zählprüfung: „Du hast [N] aktive APs (🟡): [IDs aus Hook-Feld Aktive-APs]. Stimmt diese Zahl?"`
 
 Wenn Hook-Output `Wochentag: Monday` (oder Montag):
   Vergleiche Hook-Output `Kassensturz-Datum` (Format YYYY-MM-DD) mit heutigem Datum:

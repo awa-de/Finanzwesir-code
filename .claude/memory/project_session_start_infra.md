@@ -16,9 +16,11 @@ Zwei-Stufen-Modell:
 1. `SessionStart`-Hook (`.claude/hooks/session-start.ps1`) feuert automatisch beim Fadenbeginn.
    - Liest HOOK-META-Block aus `PROJECT-STATUS.md` (maschinenlesbare SSoT für Fokus-AP, Nächster-Schritt, Blocker)
    - Liest ATTEMPT-LOG.json, session-log.md, patterns.md für Zustandsdaten
+   - Seit RITUAL-OPT-2 (2026-07-12) zusätzlich: `Aktive-APs` (PowerShell-Regex auf `BACKLOG.md`-Abschnitt „🟡 Aktiv") und `Archiv-seit-Log` (Datumsfilter auf `BACKLOG-ARCHIV.md` gegen letztes session-log-Datum) — beide vorher per Haiku-Dispatch, jetzt lokal im Hook, kein Modell-Token-Kosten mehr dafür
    - Gibt strukturierten Block aus: `Hook-Status: OK` oder `Hook-Status: DEGRADED` + Warnungen
    - RepoRoot wird aus `$PSScriptRoot` abgeleitet (nicht CWD-abhängig), UTF-8 explizit gesetzt
-2. `/start` synthetisiert Hook-Output: BLOCKED-Check, spec-scout-Dispatch für Backlog-Abgleich, Urteile, SESSION-START-Zeile.
+   - PS-5.1-Fallstrick: Mehrbyte-Emoji-Literale im `.ps1`-Quelltext werden bei fehlendem BOM falsch geparst — Emoji per `[char]::ConvertFromUtf32()` bauen, nie als Literal
+2. `/start` synthetisiert Hook-Output: BLOCKED-Check, spec-scout-Dispatch **nur noch für NAVIGATION.md** (Fließtext, bewusst nicht auf Hook-Regex umgestellt — Blind-Regex-Fehlerrisiko), Urteile, SESSION-START-Zeile. „Aktive APs"/Zählprüfung kommen jetzt direkt aus dem Hook-Feld, keine eigene Zählung mehr.
 
 **HOOK-META-Block** steht ganz oben in `PROJECT-STATUS.md`:
 ```

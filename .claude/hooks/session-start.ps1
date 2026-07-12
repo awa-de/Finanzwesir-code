@@ -83,12 +83,18 @@ if (Test-Path $attemptLog) {
     $warnungen += "ATTEMPT-LOG.json fehlt"
 }
 
-# --- Session-Log Eintragsanzahl & letzter Distill (Fallback) ---
-$logCount   = 0
-$sessionLog = Join-Path $RepoRoot ".claude\learning\session-log.md"
+# --- Session-Log Eintragsanzahl, letztes Datum & letzter Distill (Fallback) ---
+$logCount    = 0
+$lastLogDate = $null
+$sessionLog  = Join-Path $RepoRoot ".claude\learning\session-log.md"
 if (Test-Path $sessionLog) {
     $logContent = Get-Content $sessionLog -Encoding UTF8
-    $logCount   = ($logContent | Where-Object { $_ -match "^## 20" }).Count
+    $datedLines = $logContent | Where-Object { $_ -match "^## 20" }
+    $logCount   = $datedLines.Count
+    if ($datedLines.Count -gt 0) {
+        $lastLine = $datedLines[-1]
+        if ($lastLine -match "(\d{4}-\d{2}-\d{2})") { $lastLogDate = $matches[1] }
+    }
     # Fallback: nur wenn HOOK-META kein Datum geliefert hat
     if ($lastDistill -eq "nie") {
         $distillLine = $logContent | Where-Object { $_ -match "^## 20.*(?:DIST-\d+|[Dd]istill)" } | Select-Object -Last 1
@@ -96,6 +102,72 @@ if (Test-Path $sessionLog) {
     }
 } else {
     $warnungen += "session-log.md fehlt"
+}
+
+# --- BACKLOG.md: Aktiv-Tabelle mechanisch extrahieren (RITUAL-OPT-2 Punkt 7) ---
+# Ersetzt den Haiku-Dispatch-Anteil "BACKLOG_AKTIV" aus /start Schritt 2: saubere
+# Markdown-Tabelle, IDs stehen in der ersten Spalte des Abschnitts "## <gelber Kreis> Aktiv".
+# Emoji per Codepoint gebaut statt als Literal: .ps1-Dateien ohne BOM werden von
+# Windows PowerShell 5.1 beim Parsen nicht als UTF-8 gelesen, ein eingebettetes
+# Mehrbyte-Emoji im Quelltext wuerde bereits beim Skript-Parsing korrumpiert
+# (unabhaengig vom -Encoding UTF8 beim Lesen der Zieldatei).
+$yellowCircle       = [char]::ConvertFromUtf32(0x1F7E1)
+$backlogAktivIds    = @()
+$foundAktivSection  = $false
+$aktiveApsOutput    = $null
+$backlogFile        = Join-Path $RepoRoot "docs\steering\BACKLOG.md"
+if (Test-Path $backlogFile) {
+    $inAktiv = $false
+    foreach ($line in (Get-Content $backlogFile -Encoding UTF8)) {
+        if ($line -match "^##\s*$yellowCircle\s*Aktiv") { $inAktiv = $true; $foundAktivSection = $true; continue }
+        if ($inAktiv -and $line -match "^##\s")            { break }
+        if ($inAktiv -and $line -match "^\|\s*ID\s*\|")    { continue }   # Header-Zeile
+        if ($inAktiv -and $line -match "^\|[-:\s|]+\|$")   { continue }   # Trennzeile
+        if ($inAktiv -and $line -match "^\|\s*([^|]+?)\s*\|") {
+            $backlogAktivIds += $matches[1].Trim()
+        }
+    }
+    if ($foundAktivSection) {
+        $aktiveApsOutput = "$($backlogAktivIds.Count) ($($backlogAktivIds -join ', '))"
+    } else {
+        $hookStatus      = "DEGRADED"
+        $warnungen      += "BACKLOG.md: Abschnitt 'Aktiv' (gelber Kreis) nicht gefunden"
+        $aktiveApsOutput = "unbekannt (Abschnitt nicht gefunden)"
+    }
+} else {
+    $hookStatus      = "DEGRADED"
+    $warnungen      += "BACKLOG.md fehlt"
+    $aktiveApsOutput = "unbekannt (BACKLOG.md fehlt)"
+}
+
+# --- BACKLOG-ARCHIV.md: AP-IDs nach letztem session-log-Datum (RITUAL-OPT-2 Punkt 7) ---
+# Ersetzt den Haiku-Dispatch-Anteil "ARCHIV_SEIT_LETZTEM_LOG". Saubere, datierte
+# Markdown-Tabelle (append-only) — Datumsvergleich per String reicht (ISO-Format).
+$archivSeitLog       = @()
+$archivSeitLogOutput = $null
+$archivFile          = Join-Path $RepoRoot "docs\steering\BACKLOG-ARCHIV.md"
+if (Test-Path $archivFile) {
+    if ($lastLogDate) {
+        foreach ($line in (Get-Content $archivFile -Encoding UTF8)) {
+            if ($line -notmatch "^\|")        { continue }   # keine Tabellenzeile
+            if ($line -match "^\|\s*ID\s*\|") { continue }   # Header-Zeile
+            if ($line -match "^\|[-:\s|]+\|$") { continue }  # Trennzeile
+            if ($line -notmatch "\|\s*(\d{4}-\d{2}-\d{2})\s*\|\s*[^|]*\|\s*$") { continue }
+            $rowDate = $matches[1]
+            if ($rowDate -le $lastLogDate) { continue }
+            if ($line -match "^\|\s*([^|]+?)\s*\|") {
+                $archivSeitLog += $matches[1].Trim()
+            }
+        }
+        $archivSeitLogOutput = if ($archivSeitLog.Count -gt 0) { $archivSeitLog -join ', ' } else { 'keine' }
+    } else {
+        $warnungen          += "Archiv-Datumsfilter uebersprungen: kein Datum aus session-log.md ermittelbar"
+        $archivSeitLogOutput = "unbekannt (kein Datum aus session-log.md)"
+    }
+} else {
+    $hookStatus          = "DEGRADED"
+    $warnungen          += "BACKLOG-ARCHIV.md fehlt"
+    $archivSeitLogOutput = "unbekannt (BACKLOG-ARCHIV.md fehlt)"
 }
 
 # --- Pattern-Kandidaten ---
@@ -125,7 +197,9 @@ Write-Output "Fokus-AP:           $fokus"
 Write-Output "Naechster Schritt:  $naechster"
 Write-Output "Blocker-Meta:       $blocker"
 Write-Output "BLOCKED-APs:        $blocked"
+Write-Output "Aktive-APs:         $aktiveApsOutput"
 Write-Output "Log-Eintraege:      $logCount"
+Write-Output "Archiv-seit-Log:    $archivSeitLogOutput"
 Write-Output "Letzter Distill:    $lastDistill"
 Write-Output "Kassensturz-Datum:  $kassensturzDatum"                                 # NEW
 Write-Output "Pattern-Kandidaten: $patterns"
