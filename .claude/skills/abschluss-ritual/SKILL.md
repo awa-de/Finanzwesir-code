@@ -85,6 +85,17 @@ Nicht sichtbar ausgeben:
 
 Wenn unsicher: fragen. Wenn sicher: knapp entscheiden.
 
+### 0.6 Aufwand nach Schwierigkeit — Determinismus zuerst
+
+Der Abschluss skaliert mit der Schwierigkeit, nicht mit dem Modell-Budget. Determinismus liefert Genauigkeit **und** spart — das ist kein Widerspruch zum Leitsatz, sondern seine Umsetzung. (Operationalisiert den Merksatz aus §10.)
+
+- **Standardausführung: Sonnet.** Opus-Niveau-Reasoning nur bei echtem Urteil: unklarer Modus, Scope-Fund, Spec-Konflikt, Regression, widersprüchliche Steuerdateien.
+- **Mechanik ist mechanisch:** session-log-Append, Archiv-Append, BACKLOG-Zeile entfernen, NAVIGATION-✅-Flip, HOOK-META-Ersatz, Validator, Rotation laufen über Python-Tools bzw. den Haiku-Writer — nicht über Modell-Reasoning.
+- **Nicht doppelt arbeiten:** nicht lesen, was ein Tool liefert; nicht verifizieren, was ein Assert/Validator garantiert; kein mehrfaches Gegenlesen derselben Datei.
+- **Die Hauptinstanz komponiert Literale einmal** und übergibt sie an Writer/Tools. Danach kein erneutes Lesen der Zieldatei.
+
+Je einfacher der Abschluss, desto näher an null Modell-Reasoning. Nur der schwierige Abschluss (Pfad A mit echtem Urteil) darf teuer denken.
+
 ---
 
 ## 1. Feste Pfade
@@ -259,6 +270,8 @@ Regel:
 Danach: Voll-Abschluss oder gezielter Reflexions-Check.
 
 ### 3.6 PROJECT-STATUS / HOOK-META
+
+**§1 „Aktueller Fokus" ist Snapshot, kein Log:** nächster Schritt (1 Zeile) + max. ~5 Meilensteine, **je genau eine Zeile** im Format `- **AP-ID** (YYYY-MM-DD) ✅ Kurzbeschreibung`. Der Volltext gehört ins BACKLOG-ARCHIV, nie in §1. Beim Abschluss: neue Meilenstein-Zeile oben einfügen, älteste entfernen (rollierendes Fenster). Kein Absatz, keine Wiederholung des Archiv-Texts. Der Größen-Riegel im Validator (FAIL>50 KB) fängt Rückfall ab.
 
 HOOK-META `Nächster-Schritt` immer mit Kettensignal schreiben:
 
@@ -609,7 +622,7 @@ Nach Änderungen in `.claude/memory/`:
 
 Bei jeder Änderung an Fokus, nächstem Schritt oder Blockern:
 
-- sichtbaren Fließtext aktualisieren,
+- sichtbaren Fließtext aktualisieren (§1 = Ein-Zeilen-Meilensteine, rollierendes Fenster — §1-Snapshot-Regel aus §3.6),
 - HOOK-META synchronisieren,
 - HOOK-META prüfen,
 - Validator ausführen, falls vorhanden.
