@@ -1,5 +1,13 @@
 # App-Fabrik — Bewertung des Zusatzpakets und Integration in den Workflow
 
+> **Status: HISTORISCH — Empfehlungen umgesetzt, Pfadverweise veraltet** (Statuskopf ergänzt 2026-07-12, Konsolidierung)
+> Die Kernempfehlungen dieses Dokuments (State-Modell, App-Shell, SafeDOM, Whitelist, UI-Primitiven-Inventar,
+> `fw-*`-Konventionen) sind in `docs/steering/design/CI-POOL-ROLLENKONTRAKT.md` und
+> `docs/steering/design/TAILWIND-APP-BAUKASTEN_KONZEPT_V0-1.md` eingeflossen — dort steht die lebende Fassung.
+> Pfadverweise auf `docs/design-system/templates/` bzw. `spec/06-INTERAKTION.md` zeigen ins Archiv
+> (`Archiv/design-system-2026-05/`); die erwähnte `fw-app-template-demo.html` wurde nie gebaut.
+> Nicht als Quelle für Klassen, Farben oder Pfade verwenden.
+
 **Version:** V0.1  
 **Datum:** 2026-05-09  
 **Quelle:** `finanzwesir-app-fabrik-2026-05-09.zip`  

@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NON-PRODUCTION APP-MOCKUPS — Tailwind-App-Baukasten V0.1</title>
+
+<!-- ============================================================
+     NON-PRODUCTION APP-MOCKUPS — Tailwind-App-Baukasten V0.1
+     Statische „Lorem-Ipsum"-Mockups: vermitteln NUR die Optik.
+     Nicht klickbar, kein App-/Engine-JavaScript, keine Logik.
+     Vertrag: TAILWIND-APP-BAUKASTEN_KONZEPT_V0-1.md
+     Elemente: TAILWIND-APP-BAUKASTEN_VISUAL-BOARD_V0-1.html
+     ENTWURF — NICHT FREIGEGEBEN — KEIN PRODUKTIONSCODE.
+     Tailwind-CDN nur als Konzeptnachweis (Produktion = lokaler Build, T1).
+     ============================================================ -->
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
+
+<style>
+/* CI-TOKENS — 1:1 KOPIE aus Theme/assets/css/tokens.css (SSoT, Stand 2026-07-12).
+   Keine neuen Werte. Bei Abweichung gilt tokens.css. */
+:root {
+    --color-petrol-50: #F4FBFB;  --color-petrol-100: #DAF6F4; --color-petrol-200: #B4EEEB;
+    --color-petrol-300: #89E2DE; --color-petrol-400: #64CDC9; --color-petrol-500: #49B3AF;
+    --color-petrol-600: #218380; --color-petrol-700: #357270; --color-petrol-800: #325A58;
+    --color-petrol-900: #2F4A48;
+    --color-gelb-50: #FDFCEE;  --color-gelb-100: #FDF8CF; --color-gelb-200: #FCF09C;
+    --color-gelb-300: #F6E25E; --color-gelb-400: #EAD329; --color-gelb-500: #DFC805;
+    --color-gelb-600: #AB9A13; --color-gelb-700: #80741A; --color-gelb-800: #675E21;
+    --color-gelb-900: #554E24;
+    --color-purpur-50: #FCF3F7;  --color-purpur-100: #FBE8F2; --color-purpur-200: #F9D0E6;
+    --color-purpur-300: #F7A9D5; --color-purpur-400: #F172C1; --color-purpur-500: #E844B1;
+    --color-purpur-600: #D7169F; --color-purpur-700: #B90088; --color-purpur-800: #9A0071;
+    --color-purpur-900: #8D0267;
+    --color-blau-700: #0071BF;
+    --color-petrol: var(--color-petrol-600); --color-gelb: var(--color-gelb-500);
+    --color-purpur: var(--color-purpur-900); --color-blau: var(--color-blau-700);
+    --color-primary: var(--color-petrol-600);
+    --color-link: var(--color-blau-700);
+    --color-surface: var(--color-bg-faint);
+    --color-text: #272727; --color-text-sec: #4C4C4C; --color-text-muted: #666666;
+    --color-text-disabled: #888888;
+    --color-bg: #FFFFFF; --color-bg-faint: #FAFAFA; --color-border: #E7ECEF;
+    --color-error-text: #B71C1C; --color-error-border: #C62828; --color-error-bg: #FFF8F8;
+    --color-grid: #E7ECEF; --color-zero-line: #999999; --color-loader-bg: #F3F3F3;
+    --font-display: 'Archivo Black', sans-serif;
+    --font-body: 'Source Sans 3', 'Source Sans Pro', sans-serif;
+    --shadow-soft: 0 4px 20px -2px rgba(39, 39, 39, 0.05);
+    --shadow-hover: 0 10px 25px -5px rgba(39, 39, 39, 0.1);
+}
+body { background: #EDEFF1; margin: 0; }
+</style>
+
+<!-- NON-PRODUCTION: Tailwind Play CDN nur für diesen Konzeptnachweis -->
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+/* identische CI-Spiegelung wie im Visual Board (Konzept §2.1) */
+tailwind.config = {
+  theme: { extend: {
+    colors: {
+      petrol: { 50:'var(--color-petrol-50)',100:'var(--color-petrol-100)',200:'var(--color-petrol-200)',300:'var(--color-petrol-300)',400:'var(--color-petrol-400)',500:'var(--color-petrol-500)',600:'var(--color-petrol-600)',700:'var(--color-petrol-700)',800:'var(--color-petrol-800)',900:'var(--color-petrol-900)', DEFAULT:'var(--color-petrol)' },
+      gelb: { 50:'var(--color-gelb-50)',100:'var(--color-gelb-100)',200:'var(--color-gelb-200)',300:'var(--color-gelb-300)',400:'var(--color-gelb-400)',500:'var(--color-gelb-500)',600:'var(--color-gelb-600)',700:'var(--color-gelb-700)',800:'var(--color-gelb-800)',900:'var(--color-gelb-900)', DEFAULT:'var(--color-gelb)' },
+      purpur: { 50:'var(--color-purpur-50)',100:'var(--color-purpur-100)',200:'var(--color-purpur-200)',300:'var(--color-purpur-300)',400:'var(--color-purpur-400)',500:'var(--color-purpur-500)',600:'var(--color-purpur-600)',700:'var(--color-purpur-700)',800:'var(--color-purpur-800)',900:'var(--color-purpur-900)', DEFAULT:'var(--color-purpur)' },
+      blau: { 700:'var(--color-blau-700)', DEFAULT:'var(--color-blau)' },
+      primary: 'var(--color-primary)', link: 'var(--color-link)', surface: 'var(--color-surface)',
+      text: { DEFAULT:'var(--color-text)', sec:'var(--color-text-sec)', muted:'var(--color-text-muted)', disabled:'var(--color-text-disabled)' },
+      bg: { DEFAULT:'var(--color-bg)', faint:'var(--color-bg-faint)' },
+      border: 'var(--color-border)',
+      error: { text:'var(--color-error-text)', border:'var(--color-error-border)', bg:'var(--color-error-bg)' }
+    },
+    fontFamily: { display: ['Archivo Black','sans-serif'], body: ['Source Sans 3','Source Sans Pro','sans-serif'] },
+    boxShadow: { soft: 'var(--shadow-soft)', hover: 'var(--shadow-hover)' }
+  } }
+};
+</script>
+</head>
+<body class="font-body text-text">
+
+<div class="bg-purpur-900 px-6 py-4 text-white">
+  <p class="m-0 font-display text-lg">NON-PRODUCTION APP-MOCKUPS</p>
+  <p class="m-0 mt-1 text-sm opacity-90">Statische Optik-Mockups (nicht klickbar) · drei App-Archetypen im simulierten Ghost-Artikel · Rezepte = Baukasten-Vertrag V0.1 · FREIGEGEBEN 2026-07-12</p>
+</div>
+
+<!-- ================================================================
+     MOCKUP 1 · prokrastinations-preis — alle 4 Screens im Artikel
+     ================================================================ -->
+<div class="mx-auto max-w-2xl px-6 py-12">
+  <p class="text-xs font-semibold uppercase tracking-wide text-purpur-700">Mockup 1 · Rechner + Story: „Der Preis der Prokrastination"</p>
+
+  <!-- simulierter Ghost-Artikel davor -->
+  <article class="mt-4 rounded-lg bg-bg p-8 shadow-soft">
+    <h1 class="m-0 font-display text-3xl leading-tight text-text">Warum du nicht anfängst — und was es dich kostet</h1>
+    <p class="mt-4 text-base leading-relaxed text-text-sec">Du weißt, dass du investieren solltest. Du hast die Bücher gelesen, den ETF ausgesucht, das Depot ist eröffnet. Und trotzdem liegt das Geld seit drei Jahren auf dem Tagesgeldkonto. Willkommen im Club — du bist nicht allein, aber du zahlst dafür.</p>
+    <p class="mt-3 text-base leading-relaxed text-text-sec">Wie viel genau? Das rechnet dir die folgende App aus. Stell deine Sparrate und deine bisherige Wartezeit ein und schau, was der Zaudertax kostet.</p>
+
+    <!-- ============ APP: Screen 1 · Eingabe ============ -->
+    <p class="mb-1 mt-8 text-center text-xs text-text-disabled">— App-Ansicht · Screen 1 von 4: Eingabe —</p>
+    <div class="fw-app relative box-border w-full min-h-48 bg-bg font-body text-text p-4 md:p-6">
+      <div class="flex flex-col gap-6">
+        <div>
+          <h3 class="m-0 text-xl font-bold text-text">Was kostet dich das Warten?</h3>
+          <p class="m-0 mt-1 text-sm text-text-muted">Zwei Regler, eine Antwort. Dauert 30 Sekunden.</p>
+        </div>
+        <div class="my-4">
+          <label class="flex flex-wrap items-center gap-x-4 gap-y-2 cursor-pointer">
+            <span class="shrink-0 text-sm text-text-muted">Monatliche Sparrate</span>
+            <input type="range" min="50" max="2000" value="500" class="min-w-0 flex-1 basis-40 cursor-pointer accent-primary">
+            <span class="min-w-[7ch] shrink-0 text-right font-bold text-text">500 €</span>
+          </label>
+        </div>
+        <div class="my-4">
+          <label class="flex flex-wrap items-center gap-x-4 gap-y-2 cursor-pointer">
+            <span class="shrink-0 text-sm text-text-muted">Wartezeit bisher</span>
+            <input type="range" min="0" max="10" value="3" class="min-w-0 flex-1 basis-40 cursor-pointer accent-primary">
+            <span class="min-w-[7ch] shrink-0 text-right font-bold text-text">3 Jahre</span>
+          </label>
+        </div>
+        <div class="flex flex-wrap gap-3">
+          <button type="button" class="inline-flex items-center justify-center rounded-md px-4 py-2 font-bold bg-primary text-white w-full sm:w-auto">Zeig mir den Preis →</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============ APP: Screen 2 · Stationen-Zeitreise ============ -->
+    <p class="mb-1 mt-8 text-center text-xs text-text-disabled">— App-Ansicht · Screen 2 von 4: Zeitreise —</p>
+    <div class="fw-app relative box-border w-full min-h-48 bg-bg font-body text-text p-4 md:p-6">
+      <div class="flex flex-col gap-6">
+        <div>
+          <h3 class="m-0 text-xl font-bold text-text">Deine drei verlorenen Jahre</h3>
+          <p class="m-0 mt-1 text-sm text-text-muted">Station 2 von 3</p>
+        </div>
+        <section class="flex flex-col gap-3">
+          <p class="m-0 text-xs uppercase tracking-wide text-text-muted">Station · Oktober 2023</p>
+          <h4 class="m-0 text-lg font-bold text-text">Der Markt kam zurück — ohne dich</h4>
+          <p class="m-0 text-sm text-text-sec">Nach dem Zinsschock drehte der Markt innerhalb von acht Wochen. Wer investiert war, nahm die Erholung automatisch mit. Wer wartete, wartete auf den „richtigen Moment" — der im Rückspiegel immer gestern war.</p>
+          <p class="m-0 text-sm text-text-sec">Dein Tagesgeld hat in dieser Zeit brav 3,2 % gebracht. Der Weltmarkt: 14,8 %.</p>
+        </section>
+        <div class="flex flex-wrap gap-3">
+          <button type="button" class="inline-flex items-center justify-center rounded-md px-4 py-2 font-bold text-primary">← Zurück</button>
+          <button type="button" class="inline-flex items-center justify-center rounded-md px-4 py-2 font-bold bg-primary text-white">Nächste Station →</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============ APP: Screen 3 · Ergebnis ============ -->
+    <p class="mb-1 mt-8 text-center text-xs text-text-disabled">— App-Ansicht · Screen 3 von 4: Ergebnis —</p>
+    <div class="fw-app relative box-border w-full min-h-48 bg-bg font-body text-text p-4 md:p-6">
+      <div class="flex flex-col gap-6">
+        <div>
+          <h3 class="m-0 text-xl font-bold text-text">Dein Preis des Wartens</h3>
+          <p class="m-0 mt-1 text-sm text-text-muted">Bei 500 € Sparrate und 3 Jahren Wartezeit</p>
+        </div>
+        <dl class="flex flex-wrap gap-4 m-0">
+          <div class="flex-1 basis-36 rounded-lg bg-surface px-4 py-2"><dt class="mb-1 text-sm text-text-muted">Depot heute möglich</dt><dd class="m-0 text-2xl font-bold text-text">87.400 €</dd></div>
+          <div class="flex-1 basis-36 rounded-lg bg-surface px-4 py-2"><dt class="mb-1 text-sm text-text-muted">Depot tatsächlich</dt><dd class="m-0 text-2xl font-bold text-text">77.600 €</dd></div>
+          <div class="flex-1 basis-36 rounded-lg bg-surface px-4 py-2"><dt class="mb-1 text-sm text-text-muted">Preis des Wartens</dt><dd class="m-0 text-2xl font-bold text-primary">−9.800 €</dd></div>
+        </dl>
+        <div class="relative mt-6">
+          <div class="flex flex-col gap-3">
+            <h4 class="m-0 text-lg font-bold text-primary">Depotverlauf mit und ohne Warten</h4>
+            <div class="inline-block min-w-48 self-start rounded-lg bg-bg-faint px-4 py-3">
+              <p class="m-0 text-xl font-bold text-text">+27.400 € · +45,7 %</p>
+              <p class="m-0 mt-0.5 text-sm text-text-sec">seit 2016 · sofort investiert</p>
+            </div>
+            <div class="flex flex-wrap items-center gap-2">
+              <div class="inline-flex rounded-md bg-bg-faint p-0.5 gap-0.5">
+                <span class="rounded px-2.5 py-1 text-sm text-text-sec">5 J</span>
+                <span class="rounded px-2.5 py-1 text-sm font-semibold bg-bg text-primary shadow-soft">10 J</span>
+                <span class="rounded px-2.5 py-1 text-sm text-text-sec">Max</span>
+              </div>
+            </div>
+            <div class="flex flex-wrap gap-2">
+              <span class="inline-flex items-center gap-2 rounded-full bg-bg px-3 py-1 text-sm shadow-soft"><span class="h-2.5 w-2.5 rounded-full" style="background:var(--color-petrol-600)"></span>Sofort investiert</span>
+              <span class="inline-flex items-center gap-2 rounded-full bg-bg px-3 py-1 text-sm shadow-soft"><span class="h-2.5 w-2.5 rounded-full" style="background:var(--color-purpur-600)"></span>3 Jahre gewartet</span>
+            </div>
+            <div class="relative w-full">
+              <svg viewBox="0 0 600 200" class="w-full" role="img" aria-label="Platzhalter Liniendiagramm">
+                <line x1="40" y1="20"  x2="590" y2="20"  stroke="var(--color-grid)" stroke-width="1"/>
+                <line x1="40" y1="60"  x2="590" y2="60"  stroke="var(--color-grid)" stroke-width="1"/>
+                <line x1="40" y1="100" x2="590" y2="100" stroke="var(--color-grid)" stroke-width="1"/>
+                <line x1="40" y1="140" x2="590" y2="140" stroke="var(--color-grid)" stroke-width="1"/>
+                <line x1="40" y1="175" x2="590" y2="175" stroke="var(--color-zero-line)" stroke-width="1"/>
+                <text x="4" y="24"  font-size="10" fill="var(--color-text-muted)">90 T€</text>
+                <text x="4" y="64"  font-size="10" fill="var(--color-text-muted)">60 T€</text>
+                <text x="4" y="104" font-size="10" fill="var(--color-text-muted)">30 T€</text>
+                <text x="4" y="179" font-size="10" fill="var(--color-text-muted)">0</text>
+                <polyline points="40,165 130,150 220,138 310,105 400,85 490,50 590,28" fill="none" stroke="var(--color-petrol-600)" stroke-width="3"/>
+                <polyline points="40,165 130,165 220,160 310,135 400,120 490,95 590,78" fill="none" stroke="var(--color-purpur-600)" stroke-width="3" stroke-dasharray="6 4"/>
+                <text x="40"  y="195" font-size="10" fill="var(--color-text-muted)">2016</text>
+                <text x="300" y="195" font-size="10" fill="var(--color-text-muted)">2021</text>
+                <text x="560" y="195" font-size="10" fill="var(--color-text-muted)">2026</text>
+              </svg>
+            </div>
+            <p class="m-0 text-xs text-text-muted">Modellrechnung, historische Renditen. Keine Anlageberatung.</p>
+          </div>
+        </div>
+        <div>
+          <span class="flex w-full items-center justify-between gap-2 rounded-md px-3 py-2 text-left text-sm font-semibold text-text-sec">Zwischenwerte anzeigen <span>▾</span></span>
+        </div>
+        <aside class="border-l-2 border-border pl-4 text-sm text-text-muted">
+          Annahmen: 7 % p. a. nominal, monatliche Sparrate 500 €, Tagesgeld 2 % p. a., Kosten 0,2 % TER. Vergangenheitswerte sind keine Garantie.
+        </aside>
+        <div class="flex flex-wrap gap-3 mt-6">
+          <button type="button" class="inline-flex items-center justify-center rounded-md px-4 py-2 font-bold text-primary">← Zurück</button>
+          <button type="button" class="inline-flex items-center justify-center rounded-md px-4 py-2 font-bold bg-primary text-white w-full sm:w-auto">Und jetzt? Zum Ausblick →</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============ APP: Screen 4 · Zukunfts-Ausblick + CTA ============ -->
+    <p class="mb-1 mt-8 text-center text-xs text-text-disabled">— App-Ansicht · Screen 4 von 4: Ausblick —</p>
+    <div class="fw-app relative box-border w-full min-h-48 bg-bg font-body text-text p-4 md:p-6">
+      <div class="flex flex-col gap-6">
+        <div>
+          <h3 class="m-0 text-xl font-bold text-text">Die gute Nachricht: Heute ist früh genug</h3>
+          <p class="m-0 mt-1 text-sm text-text-muted">Was passiert, wenn du jetzt startest</p>
+        </div>
+        <section class="flex flex-col gap-3">
+          <p class="m-0 text-sm text-text-sec">Die 9.800 € sind weg — das ist der Zaudertax, den du bereits bezahlt hast. Aber die nächsten 20 Jahre gehören dir. Wer heute mit 500 € startet, hat bei 7 % p. a. am Ende deutlich mehr als jemand, der noch einmal „nur ein Jahr" wartet:</p>
+        </section>
+        <dl class="flex flex-wrap gap-4 m-0">
+          <div class="flex-1 basis-36 rounded-lg bg-surface px-4 py-2"><dt class="mb-1 text-sm text-text-muted">Start heute</dt><dd class="m-0 text-2xl font-bold text-primary">260.500 €</dd></div>
+          <div class="flex-1 basis-36 rounded-lg bg-surface px-4 py-2"><dt class="mb-1 text-sm text-text-muted">Start in 1 Jahr</dt><dd class="m-0 text-2xl font-bold text-text">238.200 €</dd></div>
+        </dl>
+        <div class="flex flex-wrap gap-3 mt-6">
+          <button type="button" class="inline-flex items-center justify-center rounded-md px-4 py-2 font-bold bg-primary text-white w-full sm:w-auto">So richtest du deinen Sparplan ein →</button>
+        </div>
+      </div>
+    </div>
+
+    <p class="mt-8 text-base leading-relaxed text-text-sec">So weit die Rechnung. Der wichtigste Satz steht in Screen 4: Heute ist früh genug. Der zweitwichtigste: Automatisiere die Entscheidung weg — dann kann die Prokrastination dich nicht mehr erwischen.</p>
+  </article>
+</div>
+
+<!-- ================================================================
+     MOCKUP 2 · Kostenkiller TER — reiner Rechner-Archetyp
+     ================================================================ -->
+<div class="mx-auto max-w-2xl px-6 pb-12">
+  <p class="text-xs font-semibold uppercase tracking-wide text-purpur-700">Mockup 2 · Reiner Rechner: „Kostenkiller TER"</p>
+  <article class="mt-4 rounded-lg bg-bg p-8 shadow-soft">
+    <h1 class="m-0 font-display text-3xl leading-tight text-text">0,4 % klingen nach nichts. Sind sie aber nicht.</h1>
+    <p class="mt-4 text-base leading-relaxed text-text-sec">Zwischen einem ETF mit 0,12 % Gesamtkostenquote und einem mit 0,50 % liegen — nichts? Ein Rundungsfehler? Rechne selbst.</p>
+
+    <p class="mb-1 mt-8 text-center text-xs text-text-disabled">— App-Ansicht: Rechner, ein Screen —</p>
+    <div class="fw-app relative box-border w-full min-h-48 bg-bg font-body text-text p-4 md:p-6">
+      <div class="flex flex-col gap-6">
+        <div>
+          <h3 class="m-0 text-xl font-bold text-text">Was kostet dich deine TER wirklich?</h3>
+          <p class="m-0 mt-1 text-sm text-text-muted">Über 30 Jahre, bei 7 % Marktrendite</p>
+        </div>
+        <div class="my-4">
+          <label class="flex flex-wrap items-center gap-x-4 gap-y-2 cursor-pointer">
+            <span class="shrink-0 text-sm text-text-muted">Depotwert heute</span>
+            <input type="range" min="10000" max="500000" value="100000" class="min-w-0 flex-1 basis-40 cursor-pointer accent-primary">
+            <span class="min-w-[7ch] shrink-0 text-right font-bold text-text">100.000 €</span>
+          </label>
+        </div>
+        <div class="my-4">
+          <label class="flex flex-wrap items-center gap-x-4 gap-y-2 cursor-pointer">
+            <span class="shrink-0 text-sm text-text-muted">TER deines ETF</span>
+            <input type="range" min="5" max="90" value="50" class="min-w-0 flex-1 basis-40 cursor-pointer accent-primary">
+            <span class="min-w-[7ch] shrink-0 text-right font-bold text-text">0,50 %</span>
+          </label>
+        </div>
+        <dl class="flex flex-wrap gap-4 m-0">
+          <div class="flex-1 basis-36 rounded-lg bg-surface px-4 py-2"><dt class="mb-1 text-sm text-text-muted">Kosten über 30 Jahre</dt><dd class="m-0 text-2xl font-bold text-text">31.900 €</dd></div>
+          <div class="flex-1 basis-36 rounded-lg bg-surface px-4 py-2"><dt class="mb-1 text-sm text-text-muted">Mit 0,12 % stattdessen</dt><dd class="m-0 text-2xl font-bold text-text">8.100 €</dd></div>
+          <div class="flex-1 basis-36 rounded-lg bg-surface px-4 py-2"><dt class="mb-1 text-sm text-text-muted">Deine Ersparnis</dt><dd class="m-0 text-2xl font-bold text-primary">23.800 €</dd></div>
+        </dl>
+        <div class="relative mt-6">
+          <div class="flex flex-col gap-3">
+            <h4 class="m-0 text-lg font-bold text-primary">Kostenwirkung im Vergleich</h4>
+            <div class="flex flex-wrap items-center gap-2">
+              <div class="inline-flex rounded-md bg-bg-faint p-0.5 gap-0.5">
+                <span class="rounded px-2.5 py-1 text-sm font-semibold bg-bg text-primary shadow-soft">Endwert</span>
+                <span class="rounded px-2.5 py-1 text-sm text-text-sec">Kosten p. a.</span>
+              </div>
+            </div>
+            <div class="flex flex-wrap gap-2">
+              <span class="inline-flex items-center gap-2 rounded-full bg-bg px-3 py-1 text-sm shadow-soft"><span class="h-2.5 w-2.5 rounded-full" style="background:var(--color-petrol-500)"></span>TER 0,12 %</span>
+              <span class="inline-flex items-center gap-2 rounded-full bg-bg px-3 py-1 text-sm shadow-soft"><span class="h-2.5 w-2.5 rounded-full" style="background:var(--color-purpur-500)"></span>TER 0,50 %</span>
+            </div>
+            <div class="relative w-full">
+              <svg viewBox="0 0 600 190" class="w-full" role="img" aria-label="Platzhalter Balkendiagramm">
+                <line x1="40" y1="20"  x2="590" y2="20"  stroke="var(--color-grid)" stroke-width="1"/>
+                <line x1="40" y1="75"  x2="590" y2="75"  stroke="var(--color-grid)" stroke-width="1"/>
+                <line x1="40" y1="130" x2="590" y2="130" stroke="var(--color-grid)" stroke-width="1"/>
+                <line x1="40" y1="165" x2="590" y2="165" stroke="var(--color-zero-line)" stroke-width="1"/>
+                <text x="2" y="24"  font-size="10" fill="var(--color-text-muted)">800 T€</text>
+                <text x="2" y="79"  font-size="10" fill="var(--color-text-muted)">400 T€</text>
+                <text x="2" y="169" font-size="10" fill="var(--color-text-muted)">0</text>
+                <rect x="120" y="30"  width="120" height="135" fill="var(--color-petrol-500)"/>
+                <rect x="340" y="62"  width="120" height="103" fill="var(--color-purpur-500)"/>
+                <text x="140" y="182" font-size="10" fill="var(--color-text-muted)">TER 0,12 %</text>
+                <text x="360" y="182" font-size="10" fill="var(--color-text-muted)">TER 0,50 %</text>
+              </svg>
+            </div>
+            <p class="m-0 text-xs text-text-muted">Beide Depots: 100.000 € Start, 7 % p. a., 30 Jahre.</p>
+          </div>
+        </div>
+        <aside class="border-l-2 border-border pl-4 text-sm text-text-muted">
+          Annahmen: konstante Rendite, keine Steuern, TER als einzige Kostendifferenz.
+        </aside>
+        <div class="flex flex-wrap gap-3 mt-6">
+          <button type="button" class="inline-flex items-center justify-center rounded-md px-4 py-2 font-bold bg-primary text-white w-full sm:w-auto">Günstige Welt-ETFs im Vergleich →</button>
+        </div>
+      </div>
+    </div>
+
+    <p class="mt-8 text-base leading-relaxed text-text-sec">23.800 € für exakt null Mehrleistung. Das ist keine Gebühr, das ist ein Abo, das du kündigen kannst.</p>
+  </article>
+</div>
+
+<!-- ================================================================
+     MOCKUP 3 · Weltdepot-Baukasten — Lern-/Story-Archetyp mit Donut
+     ================================================================ -->
+<div class="mx-auto max-w-2xl px-6 pb-16">
+  <p class="text-xs font-semibold uppercase tracking-wide text-purpur-700">Mockup 3 · Lern-App: „Weltdepot-Baukasten"</p>
+  <article class="mt-4 rounded-lg bg-bg p-8 shadow-soft">
+    <h1 class="m-0 font-display text-3xl leading-tight text-text">Drei Töpfe reichen</h1>
+    <p class="mt-4 text-base leading-relaxed text-text-sec">Ein Weltdepot ist kein Hexenwerk: ein Topf Welt, ein Topf Schwellenländer, ein Topf Sicherheit. Wie die Töpfe zusammenspielen, zeigt dir die App.</p>
+
+    <p class="mb-1 mt-8 text-center text-xs text-text-disabled">— App-Ansicht: Lern-App, ein Screen —</p>
+    <div class="fw-app relative box-border w-full min-h-48 bg-bg font-body text-text p-4 md:p-6">
+      <div class="flex flex-col gap-6">
+        <div>
+          <h3 class="m-0 text-xl font-bold text-text">Dein Weltdepot in drei Töpfen</h3>
+          <p class="m-0 mt-1 text-sm text-text-muted">Die 70/20/10-Basisvariante</p>
+        </div>
+        <section class="flex flex-col gap-3 rounded-xl bg-bg-faint p-4 md:p-6">
+          <p class="m-0 text-xs uppercase tracking-wide text-text-muted">Warum diese Aufteilung?</p>
+          <h4 class="m-0 text-lg font-bold text-text">Breit fängt den Markt, schmal fängt die Nerven</h4>
+          <p class="m-0 text-sm text-text-sec">Der Welt-Topf liefert die Rendite von über 1.500 Unternehmen. Der Schwellenländer-Topf beteiligt dich am Wachstum, das im Weltindex unterrepräsentiert ist. Der Sicherheits-Topf ist dein Schlafmittel: Er rettet keine Rendite, er rettet deine Durchhaltefähigkeit im Crash.</p>
+        </section>
+        <div class="relative mt-6">
+          <div class="flex flex-col gap-3">
+            <h4 class="m-0 text-lg font-bold text-primary">Weltdepot-Allokation</h4>
+            <!-- BAN-Slot bewusst leer: die zentrale Kennzahl steht beim Donut im Loch (CenterTextPlugin, Canvas-Sache) -->
+            <div class="flex flex-wrap gap-2">
+              <span class="inline-flex items-center gap-2 rounded-full bg-bg px-3 py-1 text-sm shadow-soft"><span class="h-2.5 w-2.5 rounded-full" style="background:var(--color-petrol-500)"></span>Welt</span>
+              <span class="inline-flex items-center gap-2 rounded-full bg-bg px-3 py-1 text-sm shadow-soft"><span class="h-2.5 w-2.5 rounded-full" style="background:var(--color-gelb-500)"></span>Schwellenländer</span>
+              <span class="inline-flex items-center gap-2 rounded-full bg-bg px-3 py-1 text-sm shadow-soft"><span class="h-2.5 w-2.5 rounded-full" style="background:var(--color-purpur-500)"></span>Tagesgeld</span>
+            </div>
+            <div class="relative w-full">
+              <!-- Donut-Platzhalter (Bestand: type 'doughnut', cutout 70 %, Kennzahl im Loch, keine Segment-Labels) -->
+              <svg viewBox="0 0 600 240" class="w-full" role="img" aria-label="Platzhalter Donut-Diagramm">
+                <circle cx="300" cy="120" r="76.5" fill="none" stroke="var(--color-petrol-500)" stroke-width="27" stroke-dasharray="336.46 480.66" transform="rotate(-90 300 120)"/>
+                <circle cx="300" cy="120" r="76.5" fill="none" stroke="var(--color-gelb-500)" stroke-width="27" stroke-dasharray="96.13 480.66" transform="rotate(162 300 120)"/>
+                <circle cx="300" cy="120" r="76.5" fill="none" stroke="var(--color-purpur-500)" stroke-width="27" stroke-dasharray="48.07 480.66" transform="rotate(234 300 120)"/>
+                <text x="300" y="112" text-anchor="middle" font-size="13" fill="var(--color-text-sec)">Welt</text>
+                <text x="300" y="136" text-anchor="middle" font-size="22" font-weight="700" fill="var(--color-text)">70 %</text>
+              </svg>
+            </div>
+            <p class="m-0 text-xs text-text-muted">Basisvariante — kein Muss, ein Startpunkt.</p>
+          </div>
+        </div>
+        <div>
+          <span class="flex w-full items-center justify-between gap-2 rounded-md px-3 py-2 text-left text-sm font-semibold text-text-sec">Und wenn ich mehr Risiko will? <span>▾</span></span>
+          <span class="flex w-full items-center justify-between gap-2 rounded-md px-3 py-2 text-left text-sm font-semibold text-text-sec">Warum kein Gold, kein Bitcoin, keine Themen-ETFs? <span>▾</span></span>
+        </div>
+        <aside class="border-l-2 border-border pl-4 text-sm text-text-muted">
+          Das ist Bildungsinhalt, keine Anlageberatung. Die richtige Aufteilung hängt an deiner Risikotragfähigkeit — nicht an diesem Donut.
+        </aside>
+        <div class="flex flex-wrap gap-3 mt-6">
+          <button type="button" class="inline-flex items-center justify-center rounded-md px-4 py-2 font-bold bg-primary text-white w-full sm:w-auto">Baukasten durchspielen →</button>
+        </div>
+      </div>
+    </div>
+
+    <p class="mt-8 text-base leading-relaxed text-text-sec">Merke: Der Donut ist der langweiligste Teil deiner Finanzen — und genau deshalb funktioniert er.</p>
+  </article>
+</div>
+
+<footer class="pb-10 text-center text-xs text-text-muted">
+  NON-PRODUCTION APP-MOCKUPS · Tailwind-App-Baukasten V0.1 · ENTWURF — NICHT FREIGEGEBEN · statisch, nicht klickbar · Rezept-Quelle: TAILWIND-APP-BAUKASTEN_KONZEPT_V0-1.md · CI-Quelle: tokens.css (SSoT)
+</footer>
+
+</body>
+</html>

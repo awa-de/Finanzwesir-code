@@ -125,9 +125,15 @@ Nach Abschluss: THEME-ASSEMBLY-CHECKLIST.md abhaken → `/abschluss-ritual`.
 1. docs/steering/design/CSS-KONVENTIONEN.md       ← bindend für alle CSS-Arbeit
 2. docs/steering/design/CI-POOL-ROLLENKONTRAKT.md ← verbindliche Farb-/Rollen-/Benennungsregeln (Leitern 50–900, Nutzungsregeln)
 3. docs/steering/BACKLOG.md                       ← offene DS-N / CSS-N Issues
-4. docs/design-system/spec/                       ← Komponenten-Specs
-5. Theme/assets/css/tokens.css                    ← Single Source of Truth: Farb-/Font-/Schatten-Tokens (AP-prokrast-16)
-6. Theme/assets/css/screen.css                    ← importiert tokens.css, konsumiert nur per var()/color-mix
+4. docs/design-system/README.md                   ← Statuskarte (Jahrgang 2026-05 archiviert; nur Spec 05/Icons lebt dort)
+5. docs/steering/design/TAILWIND-APP-BAUKASTEN_KONZEPT_V0-1.md ← App-Fabrik-Primitiven/Struktur (FREIGEGEBEN 2026-07-12, verbindlicher Vertrag)
+6. Theme/assets/css/tokens.css                    ← Single Source of Truth: Farb-/Font-/Schatten-Tokens (AP-prokrast-16)
+7. Theme/assets/css/screen.css                    ← importiert tokens.css, konsumiert nur per var()/color-mix
+```
+
+Verbotener Alt-Namensraum (Kontrakt §3): `-tint`, `-20`, `-30`, `-80` u. ä. — taucht so etwas in einer
+Quelle auf, ist die Quelle historisch (`Archiv/design-system-2026-05/`) und wird nicht verwendet.
+```
 ```
 
 Regeln (nie brechen):
@@ -151,7 +157,7 @@ Nach Abschluss: `/abschluss-ritual`.
 1. docs/spec/APP-INTERFACE.md                     ← Vertrag Ghost-HTML ↔ App-JS (Pflicht)
 2. docs/steering/audits/SECURITY-BASELINE.md      ← Pflicht vor App-Arbeit
 3. docs/steering/design/CSS-KONVENTIONEN.md       ← Klassen-Naming
-4. docs/design-system/                            ← Tokens, bestehende Komponenten
+4. docs/steering/design/TAILWIND-APP-BAUKASTEN_KONZEPT_V0-1.md ← App-Primitiven/Klassenrezepte (FREIGEGEBEN 2026-07-12, verbindlicher Vertrag); Icons: docs/design-system/spec/05 + Theme/assets/images/
 5. docs/App-Fabrik/APP_INVENTORY.md               ← Alle 25 App-Ordner, Datenbedarf, offene Klärungen
 6. docs/App-Fabrik/03_APP_FACTORY_STANDARD_DRAFT.md ← §1a: Komponentenbasierte App-Komposition (verbindliches Architekturmodell), Dateistruktur-Standard, Ghost-Card-Vertrag, DoD
 7. docs/App-Fabrik/04_CLAUDE_WORKFLOW_DRAFT.md    ← Skills-Mapping, Phasen Intake→Spec→Gate→Release
@@ -425,4 +431,4 @@ Vollständige Aufgabenliste: `docs/steering/BACKLOG.md`
 | `Rechtliche Seiten/` (CLICKY + KOCHREZEPT): Heimat? | offen |
 | `Basis/Prompts/` → `.claude/` mergen | offen — einzeln prüfen |
 | Font-CSS-Dopplung: `fonts/styles.css` vs. `fonts/stylesheet.css` | offen |
-| SVG-Duplikate: `assets/images/` vs. `docs/design-system/templates/assets/` | offen |
+| SVG-Duplikate: `assets/images/` vs. Templates-Kopien | erledigt 2026-07-12 — Kopien liegen in `Archiv/design-system-2026-05/templates/assets/`, kanonisch ist `Theme/assets/images/` |

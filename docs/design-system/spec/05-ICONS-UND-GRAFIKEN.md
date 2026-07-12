@@ -1,7 +1,15 @@
 # 05 Icons & Grafiken
 
-> **Status:** Final
-> **Quelle:** Design-Matrix v7, boxen-stress-test-referenz.html, ui-kit-referenz.html
+Stand: 2026-07-12 | Session: design-ablage-konsolidierung | Geändert von: Claude
+
+> **Status:** GÜLTIG — einzige überlebende Spec des Jahrgangs 2026-05 (Konsolidierung 2026-07-12).
+> **Geltung:** Icon-System (Variante F), Größen, Hard-Rim-Regeln, SVG-Inventar.
+> **Bei Widerspruch gilt:** Farb-/Fontwerte immer aus `Theme/assets/css/tokens.css` (SSoT) —
+> falls dieses Dokument Farbnamen wie `-tint`/`-20`/`-80` erwähnt, sind das Alt-Namen und zu ignorieren
+> (verbotener Namensraum, CI-POOL-ROLLENKONTRAKT §3).
+> **Kanonische Icon-Dateien:** `Theme/assets/images/` (die früheren Kopien unter `templates/assets/`
+> liegen im `Archiv/design-system-2026-05/`).
+> **Alt-Quellen** (Design-Matrix v7, boxen-stress-test, ui-kit-referenz): archiviert, nur Historie.
 
 ---
 
@@ -64,7 +72,10 @@ Der Selektor nutzt die `.hard-rim`-Klasse als Unterscheidungsmerkmal: Artikel-Bi
 
 ## 2. Verfuegbare SVG-Icons
 
-Alle Icons liegen in `docs/design-system/templates/assets/`.
+Alle Icons liegen kanonisch in `Theme/assets/images/` (der Janitor lädt von dort via `data-icon-base`).
+<!-- CHANGED 2026-07-12 Konsolidierung: vorher docs/design-system/templates/assets/ — das waren Duplikate, jetzt in Archiv/design-system-2026-05/ -->
+Hinweis: Im Theme heißen die Kopf-Dateien korrekt `Kopf_Finanzwesir_BigCircle.svg`/`_SmallCircle.svg`
+(die archivierten Duplikate trugen den Tippfehler „Finazwesir").
 
 | Datei | Beschreibung | Typischer Einsatz |
 |:------|:-------------|:------------------|
