@@ -13,6 +13,19 @@ const _dataCache = new Map();
 
 // CHANGED — B1-STATIONS-v3.0: v2.1-Konstanten entfernt (kein priority/role/sourceStatus in v3.0)
 
+// NEW — AP-tailwind-02_slice-1: Shell-/State-Klassenkonstanten (TAILWIND-APP-BAUKASTEN_KONZEPT_V0-1.md
+// §6.1/§6.10, Literalregel §2.2: vollständige String-Literale, keine Interpolation/Komposition).
+const FW_SHELL_CLASS = 'fw-app relative box-border w-full min-h-48 bg-bg font-body text-text p-4 md:p-6';
+const FW_LOADING_WRAPPER_CLASS = 'flex items-center justify-center gap-3 p-6 text-text-muted';
+const FW_LOADING_SPINNER_CLASS = 'h-8 w-8 animate-spin motion-reduce:animate-none rounded-full border-4 border-border border-t-primary';
+const FW_EMPTY_CLASS = 'p-4 text-text-muted';
+const FW_ERROR_CLASS = 'rounded-lg border border-error-border bg-error-bg p-4 text-error-text';
+// NEW — AP-tailwind-02_slice-2: KPI-Klassenkonstanten (TAILWIND-APP-BAUKASTEN_KONZEPT_V0-1.md §6.3)
+const FW_KPI_GROUP_CLASS = 'flex flex-wrap gap-4 mt-4';
+const FW_KPI_CARD_CLASS = 'flex-1 basis-36 rounded-lg bg-surface px-4 py-2';
+const FW_KPI_LABEL_CLASS = 'mb-1 text-sm text-text-muted';
+const FW_KPI_VALUE_CLASS = 'm-0 text-2xl font-bold text-text';
+
 function validateSlug(slug) {
   return typeof slug === 'string' && SLUG_WHITELIST.includes(slug.trim());
 }
@@ -23,19 +36,43 @@ function clearContainer(container) {
 
 function setState(container, state) {
   container.dataset.fwState = state;
+  container.classList.toggle('opacity-60', state === 'loading'); // CHANGED — AP-tailwind-02_slice-1: war CSS-Attributselektor
   // Erlaubte Werte: 'loading' | 'content' | 'error' | 'empty'
 }
 
+// CHANGED — AP-tailwind-02_slice-1: Zentrier-Wrapper + Spinner + sichtbarer Text (§6.10, Q-07/AP-tailwind-02c)
 function renderLoading(container) {
+  const wrapper = document.createElement('div');
+  wrapper.setAttribute('role', 'status');
+  wrapper.className = FW_LOADING_WRAPPER_CLASS;
+
+  const spinner = document.createElement('span');
+  spinner.setAttribute('aria-hidden', 'true');
+  spinner.className = FW_LOADING_SPINNER_CLASS;
+
+  const text = document.createElement('span');
+  text.textContent = 'Daten werden geladen …';
+
+  wrapper.appendChild(spinner);
+  wrapper.appendChild(text);
+  container.appendChild(wrapper);
+}
+
+// NEW — AP-tailwind-02_slice-1: von renderError() getrennt, weil Empty role="status" braucht (§6.10), nicht role="alert".
+// CHANGED — AP-tailwind-02d: aktuell ohne Aufrufer (alle bisherigen "empty"-Fälle sind Taxonomie-Error, APP-INTERFACE.md §8).
+// Bewusst nicht entfernt — Empty bleibt gültiger Zustand (z. B. künftige Empty-Journey-Faelle), kein toter Code im engeren Sinn.
+function renderEmpty(container, message) {
   const p = document.createElement('p');
   p.setAttribute('role', 'status');
-  p.textContent = 'Daten werden geladen …';
+  p.className = FW_EMPTY_CLASS;
+  p.textContent = message; // SafeDOM: textContent, niemals innerHTML (Q-01)
   container.appendChild(p);
 }
 
 function renderError(container, message) {
   const p = document.createElement('p');
   p.setAttribute('role', 'alert'); // NEW — AP-18b §14.13
+  p.className = FW_ERROR_CLASS; // NEW — AP-tailwind-02_slice-1
   p.textContent = message; // SafeDOM: textContent, niemals innerHTML (Q-01)
   container.appendChild(p);
 }
@@ -126,7 +163,7 @@ function renderKpiCards(container, appContext) {
     : fmt.format(appContext.differenz); // Intl enthält Minuszeichen bei negativem Wert
 
   const dl = document.createElement('dl');
-  dl.className = 'fw-app__kpi-cards';
+  dl.className = FW_KPI_GROUP_CLASS; // CHANGED — AP-tailwind-02_slice-2
 
   [
     { label: 'Eingezahlt',       value: fmt.format(appContext.eingezahlt),     key: 'eingezahlt' },
@@ -134,13 +171,15 @@ function renderKpiCards(container, appContext) {
     { label: 'Gewinn / Verlust', value: differenzFormatted,                    key: 'differenz' }
   ].forEach(({ label, value, key }) => {
     const div = document.createElement('div');
-    div.className = 'fw-app__kpi-card';
+    div.className = FW_KPI_CARD_CLASS; // CHANGED — AP-tailwind-02_slice-2
     div.dataset.kpi = key;
 
     const dt = document.createElement('dt');
+    dt.className = FW_KPI_LABEL_CLASS; // NEW — AP-tailwind-02_slice-2
     dt.textContent = label;
 
     const dd = document.createElement('dd');
+    dd.className = FW_KPI_VALUE_CLASS; // NEW — AP-tailwind-02_slice-2
     dd.textContent = value;
 
     div.appendChild(dt);
@@ -1228,10 +1267,7 @@ async function initApp(container, slug) {
 
     clearContainer(container);
 
-    if (csvResult.error === 'empty') {
-      setState(container, 'empty');
-      renderError(container, csvResult.message);
-    } else if (csvResult.error) {
+    if (csvResult.error) { // CHANGED — AP-tailwind-02d: 'empty' (< 120 Zeilen / fehlende Pflichtspalten) ist Taxonomie-Error, nicht Empty (APP-INTERFACE.md §8)
       setState(container, 'error');
       renderError(container, csvResult.message);
     } else if (stationsResult.error) {                       // NEW — AP-11
@@ -1263,6 +1299,7 @@ function bootstrap() {
     // Guard: verhindert doppelte Initialisierung (z.B. Ghost Code Injection + Theme)
     if (container.dataset.fwInitialized === 'true') return;
     container.dataset.fwInitialized = 'true';
+    container.className = FW_SHELL_CLASS; // NEW — AP-tailwind-02_slice-1: Shell-Klassenkonstante (§6.1)
 
     const slug = (container.dataset.fwApp || '').trim();
     initApp(container, slug);

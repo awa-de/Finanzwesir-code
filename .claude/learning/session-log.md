@@ -15,3 +15,10 @@ Wird nach /distill ins Jahres-Segment rotiert (Rohlog erhalten). Einträge: [FRI
 - [WIN] Vor der BACKLOG.md-Änderung den Hook-Parser-Vertrag (`session-start.ps1`) gezielt geprüft statt zu raten: Hook liest AP-IDs nur aus dem 🟡-Aktiv-Abschnitt, die AP-tailwind-02-Zeile liegt im Offen-Abschnitt — Änderung dadurch nachweislich hook-unsichtbar, keine Regression riskiert.
 - [OK] Checker-Härtung (bytegenauer URL-Vergleich, kein Query-/Fragment-Strip, `type="module"` case-insensitiv) 20/20 temporäre Crashtests + realer Checker (16 Testseiten, 0 Fehler) beide Male grün bestätigt.
 
+### AP-tailwind-02a/02b — AP-Wechsel
+
+### 2026-07-13 — AP-tailwind-02 Slice 1+2 (Shell/States, KPI) ✅ inkl. 02c/02d/02e
+- [FRICTION] Fuer den KPI-/Reduced-Motion-Browser-Check zunaechst eine neue Datei vorgeschlagen, ohne vorher tools/ zu pruefen -- Albert korrigierte auf die bereits bestehende ci-token-check.js. Lehre: vor neue Datei bauen immer erst gezielt tools/ auflisten.
+- [WIN] Play-CDN-Manifest- und Theme-Bridge-Checker (check-test-pages.py) sowie die KPI-/Reduced-Motion-Erweiterung von ci-token-check.js liefen beim jeweils ersten realen Lauf gruen -- generisches Ableiten aus tokens.css/app.js statt hartkodierter Kataloge zahlte sich aus.
+- [OK] Slice 1 (Shell/States) zunaechst ROT (Play-CDN generierte CSS fuer Laufzeit-Klassen nicht zuverlaessig), durch 02d (Runtime-Manifest) + 02e (Theme-Bridge) behoben, danach GRUEN. Slice 2 (KPI) direkt GRUEN inkl. Reduced-Motion-Nachweis.
+- [QUESTION] Bei AP-tailwind-02d wurde Szenario R (app.test.html) zusaetzlich zu den im Auftrag genannten F/K/L korrigiert (gleicher Codepfad) -- nicht vorab bestaetigt, transparent im Ergebnisprotokoll gemeldet.

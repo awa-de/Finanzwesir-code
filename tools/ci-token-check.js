@@ -20,19 +20,32 @@
  *     - fwFontCheck():  Font-Tokens + Font-Realität ausgewählter Flächen (Standardliste ist auf die
  *                       App `prokrastinations-preis` zugeschnitten, eigene Selektoren möglich);
  *                       prüft zusätzlich via `document.fonts.check`, ob die Schrift real geladen ist.
+ *     - fwKpiCardCheck(): NEU (AP-tailwind-02_slice-2). Eigenständiges viertes Werkzeug, bewusst
+ *                       NICHT Teil von fwCiAudit() (dessen Scope ist laut Kopfkommentar Farbe+Font
+ *                       und bleibt unangetastet). Prüft die KPI-Karten-Struktur aus
+ *                       TAILWIND-APP-BAUKASTEN_KONZEPT_V0-1.md §6.3, sobald sie im DOM stehen
+ *                       (Screen 3 erreicht): Surface-Hintergrund (Farbwert via denselben
+ *                       resolve()/toHex()-Helfern wie fwCiAudit — kein zweiter Farbmechanismus),
+ *                       kein Rahmen, kein Schatten, sichtbar gerundet, Label gedämpft/Wert
+ *                       fett-dunkel (relativ zueinander, keine Pixelwerte), sowie das
+ *                       Endwissens-Verbot: keine `[data-kpi]`-Karte, solange Screen 2 sichtbar ist.
+ *                       Kein KPI-Fund (Screen 3 noch nicht erreicht) ist kein Fehler, nur Hinweis —
+ *                       Viewport-Umbruch (S/M/L) bleibt bewusst Alberts Sichtprüfung.
  *
  * WANN WELCHES TOOL
  *   - Alltägliche Frage „ist das hier CI-konform" auf einer beliebigen Testseite → fwCiAudit().
  *   - Migrations-/Drift-Messung mit bekanntem Alt/Neu-Sollwert → fwTokenCheck()/fwFontCheck().
+ *   - KPI-Karten-Struktur (Screen 3, prokrastinations-preis) → fwKpiCardCheck().
  *
  * NUTZUNG
  *   1. Ziel-Testseite im VSCode-Live-Server öffnen (App- oder Engine-Testseite, egal).
  *   2. DevTools → Console → Inhalt dieser Datei einfügen (oder als Snippet speichern).
- *   3. Auto-Lauf beim Einfügen führt alle drei Checks aus. Ergebnis von fwCiAudit() kopieren und
- *      zur Bewertung einfügen. Einzeln / eigene Listen weiterhin möglich:
+ *   3. Auto-Lauf beim Einfügen führt alle vier Checks aus. Ergebnisse kopieren und zur Bewertung
+ *      einfügen. Einzeln / eigene Listen weiterhin möglich:
  *        fwCiAudit();                                    // Ist/Soll-Set-Audit dieser Seite
  *        fwTokenCheck([{ rolle, token, alt, neu }, …]);  // eigene Farbliste (Drift-Check)
  *        fwFontCheck([{ rolle, token, family }, …], [{ flaeche, sel }, …]);  // eigene Listen
+ *        fwKpiCardCheck();                               // KPI-Karten auf Screen 3 (falls sichtbar)
  *
  * LESART ΔE76 (nur fwTokenCheck)
  *   <1 unsichtbar · 1–2.3 nur im direkten Vergleich · 2.3–10 bei genauem Hinsehen · >10 klar.
@@ -481,11 +494,112 @@
     return rows;
   }
 
+  // ---------------------------------------------------------------------------
+  // fwKpiCardCheck(): KPI-Karten-Struktur (AP-tailwind-02_slice-2,
+  // TAILWIND-APP-BAUKASTEN_KONZEPT_V0-1.md §6.3). Eigenständiges viertes Werkzeug,
+  // bewusst NICHT Teil von fwCiAudit() (dessen Farbe+Font-Scope bleibt unangetastet,
+  // s. Kopfkommentar "PHILOSOPHIE"). Prüft Surface-Ton (über dieselben resolve()/
+  // toHex()-Helfer wie oben — kein zweiter Farbmechanismus), Rahmen-/Schattenfreiheit,
+  // sichtbare Rundung sowie das Endwissens-Verbot (keine KPI-Karte, solange Screen 2
+  // sichtbar ist). Viewport-Umbruch (S/M/L) bleibt bewusst Alberts Sichtprüfung.
+  // ---------------------------------------------------------------------------
+
+  function fwKpiCardCheck(cardSel = '[data-kpi]') {
+    console.log('%cKPI-Karten-Struktur-Check (Screen 3)', 'font-weight:bold;font-size:14px');
+
+    // Endwissens-Verbot: keine KPI-Karte, solange irgendein Screen 2 sichtbar ist (APP_SPEC §14.1).
+    const screen2Guards = [...document.querySelectorAll('[data-fw-screen="2"]')]
+      .filter(s => !s.hasAttribute('hidden'))
+      .map(s => {
+        const app = s.closest('.fw-app');
+        const leaked = app ? app.querySelectorAll('[data-kpi]').length : 0;
+        return {
+          Fläche: simpleSelector(app || s),
+          'Screen 2 sichtbar': '✅',
+          'KPI-Karten dabei': leaked,
+          Status: leaked === 0 ? '✅' : '❌ Endwissens-Verbot verletzt',
+        };
+      });
+    if (screen2Guards.length) console.table(screen2Guards);
+
+    const cards = [...document.querySelectorAll(cardSel)];
+    if (cards.length === 0) {
+      console.log('%c— Keine KPI-Karte im DOM (Screen 3 noch nicht erreicht) — kein Fehler, Kontext-abhängig.', 'color:gray');
+      return { cards: [], screen2Guards };
+    }
+
+    const surfaceHex = toHex(resolve('--color-surface'));
+    const mutedHex = toHex(resolve('--color-text-muted'));
+    const textHex = toHex(resolve('--color-text'));
+
+    const rows = cards.map(card => {
+      const cs = getComputedStyle(card);
+      const bgHex = colorToHexOrNull(cs.backgroundColor);
+      const noBorder = parseFloat(cs.borderTopWidth) === 0 || cs.borderTopStyle === 'none';
+      const noShadow = cs.boxShadow === 'none';
+      const rounded = parseFloat(cs.borderTopLeftRadius) > 0;
+
+      const dt = card.querySelector('dt');
+      const dd = card.querySelector('dd');
+      const dtHex = dt ? colorToHexOrNull(getComputedStyle(dt).color) : null;
+      const ddHex = dd ? colorToHexOrNull(getComputedStyle(dd).color) : null;
+      const ddBold = dd ? parseInt(getComputedStyle(dd).fontWeight, 10) >= 600 : false;
+      const valueLargerThanLabel = (dt && dd)
+        ? parseFloat(getComputedStyle(dd).fontSize) > parseFloat(getComputedStyle(dt).fontSize)
+        : false;
+
+      return {
+        Karte: card.dataset.kpi || simpleSelector(card),
+        Surface: bgHex === surfaceHex ? '✅' : `❌ (${bgHex})`,
+        'Kein Rahmen': noBorder ? '✅' : '❌',
+        'Kein Schatten': noShadow ? '✅' : '❌',
+        Gerundet: rounded ? '✅' : '❌',
+        'Label gedämpft': dt ? (dtHex === mutedHex ? '✅' : `❌ (${dtHex})`) : '— (kein dt)',
+        'Wert dunkel': dd ? (ddHex === textHex ? '✅' : `❌ (${ddHex})`) : '— (kein dd)',
+        'Wert fett': ddBold ? '✅' : '❌',
+        'Wert > Label': valueLargerThanLabel ? '✅' : '❌',
+      };
+    });
+    console.table(rows);
+
+    // Reduced-Motion-Reveal: prefers-reduced-motion lässt sich nicht per Script erzwingen
+    // (nur lesbar) — via DevTools → More tools → Rendering → "Emulate CSS media feature
+    // prefers-reduced-motion" aktivieren, Seite neu laden, bis Screen 3 durchklicken, dann
+    // erneut aufrufen. Prüft nur die deklarative CSS-/DOM-Reaktion (app.css @media-Regel,
+    // app.js revealScreen3() reduced-Zweig) — nicht die gefühlte Geschwindigkeit.
+    const reducedMotionActive = !!(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
+    const kpiSlot = document.querySelector('.fw-app__kpi-slot');
+    const bridge = document.querySelector('.fw-app__screen3-bridge');
+    const transitionOff = kpiSlot ? getComputedStyle(kpiSlot).transitionDuration === '0s' : null;
+    const bridgeHidden = bridge ? bridge.hasAttribute('hidden') : null;
+    console.table([{
+      'prefers-reduced-motion (matchMedia)': reducedMotionActive ? '✅ aktiv' : '— inaktiv (Standardmodus, nichts zu prüfen)',
+      'KPI-Slot-Transition aus': kpiSlot
+        ? (reducedMotionActive ? (transitionOff ? '✅' : '❌ sollte "none" sein') : (transitionOff ? '⚠ aus, obwohl Reduced Motion inaktiv' : '✅ aktiv (Standard-Fade)'))
+        : '— (kein .fw-app__kpi-slot im DOM)',
+      'Bridge-Zeile verborgen': bridge
+        ? (reducedMotionActive ? (bridgeHidden ? '✅' : '❌ sollte sofort verborgen sein') : '— (Standardmodus, Bridge darf temporär sichtbar sein)')
+        : '— (kein .fw-app__screen3-bridge im DOM)',
+    }]);
+
+    const guardFails = screen2Guards.filter(g => g.Status !== '✅');
+    const cardFails = rows.filter(r => Object.values(r).some(v => typeof v === 'string' && v.startsWith('❌')));
+    if (guardFails.length === 0 && cardFails.length === 0) {
+      console.log('%c✅ KPI-Karten strukturell korrekt, kein Endwissens-Leck auf Screen 2.', 'font-weight:bold;color:green');
+    } else {
+      if (guardFails.length) console.log(`%c❌ Endwissens-Verbot verletzt in ${guardFails.length} Fall/Fällen.`, 'font-weight:bold;color:crimson');
+      if (cardFails.length) console.log(`%c❌ ${cardFails.length}/${rows.length} Karte(n) mit Abweichung.`, 'font-weight:bold;color:crimson');
+    }
+    return { cards: rows, screen2Guards };
+  }
+
   global.fwTokenCheck = fwTokenCheck;
   global.fwFontCheck = fwFontCheck;
   global.fwCiAudit = fwCiAudit;
-  // Auto-Lauf beim Einfügen in die Konsole: Farben + Fonts + Ist/Soll-Set-Audit.
+  global.fwKpiCardCheck = fwKpiCardCheck;
+  // Auto-Lauf beim Einfügen in die Konsole: Farben + Fonts + Ist/Soll-Set-Audit + KPI-Struktur.
   fwTokenCheck();
   fwFontCheck();
   fwCiAudit();
+  fwKpiCardCheck();
 })(typeof window !== 'undefined' ? window : this);

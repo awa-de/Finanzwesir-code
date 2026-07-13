@@ -1,6 +1,6 @@
 # App Interface — Finanzwesir 2.0
 
-Stand: 2026-06-10 | OA-02-Dissens-3 | Geändert von: Claude
+Stand: 2026-07-13 | AP-tailwind-02d | Geändert von: Claude
 
 **Zweck:** Kanonischer Schnittstellen-Vertrag zwischen Ghost-Content, App-Fabrik-Apps und Chart-Engine.
 **Zielgruppe:** Claude, Albert, zukünftige App-Implementierungen.
@@ -266,9 +266,23 @@ Dev-Testseiten (`app.test.html`) dürfen technische Zusatzinfos anzeigen.
 
 ```
 Loading → Content
-       → Error    (Ladefehler, ungültige URL, Domain-Lock)
-       → Empty    (fehlende oder unvollständige Daten)
+       → Error
+       → Empty
 ```
+
+**Verbindliche Taxonomie (AP-tailwind-02d, 2026-07-13):**
+
+```
+Loading: Daten werden geladen.
+Content: nutzbare Daten.
+Empty: gültige Card und gültige Daten, aber ein leeres Ergebnis ist erwartbar.
+Error / role="alert": Card-Konfiguration, Laden, Domain-Lock, Datenformat,
+fehlende Pflichtspalten oder unzureichende Pflichtdaten verhindern ein verlässliches Ergebnis.
+```
+
+Fehlende oder unvollständige Daten sind **Error**, nicht Empty — sie verhindern ein
+verlässliches Ergebnis. Empty gilt ausschließlich, wenn Card und Daten gültig sind und ein
+leeres Ergebnis fachlich erwartbar ist (z. B. kein Datenpunkt im gewählten Zeitraum).
 
 ---
 

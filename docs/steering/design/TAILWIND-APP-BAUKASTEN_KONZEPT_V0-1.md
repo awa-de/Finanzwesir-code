@@ -1,4 +1,4 @@
-Stand: 2026-07-13 | Session: AP-tailwind-02a | Geändert von: Claude (Sonnet)
+Stand: 2026-07-13 | Session: AP-tailwind-02e | Geändert von: Claude (Sonnet)
 
 # TAILWIND-APP-BAUKASTEN — KONZEPT V0.1
 
@@ -7,6 +7,16 @@ Stand: 2026-07-13 | Session: AP-tailwind-02a | Geändert von: Claude (Sonnet)
 Grundlage: `docs/steering/patches/AP-tailwind-01_befund-und-forschung_Ergebnis.md` (maßgebliche Anamnese, Commit-Kontext `27deffa`). Dieses Dokument beantwortet das Decision Docket D-01–D-16 und definiert den Design- und Implementierungsvertrag für die App-Fabrik (25+ Apps). Es ändert keinen Bestandscode. Begleitdatei: `TAILWIND-APP-BAUKASTEN_VISUAL-BOARD_V0-1.html` (Non-Production-Nachweis derselben Rezepte).
 
 **Entschieden (AP-tailwind-02a, 2026-07-13):** Für die vorproduktive Entwicklungs- und Testphase (vor Ghost-Integration) lädt `app.test.html` und vergleichbares aktives Referenzmaterial Tailwind CSS v4 ausschließlich über den kanonischen Play-CDN-Tag `https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4` (siehe `docs/App-Fabrik/01_DECISION_LOG.md` A-04). Nach Ghost-Integration entfällt das CDN vollständig zugunsten eines lokalen, bereinigten und minimierten Builds (T1, eigener Folgeauftrag). Alle Rezepte sind so spezifiziert, dass sie unverändert den späteren lokalen Build (T1) überleben — vollständige Klassenstrings, keine Laufzeitkomposition. Der `.hbs`-Gap (Befund F-08) betrifft nur den späteren Produktions-Auslieferungsweg, nicht diese Testphasenregel.
+
+**Entschieden (AP-tailwind-02d, 2026-07-13):** Play-CDN generiert CSS für zur Laufzeit per JS gesetzte Tailwind-Utilities nicht zuverlässig genug (Anlass: manuelle Abnahme ROT). Jede `Apps/{slug}/app.test.html` trägt deshalb genau einen `<style type="text/tailwindcss">`-Manifestblock mit `@source inline(...)`, der die zur Laufzeit gesetzten Utilities explizit safelistet; `tools/check-test-pages.py` prüft Manifest und `app.js` deterministisch auf Mengengleichheit (§6.10). Zielbild für die Produktionsphase:
+```text
+Vor Ghost-Integration: Play-CDN + App-Testseiten-Manifest.
+Nach Ghost-Integration: kein CDN. Der lokale Tailwind-Build scannt die realen
+Theme-, Template- und App-JS-Quellen einschließlich der vollständigen benannten
+Klassenlisten; er erzeugt minimiertes, lokal ausgeliefertes CSS.
+Ein Produktions-Gate weist nach, dass jede App-Manifest-Utility im erzeugten CSS-Artefakt enthalten ist.
+```
+Kein Artefaktname, Build-Befehl, Pfad oder Build-Tool an dieser Stelle festgelegt — bleibt Folgeauftrag T1.
 
 ---
 
@@ -34,7 +44,7 @@ Die Grundarchitektur in fünf Ebenen mit expliziten Besitzgrenzen:
 
 ### 2.1 CI-Spiegelung (Token-Name = Utility-Suffix)
 
-Tailwind referenziert CI ausschließlich über `theme.extend`, und der Utility-Suffix ist immer der Token-Name ohne Umbenennung. Das verhindert Namensdrift zwischen `tokens.css` und Markup:
+Tailwind referenziert CI ausschließlich über eine Bridge, und der Utility-Suffix ist immer der Token-Name ohne Umbenennung. Das verhindert Namensdrift zwischen `tokens.css` und Markup. Der Mechanismus unterscheidet sich nach Phase: Die **vorproduktive Play-CDN-Testphase** (AP-tailwind-02e) nutzt Tailwind-v4-CSS-Syntax — einen wertfreien `@theme inline`-Block, der jeden Token 1:1 auf sich selbst abbildet (`--color-error-bg: var(--color-error-bg);`), kanonisch gepflegt in `docs/testing/templates/app.test.template.html` und bytegleich in jeder `Apps/{slug}/app.test.html` (Details: `docs/App-Fabrik/01_DECISION_LOG.md` A-04, `docs/testing/TEST_PAGE_STANDARD.md` §10). Der **spätere Produktionsbuild (T1)** übernimmt dieselbe Bridge-Idee, keine `theme.extend`-Konfigurationsobjekt-Syntax (die gehört zu Tailwind v3). Tokenwerte und Utility-Namen sind in beiden Phasen identisch — nur der Bridge-Mechanismus unterscheidet sich:
 
 | Token (`tokens.css`) | Tailwind-`extend`-Eintrag | Utility-Beispiel |
 |---|---|---|
@@ -363,8 +373,16 @@ Jeder Vertrag: Zweck und Abgrenzung, semantisches HTML, vollständiges Klassenre
 
 **Zweck:** Einheitliches Zustandsvokabular (D-11) für App-weite und chart-lokale Zustände. **Nicht verwenden für:** Validierungshinweise an einzelnen Feldern.
 **Träger App:** `data-fw-state` auf der Shell (Bestandsmechanik bleibt). **Träger Chart:** Engine-Container (Engine-AP übernimmt Rezepte).
+**Taxonomie (AP-tailwind-02d, verbindlich — siehe auch APP-INTERFACE.md §8):**
+```text
+Loading: Daten werden geladen.
+Content: nutzbare Daten.
+Empty: gültige Card und gültige Daten, aber ein leeres Ergebnis ist erwartbar.
+Error / role="alert": Card-Konfiguration, Laden, Domain-Lock, Datenformat,
+fehlende Pflichtspalten oder unzureichende Pflichtdaten verhindern ein verlässliches Ergebnis.
+```
 **Rezepte:**
-- Loading-Fläche: `opacity-60` + Spinner `h-8 w-8 animate-spin motion-reduce:animate-none rounded-full border-4 border-border border-t-primary` in einem Zentrier-Wrapper `flex items-center justify-center p-6`, Träger mit `role="status"` und `sr-only`-Text „Wird geladen"
+- Loading-Fläche: `opacity-60` + Spinner `h-8 w-8 animate-spin motion-reduce:animate-none rounded-full border-4 border-border border-t-primary` in einem Zentrier-Wrapper `flex items-center justify-center gap-3 p-6 text-text-muted`, Träger mit `role="status"`, sichtbarer Text „Daten werden geladen …" (kein zusätzlicher `sr-only`-Text, Q-07)
 - Empty: `p-4 text-text-muted` + erklärender Satz, `role="status"`
 - Error: `rounded-lg border border-error-border bg-error-bg p-4 text-error-text` + `role="alert"`, Icon/Präfix + Text (nie Farbe allein, CI-POOL §7.7)
 **Zustände/Responsive:** keine weiteren. **A11y:** Rollen wie oben verbindlich; Engine-Loading erhält `role="status"` im Engine-AP (heute Lücke, Befund).

@@ -450,9 +450,9 @@ body { background: #EDEFF1; margin: 0; }
       <p class="mb-3 text-xs font-semibold uppercase tracking-wide text-text-muted">Status-States (6.10) — Loading / Empty / Error</p>
       <div class="grid gap-4 md:grid-cols-3">
         <div class="opacity-60" role="status">
-          <div class="flex items-center justify-center p-6">
-            <div class="h-8 w-8 animate-spin motion-reduce:animate-none rounded-full border-4 border-border border-t-primary"></div>
-            <span class="sr-only">Wird geladen</span>
+          <div class="flex items-center justify-center gap-3 p-6 text-text-muted">
+            <div aria-hidden="true" class="h-8 w-8 animate-spin motion-reduce:animate-none rounded-full border-4 border-border border-t-primary"></div>
+            <span>Daten werden geladen …</span>
           </div>
         </div>
         <div class="p-4 text-text-muted" role="status">Noch keine Daten — wähle oben eine Wartezeit, dann rechnen wir los.</div>

@@ -36,7 +36,17 @@ Stand: 2026-06-04 | APP-01-slice-planung | Geändert von: Claude
 **Status:** 🟢 ENTSCHIEDEN  
 **Entscheidung:** Apps nutzen dieselbe Theme-Bridge wie die Chart-Engine: CSS Custom Properties aus `screen.css`, gelesen via `FwTheme.js`. Kein `FW_THEME_OVERRIDE`, kein Tailwind CDN in Produktion.  
 **Präzisierung (AP-tailwind-02a, 2026-07-13):** Vorproduktive Entwicklungs- und Testphase (vor Ghost-Integration): statische HTML-Testseiten, Visual Boards, Mockups und aktive Referenztemplates laden Tailwind CSS v4 ausschließlich über den kanonischen Play-CDN-Tag `https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4`. Produktionsphase (nach Ghost-Integration): weiterhin kein CDN — Tailwind wird gegen die realen Quellen gebaut, ungenutzte Utilities werden entfernt, das CSS wird minimiert und lokal ausgeliefert (eigener Folgeauftrag, nicht Teil von AP-tailwind-02a). Kein Widerspruch zwischen den Phasen, keine neue Einzelfallentscheidung nötig.
-**Quelle:** App-Fabrik_Zusatzpaket-Integration_V0-1.md §4.1 | Präzisiert: AP-tailwind-02a, 2026-07-13
+**Präzisierung (AP-tailwind-02d, 2026-07-13):** Play-CDN generiert CSS für zur Laufzeit per JS gesetzte Tailwind-Utilities nicht zuverlässig genug. Für die vorproduktive Phase trägt jede `Apps/{slug}/app.test.html` deshalb genau einen `<style type="text/tailwindcss">`-Manifestblock mit `@source inline(...)`, der die zur Laufzeit gesetzten Utilities explizit safelistet; `tools/check-test-pages.py` prüft Manifest und `app.js` deterministisch auf Mengengleichheit. Zielbild für danach:
+```text
+Vor Ghost-Integration: Play-CDN + App-Testseiten-Manifest.
+Nach Ghost-Integration: kein CDN. Der lokale Tailwind-Build scannt die realen
+Theme-, Template- und App-JS-Quellen einschließlich der vollständigen benannten
+Klassenlisten; er erzeugt minimiertes, lokal ausgeliefertes CSS.
+Ein Produktions-Gate weist nach, dass jede App-Manifest-Utility im erzeugten CSS-Artefakt enthalten ist.
+```
+Kein Artefaktname, Build-Befehl, Pfad oder Build-Tool an dieser Stelle festgelegt — das bleibt der bestehende Folgeauftrag T1.
+**Präzisierung (AP-tailwind-02e, 2026-07-13):** Das Manifest aus AP-tailwind-02d (`@source inline(...)`) safelistet nur die zur Laufzeit gesetzten App-Klassen, registriert aber die CI-Tokens selbst nicht als Tailwind-Utilities — `bg-error-bg`, `border-error-border`, `text-error-text` u. ä. blieben deshalb wirkungslos. Play-CDN-Testseiten brauchen deshalb zusätzlich eine wertfreie `@theme inline`-Bridge (Tailwind-v4-CSS-Syntax, kein `theme.extend`-Objekt), die jeden benötigten CI-Token 1:1 auf sich selbst abbildet (`--color-error-bg: var(--color-error-bg);` usw.) — ausgenommen die drei Bridge-only-Tokens `--color-grid`/`--color-zero-line`/`--color-loader-bg`. Kanonische Textquelle ist `docs/testing/templates/app.test.template.html`; jede `Apps/{slug}/app.test.html` trägt denselben Block bytegleich vor ihrem `@source inline(...)`. `tools/check-test-pages.py` prüft das deterministisch. T1 übernimmt später die Theme-Bridge-Idee (reale Werte statt CDN), nicht das CDN-Safelist-Gerüst selbst.
+**Quelle:** App-Fabrik_Zusatzpaket-Integration_V0-1.md §4.1 | Präzisiert: AP-tailwind-02a, 2026-07-13 | AP-tailwind-02d, 2026-07-13 | AP-tailwind-02e, 2026-07-13
 
 ---
 
@@ -286,6 +296,14 @@ Stand: 2026-06-04 | APP-01-slice-planung | Geändert von: Claude
 **Entscheidung:** Formular-Controls (`<input>`, `<select>` etc.) in App-Fabrik-Apps werden mit einem wrapping `<label>` versehen statt mit `for`/`id`. Das wrapping Label ist semantisch gleichwertig und WCAG-konform. Hardcodierte IDs wie `id="fw-slider-rate"` sind verboten, weil mehrere App-Instanzen auf einer Seite (→ Q-03) dieselbe ID doppelt setzen würden — HTML-Spec-Verletzung und AT-Verknüpfungsbruch. Falls ein explizites `for`/`id` in Ausnahmefällen unvermeidbar ist: ID pro Container-Instanz eindeutig generieren (z.B. über Zähler), nie hardcoden.  
 **Begründung:** Abgeleitet aus Pilot-2 `prokrastinations-preis` Slice 3, Full-Gate 2026-06-05. Szenario D (zwei Container) macht das Problem sichtbar.  
 **Quelle:** Full-Gate APP-01-slice3 | 2026-06-05
+
+---
+
+### Q-07 — Loading-Statusvertrag: Spinner + sichtbarer Text
+**Status:** 🟢 ENTSCHIEDEN
+**Entscheidung:** Der Loading-Zustand für App-Fabrik-Apps zeigt einen Spinner zusammen mit sichtbarem Text „Daten werden geladen …" im selben `role="status"`-Container. Kein zusätzlicher `sr-only`-Text — der sichtbare Text ist bereits für Screenreader zugänglich.
+**Begründung:** Ein doppelter, unsichtbarer Text neben identischem sichtbarem Text ist redundant und pflegeaufwendig ohne A11y-Gewinn.
+**Quelle:** AP-tailwind-02c | 2026-07-13
 
 ---
 

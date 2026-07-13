@@ -559,7 +559,7 @@ Init
 
 | State | Bedingung | Ausgabe für Nutzer |
 |---|---|---|
-| Loading | Daten werden geladen | Lade-Indikator (Skeleton oder Spinner), kein leerer Container |
+| Loading | Daten werden geladen | Spinner plus sichtbarer Text „Daten werden geladen …", kein leerer Container |
 | Content | CSV und Stations-JSON geladen und valide | Screen-Flow 1→2→3→4 mit wachsendem Chart, Stationstexten, KpiCards, CTA |
 | Error (a) | Ungültiger `data-fw-app`-Slug | „Diese App konnte nicht geladen werden. Bitte App-Konfiguration prüfen." — `textContent`, kein Stacktrace |
 | Error (b) | URL ungültig / Domain-Lock / CSV nicht parsebar | „Daten konnten nicht geladen werden. Bitte Seite neu laden." — `textContent`, kein Stacktrace |

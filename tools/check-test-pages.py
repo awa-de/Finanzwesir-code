@@ -290,6 +290,323 @@ def validate_tailwind_cdn(dom: Node, is_app_page: bool) -> List[str]:
     return findings
 
 
+# ---------------------------------------------------------------------------
+# Play-CDN-Manifest (AP-tailwind-02d, TAILWIND-APP-BAUKASTEN_KONZEPT_V0-1.md §2.2/§6.10)
+#
+# Play-CDN generiert CSS fuer zur Laufzeit per JS gesetzte Tailwind-Klassen nicht zuverlaessig
+# genug (Anlass AP-tailwind-02d: manuelle Abnahme ROT bei F/K/L). Apps/{slug}/app.test.html
+# traegt deshalb genau einen <style type="text/tailwindcss">-Block mit einer
+# @source inline("...")-Direktive, die alle zur Laufzeit gesetzten Utilities explizit safelistet.
+# Dieser Abschnitt prueft deterministisch, dass Manifest und app.js mengenidentisch sind.
+#
+# Erkennungsheuristik (bewusst kein JS-Parser, kein Build, kein Generator -- §Anlass "Kein
+# Generator, kein neuer Runtime-Manager"): Eine app.js-Konstante `const NAME = '...';` gilt als
+# Tailwind-Klassenliste, wenn ihr Wert ausschliesslich aus kleingeschriebenen, utility-foermigen
+# Tokens besteht (kein Grossbuchstabe, kein Umlaut, kein Satzzeichen) -- das unterscheidet sie
+# zuverlaessig von deutschsprachigen Text-Konstanten (z. B. RUBIKON_A11Y_TEXT). fw-*-Marker
+# werden aus jeder Tokenliste herausgefiltert (§6.10: keine Mechanikmarker im Manifest).
+# ---------------------------------------------------------------------------
+
+SOURCE_INLINE_RE = re.compile(r"@source\s+inline\(\s*(['\"])((?:(?!\1).)*)\1\s*\)\s*;", re.DOTALL)
+CONST_STRING_RE = re.compile(r"^[ \t]*const\s+([A-Za-z_$][\w$]*)\s*=\s*(['\"])(.*?)\2\s*;", re.MULTILINE)
+CLASSNAME_ASSIGN_RE = re.compile(r"\.className\s*=\s*([^;]+);")
+CLASSLIST_CALL_RE = re.compile(r"classList\.(?:add|remove|toggle)\(([^)]*)\)")
+STRING_LITERAL_RE = re.compile(r"'([^']*)'|\"([^\"]*)\"")
+TAILWIND_TOKEN_RE = re.compile(r"^[a-z0-9][a-z0-9:_\-\[\]./%]*$")
+
+
+def _tokenize_filtered(value: str) -> List[str]:
+    """Whitespace-Tokens einer Klassen-Zeichenkette, fw-*-Marker ausgefiltert
+    (TAILWIND-APP-BAUKASTEN_KONZEPT_V0-1.md §6.10: Manifest enthaelt nur Tailwind-Utilities)."""
+    return [t for t in value.split() if t and not t.startswith("fw-")]
+
+
+def _looks_like_tailwind_class_list(value: str) -> bool:
+    """Unterscheidet Tailwind-Klassenlisten von Fliesstext-Konstanten (z. B. RUBIKON_A11Y_TEXT):
+    keine Grossbuchstaben/Umlaute, keine Satzzeichen, jedes Token utility-foermig."""
+    if not value.strip():
+        return False
+    if re.search(r"[A-ZÄÖÜ]", value):
+        return False
+    if re.search(r"[.,!?;]", value):
+        return False
+    return all(TAILWIND_TOKEN_RE.match(t) for t in value.split())
+
+
+def extract_tailwind_class_consts(js_text: str) -> dict:
+    """Alle app.js-Konstanten `const NAME = '...';`, deren Wert eine Tailwind-Klassenliste ist."""
+    consts: dict = {}
+    for m in CONST_STRING_RE.finditer(js_text):
+        name, value = m.group(1), m.group(3)
+        if not _looks_like_tailwind_class_list(value):
+            continue
+        tokens = _tokenize_filtered(value)
+        if tokens:
+            consts[name] = tokens
+    return consts
+
+
+def _split_top_level_args(s: str) -> List[str]:
+    """Teilt eine JS-Argumentliste an Top-Level-Kommas, ohne Kommas innerhalb von
+    Anfuehrungszeichen oder verschachtelten Klammern zu teilen (z. B. classList.toggle('x', cond))."""
+    args: List[str] = []
+    depth = 0
+    quote: Optional[str] = None
+    current: List[str] = []
+    for ch in s:
+        if quote:
+            current.append(ch)
+            if ch == quote:
+                quote = None
+            continue
+        if ch in ("'", '"', "`"):
+            quote = ch
+            current.append(ch)
+            continue
+        if ch in "([{":
+            depth += 1
+            current.append(ch)
+            continue
+        if ch in ")]}":
+            depth -= 1
+            current.append(ch)
+            continue
+        if ch == "," and depth == 0:
+            args.append("".join(current))
+            current = []
+            continue
+        current.append(ch)
+    if current:
+        args.append("".join(current))
+    return [a.strip() for a in args]
+
+
+def _analyze_class_expr(expr: str, class_consts: dict) -> Tuple[set, Optional[str]]:
+    """Wertet einen einzelnen JS-Klassenausdruck aus. Reiner Bezeichner -> aufgeloeste Konstante.
+    Reines String-Literal -> Tokens direkt. Alles mit Template-Literal oder '+', dessen statische
+    Literal-Fragmente echte (nicht-fw-) Tokens enthalten, gilt als dynamisch konstruiert
+    (Literalregel TAILWIND-APP-BAUKASTEN_KONZEPT_V0-1.md §2.2) -- Rueckgabe (Tokens, Befundtext)."""
+    expr = expr.strip()
+
+    if re.fullmatch(r"[A-Za-z_$][\w$]*", expr):
+        return set(class_consts.get(expr, [])), None
+
+    lit_m = re.fullmatch(r"'([^']*)'|\"([^\"]*)\"", expr)
+    if lit_m:
+        return set(_tokenize_filtered(lit_m.group(1) or lit_m.group(2) or "")), None
+
+    if "`" in expr:
+        return set(), "Template-Literal"
+
+    if "+" in expr:
+        tokens: set = set()
+        for lm in STRING_LITERAL_RE.finditer(expr):
+            tokens.update(_tokenize_filtered(lm.group(1) or lm.group(2) or ""))
+        return tokens, ("Verkettung" if tokens else None)
+
+    return set(), None
+
+
+def extract_runtime_tailwind_usage(js_text: str, class_consts: dict) -> Tuple[set, List[str]]:
+    """Sammelt die zur Laufzeit tatsaechlich gesetzten Tailwind-Utility-Tokens aus
+    .className=-Zuweisungen und classList.add/remove/toggle(...)-Aufrufen; meldet dynamische
+    Klassenkomposition mit echten (nicht-fw-) Tailwind-Fragmenten als Befund."""
+    used: set = set()
+    findings: List[str] = []
+
+    for m in CLASSNAME_ASSIGN_RE.finditer(js_text):
+        tokens, reason = _analyze_class_expr(m.group(1), class_consts)
+        used.update(tokens)
+        if reason:
+            findings.append(
+                f"app.js: dynamisch konstruierter Klassenname ({reason}) in "
+                f"'.className = {m.group(1).strip()};' -- Literalregel "
+                f"TAILWIND-APP-BAUKASTEN_KONZEPT_V0-1.md §2.2."
+            )
+
+    for m in CLASSLIST_CALL_RE.finditer(js_text):
+        first_args = _split_top_level_args(m.group(1))[:1]
+        if not first_args:
+            continue
+        tokens, reason = _analyze_class_expr(first_args[0], class_consts)
+        used.update(tokens)
+        if reason:
+            findings.append(
+                f"app.js: dynamisch konstruierter Klassenname ({reason}) in "
+                f"'classList(...{first_args[0].strip()}...)' -- Literalregel "
+                f"TAILWIND-APP-BAUKASTEN_KONZEPT_V0-1.md §2.2."
+            )
+
+    return used, findings
+
+
+def validate_manifest(path: Path, dom: Node, is_app_page: bool) -> List[str]:
+    """AP-tailwind-02d: Play-CDN-Manifest (Apps/{slug}/app.test.html) und die zur Laufzeit von
+    Apps/{slug}/app.js gesetzten Tailwind-Utilities muessen mengenidentisch sein."""
+    if not is_app_page:
+        return []
+
+    findings: List[str] = []
+
+    manifest_nodes = [
+        n for n in iter_descendants(dom)
+        if n.tag == "style" and get_attr(n, "type") == "text/tailwindcss"
+    ]
+    if len(manifest_nodes) != 1:
+        findings.append(
+            "Erwartet genau einen Play-CDN-Manifestblock "
+            f'(<style type="text/tailwindcss">), gefunden: {len(manifest_nodes)}.'
+        )
+        return findings
+
+    manifest_text = "".join(c for c in manifest_nodes[0].children if isinstance(c, str))
+    source_matches = [g[1] for g in SOURCE_INLINE_RE.findall(manifest_text)]
+    if len(source_matches) != 1:
+        findings.append(
+            "Manifestblock: erwartet genau eine @source inline(...)-Direktive, "
+            f"gefunden: {len(source_matches)}."
+        )
+        return findings
+
+    manifest_tokens = set(source_matches[0].split())
+
+    app_js_path = path.parent / "app.js"
+    if not app_js_path.is_file():
+        findings.append(f"Play-CDN-Manifest geprueft, aber {app_js_path.name} fehlt.")
+        return findings
+
+    js_text = app_js_path.read_text(encoding="utf-8")
+    class_consts = extract_tailwind_class_consts(js_text)
+    used_tokens, dynamic_findings = extract_runtime_tailwind_usage(js_text, class_consts)
+    findings.extend(dynamic_findings)
+
+    missing = sorted(used_tokens - manifest_tokens)
+    extra = sorted(manifest_tokens - used_tokens)
+    if missing:
+        findings.append(
+            "Manifest unvollstaendig -- in app.js dynamisch gesetzt, im Manifest fehlend: "
+            + ", ".join(missing) + "."
+        )
+    if extra:
+        findings.append(
+            "Manifest enthaelt ungenutzte Utilities (nicht in app.js dynamisch gesetzt): "
+            + ", ".join(extra) + "."
+        )
+
+    return findings
+
+
+# ---------------------------------------------------------------------------
+# Play-CDN-Theme-Bridge (AP-tailwind-02e, TAILWIND-APP-BAUKASTEN_KONZEPT_V0-1.md §2.1,
+# TEST_PAGE_STANDARD.md §10)
+#
+# @source inline(...) (AP-tailwind-02d) safelistet nur die zur Laufzeit gesetzten App-Klassen,
+# registriert aber die CI-Tokens selbst nicht als Tailwind-Utilities (bg-error-bg etc. blieben
+# wirkungslos). Jede Apps/{slug}/app.test.html braucht deshalb zusaetzlich eine wertfreie
+# @theme inline-Bridge, bytegleich mit der kanonischen Textquelle im Template. Kein zweiter
+# hartkodierter Tokenkatalog hier -- das Template selbst ist die einzige Wahrheit
+# ("Der Templatevergleich ist die Todeszone fuer Weglassen oder Abwandeln der Bridge").
+# ---------------------------------------------------------------------------
+
+TEMPLATE_PATH = Path("docs") / "testing" / "templates" / "app.test.template.html"
+
+
+def extract_balanced_block(text: str, marker: str) -> Optional[str]:
+    """Liefert die Teilzeichenkette von `marker` bis zur passenden schliessenden geschweiften
+    Klammer (inklusive), Klammertiefe gezaehlt. None, wenn `marker` oder keine passende
+    schliessende Klammer gefunden wird."""
+    idx = text.find(marker)
+    if idx == -1:
+        return None
+    brace_idx = text.find("{", idx)
+    if brace_idx == -1:
+        return None
+    depth = 0
+    for i in range(brace_idx, len(text)):
+        if text[i] == "{":
+            depth += 1
+        elif text[i] == "}":
+            depth -= 1
+            if depth == 0:
+                return text[idx:i + 1]
+    return None
+
+
+def _manifest_style_text(dom: Node) -> Tuple[Optional[str], int]:
+    """Findet den <style type="text/tailwindcss">-Block (wie validate_manifest()) und liefert
+    dessen Rohtext plus Trefferzahl -- unabhaengige, kleine Dopplung bewusst in Kauf genommen,
+    damit validate_manifest() (AP-tailwind-02d) unveraendert bleibt."""
+    nodes = [
+        n for n in iter_descendants(dom)
+        if n.tag == "style" and get_attr(n, "type") == "text/tailwindcss"
+    ]
+    if len(nodes) != 1:
+        return None, len(nodes)
+    return "".join(c for c in nodes[0].children if isinstance(c, str)), 1
+
+
+def load_canonical_theme_bridge(root: Path) -> Union[str, List[str]]:
+    """Laedt die kanonische @theme inline-Bridge aus dem Template. Rueckgabe: der Bridge-Text
+    bei Erfolg, sonst eine Liste mit einem Fehlertext (fuer den Aufrufer als Finding)."""
+    tpl_path = root / TEMPLATE_PATH
+    if not tpl_path.is_file():
+        return [f"Kanonisches Template fehlt: {TEMPLATE_PATH.as_posix()}."]
+    try:
+        raw = tpl_path.read_text(encoding="utf-8")
+        dom = parse_html(raw)
+    except Exception as e:
+        return [f"Kanonisches Template konnte nicht gelesen werden: {e}."]
+    style_text, count = _manifest_style_text(dom)
+    if count != 1 or style_text is None:
+        return [
+            f"Kanonisches Template ({TEMPLATE_PATH.as_posix()}): erwartet genau einen "
+            f'<style type="text/tailwindcss">-Block, gefunden: {count}.'
+        ]
+    bridge = extract_balanced_block(style_text, "@theme inline")
+    if bridge is None:
+        return [f"Kanonisches Template ({TEMPLATE_PATH.as_posix()}): @theme inline-Bridge fehlt."]
+    return bridge
+
+
+def validate_theme_bridge(root: Path, dom: Node, is_app_page: bool) -> List[str]:
+    """AP-tailwind-02e: jede App-Testseite traegt dieselbe @theme inline-Bridge bytegleich
+    zur kanonischen Textquelle (Template), vor ihrem @source inline(...)-Manifest."""
+    if not is_app_page:
+        return []
+
+    canonical = load_canonical_theme_bridge(root)
+    if isinstance(canonical, list):
+        return canonical
+
+    findings: List[str] = []
+
+    style_text, count = _manifest_style_text(dom)
+    if count != 1 or style_text is None:
+        # bereits von validate_manifest() gemeldet (AP-tailwind-02d) -- hier nicht doppelt melden
+        return findings
+
+    bridge = extract_balanced_block(style_text, "@theme inline")
+    if bridge is None:
+        findings.append(
+            'Play-CDN-Theme-Bridge fehlt (@theme inline im <style type="text/tailwindcss">-Block, '
+            "TEST_PAGE_STANDARD.md §10)."
+        )
+        return findings
+
+    if bridge != canonical:
+        findings.append(
+            "Play-CDN-Theme-Bridge weicht von der kanonischen Textquelle "
+            f"({TEMPLATE_PATH.as_posix()}) ab -- muss bytegleich sein."
+        )
+
+    source_idx = style_text.find("@source inline")
+    bridge_idx = style_text.find(bridge)
+    if source_idx != -1 and bridge_idx != -1 and bridge_idx > source_idx:
+        findings.append("Play-CDN-Theme-Bridge muss vor dem @source inline(...)-Manifest stehen.")
+
+    return findings
+
+
 def validate_references(
     root: Path, path: Path, dom: Node, exempt: frozenset = frozenset(),
     is_app_page: bool = False,
@@ -601,6 +918,12 @@ def validate_test_page(root: Path, path: Path, is_engine: bool = False, is_app: 
     # §10 TEST_PAGE_STANDARD.md, AP-tailwind-02a -- kanonischer Tailwind-Play-CDN-Tag
     # (nur auf Apps/{slug}/app.test.html Pflicht und geprueft)
     findings.extend(validate_tailwind_cdn(dom, is_app))
+
+    # AP-tailwind-02d -- Play-CDN-Manifest (nur auf Apps/{slug}/app.test.html Pflicht und geprueft)
+    findings.extend(validate_manifest(path, dom, is_app))
+
+    # AP-tailwind-02e -- Play-CDN-Theme-Bridge (nur auf Apps/{slug}/app.test.html Pflicht und geprueft)
+    findings.extend(validate_theme_bridge(root, dom, is_app))
 
     # §23/§24 -- Referenzen + externe Script-/Stylesheet-Abhaengigkeiten
     findings.extend(validate_references(root, path, dom, exempt, is_app_page=is_app))

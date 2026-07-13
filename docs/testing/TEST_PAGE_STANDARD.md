@@ -1,6 +1,6 @@
 # Finanzwesir Test Page Standard
 
-Stand: 2026-07-13 | Standard-Version: 5 (AP-tailwind-02b: §10 exakte URL ohne Query/Fragment, type="module" case-insensitiv) | Geändert von: Claude (Sonnet)
+Stand: 2026-07-13 | Standard-Version: 6 (AP-tailwind-02e: §10 Play-CDN-Theme-Bridge) | Geändert von: Claude (Sonnet)
 
 > Normativer Standard. Kein Projekttagebuch. Die Wörter **MUSS**, **DARF**, **DARF NICHT**
 > und **SOLL** sind im Sinne von RFC 2119 zu lesen. **SOLL** wird nur bei bewusst begründeter
@@ -323,6 +323,17 @@ Wichtig:
   Stylesheet-`<link href>` ist von dieser Ausnahme erfasst — jede andere absolute URL (auch andere
   `cdn.jsdelivr.net`-Pfade oder ältere/alternative Tailwind-CDN-Domains wie `cdn.tailwindcss.com`
   oder `unpkg.com`) bleibt Strukturfehler. Die Ausnahme entfällt vollständig mit dem
+  Produktionsbuild (T1).
+- **Play-CDN-Theme-Bridge (AP-tailwind-02e, 2026-07-13):** Jede `Apps/{slug}/app.test.html` trägt
+  genau **einen** `<style type="text/tailwindcss">`-Block. Darin steht zuerst eine wertfreie
+  `@theme inline { --token: var(--token); ... }`-Bridge — nur Werte aus
+  `Theme/assets/css/tokens.css` (alle dort definierten `--color-*` außer den drei
+  Bridge-only-Tokens `--color-grid`, `--color-zero-line`, `--color-loader-bg`, zusätzlich
+  `--font-display`, `--font-body`, `--shadow-soft`, `--shadow-hover`) — danach, im selben Block,
+  das `@source inline(...)`-Manifest aus der vorherigen Regel. Kanonische Textquelle der Bridge ist
+  `docs/testing/templates/app.test.template.html`; jede App-Testseite trägt denselben Bridge-Block
+  bytegleich. Ohne diese Bridge registriert Tailwind die CI-Tokens nicht als Utilities — safelistete
+  Klassen wie `bg-error-bg` blieben sonst wirkungslos. Entfällt vollständig mit dem
   Produktionsbuild (T1).
 - Absolute Daten-URLs in produktiven Card-Attributen wie `data-fw-data`, `data-fw-config` oder
   `data-csv` werden durch diese Regel **nicht** pauschal verboten; für sie gelten die

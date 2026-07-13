@@ -1,17 +1,17 @@
 <!-- HOOK-META
 Version: 1
 Stand: 2026-07-13
-Fokus-AP: AP-tailwind-02a/02b ✅ — Play-CDN-Vertrag (Tailwind v4) repo-weit synchronisiert und gehärtet, kein Commit (2026-07-13)
-Nächster-Schritt: AP-tailwind-02 Slice 1 — Shell/States (AP-tailwind-02b ✅ 2026-07-13)
+Fokus-AP: AP-tailwind-02 Slice 1+2 ✅ — Shell/States + KPI auf Tailwind-Baukasten migriert (02c/02d/02e inkl.), Browser-Abnahme bestätigt, kein Commit (2026-07-13)
+Nächster-Schritt: AP-tailwind-02 Slice 3 — weitere Baukasten-Primitiven, Detail-Prompt offen (AP-tailwind-02 Slice 2 ✅ 2026-07-13)
 Blocker: keine
 Letzter-Distill: 2026-07-13
 Kassensturz-Datum: 2026-07-13
 -->
-<!-- HOOK-META-SESSION: AP-tailwind-02a/02b -->
+<!-- HOOK-META-SESSION: AP-tailwind-02 Slice 1+2 -->
 
 # PROJECT STATUS — Finanzwesir 2.0
 
-Stand: 2026-07-13 | Session: AP-tailwind-02a/02b | Geändert von: Claude
+Stand: 2026-07-13 | Session: AP-tailwind-02 Slice 1+2 | Geändert von: Claude
 
 **Zweck:** Schneller Wiedereinstieg nach Pausen.
 **Zielgruppe:** Albert und Claude.
@@ -24,14 +24,14 @@ Stand: 2026-07-13 | Session: AP-tailwind-02a/02b | Geändert von: Claude
 
 ## 1. Aktueller Fokus
 
-**Nächster Schritt:** AP-tailwind-02 Slice 1 — Shell/States (erster echter Migrations-Slice der Pilotmigration `prokrastinations-preis`). Details: HOOK-META oben + docs/steering/BACKLOG.md.
+**Nächster Schritt:** AP-tailwind-02 Slice 3 — weitere Baukasten-Primitiven der Pilotmigration `prokrastinations-preis` (Screen-Flow/Buttons/Stationen o. ä., Detail-Prompt offen). Details: HOOK-META oben + docs/steering/BACKLOG.md.
 
 Letzte Meilensteine (je eine Zeile — Volltext in BACKLOG-ARCHIV.md):
+- **AP-tailwind-02 Slice 1+2** (2026-07-13) ✅ Shell/States + KPI auf Tailwind-Baukasten migriert (02c Taxonomie, 02d Runtime-Manifest, 02e Theme-Bridge); Browser-Abnahme inkl. Reduced Motion vollständig bestätigt
 - **AP-tailwind-02a/02b** (2026-07-13) ✅ Play-CDN-Vertrag (Tailwind v4) repo-weit synchronisiert + gehärtet; Checker bytegenau, Boards/Decision-Log/Backlog konsistent
 - **Ritual-Housekeeping** (2026-07-13) ✅ Montag-Check auf einen Vorab-Block konsolidiert (3 Kopien entfernt), Kassensturz KW29, Distill 11 (8 promoted, 1 retired)
 - **RITUAL-OPT-2** (2026-07-12) ✅ Ritual + Start vollständig read-frei: NAVIGATION/BACKLOG-Flip/Remove, Hook übernimmt BACKLOG-Extraktion, BACKLOG-ARCHIV datumsbasiert rotiert (219→12 Zeilen), DECISION-LOG-Tool
 - **RITUAL-OPT-1** (2026-07-12) ✅ Abschluss-Ritual tokensparend umgebaut: HOOK-META-Riegel, PROJECT-STATUS -82 %, read-freie Log-Appends, Log-Rotation
-- **AP-tailwind-01** (2026-07-12) ✅ Tailwind-App-Baukasten V0.1 als verbindlicher Design-Vertrag freigegeben (committed ca21de2)
 
 ---
 

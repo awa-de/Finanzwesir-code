@@ -5,15 +5,14 @@
    Rubikon-Nachmessung dadurch fällig → DS-FOLLOWUP-07). Weiterhin NICHT migriert: --fw-space-* und alle
    Mechanik-Tokens (--fw-* = ausschließlich App-Mechanik, Kontrakt §2/§4). */
 
-/* === Basis === */
+/* CHANGED — AP-tailwind-02_slice-1: Shell/States auf Tailwind-Baukasten migriert
+   (TAILWIND-APP-BAUKASTEN_KONZEPT_V0-1.md §6.1/§6.10). Visuelles Styling für die
+   .fw-app-Basis und alle vier data-fw-state-Blöcke entfernt — Klassen kommen jetzt aus
+   app.js (FW_SHELL_CLASS, State-Klassenkonstanten). Nur die App-Mechanik-Properties
+   bleiben hier, weil sie kein Baukasten-Primitive sind (§1, Ebene "Lokale App-Mechanik"). */
+
+/* === Mechanik (App-lokal, kein Baukasten-Primitive) === */
 .fw-app {
-  position: relative;
-  box-sizing: border-box;
-  width: 100%;
-  min-height: 200px;
-  font-family: var(--font-body, sans-serif); /* CHANGED — AP-prokrast-17-FONT-CODE-B: Namens-Mismatch behoben, HTML-UI-Font über tokens.css (Source Sans Pro), analog Canvas-Pfad KDR 14 */
-  color: var(--color-text, #272727);
-  background: var(--color-bg, #ffffff);
   /* NEW — AP-prokrast-08b (Nachtrag): zentraler Schalter für die Card-to-Point-Fluggeschwindigkeit.
      Einzige Stelle zum Nachjustieren — app.js liest denselben Wert für das Timing der
      Klon-Entfernung/des Stationswechsels, damit CSS-Transition und JS-Timing nie auseinanderlaufen.
@@ -24,60 +23,6 @@
      analog --fw-card-to-point-flight-duration. Auf Alberts Wunsch von 400ms auf 800ms
      verlangsamt (Nachtrag, kein Gate). */
   --fw-screen3-reveal-fade-duration: 800ms;
-}
-
-/* === Loading === */
-.fw-app[data-fw-state="loading"] {
-  opacity: 0.6;
-}
-
-/* === Error === */
-.fw-app[data-fw-state="error"] {
-  border: 1px solid var(--color-error-border, #c62828);
-  background: var(--color-error-bg, #fff8f8);
-  padding: var(--fw-space-md, 1rem);
-  color: var(--color-error-text, #b71c1c);
-}
-
-/* === Empty === */
-.fw-app[data-fw-state="empty"] {
-  padding: var(--fw-space-md, 1rem);
-  color: var(--color-text-muted, #666666);
-}
-
-/* === Content === */
-.fw-app[data-fw-state="content"] {
-  opacity: 1;
-  padding: var(--fw-space-md, 1rem);
-}
-
-/* === Slice 2: KpiCards (APP_SPEC §12.4) === */
-.fw-app__kpi-cards {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--fw-space-md, 1rem);
-  margin: var(--fw-space-md, 1rem) 0 0;
-  padding: 0;
-}
-
-.fw-app__kpi-card {
-  flex: 1 1 140px;
-  background: var(--color-surface, #fafafa);
-  border-radius: 4px;
-  padding: var(--fw-space-sm, 0.5rem) var(--fw-space-md, 1rem);
-}
-
-.fw-app__kpi-card dt {
-  font-size: 0.8em;
-  color: var(--color-text-muted, #666666);
-  margin-bottom: 0.25em;
-}
-
-.fw-app__kpi-card dd {
-  font-size: 1.4em;
-  font-weight: bold;
-  color: var(--color-text, #272727);
-  margin: 0;
 }
 
 /* === Slice 3: Slider (APP_SPEC §12.3, Q-06) === */
