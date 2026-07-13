@@ -34,4 +34,10 @@ Nach der ersten BACKLOG-ARCHIV-Rotation brauchte `tools/kassensturz-archiv-query
 ## Regel für read-freies Anhängen
 Das Format darf keine schließende Klammer haben: Markdown-Zeilen und JSONL ja, JSON-Arrays und YAML-Listen nein. `ATTEMPT-LOG.json` bleibt bewusst JSON (per-AP-Zustandsspeicher, kein Log — kein Append-Fall). Batching ist unnötig, wenn der Einzel-Append read-frei ist.
 
-Verwandt: [[project_session_start_infra]], [[project_learning_system]]. „Append-only read-frei + Snapshot klein" als CLAUDE.md-Prinzip = weiterhin offener Kandidat (Regelaufnahme-Schutz-Gate) — RITUAL-OPT-1+2 sind zwei bestätigende Datenpunkte, aber noch keine formale Aufnahme.
+## Präferenz: aggressive Rotation statt sanfter
+
+Bei der BACKLOG-ARCHIV-Rotation wählte Albert auf Rückfrage die aggressive größenbasierte Variante (145→27 KB) statt der sanften zeilenbasierten (RITUAL-OPT-2, 2026-07-12) — Begründung: Modell-Kontext-Lesekosten sind bei read-freien Tools (Punkt 1/7 oben) ohnehin irrelevant, Dateigröße ist reine Hygiene, kein Kostenfaktor mehr.
+
+**How to apply:** Bei künftigen Rotations-/Größenentscheidungen für Append-only-Logs: die aggressivere Variante bevorzugen, sobald die Datei ohnehin read-frei behandelt wird — Kontext-Sparsamkeit ist dann kein Gegenargument mehr für eine sanftere, aber unübersichtlichere Rotation.
+
+Verwandt: [[project_session_start_infra]], [[project_learning_system]]. „Append-only read-frei + Snapshot klein" als CLAUDE.md-Prinzip: Distill 11 (2026-07-13) hat den Kandidaten geprüft und **abgelehnt** — Regelaufnahme-Schutz-Bedingung 4 (universell genug) nicht erfüllt, gilt nur für eine schmale Dateiklasse, Durchsetzung liegt bereits mechanisch in den Tools oben, Wortlaut lebt bereits in `abschluss-ritual/SKILL.md` §0.6/§3.6a/§3.7. Kein CLAUDE.md-Eintrag, keine zusätzliche Memory nötig — dieser Abschnitt bleibt die maßgebliche Dokumentation.

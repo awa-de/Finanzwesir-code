@@ -1,5 +1,5 @@
 # Patterns — Finanzwesir 2.0
-Stand: 2026-07-06 | Distill 10 | Muster mit ≥2 Belegen (Normal) oder ≥1 Beleg (High-Impact) werden Kandidaten. Nur Alberts OK → Promotion.
+Stand: 2026-07-13 | Distill 11 | Muster mit ≥2 Belegen (Normal) oder ≥1 Beleg (High-Impact) werden Kandidaten. Nur Alberts OK → Promotion.
 
 ---
 
@@ -36,6 +36,14 @@ Stand: 2026-07-06 | Distill 10 | Muster mit ≥2 Belegen (Normal) oder ≥1 Bele
 - feedback_verifikation_vor_output.md → zusammengeführt in feedback_gruendlichkeit_vor_tempo.md, 2026-07-06 (Distill 10) — Historie (1 Reoccurrence) im neuen Dokument erhalten
 - feedback_gruendlichkeit_vor_tempo.md → promoted 2026-07-06 (Distill 10: Zusammenlegung der beiden obigen Dateien nach 3. wiederkehrendem Versagen derselben Ursache — Commit-Status ×2 identisch am 2026-07-04 und 2026-07-06 trotz dokumentierter erster Korrektur, plus python3/python und Memory-vs-session-log als weitere Ausprägungen. Zusätzlich mechanischer Schutz für den Commit-Status-Fall in `.claude/skills/kassensturz/SKILL.md` + `.claude/skills/abschluss-ritual/SKILL.md` — dort wird git log jetzt zwingend vor jeder Commit-Status-Aussage geprüft, statt sich auf Erinnerung zu verlassen)
 - feedback_test_html_dauerhaft.md → promoted 2026-07-06 (Distill 10: PREF AP-prokrast-03d — app.test.html bleibt dauerhaftes Testszenario)
+- feedback_scope_auftragstreue.md → promoted 2026-07-13 (Distill 11: Kandidat 1 — 2 Belege High-Impact, AP-prokrast-12c + Regression-Reparatur KETTENMODUS)
+- project_memory_portability.md → ergänzt 2026-07-13 (Distill 11: Kandidat 2 — Risiko paralleler Schreibwerkzeuge auf NAS-Repo, 2 Belege High-Impact, AP-tailwind-Fable-Runde + RITUAL-OPT-1)
+- feedback_qa_ketten_status_aufhebung.md → promoted 2026-07-13 (Distill 11: PREF AP-prokrast-07d)
+- feedback_explizite_anweisung_ersetzt_gate.md → promoted 2026-07-13 (Distill 11: PREF AP-prokrast-08c)
+- feedback_arbeitsweise.md → ergänzt 2026-07-13 (Distill 11: PREF AP-prokrast-16c — exakte Verhaltensbeschreibung statt generischer Labels)
+- feedback_tools_generisch_dauerhaft.md → promoted 2026-07-13 (Distill 11: PREF AP-prokrast-17)
+- feedback_praezise_statt_absolut.md → promoted 2026-07-13 (Distill 11: PREF AP-prokrast-19)
+- project_ritual_token_optimization.md → ergänzt 2026-07-13 (Distill 11: PREF RITUAL-OPT-2 — aggressive Rotation bevorzugt; zusätzlich QUESTION „Append-only/Snapshot als CLAUDE.md-Prinzip" final als retired dokumentiert)
 
 ---
 
@@ -78,6 +86,16 @@ Stand: 2026-07-06 | Distill 10 | Muster mit ≥2 Belegen (Normal) oder ≥1 Bele
 - [Z] Peer-Review-Beleg „Smart Update ist bereits in Screen 2 erprobt" war irreführend — der betroffene Achsen-Animationspfad wurde vor der Behauptung nie tatsächlich durchlaufen. Vor Wiederverwendung eines Belegs aus Vor-AP: prüfen, ob der konkrete Codepfad wirklich identisch durchlaufen wurde. (AP-prokrast-03f, 2026-07-02) — 1 Beleg, Normal
 - [AA] Auftrag benannte einen Vorgang fälschlich als „Regression" (verlorene, bereits entschiedene Wahrheit) statt als „Korrektur nach bindender Nutzerentscheidung" — vor dem Schreiben geklärt, Historie ehrlich dokumentiert statt der falschen Rahmung gefolgt. (AP-prokrast-06b, 2026-07-04) — 1 Beleg, Normal
 - [AB] Beat-2-Symbolik (✅/❓) laut Datei-Historie durchgängig offen; eigene Empfehlung „streichen" von Albert außerhalb der Datei-Historie überstimmt. (AP-prokrast-06a, 2026-07-04) — resolved: Symbole bleiben als reiner Canvas-Marker ohne DOM/A11y-Anspruch, in APP_SPEC/Drehbuch/QA_TEST_CASES verankert (AP-06b)
+- [AC] M/L teilten sich zunächst eine CSS-Basisregel, brauchten aber unterschiedliche Werte — erst durch Messung bemerkt (AP-prokrast-07a/07c, 2026-07-06) — 1 Beleg, Normal
+- [AD] Sequenzreparatur erzeugte eigene Zwischenregression (No-op-Bootstrap-Fix ließ den Flug ganz ausbleiben), Root Cause war Chart.js-Plugin-Lese-Verhalten (AP-prokrast-08b2, 2026-07-06) — 1 Beleg, Normal
+- [AE] Erster Lösungszuschnitt fühlte sich wie Screen-Neustart an, komplette Umsteuerung während der Session nötig (AP-prokrast-10b, 2026-07-07) — 1 Beleg, Normal
+- [AF] Python-Replace-Assertion schlug am eigenen Doku-Header-Prosastring an, vor Write korrigiert (AP-prokrast-17, 2026-07-09) — 1 Beleg, Normal
+- [AG] Modell-Identifikationsgate widersprüchliches Signal (`/model opus` lief, Systemprompt behauptete weiterhin „Sonnet 5"), über externen Harness-Beleg statt Introspektion aufgelöst (AP-18-Start, 2026-07-10) — 1 Beleg, Normal
+- [AH] BACKLOG-ARCHIV enthielt bereits eine uncommittete Zeile, die in diesem Faden nie geschrieben wurde — als bereits erledigte Vorarbeit übernommen statt dupliziert (AP-19, 2026-07-10) — 1 Beleg, Normal
+- [AI] CANVAS-Write-AP (6 Engine-Dateien) wurde im Vorfaden nie ins session-log/PROJECT-STATUS/Archiv geschlossen, Lücke nachträglich geschlossen (AP-prokrast-17-FONT-CODE-A-REVIEW, 2026-07-10) — 1 Beleg, Normal
+- [AJ] Diff-Plan hatte Kopf-aktualisiert-Body-alt-Drift (Vorsätze noch im Futur-Ton neben bereits gehobenem Statussatz), vor Write korrigiert (AP-prokrast-17-FONT-SPEC-HEBUNG, 2026-07-11) — 1 Beleg, Normal
+- [AK] Vollständige Rohausgabe in Ergebnisdatei geschrieben, Albert wollte nur einen Einzeiler — Verifikations-Gründlichkeit überschoss das tatsächliche Doku-Bedürfnis (TESTENV-1g, 2026-07-11) — 1 Beleg, Normal
+- [AL] Zwei fachliche Korrekturen durch Albert an Platzhaltern (Donut statt Torte, echte Chart-Chrome-Elemente aus FwRenderer übernehmen) (AP-tailwind-Fable-Runde, 2026-07-12) — 1 Beleg, Normal
 
 ---
 
@@ -86,3 +104,4 @@ Stand: 2026-07-06 | Distill 10 | Muster mit ≥2 Belegen (Normal) oder ≥1 Bele
 - KI-Tool-Präferenz (Perplexity > ChatGPT > Gemini) — retired 2026-05-09 | Grund: Einzelpräferenz, kein universelles Verhaltensmuster
 - Klassifizierungsbaum bleibt in CLAUDE.md — retired 2026-05-09 | Grund: bereits in CLAUDE.md verankert, kein separates Memory nötig
 - Geschützte Seed-Datei trotz Read-only verändert (AP-23, 2026-07-01) — retired 2026-07-06 | Grund: einmaliges Missverständnis über den Sonderfall-Workflow, sofort korrigiert (AP-23a), kein wiederkehrendes Muster
+- „Append-only read-frei + Snapshot klein" als CLAUDE.md-Prinzip? (QUESTION RITUAL-OPT-1, 2026-07-12) — retired 2026-07-13 | Grund: Regelaufnahme-Schutz-Bedingung 4 (universell genug) nicht erfüllt — gilt nur für Append-only-/Snapshot-Steuerungsdateien, nicht für jede Codeänderung; Durchsetzung liegt bereits mechanisch in append-log-line.py/rotate-log.py/check-project-status-hook-meta.py; Wortlaut bereits in abschluss-ritual/SKILL.md §0.6/§3.6a/§3.7 — keine CLAUDE.md-Reife

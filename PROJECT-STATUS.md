@@ -4,8 +4,8 @@ Stand: 2026-07-12
 Fokus-AP: RITUAL-OPT-2 ✅ — Ritual/Start vollständig read-frei: NAVIGATION/BACKLOG-Flip, Hook übernimmt BACKLOG-Extraktion, Archiv rotiert (2026-07-12)
 Nächster-Schritt: offen — AP-tailwind-02 (Pilotmigration) ist der stehende Kandidat; Albert wählt (RITUAL-OPT-2 ✅ 2026-07-12)
 Blocker: keine
-Letzter-Distill: 2026-07-06
-Kassensturz-Datum: 2026-07-06
+Letzter-Distill: 2026-07-13
+Kassensturz-Datum: 2026-07-13
 -->
 <!-- HOOK-META-SESSION: RITUAL-OPT-2 -->
 
@@ -27,11 +27,11 @@ Stand: 2026-07-12 | Session: RITUAL-OPT-2 | Geändert von: Claude
 **Nächster Schritt:** offen — AP-tailwind-02 (Pilotmigration) ist der stehende Kandidat; Albert wählt. Details: HOOK-META oben + docs/steering/BACKLOG.md.
 
 Letzte Meilensteine (je eine Zeile — Volltext in BACKLOG-ARCHIV.md):
+- **Ritual-Housekeeping** (2026-07-13) ✅ Montag-Check auf einen Vorab-Block konsolidiert (3 Kopien entfernt), Kassensturz KW29, Distill 11 (8 promoted, 1 retired)
 - **RITUAL-OPT-2** (2026-07-12) ✅ Ritual + Start vollständig read-frei: NAVIGATION/BACKLOG-Flip/Remove, Hook übernimmt BACKLOG-Extraktion, BACKLOG-ARCHIV datumsbasiert rotiert (219→12 Zeilen), DECISION-LOG-Tool
 - **RITUAL-OPT-1** (2026-07-12) ✅ Abschluss-Ritual tokensparend umgebaut: HOOK-META-Riegel, PROJECT-STATUS -82 %, read-freie Log-Appends, Log-Rotation
 - **AP-tailwind-01** (2026-07-12) ✅ Tailwind-App-Baukasten V0.1 als verbindlicher Design-Vertrag freigegeben (committed ca21de2)
 - **AP-apptest-01/02** (2026-07-11) ✅ Testseiten-Handoff-Lücke geschlossen, unabhängig geprüft
-- **TESTENV-1** (2026-07-11) ✅ Konsolidierte Testumgebungs-Initiative vollständig abgeschlossen
 
 ---
 

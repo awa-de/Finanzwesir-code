@@ -2,6 +2,27 @@
 <!-- Token-Strategie: Hook liefert Fakten | Schritt 1 → Haiku-Dispatch | Synthese → Hauptinstanz -->
 <!-- CLAUDE_CODE_SUBAGENT_MODEL=haiku ist in settings.json gesetzt — gilt für alle Dispatches -->
 
+## Vorab — Montag-Kassensturz/Distill-Check (vor allen Ästen)
+
+Gilt unabhängig vom nachfolgenden Ast (Warm-Start/Kettenmodus/Vollmodus) — hängt nur von Hook-Output ab, nicht vom gewählten Pfad.
+
+**Kassensturz:** Wenn Hook-Output `Wochentag: Monday`:
+Vergleiche Hook-Output `Kassensturz-Datum` (Format YYYY-MM-DD) mit heutigem Datum:
+- Kassensturz-Datum ≠ heute ODER „nie":
+  `/kassensturz wird jetzt ausgeführt (Wochentag: Montag)` → Kassensturz-Output direkt ausgeben
+  Danach: Edit-Tool auf `PROJECT-STATUS.md` — Feld `Kassensturz-Datum:` auf heutiges Datum (YYYY-MM-DD) setzen
+- Kassensturz-Datum == heute:
+  `Kassensturz bereits heute ausgeführt (${Kassensturz-Datum}) — übersprungen.`
+
+**Distill-Empfehlung (optional):** Aus Hook-Output-Feldern prüfen:
+- Log-Einträge ≥ 5 → „Distill empfohlen (Daten-Schwelle) — aufrufen?"
+- Letzter Distill > 14 Tage → „Distill überfällig (Zeit-Schwelle) — aufrufen?"
+- Pattern-Kandidaten > 0 → „[N] Muster warten — aufrufen?"
+
+Wenn nicht Montag: Abschnitt entfällt, direkt weiter mit Warm-Start-Check.
+
+---
+
 ## Vorab — Warm-Start-Check (vor allem anderen)
 
 Lies die letzten 20 Zeilen von `.claude/learning/session-log.md`.
@@ -12,7 +33,7 @@ Enthält die Datei einen Eintrag `## YYYY-MM-DD – SESSION START` mit dem **heu
 - Schreibe sofort in session-log.md: `### [AP-ID aus Hook-Output] — AP-Wechsel`
 - Layer-1-Fingerabdruck bestätigen (wie Schritt 0).
 - Ausgabe: `[WARM-START] AP-Wechsel | Jetzt: [Fokus-AP] | Faden läuft seit: [Datum des SESSION-START-Eintrags]`
-- **Alle weiteren Schritte entfallen** (kein Dispatch, kein BACKLOG-Lesen, kein Kassensturz).
+- Alle weiteren Schritte entfallen (kein Dispatch, kein BACKLOG-Lesen).
 - Fertig.
 
 **NEIN → Kaltstart:** weiter mit „Vorab — Ketten-Modus-Check" unten.
@@ -31,17 +52,6 @@ Enthält es das Muster `(AP-ID ✅ YYYY-MM-DD)` und ist YYYY-MM-DD ≤ 7 Tage al
 - Schritt 1b (MEMORY), 2 (Haiku-Dispatch), 3 (Lücken-Alarm/Distill) entfallen.
 - Stil-Skill (Schritt 4) ausführen.
 - Ausgabe: `[KETTENMODUS] | Fokus: [Fokus-AP] | Letzte Station: [AP-ID ✅ DATUM] | BLOCKED: [keine oder AP-ID]`
-- **Kassensturz (Montag):** Wenn Hook-Output `Wochentag: Monday`:
-  Vergleiche Hook-Output `Kassensturz-Datum` (Format YYYY-MM-DD) mit heutigem Datum:
-  - Kassensturz-Datum ≠ heute ODER „nie":
-    `/kassensturz wird jetzt ausgeführt (Wochentag: Montag)` → Kassensturz-Output direkt ausgeben
-    Danach: Edit-Tool auf `PROJECT-STATUS.md` — Feld `Kassensturz-Datum:` auf heutiges Datum (YYYY-MM-DD) setzen
-  - Kassensturz-Datum == heute:
-    `Kassensturz bereits heute ausgeführt (${Kassensturz-Datum}) — übersprungen.`
-- **Distill-Empfehlung (optional):** Aus Hook-Output-Feldern prüfen:
-  - Log-Einträge ≥ 5 → „Distill empfohlen (Daten-Schwelle) — aufrufen?"
-  - Letzter Distill > 14 Tage → „Distill überfällig (Zeit-Schwelle) — aufrufen?"
-  - Pattern-Kandidaten > 0 → „[N] Muster warten — aufrufen?"
 - Fertig.
 
 **NEIN → Vollmodus:** weiter mit „Vorab — Hook-Status-Check" unten.
@@ -95,43 +105,19 @@ Dispatch an `spec-scout` (läuft auf Haiku per settings.json):
 Für jede AP-ID in `Archiv-seit-Log` (wenn nicht „keine"):
 `Kein session-log-Eintrag für [AP-ID]. Abschluss-Ritual vollständig ausgeführt?`
 
-**Distill-Empfehlung** (Schwellen aus Hook-Output, nur ausgeben wenn erreicht):
-- Log-Einträge ≥ 5 → „Distill empfohlen (Daten-Schwelle erreicht)"
-- Letzter Distill > 14 Tage → „Distill überfällig (Zeit-Schwelle überschritten)"
-- Pattern-Kandidaten > 0 → „[N] Muster warten auf Promotion"
+(Distill-Empfehlung: siehe Vorab — Montag-Kassensturz/Distill-Check oben.)
 
 ## Schritt 4 — Hauptinstanz: Stil (kein Dispatch — stil-relevant)
 
 Lies: `.claude/skills/00-style-sei-deutsch/SKILL.md`
 Wende Kommunikationsstil ab jetzt an.
 
-## Schritt 5 — Ausgabe & Routinen-Abschluss
+## Schritt 5 — Ausgabe
 
 `Aktive APs: [Y]` und die Zählprüfung `[N]` kommen direkt aus Hook-Output-Feld `Aktive-APs` (Anzahl + ID-Liste aus `BACKLOG.md`-Abschnitt „Aktiv") — keine eigene Zählung nötig.
-
-### Ausgabe-Block
 
 Erste Zeile:
 `SESSION-START ✓ | Fokus: [X] | Aktive APs: [Y] | Log: [Z] Einträge | BLOCKED: [keine oder AP-ID]`
 
 Direkt danach:
 `Zählprüfung: „Du hast [N] aktive APs (🟡): [IDs aus Hook-Feld Aktive-APs]. Stimmt diese Zahl?"`
-
-### Routinen: Kassensturz (nur Vollmodus)
-
-Wenn Hook-Output `Wochentag: Monday` (oder Montag):
-  Vergleiche Hook-Output `Kassensturz-Datum` (Format YYYY-MM-DD) mit heutigem Datum:
-  - Kassensturz-Datum ≠ heute ODER „nie":
-    `/kassensturz wird jetzt ausgeführt (Wochentag: Montag)` → Kassensturz-Output direkt ausgeben
-    Danach: Edit-Tool auf `PROJECT-STATUS.md` — Feld `Kassensturz-Datum:` auf heutiges Datum (YYYY-MM-DD) setzen
-  - Kassensturz-Datum == heute:
-    `Kassensturz bereits heute ausgeführt (${Kassensturz-Datum}) — übersprungen.`
-
-### Routinen: Distill-Empfehlung (nur Vollmodus)
-
-Aus Hook-Output `Letzter-Distill`, `Log-Eintraege`, `Pattern-Kandidaten` prüfen:
-- Log-Einträge ≥ 5 → „Distill empfohlen (Daten-Schwelle erreicht) — `/distill` aufrufen?"
-- Letzter Distill > 14 Tage → „Distill überfällig (Zeit-Schwelle überschritten) — `/distill` aufrufen?"
-- Pattern-Kandidaten > 0 → „[N] Muster warten auf Promotion — `/distill` aufrufen?"
-
-(Gilt nur in VOLLMODUS, nicht in KETTENMODUS — dort nur Angebot, nicht automatisch.)

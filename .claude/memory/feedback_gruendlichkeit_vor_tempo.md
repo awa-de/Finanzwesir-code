@@ -26,6 +26,9 @@ Wenn eine Aussage mechanisch prüfbar ist (Datei lesen, grep, git log, zählen),
 
 *Zustand/Status:*
 - 2026-07-04 + 2026-07-06: Commit-Status aus PROJECT-STATUS.md/HOOK-META unreflektiert übernommen — zweimal identisch, obwohl `git log` sofort das Gegenteil zeigte
+- 2026-07-09 (AP-prokrast-kdr14): HOOK-META behauptete weiterhin „AP-prokrast-15a–16c uncommitted", `git log` zeigte bereits `1357b46` als HEAD — zwischen Sessions von Albert committed, Steuerungsdatei nicht nachgezogen; vor dem Ritual per `git log --oneline -5` gefunden und korrigiert
+- 2026-07-10 (AP-prokrast-17-FONT-CODE-A-REVIEW): zwei stale Commit-Status-Behauptungen in HOOK-META gegen `git log` korrigiert (Anamnese+Spec-Parität-Kette `a266cb2`, 17b–19 `8a4163a` — beide fälschlich „uncommitted")
+- 2026-07-11 (AP-apptest-01/02): drei Stellen in PROJECT-STATUS.md behaupteten weiterhin „uncommitted" (TESTENV-1g, TESTENV-1eA, AP-prokrast-17-FONT-CODE-A/B+SPEC-HEBUNG), obwohl `git log` bereits vier eigene Commits zeigte — alle vier Stellen korrigiert. Diese Reoccurrence-Häufung selbst bestätigt: der mechanische Schutz (git-log-Check vor jeder Commit-Status-Aussage in kassensturz/SKILL.md + abschluss-ritual/SKILL.md) fängt den Fehler zuverlässig ab, bevor er nach außen dringt — die Drift entsteht weiterhin (Albert committed zwischen Sessions, Steuerungsdatei zieht nicht automatisch nach), aber der Check verhindert die Weitergabe der falschen Aussage.
 - 2026-06-30: python3 statt python verwendet (Windows-Store-Umleitung) — Umgebungskonvention war bereits geklärt (ST-19), nicht abgerufen
 
 *Bestehende Entscheidung/Konvention übersehen:*
