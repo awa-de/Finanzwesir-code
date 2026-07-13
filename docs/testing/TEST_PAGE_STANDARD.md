@@ -1,6 +1,6 @@
 # Finanzwesir Test Page Standard
 
-Stand: 2026-07-13 | Standard-Version: 6 (AP-tailwind-02e: §10 Play-CDN-Theme-Bridge) | Geändert von: Claude (Sonnet)
+Stand: 2026-07-13 | Standard-Version: 7 (AP-tailwind-02_slice-4-manifest-fix: §10 Manifest-Invariante) | Geändert von: Claude (Sonnet)
 
 > Normativer Standard. Kein Projekttagebuch. Die Wörter **MUSS**, **DARF**, **DARF NICHT**
 > und **SOLL** sind im Sinne von RFC 2119 zu lesen. **SOLL** wird nur bei bewusst begründeter
@@ -324,6 +324,15 @@ Wichtig:
   `cdn.jsdelivr.net`-Pfade oder ältere/alternative Tailwind-CDN-Domains wie `cdn.tailwindcss.com`
   oder `unpkg.com`) bleibt Strukturfehler. Die Ausnahme entfällt vollständig mit dem
   Produktionsbuild (T1).
+- **Manifest-Invariante (AP-tailwind-02_slice-4-manifest-fix, 2026-07-13):** Für die Play-CDN-
+  Testphase enthält das Manifest die Tokenmenge aller vollständigen, statisch deklarierten
+  `FW_*_CLASS`-Rezeptkonstanten der App. Es verfolgt keinen JavaScript-Laufzeitdatenfluss — der
+  Checker prüft nicht, ob/wie eine Konstante tatsächlich einer `.className`-Zuweisung zugeführt
+  wird (auch nicht über Helper-Parameter oder Objekt-Lookups). Die vollständigen Literalrezepte
+  sind zugleich die spätere T1-build-sichere Quelle: `@source inline(...)` ist nur die
+  Play-CDN-Testbrücke, der spätere lokale Build scannt dieselben Quellen direkt, ohne CDN-Manifest.
+  Freie Klassenkonstruktion (Template-Literal, `+`-Verkettung) bleibt unabhängig davon verboten
+  (Literalregel `TAILWIND-APP-BAUKASTEN_KONZEPT_V0-1.md` §2.2).
 - **Play-CDN-Theme-Bridge (AP-tailwind-02e, 2026-07-13):** Jede `Apps/{slug}/app.test.html` trägt
   genau **einen** `<style type="text/tailwindcss">`-Block. Darin steht zuerst eine wertfreie
   `@theme inline { --token: var(--token); ... }`-Bridge — nur Werte aus

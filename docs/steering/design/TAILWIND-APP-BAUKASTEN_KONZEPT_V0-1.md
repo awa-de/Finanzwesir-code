@@ -1,4 +1,4 @@
-Stand: 2026-07-13 | Session: AP-tailwind-02e | Geändert von: Claude (Sonnet)
+Stand: 2026-07-13 | Session: AP-tailwind-02f | Geändert von: Claude (Sonnet)
 
 # TAILWIND-APP-BAUKASTEN — KONZEPT V0.1
 
@@ -17,6 +17,8 @@ Klassenlisten; er erzeugt minimiertes, lokal ausgeliefertes CSS.
 Ein Produktions-Gate weist nach, dass jede App-Manifest-Utility im erzeugten CSS-Artefakt enthalten ist.
 ```
 Kein Artefaktname, Build-Befehl, Pfad oder Build-Tool an dieser Stelle festgelegt — bleibt Folgeauftrag T1.
+
+**Entschieden (AP-tailwind-02_slice-4-manifest-fix, 2026-07-13):** Die Mengengleichheits-Invariante aus AP-tailwind-02d wird präzisiert: Für die Play-CDN-Testphase enthält das Manifest die Tokenmenge aller vollständigen, statisch deklarierten `FW_*_CLASS`-Rezeptkonstanten der App — es verfolgt keinen JavaScript-Laufzeitdatenfluss (kein Nachverfolgen, ob/wie eine Konstante tatsächlich einer `.className`-Zuweisung zugeführt wird, auch nicht über Helper-Parameter oder Objekt-Lookups wie `FW_BUTTON_RECIPES`). Vollständige Literalrezepte sind zugleich die T1-build-sichere Quelle; `@source inline(...)` ist nur die Play-CDN-Testbrücke, der spätere lokale Build scannt dieselben Quellen direkt, ohne CDN-Manifest. Freie Klassenkonstruktion (Template-Literal, `+`-Verkettung in `.className`-/`classList`-Zuweisungen) bleibt unabhängig davon verboten (Literalregel §2.2).
 
 ---
 
@@ -354,11 +356,11 @@ Jeder Vertrag: Zweck und Abgrenzung, semantisches HTML, vollständiges Klassenre
 **Zweck:** Optionale Vertiefung (Zwischenwerte, Methodik) ein-/ausklappen. **Nicht verwenden für:** Screen-Navigation, Modals, Akkordeon-Landschaften (max. wenige pro App).
 **HTML:** `<button type="button" aria-expanded="false" aria-controls="ID">` + Content-Element mit `hidden`-Attribut (Referenzvertrag D-12, Headless-UI-Muster ohne Bibliothek).
 **Rezepte:**
-- Trigger: `flex w-full items-center justify-between gap-2 rounded-md px-3 py-2 text-left text-sm font-semibold text-text-sec transition-colors motion-reduce:transition-none hover:bg-bg-faint hover:text-text focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-petrol-500`
+- Trigger: `flex w-full items-center justify-between gap-2 rounded-md px-3 py-2 text-left text-sm font-semibold text-text-sec transition-colors motion-reduce:transition-none hover:bg-bg-faint hover:text-text focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-petrol-500 sm:inline-flex sm:w-auto sm:justify-start`
 - Indikator (Chevron-Span): `transition-transform motion-reduce:transition-none` + offener Zustand `rotate-180` (Literal-Toggle)
 - Content: `mt-2 pl-3`
 **Zustände:** offen/geschlossen über `hidden` + `aria-expanded` + Chevron-Klasse; hover/focus-visible am Trigger.
-**Responsive:** keins nötig. **A11y:** `aria-expanded`/`aria-controls` verbindlich; Enter/Space nativ; Fokus bleibt auf dem Trigger beim Toggling.
+**Responsive:** Mobile/Basis: volle Breite, Label links, Indikator rechts. Ab `sm`: `inline-flex`, natürliche Breite, `justify-start` — Label und Indikator bleiben zusammen, kein optisch abgehängter Indikator am rechten Rand (Q-08). Ein semantisches Disclosure mit identischem ARIA-/Tastaturvertrag auf allen Breakpoints — keine Desktop-Ausnahme, keine zweite Implementierung. **A11y:** `aria-expanded`/`aria-controls` verbindlich; Enter/Space nativ; Fokus bleibt auf dem Trigger beim Toggling.
 **Surface-Regel:** kein Flächenton im Ruhezustand; Hover-Ton als Affordanz.
 **Besitzer:** Baukasten. **Migration:** `.fw-app__collapsible-*` erfüllt den Vertrag bereits funktional; nur Klassenrezepte wechseln.
 
@@ -453,7 +455,7 @@ Verbindlich für jedes Primitive und jede App: echte `<button type="button">` f�
 | `.fw-app__btn*`, `.fw-app__cta` | Button-Familie 6.4 | Varianten-Map; Journey = primary + `w-full sm:w-auto` (600→`sm:`) |
 | `.fw-app__station-area*` | Panel 6.2 + Story-Komposition 7 | Flug-Mechanik bleibt app-lokal angedockt |
 | `.fw-app__collapsible*` | Disclosure 6.8 | funktional bereits vertragskonform |
-| `.fw-app__intermediate-values` | Section mit `grid grid-cols-2 gap-x-4 gap-y-1` | direkter Grid-Ersatz |
+| `.fw-app__intermediate-values` | Section mit `m-0 grid w-full grid-cols-2 gap-x-4 gap-y-1 sm:w-fit` | direkter Grid-Ersatz, Mobile volle Breite/ab `sm` Inhaltsbreite (Q-08) |
 | `.fw-app__assumptions` | Callout 6.7 | 3px→`border-l-2` |
 | `.fw-app__visually-hidden` | `sr-only` 6.9 | 1:1 |
 | `.fw-app__chart-section` | Chart-Slot (D-04) | nur `relative mt-6`; alles Sichtbare gehört der Engine |

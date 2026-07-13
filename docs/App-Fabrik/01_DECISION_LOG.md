@@ -307,6 +307,14 @@ Kein Artefaktname, Build-Befehl, Pfad oder Build-Tool an dieser Stelle festgeleg
 
 ---
 
+### Q-08 — Responsiver Disclosure-Auslöser: volle Zeile auf Mobile, kompakt ab `sm`
+**Status:** 🟢 ENTSCHIEDEN
+**Entscheidung:** Der Disclosure-Auslöser bleibt auf Mobile eine volle, gut treffbare Zeile (Label links, Indikator rechts). Ab `sm` wird er zur kompakten Inline-Fläche: Text und Pfeil stehen zusammen, der Pfeil hängt nicht mehr optisch am rechten Rand. Die Zwischenwerte werden auf Mobile über die verfügbare Breite gezeigt und ab `sm` auf Inhaltsbreite begrenzt. Es bleibt ein semantisches Disclosure-Primitive mit unveränderter Semantik, ARIA- und Tastaturbedienung auf allen Breakpoints — keine Desktop-Ausnahme, keine zweite Implementierung, keine Änderung an Daten oder Berechnung.
+**Begründung:** Mobile Trefffläche bewahren; bei M/L unverbundene, verloren wirkende Indikatoren und übergroße Leerräume zwischen Label und Wert vermeiden.
+**Quelle:** AP-tailwind-02f | 2026-07-13
+
+---
+
 ## Demo-Template
 
 ### T-01 — Perplexity-Demo ist Labor, nicht Produktionsstandard

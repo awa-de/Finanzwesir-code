@@ -31,21 +31,83 @@
  *                       Endwissens-Verbot: keine `[data-kpi]`-Karte, solange Screen 2 sichtbar ist.
  *                       Kein KPI-Fund (Screen 3 noch nicht erreicht) ist kein Fehler, nur Hinweis —
  *                       Viewport-Umbruch (S/M/L) bleibt bewusst Alberts Sichtprüfung.
+ *     - fwSliderFieldCheck(): NEU (AP-tailwind-02_slice-3). Eigenständiges fünftes Werkzeug, gleiches
+ *                       Prinzip wie fwKpiCardCheck(). Prüft das Slider-Field aus
+ *                       TAILWIND-APP-BAUKASTEN_KONZEPT_V0-1.md §6.6 an jedem
+ *                       `input[type="range"]` innerhalb einer `.fw-app`: vollständiger ARIA-Vertrag
+ *                       (role/aria-valuemin/-max/-now/-text, APP_SPEC §14.3), Akzentfarbe = CI-Primary
+ *                       (accent-color, derselbe Mechanismus wie bei fwCiAudit/NO_TEXT_INPUT_TYPES),
+ *                       Label umschließt den Slider (Q-06-Mehrfachinstanz-Muster: kein for/id),
+ *                       Labeltext gedämpft, Wertanzeige aria-hidden/dunkel/fett/rechtsbündig, sowie
+ *                       Flächenlosigkeit des Feld-Containers (§6.6 Surface-Regel: „reines
+ *                       Abstands-Primitive, keine Fläche"). Fokus-Ring bleibt wie bei
+ *                       fwKpiCardCheck's Reduced-Motion-Emulation Alberts Sichtprüfung
+ *                       (:focus-visible lässt sich nicht scripten).
+ *     - fwButtonCtaCheck(): NEU (AP-tailwind-02_slice-4). Eigenständiges sechstes Werkzeug. Prüft
+ *                       jeden Navigations-Button (`button[type="button"]` ohne `aria-expanded` —
+ *                       das unterscheidet sie deterministisch vom Disclosure-Trigger) und den
+ *                       Primary-CTA (`<a>`) aus §6.4/§7: Klassifikation der Button-Familie
+ *                       next/prev/journey anhand der literalen FW_BUTTON_*_CLASS-Tokens, dann
+ *                       Verifikation der tatsächlich gerenderten Farbe/Rundung/Fettung gegen die
+ *                       CI-Rolle (Token-Präsenz allein beweist nichts, wenn Play-CDN die Utility
+ *                       nicht generiert — bekannter Anlass AP-tailwind-02d). Genau ein Primary-CTA
+ *                       pro App wird als Vertragserwartung geprüft (D-06).
+ *     - fwStationPanelCheck(): NEU (AP-tailwind-02_slice-5). Eigenständiges siebtes Werkzeug. Prüft
+ *                       das flächenlose Stationen-Panel (§5.1-5.3/§6.2/§7): `<section>`-Semantik,
+ *                       Flächen-/Rahmen-/Schattenlosigkeit, `flex flex-col`, Quellenzeile/Headline/
+ *                       Anker-Farbrollen sowie Fortschritts-/Bridge-Zeile (Screen 2/3) — beide ohne
+ *                       eigenen Klassenmarker seit Slice 5, deshalb über den Textmuster-Vertrag
+ *                       „Station X von Y" (formatStationProgress()) identifiziert, nicht über CSS.
+ *     - fwDisclosureCalloutCheck(): NEU (AP-tailwind-02_slice-6 + AP-tailwind-02f). Eigenständiges
+ *                       achtes Werkzeug. Prüft Disclosure-Trigger (Label-/Indikator-Span-Struktur,
+ *                       `aria-expanded`/`aria-controls`-Gültigkeit, Indikator-Rotation, Content-
+ *                       `hidden`-Kopplung, responsiver Q-08-Kontrakt `sm:inline-flex sm:w-auto
+ *                       sm:justify-start`), die Zwischenwerte-`dl` (Grid, `sm:w-fit`-Kontrakt,
+ *                       dt/dd-Farbrollen — unterschieden von der KPI-`dl` über das `grid-cols-2`-
+ *                       Token), den Callout/die Annahmen-Box (nur linke Akzentkante, sonst
+ *                       flächenlos) sowie die ARIA-Live-Region auf echte `sr-only`-Verborgenheit
+ *                       (computed position/width/height/overflow, nicht nur Klassenname).
+ *     - fwChartSlotCheck(): NEU (AP-tailwind-02_slice-7). Eigenständiges neuntes Werkzeug. Prüft
+ *                       den D-04-Ein-Container-Vertrag an jedem `[data-fw-appchart]`-Slot:
+ *                       Positionierungskontext (`relative`), Abstand (`mt-6`), und zwingend NIE
+ *                       Fläche/Rahmen/Schatten/Radius/Padding — der einzige sichtbare Container
+ *                       bleibt der engine-eigene `fw-chart-wrapper` (§6.11, hier nicht geprüft,
+ *                       das ist der spätere Engine-DOM-Chrome-AP).
+ *     - fwScreenFlowCheck(): NEU (AP-tailwind-02_slice-8). Eigenständiges zehntes Werkzeug. Prüft
+ *                       Screen-Rahmen (`position: relative`), Screen-Headline (`text-xl font-bold`,
+ *                       Textfarbe, `tabIndex=-1`) und Screen-Navigation (`flex flex-wrap gap-3
+ *                       mt-6`). Testet zusätzlich PROGRAMMATISCH per echtem `.focus()`-Aufruf, ob
+ *                       die Headline beim JS-gesteuerten Fokus tatsächlich keinen Standard-Outline
+ *                       zeigt — das ist etwas, das Albert am Bildschirm nicht zuverlässig sehen
+ *                       kann, hier aber real testbar ist (anders als `:focus-visible`, das echte
+ *                       Nutzerinteraktion braucht).
  *
  * WANN WELCHES TOOL
  *   - Alltägliche Frage „ist das hier CI-konform" auf einer beliebigen Testseite → fwCiAudit().
  *   - Migrations-/Drift-Messung mit bekanntem Alt/Neu-Sollwert → fwTokenCheck()/fwFontCheck().
  *   - KPI-Karten-Struktur (Screen 3, prokrastinations-preis) → fwKpiCardCheck().
+ *   - Slider-Field-Struktur (Screen 1, prokrastinations-preis) → fwSliderFieldCheck().
+ *   - Buttons/CTA (alle Screens, prokrastinations-preis) → fwButtonCtaCheck().
+ *   - Stationen-Panel (Screen 2/3, prokrastinations-preis) → fwStationPanelCheck().
+ *   - Disclosure/Callout/Live-Region (Screen 2/3, prokrastinations-preis) → fwDisclosureCalloutCheck().
+ *   - Chart-Slot (Screen 2/3/4, prokrastinations-preis) → fwChartSlotCheck().
+ *   - Screen-Rahmen/Headline/Navigation (alle Screens, prokrastinations-preis) → fwScreenFlowCheck().
  *
  * NUTZUNG
  *   1. Ziel-Testseite im VSCode-Live-Server öffnen (App- oder Engine-Testseite, egal).
  *   2. DevTools → Console → Inhalt dieser Datei einfügen (oder als Snippet speichern).
- *   3. Auto-Lauf beim Einfügen führt alle vier Checks aus. Ergebnisse kopieren und zur Bewertung
+ *   3. Auto-Lauf beim Einfügen führt alle zehn Checks aus. Ergebnisse kopieren und zur Bewertung
  *      einfügen. Einzeln / eigene Listen weiterhin möglich:
  *        fwCiAudit();                                    // Ist/Soll-Set-Audit dieser Seite
  *        fwTokenCheck([{ rolle, token, alt, neu }, …]);  // eigene Farbliste (Drift-Check)
  *        fwFontCheck([{ rolle, token, family }, …], [{ flaeche, sel }, …]);  // eigene Listen
  *        fwKpiCardCheck();                               // KPI-Karten auf Screen 3 (falls sichtbar)
+ *        fwSliderFieldCheck();                           // Slider auf Screen 1 (falls sichtbar)
+ *        fwButtonCtaCheck();                             // Buttons/CTA (falls im DOM)
+ *        fwStationPanelCheck();                          // Stationen-Panel (falls im DOM)
+ *        fwDisclosureCalloutCheck();                     // Disclosure/Callout/Live-Region
+ *        fwChartSlotCheck();                             // Chart-Slots (falls im DOM)
+ *        fwScreenFlowCheck();                            // Screen-Rahmen/Headline/Navigation
  *
  * LESART ΔE76 (nur fwTokenCheck)
  *   <1 unsichtbar · 1–2.3 nur im direkten Vergleich · 2.3–10 bei genauem Hinsehen · >10 klar.
@@ -169,12 +231,18 @@
   ];
 
   // Reale HTML-UI-Flächen des Piloten. `—` in der Ausgabe = Element aktuell nicht im DOM (zustandsabhängig).
+  // CHANGED — AP-tailwind-02-Faden-Nachpruefung: um Slice 4-8-Flaechen ergaenzt (Button, CTA,
+  // Disclosure-Trigger, Callout), da diese vorher nicht in fwFontCheck() erfasst waren.
   const DEFAULT_FONT_TARGETS = [
     { flaeche: 'Fließtext (.fw-app)', sel: '.fw-app' },
-    { flaeche: 'Screen-Headline',     sel: '.fw-app__screen-headline' },
-    { flaeche: 'Station-Headline',    sel: '.fw-app__station-headline' },
+    { flaeche: 'Screen-Headline',     sel: '.fw-app [data-fw-screen] h2' },
+    { flaeche: 'Station-Headline',    sel: '.fw-app__station-area h3' },
     { flaeche: 'A11y-Tabelle',        sel: '.fw-app table, .fw-chart-wrapper table' },
     { flaeche: 'App-Meldung',         sel: '.fw-app p[role="alert"], .fw-app p[role="status"]' },
+    { flaeche: 'Navigations-Button',  sel: '.fw-app button[type="button"]:not([aria-expanded])' },
+    { flaeche: 'Primary-CTA',         sel: '.fw-app a' },
+    { flaeche: 'Disclosure-Trigger',  sel: '.fw-app button[aria-expanded]' },
+    { flaeche: 'Callout (Annahmen)',  sel: '.fw-app__assumptions' },
   ];
 
   function fwTokenCheck(checks = DEFAULT_CHECKS) {
@@ -593,13 +661,580 @@
     return { cards: rows, screen2Guards };
   }
 
+  // ---------------------------------------------------------------------------
+  // fwSliderFieldCheck(): Slider-Field-Struktur (AP-tailwind-02_slice-3,
+  // TAILWIND-APP-BAUKASTEN_KONZEPT_V0-1.md §6.6). Eigenständiges fünftes Werkzeug,
+  // gleiches Prinzip wie fwKpiCardCheck() (s. Kopfkommentar). Prüft pro
+  // `input[type="range"]` innerhalb einer `.fw-app`: ARIA-Vertrag (APP_SPEC §14.3),
+  // Akzentfarbe (derselbe resolve()/toHex()-Mechanismus wie fwCiAudit), Label-Umschluss
+  // (Q-06), Labeltext-/Wertanzeige-Farbrollen und Flächenlosigkeit des Feld-Containers.
+  // ---------------------------------------------------------------------------
+
+  function fwSliderFieldCheck(sliderSel = 'input[type="range"]') {
+    console.log('%cSlider-Field-Struktur-Check (Screen 1)', 'font-weight:bold;font-size:14px');
+
+    const sliders = [...document.querySelectorAll(sliderSel)].filter(el => el.closest('.fw-app'));
+    if (sliders.length === 0) {
+      console.log('%c— Kein Slider im DOM (Screen 1 nicht sichtbar oder andere App) — kein Fehler, Kontext-abhängig.', 'color:gray');
+      return [];
+    }
+
+    const mutedHex = toHex(resolve('--color-text-muted'));
+    const textHex = toHex(resolve('--color-text'));
+    const primaryHex = toHex(resolve('--color-primary'));
+    const ARIA_ATTRS = ['role', 'aria-valuemin', 'aria-valuemax', 'aria-valuenow', 'aria-valuetext'];
+
+    const rows = sliders.map(slider => {
+      const cs = getComputedStyle(slider);
+      const ariaOk = ARIA_ATTRS.every(a => (slider.getAttribute(a) || '').trim() !== '');
+      const roleOk = slider.getAttribute('role') === 'slider';
+      const accentHex = colorToHexOrNull(cs.accentColor);
+
+      const label = slider.closest('label');
+      const valueEl = label ? label.querySelector('[aria-hidden="true"]') : null;
+      const valueCs = valueEl ? getComputedStyle(valueEl) : null;
+      const valueHex = valueCs ? colorToHexOrNull(valueCs.color) : null;
+      const valueBold = valueCs ? parseInt(valueCs.fontWeight, 10) >= 600 : false;
+      const valueRightAlign = valueCs ? valueCs.textAlign === 'right' : false;
+
+      const labelTextEl = label ? [...label.querySelectorAll('span')].find(s => s !== valueEl) : null;
+      const labelTextCs = labelTextEl ? getComputedStyle(labelTextEl) : null;
+      const labelTextHex = labelTextCs ? colorToHexOrNull(labelTextCs.color) : null;
+
+      // Feld-Container = Elternelement des <label> (Rezept "Feld: my-4", §6.6) —
+      // Surface-Regel: reines Abstands-Primitive, keine Fläche.
+      const fieldEl = label ? label.parentElement : null;
+      const fieldCs = fieldEl ? getComputedStyle(fieldEl) : null;
+      const fieldBgHex = fieldCs ? colorToHexOrNull(fieldCs.backgroundColor) : null;
+      const fieldNoBorder = fieldCs
+        ? (parseFloat(fieldCs.borderTopWidth) === 0 || fieldCs.borderTopStyle === 'none')
+        : null;
+
+      return {
+        Slider: simpleSelector(slider),
+        'ARIA vollständig': ariaOk ? '✅' : `❌ (fehlt: ${ARIA_ATTRS.filter(a => (slider.getAttribute(a) || '').trim() === '').join(', ')})`,
+        'role=slider': roleOk ? '✅' : '❌',
+        Akzentfarbe: accentHex ? (accentHex === primaryHex ? '✅' : `❌ (${accentHex})`) : '❌ (kein accent-color)',
+        'In <label>': label ? '✅' : '❌ (Q-06/APP_SPEC §14.3-Vertrag verletzt)',
+        'Labeltext gedämpft': labelTextEl ? (labelTextHex === mutedHex ? '✅' : `❌ (${labelTextHex})`) : '— (kein Labeltext-Span gefunden)',
+        'Wertanzeige aria-hidden': valueEl ? '✅' : '❌ (keine [aria-hidden] Wertanzeige gefunden)',
+        'Wert dunkel': valueEl ? (valueHex === textHex ? '✅' : `❌ (${valueHex})`) : '—',
+        'Wert fett': valueEl ? (valueBold ? '✅' : '❌') : '—',
+        'Wert rechtsbündig': valueEl ? (valueRightAlign ? '✅' : '❌') : '—',
+        'Feld ohne Fläche': fieldEl
+          ? (!fieldBgHex && fieldNoBorder ? '✅' : `❌ (Hintergrund: ${fieldBgHex || 'keiner'}, Rahmen: ${fieldNoBorder ? 'keiner' : 'vorhanden'})`)
+          : '— (kein Feld-Container gefunden)',
+      };
+    });
+    console.table(rows);
+
+    console.log('%cNicht scriptbar (Alberts Sichtprüfung):', 'font-weight:bold',
+      'sichtbarer Fokus-Ring bei Tastaturbedienung (:focus-visible), Umbruch bei 375/768/1280px.');
+
+    const fails = rows.filter(r => Object.values(r).some(v => typeof v === 'string' && v.startsWith('❌')));
+    console.log(fails.length === 0
+      ? '%c✅ Slider-Field(er) strukturell korrekt.'
+      : `%c❌ ${fails.length}/${rows.length} Slider-Field(er) mit Abweichung.`,
+      `font-weight:bold;color:${fails.length === 0 ? 'green' : 'crimson'}`);
+    return rows;
+  }
+
+  // ---------------------------------------------------------------------------
+  // fwButtonCtaCheck(): Button-Familie + CTA (AP-tailwind-02_slice-4,
+  // TAILWIND-APP-BAUKASTEN_KONZEPT_V0-1.md §6.4/§7). Eigenständiges sechstes Werkzeug.
+  // Disclosure-Trigger tragen aria-expanded und werden deshalb ausgeschlossen (eigene
+  // Prüfung: fwDisclosureCalloutCheck()). Klassifiziert jeden verbleibenden
+  // button[type="button"] anhand der literalen FW_BUTTON_*_CLASS-Tokens (app.js), prüft
+  // dann die tatsächlich gerenderte Farbe/Rundung/Fettung gegen die CI-Rolle — Token-
+  // Präsenz allein beweist nichts, wenn Play-CDN die Utility nicht generiert (bekannter
+  // Anlass AP-tailwind-02d). CTA (<a>): genau ein Primary pro App (D-06).
+  // ---------------------------------------------------------------------------
+
+  function fwButtonCtaCheck() {
+    console.log('%cButton-Familie + CTA-Struktur-Check', 'font-weight:bold;font-size:14px');
+
+    const primaryHex = toHex(resolve('--color-primary'));
+    const bgHex = toHex(resolve('--color-bg'));
+    const textHex = toHex(resolve('--color-text'));
+
+    const navButtons = [...document.querySelectorAll('.fw-app button[type="button"]')]
+      .filter(b => !b.hasAttribute('aria-expanded'));
+
+    let buttonRows = [];
+    if (navButtons.length === 0) {
+      console.log('%c— Keine Navigations-Buttons im DOM.', 'color:gray');
+    } else {
+      buttonRows = navButtons.map(btn => {
+        const cls = btn.className || '';
+        let family = 'unbekannt';
+        if (cls.includes('border-border')) family = 'prev';
+        else if (cls.includes('w-full') && cls.includes('sm:w-auto')) family = 'journey';
+        else if (cls.includes('ml-auto')) family = 'next';
+
+        const cs = getComputedStyle(btn);
+        const bgActual = colorToHexOrNull(cs.backgroundColor);
+        const textActual = colorToHexOrNull(cs.color);
+        const rounded = parseFloat(cs.borderTopLeftRadius) > 0;
+        const bold = parseInt(cs.fontWeight, 10) >= 600;
+        const focusRingClassesOk = cls.includes('focus-visible:ring-2') && cls.includes('focus-visible:ring-petrol-500');
+
+        let colorOk = false;
+        if (family === 'prev') {
+          const hasBorder = parseFloat(cs.borderTopWidth) > 0 && cs.borderTopStyle !== 'none';
+          colorOk = bgActual === bgHex && textActual === textHex && hasBorder;
+        } else if (family === 'next' || family === 'journey') {
+          colorOk = bgActual === primaryHex;
+        }
+
+        return {
+          Button: simpleSelector(btn) + ' "' + btn.textContent.trim().slice(0, 24) + '"',
+          Familie: family,
+          Farbe: colorOk ? '✅' : `❌ (bg:${bgActual}, text:${textActual})`,
+          Gerundet: rounded ? '✅' : '❌',
+          Fett: bold ? '✅' : '❌',
+          'Fokus-Ring-Klassen': focusRingClassesOk ? '✅' : '❌',
+        };
+      });
+      console.table(buttonRows);
+    }
+
+    const ctas = [...document.querySelectorAll('.fw-app a')];
+    let ctaRows = [];
+    if (ctas.length === 0) {
+      console.log('%c— Kein CTA (<a>) im DOM (Screen 4 evtl. nicht erreicht) — kein Fehler, Kontext-abhängig.', 'color:gray');
+    } else {
+      ctaRows = ctas.map(a => {
+        const cs = getComputedStyle(a);
+        const bgActual = colorToHexOrNull(cs.backgroundColor);
+        const rounded = parseFloat(cs.borderTopLeftRadius) > 0;
+        const noUnderline = cs.textDecorationLine === 'none';
+        return {
+          CTA: simpleSelector(a) + ' "' + a.textContent.trim().slice(0, 24) + '"',
+          Primary: bgActual === primaryHex ? '✅' : `❌ (${bgActual})`,
+          Gerundet: rounded ? '✅' : '❌',
+          'Keine Unterstreichung': noUnderline ? '✅' : '❌',
+        };
+      });
+      console.table(ctaRows);
+      console.log(ctas.length === 1
+        ? '%c✅ Genau ein Primary-CTA (D-06).'
+        : `%c⚠ ${ctas.length} CTA-Elemente gefunden — Vertrag verlangt genau einen Primary-CTA pro App (D-06).`,
+        `font-weight:bold;color:${ctas.length === 1 ? 'green' : 'darkorange'}`);
+    }
+
+    console.log('%cNicht scriptbar (Alberts Sichtprüfung):', 'font-weight:bold',
+      'sichtbarer Fokus-Ring bei Tastaturbedienung (:focus-visible), hover-/active-Zustände.');
+
+    const buttonFails = buttonRows.filter(r => Object.values(r).some(v => typeof v === 'string' && v.startsWith('❌')));
+    const ctaFails = ctaRows.filter(r => Object.values(r).some(v => typeof v === 'string' && v.startsWith('❌')));
+    if (buttonFails.length === 0 && ctaFails.length === 0) {
+      console.log('%c✅ Buttons/CTA strukturell korrekt.', 'font-weight:bold;color:green');
+    } else {
+      if (buttonFails.length) console.log(`%c❌ ${buttonFails.length}/${buttonRows.length} Button(s) mit Abweichung.`, 'font-weight:bold;color:crimson');
+      if (ctaFails.length) console.log(`%c❌ ${ctaFails.length}/${ctaRows.length} CTA(s) mit Abweichung.`, 'font-weight:bold;color:crimson');
+    }
+    return { buttons: buttonRows, ctas: ctaRows };
+  }
+
+  // ---------------------------------------------------------------------------
+  // fwStationPanelCheck(): Stationen-Panel + Fortschritts-/Bridge-Zeile (AP-tailwind-
+  // 02_slice-5, TAILWIND-APP-BAUKASTEN_KONZEPT_V0-1.md §5.1-5.3 Panel-Taxonomie, §6.2,
+  // §7 Stationen-/Story-Bereich). Eigenständiges siebtes Werkzeug. Panel ist bereits im
+  // DOM, sobald die App den Content-State erreicht hat (auch wenn Screen 2 noch nicht
+  // sichtbar ist); Quelle/Headline/Anker nur nach dem ersten Journey-Schritt gefüllt.
+  // ---------------------------------------------------------------------------
+
+  function fwStationPanelCheck() {
+    console.log('%cStationen-Panel-Struktur-Check (Screen 2)', 'font-weight:bold;font-size:14px');
+
+    const panel = document.querySelector('.fw-app__station-area');
+    if (!panel) {
+      console.log('%c— Kein Stationen-Panel im DOM (App noch nicht im Content-State).', 'color:gray');
+      return [];
+    }
+
+    const cs = getComputedStyle(panel);
+    const bgHex = colorToHexOrNull(cs.backgroundColor);
+    const noBorder = parseFloat(cs.borderTopWidth) === 0 || cs.borderTopStyle === 'none';
+    const noShadow = cs.boxShadow === 'none';
+    const isSection = panel.tagName === 'SECTION';
+    const isFlexCol = cs.display.indexOf('flex') !== -1 && cs.flexDirection === 'column';
+
+    const panelRow = {
+      Element: simpleSelector(panel),
+      'Ist <section>': isSection ? '✅' : `❌ (${panel.tagName})`,
+      'Flächenlos (Panel-Regel)': !bgHex ? '✅' : `❌ (${bgHex})`,
+      'Kein Rahmen': noBorder ? '✅' : '❌',
+      'Kein Schatten': noShadow ? '✅' : '❌',
+      'flex flex-col': isFlexCol ? '✅' : '❌',
+    };
+    console.table([panelRow]);
+
+    const mutedHex = toHex(resolve('--color-text-muted'));
+    const textHex = toHex(resolve('--color-text'));
+    const textSecHex = toHex(resolve('--color-text-sec'));
+
+    const sourceLabel = panel.querySelector('p');
+    const headline = panel.querySelector('h3');
+    const anchor = headline ? headline.nextElementSibling : null;
+
+    let contentRows = [];
+    if (!sourceLabel && !headline) {
+      console.log('%c— Noch keine Station gerendert (Journey noch nicht gestartet) — kein Fehler, Kontext-abhängig.', 'color:gray');
+    } else {
+      const sourceCs = sourceLabel ? getComputedStyle(sourceLabel) : null;
+      const headlineCs = headline ? getComputedStyle(headline) : null;
+      const anchorCs = (anchor && anchor.tagName === 'P') ? getComputedStyle(anchor) : null;
+
+      contentRows = [{
+        'Quellenzeile gedämpft/uppercase': sourceCs
+          ? ((colorToHexOrNull(sourceCs.color) === mutedHex && sourceCs.textTransform === 'uppercase') ? '✅' : `❌ (${colorToHexOrNull(sourceCs.color)}, ${sourceCs.textTransform})`)
+          : '— (kein p gefunden)',
+        'Headline ist <h3>, tabIndex=-1': headline ? (headline.tabIndex === -1 ? '✅' : '❌') : '— (kein h3 gefunden)',
+        'Headline fett/dunkel': headlineCs
+          ? ((parseInt(headlineCs.fontWeight, 10) >= 600 && colorToHexOrNull(headlineCs.color) === textHex) ? '✅' : `❌ (${headlineCs.fontWeight}, ${colorToHexOrNull(headlineCs.color)})`)
+          : '—',
+        'Anker text-sec': anchorCs
+          ? (colorToHexOrNull(anchorCs.color) === textSecHex ? '✅' : `❌ (${colorToHexOrNull(anchorCs.color)})`)
+          : '— (kein Anker-p gefunden)',
+      }];
+      console.table(contentRows);
+    }
+
+    // Fortschrittszeile (Screen 2) — kein Klassenmarker mehr seit Slice 5 (reine Tailwind-
+    // Utilities); Identifikation über den bekannten Textmuster-Vertrag "Station X von Y"
+    // (formatStationProgress()), nicht über CSS.
+    const progressEl = [...document.querySelectorAll('[data-fw-screen="2"] p')]
+      .find(p => /^Station \d+ von \d+/.test(p.textContent));
+    const bridge = document.querySelector('.fw-app__screen3-bridge');
+
+    const progressCs = progressEl ? getComputedStyle(progressEl) : null;
+    const bridgeCs = bridge ? getComputedStyle(bridge) : null;
+
+    console.table([{
+      'Fortschrittszeile gefunden': progressEl ? '✅' : '— (Journey noch nicht gestartet)',
+      'Fortschrittszeile zentriert/gedämpft': progressCs
+        ? ((progressCs.textAlign === 'center' && colorToHexOrNull(progressCs.color) === mutedHex) ? '✅' : `❌ (${progressCs.textAlign}, ${colorToHexOrNull(progressCs.color)})`)
+        : '—',
+      'Screen-3-Bridge gefunden': bridge ? '✅' : '— (Screen 3 evtl. nicht erreicht)',
+      'Bridge zentriert/gedämpft': bridgeCs
+        ? ((bridgeCs.textAlign === 'center' && colorToHexOrNull(bridgeCs.color) === mutedHex) ? '✅' : `❌ (${bridgeCs.textAlign}, ${colorToHexOrNull(bridgeCs.color)})`)
+        : '—',
+    }]);
+
+    const allRows = [panelRow, ...contentRows];
+    const fails = allRows.filter(r => Object.values(r).some(v => typeof v === 'string' && v.startsWith('❌')));
+    console.log(fails.length === 0
+      ? '%c✅ Stationen-Panel strukturell korrekt.'
+      : `%c❌ ${fails.length} Zeile(n) mit Abweichung.`,
+      `font-weight:bold;color:${fails.length === 0 ? 'green' : 'crimson'}`);
+    return allRows;
+  }
+
+  // ---------------------------------------------------------------------------
+  // fwDisclosureCalloutCheck(): Disclosure (Zwischenstand) + Callout (Annahmen) +
+  // sr-only-Live-Region (AP-tailwind-02_slice-6, AP-tailwind-02f Responsive-Kontrakt,
+  // TAILWIND-APP-BAUKASTEN_KONZEPT_V0-1.md §6.7-6.9, Q-08). Eigenständiges achtes
+  // Werkzeug. Disclosure-Trigger tragen aria-expanded — eindeutiges Unterscheidungs-
+  // merkmal gegenüber den Navigations-Buttons aus fwButtonCtaCheck().
+  // ---------------------------------------------------------------------------
+
+  function fwDisclosureCalloutCheck() {
+    console.log('%cDisclosure/Callout/Live-Region-Struktur-Check', 'font-weight:bold;font-size:14px');
+
+    const mutedHex = toHex(resolve('--color-text-muted'));
+    const textHex = toHex(resolve('--color-text'));
+    const textSecHex = toHex(resolve('--color-text-sec'));
+
+    const triggers = [...document.querySelectorAll('.fw-app button[aria-expanded]')];
+    let triggerRows = [];
+    if (triggers.length === 0) {
+      console.log('%c— Kein Disclosure-Trigger im DOM (Journey noch nicht gestartet) — kein Fehler, Kontext-abhängig.', 'color:gray');
+    } else {
+      triggerRows = triggers.map(trigger => {
+        const expanded = trigger.getAttribute('aria-expanded') === 'true';
+        const controlsId = trigger.getAttribute('aria-controls');
+        const content = controlsId ? document.getElementById(controlsId) : null;
+        const spans = [...trigger.querySelectorAll('span')];
+        const indicatorSpan = spans.find(s => s.getAttribute('aria-hidden') === 'true');
+        const labelSpan = spans.find(s => s !== indicatorSpan);
+        const cs = getComputedStyle(trigger);
+        const bgAtRest = colorToHexOrNull(cs.backgroundColor);
+        const textColorOk = colorToHexOrNull(cs.color) === textSecHex;
+        const rounded = parseFloat(cs.borderTopLeftRadius) > 0;
+        const indicatorRotationOk = indicatorSpan
+          ? (expanded ? indicatorSpan.className.includes('rotate-180') : !indicatorSpan.className.includes('rotate-180'))
+          : false;
+        const responsiveOk = trigger.className.includes('sm:inline-flex')
+          && trigger.className.includes('sm:w-auto')
+          && trigger.className.includes('sm:justify-start');
+
+        return {
+          Trigger: '"' + (labelSpan ? labelSpan.textContent : trigger.textContent).trim() + '"',
+          'aria-expanded/-controls gültig': (controlsId && content) ? '✅' : `❌ (controls=${controlsId})`,
+          'Label-/Indikator-Span vorhanden': (labelSpan && indicatorSpan) ? '✅' : '❌',
+          'Indikator aria-hidden': indicatorSpan ? '✅' : '❌',
+          'Indikator-Rotation korrekt': indicatorRotationOk ? '✅' : '❌',
+          'Ruhezustand flächenlos': !bgAtRest ? '✅' : `❌ (${bgAtRest})`,
+          'Textfarbe text-sec': textColorOk ? '✅' : `❌ (${colorToHexOrNull(cs.color)})`,
+          Gerundet: rounded ? '✅' : '❌',
+          'Responsive-Kontrakt (Q-08-Tokens)': responsiveOk ? '✅' : '❌',
+          'Content hidden ⇄ aria-expanded': content ? (content.hasAttribute('hidden') === !expanded ? '✅' : '❌') : '— (kein Content gefunden)',
+        };
+      });
+      console.table(triggerRows);
+    }
+
+    // Zwischenwerte-dl vom KPI-dl unterscheiden: nur die Intermediate-Values-Konstante
+    // enthält 'grid-cols-2' (FW_KPI_GROUP_CLASS ist 'flex flex-wrap ...', kein Grid).
+    const dls = [...document.querySelectorAll('.fw-app dl')].filter(dl => dl.className.includes('grid-cols-2'));
+    let dlRows = [];
+    if (dls.length === 0) {
+      console.log('%c— Keine Zwischenwerte-Liste im DOM.', 'color:gray');
+    } else {
+      dlRows = dls.map(dl => {
+        const cs = getComputedStyle(dl);
+        const isGrid = cs.display === 'grid';
+        const dt = dl.querySelector('dt');
+        const dd = dl.querySelector('dd');
+        const dtCs = dt ? getComputedStyle(dt) : null;
+        const ddCs = dd ? getComputedStyle(dd) : null;
+        const responsiveOk = dl.className.includes('w-full') && dl.className.includes('sm:w-fit');
+        return {
+          Liste: simpleSelector(dl),
+          Grid: isGrid ? '✅' : '❌',
+          'Responsive-Kontrakt (Q-08-Tokens)': responsiveOk ? '✅' : '❌',
+          'dt gedämpft': dtCs ? (colorToHexOrNull(dtCs.color) === mutedHex ? '✅' : `❌ (${colorToHexOrNull(dtCs.color)})`) : '— (kein dt)',
+          'dd fett/dunkel': ddCs ? ((parseInt(ddCs.fontWeight, 10) >= 600 && colorToHexOrNull(ddCs.color) === textHex) ? '✅' : `❌ (${ddCs.fontWeight}, ${colorToHexOrNull(ddCs.color)})`) : '— (kein dd)',
+        };
+      });
+      console.table(dlRows);
+    }
+
+    const assumptions = document.querySelector('.fw-app__assumptions');
+    let assumptionsRow = null;
+    if (!assumptions) {
+      console.log('%c— Keine Annahmen-Box (Callout) im DOM.', 'color:gray');
+    } else {
+      const acs = getComputedStyle(assumptions);
+      const bgHex = colorToHexOrNull(acs.backgroundColor);
+      const noShadow = acs.boxShadow === 'none';
+      const hasLeftBorder = parseFloat(acs.borderLeftWidth) > 0 && acs.borderLeftStyle !== 'none';
+      const noOtherBorder = (parseFloat(acs.borderTopWidth) === 0 || acs.borderTopStyle === 'none')
+        && (parseFloat(acs.borderRightWidth) === 0 || acs.borderRightStyle === 'none');
+      const isAside = assumptions.tagName === 'ASIDE';
+      assumptionsRow = {
+        Element: simpleSelector(assumptions),
+        'Ist <aside>': isAside ? '✅' : `❌ (${assumptions.tagName})`,
+        'Flächenlos': !bgHex ? '✅' : `❌ (${bgHex})`,
+        'Kein Schatten': noShadow ? '✅' : '❌',
+        'Nur linke Akzentkante': (hasLeftBorder && noOtherBorder) ? '✅' : '❌',
+        'Text gedämpft': colorToHexOrNull(acs.color) === mutedHex ? '✅' : `❌ (${colorToHexOrNull(acs.color)})`,
+      };
+      console.table([assumptionsRow]);
+    }
+
+    const liveRegion = document.querySelector('[data-fw-role="a11y-result"]');
+    let liveRegionRow = null;
+    if (!liveRegion) {
+      console.log('%c⚠ Keine ARIA-Live-Region ([data-fw-role="a11y-result"]) im DOM gefunden.', 'color:darkorange');
+    } else {
+      const lcs = getComputedStyle(liveRegion);
+      const srOnlyOk = lcs.position === 'absolute'
+        && parseFloat(lcs.width) <= 1
+        && parseFloat(lcs.height) <= 1
+        && lcs.overflow === 'hidden';
+      liveRegionRow = {
+        Element: simpleSelector(liveRegion),
+        'aria-live=polite': liveRegion.getAttribute('aria-live') === 'polite' ? '✅' : '❌',
+        'aria-atomic=true': liveRegion.getAttribute('aria-atomic') === 'true' ? '✅' : '❌',
+        'sr-only (visuell verborgen)': srOnlyOk ? '✅' : `❌ (position:${lcs.position}, w:${lcs.width}, h:${lcs.height}, overflow:${lcs.overflow})`,
+      };
+      console.table([liveRegionRow]);
+    }
+
+    console.log('%cNicht scriptbar (Alberts Sichtprüfung):', 'font-weight:bold',
+      'tatsächliches Breakpoint-Verhalten bei 375/768/1280px (Token-Präsenz ist geprüft, nicht die aktive Media-Query bei aktueller Fensterbreite).');
+
+    const allRows = [...triggerRows, ...dlRows, assumptionsRow, liveRegionRow].filter(Boolean);
+    const fails = allRows.filter(r => Object.values(r).some(v => typeof v === 'string' && v.startsWith('❌')));
+    console.log(fails.length === 0
+      ? '%c✅ Disclosure/Callout/Live-Region strukturell korrekt.'
+      : `%c❌ ${fails.length} Zeile(n) mit Abweichung.`,
+      `font-weight:bold;color:${fails.length === 0 ? 'green' : 'crimson'}`);
+    return { triggers: triggerRows, lists: dlRows, assumptions: assumptionsRow, liveRegion: liveRegionRow };
+  }
+
+  // ---------------------------------------------------------------------------
+  // fwChartSlotCheck(): App-seitiger Chart-Slot (AP-tailwind-02_slice-7, D-04
+  // Ein-Container-Vertrag, TAILWIND-APP-BAUKASTEN_KONZEPT_V0-1.md §9). Eigenständiges
+  // neuntes Werkzeug. Prüft, dass der App-Slot niemals Fläche/Border/Schatten/Radius/
+  // Padding trägt — der einzige sichtbare Container ist der engine-eigene
+  // fw-chart-wrapper, hier bewusst NICHT geprüft (Engine-DOM-Chrome-AP, außerhalb
+  // dieses Vertrags, s. §6.11).
+  // ---------------------------------------------------------------------------
+
+  function fwChartSlotCheck() {
+    console.log('%cChart-Slot-Struktur-Check (D-04 Ein-Container-Vertrag)', 'font-weight:bold;font-size:14px');
+
+    const slots = [...document.querySelectorAll('.fw-app [data-fw-appchart]')];
+    if (slots.length === 0) {
+      console.log('%c— Kein Chart-Slot im DOM.', 'color:gray');
+      return [];
+    }
+
+    const rows = slots.map(slot => {
+      const cs = getComputedStyle(slot);
+      const bgHex = colorToHexOrNull(cs.backgroundColor);
+      const noBorder = parseFloat(cs.borderTopWidth) === 0 || cs.borderTopStyle === 'none';
+      const noShadow = cs.boxShadow === 'none';
+      const noRadius = parseFloat(cs.borderTopLeftRadius) === 0;
+      const noPadding = parseFloat(cs.paddingTop) === 0 && parseFloat(cs.paddingLeft) === 0;
+      const isRelative = cs.position === 'relative';
+      const hasTopMargin = parseFloat(cs.marginTop) > 0;
+      const wrapperInside = !!slot.querySelector('.fw-chart-wrapper');
+
+      return {
+        Slot: slot.dataset.fwAppchart || simpleSelector(slot),
+        Positionierung: isRelative ? '✅' : `❌ (${cs.position})`,
+        'mt-6 (>0)': hasTopMargin ? '✅' : '❌',
+        Flächenlos: !bgHex ? '✅' : `❌ (${bgHex})`,
+        'Kein Rahmen': noBorder ? '✅' : '❌',
+        'Kein Schatten': noShadow ? '✅' : '❌',
+        'Kein Radius': noRadius ? '✅' : '❌',
+        'Kein Padding': noPadding ? '✅' : '❌',
+        'Engine-Wrapper gefunden': wrapperInside ? '✅' : '— (Chart evtl. noch nicht gerendert)',
+      };
+    });
+    console.table(rows);
+
+    const fails = rows.filter(r => Object.values(r).some(v => typeof v === 'string' && v.startsWith('❌')));
+    console.log(fails.length === 0
+      ? '%c✅ Alle Chart-Slots strukturell korrekt (Ein-Container-Vertrag D-04 eingehalten).'
+      : `%c❌ ${fails.length}/${rows.length} Chart-Slot(s) mit Abweichung.`,
+      `font-weight:bold;color:${fails.length === 0 ? 'green' : 'crimson'}`);
+    return rows;
+  }
+
+  // ---------------------------------------------------------------------------
+  // fwScreenFlowCheck(): Screen-Rahmen, -Headline und -Navigation (AP-tailwind-
+  // 02_slice-8, TAILWIND-APP-BAUKASTEN_KONZEPT_V0-1.md §7/§9). Eigenständiges zehntes
+  // Werkzeug. Prüft zusätzlich PROGRAMMATISCH per echtem .focus()-Aufruf, ob die
+  // JS-Fokusziel-Headline tatsächlich keinen sichtbaren Standard-Outline erzeugt —
+  // das ist eine der Sachen, die Albert am Bildschirm nicht zuverlässig sehen kann
+  // (anders als :focus-visible, das echte Nutzerinteraktion braucht, ist ein echter
+  // .focus()-Aufruf real scriptbar und testet die tatsächliche Outline-Berechnung).
+  // ---------------------------------------------------------------------------
+
+  function fwScreenFlowCheck() {
+    console.log('%cScreen-Flow-Struktur-Check (Rahmen/Headline/Navigation)', 'font-weight:bold;font-size:14px');
+
+    const textHex = toHex(resolve('--color-text'));
+
+    const screens = [...document.querySelectorAll('.fw-app [data-fw-screen]')];
+    if (screens.length === 0) {
+      console.log('%c— Keine Screens im DOM.', 'color:gray');
+      return [];
+    }
+
+    const screenRows = screens.map(screen => {
+      const cs = getComputedStyle(screen);
+      return {
+        Screen: 'data-fw-screen=' + screen.dataset.fwScreen,
+        'position: relative': cs.position === 'relative' ? '✅' : `❌ (${cs.position})`,
+      };
+    });
+    console.table(screenRows);
+
+    const headlineRows = screens.map(screen => {
+      const h2 = screen.querySelector('h2');
+      if (!h2) return { Screen: 'data-fw-screen=' + screen.dataset.fwScreen, Headline: '— (kein h2 gefunden)' };
+      const cs = getComputedStyle(h2);
+      const bold = parseInt(cs.fontWeight, 10) >= 700;
+      const colorOk = colorToHexOrNull(cs.color) === textHex;
+      const tabIndexOk = h2.tabIndex === -1;
+
+      // Programmatischer Fokus-Test: nur sinnvoll, wenn der Screen gerade sichtbar
+      // (nicht hidden) ist — .focus() auf einem Element in einem hidden-Teilbaum ist
+      // ein No-op und würde sonst ein falsches ✅ liefern (Outline ist ohne echten
+      // Fokus generisch 'none').
+      let outlineNoneOnFocus = null;
+      if (!screen.hasAttribute('hidden')) {
+        try {
+          const prevActive = document.activeElement;
+          h2.focus({ preventScroll: true });
+          if (document.activeElement === h2) {
+            outlineNoneOnFocus = getComputedStyle(h2).outlineStyle === 'none';
+          }
+          if (prevActive && typeof prevActive.focus === 'function' && prevActive !== h2) prevActive.focus({ preventScroll: true });
+          else h2.blur();
+        } catch (e) { outlineNoneOnFocus = null; }
+      }
+
+      return {
+        Screen: 'data-fw-screen=' + screen.dataset.fwScreen,
+        Headline: '"' + h2.textContent.trim().slice(0, 30) + '"',
+        'text-xl font-bold': bold ? '✅' : `❌ (${cs.fontWeight})`,
+        Textfarbe: colorOk ? '✅' : `❌ (${colorToHexOrNull(cs.color)})`,
+        'tabIndex=-1': tabIndexOk ? '✅' : '❌',
+        'Kein Outline bei .focus()': outlineNoneOnFocus === null ? '— (Screen verborgen, nicht testbar)' : (outlineNoneOnFocus ? '✅' : '❌'),
+      };
+    });
+    console.table(headlineRows);
+
+    // Screen-Navigation: eindeutig über die Token-Kombination flex-wrap + gap-3 + mt-6
+    // identifizierbar (FW_SCREEN_NAV_CLASS) — kein anderer Container in der App trägt
+    // alle drei gleichzeitig (Chart-Slot hat mt-6, aber kein flex-wrap/gap-3; Stationen-
+    // Panel hat gap-3, aber flex-col statt flex-wrap und kein mt-6).
+    const navs = [...document.querySelectorAll('.fw-app div')].filter(el => {
+      const tokens = (el.className || '').split(/\s+/);
+      return tokens.includes('flex-wrap') && tokens.includes('gap-3') && tokens.includes('mt-6');
+    });
+    let navRows = [];
+    if (navs.length === 0) {
+      console.log('%c— Keine Screen-Navigation im DOM gefunden (Screen 3/4 evtl. nicht erreicht).', 'color:gray');
+    } else {
+      navRows = navs.map(nav => {
+        const cs = getComputedStyle(nav);
+        return {
+          Nav: simpleSelector(nav),
+          'flex flex-wrap': (cs.display === 'flex' && cs.flexWrap === 'wrap') ? '✅' : `❌ (${cs.display}, ${cs.flexWrap})`,
+          'gap-3 (>0)': parseFloat(cs.columnGap) > 0 ? '✅' : '❌',
+          'mt-6 (>0)': parseFloat(cs.marginTop) > 0 ? '✅' : '❌',
+        };
+      });
+      console.table(navRows);
+    }
+
+    const allRows = [...screenRows, ...headlineRows, ...navRows];
+    const fails = allRows.filter(r => Object.values(r).some(v => typeof v === 'string' && v.startsWith('❌')));
+    console.log(fails.length === 0
+      ? '%c✅ Screen-Rahmen/Headline/Navigation strukturell korrekt.'
+      : `%c❌ ${fails.length} Zeile(n) mit Abweichung.`,
+      `font-weight:bold;color:${fails.length === 0 ? 'green' : 'crimson'}`);
+    return { screens: screenRows, headlines: headlineRows, navs: navRows };
+  }
+
   global.fwTokenCheck = fwTokenCheck;
   global.fwFontCheck = fwFontCheck;
   global.fwCiAudit = fwCiAudit;
   global.fwKpiCardCheck = fwKpiCardCheck;
-  // Auto-Lauf beim Einfügen in die Konsole: Farben + Fonts + Ist/Soll-Set-Audit + KPI-Struktur.
+  global.fwSliderFieldCheck = fwSliderFieldCheck;
+  global.fwButtonCtaCheck = fwButtonCtaCheck;
+  global.fwStationPanelCheck = fwStationPanelCheck;
+  global.fwDisclosureCalloutCheck = fwDisclosureCalloutCheck;
+  global.fwChartSlotCheck = fwChartSlotCheck;
+  global.fwScreenFlowCheck = fwScreenFlowCheck;
+  // Auto-Lauf beim Einfügen in die Konsole: Farben + Fonts + Ist/Soll-Set-Audit + KPI-Struktur +
+  // Slider-Struktur + Button/CTA + Stationen-Panel + Disclosure/Callout + Chart-Slot + Screen-Flow.
   fwTokenCheck();
   fwFontCheck();
   fwCiAudit();
   fwKpiCardCheck();
+  fwSliderFieldCheck();
+  fwButtonCtaCheck();
+  fwStationPanelCheck();
+  fwDisclosureCalloutCheck();
+  fwChartSlotCheck();
+  fwScreenFlowCheck();
 })(typeof window !== 'undefined' ? window : this);

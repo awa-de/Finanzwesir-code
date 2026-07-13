@@ -22,3 +22,42 @@ Wird nach /distill ins Jahres-Segment rotiert (Rohlog erhalten). Einträge: [FRI
 - [WIN] Play-CDN-Manifest- und Theme-Bridge-Checker (check-test-pages.py) sowie die KPI-/Reduced-Motion-Erweiterung von ci-token-check.js liefen beim jeweils ersten realen Lauf gruen -- generisches Ableiten aus tokens.css/app.js statt hartkodierter Kataloge zahlte sich aus.
 - [OK] Slice 1 (Shell/States) zunaechst ROT (Play-CDN generierte CSS fuer Laufzeit-Klassen nicht zuverlaessig), durch 02d (Runtime-Manifest) + 02e (Theme-Bridge) behoben, danach GRUEN. Slice 2 (KPI) direkt GRUEN inkl. Reduced-Motion-Nachweis.
 - [QUESTION] Bei AP-tailwind-02d wurde Szenario R (app.test.html) zusaetzlich zu den im Auftrag genannten F/K/L korrigiert (gleicher Codepfad) -- nicht vorab bestaetigt, transparent im Ergebnisprotokoll gemeldet.
+
+### AP-tailwind-02 — AP-Wechsel
+
+### 2026-07-13 — AP-tailwind-02 Slice 3 (Slider-Field) ✅
+- [OK] Slider-Field auf Screen 1 migriert (FW_SLIDER_*_CLASS), Checker direkt beim ersten Lauf grün, Browser-Abnahme bestätigt.
+
+### AP-tailwind-02 Slice 3 — AP-Wechsel
+
+### 2026-07-13 — AP-tailwind-02 Slice 4 (Buttons/CTA) + Manifest-Fix ✅
+- [FRICTION] Ursprüngliches Delta (makeBtn(text, buttonClass) mit CSS-String-Parameter) erzeugte einen echten blinden Fleck im Play-CDN-Checker (Klassennutzung nur über direkte .className=/classList-Zuweisungen erkannt, keine Funktionsargumente) — gestoppt und Albert mit drei Lösungsoptionen vorgelegt statt selbst zu entscheiden.
+- [OK] Albert lieferte Folgeauftrag (Manifest-Fix): makeBtn() auf Rezeptschlüssel umgestellt, Checker-Invariante von Laufzeit-Datenfluss auf deklarierte FW_*_CLASS-Konstanten umgestellt — blinder Fleck strukturell behoben, nicht durch Sonderregel umgangen. Drei Negativproben deterministisch bestätigt.
+- [FRICTION] Neue Invariante deckte nebenbei ein zweites, unerwähntes Problem auf: opacity-60 (Loading-State, bares classList-Literal aus Slice 1) fiel durch die neue rein-deklarative Prüfung — FW_LOADING_STATE_OPACITY_CLASS ergänzt, Abweichung vom Delta transparent im Ergebnisprotokoll vermerkt statt stillschweigend gefixt.
+
+### AP-tailwind-02 Slice 4 — AP-Wechsel
+
+### 2026-07-13 — AP-tailwind-02 Slice 5 (Stationen-Panel) ✅
+- [OK] Panel/Quellenzeile/Headline/Anker/Fortschrittszeile migriert, Checker grün, Browser-Abnahme bestätigt. --fw-space-*-Nachweis explizit auf die migrierten Selektoren präzisiert, nicht als globale Leerheit behauptet.
+
+### AP-tailwind-02 Slice 5 — AP-Wechsel
+
+### 2026-07-13 — AP-tailwind-02 Slice 6 (Disclosure/Callout/sr-only) + AP-tailwind-02f (Responsiver Disclosure-Kontrakt) ✅
+- [OK] Disclosure-Trigger (Label-/Indikator-Span-Trennung), Callout, Live-Region auf sr-only migriert, Checker grün, Browser-Abnahme bestätigt.
+- [OK] AP-tailwind-02f (Q-08): Trigger + Zwischenwerte-dl responsiv nachgezogen (Konzept, Visual Board, Mockups, Pilot-App synchron), Fundstellenkarte real per Python erzeugt statt geraten.
+
+### AP-tailwind-02 Slice 6 / 02f — AP-Wechsel
+
+### 2026-07-13 — AP-tailwind-02 Slice 7 (Chart-Slot) + Slice 8 (Screen-Flow-Nachputz) ✅
+- [WIN] Read-only CSS-Inventur vor Slice 8 identifizierte den Rubikon-Subline-Konflikt sauber im Voraus (gemeinsame Klasse .fw-app__screen-subline für normale Sublines und geschützten Rubikon-Fließtext) — Slice 8 konnte dadurch präzise scope-begrenzt (nur Screen-Rahmen/Headline/Nav) umgesetzt werden, ohne den Rubikon-Vertrag zu gefährden oder den Konflikt stillschweigend zu übergehen.
+- [OK] Beide Slices Checker grün, Browser-Abnahme bestätigt (100%).
+
+### AP-tailwind-02 Slice 7/8 — AP-Wechsel
+
+### 2026-07-13 — ci-token-check.js Faden-Nachprüfung (Slices 4–8 QA-Werkzeuge) + deterministische Screen-Flow-/Chart-Slot-Verifikation ✅
+- [OK] Auf Alberts Wunsch alle seit Slice 4 eingeführten Komponenten gegen ci-token-check.js abgeglichen: 5 neue eigenständige Werkzeuge ergänzt (fwButtonCtaCheck, fwStationPanelCheck, fwDisclosureCalloutCheck, fwChartSlotCheck, fwScreenFlowCheck), insgesamt jetzt 10.
+- [WIN] Dabei einen echten stillen Bug in fwFontCheck() gefunden (Standard-Flächenliste zeigte noch auf zwei in Slice 5/8 entfernte CSS-Klassen) — Font-Prüfung lief seit den jeweiligen Migrationen für diese Flächen unbemerkt ins Leere, jetzt auf strukturelle Selektoren umgestellt.
+- [FRICTION] Alberts Testworkflow brauchte mehrere Rückfragerunden: (a) missverstand zunächst, dass injizierte Konsolen-Funktionen bis zum Seiten-Reload erhalten bleiben (kein Neueinfügen des ganzen Skripts pro Screen-Wechsel nötig), (b) kopierte wiederholt nur Teiltabellen (Nav statt Headline-Tabelle) aus der dreiteiligen Konsolenausgabe von fwScreenFlowCheck(). Beides geklärt, am Ende alle vier Screens einzeln real verifiziert (inkl. programmatischem .focus()-Outline-Test).
+- [OK] Deterministische Nachweise (fwChartSlotCheck, fwScreenFlowCheck) nachträglich in die Slice-7/8-Ergebnisprotokolle eingetragen, auf Alberts Nachfrage.
+
+### Kettenabschluss AP-tailwind-02 (Slices 1–8 + 02a/02b/02f) ✅ | RECONCILED: AP-tailwind-02a AP-tailwind-02b AP-tailwind-02-Slice-1 AP-tailwind-02-Slice-2 AP-tailwind-02-Slice-3 AP-tailwind-02-Slice-4 AP-tailwind-02-Slice-5 AP-tailwind-02-Slice-6 AP-tailwind-02f AP-tailwind-02-Slice-7 AP-tailwind-02-Slice-8

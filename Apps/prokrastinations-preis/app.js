@@ -20,11 +20,68 @@ const FW_LOADING_WRAPPER_CLASS = 'flex items-center justify-center gap-3 p-6 tex
 const FW_LOADING_SPINNER_CLASS = 'h-8 w-8 animate-spin motion-reduce:animate-none rounded-full border-4 border-border border-t-primary';
 const FW_EMPTY_CLASS = 'p-4 text-text-muted';
 const FW_ERROR_CLASS = 'rounded-lg border border-error-border bg-error-bg p-4 text-error-text';
+// NEW — AP-tailwind-02_slice-4-manifest-fix: bislang bares classList-Literal, jetzt als
+// FW_*_CLASS-Rezeptkonstante gefuehrt (neue Manifest-Invariante: nur deklarierte
+// FW_*_CLASS-Konstanten zaehlen zur erwarteten Manifestmenge, s. tools/check-test-pages.py).
+const FW_LOADING_STATE_OPACITY_CLASS = 'opacity-60';
 // NEW — AP-tailwind-02_slice-2: KPI-Klassenkonstanten (TAILWIND-APP-BAUKASTEN_KONZEPT_V0-1.md §6.3)
 const FW_KPI_GROUP_CLASS = 'flex flex-wrap gap-4 mt-4';
 const FW_KPI_CARD_CLASS = 'flex-1 basis-36 rounded-lg bg-surface px-4 py-2';
 const FW_KPI_LABEL_CLASS = 'mb-1 text-sm text-text-muted';
 const FW_KPI_VALUE_CLASS = 'm-0 text-2xl font-bold text-text';
+// NEW — AP-tailwind-02_slice-3: Slider-Field-Klassenkonstanten (TAILWIND-APP-BAUKASTEN_KONZEPT_V0-1.md §6.6)
+const FW_SLIDER_FIELD_CLASS = 'my-4';
+const FW_SLIDER_LABEL_CLASS = 'flex flex-wrap items-center gap-x-4 gap-y-2 cursor-pointer';
+const FW_SLIDER_LABEL_TEXT_CLASS = 'shrink-0 text-sm text-text-muted';
+const FW_SLIDER_INPUT_CLASS = 'min-w-0 flex-1 basis-40 cursor-pointer accent-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-petrol-500 focus-visible:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed';
+const FW_SLIDER_VALUE_CLASS = 'min-w-[7ch] shrink-0 text-right font-bold text-text';
+// NEW — AP-tailwind-02_slice-4: Button-/CTA-Klassenkonstanten (TAILWIND-APP-BAUKASTEN_KONZEPT_V0-1.md §6.4/§7)
+const FW_BUTTON_NEXT_CLASS = 'inline-flex items-center justify-center rounded-md px-4 py-2 font-bold transition-colors motion-reduce:transition-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-petrol-500 focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none bg-primary text-white hover:bg-petrol-700 active:bg-petrol-800 ml-auto';
+const FW_BUTTON_PREV_CLASS = 'inline-flex items-center justify-center rounded-md px-4 py-2 font-bold transition-colors motion-reduce:transition-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-petrol-500 focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none border border-border bg-bg text-text hover:bg-bg-faint active:bg-surface';
+const FW_BUTTON_JOURNEY_CLASS = 'inline-flex items-center justify-center rounded-md px-4 py-2 font-bold transition-colors motion-reduce:transition-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-petrol-500 focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none bg-primary text-white hover:bg-petrol-700 active:bg-petrol-800 w-full sm:w-auto mt-4';
+const FW_CTA_CLASS = 'inline-flex items-center justify-center rounded-md px-4 py-2 font-bold transition-colors motion-reduce:transition-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-petrol-500 focus-visible:ring-offset-2 bg-primary text-white hover:bg-petrol-700 active:bg-petrol-800 mt-4 no-underline';
+// NEW — AP-tailwind-02_slice-4-manifest-fix: Rezeptschlüssel statt CSS-String als makeBtn()-Parameter
+// (kein CSS-String darf als Funktionsparameter in makeBtn() gelangen).
+const FW_BUTTON_RECIPES = Object.freeze({
+  next: FW_BUTTON_NEXT_CLASS,
+  prev: FW_BUTTON_PREV_CLASS,
+  journey: FW_BUTTON_JOURNEY_CLASS,
+});
+// NEW — AP-tailwind-02_slice-5: Stationen-Panel-Klassenkonstanten (TAILWIND-APP-BAUKASTEN_KONZEPT_V0-1.md
+// §6.2 Panel, §7 Stationen-/Story-Bereich). Die fw-app__station-area-/fw-app__screen3-bridge-Marker
+// bleiben lokale Mechanikmarker (Flug-Clone, Bridge-Reveal) und werden vom Manifestchecker nicht als
+// Tailwind-Utility gezählt.
+const FW_STATION_PANEL_CLASS = 'fw-app__station-area my-5 flex flex-col gap-3';
+const FW_STATION_SOURCE_LABEL_CLASS = 'm-0 text-xs uppercase tracking-wide text-text-muted';
+const FW_STATION_HEADLINE_CLASS = 'm-0 text-lg font-bold text-text focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-petrol-500 focus-visible:ring-offset-2';
+const FW_STATION_ANCHOR_CLASS = 'm-0 text-sm text-text-sec';
+const FW_JOURNEY_PROGRESS_CLASS = 'mt-2 text-center text-sm text-text-muted';
+const FW_SCREEN3_BRIDGE_CLASS = 'fw-app__screen3-bridge mt-2 text-center text-sm text-text-muted';
+// NEW — AP-tailwind-02_slice-6: Disclosure-/Callout-/sr-only-Klassenkonstanten (TAILWIND-APP-BAUKASTEN_KONZEPT_V0-1.md
+// §6.7 Callout, §6.8 Disclosure, §6.9 ARIA-Live-Region). Der fw-app__assumptions-Marker bleibt Teil der
+// Callout-Konstante, weil er ausschließlich die bestehende Screen-3-Reveal-Mechanik trägt — kein Tailwind-
+// Token, wird vom Manifestchecker ausgefiltert.
+const FW_DISCLOSURE_TRIGGER_CLASS = 'flex w-full items-center justify-between gap-2 rounded-md px-3 py-2 text-left text-sm font-semibold text-text-sec transition-colors motion-reduce:transition-none hover:bg-bg-faint hover:text-text focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-petrol-500 sm:inline-flex sm:w-auto sm:justify-start'; // CHANGED — AP-tailwind-02f (Q-08): responsiver Disclosure-Kontrakt
+const FW_DISCLOSURE_INDICATOR_CLOSED_CLASS = 'transition-transform motion-reduce:transition-none';
+const FW_DISCLOSURE_INDICATOR_OPEN_CLASS = 'transition-transform motion-reduce:transition-none rotate-180';
+const FW_DISCLOSURE_CONTENT_CLASS = 'mt-2 pl-3';
+const FW_INTERMEDIATE_VALUES_CLASS = 'm-0 grid w-full grid-cols-2 gap-x-4 gap-y-1 sm:w-fit'; // CHANGED — AP-tailwind-02f (Q-08): responsiver Disclosure-Kontrakt
+const FW_INTERMEDIATE_LABEL_CLASS = 'text-xs text-text-muted';
+const FW_INTERMEDIATE_VALUE_CLASS = 'm-0 text-base font-semibold text-text';
+const FW_ASSUMPTIONS_CLASS = 'fw-app__assumptions mt-4 border-l-2 border-border pl-4 text-sm text-text-muted';
+const FW_A11Y_LIVE_REGION_CLASS = 'sr-only';
+// NEW — AP-tailwind-02_slice-7: App-seitiger Chart-Slot (TAILWIND-APP-BAUKASTEN_KONZEPT_V0-1.md
+// D-04 Ein-Container-Vertrag, §9). Nur Positionierungskontext + Abstand — nie Fläche/Border/
+// Schatten/Radius/Padding; der einzige sichtbare Container bleibt der engine-eigene fw-chart-wrapper.
+const FW_CHART_SLOT_CLASS = 'relative mt-6';
+// NEW — AP-tailwind-02_slice-8: Screen-Flow-Nachputz (TAILWIND-APP-BAUKASTEN_KONZEPT_V0-1.md §7/§9).
+// FW_SCREEN_CLASS: nur Positionierungsrahmen (Card-to-Point-Flug-Clone), kein flex/gap. Der
+// fw-app__screen-headline-Marker bleibt ausschließlich für die bestehende Fokus-Kompatibilitätsregel
+// (.fw-app__screen-headline:focus) erhalten — kein neues allgemeines focus:-Muster. mb-2 bildet den
+// bisherigen 0.5rem-Abstand zur noch nicht migrierten, geschützten Subline wertgleich ab.
+const FW_SCREEN_CLASS = 'relative';
+const FW_SCREEN_HEADLINE_CLASS = 'fw-app__screen-headline m-0 mb-2 text-xl font-bold text-text';
+const FW_SCREEN_NAV_CLASS = 'flex flex-wrap gap-3 mt-6';
 
 function validateSlug(slug) {
   return typeof slug === 'string' && SLUG_WHITELIST.includes(slug.trim());
@@ -36,7 +93,7 @@ function clearContainer(container) {
 
 function setState(container, state) {
   container.dataset.fwState = state;
-  container.classList.toggle('opacity-60', state === 'loading'); // CHANGED — AP-tailwind-02_slice-1: war CSS-Attributselektor
+  container.classList.toggle(FW_LOADING_STATE_OPACITY_CLASS, state === 'loading'); // CHANGED — AP-tailwind-02_slice-4-manifest-fix (war: bares Literal 'opacity-60')
   // Erlaubte Werte: 'loading' | 'content' | 'error' | 'empty'
 }
 
@@ -253,40 +310,51 @@ function renderStationCard(container, station, stationIntermediate, fmt) {
   container.textContent = ''; // vorherige Station sauber ersetzen
 
   const sourceLabel = document.createElement('p');
-  sourceLabel.className = 'fw-app__station-source-label';
+  sourceLabel.className = FW_STATION_SOURCE_LABEL_CLASS; // CHANGED — AP-tailwind-02_slice-5
   sourceLabel.textContent = formatSourceLine(station); // CHANGED — B1-STATIONS-v3.0
   container.appendChild(sourceLabel);
 
   const headline = document.createElement('h3');
-  headline.className = 'fw-app__station-headline';
+  headline.className = FW_STATION_HEADLINE_CLASS; // CHANGED — AP-tailwind-02_slice-5
   headline.tabIndex = -1; // fokussierbar via JS (APP_SPEC §14.5 Fokusführung)
   headline.textContent = station.headline;
   container.appendChild(headline);
 
   const anchor = document.createElement('p');
-  anchor.className = 'fw-app__station-anchor';
+  anchor.className = FW_STATION_ANCHOR_CLASS; // CHANGED — AP-tailwind-02_slice-5
   anchor.textContent = station.anchorText;
   container.appendChild(anchor);
 
   // Collapsible Zwischenstand (APP_SPEC §14.5, visualRules.stationValueMobile = collapsible)
+  // CHANGED — AP-tailwind-02_slice-6: Wrapper ohne eigene Klasse (Stationen-Panel-gap-3 liefert
+  // bereits den Abstand, TAILWIND-APP-BAUKASTEN_KONZEPT_V0-1.md §6.8/§7).
   const collapsibleId  = 'fw-collapsible-' + station.id;
   const collapsibleWrap = document.createElement('div');
-  collapsibleWrap.className = 'fw-app__collapsible';
 
   const trigger = document.createElement('button');
   trigger.type  = 'button';
-  trigger.className = 'fw-app__collapsible-trigger';
-  trigger.textContent = 'Zwischenstand anzeigen'; // CHANGED — B1-STATIONS-v3.0
+  trigger.className = FW_DISCLOSURE_TRIGGER_CLASS; // CHANGED — AP-tailwind-02_slice-6
   trigger.setAttribute('aria-expanded', 'false');
   trigger.setAttribute('aria-controls', collapsibleId);
 
+  // NEW — AP-tailwind-02_slice-6: sichtbarer Labeltext in eigenem Span (nur dessen textContent
+  // wechselt beim Toggle) + separater aria-hidden-Indikator (§6.8 Rezept).
+  const triggerLabel = document.createElement('span');
+  triggerLabel.textContent = 'Zwischenstand anzeigen'; // CHANGED — B1-STATIONS-v3.0
+  const indicator = document.createElement('span');
+  indicator.setAttribute('aria-hidden', 'true');
+  indicator.className = FW_DISCLOSURE_INDICATOR_CLOSED_CLASS;
+  indicator.textContent = '▾';
+  trigger.appendChild(triggerLabel);
+  trigger.appendChild(indicator);
+
   const content = document.createElement('div');
   content.id        = collapsibleId;
-  content.className = 'fw-app__collapsible-content';
+  content.className = FW_DISCLOSURE_CONTENT_CLASS; // CHANGED — AP-tailwind-02_slice-6
   content.setAttribute('hidden', '');
 
   const dl = document.createElement('dl');
-  dl.className = 'fw-app__intermediate-values';
+  dl.className = FW_INTERMEDIATE_VALUES_CLASS; // CHANGED — AP-tailwind-02_slice-6
 
   [
     { label: 'Eingezahlt',       value: fmt.format(stationIntermediate.paidIn) },
@@ -294,8 +362,10 @@ function renderStationCard(container, station, stationIntermediate, fmt) {
   ].forEach(({ label, value }) => {
     const div = document.createElement('div');
     const dt  = document.createElement('dt');
+    dt.className = FW_INTERMEDIATE_LABEL_CLASS; // NEW — AP-tailwind-02_slice-6
     dt.textContent = label;
     const dd  = document.createElement('dd');
+    dd.className = FW_INTERMEDIATE_VALUE_CLASS; // NEW — AP-tailwind-02_slice-6
     dd.textContent = value;
     div.appendChild(dt);
     div.appendChild(dd);
@@ -310,7 +380,8 @@ function renderStationCard(container, station, stationIntermediate, fmt) {
   trigger.addEventListener('click', () => {
     const isOpen = trigger.getAttribute('aria-expanded') === 'true';
     trigger.setAttribute('aria-expanded', String(!isOpen));
-    trigger.textContent = !isOpen ? 'Zwischenstand ausblenden' : 'Zwischenstand anzeigen'; // CHANGED — B1-STATIONS-v3.0
+    triggerLabel.textContent = !isOpen ? 'Zwischenstand ausblenden' : 'Zwischenstand anzeigen'; // CHANGED — AP-tailwind-02_slice-6 (war: trigger.textContent)
+    indicator.className = !isOpen ? FW_DISCLOSURE_INDICATOR_OPEN_CLASS : FW_DISCLOSURE_INDICATOR_CLOSED_CLASS; // NEW — AP-tailwind-02_slice-6
     if (!isOpen) content.removeAttribute('hidden');
     else         content.setAttribute('hidden', '');
   });
@@ -328,21 +399,25 @@ function renderContent(container, appData, options, stationsConfig) { // CHANGED
   // Zustände: 'idle' | 'chart-revealing' | 'point-pulsing-ready' | 'card-flying' | 'next-card-entering'
   let journeyState = 'idle';
 
-  function makeBtn(text, extraClass) {
+  function makeBtn(text, recipe) { // CHANGED — AP-tailwind-02_slice-4-manifest-fix: recipe ist ein fester Rezeptschlüssel, kein CSS-String
+    const buttonClass = FW_BUTTON_RECIPES[recipe];
+    if (!buttonClass) {
+      throw new Error('Unbekanntes Button-Rezept.');
+    }
     const btn = document.createElement('button');
     btn.type = 'button';
     btn.textContent = text;
-    btn.className = 'fw-app__btn ' + extraClass;
+    btn.className = buttonClass;
     return btn;
   }
 
   // --- Screen 1 — Frage + Slider ---
   const screen1 = document.createElement('section');
-  screen1.className = 'fw-app__screen';
+  screen1.className = FW_SCREEN_CLASS; // CHANGED — AP-tailwind-02_slice-8
   screen1.dataset.fwScreen = '1';
 
   const h2S1 = document.createElement('h2');
-  h2S1.className = 'fw-app__screen-headline';
+  h2S1.className = FW_SCREEN_HEADLINE_CLASS; // CHANGED — AP-tailwind-02_slice-8
   h2S1.tabIndex = -1; // fokussierbar via JS, nicht im Tab-Ring
   h2S1.textContent = 'Vor 10 Jahren wäre besser gewesen. Was ist mit heute?';
   screen1.appendChild(h2S1);
@@ -354,15 +429,15 @@ function renderContent(container, appData, options, stationsConfig) { // CHANGED
 
   // Slider-Sektion (Slice 3 — Q-06: kein for/id wegen Mehrfach-Container)
   const sliderSection = document.createElement('div');
-  sliderSection.className = 'fw-app__slider-section';
+  sliderSection.className = FW_SLIDER_FIELD_CLASS; // CHANGED — AP-tailwind-02_slice-3
   const label = document.createElement('label');
-  label.className = 'fw-app__slider-label';
+  label.className = FW_SLIDER_LABEL_CLASS; // CHANGED — AP-tailwind-02_slice-3
   const labelText = document.createElement('span');
-  labelText.className = 'fw-app__slider-label-text';
+  labelText.className = FW_SLIDER_LABEL_TEXT_CLASS; // CHANGED — AP-tailwind-02_slice-3
   labelText.textContent = 'Ich spare monatlich';
   const slider = document.createElement('input');
   slider.type = 'range';
-  slider.className = 'fw-app__slider';
+  slider.className = FW_SLIDER_INPUT_CLASS; // CHANGED — AP-tailwind-02_slice-3
   slider.min = '50';
   slider.max = '2000';
   slider.step = '50';
@@ -373,7 +448,7 @@ function renderContent(container, appData, options, stationsConfig) { // CHANGED
   slider.setAttribute('aria-valuenow', String(initialRate));
   slider.setAttribute('aria-valuetext', initialRate + ' Euro pro Monat');
   const valueDisplay = document.createElement('span');
-  valueDisplay.className = 'fw-app__slider-value';
+  valueDisplay.className = FW_SLIDER_VALUE_CLASS; // CHANGED — AP-tailwind-02_slice-3
   valueDisplay.setAttribute('aria-hidden', 'true');
   valueDisplay.textContent = initialRate + ' €/Monat';
   label.appendChild(labelText);
@@ -382,46 +457,46 @@ function renderContent(container, appData, options, stationsConfig) { // CHANGED
   sliderSection.appendChild(label);
   screen1.appendChild(sliderSection);
 
-  const btnS1Next = makeBtn('10 Jahre zurückspringen', 'fw-app__btn--next'); // CHANGED — AP-14 (war: 'Weiter →')
+  const btnS1Next = makeBtn('10 Jahre zurückspringen', 'next'); // CHANGED — AP-14 (war: 'Weiter →')
   screen1.appendChild(btnS1Next);
 
   // --- Screen 2 — Stationen-Zeitreise (CHANGED — AP-14: war KpiCards + Chart) ---
   const screen2 = document.createElement('section');
-  screen2.className = 'fw-app__screen';
+  screen2.className = FW_SCREEN_CLASS; // CHANGED — AP-tailwind-02_slice-8
   screen2.dataset.fwScreen = '2';
   screen2.setAttribute('hidden', '');
 
   const h2S2 = document.createElement('h2');
-  h2S2.className = 'fw-app__screen-headline';
+  h2S2.className = FW_SCREEN_HEADLINE_CLASS; // CHANGED — AP-tailwind-02_slice-8
   h2S2.tabIndex = -1;
   h2S2.textContent = 'Im Rückblick sieht es klar aus. In Echtzeit war es eine Entscheidung.'; // CHANGED — AP-14
   screen2.appendChild(h2S2);
 
-  const stationArea = document.createElement('div'); // NEW — AP-14: Station-Card Container
-  stationArea.className = 'fw-app__station-area';
+  const stationArea = document.createElement('section'); // CHANGED — AP-tailwind-02_slice-5 (war: div, §6.2 Panel)
+  stationArea.className = FW_STATION_PANEL_CLASS;
   screen2.appendChild(stationArea);
 
   const chartSection2 = document.createElement('div'); // CHANGED — AP-14: nur visibleChartSeries
   chartSection2.setAttribute('data-fw-appchart', 'sparplan-s2');
-  chartSection2.className = 'fw-app__chart-section';
+  chartSection2.className = FW_CHART_SLOT_CLASS; // CHANGED — AP-tailwind-02_slice-7
   screen2.appendChild(chartSection2);
 
   // NEW — AP-14b: Orientierungs-Chip (APP_SPEC §16.1)
   const progressEl = document.createElement('p');
-  progressEl.className = 'fw-app__journey-progress';
+  progressEl.className = FW_JOURNEY_PROGRESS_CLASS; // CHANGED — AP-tailwind-02_slice-5
   screen2.appendChild(progressEl);
 
-  const journeyBtn = makeBtn('', 'fw-app__btn--journey'); // NEW — AP-14: Text wird in renderJourneyStep gesetzt
+  const journeyBtn = makeBtn('', 'journey'); // NEW — AP-14: Text wird in renderJourneyStep gesetzt
   screen2.appendChild(journeyBtn);
 
   // --- Screen 3 — Heute (Chart ohne VertikaleLinie — TODO Slice 6) ---
   const screen3 = document.createElement('section');
-  screen3.className = 'fw-app__screen';
+  screen3.className = FW_SCREEN_CLASS; // CHANGED — AP-tailwind-02_slice-8
   screen3.dataset.fwScreen = '3';
   screen3.setAttribute('hidden', '');
 
   const h2S3 = document.createElement('h2');
-  h2S3.className = 'fw-app__screen-headline';
+  h2S3.className = FW_SCREEN_HEADLINE_CLASS; // CHANGED — AP-tailwind-02_slice-8
   h2S3.tabIndex = -1;
   h2S3.textContent = 'Jetzt erst sieht es einfach aus.'; // CHANGED — AP-14 (APP_SPEC §16.2; war: 'Vor 10 Jahren ist weg. Heute nicht.')
   screen3.appendChild(h2S3);
@@ -433,7 +508,7 @@ function renderContent(container, appData, options, stationsConfig) { // CHANGED
 
   const chartSection3 = document.createElement('div');
   chartSection3.setAttribute('data-fw-appchart', 'sparplan-s3'); // CHANGED — Slice 6: VertikaleLinie via features
-  chartSection3.className = 'fw-app__chart-section';
+  chartSection3.className = FW_CHART_SLOT_CLASS; // CHANGED — AP-tailwind-02_slice-7
   // CHANGED — AP-prokrast-10b (Kontinuitäts-Reveal): kein hidden mehr — Chart erscheint
   // beim Screen-3-Eintritt sofort vollständig und still (kein Zwischenframe, keine
   // Kurslinien-Neuaufbauanimation). Nur Bridge/KPI/Disclaimer sind gestuft (s.u.).
@@ -445,7 +520,7 @@ function renderContent(container, appData, options, stationsConfig) { // CHANGED
   // von progressEl — eigenes, Screen-3-lokales Element an derselben unteren Stelle, wo
   // danach KPI-Karten + Disclaimer erscheinen.
   const bridgeS3 = document.createElement('p');
-  bridgeS3.className = 'fw-app__journey-progress fw-app__screen3-bridge';
+  bridgeS3.className = FW_SCREEN3_BRIDGE_CLASS; // CHANGED — AP-tailwind-02_slice-5
   bridgeS3.setAttribute('hidden', ''); // NEW — AP-prokrast-10b: startet hidden (kein Text vor erstem Reveal), analog KPI/Disclaimer
   screen3.appendChild(bridgeS3);
 
@@ -455,34 +530,34 @@ function renderContent(container, appData, options, stationsConfig) { // CHANGED
   screen3.appendChild(kpiContainerS3);
 
   const assumptionsS3 = document.createElement('aside'); // NEW — Slice 6: AssumptionsBox (APP_SPEC §19.8)
-  assumptionsS3.className = 'fw-app__assumptions';
+  assumptionsS3.className = FW_ASSUMPTIONS_CLASS; // CHANGED — AP-tailwind-02_slice-6
   assumptionsS3.textContent = 'Basis: MSCI World Index, monatliche Indexwerte, 10 Jahre rückwärts bis zum letzten vollständig verfügbaren Monat. Die Werte zeigen das Marktprinzip, keine konkrete ETF-Produktempfehlung. Vergangene Wertentwicklungen sind keine Garantie für die Zukunft. Keine Finanzberatung.';
   assumptionsS3.setAttribute('hidden', ''); // NEW — AP-prokrast-10b: startet hidden, erscheint zusammen mit KPI nach der Bridge-Phase
   screen3.appendChild(assumptionsS3);
 
   const navS3 = document.createElement('div');
-  navS3.className = 'fw-app__screen-nav';
-  const btnS3Prev = makeBtn('← Zurück', 'fw-app__btn--prev');
-  const btnS3Next = makeBtn('Meine nächsten 10 Jahre starten', 'fw-app__btn--next'); // CHANGED — B1-AP-16b (E-04)
+  navS3.className = FW_SCREEN_NAV_CLASS; // CHANGED — AP-tailwind-02_slice-8
+  const btnS3Prev = makeBtn('← Zurück', 'prev');
+  const btnS3Next = makeBtn('Meine nächsten 10 Jahre starten', 'next'); // CHANGED — B1-AP-16b (E-04)
   navS3.appendChild(btnS3Prev);
   navS3.appendChild(btnS3Next);
   screen3.appendChild(navS3);
 
   // --- Screen 4 — Rubikon (stehender Zustand, CHANGED — AP-prokrast-03h: kein Morph mehr) ---
   const screen4 = document.createElement('section');
-  screen4.className = 'fw-app__screen';
+  screen4.className = FW_SCREEN_CLASS; // CHANGED — AP-tailwind-02_slice-8
   screen4.dataset.fwScreen = '4';
   screen4.setAttribute('hidden', '');
 
   const h2S4 = document.createElement('h2');
-  h2S4.className = 'fw-app__screen-headline';
+  h2S4.className = FW_SCREEN_HEADLINE_CLASS; // CHANGED — AP-tailwind-02_slice-8
   h2S4.tabIndex = -1;
   h2S4.textContent = 'Heute beginnt wieder ein Chart, dessen Ende niemand kennt.'; // CHANGED — B1-AP-16c (APP_SPEC §16.2)
   screen4.appendChild(h2S4);
 
   const chartSection4 = document.createElement('div'); // NEW — AP-prokrast-03f: Rubikon-Chart
   chartSection4.setAttribute('data-fw-appchart', 'sparplan-s4');
-  chartSection4.className = 'fw-app__chart-section';
+  chartSection4.className = FW_CHART_SLOT_CLASS; // CHANGED — AP-tailwind-02_slice-7
 
   // NEW — AP-prokrast-03h2: Wrapper für Chart + DOM-Text-Overlay, damit rubikonText per CSS
   // in das rechte leere Zukunftsfeld gelegt werden kann, ohne den ChartEngine-eigenen
@@ -537,15 +612,15 @@ function renderContent(container, appData, options, stationsConfig) { // CHANGED
   screen4.appendChild(screen4ChartWrap);
 
   const cta = document.createElement('a'); // CHANGED — Slice 6: finales CTA-Styling; href leer (NB-1)
-  cta.className = 'fw-app__cta';
+  cta.className = FW_CTA_CLASS; // CHANGED — AP-tailwind-02_slice-4
   cta.href = '';
   cta.textContent = 'Heute Marktzeit sammeln →';
   cta.setAttribute('hidden', ''); // CHANGED — AP-prokrast-03h: CTA erst nach Text + weiterer 800ms-Stille sichtbar
   screen4.appendChild(cta);
 
   const navS4 = document.createElement('div');
-  navS4.className = 'fw-app__screen-nav';
-  const btnS4Prev = makeBtn('← Zurück', 'fw-app__btn--prev');
+  navS4.className = FW_SCREEN_NAV_CLASS; // CHANGED — AP-tailwind-02_slice-8
+  const btnS4Prev = makeBtn('← Zurück', 'prev');
   navS4.appendChild(btnS4Prev);
   screen4.appendChild(navS4);
 
@@ -556,7 +631,7 @@ function renderContent(container, appData, options, stationsConfig) { // CHANGED
   a11yRegion.setAttribute('aria-live', 'polite');
   a11yRegion.setAttribute('aria-atomic', 'true');
   a11yRegion.dataset.fwRole = 'a11y-result';
-  a11yRegion.className = 'fw-app__visually-hidden';
+  a11yRegion.className = FW_A11Y_LIVE_REGION_CLASS; // CHANGED — AP-tailwind-02_slice-6
   container.appendChild(a11yRegion);
 
   // CHANGED — AP-14: Chart-Engines; lastRenderedRateS2 entfernt (orphaned by AP-14)

@@ -291,20 +291,30 @@ def validate_tailwind_cdn(dom: Node, is_app_page: bool) -> List[str]:
 
 
 # ---------------------------------------------------------------------------
-# Play-CDN-Manifest (AP-tailwind-02d, TAILWIND-APP-BAUKASTEN_KONZEPT_V0-1.md §2.2/§6.10)
+# Play-CDN-Manifest (AP-tailwind-02d, AP-tailwind-02_slice-4-manifest-fix,
+# TAILWIND-APP-BAUKASTEN_KONZEPT_V0-1.md §2.2/§6.10)
 #
 # Play-CDN generiert CSS fuer zur Laufzeit per JS gesetzte Tailwind-Klassen nicht zuverlaessig
 # genug (Anlass AP-tailwind-02d: manuelle Abnahme ROT bei F/K/L). Apps/{slug}/app.test.html
 # traegt deshalb genau einen <style type="text/tailwindcss">-Block mit einer
 # @source inline("...")-Direktive, die alle zur Laufzeit gesetzten Utilities explizit safelistet.
-# Dieser Abschnitt prueft deterministisch, dass Manifest und app.js mengenidentisch sind.
 #
-# Erkennungsheuristik (bewusst kein JS-Parser, kein Build, kein Generator -- §Anlass "Kein
-# Generator, kein neuer Runtime-Manager"): Eine app.js-Konstante `const NAME = '...';` gilt als
-# Tailwind-Klassenliste, wenn ihr Wert ausschliesslich aus kleingeschriebenen, utility-foermigen
-# Tokens besteht (kein Grossbuchstabe, kein Umlaut, kein Satzzeichen) -- das unterscheidet sie
-# zuverlaessig von deutschsprachigen Text-Konstanten (z. B. RUBIKON_A11Y_TEXT). fw-*-Marker
-# werden aus jeder Tokenliste herausgefiltert (§6.10: keine Mechanikmarker im Manifest).
+# INVARIANTE (AP-tailwind-02_slice-4-manifest-fix, ersetzt die bisherige Laufzeit-Datenfluss-
+# Invariante): Manifest = Vereinigung aller Tokens aus vollstaendigen, statisch deklarierten
+# `FW_*_CLASS`-Rezeptkonstanten in app.js. Der Checker verfolgt NICHT mehr, ob/wie eine Konstante
+# tatsaechlich einer `.className`-Zuweisung zugefuehrt wird (auch nicht durch Helper-Parameter,
+# Objekt-Lookups o. Ae.) -- das waere allgemeine JavaScript-Datenflussanalyse, die dieser Checker
+# bewusst nicht leistet (kein JS-Parser, kein Build, kein Generator). Eine Konstante zaehlt als
+# Rezept, wenn ihr NAME dem Muster `FW_*_CLASS` entspricht UND ihr Wert ein einziges, vollstaendiges
+# String-Literal mit ausschliesslich kleingeschriebenen, utility-foermigen Tokens ist (kein
+# Grossbuchstabe, kein Umlaut, kein Satzzeichen -- unterscheidet sie von deutschsprachigen
+# Text-Konstanten wie RUBIKON_A11Y_TEXT). fw-*-Marker werden aus jeder Tokenliste herausgefiltert
+# (§6.10: keine Mechanikmarker im Manifest).
+#
+# Getrennt davon bleibt eine lokale, direkt pruefbare Sperre echter Klassenkonstruktion bestehen:
+# Template-Literal oder `+` in einer `.className`-/`classList`-Klassenzuweisung ist weiterhin ein
+# Strukturfehler (Literalregel TAILWIND-APP-BAUKASTEN_KONZEPT_V0-1.md §2.2) -- unabhaengig von der
+# Manifest-Mengengleichheit oben.
 # ---------------------------------------------------------------------------
 
 SOURCE_INLINE_RE = re.compile(r"@source\s+inline\(\s*(['\"])((?:(?!\1).)*)\1\s*\)\s*;", re.DOTALL)
@@ -313,6 +323,7 @@ CLASSNAME_ASSIGN_RE = re.compile(r"\.className\s*=\s*([^;]+);")
 CLASSLIST_CALL_RE = re.compile(r"classList\.(?:add|remove|toggle)\(([^)]*)\)")
 STRING_LITERAL_RE = re.compile(r"'([^']*)'|\"([^\"]*)\"")
 TAILWIND_TOKEN_RE = re.compile(r"^[a-z0-9][a-z0-9:_\-\[\]./%]*$")
+FW_CLASS_CONST_NAME_RE = re.compile(r"^FW_[A-Za-z0-9_]*_CLASS$")
 
 
 def _tokenize_filtered(value: str) -> List[str]:
@@ -333,11 +344,16 @@ def _looks_like_tailwind_class_list(value: str) -> bool:
     return all(TAILWIND_TOKEN_RE.match(t) for t in value.split())
 
 
-def extract_tailwind_class_consts(js_text: str) -> dict:
-    """Alle app.js-Konstanten `const NAME = '...';`, deren Wert eine Tailwind-Klassenliste ist."""
+def extract_declared_recipe_consts(js_text: str) -> dict:
+    """Alle app.js-Konstanten `const FW_*_CLASS = '...';`: NAME muss dem Rezeptmuster entsprechen
+    UND der Wert ein einziges vollstaendiges Tailwind-Klassenliteral sein (AP-tailwind-02_slice-4-
+    manifest-fix). Das ist die alleinige Quelle der erwarteten Manifestmenge -- keine
+    Laufzeit-/Datenflusspruefung mehr."""
     consts: dict = {}
     for m in CONST_STRING_RE.finditer(js_text):
         name, value = m.group(1), m.group(3)
+        if not FW_CLASS_CONST_NAME_RE.match(name):
+            continue
         if not _looks_like_tailwind_class_list(value):
             continue
         tokens = _tokenize_filtered(value)
@@ -407,16 +423,17 @@ def _analyze_class_expr(expr: str, class_consts: dict) -> Tuple[set, Optional[st
     return set(), None
 
 
-def extract_runtime_tailwind_usage(js_text: str, class_consts: dict) -> Tuple[set, List[str]]:
-    """Sammelt die zur Laufzeit tatsaechlich gesetzten Tailwind-Utility-Tokens aus
-    .className=-Zuweisungen und classList.add/remove/toggle(...)-Aufrufen; meldet dynamische
-    Klassenkomposition mit echten (nicht-fw-) Tailwind-Fragmenten als Befund."""
-    used: set = set()
+def find_dynamic_class_construction_findings(js_text: str, class_consts: dict) -> List[str]:
+    """Lokale, direkt pruefbare Sperre echter Klassenkonstruktion (AP-tailwind-02_slice-4-
+    manifest-fix, Literalregel TAILWIND-APP-BAUKASTEN_KONZEPT_V0-1.md §2.2): meldet Template-
+    Literal oder '+'-Verkettung mit echten (nicht-fw-) Tailwind-Fragmenten in .className=-
+    Zuweisungen und classList.add/remove/toggle(...)-Aufrufen. Trifft KEINE Aussage darueber, ob
+    eine Konstante irgendwo tatsaechlich verwendet wird -- das ist nicht mehr Aufgabe dieses
+    Checkers (s. Modulkopf)."""
     findings: List[str] = []
 
     for m in CLASSNAME_ASSIGN_RE.finditer(js_text):
-        tokens, reason = _analyze_class_expr(m.group(1), class_consts)
-        used.update(tokens)
+        _tokens, reason = _analyze_class_expr(m.group(1), class_consts)
         if reason:
             findings.append(
                 f"app.js: dynamisch konstruierter Klassenname ({reason}) in "
@@ -428,8 +445,7 @@ def extract_runtime_tailwind_usage(js_text: str, class_consts: dict) -> Tuple[se
         first_args = _split_top_level_args(m.group(1))[:1]
         if not first_args:
             continue
-        tokens, reason = _analyze_class_expr(first_args[0], class_consts)
-        used.update(tokens)
+        _tokens, reason = _analyze_class_expr(first_args[0], class_consts)
         if reason:
             findings.append(
                 f"app.js: dynamisch konstruierter Klassenname ({reason}) in "
@@ -437,12 +453,13 @@ def extract_runtime_tailwind_usage(js_text: str, class_consts: dict) -> Tuple[se
                 f"TAILWIND-APP-BAUKASTEN_KONZEPT_V0-1.md §2.2."
             )
 
-    return used, findings
+    return findings
 
 
 def validate_manifest(path: Path, dom: Node, is_app_page: bool) -> List[str]:
-    """AP-tailwind-02d: Play-CDN-Manifest (Apps/{slug}/app.test.html) und die zur Laufzeit von
-    Apps/{slug}/app.js gesetzten Tailwind-Utilities muessen mengenidentisch sein."""
+    """AP-tailwind-02_slice-4-manifest-fix: Play-CDN-Manifest (Apps/{slug}/app.test.html) und die
+    Vereinigung aller deklarierten `FW_*_CLASS`-Rezeptkonstanten in Apps/{slug}/app.js muessen
+    mengenidentisch sein. Keine Laufzeit-/Datenflusspruefung (s. Modulkopf)."""
     if not is_app_page:
         return []
 
@@ -476,21 +493,24 @@ def validate_manifest(path: Path, dom: Node, is_app_page: bool) -> List[str]:
         return findings
 
     js_text = app_js_path.read_text(encoding="utf-8")
-    class_consts = extract_tailwind_class_consts(js_text)
-    used_tokens, dynamic_findings = extract_runtime_tailwind_usage(js_text, class_consts)
-    findings.extend(dynamic_findings)
+    declared_consts = extract_declared_recipe_consts(js_text)
+    findings.extend(find_dynamic_class_construction_findings(js_text, declared_consts))
 
-    missing = sorted(used_tokens - manifest_tokens)
-    extra = sorted(manifest_tokens - used_tokens)
+    expected_tokens: set = set()
+    for tokens in declared_consts.values():
+        expected_tokens.update(tokens)
+
+    missing = sorted(expected_tokens - manifest_tokens)
+    extra = sorted(manifest_tokens - expected_tokens)
     if missing:
         findings.append(
-            "Manifest unvollstaendig -- in app.js dynamisch gesetzt, im Manifest fehlend: "
-            + ", ".join(missing) + "."
+            "Manifest unvollstaendig -- in einer deklarierten FW_*_CLASS-Rezeptkonstante "
+            "enthalten, im Manifest fehlend: " + ", ".join(missing) + "."
         )
     if extra:
         findings.append(
-            "Manifest enthaelt ungenutzte Utilities (nicht in app.js dynamisch gesetzt): "
-            + ", ".join(extra) + "."
+            "Manifest enthaelt nicht deklarierte Utility (in keiner FW_*_CLASS-Rezeptkonstante "
+            "enthalten): " + ", ".join(extra) + "."
         )
 
     return findings
