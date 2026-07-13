@@ -11,9 +11,9 @@ Selbstlernendes System vollständig implementiert am 2026-05-08 (Faden 3 nach Pl
 - `.claude/learning/session-log.md` — ephemerer Log pro AP, wird nach /distill geleert
 - `.claude/learning/patterns.md` — persistente Musterliste mit Bestandsliste (2 promoted)
 - `abschluss-ritual/SKILL.md` — Schritt 0 (session-log, PFLICHT, ZUERST) + Challenge-Response
-- `/start`-Sequenz — Schritt 3c (Learning-Pipeline: Lücken-Alarm + Distill-Empfehlung)
-- `kassensturz/SKILL.md` — Lern-Loop-Abschnitt im Output
-- `.claude/skills/distill/SKILL.md` — neuer Skill (manuell oder schwellen-basiert von /start)
+- `/start`-Sequenz — Schritt 3 (Lücken-Alarm) + Schritt 5 (Kassensturz-Montag-Logik + Distill-Empfehlung); auch in KETTENMODUS aktiv seit RITUAL-OPT-2
+- `kassensturz/SKILL.md` — Wöchentliches Reporting; automatisch Montags in /start (VOLLMODUS + KETTENMODUS)
+- `.claude/skills/distill/SKILL.md` — neuer Skill (manuell oder schwellen-basiert von /start empfohlen)
 - `.claude/skills/uebergabe/SKILL.md` — neuer Skill (Delta-Übergabeprompt + Breadcrumb)
 - `CLAUDE.md §12` — Lastabwurf-System (4 Modi N/R/M/A, 6 Kern-Invarianten, Prioritätsgruppen) — v2.0.1: PROTECTED_PATHS in Gruppe 1 aufgenommen
 

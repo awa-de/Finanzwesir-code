@@ -9,6 +9,14 @@ Wird nach /distill ins Jahres-Segment rotiert (Rohlog erhalten). Einträge: [FRI
 - [OK] Memory-Integritätscheck 46/46 GRÜN; Repo-weite Prüfung auf verwaiste Referenzen der gelöschten Dateien — keine gefunden außer den 3 erwarteten (patterns.md, MEMORY.md, neue Merge-Datei)
 - [OK] NAVIGATION.md geprüft: referenziert Memory nur generisch über MEMORY.md-Index, keine Änderung nötig
 
+### 2026-07-13 — Regression-Reparatur: Kassensturz/Distill in KETTENMODUS ✅
+- [FRICTION] Surgical-Check-Verletzung: Ich erfand eigene Formulierung statt die bewährte Lösung (381f12a) exakt zu kopieren — genau das, das CLAUDE.md §7 verbietet
+- [PREF] Albert korrigierte sachlich: Prinzip müssen angewendet werden, nicht nur gekannt — das war eine wichtige Differenzierung
+- [OK] Regression vollständig repariert: start.md KETTENMODUS + Schritt 5 auf bewährte Kassensturz/Distill-Logik zurück; NAVIGATION.md präzisiert; Memory aktualisiert (project_learning_system.md + neue feedback_start_kassensturz_kettenmodus.md)
+- [QUESTION] Lernpunkt-Erfassung in session-log.md: RITUAL-OPT-1/2 hat die praktische Ausführung dieser Einträge stillschweigend gelöscht, obwohl die Dokumentation im abschluss-ritual/SKILL.md noch vorhanden ist — war das Absicht oder Versehentlich?
+
+## 2026-07-13 – SESSION START | [KETTENMODUS] | Fokus: AP-tailwind-02 (offen)
+
 ## 2026-07-06 – SESSION START | Fokus: AP-prokrast-06d — Rücklaufkapsel an Masterfaden (abgeschlossen)
 
 ### 2026-07-06 — AP-prokrast-07a ✅ / AP-prokrast-07c 🟡 (offen)

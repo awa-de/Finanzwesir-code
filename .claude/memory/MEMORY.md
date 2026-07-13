@@ -9,7 +9,8 @@
 - [Sprache: kein Denglisch](feedback_sprache_kein_denglisch.md) — Alle Texte auf Deutsch mit Umlauten, Fachbegriffe als Nomen OK, keine Hybridformen wie gecommittet/gepusht
 - [Projektsteuerung Synthese aktiviert](project_steering_synthese.md) — Kreuzfahrt-Modell aktiv seit 2026-05-03, 4 neue Skills, schlanke CLAUDE.md
 - [Session-Start-Infrastruktur](project_session_start_infra.md) — Zwei-Stufen-Modell: SessionStart-Hook (HOOK-META aus PROJECT-STATUS.md) + /start-Synthese; DEGRADED-Erkennung aktiv (ST-15, 2026-05-11)
-- [Selbstlernendes System](project_learning_system.md) — Learning-Pipeline implementiert (session-log, patterns, distill, uebergabe, CLAUDE.md §12); Pilot-Test ausstehend
+- [Selbstlernendes System](project_learning_system.md) — Learning-Pipeline implementiert (session-log, patterns, distill, uebergabe, CLAUDE.md §12); RITUAL-OPT-2 umgebaut, Kassensturz/Distill auch in KETTENMODUS aktiv
+- [Kassensturz/Distill in KETTENMODUS](feedback_start_kassensturz_kettenmodus.md) — Regression 2026-07-12: KETTENMODUS vergaß Montag-Logik; Reparatur in start.md, NAVIGATION.md
 - [Surgical-Check gilt für alle Edits](feedback_surgical_check.md) — Gilt für jeden Patch (auch .md/.json), nicht nur Code; „nur Kosmetik" ist die Falle
 - [Design-Ressourcen: Refero.design](reference_refero_design.md) — styles.refero.design + MCP: Pflicht-Check bei CSS/Design/App-Styling-Entscheidungen
 - [Ankündigung ohne Ausführung](feedback_ankuendigung_ohne_ausfuehrung.md) — Nie „notiert/geschrieben" sagen ohne tatsächlichen Write-Tool-Call; mentaler ≠ physischer Schritt
