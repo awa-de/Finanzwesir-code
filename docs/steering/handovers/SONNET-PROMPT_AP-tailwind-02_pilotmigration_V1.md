@@ -1,4 +1,4 @@
-Stand: 2026-07-12 | Session: AP-tailwind-Fable-Runde (Übergabe) | Erstellt von: Claude (Fable)
+Stand: 2026-07-13 | Session: AP-tailwind-02a | Geändert von: Claude (Sonnet)
 
 # ÜBERGABEPROMPT — AP-tailwind-02: Pilotmigration `prokrastinations-preis` auf den Tailwind-Baukasten
 
@@ -28,15 +28,13 @@ keine Alternativen erkunden. Wo der Vertrag schweigt: stoppen und Albert fragen.
 von `fw-app__*`-Eigenbau-CSS auf die Baukasten-Rezepte migrieren — exakt nach Konzept §9
 (Migrationskarte, Zeile für Zeile). Fachlogik, Screens-Mechanik, ARIA-Verträge: unverändert.
 
-**Slice 0 (zuerst, vor jedem Code):** Die Tailwind-Laufzeitfrage mit Albert klären.
-Der Vertrag nimmt eine CDN/Play-Laufzeit für die Pilotphase an (markierte Arbeitsannahme im
-Konzept-Kopf), aber `docs/testing/TEST_PAGE_STANDARD.md` §10 verbietet CDN-URLs in dauerhaften
-Testseiten, und A-04 verbietet CDN in Produktion. Wie `app.test.html` Tailwind lädt, ist damit
-**ungeklärt und entscheidungspflichtig** — Optionen sauber vorlegen (z. B. lokale Play-Kopie,
-Ausnahme-Kennzeichnung, vorgezogener Mini-Build), Albert entscheidet. Ohne diese Entscheidung
-kein Migrations-Code.
+Tailwind-Laufzeit für den Piloten ist entschieden: `app.test.html` lädt im `<head>` exakt
+`<script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>`. Dies ist
+ausschließlich die vorproduktive Testphase. Der spätere Ghost-Produktionsbuild erzeugt
+bereinigtes, minimiertes und lokal gehostetes CSS. Keine erneute Laufzeitdiskussion; direkt mit
+dem ersten Migrations-Slice beginnen.
 
-**Danach in kleinen Slices** (je Slice: Gate → Alberts OK → Patch → `/patch-quittung` → Albert
+**In kleinen Slices** (je Slice: Gate → Alberts OK → Patch → `/patch-quittung` → Albert
 testet im VSCode-Live-Server → erst dann weiter):
 Shell/States → KPI → Slider → Buttons/CTA → Stationen-Panel → Disclosure/Callout/sr-only →
 Chart-Slot (nur `relative mt-6`!) → Aufräumen `app.css`.

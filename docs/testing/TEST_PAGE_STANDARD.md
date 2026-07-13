@@ -1,6 +1,6 @@
 # Finanzwesir Test Page Standard
 
-Stand: 2026-07-11 | Standard-Version: 3 (AP-apptest-01: §14 Launcher-Erzeugung präzisiert) | Geändert von: Claude (Sonnet)
+Stand: 2026-07-13 | Standard-Version: 5 (AP-tailwind-02b: §10 exakte URL ohne Query/Fragment, type="module" case-insensitiv) | Geändert von: Claude (Sonnet)
 
 > Normativer Standard. Kein Projekttagebuch. Die Wörter **MUSS**, **DARF**, **DARF NICHT**
 > und **SOLL** sind im Sinne von RFC 2119 zu lesen. **SOLL** wird nur bei bewusst begründeter
@@ -309,8 +309,21 @@ Wichtig:
 - In dauerhaften Testseiten dürfen `<script src>` und Stylesheet-`<link href>` ausschließlich
   repository-relative oder lokale Pfade verwenden. Absolute `http://`- oder `https://`-URLs in
   diesen Elementen sind ein Strukturfehler — bekannte Regressionen dieser Art sind
-  `cdn.jsdelivr.net` (Chart.js) und `cdn.tailwindcss.com` (Tailwind). Lokale Vendor-Dateien
+  `cdn.jsdelivr.net` (Chart.js) und `cdn.tailwindcss.com` (Tailwind v3). Lokale Vendor-Dateien
   (z. B. `Theme/assets/js/vendor/chart.umd.min.js`) bleiben erlaubt.
+- **Eng begrenzte Ausnahme — Tailwind-Play-CDN (AP-tailwind-02a, 2026-07-13):** Für die
+  vorproduktive Tailwind-Entwicklungs- und Testphase (vor Ghost-Integration, siehe
+  `docs/App-Fabrik/01_DECISION_LOG.md` A-04) darf eine `Apps/{slug}/app.test.html` genau **ein**
+  `<script>`-Element im `<head>` mit exakt dieser `src` tragen:
+  `https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4`. „Exakt" bedeutet bytegenau — ohne
+  Query-Parameter (`?...`) und ohne Fragment (`#...`); eine mit Query oder Fragment ergänzte URL
+  gilt nicht als kanonisch und bleibt Strukturfehler. Kein `async`, kein `defer`, kein
+  `type="module"` (unabhängig von Groß-/Kleinschreibung des Attributwerts, z. B. auch `"MODULE"`),
+  kein `integrity`, kein `crossorigin`. Kein anderes externes `<script src>` oder
+  Stylesheet-`<link href>` ist von dieser Ausnahme erfasst — jede andere absolute URL (auch andere
+  `cdn.jsdelivr.net`-Pfade oder ältere/alternative Tailwind-CDN-Domains wie `cdn.tailwindcss.com`
+  oder `unpkg.com`) bleibt Strukturfehler. Die Ausnahme entfällt vollständig mit dem
+  Produktionsbuild (T1).
 - Absolute Daten-URLs in produktiven Card-Attributen wie `data-fw-data`, `data-fw-config` oder
   `data-csv` werden durch diese Regel **nicht** pauschal verboten; für sie gelten die
   kanonischen Datenquellen- und Domainregeln aus `docs/spec/APP-INTERFACE.md` (§6/§7). Diese
@@ -420,7 +433,8 @@ Marker deckt ausschließlich dieses eine, benannte Negativtest-Muster ab.
 9. Referenzierte lokale Dateien existieren.
 10. Pfade stimmen auch in Groß-/Kleinschreibung exakt.
 11. Dauerhafte Testseiten laden `<script src>`/`<link href>` ausschließlich repository-relativ
-    oder lokal (§10) — keine absoluten `http://`/`https://`-URLs in diesen Elementen.
+    oder lokal (§10) — keine absoluten `http://`/`https://`-URLs in diesen Elementen, außer der
+    einen kanonischen Tailwind-Play-CDN-Ausnahme aus §10 auf `Apps/{slug}/app.test.html`.
 12. Keine dauerhafte Testseite liegt außerhalb der Standardorte, außer unter `tests/scratch/`.
 13. Exakte Dateidubletten werden gemeldet.
 14. Aus den real gefundenen Testseiten kann der Launcher erzeugt werden (§13).
@@ -476,7 +490,8 @@ Pflichten:
 - Konkrete Werte nennen, wenn sie festgelegt sind: Texte, Farben, Zustände, Reihenfolge,
   Breakpoints, Tooltip-Inhalt, Fehlermeldungen.
 - Shared Test CSS/JS einbinden.
-- Keine CDN-Laufzeitabhängigkeit.
+- Keine CDN-Laufzeitabhängigkeit, außer der einen kanonischen Tailwind-Play-CDN-Ausnahme aus §10
+  (nur für Tailwind-nutzende Apps in der vorproduktiven Testphase).
 - Nach dem Write python tools/check-test-pages.py ausführen.
 - Nach grünem Strukturcheck zusätzlich python tools/check-test-pages.py --write-index
   ausführen, um tests/index.html neu zu erzeugen.

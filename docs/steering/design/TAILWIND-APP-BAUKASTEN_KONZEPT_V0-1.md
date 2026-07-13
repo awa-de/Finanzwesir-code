@@ -1,4 +1,4 @@
-Stand: 2026-07-12 | Session: AP-tailwind-Fable-Runde (Abschluss) | Geändert von: Claude (Fable)
+Stand: 2026-07-13 | Session: AP-tailwind-02a | Geändert von: Claude (Sonnet)
 
 # TAILWIND-APP-BAUKASTEN — KONZEPT V0.1
 
@@ -6,7 +6,7 @@ Stand: 2026-07-12 | Session: AP-tailwind-Fable-Runde (Abschluss) | Geändert von
 
 Grundlage: `docs/steering/patches/AP-tailwind-01_befund-und-forschung_Ergebnis.md` (maßgebliche Anamnese, Commit-Kontext `27deffa`). Dieses Dokument beantwortet das Decision Docket D-01–D-16 und definiert den Design- und Implementierungsvertrag für die App-Fabrik (25+ Apps). Es ändert keinen Bestandscode. Begleitdatei: `TAILWIND-APP-BAUKASTEN_VISUAL-BOARD_V0-1.html` (Non-Production-Nachweis derselben Rezepte).
 
-**Arbeitsannahme (markiert, reversibel):** Für Konzept- und Pilotphase steht eine Tailwind-Laufzeit (CDN/Play) im App-Laufzeitkontext zur Verfügung. Das ist eine Nutzer-Laufzeitannahme, kein Repository-Fakt (Befund F-08: `.hbs`-Kette nicht verifizierbar). Alle Rezepte sind so spezifiziert, dass sie unverändert den späteren lokalen Build (T1) überleben — vollständige Klassenstrings, keine Laufzeitkomposition. Kippt die Annahme, ändert sich der Auslieferungsweg, nicht dieser Vertrag.
+**Entschieden (AP-tailwind-02a, 2026-07-13):** Für die vorproduktive Entwicklungs- und Testphase (vor Ghost-Integration) lädt `app.test.html` und vergleichbares aktives Referenzmaterial Tailwind CSS v4 ausschließlich über den kanonischen Play-CDN-Tag `https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4` (siehe `docs/App-Fabrik/01_DECISION_LOG.md` A-04). Nach Ghost-Integration entfällt das CDN vollständig zugunsten eines lokalen, bereinigten und minimierten Builds (T1, eigener Folgeauftrag). Alle Rezepte sind so spezifiziert, dass sie unverändert den späteren lokalen Build (T1) überleben — vollständige Klassenstrings, keine Laufzeitkomposition. Der `.hbs`-Gap (Befund F-08) betrifft nur den späteren Produktions-Auslieferungsweg, nicht diese Testphasenregel.
 
 ---
 
@@ -478,7 +478,7 @@ Card-to-Point-Flug (Klassen + `--fw-card-to-point-flight-duration`), Rubikon-Ove
 3. **D-16:** Priorisierung der drei Standalone-Prototypen (welche zuerst, Zeithorizont) in der T1-Feinplanung.
 4. **T1-Detail (später):** ob die CI-`extend`-Utilities im lokalen Build exakt wie in 2.1 benannt bleiben (Empfehlung: ja, Token-Name = Suffix) — formal Teil des T1-APs.
 
-Keine Entscheidung D-01–D-16 ist blockiert; der `.hbs`-Gap (F-08) berührt nur den Auslieferungsweg, nicht diesen Vertrag (Arbeitsannahme, Kopf dieses Dokuments).
+Keine Entscheidung D-01–D-16 ist blockiert; der `.hbs`-Gap (F-08) berührt nur den Auslieferungsweg, nicht diesen Vertrag (entschieden, Kopf dieses Dokuments, AP-tailwind-02a).
 
 ---
 

@@ -1,17 +1,17 @@
 <!-- HOOK-META
 Version: 1
-Stand: 2026-07-12
-Fokus-AP: RITUAL-OPT-2 ✅ — Ritual/Start vollständig read-frei: NAVIGATION/BACKLOG-Flip, Hook übernimmt BACKLOG-Extraktion, Archiv rotiert (2026-07-12)
-Nächster-Schritt: offen — AP-tailwind-02 (Pilotmigration) ist der stehende Kandidat; Albert wählt (RITUAL-OPT-2 ✅ 2026-07-12)
+Stand: 2026-07-13
+Fokus-AP: AP-tailwind-02a/02b ✅ — Play-CDN-Vertrag (Tailwind v4) repo-weit synchronisiert und gehärtet, kein Commit (2026-07-13)
+Nächster-Schritt: AP-tailwind-02 Slice 1 — Shell/States (AP-tailwind-02b ✅ 2026-07-13)
 Blocker: keine
 Letzter-Distill: 2026-07-13
 Kassensturz-Datum: 2026-07-13
 -->
-<!-- HOOK-META-SESSION: RITUAL-OPT-2 -->
+<!-- HOOK-META-SESSION: AP-tailwind-02a/02b -->
 
 # PROJECT STATUS — Finanzwesir 2.0
 
-Stand: 2026-07-12 | Session: RITUAL-OPT-2 | Geändert von: Claude
+Stand: 2026-07-13 | Session: AP-tailwind-02a/02b | Geändert von: Claude
 
 **Zweck:** Schneller Wiedereinstieg nach Pausen.
 **Zielgruppe:** Albert und Claude.
@@ -24,14 +24,14 @@ Stand: 2026-07-12 | Session: RITUAL-OPT-2 | Geändert von: Claude
 
 ## 1. Aktueller Fokus
 
-**Nächster Schritt:** offen — AP-tailwind-02 (Pilotmigration) ist der stehende Kandidat; Albert wählt. Details: HOOK-META oben + docs/steering/BACKLOG.md.
+**Nächster Schritt:** AP-tailwind-02 Slice 1 — Shell/States (erster echter Migrations-Slice der Pilotmigration `prokrastinations-preis`). Details: HOOK-META oben + docs/steering/BACKLOG.md.
 
 Letzte Meilensteine (je eine Zeile — Volltext in BACKLOG-ARCHIV.md):
+- **AP-tailwind-02a/02b** (2026-07-13) ✅ Play-CDN-Vertrag (Tailwind v4) repo-weit synchronisiert + gehärtet; Checker bytegenau, Boards/Decision-Log/Backlog konsistent
 - **Ritual-Housekeeping** (2026-07-13) ✅ Montag-Check auf einen Vorab-Block konsolidiert (3 Kopien entfernt), Kassensturz KW29, Distill 11 (8 promoted, 1 retired)
 - **RITUAL-OPT-2** (2026-07-12) ✅ Ritual + Start vollständig read-frei: NAVIGATION/BACKLOG-Flip/Remove, Hook übernimmt BACKLOG-Extraktion, BACKLOG-ARCHIV datumsbasiert rotiert (219→12 Zeilen), DECISION-LOG-Tool
 - **RITUAL-OPT-1** (2026-07-12) ✅ Abschluss-Ritual tokensparend umgebaut: HOOK-META-Riegel, PROJECT-STATUS -82 %, read-freie Log-Appends, Log-Rotation
 - **AP-tailwind-01** (2026-07-12) ✅ Tailwind-App-Baukasten V0.1 als verbindlicher Design-Vertrag freigegeben (committed ca21de2)
-- **AP-apptest-01/02** (2026-07-11) ✅ Testseiten-Handoff-Lücke geschlossen, unabhängig geprüft
 
 ---
 

@@ -58,38 +58,67 @@ body { background: #EDEFF1; margin: 0; }
 </style>
 
 <!-- NON-PRODUCTION: Tailwind Play CDN nur für diesen Konzeptnachweis -->
-<script src="https://cdn.tailwindcss.com"></script>
-<script>
-/* CI-Spiegelung laut Konzept §2.1: Token-Name = Utility-Suffix, nur extend,
-   alle Werte referenzieren die tokens.css-Variablen — keine neuen Farbwerte. */
-tailwind.config = {
-  theme: {
-    extend: {
-      colors: {
-        petrol: { 50:'var(--color-petrol-50)',100:'var(--color-petrol-100)',200:'var(--color-petrol-200)',300:'var(--color-petrol-300)',400:'var(--color-petrol-400)',500:'var(--color-petrol-500)',600:'var(--color-petrol-600)',700:'var(--color-petrol-700)',800:'var(--color-petrol-800)',900:'var(--color-petrol-900)', DEFAULT:'var(--color-petrol)' },
-        gelb: { 50:'var(--color-gelb-50)',100:'var(--color-gelb-100)',200:'var(--color-gelb-200)',300:'var(--color-gelb-300)',400:'var(--color-gelb-400)',500:'var(--color-gelb-500)',600:'var(--color-gelb-600)',700:'var(--color-gelb-700)',800:'var(--color-gelb-800)',900:'var(--color-gelb-900)', DEFAULT:'var(--color-gelb)' },
-        purpur: { 50:'var(--color-purpur-50)',100:'var(--color-purpur-100)',200:'var(--color-purpur-200)',300:'var(--color-purpur-300)',400:'var(--color-purpur-400)',500:'var(--color-purpur-500)',600:'var(--color-purpur-600)',700:'var(--color-purpur-700)',800:'var(--color-purpur-800)',900:'var(--color-purpur-900)', DEFAULT:'var(--color-purpur)' },
-        blau: { 700:'var(--color-blau-700)', DEFAULT:'var(--color-blau)' },
-        primary: 'var(--color-primary)',
-        link: 'var(--color-link)',
-        surface: 'var(--color-surface)',
-        text: { DEFAULT:'var(--color-text)', sec:'var(--color-text-sec)', muted:'var(--color-text-muted)', disabled:'var(--color-text-disabled)' },
-        bg: { DEFAULT:'var(--color-bg)', faint:'var(--color-bg-faint)' },
-        border: 'var(--color-border)',
-        error: { text:'var(--color-error-text)', border:'var(--color-error-border)', bg:'var(--color-error-bg)' }
-      },
-      fontFamily: {
-        display: ['Archivo Black', 'sans-serif'],
-        body: ['Source Sans 3', 'Source Sans Pro', 'sans-serif']
-      },
-      boxShadow: {
-        soft: 'var(--shadow-soft)',
-        hover: 'var(--shadow-hover)'
-      }
-    }
-  }
-};
-</script>
+<script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+<style type="text/tailwindcss">
+/* CI-Spiegelung laut Konzept §2.1 -- Tailwind-v4-@theme-Syntax nach Play-CDN-Wechsel v3->v4
+   (AP-tailwind-02a, 2026-07-13): Token-Name = Utility-Suffix, Werte 1:1 aus den CI-Tokens
+   oben (keine neuen Farbwerte). Bridge-only-Tokens (--color-grid/-zero-line/-loader-bg)
+   bekommen bewusst keinen @theme-Eintrag (Konzept §2.1: "bekommen keine Utility"). */
+@theme {
+  --color-petrol-50: #F4FBFB;
+  --color-petrol-100: #DAF6F4;
+  --color-petrol-200: #B4EEEB;
+  --color-petrol-300: #89E2DE;
+  --color-petrol-400: #64CDC9;
+  --color-petrol-500: #49B3AF;
+  --color-petrol-600: #218380;
+  --color-petrol-700: #357270;
+  --color-petrol-800: #325A58;
+  --color-petrol-900: #2F4A48;
+  --color-petrol: var(--color-petrol-600);
+  --color-gelb-50: #FDFCEE;
+  --color-gelb-100: #FDF8CF;
+  --color-gelb-200: #FCF09C;
+  --color-gelb-300: #F6E25E;
+  --color-gelb-400: #EAD329;
+  --color-gelb-500: #DFC805;
+  --color-gelb-600: #AB9A13;
+  --color-gelb-700: #80741A;
+  --color-gelb-800: #675E21;
+  --color-gelb-900: #554E24;
+  --color-gelb: var(--color-gelb-500);
+  --color-purpur-50: #FCF3F7;
+  --color-purpur-100: #FBE8F2;
+  --color-purpur-200: #F9D0E6;
+  --color-purpur-300: #F7A9D5;
+  --color-purpur-400: #F172C1;
+  --color-purpur-500: #E844B1;
+  --color-purpur-600: #D7169F;
+  --color-purpur-700: #B90088;
+  --color-purpur-800: #9A0071;
+  --color-purpur-900: #8D0267;
+  --color-purpur: var(--color-purpur-900);
+  --color-blau-700: #0071BF;
+  --color-blau: var(--color-blau-700);
+  --color-primary: var(--color-petrol-600);
+  --color-link: var(--color-blau-700);
+  --color-surface: var(--color-bg-faint);
+  --color-text: #272727;
+  --color-text-sec: #4C4C4C;
+  --color-text-muted: #666666;
+  --color-text-disabled: #888888;
+  --color-bg: #FFFFFF;
+  --color-bg-faint: #FAFAFA;
+  --color-border: #E7ECEF;
+  --color-error-text: #B71C1C;
+  --color-error-border: #C62828;
+  --color-error-bg: #FFF8F8;
+  --font-display: 'Archivo Black', sans-serif;
+  --font-body: 'Source Sans 3', 'Source Sans Pro', sans-serif;
+  --shadow-soft: 0 4px 20px -2px rgba(39, 39, 39, 0.05);
+  --shadow-hover: 0 10px 25px -5px rgba(39, 39, 39, 0.1);
+}
+</style>
 </head>
 <body class="board-note text-text">
 

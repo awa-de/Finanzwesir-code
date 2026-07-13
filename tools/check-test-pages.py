@@ -224,9 +224,81 @@ def check_data_ref(root: Path, base_dir: Path, ref: str, attr_name: str) -> List
     return findings
 
 
-def validate_references(root: Path, path: Path, dom: Node, exempt: frozenset = frozenset()) -> List[str]:
+# AP-tailwind-02a, TEST_PAGE_STANDARD.md §10 enge Ausnahme: einzige kanonische
+# Tailwind-Play-CDN-URL, ausschliesslich fuer Apps/{slug}/app.test.html erlaubt.
+TAILWIND_PLAY_CDN_URL = "https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"
+
+TAILWIND_CDN_MARKERS = ("tailwindcss.com", "tailwindcss/browser")
+
+
+def is_tailwind_cdn_candidate(url_clean: str) -> bool:
+    return any(marker in url_clean for marker in TAILWIND_CDN_MARKERS)
+
+
+def validate_tailwind_cdn(dom: Node, is_app_page: bool) -> List[str]:
+    """AP-tailwind-02a, TEST_PAGE_STANDARD.md §10: prueft den kanonischen Tailwind-Play-CDN-Tag
+    deterministisch. Die Ausnahme gilt ausschliesslich fuer Apps/{slug}/app.test.html -- auf
+    allen anderen Testseiten bleibt jede Tailwind-CDN-URL eine normale absolute-URL-Sperre
+    (validate_references(), unveraendert)."""
+    if not is_app_page:
+        return []
+
+    findings: List[str] = []
+    scripts = [n for n in iter_descendants(dom) if n.tag == "script" and get_attr(n, "src")]
+
+    canonical_nodes: List[Node] = []
+    for n in scripts:
+        src = get_attr(n, "src") or ""
+        # AP-tailwind-02b: bytegenauer Vergleich auf dem unveraenderten Attributwert --
+        # Query/Fragment duerfen NICHT normalisiert werden, sonst waere "@4?x=1" faelschlich kanonisch.
+        if src == TAILWIND_PLAY_CDN_URL:
+            canonical_nodes.append(n)
+        elif is_tailwind_cdn_candidate(split_query_fragment(src)):
+            findings.append(
+                f"Nicht-kanonische Tailwind-CDN-URL '{src}' -- erlaubt ist ausschliesslich "
+                f"{TAILWIND_PLAY_CDN_URL} (TEST_PAGE_STANDARD.md §10)."
+            )
+
+    if len(canonical_nodes) == 0:
+        findings.append(
+            f"Kanonischer Tailwind-Play-CDN-Tag fehlt (TEST_PAGE_STANDARD.md §10): {TAILWIND_PLAY_CDN_URL}."
+        )
+    elif len(canonical_nodes) > 1:
+        findings.append(
+            "Kanonischer Tailwind-Play-CDN-Tag ist mehrfach vorhanden -- erlaubt ist genau einer."
+        )
+
+    for n in canonical_nodes:
+        ancestor = n.parent
+        in_head = False
+        while ancestor is not None:
+            if ancestor.tag == "head":
+                in_head = True
+                break
+            ancestor = ancestor.parent
+        if not in_head:
+            findings.append("Kanonischer Tailwind-Play-CDN-Tag steht ausserhalb des <head>.")
+
+        for attr in ("async", "defer", "integrity", "crossorigin"):
+            if has_attr(n, attr):
+                findings.append(f"Kanonischer Tailwind-Play-CDN-Tag traegt verbotenes Attribut '{attr}'.")
+        # AP-tailwind-02b: type="module" gross-/kleinschreibungsunabhaengig sperren
+        # (z. B. "MODULE", " Module " bleiben verboten).
+        if (get_attr(n, "type") or "").strip().lower() == "module":
+            findings.append('Kanonischer Tailwind-Play-CDN-Tag traegt verbotenes type="module".')
+
+    return findings
+
+
+def validate_references(
+    root: Path, path: Path, dom: Node, exempt: frozenset = frozenset(),
+    is_app_page: bool = False,
+) -> List[str]:
     """exempt: Menge aus (id(node), attr_name) -- vom Marker data-fw-test-allow-missing-ref
-    testfalllokal geprueft und explizit zugelassen (§10.1 TEST_PAGE_STANDARD.md)."""
+    testfalllokal geprueft und explizit zugelassen (§10.1 TEST_PAGE_STANDARD.md).
+    is_app_page: Apps/{slug}/app.test.html -- hier ist genau der kanonische
+    Tailwind-Play-CDN-Tag von der absoluten-URL-Sperre ausgenommen (§10 TEST_PAGE_STANDARD.md,
+    AP-tailwind-02a); validate_tailwind_cdn() prueft diesen Tag eigenstaendig deterministisch."""
     findings: List[str] = []
     base_dir = path.parent
 
@@ -234,6 +306,10 @@ def validate_references(root: Path, path: Path, dom: Node, exempt: frozenset = f
         if n.tag == "script":
             src = get_attr(n, "src")
             if src is not None:
+                # AP-tailwind-02b: Ausnahme gilt nur fuer den bytegenauen, unveraenderten
+                # Attributwert -- keine Query-/Fragment-Normalisierung vor dem Vergleich.
+                if is_app_page and src == TAILWIND_PLAY_CDN_URL:
+                    continue
                 findings.extend(check_loadable_ref(root, base_dir, src, "<script src>"))
         elif n.tag == "link":
             rel = (get_attr(n, "rel") or "").lower()
@@ -386,7 +462,7 @@ def validate_allow_missing_app_id_markers(
     return findings, frozenset(exempt)
 
 
-def validate_test_page(root: Path, path: Path, is_engine: bool = False) -> List[str]:
+def validate_test_page(root: Path, path: Path, is_engine: bool = False, is_app: bool = False) -> List[str]:
     """Vollstaendige Strukturpruefung einer einzelnen, an einem Standardort
     liegenden Testseite (docs/testing/TEST_PAGE_STANDARD.md §4/§5/§7/§8/§10/§12)."""
     findings: List[str] = []
@@ -522,8 +598,12 @@ def validate_test_page(root: Path, path: Path, is_engine: bool = False) -> List[
     marker_findings, exempt = validate_allow_missing_markers(root, path, dom, test_cases)
     findings.extend(marker_findings)
 
+    # §10 TEST_PAGE_STANDARD.md, AP-tailwind-02a -- kanonischer Tailwind-Play-CDN-Tag
+    # (nur auf Apps/{slug}/app.test.html Pflicht und geprueft)
+    findings.extend(validate_tailwind_cdn(dom, is_app))
+
     # §23/§24 -- Referenzen + externe Script-/Stylesheet-Abhaengigkeiten
-    findings.extend(validate_references(root, path, dom, exempt))
+    findings.extend(validate_references(root, path, dom, exempt, is_app_page=is_app))
 
     return findings
 
@@ -686,7 +766,7 @@ def validate_repository(root: Path) -> Report:
             continue
 
         standard_pages.append(p)
-        page_findings = validate_test_page(root, p, is_engine=(group == "Engine"))
+        page_findings = validate_test_page(root, p, is_engine=(group == "Engine"), is_app=(group == "Apps"))
         for msg in page_findings:
             findings.append((rel, msg))
 

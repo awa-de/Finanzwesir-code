@@ -35,7 +35,8 @@ Stand: 2026-06-04 | APP-01-slice-planung | Geändert von: Claude
 ### A-04 — Design-System-Bridge via CSS Custom Properties
 **Status:** 🟢 ENTSCHIEDEN  
 **Entscheidung:** Apps nutzen dieselbe Theme-Bridge wie die Chart-Engine: CSS Custom Properties aus `screen.css`, gelesen via `FwTheme.js`. Kein `FW_THEME_OVERRIDE`, kein Tailwind CDN in Produktion.  
-**Quelle:** App-Fabrik_Zusatzpaket-Integration_V0-1.md §4.1
+**Präzisierung (AP-tailwind-02a, 2026-07-13):** Vorproduktive Entwicklungs- und Testphase (vor Ghost-Integration): statische HTML-Testseiten, Visual Boards, Mockups und aktive Referenztemplates laden Tailwind CSS v4 ausschließlich über den kanonischen Play-CDN-Tag `https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4`. Produktionsphase (nach Ghost-Integration): weiterhin kein CDN — Tailwind wird gegen die realen Quellen gebaut, ungenutzte Utilities werden entfernt, das CSS wird minimiert und lokal ausgeliefert (eigener Folgeauftrag, nicht Teil von AP-tailwind-02a). Kein Widerspruch zwischen den Phasen, keine neue Einzelfallentscheidung nötig.
+**Quelle:** App-Fabrik_Zusatzpaket-Integration_V0-1.md §4.1 | Präzisiert: AP-tailwind-02a, 2026-07-13
 
 ---
 
