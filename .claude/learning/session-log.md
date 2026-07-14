@@ -61,3 +61,15 @@ Wird nach /distill ins Jahres-Segment rotiert (Rohlog erhalten). Einträge: [FRI
 - [OK] Deterministische Nachweise (fwChartSlotCheck, fwScreenFlowCheck) nachträglich in die Slice-7/8-Ergebnisprotokolle eingetragen, auf Alberts Nachfrage.
 
 ### Kettenabschluss AP-tailwind-02 (Slices 1–8 + 02a/02b/02f) ✅ | RECONCILED: AP-tailwind-02a AP-tailwind-02b AP-tailwind-02-Slice-1 AP-tailwind-02-Slice-2 AP-tailwind-02-Slice-3 AP-tailwind-02-Slice-4 AP-tailwind-02-Slice-5 AP-tailwind-02-Slice-6 AP-tailwind-02f AP-tailwind-02-Slice-7 AP-tailwind-02-Slice-8
+
+## 2026-07-14 – SESSION START | [KETTENMODUS] | Fokus: AP-tailwind-02 Slices 1-8 + 02a/02b/02f ✅ Tailwind-Baukasten-Pilotmigration abgeschlossen+abgenommen, Checker grün, kein Commit (2026-07-13)
+
+### 2026-07-14 — Content-Rohmaterial-Migration + 2ndbrain-Vault-Auflösung (Housekeeping, kein BACKLOG-AP)
+- [OK] Blogpost-Matching: 25 App-Steuerungsblöcke extrahiert → Suchachsen abgeleitet → 855 Blogposts mechanisch vorgefiltert (Wortgrenzen) → inhaltlich bewertet → 148 Kopien in 24 `content/posts/apps/{slug}/Rohmaterial/`, 121 Originale nach `Inhalte alte Site/blog/kopiert/`. Report: docs/App-Fabrik/BLOG_MATCHING_DRY_RUN.md.
+- [OK] Vault-Perlen aus 2ndbrain (ETF-Ära-Essay etc.): 8 Kopien in 8 Apps; Mappings blog_matching_final/vault.json.
+- [OK] 2ndbrain-Vault „Finanzwesir Vermächtnis" (C:, kanonisch) aufgelöst: 62 gelöscht (52 byte-identisch), 11 kuratiert ins /Archiv/ (content-workflow-prompts, etf-vermaechtnis-genese, Rechtliches, making-of), Ordner entfernt. legacy-map.md nachgeführt.
+- [OK] 5 Root-JSONs einsortiert: Tool-Daten → tools/app_fabrik/data/, Audit-Mappings → docs/App-Fabrik/, raw_candidates.json gelöscht; 3 Skript-Pfade angepasst + verifiziert (extract 25/25).
+- [WIN] Deterministisch-vor-LLM zahlte sich hart aus: Hash-Dedup *mit* /Archiv/ fand 52 statt 14 Duplikate → verhinderte, dass 35 schon archivierte Dateien erneut archiviert wurden. → [[feedback-python-powershell-tooling]]
+- [FRICTION] Subagent-`model:opus` griff nicht (env erzwingt Haiku) → schlechte Bewertung; auf Hauptfaden-Opus umgestiegen. → [[subagent-model-override-gilt-nicht]]
+- [QUESTION/OFFEN] **Z:-Überbleibsel-Löschung blockiert:** `Z:\…\Privat\2ndbrain\…\Finanzwesir Vermächtnis` (stale Kopie, 100% redundant, verifiziert) ließ sich wegen Nextcloud-VFS-Sperre („Zugriff verweigert") nicht entfernen. Albert muss OS-seitig löschen (Nextcloud/Obsidian schließen). Offen bis erledigt.
+- [OFFEN] Zwei Repos uncommitted (Code + content/) — Commit-Messages geliefert, Albert staged/committed selbst.

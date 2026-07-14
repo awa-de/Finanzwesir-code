@@ -46,7 +46,7 @@ Vollständige Regeln: `docs/steering/ARCHIV-STRATEGIE.md`
 | Feld | Wert |
 |---|---|
 | Quelle | `docs/steering/ARCHIV-INVENTAR.md` |
-| Stand | 2026-06-08 |
+| Stand | 2026-07-14 (Zugang aus Vault-Auflösung „Finanzwesir Vermächtnis", +11 Dateien) |
 | Status | Befundkarte, keine Zielstruktur |
 | Nächste geplante Überarbeitung | AP-KORR-3 Synchronisierung ✅ abgeschlossen |
 
@@ -71,7 +71,7 @@ Vollständige Regeln: `docs/steering/ARCHIV-STRATEGIE.md`
 
 | Pfad (relativ) | Typ | Bereich | Zweck / Kontext | Making-of-Wert | Drift-Risiko | Zielrolle | Nächste Aktion |
 |---|---|---|---|---|---|---|---|
-| `Archiv/` | ROOT_ARCHIV | Gesamtprojekt | 14 Themeninseln; Chart-Engine-Historie, Peer-Reviews, Design, KI-Workflow-Geschichte | hoch | niedrig | ROOT_KURATION + MAKING_OF_BELEG | SONDERFAELLE_DOKUMENTIERT — weitere Prüfung nur mit gesondertem AP |
+| `Archiv/` | ROOT_ARCHIV | Gesamtprojekt | 16 Themeninseln; Chart-Engine-Historie, Peer-Reviews, Design, KI-Workflow-Geschichte, content-workflow-prompts + etf-vermaechtnis-genese (2026-07-14) | hoch | niedrig | ROOT_KURATION + MAKING_OF_BELEG | SONDERFAELLE_DOKUMENTIERT — weitere Prüfung nur mit gesondertem AP |
 | `Archiv/local/` | LOCAL_QUARANTAENE | Root-Archiv | Gitignored Quarantäne; 203 Dateien, ≈31 MB; Binärdateien, LLM-Dumps, Rohmaterial | unklar | niedrig | LOCAL_QUARANTAENE | BELASSEN_UND_VERTRAG_ANWENDEN |
 | `Archiv/optimierung-projektsteuerung/Optimierung Projektsteuerung/Archiv/` | LOKALES_ARCHIV | Root-Archiv (verschachtelt) | 2 Dateien: LLM-Synthese-Exports (CLAUDE-pre-synthese + NAVIGATION-pre-synthese, 2026-05-03) | mittel | niedrig | LOCAL_QUARANTAENE + ZU_PRUEFEN | ERLEDIGT_AP_KORR_6 |
 | `Apps/prokrastinations-preis/Archiv/` | LOKALES_ARCHIV | App prokrastinations-preis | 2 Markdown-Dateien, 6 KB; Slice-0-Kickoff-Prompt + Implementierungs-Prompt | mittel | niedrig | LOKALER_KONTEXT + MAKING_OF_BELEG | SPÄTERE_KURATIERUNG_OPTIONAL |
@@ -92,7 +92,7 @@ Vollständige Regeln: `docs/steering/ARCHIV-STRATEGIE.md`
 ## Root-Archiv
 
 **Pfad:** `Archiv/`
-**Dateianzahl:** ≈88 Dateien (exkl. `Archiv/local/`), ≈1,6 MB
+**Dateianzahl:** ≈99 Dateien (exkl. `Archiv/local/`), ≈1,6 MB (+11 aus Vault-Auflösung 2026-07-14)
 **Zielrolle:** ROOT_KURATION + MAKING_OF_BELEG
 
 Das Root-Archiv ist die projektweite Kurations- und Making-of-Ebene.
@@ -111,11 +111,13 @@ Lokale Archive bleiben an Ort und Stelle; das Root-Archiv enthält projektüberg
 | `Archiv/Peer Review Arbeitspakete/` | Peer-Review-Material zu Arbeitspaketen; inkl. OA-02 HIST-Dateien (2026-06-09) | hoch | hoch | nein |
 | `Archiv/Peer Review Migration/` | Peer-Review-Material zur Migration | hoch | hoch | nein |
 | `Archiv/Projekt Kontroll-Skills/` | KI-Workflow-Geschichte | mittel | hoch | unklar |
-| `Archiv/Rechtliches/` | Rechtliche Dokumente | mittel | niedrig | nein |
+| `Archiv/content-workflow-prompts/` | Prompts des früheren Gemini/ChatGPT-Content-Workflows (PROJECT_CORE, CONTENT_GUIDE, OUTPUT_SPECS, SOURCES, LLM_INSTRUCTIONS, MOC Prompt-Struktur); Zugang 2026-07-14 aus Vault-Auflösung | mittel | hoch | nein |
+| `Archiv/etf-vermaechtnis-genese/` | ETF-Vermächtnis MOC (Index der Finanz-Legacy-Notizen); Zugang 2026-07-14 aus Vault-Auflösung | niedrig | mittel | nein |
+| `Archiv/Rechtliches/` | Rechtliche Dokumente; + CLICKY_ANONYMISIERT_KOMPAKT + KOCHREZEPT_RECHTLICHE_SEITEN (Zugang 2026-07-14 aus Vault-Auflösung) | mittel | niedrig | nein |
 | `Archiv/Refactoring der Dateistruktur/` | Enthält Aufraeum-Archiv.md (18 KB) | mittel | mittel | nein |
 | `Archiv/Refactoring des Gehirns/` | KI-Workflow-Geschichte, Prozess-Reflexion | hoch | hoch | unklar |
 | `Archiv/root-dateien-2026-05-03/` | Root-Dateien-Backup vom 2026-05-03 | niedrig | niedrig | ja |
-| `Archiv/making-of/` | Making-of-Rahmen; KAPITELRAHMEN.md + README.md + Belegnotizen 07a–07c; erstellt AP 8 | hoch | hoch | nein |
+| `Archiv/making-of/` | Making-of-Rahmen; KAPITELRAHMEN.md + README.md + Belegnotizen 07a–07c; erstellt AP 8; + MOC Strategie Meta-Navigation + Technische Struktur Finanzwesir 2.0 (Zugang 2026-07-14 aus Vault-Auflösung) | hoch | hoch | nein |
 | `Archiv/selbstlernenes System/` | Geschichte des selbstlernenden Projektsystems | hoch | hoch | unklar |
 
 ### Direkte Dateien im Root
@@ -125,6 +127,12 @@ Lokale Archive bleiben an Ort und Stelle; das Root-Archiv enthält projektüberg
 | `Archiv/Author Guide Ghost-v1.md` | 5 KB | Erste Version des Author Guides — Versionsgeschichte kuratierbar | BELASSEN_UND_VERTRAG_ANWENDEN |
 | `Archiv/Author Guide Ghost-v2.md` | 5 KB | Zweite Version des Author Guides — Versionsgeschichte kuratierbar | BELASSEN_UND_VERTRAG_ANWENDEN |
 | `Archiv/struktur.md` | 17 KB | Strukturdokument; Inhalt und Status unbekannt | UNKLAR_PRUEFEN |
+
+**Zugang 2026-07-14 — Auflösung Vault „Finanzwesir Vermächtnis"** (C:\…\2ndbrain\Projekte\Finanzwesir Vermächtnis, aufgelöst). 73 Dateien: 62 gelöscht (52 byte-identisch bereits in Zielen/Archiv, 10 leere Stubs/Indizes/superseded), 11 hierher archiviert:
+- `content-workflow-prompts/`: CONTENT_GUIDE, PROJECT_CORE, OUTPUT_SPECS, SOURCES, LLM_INSTRUCTIONS, MOC Prompt-Struktur
+- `etf-vermaechtnis-genese/`: ETF-Vermächtnis MOC
+- `Rechtliches/`: CLICKY_ANONYMISIERT_KOMPAKT, KOCHREZEPT_RECHTLICHE_SEITEN
+- `making-of/`: MOC Strategie Meta-Navigation, Technische Struktur Finanzwesir 2.0
 
 **Offener Punkt:** `Archiv/Apps/` hat mögliche Überlappung mit `Apps/prokrastinations-preis/Archiv/` — AP9 abgeschlossen; Überlappungsprüfung offen, bei Bedarf in gesondertem AP.
 

@@ -1,0 +1,177 @@
+[
+  {
+    "app_slug": "crash-reaktions-test",
+    "rolle": "A2 — Feuerprobe-App",
+    "positivbegriffe": ["crash", "börsencrash", "panikverkauf", "verkaufen in der krise", "nachkaufen", "durchhalten", "börsenpsychologie", "angst an der börse", "kursverfall", "einbruch an der börse", "krisenverhalten"],
+    "negativbegriffe": ["ich bleibe ruhig", "im ernstfall", "wissen reicht nicht", "theorie kennen"],
+    "kontrastbegriffe": ["trading-simulator", "crash-vorhersage", "panikmache", "prognose für crash", "daytrading"]
+  },
+  {
+    "app_slug": "depot-kipppunkt",
+    "rolle": "B5 — Statuswechsel-App / Depot als Mitverdiener",
+    "positivbegriffe": ["depot als einkommen", "zweites einkommen", "passives einkommen aus etf", "depot-ertrag", "kipppunkt", "sparen als investition", "gehalt ersetzen", "depot verdient mehr als"],
+    "negativbegriffe": ["sparen als verzicht", "nur mein job verdient geld", "geld zum verzichten"],
+    "kontrastbegriffe": ["finanzielle freiheit", "entnahmerate", "fire-bewegung", "rentenplanung", "steuerplanung"]
+  },
+  {
+    "app_slug": "der-alte-euro",
+    "rolle": "B4 — Mechanik der Marktzeit / Zinseszins sichtbar machen",
+    "positivbegriffe": ["zinseszins", "früh anfangen", "zeit im markt", "ertrag auf ertrag", "exponentielles wachstum", "je früher desto besser", "achtes weltwunder", "compound interest", "rendite über jahrzehnte"],
+    "negativbegriffe": ["früh anfangen als moralappell", "ein euro bleibt ein euro"],
+    "kontrastbegriffe": ["opportunitätskosten", "sparrate erhöhen", "depotaufbau", "thesaurierer vs ausschütter"]
+  },
+  {
+    "app_slug": "diversifikations-detektor",
+    "rolle": "C1 — Diversifikationsillusion entlarven",
+    "positivbegriffe": ["diversifikation", "diversifizier", "überschneidung", "klumpenrisiko", "mehrere etfs", "portfolio-überlappung", "doppelte positionen", "scheindiversifikation", "streuung im depot"],
+    "negativbegriffe": ["mehr etfs mehr sicherheit", "fünf etfs fünffach diversifiziert"],
+    "kontrastbegriffe": ["etf-ranking", "produktempfehlung", "portfolio-optimierung für fortgeschrittene"]
+  },
+  {
+    "app_slug": "esg-spiegel",
+    "rolle": "E1 — ESG-Label entmystifizieren",
+    "positivbegriffe": ["esg", "nachhaltige geldanlage", "nachhaltiges investieren", "esg-fonds", "greenwashing", "sri", "ethisches investieren", "grünes investieren", "nachhaltigkeitsfonds"],
+    "negativbegriffe": ["esg automatisch sauber", "etikettenglauben"],
+    "kontrastbegriffe": ["esg-bashing", "moralische belehrung", "politische debatte"]
+  },
+  {
+    "app_slug": "etf-aera-vorbei",
+    "rolle": "Zweifel prüfen / ETF-Ära-Skepsis einordnen",
+    "positivbegriffe": ["etf-blase", "kritik an etfs", "passives investieren kritik", "etf-risiken", "konzentrationsrisiko", "bewertungsniveau", "passives volumen", "funktioniert etf-investieren noch", "etf-hype vorbei"],
+    "negativbegriffe": ["gute etf-zeit ist vorbei", "etf-skepsis als ausrede"],
+    "kontrastbegriffe": ["etf-marketing", "untergangsnarrativ", "crash-prognose"]
+  },
+  {
+    "app_slug": "etf-namensdecoder",
+    "rolle": "D1 — ETF-Technik entmystifizieren",
+    "positivbegriffe": ["etf-name lesen", "etf verstehen", "replikation", "ausschüttend", "thesaurierend", "fondswährung", "isin", "wkn", "etf-bezeichnung", "fondsname entschlüsseln"],
+    "negativbegriffe": ["etf-namen als expertencode", "verwirrung durch fachbegriffe"],
+    "kontrastbegriffe": ["prospekt", "etf-ranking", "produktempfehlung"]
+  },
+  {
+    "app_slug": "etf-vergleich",
+    "rolle": "D4 — ETF-Feinschliff-Entgifter / Exit-Gate aus Produktoptimierung",
+    "positivbegriffe": ["etf-vergleich", "ter-vergleich", "bester etf", "etf-auswahl", "fondsgröße", "anbietervergleich", "welcher etf ist besser", "etf-check"],
+    "negativbegriffe": ["optimalen etf finden", "produktoptimierung als startbremse"],
+    "kontrastbegriffe": ["einzelsieger", "affiliate", "ranking-show", "ter ist egal", "alle etfs sind gleich"]
+  },
+  {
+    "app_slug": "geburtsjahrlos",
+    "rolle": "B2 — historische Robustheit / Börsenepoche als Los",
+    "positivbegriffe": ["börsenepoche", "startjahr", "historische rendite", "generationenvergleich", "kohorte", "wann investiert", "geburtsjahr und rendite", "epochenglück", "jahrgang"],
+    "negativbegriffe": ["mein ergebnis zeigt ob ich gut investiert habe"],
+    "kontrastbegriffe": ["kindersparplan", "bestes startjahr optimieren", "schuldgefühl beim investieren"]
+  },
+  {
+    "app_slug": "investment-universum",
+    "rolle": "Gegenperspektive / Grundmodell zur Diversifikation",
+    "positivbegriffe": ["anlageklassen", "assetklassen", "aktien anleihen rohstoffe", "investment-universum", "anlageuniversum", "was gibt es zu investieren"],
+    "negativbegriffe": ["alles ist nur eine weitere produktvariante"],
+    "kontrastbegriffe": ["produktkatalog", "kaufempfehlung", "theorievorlesung"]
+  },
+  {
+    "app_slug": "komplexitaets-entlarver",
+    "rolle": "C2 — Komplexitätsillusion entlarven",
+    "positivbegriffe": ["ein-etf-lösung", "einfachheit im depot", "portfolio-komplexität", "wie viele etfs braucht man", "ein etf reicht", "simplify investing", "keep it simple depot"],
+    "negativbegriffe": ["komplexeres depot durchdachter", "komplexität wirkt professionell"],
+    "kontrastbegriffe": ["ein-etf-doktrin", "fortgeschrittene-portfolios abwerten", "rebalancing-detailtiefe"]
+  },
+  {
+    "app_slug": "kostenkiller-ter",
+    "rolle": "D3 — Kostenwirkung kalibrieren",
+    "positivbegriffe": ["ter", "laufende kosten", "etf-kosten", "kostenvergleich fonds", "gebühren etf", "ausgabeaufschlag", "kostenquote"],
+    "negativbegriffe": ["kleinste sichtbare kosten wichtigste entscheidung"],
+    "kontrastbegriffe": ["etf-ranking", "billigstes produkt", "steuerdetails"]
+  },
+  {
+    "app_slug": "market-timing-simulator",
+    "rolle": "B3 — Timing-Illusions-App",
+    "positivbegriffe": ["market timing", "richtiger einstiegszeitpunkt", "warten auf rücksetzer", "bester einstiegszeitpunkt", "timing der börse", "einstiegszeitpunkt finden"],
+    "negativbegriffe": ["ich warte auf den rücksetzer", "kontrollillusion"],
+    "kontrastbegriffe": ["trading-signale", "technische analyse", "kauf-verkaufssignale"]
+  },
+  {
+    "app_slug": "markt-kam-zurueck",
+    "rolle": "A3 — Ausstiegsfolgen-App",
+    "positivbegriffe": ["ausstieg aus dem markt", "verpasste erholung", "verkauf im crash", "wiedereinstieg", "aus dem markt aussteigen", "markt erholt sich", "sell in may"],
+    "negativbegriffe": ["ich verkaufe und steige später wieder ein"],
+    "kontrastbegriffe": ["stop-loss", "re-entry-simulator", "drawdown-theorie", "panikmache"]
+  },
+  {
+    "app_slug": "plan-generator",
+    "rolle": "H1 / Funnel-Finale — Abschlussmodul",
+    "positivbegriffe": ["nächster schritt", "wie fange ich an", "einstieg in den sparplan", "erster schritt investieren", "loslegen mit investieren", "endlich anfangen", "checkliste", "schritt für schritt"],
+    "negativbegriffe": ["ich brauche noch mehr wissen bevor ich anfange", "analyse-paralyse"],
+    "kontrastbegriffe": ["individuelle anlageberatung", "etf-empfehlung", "produktempfehlung", "isin wkn empfehlung"]
+  },
+  {
+    "app_slug": "prokrastinations-preis",
+    "rolle": "B1 — Marktzeit-Entscheidungspunkt / geführte Stationen-Zeitreise",
+    "positivbegriffe": ["heute anfangen zu investieren", "investieren aufschieben", "prokrastination", "richtiger zeitpunkt zum einstieg", "verpasstes gestern", "warten auf den perfekten moment"],
+    "negativbegriffe": ["einstiegszeitpunkt müsste sich klar anfühlen", "rückblick-illusion", "hindsight bias", "im nachhinein war es klar"],
+    "kontrastbegriffe": ["verlustzähler", "countdown", "fake-urgency", "kohortenanalyse", "epochen-fächer"]
+  },
+  {
+    "app_slug": "regulatorik-dashboard",
+    "rolle": "G1 — Abgabenpolitik / Regulatorisches Risiko",
+    "positivbegriffe": ["abgabenpolitik", "steuerpolitik", "kapitalertragsteuer", "vorabpauschale", "abgeltungssteuer", "gesetzesänderung geldanlage", "steuerrecht etf", "steuerreform"],
+    "negativbegriffe": ["staat kann regeln jederzeit ändern", "planungsunsicherheit durch politik"],
+    "kontrastbegriffe": ["steuerberatung", "politische kampagne", "parteipolitik", "prognose künftiger gesetzgebung"]
+  },
+  {
+    "app_slug": "rendite-kalibrierung",
+    "rolle": "G2 — Erwartungsmanagement",
+    "positivbegriffe": ["realistische renditeerwartung", "wie viel rendite bringt ein etf", "renditeerwartung", "durchschnittsrendite", "erwartete rendite"],
+    "negativbegriffe": ["wenn etfs nicht sieben prozent bringen lohnt sich der plan nicht"],
+    "kontrastbegriffe": ["renditeprognose", "angstmacherei niedrigrendite", "faktorwette"]
+  },
+  {
+    "app_slug": "renditekiller-volatilitaet",
+    "rolle": "F1 — Volatilitäts-/Pfadwirkung zeigen",
+    "positivbegriffe": ["volatility drag", "schwankung und rendite", "pfadabhängigkeit", "durchschnittsrendite vs tatsächliche rendite", "volatilität kostet rendite", "schwankungsrisiko"],
+    "negativbegriffe": ["solange durchschnittsrendite stimmt ist weg egal"],
+    "kontrastbegriffe": ["derivate", "trendfolge", "portfoliooptimierung"]
+  },
+  {
+    "app_slug": "replizierer-swapper",
+    "rolle": "D2 — Replikationsmethode entgiften",
+    "positivbegriffe": ["physische replikation", "synthetische replikation", "swap-etf", "sampling", "replikationsmethode", "wie funktioniert ein etf technisch"],
+    "negativbegriffe": ["swap klingt gefährlich", "physisch klingt automatisch sicher"],
+    "kontrastbegriffe": ["derivate-vorlesung", "physisch immer gut", "synthetisch immer schlecht"]
+  },
+  {
+    "app_slug": "risiko-uebersetzer",
+    "rolle": "A1 — Dosis-App / Risiko übersetzen (Dacia-Test)",
+    "positivbegriffe": ["risikotoleranz", "verlusttragfähigkeit", "aktienquote", "etf-dosis", "wie viel aktien vertrage ich", "crash aushalten", "risikobereitschaft", "wie viel risiko"],
+    "negativbegriffe": ["einen crash von 30 oder 40 prozent halte ich schon aus"],
+    "kontrastbegriffe": ["renditeoptimierung", "crash-prognose", "beschämung niedriger aktienquote"]
+  },
+  {
+    "app_slug": "rollierende-sparplaene",
+    "rolle": "Companion / Erweiterungsmodul zu historischer Startjahrlogik",
+    "positivbegriffe": ["rollierende zeiträume", "historische sparplan-rendite", "30-jahres-zeitraum", "bandbreite historischer renditen", "sparplan simulation", "vor 30 jahren angefangen", "rollierend"],
+    "negativbegriffe": ["ein beispielzeitraum überzeugt bewiesen", "cherry-picking zeitraum"],
+    "kontrastbegriffe": ["bestes startjahr", "zukunftsprognose"]
+  },
+  {
+    "app_slug": "thesaurierer-rennen",
+    "rolle": "F2 — Ausschütter/Thesaurierer-Perfektionismus entschärfen",
+    "positivbegriffe": ["thesaurierend", "ausschüttend", "ausschüttung vs wiederanlage", "thesaurierende etfs", "ausschüttende etfs", "thesaurierer oder ausschütter"],
+    "negativbegriffe": ["thesaurierend vs ausschüttend entscheidet über erfolg"],
+    "kontrastbegriffe": ["steuerberatung", "pauschale überlegenheit einer variante"]
+  },
+  {
+    "app_slug": "weltdepot-baukasten",
+    "rolle": "C3 / Architektur-Baukasten",
+    "positivbegriffe": ["depot-architektur", "weltportfolio", "depotaufbau", "etf-portfolio bauen", "2-etf-portfolio", "3-etf-portfolio", "musterdepot", "weltdepot"],
+    "negativbegriffe": ["ohne perfekte eigenkonstruktion ist mein depot nicht richtig"],
+    "kontrastbegriffe": ["individuelle anlageberatung", "optimierungsmaschine", "20 varianten"]
+  },
+  {
+    "app_slug": "weltkarte-etf-indizes",
+    "rolle": "Companion-App / visuelles Lernmodul",
+    "positivbegriffe": ["msci world", "acwi", "emerging markets", "indexzusammensetzung", "ländergewichtung", "welche länder sind im index", "index verstehen"],
+    "negativbegriffe": ["world oder acwi sagt mir schon was drin ist"],
+    "kontrastbegriffe": ["politische länderbewertung", "etf-ranking", "prognose gewinnerregionen"]
+  }
+]

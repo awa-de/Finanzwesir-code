@@ -14,3 +14,11 @@ Python-Tool: für Dateiinhalt-Verarbeitung (CSV-Parsing, XLS/XLSX, Datentransfor
 **How to apply:** Entscheidungsbaum: Ich verarbeite Datei-Inhalt (lesen, parsen, validieren) → Python. Ich verwalte Dateisystem oder Git → PowerShell. Bei XLS/XLSX/CSV-Verarbeitung immer Python vorschlagen. Grenzfall (Datei lesen und Ergebnis weiterverwenden) → Python.
 
 Windows-spezifisch: Bash-Kommando `python3` existiert nicht im Repo-Kontext (ergibt Windows-Store-Umleitung). Immer `python` verwenden, nicht `python3`. Betrifft alle Bash-Tool-Aufrufe.
+
+## Deterministisch-vor-LLM (Arbeitsteilung, geschärft 2026-07-14)
+
+Wenn eine Aufgabe deterministisch mit Python lösbar ist → **Python**, nicht LLM. Billiger, besser, verifizierbar. LLM erst dort, wo es ums Nachdenken/Bewerten geht (echte Grenzfälle, Urteil). Albert zweimal explizit betont.
+
+**Why (Beleg):** Bei der Vault-Auflösung fand der Python-Hash-Dedup, dass 52 (nicht 14) Dateien byte-identisch schon im Ziel/Archiv lagen — ein LLM-Plan (Haiku-Zusammenfassung) hätte 35 bereits archivierte Dateien erneut archiviert. Reine Hash-Arithmetik statt Modell-Urteil. Gegenbeleg vorher: der Haiku-Subagent lieferte beim Blogpost-Matching generische Textbausteine + Zählfehler, wo Bewertung nötig war — die Mechanik (Wortgrenzen-Scan, Hash-Vergleich) lief dagegen fehlerfrei.
+
+**How to apply:** Vor jedem LLM-Dispatch fragen: „Ist das deterministisch (Zählen, Hashen, Vergleichen, Filtern, Extrahieren)?" → dann Python-Skript. LLM/Subagent nur für Inhalts-Bewertung, Zuordnungs-Urteile, Textproduktion. Verwandt: [[subagent-model-override-gilt-nicht]].
