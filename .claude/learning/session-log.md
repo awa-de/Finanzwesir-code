@@ -81,3 +81,7 @@ Wird nach /distill ins Jahres-Segment rotiert (Rohlog erhalten). Einträge: [FRI
 - [FRICTION] CE-3a/CE-3b: Alberts reale Browser-Abnahme deckte mehrfach Abweichungen vom Baukasten-Mockup auf (BAN gestreckt statt kompakt, View-Gruppe ohne M/L-Rechtsanker, Zone-S generisch statt line-spezifisch); CE-3a selbst enthielt noch eine Kaskaden-Reihenfolge-Fehleinschätzung (Spezifität vs. Quellposition), erst CE-3b behoben.
 - [WIN] tools/engine-dom-check.js (neues DOM-Struktur-/A11y-Verbergungs-Diagnosewerkzeug) real mit Positiv- UND Negativfall verifiziert (DOM-Mutation im Browser, Wiederherstellung, erneuter PASS) — kein reiner Positiv-Nachweis.
 - [WIN] CE-3b: reale, dokumentierte CSS-Lehre — bei identischer Selektorspezifität entscheidet die Quellreihenfolge, nicht die Intuition 'später im Code = spezifischer'.
+
+### AP-chart-engine-01 — AP-Wechsel
+### 2026-07-14 — AP-chart-engine-01 DOC-01 (Line-Chart-Chrome-Vertragsnachzug) ✅ | DEFERRED: MEMORY-CHECK
+- [OK] Baukasten-Konzept (D-02 funktionale Legend-Pill-Kontur, §5.3-Tabelle, §6.11 finales Pill-/BAN-/Toolbar-/Wrapper-Rezept + App-Fabrik-Verbindlichkeitsklausel), Mockup (echte aria-pressed-Buttons, zweite Control-Gruppe, Zone-S-Notiz) und Test-Page-Standard (§10 Engine-Fallback-Paritätspflicht, §5.3 Chart-Chrome-Beispiel) auf den von Albert abgenommenen CE-3b-Ist-Stand nachgezogen — reine Dokumentation, kein Produktcode, kein Commit.

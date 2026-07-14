@@ -205,14 +205,19 @@ body { background: #EDEFF1; margin: 0; }
             </div>
             <div class="flex flex-wrap items-center gap-2">
               <div class="inline-flex rounded-md bg-bg-faint p-0.5 gap-0.5">
-                <span class="rounded px-2.5 py-1 text-sm text-text-sec">5 J</span>
-                <span class="rounded px-2.5 py-1 text-sm font-semibold bg-bg text-primary shadow-soft">10 J</span>
-                <span class="rounded px-2.5 py-1 text-sm text-text-sec">Max</span>
+                <button type="button" aria-pressed="false" class="rounded px-2.5 py-1 text-sm text-text-sec">5 J</button>
+                <button type="button" aria-pressed="true" class="rounded px-2.5 py-1 text-sm font-semibold bg-bg text-primary shadow-soft">10 J</button>
+                <button type="button" aria-pressed="false" class="rounded px-2.5 py-1 text-sm text-text-sec">Max</button>
+              </div>
+              <div class="inline-flex rounded-md bg-bg-faint p-0.5 gap-0.5 ml-auto">
+                <button type="button" aria-pressed="true" class="rounded px-2.5 py-1 text-sm font-semibold bg-bg text-primary shadow-soft">Wert €</button>
+                <button type="button" aria-pressed="false" class="rounded px-2.5 py-1 text-sm text-text-sec">Verlauf %</button>
               </div>
             </div>
+            <p class="m-0 text-xs text-text-muted">Engine Zone S ≤450px: Die Ansichtsauswahl bricht bei Bedarf linksbündig um; der Engine-Fallback spiegelt den <code>gap-3</code>-Rhythmus ohne Tailwind.</p>
             <div class="flex flex-wrap gap-2">
-              <span class="inline-flex items-center gap-2 rounded-full bg-bg px-3 py-1 text-sm shadow-soft"><span class="h-2.5 w-2.5 rounded-full" style="background:var(--color-petrol-600)"></span>Sofort investiert</span>
-              <span class="inline-flex items-center gap-2 rounded-full bg-bg px-3 py-1 text-sm shadow-soft"><span class="h-2.5 w-2.5 rounded-full" style="background:var(--color-purpur-600)"></span>3 Jahre gewartet</span>
+              <button type="button" aria-pressed="true" class="inline-flex cursor-pointer select-none items-center gap-2 rounded-full bg-bg px-3 py-1 text-sm shadow-soft transition-shadow motion-reduce:transition-none hover:shadow-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-petrol-500 border border-border text-text transition-colors hover:border-primary hover:bg-bg-faint hover:text-primary"><span class="h-2.5 w-2.5 rounded-full" style="background:var(--color-petrol-600)"></span>Sofort investiert</button>
+              <button type="button" aria-pressed="true" class="inline-flex cursor-pointer select-none items-center gap-2 rounded-full bg-bg px-3 py-1 text-sm shadow-soft transition-shadow motion-reduce:transition-none hover:shadow-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-petrol-500 border border-border text-text transition-colors hover:border-primary hover:bg-bg-faint hover:text-primary"><span class="h-2.5 w-2.5 rounded-full" style="background:var(--color-purpur-600)"></span>3 Jahre gewartet</button>
             </div>
             <div class="relative w-full">
               <svg viewBox="0 0 600 200" class="w-full" role="img" aria-label="Platzhalter Liniendiagramm">

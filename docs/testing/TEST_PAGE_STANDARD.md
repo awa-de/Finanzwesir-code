@@ -1,6 +1,6 @@
 # Finanzwesir Test Page Standard
 
-Stand: 2026-07-13 | Standard-Version: 7 (AP-tailwind-02_slice-4-manifest-fix: §10 Manifest-Invariante) | Geändert von: Claude (Sonnet)
+Stand: 2026-07-14 | Standard-Version: 8 (AP-chart-engine-01 DOC-01: §10 Engine-Fallback-Parität, §5.3 Chart-Chrome-Beispiel) | Geändert von: Claude (Sonnet)
 
 > Normativer Standard. Kein Projekttagebuch. Die Wörter **MUSS**, **DARF**, **DARF NICHT**
 > und **SOLL** sind im Sinne von RFC 2119 zu lesen. **SOLL** wird nur bei bewusst begründeter
@@ -186,6 +186,16 @@ Erwartungen nennen konkrete Werte, wenn sie feststehen (Texte, Farben, Zustände
 Breakpoints, Tooltip-Inhalt, Fehlermeldungen) — keine vagen Pauschalaussagen wie „sollte
 funktionieren".
 
+Chart-Chrome-Beispiel (Baukasten §6.11):
+
+```text
+- Titel, BAN, Toolbar und Legende stehen mit gleichmäßigem Abstand untereinander (Wrapper-Rhythmus).
+- Die BAN ist eine kompakte, startausgerichtete Box, nicht breitenfüllend.
+- Auf M/L steht die Ansichtsauswahl rechts von der Zeitspanne; auf Zone S (≤450px) bricht sie linksbündig um.
+- Legend-Pills zeigen im Ruhezustand eine feine Kontur; beim Hover wechseln Kontur, Text und Fläche auf Primärfarbe.
+- Der Tastaturfokus ist an jedem bedienbaren Element sichtbar (Fokus-Ring).
+```
+
 ---
 
 ## 6. Ghost-nahe Einbettung
@@ -348,6 +358,12 @@ Wichtig:
   `data-csv` werden durch diese Regel **nicht** pauschal verboten; für sie gelten die
   kanonischen Datenquellen- und Domainregeln aus `docs/spec/APP-INTERFACE.md` (§6/§7). Diese
   Regel betrifft ausschließlich Script-/Stylesheet-Ladeelemente, nicht Datenattribute.
+- **Engine-Fallback-Parität (AP-chart-engine-01 DOC-01, 2026-07-14):** Dauerhafte
+  `tests/engine/`-Seiten laden kein Tailwind. Rendert die Engine Tailwind-Rezeptklassen in ihr
+  DOM, MUSS `FwRenderer` für jede auf dieser Testseite sichtbare Chrome-Geometrie und jeden
+  sichtbaren Interaktionszustand ein gleichwertiges tokenbasiertes CSS-Fallback bereitstellen.
+  Eine Engine-Sichtprüfung dokumentiert bei responsivem Chrome mindestens M/L und Zone S ≤450px
+  sowie Ruhe-/Hover-/Fokus- und Toggle-Zustand, wenn diese existieren.
 - Auf neu gebauten oder migrierten Testseiten gilt diese Regel sofort; auf unmigriertem
   Altbestand wird sie erst im Zuge der Migration (§15) durchgesetzt, nicht rückwirkend als
   Fehler erzwungen.
