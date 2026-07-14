@@ -745,7 +745,8 @@
       <ul>
       <li>Testschritte: „10 Jahre zurückspringen" klicken.</li>
       <li>Erwartung: Screen 2 zeigt erste Station. Sichtbar: Quellenzeile (z.B. „Zeit Online · 9. November 2016"), Headline, Anker-Text, Journey-Button „Weiter investiert bleiben".</li>
-      <li>„Zwischenstand anzeigen"-Button vorhanden (Collapsible). Klick darauf: dl mit Eingezahlt + Depotwert-Werten erscheint.</li>
+      <li>„Zwischenstand anzeigen"-Button vorhanden (Collapsible). Klick darauf: Label wird „Zwischenstand ausblenden", <code>aria-expanded</code> wird <code>true</code> und ein <code>dl</code> mit Eingezahlt + Depotwert-Werten erscheint.</li>
+      <li>Responsive Vertrag: unter <code>sm</code> volle Triggerzeile (Text links, Chevron rechts) und volles <code>dl</code>; ab <code>sm</code> derselbe Trigger kompakt mit Chevron neben dem Text und inhaltsbreitem <code>dl</code>. Die zwei Kennzahl-Blöcke stehen nebeneinander, jeweils Label über Wert.</li>
       <li>Kein Endwissen (kein finaler Depotwert, kein 120-Monats-Chart, keine Rendite).</li>
       <li>Kein JS-Fehler. Konsole: keine EditorialDegraded-Warnung (v3.0: kein Gate).</li>
       </ul>

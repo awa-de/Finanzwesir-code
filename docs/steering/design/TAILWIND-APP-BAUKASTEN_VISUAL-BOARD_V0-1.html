@@ -279,11 +279,31 @@ body { background: #EDEFF1; margin: 0; }
           </div>
         </div>
 
-        <!-- Disclosure 6.8 -->
-        <div>
-          <button type="button" aria-expanded="false" aria-controls="board-zwischenwerte" class="flex w-full items-center justify-between gap-2 rounded-md px-3 py-2 text-left text-sm font-semibold text-text-sec transition-colors motion-reduce:transition-none hover:bg-bg-faint hover:text-text focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-petrol-500 sm:inline-flex sm:w-auto sm:justify-start">Zwischenwerte anzeigen <span class="transition-transform motion-reduce:transition-none">▾</span></button>
-          <div id="board-zwischenwerte" hidden class="mt-2 pl-3"></div>
-        </div>
+        <!-- Disclosure 6.8: statische Referenz für beide Zustände -->
+        <section class="flex flex-col gap-3" aria-label="Zwischenstand-Disclosure">
+          <div>
+            <p class="m-0 mb-1 text-xs text-text-muted">Geschlossen</p>
+            <button type="button" aria-expanded="false" aria-controls="board-zwischenstand-closed" class="flex w-full items-center justify-between gap-2 rounded-md px-3 py-2 text-left text-sm font-semibold text-text-sec transition-colors motion-reduce:transition-none hover:bg-bg-faint hover:text-text focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-petrol-500 sm:inline-flex sm:w-auto sm:justify-start">Zwischenstand anzeigen <span aria-hidden="true" class="transition-transform motion-reduce:transition-none">▾</span></button>
+            <div id="board-zwischenstand-closed" hidden class="mt-2 pl-3"></div>
+          </div>
+          <div>
+            <p class="m-0 mb-1 text-xs text-text-muted">Geöffnet</p>
+            <button type="button" aria-expanded="true" aria-controls="board-zwischenstand-open" class="flex w-full items-center justify-between gap-2 rounded-md px-3 py-2 text-left text-sm font-semibold text-text-sec transition-colors motion-reduce:transition-none hover:bg-bg-faint hover:text-text focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-petrol-500 sm:inline-flex sm:w-auto sm:justify-start">Zwischenstand ausblenden <span aria-hidden="true" class="rotate-180 transition-transform motion-reduce:transition-none">▾</span></button>
+            <div id="board-zwischenstand-open" class="mt-2 pl-3">
+              <dl class="m-0 grid w-full grid-cols-2 gap-x-4 gap-y-1 sm:w-fit">
+                <div>
+                  <dt class="text-xs text-text-muted">Eingezahlt</dt>
+                  <dd class="m-0 text-base font-semibold text-text">1.800&nbsp;€</dd>
+                </div>
+                <div>
+                  <dt class="text-xs text-text-muted">Depotwert damals</dt>
+                  <dd class="m-0 text-base font-semibold text-text">1.890&nbsp;€</dd>
+                </div>
+              </dl>
+            </div>
+          </div>
+          <p class="m-0 text-xs text-text-muted">Basis/S: volle Zeile, Text links und Chevron rechts. Ab <code>sm</code>: derselbe Trigger kompakt; Text und Chevron bleiben zusammen.</p>
+        </section>
 
         <!-- Callout/Assumptions 6.7 -->
         <aside class="border-l-2 border-border pl-4 text-sm text-text-muted">

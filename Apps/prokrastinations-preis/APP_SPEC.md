@@ -813,6 +813,12 @@ Regeln:
 - Auf Mobile keine permanent sichtbaren Mini-KPI-Karten pro Station
 - Finale KPI-Cards erscheinen erst auf Screen 3
 
+**Responsiver Ein-Primitive-Vertrag (Q-08):**
+- Basis/Mobile: derselbe Trigger ist eine volle Zeile; Text links, Chevron rechts; das geöffnete <dl> nutzt die volle verfügbare Breite.
+- Ab sm: kein zweites Desktop-Element; derselbe Trigger wird kompakt (inline-flex, natürliche Breite), Text und Chevron bleiben zusammen; das <dl> wird inhaltsbreit.
+- DOM-Reihenfolge, Button-Semantik, aria-expanded, aria-controls, Tastaturverhalten und sichtbare Labels bleiben über alle Breakpoints identisch.
+- Das `dl` ist ein zweispaltiges Grid aus zwei Kennzahl-Blöcken: je ein Kindelement mit `dt` über `dd` (Eingezahlt / Wert darunter, Depotwert damals / Wert darunter). Nicht vier direkte Grid-Zellen für Labels und Werte.
+
 **Collapsible-A11y:**
 - Trigger wird als Button behandelt, nicht als dekorativer Link
 - Empfohlene ARIA-Attribute: `aria-expanded`, `aria-controls`, eindeutige ID des aufklappbaren Inhalts
@@ -829,6 +835,8 @@ Erlaubt:
 - Hover-/Focus-Tooltip auf Station-Marker
 - kleiner Zwischenstand im Stationstext
 - derselbe Collapsible wie Mobile
+
+Maßgeblich ist dabei der responsive Ein-Primitive-Vertrag oben, nicht eine abweichende Desktop-Variante.
 
 Nicht erlaubt:
 - Nur-Hover-Informationen als einziger Zugang

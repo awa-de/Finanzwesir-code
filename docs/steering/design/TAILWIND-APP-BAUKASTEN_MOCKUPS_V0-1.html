@@ -235,9 +235,24 @@ body { background: #EDEFF1; margin: 0; }
             <p class="m-0 text-xs text-text-muted">Modellrechnung, historische Renditen. Keine Anlageberatung.</p>
           </div>
         </div>
-        <div>
-          <span class="flex w-full items-center justify-between gap-2 rounded-md px-3 py-2 text-left text-sm font-semibold text-text-sec sm:inline-flex sm:w-auto sm:justify-start">Zwischenwerte anzeigen <span>▾</span></span>
-        </div>
+        <!-- Disclosure 6.8: statische offene Referenz -->
+        <section aria-label="Zwischenstand-Disclosure">
+          <p class="m-0 mb-1 text-xs text-text-muted">Optionaler Zwischenstand an einer Station</p>
+          <button type="button" aria-expanded="true" aria-controls="mockup-zwischenstand-open" class="flex w-full items-center justify-between gap-2 rounded-md px-3 py-2 text-left text-sm font-semibold text-text-sec transition-colors motion-reduce:transition-none hover:bg-bg-faint hover:text-text focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-petrol-500 sm:inline-flex sm:w-auto sm:justify-start">Zwischenstand ausblenden <span aria-hidden="true" class="rotate-180 transition-transform motion-reduce:transition-none">▾</span></button>
+          <div id="mockup-zwischenstand-open" class="mt-2 pl-3">
+            <dl class="m-0 grid w-full grid-cols-2 gap-x-4 gap-y-1 sm:w-fit">
+              <div>
+                <dt class="text-xs text-text-muted">Eingezahlt</dt>
+                <dd class="m-0 text-base font-semibold text-text">1.800&nbsp;€</dd>
+              </div>
+              <div>
+                <dt class="text-xs text-text-muted">Depotwert damals</dt>
+                <dd class="m-0 text-base font-semibold text-text">1.890&nbsp;€</dd>
+              </div>
+            </dl>
+          </div>
+          <p class="m-0 mt-2 text-xs text-text-muted">Basis/S: volle Zeile, Text links und Chevron rechts. Ab <code>sm</code>: kompakt, Text und Chevron zusammen.</p>
+        </section>
         <aside class="border-l-2 border-border pl-4 text-sm text-text-muted">
           Annahmen: 7 % p. a. nominal, monatliche Sparrate 500 €, Tagesgeld 2 % p. a., Kosten 0,2 % TER. Vergangenheitswerte sind keine Garantie.
         </aside>
@@ -395,9 +410,11 @@ body { background: #EDEFF1; margin: 0; }
             <p class="m-0 text-xs text-text-muted">Basisvariante — kein Muss, ein Startpunkt.</p>
           </div>
         </div>
-        <div>
-          <span class="flex w-full items-center justify-between gap-2 rounded-md px-3 py-2 text-left text-sm font-semibold text-text-sec sm:inline-flex sm:w-auto sm:justify-start">Und wenn ich mehr Risiko will? <span>▾</span></span>
-          <span class="flex w-full items-center justify-between gap-2 rounded-md px-3 py-2 text-left text-sm font-semibold text-text-sec sm:inline-flex sm:w-auto sm:justify-start">Warum kein Gold, kein Bitcoin, keine Themen-ETFs? <span>▾</span></span>
+        <div class="flex flex-col gap-1">
+          <button type="button" aria-expanded="false" aria-controls="mockup-risiko" class="flex w-full items-center justify-between gap-2 rounded-md px-3 py-2 text-left text-sm font-semibold text-text-sec transition-colors motion-reduce:transition-none hover:bg-bg-faint hover:text-text focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-petrol-500 sm:inline-flex sm:w-auto sm:justify-start">Und wenn ich mehr Risiko will? <span aria-hidden="true" class="transition-transform motion-reduce:transition-none">▾</span></button>
+          <div id="mockup-risiko" hidden class="mt-2 pl-3"></div>
+          <button type="button" aria-expanded="false" aria-controls="mockup-ausschluesse" class="flex w-full items-center justify-between gap-2 rounded-md px-3 py-2 text-left text-sm font-semibold text-text-sec transition-colors motion-reduce:transition-none hover:bg-bg-faint hover:text-text focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-petrol-500 sm:inline-flex sm:w-auto sm:justify-start">Warum kein Gold, kein Bitcoin, keine Themen-ETFs? <span aria-hidden="true" class="transition-transform motion-reduce:transition-none">▾</span></button>
+          <div id="mockup-ausschluesse" hidden class="mt-2 pl-3"></div>
         </div>
         <aside class="border-l-2 border-border pl-4 text-sm text-text-muted">
           Das ist Bildungsinhalt, keine Anlageberatung. Die richtige Aufteilung hängt an deiner Risikotragfähigkeit — nicht an diesem Donut.
