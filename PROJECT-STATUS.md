@@ -1,17 +1,17 @@
 <!-- HOOK-META
 Version: 1
-Stand: 2026-07-13
-Fokus-AP: AP-tailwind-02 Slices 1-8 + 02a/02b/02f ✅ Tailwind-Baukasten-Pilotmigration abgeschlossen+abgenommen, Checker grün, kein Commit (2026-07-13)
-Nächster-Schritt: Offen (Rubikon-Subline-Konflikt bewusst zurückgestellt, kein Blocker) (AP-tailwind-02 Slice 8 ✅ 2026-07-13)
+Stand: 2026-07-14
+Fokus-AP: AP-chart-engine-01 CE-3b ✅ Line-Chart-Chrome (Engine-DOM-Chrome-Programm) abgeschlossen+browserabgenommen, kein Commit (2026-07-14)
+Nächster-Schritt: CE-4 — Bar-Chart-Chrome (AP-chart-engine-01 CE-3b ✅ 2026-07-14)
 Blocker: keine
 Letzter-Distill: 2026-07-13
 Kassensturz-Datum: 2026-07-13
 -->
-<!-- HOOK-META-SESSION: AP-tailwind-02 Kettenabschluss -->
+<!-- HOOK-META-SESSION: AP-chart-engine-01 CE-3b Vollabschluss -->
 
 # PROJECT STATUS — Finanzwesir 2.0
 
-Stand: 2026-07-13 | Session: AP-tailwind-02 Kettenabschluss | Geändert von: Claude
+Stand: 2026-07-14 | Session: AP-chart-engine-01 CE-3b Vollabschluss | Geändert von: Claude
 
 **Zweck:** Schneller Wiedereinstieg nach Pausen.
 **Zielgruppe:** Albert und Claude.
@@ -24,14 +24,14 @@ Stand: 2026-07-13 | Session: AP-tailwind-02 Kettenabschluss | Geändert von: Cla
 
 ## 1. Aktueller Fokus
 
-**Nächster Schritt:** Offen — die AP-tailwind-02-Migration (Slices 1–8 + 02a/02b/02f) ist für den aktuellen Umfang abgeschlossen. Der Rubikon-Subline-Konflikt (`.fw-app__screen-subline` trägt geschützten Rubikon-Fließtext, letzter `--fw-space-*`-Rest, blockiert D-08-Abnahme „Grep leer") ist bewusst zurückgestellt, kein aktiver Blocker — wird später als eigener Folge-AP aufgegriffen. Details: docs/steering/BACKLOG.md.
+**Nächster Schritt:** CE-4 — Bar-Chart-Chrome (Engine-DOM-Chrome-Programm AP-chart-engine-01, Prompt liegt vor in `Archiv/local/muss noch eingeordnet werden/`, noch nicht begonnen). CE-1 bis CE-3b sind abgeschlossen und von Albert browserabgenommen, aber noch **nicht committed**. Details: docs/steering/BACKLOG.md (Eintrag „AP-chart-engine-01").
 
 Letzte Meilensteine (je eine Zeile — Volltext in BACKLOG-ARCHIV.md):
+- **AP-chart-engine-01 (CE-1–CE-3b) + AP-chart-engine-tool-01** (2026-07-14) ✅ Engine-DOM-Chrome-Programm gestartet: Read-only-Inventur (F-05/F-06), Token-Fallback-Architektur (F-07) statt reinem Tailwind-Tausch, Line-Chart-Chrome (Segmented-Controls+Legend-Pills als echte aria-pressed-Buttons) auf Baukasten migriert, Bar/Donut/Pie unverändert; neues Diagnosewerkzeug engine-dom-check.js (Positiv+Negativfall verifiziert); Albert-browserabgenommen; kein Commit
 - **AP-tailwind-02 Slices 3–8 + 02f** (2026-07-13) ✅ Slider/Buttons-CTA(+Manifest-Fix)/Stationen-Panel/Disclosure-Callout/Chart-Slot/Screen-Flow migriert, alle Browser-abgenommen, Checker durchgehend grün; ci-token-check.js auf 10 Werkzeuge erweitert; offen: Rubikon-Subline-Konflikt
 - **AP-tailwind-02 Slice 1+2** (2026-07-13) ✅ Shell/States + KPI auf Tailwind-Baukasten migriert (02c Taxonomie, 02d Runtime-Manifest, 02e Theme-Bridge); Browser-Abnahme inkl. Reduced Motion vollständig bestätigt
 - **AP-tailwind-02a/02b** (2026-07-13) ✅ Play-CDN-Vertrag (Tailwind v4) repo-weit synchronisiert + gehärtet; Checker bytegenau, Boards/Decision-Log/Backlog konsistent
 - **Ritual-Housekeeping** (2026-07-13) ✅ Montag-Check auf einen Vorab-Block konsolidiert (3 Kopien entfernt), Kassensturz KW29, Distill 11 (8 promoted, 1 retired)
-- **RITUAL-OPT-2** (2026-07-12) ✅ Ritual + Start vollständig read-frei: NAVIGATION/BACKLOG-Flip/Remove, Hook übernimmt BACKLOG-Extraktion, BACKLOG-ARCHIV datumsbasiert rotiert (219→12 Zeilen), DECISION-LOG-Tool
 
 ---
 

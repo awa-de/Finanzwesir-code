@@ -600,15 +600,27 @@ export class ChartEngine {
     }
 
     _updateUIState(container, state) {
+        // CHANGED — CE-3: Line setzt den vollstaendigen Literal-/aria-pressed-Zustand ueber den Renderer
+        // (Delta C.4); die bestehende globale active-Suffixlogik steuert fuer Line weder Optik noch A11y
+        // mehr. Bar bleibt exakt beim bisherigen classList.add/remove('active') (Delta C.5).
+        var isLine = (state.type === 'line');
         const rangeBtns = container.querySelectorAll('[data-action="setRange"]');
         rangeBtns.forEach(btn => {
-            if (btn.dataset.value === state.range) btn.classList.add('active');
-            else btn.classList.remove('active');
+            var isActive = (btn.dataset.value === state.range);
+            if (isLine) {
+                this.renderer._setLineSegmentedOptionState(btn, isActive);
+            } else {
+                if (isActive) btn.classList.add('active'); else btn.classList.remove('active');
+            }
         });
         const viewBtns = container.querySelectorAll('[data-action="setView"]');
         viewBtns.forEach(btn => {
-            if (btn.dataset.value === state.view) btn.classList.add('active');
-            else btn.classList.remove('active');
+            var isActive = (btn.dataset.value === state.view);
+            if (isLine) {
+                this.renderer._setLineSegmentedOptionState(btn, isActive);
+            } else {
+                if (isActive) btn.classList.add('active'); else btn.classList.remove('active');
+            }
         });
     }
 
@@ -640,7 +652,16 @@ export class ChartEngine {
             if (item) {
                 var index = parseInt(item.dataset.index, 10);
                 state.strategy.handleLegendClick(chart, index);
-                item.classList.toggle('hidden-dataset');
+
+                // CHANGED — CE-3: Line liest den realen Chart.js-Sichtbarkeitszustand nach dem Klick aus
+                // (Delta D.4, keine eigene Sichtbarkeitsquelle) und setzt vollstaendigen Klassentausch +
+                // aria-pressed ueber den Renderer. Bar/Pie/Ranking bleiben beim bisherigen hidden-dataset-Toggle.
+                if (state.type === 'line') {
+                    var isVisible = chart.isDatasetVisible(index);
+                    self.renderer._setLineLegendPillState(item, isVisible);
+                } else {
+                    item.classList.toggle('hidden-dataset');
+                }
 
                 // BAN Dynamik V5.1.0: Headline für sichtbare Serien neu berechnen
                 if (typeof state.strategy.computeHeadlineForVisibleSeries === 'function') {

@@ -1,5 +1,5 @@
 # Funktionierende Features (Nicht kaputt machen!)
-Stand: 2026-07-06 | Session: AP-prokrast-09d | Geändert von: Claude
+Stand: 2026-07-14 | Session: AP-chart-engine-01 CE-3b Vollabschluss | Geändert von: Claude
 
 ## Hinweis
 
@@ -59,3 +59,4 @@ Die genaue technische Umsetzung darf Claude selbst analysieren.
 - Die Achsen und der Aufbau des Diagramms sind ebenfalls einwandfrei
 - Die Tooltips funktionieren einwandfrei, die bleiben so
 - KDR-14 CSS-Variables Bridge (FwTheme V5.0.0): Engine liest Farb-Tokens aus `screen.css :root`. Alle Dateien tokenisiert. Fallback-Defaults für Test-HTMLs ohne screen.css. Init-Reihenfolge bindend: `new FwTheme()` → `init()` → `_injectStyles()`.
+- Engine-DOM-Chrome auf Tailwind-Baukasten migriert (AP-chart-engine-01, CE-2b + CE-3/3a/3b, 2026-07-14): Gemeinsames DOM-Fundament (Wrapper/Canvas-Container/A11y-Tabelle/Loading/Error) trägt jetzt Baukasten-Literalrezepte (§6.9–6.11) + einen schmalen tokenbasierten CSS-Fallback für die dauerhaft Tailwind-freien Engine-Testseiten (`.fw-chart-a11y-fallback`, `.fw-chart-error` u. a.). Für **Linie** zusätzlich: Titel/BAN/Toolbar/Segmented-Controls (Zeitspanne + Ansicht, echte `<button role="group" aria-pressed>`)/Legende (echte `<button aria-pressed>`-Pills) auf Baukasten-Literale (§6.5/§6.11) migriert, jeweils mit eigenem line-spezifischen CSS-Fallback (Marker `.fw-chart-wrapper--line`). Bar/Donut/Pie unverändert (eigene, spätere Slices CE-4/CE-5). Neues Diagnosewerkzeug `tools/engine-dom-check.js` prüft A11y-Verbergung + Struktur-Anker über beide Datenpfade. Ergebnisprotokolle: `docs/steering/patches/AP-chart-engine-01_CE-2b_*` bis `..._CE-3b_*`.

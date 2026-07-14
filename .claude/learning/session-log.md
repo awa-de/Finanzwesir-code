@@ -1,6 +1,8 @@
 # Session-Log — Finanzwesir 2.0
 Wird nach /distill ins Jahres-Segment rotiert (Rohlog erhalten). Einträge: [FRICTION] [WIN] [PREF] [QUESTION] [OK]
 
+## 2026-07-14 – SESSION START | [KETTENMODUS] | Fokus: AP-tailwind-02 (Tailwind-Baukasten-Pilotmigration abgeschlossen, kein Commit)
+
 ### 2026-07-13 — Housekeeping: Montag-Check-Konsolidierung + Kassensturz KW29 + Distill 11 ✅
 - [FRICTION] Erster Kassensturz-Befund war falsch — nur die ersten ~20 Zeilen von session-log.md gelesen, „1 Eintrag seit Distill" gemeldet statt real 26. Von Albert durch Nachfrage aufgedeckt, korrigiert.
 - [OK] start.md: Montag-Kassensturz/Distill-Check war 3x dupliziert (Warm-Start/Kettenmodus/Vollmodus) + 1x redundant in Schritt 3 — auf einen gemeinsamen Vorab-Block vor allen 3 Ästen konsolidiert (Full-Gate, Albert-OK). NAVIGATION.md Zeile 41 präzisiert.
@@ -73,3 +75,9 @@ Wird nach /distill ins Jahres-Segment rotiert (Rohlog erhalten). Einträge: [FRI
 - [FRICTION] Subagent-`model:opus` griff nicht (env erzwingt Haiku) → schlechte Bewertung; auf Hauptfaden-Opus umgestiegen. → [[subagent-model-override-gilt-nicht]]
 - [QUESTION/OFFEN] **Z:-Überbleibsel-Löschung blockiert:** `Z:\…\Privat\2ndbrain\…\Finanzwesir Vermächtnis` (stale Kopie, 100% redundant, verifiziert) ließ sich wegen Nextcloud-VFS-Sperre („Zugriff verweigert") nicht entfernen. Albert muss OS-seitig löschen (Nextcloud/Obsidian schließen). Offen bis erledigt.
 - [OFFEN] Zwei Repos uncommitted (Code + content/) — Commit-Messages geliefert, Albert staged/committed selbst.
+### 2026-07-14 — AP-chart-engine-01 (CE-1-CE-3b) + AP-chart-engine-tool-01 Vollabschluss ✅
+- [FRICTION] CE-2 gestoppt (Vorbedingung 3): Tailwind-Utilities auf den absichtlich Tailwind-freien Engine-Testseiten nicht generierbar — F-07-Entscheidung (CE-2b) gibt FwRenderer einen schmalen, tokenbasierten CSS-Kompatibilitätsboden.
+- [FRICTION] CE-2b Erstwurf: Error-Fallback-Fläche war Purpur statt CI-konform (Baukasten §6.10-Tokenrezept) — von Albert korrigiert.
+- [FRICTION] CE-3a/CE-3b: Alberts reale Browser-Abnahme deckte mehrfach Abweichungen vom Baukasten-Mockup auf (BAN gestreckt statt kompakt, View-Gruppe ohne M/L-Rechtsanker, Zone-S generisch statt line-spezifisch); CE-3a selbst enthielt noch eine Kaskaden-Reihenfolge-Fehleinschätzung (Spezifität vs. Quellposition), erst CE-3b behoben.
+- [WIN] tools/engine-dom-check.js (neues DOM-Struktur-/A11y-Verbergungs-Diagnosewerkzeug) real mit Positiv- UND Negativfall verifiziert (DOM-Mutation im Browser, Wiederherstellung, erneuter PASS) — kein reiner Positiv-Nachweis.
+- [WIN] CE-3b: reale, dokumentierte CSS-Lehre — bei identischer Selektorspezifität entscheidet die Quellreihenfolge, nicht die Intuition 'später im Code = spezifischer'.
