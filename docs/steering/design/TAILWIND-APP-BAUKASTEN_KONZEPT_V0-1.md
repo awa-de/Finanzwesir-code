@@ -1,4 +1,4 @@
-Stand: 2026-07-15 | Session: AP-chart-engine-01 DOC-02a | Geändert von: Claude (Sonnet)
+Stand: 2026-07-15 | Session: AP-chart-engine-01 DOC-03 | Geändert von: Claude (Sonnet)
 
 # TAILWIND-APP-BAUKASTEN — KONZEPT V0.1
 
@@ -433,11 +433,20 @@ Offener Prüfpunkt für den Engine-DOM-AP: Tooltip-Optik (Hintergrund/Schrift) v
    - Headline: keine | Performance-Zusammenfassung
    - Range-Control: keine | Einfachauswahl
    - View-Control: keine | Einfachauswahl
-   - Legende: keine | Sichtbarkeit von Datenreihen umschalten
+   - Legende: keine | Sichtbarkeit von Datenreihen umschalten | Segment-Dämpfung umschalten
    - Caption: keine | vorhandene Caption
    ```
+
+   **Segment-Dämpfung umschalten (Donut/Pie, bestätigt DOC-03, 2026-07-15):**
+   - Gilt für einzelne Segmente eines Donut-/Pie-Datasets.
+   - Klick wechselt ausschließlich zwischen aktiv und gedämpft/„ghost"; das Segment bleibt sichtbar, die Daten bleiben unverändert.
+   - Die konkrete bestehende Canvas-Mechanik und ihr Zustand bleiben im Besitz des Pie-Pfads; DOC-03 führt keinen neuen Daten-, `fwContext`-, Plugin- oder Strategy-Vertrag ein.
+   - DOM und Canvas müssen später denselben aktiven/gedämpften Zustand vermitteln; die technische A11y-/Renderer-Umsetzung ist CE-5-Scope.
+   - Kein Drill-down über die Legende; Canvas-Drill-down für „Weitere …" bleibt getrennt.
+
+   **Migrationsinvariante (nur für diesen Donut-Legendenbedarf):** CE-5 darf die bestehende Segment-Dämpfung in DOM-/Tailwind-/A11y-Rezepte überführen, aber ihre sichtbare Wirkung und fachliche Funktion nicht still verändern. Jede Änderung von Verhalten oder abgenommener Optik braucht Alberts ausdrückliche Produktentscheidung.
 3. Charttypmarker (`fw-chart-wrapper--line`/`--bar`, `fw-chart-chrome`) sind ausschließlich strukturelle bzw. fallback-begrenzende Ausnahmeanker; sie begründen keine zweite visuelle Rezeptfamilie.
-4. Regel für Donut/Pie und künftige Charttypen: Vorhandene Bedarfe (Punkt 2) werden wiederverwendet. Braucht ein Charttyp erstmals eine fachlich andere Bedeutung (z. B. Pie-/Donut-Segment-Toggle, Drill-down-Popover, Kategorienlegende), wird sie **nicht** als optische Sondervariante improvisiert — ein kleiner, separater Design-/Vertrags-AP belegt zuerst die Bedeutung und ergänzt danach genau ein neues Renderer-Primitive. Kein Vorratsvokabular.
+4. Regel für Donut/Pie und künftige Charttypen: Vorhandene Bedarfe (Punkt 2, inklusive der seit DOC-03 bestätigten Segment-Dämpfung) werden wiederverwendet. **Bereits entschieden:** Die Donut-Legende bedeutet „Segment-Dämpfung umschalten" (DOC-03) — das ist keine offene Frage mehr. **Weiterhin offen:** Braucht ein Charttyp künftig eine andere, noch unbelegte Bedeutung (z. B. eine rein informative Kategorienliste anstelle der Dämpfung, oder ein Drill-down-Popover), wird sie **nicht** als optische Sondervariante improvisiert — ein kleiner, separater Design-/Vertrags-AP belegt zuerst die Bedeutung und ergänzt danach genau ein neues Renderer-Primitive. Kein Vorratsvokabular. „Drill-down-Auslöser" bleibt weiterhin kein Legendenbedarf — der bestehende Drill-down läuft ausschließlich über einen separaten Canvas-Klickpfad.
 5. Ausdrücklich verboten: (a) `FW_LINE_*`-/`FW_BAR_*`-artiges Kopieren gemeinsamer Rezepte statt Wiederverwendung von `FW_CHROME_*`; (b) eine App-lokale Optikvariante eines gemeinsamen Primitives; (c) Stylewissen (CSS-Klassen, Farben, Abstände) in Strategien; (d) eine globale Chrome- oder Plugin-Registry.
 6. `tokens.css` bleibt die CI-Quelle für Farben, Fonts und die zwei Zusatzschatten; die Tailwind-Defaults liefern die vertragliche Struktur-Skala (Spacing, Radius, Border); der Tailwind-freie Fallback (`_injectStyles()`, `.fw-chart-chrome`) spiegelt beides nur auf Tailwind-freien Engine-Testseiten. Das sind zwei Implementierungswege für **einen** visuellen Vertrag, keine zwei Designwahrheiten.
 
@@ -500,7 +509,7 @@ Derselbe DOM-Vertrag (6.11), drei Belegungen — Nachweis, dass das Chrome chart
 | Titel | ja | ja | ja |
 | BAN | Endwert, `aria-live` (Bestand: nur Linie — Ausweitung auf Balken/Donut ist Engine-AP-Option) | Durchschnittswert (optional) | meist entbehrlich — die zentrale Kennzahl steht beim Donut bereits im Loch (`CenterTextPlugin`, Canvas-Sache) |
 | Toolbar | Zeitraum-Segmented (1/5/10 J) | Modus-Segmented (nominal/real) | oft leer — Slot entfällt ersatzlos |
-| Legende (vor dem Canvas) | Pills je Serie, `aria-pressed`-Toggle | Pills je Serie | Rahmen (6.11) übernommen; Legende/Interaktion noch nicht entschieden — wird im CE-5-Preflight fachlich bestimmt (DOC-02a) |
+| Legende (vor dem Canvas) | Pills je Serie, `aria-pressed`-Toggle | Pills je Serie | Rahmen (6.11) übernommen; Bedeutung = Segment-Dämpfung umschalten (entschieden, DOC-03) — Kategorienliste als abweichende Bedeutung und Drill-down-Popover bleiben offen |
 | Canvas | Linienchart (Engine/Chart.js, unangetastet) | Balkenchart (dito) | Donut, `cutout: '70%'`, Kennzahl im Loch (dito) |
 | Caption | Quelle/Methodik | Quelle | Quelle |
 | Zustände | 6.10 im Canvas-Slot | dito | dito |
