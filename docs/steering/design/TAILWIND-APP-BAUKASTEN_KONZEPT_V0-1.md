@@ -1,4 +1,4 @@
-Stand: 2026-07-14 | Session: AP-chart-engine-01 DOC-01 | Geändert von: Claude (Sonnet)
+Stand: 2026-07-15 | Session: AP-chart-engine-01 DOC-02a | Geändert von: Claude (Sonnet)
 
 # TAILWIND-APP-BAUKASTEN — KONZEPT V0.1
 
@@ -421,6 +421,28 @@ Offener Prüfpunkt für den Engine-DOM-AP: Tooltip-Optik (Hintergrund/Schrift) v
 **Besitzer:** Chart-Engine; dieses Rezept ist der verbindliche Zielvertrag für den Engine-DOM-AP.
 **Migration:** `fw-chart-title`, `fw-chart-toolbar`, `fw-btn-group`, `fw-chart-legend`, `fw-ban-*`, `fw-popover-*`, `fw-loading-container` wechseln im Engine-AP auf diese Literalrezepte (als JS-Konstanten, D-13); `className`-Zuweisungen in `FwRenderer.js` sind heute schon Literale — die Umstellung ist ein Stringtausch, kein Strukturumbau.
 
+**Semantischer Chrome-Auftrag und Erweiterung (DOC-02, 2026-07-15 — Zielvertrag, kein Ist-Code):**
+
+1. Die vorhandenen `FW_CHROME_*`-Rezepte (`FwRenderer.js`, seit CE-4c) sind Renderer-Besitz und die gemeinsame Umsetzung bereits belegter Primitiven; Line und regulärer Bar verwenden sie gemeinsam. Keine neue Chrome-Fabrik, keine Registry entsteht dadurch.
+2. Die minimale, geschlossene Bedarfsliste, die eine Strategie fachlich anfordern kann:
+   ```text
+   Strukturelle Renderer-Invarianten (nicht anzufordern):
+   - Wrapper, Canvas-Container, A11y-Tabelle und vorhandene Statusflächen.
+
+   Optionale fachliche Chrome-Bedarfe:
+   - Headline: keine | Performance-Zusammenfassung
+   - Range-Control: keine | Einfachauswahl
+   - View-Control: keine | Einfachauswahl
+   - Legende: keine | Sichtbarkeit von Datenreihen umschalten
+   - Caption: keine | vorhandene Caption
+   ```
+3. Charttypmarker (`fw-chart-wrapper--line`/`--bar`, `fw-chart-chrome`) sind ausschließlich strukturelle bzw. fallback-begrenzende Ausnahmeanker; sie begründen keine zweite visuelle Rezeptfamilie.
+4. Regel für Donut/Pie und künftige Charttypen: Vorhandene Bedarfe (Punkt 2) werden wiederverwendet. Braucht ein Charttyp erstmals eine fachlich andere Bedeutung (z. B. Pie-/Donut-Segment-Toggle, Drill-down-Popover, Kategorienlegende), wird sie **nicht** als optische Sondervariante improvisiert — ein kleiner, separater Design-/Vertrags-AP belegt zuerst die Bedeutung und ergänzt danach genau ein neues Renderer-Primitive. Kein Vorratsvokabular.
+5. Ausdrücklich verboten: (a) `FW_LINE_*`-/`FW_BAR_*`-artiges Kopieren gemeinsamer Rezepte statt Wiederverwendung von `FW_CHROME_*`; (b) eine App-lokale Optikvariante eines gemeinsamen Primitives; (c) Stylewissen (CSS-Klassen, Farben, Abstände) in Strategien; (d) eine globale Chrome- oder Plugin-Registry.
+6. `tokens.css` bleibt die CI-Quelle für Farben, Fonts und die zwei Zusatzschatten; die Tailwind-Defaults liefern die vertragliche Struktur-Skala (Spacing, Radius, Border); der Tailwind-freie Fallback (`_injectStyles()`, `.fw-chart-chrome`) spiegelt beides nur auf Tailwind-freien Engine-Testseiten. Das sind zwei Implementierungswege für **einen** visuellen Vertrag, keine zwei Designwahrheiten.
+
+Dieser Erweiterungsvertrag ist rein konzeptionell (DOC-02): Er beschreibt, wie ein künftiger Charttyp den bestehenden `FW_CHROME_*`-Bestand erweitern darf, ändert aber selbst keine Datei unter `Theme/assets/js/fw-chart-engine/`.
+
 ---
 
 ## 7. Kompositionen
@@ -478,7 +500,7 @@ Derselbe DOM-Vertrag (6.11), drei Belegungen — Nachweis, dass das Chrome chart
 | Titel | ja | ja | ja |
 | BAN | Endwert, `aria-live` (Bestand: nur Linie — Ausweitung auf Balken/Donut ist Engine-AP-Option) | Durchschnittswert (optional) | meist entbehrlich — die zentrale Kennzahl steht beim Donut bereits im Loch (`CenterTextPlugin`, Canvas-Sache) |
 | Toolbar | Zeitraum-Segmented (1/5/10 J) | Modus-Segmented (nominal/real) | oft leer — Slot entfällt ersatzlos |
-| Legende (vor dem Canvas) | Pills je Serie, `aria-pressed`-Toggle | Pills je Serie | Pills je Segment (Toggle je nach Chartlogik — Engine entscheidet) |
+| Legende (vor dem Canvas) | Pills je Serie, `aria-pressed`-Toggle | Pills je Serie | Rahmen (6.11) übernommen; Legende/Interaktion noch nicht entschieden — wird im CE-5-Preflight fachlich bestimmt (DOC-02a) |
 | Canvas | Linienchart (Engine/Chart.js, unangetastet) | Balkenchart (dito) | Donut, `cutout: '70%'`, Kennzahl im Loch (dito) |
 | Caption | Quelle/Methodik | Quelle | Quelle |
 | Zustände | 6.10 im Canvas-Slot | dito | dito |

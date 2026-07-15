@@ -95,3 +95,5 @@ Wird nach /distill ins Jahres-Segment rotiert (Rohlog erhalten). Einträge: [FRI
 - [OK] CE-4/CE-4c vollständig browserabgenommen (Line/Bar/Donut), REGRESSION-MATRIX.md (REG-DOM-001), WORKING-FEATURES.md, BACKLOG.md, NAVIGATION.md, PROJECT-STATUS.md synchronisiert. Neue MEMORY project_chartengine_chrome_migration.md (Integritätscheck 59/59 GRÜN). Kein Commit in dieser Session (Albert committet selbst).
 
 ### AP-chart-engine-01 CE-4/CE-4c — Kettenabschluss ✅ | RECONCILED: AP-chart-engine-01-CE-4 AP-chart-engine-01-CE-4c
+
+### AP-chart-engine-01 CE-4c — AP-Wechsel

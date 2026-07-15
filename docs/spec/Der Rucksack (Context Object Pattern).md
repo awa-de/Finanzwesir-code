@@ -161,6 +161,27 @@ Output in den Context: Der Kontext erhält die physikalischen Eigenschaften.
 
 **Vorteil:** SmartScales muss nicht wissen, was ein "Bar Chart" ist. Es prüft nur `ctx.offset === true`. Das macht das Hinzufügen neuer Chart-Typen (z.B. Waterfall) zu einer einzeiligen Konfigurationsänderung in der Basis-Strategie.
 
+### 2.6 Der Chrome-Auftrag (verwandtes Pattern, kein Rucksack-Feld) — Zielvertrag
+
+*Status: Konzeptionell verankert (DOC-02, 2026-07-15). Kein Ist-Code, keine neue `fwContext`-Eigenschaft.*
+
+Die Strategie legt einen Wunschzettel in den Rucksack:
+„eine Zeitspannen-Auswahl", „eine Sichtbarkeitslegende" oder „nichts davon".
+Der Renderer baut daraus die fertige Bedienoberfläche.
+Die Strategie bestellt keine Pill, keine Farbe und keinen Abstand.
+
+Dieser „Chrome-Auftrag" ist ein eigenständiges, dem Rucksack strukturell verwandtes Pattern (dasselbe Context Object Pattern, siehe 2.1), aber **kein Feld des bestehenden `fwContext`**. Er transportiert DOM-Chrome-Bedarf (Headline, Range-Control, View-Control, Legende, Caption — siehe `docs/steering/design/TAILWIND-APP-BAUKASTEN_KONZEPT_V0-1.md` §6.11), nicht die Darstellungssemantik für Achsen/Tooltips, die weiterhin ausschließlich im bestehenden `fwContext` (KDR 9) lebt.
+
+Technisch verbindlich für eine künftige Durchleitung (eigener Code-AP, nicht dieser Eintrag):
+
+- Der Bedarf ist statisch/fachlich, kein dynamischer UI-State — der gerade aktive Button gehört dem Manager, nicht dem Auftrag.
+- Der Renderer darf den Auftrag lesen, aber nicht in Strategie- oder Domain-Daten zurückschreiben.
+- Ohne Auftrag gibt es kein optionales Chrome-Verhalten — kein globales Auto-Verhalten, kein stillschweigendes Erraten.
+- Auf Resize ändert sich nur die dynamische Schale/Fallback-Darstellung (analog zur „Regenjacke" aus 2.3); der Auftrag selbst bleibt unverändert.
+- Die aktuellen Canvas-/Tooltip-/Plugin-Verbraucher des bestehenden `fwContext` (KDR 9) bleiben unverändert gültig — dieser Vertrag ersetzt sie nicht und vermischt sich nicht mit ihnen.
+
+---
+
 ## 3. Warum haben wir das gemacht? (Rationale)
 
 1. **Determinismus (Via Negativa)**
