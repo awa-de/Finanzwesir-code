@@ -1,17 +1,17 @@
 <!-- HOOK-META
 Version: 1
-Stand: 2026-07-14
-Fokus-AP: AP-chart-engine-01 DOC-01 ✅ Line-Chart-Chrome-Vertragsnachzug abgeschlossen (CE-1–CE-3b bereits committed), DOC-01 offen (2026-07-14)
-Nächster-Schritt: CE-4 — Bar-Chart-Chrome (AP-chart-engine-01 DOC-01 ✅ 2026-07-14)
+Stand: 2026-07-15
+Fokus-AP: AP-chart-engine-01 CE-4c ✅ Gemeinsamer Chrome-Kern (FW_CHROME_*) — CE-4/CE-4c vollständig browserabgenommen (Line/Bar/Donut), noch nicht committed (2026-07-15)
+Nächster-Schritt: CE-5 — Donut/Pie-Chart-Chrome (AP-chart-engine-01 CE-4c ✅ 2026-07-15)
 Blocker: keine
 Letzter-Distill: 2026-07-13
 Kassensturz-Datum: 2026-07-13
 -->
-<!-- HOOK-META-SESSION: AP-chart-engine-01 DOC-01 Kettenabschluss -->
+<!-- HOOK-META-SESSION: AP-chart-engine-01 CE-4/CE-4c Vollabschluss -->
 
 # PROJECT STATUS — Finanzwesir 2.0
 
-Stand: 2026-07-14 | Session: AP-chart-engine-01 DOC-01 Kettenabschluss | Geändert von: Claude
+Stand: 2026-07-15 | Session: AP-chart-engine-01 CE-4/CE-4c Vollabschluss | Geändert von: Claude
 
 **Zweck:** Schneller Wiedereinstieg nach Pausen.
 **Zielgruppe:** Albert und Claude.
@@ -24,14 +24,14 @@ Stand: 2026-07-14 | Session: AP-chart-engine-01 DOC-01 Kettenabschluss | Geände
 
 ## 1. Aktueller Fokus
 
-**Nächster Schritt:** CE-4 — Bar-Chart-Chrome (Engine-DOM-Chrome-Programm AP-chart-engine-01, Prompt liegt vor in `Archiv/local/muss noch eingeordnet werden/`, noch nicht begonnen). CE-1 bis CE-3b + Tool-01 sind abgeschlossen, von Albert browserabgenommen und **bereits committed** (`20bb90c`, 2026-07-14). DOC-01 (Dokumentationsvertrag) ist ebenfalls abgeschlossen, aber **noch nicht committed**. Details: docs/steering/BACKLOG.md (Eintrag „AP-chart-engine-01").
+**Nächster Schritt:** CE-5 — Donut/Pie-Chart-Chrome (Engine-DOM-Chrome-Programm AP-chart-engine-01, Prompt liegt vor in `Archiv/local/muss noch eingeordnet werden/`, noch nicht begonnen, nur nach Alberts explizitem Auftrag). CE-1 bis CE-3b + Tool-01 sind abgeschlossen, von Albert browserabgenommen und **bereits committed** (`20bb90c`, 2026-07-14). DOC-01 (Dokumentationsvertrag) ist ebenfalls abgeschlossen und **committed** (`9dd899d`, 2026-07-14). CE-4 (Bar-Chart-Chrome) + CE-4c (Reparatur: gemeinsamer Chrome-Kern `FW_CHROME_*` statt dupliziertem `FW_BAR_*`) sind abgeschlossen und vollständig browserabgenommen (Line/Bar/Donut, Sicht + `engine-dom-check.js`), **noch nicht committed** (2026-07-15). Details: docs/steering/BACKLOG.md (Eintrag „AP-chart-engine-01").
 
 Letzte Meilensteine (je eine Zeile — Volltext in BACKLOG-ARCHIV.md):
-- **AP-chart-engine-01 DOC-01** (2026-07-14) ✅ Line-Chart-Chrome-Vertragsnachzug: Baukasten-Konzept (Legend-Pill-Kontur, App-Fabrik-Verbindlichkeit), Mockup und Test-Page-Standard auf abgenommenen CE-3b-Ist-Stand nachgezogen; reine Dokumentation, noch nicht committed
+- **AP-chart-engine-01 CE-4/CE-4c** (2026-07-15) ✅ Bar-Chart-Chrome (CE-4) + Reparatur gemeinsamer Chrome-Kern `FW_CHROME_*` statt dupliziertem `FW_BAR_*` (CE-4c, behebt CE-4a-Verstoß); Line/Bar/Donut vollständig browserabgenommen (Sicht + um Chrome-Kern-Block erweitertes `engine-dom-check.js`); noch nicht committed
+- **AP-chart-engine-01 DOC-01** (2026-07-14) ✅ Line-Chart-Chrome-Vertragsnachzug: Baukasten-Konzept (Legend-Pill-Kontur, App-Fabrik-Verbindlichkeit), Mockup und Test-Page-Standard auf abgenommenen CE-3b-Ist-Stand nachgezogen; reine Dokumentation, committed (9dd899d)
 - **AP-chart-engine-01 (CE-1–CE-3b) + AP-chart-engine-tool-01** (2026-07-14) ✅ Engine-DOM-Chrome-Programm gestartet: Read-only-Inventur (F-05/F-06), Token-Fallback-Architektur (F-07) statt reinem Tailwind-Tausch, Line-Chart-Chrome (Segmented-Controls+Legend-Pills als echte aria-pressed-Buttons) auf Baukasten migriert, Bar/Donut/Pie unverändert; neues Diagnosewerkzeug engine-dom-check.js (Positiv+Negativfall verifiziert); Albert-browserabgenommen; committed (20bb90c)
 - **AP-tailwind-02 Slices 3–8 + 02f** (2026-07-13) ✅ Slider/Buttons-CTA(+Manifest-Fix)/Stationen-Panel/Disclosure-Callout/Chart-Slot/Screen-Flow migriert, alle Browser-abgenommen, Checker durchgehend grün; ci-token-check.js auf 10 Werkzeuge erweitert; offen: Rubikon-Subline-Konflikt
 - **AP-tailwind-02 Slice 1+2** (2026-07-13) ✅ Shell/States + KPI auf Tailwind-Baukasten migriert (02c Taxonomie, 02d Runtime-Manifest, 02e Theme-Bridge); Browser-Abnahme inkl. Reduced Motion vollständig bestätigt
-- **AP-tailwind-02a/02b** (2026-07-13) ✅ Play-CDN-Vertrag (Tailwind v4) repo-weit synchronisiert + gehärtet; Checker bytegenau, Boards/Decision-Log/Backlog konsistent
 
 ---
 

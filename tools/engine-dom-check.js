@@ -16,6 +16,18 @@
  * Zusaetzlich, falls auf der Seite gerendert: Loading (`role="status"`) und
  * Error (`role="alert"`) Status-Flaechen.
  *
+ * NEW — CE-4c: Chrome-Kern-Check (additiv, eigener Tabellenblock). Nur fuer
+ * Container, deren Wrapper `fw-chart-wrapper--line`/`--bar` oder den
+ * gemeinsamen Chrome-Anker `fw-chart-chrome` traegt (Baukasten §6.5/§6.11):
+ *  - genau ein Typmarker + der gemeinsame Chrome-Anker vorhanden,
+ *  - Range-/View-Controls sind echte `<button type="button" aria-pressed>`,
+ *  - pro `role="group"` genau ein aktiver (`aria-pressed="true"`) Button,
+ *  - falls eine Legende existiert: Line/regulaerer Bar erhalten echte
+ *    `<button aria-pressed>`-Pills (Ranking-Bar/Donut/Pie zeigen strukturell
+ *    gar keine bzw. eine nicht-Chrome-Legende und werden hier nicht erfasst).
+ * Kein Hover-/Fokus-Zustand (bleibt Sichtprüfung), keine fachliche
+ * Ranking-Erkennung -- rein strukturell, wie der Rest dieses Tools.
+ *
  * Nutzung: Datei-Inhalt in die DevTools-Konsole der geladenen Testseite
  * einfuegen, Enter. Laeuft sofort, druckt console.table + Zusammenfassung und
  * gibt ein Ergebnisobjekt zurueck. Aendert nichts am DOM.
@@ -75,6 +87,51 @@
     return tokens.every(function (t) { return el.classList.contains(t); });
   }
 
+  // --- NEW — CE-4c: Chrome-Kern-Helfer (Baukasten §6.5/§6.11) ---
+  function hasAttr(el, name) {
+    return !!(el && el.hasAttribute(name));
+  }
+
+  // Range-/View-Controls: alle [data-action="setRange"|"setView"] muessen echte
+  // <button type="button" aria-pressed> sein. total===0 zaehlt als unkritisch (z. B. Pie ohne Controls).
+  function checkControlButtons(container) {
+    var els = Array.prototype.slice.call(
+      container.querySelectorAll('[data-action="setRange"], [data-action="setView"]')
+    );
+    var total = els.length;
+    var ok = els.filter(function (el) {
+      return el.tagName === 'BUTTON' && el.getAttribute('type') === 'button' && hasAttr(el, 'aria-pressed');
+    }).length;
+    return { total: total, allOk: (total === 0) || (ok === total) };
+  }
+
+  // Pro role="group" (Range-/View-Gruppe) genau ein aktiver Button. total===0 zaehlt als unkritisch.
+  function checkActiveStatePerGroup(container) {
+    var groups = Array.prototype.slice.call(container.querySelectorAll('[role="group"]'));
+    var total = groups.length;
+    var okCount = 0;
+    groups.forEach(function (group) {
+      var btns = Array.prototype.slice.call(group.querySelectorAll('button[aria-pressed]'));
+      var pressedCount = btns.filter(function (b) { return b.getAttribute('aria-pressed') === 'true'; }).length;
+      if (btns.length > 0 && pressedCount === 1) okCount++;
+    });
+    return { total: total, allOk: (total === 0) || (okCount === total) };
+  }
+
+  // Legende: existiert sie, muessen bei Line/regulaerem Bar alle .fw-legend-item echte
+  // <button aria-pressed> sein (Chrome-Pill-Vertrag, CE-3/CE-3b/CE-4). Keine Legende ist kein Fehler
+  // (Einzeldataset-Bar und Ranking-Bar zeigen strukturell nie eine Legende, siehe FwRenderer._renderLegend).
+  function checkChromeLegend(container) {
+    var legendEl = container.querySelector('.fw-chart-legend');
+    if (!legendEl) return { ok: true, note: 'keine' };
+    var items = Array.prototype.slice.call(legendEl.querySelectorAll('.fw-legend-item'));
+    if (items.length === 0) return { ok: true, note: 'leer' };
+    var ok = items.every(function (el) {
+      return el.tagName === 'BUTTON' && el.getAttribute('type') === 'button' && hasAttr(el, 'aria-pressed');
+    });
+    return { ok: ok, note: ok ? 'PASS (Chrome-Pill)' : 'FAIL (erwartet <button aria-pressed>)' };
+  }
+
   var srOnlyActive = detectSrOnly();
 
   // --- Charts einsammeln (beide Datenpfade) ---
@@ -85,6 +142,8 @@
   var rows = [];       // nur gerenderte (aktive) Charts
   var inaktiv = 0;     // Container ohne Engine-Ausgabe (Testszenario nicht getriggert)
   var allPass = true;
+  var chromeRows = [];      // NEW — CE-4c: nur Container mit Line-/Bar-Chrome-Marker
+  var allChromePass = true; // NEW — CE-4c
 
   containers.forEach(function (container, i) {
     var row = { idx: i };
@@ -132,6 +191,33 @@
                  !!canvasBox && boxClasses && boxHOk && !!canvas;
       row.ergebnis = pass ? 'PASS' : 'FAIL';
       if (!pass) allPass = false;
+
+      // NEW — CE-4c: Chrome-Kern-Check, nur wenn der Wrapper einen Typmarker oder den
+      // gemeinsamen Chrome-Anker traegt (Line/regulaerer Bar). Donut/Pie/Legacy-Bar ohne
+      // Marker werden hier nicht erfasst -- unveraendert ausserhalb des Chrome-Kern-Scopes.
+      var hasLineMarker = !!(wrapper && wrapper.classList.contains('fw-chart-wrapper--line'));
+      var hasBarMarker = !!(wrapper && wrapper.classList.contains('fw-chart-wrapper--bar'));
+      var hasChromeAnchor = !!(wrapper && wrapper.classList.contains('fw-chart-chrome'));
+      if (hasLineMarker || hasBarMarker || hasChromeAnchor) {
+        var chromeRow = { idx: i, pfad: row.pfad, typ: hasLineMarker ? 'line' : (hasBarMarker ? 'bar' : '?') };
+
+        var ankerOk = (hasLineMarker !== hasBarMarker) && hasChromeAnchor; // genau ein Typmarker + Anker
+        chromeRow.chromeAnker = ankerOk ? 'PASS' : 'FAIL';
+
+        var controlsCheck = checkControlButtons(container);
+        chromeRow.controlsButtons = controlsCheck.total === 0 ? '—' : (controlsCheck.allOk ? 'PASS (' + controlsCheck.total + ')' : 'FAIL');
+
+        var activeStateCheck = checkActiveStatePerGroup(container);
+        chromeRow.controlsAktivZustand = activeStateCheck.total === 0 ? '—' : (activeStateCheck.allOk ? 'PASS' : 'FAIL');
+
+        var legendCheck = checkChromeLegend(container);
+        chromeRow.legende = legendCheck.note;
+
+        var chromePass = ankerOk && controlsCheck.allOk && activeStateCheck.allOk && legendCheck.ok;
+        chromeRow.ergebnis = chromePass ? 'PASS' : 'FAIL';
+        if (!chromePass) allChromePass = false;
+        chromeRows.push(chromeRow);
+      }
     } catch (e) {
       row.ergebnis = 'FEHLER: ' + e.message;
       allPass = false;
@@ -182,5 +268,19 @@
     '  |  aktiv: ' + rows.length + ', inaktiv/uebersprungen: ' + inaktiv,
     'font-weight:bold;color:' + (gesamt === 'PASS' ? 'green' : 'crimson'));
 
-  return { tailwindSrOnly: srOnlyActive, gesamt: gesamt, aktiv: rows.length, inaktiv: inaktiv, charts: rows, status: statusRows };
+  // NEW — CE-4c: Chrome-Kern-Check-Ausgabe (Line/regulaerer Bar)
+  if (chromeRows.length) {
+    console.log('%c[engine-dom-check] Chrome-Kern-Check (CE-3/CE-3b/CE-4/CE-4c)', 'font-weight:bold');
+    console.table(chromeRows);
+  } else {
+    console.log('[engine-dom-check] Kein Line-/Bar-Chrome-Container auf dieser Seite (Chrome-Kern-Check uebersprungen).');
+  }
+  var chromeGesamt = chromeRows.length ? (allChromePass ? 'PASS' : 'FAIL') : 'KEINE CHROME-CONTAINER';
+  console.log('%c[engine-dom-check] Chrome-Kern-Gesamt: ' + chromeGesamt + '  |  geprueft: ' + chromeRows.length,
+    'font-weight:bold;color:' + (chromeGesamt === 'PASS' ? 'green' : (chromeRows.length ? 'crimson' : 'gray')));
+
+  return {
+    tailwindSrOnly: srOnlyActive, gesamt: gesamt, aktiv: rows.length, inaktiv: inaktiv, charts: rows, status: statusRows,
+    chromeGesamt: chromeGesamt, chrome: chromeRows // NEW — CE-4c
+  };
 })();

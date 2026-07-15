@@ -600,15 +600,20 @@ export class ChartEngine {
     }
 
     _updateUIState(container, state) {
-        // CHANGED — CE-3: Line setzt den vollstaendigen Literal-/aria-pressed-Zustand ueber den Renderer
-        // (Delta C.4); die bestehende globale active-Suffixlogik steuert fuer Line weder Optik noch A11y
-        // mehr. Bar bleibt exakt beim bisherigen classList.add/remove('active') (Delta C.5).
+        // CHANGED — CE-4c: Line/Bar setzen den vollstaendigen Literal-/aria-pressed-Zustand ueber den
+        // einen gemeinsamen Renderer-Helfer _setChromeSegmentedOptionState() (ersetzt die vormals
+        // getrennten _setLineSegmentedOptionState/_setBarSegmentedOptionState aus CE-3/CE-4); die
+        // bestehende globale active-Suffixlogik steuert fuer Line/Bar weder Optik noch A11y mehr. Gilt
+        // fuer alle Bar-Controls unabhaengig vom aktiven View (Ranking-Schranke — Controls duerfen bei
+        // allen type==='bar' den gemeinsamen Chrome-Kern erhalten).
         var isLine = (state.type === 'line');
+        var isBar = (state.type === 'bar'); // NEW — CE-4
+        var isChromeControls = (isLine || isBar); // NEW — CE-4c
         const rangeBtns = container.querySelectorAll('[data-action="setRange"]');
         rangeBtns.forEach(btn => {
             var isActive = (btn.dataset.value === state.range);
-            if (isLine) {
-                this.renderer._setLineSegmentedOptionState(btn, isActive);
+            if (isChromeControls) {
+                this.renderer._setChromeSegmentedOptionState(btn, isActive);
             } else {
                 if (isActive) btn.classList.add('active'); else btn.classList.remove('active');
             }
@@ -616,8 +621,8 @@ export class ChartEngine {
         const viewBtns = container.querySelectorAll('[data-action="setView"]');
         viewBtns.forEach(btn => {
             var isActive = (btn.dataset.value === state.view);
-            if (isLine) {
-                this.renderer._setLineSegmentedOptionState(btn, isActive);
+            if (isChromeControls) {
+                this.renderer._setChromeSegmentedOptionState(btn, isActive);
             } else {
                 if (isActive) btn.classList.add('active'); else btn.classList.remove('active');
             }
@@ -653,12 +658,17 @@ export class ChartEngine {
                 var index = parseInt(item.dataset.index, 10);
                 state.strategy.handleLegendClick(chart, index);
 
-                // CHANGED — CE-3: Line liest den realen Chart.js-Sichtbarkeitszustand nach dem Klick aus
-                // (Delta D.4, keine eigene Sichtbarkeitsquelle) und setzt vollstaendigen Klassentausch +
-                // aria-pressed ueber den Renderer. Bar/Pie/Ranking bleiben beim bisherigen hidden-dataset-Toggle.
-                if (state.type === 'line') {
+                // CHANGED — CE-4c: Line/reguläre Bar lesen den realen Chart.js-Sichtbarkeitszustand nach
+                // dem Klick aus (Delta D.4, keine eigene Sichtbarkeitsquelle) und setzen vollstaendigen
+                // Klassentausch + aria-pressed ueber den einen gemeinsamen Renderer-Helfer
+                // _setChromeLegendPillState() (ersetzt die vormals getrennten _setLineLegendPillState/
+                // _setBarLegendPillState aus CE-3/CE-4). Pie/Ranking bleiben beim bisherigen
+                // hidden-dataset-Toggle — Ranking-Bar rendert nie eine .fw-chart-legend (siehe
+                // _renderLegend), dieser Klick-Handler wird fuer Ranking also nie mit einem echten
+                // Legend-Item erreicht.
+                if (state.type === 'line' || state.type === 'bar') {
                     var isVisible = chart.isDatasetVisible(index);
-                    self.renderer._setLineLegendPillState(item, isVisible);
+                    self.renderer._setChromeLegendPillState(item, isVisible);
                 } else {
                     item.classList.toggle('hidden-dataset');
                 }

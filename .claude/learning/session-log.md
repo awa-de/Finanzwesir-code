@@ -85,3 +85,13 @@ Wird nach /distill ins Jahres-Segment rotiert (Rohlog erhalten). Einträge: [FRI
 ### AP-chart-engine-01 — AP-Wechsel
 ### 2026-07-14 — AP-chart-engine-01 DOC-01 (Line-Chart-Chrome-Vertragsnachzug) ✅ | DEFERRED: MEMORY-CHECK
 - [OK] Baukasten-Konzept (D-02 funktionale Legend-Pill-Kontur, §5.3-Tabelle, §6.11 finales Pill-/BAN-/Toolbar-/Wrapper-Rezept + App-Fabrik-Verbindlichkeitsklausel), Mockup (echte aria-pressed-Buttons, zweite Control-Gruppe, Zone-S-Notiz) und Test-Page-Standard (§10 Engine-Fallback-Paritätspflicht, §5.3 Chart-Chrome-Beispiel) auf den von Albert abgenommenen CE-3b-Ist-Stand nachgezogen — reine Dokumentation, kein Produktcode, kein Commit.
+
+## 2026-07-15 – SESSION START | [KETTENMODUS] | Fokus: CE-4 — Bar-Chart-Chrome
+
+### 2026-07-15 — AP-chart-engine-01 CE-4 + CE-4c ✅ | Vollabschluss
+- [FRICTION] CE-4 (Bar-Chart-Chrome) führte elf vollständig duplizierte `FW_BAR_*`-Konstanten ein, obwohl ihr Inhalt byte-identisch mit den bereits bestehenden `FW_LINE_*`-Konstanten war — direkter Verstoß gegen den vorher erteilten CE-4a-Nachtrag ("identische Chrome-Rezepte existieren genau einmal"). Musste als eigener Reparatur-AP CE-4c (gemeinsame `FW_CHROME_*`-Konstanten) nachgezogen werden. Lehre in project_chartengine_chrome_migration.md hinterlegt für CE-5/CE-6.
+- [WIN] CE-4c-Reparatur programmatisch statt behauptet bewiesen: PowerShell-Tokenmengenvergleich des committed CE-3b-Stands (`git show HEAD:...`) gegen den neuen Stand zeigte 11/11 Übereinstimmungen + 4/4 byte-identische BAN-Konstanten — die mechanische Umbenennung war nachweislich token- und verhaltensgleich, nicht nur plausibel.
+- [WIN] `tools/engine-dom-check.js` um additiven Chrome-Kern-Prüfblock erweitert (Light-Gate, Alberts expliziter Auftrag) — beim ersten realen Lauf auf allen drei Testseiten (line-ci/bar-ci/pie-ci.test.html) sofort 100% GRÜN, deckungsgleich mit Alberts Sichtprüfung. Kombination aus visueller und struktureller Prüfung bestätigte alle 5 Checklistenpunkte ohne Nacharbeit.
+- [OK] CE-4/CE-4c vollständig browserabgenommen (Line/Bar/Donut), REGRESSION-MATRIX.md (REG-DOM-001), WORKING-FEATURES.md, BACKLOG.md, NAVIGATION.md, PROJECT-STATUS.md synchronisiert. Neue MEMORY project_chartengine_chrome_migration.md (Integritätscheck 59/59 GRÜN). Kein Commit in dieser Session (Albert committet selbst).
+
+### AP-chart-engine-01 CE-4/CE-4c — Kettenabschluss ✅ | RECONCILED: AP-chart-engine-01-CE-4 AP-chart-engine-01-CE-4c

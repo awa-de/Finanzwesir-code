@@ -23,32 +23,39 @@ import { FwTheme } from './FwTheme.js';
 import { FwDateUtils } from './FwDateUtils.js';
 import { FwFormatUtils } from './FwFormatUtils.js';
 
-// CE-3 — Line-Chart-Chrome: statische Literalrezepte (Baukasten §6.5/§6.11).
-// Gelten ausschliesslich fuer type === 'line'. Bar/Donut nutzen weiterhin unveraendert
-// fw-btn-group/fw-toggle/fw-btn/fw-toggle-opt (Delta A/C.5) — keine Zweitklassenbildung,
-// keine Interpolation: jede Konstante ist ein vollstaendiges Literal (§2.2).
-const FW_LINE_WRAPPER_CLASS = 'fw-chart-wrapper flex flex-col gap-3 fw-chart-wrapper--line';
-const FW_LINE_TITLE_CLASS = 'fw-chart-title m-0 text-lg font-bold text-primary';
-const FW_LINE_TOOLBAR_CLASS = 'fw-chart-toolbar flex flex-wrap items-center gap-2';
-const FW_LINE_SEGMENTED_GROUP_CLASS = 'fw-chart-segmented-group inline-flex rounded-md bg-bg-faint p-0.5 gap-0.5';
-// NEW — CE-3a: eigener Anker fuer die View-Gruppe (Delta B) — nur damit ist die M/L-Rechtsausrichtung
-// (ml-auto) gezielt auf die View-Gruppe begrenzbar, ohne die Range-Gruppe mitzubetreffen.
-const FW_LINE_VIEW_GROUP_CLASS = 'fw-chart-segmented-group fw-chart-line-view-group inline-flex rounded-md bg-bg-faint p-0.5 gap-0.5 ml-auto';
-const FW_LINE_SEGMENTED_OPTION_CLASS = 'fw-chart-segmented-option rounded px-2.5 py-1 text-sm text-text-sec transition-colors motion-reduce:transition-none hover:text-text focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-petrol-500';
-const FW_LINE_SEGMENTED_OPTION_ACTIVE_CLASS = 'fw-chart-segmented-option rounded px-2.5 py-1 text-sm font-semibold bg-bg text-primary shadow-soft focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-petrol-500';
-// CHANGED — CE-3a: self-start ergaenzt (Delta A) — verhindert, dass der flex-col-Wrapper die BAN ueber
-// die volle Breite streckt; entspricht dem Mockup "Depotverlauf mit und ohne Warten".
+// CE-4c — Gemeinsamer Chrome-Kern (Baukasten §6.5/§6.11): identische reine Chrome-Rezepte existieren
+// genau einmal als FW_CHROME_*-Konstanten und werden von Line UND regulaerem Bar verwendet (repariert
+// die CE-4-Architekturabweichung, die diese Rezepte als FW_LINE_*/FW_BAR_* dupliziert hatte — siehe
+// CE-4a-Nachtrag). Donut/Pie nutzt weiterhin unveraendert fw-btn-group/fw-toggle/fw-btn/fw-toggle-opt
+// bzw. den generischen 'fw-chart-*'-Bestand — keine Zweitklassenbildung, keine Interpolation: jede
+// Konstante ist ein vollstaendiges Literal (§2.2).
+const FW_CHROME_WRAPPER_CLASS = 'fw-chart-wrapper flex flex-col gap-3';
+const FW_CHROME_TITLE_CLASS = 'fw-chart-title m-0 text-lg font-bold text-primary';
+const FW_CHROME_TOOLBAR_CLASS = 'fw-chart-toolbar flex flex-wrap items-center gap-2';
+const FW_CHROME_SEGMENTED_GROUP_CLASS = 'fw-chart-segmented-group inline-flex rounded-md bg-bg-faint p-0.5 gap-0.5';
+// gemeinsamer Anker fuer die View-Gruppe (ersetzt die vormals getrennten fw-chart-line-view-group/
+// fw-chart-bar-view-group-Anker aus CE-3a/CE-4) — begrenzt die M/L-Rechtsausrichtung (ml-auto) und die
+// Zone-S-Gegenregel gezielt auf die View-Gruppe, typunabhaengig.
+const FW_CHROME_VIEW_GROUP_CLASS = 'fw-chart-segmented-group fw-chart-view-group inline-flex rounded-md bg-bg-faint p-0.5 gap-0.5 ml-auto';
+const FW_CHROME_SEGMENTED_OPTION_CLASS = 'fw-chart-segmented-option rounded px-2.5 py-1 text-sm text-text-sec transition-colors motion-reduce:transition-none hover:text-text focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-petrol-500';
+const FW_CHROME_SEGMENTED_OPTION_ACTIVE_CLASS = 'fw-chart-segmented-option rounded px-2.5 py-1 text-sm font-semibold bg-bg text-primary shadow-soft focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-petrol-500';
+const FW_CHROME_LEGEND_GROUP_CLASS = 'fw-chart-legend flex flex-wrap gap-2';
+// Funktionale Kontur/Hover (border border-border text-text transition-colors hover:border-primary
+// hover:bg-bg-faint hover:text-primary, seit CE-3b) — macht die Klickbarkeit der echten
+// <button>-Toggle-Pills erkennbar; kein neuer Card-Stil, keine neue Farbwelt. Gilt fuer Line und die
+// reguläre Mehrserien-Bar-Legende (!isRanking); Ranking-Bar-Legende bleibt unberuehrt (eigener,
+// unveraenderter Legend-Branch, siehe Ranking-Schranke).
+const FW_CHROME_LEGEND_PILL_CLASS = 'fw-legend-item inline-flex cursor-pointer select-none items-center gap-2 rounded-full bg-bg px-3 py-1 text-sm shadow-soft transition-shadow motion-reduce:transition-none hover:shadow-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-petrol-500 border border-border text-text transition-colors hover:border-primary hover:bg-bg-faint hover:text-primary';
+const FW_CHROME_LEGEND_PILL_HIDDEN_CLASS = 'fw-legend-item inline-flex cursor-pointer select-none items-center gap-2 rounded-full bg-bg px-3 py-1 text-sm shadow-soft transition-shadow motion-reduce:transition-none hover:shadow-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-petrol-500 border border-border text-text transition-colors hover:border-primary hover:bg-bg-faint hover:text-primary opacity-40 grayscale';
+const FW_CHROME_LEGEND_DOT_CLASS = 'fw-legend-dot h-2.5 w-2.5 rounded-full';
+
+// Line-spezifisch (bleibt line-exklusiv, CE-4c fasst diese Familie nicht an — Delta A.3/B.4):
+// CHANGED — CE-3a: self-start ergaenzt — verhindert, dass der flex-col-Wrapper die BAN ueber die volle
+// Breite streckt; entspricht dem Mockup "Depotverlauf mit und ohne Warten".
 const FW_LINE_BAN_CONTAINER_CLASS = 'fw-ban-container inline-block min-w-48 self-start rounded-lg bg-bg-faint px-4 py-3';
 const FW_LINE_BAN_MAIN_CLASS = 'fw-ban-main text-xl font-bold text-text';
 const FW_LINE_BAN_SUB_CLASS = 'fw-ban-sub text-sm text-text-sec';
 const FW_LINE_BAN_HINT_CLASS = 'fw-ban-hint text-sm text-text-sec';
-const FW_LINE_LEGEND_GROUP_CLASS = 'fw-chart-legend flex flex-wrap gap-2';
-// CHANGED — CE-3b Delta C: funktionale Kontur/Hover ergaenzt (border border-border text-text
-// transition-colors hover:border-primary hover:bg-bg-faint hover:text-primary) — macht die Klickbarkeit
-// der echten <button>-Toggle-Pills erkennbar; kein neuer Card-Stil, keine neue Farbwelt.
-const FW_LINE_LEGEND_PILL_CLASS = 'fw-legend-item inline-flex cursor-pointer select-none items-center gap-2 rounded-full bg-bg px-3 py-1 text-sm shadow-soft transition-shadow motion-reduce:transition-none hover:shadow-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-petrol-500 border border-border text-text transition-colors hover:border-primary hover:bg-bg-faint hover:text-primary';
-const FW_LINE_LEGEND_PILL_HIDDEN_CLASS = 'fw-legend-item inline-flex cursor-pointer select-none items-center gap-2 rounded-full bg-bg px-3 py-1 text-sm shadow-soft transition-shadow motion-reduce:transition-none hover:shadow-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-petrol-500 border border-border text-text transition-colors hover:border-primary hover:bg-bg-faint hover:text-primary opacity-40 grayscale';
-const FW_LINE_LEGEND_DOT_CLASS = 'fw-legend-dot h-2.5 w-2.5 rounded-full';
 
 export class FwRenderer {
     constructor() {
@@ -149,15 +156,24 @@ export class FwRenderer {
         this._renderA11yTable(container, a11yData);
 
         var isLine = (type === 'line'); // NEW — CE-3
+        var isBar = (type === 'bar'); // NEW — CE-4
         var wrapper = document.createElement('div');
-        // CHANGED — CE-2b/CE-3: Tailwind-Rezept + fw-chart-wrapper bleibt Container-Query-Anker (container-type/-name);
-        // Line erhaelt zusaetzlich den stabilen Marker fw-chart-wrapper--line (Delta A.1)
-        wrapper.className = isLine ? FW_LINE_WRAPPER_CLASS : 'fw-chart-wrapper flex flex-col gap-3';
+        // CHANGED — CE-4c (Delta B.1): gemeinsames FW_CHROME_WRAPPER_CLASS-Grundrezept fuer alle Typen;
+        // fw-chart-wrapper bleibt Container-Query-Anker (container-type/-name). Typmarker (fw-chart-wrapper--line/
+        // --bar) UND der gemeinsame, nicht-Tailwind Chrome-Anker fw-chart-chrome (scoped die gemeinsamen
+        // Tailwind-freien Fallbacks, s. _injectStyles) werden ausschliesslich per classList.add() ergaenzt —
+        // keine Stringverkettung. Donut bleibt ohne Marker/Anker beim reinen Grundrezept (unveraendert).
+        wrapper.className = FW_CHROME_WRAPPER_CLASS;
+        if (isLine) {
+            wrapper.classList.add('fw-chart-wrapper--line', 'fw-chart-chrome');
+        } else if (isBar) {
+            wrapper.classList.add('fw-chart-wrapper--bar', 'fw-chart-chrome');
+        }
 
         if (config.title) {
             var titleEl = document.createElement('h3');
-            // CHANGED — CE-3: Line ergaenzt das statische Titel-Rezept (Delta B.1); Bar/Donut unveraendert
-            titleEl.className = isLine ? FW_LINE_TITLE_CLASS : 'fw-chart-title';
+            // CHANGED — CE-4c: Line/Bar teilen sich das gemeinsame Titel-Rezept (Delta A.1); Donut unveraendert
+            titleEl.className = (isLine || isBar) ? FW_CHROME_TITLE_CLASS : 'fw-chart-title';
             titleEl.innerText = config.title;
             wrapper.appendChild(titleEl);
         }
@@ -287,9 +303,11 @@ export class FwRenderer {
         const features = config.features || {};
         if (features.rangeControls === false) return null;
         var isLine = (type === 'line'); // NEW — CE-3
+        var isBar = (type === 'bar'); // NEW — CE-4
+        var isChromeControls = (isLine || isBar); // NEW — CE-4c: gemeinsamer Kontroll-Pfad
         var toolbar = document.createElement('div');
-        // CHANGED — CE-3: Line ergaenzt das statische Toolbar-Rezept (Delta C.1); Bar/Donut unveraendert
-        toolbar.className = isLine ? FW_LINE_TOOLBAR_CLASS : 'fw-chart-toolbar';
+        // CHANGED — CE-4c: Line/Bar teilen sich das gemeinsame Toolbar-Rezept (Delta C.1); Donut unveraendert
+        toolbar.className = isChromeControls ? FW_CHROME_TOOLBAR_CLASS : 'fw-chart-toolbar';
 
         var totalYears = 0;
         if (fullData && fullData.rows && fullData.rows.length > 1) {
@@ -315,9 +333,10 @@ export class FwRenderer {
 
         if (validButtons.length > 1) {
             var btnGroup = document.createElement('div');
-            // CHANGED — CE-3: Line wird echte role="group" mit praezisem aria-label (Delta C.2); Bar unveraendert
-            if (isLine) {
-                btnGroup.className = FW_LINE_SEGMENTED_GROUP_CLASS;
+            // CHANGED — CE-4c: Line/Bar werden echte role="group" mit praezisem aria-label über das
+            // gemeinsame Segmented-Group-Rezept (Delta C.2); Donut unveraendert
+            if (isChromeControls) {
+                btnGroup.className = FW_CHROME_SEGMENTED_GROUP_CLASS;
                 btnGroup.setAttribute('role', 'group');
                 btnGroup.setAttribute('aria-label', 'Zeitspanne');
             } else {
@@ -327,10 +346,11 @@ export class FwRenderer {
             validButtons.forEach(item => {
                 var btn = document.createElement('button');
                 var isActive = (activeRange === item.value);
-                // CHANGED — CE-3: Line setzt vollstaendiges Literalrezept + aria-pressed (Delta C.3/C.4); Bar unveraendert
-                if (isLine) {
+                // CHANGED — CE-4c: Line/Bar setzen vollstaendiges gemeinsames Literalrezept + aria-pressed
+                // (Delta C.3/C.4); Donut unveraendert
+                if (isChromeControls) {
                     btn.type = 'button';
-                    btn.className = isActive ? FW_LINE_SEGMENTED_OPTION_ACTIVE_CLASS : FW_LINE_SEGMENTED_OPTION_CLASS;
+                    btn.className = isActive ? FW_CHROME_SEGMENTED_OPTION_ACTIVE_CLASS : FW_CHROME_SEGMENTED_OPTION_CLASS;
                     btn.setAttribute('aria-pressed', isActive ? 'true' : 'false');
                 } else {
                     btn.className = 'fw-btn ' + (isActive ? 'active' : '');
@@ -345,11 +365,12 @@ export class FwRenderer {
 
         if (viewOptions && viewOptions.length > 0) {
             var toggle = document.createElement('div');
-            // CHANGED — CE-3: Line wird echte role="group" mit praezisem aria-label (Delta C.2); Bar unveraendert
-            // CHANGED — CE-3a: View-Gruppe nutzt eigenen Anker FW_LINE_VIEW_GROUP_CLASS (Delta B) fuer M/L-Rechtsausrichtung;
-            // Struktur, role, aria-label unveraendert
-            if (isLine) {
-                toggle.className = FW_LINE_VIEW_GROUP_CLASS;
+            // CHANGED — CE-4c: Line/Bar werden echte role="group" mit praezisem aria-label über den
+            // gemeinsamen View-Gruppen-Anker FW_CHROME_VIEW_GROUP_CLASS (ersetzt die vormals getrennten
+            // FW_LINE_VIEW_GROUP_CLASS/FW_BAR_VIEW_GROUP_CLASS aus CE-3a/CE-4); Struktur, role, aria-label
+            // unveraendert; Donut unveraendert
+            if (isChromeControls) {
+                toggle.className = FW_CHROME_VIEW_GROUP_CLASS;
                 toggle.setAttribute('role', 'group');
                 toggle.setAttribute('aria-label', 'Ansicht');
             } else {
@@ -357,11 +378,11 @@ export class FwRenderer {
             }
             viewOptions.forEach(opt => {
                 var isActive = (activeView === opt.key);
-                // CHANGED — CE-3: Line-Optionen sind echte <button type="button"> (Delta C.3); Bar bleibt <span> unveraendert
-                var optEl = isLine ? document.createElement('button') : document.createElement('span');
-                if (isLine) {
+                // CHANGED — CE-4c: Line-/Bar-Optionen sind echte <button type="button"> (Delta C.3); Donut bleibt <span> unveraendert
+                var optEl = isChromeControls ? document.createElement('button') : document.createElement('span');
+                if (isChromeControls) {
                     optEl.type = 'button';
-                    optEl.className = isActive ? FW_LINE_SEGMENTED_OPTION_ACTIVE_CLASS : FW_LINE_SEGMENTED_OPTION_CLASS;
+                    optEl.className = isActive ? FW_CHROME_SEGMENTED_OPTION_ACTIVE_CLASS : FW_CHROME_SEGMENTED_OPTION_CLASS;
                     optEl.setAttribute('aria-pressed', isActive ? 'true' : 'false');
                 } else {
                     optEl.className = 'fw-toggle-opt ' + (isActive ? 'active' : '');
@@ -385,10 +406,14 @@ export class FwRenderer {
         var isPie = chartConfig.type === 'pie' || chartConfig.type === 'doughnut';
         var isRanking = (chartConfig.data.datasets.length === 1 && Array.isArray(chartConfig.data.datasets[0].backgroundColor));
         var isLine = (chartConfig.type === 'line'); // NEW — CE-3 (Delta D: nur chartConfig.type === 'line')
+        // NEW — CE-4 (Delta C.1): reguläre Mehrserien-Bar-Legende, ausdrücklich NICHT Ranking-Bar
+        // (Ranking-Schranke) — Ranking behält den bisherigen isPie||isRanking-Branch unveraendert.
+        var isBarRegular = (chartConfig.type === 'bar' && !isRanking);
+        var isChromeLegend = (isLine || isBarRegular); // NEW — CE-4c: gemeinsamer Legend-Pill-Pfad
 
         var legend = document.createElement('div');
-        // CHANGED — CE-3: Line ergaenzt das statische Legende-Rezept (Delta D.1); Bar/Pie/Ranking unveraendert
-        legend.className = isLine ? FW_LINE_LEGEND_GROUP_CLASS : 'fw-chart-legend';
+        // CHANGED — CE-4c: Line/reguläre Bar teilen sich das gemeinsame Legende-Rezept (Delta D.1); Pie/Ranking unveraendert
+        legend.className = isChromeLegend ? FW_CHROME_LEGEND_GROUP_CLASS : 'fw-chart-legend';
         var items = [];
         var i = 0;
 
@@ -417,12 +442,13 @@ export class FwRenderer {
         }
 
         for (i = 0; i < items.length; i++) {
-            // CHANGED — CE-3: Line-Legendeneintraege sind echte <button type="button"> mit vollstaendigem
-            // Aktiv-Rezept + aria-pressed (Delta D.2/D.4); Bar/Pie/Ranking bleiben <div> unveraendert (Delta D.5).
-            var item = isLine ? document.createElement('button') : document.createElement('div');
-            if (isLine) {
+            // CHANGED — CE-4c: Line-/reguläre Bar-Legendeneintraege sind echte <button type="button"> mit
+            // vollstaendigem gemeinsamem Aktiv-Rezept + aria-pressed (Delta D.2/D.4); Pie/Ranking bleiben
+            // <div> unveraendert (Delta D.5).
+            var item = isChromeLegend ? document.createElement('button') : document.createElement('div');
+            if (isChromeLegend) {
                 item.type = 'button';
-                item.className = FW_LINE_LEGEND_PILL_CLASS; // initial stets sichtbar — kein Dataset startet hidden
+                item.className = FW_CHROME_LEGEND_PILL_CLASS; // initial stets sichtbar — kein Dataset startet hidden
                 item.setAttribute('aria-pressed', 'true');
             } else {
                 item.className = 'fw-legend-item';
@@ -430,8 +456,8 @@ export class FwRenderer {
             item.dataset.index = items[i].index;
 
             var dot = document.createElement('span');
-            // CHANGED — CE-3: Line-Dot-Rezept (Delta D.3); datengetriebene Inline-Farbe bleibt unveraendert
-            dot.className = isLine ? FW_LINE_LEGEND_DOT_CLASS : 'fw-legend-dot';
+            // CHANGED — CE-4c: Line-/Bar-Dot-Rezept (Delta D.3); datengetriebene Inline-Farbe bleibt unveraendert
+            dot.className = isChromeLegend ? FW_CHROME_LEGEND_DOT_CLASS : 'fw-legend-dot';
             dot.style.backgroundColor = items[i].color;
 
             var text = document.createElement('span');
@@ -445,19 +471,24 @@ export class FwRenderer {
         return legend;
     }
 
-    // NEW — CE-3: setzt den Aktiv-/Inaktiv-Zustand eines Line-Segmented-Buttons als vollstaendigen
-    // Klassentausch + aria-pressed (Delta C.4). Einzige Quelle der Literalstrings (kein Import in
-    // ChartEngine.js noetig); wird sowohl beim Initial-Render als auch im Smart-Update aufgerufen.
-    _setLineSegmentedOptionState(btn, isActive) {
-        btn.className = isActive ? FW_LINE_SEGMENTED_OPTION_ACTIVE_CLASS : FW_LINE_SEGMENTED_OPTION_CLASS;
+    // CHANGED — CE-4c: gemeinsamer Zustandshelfer fuer Segmented-Options (ersetzt die vormals getrennten
+    // _setLineSegmentedOptionState/_setBarSegmentedOptionState aus CE-3/CE-4 — identische Konstanten,
+    // identisches Verhalten fuer Line und regulären Bar). Setzt den Aktiv-/Inaktiv-Zustand als
+    // vollstaendigen Klassentausch + aria-pressed (Delta C.4). Wird sowohl beim Initial-Render als auch
+    // im Smart-Update aufgerufen.
+    _setChromeSegmentedOptionState(btn, isActive) {
+        btn.className = isActive ? FW_CHROME_SEGMENTED_OPTION_ACTIVE_CLASS : FW_CHROME_SEGMENTED_OPTION_CLASS;
         btn.setAttribute('aria-pressed', isActive ? 'true' : 'false');
     }
 
-    // NEW — CE-3: setzt den Sichtbar-/Ausgeblendet-Zustand eines Line-Legend-Pills als vollstaendigen
-    // Klassentausch + aria-pressed (Delta D.4). isVisible kommt vom Aufrufer aus dem realen
-    // Chart.js-Zustand (chart.isDatasetVisible()), keine eigene Sichtbarkeitsquelle.
-    _setLineLegendPillState(item, isVisible) {
-        item.className = isVisible ? FW_LINE_LEGEND_PILL_CLASS : FW_LINE_LEGEND_PILL_HIDDEN_CLASS;
+    // CHANGED — CE-4c: gemeinsamer Zustandshelfer fuer Legend-Pills (ersetzt die vormals getrennten
+    // _setLineLegendPillState/_setBarLegendPillState aus CE-3/CE-4). Setzt den Sichtbar-/Ausgeblendet-
+    // Zustand als vollstaendigen Klassentausch + aria-pressed (Delta D.4). isVisible kommt vom Aufrufer
+    // ausschliesslich aus dem realen Chart.js-Zustand (chart.isDatasetVisible()), keine eigene
+    // Sichtbarkeitsquelle. Gilt fuer Line und die reguläre Mehrserien-Bar-Legende — Ranking-Bar rendert
+    // nie eine Legende (siehe _renderLegend), dieser Helfer wird fuer Ranking nie aufgerufen.
+    _setChromeLegendPillState(item, isVisible) {
+        item.className = isVisible ? FW_CHROME_LEGEND_PILL_CLASS : FW_CHROME_LEGEND_PILL_HIDDEN_CLASS;
         item.setAttribute('aria-pressed', isVisible ? 'true' : 'false');
     }
 
@@ -566,49 +597,54 @@ export class FwRenderer {
                 .fw-toggle { width: 100% !important; display: flex !important; margin-top: 5px !important; }
                 .fw-toggle-opt { flex: 1 !important; text-align: center !important; justify-content: center !important; padding: 10px 0 !important; font-size: 13px !important; }
             }
-            /* NEW — CE-3: Line-Chart-Chrome — tokenbasierter Fallback fuer Tailwind-freie Engine-Testseiten
-               (Delta A: line-spezifische Fallbacks), ausschliesslich unter dem Line-Marker selektiert
-               (Delta A.2). Bestehende generische Bar-/Donut-Regeln (.fw-chart-title, .fw-chart-toolbar,
-               .fw-ban-*, .fw-chart-legend, .fw-legend-item, .fw-legend-dot sowie
-               .fw-btn-group/.fw-toggle/.fw-btn/.fw-toggle-opt inkl. der Zone-S-@container-Regeln oben)
-               bleiben unveraendert und bedienen weiterhin Bar/Donut unveraendert. Zone-S-Sonderregeln
-               sind fuer Line bewusst nicht dupliziert: flex-wrap leistet das Umbruchverhalten bereits
-               (Baukasten §6.11 Responsive-Absatz: "Zone S ... beides leistet flex-wrap bereits"). */
-            /* NEW — CE-3b Delta A: Wrapper-Fallback-Rhythmus. FW_LINE_WRAPPER_CLASS traegt "flex flex-col
+            /* CHANGED — CE-4c: gemeinsamer Chrome-Kern. Die identischen Tailwind-freien Fallbackregeln fuer
+               Wrapper-Rhythmus, Titel, Toolbar, Segmented Controls, Legend-Pill-Interaktion und M/L/S
+               existieren jetzt genau einmal unter dem gemeinsamen, nicht-Tailwind Chrome-Anker
+               .fw-chart-chrome (ersetzt die vormals fuer Line (CE-3/CE-3b) und Bar (CE-4) identisch
+               duplizierten .fw-chart-wrapper--line/--bar-Bloecke). Line und regulärer Bar tragen diesen
+               Anker zusaetzlich zu ihrem eigenen Typmarker (fw-chart-wrapper--line/--bar bleibt im DOM,
+               wird aber nur noch fuer die Line-BAN-Regeln unten sowie als strukturelle Typidentifikation
+               genutzt). Donut/Pie traegt weder Anker noch Typmarker — sein Wrapper bleibt exakt beim
+               generischen .fw-chart-wrapper-Fallback oben (unveraendert). Bestehende generische
+               Bar-/Donut-Regeln (.fw-btn-group/.fw-toggle/.fw-btn/.fw-toggle-opt inkl. ihrer
+               Zone-S-@container-Regeln oben) bleiben unveraendert an ihrer bisherigen Stelle — nach CE-4
+               fuer Bar/Line unbenutzt, aber nicht entfernt (kein Scope dieses APs).
+               Wrapper-Fallback-Rhythmus (CE-3b-Ursprung): FW_CHROME_WRAPPER_CLASS traegt "flex flex-col
                gap-3", aber auf Tailwind-freien Engine-Testseiten ist das inerter Text -- ohne diese Regel
                kleben Titel/BAN/Toolbar/Legende/Canvas zusammen. gap:12px = Tailwind gap-3 (0.75rem),
-               einzige Quelle des vertikalen Rhythmus (keine individuellen Margins re-eingefuehrt). */
-            .fw-chart-wrapper--line { display: flex; flex-direction: column; gap: 12px; }
-            .fw-chart-wrapper--line .fw-chart-title { margin: 0; font-size: 18px; }
-            .fw-chart-wrapper--line .fw-chart-toolbar { justify-content: flex-start; margin-bottom: 0; gap: 8px; }
-            .fw-chart-wrapper--line .fw-chart-segmented-group { display: inline-flex; border-radius: 6px; background: ${c.bgFaint}; padding: 2px; gap: 2px; }
-            .fw-chart-wrapper--line .fw-chart-line-view-group { margin-left: auto; }
-            .fw-chart-wrapper--line .fw-chart-segmented-option { display: inline-block; border: none; border-radius: 4px; padding: 4px 10px; font-family: ${f.body}; font-size: 14px; color: ${c.textSec}; background: transparent; cursor: pointer; transition: color 0.2s ease; }
-            .fw-chart-wrapper--line .fw-chart-segmented-option:hover { color: ${c.text}; }
-            .fw-chart-wrapper--line .fw-chart-segmented-option[aria-pressed="true"] { background: ${c.bgWhite}; color: ${c.petrol}; font-weight: 600; box-shadow: var(--shadow-soft, 0 4px 20px -2px rgba(39,39,39,0.05)); }
+               einzige Quelle des vertikalen Rhythmus (keine individuellen Margins re-eingefuehrt).
+               Zone-S-Kaskade (CE-3b-Lehre): der Zone-S-Block steht bewusst als eigener, spaeterer Block
+               NACH der Basisregel ".fw-chart-chrome .fw-chart-view-group { margin-left: auto; }" — bei
+               gleicher Selektorspezifitaet (zwei Klassen) entscheidet die spaetere Quellposition den
+               Kaskaden-Tiebreak: "margin-left: 0" gewinnt auf S, "margin-left: auto" auf M/L. Kein
+               !important fuer margin-left. */
+            .fw-chart-chrome { display: flex; flex-direction: column; gap: 12px; }
+            .fw-chart-chrome .fw-chart-title { margin: 0; font-size: 18px; }
+            .fw-chart-chrome .fw-chart-toolbar { justify-content: flex-start; margin-bottom: 0; gap: 8px; }
+            .fw-chart-chrome .fw-chart-segmented-group { display: inline-flex; border-radius: 6px; background: ${c.bgFaint}; padding: 2px; gap: 2px; }
+            .fw-chart-chrome .fw-chart-view-group { margin-left: auto; }
+            .fw-chart-chrome .fw-chart-segmented-option { display: inline-block; border: none; border-radius: 4px; padding: 4px 10px; font-family: ${f.body}; font-size: 14px; color: ${c.textSec}; background: transparent; cursor: pointer; transition: color 0.2s ease; }
+            .fw-chart-chrome .fw-chart-segmented-option:hover { color: ${c.text}; }
+            .fw-chart-chrome .fw-chart-segmented-option[aria-pressed="true"] { background: ${c.bgWhite}; color: ${c.petrol}; font-weight: 600; box-shadow: var(--shadow-soft, 0 4px 20px -2px rgba(39,39,39,0.05)); }
+            .fw-chart-chrome .fw-chart-legend { margin-bottom: 0; padding-bottom: 0; border-bottom: none; gap: 8px; }
+            .fw-chart-chrome .fw-legend-item { display: inline-flex; gap: 8px; border: 1px solid ${c.grid}; border-radius: 9999px; padding: 4px 12px; font-size: 14px; font-weight: 400; color: ${c.text}; background-color: ${c.bgWhite}; box-shadow: var(--shadow-soft, 0 4px 20px -2px rgba(39,39,39,0.05)); transition: box-shadow 0.2s ease; }
+            .fw-chart-chrome .fw-legend-item:hover { border-color: ${c.petrol}; color: ${c.petrol}; background-color: ${c.bgFaint}; box-shadow: var(--shadow-hover, 0 10px 25px -5px rgba(39,39,39,0.1)); transform: none; }
+            .fw-chart-chrome .fw-legend-item[aria-pressed="false"] { opacity: 0.4; filter: grayscale(1); }
+            .fw-chart-chrome .fw-legend-dot { border-radius: 9999px; margin-right: 0; }
+            @media (prefers-reduced-motion: reduce) {
+                .fw-chart-chrome .fw-chart-segmented-option,
+                .fw-chart-chrome .fw-legend-item { transition: none; }
+            }
+            @container fw-chart (max-width: 450px) {
+                .fw-chart-chrome .fw-chart-toolbar { flex-direction: row !important; align-items: center; padding: 0 !important; gap: 8px !important; }
+                .fw-chart-chrome .fw-chart-view-group { margin-left: 0; }
+            }
+            /* Line-BAN bleibt ausschliesslich unter dem Line-Typmarker (Delta A.3/B.4) — keine Bar-/Pie-Regel
+               darf davon erfasst werden. Unveraendert seit CE-3a, nur der Selektor-Anker ist unveraendert
+               fw-chart-wrapper--line (kein Chrome-Anker-Bezug noetig, da BAN line-exklusiv bleibt). */
             .fw-chart-wrapper--line .fw-ban-container { min-width: 192px; margin: 0; background-color: ${c.bgFaint}; align-self: flex-start; }
             .fw-chart-wrapper--line .fw-ban-sub { font-size: 14px; margin-top: 0; }
             .fw-chart-wrapper--line .fw-ban-hint { font-size: 14px; }
-            .fw-chart-wrapper--line .fw-chart-legend { margin-bottom: 0; padding-bottom: 0; border-bottom: none; gap: 8px; }
-            .fw-chart-wrapper--line .fw-legend-item { display: inline-flex; gap: 8px; border: 1px solid ${c.grid}; border-radius: 9999px; padding: 4px 12px; font-size: 14px; font-weight: 400; color: ${c.text}; background-color: ${c.bgWhite}; box-shadow: var(--shadow-soft, 0 4px 20px -2px rgba(39,39,39,0.05)); transition: box-shadow 0.2s ease; }
-            .fw-chart-wrapper--line .fw-legend-item:hover { border-color: ${c.petrol}; color: ${c.petrol}; background-color: ${c.bgFaint}; box-shadow: var(--shadow-hover, 0 10px 25px -5px rgba(39,39,39,0.1)); transform: none; }
-            .fw-chart-wrapper--line .fw-legend-item[aria-pressed="false"] { opacity: 0.4; filter: grayscale(1); }
-            .fw-chart-wrapper--line .fw-legend-dot { border-radius: 9999px; margin-right: 0; }
-            @media (prefers-reduced-motion: reduce) {
-                .fw-chart-wrapper--line .fw-chart-segmented-option,
-                .fw-chart-wrapper--line .fw-legend-item { transition: none; }
-            }
-            /* NEW — CE-3b Delta B: einziger line-spezifischer Zone-S-Block, bewusst NACH der Basisregel
-               ".fw-chart-wrapper--line .fw-chart-line-view-group { margin-left: auto; }" oben platziert.
-               Gleiche Selektorspezifitaet (zwei Klassen) -> die spaetere Quellposition entscheidet den
-               Kaskaden-Tiebreak: hier gewinnt "margin-left: 0" auf S, oben "margin-left: auto" auf M/L.
-               Kein !important fuer margin-left (CE-3a-Fehleinschaetzung zur Spezifitaet korrigiert). Der
-               fruehere, zu frueh platzierte CE-3a-Block innerhalb des ersten @container-Blocks oben wurde
-               entfernt -- es existiert jetzt nur noch dieser eine line-spezifische Zone-S-Block. */
-            @container fw-chart (max-width: 450px) {
-                .fw-chart-wrapper--line .fw-chart-toolbar { flex-direction: row !important; align-items: center; padding: 0 !important; gap: 8px !important; }
-                .fw-chart-wrapper--line .fw-chart-line-view-group { margin-left: 0; }
-            }
         `;
         
         var style = document.createElement('style'); 

@@ -1,5 +1,5 @@
 # BACKLOG – Finanzwesir 2.0
-Stand: 2026-07-14 | Session: AP-chart-engine-01 DOC-01 Kettenabschluss | Geändert von: Claude
+Stand: 2026-07-15 | Session: AP-chart-engine-01 CE-4/CE-4c Vollabschluss | Geändert von: Claude
 
 **Regeln:**
 - ✅-Zeilen werden sofort nach `BACKLOG-ARCHIV.md` verschoben (append), dann hier gelöscht.
@@ -16,7 +16,7 @@ Stand: 2026-07-14 | Session: AP-chart-engine-01 DOC-01 Kettenabschluss | Geände
 | AP-6c    | Engine  | Touch-Tooltip Smartphone-Test             | M    | —   | engine/detail/AP-6c-DETAIL.md       |
 | AP-22    | Engine  | Zero-Line lineWidth (~3 Zeilen Fix)       | L    | —   | —                                   |
 | TESTENV-1-FOLLOWUP-BORDER | CSS | `.financial-chart-module { border: 1px solid #ddd }` — Legacy-Hardcode (kein CI-Token) auf mehreren migrierten Engine-Testseiten, gefunden mit `fwCiAudit()`. Fix bewusst zurückgestellt bis zur Tailwind-Arbeit (Alberts Entscheidung, 2026-07-11) | L | DS-012 | tools/ci-token-check.js (`fwCiAudit()`, Fund 2026-07-11) |
-| AP-chart-engine-01 | Engine | Engine-DOM-Chrome-Programm CE-4 ff. (Bar-Chart-Chrome, danach CE-5 Donut/Pie, CE-6 Cross-Type-Abschluss) — CE-1 bis CE-3b + Tool-01 abgeschlossen+browserabgenommen+committed (20bb90c, 2026-07-14); DOC-01 (Dokumentationsvertrag) abgeschlossen, noch nicht committed. Prompts liegen vor in `Archiv/local/muss noch eingeordnet werden/` (Hauptübergabe + CE-4/5/6 folgen analog CE-3-Serie) | H | — | NAVIGATION.md AP-chart-engine-01-Eintrag; docs/steering/patches/AP-chart-engine-01_CE-3b_*_Ergebnis.md, ..._DOC-01_*_Ergebnis.md |
+| AP-chart-engine-01 | Engine | Engine-DOM-Chrome-Programm CE-5 ff. (Donut/Pie-Chart-Chrome, danach CE-6 Cross-Type-Abschluss) — CE-1 bis CE-3b + Tool-01 abgeschlossen+browserabgenommen+committed (20bb90c, 2026-07-14); DOC-01 (Dokumentationsvertrag) abgeschlossen und committed (9dd899d, 2026-07-14); CE-4 (Bar-Chart-Chrome) + CE-4c (Reparatur: gemeinsamer Chrome-Kern `FW_CHROME_*` statt dupliziertem `FW_BAR_*`) abgeschlossen+vollständig browserabgenommen (Line/Bar/Donut, Sicht+`engine-dom-check.js`), **noch nicht committed** (2026-07-15). Prompts liegen vor in `Archiv/local/muss noch eingeordnet werden/` (Hauptübergabe + CE-5/6 folgen analog CE-3/CE-4-Serie) | H | — | NAVIGATION.md AP-chart-engine-01-Eintrag; docs/steering/patches/AP-chart-engine-01_CE-4c_*_Ergebnis.md, ..._CE-4_*_Ergebnis.md, ..._DOC-01_*_Ergebnis.md |
 
 ---
 
