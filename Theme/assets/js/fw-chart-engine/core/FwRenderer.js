@@ -445,11 +445,30 @@ export class FwRenderer {
             // CHANGED — CE-4c: Line-/reguläre Bar-Legendeneintraege sind echte <button type="button"> mit
             // vollstaendigem gemeinsamem Aktiv-Rezept + aria-pressed (Delta D.2/D.4); Pie/Ranking bleiben
             // <div> unveraendert (Delta D.5).
-            var item = isChromeLegend ? document.createElement('button') : document.createElement('div');
+            var item = (isChromeLegend || isPie) ? document.createElement('button') : document.createElement('div');
             if (isChromeLegend) {
                 item.type = 'button';
                 item.className = FW_CHROME_LEGEND_PILL_CLASS; // initial stets sichtbar — kein Dataset startet hidden
                 item.setAttribute('aria-pressed', 'true');
+            } else if (isPie) {
+                // NEW — CE-5: Segment-Daempfungs-Primitive (DOC-03). Echtes <button> fuer A11y/Tastatur-
+                // Semantik. CE-5/CE-5a/CE-5c hielten hier bewusst eine eigene, minimale Klasse (kein
+                // FW_CHROME_LEGEND_PILL_CLASS), weil die damalige Pie-Altoptik (petrol-getoentem Hover,
+                // Hover-Lift, drei Box-Shadow-Zustaende) als erhaltenswert galt und sich nicht verlustfrei
+                // auf die Baukasten-Zwei-Schatten-Stufen abbilden liess.
+                // CHANGED — CE-5d: Albert hat diese Altoptik-Schutzwirkung per DOC-04 ausdruecklich
+                // aufgehoben (Basis-/Hover-/Fokusoptik ist ab jetzt gemeinsam fuer alle Legend-Pills; nur
+                // Bedeutung + Toggle-/Ghost-Zustand bleiben charttypspezifisch). Aktiver Pie-Eintrag nutzt
+                // deshalb jetzt direkt das vorhandene FW_CHROME_LEGEND_PILL_CLASS (nicht kopiert, nicht
+                // nachgebaut) und ergaenzt nur den bestehenden statischen Pie-Scope-Anker
+                // fw-pie-segment-damping-item per classList.add(). Der Ghost-Zustand bleibt unveraendert
+                // eigenstaendig ueber die bestehende 'hidden-dataset'-Klasse (_setPieSegmentDampingState()
+                // bytegleich) -- FW_CHROME_LEGEND_PILL_HIDDEN_CLASS bleibt exklusiv fuer Line/Bar-
+                // Dataset-Sichtbarkeit und wird hier nicht verwendet.
+                item.type = 'button';
+                item.className = FW_CHROME_LEGEND_PILL_CLASS;
+                item.classList.add('fw-pie-segment-damping-item');
+                item.setAttribute('aria-pressed', 'true'); // Start: alle Segmente aktiv (ds._status init 'active')
             } else {
                 item.className = 'fw-legend-item';
             }
@@ -457,7 +476,9 @@ export class FwRenderer {
 
             var dot = document.createElement('span');
             // CHANGED — CE-4c: Line-/Bar-Dot-Rezept (Delta D.3); datengetriebene Inline-Farbe bleibt unveraendert
-            dot.className = isChromeLegend ? FW_CHROME_LEGEND_DOT_CLASS : 'fw-legend-dot';
+            // CHANGED — CE-5d: Pie-Dot teilt sich jetzt ebenfalls FW_CHROME_LEGEND_DOT_CLASS (DOC-04-
+            // Basisoptik-Vertrag) statt des generischen, fast quadratischen Alt-Dots.
+            dot.className = (isChromeLegend || isPie) ? FW_CHROME_LEGEND_DOT_CLASS : 'fw-legend-dot';
             dot.style.backgroundColor = items[i].color;
 
             var text = document.createElement('span');
@@ -490,6 +511,17 @@ export class FwRenderer {
     _setChromeLegendPillState(item, isVisible) {
         item.className = isVisible ? FW_CHROME_LEGEND_PILL_CLASS : FW_CHROME_LEGEND_PILL_HIDDEN_CLASS;
         item.setAttribute('aria-pressed', isVisible ? 'true' : 'false');
+    }
+
+    // NEW — CE-5: Segment-Daempfungs-Zustandshelfer (Donut/Pie, DOC-03-Vertrag "Segment-Daempfung
+    // umschalten"). Spiegelt den realen active/ghost-Zustand aus PieChartStrategy (ds._status, von
+    // handleLegendClick() gepflegt) in Klasse + aria-pressed. Kein unabhaengiges classList.toggle()
+    // mehr als zweite Zustandsquelle -- isActive kommt vom Aufrufer ausschliesslich aus dem realen
+    // ds._status-Wert. Klasse 'hidden-dataset' ist die unveraenderte Bestandsoptik (Grauton,
+    // durchgestrichener Text, entsaettigter Dot), keine neue Rezeptur.
+    _setPieSegmentDampingState(item, isActive) {
+        item.classList.toggle('hidden-dataset', !isActive);
+        item.setAttribute('aria-pressed', isActive ? 'true' : 'false');
     }
 
     _renderA11yTable(container, data) {
@@ -543,7 +575,7 @@ export class FwRenderer {
             .fw-btn:hover, .fw-toggle-opt:hover { color: ${c.petrol}; background: rgba(255,255,255,0.6); }
             .fw-btn.active, .fw-toggle-opt.active { background: ${c.bgWhite}; color: ${c.petrol}; box-shadow: 0 1px 2px rgba(0,0,0,0.1); }
             .fw-chart-legend { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 20px; padding-bottom: 12px; border-bottom: 1px solid ${c.grid}; }
-            .fw-legend-item { display: flex; align-items: center; cursor: pointer; background-color: ${c.bgWhite}; border: 1px solid ${c.grid}; border-radius: 9999px; padding: 5px 12px; font-size: 13px; font-weight: 600; color: ${c.text}; box-shadow: 0 1px 2px rgba(0,0,0,0.05); transition: all 0.2s ease; user-select: none; }
+            .fw-legend-item { display: flex; align-items: center; cursor: pointer; background-color: ${c.bgWhite}; border: 1px solid ${c.grid}; border-radius: 9999px; padding: 5px 12px; font-family: ${f.body}; font-size: 13px; font-weight: 600; color: ${c.text}; box-shadow: 0 1px 2px rgba(0,0,0,0.05); transition: all 0.2s ease; user-select: none; }
             .fw-legend-item:hover { border-color: ${c.petrol}; background-color: ${theme.getGhostColor(c.petrol, 0.08)}; box-shadow: 0 2px 4px rgba(0,0,0,0.08); transform: translateY(-1px); }
             .fw-legend-item.hidden-dataset { background-color: ${c.grid}; border-color: transparent; box-shadow: none; opacity: 0.6; transform: none; }
             .fw-legend-item.hidden-dataset .fw-legend-text { text-decoration: line-through; color: ${c.textDisabled}; }
@@ -627,17 +659,46 @@ export class FwRenderer {
             .fw-chart-chrome .fw-chart-segmented-option:hover { color: ${c.text}; }
             .fw-chart-chrome .fw-chart-segmented-option[aria-pressed="true"] { background: ${c.bgWhite}; color: ${c.petrol}; font-weight: 600; box-shadow: var(--shadow-soft, 0 4px 20px -2px rgba(39,39,39,0.05)); }
             .fw-chart-chrome .fw-chart-legend { margin-bottom: 0; padding-bottom: 0; border-bottom: none; gap: 8px; }
-            .fw-chart-chrome .fw-legend-item { display: inline-flex; gap: 8px; border: 1px solid ${c.grid}; border-radius: 9999px; padding: 4px 12px; font-size: 14px; font-weight: 400; color: ${c.text}; background-color: ${c.bgWhite}; box-shadow: var(--shadow-soft, 0 4px 20px -2px rgba(39,39,39,0.05)); transition: box-shadow 0.2s ease; }
-            .fw-chart-chrome .fw-legend-item:hover { border-color: ${c.petrol}; color: ${c.petrol}; background-color: ${c.bgFaint}; box-shadow: var(--shadow-hover, 0 10px 25px -5px rgba(39,39,39,0.1)); transform: none; }
+            /* CHANGED — CE-5d: gemeinsame Legend-Pill-Basisoptik (DOC-04). Die drei folgenden Regeln
+               (Basis/Hover/Dot) galten bisher nur fuer Line/regulaeren Bar (.fw-chart-chrome-Anker) --
+               jede erhaelt jetzt zusaetzlich den bestehenden .fw-pie-segment-damping-item-Anker als
+               zweiten Selektor, ohne einen einzigen Wert zu aendern (reine Wiederverwendung, keine
+               Pie-Sonder-Rezeptur). Der Pie-Ghost-Zustand ('.hidden-dataset', 2 Klassen, hoehere
+               Spezifitaet als der blosse Pie-Anker) gewinnt weiterhin unveraendert -- deshalb bleibt der
+               Hover-Zweig zusaetzlich per ':not(.hidden-dataset)' auf aktive Segmente begrenzt (sonst
+               wuerde ein gehoverter Ghost-Eintrag faelschlich aktiv wirken). */
+            .fw-chart-chrome .fw-legend-item,
+            .fw-pie-segment-damping-item { display: inline-flex; gap: 8px; border: 1px solid ${c.grid}; border-radius: 9999px; padding: 4px 12px; font-size: 14px; font-weight: 400; color: ${c.text}; background-color: ${c.bgWhite}; box-shadow: var(--shadow-soft, 0 4px 20px -2px rgba(39,39,39,0.05)); transition: box-shadow 0.2s ease; }
+            .fw-chart-chrome .fw-legend-item:hover,
+            .fw-pie-segment-damping-item:not(.hidden-dataset):hover { border-color: ${c.petrol}; color: ${c.petrol}; background-color: ${c.bgFaint}; box-shadow: var(--shadow-hover, 0 10px 25px -5px rgba(39,39,39,0.1)); transform: none; }
             .fw-chart-chrome .fw-legend-item[aria-pressed="false"] { opacity: 0.4; filter: grayscale(1); }
-            .fw-chart-chrome .fw-legend-dot { border-radius: 9999px; margin-right: 0; }
+            .fw-chart-chrome .fw-legend-dot,
+            .fw-pie-segment-damping-item .fw-legend-dot { border-radius: 9999px; margin-right: 0; }
             @media (prefers-reduced-motion: reduce) {
                 .fw-chart-chrome .fw-chart-segmented-option,
-                .fw-chart-chrome .fw-legend-item { transition: none; }
+                .fw-chart-chrome .fw-legend-item,
+                .fw-pie-segment-damping-item { transition: none; }
             }
             @container fw-chart (max-width: 450px) {
                 .fw-chart-chrome .fw-chart-toolbar { flex-direction: row !important; align-items: center; padding: 0 !important; gap: 8px !important; }
                 .fw-chart-chrome .fw-chart-view-group { margin-left: 0; }
+            }
+            /* NEW — CE-5c: gemeinsamer Tailwind-freier focus-visible-Fallback fuer alle Chart-Primitiven,
+               die denselben spezifischen Chart-Fokus-Vertrag teilen (Baukasten §6.5/§6.11/§8, Visual
+               Board "Fokus"): Segmented-Option und Legend-Pill (Line/regulaerer Bar, via .fw-chart-chrome-
+               Anker begrenzt) sowie die Pie-Segment-Daempfungs-Pills (via eigenen .fw-pie-segment-damping-
+               item-Anker begrenzt). Spiegelt exakt das Tailwind-Literal "focus-visible:outline-none
+               focus-visible:ring-2 focus-visible:ring-petrol-500" -- bewusst OHNE Offset-Schatten (anders
+               als der allgemeine Button-Vertrag §6.4: der spezifischere Chart-Primitive-Vertrag praezisiert
+               ihn hier). c.petrol80 = --color-petrol-500 (CE-5b-Lehre), keine Hexfarbe. Nur waehrend
+               :focus-visible aktiv; bei Fokusverlust greifen die bisherigen Ruhe-/Hover-/Ghost-Schatten
+               unveraendert (native CSS-Pseudoklasse, kein JS noetig). Ranking-Bar und andere Charttypen
+               ohne einen dieser drei Anker bleiben unberuehrt. */
+            .fw-chart-chrome .fw-chart-segmented-option:focus-visible,
+            .fw-chart-chrome .fw-legend-item:focus-visible,
+            .fw-pie-segment-damping-item:focus-visible {
+                outline: none;
+                box-shadow: 0 0 0 2px ${c.petrol80};
             }
             /* Line-BAN bleibt ausschliesslich unter dem Line-Typmarker (Delta A.3/B.4) — keine Bar-/Pie-Regel
                darf davon erfasst werden. Unveraendert seit CE-3a, nur der Selektor-Anker ist unveraendert

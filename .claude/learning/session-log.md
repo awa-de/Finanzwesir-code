@@ -97,3 +97,32 @@ Wird nach /distill ins Jahres-Segment rotiert (Rohlog erhalten). Einträge: [FRI
 ### AP-chart-engine-01 CE-4/CE-4c — Kettenabschluss ✅ | RECONCILED: AP-chart-engine-01-CE-4 AP-chart-engine-01-CE-4c
 
 ### AP-chart-engine-01 CE-4c — AP-Wechsel
+
+### 2026-07-15 — AP-chart-engine-01 DOC-02/DOC-02a ✅
+- [OK] Semantischer Chrome-Auftrag verankert (KDR 15 in ARCHITECTURE STRATEGY PAPER, Abschnitt 2.6 in „Der Rucksack", §6.11-Erweiterungsvertrag im Baukasten) — Strategie liefert Was, Renderer baut Wie, technische Durchleitung ausdrücklich noch nicht implementiert. Reine Dokumentation, kein Code.
+- [FRICTION] Albert fand nach DOC-02-Abnahme einen Widerspruch: §10-Tabelle nahm die noch offene Donut-Legendenbedeutung („Toggle je nach Chartlogik — Engine entscheidet") bereits vorweg. DOC-02a korrigierte die eine Zelle auf einen neutralen Ist-Stand.
+
+### 2026-07-15 — AP-chart-engine-01 CE-5-Preflight ✅ | GELB
+- [OK] Read-only Ist-/Soll-Vertragskarte für Donut/Pie-Chrome erstellt. Ergebnis: Titel/Range-/View-Control/BAN/Caption eindeutig (vorhandener Bedarf/kein Bedarf/Canvas), einzig die Legende offen — Ist-Code interagiert real (Segment-Ghosting), passt aber zu keiner der drei bereits belegten Baukasten-Bedeutungen.
+
+### 2026-07-15 — AP-chart-engine-01 DOC-03 ✅
+- [OK] Albert entschied die vierte Legendenbedeutung „Segment-Dämpfung umschalten" für Donut/Pie; Baukasten §6.11/§10 entsprechend ergänzt, Migrationsinvariante für CE-5 verankert.
+
+### 2026-07-15 — AP-chart-engine-01 CE-5 ✅ (ROT→GELB→real bestätigt)
+- [FRICTION] Erster CE-5-Anlauf stoppte korrekt mit ROT: die eigene Prompt-Vorbedingung („CE-5-Preflight und DOC-03 committed") war noch nicht erfüllt — beide lagen nur uncommitted vor. Kein Teil-Write, sauber dokumentiert; nach Alberts Commit erneut angestoßen.
+- [WIN] Bewusste Design-Entscheidung statt Ersatzoptik: Der Ist-Zustand der Pie-Legende (drei Box-Shadow-Zustände + Hover-Lift) ließ sich nicht verlustfrei auf die Baukasten-Zwei-Schatten-Stufen-Regel (D-09) abbilden. Statt zu improvisieren: nur DOM-/A11y-Semantik migriert (`<div>`→`<button aria-pressed>`), bestehende CSS-Klasse unverändert weiterverwendet — keine neue Tailwind-Rezeptur erzwungen.
+- [OK] Neues, separates interaktives Werkzeug `tools/pie-segment-damping-interaction-check.js` gebaut (Klick-Rundreise), da eine Klick-Simulation den Read-only-Vertrag von `engine-dom-check.js` verletzt hätte — stattdessen additiver read-only Struktur-Block dort + eigenes Werkzeug für die Interaktion. Beide real verifiziert (9/9 bzw. 51/51 PASS).
+
+### 2026-07-15 — AP-chart-engine-01 CE-5a/CE-5b/CE-5c ✅ (Fokusring-Iteration)
+- [FRICTION] CE-5a führte einen eigenen Pie-Fokusring ein (mit `ring-offset-2`, aus dem allgemeinen Button-Vertrag §6.4 übernommen) und einer falschen Petrol-Stufe (`c.petrol` = Petrol-600 statt `c.petrol80` = Petrol-500, CE-5b-Fund). CE-5c korrigierte grundsätzlicher: ein gemeinsamer `focus-visible`-Fallback für Segmented-Option/Legend-Pill/Pie-Segment-Dämpfung, ohne Offset (spezifischerer Chart-Primitive-Vertrag schlägt den allgemeinen Button-Vertrag). Lehre: bei Fokusring-Design zuerst prüfen, ob ein spezifischerer Vertrag existiert, bevor der allgemeine übernommen wird.
+- [OK] Alle drei Schritte real auf S/M/L browserverifiziert (Albert: „Fokus auf Line/Bar/Pie in S/M/L geprüft und ok").
+
+### 2026-07-15 — AP-chart-engine-01 DOC-04/DOC-04a ✅
+- [OK] Albert traf die Produktentscheidung: alle Legend-Pills teilen künftig Ruhe-/Hover-/Fokus-Basisoptik, nur Bedeutung + Toggle-/Ghost-Zustand dürfen abweichen — hebt den bisherigen Schutz der Pie-Altoptik (petrol-getönter Hover, Lift) gezielt auf. Baukasten §6.11/§10 + Visual Board entsprechend präzisiert/erweitert (Ruhe/Hover/Fokus/Datenreihe-aus-Referenz). DOC-04a ergänzte die Ghost-Zustands-Visualreferenz im Visual Board.
+
+### 2026-07-15 — AP-chart-engine-01 CE-5d ✅ | GRÜN
+- [OK] Aktive Pie-Segment-Dämpfungs-Pill nutzt jetzt direkt `FW_CHROME_LEGEND_PILL_CLASS`/`FW_CHROME_LEGEND_DOT_CLASS` (keine Kopie); gemeinsame Chrome-Fallback-Regeln (Basis/Hover/Dot) um den Pie-Anker erweitert, `:not(.hidden-dataset):hover` schützt den Ghost-Zustand explizit. Vollständig real verifiziert: Sichtprüfung „optisch alles einwandfrei", `engine-dom-check.js` 9/9 PASS auf allen drei Testseiten, `pie-segment-damping-interaction-check.js` 51/51 PASS.
+- [WIN] Die gesamte CE-5-Kette (Preflight→DOC-03→CE-5→CE-5a→CE-5b→CE-5c→DOC-04→CE-5d) verlief ohne einen einzigen unentdeckten Regressionsfund — jede Iteration wurde vor dem nächsten Schritt real im Browser bestätigt.
+- [OK] REGRESSION-MATRIX.md (REG-DOM-002), WORKING-FEATURES.md, MEMORY project_chartengine_chrome_migration.md synchronisiert (Integritätscheck 59/59 GRÜN). Kein Commit in dieser Session (Albert committet selbst).
+
+### AP-chart-engine-01 CE-5-Kette — Kettenabschluss ✅ | RECONCILED: AP-chart-engine-01-DOC-02 AP-chart-engine-01-DOC-02a AP-chart-engine-01-CE-5-Preflight AP-chart-engine-01-DOC-03 AP-chart-engine-01-CE-5 AP-chart-engine-01-CE-5a AP-chart-engine-01-CE-5b AP-chart-engine-01-CE-5c AP-chart-engine-01-DOC-04 AP-chart-engine-01-DOC-04a AP-chart-engine-01-CE-5d

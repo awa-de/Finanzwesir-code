@@ -454,15 +454,18 @@ body { background: #EDEFF1; margin: 0; }
     </div>
 
     <div>
-      <p class="mb-3 text-xs font-semibold uppercase tracking-wide text-text-muted">Segmented-Option — inaktiv / aktiv / fokussiert · Legend-Pill — an / aus (opacity-40 grayscale)</p>
+      <p class="mb-3 text-xs font-semibold uppercase tracking-wide text-text-muted">Segmented-Option — inaktiv / aktiv / fokussiert · Legend-Pill — Ruhe / Hover / Fokus / Datenreihe aus / Segment gedämpft (gemeinsame Basisoptik aller Chart-Legend-Pills, DOC-04/04a)</p>
       <div class="flex flex-wrap items-center gap-6">
         <div class="inline-flex rounded-md bg-bg-faint p-0.5 gap-0.5">
           <span class="rounded px-2.5 py-1 text-sm text-text-sec">Inaktiv</span>
           <span class="rounded px-2.5 py-1 text-sm font-semibold bg-bg text-primary shadow-soft">Aktiv</span>
           <span class="rounded px-2.5 py-1 text-sm text-text-sec ring-2 ring-petrol-500">Fokus</span>
         </div>
-        <span class="inline-flex items-center gap-2 rounded-full bg-bg px-3 py-1 text-sm shadow-soft"><span class="h-2.5 w-2.5 rounded-full" style="background:var(--color-petrol-600)"></span>Serie an</span>
-        <span class="inline-flex items-center gap-2 rounded-full bg-bg px-3 py-1 text-sm shadow-soft opacity-40 grayscale"><span class="h-2.5 w-2.5 rounded-full" style="background:var(--color-petrol-600)"></span>Serie aus</span>
+        <span class="inline-flex items-center gap-2 rounded-full bg-bg px-3 py-1 text-sm shadow-soft border border-border text-text"><span class="h-2.5 w-2.5 rounded-full" style="background:var(--color-petrol-600)"></span>Legend-Pill · Ruhe</span>
+        <span class="inline-flex items-center gap-2 rounded-full bg-bg-faint px-3 py-1 text-sm shadow-hover border border-primary text-primary"><span class="h-2.5 w-2.5 rounded-full" style="background:var(--color-petrol-600)"></span>Legend-Pill · Hover</span>
+        <span class="inline-flex items-center gap-2 rounded-full bg-bg px-3 py-1 text-sm shadow-soft border border-border text-text ring-2 ring-petrol-500 outline-none"><span class="h-2.5 w-2.5 rounded-full" style="background:var(--color-petrol-600)"></span>Legend-Pill · Fokus</span>
+        <span class="inline-flex items-center gap-2 rounded-full bg-bg px-3 py-1 text-sm shadow-soft border border-border text-text opacity-40 grayscale"><span class="h-2.5 w-2.5 rounded-full" style="background:var(--color-petrol-600)"></span>Legend-Pill · Datenreihe aus</span>
+        <span class="inline-flex items-center gap-2 rounded-full px-3 py-1 text-sm border border-transparent text-text opacity-60 shadow-none" style="background-color:var(--color-grid)"><span class="h-2.5 w-2.5 rounded-full grayscale opacity-50" style="background:var(--color-petrol-600)"></span><span class="text-text-disabled line-through">Legend-Pill · Segment gedämpft</span></span>
       </div>
     </div>
 

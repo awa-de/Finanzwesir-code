@@ -28,6 +28,17 @@
  * Kein Hover-/Fokus-Zustand (bleibt Sichtprüfung), keine fachliche
  * Ranking-Erkennung -- rein strukturell, wie der Rest dieses Tools.
  *
+ * NEW — CE-5: Segment-Daempfungs-Struktur-Check (additiv, eigener Tabellenblock,
+ * rein strukturell/read-only). Nur fuer Legenden OHNE Line-/Bar-Chrome-Marker
+ * und ohne Chrome-Anker (Donut/Pie, Baukasten-Bedeutung "Segment-Daempfung
+ * umschalten", DOC-03): prueft, dass alle Legendeneintraege echte
+ * `<button type="button" aria-pressed>` sind, per Tab erreichbar
+ * (`tabIndex >= 0`, nicht `disabled`) und initial `aria-pressed="true"`
+ * (alle Segmente starten aktiv). Simuliert KEINE Klicks -- fuer die
+ * interaktive Klick-Rundreise (daempfen/wiederherstellen, Drill-down-
+ * Ausschluss) siehe das separate, bewusst NICHT read-only Werkzeug
+ * tools/pie-segment-damping-interaction-check.js.
+ *
  * Nutzung: Datei-Inhalt in die DevTools-Konsole der geladenen Testseite
  * einfuegen, Enter. Laeuft sofort, druckt console.table + Zusammenfassung und
  * gibt ein Ergebnisobjekt zurueck. Aendert nichts am DOM.
@@ -144,6 +155,8 @@
   var allPass = true;
   var chromeRows = [];      // NEW — CE-4c: nur Container mit Line-/Bar-Chrome-Marker
   var allChromePass = true; // NEW — CE-4c
+  var pieRows = [];         // NEW — CE-5: nur Container mit Donut/Pie-Legende (kein Chrome-Marker)
+  var allPiePass = true;    // NEW — CE-5
 
   containers.forEach(function (container, i) {
     var row = { idx: i };
@@ -217,6 +230,33 @@
         chromeRow.ergebnis = chromePass ? 'PASS' : 'FAIL';
         if (!chromePass) allChromePass = false;
         chromeRows.push(chromeRow);
+      } else {
+        // NEW — CE-5: Segment-Daempfungs-Struktur-Check. Nur Legenden ohne jeden Line-/Bar-Chrome-
+        // Marker/-Anker (also Donut/Pie, siehe FwRenderer._renderLegend() isPie-Zweig). Rein
+        // strukturell -- keine Klick-Simulation (dafuer: pie-segment-damping-interaction-check.js).
+        var pieLegendEl = container.querySelector('.fw-chart-legend');
+        if (pieLegendEl) {
+          var pieItems = Array.prototype.slice.call(pieLegendEl.querySelectorAll('.fw-legend-item'));
+          if (pieItems.length > 0) {
+            var pieRow = { idx: i, pfad: row.pfad, itemsGesamt: pieItems.length };
+
+            var pieButtonOk = pieItems.every(function (el) {
+              return el.tagName === 'BUTTON' && el.getAttribute('type') === 'button' && hasAttr(el, 'aria-pressed');
+            });
+            pieRow.buttonStruktur = pieButtonOk ? 'PASS' : 'FAIL';
+
+            var pieFocusOk = pieItems.every(function (el) { return el.tabIndex >= 0 && !el.disabled; });
+            pieRow.tastaturfaehig = pieFocusOk ? 'PASS' : 'FAIL';
+
+            var pieInitialOk = pieItems.every(function (el) { return el.getAttribute('aria-pressed') === 'true'; });
+            pieRow.initialAktiv = pieInitialOk ? 'PASS' : ('FAIL (' + pieItems.filter(function (el) { return el.getAttribute('aria-pressed') !== 'true'; }).length + ' nicht aktiv)');
+
+            var piePass = pieButtonOk && pieFocusOk && pieInitialOk;
+            pieRow.ergebnis = piePass ? 'PASS' : 'FAIL';
+            if (!piePass) allPiePass = false;
+            pieRows.push(pieRow);
+          }
+        }
       }
     } catch (e) {
       row.ergebnis = 'FEHLER: ' + e.message;
@@ -279,8 +319,20 @@
   console.log('%c[engine-dom-check] Chrome-Kern-Gesamt: ' + chromeGesamt + '  |  geprueft: ' + chromeRows.length,
     'font-weight:bold;color:' + (chromeGesamt === 'PASS' ? 'green' : (chromeRows.length ? 'crimson' : 'gray')));
 
+  // NEW — CE-5: Segment-Daempfungs-Struktur-Check-Ausgabe (Donut/Pie)
+  if (pieRows.length) {
+    console.log('%c[engine-dom-check] Segment-Daempfungs-Struktur-Check (Donut/Pie, CE-5)', 'font-weight:bold');
+    console.table(pieRows);
+  } else {
+    console.log('[engine-dom-check] Keine Donut/Pie-Legende auf dieser Seite (Segment-Daempfungs-Check uebersprungen).');
+  }
+  var pieGesamt = pieRows.length ? (allPiePass ? 'PASS' : 'FAIL') : 'KEINE PIE-LEGENDEN';
+  console.log('%c[engine-dom-check] Segment-Daempfungs-Gesamt: ' + pieGesamt + '  |  geprueft: ' + pieRows.length,
+    'font-weight:bold;color:' + (pieGesamt === 'PASS' ? 'green' : (pieRows.length ? 'crimson' : 'gray')));
+
   return {
     tailwindSrOnly: srOnlyActive, gesamt: gesamt, aktiv: rows.length, inaktiv: inaktiv, charts: rows, status: statusRows,
-    chromeGesamt: chromeGesamt, chrome: chromeRows // NEW — CE-4c
+    chromeGesamt: chromeGesamt, chrome: chromeRows, // NEW — CE-4c
+    pieGesamt: pieGesamt, pieSegmentDamping: pieRows // NEW — CE-5
   };
 })();

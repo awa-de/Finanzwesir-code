@@ -669,6 +669,13 @@ export class ChartEngine {
                 if (state.type === 'line' || state.type === 'bar') {
                     var isVisible = chart.isDatasetVisible(index);
                     self.renderer._setChromeLegendPillState(item, isVisible);
+                } else if (state.type === 'pie') {
+                    // NEW — CE-5: handleLegendClick() (oben) hat ds._status[index] bereits vor diesem
+                    // Aufruf aktualisiert (aktiv/ghost) -- wir lesen den realen Zustand von der
+                    // Strategie, statt ihn blind zu toggeln (DOC-03/CE-5-Vertrag: keine zweite,
+                    // unabhaengige Zustandsquelle).
+                    var isActive = chart.data.datasets[0]._status[index] === 'active';
+                    self.renderer._setPieSegmentDampingState(item, isActive);
                 } else {
                     item.classList.toggle('hidden-dataset');
                 }
