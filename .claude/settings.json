@@ -74,6 +74,28 @@
           }
         ]
       }
+    ],
+    "Stop": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "powershell.exe -ExecutionPolicy Bypass -NoProfile -File \".claude\\hooks\\notify.ps1\" -Title \"Claude fertig\" -Message \"Task abgeschlossen\""
+          }
+        ]
+      }
+    ],
+    "PermissionRequest": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "powershell.exe -ExecutionPolicy Bypass -NoProfile -File \".claude\\hooks\\notify.ps1\" -Title \"Claude braucht dich\" -Message \"Freigabe erforderlich\""
+          }
+        ]
+      }
     ]
   },
   "env": {
