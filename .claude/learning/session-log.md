@@ -136,3 +136,10 @@ Wird nach /distill ins Jahres-Segment rotiert (Rohlog erhalten). Einträge: [FRI
 ### AP-chart-engine-01 CE-1–CE-6a — Kettenabschluss ✅ | RECONCILED: AP-chart-engine-01-DOC-01 AP-chart-engine-01-CE-6 AP-chart-engine-01-CE-6a
 
 ## 2026-07-17 – SESSION START | Fokus: AP-chart-engine-01 CE-6a ✅ Cross-Type-Abschluss (kein Ketten-Nachfolger, nächster Fokus nach Alberts Wahl)
+
+### AP-chart-engine-01 CE-6a — AP-Wechsel
+
+### 2026-07-17 — Housekeeping: Psychosprint-Entwurf risiko-uebersetzer (Teilnehmer opus) ✅
+- [OK] Grundprompt AP-app-fabrik-06 ausgeführt, Ergebnis nach Schema geschrieben: tests/scratch/risiko-uebersetzer/psychosprint/02-opus.md (Frontmatter teilnehmer: opus, 8 Abschnitte, Prüfscore 8/8).
+- [OK] Nur Steuerungsblock als bindend behandelt; UX-Flow/Ankerliste/Rendite-Formel/Kernbotschaft als nicht bindendes Altmaterial in der Fidelitäts-Tabelle auf „simuliert / redaktionell zu bestätigen" gesetzt.
+- [OK] Keine Projektdatei außerhalb der Ergebnisdatei gelesen oder geändert; PROJECT-STATUS/BACKLOG/NAVIGATION unverändert (kein AP-ID, kein fachlicher Statuswechsel).
