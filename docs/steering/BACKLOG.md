@@ -1,5 +1,5 @@
 # BACKLOG – Finanzwesir 2.0
-Stand: 2026-07-15 | Session: AP-chart-engine-01 CE-6/CE-6a Vollabschluss | Geändert von: Claude
+Stand: 2026-07-15 | Session: §2a Ankerpflicht + Holmes/Rumsfeld-Nuggets geparkt | Geändert von: Claude
 
 **Regeln:**
 - ✅-Zeilen werden sofort nach `BACKLOG-ARCHIV.md` verschoben (append), dann hier gelöscht.
@@ -42,6 +42,7 @@ Stand: 2026-07-15 | Session: AP-chart-engine-01 CE-6/CE-6a Vollabschluss | Geän
 | AP-SEC-1 | Engine  | Domain-Lock Validierungsfunktion implementieren| M    | AP-DOC-1     | —                                                 |
 | ST-01    | System  | Scope-Creep-Erkennung stärken — proaktiver Mid-Work-Check nach jedem Patch + Selftest-Szenario Pfad 14 | H | — | — |
 | ST-02    | System  | Selftest: Szenario „Protected Path direkt" ergänzen — Pfad 11, PROTECTED_PATHS.json-Protokoll vs. CLAUDE.md-Tabu-Regel | H | — | — |
+| ST-ANKER-01 | System | Review §2a „Ankerpflicht bei tragenden Urteilen" (eingebaut 2026-07-15 in `00-style-sei-deutsch`, noch ungetestet): ab ~2026-08-15 an echten Urteilen prüfen, ob das Ankerzeilen-Verhalten reproduzierbar erzeugt wird. Zwei geparkte Verfeinerungen — erst einbauen, wenn ein realer Fall sie rechtfertigt (Selektion statt Vorrat-Stapeln): **Holmes-Nugget** — §2a um Prüfung der Hypothesenraum-Vollständigkeit + Sicherheit jeder Elimination ergänzen; Build-Trigger = ein Urteil scheitert daran, dass eine Möglichkeit nicht aufgezählt war (unknown unknown), NICHT Holmes' „was übrig bleibt muss wahr sein" (Closed-World-Hybris). **Rumsfeld-Nugget** — „Konfidenz nie 100 %" ist der reservierte Slot fürs unknown unknown (kein Demut-Theater); das „unknown known" (Žižek) benennt den Gefälligkeits-Bias selbst, den §2a per externem Anker umgeht statt introspektiv zu suchen. | L | — | `.claude/skills/00-style-sei-deutsch/SKILL.md` §2a |
 | CHR-1    | System  | Chronik-Validierung automatisieren: git-pre-commit-Hook (ruft `validate_chronik.py`) + maschinenlesbarer Chronik-Index — erst wenn Chronik-Volumen es rechtfertigt | L | — | Engine vorhanden: `.claude/skills/chronik-check/validate_chronik.py` |
 | CL-04    | Cleanup | theme/CLAUDE.md schreiben                      | M    | —            | —                                                 |
 | CL-05    | Cleanup | apps/CLAUDE.md schreiben                       | M    | —            | —                                                 |
