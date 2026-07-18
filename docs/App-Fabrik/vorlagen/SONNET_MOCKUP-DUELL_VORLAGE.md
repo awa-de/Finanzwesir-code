@@ -25,9 +25,13 @@ Keine Hybridisierung, keine dritte Variante. Grok-Schärfungen mit `nicht übern
 2. `Apps/{{SLUG}}/MINI_SPEC_FROM_HAUPTDOKUMENT.md` — nur der lokale Steuerungsblock ist bindend
 3. `docs/App-Fabrik/MOCKUP-VERTRAG.md`
 4. `docs/steering/design/TAILWIND-APP-BAUKASTEN_KONZEPT_V0-1.md`
-5. `docs/spec/APP-INTERFACE.md`
-6. `docs/steering/audits/SECURITY-BASELINE.md`
-7. `tests/scratch/README.md`
+5. `Theme/assets/css/tokens.css` — CI-Farbtokens; unverändert als `:root`-Block übernehmen (SSoT, Änderungsverbot)
+6. `docs/testing/templates/app.test.template.html` — nur der `@theme inline`-Bridge-Block; bytegleich übernehmen (AP-tailwind-02e-Mechanismus), sonst bleiben CI-Farb-Utilities im Play-CDN-Mockup leer
+7. `docs/spec/APP-INTERFACE.md`
+8. `docs/steering/audits/SECURITY-BASELINE.md`
+9. `tests/scratch/README.md`
+
+Verlangt die Mini-Spec oder eine freigegebene Produktentscheidung echte historische Daten (Mockup-Vertrag §4): Die konkrete Datenquelle ist bewusst **nicht** in dieser Liste, weil sie app-spezifisch ist und nicht jede App sie braucht. Stoppe in diesem Fall nach der Quellensperre-Regel unten und lass dir den konkreten Dateipfad von Albert nennen — nicht raten, keine andere App als Ersatzquelle lesen.
 
 ## Quellensperre — Harter Stop
 

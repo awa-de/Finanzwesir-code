@@ -168,3 +168,12 @@ FinanzwesirData.js, CSVParser.js, FwDateUtils.js — diese Session nicht berühr
 - [DECISION] Kanonische Ablage: dauerhafte Prompt-Vorlagen gehören getrackt nach docs/App-Fabrik/vorlagen/, nie ins gitignored Archiv/local (Werkzeug liest sie via VORLAGEN_REL).
 - [FRICTION] Zähl-Gate (09i) war Scheinsicherheit — extern (ChatGPT) aufgedeckt; ID-Bindung (09k) ist die echte Lösung. → [[feedback-gruendlichkeit-vor-tempo]]
 - [OK] Offen, nicht blockierend: depot-kipppunkt ist bewusster Vor-Gate-Fall (Gutachten ohne IDs) — IDs nachziehen oder als „vor Gate" markieren. Kette nicht committed (Albert committet).
+
+### AP-app-fabrik-09k — AP-Wechsel
+
+### 2026-07-18 — Housekeeping: Mockup-Duell Crash-Reaktions-Test + Sonnet-Vorlage-Pflichtquellenfix ✅
+- [OK] Zwei getrennte Happy-Path-Mockups (a-sol/Regel-Lücke, b-fable/Faltchart) für crash-reaktions-test gebaut, inkl. README.md und Ergebnisdatei (docs/steering/patches/AF_crash-reaktions-test_mockup-duell_Ergebnis.md). Status GELB, Browser-Testauftrag an Albert übergeben.
+- [OK] E1/E3 (echte Daten) mit tests/fixtures/engine/test_data-Liniendiagramm.csv (Spalte „World") umgesetzt; Datei von Albert als zusätzliche Pflichtquelle freigegeben.
+- [FRICTION] Fehlende tokens.css/app.test.template.html im Sonnet-Auftrag blockierten den Bau kurz (Play-CDN-Utilities wären ungestylt geblieben) — von Albert als zweite zusätzliche Pflichtquelle freigegeben.
+- [OK] Root-Cause geklärt (git log: gehärtete Quellensperre erst seit heutigem 09h–09k-Commit, ältere Vorlage ohne Sperre hatte dieselbe Lücke unauffällig) und in beiden kanonischen Vorlagen nachgezogen, damit sie bei künftigen Apps nicht wiederkehrt: docs/App-Fabrik/vorlagen/SONNET_MOCKUP-DUELL_VORLAGE.md (Pflichtquellenliste 7→9 Einträge + Klärsatz für app-spezifische Datenquellen) und docs/App-Fabrik/MASTERPROMPT_MOCKUP-DUELL.md (Bestandsdateien ergänzt). Zwei Patch-Quittungen geschrieben.
+- [OK] MEMORY project_app_duell_pipeline.md aktualisiert (CI-Basis-Lücke + Fix dokumentiert). Kein BACKLOG-AP betroffen, PROJECT-STATUS/NAVIGATION bewusst unverändert (kein fachlicher Statuswechsel). Nichts committed (Albert committet selbst).

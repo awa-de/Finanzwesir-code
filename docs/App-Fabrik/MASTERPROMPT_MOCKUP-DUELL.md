@@ -51,6 +51,8 @@ docs/App-Fabrik/vorlagen/
 docs/App-Fabrik/MOCKUP-VERTRAG.md
 docs/App-Fabrik/APP_FACTORY_STARTLINIE.md
 docs/steering/design/TAILWIND-APP-BAUKASTEN_KONZEPT_V0-1.md
+Theme/assets/css/tokens.css
+docs/testing/templates/app.test.template.html
 docs/spec/APP-INTERFACE.md
 docs/steering/audits/SECURITY-BASELINE.md
 tests/scratch/README.md
