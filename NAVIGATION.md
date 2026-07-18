@@ -50,6 +50,7 @@ Albert kann sie auch explizit aufrufen.
 | `/heldenreise` | Beweisdramaturgie für APP_SPEC.md: Heldenreise, Tufte, Krug, FAANG, Ethik-Gate — Pflicht bei App-Fabrik-Apps | Nur manuell (Albert) — Claude startet nie automatisch |
 | `/tech-spec-app {slug}` | technische APP_SPEC erstellen oder prüfen (18 Pflichtabschnitte: App-Familie, Inputs/Outputs, State-Modell, AppContext, A11y, Sicherheit, Testfälle) | Manuell (Albert) oder durch /app-spec-create |
 | `/app-spec-create {slug}` | vollständige APP_SPEC erstellen: tech-spec-app + heldenreise + Spec-Gate-Checkliste (5 Phasen) | Nur manuell (Albert) — kein Auto-Trigger |
+| `/app-duell [slug]` | App-Fabrik-Mockup-Duell fahren: Psychosprint (Sol+Fable) → Grok-Gegenkritik → Sonnet baut zwei getrennte Happy-Path-Mockups; lädt `docs/App-Fabrik/MASTERPROMPT_MOCKUP-DUELL.md`, Debug-Karte in `.claude/skills/app-duell/README.md` | Nur manuell (Albert) — Claude ist Orchestrator, fährt nur `tools/app-fabrik-psychosprint.py` |
 | `/spec-mode-architecture` | Allgemeiner Architektur-Spec-Modus; erzeugt technische Spezifikationen, Edge-Cases, Testszenarien; für App-Specs nur ergänzend, kein Ersatz für `app-spec-create` und lokalen App-Steuerungsblock | Manuell |
 
 ---

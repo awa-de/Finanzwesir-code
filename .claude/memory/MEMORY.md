@@ -59,3 +59,4 @@
 - [Tools generisch und dauerhaft bauen](feedback_tools_generisch_dauerhaft.md) — Diagnose-/QA-Skripte AP-neutral benennen und wiederverwendbar bauen statt Einmal-Skript; verwandt: [[feedback-test-html-dauerhaft]]
 - [Präzise statt absolute Formulierungen](feedback_praezise_statt_absolut.md) — pauschale Statusaussagen vor Restfällen/Ausnahmen gegenprüfen, konkreten Mechanismus benennen statt zu pauschalisieren
 - [Subagent-Modell-Override greift nicht](project_subagent_model_override.md) — Agent-Tool `model:opus` übersteuert `CLAUDE_CODE_SUBAGENT_MODEL=haiku` nicht; für Opus-Qualität Hauptfaden per /model umstellen oder env-Var temporär ändern
+- [/app-duell Mockup-Duell-Pipeline](project_app_duell_pipeline.md) — Prozess/Skill/Werkzeug + ID-gebundenes Produktentscheidungs-Gate; kanonische Orte docs/App-Fabrik/(vorlagen/)

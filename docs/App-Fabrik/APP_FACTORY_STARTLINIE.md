@@ -1,6 +1,6 @@
 # App-Fabrik — Startlinie
 
-**Stand:** 2026-07-17  
+**Stand:** 2026-07-18  
 **Status:** Arbeitssteuerung; wird nur nach realem Befund oder bewusster Produktentscheidung geändert.  
 **Geltung:** Diese Reihenfolge ist keine automatische Arbeitsfreigabe. Jeder Punkt braucht weiterhin einen eigenen, risikogestuften Arbeitsauftrag.
 
@@ -8,15 +8,15 @@
 
 2. **Mockup-Vertrag, Klasse C — ENTSCHIEDEN 2026-07-17:** Schutzgut, Knautschzone, Artefakte, Happy-Path-Grenze, Abnahme und Übergabe sind verbindlich festgehalten in `docs/App-Fabrik/MOCKUP-VERTRAG.md` (E-01 Datenfidelität, E-02 Wirkungsprüfung ohne Selbstzertifizierung, E-03 Wegwerfgrenze, E-04 Werkstatt/Quellmanifest; Alberts Freigabe).
 
-3. **Starterkit, Klasse B:** Nur die freigegebenen Vorlagen bauen — Psychosprint-Prompt, Werkstatt-Startgerüst ohne App-Logik, qualitative Gegenkritik-Leitfrage gemäß MOCKUP-VERTRAG.md §7 und technische Übergabevorlage.
+3. **Starterkit, Klasse B:** Nur die freigegebenen Vorlagen und das Werkzeug bauen — ein modellneutraler, einheitlicher Psychosprint-Grundprompt auf Basis von AP-app-fabrik-06, Werkstatt-Startgerüst ohne App-Logik, Grok-Gegenkritikvorlage gemäß MOCKUP-VERTRAG.md §7 (bestehender Vier-Kriterien-Prüfscore plus qualitative, A/B-zuordenbare Schärfung), ein deterministisches Python-Werkzeug für Vorbereitung, Anonymisierung und Zusammenführung sowie Sonnet-Bauprompt und technische Übergabevorlage.
 
-4. **Vierer-Kalibrierung, Klasse B:** Terra/High, Opus, Sol und Fable erhalten dieselbe Mini-Spec und denselben Psychosprint-Prompt.
+4. **Zweier-Psychosprint, Klasse B:** Sol und Fable erhalten dieselbe Mini-Spec und exakt denselben vollständigen Psychosprint-Prompt. Nur Teilnehmer-ID und Zielpfad der Rohdatei unterscheiden sich; sie verändern keinen Denkauftrag.
 
-5. **Unabhängige Kritik:** Perplexity prüft die vier anonymisierten Entwürfe qualitativ gemäß MOCKUP-VERTRAG.md §7 und ohne numerischen Score; es entscheidet nicht über das Produkt.
+5. **Unabhängige Kritik:** Grok prüft die zwei anonymisierten Rohentwürfe gemäß MOCKUP-VERTRAG.md §7 mit dem bestehenden Vier-Kriterien-Prüfscore und qualitativer Begründung. Es schärft Entwurf A oder B zuordenbar, entscheidet aber nicht über das Produkt und eröffnet keinen dritten Mockup-Pfad.
 
-6. **Produktwahl:** Albert wählt die zwei stärksten und unterschiedlichsten Wirkmechaniken aus.
+6. **Festes Zwei-Varianten-Duell:** Sonnet baut immer beide Rohentwürfe mit den zulässigen Grok-Schärfungen als getrennte Werkstatt-Mockups.
 
-7. **Mockup-Duell, Klasse B:** Zwei interaktive, CI-konforme Happy-Path-Mockups bauen und auf 375/768/1280 px beurteilen.
+7. **Mockup-Duell, Klasse B:** Albert beurteilt beide interaktiven, CI-konformen Happy-Path-Mockups auf 375/768/1280 px und wählt danach den psychologisch stärkeren Weg.
 
 8. **Psychologisches Gate:** Nur das Mockup mit echter Einsicht, starker Optik und klarem nächsten Schritt gewinnt; der Rest bleibt verworfener Entwurf.
 

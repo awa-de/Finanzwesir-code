@@ -1,4 +1,4 @@
-Stand: 2026-07-17 | Session: AP-app-fabrik-04 | Geändert von: Claude
+Stand: 2026-07-18 | Session: AP-app-fabrik-08 | Geändert von: Claude
 
 # Mockup-Vertrag — App-Fabrik
 
@@ -83,7 +83,7 @@ Der bestehende **Vier-Kriterien-Prüfscore** aus dem lokalen Steuerungsblock (Ba
 | Rolle | Wer | Was |
 |---|---|---|
 | Vorab-Selbstprüfung | erstellendes LLM | führt den Prüfscore nur als Vorab-Selbstprüfung aus |
-| Fremdkritik | unabhängiges Gegenmodell | liefert **ausschließlich qualitative** Kritik zu denselben Prüffragen; **vergibt keinen numerischen Score**; entscheidet nicht über das Produkt |
+| Fremdkritik | unabhängiges Gegenmodell (Grok) | bewertet **jeden** Entwurf mit dem bereits bestehenden Vier-Kriterien-Prüfscore (`0/1/2`) und begründet ihn qualitativ; liefert je Entwurf höchstens **drei** konkrete Schärfungshinweise; entscheidet **nicht** über das Produkt |
 | Wirkung und Freigabe | Albert | einzige Instanz, die Wirkung feststellt und freigibt (`STRUKTURELLE_SICHERHEIT` §7, Rang 7) |
 
 Beobachtbare Prüffragen der Abnahme (aus Startlinie Punkt 8 und dem Prüfscore):
@@ -95,6 +95,18 @@ Beobachtbare Prüffragen der Abnahme (aus Startlinie Punkt 8 und dem Prüfscore)
 5. **Nächster Schritt:** Ist am Ende klar, was der Nutzer tun soll?
 
 Ein selbstvergebener Score des erstellenden LLM ist **kein** Abnahmenachweis (`STRUKTURELLE_SICHERHEIT` §8.5: keine Selbstzertifizierung).
+
+**Schärfungsregel für die unabhängige Zweitmeinung (verbindlich):**
+
+1. Jeder Hinweis trägt genau eine Kennzeichnung: `für Entwurf A`, `für Entwurf B` oder `nicht übernehmen`.
+2. Jeder zulässige Hinweis benennt die konkrete Barriere oder das konkrete Nicht-Ziel, die beizubehaltende Signaturmechanik und den erwarteten Mockup-Testmoment.
+3. Grok darf keinen Sieger bestimmen, keine Mischvariante bilden und keinen dritten Mockup-Pfad eröffnen.
+4. Eine neue Idee ist nur zulässig, wenn sie als Schärfung einem einzigen Entwurf zugeordnet bleibt.
+5. Verändert ein Vorschlag Nicht-Ziel, Signaturmechanik oder vereinbarten Scope, erhält er den Status `Produktentscheidung nötig` und wird nicht automatisch gebaut.
+6. Fehlt eine substanzielle Verbesserung, lautet der Befund `Keine Verbesserung empfohlen`.
+7. Der unabhängige Score ist eine Zweitmeinung zur Einordnung, keine Abnahme oder Produktfreigabe. Albert bleibt alleinige Freigabeinstanz.
+
+Die bestehende Regel „keine zweite Jury-Matrix" bleibt erhalten. Grok nutzt ausschließlich den vorhandenen Vier-Kriterien-Prüfscore; es wird keine weitere Skala eingeführt.
 
 ## 8. Übergabe in die technische APP_SPEC
 

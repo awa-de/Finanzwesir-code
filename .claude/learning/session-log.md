@@ -143,3 +143,28 @@ Wird nach /distill ins Jahres-Segment rotiert (Rohlog erhalten). Einträge: [FRI
 - [OK] Grundprompt AP-app-fabrik-06 ausgeführt, Ergebnis nach Schema geschrieben: tests/scratch/risiko-uebersetzer/psychosprint/02-opus.md (Frontmatter teilnehmer: opus, 8 Abschnitte, Prüfscore 8/8).
 - [OK] Nur Steuerungsblock als bindend behandelt; UX-Flow/Ankerliste/Rendite-Formel/Kernbotschaft als nicht bindendes Altmaterial in der Fidelitäts-Tabelle auf „simuliert / redaktionell zu bestätigen" gesetzt.
 - [OK] Keine Projektdatei außerhalb der Ergebnisdatei gelesen oder geändert; PROJECT-STATUS/BACKLOG/NAVIGATION unverändert (kein AP-ID, kein fachlicher Statuswechsel).
+
+### AP-chart-engine-01 CE-6a — AP-Wechsel
+
+### 2026-07-18 — AP-app-fabrik-07 Mockup-Duell risiko-uebersetzer | Zwischenstand/Übergabepunkt
+- [STAND] Fester Übergabepunkt geschrieben: docs/steering/patches/AP-app-fabrik-07_mockup-duell-risiko-uebersetzer_Ergebnis.md (selbsttragend, beide Varianten, offene Punkte). Status GELB.
+- [ENTSCHEIDUNG] Variante A: „Lebensraum-Blende" (Sol-Signaturmechanik) auf Alberts Wunsch verworfen — war nicht selbsterklärend. A ist jetzt kompakter „Verlust gegen Anker"-Kartenvergleich (2 Karten untereinander, Verlust in CI-Purpur) + neue Gesamtrendite-Kette.
+- [ENTSCHEIDUNG] Rendite in A: Nicht-Ziel „keine Rendite in der Entscheidungsstrecke" von Albert explizit überstimmt (Produktentscheidung, transparente Vorsteuer-Annahmen ETF 8 % / TG 1,5 %, Größenordnung). In C weiterhin keine Rendite. Reichweite (nur Mockup vs. Produktion) = offen, an Albert.
+- [FIX] Beide Mockups: `showScreen(n)` brauchte `n = Number(n)` (data-goto liefert Strings; Screen-Weichen liefen sonst nicht). C-Screen-3-Auswahl + A-Screen-3-Init hingen daran.
+- [OFFEN] Duell-Ziel neu fassen (A testet nicht mehr Sol-Mechanik); C-Voll-Durchlauf seit dem Number-Fix nicht real getestet; reale Browser-Abnahme A nach Rendite-Umbau. Kein Commit (Albert committet selbst).
+
+## 2026-07-18 – SESSION START | Fokus: AP-chart-engine-01 CE-6a ✅ (kein Ketten-Nachfolger, nächster Fokus nach Alberts Wahl)
+FinanzwesirData.js, CSVParser.js, FwDateUtils.js — diese Session nicht berühren. ✓
+
+### AP-chart-engine-01 CE-6a — AP-Wechsel
+## 2026-07-18 – AP-app-fabrik-09 Mockup-Duell Depot-Kipppunkt (Übergabe, läuft noch) — [FRICTION] Sonnet las Risiko-Übersetzer außerhalb des Quellenscopes; Bau abgebrochen, keine Mockups geschrieben. [OK] AP-09d–09f: app-spezifische Aufträge vollständig in tests/scratch verifiziert. Albert-Entscheidung B: Gleichstand, dann mehr. Nächster Schritt: neuer Sonnet-Faden liest ausschließlich tests/scratch/depot-kipppunkt/mockup-duell/SONNET_AUFTRAG.md plus explizite B-Entscheidung.
+- [DECISION] AP-09g Mockup-Hülle vor Sonnet-Bau: keine Übernahme aus risiko-uebersetzer; app-neutrale, minimale Kopierhülle unter tools/app_fabrik auf Basis Baukasten/SafeDOM/Screen-Flow. Keine psychologische Mechanik oder app-spezifische UI. Danach Sonnet-Auftrag für Depot-Kipppunkt auf diese einzige zusätzliche Quelle ergänzen und erst dann zwei Mockups bauen.
+- [CORRECTION] KORREKTUR AP-09g: keine Mockup-Hülle und keine Scaffold-Extraktion vor dem laufenden Sonnet-Bau. Dauerhafte Folgeaufgabe erst nach dessen Ergebnis: generische Sonnet-Vorlage mit expliziter Quellensperre (andere tests/scratch-Apps niemals lesen; bei fehlender Quelle stoppen) plus deterministischer Selbsttest gegen Promptdrift. Aktueller Depot-Faden bleibt unverändert und läuft weiter.
+
+## 2026-07-18 — AP-app-fabrik-09h–09k + Skill /app-duell ✅ | Voll-Abschluss (Kettenende) | RECONCILED: AP-app-fabrik-09h AP-app-fabrik-09i AP-app-fabrik-09j AP-app-fabrik-09k
+- [OK] Mockup-Duell-Prozess vom losen ChatGPT-Masterprompt zur produktionsreifen Kette gebaut: 09h Masterprompt bereinigt (K1–K5/K7/K8), 09j nach docs/App-Fabrik/MASTERPROMPT_MOCKUP-DUELL.md + Vorlagen nach docs/App-Fabrik/vorlagen/ kanonisiert (getrackt statt gitignored Archiv), Skill /app-duell als dünner Launcher + Debug-README.
+- [OK] Produktentscheidungs-Gate: 09i deterministisch (PRODUKTENTSCHEIDUNGEN.md, blockt sonnet-paket), 09k von Zählung auf ID-Bindung (E1/E2, Mengen-Gleichheit) gehärtet — Self-Test 6 Fälle inkl. „E1 doppelt/E2 fehlt", „doppelte Grok-ID", „nicht zuordenbare ID", „Fund ohne ID".
+- [WIN] Unabhängiger ChatGPT-Peer-Review (frischer Faden) gab Go für die ID-Bindung; zwei Low-Findings sofort behoben; Albert freigegeben → AP-09k GRÜN.
+- [DECISION] Kanonische Ablage: dauerhafte Prompt-Vorlagen gehören getrackt nach docs/App-Fabrik/vorlagen/, nie ins gitignored Archiv/local (Werkzeug liest sie via VORLAGEN_REL).
+- [FRICTION] Zähl-Gate (09i) war Scheinsicherheit — extern (ChatGPT) aufgedeckt; ID-Bindung (09k) ist die echte Lösung. → [[feedback-gruendlichkeit-vor-tempo]]
+- [OK] Offen, nicht blockierend: depot-kipppunkt ist bewusster Vor-Gate-Fall (Gutachten ohne IDs) — IDs nachziehen oder als „vor Gate" markieren. Kette nicht committed (Albert committet).

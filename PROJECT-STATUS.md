@@ -1,17 +1,17 @@
 <!-- HOOK-META
 Version: 1
-Stand: 2026-07-15
-Fokus-AP: AP-chart-engine-01 CE-6a ✅ Cross-Type-Abschluss — CE-1 bis CE-6a fertig+browserabgenommen; nur CE-6/CE-6a noch nicht committed (Rest bis 93c884f) (2026-07-15)
-Nächster-Schritt: Kein Ketten-Nachfolger, naechster Fokus nach Alberts Wahl aus BACKLOG.md Abschnitt Aktiv (AP-chart-engine-01 ✅ 2026-07-15)
+Stand: 2026-07-18
+Fokus-AP: AP-app-fabrik-09k ✅ ID-Bindung Produktentscheidungs-Gate — Mockup-Duell-Prozess (/app-duell) vollständig gebaut und freigegeben (2026-07-18)
+Nächster-Schritt: Naechster Fokus nach Alberts Wahl — /app-duell fuer eine App (offener depot-kipppunkt Vor-Gate-Fall) oder BACKLOG Abschnitt Aktiv (AP-app-fabrik-09k ✅ 2026-07-18)
 Blocker: keine
 Letzter-Distill: 2026-07-13
 Kassensturz-Datum: 2026-07-13
 -->
-<!-- HOOK-META-SESSION: AP-chart-engine-01 CE-6/CE-6a Vollabschluss -->
+<!-- HOOK-META-SESSION: AP-app-fabrik-09h–09k + Skill /app-duell (Voll-Abschluss) -->
 
 # PROJECT STATUS — Finanzwesir 2.0
 
-Stand: 2026-07-15 | Session: AP-chart-engine-01 CE-6/CE-6a Vollabschluss | Geändert von: Claude
+Stand: 2026-07-18 | Session: AP-app-fabrik-09h–09k + Skill /app-duell (Voll-Abschluss) | Geändert von: Claude
 
 **Zweck:** Schneller Wiedereinstieg nach Pausen.
 **Zielgruppe:** Albert und Claude.
@@ -24,14 +24,14 @@ Stand: 2026-07-15 | Session: AP-chart-engine-01 CE-6/CE-6a Vollabschluss | Geän
 
 ## 1. Aktueller Fokus
 
-**Nächster Schritt:** Kein Ketten-Nachfolger — das Engine-DOM-Chrome-Programm AP-chart-engine-01 (CE-1 bis CE-6a) ist vollständig abgeschlossen und browserabgenommen. CE-1 bis CE-5d inkl. DOC-01/DOC-02/DOC-02a/DOC-03/DOC-04/DOC-04a sind **bereits committed** (`20bb90c`, `9dd899d`, `76d7080`, `6470c71`, `519584c`, `93c884f` — Albert committete die CE-5-Kette zwischen den Sessions); nur **CE-6/CE-6a** (Cross-Type-Abschlussnachweis) sind **noch nicht committed** (2026-07-15, Commit-Message vorbereitet). Vier bewusst offene, nicht blockierende Restpunkte (KDR-15-Chrome-Auftrag-Durchleitung, F-06 Pie-Popover, Pie-Wrapper/-Titel-Vollmigration, Donut-Kategorienliste) dokumentiert in `docs/steering/patches/AP-chart-engine-01_CE-6_cross-type-abschluss-und-engine-dom-uebergabe_Ergebnis.md`. Nächster Fokus nach Alberts Wahl aus `docs/steering/BACKLOG.md` 🟡 Aktiv (höchste Prio: AP-20/21 Mixed-Rhythm CV-Heuristik).
+**Nächster Schritt:** Der App-Fabrik-Mockup-Duell-Prozess ist vollständig gebaut und freigegeben: Skill `/app-duell`, kanonischer Masterprompt `docs/App-Fabrik/MASTERPROMPT_MOCKUP-DUELL.md` + Prompt-Vorlagen (getrackt) unter `docs/App-Fabrik/vorlagen/`, Werkzeug `tools/app-fabrik-psychosprint.py` mit Quellensperre und **ID-gebundenem** Produktentscheidungs-Gate (ChatGPT-Peer-Review Go, AP-09k GRÜN). Nächster Fokus nach Alberts Wahl: `/app-duell` für eine App (offener, nicht blockierender depot-kipppunkt-Vor-Gate-Fall — Gutachten ohne IDs) **oder** ein BACKLOG-Item aus `docs/steering/BACKLOG.md` 🟡 Aktiv (höchste Prio: AP-20/21 Mixed-Rhythm CV-Heuristik). Noch nicht committed (Albert committet): die 09h–09k-Kette sowie die zuvor offene chart-engine CE-6/CE-6a.
 
 Letzte Meilensteine (je eine Zeile — Volltext in BACKLOG-ARCHIV.md):
+- **AP-app-fabrik-09h–09k + Skill /app-duell** (2026-07-18) ✅ Mockup-Duell-Prozess produktionsreif: Masterprompt bereinigt+kanonisiert (`docs/App-Fabrik/MASTERPROMPT_MOCKUP-DUELL.md`), Prompt-Vorlagen getrackt unter `docs/App-Fabrik/vorlagen/`, Werkzeug-Kette prepare→grok-paket→sonnet-paket mit Quellensperre + deterministischem Produktentscheidungs-Gate (09i) auf ID-Bindung E1/E2 + Mengen-Gleichheit gehärtet (09k); ChatGPT-Peer-Review Go, freigegeben GRÜN; Skill `/app-duell` als dünner Launcher. Noch nicht committed
 - **AP-chart-engine-01 CE-6/CE-6a** (2026-07-15) ✅ Cross-Type-Abschluss und Engine-DOM-Übergabe: read-only Nachweis, dass Line/regulärer+Ranking-Bar/Donut-Pie eine gemeinsame `FW_CHROME_*`-Legend-Pill-Basis teilen, Ranking-Bar strukturell ohne erfundene Legende bleibt, Pie-Ghost-Zustand geschützt ist, DOM-/Canvas-Grenzen und beide Datenpfade unberührt sind (CE-6, statisch GELB); Alberts reale S/M/L-Browser-Abnahme („Alles ok.") quittiert (CE-6a) → GRÜN. Damit ist die gesamte Kette CE-1–CE-6a abgeschlossen; noch nicht committed
 - **AP-chart-engine-01 CE-5-Preflight bis CE-5d + DOC-02 bis DOC-04a** (2026-07-15) ✅ Donut/Pie-Chart-Chrome mit Segment-Dämpfung: vierte Legend-Bedeutung „Segment-Dämpfung umschalten" (DOC-03) als echtes A11y-Primitiv umgesetzt, Fokusring-Iteration auf gemeinsamen Petrol-500-`focus-visible`-Fallback konsolidiert (CE-5a–c), Produktentscheidung „gemeinsame Legend-Pill-Basisoptik" (DOC-04) umgesetzt (CE-5d); alle Schritte real browserverifiziert (Sicht + `engine-dom-check.js` 9/9 + neues `pie-segment-damping-interaction-check.js` 51/51 PASS); committed (93c884f)
 - **AP-chart-engine-01 CE-4/CE-4c** (2026-07-15) ✅ Bar-Chart-Chrome (CE-4) + Reparatur gemeinsamer Chrome-Kern `FW_CHROME_*` statt dupliziertem `FW_BAR_*` (CE-4c, behebt CE-4a-Verstoß); Line/Bar/Donut vollständig browserabgenommen; committed (76d7080)
 - **AP-chart-engine-01 DOC-02/DOC-02a** (2026-07-15) ✅ Semantischer Chrome-Auftrag (KDR 15, Strategie=Was/Renderer=Wie) + Widerspruchskorrektur in Baukasten §10; reine Dokumentation, committed (6470c71)
-- **AP-chart-engine-01 DOC-01** (2026-07-14) ✅ Line-Chart-Chrome-Vertragsnachzug: Baukasten-Konzept (Legend-Pill-Kontur, App-Fabrik-Verbindlichkeit), Mockup und Test-Page-Standard auf abgenommenen CE-3b-Ist-Stand nachgezogen; reine Dokumentation, committed (9dd899d)
 
 ---
 
