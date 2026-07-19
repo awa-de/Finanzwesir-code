@@ -1,0 +1,22 @@
+<article class="{{post_class}} overflow-hidden rounded-xl border border-border bg-surface shadow-soft transition-shadow hover:shadow-hover">
+    {{#if feature_image}}
+        <a class="block overflow-hidden" href="{{url}}">
+            <img class="aspect-[16/9] w-full object-cover" src="{{img_url feature_image size="l"}}" alt="{{#if feature_image_alt}}{{feature_image_alt}}{{else}}{{title}}{{/if}}" loading="lazy">
+        </a>
+    {{/if}}
+
+    <div class="space-y-3 p-5">
+        {{#if primary_tag}}
+            <p class="text-xs font-semibold uppercase tracking-wide text-primary"><a class="no-underline hover:text-petrol" href="{{primary_tag.url}}">{{primary_tag.name}}</a></p>
+        {{/if}}
+
+        <h2 class="font-display text-xl leading-tight text-text"><a class="no-underline hover:text-primary" href="{{url}}">{{title}}</a></h2>
+
+        <p class="text-sm leading-relaxed text-text-sec">{{excerpt characters="180"}}</p>
+
+        <footer class="flex flex-wrap gap-x-3 gap-y-1 text-sm text-text-muted">
+            <time datetime="{{date format="YYYY-MM-DD"}}">{{date format="DD. MMMM YYYY"}}</time>
+            <span>{{reading_time}}</span>
+        </footer>
+    </div>
+</article>

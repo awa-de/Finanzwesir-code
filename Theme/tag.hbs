@@ -1,0 +1,25 @@
+{{!< default}}
+
+{{#tag}}
+    <header class="fw-archive-header fw-tag-header">
+        {{#if feature_image}}
+            <img class="fw-archive-header__image" src="{{img_url feature_image size="l"}}" alt="{{name}}">
+        {{/if}}
+        <h1>{{name}}</h1>
+        {{#if description}}
+            <p>{{description}}</p>
+        {{/if}}
+    </header>
+{{/tag}}
+
+<section class="fw-post-listing" aria-label="Beiträge dieses Tags">
+    <div class="fw-post-listing__items">
+        {{#foreach posts}}
+            {{> "post-card"}}
+        {{else}}
+            <p class="fw-post-listing__empty">Zu diesem Tag gibt es noch keine Beiträge.</p>
+        {{/foreach}}
+    </div>
+
+    {{pagination}}
+</section>

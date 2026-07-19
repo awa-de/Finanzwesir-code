@@ -1,0 +1,60 @@
+{{!< default}}
+
+{{#post}}
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "headline": {{json title}},
+        "datePublished": "{{date format="YYYY-MM-DD"}}",
+        "dateModified": "{{date updated_at format="YYYY-MM-DD"}}",
+        "author": {
+            "@type": "Person",
+            "name": {{json primary_author.name}}
+        },
+        "publisher": {
+            "@type": "Organization",
+            "name": {{json @site.title}}
+        }
+    }
+    </script>
+
+    <article class="{{post_class}} fw-post" itemscope itemtype="https://schema.org/BlogPosting">
+        <header class="fw-post__header">
+            {{#if primary_tag}}
+                <p class="fw-post__tag"><a href="{{primary_tag.url}}">{{primary_tag.name}}</a></p>
+            {{/if}}
+
+            <h1 itemprop="headline">{{title}}</h1>
+
+            <p class="fw-post__meta">
+                <time itemprop="datePublished" datetime="{{date format="YYYY-MM-DD"}}">{{date format="DD. MMMM YYYY"}}</time>
+                <meta itemprop="dateModified" content="{{date updated_at format="YYYY-MM-DD"}}">
+                <span itemprop="author" itemscope itemtype="https://schema.org/Person">
+                    <span itemprop="name">{{primary_author.name}}</span>
+                </span>
+            </p>
+        </header>
+
+        {{#if feature_image}}
+            <figure class="fw-post__feature-image">
+                <img itemprop="image" src="{{img_url feature_image size="xl"}}" alt="{{#if feature_image_alt}}{{feature_image_alt}}{{else}}{{title}}{{/if}}">
+            </figure>
+        {{/if}}
+
+        <section class="gh-content" itemprop="articleBody">
+            {{content}}
+        </section>
+    </article>
+
+    <script defer src="{{asset "js/vendor/chart.umd.min.js"}}"></script>
+    <script type="module">
+        import { ChartEngine } from '{{asset "js/fw-chart-engine/index.js"}}';
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const engine = new ChartEngine();
+            engine.init();
+        });
+    </script>
+    <script defer src="{{asset "js/fw-janitor.js"}}" data-icon-base="{{asset "images/"}}"></script>
+{{/post}}

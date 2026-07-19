@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="{{@site.locale}}">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{{meta_title}}</title>
+    <meta name="description" content="{{meta_description}}">
+    <link rel="canonical" href="{{canonical_url}}">
+    <link rel="alternate" type="application/rss+xml" title="{{@site.title}}" href="{{@site.url}}/rss/">
+    <link rel="stylesheet" href="{{asset "css/screen.css"}}">
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+            {
+                "@type": "ListItem",
+                "position": 1,
+                "name": {{json @site.title}},
+                "item": {{json @site.url}}
+            }
+        ]
+    }
+    </script>
+
+    {{ghost_head}}
+</head>
+<body class="{{body_class}} min-h-screen bg-bg font-body text-text-sec">
+    <div class="flex min-h-screen flex-col">
+        {{> "header"}}
+
+        <main class="mx-auto w-full max-w-7xl flex-1 px-4 py-8 sm:px-6 lg:px-8">
+            {{{body}}}
+        </main>
+
+        {{> "footer"}}
+    </div>
+
+    {{ghost_foot}}
+</body>
+</html>

@@ -1,0 +1,13 @@
+{
+  "name": "finanzwesir-build",
+  "private": true,
+  "version": "0.1.0",
+  "scripts": {
+    "css:build": "tailwindcss -i Theme/src/css/screen.source.css -o Theme/assets/css/screen.css --minify",
+    "css:watch": "tailwindcss -i Theme/src/css/screen.source.css -o Theme/assets/css/screen.css --watch"
+  },
+  "devDependencies": {
+    "@tailwindcss/cli": "4.3.3",
+    "tailwindcss": "4.3.3"
+  }
+}

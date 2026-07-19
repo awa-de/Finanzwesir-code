@@ -112,8 +112,12 @@ Nach Abschluss: Claude bietet `/abschluss-ritual AP-N` an.
 ```
 1. docs/steering/BACKLOG.md
 2. docs/steering/theme-build/THEME-ASSEMBLY-CHECKLIST.md
-3. docs/spec/[relevante Spec]
-4. docs/steering/audits/SECURITY-BASELINE.md      ← bei Script-Tags, externen URLs
+3. docs/steering/theme-build/GHOST-LOKALBETRIEB.md ← lokale Ghost-6-Devinstanz (außerhalb Repo, C:\Tools\ghost-local\)
+4. docs/steering/theme-build/TMPL-1-PLAN.md ← Ghost-Grundgerüst (10 Templates + 4 Partials), Site-Shell-Architektur
+5. docs/steering/design/T1-TAILWIND-PRODUKTIONSBUILD-PLAN.md ← lokaler Tailwind-Produktionsbuild, löst Play-CDN ab
+6. docs/steering/theme-build/M1-HOMEPAGE-TAILWIND-PLAN.md + M1-HOMEPAGE-TAILWIND-KOCHBUCH.md ← Homepage-Templates auf Tailwind (✅ 2026-07-19)
+7. docs/spec/[relevante Spec]
+8. docs/steering/audits/SECURITY-BASELINE.md      ← bei Script-Tags, externen URLs
 ```
 
 Nach Abschluss: THEME-ASSEMBLY-CHECKLIST.md abhaken → `/abschluss-ritual`.

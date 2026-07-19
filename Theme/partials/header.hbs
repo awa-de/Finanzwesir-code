@@ -1,0 +1,17 @@
+<header class="border-b border-border bg-surface">
+    <div class="mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-4 px-4 py-4 sm:px-6 lg:px-8">
+        <a class="inline-flex items-center gap-3 no-underline" href="{{@site.url}}" aria-label="{{@site.title}} – Startseite">
+            {{#if @site.logo}}
+                <img class="h-10 w-auto" src="{{@site.logo}}" alt="{{@site.title}}">
+            {{else}}
+                <span class="font-display text-xl tracking-wide text-primary">{{@site.title}}</span>
+            {{/if}}
+        </a>
+
+        {{#if @site.navigation}}
+            <nav class="[&_a]:text-sm [&_a]:font-semibold [&_a]:text-text-sec [&_a]:no-underline [&_a:hover]:text-primary [&_ul]:m-0 [&_ul]:flex [&_ul]:list-none [&_ul]:flex-wrap [&_ul]:items-center [&_ul]:gap-x-4 [&_ul]:gap-y-2 [&_ul]:p-0" aria-label="Hauptnavigation">
+                {{navigation}}
+            </nav>
+        {{/if}}
+    </div>
+</header>

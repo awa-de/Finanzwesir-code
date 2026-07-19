@@ -1,0 +1,35 @@
+{{!< default}}
+
+{{#author}}
+    <header class="fw-author-header" itemscope itemtype="https://schema.org/Person">
+        {{#if profile_image}}
+            <img class="fw-author-header__image" src="{{img_url profile_image size="m"}}" alt="Porträt von {{name}}" itemprop="image">
+        {{/if}}
+
+        <h1 itemprop="name">{{name}}</h1>
+
+        {{#if bio}}
+            <p itemprop="description">{{bio}}</p>
+        {{/if}}
+
+        {{#if website}}
+            <p><a href="{{website}}" rel="me" itemprop="url">Website</a></p>
+        {{/if}}
+
+        {{#if location}}
+            <p itemprop="homeLocation">{{location}}</p>
+        {{/if}}
+    </header>
+{{/author}}
+
+<section class="fw-post-listing" aria-label="Beiträge dieses Autors">
+    <div class="fw-post-listing__items">
+        {{#foreach posts}}
+            {{> "post-card"}}
+        {{else}}
+            <p class="fw-post-listing__empty">Noch keine Beiträge veröffentlicht.</p>
+        {{/foreach}}
+    </div>
+
+    {{pagination}}
+</section>

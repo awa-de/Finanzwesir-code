@@ -60,3 +60,4 @@
 - [Präzise statt absolute Formulierungen](feedback_praezise_statt_absolut.md) — pauschale Statusaussagen vor Restfällen/Ausnahmen gegenprüfen, konkreten Mechanismus benennen statt zu pauschalisieren
 - [Subagent-Modell-Override greift nicht](project_subagent_model_override.md) — Agent-Tool `model:opus` übersteuert `CLAUDE_CODE_SUBAGENT_MODEL=haiku` nicht; für Opus-Qualität Hauptfaden per /model umstellen oder env-Var temporär ändern
 - [/app-duell Mockup-Duell-Pipeline](project_app_duell_pipeline.md) — Prozess/Skill/Werkzeug + ID-gebundenes Produktentscheidungs-Gate; kanonische Orte docs/App-Fabrik/(vorlagen/)
+- [Ghost.io-Theme-Bau teils via Codex](project_ghost_theme_build.md) — Albert baut Theme/-Templates teils über Codex außerhalb Claude Code; GHOST-LOKALBETRIEB+TMPL-1+T1+M1 fertig (2026-07-19), git status aktiv prüfen

@@ -1,0 +1,20 @@
+{{!< default}}
+
+<section class="space-y-8">
+    <header class="border-l-4 border-primary pl-4">
+        <h1 class="font-display text-3xl text-primary sm:text-4xl">{{@site.title}}</h1>
+        {{#if @site.description}}
+            <p class="mt-2 max-w-2xl text-lg text-text-sec">{{@site.description}}</p>
+        {{/if}}
+    </header>
+
+    <div class="grid gap-6 md:grid-cols-2">
+        {{#foreach posts}}
+            {{> "post-card"}}
+        {{else}}
+            <p class="rounded-xl border border-border bg-bg-faint p-6 text-text-muted">Noch keine Beiträge veröffentlicht.</p>
+        {{/foreach}}
+    </div>
+
+    {{pagination}}
+</section>

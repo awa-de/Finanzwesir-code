@@ -1,5 +1,5 @@
 # CSS-Konventionen — Dauerhafter Arbeitsvertrag
-Stand: 2026-05-03 08:02 | Session: A7-Stand-Datum | Geändert von: Claude
+Stand: 2026-07-19 20:55 | Session: DS-013-Entscheidung | Geändert von: Codex
 
 > **Status:** Bindend ab 2026-02-19, gilt bis Production-Build.
 > **Scope:** Jede CSS-Änderung im Theme.
@@ -7,9 +7,25 @@ Stand: 2026-05-03 08:02 | Session: A7-Stand-Datum | Geändert von: Claude
 
 ---
 
-## Die Datei
+## Die ausgelieferte Datei und ihre Quelle
 
-Eine einzige CSS-Datei: `assets/css/screen.css`. Kein zweites CSS, keine Inline-Styles in HTML außer Tailwind-Utility-Klassen, keine `<style>`-Blöcke in Templates.
+Eine einzige **ausgelieferte** CSS-Datei: `assets/css/screen.css`. Ghost lädt
+ausschließlich diese Datei. Kein zweites ausgeliefertes CSS, keine Inline-
+Styles in HTML außer Tailwind-Utility-Klassen, keine `<style>`-Blöcke in
+Templates.
+
+Vor T1 ist `assets/css/screen.css` zugleich die manuell gepflegte Quelle. Ab
+T1 gilt die entschiedene Trennung:
+
+- Bearbeitete Quelle: `src/css/screen.source.css`.
+- Build-Ausgabe: `assets/css/screen.css`.
+- `tokens.css` bleibt die CI-Quelle und wird von der Build-Quelle importiert.
+- Build-Ausgabe niemals direkt ändern; CSS-Änderungen gehen ausschließlich in
+  die Quelle.
+
+Der Build ergänzt Tailwind-Theme und -Utilities ohne Preflight-Reset. Die
+sieben Abschnitte dieses Dokuments strukturieren weiterhin die bearbeitete
+Quelle.
 
 ## Die sieben Abschnitte — Zuständigkeiten sind bindend
 
