@@ -94,11 +94,11 @@ STOP-Regel:
 Wenn diese Rollenprüfung nicht durchgeführt wurde, darf keine APP_SPEC erstellt werden.
 
 Zusätzlich für `plan-generator`:
-Auch wenn die Rolle als Funnel-Finale geklärt ist, bleibt das Output-Modell offen. Der Entscheidungsblock „Wie konkret darf der finale Plan werden?" muss vor jeder APP_SPEC-Erstellung bearbeitet werden.
+Der Entscheidungsblock „Wie konkret darf der finale Plan werden?" wurde am 2026-07-19 mit Albert besprochen (siehe Alberts Entscheidung je Frage unten). Die LLM-STOP-Regel gilt damit als erfüllt.
 
-## Offener Entscheidungsblock: Wie konkret darf der finale Plan werden?
+## Entscheidungsblock: Wie konkret darf der finale Plan werden? (geklärt 2026-07-19)
 
-Dieser Block ist bewusst offen. Er ist kein fertiges APP_SPEC-Konzept und kein Bauauftrag.
+Dieser Block war bewusst offen. Er ist weiterhin kein fertiges APP_SPEC-Konzept und kein Bauauftrag — die folgenden Antworten sind die Grundlage für eine spätere APP_SPEC, ersetzen sie aber nicht.
 
 Der Plan-Generator ist das Funnel-Finale: Er soll den Nutzer am Ende der Entscheidungsreise aus der Entscheidungslähmung holen und zu einem kleinen nächsten Schritt führen. Gleichzeitig darf er keine individuelle Anlageberatung, keine ungeprüfte Produktempfehlung und keinen automatischen Waschzettel erzeugen.
 
@@ -118,6 +118,8 @@ Begründung: Der Plan muss konkret genug sein, um Handlungsfähigkeit auszulöse
 
 Offene Nutzerentscheidung: Soll der finale Output eher generisch, musterhaft oder produktkonkret sein?
 
+Alberts Entscheidung (2026-07-19): Grundsätzlich A (generisch), aber mit Nennung des **Indexnamens** (z. B. „MSCI World" oder „FTSE All World" als Index, nicht als konkretes ETF-Produkt). Kein Produktname, kein Anbietername.
+
 ### 2. Dürfen konkrete ETF-Namen genannt werden?
 
 Optionen:
@@ -131,6 +133,8 @@ Empfehlung: B im Plan-Generator. C später nur in einem ausdrücklich redaktione
 Begründung: Konkrete ETF-Namen im direkten Ergebnis erhöhen das Risiko, dass der Output wie eine persönliche Empfehlung wirkt.
 
 Offene Nutzerentscheidung: Soll der Plan-Generator selbst konkrete ETF-Namen nennen oder nur Kategorien?
+
+Alberts Entscheidung (2026-07-19): C — konkrete ETF-Namen nur im separaten Waschzettel-Bereich (siehe Frage 6), nicht im Haupt-Startvorschlag.
 
 ### 3. Darf der Plan einen Euro-Betrag nennen?
 
@@ -147,6 +151,8 @@ Begründung: Ein selbst gewählter Betrag bleibt beim Nutzer. Ein berechneter Be
 
 Offene Nutzerentscheidung: Soll die App Beträge nur spiegeln, beispielhaft rahmen oder komplett vermeiden?
 
+Alberts Entscheidung (2026-07-19): C kombiniert mit B — Nutzer wählt den Startbetrag selbst, die App spiegelt ihn zurück; als redaktioneller Anker-Beispielwert gilt **150 €** (durchschnittliche Sparplanrate in Deutschland).
+
 ### 4. Was ist der Output: Empfehlung, Beispiel oder Startvorschlag?
 
 Optionen:
@@ -162,6 +168,8 @@ Begründung: „Empfehlung" und „persönlicher Plan" erzeugen Beratungsnähe. 
 
 Offene Nutzerentscheidung: Wie soll der Output sprachlich etikettiert werden?
 
+Alberts Entscheidung (2026-07-19): C — Startvorschlag, klar als Beispiel gekennzeichnet.
+
 ### 5. Was passiert, wenn der Nutzer noch nicht reif ist?
 
 Optionen:
@@ -175,6 +183,8 @@ Empfehlung: B.
 Begründung: Der Plan-Generator darf die vorherigen Schutzmechaniken nicht kurzschließen. Wer zentrale Fragen noch nicht geklärt hat, braucht keinen Plan, sondern den Rückweg zur passenden Station.
 
 Offene Nutzerentscheidung: Soll bei mangelnder Reife konsequent kein Plan ausgegeben werden?
+
+Alberts Entscheidung (2026-07-19): B — kein Plan; stattdessen Rückverweis auf passende Funnel-Apps.
 
 ### 6. Soll der Plan-Generator später einen echten Waschzettel liefern?
 
@@ -190,11 +200,11 @@ Begründung: Der Plan-Generator kann den Übergang zu einem Waschzettel vorberei
 
 Offene Nutzerentscheidung: Soll der Waschzettel Teil dieser App werden oder ein separater redaktioneller Anschluss?
 
-### LLM-STOP-Regel
+Alberts Entscheidung (2026-07-19): A — ja, direkter Waschzettel mit konkreten Produkten, als Teil dieser App. Ergänzt Frage 2: die konkreten ETF-Namen leben in diesem Waschzettel-Teil, nicht im Haupt-Startvorschlag.
 
-Wenn dieser Entscheidungsblock nicht ausdrücklich mit dem Nutzer besprochen wurde, darf aus dieser MINI_SPEC keine APP_SPEC und keine App-Bau-Anweisung abgeleitet werden.
+### LLM-STOP-Regel — erfüllt (2026-07-19)
 
-Ein späteres LLM muss zuerst die offenen Nutzerentscheidungen 1–6 klären und dokumentieren.
+Der Entscheidungsblock wurde mit Albert besprochen (Antworten 1–6 oben). Eine APP_SPEC oder App-Bau-Anweisung darf auf Basis dieser sechs Antworten abgeleitet werden. Weicht ein späterer Bau von einer dieser Antworten ab, ist das eine neue, mit Albert zu klärende Abweichung — keine stillschweigende Neuinterpretation.
 
 ### Aufbau: Zwei Stufen
 

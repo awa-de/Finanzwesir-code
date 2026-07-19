@@ -67,6 +67,7 @@ Stand: 2026-07-15 | Session: §2a Ankerpflicht + Holmes/Rumsfeld-Nuggets geparkt
 | AF-22    | App-Fabrik | P→B→N-Block in APP_SPEC-Template integrieren          | M    | AF-21   | Pflichtabschnitt in APP_SPEC.md-Vorlage + 10v10-Test-Feld |
 | AF-23    | App-Fabrik | Pincus-Check als Pre-Code-Quality-Gate dokumentieren  | L    | AF-22   | 4-Punkte-Checkliste in .claude/commands/ oder CLAUDE.md §6 App-Arbeit |
 | AP-23    | Engine  | Chart.js-Version zwischen Dev/Test-CDN (`Theme/index.html`, `app.test.html`, ungepinntes `<script src="https://cdn.jsdelivr.net/npm/chart.js">`) und lokal vendorter Produktionsversion 4.5.0 synchronisieren/pinnen — Drift-Risiko bei künftigen Chart.js-Majors | L | — | docs/steering/patches/AP-prokrast-03g_klaerung-forschung_rubikon-reveal_scale-animation_Ergebnis.md |
+| AF-25    | App-Fabrik | Beziehung G2 rendite-kalibrierung ↔ etf-aera-vorbei klären (eine App / Master-Slave / zwei getrennte Apps) — noch offen, bewusst nicht entschieden (2026-07-19). Gekoppelte Marker in beiden Mini-Specs hinterlegt, damit das Thema bei Arbeit an einer der beiden Apps zuverlässig wieder auftaucht. | M | — | Apps/rendite-kalibrierung/MINI_SPEC_FROM_HAUPTDOKUMENT.md; Apps/etf-aera-vorbei/MINI_SPEC_FROM_HAUPTDOKUMENT.md |
 
 ---
 

@@ -21,6 +21,17 @@
 
 **Rolle:** Zweifel prüfen / ETF-Ära-Skepsis einordnen  
 
+## Gekoppelter Sonderfall: Verknüpfung mit G2 rendite-kalibrierung
+
+Offen seit 2026-07-19 (BACKLOG AF-25). Ungeklärt: G2 `rendite-kalibrierung` (Untertitel im Hauptdokument: „Ist die ETF-Ära vorbei?") und diese App könnten werden:
+- eine gemeinsame App
+- eine Master/Slave-Kombination
+- zwei getrennte, eigenständige Apps
+
+Grund: Titel/Slug dieser App behaupten die allgemeine Frage „Ist die ETF-Ära vorbei", der tatsächliche Inhalt unten beschreibt aber das enger gefasste Passiv-Paradox (Markteffizienz-Argument) — ein anderes Thema, das inhaltlich näher an G2 liegt als der eigene Titel vermuten lässt.
+
+Vor jeder Arbeit an dieser App (Mockup-Duell, APP_SPEC, Redaktion): `Apps/rendite-kalibrierung/MINI_SPEC_FROM_HAUPTDOKUMENT.md` lesen und mit Albert klären, ob die Beziehung inzwischen entschieden wurde.
+
 **Diese App existiert, um:**  
 berechtigte ETF-Skepsis von lähmender Ausrede zu trennen.
 

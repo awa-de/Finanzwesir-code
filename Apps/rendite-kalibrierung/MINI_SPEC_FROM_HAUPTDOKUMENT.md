@@ -20,6 +20,17 @@
 
 **Rolle:** G2 — Erwartungsmanagement  
 
+## Gekoppelter Sonderfall: Verknüpfung mit etf-aera-vorbei
+
+Offen seit 2026-07-19 (BACKLOG AF-25). Ungeklärt: Diese App (Untertitel im Hauptdokument: „Ist die ETF-Ära vorbei?") und `etf-aera-vorbei` (Arbeitstitel „Das Passiv-Paradox") könnten werden:
+- eine gemeinsame App
+- eine Master/Slave-Kombination
+- zwei getrennte, eigenständige Apps
+
+Grund: `etf-aera-vorbei` trägt zwar Titel/Slug „ETF-Ära vorbei", ihr tatsächlicher Inhalt beschreibt aber das enger gefasste Passiv-Paradox (Markteffizienz-Argument) — inhaltlich näher an dieser App als der fremde Titel vermuten lässt.
+
+Vor jeder Arbeit an dieser App (Mockup-Duell, APP_SPEC, Redaktion): `Apps/etf-aera-vorbei/MINI_SPEC_FROM_HAUPTDOKUMENT.md` lesen und mit Albert klären, ob die Beziehung inzwischen entschieden wurde.
+
 **Diese App existiert, um:**  
 Renditeerwartungen so zu kalibrieren, dass der Plan auch bei niedrigeren Ergebnissen mental und rechnerisch tragfähig bleibt.
 
