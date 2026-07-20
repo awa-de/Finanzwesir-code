@@ -1,5 +1,5 @@
 # Patterns — Finanzwesir 2.0
-Stand: 2026-07-13 | Distill 11 | Muster mit ≥2 Belegen (Normal) oder ≥1 Beleg (High-Impact) werden Kandidaten. Nur Alberts OK → Promotion.
+Stand: 2026-07-20 | Distill 12 | Muster mit ≥2 Belegen (Normal) oder ≥1 Beleg (High-Impact) werden Kandidaten. Nur Alberts OK → Promotion.
 
 ---
 
@@ -19,7 +19,7 @@ Stand: 2026-07-13 | Distill 11 | Muster mit ≥2 Belegen (Normal) oder ≥1 Bele
 - feedback_glob_vs_read.md → promoted (Bekannte Pfade direkt lesen, nie Glob) | Reoccurrence 2026-05-10 (APP-01-spec-gate: Glob bei bekanntem Pfad SECURITY-BASELINE.md → Albert korrigierte)
 - feedback_spec_verbote_scope.md → promoted 2026-06-03 (Distill 5: Spec-Verbote zu breit formuliert — High-Impact, 1 Beleg)
 - feedback_python_powershell_tooling.md → promoted 2026-06-05 (Distill 6: Python für Datei-Inhalte, PowerShell für Dateisystem/Git — 2 Belege PREF) | Reoccurrence 2026-06-22 (Kassensturz-Archiv-Query: Tooling-Memory nicht proaktiv abgerufen — 3 LLM-Optionen präsentiert statt Python-Regel zu prüfen)
-- feedback_gate_scope_dialog.md → promoted 2026-06-05 (Distill 6: Gate-Dialog als Scope-Klärungs-Kanal — 1 Beleg PREF)
+- feedback_gate_scope_dialog.md → promoted 2026-06-05 (Distill 6: Gate-Dialog als Scope-Klärungs-Kanal — 1 Beleg PREF) | Reoccurrence 2026-07-13 (AP-tailwind-02 Slice 4: makeBtn-Checker-Lücke gestoppt, 3 Optionen statt Alleinentscheidung)
 - feedback_csvparser_vertrauenswuerdig.md → promoted 2026-06-05 (Distill 6: Parser-Output vollständig vertrauenswürdig — 1 Beleg PREF)
 - feedback_edit_vorab_lesen.md → promoted 2026-06-05 (Distill 6: Edit-Vorab-Lesen — 2 Belege Normal)
 - feedback_abschluss_ritual_timing.md → promoted 2026-06-05 (Distill 6: Abschluss-Ritual-Timing — 3 Belege Normal)
@@ -44,6 +44,9 @@ Stand: 2026-07-13 | Distill 11 | Muster mit ≥2 Belegen (Normal) oder ≥1 Bele
 - feedback_tools_generisch_dauerhaft.md → promoted 2026-07-13 (Distill 11: PREF AP-prokrast-17)
 - feedback_praezise_statt_absolut.md → promoted 2026-07-13 (Distill 11: PREF AP-prokrast-19)
 - project_ritual_token_optimization.md → ergänzt 2026-07-13 (Distill 11: PREF RITUAL-OPT-2 — aggressive Rotation bevorzugt; zusätzlich QUESTION „Append-only/Snapshot als CLAUDE.md-Prinzip" final als retired dokumentiert)
+- feedback_gruendlichkeit_vor_tempo.md → Reoccurrence 2026-07-20 nachgetragen (Distill 12: Kassensturz KW30 fand vier stale Commit-Status-Zeilen in PROJECT-STATUS.md/BACKLOG-ARCHIV.md — durch die verdrahtete Skill-Pflichtprüfung selbst gefunden, nicht von Albert)
+- feedback_scope_auftragstreue.md → ergänzt 2026-07-20 (Distill 12: Kandidat „Seiteneffekte/Scope-Abweichungen proaktiv nennen" — [P2] + AP-tailwind-02 Slice 4 opacity-60, 2 Belege — bewusst hier eingehängt statt eigene Datei, Albert-Entscheidung nach LLM-Retrieval-Abwägung: gleicher Auslösekontext, weniger Fragmentierung)
+- feedback_arbeitsweise.md → ergänzt 2026-07-20 (Distill 12: PREF — bei CLAUDE.md-Regelfragen begründete Einschätzung inkl. Einordnung gegen Anthropic-Guidance statt neutraler Pro/Contra-Liste)
 
 ---
 
@@ -72,7 +75,7 @@ Stand: 2026-07-13 | Distill 11 | Muster mit ≥2 Belegen (Normal) oder ≥1 Bele
 - [M] Stand-Datum im Hauptpatch vergessen — bei Mehrfach-Datei-Patches steht das Stand-Datum-Update nicht auf der mentalen Checkliste; separater Nachpatch nötig (OA-02-Dissens-1, 2026-06-09) — 1 Beleg, Normal
 - [N] Code-Marker in Dokumentationsdateien — `// NEW`-Marker in .md-Dateien eingefügt; CLAUDE.md-Regel „im Code" gilt nicht für Doku-Dateien (OA-02-Dissens-3, 2026-06-10) — 1 Beleg, Normal
 - [O] Handover-Lücke: Umgebungsabhängigkeiten fehlen — `app.test.html` brauchte Chart.js CDN-Script-Tag, nicht im Handover dokumentiert; erst beim Browser-Test erkannt (APP-01 Slice 4, 2026-06-11) — 1 Beleg, Normal
-- [P2] Seiteneffekte von Patches proaktiv benennen — Albert war besorgt wegen Fetch-Cache-Verlust, weil Seiteneffekte nicht erklärt wurden; erst auf Nachfrage bestätigt. Bei Patches die Verhalten berühren das andere Komponenten nutzen: Seiteneffekte proaktiv im Patch-Echo nennen (APP-01 Slice 5, 2026-06-15) — 1 Beleg, Normal
+- [P2] Seiteneffekte von Patches proaktiv benennen (APP-01 Slice 5, 2026-06-15) — promoted 2026-07-20 (Distill 12, 2. Beleg AP-tailwind-02 Slice 4 → eingehängt in feedback_scope_auftragstreue.md)
 - [P3] AP-Brief-Scope vor Gate klären — AP-Name „Marker + Pulse Screen 2" war zu breit; Scope erst während Umsetzung auf reinen Datenvertrag reduziert. Wenn AP-Brief mehrere Konzepte umfasst: Scope-Grenze explizit vor Gate-Start klären (B1-AP-14c1, 2026-06-18) — 1 Beleg, Normal
 - [Q] Komplexere Lösung vorgeschlagen wenn einfachere verfügbar — Batch-Umbenennung §2–§18 vorgeschlagen, unnummerierter Einschub war ausreichend und chirurgischer. Vor Batch-Operationen auf Spec/Doc: strukturell einfachere Alternative prüfen. (AP-07b-mini, 2026-06-26) — 1 Beleg, Normal
 - [R] „BEREITS GEBAUT" als Statuswort missverstanden — regulatorik-dashboard trug diesen Vermerk, der kein Fertigstellungsstatus war, sondern nur eine grobe Notiz; führte zu Drift-Sonderpfad AP-14a. (AP-13, 2026-06-29) — 1 Beleg, Normal
@@ -96,6 +99,8 @@ Stand: 2026-07-13 | Distill 11 | Muster mit ≥2 Belegen (Normal) oder ≥1 Bele
 - [AJ] Diff-Plan hatte Kopf-aktualisiert-Body-alt-Drift (Vorsätze noch im Futur-Ton neben bereits gehobenem Statussatz), vor Write korrigiert (AP-prokrast-17-FONT-SPEC-HEBUNG, 2026-07-11) — 1 Beleg, Normal
 - [AK] Vollständige Rohausgabe in Ergebnisdatei geschrieben, Albert wollte nur einen Einzeiler — Verifikations-Gründlichkeit überschoss das tatsächliche Doku-Bedürfnis (TESTENV-1g, 2026-07-11) — 1 Beleg, Normal
 - [AL] Zwei fachliche Korrekturen durch Albert an Platzhaltern (Donut statt Torte, echte Chart-Chrome-Elemente aus FwRenderer übernehmen) (AP-tailwind-Fable-Runde, 2026-07-12) — 1 Beleg, Normal
+- [AM] Vor Vorschlag einer neuen Datei/eines neuen Checks: erst gezielt `tools/` prüfen statt anzunehmen, dass nichts Passendes existiert (AP-tailwind-02 Slice 1+2, 2026-07-13) — 1 Beleg, Normal
+- [AN] Bei Fokusring-/Primitive-Design zuerst prüfen, ob ein spezifischerer Vertrag existiert, bevor der allgemeine übernommen wird (CE-5a, 2026-07-15) — 1 Beleg, Normal
 
 ---
 
@@ -105,3 +110,4 @@ Stand: 2026-07-13 | Distill 11 | Muster mit ≥2 Belegen (Normal) oder ≥1 Bele
 - Klassifizierungsbaum bleibt in CLAUDE.md — retired 2026-05-09 | Grund: bereits in CLAUDE.md verankert, kein separates Memory nötig
 - Geschützte Seed-Datei trotz Read-only verändert (AP-23, 2026-07-01) — retired 2026-07-06 | Grund: einmaliges Missverständnis über den Sonderfall-Workflow, sofort korrigiert (AP-23a), kein wiederkehrendes Muster
 - „Append-only read-frei + Snapshot klein" als CLAUDE.md-Prinzip? (QUESTION RITUAL-OPT-1, 2026-07-12) — retired 2026-07-13 | Grund: Regelaufnahme-Schutz-Bedingung 4 (universell genug) nicht erfüllt — gilt nur für Append-only-/Snapshot-Steuerungsdateien, nicht für jede Codeänderung; Durchsetzung liegt bereits mechanisch in append-log-line.py/rotate-log.py/check-project-status-hook-meta.py; Wortlaut bereits in abschluss-ritual/SKILL.md §0.6/§3.6a/§3.7 — keine CLAUDE.md-Reife
+- BOM in Sol-Rohtexten blockiert grok-paket-Frontmatter-Check (2× identisch, esg-spiegel + regulatorik-dashboard, 2026-07-19) — retired 2026-07-20 (Distill 12) | Grund (Albert): Ursache liegt bei Schreibproblemen von ChatGPT/Windows-Editor, kein Claude-Verhaltensmuster; bestehendes Prüfen-und-Blocken im Werkzeug ist bereits die richtige Reaktion, kein weiteres Memory nötig

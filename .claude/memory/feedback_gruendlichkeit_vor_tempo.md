@@ -5,6 +5,7 @@ metadata:
   node_type: memory
   type: feedback
   originSessionId: e7cbd7dc-2859-4d18-a3e4-fb07cad77ddd
+  modified: 2026-07-20T08:45:26.111Z
 ---
 
 Wenn eine Aussage mechanisch prüfbar ist (Datei lesen, grep, git log, zählen), wird sie in genau diesem Moment geprüft — nicht aus dem Kopf, nicht aus einer Vorlage, nicht aus einer früheren Session übernommen.
@@ -31,6 +32,7 @@ Wenn eine Aussage mechanisch prüfbar ist (Datei lesen, grep, git log, zählen),
 - 2026-07-11 (AP-apptest-01/02): drei Stellen in PROJECT-STATUS.md behaupteten weiterhin „uncommitted" (TESTENV-1g, TESTENV-1eA, AP-prokrast-17-FONT-CODE-A/B+SPEC-HEBUNG), obwohl `git log` bereits vier eigene Commits zeigte — alle vier Stellen korrigiert. Diese Reoccurrence-Häufung selbst bestätigt: der mechanische Schutz (git-log-Check vor jeder Commit-Status-Aussage in kassensturz/SKILL.md + abschluss-ritual/SKILL.md) fängt den Fehler zuverlässig ab, bevor er nach außen dringt — die Drift entsteht weiterhin (Albert committed zwischen Sessions, Steuerungsdatei zieht nicht automatisch nach), aber der Check verhindert die Weitergabe der falschen Aussage.
 - 2026-07-15 (AP-chart-engine-01 CE-6a Voll-Abschluss): Innerhalb derselben Session `git log` bereits korrekt für CE-6 selbst geprüft (bestätigte `93c884f` als committed) — beim anschließenden Voll-Abschluss aber sechs Steuerdateien (MEMORY, WORKING-FEATURES, session-log, NAVIGATION, BACKLOG-ARCHIV, PROJECT-STATUS) mit „CE-5-Kette noch nicht committed" beschrieben, weil die stale BACKLOG.md-Formulierung mechanisch übernommen statt der bereits im selben Gespräch gewonnene git-log-Befund erneut angewendet wurde. Erst ein expliziter zweiter `git status`-Abgleich vor dem Commit-Message-Schritt deckte den Widerspruch auf. **Neue Lehre:** Ein einmal im Gespräch verifizierter Fakt schützt nicht automatisch die nächsten zehn Textstellen, die denselben Fakt behaupten — jede Steuerdatei-Aussage zum Commit-Status einzeln gegen die eigene, bereits vorliegende git-log-Erkenntnis gegenprüfen, nicht aus der Vorlage/BACKLOG-Zeile fortschreiben.
 - 2026-06-30: python3 statt python verwendet (Windows-Store-Umleitung) — Umgebungskonvention war bereits geklärt (ST-19), nicht abgerufen
+- 2026-07-20 (Kassensturz KW30): PROJECT-STATUS.md + BACKLOG-ARCHIV.md markierten vier bereits committete Stände (App-Duell-Runde, TMPL-1/T1/M1, AP-app-fabrik-09h–09k, CE-6/CE-6a) weiterhin als „noch nicht committed" — diesmal durch die im Kassensturz-Skill fest verdrahtete Pflichtprüfung (Schritt 3a: Commit-Status-Aussagen vor Übernahme gegen `git log` prüfen) selbst gefunden, nicht von Albert korrigiert. Bestätigt: der mechanische Schutz greift, die zugrundeliegende Drift (Steuerdatei zieht nach Alberts Commits nicht automatisch nach) bleibt bestehen.
 
 *Bestehende Entscheidung/Konvention übersehen:*
 - 2026-07-04: Memory-Datei angelegt statt zu prüfen, ob session-log (bereits dokumentierte Routing-Regel, project_audit_trail.md) gemeint war

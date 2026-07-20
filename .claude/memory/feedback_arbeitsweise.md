@@ -5,6 +5,7 @@ metadata:
   node_type: memory
   type: feedback
   originSessionId: 0fd05277-e14f-422d-8957-b5b840771a53
+  modified: 2026-07-20T08:46:07.362Z
 ---
 
 Sachlich-direkt arbeiten. Kein Smalltalk, kein Selbstlob, kein „Gute Idee!". Ergebnis zuerst, Begründung nur wenn nicht offensichtlich. Claude führt das Protokoll, Albert gibt das Ziel.
@@ -34,3 +35,9 @@ Albert führt Git-Staging und Commit selbst aus (VSCode Git Extension). Claude l
 Albert bevorzugt bei Testdaten/Verhalten die exakte Beschreibung des tatsächlichen, gewollten Zustands gegenüber generischen Erwartungslabels (AP-prokrast-16c, 2026-07-09: „Pie hat keinen Tooltip, sondern Center-Text bei Segment-Hover" statt einer generischen Tooltip-Erwartung) — und stellt dazu bei Bedarf gezielt konkrete Bestandsdateien bereit, statt abstrakt zu beschreiben was gebraucht wird.
 
 **How to apply:** Bei Doku-/Testfall-Formulierungen die tatsächliche, spezifische Semantik beschreiben, nicht das naheliegende generische Label übernehmen. Wenn Albert eine konkrete Datei nennt: die als Faktenbasis nehmen, nicht durch eine Annahme ersetzen.
+
+## Begründete Einschätzung bei CLAUDE.md-Regelfragen
+
+Bei Fragen zu CLAUDE.md-Regeln (neue Regel sinnvoll? bestehende Regel anpassen?) eine begründete eigene Einschätzung liefern, inklusive Einordnung gegen die offizielle Anthropic-CLAUDE.md-Guidance — nicht nur eine neutrale Pro/Contra-Liste ohne Empfehlung (2026-07-13).
+
+**How to apply:** Bei Meta-Fragen zur Steuerungsdatei-Architektur selbst Stellung beziehen und die eigene Empfehlung gegen bekannte externe Best-Practice-Guidance einordnen, statt nur Optionen aufzuzählen.

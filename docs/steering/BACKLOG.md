@@ -13,7 +13,7 @@ Stand: 2026-07-19 | Session: Ghost.io-Prototyp-Start (Abschluss-Ritual, extern: 
 | ID       | Bereich | Titel                                     | Prio | Dep | Detail                              |
 |----------|---------|-------------------------------------------|------|-----|-------------------------------------|
 | AP-20/21 | Engine  | Mixed-Rhythm CV-Heuristik (T5→T3→T6→T7)  | H    | —   | engine/detail/AP-20-DETAIL.md       |
-| AP-6c    | Engine  | Touch-Tooltip Smartphone-Test             | M    | —   | engine/detail/AP-6c-DETAIL.md       |
+| AP-6c    | Engine  | Touch-Tooltip Smartphone-Test — wartet bewusst bis nach Launch (echtes Smartphone-Testgerät nötig, Browser-Simulation reicht nicht) | M | — | engine/detail/AP-6c-DETAIL.md |
 | AP-22    | Engine  | Zero-Line lineWidth (~3 Zeilen Fix)       | L    | —   | —                                   |
 | TESTENV-1-FOLLOWUP-BORDER | CSS | `.financial-chart-module { border: 1px solid #ddd }` — Legacy-Hardcode (kein CI-Token) auf mehreren migrierten Engine-Testseiten, gefunden mit `fwCiAudit()`. Fix bewusst zurückgestellt bis zur Tailwind-Arbeit (Alberts Entscheidung, 2026-07-11) | L | DS-012 | tools/ci-token-check.js (`fwCiAudit()`, Fund 2026-07-11) |
 | TMPL-1   | Theme   | Ghost-Grundgerüst — Skelett real vorhanden (10 Templates + 4 Partials, 2026-07-19), Homepage-Tailwind-Styling über M1 abgeschlossen; offen: `post/page/tag/author/error.hbs` noch unstyled, Checkliste-Pflichtinhalte (SEO-Meta/JSON-LD/Schema.org, Phase 2/3) ungeprüft | H | — | theme-build/THEME-ASSEMBLY-CHECKLIST.md, theme-build/TMPL-1-PLAN.md |
