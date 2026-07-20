@@ -109,10 +109,13 @@ Das Theme lädt die App-Logik automatisch. Design-System und Fonts kommen aus de
 <div class="financial-chart-module"
      data-type="line"
      data-title="Rendite-Vergleich (5 Jahre)"
-     data-csv="https://..."
+     data-app-file="rendite-vergleich.csv"
      data-colors="World: #0071BF, ACWI: #218380"
      data-options="range:5y, benchmark:ACWI">
 </div>
 ```
+
+`data-app-file` nennt nur den Dateinamen der lokal geprüften und veröffentlichten CSV — kein
+Link. Ablauf: `docs/editorial/CSV-APP-DATEN-WORKFLOW.md`.
 
 Verfügbare `data-type` Werte: `line`, `bar`, `pie`

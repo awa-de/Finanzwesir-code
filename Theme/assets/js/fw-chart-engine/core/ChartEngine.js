@@ -318,11 +318,26 @@ export class ChartEngine {
         this.renderer.showLoading(container);
         
         try {
-            var csvUrl = container.dataset.csv;
+            // CHANGED — AP-DATA-04b: data-app-file als zweite, gleichberechtigte
+            // Datenquelle neben data-csv. Exklusiv zueinander (Pfad-1/Pfad-2-Prinzip,
+            // vgl. renderFromData()-Guards oben). Ab hier unverändert: derselbe
+            // csvUrl speist denselben parser.parse()-Aufruf wie zuvor.
+            var csvUrl;
             var type = container.dataset.type || 'line';
-            
-            if (!csvUrl) throw new Error("data-csv fehlt");
-            
+            var hasCsv = container.hasAttribute('data-csv');
+            var hasAppFile = container.hasAttribute('data-app-file');
+
+            if (hasCsv && hasAppFile) throw new Error("data-csv und data-app-file dürfen nicht gleichzeitig gesetzt sein.");
+            if (!hasCsv && !hasAppFile) throw new Error("Datenquelle fehlt: weder data-csv noch data-app-file gesetzt.");
+
+            if (hasAppFile) {
+                var appFile = container.dataset.appFile;
+                if (!/^[a-z0-9_-]+\.csv$/.test(appFile)) throw new Error("data-app-file: ungültiger Dateiname '" + appFile + "'.");
+                csvUrl = '/content/files/app-data/' + appFile;
+            } else {
+                csvUrl = container.dataset.csv;
+            }
+
             var isTimeSeries = (type !== 'pie' && type !== 'doughnut');
             
             var data = await this.parser.parse(csvUrl, { 

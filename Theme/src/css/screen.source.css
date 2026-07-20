@@ -185,6 +185,29 @@ body {
     color: var(--color-text);
 }
 
+/* --- Paragraphs --- */
+
+.gh-content p {
+    margin-bottom: 1.5rem;
+}
+
+/* --- Links --- */
+
+.gh-content a {
+    color: var(--color-link);
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 4px;
+    font-weight: 600;
+    transition: all 0.2s ease-in-out;
+}
+
+.gh-content a:hover {
+    color: var(--color-petrol);
+    text-decoration-color: var(--color-petrol);
+    text-decoration-thickness: 3px;
+}
+
 /* --- Blockquotes --- */
 
 .gh-content blockquote {

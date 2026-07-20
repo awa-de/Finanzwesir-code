@@ -1,5 +1,5 @@
 # NAVIGATION.md – Finanzwesir 2.0
-Stand: 2026-07-15 | Session: AP-chart-engine-01 CE-6/CE-6a Vollabschluss | Geändert von: Claude
+Stand: 2026-07-20 | Session: APP-DATA-05 Dokumentationskonsolidierung | Geändert von: Claude
 
 Für Claude: **Routing-Dokument.** Wird beim Session-Start (Schritt 2) gelesen.
 Gibt Pfade und Lese-Reihenfolgen vor — KEINE Verhaltensregeln (die stehen in CLAUDE.md).
@@ -98,6 +98,7 @@ Bei `Hook-Status: DEGRADED` → sichtbar melden, nicht still fortfahren (→ `/s
    → bei Plugin-Arbeit: docs/spec/CHART_PLUGIN_ARCHITEKTUR.md (WeakMap, afterDraw, reduced-motion, Canvas/Chart.js-Grenzen, Barrel: plugins/index.js, Importzyklus-Verbot, §20.3 selektive Barrel-Imports, §20.8 _originalDate-Abgrenzung)
    → Alte X-Achsen-Dokumente (I/II/III in docs/spec/) sind nur historische Designintention — bei _fwGeometry / FwBarLayoutPlugin / Chart.register gilt ausschließlich CHART_PLUGIN_ARCHITEKTUR.md (AP-14e12 hat Statusbanner gesetzt)
    → bei Engine-Datenpfad-Arbeit: docs/spec/CHART_ENGINE_REGRESSIONSREGELN.md (renderFromData vs. _processContainer, Date-Typ-Normalisierung, Pflichtprüfung)
+   → bei Fragen zur CSV-App-Daten-Quelle (data-app-file vs. data-csv): docs/editorial/CSV-APP-DATEN-WORKFLOW.md
 5. docs/steering/engine/WORKING-FEATURES.md       ← Regressionswächter VOR der Arbeit
 6. docs/steering/engine/REGRESSION-MATRIX.md      ← vor Abschluss relevante Tests
 ```
@@ -281,6 +282,7 @@ Beweisdramaturgie prüfen: `/heldenreise` verfügbar (nur manuell).
 1. docs/editorial/AUTHOR_GUIDE-v3.md
 2. docs/editorial/GEO statt SEO.md
 3. docs/editorial/SEO-WORKFLOW.md
+4. bei Chart-CSV: docs/editorial/CSV-APP-DATEN-WORKFLOW.md ← lokal prüfen → FileZilla → data-app-file
 ```
 
 Theme-Docs nicht lesen — nicht relevant für Content-Arbeit.

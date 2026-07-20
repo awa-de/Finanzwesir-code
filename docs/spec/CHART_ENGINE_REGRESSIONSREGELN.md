@@ -1,4 +1,4 @@
-Stand: 2026-06-19 | Session: B1-AP-14e3 | Geändert von: Claude
+Stand: 2026-07-20 | Session: APP-DATA-05 | Geändert von: Claude
 
 # Chart Engine — Datenpfad-Regressionsregeln
 
@@ -54,7 +54,7 @@ ChartEngine._processContainer()
 → CSVParser ist Protected / Single Source of Truth.
 ```
 
-Typischer Aufrufer: HTML mit `data-csv`-Attribut, Standard-Test-HTMLs.
+Typischer Aufrufer: HTML mit `data-app-file`-Attribut (produktive Ghost-Cards, seit APP-DATA-04b) oder `data-csv`-Attribut (Standard-Test-HTMLs). Beide münden nach der URL-Bildung in denselben `parser.parse()`-Aufruf — kein zweiter Codepfad.
 
 ---
 

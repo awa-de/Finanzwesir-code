@@ -1,7 +1,7 @@
 # Technische Spezifikation: Ghost-Theme-Integration der Chart-Engine
 
-**Version:** 1.0.0
-**Datum:** 17.02.2026
+**Version:** 1.1.0
+**Datum:** 20.07.2026 (§4.2, §6, §7.1, §10 auf `data-app-file`-Vertrag nachgezogen — APP-DATA-05)
 **Status:** Verbindliche Referenz
 **Zielgruppe:** Entwickler, die das Ghost-Theme zusammenbauen.
 **Kontext:** Was muss das Theme bereitstellen, damit die Chart-Engine im Artikel-Content funktioniert?
@@ -119,10 +119,13 @@ Diese Container werden vom **Redakteur** in Ghost-HTML-Cards platziert. Das Them
 | Attribut | Pflicht? | Format | Beispiel |
 |:---------|:---------|:-------|:---------|
 | `data-type` | Ja | `line` \| `bar` \| `pie` | `data-type="line"` |
-| `data-csv` | Ja | Vollständige URL (nur `www.finanzwesir.com`) | `data-csv="https://www.finanzwesir.com/content/files/file.csv"` |
+| `data-app-file` | Ja bei produktiven Cards | Kanonischer Basisname `^[a-z0-9_-]+\.csv$` | `data-app-file="file.csv"` → Engine lädt `/content/files/app-data/file.csv` |
+| `data-csv` | Nur Testseiten (`tests/engine/`) | Vollständiger relativer oder erlaubter URL-Pfad, kein bloßer Dateiname | `data-csv="../fixtures/engine/file.csv"` |
 | `data-colors` | Ja | `Key: #Hex, Key: #Hex` | `data-colors="World: #0071BF"` |
 | `data-title` | Nein | Freitext | `data-title="Rendite"` |
 | `data-options` | Nein | `key:value, key:value` | `data-options="range:5y"` |
+
+`data-app-file` und `data-csv` sind gegenseitig exklusiv (seit APP-DATA-04b, 2026-07-20).
 
 ### 4.3 Options-Whitelist
 
@@ -192,20 +195,30 @@ Die Font-**Namen** sind zusätzlich als CSS-Custom-Properties in `tokens.css` hi
 
 ### 6.1 Sicherheitsentscheidung: Domain-Whitelist
 
-CSV-URLs dürfen **ausschließlich** von `https://www.finanzwesir.com` geladen werden. Diese Einschränkung wird in `CSVParser.parse()` erzwungen (implementiert seit 2026-02-17). Zusätzlich sind relative Pfade (`/`, `./`, `../`) und `http://localhost`/`http://127.0.0.1` für die Entwicklungsumgebung erlaubt.
+CSV-URLs dürfen **ausschließlich** von `https://www.finanzwesir.com` geladen werden. Diese Einschränkung wird in `CSVParser.parse()` erzwungen (implementiert seit 2026-02-17, unverändert). Zusätzlich sind relative Pfade (`/`, `./`, `../`) und `http://localhost`/`http://127.0.0.1` für die Entwicklungsumgebung erlaubt.
 
-**Begründung:** Keine CSVs von Drittseiten einspielen. Der Redakteur lädt Dateien über das Ghost-Backend hoch — Ghost generiert eine URL unter der eigenen Domain.
+`data-app-file` nutzt diese Regel, ohne sie zu ändern: Die Engine baut aus dem validierten
+Dateinamen zentral den relativen, führend mit `/` beginnenden Pfad `/content/files/app-data/<name>.csv`
+— das erfüllt den `isRelative`-Zweig der Prüfung unabhängig von Domain/Umgebung.
 
-### 6.2 Workflow: CSV hochladen
+**Begründung:** Keine CSVs von Drittseiten einspielen.
 
-1. Redakteur öffnet Artikel im Ghost-Editor
-2. CSV-Datei über das Upload-Feld im Ghost-Backend hochladen
-3. Ghost gibt eine URL zurück (z.B. `https://www.finanzwesir.com/content/files/2024/renditen.csv`)
-4. Diese URL wird in `data-csv` eingetragen
+### 6.2 Workflow: CSV veröffentlichen (Stand seit APP-DATA-03a/04b, 2026-07-20)
 
-### 6.3 Noch zu klären
+Kein Ghost-Editor-Upload-Feld mehr für diesen Pfad. Stattdessen:
 
-- Genaues Upload-Verfahren in Ghost.io: Gibt es ein Datei-Upload-Feld im Artikel-Editor? Welches URL-Format generiert Ghost für hochgeladene Dateien?
+1. CSV lokal unter `content/files/app-data/` (eigenständiges `content`-Git-Repository) ablegen.
+2. `pruefe-csv.bat` doppelklicken — lokaler Offline-Prüfer, nutzt denselben `parseCsvText()`-Kern wie der Browser, erkennt Zeitreihe/Snapshot automatisch, kanonisiert den Dateinamen.
+3. Nur bei GRÜN weitermachen; geprüfte CSV per FileZilla (SFTP/FTPS) nach `Ghost/content/files/app-data/` übertragen.
+4. Kanonischen Dateinamen in `data-app-file` eintragen.
+
+Ghost ist an Prüfung und Übertragung nicht beteiligt — es liefert die Datei danach nur statisch aus. Vollständiger Ablauf inkl. Namensvertrag, Hash-Verhalten und Fehlerbildern: `docs/editorial/CSV-APP-DATEN-WORKFLOW.md`.
+
+Der frühere HTTP-Upload-Dienst (`tools/upload-dienst/`, Port 4790) war ein Zwischenschritt dieser Kette und ist vollständig zurückgebaut (APP-DATA-03b).
+
+### 6.3 Geklärt
+
+Die frühere offene Frage nach Ghost.io's Datei-Upload-Feld im Artikel-Editor betrifft den CSV-App-Daten-Weg nicht mehr — dieser läuft ausschließlich über den Offline-Prüfer und FileZilla (§6.2), nicht über den Ghost-Editor.
 
 ---
 
@@ -218,7 +231,7 @@ CSV-URLs dürfen **ausschließlich** von `https://www.finanzwesir.com` geladen w
 3. Engine sucht alle `.financial-chart-module`-Container
 4. Pro Container:
    a. `data-type` auslesen → Strategie wählen (Line/Bar/Pie)
-   b. `data-csv` auslesen → CSV via `fetch()` laden
+   b. `data-app-file` (produktiv) oder `data-csv` (Testseiten) auslesen, validieren → CSV via `fetch()` laden
    c. `CSVParser` validiert und parst die CSV
    d. `FinanzwesirData` speichert die Daten (Deep Freeze)
    e. Strategie transformiert Daten → Chart.js-Konfiguration + `fwContext`
@@ -296,7 +309,8 @@ Dieses Dokument basiert auf und verweist auf:
 | Dokument | Relevanz |
 |:---------|:---------|
 | `docs/spec/ARCHITECTURE STRATEGY PAPER VX.md` | 5-Layer-Modell, KDR 1–14 |
-| `docs/spec/Beschreibung HTML-Karten für Charts_v3.md` | HTML-Interface-Contract (Ursprungs-Spec) |
-| `docs/spec/REDAKTEURS-HANDBUCH Chart-Integration.md` | Redakteurs-Perspektive (Gegenstück) |
+| `docs/spec/archiv/Beschreibung HTML-Karten für Charts_v3.md` | HTML-Interface-Contract (historische Ursprungs-Spec, Pfad korrigiert) |
+| `docs/editorial/REDAKTEURS-HANDBUCH Chart-Integration.md` | Redakteurs-Perspektive (Gegenstück, Pfad korrigiert) |
+| `docs/editorial/CSV-APP-DATEN-WORKFLOW.md` | Kanonischer CSV-Prüf- und Veröffentlichungsablauf |
 | `docs/spec/Mobile versus Desktop.md` | Responsive-Zonen, Schriftgrößen |
-| `docs/context/THEME-ASSEMBLY-CHECKLIST.md` | Checkliste für den Theme-Zusammenbau |
+| `docs/steering/theme-build/THEME-ASSEMBLY-CHECKLIST.md` | Checkliste für den Theme-Zusammenbau (Pfad korrigiert) |

@@ -1,17 +1,17 @@
 <!-- HOOK-META
 Version: 1
-Stand: 2026-07-19
-Fokus-AP: Ghost.io-Prototyp-Start (TMPL-1/T1/M1) ✅ Homepage-Tailwind live + App-Duell-Runde ✅ 19 Apps (beide 2026-07-19, gleichrangig)
-Nächster-Schritt: A) Sonnet-Bau der 19 App-Duell-Mockups (Albert extern) ODER B) Ghost-Prototyp: TMPL-1-Resttemplates + T1-Produktions-Gate (Ghost.io-Prototyp-Start ✅ 2026-07-19)
+Stand: 2026-07-20
+Fokus-AP: Ghost-Prototyp ✅ + App-Duell 19 Apps ✅ (2026-07-19) + CSV-App-Daten-Pipeline APP-DATA-00–05a ✅ (2026-07-20, gleichrangig)
+Nächster-Schritt: A) Sonnet-Bau der 19 App-Duell-Mockups (Albert extern) ODER B) Ghost-Prototyp: TMPL-1-Resttemplates + T1-Produktions-Gate ODER C) optional: data-app-file-Rollout auf bestehende data-csv-Cards (APP-DATA-00–05a ✅ 2026-07-20)
 Blocker: keine
 Letzter-Distill: 2026-07-20
 Kassensturz-Datum: 2026-07-20
 -->
-<!-- HOOK-META-SESSION: Ghost.io-Prototyp-Start (TMPL-1/T1/M1, Voll-Abschluss, extern von Codex + Abschluss-Ritual nachgezogen) -->
+<!-- HOOK-META-SESSION: APP-DATA-00–05a (CSV-App-Daten-Pipeline, Voll-Abschluss, Patch-Kette eines externen steuernden Fadens/ChatGPT) -->
 
 # PROJECT STATUS — Finanzwesir 2.0
 
-Stand: 2026-07-19 | Session: Ghost.io-Prototyp-Start (TMPL-1/T1/M1, Voll-Abschluss) | Geändert von: Claude
+Stand: 2026-07-20 | Session: APP-DATA-00–05a (CSV-App-Daten-Pipeline, Voll-Abschluss) | Geändert von: Claude
 
 **Zweck:** Schneller Wiedereinstieg nach Pausen.
 **Zielgruppe:** Albert und Claude.
@@ -24,14 +24,14 @@ Stand: 2026-07-19 | Session: Ghost.io-Prototyp-Start (TMPL-1/T1/M1, Voll-Abschlu
 
 ## 1. Aktueller Fokus
 
-**Nächster Schritt:** Zwei gleichrangige, parallele Fäden offen — Albert entscheidet situativ, welcher zuerst weiterläuft. **A) App-Duell-Runde:** 19 App-Fabrik-Apps sind bis zum Sonnet-Auftrag durchgezogen (Phase 1–3: Psychosprint → Grok-Gegenkritik → Sonnet-Baupaket), Sonnet-Bau selbst steht app-weise noch aus (externe Sonnet-Fäden, Albert steuert) — alternativ ein BACKLOG-Item 🟡 Aktiv (höchste Prio: AP-20/21) oder BACKLOG AF-25 (G2/etf-aera-vorbei-Beziehung final entscheiden). **B) Ghost.io-Prototyp:** Ghost-Grundgerüst (TMPL-1, 10 Templates + 4 Partials) und Homepage-Tailwind-Umbau (M1, 6 sichtbare Templates) stehen und sind lokal sichtgeprüft; offen sind die restlichen Templates (post/page/tag/author/error, Checkliste-Pflichtinhalte SEO/JSON-LD) sowie T1s Produktions-Gate (Mengenvergleich je App, CDN-Ablösung, JANITOR-FALLBACK). Alle vier zuletzt genannten Stände sind inzwischen committed: App-Duell-Runde-Session (`fa86fec`), TMPL-1/T1/M1-Paket (`1ae7f5c`), die vorherige 09h–09k-Kette (`9986f8c`) sowie chart-engine CE-6/CE-6a (`2757580`).
+**Nächster Schritt:** Drei gleichrangige Fäden offen — Albert entscheidet situativ, welcher zuerst weiterläuft. **C) CSV-App-Daten-Pipeline (APP-DATA-00–05a, ✅ 2026-07-20):** HTTP-Upload-Dienst zugunsten eines lokalen Offline-Prüfers + neuem Ghost-Card-Attribut `data-app-file` abgeschlossen (siehe Meilenstein unten); optionaler, unentschiedener Folgeschritt: bestehende `data-csv`-Cards auf `data-app-file` umstellen — nur Vorschlag, keine Entscheidung. **A) App-Duell-Runde:** 19 App-Fabrik-Apps sind bis zum Sonnet-Auftrag durchgezogen (Phase 1–3: Psychosprint → Grok-Gegenkritik → Sonnet-Baupaket), Sonnet-Bau selbst steht app-weise noch aus (externe Sonnet-Fäden, Albert steuert) — alternativ ein BACKLOG-Item 🟡 Aktiv (höchste Prio: AP-20/21) oder BACKLOG AF-25 (G2/etf-aera-vorbei-Beziehung final entscheiden). **B) Ghost.io-Prototyp:** Ghost-Grundgerüst (TMPL-1, 10 Templates + 4 Partials) und Homepage-Tailwind-Umbau (M1, 6 sichtbare Templates) stehen und sind lokal sichtgeprüft; offen sind die restlichen Templates (post/page/tag/author/error, Checkliste-Pflichtinhalte SEO/JSON-LD) sowie T1s Produktions-Gate (Mengenvergleich je App, CDN-Ablösung, JANITOR-FALLBACK). Alle vier zuletzt genannten Stände sind inzwischen committed: App-Duell-Runde-Session (`fa86fec`), TMPL-1/T1/M1-Paket (`1ae7f5c`), die vorherige 09h–09k-Kette (`9986f8c`) sowie chart-engine CE-6/CE-6a (`2757580`).
 
 Letzte Meilensteine (je eine Zeile — Volltext in BACKLOG-ARCHIV.md):
+- **CSV-App-Daten-Pipeline — APP-DATA-00 bis 05a** (2026-07-20) ✅ HTTP-Upload-Dienst gebaut, getestet, wieder zurückgebaut; ersetzt durch lokalen Offline-Prüfer (`content/files/app-data/csv-validator.mjs`, automatische Datenform-Erkennung) + neues Ghost-Card-Attribut `data-app-file` (in `ChartEngine.js`, live bestätigt); aktive Dokumentation vollständig nachgezogen (`docs/editorial/CSV-APP-DATEN-WORKFLOW.md` neu). Nicht committed — Freigabe liegt bei Albert
 - **Ghost.io-Prototyp-Start — GHOST-LOKALBETRIEB + TMPL-1 + T1 + M1** (2026-07-19) ✅ Lokale Ghost-6-Devinstanz aufgesetzt, Ghost-Grundgerüst (10 Templates + 4 Partials) gebaut, erster lokaler Tailwind-Produktionsbuild erfolgreich (screen.css 25,4 KB), Homepage (6 sichtbare Templates) auf Tailwind umgestellt und lokal live geprüft. Arbeit extern (Albert/Codex) entstanden, per Abschluss-Ritual nachgezogen. Committed (`1ae7f5c`)
 - **App-Duell-Runde — 19 Apps + 3 Problemfälle** (2026-07-19) ✅ 19 Apps per `/app-duell` bis Sonnet-Auftrag gezogen (diversifikations-detektor, esg-spiegel, etf-namensdecoder, etf-vergleich, geburtsjahrlos, investment-universum, komplexitaets-entlarver, kostenkiller-ter, market-timing-simulator, markt-kam-zurueck, rendite-kalibrierung, renditekiller-volatilitaet, replizierer-swapper, rollierende-sparplaene, thesaurierer-rennen, weltdepot-baukasten, weltkarte-etf-indizes, plan-generator, regulatorik-dashboard); 3 Sonderfälle gelöst (Details session-log 2026-07-19). Committed (`fa86fec`)
 - **AP-app-fabrik-09h–09k + Skill /app-duell** (2026-07-18) ✅ Mockup-Duell-Prozess produktionsreif: Masterprompt bereinigt+kanonisiert (`docs/App-Fabrik/MASTERPROMPT_MOCKUP-DUELL.md`), Prompt-Vorlagen getrackt unter `docs/App-Fabrik/vorlagen/`, Werkzeug-Kette prepare→grok-paket→sonnet-paket mit Quellensperre + deterministischem Produktentscheidungs-Gate (09i) auf ID-Bindung E1/E2 + Mengen-Gleichheit gehärtet (09k); ChatGPT-Peer-Review Go, freigegeben GRÜN; Skill `/app-duell` als dünner Launcher. Committed (`9986f8c`)
 - **AP-chart-engine-01 CE-6/CE-6a** (2026-07-15) ✅ Cross-Type-Abschluss und Engine-DOM-Übergabe: read-only Nachweis, dass Line/regulärer+Ranking-Bar/Donut-Pie eine gemeinsame `FW_CHROME_*`-Legend-Pill-Basis teilen, Ranking-Bar strukturell ohne erfundene Legende bleibt, Pie-Ghost-Zustand geschützt ist, DOM-/Canvas-Grenzen und beide Datenpfade unberührt sind (CE-6, statisch GELB); Alberts reale S/M/L-Browser-Abnahme („Alles ok.") quittiert (CE-6a) → GRÜN. Damit ist die gesamte Kette CE-1–CE-6a abgeschlossen; committed (`2757580`)
-- **AP-chart-engine-01 CE-5-Preflight bis CE-5d + DOC-02 bis DOC-04a** (2026-07-15) ✅ Donut/Pie-Chart-Chrome mit Segment-Dämpfung: vierte Legend-Bedeutung „Segment-Dämpfung umschalten" (DOC-03) als echtes A11y-Primitiv umgesetzt, Fokusring-Iteration auf gemeinsamen Petrol-500-`focus-visible`-Fallback konsolidiert (CE-5a–c), Produktentscheidung „gemeinsame Legend-Pill-Basisoptik" (DOC-04) umgesetzt (CE-5d); alle Schritte real browserverifiziert (Sicht + `engine-dom-check.js` 9/9 + neues `pie-segment-damping-interaction-check.js` 51/51 PASS); committed (93c884f)
 
 ---
 
@@ -51,7 +51,8 @@ Letzte Meilensteine (je eine Zeile — Volltext in BACKLOG-ARCHIV.md):
   - git config: `core.sshCommand = C:/Windows/System32/OpenSSH/ssh.exe`
 - CL-01 + CL-02 abgeschlossen. CL-03 (Vermächtnis überführen) jetzt ungeblockt.
 - Design-System-Analyse abgeschlossen (2026-05-03): Architektur klar, Lücken identifiziert.
-- Chart-Engine: stabil, offene APs in BACKLOG.md (AP-20/21 🟡 Aktiv, AP-6c 🟡 Aktiv).
+- Chart-Engine: stabil, offene APs in BACKLOG.md (AP-20/21 🟡 Aktiv, AP-6c 🟡 Aktiv). Produktive Ghost-Cards nutzen seit 2026-07-20 `data-app-file` (kanonischer Dateiname, aufgelöst zu `/content/files/app-data/<name>.csv`); `data-csv` bleibt exklusiv Test-/Fixture-Adapter.
+- App-Daten-Pipeline: `content/files/app-data/csv-validator.mjs` (Offline-Prüfer, automatische Datenform-Erkennung) + FileZilla ist der aktive Redaktionsweg für Chart-CSVs. Der frühere HTTP-Upload-Dienst (`tools/upload-dienst/`) ist zurückgebaut, kanonische Doku: `docs/editorial/CSV-APP-DATEN-WORKFLOW.md`.
 - Ghost-Theme: Grundgerüst (TMPL-1) + Homepage-Tailwind (M1) lokal lauffähig und sichtgeprüft (2026-07-19), noch kein Produktions-Deploy.
 
 ---

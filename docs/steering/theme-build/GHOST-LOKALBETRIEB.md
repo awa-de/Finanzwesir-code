@@ -48,6 +48,41 @@ C:\Tools\ghost-local\
 
 `Theme/` wird nicht direkt aus dem NAS ausgeführt. Erst ein gültiges Ghost-Theme wird als Testkopie nach `site\content\themes\` übertragen; die Quellwahrheit bleibt `Theme/` im Projekt.
 
+### 3.1 Bindender Theme-Build- und Übertragungspfad
+
+Diese Pfade gelten für jeden Eingriff in das Finanzwesir-Theme:
+
+| Rolle | Pfad | Regel |
+| --- | --- | --- |
+| Projektwurzel | `Z:\Documents\Nextcloud\Finanzwesir 2.0\` | Arbeitsverzeichnis für den Build; nicht per UNC mit `npm` arbeiten. |
+| Kanonisches Theme | `Theme\` | Einzige bearbeitbare Theme-Quelle. |
+| CSS-Quelle | `Theme\src\css\screen.source.css` | Ausschließlich diese Datei für CSS-Änderungen bearbeiten. |
+| CSS-Artefakt | `Theme\assets\css\screen.css` | Ausschließlich der Tailwind-Build schreibt diese Datei. Niemals direkt bearbeiten. |
+| Lokale Ghost-Laufzeit | `C:\Tools\ghost-local\site\` | Keine fachliche Quelle. |
+| Aktive Testkopie (Stand 2026-07-20) | `C:\Tools\ghost-local\site\content\themes\finanzwesir-local-theme\` | Nur durch Ghost-Theme-Upload aktualisieren, niemals manuell bearbeiten. |
+
+Der verbindliche CSS-Build läuft mit System-Node 24 aus der Projektwurzel:
+
+```powershell
+Set-Location 'Z:\Documents\Nextcloud\Finanzwesir 2.0'
+npm run css:build
+```
+
+Der Befehl baut `Theme\src\css\screen.source.css` mit Tailwind 4 zu
+`Theme\assets\css\screen.css`. Ghost selbst verwendet weiterhin nur die
+separate Node-22-Laufzeit unter `C:\Tools\ghost-local\runtime\node22\`.
+
+Es gibt keinen Dateisynchronisationsmechanismus zwischen `Theme\` und der
+lokalen Ghost-Kopie. Der Übertragungspfad ist: Theme im Projekt bauen,
+auslieferbares Theme als ZIP paketieren, ZIP in Ghost Admin unter
+**Settings → Change theme → Upload theme** hochladen und aktivieren. Die
+Testkopie enthält bewusst nicht `src\css\screen.source.css`.
+
+Vor jeder Sichtprüfung muss der Bearbeiter den Build ausführen und die
+aktualisierte ZIP hochladen. Hash-Gleichheit einzelner Dateien zwischen Quelle
+und Testkopie belegt nur den Stand nach einem Upload; sie ist kein Ersatz für
+den Build oder eine bidirektionale Synchronisation.
+
 ## 4. Einmalig installieren
 
 Die folgenden Schritte führt ein LLM oder Entwickler in PowerShell aus. Alle Variablen beziehen sich ausdrücklich auf `C:\Tools\ghost-local`.

@@ -44,11 +44,14 @@ Sie möchten einen **Linien-Chart** zeigen, der sich auf die **letzten 5 Jahre**
 <div class="financial-chart-module" 
      data-type="line"
      data-title="Rendite-Vergleich (Fokus 5 Jahre)" 
-     data-csv="HIER_LINK_EINFÜGEN"
+     data-app-file="HIER_DATEINAMEN_EINFÜGEN.csv"
      data-colors="World: #0071BF, ACWI: #218380"
      data-options="range:5y, benchmark:ACWI">
 </div>
 ```
+
+`data-app-file` bekommt nur den Dateinamen Ihrer geprüften CSV — keinen Link. Wie Sie die CSV
+prüfen und den Dateinamen bekommen: `docs/editorial/CSV-APP-DATEN-WORKFLOW.md`.
 
 -----
 

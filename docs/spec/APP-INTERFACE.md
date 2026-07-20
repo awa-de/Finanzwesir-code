@@ -1,6 +1,6 @@
 # App Interface — Finanzwesir 2.0
 
-Stand: 2026-07-13 | AP-tailwind-02d | Geändert von: Claude
+Stand: 2026-07-20 | APP-DATA-05 | Geändert von: Claude
 
 **Zweck:** Kanonischer Schnittstellen-Vertrag zwischen Ghost-Content, App-Fabrik-Apps und Chart-Engine.
 **Zielgruppe:** Claude, Albert, zukünftige App-Implementierungen.
@@ -116,13 +116,14 @@ App mit Optionen:
 
 ### 3.2 Chart-Card (Legacy-Vertrag / Bestandsschutz)
 
-Bestehender Vertrag — bleibt vollständig gültig, wird nicht auf fw-app migriert:
+Bestehender Vertrag — bleibt vollständig gültig, wird nicht auf fw-app migriert. Produktive Cards
+verwenden `data-app-file` (Stand seit APP-DATA-04b, 2026-07-20):
 
 ```html
 <div class="financial-chart-module"
      data-type="line"
      data-title="Rendite-Vergleich (5 Jahre)"
-     data-csv="https://www.finanzwesir.com/..."
+     data-app-file="rendite-vergleich.csv"
      data-colors="World: #0071BF, ACWI: #218380"
      data-options="range:5y, benchmark:ACWI">
 </div>
@@ -135,7 +136,8 @@ Bestehender Vertrag — bleibt vollständig gültig, wird nicht auf fw-app migri
 | `class="financial-chart-module"` | Pflicht | Identifiziert den Container als Chart-Engine-Chart |
 | `data-type="line\|bar\|pie"` | Pflicht | Chart-Typ |
 | `data-title="..."` | Optional | Sichtbarer oder interner Titel |
-| `data-csv="[url]"` | Pflicht bei datengetriebenen Charts | CSV-Quelle (Domain-Lock beachten) |
+| `data-app-file="[dateiname].csv"` | Pflicht bei produktiven, datengetriebenen Charts | Kanonischer Basisname (`^[a-z0-9_-]+\.csv$`) einer lokal geprüften, per FileZilla übertragenen CSV. Engine bildet zentral `/content/files/app-data/<dateiname>.csv`. Exklusiv zu `data-csv`. Ablauf: `docs/editorial/CSV-APP-DATEN-WORKFLOW.md`. |
+| `data-csv="[pfad]"` | Nur für Testseiten (`tests/engine/`) | Vollständiger, direkt nutzbarer relativer oder erlaubter URL-Pfad. Kein bloßer Dateiname. Nicht für produktive Cards verwenden. |
 | `data-colors="Name: #HEX, ..."` | Optional | Name-Farbe-Paare |
 | `data-options="key:val, ..."` | Optional | Chart-Optionen, key:value-Syntax |
 
@@ -144,6 +146,7 @@ Bestehender Vertrag — bleibt vollständig gültig, wird nicht auf fw-app migri
 - `data-options` ist eine einfache `key:value, key:value`-Syntax — kein komplexes JSON
 - `data-colors` enthält Name-Farbe-Paare: `Name: #HEX, Name2: #HEX`
 - Die Chart-Engine wird vorerst nicht auf den `fw-app`-Namespace migriert
+- `data-app-file` und `data-csv` sind gegenseitig exklusiv — nie beide, nie keines. Der frühere HTTP-Upload-Dienst (`tools/upload-dienst/`, Port 4790) ist zurückgebaut; er ist kein Weg zu diesen Daten mehr.
 
 ---
 
@@ -211,6 +214,11 @@ Beide Attribute folgen derselben Syntax: `key:value, key:value`
 **Erlaubte Quellen:**
 - `https://www.finanzwesir.com/...` (Ghost-Upload-Pfade)
 - Lokale Entwicklungs-URLs (`localhost`, `127.0.0.1`) nur in Dev-Testseiten — explizit als Dev-Ausnahme markieren
+
+**Chart-Card-Daten (`data-app-file`, §3.2):** eigener, geprüfter Weg über `content/files/app-data/`
+— lokaler Offline-Prüfer, dann FileZilla-Übertragung nach `Ghost/content/files/app-data/`. Kein
+HTTP-Upload-Dienst, kein Ghost-Editor-Upload-Feld für diesen Pfad. Vollständiger Ablauf:
+`docs/editorial/CSV-APP-DATEN-WORKFLOW.md`.
 
 **Verboten:**
 - Beliebige Fremd-URLs ohne explizite Architekturentscheidung
@@ -319,4 +327,5 @@ Bestehende Ghost-HTML-Cards mit `data-app` (falls vorhanden): funktionieren weit
 | `docs/App-Fabrik/CHART_ENGINE_ROLE_AND_INTEGRATION.md` | Rolle der Chart-Engine, Architekturprinzipien P-01–P-10 |
 | `docs/editorial/AUTHOR_GUIDE-v3.md` | Redakteursdoku — wird nach Pilot 1 harmonisiert (AF-04) |
 | `docs/editorial/Cheat-Sheet HTML-Karten.md` | Chart-spezifische Redakteursdoku — bleibt Chart-spezifisch |
+| `docs/editorial/CSV-APP-DATEN-WORKFLOW.md` | Kanonischer Ablauf: CSV lokal prüfen → FileZilla → `data-app-file` |
 | `docs/steering/audits/SECURITY-BASELINE.md` | Sicherheits-Baseline — vor App-Arbeit pflichtweise lesen |

@@ -1,7 +1,9 @@
 # Memory Index — Finanzwesir 2.0
 
 - [Projektstruktur und Kontext](project_structure.md) — Wer, was, wo: Ghost.io, Einpersonen, Live Server, Arbeitsverzeichnis
-- [Content-System-Architektur](project_content_system.md) — Zwei getrennte Git-Repos (Code/Content) in einem Ordner; content/-Struktur; Frontmatter-Standard inkl. offener published_at-Diskrepanz
+- [Content-System-Architektur](project_content_system.md) — Zwei getrennte Git-Repos (Code/Content) in einem Ordner; content/-Struktur; Frontmatter-Standard; seit 2026-07-20 zusätzlich content/files/app-data/ (Offline-CSV-Prüfer, data-app-file-Pipeline)
+- [PROTECTED_PATHS-Hook ist rein mechanisch](feedback_protected_paths_hook_mechanisch.md) — „forbidden"-Sperre blockiert trotz mündlichem Albert-OK; nur tatsächliche Herabstufung in der JSON-Datei wirkt, danach zurückstufen
+- [Automatik statt manueller Deklaration](feedback_automatik_statt_manueller_deklaration.md) — Albert verwirft „keine Heuristik"-Vorgaben nach echtem Praxiskontakt zugunsten struktureller Auto-Erkennung (2× bestätigt, APP-DATA-02/03a)
 - [content/ nie in Code-Repo-Commit-Messages](feedback_content_repo_scope.md) — content/ gehört zum separaten Content-Repo, nie unter „Bereiche:" oder Commit-Status-Aussagen des Code-Repos listen
 - [App-Architektur (beschlossen)](project_app_architecture.md) — HTML-Card-Einbettung, Ghost liefert screen.css+Tailwind, zwei Rendering-Welten (HTML+Canvas), kein Dark Mode in Apps
 - [Design-API Konzept](project_design_api.md) — Zentraler Baukasten interaktiver UI-Elemente, alle Apps nutzen dieselben Selektoren, Zustände vollständig definieren

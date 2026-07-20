@@ -26,3 +26,4 @@ Rechtliche Seiten/
 # TESTENV: lokale Wegwerf-Experimente
 tests/scratch/*
 !tests/scratch/README.md
+

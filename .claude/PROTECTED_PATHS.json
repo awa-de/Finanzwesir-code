@@ -20,7 +20,7 @@
     {
       "path": "Theme/assets/js/fw-chart-engine/data/CSVParser.js",
       "level": "forbidden",
-      "reason": "Layer 1 / TABU — CSV-Ingestion. Niemals ändern."
+      "reason": "Layer 1 / TABU — CSV-Ingestion. Niemals ändern. (War 2026-07-20 für APP-DATA-02 kurzzeitig auf 'protected' herabgestuft, Extraktion abgeschlossen und verifiziert, Sperre auf Alberts Anweisung wieder auf 'forbidden' zurückgestuft.)"
     },
     {
       "path": "Theme/assets/js/fw-chart-engine/core/FwDateUtils.js",

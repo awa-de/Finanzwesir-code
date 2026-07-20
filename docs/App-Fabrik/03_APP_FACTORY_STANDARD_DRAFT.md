@@ -1,6 +1,6 @@
 # App-Fabrik-Standard — Draft V0.1
 
-Stand: 2026-06-10 | OA-02-Nachputz | Geändert von: Claude  
+Stand: 2026-07-20 | APP-DATA-05 | Geändert von: Claude  
 Ziel-Pfad wenn bindend: `docs/spec/APP-FACTORY-STANDARD.md`
 
 **Alle Inhalte hier sind Arbeitsstände.**  
@@ -516,13 +516,13 @@ Für App-Fabrik-Apps wird der Finanzwesir-Namespace verwendet.
 
 🟢 ENTSCHIEDEN — Quelle: Alberts Briefing 2026-05-09; `Cheat-Sheet HTML-Karten.md`
 
-Der bestehende Chart-Engine-Vertrag bleibt vollständig gültig und wird **nicht** auf `fw-app` migriert:
+Der bestehende Chart-Engine-Vertrag bleibt vollständig gültig und wird **nicht** auf `fw-app` migriert. Produktive Cards verwenden `data-app-file` (Stand seit APP-DATA-04b, 2026-07-20):
 
 ```html
 <div class="financial-chart-module"
      data-type="line"
      data-title="Rendite-Vergleich (5 Jahre)"
-     data-csv="https://..."
+     data-app-file="rendite-vergleich.csv"
      data-colors="World: #0071BF, ACWI: #218380"
      data-options="range:5y, benchmark:ACWI">
 </div>
@@ -533,6 +533,7 @@ Der bestehende Chart-Engine-Vertrag bleibt vollständig gültig und wird **nicht
 - `data-options` ist eine einfache `key:value, key:value`-Syntax — keine komplexen JSON-Strukturen
 - `data-colors` enthält Name-Farbe-Paare: `Name: #HEX, Name2: #HEX`
 - Die Chart-Engine wird vorerst nicht auf den `fw-app`-Namespace migriert
+- `data-app-file` (kanonischer Dateiname, geprüft über `content/files/app-data/` + FileZilla) und `data-csv` (nur Testseiten) sind gegenseitig exklusiv. Ablauf: `docs/editorial/CSV-APP-DATEN-WORKFLOW.md`. Der frühere HTTP-Upload-Dienst ist zurückgebaut.
 - OA-02 ist auf Architektur-/Doku-Ebene entschieden: Chart-Komponenten nutzen die ChartEngine als Single Source of Truth; es gibt den bestehenden deklarativen Legacy-/CSV-Pfad und den Daten-Bridge-Pfad für app-berechnete Daten. Offen bleibt nur die konkrete ChartEngine.js-Implementierung: API-Signatur, Lifecycle, Attributform des In-App-Zielcontainers und Container-Guard.
 
 **Zwei-Vertrags-Modell:**

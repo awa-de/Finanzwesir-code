@@ -272,6 +272,11 @@ Migration geplant).
 - `data-csv`, `data-title`, `data-colors`, `data-options` — je nach Szenario, siehe
   `APP-INTERFACE.md` §3.2 und `Cheat-Sheet HTML-Karten.md`.
 
+`data-csv` ist hier bewusst korrekt: Testseiten unter `tests/engine/` bleiben der Fixture-Adapter
+mit vollständigem relativem Pfad. Produktive Ghost-Cards verwenden stattdessen `data-app-file`
+(kanonischer Dateiname, kein Pfad) — siehe `docs/editorial/CSV-APP-DATEN-WORKFLOW.md`. Beide
+Attribute sind gegenseitig exklusiv.
+
 ---
 
 ## 9. Sichtbare technische Fehler

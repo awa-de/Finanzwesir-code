@@ -1,7 +1,7 @@
 # Redakteurs-Handbuch: Chart-Integration in Ghost
 
-**Version:** 1.0.0
-**Datum:** 17.02.2026
+**Version:** 1.1.0
+**Datum:** 20.07.2026 (data-csv → data-app-file für produktive Cards — APP-DATA-05)
 **Status:** Verbindliche Referenz
 **Zielgruppe:** Redakteure, die Artikel mit Charts im Ghost-CMS erstellen.
 
@@ -11,10 +11,14 @@
 
 Dieses Handbuch erklärt, wie Sie als Redakteur interaktive Charts in einen Ghost-Artikel einbinden. Sie brauchen dafür **kein** Programmier-Wissen — nur dieses Dokument und Ihre CSV-Datei.
 
+**Wie die CSV live kommt** (Prüfen, Übertragen, Card einfügen) steht vollständig in
+`docs/editorial/CSV-APP-DATEN-WORKFLOW.md`. Dieses Dokument hier konzentriert sich auf das
+CSV-Format selbst und die Chart-Parameter.
+
 **Kurzfassung des Workflows:**
 
 1. CSV-Datei vorbereiten (Excel/Numbers → Speichern als CSV)
-2. CSV-Datei hochladen (Ghost Storage oder Server)
+2. CSV lokal prüfen und veröffentlichen (`CSV-APP-DATEN-WORKFLOW.md`)
 3. HTML-Snippet in den Artikel kopieren
 4. Parameter anpassen (Typ, Titel, Farben, Optionen)
 5. Vorschau prüfen
@@ -112,7 +116,7 @@ Charts werden in Ghost über eine **HTML-Card** eingebunden. Dafür:
 <div class="financial-chart-module"
      data-type="line"
      data-title="Mein Chart-Titel"
-     data-csv="https://www.finanzwesir.com/content/files/datei.csv"
+     data-app-file="datei.csv"
      data-colors="Spalte1: #0071BF, Spalte2: #218380"
      data-options="range:5y">
 </div>
@@ -134,26 +138,28 @@ Bestimmt, welche Art von Chart angezeigt wird.
 
 Freitext. Wird als Überschrift über dem Chart angezeigt. Wenn leer oder weggelassen, wird **keine Überschrift** angezeigt — der Chart beginnt direkt mit der Toolbar.
 
-#### `data-csv` — Dateipfad (Pflicht)
+#### `data-app-file` — Dateiname (Pflicht)
 
-Die vollständige URL zur CSV-Datei. Der Redakteur lädt die CSV-Datei über das Upload-Feld im Ghost-Backend hoch und kopiert die resultierende URL hierher.
+Nur der **kanonische Dateiname** Ihrer geprüften CSV — keine URL, kein Pfad. Die Chart-Engine bildet die vollständige Adresse selbst.
 
-**Sicherheitsregel:** Die URL **muss** mit `https://www.finanzwesir.com` beginnen. CSV-Dateien von Drittseiten werden nicht akzeptiert.
-
-**Workflow:**
-1. Im Ghost-Editor: Artikel bearbeiten
-2. CSV-Datei über das Upload-Feld hochladen
-3. Ghost gibt eine URL zurück (z.B. `https://www.finanzwesir.com/content/files/2024/renditen.csv`)
-4. Diese URL in `data-csv` eintragen
+**Voraussetzung:** Die CSV muss vorher lokal geprüft und veröffentlicht worden sein. Vollständiger Ablauf: `docs/editorial/CSV-APP-DATEN-WORKFLOW.md`. Kurzfassung:
+1. CSV nach `content/files/app-data/` legen, `pruefe-csv.bat` doppelklicken.
+2. Nur bei GRÜN weitermachen.
+3. Geprüfte CSV per FileZilla nach `Ghost/content/files/app-data/` übertragen.
+4. Kanonischen Dateinamen aus der Prüfer-Ausgabe in `data-app-file` eintragen.
 
 ```html
-data-csv="https://www.finanzwesir.com/content/files/2024/renditen.csv"
+data-app-file="renditen.csv"
 ```
 
+**Namensregel:** ausschließlich Kleinbuchstaben, Ziffern, `-`, `_` und die Endung `.csv`. Der Prüfer benennt abweichende Namen automatisch um (`ä`→`ae`, `ö`→`oe`, `ü`→`ue`, `ß`→`ss`, sonst kleingeschrieben).
+
 **Nicht erlaubt:**
-- Relative Pfade (`./data/datei.csv`)
-- Externe URLs (`https://andere-seite.de/datei.csv`)
-- URLs ohne Domain (`/content/files/datei.csv`)
+- Leerzeichen, Großbuchstaben, Umlaute
+- Vollständige URLs oder absolute Pfade
+- `data-csv` gleichzeitig mit `data-app-file` auf derselben Card
+
+`data-csv` ist kein produktiver Weg mehr — es bleibt ausschließlich Test-Infrastruktur (`tests/engine/`) und erwartet dort einen vollständigen, direkt nutzbaren Pfad, keinen bloßen Dateinamen.
 
 #### `data-colors` — Farbzuweisung (Pflicht)
 
@@ -251,7 +257,7 @@ Optionen, die für einen Chart-Typ nicht relevant sind, werden **stillschweigend
 <div class="financial-chart-module"
      data-type="line"
      data-title="Rendite-Vergleich (5 Jahre)"
-     data-csv="https://www.finanzwesir.com/content/files/rendite-vergleich.csv"
+     data-app-file="rendite-vergleich.csv"
      data-colors="MSCI World: #0071BF, ACWI: #218380"
      data-options="range:5y, benchmark:ACWI">
 </div>
@@ -265,7 +271,7 @@ Optionen, die für einen Chart-Typ nicht relevant sind, werden **stillschweigend
 <div class="financial-chart-module"
      data-type="bar"
      data-title="Jahresrenditen MSCI World"
-     data-csv="https://www.finanzwesir.com/content/files/jahresrenditen.csv"
+     data-app-file="jahresrenditen.csv"
      data-colors="MSCI World: #0071BF">
 </div>
 ```
@@ -278,7 +284,7 @@ Optionen, die für einen Chart-Typ nicht relevant sind, werden **stillschweigend
 <div class="financial-chart-module"
      data-type="bar"
      data-title="Asset-Ranking 2024"
-     data-csv="https://www.finanzwesir.com/content/files/ranking.csv"
+     data-app-file="ranking.csv"
      data-colors="World: #0071BF, EM: #8D0267, Gold: #DFC805"
      data-options="view:ranking">
 </div>
@@ -292,7 +298,7 @@ Optionen, die für einen Chart-Typ nicht relevant sind, werden **stillschweigend
 <div class="financial-chart-module"
      data-type="pie"
      data-title="Asset Allokation"
-     data-csv="https://www.finanzwesir.com/content/files/allokation.csv"
+     data-app-file="allokation.csv"
      data-colors="Gold: #DFC805, Aktien: #0071BF, Cash: #4C4C4C">
 </div>
 ```
@@ -304,7 +310,7 @@ Optionen, die für einen Chart-Typ nicht relevant sind, werden **stillschweigend
 ```html
 <div class="financial-chart-module"
      data-type="line"
-     data-csv="https://www.finanzwesir.com/content/files/meine-daten.csv"
+     data-app-file="meine-daten.csv"
      data-colors="Spalte1: #0071BF">
 </div>
 ```
@@ -329,10 +335,12 @@ Optionen, die für einen Chart-Typ nicht relevant sind, werden **stillschweigend
 
 Die Engine ist fehlertolerant gestaltet. Wenn etwas nicht stimmt, passiert Folgendes:
 
+Fehlerbilder rund um `data-app-file` selbst (falscher Dateiname, beide Attribute gesetzt, Datei nicht erreichbar) stehen in `docs/editorial/CSV-APP-DATEN-WORKFLOW.md` Abschnitt 8. Die folgende Tabelle betrifft den CSV-Inhalt und die übrigen Card-Attribute:
+
 | Situation | Verhalten der Engine |
 |:----------|:--------------------|
 | CSV nicht erreichbar | Fehlermeldung im Chart-Bereich |
-| CSV-URL nicht von finanzwesir.com | Wird abgelehnt (Sicherheitsregel) |
+| Ungültiger Dateiname in `data-app-file` bzw. URL ohne erlaubten Pfad in `data-csv` | Wird abgelehnt (Sicherheitsregel) |
 | Falsche Farbe (z.B. `#ZZZ`) | Fallback auf Standard-Palette |
 | Unbekannte Option (z.B. `mode:xyz`) | Option wird ignoriert, Standard-Verhalten |
 | Fehlender Titel | Kein Titel angezeigt (kein Fallback) |

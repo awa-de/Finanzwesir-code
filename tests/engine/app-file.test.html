@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>APP-DATA-04b — data-app-file Vertragstest</title>
+
+  <link rel="stylesheet" href="../../Theme/assets/css/tokens.css">
+  <link rel="stylesheet" href="../shared/test-page.css">
+  <script src="../shared/test-page.js" defer></script>
+  <style>
+    body { font-family: 'Source Sans Pro', sans-serif; padding: 2rem; max-width: 1200px; margin: 0 auto; background-color: #f4f4f4; color: #333; }
+    h1 { color: #218380; border-bottom: 3px solid #218380; padding-bottom: 10px; }
+    h2 { margin-top: 3rem; background: #e3f2fd; padding: 12px 15px; border-left: 8px solid #1565c0; color: #0d47a1; }
+    h3 { margin-top: 1rem; color: #555; }
+    p { color: #666; font-size: 0.9rem; margin-bottom: 0.5rem; }
+    .note { background: #fff3e0; border: 1px solid #ffe0b2; border-left: 6px solid #ef6c00; padding: 0.8rem 1.2rem; margin-bottom: 1.5rem; font-size: 0.9rem; color: #e65100; }
+    .financial-chart-module {
+      border: 1px solid #ddd; padding: 1rem; margin-bottom: 1.5rem; background: #fff;
+      min-height: 300px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); border-radius: 8px;
+      container-type: inline-size; container-name: fw-chart;
+    }
+    .neg-case { display: inline-block; width: 280px; vertical-align: top; margin: 0 0.5rem 0.5rem 0; }
+    code { background: #f0f0f0; padding: 0.1rem 0.3rem; }
+  </style>
+</head>
+<body class="fw-test-page" data-fw-test-template="1">
+
+  <header class="fw-test-header">
+    <h1>Testseite: APP-DATA-04b — <code>data-app-file</code> Vertragstest</h1>
+
+    <div class="fw-test-runtime-status" data-fw-runtime-status role="status" aria-live="polite">
+      Bereit – bisher kein JavaScript-Fehler erkannt.
+    </div>
+
+    <section class="fw-test-errors" data-fw-test-errors aria-live="assertive" hidden>
+      <h2>Technische Fehler</h2>
+      <ol data-fw-test-error-list></ol>
+    </section>
+  </header>
+
+  <main class="fw-test-main">
+    <p class="fw-test-intro">Prüft den neuen <code>data-app-file</code>-Vertrag (APP-DATA-04b) neben dem
+    unveränderten <code>data-csv</code>-Pfad. Bestehende Regression: siehe weiterhin
+    <code>bar-all.test.html</code>, <code>line-ci.test.html</code>, <code>pie-ci.test.html</code>,
+    <code>security-gatekeeper.test.html</code> — unverändert, hier nicht dupliziert.</p>
+
+    <div class="note">
+      <strong>Wichtig für die drei positiven Fälle unten (1–3):</strong> <code>data-app-file</code> löst
+      immer zu <code>/content/files/app-data/&lt;name&gt;.csv</code> auf — ein absoluter, server-root-bezogener
+      Pfad. Beim direkten Öffnen dieser Seite über Live-Server (Projektwurzel als Root) zeigt dieser Pfad auf
+      den <strong>Content-Repo</strong>-Ordner <code>content/files/app-data/</code>, nicht auf die
+      Ghost-Laufzeit. Für einen realistischen Nachweis diese Seite über echtes lokales Ghost aufrufen
+      (Theme als HTML-Card in einem Post/einer Page, siehe Bedienanleitung im Abschlussbericht) — oder
+      sicherstellen, dass die drei referenzierten Dateien
+      (<code>world-acwi-em.csv</code>, <code>bd_single_year.csv</code>, <code>test_data_torte.csv</code>)
+      dort liegen, wo der jeweilige Server <code>/content/files/app-data/</code> auflöst.
+      Die Fälle 4–15 (Fehlerfälle) sind davon unabhängig und funktionieren in jedem Serving-Kontext,
+      weil die Validierung vor jedem Netzwerkzugriff greift.
+    </div>
+
+    <h2>1–3. Positivfälle: data-app-file je Charttyp</h2>
+
+    <h3>1. Zeitreihe (Linie) — world-acwi-em.csv</h3>
+    <div class="kg-card">
+      <div class="financial-chart-module" data-app-file="world-acwi-em.csv" data-type="line" data-title="data-app-file: Linie"></div>
+    </div>
+
+    <h3>2. Zeitreihe (Balken) — bd_single_year.csv</h3>
+    <div class="kg-card">
+      <div class="financial-chart-module" data-app-file="bd_single_year.csv" data-type="bar" data-title="data-app-file: Balken"></div>
+    </div>
+
+    <h3>3. Snapshot (Torte) — test_data_torte.csv</h3>
+    <div class="kg-card">
+      <div class="financial-chart-module" data-app-file="test_data_torte.csv" data-type="pie" data-title="data-app-file: Torte"></div>
+    </div>
+
+    <h2>4–5. Exklusivität</h2>
+
+    <h3>4. Beide Quellen gesetzt</h3>
+    <p>Erwartung: Fehlermeldung „data-csv und data-app-file dürfen nicht gleichzeitig gesetzt sein."</p>
+    <div class="kg-card">
+      <div class="financial-chart-module" data-csv="../fixtures/engine/bd_single_year.csv" data-app-file="bd_single_year.csv" data-type="bar" data-title="Beide Quellen"></div>
+    </div>
+
+    <h3>5. Keine Quelle gesetzt</h3>
+    <p>Erwartung: Fehlermeldung „Datenquelle fehlt: weder data-csv noch data-app-file gesetzt."</p>
+    <div class="kg-card">
+      <div class="financial-chart-module" data-type="bar" data-title="Keine Quelle"></div>
+    </div>
+
+    <h2>6–16. Unzulässige data-app-file-Werte</h2>
+    <p>Jeder Fall erwartet: Fehlermeldung „data-app-file: ungültiger Dateiname '…'." — ohne jeden Netzwerkzugriff.</p>
+
+    <div class="neg-case"><h3>6. Leerzeichen</h3>
+      <div class="financial-chart-module" data-app-file="a b.csv" data-type="line" data-title="Leerzeichen"></div></div>
+    <div class="neg-case"><h3>7. Großbuchstabe</h3>
+      <div class="financial-chart-module" data-app-file="ACWI.csv" data-type="line" data-title="Großbuchstabe"></div></div>
+    <div class="neg-case"><h3>8. Umlaut</h3>
+      <div class="financial-chart-module" data-app-file="msci-überblick.csv" data-type="line" data-title="Umlaut"></div></div>
+    <div class="neg-case"><h3>9. Slash</h3>
+      <div class="financial-chart-module" data-app-file="a/b.csv" data-type="line" data-title="Slash"></div></div>
+    <div class="neg-case"><h3>10. Backslash</h3>
+      <div class="financial-chart-module" data-app-file="a\b.csv" data-type="line" data-title="Backslash"></div></div>
+    <div class="neg-case"><h3>11. Parent-Traversal</h3>
+      <div class="financial-chart-module" data-app-file="../evil.csv" data-type="line" data-title="Traversal"></div></div>
+    <div class="neg-case"><h3>12. Prozentkodierung</h3>
+      <div class="financial-chart-module" data-app-file="a%2e%2ecsv" data-type="line" data-title="Prozentkodierung"></div></div>
+    <div class="neg-case"><h3>13. Query</h3>
+      <div class="financial-chart-module" data-app-file="a.csv?x=1" data-type="line" data-title="Query"></div></div>
+    <div class="neg-case"><h3>14. Fragment</h3>
+      <div class="financial-chart-module" data-app-file="a.csv#frag" data-type="line" data-title="Fragment"></div></div>
+    <div class="neg-case"><h3>15. Volle URL</h3>
+      <div class="financial-chart-module" data-app-file="https://evil.example/a.csv" data-type="line" data-title="Volle URL"></div></div>
+    <div class="neg-case"><h3>16. Absoluter Pfad</h3>
+      <div class="financial-chart-module" data-app-file="/etc/passwd.csv" data-type="line" data-title="Absoluter Pfad"></div></div>
+
+  </main>
+
+  <script src="../../Theme/assets/js/vendor/chart.umd.min.js"></script>
+  <script type="module" src="../../Theme/assets/js/fw-chart-engine/index.js"></script>
+</body>
+</html>
