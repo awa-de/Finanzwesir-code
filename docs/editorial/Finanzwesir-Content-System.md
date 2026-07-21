@@ -105,6 +105,13 @@ Im Artikeltext markiert ein Obsidian-Callout die Stelle, an der beim manuellen G
 
 ## 5. Frontmatter-Standard
 
+Das Frontmatter im privaten Content-Repo ist eine Arbeitskopie. Es ersetzt
+nicht die verbindlichen SEO-/Social-Felder im Ghost-Backend. Für jede
+statische Ghost Page gilt zusätzlich der
+[SEO/GEO-Feldvertrag für Ghost Pages](SEO-GEO-PAGE-FELDVERTRAG.md): Die
+vollständigen Page-Metadaten werden beim manuellen Ghost-Upload in Ghost
+gepflegt oder bewusst leer gelassen.
+
 Jede `index.md` beginnt mit denselben Metadaten-Feldern:
 
 ```yaml

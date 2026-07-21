@@ -4,25 +4,10 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{{meta_title}}</title>
-    <meta name="description" content="{{meta_description}}">
-    <link rel="canonical" href="{{canonical_url}}">
     <link rel="alternate" type="application/rss+xml" title="{{@site.title}}" href="{{@site.url}}/rss/">
     <link rel="stylesheet" href="{{asset "css/screen.css"}}">
 
-    <script type="application/ld+json">
-    {
-        "@context": "https://schema.org",
-        "@type": "BreadcrumbList",
-        "itemListElement": [
-            {
-                "@type": "ListItem",
-                "position": 1,
-                "name": {{json @site.title}},
-                "item": {{json @site.url}}
-            }
-        ]
-    }
-    </script>
+    {{{block "head"}}}
 
     {{ghost_head}}
 </head>

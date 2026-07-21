@@ -38,3 +38,32 @@ Wird nach /distill ins Jahres-Segment rotiert (Rohlog erhalten). Einträge: [FRI
 - [OK] Auf Aufruf von `docs/steering/CHRONIK-PROMPT.md` eine vollständige Faden-Chronik des gesamten Fadens (SESSION-START bis Kettenende) erzeugt: `Archiv/Chroniken/chronist-v1/CHRONIK-2026-07-20-csv-app-daten-pipeline-umsetzung.md`. `/chronik-check` gegen diese und die bereits vorhandene, thematisch benachbarte Chronik des steuernden ChatGPT-Fadens ausgeführt — beide konform, 0 Fehler, 0 Warnungen.
 
 ### 2026-07-20 — Kettenabschluss ✅ | RECONCILED: APP-DATA-00 APP-DATA-01 APP-DATA-02 APP-DATA-03A APP-DATA-03B APP-DATA-04A APP-DATA-04B APP-DATA-05 APP-DATA-05A
+
+## 2026-07-21 – SESSION START | Fokus: Ghost-Prototyp ✅ + App-Duell 19 Apps ✅ + CSV-App-Daten-Pipeline ✅ (2026-07-20)
+
+### 2026-07-21 — GHOST-02: SEO/GEO-Page-Feldvertrag Soll/Ist-Befund (Übergabe an steuerndes LLM)
+- [OK] Reiner Lesevorgang, Befund nach `Archiv/local/muss noch eingeordnet werden/GHOST-02_..._BEFUND.md` geschrieben, Status ROT (`page.hbs` ohne Tag-Steuerung/Schema-Ableitung, einzige geerbte JSON-LD war eine statische, hierarchielose `BreadcrumbList`).
+- [FRICTION] Fünf gelesene Dateien wurden zunächst vom Nutzer blockiert (Permission-Ablehnung); auf Rückfrage klargestellt, dass nicht `page.hbs` betroffen war, sondern ankerlose Nebendateien (`header/footer/index/tag/error.hbs`). Nachträglich gelesen, Befund unverändert.
+- [PREF] Ergebnisdateien ab dieser Kette nach `docs/steering/patches/` statt `Archiv/local/` (Albert-Korrektur).
+
+### 2026-07-21 — GHOST-03: Theme-Umsetzung SEO/GEO-Page-Feldvertrag
+- [OK] Full-Gate durchlaufen, Albert-OK erhalten. `default.hbs`: Head-Slot ergänzt, `BreadcrumbList` entfernt. `page.hbs`: `contentFor`-Block mit Tag-gesteuerter Schema-/Robots-Logik (5 Profile + Default) ergänzt. Umsetzungsbefund GELB (Duplikat-Risiko bei Title/Description/Canonical + Tag-Slug-Annahme ungeprüft, kein Browser in dieser Session verfügbar).
+
+### 2026-07-21 — GHOST-04: Windows-Full-Gate, Build und iterative Browser-Verifikation
+- [FRICTION] Kein Browser-/Ghost-Admin-Werkzeug in dieser Session verfügbar; einziges Shell-Werkzeug ist Git Bash, Auftrag verlangte reine PowerShell. Zunächst Status ROT gemeldet (Auftrag sah das für diesen Fall explizit vor); auf Alberts Anweisung „Du baust, legst das ZIP einfach ab" dennoch Build+Paketierung übernommen (`npm run css:build` via Bash, `Compress-Archive` via `powershell.exe`-Unterprozess), Upload/Test lief durchgehend über Albert.
+- [FRICTION] Erste Ursachenhypothese zum `{{#has}}`-Tag-Erkennungsfehler (Kontextverlust innerhalb `{{#contentFor}}`) wurde nach Umstrukturierung durch einen echten Test widerlegt. Tatsächliche Ursache: falsche Tag-Matching-Syntax (`tag="hash-schema-about"` statt `tag="#schema-about"`) — gefunden über Ghosts offizielle Dokumentation, nach Alberts direkter Nachfrage „Rätst Du, oder hast Du recherchiert?".
+- [WIN] Nach Korrektur alle neun geforderten Tag-Kombinationen (5 Schema-Profile, 2 Robots-Tags einzeln+kombiniert, Default) im echten Browser-Rendering bestätigt — Status GRÜN, keine Blocker.
+- [QUESTION] Zwei WebFetch-Abrufe von `TryGhost/express-hbs` lieferten eine zur (später widerlegten) Hypothese passende Code-Erklärung; als möglicherweise durch das Zusammenfassungsmodell erzeugtes Scheinergebnis markiert, nicht als Beleg verwendet.
+
+### 2026-07-21 — Chronik erzeugt und geprüft
+- [OK] Faden-Chronik erzeugt: `Archiv/Chroniken/chronist-v1/CHRONIK-2026-07-21-seo-geo-page-feldvertrag.md`. `/chronik-check` gegen diese und eine zweite, unabhängig vorgefundene Chronik des steuernden ChatGPT-Fadens (`CHRONIK-2026-07-21-ghost-seo-geo-pages.md`) ausgeführt — beide konform, 0 Fehler, 0 Warnungen.
+
+### 2026-07-21 — Voll-Abschluss ✅
+- [OK] `THEME-ASSEMBLY-CHECKLIST.md` in den durch GHOST-02–04 direkt widerlegten Punkten korrigiert (`default.hbs`-Head-Inhalt, `page.hbs`-Beschreibung, Escaping-Ausnahmeliste); übriger, seit 2026-05-03 stark veralteter Rest bewusst nicht angefasst (eigener Abgleich-Bedarf, kein AP vergeben).
+- [OK] MEMORY aktualisiert: `project_ghost_theme_build.md` (neue gesicherte Ghost-Fakten: `ghost_head`-Duplikate, `{{#has}}`-Tag-Syntax, Patches-Ablageort-Konvention), `MEMORY.md`-Index-Zeile. `check-memory-integrity.py` grün (63/63).
+- [OK] `PROJECT-STATUS.md`: neuer Meilenstein (GHOST-02–04 ✅ 2026-07-21) oben eingefügt, ältester Meilenstein (CE-6/CE-6a) aus dem rollierenden Fenster entfernt; HOOK-META synchronisiert, `check-project-status-hook-meta.py` bestätigt (403 Zeichen, schema-konform).
+- [FRICTION] Kein AP-ID/BACKLOG-Eintrag für GHOST-02–04 (analog zu APP-DATA-00–05a) — kein BACKLOG-/NAVIGATION-Eintrag nötig, per Grep bestätigt (0 Treffer für „GHOST" in beiden Dateien).
+- [QUESTION] Drei `docs/editorial/*`-Dateien (`GEO statt SEO.md`, `REDAKTEURS-HANDBUCH Redaktionsleitfaden.md`, `Finanzwesir-Content-System.md`) erscheinen in `git status` als geändert, wurden aber in diesem Faden nur gelesen, nie editiert — vermutlich extern durch den parallelen ChatGPT-Faden verändert. Nicht Teil dieses Abschlusses.
+- [QUESTION] Die GHOST-02-Befunddatei liegt nicht mehr unter `Archiv/local/muss noch eingeordnet werden/` (dort ursprünglich geschrieben), sondern nur noch unter `docs/steering/patches/` — Verschiebung fand außerhalb dieses Fadens statt (vermutlich Albert manuell oder der parallele Faden), nicht von hier aus veranlasst.
+
+### 2026-07-21 — Kettenabschluss ✅ | RECONCILED: GHOST-02 GHOST-03 GHOST-04

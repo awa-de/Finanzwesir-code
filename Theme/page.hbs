@@ -1,6 +1,202 @@
 {{!< default}}
 
 {{#post}}
+    {{#has tag="#seo-noindex"}}
+        {{#has tag="#seo-nosnippet"}}
+            {{#contentFor "head"}}
+    <meta name="robots" content="noindex, nosnippet">
+            {{/contentFor}}
+        {{else}}
+            {{#contentFor "head"}}
+    <meta name="robots" content="noindex">
+            {{/contentFor}}
+        {{/has}}
+    {{else}}
+        {{#has tag="#seo-nosnippet"}}
+            {{#contentFor "head"}}
+    <meta name="robots" content="nosnippet">
+            {{/contentFor}}
+        {{/has}}
+    {{/has}}
+
+    {{#has tag="#schema-article"}}
+        {{#contentFor "head"}}
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "headline": {{json title}},
+        "url": "{{url absolute="true"}}",
+        "mainEntityOfPage": "{{url absolute="true"}}",
+        "datePublished": "{{date format="YYYY-MM-DD"}}",
+        "dateModified": "{{date updated_at format="YYYY-MM-DD"}}",
+        "inLanguage": {{json @site.locale}},
+        "publisher": {
+            "@type": "Organization",
+            "name": {{json @site.title}},
+            "url": {{json @site.url}}{{#if @site.logo}},
+            "logo": {{json @site.logo}}{{/if}}
+        }{{#if meta_description}},
+        "description": {{json meta_description}}{{else}}{{#if custom_excerpt}},
+        "description": {{json custom_excerpt}}{{/if}}{{/if}}{{#if feature_image}},
+        "image": {{json feature_image}}{{/if}}{{#if primary_author}},
+        "author": {
+            "@type": "Person",
+            "name": {{json primary_author.name}}
+        }{{/if}}
+    }
+    </script>
+        {{/contentFor}}
+    {{else}}
+    {{#has tag="#schema-about"}}
+        {{#contentFor "head"}}
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "AboutPage",
+        "name": {{json title}},
+        "url": "{{url absolute="true"}}",
+        "mainEntityOfPage": "{{url absolute="true"}}",
+        "datePublished": "{{date format="YYYY-MM-DD"}}",
+        "dateModified": "{{date updated_at format="YYYY-MM-DD"}}",
+        "inLanguage": {{json @site.locale}},
+        "publisher": {
+            "@type": "Organization",
+            "name": {{json @site.title}},
+            "url": {{json @site.url}}{{#if @site.logo}},
+            "logo": {{json @site.logo}}{{/if}}
+        }{{#if meta_description}},
+        "description": {{json meta_description}}{{else}}{{#if custom_excerpt}},
+        "description": {{json custom_excerpt}}{{/if}}{{/if}}{{#if feature_image}},
+        "image": {{json feature_image}}{{/if}}{{#if primary_author}},
+        "author": {
+            "@type": "Person",
+            "name": {{json primary_author.name}}
+        }{{/if}}
+    }
+    </script>
+        {{/contentFor}}
+    {{else}}
+    {{#has tag="#schema-contact"}}
+        {{#contentFor "head"}}
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "ContactPage",
+        "name": {{json title}},
+        "url": "{{url absolute="true"}}",
+        "mainEntityOfPage": "{{url absolute="true"}}",
+        "datePublished": "{{date format="YYYY-MM-DD"}}",
+        "dateModified": "{{date updated_at format="YYYY-MM-DD"}}",
+        "inLanguage": {{json @site.locale}},
+        "publisher": {
+            "@type": "Organization",
+            "name": {{json @site.title}},
+            "url": {{json @site.url}}{{#if @site.logo}},
+            "logo": {{json @site.logo}}{{/if}}
+        }{{#if meta_description}},
+        "description": {{json meta_description}}{{else}}{{#if custom_excerpt}},
+        "description": {{json custom_excerpt}}{{/if}}{{/if}}{{#if feature_image}},
+        "image": {{json feature_image}}{{/if}}{{#if primary_author}},
+        "author": {
+            "@type": "Person",
+            "name": {{json primary_author.name}}
+        }{{/if}}
+    }
+    </script>
+        {{/contentFor}}
+    {{else}}
+    {{#has tag="#schema-profile"}}
+        {{#contentFor "head"}}
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "ProfilePage",
+        "name": {{json title}},
+        "url": "{{url absolute="true"}}",
+        "mainEntityOfPage": "{{url absolute="true"}}",
+        "datePublished": "{{date format="YYYY-MM-DD"}}",
+        "dateModified": "{{date updated_at format="YYYY-MM-DD"}}",
+        "inLanguage": {{json @site.locale}},
+        "publisher": {
+            "@type": "Organization",
+            "name": {{json @site.title}},
+            "url": {{json @site.url}}{{#if @site.logo}},
+            "logo": {{json @site.logo}}{{/if}}
+        }{{#if meta_description}},
+        "description": {{json meta_description}}{{else}}{{#if custom_excerpt}},
+        "description": {{json custom_excerpt}}{{/if}}{{/if}}{{#if feature_image}},
+        "image": {{json feature_image}}{{/if}}{{#if primary_author}},
+        "author": {
+            "@type": "Person",
+            "name": {{json primary_author.name}}
+        }{{/if}}
+    }
+    </script>
+        {{/contentFor}}
+    {{else}}
+    {{#has tag="#schema-collection"}}
+        {{#contentFor "head"}}
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "CollectionPage",
+        "name": {{json title}},
+        "url": "{{url absolute="true"}}",
+        "mainEntityOfPage": "{{url absolute="true"}}",
+        "datePublished": "{{date format="YYYY-MM-DD"}}",
+        "dateModified": "{{date updated_at format="YYYY-MM-DD"}}",
+        "inLanguage": {{json @site.locale}},
+        "publisher": {
+            "@type": "Organization",
+            "name": {{json @site.title}},
+            "url": {{json @site.url}}{{#if @site.logo}},
+            "logo": {{json @site.logo}}{{/if}}
+        }{{#if meta_description}},
+        "description": {{json meta_description}}{{else}}{{#if custom_excerpt}},
+        "description": {{json custom_excerpt}}{{/if}}{{/if}}{{#if feature_image}},
+        "image": {{json feature_image}}{{/if}}{{#if primary_author}},
+        "author": {
+            "@type": "Person",
+            "name": {{json primary_author.name}}
+        }{{/if}}
+    }
+    </script>
+        {{/contentFor}}
+    {{else}}
+        {{#contentFor "head"}}
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebPage",
+        "name": {{json title}},
+        "url": "{{url absolute="true"}}",
+        "mainEntityOfPage": "{{url absolute="true"}}",
+        "datePublished": "{{date format="YYYY-MM-DD"}}",
+        "dateModified": "{{date updated_at format="YYYY-MM-DD"}}",
+        "inLanguage": {{json @site.locale}},
+        "publisher": {
+            "@type": "Organization",
+            "name": {{json @site.title}},
+            "url": {{json @site.url}}{{#if @site.logo}},
+            "logo": {{json @site.logo}}{{/if}}
+        }{{#if meta_description}},
+        "description": {{json meta_description}}{{else}}{{#if custom_excerpt}},
+        "description": {{json custom_excerpt}}{{/if}}{{/if}}{{#if feature_image}},
+        "image": {{json feature_image}}{{/if}}{{#if primary_author}},
+        "author": {
+            "@type": "Person",
+            "name": {{json primary_author.name}}
+        }{{/if}}
+    }
+    </script>
+        {{/contentFor}}
+    {{/has}}
+    {{/has}}
+    {{/has}}
+    {{/has}}
+    {{/has}}
+
     <article class="{{post_class}} mx-auto max-w-2xl">
         <header class="mb-8 border-b border-border pb-6 sm:mb-12 sm:pb-8">
             <h1 class="font-display text-3xl leading-tight text-primary sm:text-4xl">{{title}}</h1>

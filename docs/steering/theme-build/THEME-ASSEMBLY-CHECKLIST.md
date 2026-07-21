@@ -1,5 +1,5 @@
 # Ghost Theme Assembly — Checkliste
-Stand: 2026-05-03 08:02 | Session: A7-Stand-Datum | Geändert von: Claude
+Stand: 2026-07-21 | Session: GHOST-02–04 | Geändert von: Claude
 
 > Status: **In Arbeit**
 > Ziel: Finanzwesir-Theme für Ghost 6.x zusammenbauen und hochladen.
@@ -45,14 +45,20 @@ siehe docs/design-system/spec und docs/design-system/referenz
 - [ ] `assets/css/screen.css` — Komplettes Stylesheet (Farben, Typo, Layout, Responsive)
 
 #### default.hbs `<head>` Pflichtinhalte
-- [ ] SEO-Meta: `<title>`, `<meta description>`, `<link canonical>` — **vor** `{{ghost_head}}`
-- [ ] Open Graph Tags: og:type, og:title, og:description, og:url, og:site_name, og:image, article:*
-- [ ] Twitter/X Card Tags: twitter:card, twitter:title, twitter:description, twitter:image
-- [ ] BreadcrumbList JSON-LD (`<script type="application/ld+json">`)
-- [ ] RSS-Feed: `<link rel="alternate" type="application/rss+xml">`
+Korrigiert nach GHOST-02–04 (2026-07-21): Reale Browser-Render-Tests zeigten, dass `{{ghost_head}}`
+eigene Meta Description und Canonical erzeugt, sobald das jeweilige Ghost-Feld befüllt ist — eine
+zusätzliche manuelle Zeile führte zu Duplikaten und wurde entfernt. OG-/Twitter-Tags kommen ebenfalls
+vollständig aus `{{ghost_head}}`. Die frühere statische `BreadcrumbList` wurde entfernt, da sie keine
+reale Seitenhierarchie abbildete (Feldvertrag-Vorgabe).
+- [x] SEO-Meta: nur `<title>` manuell — **vor** `{{ghost_head}}`
+- [x] KEINE manuelle `<meta description>` / `<link canonical>` — `{{ghost_head}}` erzeugt beide selbst
+- [x] KEINE manuellen Open-Graph-/Twitter-Tags — kommen vollständig aus `{{ghost_head}}`
+- [x] KEINE BreadcrumbList JSON-LD in `default.hbs` (entfernt, siehe GHOST-03)
+- [x] RSS-Feed: `<link rel="alternate" type="application/rss+xml">`
 - [ ] Webmentions: `<link rel="webmention">` + `<link rel="pingback">` (optional)
-- [ ] `{{ghost_head}}` vorhanden (DARF NICHT FEHLEN)
-- [ ] Kein manueller `<title>` nach `{{ghost_head}}` (erster gewinnt)
+- [x] `{{ghost_head}}` vorhanden (DARF NICHT FEHLEN)
+- [x] Benannter Head-Slot `{{{block "head"}}}` **vor** `{{ghost_head}}` — wird von `page.hbs` über
+      `{{#contentFor "head"}}` mit Page-spezifischem Robots-Meta und Schema-JSON-LD befüllt (GHOST-03/04)
 
 ### Partials (wiederverwendbare Bausteine)
 - [ ] `partials/header.hbs` — Navigation + Logo
@@ -63,7 +69,11 @@ siehe docs/design-system/spec und docs/design-system/referenz
 ### Seiten-Templates
 - [ ] `index.hbs` — Startseite / Postliste
 - [ ] `post.hbs` — Einzelner Artikel (**Kernstück: Chart-Integration + BlogPosting JSON-LD**)
-- [ ] `page.hbs` — Statische Seiten (ohne Chart-Engine, ohne `datePublished`)
+- [x] `page.hbs` — Statische Seiten. Enthält Chart-Engine (`financial-chart-module`-Cards werden auch
+      auf Pages verwendet, z.B. `/index-vergleich/`) sowie seit GHOST-03/04 einen `{{#contentFor "head"}}`-
+      Block: Robots-Meta (`#seo-noindex`/`#seo-nosnippet`) und Schema-JSON-LD (`WebPage`-Default plus
+      `Article`/`AboutPage`/`ContactPage`/`ProfilePage`/`CollectionPage` über genau einen `#schema-*`-Tag).
+      Kein `datePublished` in der sichtbaren Ausgabe, wohl aber im JSON-LD.
 - [ ] `tag.hbs` — Tag-Archivseite mit Tag-Description
 - [ ] `author.hbs` — Autorenseite mit Schema.org Person-Microdata (E-E-A-T)
 - [ ] `error.hbs` — Fehlerseite (404, 500)
@@ -115,7 +125,7 @@ siehe docs/design-system/spec und docs/design-system/referenz
 - [ ] Open Graph Tags vollständig (og:type, og:title, og:description, og:url, og:image)
 - [ ] Twitter Card Tags vollständig (twitter:card, twitter:title, twitter:description, twitter:image)
 - [ ] BlogPosting JSON-LD in post.hbs valide (https://validator.schema.org)
-- [ ] BreadcrumbList JSON-LD in default.hbs valide
+- [x] Page-Schema-JSON-LD in page.hbs valide (`WebPage`-Default + 5 `#schema-*`-Profile, browserverifiziert GHOST-04) — KEINE BreadcrumbList mehr, siehe oben
 - [ ] RSS `<link rel="alternate">` im Quelltext
 - [ ] `<link rel="canonical">` vorhanden
 
@@ -197,7 +207,7 @@ siehe docs/design-system/spec und docs/design-system/referenz
 **Theme-Härtung**
 - [ ] Keine Secrets im Theme-Paket (.env, API-Keys, Credentials)
 - [ ] Keine Debug-Informationen in Produktion (console.log entfernt oder hinter Flag)
-- [ ] Handlebars-Templates: Escaped Output `{{variable}}` statt `{{{variable}}}` (außer `ghost_head`/`ghost_foot`)
+- [ ] Handlebars-Templates: Escaped Output `{{variable}}` statt `{{{variable}}}` (außer `ghost_head`/`ghost_foot`/`{{{block "head"}}}` — Letzteres verlangt zwingend die dritte Klammer, sonst wird das per `{{#contentFor}}` eingefügte JSON-LD/Robots-Meta als sichtbarer Escaped-Text gerendert, siehe GHOST-04)
 - [ ] Externe Links mit `rel="noopener noreferrer"`
 - [ ] Formular-Inputs (falls vorhanden): CSRF-Schutz via Ghost
 
@@ -247,3 +257,13 @@ siehe docs/design-system/spec und docs/design-system/referenz
 ## Notizen
 
 _Platz für Erkenntnisse, Entscheidungen und Probleme während des Zusammenbaus._
+
+### 2026-07-21 — GHOST-02–04 (SEO/GEO-Page-Feldvertrag)
+Mehrere Annahmen dieser Checkliste zu `default.hbs`/`page.hbs` waren durch reale Browser-Render-Tests
+widerlegt (siehe `docs/steering/patches/GHOST-03_...UMSETZUNGSBEFUND.md` und
+`GHOST-04_...WINDOWS-FULL-GATE.md`): `{{ghost_head}}` erzeugt Description/Canonical/OG/Twitter selbst;
+manuelle Duplikate wurden entfernt. Die BreadcrumbList wurde ersatzlos gestrichen. `page.hbs` trägt
+jetzt die Page-Schema-/Robots-Logik über einen Head-Slot. Nur diese direkt widerlegten Punkte wurden
+korrigiert — der übrige, seit 2026-05-03 unveränderte Rest dieser Checkliste (fast durchgehend „[ ]",
+obwohl das Theme inzwischen weitgehend gebaut ist, siehe PROJECT-STATUS.md „Ghost-Prototyp ✅") wurde
+in dieser Runde bewusst nicht angefasst — das wäre ein eigener, größerer Abgleich-AP.
