@@ -1,6 +1,6 @@
 # Decision Log — App-Fabrik
 
-Stand: 2026-06-04 | APP-01-slice-planung | Geändert von: Claude
+Stand: 2026-07-21 15:52 | SEC-04-ghost-app-migration | Geändert von: Claude
 
 **Legende:**
 - 🟢 ENTSCHIEDEN — robuste Entscheidung, Grundlage für weitere Schritte
@@ -394,3 +394,29 @@ Kein Artefaktname, Build-Befehl, Pfad oder Build-Tool an dieser Stelle festgeleg
 **Entscheidung:** Jede sicherheitsrelevante Architekturentscheidung (neue Domain, neue `data-*` Semantik, Bootstrapper-Strategie, Shadow DOM, externe Scripts, neue Abhängigkeiten, SafeDOM-Regeländerungen, Slug-Whitelist-Änderungen) bekommt einen Eintrag in `01_DECISION_LOG.md`. Detailregeln: → `SECURITY-BASELINE.md §9`.  
 **Begründung:** Sicherheitsentscheidungen müssen nachvollziehbar und auditierbar sein, auch über Sessions hinweg.  
 **Quelle:** Arbeitsauftrag security-baseline-sync | 2026-05-10
+
+---
+
+### SEC-04 — Dateinamenvertrag für `fw-app` + statischer Theme-Bootstrapper
+**Status:** 🟢 ENTSCHIEDEN
+
+**Entscheidung 1 — Dateinamenvertrag für `data-fw-data` / `data-fw-config`:**
+Beide Attribute enthalten ausschließlich geprüfte Dateinamen, keine URL.
+- `data-fw-data`: kanonischer CSV-Dateiname, Grammatik `^[a-z0-9_-]+\.csv$`.
+- `data-fw-config`: kanonischer JSON-Dateiname, Grammatik `^[a-z0-9_-]+\.json$`.
+- Kein Protokoll, keine Domain, kein Pfad, kein Slash, kein Query-String, kein Fragment, keine URL als Attributwert.
+- Der zentrale Resolver bildet ausschließlich `/content/files/app-data/<dateiname>` — derselbe Auslieferungsweg wie `data-app-file` (§3.2 APP-INTERFACE.md), aber eigener Attributname und eigener Parser je Datentyp.
+- Die Daten bleiben zur Laufzeit untrusted input: Dateinamen werden vor der Auflösung geprüft; CSV und JSON werden danach vom jeweiligen spezialisierten Parser erneut validiert und versiegelt (Two-Step Parsing, → A-10).
+- Kein URL-Kompatibilitätsmodus, keine Dev-Ausnahme (`localhost`/`127.0.0.1` entfällt für diese beiden Attribute).
+
+**Entscheidung 2 — Statischer Theme-Bootstrapper mit fester Registry/Slug-Whitelist:**
+- Die Registry ist Code im Theme-Bundle. Jeder Eintrag ordnet einen Literal-Slug einer statisch importierten Init-Funktion zu.
+- Kein Wert aus einem `data-*`-Attribut darf — auch nicht teilweise oder nach Validierung — einen Import-Pfad, eine Script-URL oder einen `import()`-Ausdruck beeinflussen.
+- Unbekannter Slug führt zum Error-State; es findet kein Nachladen statt.
+- Jeder `.fw-app`-Container erhält eine eigene `try/catch`-Error-Boundary. Der bestehende Doppelinitialisierungs-Guard `data-fw-initialized` bleibt Pflicht.
+- Genau ein Theme-Einstieg, analog `fw-chart-engine/index.js`: kein Script pro Ghost-Card, keine Code-Injection pro Seite, kein CDN, kein Loader-Framework, keine Manifest-/Registry-Datei außerhalb des Codes. Löst B3 (`APP_FACTORY_IMPLEMENTATION_RFC.md` §9) zugunsten „Theme" statt „Code Injection".
+- Wachstumspfad nur dokumentiert, nicht gebaut: Code-Splitting mit ausschließlich literalen Importpfaden erst neu bewerten, wenn eine einzelne App etwa die Größe von `chart.umd.min.js` erreicht (~10× heutige App-Größe).
+
+**Begründung:** Sicherheit by Construction — kein Vertragswiderspruch mehr zwischen Strategiepapier und bindender Spec (Peer-Review-Finding 1), keine Script-URL aus untrusted input möglich (Peer-Review-Finding 3), ein einziger auditierbarer Perimeter, Konsistenz mit der Chart-Blaupause.
+
+**Quelle:** Albert-Freigabe 2026-07-21 | `docs/steering/audits/PEER_REVIEW_ERGEBNIS_GHOST_APP_MIGRATION_V1.md` (Findings 1 + 3, Nachtrag) | `docs/steering/handovers/HANDOVER_FORMALISIERUNG_GHOST_APP_MIGRATION_ENTSCHEIDUNGEN_V1.md`

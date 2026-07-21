@@ -1,10 +1,10 @@
-Stand: 2026-06-25 | Zweck: Minimaler Event-Pin-Vertrag für Screen 2 der Prokrastinationspreis-App
+Stand: 2026-07-21 21:42 | Datenmigration: Datei auf stations-de.json umbenannt, Produktionsquelle in §2 nachgezogen | Zweck: Minimaler Event-Pin-Vertrag für Screen 2 der Prokrastinationspreis-App
 
 # Stations-JSON-Datenvertrag — Minimalversion
 
 ## 1. Zweck
 
-`Apps/prokrastinations-preis/config/stations.de.json` enthält belegte historische Event-Pins für eine Finanzzeitreihe.
+`Apps/prokrastinations-preis/config/stations-de.json` enthält belegte historische Event-Pins für eine Finanzzeitreihe.
 
 Ein Event-Pin markiert einen Nachrichtenmoment, der für Anleger damals emotional relevant war: Furcht, Zweifel, Panik, Erleichterung, Euphorie, Gier oder FOMO.
 
@@ -14,9 +14,13 @@ Die App zeigt keine allgemeine Weltchronik. Sie zeigt wenige belegte Momente ent
 
 ## 2. Produktiver Dateipfad
 
+**Produktionsquelle (Ghost-Laufzeit):** Ghost-Card-Feed `data-fw-config="stations-de.json"`, zentral aufgelöst zu `/content/files/app-data/stations-de.json` (→ SEC-04, `01_DECISION_LOG.md`; `APP_SPEC.md` §8/§10).
+
 ```text
-Apps/prokrastinations-preis/config/stations.de.json
+Apps/prokrastinations-preis/config/stations-de.json
 ```
+
+Diese Kopie im App-Ordner ist **nur noch Quell-/Fixture-Datei** (lokale Bearbeitung, Testseiten-Fixture) — keine Ghost-Laufzeitquelle mehr. Die produktive Auslieferung folgt demselben geprüften Weg wie die CSV-Daten (lokaler Offline-Prüfer → FileZilla → `Ghost/content/files/app-data/`, → `docs/editorial/CSV-APP-DATEN-WORKFLOW.md`).
 
 ## 3. Minimalprinzip
 

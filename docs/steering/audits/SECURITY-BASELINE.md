@@ -1,5 +1,5 @@
-Stand: 2026-05-10 | Session: konsistenz-korrektur | Geändert von: Claude
-Hinweis: App-Fabrik / fw-app Sicherheitsregeln ergänzt
+Stand: 2026-07-21 15:52 | Session: ghost-app-migration-formalisierung | Geändert von: Claude
+Hinweis: §6.5/§6.9/§7 auf Dateinamenvertrag für data-fw-data/data-fw-config umgestellt (→ 01_DECISION_LOG.md SEC-04)
 
 # Security Baseline — Finanzwesir 2.0
 
@@ -139,12 +139,16 @@ Jede App definiert ihre Whitelist in `APP_SPEC.md`. Details → `APP-INTERFACE.m
 
 ### 6.5 data-fw-data / data-fw-config
 
-Externe Daten- oder Config-URLs müssen validiert werden:
+`data-fw-data` und `data-fw-config` enthalten ausschließlich geprüfte Dateinamen — keine URL, keine Domain, kein Pfad (→ SEC-04, `01_DECISION_LOG.md`):
 
-- Nur erlaubte Domains (→ §7).
-- Dev-Ausnahmen `localhost` / `127.0.0.1` erlaubt, wenn dokumentiert.
-- Ungültige URLs führen zu Error-State, nicht zu Crash.
-- Kein dynamisches Script-Laden aus Daten- oder Config-URLs.
+- `data-fw-data`: kanonischer CSV-Dateiname, Grammatik `^[a-z0-9_-]+\.csv$`.
+- `data-fw-config`: kanonischer JSON-Dateiname, Grammatik `^[a-z0-9_-]+\.json$`.
+- Kein Protokoll, keine Domain, kein Pfad, kein Slash, kein Query-String, kein Fragment und keine URL als Attributwert.
+- Der zentrale Resolver bildet ausschließlich `/content/files/app-data/<dateiname>` — derselbe Auslieferungsweg wie `data-app-file` (→ §7 Chart-Card-Ausnahme).
+- Es gibt keinen URL-Kompatibilitätsmodus und keine Dev-Ausnahme (`localhost`/`127.0.0.1`) für diese beiden Attribute.
+- Ungültige Dateinamen führen zu Error-State, nicht zu Crash.
+- Kein dynamisches Script-Laden aus Daten- oder Config-Dateinamen.
+- CSV und JSON werden nach der Auflösung vom jeweiligen spezialisierten Parser erneut validiert und versiegelt (Two-Step Parsing).
 
 Details → `APP-INTERFACE.md §6`.
 
@@ -178,14 +182,16 @@ Details → `APP-INTERFACE.md §8`.
 
 ### 6.9 Bootstrapper als Sicherheitsperimeter
 
-Falls ein globaler fw-app Bootstrapper genutzt wird, ist er Sicherheitsperimeter:
+Der globale fw-app Bootstrapper ist Sicherheitsperimeter:
 
-- Er validiert Slugs und erlaubte App-Dateien.
-- Kein dynamisches Laden aus untrusted input.
-- Bootstrapper-Strategie muss vor Ghost-Deploy freigegeben sein.
-- Änderungen am Bootstrapper sind sicherheitsrelevant und brauchen Decision-Log-Eintrag.
+- Statischer Bootstrapper im Theme-Bundle mit fester Registry/Slug-Whitelist: Registry ist Code im Theme-Bundle, jeder Eintrag ordnet einen Literal-Slug einer statisch importierten Init-Funktion zu.
+- Kein Wert aus einem `data-*`-Attribut darf — auch nicht teilweise oder nach Validierung — einen Import-Pfad, eine Script-URL oder einen `import()`-Ausdruck beeinflussen.
+- Unbekannter Slug führt zum Error-State; es findet kein Nachladen statt.
+- Jeder `.fw-app`-Container erhält eine eigene `try/catch`-Error-Boundary. Doppelinitialisierungs-Guard `data-fw-initialized` bleibt Pflicht.
+- Genau ein Theme-Einstieg, analog `fw-chart-engine/index.js`: kein Script pro Ghost-Card, keine Code-Injection pro Seite, kein CDN, kein Loader-Framework, keine Registry-Datei außerhalb des Codes.
+- Wachstumspfad (Code-Splitting mit literalen Importpfaden) nur dokumentiert, nicht gebaut — Trigger: einzelne App erreicht ~10× heutige App-Größe.
 
-Stand Pilot-1: Bootstrapper-Implementierung noch offen (RFC B2/B3). Kein Blocker für Slices 0–6.
+Stand: Bootstrapper-Strategie freigegeben und im Decision Log verankert (→ `01_DECISION_LOG.md` SEC-04, 2026-07-21). Umsetzung ist eigener Migrations-AP, kein stiller Bestandteil dieser Baseline-Änderung.
 
 ### 6.10 CSS-Sicherheit / Isolation
 
@@ -212,9 +218,14 @@ Frontend-Config ist öffentlich zu behandeln.
 
 ## 7. Domain-Lock
 
-Externe Datenquellen (CSV, JSON, `data-fw-data`, `data-fw-config`, Chart-Datenquellen) müssen aus erlaubten Domains stammen.
+Gilt für tatsächlich externe Datenquellen und den bestehenden Chart-Testpfad — **nicht** für `data-fw-data` / `data-fw-config` bei `fw-app`-Cards (→ SEC-04): Diese beiden Attribute akzeptieren keine URL und damit keine Domain, sondern ausschließlich einen geprüften Dateinamen, den der zentrale Resolver zu `/content/files/app-data/<dateiname>` auflöst (§6.5).
 
-**Aktuell erlaubt:**
+Weiterhin Domain-Lock-pflichtig:
+
+- `data-csv` auf Testseiten (`tests/engine/`, → APP-INTERFACE.md §3.2)
+- jede sonstige tatsächlich externe Datenquelle, die künftig per vollständiger URL eingebunden wird
+
+**Aktuell erlaubt (für Domain-Lock-pflichtige Fälle):**
 
 - `https://www.finanzwesir.com/...`
 - `https://finanzwesir.com/...` (Weiterleitung — Ziel bei Nutzung explizit klären)

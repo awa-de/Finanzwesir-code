@@ -1,6 +1,6 @@
 # APP_SPEC — prokrastinations-preis
 
-Stand: 2026-06-18 | V2.9 — B1-AP-14d4: §16.3 Status-Sync + §1 Status-Tabelle Nachputz | Geändert von: Claude
+Stand: 2026-07-21 21:42 | V3.2 — Datenmigration: app.js auf AppDataResolver/JSONParser umgestellt, stations.de.json → stations-de.json umbenannt | Geändert von: Claude
 
 ---
 
@@ -8,7 +8,7 @@ Stand: 2026-06-18 | V2.9 — B1-AP-14d4: §16.3 Status-Sync + §1 Status-Tabelle
 
 | Feld | Wert |
 |---|---|
-| Version | V2.9 — B1-AP-14d4: §16.3 UI-Primitive-Status synchronisiert (V2.8: AP-14d3 Pulse-Produktentscheidung) |
+| Version | V3.2 — Datenmigration: `app.js` lädt CSV/JSON über `AppDataResolver`/`CSVParser`/`JSONParser` + `validateStationsJson`, `buildAppContext()` tief eingefroren, `stations.de.json` → `stations-de.json` umbenannt (V3.1: Resolver-Suffixwiderspruch korrigiert) |
 | Phase | Implementierung — Stationen-Zeitreise vollständig (B1-AP-11–AP-14c4 ✅ 2026-06-17/18); Engine-Erweiterungen (Progressive Domain, Annotation-Marker, Pulse) abgeschlossen; nächster Schritt: Transitions + Reduced Motion (B1-AP-15) |
 | Nächster Schritt | B1-AP-15 — Transitions + Reduced Motion (B1-AP-14d4 ✅ 2026-06-18) |
 | Code-Freigabe | Slice 0 ✅ 2026-06-04, Slice 1–2 ✅ 2026-06-05, Slice 4 ✅ 2026-06-11, Slice 5 ✅ 2026-06-15, Slice 6 ✅ 2026-06-16; B1-AP-11–AP-14c4 ✅ 2026-06-17/18 |
@@ -339,16 +339,15 @@ Interne JS-Konvention: Nach erfolgreicher Validierung darf `index_value` app-int
 
 | Feld | Wert |
 |---|---|
-| Produktiver CSV-Pfad | `Theme/assets/data/b1/msci-world-net-return-eur-monthly.csv` [entschieden AP-DATA-05, 2026-06-04] |
+| Produktiver CSV-Pfad | Zentral aufgelöst durch reine Präfixbildung: `/content/files/app-data/<dateiname>` — `<dateiname>` ist bereits vollständig mit `.csv` (→ SEC-04, `01_DECISION_LOG.md`). Lokale Quelle/Fixture weiterhin über den Offline-Prüfer, dann FileZilla nach `Ghost/content/files/app-data/`, → `docs/editorial/CSV-APP-DATEN-WORKFLOW.md`. |
 | Dataset Contract | `docs/data/contracts/msci-world-net-return-monthly.md` ✅ angelegt 2026-06-04 |
 | Catalog-Eintrag | `docs/data/DATASET-CATALOG.md` |
-| Einbindung in Ghost | `data-fw-data` (Ghost-Card-Attribut) |
-| URL (Ziel) | `https://www.finanzwesir.com/content/files/[Dateiname nach AP-DATA-05]` [nach Upload] |
+| Einbindung in Ghost | `data-fw-data="[dateiname].csv"` (Ghost-Card-Attribut) — kanonischer Dateiname, keine URL, keine Domain, kein Pfad |
 | Datenstatus für App-Bau | Mock-Daten erlaubt; produktive Daten offen |
 | Zeitraum | Mindestens 120 Monate; letzter Eintrag = letzter vollständig verfügbarer Monat |
 
-Cache-Busting: Versionsparameter in URL `?v=2026-05` oder versionierter Dateiname.
-Dev-Ausnahme: `localhost`/`127.0.0.1` erlaubt, als Dev-Ausnahme dokumentiert.
+Cache-Busting: versionierter Dateiname (kein URL-Versionsparameter — `data-fw-data` trägt keine URL).
+Kein Dev-Ausnahme-Modus mehr für `data-fw-data`: `localhost`/`127.0.0.1` entfällt, da kein URL-Feld.
 
 > **Datenhoheit:** Der Projektinhaber (Albert Warnecke) erstellt und pflegt die CSV redaktionell. Claude verarbeitet nur freigegebene Datasets (→ `docs/data/DATENQUELLEN-GOVERNANCE.md`).
 
@@ -449,14 +448,14 @@ App-spezifische Verbote:
 
 Die App verwendet zwei getrennte Datenquellen. Beide müssen vorhanden und valide sein, bevor der Content-State erreicht wird.
 
-| Datensorte | Format | Pfad | Zweck |
+| Datensorte | Format | Ghost-Card-Feed | Produktiver Pfad |
 |---|---|---|---|
-| MSCI-World-Monatsdaten | CSV | `data-fw-data` (Ghost-Card) | Sparplanberechnung und Chartwerte |
-| Stationenbibliothek | JSON | `Apps/prokrastinations-preis/config/stations.de.json` | redaktionelle Haltepunkte der Zeitreise |
+| MSCI-World-Monatsdaten | CSV | `data-fw-data="[dateiname].csv"` | zentral aufgelöst (reine Präfixbildung): `/content/files/app-data/<dateiname>` |
+| Stationenbibliothek | JSON | `data-fw-config="stations-de.json"` | zentral aufgelöst: `/content/files/app-data/stations-de.json` |
 
 **CSV bleibt CSV.** Regeln aus §7 gelten unverändert.
 
-**Stationen-JSON ist neu.** Der detaillierte Vertrag (Felder, Enums, Flags, Quellenstatus, Validierungsregeln) ist in `STATIONS_CONFIG_CONTRACT.md` dokumentiert.
+**Stationen-JSON ist ein zweiter Ghost-Card-Feed** (`data-fw-config`, → SEC-04). Sie wird nicht mehr seitenrelativ oder intern aus `Apps/prokrastinations-preis/config/` geladen — diese Kopie ist nur noch Quell-/Fixture-Datei (→ `STATIONS_CONFIG_CONTRACT.md` §2), nicht Ghost-Laufzeitquelle. Der detaillierte Inhaltsvertrag (Felder, Enums, Flags, Quellenstatus, Validierungsregeln) bleibt in `STATIONS_CONFIG_CONTRACT.md` dokumentiert.
 
 **Redaktionelle Kontrolle:**
 Claude darf die redaktionellen Stationen nicht eigenmächtig erfinden, erweitern oder umpriorisieren. Claude lädt die freigegebene JSON-Konfiguration, validiert sie gegen den Vertrag (STATIONS_CONFIG_CONTRACT.md) und rendert sie.
@@ -500,7 +499,8 @@ Gemäß `docs/spec/APP-INTERFACE.md` §3.1.
 ```html
 <div class="fw-app"
      data-fw-app="prokrastinations-preis"
-     data-fw-data="https://www.finanzwesir.com/content/files/[Dateiname nach AP-DATA-05]">
+     data-fw-data="msci-world-net-return-eur-monthly.csv"
+     data-fw-config="stations-de.json">
 </div>
 ```
 
@@ -509,7 +509,8 @@ Gemäß `docs/spec/APP-INTERFACE.md` §3.1.
 ```html
 <div class="fw-app"
      data-fw-app="prokrastinations-preis"
-     data-fw-data="https://www.finanzwesir.com/content/files/[Dateiname nach AP-DATA-05]"
+     data-fw-data="msci-world-net-return-eur-monthly.csv"
+     data-fw-config="stations-de.json"
      data-fw-options="defaultRate:500">
 </div>
 ```
@@ -518,9 +519,9 @@ Gemäß `docs/spec/APP-INTERFACE.md` §3.1.
 - Kein `data-app` (veralteter Namespace)
 - Kein `data-fw-theme` (reserviert, nicht produktiv)
 - Kein freies JSON in `data-fw-options`
-- Keine URLs außerhalb erlaubter Domains
+- Keine URL, Domain, Pfad, Slash, Query-String oder Fragment in `data-fw-data` / `data-fw-config` — nur der reine, kanonische Dateiname
 
-**Unterschied zur alten Spec:** Die neue Card hat zwingend `data-fw-data` für die CSV-Datendatei. Die alte Calculator-App hatte keine externe Datenquelle. Die Stations-JSON wird intern geladen, nicht über Ghost-Card-Attribute.
+**Unterschied zur alten Spec:** Die neue Card hat zwingend `data-fw-data` für die CSV-Datendatei und `data-fw-config` für die Stations-JSON — beide als reiner Dateiname, zentral aufgelöst zu `/content/files/app-data/<dateiname>` (→ SEC-04, `01_DECISION_LOG.md`). Die alte Calculator-App hatte keine externe Datenquelle. Die Stations-JSON wird nicht mehr intern aus `config/` geladen, sondern als zweiter Ghost-Card-Feed ausgeliefert.
 
 ---
 
@@ -532,7 +533,7 @@ Gemäß `docs/spec/APP-INTERFACE.md` §3.1.
 | `startBetrag` | Integer | 0 | 0 | 50.000 | 0 (interner Default) |
 
 Unbekannte Keys: stillschweigend ignoriert (Whitelist-Prinzip, APP-INTERFACE.md §5).
-Die Datenbasis kommt aus `data-fw-data`, nicht aus `data-fw-options`.
+Die Datenbasis kommt aus `data-fw-data` (CSV) und `data-fw-config` (Stationen-JSON), nicht aus `data-fw-options`.
 
 ---
 
@@ -552,7 +553,7 @@ Init
        │         ├─ Error (d)      (Stations-JSON nicht erreichbar / nicht parsebar / Contract ungültig)
        │         ├─ Empty-Journey  (Stations-JSON valide, aber keine Station im aktiven Fenster oder Redaktions-Gate nicht publikationsreif)
        │         └─ Content
-       ├─ Error (b)  (URL ungültig / Domain-Lock / CSV nicht parsebar)
+       ├─ Error (b)  (Dateiname ungültig / Resolver-Fehlschlag / CSV nicht parsebar)
        ├─ Error (c)  (CSV parsebar, unitKey ≠ CURRENCY_EUR)
        └─ Empty      (CSV valide aber < 120 Zeilen oder Pflichtfelder fehlen)
 ```
@@ -562,7 +563,7 @@ Init
 | Loading | Daten werden geladen | Spinner plus sichtbarer Text „Daten werden geladen …", kein leerer Container |
 | Content | CSV und Stations-JSON geladen und valide | Screen-Flow 1→2→3→4 mit wachsendem Chart, Stationstexten, KpiCards, CTA |
 | Error (a) | Ungültiger `data-fw-app`-Slug | „Diese App konnte nicht geladen werden. Bitte App-Konfiguration prüfen." — `textContent`, kein Stacktrace |
-| Error (b) | URL ungültig / Domain-Lock / CSV nicht parsebar | „Daten konnten nicht geladen werden. Bitte Seite neu laden." — `textContent`, kein Stacktrace |
+| Error (b) | Dateiname ungültig / Resolver-Fehlschlag / CSV nicht parsebar | „Daten konnten nicht geladen werden. Bitte Seite neu laden." — `textContent`, kein Stacktrace |
 | Error (c) | CSV parsebar, aber `unitKey ≠ CURRENCY_EUR` (kein oder falscher Währungssuffix) | „Datenreihe hat keine oder ungültige Währungsangabe. Erwartet: EUR." — `textContent`, kein Stacktrace |
 | Empty | CSV valide, aber < 120 Datenzeilen oder Pflichtfelder fehlen | „Nicht genug Daten für die Berechnung. Bitte Datenquelle prüfen." — `textContent`, kein Stacktrace |
 | Error (d) | Stations-JSON nicht ladbar, nicht parsebar oder Contract ungültig | „Die Zeitreise kann gerade nicht geladen werden." — `textContent`, kein Stacktrace |
@@ -1016,7 +1017,7 @@ Wenn globale Dokumente existieren (zentrale Responsive-Regeln, Accessibility-Reg
 ### Schritt 1 — Eingang
 
 **Quelle A — data-fw-data (Ghost-Card):**
-URL wird als String gelesen. Domain-Validierung: muss `finanzwesir.com` enthalten.
+Dateiname wird als String gelesen. Validierung gegen Grammatik `^[a-z0-9_-]+\.csv$` — keine URL, keine Domain. Zentraler Resolver bildet `/content/files/app-data/<dateiname>` durch reine Präfixbildung (`<dateiname>` bereits vollständig mit `.csv`, kein zusätzlich angehängtes Suffix).
 
 **Quelle B — data-fw-options:**
 String `"defaultRate:300"` → geparst zu `{ defaultRate: 300 }`, gegen Whitelist geprüft.
@@ -1024,8 +1025,8 @@ String `"defaultRate:300"` → geparst zu `{ defaultRate: 300 }`, gegen Whitelis
 **Quelle C — UI-Slider:**
 `input`-Event liefert `event.target.value = "300"` als DOM-String.
 
-**Quelle D — Stations-JSON (intern):**
-Pfad `config/stations.de.json` → fetch → validieren gegen AP-03-Vertrag → aktive Stationen filtern.
+**Quelle D — data-fw-config (Ghost-Card):**
+Dateiname wird als String gelesen. Validierung gegen Grammatik `^[a-z0-9_-]+\.json$` — keine URL, keine Domain. Zentraler Resolver bildet `/content/files/app-data/<dateiname>` durch reine Präfixbildung (`<dateiname>` bereits vollständig mit `.json`) → fetch → validieren gegen `STATIONS_CONFIG_CONTRACT.md` → aktive Stationen filtern.
 
 ### Schritt 2 — Parsing und Validierung
 
@@ -1237,7 +1238,7 @@ Ersetzt durch: §16.1b — Kontinuitäts-Reveal (Variante B++, AP-prokrast-10a�
 Für diese App wird keine neue `events.json` eingeführt.
 
 **Datenquelle:**
-- Marker werden aus den bestehenden Journey-Stations (`stations.de.json`) abgeleitet
+- Marker werden aus den bestehenden Journey-Stations (`stations-de.json`) abgeleitet
 - `final_reveal` wird ausgeschlossen
 - Aktuelle Station wird nicht markiert; Zukunftsstationen werden nicht markiert
 - Sichtbar sind nur vergangene Stationen: bei Station n Marker für Stationen 1 bis n−1
@@ -1252,7 +1253,7 @@ Nicht erlaubt: lineare Interpolation als Default, linker Floor-Snap als Default,
 
 **Pulse (B1-AP-14c4 ✅ 2026-06-18):**
 
-Pulse ist ephemerer Runtime-State — gehört nicht in `stations.de.json` und nicht dauerhaft in `fwContext`.
+Pulse ist ephemerer Runtime-State — gehört nicht in `stations-de.json` und nicht dauerhaft in `fwContext`.
 
 Produktentscheidung (freigegeben Albert 2026-06-18):
 - Scope: Screen 2 only; Screen 3 kein Pulse
@@ -1491,7 +1492,7 @@ Diese Regeln sind absolut. Kein Einzelfall-Override ohne Albert-Freigabe und ENT
 Aus APP-INTERFACE.md §7 und SECURITY-BASELINE.md:
 
 1. **Alle `data-*` Attribute sind untrusted input** — ohne Ausnahme.
-2. **URL-Validierung (data-fw-data):** Domain muss `www.finanzwesir.com` enthalten. Dev-Ausnahme: `localhost`/`127.0.0.1`. Fehlschlag → Error-State (b), kein Crash.
+2. **Dateinamenvalidierung (data-fw-data / data-fw-config):** Grammatik `^[a-z0-9_-]+\.csv$` bzw. `^[a-z0-9_-]+\.json$` — keine URL, keine Domain, kein Pfad, kein Query-String, keine Dev-Ausnahme. Zentraler Resolver bildet `/content/files/app-data/<dateiname>`. Fehlschlag → Error-State (b) bzw. (d), kein Crash.
 3. **SafeDOM (Q-01):** KpiCard-Werte, TextBlocks, A11y-Summary — ausschließlich `textContent`. Niemals `innerHTML` für Nutzdaten.
 4. **CSV validieren:** Format, Pflichtfelder, Mindestlänge (≥ 120). Fehler → Empty-State oder Error-State.
 5. **Whitelist-Prinzip (Q-02):** Unbekannte `data-fw-options`-Keys werden ignoriert. Unbekannter Slug → Error-State (a).
@@ -1500,7 +1501,7 @@ Aus APP-INTERFACE.md §7 und SECURITY-BASELINE.md:
 8. **Empty-State statt Crash.** Ungültige Daten → sauberer Fehlerzustand, kein Stacktrace für Endnutzer.
 9. **XSS-Schutz:** Optionswerte werden als Zahlen geparst — keine String-Injektion. Chart-Datenpunkte kommen aus validierter CSV, nicht aus DOM-Input.
 10. **`data-fw-theme` nicht verwendet** — reserviert, nicht produktiv einsetzen.
-11. **Stations-JSON:** Textinhalte aus stations.de.json werden als `textContent` gerendert, niemals als `innerHTML`.
+11. **Stations-JSON:** Textinhalte aus stations-de.json werden als `textContent` gerendert, niemals als `innerHTML`.
 
 **Security-Sync-Status:** synchron mit Nicht-Blockern.
 
@@ -1527,10 +1528,10 @@ Die Testfälle T-01–T-40 (unten) sind eine ergänzende Kurzreferenz; maßgeben
 
 | # | Testfall | Erwartetes Verhalten |
 |---|---|---|
-| T-01 | Minimal-Card mit gültiger `data-fw-data`-URL | Loading → Content (Screen 1 sichtbar) |
+| T-01 | Minimal-Card mit gültigem `data-fw-data`-Dateinamen | Loading → Content (Screen 1 sichtbar) |
 | T-02 | Ungültiger `data-fw-app`-Slug | Error-State (a), nutzerfreundliche Meldung auf Deutsch |
-| T-03 | `data-fw-data`-URL mit ungültiger Domain | Error-State (b) |
-| T-04 | `data-fw-data`-URL unerreichbar (404, Netzwerkfehler) | Error-State (b) |
+| T-03 | `data-fw-data` mit ungültigem Dateinamen (Pfad, Slash, URL, Query-String statt reinem Dateinamen) | Error-State (b) |
+| T-04 | `data-fw-data` mit gültigem Dateinamen, aber Datei am aufgelösten Pfad nicht erreichbar (404, Netzwerkfehler) | Error-State (b) |
 | T-05 | CSV nicht parsebar (fehlende Header / ungültige Struktur) | Error-State (b) |
 | T-06 | CSV < 120 Datenzeilen | Empty-State |
 | T-07 | CSV mit fehlender oder leerer `index_value`-Spalte | Empty-State |
@@ -1675,7 +1676,7 @@ Wenn diese Bedingungen nicht erfüllt sind, ist die App redaktionell nicht publi
 
 | Prüfpunkt | Status |
 |---|---|
-| Ghost-Card-Vertrag korrekt? (`data-fw-app`, `data-fw-data`, kein `data-app`, kein produktives `data-fw-theme`) | ✅ §10 |
+| Ghost-Card-Vertrag korrekt? (`data-fw-app`, `data-fw-data`, `data-fw-config`, kein `data-app`, kein produktives `data-fw-theme`) | ✅ §10 |
 | Kein data-app? | ✅ §10 |
 | Kein produktives data-fw-theme? | ✅ §18 |
 | data-fw-options whitelistbar? (Whitelist dokumentiert) | ✅ §11 |
@@ -1747,7 +1748,7 @@ Wenn diese Bedingungen nicht erfüllt sind, ist die App redaktionell nicht publi
 | Fehlermeldungen A11y-konform beschrieben? | ✅ §14.13 |
 | Rote Signals weiterhin verboten? | ✅ §17, §14.0, §14.5 |
 | Keine Code-Dateien geändert? | ✅ |
-| Keine produktive stations.de.json angelegt? | ✅ |
+| Keine produktive stations-de.json angelegt? | ✅ |
 | AP-08b Konsistenz-Nachputz ✅ 2026-06-16? | ✅ |
 
 ---

@@ -1,6 +1,6 @@
 # Finanzwesir Test Page Standard
 
-Stand: 2026-07-14 | Standard-Version: 8 (AP-chart-engine-01 DOC-01: §10 Engine-Fallback-Parität, §5.3 Chart-Chrome-Beispiel) | Geändert von: Claude (Sonnet)
+Stand: 2026-07-21 22:22 | Standard-Version: 9 (Nachputz Testseiten: §7/§10/§10.1/§14 auf Ghost-Feed-Resolver-Vertrag synchronisiert — nur data-csv ist eine lokale Fixture-Referenz) | Geändert von: Claude
 
 > Normativer Standard. Kein Projekttagebuch. Die Wörter **MUSS**, **DARF**, **DARF NICHT**
 > und **SOLL** sind im Sinne von RFC 2119 zu lesen. **SOLL** wird nur bei bewusst begründeter
@@ -237,7 +237,7 @@ Mindestvertrag für die Testseite.
 <div class="kg-card">
   <div class="fw-app"
        data-fw-app="prokrastinations-preis"
-       data-fw-data="../../Theme/assets/data/b1/msci-world-net-return-eur-monthly.csv">
+       data-fw-data="msci-world-net-return-eur-monthly.csv">
   </div>
 </div>
 ```
@@ -245,6 +245,9 @@ Mindestvertrag für die Testseite.
 - `class="fw-app"` — Pflicht.
 - `data-fw-app="[slug]"` — Pflicht.
 - `data-fw-data`, `data-fw-config`, `data-fw-options` — optional, je nach Szenario (§APP-INTERFACE.md §3.1).
+  `data-fw-data`/`data-fw-config` sind ausschließlich untrusted Laufzeitnamen für den zentralen
+  `AppDataResolver` (`APP-INTERFACE.md` §3.1/§6/§7) — voller Dateiname, kein lokaler Pfad, keine
+  URL. Der Testseiten-Checker (§12) prüft sie deshalb nicht als lokale Dateireferenz.
 
 Für Details zu Attributsyntax, Whitelist-Prinzip und Sicherheitsregeln gilt ausschließlich
 `APP-INTERFACE.md` — hier nicht dupliziert.
@@ -315,12 +318,18 @@ Wichtig:
 - Referenzierte lokale Dateien MÜSSEN existieren; Pfade werden **case-sensitiv** geprüft (auch
   unter Windows) — Bestandsfehler wie der Case-Mismatch `scenario_6_decimals.csV` in
   `Theme/chart-tests/index_linien.html:97` (siehe `TESTENV-1a` §11) zeigen, warum das nötig ist.
-- Absichtlich fehlende Dateien oder externe URLs (z. B. `app.test.html`s `./test-data/nonexistent.csv`
-  und `https://evil.example.com/data.csv`) bleiben für den **menschlichen Prüfer** zulässig, wenn
-  der zugehörige Testfall im sichtbaren Erwartungstext klar als Negativtest beschrieben ist. Für den
-  **Checker** gilt zusätzlich §10.1: eine absichtlich fehlende lokale Card-Datenreferenz MUSS am
-  Testfall explizit mit `data-fw-test-allow-missing-ref` deklariert werden, sonst bleibt sie ein
-  Strukturfehler — der Checker kann Erwartungstext nicht lesen und interpretieren.
+- Absichtlich fehlende lokale `data-csv`-Fixtures oder externe URLs bleiben für den
+  **menschlichen Prüfer** zulässig, wenn der zugehörige Testfall im sichtbaren Erwartungstext klar
+  als Negativtest beschrieben ist. Für den **Checker** gilt zusätzlich §10.1: eine absichtlich
+  fehlende lokale `data-csv`-Fixture MUSS am Testfall explizit mit `data-fw-test-allow-missing-ref`
+  deklariert werden, sonst bleibt sie ein Strukturfehler — der Checker kann Erwartungstext nicht
+  lesen und interpretieren.
+- Absichtlich ungültige oder unerreichbare `data-fw-data`-/`data-fw-config`-Werte (z. B. ein
+  Dateiname, der die Resolver-Grammatik verletzt, oder ein Name, zu dem am aufgelösten
+  `/content/files/app-data/`-Pfad real keine Datei liegt) sind **keine lokalen Dateireferenzen**
+  und brauchen — anders als `data-csv` — keinen `data-fw-test-allow-missing-ref`-Marker. Ihr Beweis
+  ist der Laufzeit-Resolver-Test (`AppDataResolver`/`CSVParser`/`JSONParser`), nicht der
+  Strukturchecker (Bestandsmuster: `Apps/prokrastinations-preis/app.test.html`).
 - In dauerhaften Testseiten dürfen `<script src>` und Stylesheet-`<link href>` ausschließlich
   repository-relative oder lokale Pfade verwenden. Absolute `http://`- oder `https://`-URLs in
   diesen Elementen sind ein Strukturfehler — bekannte Regressionen dieser Art sind
@@ -359,10 +368,12 @@ Wichtig:
   bytegleich. Ohne diese Bridge registriert Tailwind die CI-Tokens nicht als Utilities — safelistete
   Klassen wie `bg-error-bg` blieben sonst wirkungslos. Entfällt vollständig mit dem
   Produktionsbuild (T1).
-- Absolute Daten-URLs in produktiven Card-Attributen wie `data-fw-data`, `data-fw-config` oder
-  `data-csv` werden durch diese Regel **nicht** pauschal verboten; für sie gelten die
+- Absolute Daten-URLs in `data-csv` (dem einzigen der drei Card-Datenattribute, das noch ein
+  Pfad-/URL-Feld ist) werden durch diese Regel **nicht** pauschal verboten; für sie gelten die
   kanonischen Datenquellen- und Domainregeln aus `docs/spec/APP-INTERFACE.md` (§6/§7). Diese
   Regel betrifft ausschließlich Script-/Stylesheet-Ladeelemente, nicht Datenattribute.
+  `data-fw-data`/`data-fw-config` sind seit dem Ghost-Feed-Resolver-Vertrag ohnehin nie eine URL
+  (§7 oben) — die Frage einer „absoluten Daten-URL" stellt sich für sie nicht mehr.
 - **Engine-Fallback-Parität (AP-chart-engine-01 DOC-01, 2026-07-14):** Dauerhafte
   `tests/engine/`-Seiten laden kein Tailwind. Rendert die Engine Tailwind-Rezeptklassen in ihr
   DOM, MUSS `FwRenderer` für jede auf dieser Testseite sichtbare Chrome-Geometrie und jeden
@@ -388,18 +399,22 @@ Pfadnormalisierung für diesen Vergleich — `./test-data/nonexistent.csv` und
 <section data-fw-test-case
          data-fw-test-allow-missing-ref="./test-data/nonexistent.csv">
   ...
-  <div class="fw-app"
-       data-fw-app="beispiel"
-       data-fw-data="./test-data/nonexistent.csv">
+  <div class="financial-chart-module"
+       data-type="line"
+       data-csv="./test-data/nonexistent.csv">
   </div>
 </section>
 ```
 
 **Zulässiger Anwendungsbereich:** Der Marker erlaubt eine fehlende lokale Referenz ausschließlich
-aus `data-fw-data`, `data-fw-config` oder `data-csv`. **Nicht** für `<script src>`,
-Stylesheet-`<link href>`, Shared CSS/JS, App-Script, Dateien außerhalb des Repositories oder
-absolute `http://`/`https://`-Daten-URLs (diese brauchen und dürfen den Marker nicht — absolute
-Daten-URLs sind ohnehin nie Gegenstand einer lokalen Existenzprüfung, §10 oben).
+aus `data-csv` — der einzigen lokalen Fixture-Referenz unter den Card-Datenattributen.
+`data-fw-data`/`data-fw-config` sind untrusted Laufzeitnamen für den zentralen `AppDataResolver`
+(§7 oben) und werden vom Checker nicht als lokale Datei aufgelöst — sie brauchen und dürfen diesen
+Marker deshalb nicht tragen; ihr Negativtest-Beweis läuft über den Laufzeit-Resolver, nicht über
+den Strukturchecker. **Ebenfalls nicht** für `<script src>`, Stylesheet-`<link href>`, Shared
+CSS/JS, App-Script, Dateien außerhalb des Repositories oder absolute `http://`/`https://`-Daten-URLs
+in `data-csv` (diese brauchen und dürfen den Marker nicht — absolute Daten-URLs sind ohnehin nie
+Gegenstand einer lokalen Existenzprüfung, §10 oben).
 
 **Gültigkeitsbedingungen** (alle MÜSSEN erfüllt sein):
 
@@ -542,10 +557,12 @@ Pflichten:
   erforderlich.
 ```
 
-Absichtlich fehlende lokale `data-fw-data`-, `data-fw-config`- oder `data-csv`-Referenzen sind nur
-für echte Negativtests zulässig und müssen am zugehörigen `data-fw-test-case` mit
-`data-fw-test-allow-missing-ref` exakt deklariert werden (§10.1). Keine Textheuristik und keine
-globale Ausnahme verwenden.
+Absichtlich fehlende lokale `data-csv`-Referenzen sind nur für echte Negativtests zulässig und
+müssen am zugehörigen `data-fw-test-case` mit `data-fw-test-allow-missing-ref` exakt deklariert
+werden (§10.1). Keine Textheuristik und keine globale Ausnahme verwenden. Absichtlich ungültige
+oder unerreichbare `data-fw-data`-/`data-fw-config`-Werte brauchen diesen Marker nicht — sie sind
+keine lokalen Dateireferenzen; ihr Negativtest-Beweis läuft über den Laufzeit-Resolver, nicht über
+den Strukturchecker (§10 oben).
 
 Keine zusätzliche Capability- oder Manifestpflege verlangen.
 

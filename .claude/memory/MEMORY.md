@@ -29,7 +29,7 @@
 - [Bekannte Pfade direkt lesen, nie Glob](feedback_glob_vs_read.md) — Read mit absolutem Pfad wenn Pfad bekannt; Glob nur bei unbekannten Pfaden; Timeout bei Pflichtquelle = stoppen
 - [Spec-Verbote im engsten Scope formulieren](feedback_spec_verbote_scope.md) — Verbote/Regeln nicht breiter als nötig; explizit abgrenzen was nicht gilt; Gegenstück: [[feedback-verbote-explizit-formulieren]]
 - [Component Composition Architecture](project_comp_arch.md) — App=Board, Komponente=Stein, Engine=Werkzeug; OA-02 als Chart-Komponenten-Entscheidung; §1a in 03_APP_FACTORY_STANDARD_DRAFT.md
-- [Python/PowerShell Tooling](feedback_python_powershell_tooling.md) — Python für Datei-Inhalte (parsen/validieren), PowerShell für Dateisystem/Git; locale-Determinismus
+- [Python/PowerShell Tooling](feedback_python_powershell_tooling.md) — Python für Datei-Inhalte (parsen/validieren), PowerShell für Dateisystem/Git; locale-Determinismus; cmd.exe via Bash-Tool braucht MSYS_NO_PATHCONV=1
 - [Gate als Scope-Klärungs-Kanal](feedback_gate_scope_dialog.md) — Gate-Durchlauf explizit zum Klären von Scope-Grenzen nutzen, nicht nur Checkliste abhaken
 - [CSVParser-Output vertrauenswürdig](feedback_csvparser_vertrauenswuerdig.md) — kein eigener Validierungscode in app.js; Parser liefert korrekt und vollständig
 - [Edit-Vorab-Lesen](feedback_edit_vorab_lesen.md) — Vor Edit die Ziel-Passage lesen; Whitespace/Flexion können exakten Match brechen
@@ -63,3 +63,4 @@
 - [Subagent-Modell-Override greift nicht](project_subagent_model_override.md) — Agent-Tool `model:opus` übersteuert `CLAUDE_CODE_SUBAGENT_MODEL=haiku` nicht; für Opus-Qualität Hauptfaden per /model umstellen oder env-Var temporär ändern
 - [/app-duell Mockup-Duell-Pipeline](project_app_duell_pipeline.md) — Prozess/Skill/Werkzeug + ID-gebundenes Produktentscheidungs-Gate; kanonische Orte docs/App-Fabrik/(vorlagen/)
 - [Ghost.io-Theme-Bau teils via Codex](project_ghost_theme_build.md) — Albert baut Theme/-Templates teils über Codex außerhalb Claude Code; GHOST-LOKALBETRIEB+TMPL-1+T1+M1 fertig (2026-07-19); SEO/GEO-Page-Feldvertrag GHOST-02–04 browserverifiziert (2026-07-21): ghost_head dupliziert Description/Canonical bei befülltem Feld, {{#has tag="#name"}} nicht "hash-name"
+- [Ghost-Feed-Dateinamenvertrag (SEC-04)](project_ghost_feed_resolver_vertrag.md) — data-fw-data/data-fw-config seit 2026-07-21 reine Dateinamen, kein URL-Feld; AppDataResolver.js/JSONParser.js/FinanzwesirJsonData.js neu als CSVParser/FinanzwesirData-Geschwister; prokrastinations-preis migriert (stations-de.json); check-test-pages.py prüft nur noch data-csv lokal

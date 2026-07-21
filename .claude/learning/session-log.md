@@ -67,3 +67,33 @@ Wird nach /distill ins Jahres-Segment rotiert (Rohlog erhalten). Einträge: [FRI
 - [QUESTION] Die GHOST-02-Befunddatei liegt nicht mehr unter `Archiv/local/muss noch eingeordnet werden/` (dort ursprünglich geschrieben), sondern nur noch unter `docs/steering/patches/` — Verschiebung fand außerhalb dieses Fadens statt (vermutlich Albert manuell oder der parallele Faden), nicht von hier aus veranlasst.
 
 ### 2026-07-21 — Kettenabschluss ✅ | RECONCILED: GHOST-02 GHOST-03 GHOST-04
+
+### Ghost-Prototyp ✅ + App-Duell 19 Apps ✅ + APP-DATA-00–05a ✅ + SEO/GEO-Feldvertrag GHOST-02–04 ✅ (2026-07-21) — AP-Wechsel
+
+### 2026-07-21 — GHOST-05: Formalisierung Dateinamenvertrag + Theme-Bootstrapper (SEC-04)
+- [OK] Full-Gate (9 Fragen) sichtbar durchlaufen, Alberts „Führe den Auftrag exakt aus" als Freigabe gewertet. Neuer Decision-Log-Eintrag SEC-04 (Dateinamenvertrag `data-fw-data`/`data-fw-config` + statischer Theme-Bootstrapper). SECURITY-BASELINE.md §6.5/§6.9/§7, APP-INTERFACE.md, APP_FACTORY_IMPLEMENTATION_RFC.md, APP_SPEC.md, STATIONS_CONFIG_CONTRACT.md synchronisiert. PEER_REVIEW_ERGEBNIS-Status NO-GO → GO (mit Nachtrag, nicht stillschweigend überschrieben).
+- [OK] Abschlussmeldung auf Alberts Wunsch zusätzlich als Datei unter `docs/steering/patches/` abgelegt; Namenskonvention aus Bestand ermittelt (`GHOST-0x_THEMA_TYP.md`), da keine AP-ID vergeben war.
+
+### 2026-07-21 — GHOST-06: Korrektur Resolver-Suffixwiderspruch (P1)
+- [FRICTION] Die in GHOST-05 formulierte Resolver-Beschreibung widersprach sich selbst: „vollständiger Dateiname inkl. Suffix" UND „Resolver bildet `.../<name>.csv`" — hätte zu `abc.csv.csv` geführt. Gefunden durch Alberts Vergleich mit dem realen `ChartEngine.js`-Code, nicht durch eigene Prüfung in GHOST-05.
+- [OK] Gegen `ChartEngine.js` verifiziert (reine Präfixbildung, kein Suffix-Anhängen). APP-INTERFACE.md, RFC, APP_SPEC.md korrigiert; 4 selbst eingeführte nachgestellte Leerzeichen in der RFC entfernt (`git diff --check`).
+
+### 2026-07-21 — GHOST-07: Shared-Daten-AP — AppDataResolver/JSONParser/Vault
+- [OK] `AppDataResolver.js`, `JSONParser.js` (Geschwisterdatei zu `CSVParser.js`), `FinanzwesirJsonData.js` (rekursiv einfrierender JSON-Vault), `tests/json-parser.test.mjs` neu angelegt. `CSVParser.js`/`FinanzwesirData.js` nur gelesen, nicht verändert. 32 Testprüfungen grün, CSV-Regression unverändert grün.
+- [QUESTION] Beim Testschreiben festgestellt: der reale Produktivname `stations.de.json` verletzt die in GHOST-05 formalisierte Grammatik `^[a-z0-9_-]+\.json$` (interner Punkt). Nicht stillschweigend über einen Fake-Dateinamen im Test verdeckt, sondern als eigener Testfall + offener Punkt gemeldet — Entscheidung (Umbenennen oder Grammatik ändern) lag außerhalb des Auftrags.
+
+### 2026-07-21 — GHOST-08: Datenmigration prokrastinations-preis
+- [OK] `app.js` auf Resolver/JSONParser umgestellt (kein `.trim()` vor Auflösung, `validateStationsJson()` bleibt Fachvalidierung), `buildAppContext()` über lokale `deepFreezeContext()`-Hilfe rekursiv eingefroren. `config/stations.de.json` → `stations-de.json` umbenannt (bytegleich) — löste den in GHOST-07 gefundenen Grammatikwiderspruch auf. `app.test.html` auf kanonische Dateinamen umgestellt, testseitig lokaler Fetch-Stub ergänzt, 4 neue Error-(d)-Fälle, 1 Reduced-Motion-Fall (als Anleitung markiert, kein hier ausgeführter Browsertest).
+- [FRICTION] CSV-Regressionstest über das Netzlaufwerk scheiterte zweimal mit „Pfad nicht gefunden" — Ursache: fehlende Anführungszeichen um den leerzeichenhaltigen UNC-Pfad in der `cmd`-Aufrufkette über Git Bash; nach Korrektur grün.
+- [FRICTION] Erster Deep-Freeze-Nachweis (`node -e`) meldete fälschlich „Mutation wirft nicht" — Ursache: Sloppy Mode ohne `'use strict'`; mit `'use strict'` bestätigte sich das erwartete Wurfverhalten (14/14 grün).
+- [QUESTION] Abschließender `check-test-pages.py`-Lauf meldete 59 Strukturfehler: 57 durch die neue Dateinamenkonvention verursachte Fehlalarme (Checker prüfte `data-fw-data`/`data-fw-config` noch als lokale Pfade) + 2 unabhängige, vorbestehende Befunde (Manifest-Utility-Überschuss, strukturell ungültiger Engine-Test). Alle drei gemeldet, keiner in diesem Auftrag behoben (außerhalb Write-Scope) — bereitete GHOST-09 vor.
+
+### 2026-07-21 — GHOST-09: Nachputz Testseiten-Checker
+- [OK] `tools/check-test-pages.py`: nur noch `data-csv` als lokale Fixture-Referenz geprüft (`LOCAL_DATA_ATTRS` von 3 auf 1 Attribut), `TEST_PAGE_STANDARD.md` §7/§10/§10.1/§14 synchronisiert, überflüssige `data-fw-test-allow-missing-ref`-Marker in `app.test.html` entfernt, Play-CDN-Manifest um 21 nicht deklarierte Utilities bereinigt, `tests/engine/app-file.test.html` in 3 echte Testfallgruppen restrukturiert (Container-/Attributwerte unverändert). Checker danach `TESTSEITEN-STRUKTUR: GRUEN, Strukturfehler: 0`; 3 Beweispunkte per direktem Funktionsaufruf verifiziert.
+- [FRICTION] Erster Beweisversuch scheiterte an einem relativen statt absoluten `base_dir`-Pfad (fälschlich „verlässt das Repository"); nach Korrektur auf absolute Pfade lieferten die Aufrufe die erwarteten Ergebnisse.
+- [OK] Nebenprodukt `tools/__pycache__/` (Python-Bytecode-Cache) entstanden; Löschversuch von der Berechtigungsprüfung abgelehnt, harmlos liegen gelassen.
+
+### 2026-07-21 — Chronik erzeugt und geprüft
+- [OK] Faden-Chronik erzeugt: `Archiv/Chroniken/chronist-v1/CHRONIK-2026-07-21-ghost-feed-resolver-vertrag.md`. `/chronik-check` ausgeführt — 0 harte Fehler, 0 Warnungen.
+
+### 2026-07-21 — Kettenabschluss ✅ | RECONCILED: GHOST-05 GHOST-06 GHOST-07 GHOST-08 GHOST-09

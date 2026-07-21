@@ -1,7 +1,7 @@
 # APP_FACTORY_IMPLEMENTATION_RFC
 
 **Projekt:** Finanzwesir 2.0 — App-Fabrik  
-**Stand:** 2026-05-10  
+**Stand:** 2026-07-21 16:49 — Resolver-Suffixwiderspruch korrigiert (reine Präfixbildung, `01_DECISION_LOG.md` SEC-04)
 **Status:** RFC / Draft  
 **Pilot-App:** `Apps/prokrastinations-preis`  
 **Ziel-Spec nach Review:** `docs/spec/APP-FACTORY-IMPLEMENTATION-STANDARD.md`  
@@ -609,11 +609,11 @@ internal defaults
 → validated AppData
 ```
 
-Später:
+Später (entschieden, → SEC-04 `01_DECISION_LOG.md`): `data-fw-config` trägt ausschließlich einen vollständigen kanonischen JSON-Dateinamen einschließlich Suffix (`^[a-z0-9_-]+\.json$`), keine URL. Der zentrale Resolver bildet `/content/files/app-data/<dateiname>` durch reine Präfixbildung — `<dateiname>` ist bereits vollständig mit `.json`, kein zusätzlich angehängtes Suffix (analog `data-fw-data`/`data-app-file`, → `ChartEngine.js`). Kein Fetch aus freier Domain, kein CORS-Thema.
 
 ```text
 internal defaults
-→ optional data-fw-config
+→ optional data-fw-config (kanonischer Dateiname, zentral aufgelöst)
 → data-fw-options overrides
 → validated AppData
 ```
@@ -953,7 +953,7 @@ Factory-Standard-Kandidat.
 
 ### Empfohlener Default
 
-**Zielbild: globaler Bootstrapper + Minimal-Cards.**
+**Entschieden (→ SEC-04, `01_DECISION_LOG.md`, 2026-07-21): statischer Bootstrapper im Theme-Bundle + Minimal-Cards.**
 
 Redakteur fügt nur ein:
 
@@ -963,16 +963,13 @@ Redakteur fügt nur ein:
 </div>
 ```
 
-Ein globaler Bootstrapper sucht `.fw-app` Container, prüft den Slug gegen eine Whitelist und lädt bzw. initialisiert die passende App.
+Ein statischer Bootstrapper im Theme-Bundle sucht `.fw-app` Container, prüft den Slug gegen eine literale Registry (Slug → statisch importierte Init-Funktion) und initialisiert die passende App. Kein Wert aus einem `data-*`-Attribut beeinflusst je einen Import-Pfad, eine Script-URL oder einen `import()`-Ausdruck. Unbekannter Slug → Error-State, kein Nachladen. Jeder Container eigene `try/catch`-Error-Boundary; `data-fw-initialized`-Guard bleibt Pflicht.
 
 ### Wichtig
 
-Dieses Deployment-Modell ist ein **Factory-Standard-Kandidat**, aber noch nicht praktisch verifiziert.
+Das Grundprinzip (Theme-Einbindung statt Code Injection, statische Registry statt dynamischem Nachladen) ist **entschieden**, nicht mehr Kandidat. Löst B3 zugunsten „Theme". Praktisch noch zu testen bleiben nur die operativen Ghost-Details:
 
-Offen zu testen:
-
-- Ghost Code Injection Header oder Footer?
-- Ghost-Theme-Integration statt Code Injection?
+- Ghost-Theme-Integration: genaue Einbindungsstelle im Theme-Build
 - echtes Upload-URL-Schema
 - Pfadstruktur für App-Dateien
 - Cache-Busting
@@ -1038,7 +1035,7 @@ Vor erstem echten Ghost-Deployment.
 
 ### Status
 
-Factory-Standard-Kandidat, aber Deployment-Details offen.
+Grundprinzip entschieden (→ SEC-04). Operative Deployment-Details (Upload-URL-Schema, Cache-Busting, Whitelist-Pflege) bleiben offen.
 
 ---
 
@@ -1417,18 +1414,16 @@ Testdatei in Ghost hochladen und URL-Schema dokumentieren.
 
 ### B3 — Bootstrapper-Strategie
 
-**Frage:**  
+**Status: 🟢 ERLEDIGT (2026-07-21, → SEC-04 `01_DECISION_LOG.md`).**
+
+**Frage (historisch):**
 Wird der Bootstrapper global per Ghost Code Injection / Theme eingebunden oder app-spezifisch geladen?
 
-**Einordnung:**  
-Blocker vor Produktionsarchitektur.  
-Kein Blocker für lokale `app.test.html`.
+**Entscheidung:**
+Theme — statischer Bootstrapper im Theme-Bundle mit fester Registry/Slug-Whitelist, kein Code Injection, kein Script pro Ghost-Card.
 
-**Empfohlene Richtung:**  
-Globaler Bootstrapper als Factory-Standard-Kandidat.
-
-**Nächster Schritt:**  
-Praktischen Ghost-Test durchführen: Header vs Footer vs Theme-Einbindung.
+**Verbleibt offen (kein Blocker für Migration):**
+Genaue Einbindungsstelle innerhalb des Theme-Builds (Header/Footer-Äquivalent im Theme-Bundle-Prozess) — praktischer Ghost-Test.
 
 ---
 
@@ -1471,7 +1466,7 @@ Bestätigt sind:
 
 Noch echte Albert-Entscheidungen / Bestätigungen:
 
-1. Soll der globale Bootstrapper als Zielbild weiterverfolgt werden?
+1. ~~Soll der globale Bootstrapper als Zielbild weiterverfolgt werden?~~ Entschieden: Ja — statischer Theme-Bootstrapper mit fester Registry/Slug-Whitelist (→ SEC-04, 2026-07-21).
 2. Reicht lokale Testseite für Slice 0–6 vor echtem Ghost-Test?
 3. Wird Core-Extraktion erst nach Pilot 2 geprüft?
 4. Darf Pilot 1 mit Fallback-Design-Tokens starten, falls `screen.css` noch unvollständig ist?

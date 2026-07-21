@@ -201,9 +201,12 @@ def check_loadable_ref(root: Path, base_dir: Path, ref: str, label: str) -> List
     return findings
 
 
-def check_data_ref(root: Path, base_dir: Path, ref: str, attr_name: str) -> List[str]:
-    """Prueft data-fw-data / data-fw-config / data-csv: absolute Daten-URLs sind
-    zulaessig und werden nicht lokal geprueft (APP-INTERFACE.md bleibt kanonisch)."""
+def check_data_csv_ref(root: Path, base_dir: Path, ref: str, attr_name: str) -> List[str]:
+    """Prueft ausschliesslich data-csv: die einzige lokale Fixture-Referenz unter den
+    Card-Datenattributen. `data-fw-data`/`data-fw-config` sind untrusted Laufzeitnamen fuer
+    den zentralen AppDataResolver (docs/spec/APP-INTERFACE.md §3.1/§6/§7) -- reine
+    Ghost-Feed-Dateinamen ohne lokalen Pfadbezug, deshalb hier bewusst nicht (mehr) geprueft.
+    Absolute Daten-URLs sind zulaessig und werden nicht lokal geprueft."""
     findings: List[str] = []
     clean = split_query_fragment(ref)
     if clean == "":
@@ -632,7 +635,8 @@ def validate_references(
     is_app_page: bool = False,
 ) -> List[str]:
     """exempt: Menge aus (id(node), attr_name) -- vom Marker data-fw-test-allow-missing-ref
-    testfalllokal geprueft und explizit zugelassen (§10.1 TEST_PAGE_STANDARD.md).
+    testfalllokal geprueft und explizit zugelassen (§10.1 TEST_PAGE_STANDARD.md). Der Marker
+    gilt seit dem Ghost-Feed-Resolver-Vertrag nur noch fuer `data-csv` (s. LOCAL_DATA_ATTRS).
     is_app_page: Apps/{slug}/app.test.html -- hier ist genau der kanonische
     Tailwind-Play-CDN-Tag von der absoluten-URL-Sperre ausgenommen (§10 TEST_PAGE_STANDARD.md,
     AP-tailwind-02a); validate_tailwind_cdn() prueft diesen Tag eigenstaendig deterministisch."""
@@ -654,20 +658,30 @@ def validate_references(
             if href is not None and "stylesheet" in rel.split():
                 findings.extend(check_loadable_ref(root, base_dir, href, "<link href> (stylesheet)"))
 
+    # Nur data-csv ist eine lokale Fixture-Referenz. data-fw-data/data-fw-config sind
+    # untrusted Laufzeit-Dateinamen fuer den zentralen AppDataResolver -- der Checker loest
+    # sie nicht als lokale Datei auf und verlangt ihre Existenz nicht (docs/spec/APP-INTERFACE.md
+    # §3.1/§6/§7; Ghost-Feed-Resolver-Vertrag).
     for n in iter_descendants(dom):
-        for attr_name in ("data-fw-data", "data-fw-config", "data-csv"):
+        for attr_name in LOCAL_DATA_ATTRS:
             if attr_name in n.attrs:
                 if (id(n), attr_name) in exempt:
                     continue
                 val = n.attrs.get(attr_name)
                 if val is not None:
-                    findings.extend(check_data_ref(root, base_dir, val, attr_name))
+                    findings.extend(check_data_csv_ref(root, base_dir, val, attr_name))
 
     return findings
 
 
 MISSING_REF_ATTR = "data-fw-test-allow-missing-ref"
-LOCAL_DATA_ATTRS = ("data-fw-data", "data-fw-config", "data-csv")
+
+# Ghost-Feed-Resolver-Vertrag (docs/spec/APP-INTERFACE.md §3.1/§6/§7): data-fw-data und
+# data-fw-config sind ausschliesslich untrusted Laufzeitnamen fuer den zentralen
+# AppDataResolver -- keine lokalen Dateipfade. Nur data-csv bleibt eine lokale
+# Test-Fixture-Referenz und wird vom Checker (und vom Marker data-fw-test-allow-missing-ref,
+# §10.1 TEST_PAGE_STANDARD.md) geprueft.
+LOCAL_DATA_ATTRS = ("data-csv",)
 
 # TESTENV-1eB: Marker fuer bewusst fehlendes Pflichtattribut data-fw-app (kein
 # Datei-/Pfad-Bezug, deshalb kein Wertevergleich wie bei MISSING_REF_ATTR --
@@ -677,7 +691,8 @@ MISSING_APP_ID_ATTR = "data-fw-test-allow-missing-app-id"
 
 
 def find_local_data_refs_in_case(case: Node) -> List[Tuple[Node, str, str]]:
-    """Alle lokalen Card-Datenreferenzen (Attributname, Rohwert) innerhalb eines Testfalls."""
+    """Alle lokalen Card-Datenreferenzen (Attributname, Rohwert) innerhalb eines Testfalls --
+    seit dem Ghost-Feed-Resolver-Vertrag nur noch data-csv (s. LOCAL_DATA_ATTRS)."""
     results: List[Tuple[Node, str, str]] = []
     for n in iter_descendants(case):
         for attr_name in LOCAL_DATA_ATTRS:

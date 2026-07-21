@@ -81,7 +81,7 @@
       --shadow-soft: var(--shadow-soft);
       --shadow-hover: var(--shadow-hover);
     }
-    @source inline("relative box-border w-full min-h-48 bg-bg font-body text-text p-4 md:p-6 flex items-center justify-center gap-3 p-6 text-text-muted h-8 w-8 animate-spin motion-reduce:animate-none rounded-full border-4 border-border border-t-primary rounded-lg border border-error-border bg-error-bg text-error-text opacity-60 flex-wrap gap-4 mt-4 flex-1 basis-36 bg-surface px-4 py-2 mb-1 text-sm m-0 text-2xl font-bold my-4 gap-x-4 gap-y-2 cursor-pointer shrink-0 text-text-muted min-w-0 flex-1 basis-40 cursor-pointer accent-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-petrol-500 focus-visible:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed min-w-[7ch] shrink-0 text-right font-bold text-text inline-flex rounded-md transition-colors motion-reduce:transition-none disabled:pointer-events-none bg-primary text-white hover:bg-petrol-700 active:bg-petrol-800 ml-auto hover:bg-bg-faint active:bg-surface sm:w-auto no-underline my-5 flex-col text-xs uppercase tracking-wide text-lg text-text-sec mt-2 text-center justify-between gap-2 px-3 text-left font-semibold hover:text-text transition-transform rotate-180 pl-3 grid grid-cols-2 gap-y-1 text-base border-l-2 pl-4 sr-only sm:inline-flex sm:justify-start sm:w-fit mt-6 mb-2 text-xl text-primary bg-bg-faint p-0.5 gap-0.5 rounded px-2.5 py-1 shadow-soft inline-block min-w-48 py-3 select-none transition-shadow hover:shadow-hover opacity-40 grayscale h-2.5 w-2.5 self-start hover:border-primary hover:text-primary");
+    @source inline("relative box-border w-full min-h-48 bg-bg font-body text-text p-4 md:p-6 flex items-center justify-center gap-3 p-6 text-text-muted h-8 w-8 animate-spin motion-reduce:animate-none rounded-full border-4 border-border border-t-primary rounded-lg border border-error-border bg-error-bg text-error-text opacity-60 flex-wrap gap-4 mt-4 flex-1 basis-36 bg-surface px-4 py-2 mb-1 text-sm m-0 text-2xl font-bold my-4 gap-x-4 gap-y-2 cursor-pointer shrink-0 text-text-muted min-w-0 flex-1 basis-40 cursor-pointer accent-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-petrol-500 focus-visible:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed min-w-[7ch] shrink-0 text-right font-bold text-text inline-flex rounded-md transition-colors motion-reduce:transition-none disabled:pointer-events-none bg-primary text-white hover:bg-petrol-700 active:bg-petrol-800 ml-auto hover:bg-bg-faint active:bg-surface sm:w-auto no-underline my-5 flex-col text-xs uppercase tracking-wide text-lg text-text-sec mt-2 text-center justify-between gap-2 px-3 text-left font-semibold hover:text-text transition-transform rotate-180 pl-3 grid grid-cols-2 gap-y-1 text-base border-l-2 pl-4 sr-only sm:inline-flex sm:justify-start sm:w-fit mt-6 mb-2 text-xl");
   </style>
   <script src="../../tests/shared/test-page.js" defer></script>
   <style>
@@ -127,7 +127,7 @@
       <h3>Erwartetes Verhalten</h3>
       <ul>
       <li>Erwartung: Loading → Content-State. Screen 1 sichtbar mit Slider (300 €). Keine KpiCards (AP-14: entfernt von Screen 2).</li>
-      <li>„10 Jahre zurückspringen" → Screen 2: erste Station-Card erscheint (Station aus stations.de.json).</li>
+      <li>„10 Jahre zurückspringen" → Screen 2: erste Station-Card erscheint (Station aus stations-de.json).</li>
       <li>ARIA Live Region vorhanden (DevTools → DOM: [data-fw-role="a11y-result"]).</li>
       <li>Konsole: keine JS-Exception (v3.0: kein Editorial Gate mehr).</li>
       <li>Testfälle: T-01, AP-14-A01</li>
@@ -136,7 +136,8 @@
     <div class="kg-card">
       <div class="fw-app"
            data-fw-app="prokrastinations-preis"
-           data-fw-data="../../Theme/assets/data/b1/msci-world-net-return-eur-monthly.csv">
+           data-fw-data="msci-world-net-return-eur-monthly.csv"
+           data-fw-config="stations-de.json">
       </div>
     </div>
   </div>
@@ -191,13 +192,15 @@
     <div class="kg-card">
       <div class="fw-app"
            data-fw-app="prokrastinations-preis"
-           data-fw-data="../../Theme/assets/data/b1/msci-world-net-return-eur-monthly.csv">
+           data-fw-data="msci-world-net-return-eur-monthly.csv"
+           data-fw-config="stations-de.json">
       </div>
     </div>
     <div class="kg-card">
       <div class="fw-app"
            data-fw-app="prokrastinations-preis"
-           data-fw-data="../../Theme/assets/data/b1/msci-world-net-return-eur-monthly.csv">
+           data-fw-data="msci-world-net-return-eur-monthly.csv"
+           data-fw-config="stations-de.json">
       </div>
     </div>
   </div>
@@ -218,7 +221,8 @@
     <div class="kg-card">
       <div class="fw-app"
            data-fw-app="prokrastinations-preis"
-           data-fw-data="../../Theme/assets/data/b1/msci-world-net-return-eur-monthly.csv"
+           data-fw-data="msci-world-net-return-eur-monthly.csv"
+           data-fw-config="stations-de.json"
            data-fw-options="defaultRate:&lt;img src=x onerror=alert(1)&gt;">
       </div>
     </div>
@@ -259,7 +263,8 @@
       <div class="kg-card">
         <div class="fw-app"
              data-fw-app="prokrastinations-preis"
-             data-fw-data="../../Theme/assets/data/b1/msci-world-net-return-eur-monthly.csv">
+             data-fw-data="msci-world-net-return-eur-monthly.csv"
+             data-fw-config="stations-de.json">
         </div>
       </div>
       <p>Dieser Absatz nach der App soll ebenfalls unverändert aussehen.</p>
@@ -270,44 +275,48 @@
   <!-- Slice 1: Daten-States (T-03 bis T-07b)                    -->
   <!-- ═══════════════════════════════════════════════════════════ -->
 
-  <!-- Szenario H: Ungültige Domain → Error (b) -->
+  <!-- Szenario H: Ungültiger Dateiname (Resolver lehnt ab) → Error (b)
+       CHANGED — Datenmigration: data-fw-data ist jetzt ausschliesslich ein vollstaendiger
+       Dateiname (kein URL-Feld mehr, SEC-04). Der bisherige Fremd-URL-Test ist damit
+       gegenstandslos (resolveCsvAppDataFile() wirft schon vor jeder Netzwerkanfrage) --
+       ersetzt durch einen Dateinamen, der die Resolver-Grammatik ^[a-z0-9_-]+\.csv$ verletzt. -->
   <div class="fw-test-case"
      data-fw-test-case>
-    <h2>H — Ungültige Domain (nicht finanzwesir.com)</h2>
+    <h2>H — Ungültiger Dateiname (Resolver lehnt ab, keine Netzwerkanfrage)</h2>
 
     <div class="fw-test-expected" data-fw-expected-behavior>
       <h3>Erwartetes Verhalten</h3>
       <ul>
       <li>Erwartung: Error-State (b), Meldung „Daten konnten nicht geladen werden. Bitte Seite neu laden."</li>
-      <li>CSVParser GATEKEEPER schlägt an — keine Verbindung zu Fremd-URL.</li>
-      <li>Testfall: T-03</li>
+      <li>resolveCsvAppDataFile() wirft vor jeder Netzwerkanfrage (Pfad/Traversal ist kein zulässiger Dateiname) — kein fetch, kein CSVParser-Aufruf.</li>
+      <li>Testfall: T-03 (Datenmigration: Dateinamen- statt Domain-Test)</li>
       </ul>
     </div>
     <div class="kg-card">
       <div class="fw-app"
            data-fw-app="prokrastinations-preis"
-           data-fw-data="https://evil.example.com/data.csv">
+           data-fw-data="../evil-data.csv">
       </div>
     </div>
   </div>
 
-  <!-- Szenario I: Nicht erreichbare URL (404) → Error (b) -->
+  <!-- Szenario I: Gültiger Dateiname, Datei am aufgelösten Pfad nicht erreichbar (404) → Error (b) -->
   <div class="fw-test-case"
-     data-fw-test-case
-     data-fw-test-allow-missing-ref="./test-data/nonexistent.csv">
-    <h2>I — Nicht erreichbare URL (404)</h2>
+     data-fw-test-case>
+    <h2>I — Gültiger Dateiname, 404 am aufgelösten app-data-Pfad</h2>
 
     <div class="fw-test-expected" data-fw-expected-behavior>
       <h3>Erwartetes Verhalten</h3>
       <ul>
       <li>Erwartung: Error-State (b), Meldung „Daten konnten nicht geladen werden. Bitte Seite neu laden."</li>
+      <li>Dateiname besteht die Resolver-Grammatik; /content/files/app-data/nonexistent.csv existiert real nicht (kein Stub-Mapping) → natürlicher 404.</li>
       <li>Testfall: T-04</li>
       </ul>
     </div>
     <div class="kg-card">
       <div class="fw-app"
            data-fw-app="prokrastinations-preis"
-           data-fw-data="./test-data/nonexistent.csv">
+           data-fw-data="nonexistent.csv">
       </div>
     </div>
   </div>
@@ -327,7 +336,7 @@
     <div class="kg-card">
       <div class="fw-app"
            data-fw-app="prokrastinations-preis"
-           data-fw-data="./test-data/invalid.csv">
+           data-fw-data="invalid.csv">
       </div>
     </div>
   </div>
@@ -347,7 +356,7 @@
     <div class="kg-card">
       <div class="fw-app"
            data-fw-app="prokrastinations-preis"
-           data-fw-data="./test-data/short.csv">
+           data-fw-data="short.csv">
       </div>
     </div>
   </div>
@@ -367,7 +376,7 @@
     <div class="kg-card">
       <div class="fw-app"
            data-fw-app="prokrastinations-preis"
-           data-fw-data="./test-data/no-index-value.csv">
+           data-fw-data="no-index-value.csv">
       </div>
     </div>
   </div>
@@ -387,7 +396,7 @@
     <div class="kg-card">
       <div class="fw-app"
            data-fw-app="prokrastinations-preis"
-           data-fw-data="./test-data/no-eur.csv">
+           data-fw-data="no-eur.csv">
       </div>
     </div>
   </div>
@@ -407,7 +416,7 @@
     <div class="kg-card">
       <div class="fw-app"
            data-fw-app="prokrastinations-preis"
-           data-fw-data="./test-data/usd-suffix.csv">
+           data-fw-data="usd-suffix.csv">
       </div>
     </div>
   </div>
@@ -432,7 +441,8 @@
     <div class="kg-card">
       <div class="fw-app"
            data-fw-app="prokrastinations-preis"
-           data-fw-data="../../Theme/assets/data/b1/msci-world-net-return-eur-monthly.csv"
+           data-fw-data="msci-world-net-return-eur-monthly.csv"
+           data-fw-config="stations-de.json"
            data-fw-options="defaultRate:2000">
       </div>
     </div>
@@ -454,7 +464,8 @@
     <div class="kg-card">
       <div class="fw-app"
            data-fw-app="prokrastinations-preis"
-           data-fw-data="../../Theme/assets/data/b1/msci-world-net-return-eur-monthly.csv"
+           data-fw-data="msci-world-net-return-eur-monthly.csv"
+           data-fw-config="stations-de.json"
            data-fw-options="defaultRate:50">
       </div>
     </div>
@@ -482,7 +493,8 @@
     <div class="kg-card">
       <div class="fw-app"
            data-fw-app="prokrastinations-preis"
-           data-fw-data="../../Theme/assets/data/b1/msci-world-net-return-eur-monthly.csv">
+           data-fw-data="msci-world-net-return-eur-monthly.csv"
+           data-fw-config="stations-de.json">
       </div>
     </div>
   </div>
@@ -502,7 +514,8 @@
     <div class="kg-card">
       <div class="fw-app"
            data-fw-app="prokrastinations-preis"
-           data-fw-data="../../Theme/assets/data/b1/msci-world-net-return-eur-monthly.csv"
+           data-fw-data="msci-world-net-return-eur-monthly.csv"
+           data-fw-config="stations-de.json"
            data-fw-options="defaultRate:abc">
       </div>
     </div>
@@ -530,7 +543,7 @@
     <div class="kg-card">
       <div class="fw-app"
            data-fw-app="prokrastinations-preis"
-           data-fw-data="./test-data/no-date.csv">
+           data-fw-data="no-date.csv">
       </div>
     </div>
   </div>
@@ -552,7 +565,7 @@
     <div class="kg-card">
       <div class="fw-app"
            data-fw-app="prokrastinations-preis"
-           data-fw-data="./test-data/invalid-index-value.csv">
+           data-fw-data="invalid-index-value.csv">
       </div>
     </div>
   </div>
@@ -580,7 +593,8 @@
     <div class="kg-card">
       <div class="fw-app"
            data-fw-app="prokrastinations-preis"
-           data-fw-data="../../Theme/assets/data/b1/msci-world-net-return-eur-monthly.csv">
+           data-fw-data="msci-world-net-return-eur-monthly.csv"
+           data-fw-config="stations-de.json">
       </div>
     </div>
   </div>
@@ -610,7 +624,8 @@
     <div class="kg-card">
       <div class="fw-app"
            data-fw-app="prokrastinations-preis"
-           data-fw-data="../../Theme/assets/data/b1/msci-world-net-return-eur-monthly.csv">
+           data-fw-data="msci-world-net-return-eur-monthly.csv"
+           data-fw-config="stations-de.json">
       </div>
     </div>
   </div>
@@ -635,7 +650,8 @@
     <div class="kg-card">
       <div class="fw-app"
            data-fw-app="prokrastinations-preis"
-           data-fw-data="../../Theme/assets/data/b1/msci-world-net-return-eur-monthly.csv">
+           data-fw-data="msci-world-net-return-eur-monthly.csv"
+           data-fw-config="stations-de.json">
       </div>
     </div>
   </div>
@@ -656,7 +672,8 @@
     <div class="kg-card">
       <div class="fw-app"
            data-fw-app="prokrastinations-preis"
-           data-fw-data="../../Theme/assets/data/b1/msci-world-net-return-eur-monthly.csv">
+           data-fw-data="msci-world-net-return-eur-monthly.csv"
+           data-fw-config="stations-de.json">
       </div>
     </div>
   </div>
@@ -681,7 +698,8 @@
     <div class="kg-card">
       <div class="fw-app"
            data-fw-app="prokrastinations-preis"
-           data-fw-data="../../Theme/assets/data/b1/msci-world-net-return-eur-monthly.csv">
+           data-fw-data="msci-world-net-return-eur-monthly.csv"
+           data-fw-config="stations-de.json">
       </div>
     </div>
   </div>
@@ -704,7 +722,8 @@
     <div class="kg-card">
       <div class="fw-app"
            data-fw-app="prokrastinations-preis"
-           data-fw-data="../../Theme/assets/data/b1/msci-world-net-return-eur-monthly.csv">
+           data-fw-data="msci-world-net-return-eur-monthly.csv"
+           data-fw-config="stations-de.json">
       </div>
     </div>
   </div>
@@ -726,7 +745,8 @@
     <div class="kg-card">
       <div class="fw-app"
            data-fw-app="prokrastinations-preis"
-           data-fw-data="../../Theme/assets/data/b1/msci-world-net-return-eur-monthly.csv">
+           data-fw-data="msci-world-net-return-eur-monthly.csv"
+           data-fw-config="stations-de.json">
       </div>
     </div>
   </div>
@@ -754,7 +774,8 @@
     <div class="kg-card">
       <div class="fw-app"
            data-fw-app="prokrastinations-preis"
-           data-fw-data="../../Theme/assets/data/b1/msci-world-net-return-eur-monthly.csv">
+           data-fw-data="msci-world-net-return-eur-monthly.csv"
+           data-fw-config="stations-de.json">
       </div>
     </div>
   </div>
@@ -777,7 +798,8 @@
     <div class="kg-card">
       <div class="fw-app"
            data-fw-app="prokrastinations-preis"
-           data-fw-data="../../Theme/assets/data/b1/msci-world-net-return-eur-monthly.csv">
+           data-fw-data="msci-world-net-return-eur-monthly.csv"
+           data-fw-config="stations-de.json">
       </div>
     </div>
   </div>
@@ -800,7 +822,8 @@
     <div class="kg-card">
       <div class="fw-app"
            data-fw-app="prokrastinations-preis"
-           data-fw-data="../../Theme/assets/data/b1/msci-world-net-return-eur-monthly.csv">
+           data-fw-data="msci-world-net-return-eur-monthly.csv"
+           data-fw-config="stations-de.json">
       </div>
     </div>
   </div>
@@ -822,7 +845,126 @@
     <div class="kg-card">
       <div class="fw-app"
            data-fw-app="prokrastinations-preis"
-           data-fw-data="../../Theme/assets/data/b1/msci-world-net-return-eur-monthly.csv">
+           data-fw-data="msci-world-net-return-eur-monthly.csv"
+           data-fw-config="stations-de.json">
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════════ -->
+  <!-- NEU — Datenmigration: Error-(d)-Fälle (Stations-JSON)      -->
+  <!-- ═══════════════════════════════════════════════════════════ -->
+
+  <!-- Szenario AG: ungültiger data-fw-config-Dateiname → Error (d) -->
+  <div class="fw-test-case"
+     data-fw-test-case>
+    <h2>AG — Ungültiger data-fw-config-Dateiname → Error (d)</h2>
+
+    <div class="fw-test-expected" data-fw-expected-behavior>
+      <h3>Erwartetes Verhalten</h3>
+      <ul>
+      <li>Erwartung: Error-State (d), Meldung „Die Zeitreise kann gerade nicht geladen werden."</li>
+      <li>resolveJsonAppDataFile() wirft vor jeder Netzwerkanfrage (Traversal ist kein zulässiger Dateiname) — kein fetch, kein JSONParser-Aufruf.</li>
+      <li>CSV lädt unabhängig davon korrekt (data-fw-data gültig) — nur der JSON-Pfad schlägt fehl.</li>
+      </ul>
+    </div>
+    <div class="kg-card">
+      <div class="fw-app"
+           data-fw-app="prokrastinations-preis"
+           data-fw-data="msci-world-net-return-eur-monthly.csv"
+           data-fw-config="../evil-config.json">
+      </div>
+    </div>
+  </div>
+
+  <!-- Szenario AH: gültiger data-fw-config-Dateiname, 404 am aufgelösten Pfad → Error (d) -->
+  <div class="fw-test-case"
+     data-fw-test-case>
+    <h2>AH — Gültiger Dateiname, 404 am aufgelösten app-data-Pfad → Error (d)</h2>
+
+    <div class="fw-test-expected" data-fw-expected-behavior>
+      <h3>Erwartetes Verhalten</h3>
+      <ul>
+      <li>Erwartung: Error-State (d), Meldung „Die Zeitreise kann gerade nicht geladen werden."</li>
+      <li>Dateiname besteht die Resolver-Grammatik; /content/files/app-data/stations-missing.json existiert real nicht (kein Stub-Mapping) → natürlicher 404.</li>
+      </ul>
+    </div>
+    <div class="kg-card">
+      <div class="fw-app"
+           data-fw-app="prokrastinations-preis"
+           data-fw-data="msci-world-net-return-eur-monthly.csv"
+           data-fw-config="stations-missing.json">
+      </div>
+    </div>
+  </div>
+
+  <!-- Szenario AI: syntaktisch ungültiges Stations-JSON → Error (d) -->
+  <div class="fw-test-case"
+     data-fw-test-case>
+    <h2>AI — Syntaktisch ungültiges Stations-JSON → Error (d)</h2>
+
+    <div class="fw-test-expected" data-fw-expected-behavior>
+      <h3>Erwartetes Verhalten</h3>
+      <ul>
+      <li>Erwartung: Error-State (d), Meldung „Die Zeitreise kann gerade nicht geladen werden."</li>
+      <li>Fetch-Stub liefert absichtlich kaputtes JSON (kein gültiges Objekt) für diesen Dateinamen — JSON.parse() in parseJsonText() schlägt fehl.</li>
+      </ul>
+    </div>
+    <div class="kg-card">
+      <div class="fw-app"
+           data-fw-app="prokrastinations-preis"
+           data-fw-data="msci-world-net-return-eur-monthly.csv"
+           data-fw-config="stations-invalid-syntax.json">
+      </div>
+    </div>
+  </div>
+
+  <!-- Szenario AJ: fachlich ungültiges Stations-JSON (Contract-Verstoß) → Error (d) -->
+  <div class="fw-test-case"
+     data-fw-test-case>
+    <h2>AJ — Fachlich ungültiges Stations-JSON (Contract-Verstoß) → Error (d)</h2>
+
+    <div class="fw-test-expected" data-fw-expected-behavior>
+      <h3>Erwartetes Verhalten</h3>
+      <ul>
+      <li>Erwartung: Error-State (d), Meldung „Die Zeitreise kann gerade nicht geladen werden."</li>
+      <li>Fetch-Stub liefert syntaktisch gültiges, aber gegen STATIONS_CONFIG_CONTRACT.md ungültiges JSON (Station ohne Pflichtfelder) — validateStationsJson() liefert { ok: false }, JSONParser.parse() wirft.</li>
+      <li>Konsole: „[fw-app] loadStations error" mit „JSON-Validierung fehlgeschlagen"-Detail (kein Stacktrace im UI).</li>
+      </ul>
+    </div>
+    <div class="kg-card">
+      <div class="fw-app"
+           data-fw-app="prokrastinations-preis"
+           data-fw-data="msci-world-net-return-eur-monthly.csv"
+           data-fw-config="stations-invalid-contract.json">
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════════ -->
+  <!-- NEU — Datenmigration: Reduced-Motion-Nachweis (dokumentiert/simuliert) -->
+  <!-- ═══════════════════════════════════════════════════════════ -->
+
+  <!-- Szenario AK: prefers-reduced-motion — Screen 3 ohne Bridge-Zwischenzustand -->
+  <div class="fw-test-case"
+     data-fw-test-case>
+    <h2>AK — Reduced Motion: Screen 3 zeigt Ergebnis ohne Bridge-Zwischenzustand</h2>
+
+    <div class="fw-test-expected" data-fw-expected-behavior>
+      <h3>Erwartetes Verhalten (manuell durch Albert im Browser zu prüfen — hier nur dokumentiert/simuliert, kein hier tatsächlich ausgeführter Browsertest)</h3>
+      <ul>
+      <li>Simulation: DevTools → Rendering-Tab → „Emulate CSS media feature prefers-reduced-motion" → „reduce" wählen. Alternativ Betriebssystem-Einstellung „Bewegung reduzieren" aktivieren, Seite neu laden.</li>
+      <li>Testschritte: Alle Screen-2-Stationen durchklicken, bis Screen 3 erscheint (revealScreen3() in app.js prüft prefersReducedMotion() vor dem Bridge-Timer).</li>
+      <li>Erwartung: Screen 3 zeigt KPI-Cards und AssumptionsBox sofort im Endzustand — kein sichtbarer Bridge-Zwischenzustand („Station X von Y · Bekannt bis Z"), kein 800ms-Timer, keine Chart-Neuaufbauanimation.</li>
+      <li>Bekannte, nicht Teil dieses AP: Screen 4 (revealScreen4()) prüft prefers-reduced-motion nicht — die beiden 800ms-Reveal-Pausen (Text, dann CTA) laufen dort unverändert weiter, auch bei aktivierter Reduced-Motion-Einstellung. Reduced Motion betrifft in app.js ausschließlich die Screen-3-Bridge-Phase; Screen-4-Timing ist vorhandene Fachlogik und liegt außerhalb des Datenpfads (Nicht-Ziel dieses AP, s. Abschlussmeldung).</li>
+      <li>Kein JS-Fehler in Konsole.</li>
+      </ul>
+    </div>
+    <div class="kg-card">
+      <div class="fw-app"
+           data-fw-app="prokrastinations-preis"
+           data-fw-data="msci-world-net-return-eur-monthly.csv"
+           data-fw-config="stations-de.json">
       </div>
     </div>
   </div>
@@ -835,6 +977,54 @@
   </main>
 
   <script src="../../Theme/assets/js/vendor/chart.umd.min.js"></script>
+
+  <!-- NEU — Datenmigration: testseitig lokaler Fetch-Stub. Bildet ausschliesslich die festen,
+       zentral aufgeloesten app-data-Resolverpfade (/content/files/app-data/<dateiname>) auf
+       vorhandene lokale Test-Fixtures ab bzw. liefert fuer gezielte Fehlerfaelle deterministisch
+       synthetische Antworten. Alle anderen URLs gehen unveraendert an den originalen fetch (z. B.
+       der natuerliche 404 fuer nonexistent.csv/stations-missing.json). Muss vor dem Modulimport
+       laufen (klassisches Script, nicht deferred) -- reine Testseiten-Einrichtung, beeinflusst
+       weder app.js noch Theme-Code. Keine echte Datei unter content/files/app-data/ noetig. -->
+  <script>
+    (function () {
+      var originalFetch = window.fetch.bind(window);
+
+      var REAL_FILE_REDIRECTS = {
+        '/content/files/app-data/msci-world-net-return-eur-monthly.csv': '../../Theme/assets/data/b1/msci-world-net-return-eur-monthly.csv',
+        '/content/files/app-data/stations-de.json': './config/stations-de.json',
+        '/content/files/app-data/short.csv': './test-data/short.csv',
+        '/content/files/app-data/invalid.csv': './test-data/invalid.csv',
+        '/content/files/app-data/no-index-value.csv': './test-data/no-index-value.csv',
+        '/content/files/app-data/no-eur.csv': './test-data/no-eur.csv',
+        '/content/files/app-data/usd-suffix.csv': './test-data/usd-suffix.csv',
+        '/content/files/app-data/no-date.csv': './test-data/no-date.csv',
+        '/content/files/app-data/invalid-index-value.csv': './test-data/invalid-index-value.csv'
+      };
+
+      // Gezielte Fehlerfälle (Error-(d)-Nachweis, Szenario AI/AJ): synthetische, rein
+      // in-memory erzeugte Antworten -- keine neue Datei auf der Festplatte.
+      var SYNTHETIC_RESPONSES = {
+        '/content/files/app-data/stations-invalid-syntax.json':
+          '{ "version": "3.0", "locale": "de-DE", "app": "prokrastinations-preis", "stations": [ SYNTAKTISCH KAPUTT',
+        '/content/files/app-data/stations-invalid-contract.json':
+          JSON.stringify({ version: '3.0', locale: 'de-DE', app: 'prokrastinations-preis', stations: [{ id: 'nur-id-kein-pflichtfeld-sonst' }] })
+      };
+
+      window.fetch = function (input, init) {
+        var url = typeof input === 'string' ? input : (input && input.url) || '';
+
+        if (Object.prototype.hasOwnProperty.call(REAL_FILE_REDIRECTS, url)) {
+          return originalFetch(REAL_FILE_REDIRECTS[url], init);
+        }
+        if (Object.prototype.hasOwnProperty.call(SYNTHETIC_RESPONSES, url)) {
+          return Promise.resolve(new Response(SYNTHETIC_RESPONSES[url], { status: 200 }));
+        }
+        // Alles andere (z. B. nonexistent.csv, stations-missing.json): unverändert an den
+        // originalen fetch -- natürlicher 404, kein Stub-Eingriff.
+        return originalFetch(input, init);
+      };
+    })();
+  </script>
   <script type="module" src="./app.js"></script>
 </body>
 </html>

@@ -4,6 +4,8 @@
 
 import { CSVParser } from '../../Theme/assets/js/fw-chart-engine/data/CSVParser.js';
 import { ChartEngine } from '../../Theme/assets/js/fw-chart-engine/core/ChartEngine.js'; // NEW — Slice 4
+import { resolveCsvAppDataFile, resolveJsonAppDataFile } from '../../Theme/assets/js/fw-chart-engine/data/AppDataResolver.js'; // NEW — Datenmigration (Shared-Daten-AP)
+import { JSONParser } from '../../Theme/assets/js/fw-chart-engine/data/JSONParser.js'; // NEW — Datenmigration (Shared-Daten-AP)
 
 // SLUG_WHITELIST: Kompilzeit-Konstante — bewusst keine dynamische Quelle
 const SLUG_WHITELIST = ['prokrastinations-preis'];
@@ -185,11 +187,27 @@ function marketTimeStrategy(msciData, monatlicheRate, startBetrag) {
   return { chartSeries, eingezahlt, depotwertHeute, differenz };
 }
 
+// NEW — Datenmigration: lokale Deep-Freeze-Hilfe, ausschließlich für den Rückgabewert von
+// buildAppContext() (Der Rucksack §2.2/§2.3: der statische Kern ist immutable). Keine neue
+// globale Utility-Datei — bewusst lokal in app.js, analog FinanzwesirJsonData.js im Datenlayer.
+function deepFreezeContext(value) {
+  if (value === null || (typeof value !== 'object' && typeof value !== 'function')) return value;
+  if (Object.isFrozen(value)) return value;
+  Object.freeze(value);
+  for (const key of Object.getOwnPropertyNames(value)) {
+    deepFreezeContext(value[key]);
+  }
+  return value;
+}
+
 // NEW — AppContext aus appData + Nutzerwerten (APP_SPEC §11)
+// CHANGED — Datenmigration: Rückgabewert wird rekursiv eingefroren (deepFreezeContext), nicht
+// nur an der Wurzel. Flüchtiger Screen-/Fokus-/Timer-/Animationszustand bleibt im Controller
+// (renderContent()-Closures) und wandert nie in dieses Objekt.
 function buildAppContext(appData, monatlicheRate, startBetrag, stations) { // CHANGED — AP-13
   const { chartSeries, eingezahlt, depotwertHeute, differenz } =
     marketTimeStrategy(appData.msciData, monatlicheRate, startBetrag);
-  return {
+  return deepFreezeContext({
     valueMode:    'currency',
     currency:     appData.currency,
     locale:       appData.locale,
@@ -207,7 +225,7 @@ function buildAppContext(appData, monatlicheRate, startBetrag, stations) { // CH
     differenz,
     resultTone:  'neutral'
     // a11ySummary entfernt — AP-14: endwissen erst in showScreen(3) ausgeben
-  };
+  });
 }
 
 // NEW — KpiCards (APP_SPEC §6, §12.4) via textContent (Q-01)
@@ -1147,8 +1165,19 @@ function renderContent(container, appData, options, stationsConfig) { // CHANGED
 }
 
 // gibt { appData } bei Erfolg oder { error: 'b'|'c'|'empty', message } zurück
-async function loadData(url) { // CHANGED — dünne Cache-Shell; Logik in _loadDataImpl (P-11)
-  if (!url) {
+// CHANGED — Datenmigration: rawFilename ist der ungetrimmte Card-Rohwert (data-fw-data).
+// Er geht zuerst durch resolveCsvAppDataFile() (keine .trim()-Kanonisierung); erst der
+// aufgelöste, zentrale app-data-Pfad geht an CSVParser.parse(). Ungültiger/fehlender
+// Dateiname bleibt Error (b) — CSV-Fehler wandern nie zu Error (d).
+async function loadData(rawFilename) { // CHANGED — dünne Cache-Shell; Logik in _loadDataImpl (P-11)
+  if (!rawFilename) {
+    return { error: 'b', message: 'Daten konnten nicht geladen werden. Bitte Seite neu laden.' };
+  }
+  let url;
+  try {
+    url = resolveCsvAppDataFile(rawFilename);
+  } catch (e) {
+    console.error('[fw-app] loadData resolve error:', e);
     return { error: 'b', message: 'Daten konnten nicht geladen werden. Bitte Seite neu laden.' };
   }
   if (!_dataCache.has(url)) _dataCache.set(url, _loadDataImpl(url)); // NEW
@@ -1304,18 +1333,26 @@ function buildJourneyStations(stationsConfig, window) {
 }
 
 // NEW — AP-11: Stations-JSON app-spezifisch laden
-async function loadStations() {
+// CHANGED — Datenmigration: rawFilename ist der ungetrimmte Card-Rohwert (data-fw-config).
+// Er geht zuerst durch resolveJsonAppDataFile() (keine .trim()-Kanonisierung); erst der
+// aufgelöste, zentrale app-data-Pfad geht an JSONParser.parse(). validateStationsJson bleibt
+// die app-spezifische Fachvalidierung — JSONParser kennt keine Stationssemantik. Ungültiger/
+// fehlender Dateiname, JSON-HTTP-, JSON-Parse- und JSON-Contract-Fehler sind alle Error (d).
+async function loadStations(rawFilename) {
+  if (!rawFilename) {
+    return { error: 'd', message: 'Die Zeitreise kann gerade nicht geladen werden.' };
+  }
+  let url;
   try {
-    const response = await fetch('config/stations.de.json');
-    if (!response.ok) throw new Error('HTTP ' + response.status);
-    const stationsConfig = JSON.parse(await response.text());
-    // NEW — AP-12: Contract-Validierung
-    const validation = validateStationsJson(stationsConfig);
-    if (!validation.ok) {
-      console.error('[fw-app] validateStationsJson:', validation.code, validation.detail);
-      return { error: 'd', message: 'Die Zeitreise kann gerade nicht geladen werden.' };
-    }
-    return { stationsConfig };
+    url = resolveJsonAppDataFile(rawFilename);
+  } catch (e) {
+    console.error('[fw-app] loadStations resolve error:', e);
+    return { error: 'd', message: 'Die Zeitreise kann gerade nicht geladen werden.' };
+  }
+  try {
+    const parser = new JSONParser();
+    const vault = await parser.parse(url, { validator: validateStationsJson });
+    return { stationsConfig: vault.data };
   } catch (e) {
     console.error('[fw-app] loadStations error:', e);
     return { error: 'd', message: 'Die Zeitreise kann gerade nicht geladen werden.' };
@@ -1334,10 +1371,14 @@ async function initApp(container, slug) {
 
     renderLoading(container);
 
-    const dataUrl = (container.dataset.fwData || '').trim();
+    // CHANGED — Datenmigration: rohe Card-Werte ungetrimmt an die Loader — die Resolver
+    // (resolveCsvAppDataFile/resolveJsonAppDataFile) validieren gegen die exakte Grammatik,
+    // keine .trim()-Kanonisierung des Dateinamens vor der Auflösung.
+    const rawCsvFilename = container.dataset.fwData || '';
+    const rawConfigFilename = container.dataset.fwConfig || '';
     const [csvResult, stationsResult] = await Promise.all([  // CHANGED — AP-11
-      loadData(dataUrl),
-      loadStations()
+      loadData(rawCsvFilename),
+      loadStations(rawConfigFilename)
     ]);
 
     clearContainer(container);

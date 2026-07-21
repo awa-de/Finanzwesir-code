@@ -1,6 +1,6 @@
 # App Interface — Finanzwesir 2.0
 
-Stand: 2026-07-20 | APP-DATA-05 | Geändert von: Claude
+Stand: 2026-07-21 21:14 | shared-daten-jsonparser-vault-resolver | Geändert von: Claude
 
 **Zweck:** Kanonischer Schnittstellen-Vertrag zwischen Ghost-Content, App-Fabrik-Apps und Chart-Engine.
 **Zielgruppe:** Claude, Albert, zukünftige App-Implementierungen.
@@ -73,7 +73,7 @@ App mit CSV-Daten:
 ```html
 <div class="fw-app"
      data-fw-app="geburtsjahrlos"
-     data-fw-data="https://www.finanzwesir.com/content/files/2026/msci-world.csv">
+     data-fw-data="msci-world.csv">
 </div>
 ```
 
@@ -82,7 +82,7 @@ App mit JSON-Konfiguration:
 ```html
 <div class="fw-app"
      data-fw-app="risiko-uebersetzer"
-     data-fw-config="https://www.finanzwesir.com/content/files/2026/risiko-uebersetzer.config.json">
+     data-fw-config="risiko-uebersetzer-config.json">
 </div>
 ```
 
@@ -101,14 +101,14 @@ App mit Optionen:
 |---|---|---|
 | `class="fw-app"` | Pflicht | Identifiziert den Container als App-Fabrik-App |
 | `data-fw-app="[slug]"` | Pflicht | App-Slug, bestimmt welche App geladen wird |
-| `data-fw-data="[url]"` | Optional | URL zur CSV-Datendatei |
-| `data-fw-config="[url]"` | Optional | URL zur JSON-Konfigurationsdatei |
+| `data-fw-data="[dateiname].csv"` | Optional | Vollständiger, kanonischer Dateiname einschließlich Suffix (`^[a-z0-9_-]+\.csv$`) einer lokal geprüften CSV. Kein Protokoll, keine Domain, kein Pfad, kein Slash, kein Query-String, kein Fragment. Engine bildet zentral `/content/files/app-data/<dateiname>` (reine Präfixbildung, `<dateiname>` bereits mit `.csv`). Analog `data-app-file` (§3.2), aber eigener Attributname und eigener Parser. |
+| `data-fw-config="[dateiname].json"` | Optional | Vollständiger, kanonischer Dateiname einschließlich Suffix (`^[a-z0-9_-]+\.json$`) einer lokal geprüften JSON-Config. Kein Protokoll, keine Domain, kein Pfad, kein Slash, kein Query-String, kein Fragment. Engine bildet zentral `/content/files/app-data/<dateiname>` (reine Präfixbildung, `<dateiname>` bereits mit `.json`). |
 | `data-fw-options="[key:val]"` | Optional | Kleine Inline-Overrides, key:value-Syntax |
 | `data-fw-theme="[enum]"` | Reserviert | Theme-Override — reserviert, noch nicht implementiert. Nicht produktiv in Ghost-Cards verwenden. Nur über Enum-Whitelist, wenn implementiert. |
 
 **Was niemals in `data-*` Attribute gehört:**
 - Freies JSON direkt im HTML (`data-fw-options='{"key": "value"}'`) — Fehlerquelle für Redakteure
-- URLs außerhalb erlaubter Domains
+- URL, Protokoll, Domain, Pfad, Slash, Query-String oder Fragment in `data-fw-data` / `data-fw-config` — nur der reine Dateiname ist erlaubt (kein URL-Kompatibilitätsmodus, keine Dev-Ausnahme)
 - Ausführbarer Code jeder Art
 - Nutzerdaten oder personenbezogene Informationen
 
@@ -136,7 +136,7 @@ verwenden `data-app-file` (Stand seit APP-DATA-04b, 2026-07-20):
 | `class="financial-chart-module"` | Pflicht | Identifiziert den Container als Chart-Engine-Chart |
 | `data-type="line\|bar\|pie"` | Pflicht | Chart-Typ |
 | `data-title="..."` | Optional | Sichtbarer oder interner Titel |
-| `data-app-file="[dateiname].csv"` | Pflicht bei produktiven, datengetriebenen Charts | Kanonischer Basisname (`^[a-z0-9_-]+\.csv$`) einer lokal geprüften, per FileZilla übertragenen CSV. Engine bildet zentral `/content/files/app-data/<dateiname>.csv`. Exklusiv zu `data-csv`. Ablauf: `docs/editorial/CSV-APP-DATEN-WORKFLOW.md`. |
+| `data-app-file="[dateiname].csv"` | Pflicht bei produktiven, datengetriebenen Charts | Vollständiger, kanonischer Dateiname einschließlich `.csv` (`^[a-z0-9_-]+\.csv$`) einer lokal geprüften, per FileZilla übertragenen CSV. Engine bildet zentral `/content/files/app-data/<dateiname>` (reine Präfixbildung — `ChartEngine.js`: `'/content/files/app-data/' + appFile`, kein zusätzlich angehängtes `.csv`). Exklusiv zu `data-csv`. Ablauf: `docs/editorial/CSV-APP-DATEN-WORKFLOW.md`. |
 | `data-csv="[pfad]"` | Nur für Testseiten (`tests/engine/`) | Vollständiger, direkt nutzbarer relativer oder erlaubter URL-Pfad. Kein bloßer Dateiname. Nicht für produktive Cards verwenden. |
 | `data-colors="Name: #HEX, ..."` | Optional | Name-Farbe-Paare |
 | `data-options="key:val, ..."` | Optional | Chart-Optionen, key:value-Syntax |
@@ -211,14 +211,16 @@ Beide Attribute folgen derselben Syntax: `key:value, key:value`
 | Strukturierte Konfiguration (Slider-Defaults, Texte, Szenarien) | JSON | Claude auf Basis Albert-Input |
 | Kleine Inline-Overrides im Ghost-Card | `data-fw-options` | Redakteur direkt in Ghost |
 
-**Erlaubte Quellen:**
-- `https://www.finanzwesir.com/...` (Ghost-Upload-Pfade)
-- Lokale Entwicklungs-URLs (`localhost`, `127.0.0.1`) nur in Dev-Testseiten — explizit als Dev-Ausnahme markieren
+**`data-fw-data` / `data-fw-config` (fw-app, §3.1):** kein URL-Feld — ausschließlich ein geprüfter Dateiname (→ SEC-04, `01_DECISION_LOG.md`). Beide Attribute nutzen denselben produktiven `app-data`-Lieferweg wie `data-app-file`: lokaler Offline-Prüfer, dann FileZilla-Übertragung nach `Ghost/content/files/app-data/`, zentral aufgelöst zu `/content/files/app-data/<dateiname>`. Eigener Attributname und eigener Parser je Datentyp (CSV vs. JSON) bleiben erhalten — keine Zusammenlegung mit `data-app-file`. Kein dynamisches Nachladen aus Domains, keine Dev-Ausnahme.
 
-**Chart-Card-Daten (`data-app-file`, §3.2):** eigener, geprüfter Weg über `content/files/app-data/`
+**Chart-Card-Daten (`data-app-file`, §3.2):** derselbe eigene, geprüfter Weg über `content/files/app-data/`
 — lokaler Offline-Prüfer, dann FileZilla-Übertragung nach `Ghost/content/files/app-data/`. Kein
 HTTP-Upload-Dienst, kein Ghost-Editor-Upload-Feld für diesen Pfad. Vollständiger Ablauf:
 `docs/editorial/CSV-APP-DATEN-WORKFLOW.md`.
+
+**Nur noch für tatsächlich externe Quellen und den Chart-Testpfad (`data-csv`, `tests/engine/`) relevant — Domain-Lock:**
+- `https://www.finanzwesir.com/...` (Ghost-Upload-Pfade)
+- Lokale Entwicklungs-URLs (`localhost`, `127.0.0.1`) nur in Dev-Testseiten — explizit als Dev-Ausnahme markieren
 
 **Verboten:**
 - Beliebige Fremd-URLs ohne explizite Architekturentscheidung
@@ -226,6 +228,9 @@ HTTP-Upload-Dienst, kein Ghost-Editor-Upload-Feld für diesen Pfad. Vollständig
 
 **CSV-Lademechanismus (D-04):**
 Alle Apps, die `data-fw-data` nutzen, laden CSV über `CSVParser.js` (`Theme/assets/js/fw-chart-engine/data/CSVParser.js`). CSVParser.js ist shared App-Fabrik-Infrastruktur — keine App schreibt eigene Parser-Logik. Die Chart-Engine nutzt denselben Mechanismus. Rückgabe: `FinanzwesirData` mit `unitKey`, bereinigten Werten und `Date`-Objekten. Beide Dateien sind TABU (nicht ändern).
+
+**JSON-Lademechanismus:**
+Alle Apps, die `data-fw-config` nutzen, laden JSON über `JSONParser.js` (`Theme/assets/js/fw-chart-engine/data/JSONParser.js`) — strukturelle Geschwisterdatei von `CSVParser.js`: gleicher URL-Gate, gleicher Fetch-/HTTP-/Fehlerrahmen, fetch-freier Kern `parseJsonText(text, config)`. `JSONParser.js` und der Vault `FinanzwesirJsonData.js` sind shared App-Fabrik-Infrastruktur — kein Universalparser, keine Stationssemantik oder sonstige App-Fachlogik im Parser selbst. App-Code liefert den app-spezifischen `options.validator` (Funktion, liefert `{ ok: true }` oder `{ ok: false, code?, detail? }` — Vertrag identisch zum bestehenden `validateStationsJson()`). Rückgabe: `FinanzwesirJsonData` mit rekursiv eingefrorenen Nutzdaten (`data`) und Metadaten (`metadata`, mindestens `source: 'JSON'` und `parsedAt`). Zentraler Dateinamen-Resolver für beide Formate: `AppDataResolver.js` (`resolveCsvAppDataFile`, `resolveJsonAppDataFile`).
 
 **Regeln:**
 - CSV und JSON werden als Daten behandelt — niemals als Code
@@ -242,7 +247,7 @@ Alle `data-*` Attribute sind untrusted input — keine Ausnahme, auch bei intern
 2. **SafeDOM:** Nutzdaten nie via `innerHTML` — nur `textContent` oder sichere Renderer.
 3. **Whitelist-Prinzip für `data-fw-options` / `data-options`:** Nur bekannte Keys werden verarbeitet, unbekannte stillschweigend ignoriert.
 4. **Slug-Whitelist für `data-fw-app`:** Nur bekannte App-Slugs werden geladen.
-5. **URL-Validierung:** `data-fw-data` und `data-fw-config` gegen erlaubte Domains prüfen (`www.finanzwesir.com`). Fehlschlag → Empty-State, kein Crash.
+5. **Dateinamenvalidierung:** `data-fw-data` (`^[a-z0-9_-]+\.csv$`) und `data-fw-config` (`^[a-z0-9_-]+\.json$`) gegen die Grammatik prüfen — keine URL, keine Domain, kein Pfad. Zentraler Resolver bildet `/content/files/app-data/<dateiname>`. Fehlschlag → Empty-State, kein Crash.
 6. **CSV/JSON validieren** vor Verwendung: Format, Pflichtfelder, Wertebereich.
 7. **Empty-State statt Crash:** Ungültige oder fehlende Daten führen zu einem sauberen Fehlerzustand, keinem technischen Absturz.
 8. **Keine geheimen Tokens im Frontend.**
@@ -298,8 +303,12 @@ leeres Ergebnis fachlich erwartbar ist (z. B. kein Datenpunkt im gewählten Zeit
 
 Gilt für CSV- und JSON-Datendateien.
 
+**Für produktive `data-fw-data` / `data-fw-config` / `data-app-file` (Card-Attribute, reiner Dateiname, kein URL-Feld):**
+- **Ausschließlich:** versionierter Dateiname (z. B. Datum oder Build-Version im Namen).
+- Kein Query-Parameter (`?v=...`) und kein `Date.now()` in Card-Attributen — beide setzen ein URL-Feld voraus, das es für diese Attribute nicht mehr gibt (→ SEC-04, `01_DECISION_LOG.md`).
+
+**Der bestehende `data-csv`-Testpfad (`tests/engine/`, §3.2) bleibt davon unberührt:**
 - **Bevorzugt:** expliziter Versionsparameter, z.B. `?v=2026-05-10`
-- **Alternativ:** Build-/Deploy-Version im Dateinamen
 - **Dev-Modus:** optional `Date.now()` zum Debuggen erlaubt
 - **Live-Modus:** kein permanentes `Date.now()` bei jedem Seitenaufruf
 
