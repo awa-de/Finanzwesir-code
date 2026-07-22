@@ -1,0 +1,126 @@
+/**
+ * Theme/src/css/apps/prokrastinations-preis.css
+ * Lokale App-Mechanik für prokrastinations-preis (Option B, D-CSS-03, 01_DECISION_LOG.md).
+ * Card-to-Point-Flug, Rubikon-Overlay, KPI-/Disclaimer-Reveal, JS-Fokus-Kompatibilitätsregel.
+ * Jeder Selektor ist auf die literale Wurzel .fw-app.fw-app--prokrastinations-preis begrenzt.
+ * Keine Shell-, State-, Typografie-, Button-, Card- oder sonstige Baukasten-Chrome-Regel hier —
+ * diese kommen aus dem Tailwind-Baukasten (TAILWIND-APP-BAUKASTEN_KONZEPT_V0-1.md).
+ * Eingebunden über den baren @import in Theme/src/css/screen.source.css.
+ */
+
+.fw-app.fw-app--prokrastinations-preis {
+  /* Zentraler Schalter für die Card-to-Point-Fluggeschwindigkeit. Einzige Stelle zum
+     Nachjustieren — die Runtime liest denselben Wert für das Timing der Klon-Entfernung/des
+     Stationswechsels, damit CSS-Transition und JS-Timing nie auseinanderlaufen. */
+  --fw-card-to-point-flight-duration: 1350ms;
+  /* Fade-Dauer für KPI-Karten + Disclaimer nach der Bridge-Haltephase auf Screen 3. */
+  --fw-screen3-reveal-fade-duration: 800ms;
+}
+
+/* JS-Fokus-Kompatibilitätsregel: JS-Fokusziel (tabIndex=-1), kein Tastatur-Fokus-Ring nötig. */
+.fw-app.fw-app--prokrastinations-preis .fw-app__screen-headline:focus {
+  outline: none;
+}
+
+/* Card-to-Point-Flug: visueller Flug-Clone (Beat A). Die echte Karte bleibt währenddessen
+   unverändert im DOM (semantische Quelle); Ziel wird per --fw-flight-delta-x/-y
+   (Container-relative Pixel aus AnchorMeasurement) gesetzt. */
+.fw-app.fw-app--prokrastinations-preis .fw-app__station-area--flight-clone {
+  position: absolute;
+  pointer-events: none;
+  z-index: 2;
+  transform: translate(0, 0) scale(1);
+  opacity: 1;
+  transition: transform var(--fw-card-to-point-flight-duration, 450ms) ease-in,
+              opacity var(--fw-card-to-point-flight-duration, 450ms) ease-in;
+  will-change: transform, opacity;
+}
+
+.fw-app.fw-app--prokrastinations-preis .fw-app__station-area--flight-active {
+  transform: translate(var(--fw-flight-delta-x, 0px), var(--fw-flight-delta-y, 0px)) scale(0.15);
+  opacity: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fw-app.fw-app--prokrastinations-preis .fw-app__station-area--flight-clone {
+    display: none;
+  }
+}
+
+/* Rubikon-Text als DOM-Overlay im rechten Zukunftsfeld über dem Chart. */
+.fw-app.fw-app--prokrastinations-preis .fw-app__rubikon-chart-wrap {
+  position: relative;
+}
+
+.fw-app.fw-app--prokrastinations-preis .fw-app__rubikon-text {
+  position: absolute;
+  /* Position über Custom Properties einstellbar — top größer = weiter nach unten, kleiner =
+     weiter nach oben; left größer = weiter nach rechts, kleiner = weiter nach links. Direkt in
+     DevTools am Element testbar, dann hier übernehmen. Werte: Albert-Nachmessung DevTools,
+     gilt für L (>1024px) — M/S haben eigene Regeln unten. */
+  --fw-rubikon-text-top: 14.9%;
+  --fw-rubikon-text-left: 55.2%;
+  top: var(--fw-rubikon-text-top);
+  left: var(--fw-rubikon-text-left);
+  right: 3%;
+  pointer-events: none; /* reiner Lesetext, blockiert keine Chart-Interaktion darunter */
+}
+
+.fw-app.fw-app--prokrastinations-preis .fw-app__rubikon-variant--short {
+  display: none;
+}
+
+@media (max-width: 480px) {
+  .fw-app.fw-app--prokrastinations-preis .fw-app__rubikon-variant--long {
+    display: none;
+  }
+  .fw-app.fw-app--prokrastinations-preis .fw-app__rubikon-variant--short {
+    display: block;
+  }
+  .fw-app.fw-app--prokrastinations-preis .fw-app__rubikon-text {
+    --fw-rubikon-text-top: 14.8%; /* Albert-Nachmessung DevTools */
+    --fw-rubikon-text-left: 66.2%; /* Albert-Nachmessung DevTools */
+    right: 2%;
+    font-size: 0.85em;
+  }
+}
+
+/* Eigene M-Stufe, da die Basisregel M und L nicht gleichzeitig treffen konnte
+   (Albert-Nachmessung DevTools). L bleibt auf der Basisregel. */
+@media (min-width: 481px) and (max-width: 1024px) {
+  .fw-app.fw-app--prokrastinations-preis .fw-app__rubikon-text {
+    --fw-rubikon-text-left: 56.3%;
+    --fw-rubikon-text-top: 14.9%;
+  }
+}
+
+.fw-app.fw-app--prokrastinations-preis .fw-app__rubikon-line {
+  white-space: pre-line; /* erlaubt bewusste Zeilenumbrüche (\n) innerhalb eines Absatzes */
+}
+
+.fw-app.fw-app--prokrastinations-preis .fw-app__rubikon-footnote {
+  font-size: 0.75em;
+  color: var(--color-text-muted, #666666);
+  margin: 0;
+}
+
+/* KPI-/Disclaimer-Reveal: Chart selbst startet nicht unsichtbar (erscheint beim Screen-3-Eintritt
+   sofort); nur KPI-Slot und Disclaimer starten unsichtbar (opacity:0) und ersetzen nach einer
+   kurzen Bridge-Haltephase die Screen-3-lokale Bridge-Zeile. */
+.fw-app.fw-app--prokrastinations-preis .fw-app__kpi-slot,
+.fw-app.fw-app--prokrastinations-preis .fw-app__assumptions {
+  opacity: 0;
+  transition: opacity var(--fw-screen3-reveal-fade-duration, 400ms) ease-in;
+}
+
+.fw-app.fw-app--prokrastinations-preis .fw-app__kpi-slot.fw-app__screen3-reveal--visible,
+.fw-app.fw-app--prokrastinations-preis .fw-app__assumptions.fw-app__screen3-reveal--visible {
+  opacity: 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fw-app.fw-app--prokrastinations-preis .fw-app__kpi-slot,
+  .fw-app.fw-app--prokrastinations-preis .fw-app__assumptions {
+    transition: none;
+  }
+}

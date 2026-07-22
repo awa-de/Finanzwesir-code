@@ -97,3 +97,48 @@ Wird nach /distill ins Jahres-Segment rotiert (Rohlog erhalten). Einträge: [FRI
 - [OK] Faden-Chronik erzeugt: `Archiv/Chroniken/chronist-v1/CHRONIK-2026-07-21-ghost-feed-resolver-vertrag.md`. `/chronik-check` ausgeführt — 0 harte Fehler, 0 Warnungen.
 
 ### 2026-07-21 — Kettenabschluss ✅ | RECONCILED: GHOST-05 GHOST-06 GHOST-07 GHOST-08 GHOST-09
+
+## 2026-07-22 – SESSION START | [KETTENMODUS] | Fokus: Ghost-Prototyp ✅ + App-Duell 19 Apps ✅ + APP-DATA-00–05a ✅ + Ghost-Feed-Resolver-Vertrag GHOST-05–09 ✅ (2026-07-21)
+
+### 2026-07-22 — SEC-05: Theme-Bootstrapper-Runtime-Grenze
+- [OK] `Apps/prokrastinations-preis/app.js` nach `Theme/assets/js/apps/prokrastinations-preis.js` verschoben, `bootstrap()` entfernt, `initProkrastinationsPreis()` exportiert; neuer Bootstrapper `Theme/assets/js/apps/index.js` mit literaler Registry; `check_app_pflicht()` zunächst auf Ordner-Iteration umgestellt (später in CHECKER-REGISTRY-PFLICHT-C1 revidiert).
+- [FRICTION] `Object.hasOwn()`-Lücke: Registry-Lookup akzeptierte geerbte Object-Prototype-Eigenschaften (`data-fw-app="toString"`) als Treffer — P1-Korrektur direkt nach Erstabschluss, neuer Negativtestfall B2 in `app.test.html`.
+- [FRICTION] `git status` im separaten `content`-Repo wurde vom Nutzer unterbrochen, Gate 6/7 blieben dafür zunächst unvollständig; nach Hinweis des Nutzers nachgeholt (zwei vorbestehende, fremde Content-Änderungen identifiziert, nicht Teil dieses APs).
+
+### 2026-07-22 — JSON-Offline-Validator
+- [OK] `prokrastinations-preis-stations-contract.js` als Vertragsmodul ausgelagert; `content/files/app-data/json-validator.mjs` + `pruefe-json.bat` als Klon des CSV-Prüfers; `tests/json-validator.test.mjs` (8 Nachweise); `docs/editorial/JSON-APP-DATEN-WORKFLOW.md` neu.
+- [QUESTION] `content/files/app-data/package.json` erfüllt die JSON-Namensgrammatik, stand aber nicht in der Vier-Eigenartefakt-Liste — per Rückfrage entschieden: fünftes exaktes Eigenartefakt.
+
+### 2026-07-22 — Theme-ZIP v1
+- [OK] `finanzwesir-local-theme-prokrastinations-preis-v1.zip` erzeugt und strukturell geprüft (Light-Gate, Risikoklasse A laut Auftrag).
+
+### 2026-07-22 — D-CSS-01–04: CSS-Architektur-Formalisierung
+- [OK] Vier Entscheidungen in `01_DECISION_LOG.md` verankert (Übergangsoption C für Chart-Fallback, Ghost-Kaskadengrenze, barer `@import`, Migrations-Gate); vier weitere Dokumente entsprechend korrigiert/ergänzt (`GHOST_APP_CSS_ARCHITEKTUR_UMSETZUNGSVORLAGE_V2.md`, `TAILWIND-APP-BAUKASTEN_KONZEPT_V0-1.md`, `CSS-KONVENTIONEN.md`, `MIGRATIONSSTRATEGIE_GHOST_APPS_V2_CHART_BLAUPAUSE.md`).
+
+### 2026-07-22 — CSS-Reparatur (Option B) — Nachweis 4 scheitert
+- [OK] `Theme/src/css/apps/prokrastinations-preis.css` neu (überführte App-Mechanik); `screen.source.css`/`prokrastinations-preis.js`/`app.test.html` angepasst; acht von neun Pflichtnachweisen grün.
+- [FRICTION] Voller `check-test-pages.py`-Lauf (Nachweis 4) schlug fehl: `check_app_pflicht()` behandelte jede `.js`-Datei in `Theme/assets/js/apps/` außer `index.js` als testpflichtig und meldete einen Fehlalarm für das Vertragsmodul aus der JSON-Validator-AP. Da die Korrektur außerhalb des Write-Scopes lag, AP als „nicht bestanden" mit explizitem Stop-Befund gemeldet, kein ZIP erzeugt.
+
+### 2026-07-22 — Checker-Registry-Pflicht (Korrektur)
+- [OK] `check_app_pflicht()` neu geschrieben: Testpflicht wird aus den literalen Registry-Schlüsseln in `index.js` abgeleitet (`extract_registry_slugs()`, fail-closed), nicht mehr aus Ordner-Iteration. `TEST_PAGE_STANDARD.md` §12 angepasst (v11). Negativnachweis über temporäre, außerhalb des Repos angelegte Fixture bestätigt: Abschwächung ausgeschlossen, Fixture automatisch entfernt.
+
+### 2026-07-22 — Checker-Registry-Dokupräzisierung
+- [OK] `TEST_PAGE_STANDARD.md` §12: „(noch nicht gebaut)" entfernt, Registry-vs-Ordner-Formulierung präzisiert (v12).
+
+### 2026-07-22 — Testseitenstandard-Zustandskorrektur
+- [OK] §9/§17 in `TEST_PAGE_STANDARD.md`: zwei veraltete „noch nicht gebaut"/„sobald gebaut"-Aussagen zu `test-page.js`/`check-test-pages.py` korrigiert (v13).
+- [QUESTION] §11 enthält weiterhin eine ähnliche veraltete Aussage („wird in TESTENV-1c gebaut") — außerhalb des benannten Korrekturumfangs, nur gemeldet, nicht geändert.
+
+### 2026-07-22 — Theme-ZIP v2
+- [OK] Nach bestätigt grünem CSS-Reparatur-Stand: `finanzwesir-local-theme-prokrastinations-preis-v2.zip` erzeugt und geprüft.
+
+### 2026-07-22 — Disclosure-Button-Hotfix
+- [OK] `FW_DISCLOSURE_TRIGGER_CLASS` fehlten `appearance-none`/`border-0` (einziges Button-Rezept ohne native-Control-Normalisierung) — ergänzt; Play-CDN-Manifest brauchte keine Änderung (Tokens bereits durch andere Rezepte gedeckt, geprüft statt vorsorglich geändert).
+
+### 2026-07-22 — Theme-ZIP v3
+- [OK] `finanzwesir-local-theme-prokrastinations-preis-v3.zip` erzeugt und geprüft.
+
+### 2026-07-22 — Chronik erzeugt und geprüft
+- [OK] Faden-Chronik erzeugt: `Archiv/Chroniken/chronist-v1/CHRONIK-2026-07-22-prokrastinations-theme-css-kette.md`. `/chronik-check` ausgeführt — 0 harte Fehler, 0 Warnungen.
+
+### 2026-07-22 — Kettenabschluss ✅ | RECONCILED: SEC-05 JSON-VALIDATOR THEME-ZIP-V1 D-CSS-01-04 CSS-REPARATUR-C1 CHECKER-REGISTRY-PFLICHT-C1 CHECKER-REGISTRY-DOKU-C1 TESTSTANDARD-ZUSTAND-C1 THEME-ZIP-V2 DISCLOSURE-HOTFIX-C1 THEME-ZIP-V3

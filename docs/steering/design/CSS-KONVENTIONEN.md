@@ -1,5 +1,5 @@
 # CSS-Konventionen — Dauerhafter Arbeitsvertrag
-Stand: 2026-07-19 20:55 | Session: DS-013-Entscheidung | Geändert von: Codex
+Stand: 2026-07-22 | Session: css-architektur-formalisierung-c1 | Geändert von: Claude (vorher: Codex, DS-013-Entscheidung)
 
 > **Status:** Bindend ab 2026-02-19, gilt bis Production-Build.
 > **Scope:** Jede CSS-Änderung im Theme.
@@ -75,6 +75,12 @@ Quelle.
    Klar als Fallback markiert. Minimal halten.
    ============================================================ */
 ```
+
+## Lokale App-Mechanik und Ghost-Kaskadengrenze
+
+**App-Mechanik-Quelle (→ D-CSS-03, `01_DECISION_LOG.md`):** Nicht verallgemeinerbare App-Mechanik (z. B. Card-to-Point-Flug, Rubikon-Overlay) wird als eigene Theme-CSS-Quelle unter `Theme/src/css/apps/{slug}.css` ausgeliefert und über den kanonischen Tailwind-Build in `screen.css` eingebettet. Einbindung ausschließlich mit der baren Importform `@import "…";` — nicht `@import url("…");`. Nachweis der Einbettung ist der Selektor-Grep der Mechanik-Klassen im gebauten Artefakt. Keine JavaScript-Style-Injektion, keine CSS-URL in einer HTML-Card und kein zweites CSS-Deployment- oder Loader-System für diese Mechanik.
+
+**Ghost-Kaskadengrenze (→ D-CSS-02, `01_DECISION_LOG.md`):** Ghost-Artikelregeln (`.gh-content`, ungelayert) dürfen den `.fw-app`-Teilbaum nicht ungegrenzt gestalten — ungelayerte Autorenregeln schlagen gelayerte Tailwind-Utilities unabhängig von Spezifität und Reihenfolge. Die Ausnahme liegt an der Ursprungsregel selbst (`:not(.fw-app *)` an den betroffenen `.gh-content`-Regelgruppen), nicht an einer neuen App-Gegenregel. `!important` ist für diese Kaskadengrenze kategorisch verboten; das Verbot betrifft ausschließlich diese Reparatur, nicht historische `!important`-Stellen in abgegrenzten Engine-/Layout-Fallbacks.
 
 ## Ritual für jede neue Komponente
 

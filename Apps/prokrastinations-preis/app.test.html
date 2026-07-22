@@ -4,11 +4,11 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Testseite — prokrastinations-preis B1-AP-14 Stationen-Zeitreise</title>
-  <!-- NEW — AP-prokrast-17: CI-Tokens-SSoT (tokens.css, Kontrakt-FINAL) VOR app.css, damit --color-* im
-       App-Laufzeitkontext auflösen. Nur Dev-Harness-Bindung; Ghost-/Produktions-Einbindung bleibt To-do T1. -->
+  <!-- NEW — AP-prokrast-17: CI-Tokens-SSoT (tokens.css, Kontrakt-FINAL) VOR der Theme-Mechanikquelle,
+       damit --color-* im App-Laufzeitkontext auflösen. Nur Dev-Harness-Bindung; Ghost-/Produktions-Einbindung bleibt To-do T1. -->
   <link rel="stylesheet" href="../../Theme/assets/css/tokens.css">
   <link rel="stylesheet" href="../../tests/shared/test-page.css">
-  <link rel="stylesheet" href="./app.css">
+  <link rel="stylesheet" href="../../Theme/src/css/apps/prokrastinations-preis.css">
   <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
   <!-- AP-tailwind-02e — Play-CDN-Theme-Bridge: wertfreie CI-Utility-Registrierung fuer Tailwind v4.
        Bytegleich mit dem @theme inline-Block in docs/testing/templates/app.test.template.html
@@ -81,11 +81,11 @@
       --shadow-soft: var(--shadow-soft);
       --shadow-hover: var(--shadow-hover);
     }
-    @source inline("relative box-border w-full min-h-48 bg-bg font-body text-text p-4 md:p-6 flex items-center justify-center gap-3 p-6 text-text-muted h-8 w-8 animate-spin motion-reduce:animate-none rounded-full border-4 border-border border-t-primary rounded-lg border border-error-border bg-error-bg text-error-text opacity-60 flex-wrap gap-4 mt-4 flex-1 basis-36 bg-surface px-4 py-2 mb-1 text-sm m-0 text-2xl font-bold my-4 gap-x-4 gap-y-2 cursor-pointer shrink-0 text-text-muted min-w-0 flex-1 basis-40 cursor-pointer accent-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-petrol-500 focus-visible:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed min-w-[7ch] shrink-0 text-right font-bold text-text inline-flex rounded-md transition-colors motion-reduce:transition-none disabled:pointer-events-none bg-primary text-white hover:bg-petrol-700 active:bg-petrol-800 ml-auto hover:bg-bg-faint active:bg-surface sm:w-auto no-underline my-5 flex-col text-xs uppercase tracking-wide text-lg text-text-sec mt-2 text-center justify-between gap-2 px-3 text-left font-semibold hover:text-text transition-transform rotate-180 pl-3 grid grid-cols-2 gap-y-1 text-base border-l-2 pl-4 sr-only sm:inline-flex sm:justify-start sm:w-fit mt-6 mb-2 text-xl");
+    @source inline("relative box-border w-full min-h-48 bg-bg font-body text-text p-4 md:p-6 flex items-center justify-center gap-3 p-6 text-text-muted h-8 w-8 animate-spin motion-reduce:animate-none rounded-full border-4 border-border border-t-primary rounded-lg border border-error-border bg-error-bg text-error-text opacity-60 flex-wrap gap-4 mt-4 flex-1 basis-36 bg-surface px-4 py-2 mb-1 text-sm m-0 text-2xl font-bold my-4 gap-x-4 gap-y-2 cursor-pointer shrink-0 text-text-muted min-w-0 flex-1 basis-40 cursor-pointer accent-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-petrol-500 focus-visible:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed min-w-[7ch] shrink-0 text-right font-bold text-text appearance-none border-0 inline-flex rounded-md transition-colors motion-reduce:transition-none disabled:pointer-events-none bg-primary text-white hover:bg-petrol-700 active:bg-petrol-800 ml-auto hover:bg-bg-faint active:bg-surface sm:w-auto no-underline my-5 flex-col text-xs uppercase tracking-wide text-lg text-text-sec mt-2 text-center justify-between gap-2 px-3 text-left font-semibold hover:text-text transition-transform rotate-180 pl-3 grid grid-cols-2 gap-y-1 text-base border-l-2 pl-4 sr-only sm:inline-flex sm:justify-start sm:w-fit mt-6 mb-2 text-xl");
   </style>
   <script src="../../tests/shared/test-page.js" defer></script>
   <style>
-    /* Nur fuer diese Testseite -- kg-card-Chrome, gehoert nicht in app.css oder Shared CSS */
+    /* Nur fuer diese Testseite -- kg-card-Chrome, gehoert nicht in die Theme-Mechanikquelle oder Shared CSS */
     .kg-card { background: #f9f9f9; padding: 1rem; border-radius: 4px; }
     .kg-card + .kg-card { margin-top: 1rem; }
   </style>
@@ -156,6 +156,23 @@
     </div>
     <div class="kg-card">
       <div class="fw-app" data-fw-app="ungueltig-slug"></div>
+    </div>
+  </div>
+
+  <!-- Szenario B2: Geerbte Object-Prototype-Eigenschaft als Slug (P1-Korrektur Theme-Bootstrapper) -->
+  <div class="fw-test-case"
+     data-fw-test-case>
+    <h2>B2 — Geerbter Prototype-Eigenschaftsname als Slug</h2>
+
+    <div class="fw-test-expected" data-fw-expected-behavior>
+      <h3>Erwartetes Verhalten</h3>
+      <ul>
+      <li>Erwartung: Error-State, role="alert", Meldung „Diese App konnte nicht geladen werden.", kein Stack-Trace im UI, kein Nachladen, kein Crash — obwohl `REGISTRY['toString']` als geerbte Object-Prototype-Eigenschaft ohne Guard eine Funktion wäre.</li>
+      <li>AK: A0-2 (Slug-Whitelist/Registry-Lookup)</li>
+      </ul>
+    </div>
+    <div class="kg-card">
+      <div class="fw-app" data-fw-app="toString"></div>
     </div>
   </div>
 
@@ -253,13 +270,13 @@
     <div class="fw-test-expected" data-fw-expected-behavior>
       <h3>Erwartetes Verhalten</h3>
       <ul>
-      <li>Erwartung: Artikeltext, Überschriften und Absätze neben .fw-app visuell unverändert. app.css darf keine Ghost-Elemente beeinflussen.</li>
+      <li>Erwartung: Artikeltext, Überschriften und Absätze neben .fw-app visuell unverändert. Die Theme-Mechanikquelle darf keine Ghost-Elemente beeinflussen.</li>
       <li>AK: A0-9, A0-10</li>
       </ul>
     </div>
     <article>
       <h2>Normaler Artikeltext (h2 außerhalb .fw-app)</h2>
-      <p>Dieser Absatz soll durch app.css nicht beeinflusst werden. Schriftgröße, Farbe und Abstände müssen wie auf einer normalen Ghost-Seite aussehen.</p>
+      <p>Dieser Absatz soll durch die Theme-Mechanikquelle nicht beeinflusst werden. Schriftgröße, Farbe und Abstände müssen wie auf einer normalen Ghost-Seite aussehen.</p>
       <div class="kg-card">
         <div class="fw-app"
              data-fw-app="prokrastinations-preis"
@@ -1025,6 +1042,6 @@
       };
     })();
   </script>
-  <script type="module" src="./app.js"></script>
+  <script type="module" src="../../Theme/assets/js/apps/index.js"></script>
 </body>
 </html>

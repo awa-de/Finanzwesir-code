@@ -459,10 +459,12 @@ def find_dynamic_class_construction_findings(js_text: str, class_consts: dict) -
     return findings
 
 
-def validate_manifest(path: Path, dom: Node, is_app_page: bool) -> List[str]:
-    """AP-tailwind-02_slice-4-manifest-fix: Play-CDN-Manifest (Apps/{slug}/app.test.html) und die
-    Vereinigung aller deklarierten `FW_*_CLASS`-Rezeptkonstanten in Apps/{slug}/app.js muessen
-    mengenidentisch sein. Keine Laufzeit-/Datenflusspruefung (s. Modulkopf)."""
+def validate_manifest(root: Path, path: Path, dom: Node, is_app_page: bool) -> List[str]:
+    """AP-tailwind-02_slice-4-manifest-fix, aktualisiert (Theme-Bootstrapper-Runtime-Grenze,
+    SEC-04/SEC-05 in docs/App-Fabrik/01_DECISION_LOG.md): Play-CDN-Manifest (Apps/{slug}/app.test.html)
+    und die Vereinigung aller deklarierten `FW_*_CLASS`-Rezeptkonstanten in der einzigen Runtime
+    Theme/assets/js/apps/{slug}.js muessen mengenidentisch sein. Keine Laufzeit-/Datenflusspruefung
+    (s. Modulkopf), keine zweite Runtime-Quelle, kein Fallback-Pfad."""
     if not is_app_page:
         return []
 
@@ -490,9 +492,11 @@ def validate_manifest(path: Path, dom: Node, is_app_page: bool) -> List[str]:
 
     manifest_tokens = set(source_matches[0].split())
 
-    app_js_path = path.parent / "app.js"
+    slug = path.parent.name
+    app_js_path = root / "Theme" / "assets" / "js" / "apps" / f"{slug}.js"
     if not app_js_path.is_file():
-        findings.append(f"Play-CDN-Manifest geprueft, aber {app_js_path.name} fehlt.")
+        rel = str(app_js_path.relative_to(root)).replace("\\", "/")
+        findings.append(f"Play-CDN-Manifest geprueft, aber Runtime {rel} fehlt.")
         return findings
 
     js_text = app_js_path.read_text(encoding="utf-8")
@@ -955,7 +959,7 @@ def validate_test_page(root: Path, path: Path, is_engine: bool = False, is_app: 
     findings.extend(validate_tailwind_cdn(dom, is_app))
 
     # AP-tailwind-02d -- Play-CDN-Manifest (nur auf Apps/{slug}/app.test.html Pflicht und geprueft)
-    findings.extend(validate_manifest(path, dom, is_app))
+    findings.extend(validate_manifest(root, path, dom, is_app))
 
     # AP-tailwind-02e -- Play-CDN-Theme-Bridge (nur auf Apps/{slug}/app.test.html Pflicht und geprueft)
     findings.extend(validate_theme_bridge(root, dom, is_app))
@@ -1050,21 +1054,56 @@ def discover_test_pages(root: Path) -> List[Path]:
     return sorted(found, key=lambda p: str(p).lower())
 
 
+REGISTRY_MARKER = "const REGISTRY = Object.freeze("
+REGISTRY_KEY_RE = re.compile(r"""^[ \t]*(['"])((?:(?!\1).)+)\1\s*:""", re.MULTILINE)
+
+
+def extract_registry_slugs(index_js_path: Path) -> Optional[List[str]]:
+    """Liest Theme/assets/js/apps/index.js und extrahiert die literalen Slug-Schluessel aus dem
+    einzigen `const REGISTRY = Object.freeze({...})`-Block (Checker-Registry-Pflicht C1). Liefert
+    None, wenn die Datei fehlt, der Marker nicht genau einmal vorkommt, der Block nicht eindeutig
+    balanciert auffindbar ist, oder keine Schluessel als String-Literale lesbar sind -- eine leere
+    Menge gilt nicht als Erfolg (fail-closed). Keine Python-Auswertung von JavaScript; Suche ist
+    auf den gefundenen Registry-Block begrenzt, kein Regex ueber das gesamte Dokument."""
+    if not index_js_path.is_file():
+        return None
+    text = index_js_path.read_text(encoding="utf-8")
+    if text.count(REGISTRY_MARKER) != 1:
+        return None
+    block = extract_balanced_block(text, REGISTRY_MARKER)
+    if block is None:
+        return None
+    slugs = [m.group(2) for m in REGISTRY_KEY_RE.finditer(block)]
+    if not slugs:
+        return None
+    return slugs
+
+
 def check_app_pflicht(root: Path) -> List[Tuple[str, str]]:
-    """§21: Apps/{slug}/app.js vorhanden -> Apps/{slug}/app.test.html Pflicht.
-    Kein Raten aus README/APP_SPEC/Ordneralter."""
+    """§21, aktualisiert (Checker-Registry-Pflicht C1): Quelle der Pruefpflicht ist ausschliesslich
+    die literale Slug-Menge der Theme-Bootstrapper-Registry (Theme/assets/js/apps/index.js), nicht
+    das Dateisystem unter Theme/assets/js/apps/. Ein statisch importiertes Hilfsmodul (z. B. ein
+    Vertragsmodul), das keinen eigenen Registry-Eintrag hat, erzeugt keine Testpflicht und keinen
+    Fehlalarm. Fuer jeden Registry-Slug MUSS Apps/{slug}/app.test.html existieren. Kein Raten aus
+    README/APP_SPEC/Ordneralter, keine globale Suche, kein Fallback-Pfad, keine zweite Registry-
+    oder Runtime-Quelle. Fail-closed: ist die Registry nicht eindeutig lesbar, meldet diese Funktion
+    einen Strukturfehler statt stillschweigend keine Pflicht anzunehmen."""
     findings: List[Tuple[str, str]] = []
-    apps_dir = root / "Apps"
-    if not apps_dir.is_dir():
+    index_js_path = root / "Theme" / "assets" / "js" / "apps" / "index.js"
+    slugs = extract_registry_slugs(index_js_path)
+    if slugs is None:
+        rel = str(index_js_path.relative_to(root)).replace("\\", "/")
+        findings.append((
+            rel,
+            "Theme-Bootstrapper-Registry ('const REGISTRY = Object.freeze({...})') nicht eindeutig "
+            "auffindbar oder keine lesbaren Slug-Schluessel -- App-Testpflicht kann nicht bestimmt werden."
+        ))
         return findings
-    for d in sorted(apps_dir.iterdir()):
-        if not d.is_dir():
-            continue
-        app_js = d / "app.js"
-        app_test = d / "app.test.html"
-        if app_js.exists() and not app_test.exists():
-            rel = str((d / "app.test.html").relative_to(root)).replace("\\", "/")
-            findings.append((rel, "app.js ist vorhanden, aber app.test.html fehlt (§21)."))
+    for slug in slugs:
+        app_test = root / "Apps" / slug / "app.test.html"
+        if not app_test.is_file():
+            rel = str(app_test.relative_to(root)).replace("\\", "/")
+            findings.append((rel, f"Registry-Slug '{slug}' (Theme/assets/js/apps/index.js) vorhanden, aber app.test.html fehlt (§21)."))
     return findings
 
 

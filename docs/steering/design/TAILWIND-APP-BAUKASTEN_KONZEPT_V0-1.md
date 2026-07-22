@@ -1,4 +1,4 @@
-Stand: 2026-07-15 | Session: AP-chart-engine-01 DOC-04a | Geändert von: Codex
+Stand: 2026-07-22 | Session: css-architektur-formalisierung-c1 | Geändert von: Claude (vorher: Codex, AP-chart-engine-01 DOC-04a)
 
 # TAILWIND-APP-BAUKASTEN — KONZEPT V0.1
 
@@ -300,12 +300,14 @@ Jeder Vertrag: Zweck und Abgrenzung, semantisches HTML, vollständiges Klassenre
 
 **Zweck:** Alle klickbaren Aktionen der App-Fabrik. **Nicht verwenden für:** Links zu anderen Seiten (`<a>` mit Link-Farbe), Legend-Toggles (eigenes Primitive 6.11), Disclosure-Trigger (6.8).
 **HTML:** immer `<button type="button">` (Bestandsregel bleibt).
-**Basis (alle Varianten):** `inline-flex items-center justify-center rounded-md px-4 py-2 font-bold transition-colors motion-reduce:transition-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-petrol-500 focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none`
+**Basis (alle Varianten):** `appearance-none border-0 font-body inline-flex items-center justify-center rounded-md px-4 py-2 font-bold transition-colors motion-reduce:transition-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-petrol-500 focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none`
 **Varianten (vollständige Zusatzstrings, als Map zu führen):**
 - `primary`: `bg-primary text-white hover:bg-petrol-700 active:bg-petrol-800`
-- `secondary`: `border border-border bg-bg text-text hover:bg-bg-faint active:bg-surface`
+- `secondary`: `border border-border bg-bg text-text hover:bg-bg-faint active:bg-surface` — die bewusst sichtbare Kontur (`border border-border`) bleibt fachlich gewollt und überschreibt das `border-0` der Basis gezielt; nicht pauschal alle Borders entfernen.
 - `ghost`: `text-primary hover:bg-petrol-50 active:bg-petrol-100`
 - `toolbar`: siehe Control-Group 6.5 (kompakte Segmented-Option, eigenes Rezept)
+
+Normalisierung native Controls: `appearance-none` entfernt Browser-Standardoptik, `border-0` entfernt den nativen grauen Rahmen (Secondary stellt ihre Kontur bewusst wieder her), `font-body` erzwingt Source Sans Pro statt System-UI-Schrift — alle drei ohne globales Tailwind-Preflight.
 **Zustände:** hover/active per Variante; focus-visible/disabled in der Basis; kein `focus:`-Ring ohne `-visible`.
 **Responsive:** Standard keine Präfixe; der Journey-CTA nutzt die Kompositionsregel `w-full sm:w-auto` (ersetzt den 600px-Bestandsumbruch, D-07).
 **A11y:** echtes `<button>`, Fokusring immer sichtbar, `disabled` nativ.
@@ -455,7 +457,7 @@ Offener Prüfpunkt für den Engine-DOM-AP: Tooltip-Optik (Hintergrund/Schrift) v
 3. Charttypmarker (`fw-chart-wrapper--line`/`--bar`, `fw-chart-chrome`) sind ausschließlich strukturelle bzw. fallback-begrenzende Ausnahmeanker; sie begründen keine zweite visuelle Rezeptfamilie.
 4. Regel für Donut/Pie und künftige Charttypen: Vorhandene Bedarfe (Punkt 2, inklusive der seit DOC-03 bestätigten Segment-Dämpfung) werden wiederverwendet. **Bereits entschieden:** Die Donut-Legende bedeutet „Segment-Dämpfung umschalten" (DOC-03) — das ist keine offene Frage mehr. **Weiterhin offen:** Braucht ein Charttyp künftig eine andere, noch unbelegte Bedeutung (z. B. eine rein informative Kategorienliste anstelle der Dämpfung, oder ein Drill-down-Popover), wird sie **nicht** als optische Sondervariante improvisiert — ein kleiner, separater Design-/Vertrags-AP belegt zuerst die Bedeutung und ergänzt danach genau ein neues Renderer-Primitive. Kein Vorratsvokabular. „Drill-down-Auslöser" bleibt weiterhin kein Legendenbedarf — der bestehende Drill-down läuft ausschließlich über einen separaten Canvas-Klickpfad.
 5. Ausdrücklich verboten: (a) `FW_LINE_*`-/`FW_BAR_*`-artiges Kopieren gemeinsamer Rezepte statt Wiederverwendung von `FW_CHROME_*`; (b) eine App-lokale Optikvariante eines gemeinsamen Primitives; (c) Stylewissen (CSS-Klassen, Farben, Abstände) in Strategien; (d) eine globale Chrome- oder Plugin-Registry.
-6. `tokens.css` bleibt die CI-Quelle für Farben, Fonts und die zwei Zusatzschatten; die Tailwind-Defaults liefern die vertragliche Struktur-Skala (Spacing, Radius, Border); der Tailwind-freie Fallback (`_injectStyles()`, `.fw-chart-chrome`) spiegelt beides nur auf Tailwind-freien Engine-Testseiten. Das sind zwei Implementierungswege für **einen** visuellen Vertrag, keine zwei Designwahrheiten.
+6. `tokens.css` bleibt die CI-Quelle für Farben, Fonts und die zwei Zusatzschatten; die Tailwind-Defaults liefern die vertragliche Struktur-Skala (Spacing, Radius, Border). Der Fallback (`_injectStyles()`, `.fw-chart-chrome`) ist ungelayert und läuft heute unbedingt auf jeder Seite mit geladener Chart-Engine — auch produktiv, nicht nur auf Tailwind-freien Engine-Testseiten (Übergangsoption C, → D-CSS-01, `01_DECISION_LOG.md`). Seine Begrenzung auf Tailwind-freie Engine-Testumgebungen ist Zielzustand eines späteren, separaten Engine-DOM-APs (Option A), nicht der heutige Ist-Zustand. Das sind zwei Implementierungswege für **einen** visuellen Vertrag — das gilt aber nur, solange produktive Parität zwischen Fallback und Tailwind-Chrome-Rezepten geprüft wird, nicht als bloße Behauptung.
 
 Dieser Erweiterungsvertrag ist rein konzeptionell (DOC-02): Er beschreibt, wie ein künftiger Charttyp den bestehenden `FW_CHROME_*`-Bestand erweitern darf, ändert aber selbst keine Datei unter `Theme/assets/js/fw-chart-engine/`.
 
@@ -542,5 +544,5 @@ Keine Entscheidung D-01–D-16 ist blockiert; der `.hbs`-Gap (F-08) berührt nur
 
 ---
 
-*Ende V0.1 — ENTWURF, NICHT FREIGEGEBEN. Nächster Schritt: Abnahme von Konzept + Visual Board, danach Vertrags-/Komponenten-Spec und Pilotumsetzung (Folge-AP-Kette laut Befund Abschnitt 15).*
+*Ende V0.1 — FREIGEGEBEN durch Albert am 2026-07-12 (siehe Kopf dieses Dokuments). Nächster Schritt: Vertrags-/Komponenten-Spec und Pilotumsetzung (Folge-AP-Kette laut Befund Abschnitt 15).*
 

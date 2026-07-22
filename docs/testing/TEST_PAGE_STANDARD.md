@@ -1,6 +1,6 @@
 # Finanzwesir Test Page Standard
 
-Stand: 2026-07-21 22:22 | Standard-Version: 9 (Nachputz Testseiten: §7/§10/§10.1/§14 auf Ghost-Feed-Resolver-Vertrag synchronisiert — nur data-csv ist eine lokale Fixture-Referenz) | Geändert von: Claude
+Stand: 2026-07-22 14:35 | Standard-Version: 13 (Zustandskorrektur C1: §9 `tests/shared/test-page.js` und §17 `tools/check-test-pages.py` als vorhandene, produktive Infrastruktur statt künftig/„sobald gebaut" beschrieben) | Geändert von: Claude
 
 > Normativer Standard. Kein Projekttagebuch. Die Wörter **MUSS**, **DARF**, **DARF NICHT**
 > und **SOLL** sind im Sinne von RFC 2119 zu lesen. **SOLL** wird nur bei bewusst begründeter
@@ -284,7 +284,7 @@ Attribute sind gegenseitig exklusiv.
 
 ## 9. Sichtbare technische Fehler
 
-`tests/shared/test-page.js` (noch nicht gebaut, §12 Rollout `TESTENV-1c`) MUSS künftig mindestens
+`tests/shared/test-page.js` (vorhanden, eingebunden in App-Testseiten) MUSS mindestens
 sichtbar abfangen:
 
 - `window.onerror`;
@@ -307,7 +307,8 @@ Wichtig:
 - Produktive App-Fehlerzustände bleiben nutzerfreundlich (`APP-INTERFACE.md` §8).
 - Die Dev-Testseite zeigt zusätzlich technische Details für Albert und das nächste LLM
   (`APP-INTERFACE.md` §8: „Dev-Testseiten dürfen technische Zusatzinfos anzeigen").
-- `TESTENV-1bF` baut das Shared JavaScript noch nicht.
+- Das Shared JavaScript ist gebaut und produktiv eingebunden (Bestandsmuster
+  `Apps/prokrastinations-preis/app.test.html`).
 
 ---
 
@@ -356,7 +357,10 @@ Wichtig:
   sind zugleich die spätere T1-build-sichere Quelle: `@source inline(...)` ist nur die
   Play-CDN-Testbrücke, der spätere lokale Build scannt dieselben Quellen direkt, ohne CDN-Manifest.
   Freie Klassenkonstruktion (Template-Literal, `+`-Verkettung) bleibt unabhängig davon verboten
-  (Literalregel `TAILWIND-APP-BAUKASTEN_KONZEPT_V0-1.md` §2.2).
+  (Literalregel `TAILWIND-APP-BAUKASTEN_KONZEPT_V0-1.md` §2.2). Seit der Theme-Bootstrapper-
+  Runtime-Grenze (SEC-04/SEC-05) liegen die geprüften `FW_*_CLASS`-Rezeptkonstanten in der
+  einzigen produktiven Runtime `Theme/assets/js/apps/{slug}.js`, nicht mehr in
+  `Apps/{slug}/app.js` — die Testseite selbst bleibt unter `Apps/{slug}/`.
 - **Play-CDN-Theme-Bridge (AP-tailwind-02e, 2026-07-13):** Jede `Apps/{slug}/app.test.html` trägt
   genau **einen** `<style type="text/tailwindcss">`-Block. Darin steht zuerst eine wertfreie
   `@theme inline { --token: var(--token); ... }`-Bridge — nur Werte aus
@@ -470,10 +474,23 @@ Marker deckt ausschließlich dieses eine, benannte Negativtest-Muster ab.
 
 ## 12. Python-Strukturchecker
 
-`tools/check-test-pages.py` (noch nicht gebaut) prüft künftig **ausschließlich Struktur**:
+`tools/check-test-pages.py` prüft **ausschließlich Struktur**:
 
 1. Testdateien liegen an erlaubten Orten (§3).
-2. Existiert `Apps/{slug}/app.js`, MUSS `Apps/{slug}/app.test.html` existieren.
+2. Nicht jede Datei `Theme/assets/js/apps/{slug}.js` löst eine Testpflicht aus. Quelle der
+   Testpflicht ist ausschließlich die literale `const REGISTRY = Object.freeze({...})` in
+   `Theme/assets/js/apps/index.js` (Theme-Bootstrapper-Runtime-Grenze, SEC-04/SEC-05 in
+   `docs/App-Fabrik/01_DECISION_LOG.md`): für jeden Literal-Slug dieser Registry MUSS
+   `Apps/{slug}/app.test.html` existieren. Der Ordner `Theme/assets/js/apps/` bzw. der statische
+   Importgraph des Bootstrappers kann neben den produktiven, in der Registry eingetragenen
+   App-Runtimes auch Hilfs-/Vertragsmodule enthalten (z. B. ein Vertragsmodul); nur ein
+   Literal-Slug als eigener Schlüssel in `const REGISTRY = Object.freeze({...})` löst die
+   Testpflicht aus. Ein nicht in der Registry eingetragenes Hilfs-/Vertragsmodul löst keine
+   Testpflicht aus und braucht keine eigene `Apps/{slug}/app.test.html`.
+   `Theme/assets/js/apps/index.js` selbst ist der Bootstrapper-
+   Einstieg, kein Registry-Slug. Die Testseite bleibt in `Apps/{slug}/`, die produktive Runtime
+   liegt ausschließlich im Theme — keine globale Suche, kein Fallback-Pfad, keine zweite
+   Registry- oder Runtime-Quelle.
 3. `app.test.html` besitzt `data-fw-test-template="1"`.
 4. Shared CSS und Shared JavaScript sind eingebunden.
 5. Mindestens ein `data-fw-test-case` ist vorhanden.
@@ -619,7 +636,7 @@ Eine Testseite gilt als vertragskonform, wenn:
 - sie unter einem der Standardorte (§3) liegt;
 - sie den Grundaufbau (§4) und mindestens einen vollständigen Testfall (§5) trägt;
 - jede geprüfte App/jeder Chart über die echte Ghost-Card (§6–§8) eingebunden ist;
-- `tools/check-test-pages.py` (sobald gebaut) sie strukturell grün meldet;
+- `tools/check-test-pages.py` sie strukturell grün meldet;
 - Albert die Seite manuell im Live-Server geöffnet, bedient und gegen die sichtbaren
   Erwartungen verglichen hat.
 

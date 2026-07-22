@@ -1,5 +1,7 @@
 # Migrationsstrategie Ghost-Apps V2: Die Chart-App als Blaupause
 
+Stand: 2026-07-22 11:00 | Session: css-architektur-formalisierung-c1 | Geändert von: Claude
+
 **Status:** Strategischer Sollstand fuer `prokrastinations-preis` und die folgenden Apps.  
 **Bindende Grundlage:** `docs/spec/ARCHITECTURE STRATEGY PAPER VX.md` und `docs/spec/Der Rucksack (Context Object Pattern).md`.
 
@@ -85,6 +87,42 @@ Der JSONParser uebernimmt API-Form, URL-Gate, Fetch, HTTP-Fehler, Fehlerpfad und
 5. **Theme integrieren:** Tailwind-Scan erfasst das App-Modul; Spezial-CSS bleibt auf echte Animationen/Overlays begrenzt.
 6. **Ghost nachweisen:** Card, beide Dateien, vier Screen-Zustände, Tastatur, Mobile, Reduced Motion und Browser-Konsole pruefen.
 7. **Erst nach dem Pilot standardisieren:** Aus bewiesenen Deltas eine knappe Checkliste fuer A0, A1-C, A1-J und A2-CJ ableiten.
+
+## 7a. Runtime-Grenze (SEC-04/SEC-05, `01_DECISION_LOG.md`) — Wiederholungsregel fuer kuenftige Apps
+
+Fuer jede migrierte oder neu gebaute `fw-app` gilt dieselbe Ablage-Grenze:
+
+```text
+Apps/{slug}/                        Fach-/Testakte
+  APP_SPEC.md, Testseite, Testdaten/Uebergangs-Fixtures
+  keine produktive app.js
+
+Theme/assets/js/apps/{slug}.js      einzige produktive Runtime
+Theme/assets/js/apps/index.js       einziger Bootstrapper-Einstieg, literale Registry
+```
+
+`prokrastinations-preis` ist der erste umgesetzte Registry-Eintrag (Pilot). Jede weitere App
+erweitert dieselbe literale Registry um einen weiteren Slug-Eintrag — kein zweiter Bootstrapper,
+kein zweiter Codepfad, keine Kopie der Runtime unter `Apps/`.
+
+## 7b. CSS-Migrations-Gate (D-CSS-04, `01_DECISION_LOG.md`)
+
+Eine App-Runtime gilt erst als **ins Theme migriert**, wenn zusätzlich zur Runtime-Grenze (§7a) alle vier CSS-Nachweise vorliegen:
+
+1. Jede von ihr gesetzte Nicht-Tailwind-Klasse und jede gelesene lokale `--fw-*`-Property ist in einer vom Theme ausgelieferten CSS-Quelle definiert.
+2. Die reale Runtime wird von der Tailwind-`@source`-Liste erfasst; ein frischer Build enthält die benötigten Utilities.
+3. Die lokale CSS-Mechanik ist auf eine literale App-Wurzel begrenzt; `Apps/{slug}` enthält keine zweite aktuelle CSS-Wahrheit.
+
+Die drei später zu bauenden maschinellen Gates dafür heißen Quellen-Existenz, Utility-Deckung und Mechanik-Parität (noch nicht gebaut, diese Regel baut sie nicht).
+
+4. Die sichtbare Abnahme erfolgt in einer **Ghost-nahen Umgebung**: Artikelkontext, produktives `screen.css`, kein Play-CDN.
+
+**Klare Trennung zweier Prüfungen:**
+
+- **Strukturelle App-Testseite** (`Apps/{slug}/app.test.html`, Play-CDN, kein `.gh-content`-Kontext): schneller App-/DOM-Test, prüft Funktion und Struktur — beweist aber nichts über die Ghost-Kaskadengrenze oder das produktive CSS-Artefakt.
+- **Ghost-nahe Sichtabnahme** (lokales Ghost, Artikelkontext, gebautes `screen.css`, kein CDN): einzige Umgebung, in der Punkt 4 erfüllt werden kann.
+
+„Grün auf `app.test.html`" ersetzt die Ghost-nahe Sichtabnahme nicht und umgekehrt. Keine Testinfrastruktur wird durch diese Regel neu gebaut.
 
 ## 7. Konsequenz fuer die Arbeitspakete
 

@@ -1,6 +1,6 @@
 # Decision Log — App-Fabrik
 
-Stand: 2026-07-21 15:52 | SEC-04-ghost-app-migration | Geändert von: Claude
+Stand: 2026-07-22 11:00 | D-CSS-01–04-formalisierung | Geändert von: Claude
 
 **Legende:**
 - 🟢 ENTSCHIEDEN — robuste Entscheidung, Grundlage für weitere Schritte
@@ -420,3 +420,78 @@ Beide Attribute enthalten ausschließlich geprüfte Dateinamen, keine URL.
 **Begründung:** Sicherheit by Construction — kein Vertragswiderspruch mehr zwischen Strategiepapier und bindender Spec (Peer-Review-Finding 1), keine Script-URL aus untrusted input möglich (Peer-Review-Finding 3), ein einziger auditierbarer Perimeter, Konsistenz mit der Chart-Blaupause.
 
 **Quelle:** Albert-Freigabe 2026-07-21 | `docs/steering/audits/PEER_REVIEW_ERGEBNIS_GHOST_APP_MIGRATION_V1.md` (Findings 1 + 3, Nachtrag) | `docs/steering/handovers/HANDOVER_FORMALISIERUNG_GHOST_APP_MIGRATION_ENTSCHEIDUNGEN_V1.md`
+
+---
+
+### SEC-05 — Runtime-Grenze: Fach-/Testakte vs. produktive Theme-Runtime
+**Status:** 🟢 ENTSCHIEDEN
+
+**Entscheidung:**
+- Die App-Fach-/Testakte bleibt unter `Apps/{slug}/` (APP_SPEC, Testseite, Testdaten/Übergangs-Fixtures).
+- Die produktive Runtime liegt ausschließlich unter `Theme/assets/js/apps/{slug}.js`. `Apps/{slug}/` enthält keine produktive `app.js` mehr.
+- Produktive CSV-/JSON-Daten liegen nicht in beiden Verzeichnissen; ihr zentraler, separat geprüfter Lieferweg bleibt `content/files/app-data/` (→ SEC-04).
+- Die App-Testseite (`Apps/{slug}/app.test.html`) lädt den Theme-Einstieg (`Theme/assets/js/apps/index.js`) und damit dieselbe Runtime wie Ghost — kein zweiter Codepfad für Tests.
+
+**Begründung:** Kein Copy-/Sync-Schritt, keine zweite Codewahrheit, das Theme-ZIP enthält jede produktiv benötigte Runtime.
+
+**Quelle:** Albert-Freigabe 2026-07-22 | → SEC-04
+
+---
+
+## CSS-Architektur
+
+### D-CSS-01 — Chart-Chrome: Übergangsoption C (produktiv wirksame Spiegel-CSS mit Paritätspflicht)
+**Status:** 🟢 ENTSCHIEDEN
+
+**Ist-Fakt:** Der `FwRenderer` injiziert seinen tokenbasierten Fallback (`_injectStyles()`) heute unbedingt, sobald die Chart-Engine geladen wird. Er läuft daher auch auf Ghost-Post-/Page-Seiten produktiv. Da der injizierte Style ungelayert ist, gewinnt er bei gleichen Eigenschaften gegen die gelayerten Tailwind-Chrome-Utilities.
+
+**Entscheidung — Übergangsoption C:**
+- Der produktiv wirksame Fallback bleibt unverändert.
+- Seine Parität zu den Tailwind-Chrome-Rezepten ist ausdrücklich Pflicht; er ist keine reine Testhilfe.
+- Keine Engine-Logik, keine Style-Injection und keine Chart-Optik wird in diesem AP geändert.
+- Zielzustand für einen **späteren, separaten Engine-DOM-AP** ist Option A: Der Fallback wird auf Tailwind-freie Engine-Testumgebungen begrenzt, Produktion nutzt dann allein die Tailwind-Chrome-Rezepte.
+- Bis dahin ist der Ist-Zustand als produktiv wirksame Spiegel-CSS mit Paritätspflicht dokumentiert; keine falsche Aussage „nur auf Testseiten" bleibt aktiv.
+
+**Begründung:** Kleinster Eingriff jetzt (reine Dokumentationskorrektur, kein Code-/Optik-Risiko); der Ist-Zustand wird korrekt beschrieben statt fälschlich als reiner Testweg behauptet — Voraussetzung für eine spätere, bewusste Entscheidung im Engine-DOM-AP.
+
+**Quelle:** Albert-Freigabe 2026-07-22 | `docs/steering/audits/PEER_REVIEW_ERGEBNIS_CSS_STRATEGIE_GHOST_TAILWIND_APPS_V1.md` (F-01) | `docs/steering/audits/PEER_REVIEW_ERGEBNIS_GHOST_APP_CSS_ARCHITEKTUR_V1.md` (Frage 10)
+
+### D-CSS-02 — Kaskadengrenze Ghost / normale Apps
+**Status:** 🟢 ENTSCHIEDEN
+
+- Ghost-Artikelregeln sind ungelayert; Tailwind-Utilities sind gelayert. Ungelayerte Autorenregeln schlagen gelayerte unabhängig von Spezifität und Reihenfolge.
+- Die normale App-Grenze wird an der Ursprungsregel hergestellt: Ghost-Artikelregeln schließen den `.fw-app`-Teilbaum aus (`:not(.fw-app *)`-Ausnahme an den betroffenen `.gh-content`-Regelgruppen).
+- `!important` ist **kategorisch verboten**, um diese Systemgrenze zu übersteuern oder zu reparieren.
+- Das Verbot gilt präzise für diese Kaskadenreparatur. Es behauptet nicht, dass historische `!important`-Stellen in klar abgegrenzten Engine-/Layout-Fallbacks jetzt verändert werden sollen.
+
+**Begründung:** Ein Utility-Gegenmittel kann gegen ungelayerte Regeln nie gewinnen; eine Gegenregel-Bridge würde zusätzlich die App-eigenen Utilities mit erschlagen. Die Ausnahme an der Quelle ist der kleinste, robusteste Grenzschutz.
+
+**Quelle:** Albert-Freigabe 2026-07-22 | Peer Reviews CSS-Strategie (Fragen 7–10) und Ghost-App-CSS-Architektur (Fragen 6, 10)
+
+### D-CSS-03 — Ein Buildweg für normale App-Mechanik
+**Status:** 🟢 ENTSCHIEDEN
+
+- Normale App-Mechanik wird als Theme-CSS-Quelle über `screen.source.css` und den kanonischen Tailwind-Build ausgeliefert (Option B).
+- Für lokale App-Mechanik ist ausschließlich die bare Importform `@import "…";` zulässig, **nicht** `@import url("…");`.
+- Der Build muss die Mechanik in `screen.css` einbetten; Selektor-Grep im Artefakt ist der Nachweis.
+- Keine JavaScript-Style-Injektion, keine CSS-URL in einer HTML-Card und kein zweites CSS-Deployment-System.
+
+**Begründung:** Ein vorhandener, kanonischer Build statt eines neuen Style-Injektionsmechanismus; nur die bare Importform wird vom Compiler inlined — `@import url(...)` würde unverändert durchgereicht und einen zweiten Browser-Download erzeugen.
+
+**Quelle:** Albert-Freigabe 2026-07-22 | `docs/steering/audits/PEER_REVIEW_ERGEBNIS_CSS_STRATEGIE_GHOST_TAILWIND_APPS_V1.md` (F-03) | `docs/steering/audits/PEER_REVIEW_ERGEBNIS_GHOST_APP_CSS_ARCHITEKTUR_V1.md` (Frage 9)
+
+### D-CSS-04 — Migrations-Gate
+**Status:** 🟢 ENTSCHIEDEN
+
+Eine App-Runtime gilt erst als im Theme migriert, wenn:
+
+1. jede gesetzte Nicht-Tailwind-Klasse und jede gelesene lokale `--fw-*`-Property in einer vom Theme ausgelieferten CSS-Quelle definiert ist;
+2. die reale Runtime von der Tailwind-`@source`-Liste erfasst wird und ein frischer Build die benötigten Utilities enthält;
+3. lokale Mechanik auf eine literale App-Wurzel begrenzt ist;
+4. die sichtbare Abnahme im lokalen Ghost im Artikelkontext mit gebautem `screen.css` und ohne Play-CDN erfolgt.
+
+Die drei später zu bauenden maschinellen Gates heißen: Quellen-Existenz, Utility-Deckung und Mechanik-Parität. Diese Entscheidung baut die Gates noch nicht.
+
+**Begründung:** Ohne dieses Gate kann eine Runtime ohne ihre sichtbare Fachmechanik ins Theme ziehen (real eingetreten, → Peer Reviews F-01/F-02); die vier Nachweise sind das kleinste vollständige Kriterium für „migriert".
+
+**Quelle:** Albert-Freigabe 2026-07-22 | `docs/steering/audits/PEER_REVIEW_ERGEBNIS_GHOST_APP_CSS_ARCHITEKTUR_V1.md` (Antwort 17, Finding F-06)

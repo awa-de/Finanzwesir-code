@@ -1,7 +1,7 @@
 # APP_FACTORY_IMPLEMENTATION_RFC
 
 **Projekt:** Finanzwesir 2.0 — App-Fabrik  
-**Stand:** 2026-07-21 16:49 — Resolver-Suffixwiderspruch korrigiert (reine Präfixbildung, `01_DECISION_LOG.md` SEC-04)
+**Stand:** 2026-07-22 09:00 — Theme-Bootstrapper-Runtime-Grenze umgesetzt (D7/D9/B3, `01_DECISION_LOG.md` SEC-05)
 **Status:** RFC / Draft  
 **Pilot-App:** `Apps/prokrastinations-preis`  
 **Ziel-Spec nach Review:** `docs/spec/APP-FACTORY-IMPLEMENTATION-STANDARD.md`  
@@ -788,7 +788,14 @@ Pilot-1-Arbeitsannahme + Factory-Standard-Kandidat.
 
 ### Empfohlener Default für Pilot 1
 
-Pflichtdateien:
+**Historisch (überholt durch SEC-05, `01_DECISION_LOG.md`, 2026-07-22):** Der ursprüngliche
+Pilot-1-Default sah `app.js` als produktive Datei unter `Apps/{slug}/` vor. Seit der
+Theme-Bootstrapper-Runtime-Grenze liegt die produktive Runtime ausschließlich unter
+`Theme/assets/js/apps/{slug}.js`; `Apps/{slug}/` enthält keine produktive `app.js` mehr
+(aktueller Stand → D9/B3 unten). Der folgende Block bleibt als historische Pilot-1-Formulierung
+unverändert stehen, nicht stillschweigend umgedeutet.
+
+Pflichtdateien (historisch, Pilot-1-Ausgangslage):
 
 ```text
 /Apps/prokrastinations-preis/
@@ -964,6 +971,12 @@ Redakteur fügt nur ein:
 ```
 
 Ein statischer Bootstrapper im Theme-Bundle sucht `.fw-app` Container, prüft den Slug gegen eine literale Registry (Slug → statisch importierte Init-Funktion) und initialisiert die passende App. Kein Wert aus einem `data-*`-Attribut beeinflusst je einen Import-Pfad, eine Script-URL oder einen `import()`-Ausdruck. Unbekannter Slug → Error-State, kein Nachladen. Jeder Container eigene `try/catch`-Error-Boundary; `data-fw-initialized`-Guard bleibt Pflicht.
+
+**Umgesetzt (→ SEC-05, `01_DECISION_LOG.md`, 2026-07-22):** einziger Theme-Einstieg
+`Theme/assets/js/apps/index.js`, Pilot-Registry-Eintrag `Theme/assets/js/apps/prokrastinations-preis.js`.
+Heutiger Testpfad: `Apps/{slug}/app.test.html` lädt denselben Theme-Einstieg wie Ghost — kein
+zweiter Codepfad. `Apps/{slug}/` bleibt Fach-/Testakte (APP_SPEC, Testseite, Testdaten), enthält
+keine produktive `app.js` mehr.
 
 ### Wichtig
 
@@ -1423,7 +1436,10 @@ Wird der Bootstrapper global per Ghost Code Injection / Theme eingebunden oder a
 Theme — statischer Bootstrapper im Theme-Bundle mit fester Registry/Slug-Whitelist, kein Code Injection, kein Script pro Ghost-Card.
 
 **Verbleibt offen (kein Blocker für Migration):**
-Genaue Einbindungsstelle innerhalb des Theme-Builds (Header/Footer-Äquivalent im Theme-Bundle-Prozess) — praktischer Ghost-Test.
+~~Genaue Einbindungsstelle innerhalb des Theme-Builds (Header/Footer-Äquivalent im Theme-Bundle-Prozess) — praktischer Ghost-Test.~~
+**Umgesetzt (→ SEC-05, `01_DECISION_LOG.md`, 2026-07-22):** Einbindungsstelle ist `Theme/default.hbs`,
+ein `<script type="module" src="{{asset "js/apps/index.js"}}">` unmittelbar nach `{{ghost_foot}}`.
+Praktischer Ghost-Test (Theme-ZIP/Upload) bleibt manuelle Restarbeit.
 
 ---
 

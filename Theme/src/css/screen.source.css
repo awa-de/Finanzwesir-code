@@ -21,13 +21,14 @@
 @layer theme, utilities;
 @import "tailwindcss/theme.css" layer(theme);
 @import "tailwindcss/utilities.css" layer(utilities) source(none);
+@import "./apps/prokrastinations-preis.css"; /* NEW — D-CSS-03: lokale App-Mechanik, bare Importform (kein url()) */
 
 /* T1 — ausschliesslich reale Produktionsquellen; Testseiten und Archive fehlen bewusst. */
 @source "../../*.hbs";
 @source "../../partials";
 @source "../../assets/js/fw-chart-engine";
 @source "../../assets/js/fw-janitor.js";
-@source "../../../Apps/prokrastinations-preis/app.js";
+@source "../../assets/js/apps"; /* CHANGED — D-CSS-04/Peer-Review F-01: reale Theme-Runtime-Quelle statt der gelöschten App-Datei */
 
 /* T1 — CI-Bridge, inhaltlich identisch zur kanonischen App-Testvorlage.
    Keine Werte kopieren: Jede Utility verweist auf den gleichnamigen Token. */
@@ -167,18 +168,22 @@ body {
    4. GHOST CONTENT — Alles unter .gh-content
    ========================================================================== */
 
-/* --- Headings --- */
+/* --- Headings ---
+   D-CSS-02: Ghost-Artikelregeln sind ungelayert und schlagen gelayerte Tailwind-Utilities
+   unabhängig von Spezifität — die Ausnahme liegt an der Ursprungsregel selbst. Jede neue
+   .gh-content-Textregel muss denselben .fw-app-Ausschluss erhalten, sofern sie dynamischen
+   App-DOM treffen könnte. */
 
-.gh-content h1,
-.gh-content h2 {
+.gh-content h1:not(.fw-app *),
+.gh-content h2:not(.fw-app *) {
     font-family: 'Archivo Black', sans-serif;
     letter-spacing: -0.02em;
     color: var(--color-petrol);
 }
 
-.gh-content h3,
-.gh-content h4,
-.gh-content h5 {
+.gh-content h3:not(.fw-app *),
+.gh-content h4:not(.fw-app *),
+.gh-content h5:not(.fw-app *) {
     font-family: 'Source Sans Pro', sans-serif;
     font-weight: 700;
     letter-spacing: normal;
@@ -187,13 +192,13 @@ body {
 
 /* --- Paragraphs --- */
 
-.gh-content p {
+.gh-content p:not(.fw-app *) {
     margin-bottom: 1.5rem;
 }
 
 /* --- Links --- */
 
-.gh-content a {
+.gh-content a:not(.fw-app *) {
     color: var(--color-link);
     text-decoration: underline;
     text-decoration-thickness: 1px;
@@ -202,7 +207,7 @@ body {
     transition: all 0.2s ease-in-out;
 }
 
-.gh-content a:hover {
+.gh-content a:hover:not(.fw-app *) {
     color: var(--color-petrol);
     text-decoration-color: var(--color-petrol);
     text-decoration-thickness: 3px;

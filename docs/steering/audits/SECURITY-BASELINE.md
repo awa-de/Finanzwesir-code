@@ -1,5 +1,5 @@
-Stand: 2026-07-21 15:52 | Session: ghost-app-migration-formalisierung | Geändert von: Claude
-Hinweis: §6.5/§6.9/§7 auf Dateinamenvertrag für data-fw-data/data-fw-config umgestellt (→ 01_DECISION_LOG.md SEC-04)
+Stand: 2026-07-22 09:00 | Session: theme-bootstrapper-runtime | Geändert von: Claude
+Hinweis: §6.5/§6.9/§7 auf Dateinamenvertrag für data-fw-data/data-fw-config umgestellt (→ 01_DECISION_LOG.md SEC-04); §6.9 Umsetzungsstatus + Theme-Pfade ergänzt (→ 01_DECISION_LOG.md SEC-05)
 
 # Security Baseline — Finanzwesir 2.0
 
@@ -191,7 +191,7 @@ Der globale fw-app Bootstrapper ist Sicherheitsperimeter:
 - Genau ein Theme-Einstieg, analog `fw-chart-engine/index.js`: kein Script pro Ghost-Card, keine Code-Injection pro Seite, kein CDN, kein Loader-Framework, keine Registry-Datei außerhalb des Codes.
 - Wachstumspfad (Code-Splitting mit literalen Importpfaden) nur dokumentiert, nicht gebaut — Trigger: einzelne App erreicht ~10× heutige App-Größe.
 
-Stand: Bootstrapper-Strategie freigegeben und im Decision Log verankert (→ `01_DECISION_LOG.md` SEC-04, 2026-07-21). Umsetzung ist eigener Migrations-AP, kein stiller Bestandteil dieser Baseline-Änderung.
+Stand: Bootstrapper-Strategie freigegeben und im Decision Log verankert (→ `01_DECISION_LOG.md` SEC-04, 2026-07-21). Umgesetzt (→ `01_DECISION_LOG.md` SEC-05, 2026-07-22): einziger Theme-Einstieg `Theme/assets/js/apps/index.js` mit literaler Registry, Pilot-Runtime `Theme/assets/js/apps/prokrastinations-preis.js`. Die Fach-/Testakte bleibt unter `Apps/{slug}/`, keine produktive `app.js` mehr dort.
 
 ### 6.10 CSS-Sicherheit / Isolation
 

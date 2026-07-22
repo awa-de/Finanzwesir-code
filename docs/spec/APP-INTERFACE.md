@@ -1,6 +1,6 @@
 # App Interface — Finanzwesir 2.0
 
-Stand: 2026-07-21 21:14 | shared-daten-jsonparser-vault-resolver | Geändert von: Claude
+Stand: 2026-07-22 09:00 | theme-bootstrapper-runtime | Geändert von: Claude
 
 **Zweck:** Kanonischer Schnittstellen-Vertrag zwischen Ghost-Content, App-Fabrik-Apps und Chart-Engine.
 **Zielgruppe:** Claude, Albert, zukünftige App-Implementierungen.
@@ -323,7 +323,7 @@ Gilt für CSV- und JSON-Datendateien.
 | ChartEngine-Einstiegspfade (interner Entwicklervertrag §4) | Beschlossen: zwei Pfade (deklarativ + Bridge), gemeinsamer Kern — OA-02-Dissens-2. Lifecycle und API-Signaturen: separates Gate bei ChartEngine.js-Implementierung. |
 | `data-fw-theme` | Reserviert — noch nicht implementiert. Nicht produktiv in Ghost-Cards verwenden. Nur über Enum-Whitelist, wenn implementiert. |
 
-Bestehende Ghost-HTML-Cards mit `data-app` (falls vorhanden): funktionieren weiterhin, solange kein Bootstrapper für `fw-app` aktiv ist. Kein Breaking Change im Pilot.
+Bestehende Ghost-HTML-Cards mit `data-app` (falls vorhanden): funktionieren weiterhin — der seit SEC-04/SEC-05 aktive Theme-Bootstrapper (`Theme/assets/js/apps/index.js`) selektiert ausschließlich `.fw-app`-Container und berührt `data-app`-Bestandskarten nicht. Kein Breaking Change im Pilot.
 
 ---
 

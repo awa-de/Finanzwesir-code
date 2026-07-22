@@ -2,10 +2,11 @@
 // app.js — ES-Modul (OA-01: <script type="module">)
 // Slice 5: 4-Screen-Flow (Screen-Controller, Button-Navigation, Fokus-Management)
 
-import { CSVParser } from '../../Theme/assets/js/fw-chart-engine/data/CSVParser.js';
-import { ChartEngine } from '../../Theme/assets/js/fw-chart-engine/core/ChartEngine.js'; // NEW — Slice 4
-import { resolveCsvAppDataFile, resolveJsonAppDataFile } from '../../Theme/assets/js/fw-chart-engine/data/AppDataResolver.js'; // NEW — Datenmigration (Shared-Daten-AP)
-import { JSONParser } from '../../Theme/assets/js/fw-chart-engine/data/JSONParser.js'; // NEW — Datenmigration (Shared-Daten-AP)
+import { CSVParser } from '../fw-chart-engine/data/CSVParser.js'; // CHANGED — Theme-Bootstrapper-Runtime-Grenze (SEC-05): Pfad relativ zum neuen Speicherort Theme/assets/js/apps/
+import { ChartEngine } from '../fw-chart-engine/core/ChartEngine.js'; // NEW — Slice 4
+import { resolveCsvAppDataFile, resolveJsonAppDataFile } from '../fw-chart-engine/data/AppDataResolver.js'; // NEW — Datenmigration (Shared-Daten-AP)
+import { JSONParser } from '../fw-chart-engine/data/JSONParser.js'; // NEW — Datenmigration (Shared-Daten-AP)
+import { validateStationsJson } from './prokrastinations-preis-stations-contract.js'; // NEW — JSON-Offline-Validator V1: einzige fachliche Implementierung, geteilt mit content/files/app-data/json-validator.mjs
 
 // SLUG_WHITELIST: Kompilzeit-Konstante — bewusst keine dynamische Quelle
 const SLUG_WHITELIST = ['prokrastinations-preis'];
@@ -17,7 +18,7 @@ const _dataCache = new Map();
 
 // NEW — AP-tailwind-02_slice-1: Shell-/State-Klassenkonstanten (TAILWIND-APP-BAUKASTEN_KONZEPT_V0-1.md
 // §6.1/§6.10, Literalregel §2.2: vollständige String-Literale, keine Interpolation/Komposition).
-const FW_SHELL_CLASS = 'fw-app relative box-border w-full min-h-48 bg-bg font-body text-text p-4 md:p-6';
+const FW_SHELL_CLASS = 'fw-app fw-app--prokrastinations-preis relative box-border w-full min-h-48 bg-bg font-body text-text p-4 md:p-6'; // CHANGED — CSS-Reparatur C1: literales Root-Marker-Token für die lokale Mechanik-Wurzel (D-CSS-03)
 const FW_LOADING_WRAPPER_CLASS = 'flex items-center justify-center gap-3 p-6 text-text-muted';
 const FW_LOADING_SPINNER_CLASS = 'h-8 w-8 animate-spin motion-reduce:animate-none rounded-full border-4 border-border border-t-primary';
 const FW_EMPTY_CLASS = 'p-4 text-text-muted';
@@ -38,10 +39,10 @@ const FW_SLIDER_LABEL_TEXT_CLASS = 'shrink-0 text-sm text-text-muted';
 const FW_SLIDER_INPUT_CLASS = 'min-w-0 flex-1 basis-40 cursor-pointer accent-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-petrol-500 focus-visible:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed';
 const FW_SLIDER_VALUE_CLASS = 'min-w-[7ch] shrink-0 text-right font-bold text-text';
 // NEW — AP-tailwind-02_slice-4: Button-/CTA-Klassenkonstanten (TAILWIND-APP-BAUKASTEN_KONZEPT_V0-1.md §6.4/§7)
-const FW_BUTTON_NEXT_CLASS = 'inline-flex items-center justify-center rounded-md px-4 py-2 font-bold transition-colors motion-reduce:transition-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-petrol-500 focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none bg-primary text-white hover:bg-petrol-700 active:bg-petrol-800 ml-auto';
-const FW_BUTTON_PREV_CLASS = 'inline-flex items-center justify-center rounded-md px-4 py-2 font-bold transition-colors motion-reduce:transition-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-petrol-500 focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none border border-border bg-bg text-text hover:bg-bg-faint active:bg-surface';
-const FW_BUTTON_JOURNEY_CLASS = 'inline-flex items-center justify-center rounded-md px-4 py-2 font-bold transition-colors motion-reduce:transition-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-petrol-500 focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none bg-primary text-white hover:bg-petrol-700 active:bg-petrol-800 w-full sm:w-auto mt-4';
-const FW_CTA_CLASS = 'inline-flex items-center justify-center rounded-md px-4 py-2 font-bold transition-colors motion-reduce:transition-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-petrol-500 focus-visible:ring-offset-2 bg-primary text-white hover:bg-petrol-700 active:bg-petrol-800 mt-4 no-underline';
+const FW_BUTTON_NEXT_CLASS = 'appearance-none border-0 font-body inline-flex items-center justify-center rounded-md px-4 py-2 font-bold transition-colors motion-reduce:transition-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-petrol-500 focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none bg-primary text-white hover:bg-petrol-700 active:bg-petrol-800 ml-auto'; // CHANGED — CSS-Reparatur C1: native-Control-Normalisierung (Baukasten §6.4)
+const FW_BUTTON_PREV_CLASS = 'appearance-none font-body inline-flex items-center justify-center rounded-md px-4 py-2 font-bold transition-colors motion-reduce:transition-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-petrol-500 focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none border border-border bg-bg text-text hover:bg-bg-faint active:bg-surface'; // CHANGED — CSS-Reparatur C1: kein border-0 — Secondary behält die gewollte Kontur
+const FW_BUTTON_JOURNEY_CLASS = 'appearance-none border-0 font-body inline-flex items-center justify-center rounded-md px-4 py-2 font-bold transition-colors motion-reduce:transition-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-petrol-500 focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none bg-primary text-white hover:bg-petrol-700 active:bg-petrol-800 w-full sm:w-auto mt-4'; // CHANGED — CSS-Reparatur C1: native-Control-Normalisierung (Baukasten §6.4)
+const FW_CTA_CLASS = 'inline-flex items-center justify-center rounded-md px-4 py-2 font-bold font-body transition-colors motion-reduce:transition-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-petrol-500 focus-visible:ring-offset-2 bg-primary text-white hover:bg-petrol-700 active:bg-petrol-800 mt-4 no-underline'; // CHANGED — CSS-Reparatur C1: font-body ergänzt — Link, kein nativer Button, kein appearance-none/border-0
 // NEW — AP-tailwind-02_slice-4-manifest-fix: Rezeptschlüssel statt CSS-String als makeBtn()-Parameter
 // (kein CSS-String darf als Funktionsparameter in makeBtn() gelangen).
 const FW_BUTTON_RECIPES = Object.freeze({
@@ -63,7 +64,7 @@ const FW_SCREEN3_BRIDGE_CLASS = 'fw-app__screen3-bridge mt-2 text-center text-sm
 // §6.7 Callout, §6.8 Disclosure, §6.9 ARIA-Live-Region). Der fw-app__assumptions-Marker bleibt Teil der
 // Callout-Konstante, weil er ausschließlich die bestehende Screen-3-Reveal-Mechanik trägt — kein Tailwind-
 // Token, wird vom Manifestchecker ausgefiltert.
-const FW_DISCLOSURE_TRIGGER_CLASS = 'flex w-full items-center justify-between gap-2 rounded-md px-3 py-2 text-left text-sm font-semibold text-text-sec transition-colors motion-reduce:transition-none hover:bg-bg-faint hover:text-text focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-petrol-500 sm:inline-flex sm:w-auto sm:justify-start'; // CHANGED — AP-tailwind-02f (Q-08): responsiver Disclosure-Kontrakt
+const FW_DISCLOSURE_TRIGGER_CLASS = 'appearance-none border-0 font-body flex w-full items-center justify-between gap-2 rounded-md px-3 py-2 text-left text-sm font-semibold text-text-sec transition-colors motion-reduce:transition-none hover:bg-bg-faint hover:text-text focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-petrol-500 sm:inline-flex sm:w-auto sm:justify-start'; // CHANGED — Hotfix C1: native-Control-Normalisierung (fehlte, war einziges Rezept ohne appearance-none/border-0)
 const FW_DISCLOSURE_INDICATOR_CLOSED_CLASS = 'transition-transform motion-reduce:transition-none';
 const FW_DISCLOSURE_INDICATOR_OPEN_CLASS = 'transition-transform motion-reduce:transition-none rotate-180';
 const FW_DISCLOSURE_CONTENT_CLASS = 'mt-2 pl-3';
@@ -1246,43 +1247,6 @@ async function _loadDataImpl(url) {
   return { appData };
 }
 
-// CHANGED — B1-STATIONS-v3.0: Validator für STATIONS_CONFIG_CONTRACT.md v3.0
-// Gibt { ok: true } oder { ok: false, code, detail } zurück — kein Wurf.
-function validateStationsJson(json) {
-  if (typeof json !== 'object' || json === null || Array.isArray(json))
-    return { ok: false, code: 'invalid_structure', detail: 'root is not an object' };
-
-  if (json.version !== '3.0')
-    return { ok: false, code: 'invalid_value', detail: 'version: expected "3.0", got: ' + json.version };
-  if (json.locale !== 'de-DE')
-    return { ok: false, code: 'invalid_value', detail: 'locale: expected "de-DE", got: ' + json.locale };
-  if (json.app !== 'prokrastinations-preis')
-    return { ok: false, code: 'invalid_value', detail: 'app: expected "prokrastinations-preis", got: ' + json.app };
-
-  if (!Array.isArray(json.stations) || json.stations.length < 1)
-    return { ok: false, code: 'missing_field', detail: 'stations (array, min length 1)' };
-
-  for (let i = 0; i < json.stations.length; i++) {
-    const s = json.stations[i];
-    const p = 'station[' + i + ']';
-
-    if (typeof s.id !== 'string' || s.id.trim() === '')
-      return { ok: false, code: 'missing_field', detail: p + '.id' };
-    if (typeof s.date !== 'string' || !/^\d{4}-\d{2}-\d{2}$/.test(s.date))
-      return { ok: false, code: 'invalid_value', detail: p + '.date: expected YYYY-MM-DD, got: ' + s.date };
-    if (typeof s.source !== 'string' || s.source.trim() === '')
-      return { ok: false, code: 'missing_field', detail: p + '.source' };
-    if (typeof s.headline !== 'string' || s.headline.trim() === '')
-      return { ok: false, code: 'missing_field', detail: p + '.headline' };
-    if (typeof s.anchorText !== 'string' || s.anchorText.trim() === '')
-      return { ok: false, code: 'missing_field', detail: p + '.anchorText' };
-    if (typeof s.sourceUrl !== 'string' || !/^https?:\/\//.test(s.sourceUrl))
-      return { ok: false, code: 'invalid_value', detail: p + '.sourceUrl: must start with http:// or https://' };
-  }
-
-  return { ok: true };
-}
-
 // NEW — AP-13: YYYY-MM Monatssubtraktion (FwDateUtils hat keine YYYY-MM-String-Funktion)
 function subtractMonths(yyyyMm, n) {
   const year  = parseInt(yyyyMm.slice(0, 4), 10);
@@ -1405,22 +1369,12 @@ async function initApp(container, slug) {
   }
 }
 
-function bootstrap() {
-  const containers = document.querySelectorAll('.fw-app');
-  if (containers.length === 0) {
-    console.warn('[fw-app] Kein .fw-app-Container gefunden.');
-    return;
-  }
-  containers.forEach(container => {
-    // Guard: verhindert doppelte Initialisierung (z.B. Ghost Code Injection + Theme)
-    if (container.dataset.fwInitialized === 'true') return;
-    container.dataset.fwInitialized = 'true';
-    container.className = FW_SHELL_CLASS; // NEW — AP-tailwind-02_slice-1: Shell-Klassenkonstante (§6.1)
-
-    const slug = (container.dataset.fwApp || '').trim();
-    initApp(container, slug);
-  });
+// CHANGED — Theme-Bootstrapper-Runtime-Grenze (SEC-05): kein eigener .fw-app-Query und kein
+// eigener DOMContentLoaded-Bootstrap mehr. Der zentrale Bootstrapper (Theme/assets/js/apps/index.js)
+// findet die Container, hält den data-fw-initialized-Guard und ruft pro Container genau diese
+// Init-Funktion in einer eigenen try/catch-Grenze auf.
+export async function initProkrastinationsPreis(container) {
+  container.className = FW_SHELL_CLASS; // NEW — AP-tailwind-02_slice-1: Shell-Klassenkonstante (§6.1)
+  const slug = (container.dataset.fwApp || '').trim();
+  await initApp(container, slug);
 }
-
-// ES-Modul: defer by default — DOMContentLoaded ist dennoch sicherer gegen Race Conditions
-document.addEventListener('DOMContentLoaded', bootstrap);
