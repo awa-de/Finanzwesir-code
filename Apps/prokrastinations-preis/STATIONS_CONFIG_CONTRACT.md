@@ -1,10 +1,10 @@
-Stand: 2026-07-21 21:42 | Datenmigration: Datei auf stations-de.json umbenannt, Produktionsquelle in §2 nachgezogen | Zweck: Minimaler Event-Pin-Vertrag für Screen 2 der Prokrastinationspreis-App
+Stand: 2026-07-22 | V4.0: Stationen plus eingeschränkter Rubikon-Redaktionsinhalt im selben JSON-Feed | Zweck: Event-Pins für Screen 2 und barrierefreier Rubikon-Text für Screen 4
 
-# Stations-JSON-Datenvertrag — Minimalversion
+# Stations-JSON-Datenvertrag — V4.0
 
 ## 1. Zweck
 
-`Apps/prokrastinations-preis/config/stations-de.json` enthält belegte historische Event-Pins für eine Finanzzeitreihe.
+`stations-de.json` enthält belegte historische Event-Pins für eine Finanzzeitreihe sowie den eingeschränkten Rubikon-Redaktionsinhalt für Screen 4.
 
 Ein Event-Pin markiert einen Nachrichtenmoment, der für Anleger damals emotional relevant war: Furcht, Zweifel, Panik, Erleichterung, Euphorie, Gier oder FOMO.
 
@@ -34,15 +34,19 @@ Die JSON enthält nur das, was für Event-Pins zwingend gebraucht wird:
 
 Alles andere gehört nicht in den Event-Datensatz.
 
-Formatierungen gehören nicht in die JSON. Die Chart-/UI-Strategie entscheidet über Darstellung und baut die sichtbare Quellenzeile aus `source` und `date`.
+Formatierungen gehören nicht in historische Stationen. Die einzige ausdrücklich definierte Ausnahme ist `rubikon.long`/`rubikon.short`: deren eingeschränkte Markdown-Grammatik gehört zur redaktionellen Screen-4-Konfiguration und wird fail-closed validiert. Die Chart-/UI-Strategie entscheidet weiter über Darstellung und baut die sichtbare Quellenzeile aus `source` und `date`.
 
 ## 4. Top-Level-Struktur
 
 ```json
 {
-  "version": "3.0",
+  "version": "4.0",
   "locale": "de-DE",
   "app": "prokrastinations-preis",
+  "rubikon": {
+    "long": "Text für Desktop und Tablet",
+    "short": "Text für Mobil"
+  },
   "stations": []
 }
 ```
@@ -55,7 +59,7 @@ Pflicht: ja
 Vertragsversion dieser JSON-Struktur.
 
 ```json
-"version": "3.0"
+"version": "4.0"
 ```
 
 ### `locale`
@@ -343,6 +347,26 @@ Stationen werden chronologisch nach `date` sortiert.
 Die Reihenfolge im JSON soll chronologisch sein. Die App darf zusätzlich nach `date` aufsteigend sortieren.
 
 Keine manuelle Gewichtung. Keine Rollenlogik.
+
+### `rubikon`
+
+Typ: Objekt mit exakt `long` und `short`
+Pflicht: ja
+
+`long` ist die Desktop-/Tablet-Fassung, `short` die mobile Fassung des semantischen Haupttexts auf Screen 4. Beide Werte sind Zeichenketten in einer absichtlich kleinen Markdown-Grammatik. Sie werden nach der JSON-Prüfung als sicherer AST und anschließend per DOM-APIs gerendert; sie sind nie HTML und nie Canvas-Text.
+
+Erlaubt sind nur:
+
+- Absätze, getrennt durch Leerzeilen;
+- `## ` und `### ` für Überschriften (im DOM `h3` bzw. `h4`);
+- flache `- `-Listen oder fortlaufende `1. `-Listen;
+- `**fett**` und `*kursiv*`.
+
+Eine Überschrift ist immer genau eine Zeile. Unmittelbar folgender Text ohne Leerzeile bildet einen neuen Absatz (bzw. eine neue Liste) — eine Leerzeile nach einer Überschrift ist nicht erforderlich.
+
+Nicht erlaubt sind HTML, `<`/`>`, Links, Bilder, Backticks/Code, Tabellen, Zitate, Ebene-1-Überschriften, verschachtelte Listen sowie offene oder verschachtelte Formatierungsmarker. Ein Verstoß macht die gesamte JSON-Konfiguration ungültig.
+
+Bearbeitung erfolgt über `content/files/app-data/bearbeite-rubikon-text.bat`. Das Werkzeug schreibt nur nach erfolgreicher Prüfung bytegleich in die produktive Prüfkopie und die Test-/Quellfixture. Anschließend ist `pruefe-json.bat` nochmals manuell auszuführen, bevor die Datei nach Ghost Local oder Produktion übertragen wird. `bearbeite-rubikon-text.ps1` ist ein dünnes Rubikon-Profil (L/K-Auswahl, Zielpfade, Hilfetexte, mechanische Zeilen-Normalisierung); die wiederverwendbare Mechanik (Mehrzeileneingabe, Abschlussgeste, atomare Doppel-Schreiblogik mit Rollback) liegt in `json-eingabe-tool-core.psm1`.
 
 ## 11. Gültiges Beispiel
 

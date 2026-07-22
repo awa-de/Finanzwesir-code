@@ -1,6 +1,6 @@
 # APP_SPEC — prokrastinations-preis
 
-Stand: 2026-07-21 21:42 | V3.2 — Datenmigration: app.js auf AppDataResolver/JSONParser umgestellt, stations.de.json → stations-de.json umbenannt | Geändert von: Claude
+Stand: 2026-07-22 | V3.3 — Rubikon-Text aus V4.0-JSON-Konfiguration als sicheres DOM gerendert | Geändert von: Codex
 
 ---
 
@@ -8,7 +8,7 @@ Stand: 2026-07-21 21:42 | V3.2 — Datenmigration: app.js auf AppDataResolver/JS
 
 | Feld | Wert |
 |---|---|
-| Version | V3.2 — Datenmigration: `app.js` lädt CSV/JSON über `AppDataResolver`/`CSVParser`/`JSONParser` + `validateStationsJson`, `buildAppContext()` tief eingefroren, `stations.de.json` → `stations-de.json` umbenannt (V3.1: Resolver-Suffixwiderspruch korrigiert) |
+| Version | V3.3 — Rubikon-Text kommt aus `stations-de.json` V4.0 als sicherer DOM-Block; `app.js` lädt CSV/JSON über `AppDataResolver`/`CSVParser`/`JSONParser` + `validateStationsJson`, `buildAppContext()` tief eingefroren |
 | Phase | Implementierung — Stationen-Zeitreise vollständig (B1-AP-11–AP-14c4 ✅ 2026-06-17/18); Engine-Erweiterungen (Progressive Domain, Annotation-Marker, Pulse) abgeschlossen; nächster Schritt: Transitions + Reduced Motion (B1-AP-15) |
 | Nächster Schritt | B1-AP-15 — Transitions + Reduced Motion (B1-AP-14d4 ✅ 2026-06-18) |
 | Code-Freigabe | Slice 0 ✅ 2026-06-04, Slice 1–2 ✅ 2026-06-05, Slice 4 ✅ 2026-06-11, Slice 5 ✅ 2026-06-15, Slice 6 ✅ 2026-06-16; B1-AP-11–AP-14c4 ✅ 2026-06-17/18 |
@@ -1279,7 +1279,7 @@ Screen 4 zeigt beim Eintritt sofort den finalen, stehenden Rubikon-Zustand — k
 - Rechts: leerer Zukunftsraum über `xDisplayRange` (Domain um 120 Monate erweitert). Keine Linie, keine Prognose, keine Zukunftsdaten in diesem Bereich — nur Achsenraum ohne Dataset-Punkte.
 
 **Haupttext (A11y-Pflicht):**
-Der semantische Screen-4-Haupttext ist ein echter DOM-Textblock (kein Canvas-Text), weil er zentral und barrierefrei zugänglich sein muss. Er wird per CSS (`position:absolute`, `--fw-rubikon-text-top`/`--fw-rubikon-text-left` als nachjustierbare Custom Properties) visuell in den rechten, leeren Zukunftsraum des Charts gelegt — bleibt aber technisch außerhalb des Chart-DOM, den `ChartEngine`/`FwRenderer` verwalten.
+Der semantische Screen-4-Haupttext ist ein echter DOM-Textblock (kein Canvas-Text), weil er zentral und barrierefrei zugänglich sein muss. Sein Inhalt kommt aus `stationsConfig.rubikon.long` bzw. `.short` im bestehenden `data-fw-config`-Feed, wird durch den gemeinsamen eingeschränkten Markdown-Kern validiert und mittels DOM-APIs erzeugt. Es gibt keinen zusätzlichen Feed, kein HTML aus Daten und keine Laufzeit-Markdown-Datei. Per CSS (`position:absolute`, `--fw-rubikon-text-top`/`--fw-rubikon-text-left` als nachjustierbare Custom Properties) wird er visuell in den rechten, leeren Zukunftsraum des Charts gelegt — bleibt aber technisch außerhalb des Chart-DOM, den `ChartEngine`/`FwRenderer` verwalten.
 
 `FwChartTextPlugin.js` (AP-prokrast-03c/03d) ist ein vorhandener, isolierter Canvas-Text-Plugin-Baustein für persistente Chart-Annotationen. Er wurde für Screen 4 gebaut und getestet, ist aber **nicht** die Lösung für den Screen-4-Haupttext — der A11y-Konflikt (Canvas-Text ist für Screenreader unerreichbar) wurde zugunsten des DOM-Overlays entschieden. Der Plugin-Baustein bleibt für andere, zukünftige Anwendungsfälle nutzbar.
 

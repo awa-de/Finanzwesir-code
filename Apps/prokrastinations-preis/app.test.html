@@ -1022,9 +1022,9 @@
       // in-memory erzeugte Antworten -- keine neue Datei auf der Festplatte.
       var SYNTHETIC_RESPONSES = {
         '/content/files/app-data/stations-invalid-syntax.json':
-          '{ "version": "3.0", "locale": "de-DE", "app": "prokrastinations-preis", "stations": [ SYNTAKTISCH KAPUTT',
+          '{ "version": "4.0", "locale": "de-DE", "app": "prokrastinations-preis", "rubikon": { "long": "Text", "short": "Text" }, "stations": [ SYNTAKTISCH KAPUTT',
         '/content/files/app-data/stations-invalid-contract.json':
-          JSON.stringify({ version: '3.0', locale: 'de-DE', app: 'prokrastinations-preis', stations: [{ id: 'nur-id-kein-pflichtfeld-sonst' }] })
+          JSON.stringify({ version: '4.0', locale: 'de-DE', app: 'prokrastinations-preis', rubikon: { long: 'Text', short: 'Text' }, stations: [{ id: 'nur-id-kein-pflichtfeld-sonst' }] })
       };
 
       window.fetch = function (input, init) {

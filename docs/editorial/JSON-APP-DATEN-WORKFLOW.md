@@ -1,6 +1,6 @@
 # JSON-App-Daten-Workflow: App-Konfigurationsdaten prüfen und veröffentlichen
 
-**Version:** 1.0.0
+**Version:** 1.1.2
 **Datum:** 22.07.2026
 **Status:** Verbindliche Referenz
 **Zielgruppe:** Redakteure und Entwickler, die eine JSON-App-Konfigurationsdatei (`data-fw-config`) veröffentlichen.
@@ -30,12 +30,12 @@ Wichtig: **Ghost ist am Prüf- und Übertragungsschritt nicht beteiligt.** Es li
 
 | Ort | Was liegt dort | Wer greift zu |
 |---|---|---|
-| **Quell-/Fixture-JSON** | `Apps/prokrastinations-preis/config/stations-de.json` — lokale Bearbeitung, Testseiten-Fixture, **keine Ghost-Laufzeitquelle** | Redakteur, Testseite `app.test.html` |
-| **Lokale Prüfkopie** | `content/files/app-data/` im eigenständigen `content`-Git-Repository (auf diesem Rechner) | Redakteur, Offline-Prüfer |
+| **Quell-/Fixture-JSON** | `Apps/prokrastinations-preis/config/stations-de.json` — Testseiten-Fixture, **keine Ghost-Laufzeitquelle** | Testseite `app.test.html` |
+| **Lokale Prüfkopie** | `content/files/app-data/` im eigenständigen `content`-Git-Repository — maßgeblicher Bearbeitungskandidat | Redakteur, Offline-Prüfer |
 | **Lokaler Ghost-Laufzeitordner** | `C:\Tools\ghost-local\site\content\files\app-data\` — außerhalb jedes Repositories, rein für den lokalen Test | lokales Ghost (`http://localhost:2368/…`) |
 | **Produktions-Ghost-Content-Pfad** | `Ghost/content/files/app-data/` auf dem Produktionsserver | Produktions-Ghost, erreicht per FileZilla |
 
-Die Quell-/Fixture-Datei unter `Apps/.../config/` und die Prüfkopie unter `content/files/app-data/` sind zwei getrennte Dateien an zwei getrennten Orten — beim Bearbeiten der Stationsdaten wird die Quelle geändert, dann eine aktualisierte Kopie für die Prüfung und Veröffentlichung angelegt.
+Die Quell-/Fixture-Datei unter `Apps/.../config/` und die Prüfkopie unter `content/files/app-data/` bleiben zwei getrennte Dateien. Für Rubikon-Text pflegt `bearbeite-rubikon-text.bat` jedoch bewusst beide bytegleich; so testet die App-Testseite denselben Inhalt, der später veröffentlicht wird.
 
 ---
 
@@ -83,14 +83,16 @@ Derselbe kanonische Name ist der gültige Wert für `data-fw-config` in der Ghos
 
 ## 6. Checkliste „Neue oder geänderte JSON-Konfiguration veröffentlichen"
 
-1. Quelle unter `Apps/prokrastinations-preis/config/stations-de.json` bearbeiten.
-2. Aktualisierte Kopie nach `content/files/app-data/` legen.
+1. Für Rubikon-Text: `bearbeite-rubikon-text.bat` unter `content/files/app-data/` doppelklicken. `L` = Langfassung (Desktop/Tablet, CSS zeigt sie oberhalb 480 px), `K` = Kurzfassung (Mobil, CSS zeigt sie bis einschließlich 480 px). Fassung wählen, Text eingeben, letzte Zeile mit Enter abschließen, danach zweimal Enter für zwei leere Zeilen; `Esc` bricht jederzeit ohne Änderung ab. Das Werkzeug prüft vor dem Schreiben und hält Prüfkopie und Fixture bytegleich. Das Fenster bleibt nach Erfolg, Abbruch oder Fehler offen — Meldung lesen und mit beliebiger Taste schließen. (`bearbeite-rubikon-text.ps1` ist als UTF-8-Quelldatei mit BOM gespeichert — nötig für korrekte Umlaute unter Windows PowerShell 5.1; `stations-de.json` bleibt davon unberührt UTF-8 ohne BOM.)
+2. Für Stationsdaten: die Prüfkopie unter `content/files/app-data/stations-de.json` gezielt bearbeiten und die Fixture anschließend bytegleich nachziehen.
 3. `pruefe-json.bat` doppelklicken.
 4. Nur bei **GRÜN** weitermachen. Bei Fehler: Meldung lesen, JSON korrigieren, erneut prüfen.
 5. Für den lokalen Test: die (ggf. kanonisch umbenannte) JSON nach `C:\Tools\ghost-local\site\content\files\app-data\` kopieren.
 6. Für Produktion: dieselbe geprüfte JSON mit FileZilla (SFTP/FTPS) nach `Ghost/content/files/app-data/` übertragen.
 7. Ghost-Card mit `data-fw-config="<kanonischer-dateiname>.json"` einfügen oder aktualisieren.
 8. Seite im Browser öffnen, App und Konsole prüfen.
+
+**Eingabewerkzeug-Architektur:** `bearbeite-rubikon-text.ps1` ist ein dünnes Profil (L/K-Auswahl, Zielpfade, Hilfetexte, mechanische Zeilen-Normalisierung) über einem allgemeinen, wiederverwendbaren Mechanik-Kern (`content/files/app-data/json-eingabe-tool-core.psm1`: Mehrzeileneingabe, Abschlussgeste, atomare Doppel-Schreiblogik mit Rollback). Rubikon ist heute das erste Profil dieses Kerns; weitere Profile werden erst bei konkretem Bedarf ergänzt — kein allgemeiner `bearbeite-json.bat`, keine App-Auswahl und kein allgemeiner Feldeditor sind vorweggebaut.
 
 ## 7. Checkliste „Weiteren JSON-Feed hinzufügen"
 

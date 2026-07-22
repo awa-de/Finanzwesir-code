@@ -1,63 +1,67 @@
 {
-  "version": "3.0",
-  "locale": "de-DE",
-  "app": "prokrastinations-preis",
-  "stations": [
-    {
-      "id": "station_2016_11_09_trump_sieg",
-      "date": "2016-11-09",
-      "source": "Zeit Online",
-      "headline": "Finanzmärkte: Dax startet nach Trump-Sieg mit Verlusten",
-      "anchorText": "Trumps Wahlsieg sorgt für Nervosität; der DAX startet mit fast drei Prozent Minus.",
-      "sourceUrl": "https://www.zeit.de/wirtschaft/boerse/2016-11/finanzmaerkte-us-wahl-euro-yen-peso-goldpreis-reaktionen"
-    },
-    {
-      "id": "station_2017_12_17_bitcoin_20000",
-      "date": "2017-12-17",
-      "source": "WirtschaftsWoche",
-      "headline": "Krypto und kein Ende: Bitcoin durchbricht 20.000-Dollar-Marke",
-      "anchorText": "Bitcoin durchbricht erstmals die Marke von 20.000 Dollar.",
-      "sourceUrl": "https://www.wiwo.de/finanzen/boerse/krypto-und-kein-ende-bitcoin-durchbricht-20-000-dollar-marke/20735156.html"
-    },
-    {
-      "id": "station_2020_03_10_corona_crash",
-      "date": "2020-03-10",
-      "source": "Tagesschau",
-      "headline": "Coronavirus: \"Schwarzer Montag\" an den Börsen weltweit",
-      "anchorText": "Corona-Furcht und Ölpreissturz drücken den DAX um 7,94 Prozent.",
-      "sourceUrl": "https://www.tagesschau.de/wirtschaft/corona-wirtschaft-wallstreet-103.html"
-    },
-    {
-      "id": "station_2020_11_09_impfstoff_rally",
-      "date": "2020-11-09",
-      "source": "Handelsblatt",
-      "headline": "Dax aktuell: Dax schließt mehr als 600 Punkte fester – Hoffnung auf Corona-Impfstoff teilt die Börsenwelt neu auf",
-      "anchorText": "Impfstoffhoffnung treibt den DAX 4,94 Prozent höher auf 13.095 Punkte.",
-      "sourceUrl": "https://www.handelsblatt.com/finanzen/maerkte/marktberichte/dax-aktuell-dax-schliesst-mehr-als-600-punkte-fester-hoffnung-auf-corona-impfstoff-teilt-die-boersenwelt-neu-auf/26604010.html"
-    },
-    {
-      "id": "station_2022_02_24_ukraine_invasion",
-      "date": "2022-02-24",
-      "source": "Zeit Online",
-      "headline": "Börseneinbruch: Angriff auf Ukraine stürzt Finanzmärkte ins Chaos",
-      "anchorText": "Russlands Angriff belastet die Aktienmärkte; der DAX verliert fast vier Prozent.",
-      "sourceUrl": "https://www.zeit.de/wirtschaft/2022-02/moskau-boerse-einbruch-russland-angriff-ukraine"
-    },
-    {
-      "id": "station_2024_06_19_nvidia_ki_euphorie",
-      "date": "2024-06-19",
-      "source": "Tagesschau",
-      "headline": "Chiphersteller Nvidia wertvollster Konzern der Welt",
-      "anchorText": "Nvidia steigt in der KI-Börseneuphorie zum wertvollsten Konzern auf.",
-      "sourceUrl": "https://www.tagesschau.de/wirtschaft/digitales/nvidia-wertvollstes-unternehmen-boerse-chiphersteller-100.html"
-    },
-    {
-      "id": "station_2026_02_06_saas_okalypse",
-      "date": "2026-02-06",
-      "source": "ORF.at",
-      "headline": "Turbulente Woche für Bitcoin, Gold und Tech",
-      "anchorText": "Anthropics Claude-Modul lässt SaaS-Werte abstürzen; der S&P-SaaS-Index fällt auf rund 13.000 Punkte.",
-      "sourceUrl": "https://orf.at/stories/3419382/"
-    }
-  ]
+    "version":  "4.0",
+    "locale":  "de-DE",
+    "app":  "prokrastinations-preis",
+    "rubikon":  {
+                    "long":  "## Die letzten 10 Jahre sind gelaufen.\nDie nächsten 10 sind leer. Noch.\nNicht, weil nichts passiert, sondern weil niemand weiß was kommt.\nAndere Krisen, gleiche Zumutung. Der Job bleibt: Dranbleioben, auch wenn es nervt.\n*Keine Vorhersage, aber so ist der Markt.*",
+                    "short":  "Die nächsten 10 Jahre sind leer. Noch.\n\nDie Linie fehlt noch. Die Aufgabe nicht: dranbleiben."
+                },
+    "stations":  [
+                     {
+                         "id":  "station_2016_11_09_trump_sieg",
+                         "date":  "2016-11-09",
+                         "source":  "Zeit Online",
+                         "headline":  "Finanzmärkte: Dax startet nach Trump-Sieg mit Verlusten",
+                         "anchorText":  "Trumps Wahlsieg sorgt für Nervosität; der DAX startet mit fast drei Prozent Minus.",
+                         "sourceUrl":  "https://www.zeit.de/wirtschaft/boerse/2016-11/finanzmaerkte-us-wahl-euro-yen-peso-goldpreis-reaktionen"
+                     },
+                     {
+                         "id":  "station_2017_12_17_bitcoin_20000",
+                         "date":  "2017-12-17",
+                         "source":  "WirtschaftsWoche",
+                         "headline":  "Krypto und kein Ende: Bitcoin durchbricht 20.000-Dollar-Marke",
+                         "anchorText":  "Bitcoin durchbricht erstmals die Marke von 20.000 Dollar.",
+                         "sourceUrl":  "https://www.wiwo.de/finanzen/boerse/krypto-und-kein-ende-bitcoin-durchbricht-20-000-dollar-marke/20735156.html"
+                     },
+                     {
+                         "id":  "station_2020_03_10_corona_crash",
+                         "date":  "2020-03-10",
+                         "source":  "Tagesschau",
+                         "headline":  "Coronavirus: \"Schwarzer Montag\" an den Börsen weltweit",
+                         "anchorText":  "Corona-Furcht und Ölpreissturz drücken den DAX um 7,94 Prozent.",
+                         "sourceUrl":  "https://www.tagesschau.de/wirtschaft/corona-wirtschaft-wallstreet-103.html"
+                     },
+                     {
+                         "id":  "station_2020_11_09_impfstoff_rally",
+                         "date":  "2020-11-09",
+                         "source":  "Handelsblatt",
+                         "headline":  "Dax aktuell: Dax schließt mehr als 600 Punkte fester – Hoffnung auf Corona-Impfstoff teilt die Börsenwelt neu auf",
+                         "anchorText":  "Impfstoffhoffnung treibt den DAX 4,94 Prozent höher auf 13.095 Punkte.",
+                         "sourceUrl":  "https://www.handelsblatt.com/finanzen/maerkte/marktberichte/dax-aktuell-dax-schliesst-mehr-als-600-punkte-fester-hoffnung-auf-corona-impfstoff-teilt-die-boersenwelt-neu-auf/26604010.html"
+                     },
+                     {
+                         "id":  "station_2022_02_24_ukraine_invasion",
+                         "date":  "2022-02-24",
+                         "source":  "Zeit Online",
+                         "headline":  "Börseneinbruch: Angriff auf Ukraine stürzt Finanzmärkte ins Chaos",
+                         "anchorText":  "Russlands Angriff belastet die Aktienmärkte; der DAX verliert fast vier Prozent.",
+                         "sourceUrl":  "https://www.zeit.de/wirtschaft/2022-02/moskau-boerse-einbruch-russland-angriff-ukraine"
+                     },
+                     {
+                         "id":  "station_2024_06_19_nvidia_ki_euphorie",
+                         "date":  "2024-06-19",
+                         "source":  "Tagesschau",
+                         "headline":  "Chiphersteller Nvidia wertvollster Konzern der Welt",
+                         "anchorText":  "Nvidia steigt in der KI-Börseneuphorie zum wertvollsten Konzern auf.",
+                         "sourceUrl":  "https://www.tagesschau.de/wirtschaft/digitales/nvidia-wertvollstes-unternehmen-boerse-chiphersteller-100.html"
+                     },
+                     {
+                         "id":  "station_2026_02_06_saas_okalypse",
+                         "date":  "2026-02-06",
+                         "source":  "ORF.at",
+                         "headline":  "Turbulente Woche für Bitcoin, Gold und Tech",
+                         "anchorText":  "Anthropics Claude-Modul lässt SaaS-Werte abstürzen; der S\u0026P-SaaS-Index fällt auf rund 13.000 Punkte.",
+                         "sourceUrl":  "https://orf.at/stories/3419382/"
+                     }
+                 ]
 }

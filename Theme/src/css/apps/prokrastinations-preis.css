@@ -95,13 +95,37 @@
 }
 
 .fw-app.fw-app--prokrastinations-preis .fw-app__rubikon-line {
-  white-space: pre-line; /* erlaubt bewusste Zeilenumbrüche (\n) innerhalb eines Absatzes */
+  margin: 0;
+  line-height: 1.35;
 }
 
-.fw-app.fw-app--prokrastinations-preis .fw-app__rubikon-footnote {
-  font-size: 0.75em;
-  color: var(--color-text-muted, #666666);
+.fw-app.fw-app--prokrastinations-preis .fw-app__rubikon-line + .fw-app__rubikon-line,
+.fw-app.fw-app--prokrastinations-preis .fw-app__rubikon-heading + .fw-app__rubikon-line,
+.fw-app.fw-app--prokrastinations-preis .fw-app__rubikon-list + .fw-app__rubikon-line {
+  margin-top: 0.45rem;
+}
+
+.fw-app.fw-app--prokrastinations-preis .fw-app__rubikon-heading {
   margin: 0;
+  font: inherit;
+  font-weight: 700;
+  line-height: 1.25;
+}
+
+.fw-app.fw-app--prokrastinations-preis .fw-app__rubikon-heading + .fw-app__rubikon-heading,
+.fw-app.fw-app--prokrastinations-preis .fw-app__rubikon-line + .fw-app__rubikon-heading,
+.fw-app.fw-app--prokrastinations-preis .fw-app__rubikon-list + .fw-app__rubikon-heading {
+  margin-top: 0.55rem;
+}
+
+.fw-app.fw-app--prokrastinations-preis .fw-app__rubikon-list {
+  margin: 0.45rem 0 0;
+  padding-left: 1.15rem;
+  line-height: 1.35;
+}
+
+.fw-app.fw-app--prokrastinations-preis .fw-app__rubikon-list li + li {
+  margin-top: 0.15rem;
 }
 
 /* KPI-/Disclaimer-Reveal: Chart selbst startet nicht unsichtbar (erscheint beim Screen-3-Eintritt

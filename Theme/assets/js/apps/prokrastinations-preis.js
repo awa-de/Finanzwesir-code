@@ -7,12 +7,66 @@ import { ChartEngine } from '../fw-chart-engine/core/ChartEngine.js'; // NEW —
 import { resolveCsvAppDataFile, resolveJsonAppDataFile } from '../fw-chart-engine/data/AppDataResolver.js'; // NEW — Datenmigration (Shared-Daten-AP)
 import { JSONParser } from '../fw-chart-engine/data/JSONParser.js'; // NEW — Datenmigration (Shared-Daten-AP)
 import { validateStationsJson } from './prokrastinations-preis-stations-contract.js'; // NEW — JSON-Offline-Validator V1: einzige fachliche Implementierung, geteilt mit content/files/app-data/json-validator.mjs
+import { parseRubikonMarkdown } from './prokrastinations-preis-rubikon-content.js';
 
 // SLUG_WHITELIST: Kompilzeit-Konstante — bewusst keine dynamische Quelle
 const SLUG_WHITELIST = ['prokrastinations-preis'];
 
 // NEW — Fetch-Dedup-Cache: verhindert parallele Mehrfach-Requests für dieselbe URL (P-11)
 const _dataCache = new Map();
+
+function appendRubikonInline(parent, nodes) {
+  for (const node of nodes) {
+    if (node.type === 'text') {
+      parent.appendChild(document.createTextNode(node.value));
+    } else {
+      const element = document.createElement(node.type === 'strong' ? 'strong' : 'em');
+      element.textContent = node.value;
+      parent.appendChild(element);
+    }
+  }
+}
+
+function appendRubikonAst(parent, ast) {
+  for (const node of ast) {
+    if (node.type === 'heading') {
+      const element = document.createElement(node.level === 2 ? 'h3' : 'h4');
+      element.className = 'fw-app__rubikon-heading';
+      appendRubikonInline(element, node.children);
+      parent.appendChild(element);
+      continue;
+    }
+    if (node.type === 'paragraph') {
+      const element = document.createElement('p');
+      element.className = 'fw-app__rubikon-line';
+      node.children.forEach((line, index) => {
+        if (index > 0) element.appendChild(document.createElement('br'));
+        appendRubikonInline(element, line);
+      });
+      parent.appendChild(element);
+      continue;
+    }
+    const list = document.createElement(node.type);
+    list.className = 'fw-app__rubikon-list';
+    for (const item of node.items) {
+      const element = document.createElement('li');
+      appendRubikonInline(element, item);
+      list.appendChild(element);
+    }
+    parent.appendChild(list);
+  }
+}
+
+function rubikonAstToPlainText(ast) {
+  const parts = [];
+  const inlineText = nodes => nodes.map(node => node.value).join('');
+  for (const node of ast) {
+    if (node.type === 'heading') parts.push(inlineText(node.children));
+    if (node.type === 'paragraph') parts.push(node.children.map(inlineText).join(' '));
+    if (node.type === 'ul' || node.type === 'ol') parts.push(node.items.map(inlineText).join(' '));
+  }
+  return parts.join(' ');
+}
 
 // CHANGED — B1-STATIONS-v3.0: v2.1-Konstanten entfernt (kein priority/role/sourceStatus in v3.0)
 
@@ -585,46 +639,27 @@ function renderContent(container, appData, options, stationsConfig) { // CHANGED
   screen4ChartWrap.className = 'fw-app__rubikon-chart-wrap';
   screen4ChartWrap.appendChild(chartSection4);
 
-  // CHANGED — AP-prokrast-03h2: semantischer Rubikon-Text bleibt DOM, wird aber visuell als
-  // Overlay in die rechte Chart-Hälfte gelegt (statt als Absatz unter dem Chart). Zwei Text-
-  // Varianten im DOM (lang/kurz), CSS-Breakpoint entscheidet über Sichtbarkeit — kein JS-Zweig,
-  // keine zweite hidden-Steuerung nötig.
+  // Semantischer Rubikon-Text bleibt DOM, wird aber aus dem bereits validierten JSON-Feed
+  // erzeugt. Der gemeinsame Inhaltskern liefert nur einen kleinen AST, nie HTML.
   const rubikonText = document.createElement('div');
   rubikonText.className = 'fw-app__rubikon-text';
   rubikonText.setAttribute('hidden', '');
 
+  const rubikonLongAst = parseRubikonMarkdown(stationsConfig.rubikon.long);
+  const rubikonShortAst = parseRubikonMarkdown(stationsConfig.rubikon.short);
+  if (!rubikonLongAst.ok || !rubikonShortAst.ok) {
+    throw new Error('Validierter Rubikon-Inhalt konnte nicht geparst werden.');
+  }
+
   const rubikonLong = document.createElement('div');
   rubikonLong.className = 'fw-app__rubikon-variant fw-app__rubikon-variant--long';
-  [
-    'Die letzten zehn Jahre sind gelaufen.',
-    'Die nächsten zehn sind leer.\nNoch.',
-    'Nicht weil nichts passiert —\nsondern weil niemand weiß, was.',
-    'Andere Krisen. Gleiche Zumutung.\nDer Job bleibt:\ndranbleiben, wenn es nervt.'
-  ].forEach(line => {
-    const p = document.createElement('p');
-    p.className = 'fw-app__screen-subline fw-app__rubikon-line';
-    p.textContent = line;
-    rubikonLong.appendChild(p);
-  });
-  const rubikonLongFootnote = document.createElement('p'); // NEW — AP-prokrast-03h: Prognose-Abgrenzung
-  rubikonLongFootnote.className = 'fw-app__rubikon-footnote';
-  rubikonLongFootnote.textContent = 'Keine Vorhersage. Nur Markterfahrung.';
-  rubikonLong.appendChild(rubikonLongFootnote);
+  appendRubikonAst(rubikonLong, rubikonLongAst.ast);
   rubikonText.appendChild(rubikonLong);
 
-  // NEW — AP-prokrast-03h2: kompakte Mobile-Fassung — engeres rechtes Overlay-Feld auf 375px
-  // reicht für die lange Fassung nicht; CSS-Breakpoint blendet long aus, short ein.
+  // Kompakte Mobile-Fassung — CSS-Breakpoint blendet long aus, short ein.
   const rubikonShort = document.createElement('div');
   rubikonShort.className = 'fw-app__rubikon-variant fw-app__rubikon-variant--short';
-  [
-    'Die nächsten 10 Jahre sind leer.\nNoch.',
-    'Die Linie fehlt noch.\nDie Aufgabe nicht:\ndranbleiben.'
-  ].forEach(line => {
-    const p = document.createElement('p');
-    p.className = 'fw-app__screen-subline fw-app__rubikon-line';
-    p.textContent = line;
-    rubikonShort.appendChild(p);
-  });
+  appendRubikonAst(rubikonShort, rubikonShortAst.ast);
   rubikonText.appendChild(rubikonShort);
 
   screen4ChartWrap.appendChild(rubikonText);
@@ -663,7 +698,7 @@ function renderContent(container, appData, options, stationsConfig) { // CHANGED
   let screen4TextTimer = null; // CHANGED — AP-prokrast-03h (war: screen4Timer, ein Morph-Timer): Timer für Text-Reveal nach 800ms
   let screen4CtaTimer = null; // NEW — AP-prokrast-03h: Timer für CTA-Reveal nach weiterer 800ms-Stille
   let screen4RevealedRate = null; // Rate, für die S4 zuletzt final gerendert wurde (analog screen3RevealedRate)
-  const RUBIKON_A11Y_TEXT = 'Die letzten zehn Jahre sind gelaufen. Die nächsten zehn Jahre sind bewusst leer, weil niemand weiß, was passiert. Der Handlungsrahmen ist: dranbleiben, wenn es nervt.'; // CHANGED — AP-prokrast-03h
+  const RUBIKON_A11Y_TEXT = rubikonAstToPlainText(rubikonLongAst.ast);
 
   // NEW — AP-prokrast-08b4a: Chart-Teil von renderJourneyStep() aufgetrennt — kein
   // Karten-DOM-Update, kein Progress-Chip, kein Button-Text, keine Live-Region. Grund:

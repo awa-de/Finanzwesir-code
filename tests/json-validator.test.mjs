@@ -52,9 +52,10 @@ function readContract(dir) {
 }
 
 const VALID_STATIONS_JSON = JSON.stringify({
-    version: '3.0',
+    version: '4.0',
     locale: 'de-DE',
     app: 'prokrastinations-preis',
+    rubikon: { long: 'Gültiger Text.', short: 'Kurz.' },
     stations: [
         {
             id: 'station_2022_02_24_ukraine_invasion',
@@ -70,9 +71,10 @@ const VALID_STATIONS_JSON = JSON.stringify({
 const INVALID_JSON_SYNTAX = '{ this is not valid json ';
 
 const FACHLICH_UNGUELTIGE_STATIONSDATEN = JSON.stringify({
-    version: '2.0', // falsch -- erwartet '3.0'
+    version: '2.0', // falsch -- erwartet '4.0'
     locale: 'de-DE',
     app: 'prokrastinations-preis',
+    rubikon: { long: 'Gültiger Text.', short: 'Kurz.' },
     stations: [],
 });
 

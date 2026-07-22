@@ -1,16 +1,18 @@
 // Stations-Vertragsmodul (JSON-Offline-Validator V1): einzige fachliche Implementierung des
-// Stations-Vertrags aus Apps/prokrastinations-preis/STATIONS_CONFIG_CONTRACT.md (v3.0). Browser-
+// Stations-Vertrags aus Apps/prokrastinations-preis/STATIONS_CONFIG_CONTRACT.md (v4.0). Browser-
 // Laufzeit (prokrastinations-preis.js) und der Offline-Prüfer (content/files/app-data/json-validator.mjs)
 // importieren beide statisch exakt diese Funktion. Reines ES-Modul: kein DOM, kein window, kein fetch,
 // kein dynamischer Import, keine Seiteneffekte beim Import.
+
+import { validateRubikonContent } from './prokrastinations-preis-rubikon-content.js';
 
 // Gibt { ok: true } oder { ok: false, code, detail } zurück — kein Wurf.
 export function validateStationsJson(json) {
   if (typeof json !== 'object' || json === null || Array.isArray(json))
     return { ok: false, code: 'invalid_structure', detail: 'root is not an object' };
 
-  if (json.version !== '3.0')
-    return { ok: false, code: 'invalid_value', detail: 'version: expected "3.0", got: ' + json.version };
+  if (json.version !== '4.0')
+    return { ok: false, code: 'invalid_value', detail: 'version: expected "4.0", got: ' + json.version };
   if (json.locale !== 'de-DE')
     return { ok: false, code: 'invalid_value', detail: 'locale: expected "de-DE", got: ' + json.locale };
   if (json.app !== 'prokrastinations-preis')
@@ -18,6 +20,10 @@ export function validateStationsJson(json) {
 
   if (!Array.isArray(json.stations) || json.stations.length < 1)
     return { ok: false, code: 'missing_field', detail: 'stations (array, min length 1)' };
+
+  const rubikon = validateRubikonContent(json.rubikon);
+  if (!rubikon.ok)
+    return { ok: false, code: rubikon.code, detail: rubikon.detail };
 
   for (let i = 0; i < json.stations.length; i++) {
     const s = json.stations[i];

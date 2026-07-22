@@ -142,3 +142,31 @@ Wird nach /distill ins Jahres-Segment rotiert (Rohlog erhalten). Einträge: [FRI
 - [OK] Faden-Chronik erzeugt: `Archiv/Chroniken/chronist-v1/CHRONIK-2026-07-22-prokrastinations-theme-css-kette.md`. `/chronik-check` ausgeführt — 0 harte Fehler, 0 Warnungen.
 
 ### 2026-07-22 — Kettenabschluss ✅ | RECONCILED: SEC-05 JSON-VALIDATOR THEME-ZIP-V1 D-CSS-01-04 CSS-REPARATUR-C1 CHECKER-REGISTRY-PFLICHT-C1 CHECKER-REGISTRY-DOKU-C1 TESTSTANDARD-ZUSTAND-C1 THEME-ZIP-V2 DISCLOSURE-HOTFIX-C1 THEME-ZIP-V3
+
+### Ghost-Feed-Resolver-Vertrag GHOST-05–09 ✅ + Theme-Bootstrapper/CSS-Reparatur-Kette ✅ (2026-07-22) — AP-Wechsel
+
+### Ghost-Feed-Resolver-Vertrag GHOST-05–09 ✅ + Theme-Bootstrapper/CSS-Reparatur-Kette ✅ (2026-07-22) — AP-Wechsel
+
+### 2026-07-22 — Rubikon-V4-Übernahmeprüfung (Handover C1)
+- [OK] Vorgefundenen, bereits uncommitteten V4-Arbeitsstand (`stations-de.json` `rubikon.long`/`short`, sicheres DOM-Rendering, Offline-Prüfer, Editor-Werkzeug) kritisch geprüft — Sollzustand vollständig erfüllt, nichts korrigiert. Alle 8 geforderten Nachweise grün, inkl. `check-test-pages.py` (kein befürchteter Timeout, lief in ca. 1 Minute).
+- [QUESTION] Interaktive `ReadKey`-Bedienung nur durch Code-Lektüre geprüft, nicht live ausgeführt — als offene Lücke benannt, nicht verschwiegen.
+
+### 2026-07-22 — Rubikon-Editor Windows-Konsolen-Hotfix (Handover C1)
+- [FRICTION] Realer, von Albert beobachteter Fehler: Umlaute im Editor beschädigt (BOM-lose UTF-8 wird von Windows PowerShell 5.1 als ANSI gelesen), Konsolenfenster schloss sich sofort nach Programmende. Full-Gate durchlaufen, nach Alberts „ok, setze um" behoben: `.ps1` mit UTF-8-BOM, `InputEncoding` zusätzlich zu `OutputEncoding`, `chcp 65001`+`pause` in der `.bat`, Hilfetext um L/K-Bedeutung und exakte Abschlussformulierung ergänzt.
+- [OK] Alle Nachweise grün (Byte-Nachweis, PowerShell-Syntaxprüfung, Offline-Validator, `git diff --check`).
+
+### 2026-07-22 — JSON-Eingabe-Tool-Grundlage (Handover C3, ersetzt C1/C2 vollständig)
+- [WIN] Architektur in allgemeinen Mechanik-Kern (`content/files/app-data/json-eingabe-tool-core.psm1`) und dünnes Rubikon-Profil (`bearbeite-rubikon-text.ps1`) getrennt; JS-Inhaltskern-Blockgrenzenfehler behoben (Überschrift direkt vor Absatz ohne Leerzeile wurde vorher fälschlich abgewiesen).
+- [FRICTION] Ein Smoke-Test vor dem formalen Testschreiben deckte auf: `[System.IO.File]::Replace(quelle, ziel, $null)` wirft unter der hier laufenden Windows-PowerShell-5.1-Version (`5.1.22621.6133`) zuverlässig „Der Pfad hat ein ungültiges Format" — die atomare Schreiblogik aus den beiden Vorgängerphasen hatte dadurch nie tatsächlich einen Schreibvorgang erfolgreich abgeschlossen, unbemerkt, weil nie interaktiv end-to-end getestet. Mit echten, im `finally`-Block aufgeräumten Backup-Pfaden behoben, per neuem nicht-interaktivem PowerShell-Testfall (`tests/json-eingabe-tool-core.test.ps1`) abgesichert.
+- [FRICTION] Beim Bau des Theme-V5-ZIPs: `Compress-Archive` und `ZipFile.CreateFromDirectory` erzeugen unter derselben PowerShell-Version Backslash- statt Vorwärtsslash-Zip-Pfade (ZIP-Standard-Verstoß, Risiko für Linux-Ghost-Deploy) — ZIP daraufhin manuell mit auf `/` normalisierten Eintragsnamen gebaut; ein erster Korrekturversuch scheiterte zusätzlich an einer Kurz-/Langpfad-Diskrepanz von `$env:TEMP`.
+- [OK] Alle Nachweise grün (vier Testsuiten, Byte-Nachweis, PowerShell-Syntaxprüfung, `git diff --check`, ZIP-Struktur+SHA-256). Albert bestätigte nach eigenem manuellem Test: „Klappt alles ist grün". Zwei Projekt-Gedächtniseinträge angelegt (`project_powershell_dotnet_quirks.md`, `project_json_eingabe_tool_kern.md`).
+
+### 2026-07-22 — Abschlussmeldungen gesammelt
+- [OK] Alle drei Abschlussmeldungen dieses Fadens unverändert in `docs/steering/patches/PATCH-rubikon-handover-abschlussmeldungen-2026-07-22.md` gesammelt.
+
+### 2026-07-22 — Chronik erzeugt und geprüft
+- [OK] Faden-Chronik erzeugt: `Archiv/Chroniken/chronist-v1/CHRONIK-2026-07-22-rubikon-json-eingabe-kern.md`. `/chronik-check` ausgeführt — 0 harte Fehler, 0 Warnungen.
+
+### 2026-07-22 — Kettenabschluss ✅ | RECONCILED: RUBIKON-V4-UEBERNAHME-C1 WINDOWS-KONSOLE-HOTFIX-C1 JSON-EINGABE-TOOL-C3
+
+### Rubikon-V4-Übernahme ✅ + Windows-Konsolen-Hotfix ✅ + JSON-Eingabe-Tool-Kern C3 ✅ (2026-07-22) — AP-Wechsel
