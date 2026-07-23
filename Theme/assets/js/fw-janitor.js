@@ -18,7 +18,8 @@
  *   pass { iconBasePath: '/path/' } to init(). Must end with '/'.
  *
  * Quality: Defensive, idempotent, no innerHTML for user content.
- * Scope: Only operates inside .gh-content elements.
+ * Scope: Only operates inside .gh-content elements, excluding any .fw-app
+ *   subtree — apps own their markup and the Janitor stays inert there.
  */
 (function FwJanitor() {
   'use strict';
@@ -78,6 +79,11 @@
   /** Mark element as processed (idempotency guard) */
   function _markProcessed(el) {
     if (el) el.setAttribute(PROCESSED_ATTR, PROCESSED_VALUE);
+  }
+
+  /** True if element lives inside an app root — apps own their markup, Janitor stays out */
+  function _isInApp(el) {
+    return !!(el && el.closest && el.closest('.fw-app'));
   }
 
   /**
@@ -164,6 +170,7 @@
     const blockquotes = scope.querySelectorAll('blockquote');
 
     for (const bq of blockquotes) {
+      if (_isInApp(bq)) continue;
       if (_isProcessed(bq)) continue;
 
       try {
@@ -223,6 +230,7 @@
     const lists = scope.querySelectorAll('ul');
 
     for (const ul of lists) {
+      if (_isInApp(ul)) continue;
       if (_isProcessed(ul)) continue;
 
       try {

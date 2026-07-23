@@ -480,6 +480,15 @@ Beide Attribute enthalten ausschließlich geprüfte Dateinamen, keine URL.
 
 **Quelle:** Albert-Freigabe 2026-07-22 | `docs/steering/audits/PEER_REVIEW_ERGEBNIS_CSS_STRATEGIE_GHOST_TAILWIND_APPS_V1.md` (F-03) | `docs/steering/audits/PEER_REVIEW_ERGEBNIS_GHOST_APP_CSS_ARCHITEKTUR_V1.md` (Frage 9)
 
+**Präzisierung (CSS-Altlastenabschluss, 2026-07-23):**
+- `tokens.css` ist Build-Quelle und wird per barem Import in `screen.css` eingebettet.
+- Die Produktion besitzt genau ein CSS-Laufzeitartefakt: `screen.css`.
+- Vor der ersten produktiven App-Migration muss der globale Artefaktform-Nachweis bestanden sein. Danach wird er bei jedem frischen Produktions-Build wiederholt.
+- Der Nachweis umfasst mindestens: 1. kein lokaler CSS-`@import` im erzeugten `screen.css`; 2. definierte Token-Sentinels im Artefakt; 3. weiterhin eingebettete lokale App-Mechanik.
+- Siehe D-CSS-04 für das dort benannte künftige Produktions-Gate; dieses Gate wird hier nicht gebaut.
+
+**Quelle:** Albert-Freigabe 2026-07-23 | `Theme/src/css/screen.source.css` | `Theme/assets/css/screen.css` (Build-Nachweis 2026-07-23) | `docs/steering/audits/PEER_REVIEW_ERGEBNIS_CSS_STRATEGIE_GHOST_TAILWIND_APPS_V1.md` (F-03, F-07)
+
 ### D-CSS-04 — Migrations-Gate
 **Status:** 🟢 ENTSCHIEDEN
 
@@ -495,3 +504,49 @@ Die drei später zu bauenden maschinellen Gates heißen: Quellen-Existenz, Utili
 **Begründung:** Ohne dieses Gate kann eine Runtime ohne ihre sichtbare Fachmechanik ins Theme ziehen (real eingetreten, → Peer Reviews F-01/F-02); die vier Nachweise sind das kleinste vollständige Kriterium für „migriert".
 
 **Quelle:** Albert-Freigabe 2026-07-22 | `docs/steering/audits/PEER_REVIEW_ERGEBNIS_GHOST_APP_CSS_ARCHITEKTUR_V1.md` (Antwort 17, Finding F-06)
+
+---
+
+## App-Fabrik-Produktionslinie
+
+### AF-PROD-01 — Ein kanonischer Produktionsstandard
+**Status:** 🟢 ENTSCHIEDEN
+
+**Entscheidung:** `docs/spec/APP_FACTORY_PRODUKTIONSSTANDARD.md` ist ab AF-GM-01 die verbindliche Produktionslinie vom abgenommenen Werkstatt-Mockup bis zum Ghost-Theme-ZIP. Er definiert Quellenrang, Golden-Master-Gate, Eingabepaket, Schutzprofil, Belegform und Modellrollen. Ältere App-Fabrik-Entwürfe bleiben Kontext, aber keine eigenständige operative Regelquelle.
+
+**Begründung:** Eine Fabrik braucht einen Kanon, nicht mehrere teilweise überlappende Arbeitsanweisungen. Der Standard trennt Produktfindung vom technischen Herstellungsprozess und verhindert stille Post zwischen Mockup, Spezifikation und Runtime.
+
+**Quelle:** Albert-Freigabe AF-GM-01, 2026-07-22 | `ENTWURF_APP_FABRIK_GOLDEN_MASTER_V6.md` | `PEER_REVIEW_APP_FABRIK_GOLDEN_MASTER_V6.md`
+
+---
+
+### AF-PROD-02 — Golden Master mit Abnahmebeleg und beobachteter Spur
+**Status:** 🟢 ENTSCHIEDEN
+
+**Entscheidung:** Jeder Fabriklauf beginnt mit genau einem durch Albert abgenommenen Mockup, dessen Pfad, Variante und SHA-256 im Abnahmebeleg stehen. Aus dem Mockup werden nur deklarative Belege extrahiert. Zeitgatter, Zustandsverzweigungen und Rundenlogik kommen aus einer aufgezeichneten Browser-Spur, nie aus einer Deutung des Mockup-JavaScripts.
+
+**Begründung:** Sichtbare Wirkung ist der abgenommene Produktvertrag; Mockup-Code ist ausdrücklich Wegwerfcode. Eine beobachtete Spur schließt den Fehlermodus, dass ein LLM implizite JS-Logik „richtig“ erraten muss.
+
+**Quelle:** Albert-Freigabe AF-GM-01, 2026-07-22 | Fable-Review V6, P1 F-01
+
+---
+
+### AF-PROD-03 — Shared Paths: forbidden → protected → forbidden
+**Status:** 🟢 ENTSCHIEDEN
+
+**Entscheidung:** Gemeinsame Theme-, Engine-, Build-, Paket-, Checker- und Kanonpfade stehen standardmäßig auf `forbidden`. Eine App darf sie nicht berühren. Jede Ausnahme besteht aus drei getrennten APs: formeller Unlock durch Statusänderung in `.claude/PROTECTED_PATHS.json`, enger Shared-AP mit Regression, formeller Relock mit Diff-/Hash-Nachweis. Eine verbale Freigabe ersetzt die Statusänderung nie.
+
+**Begründung:** Eine lokal gut begründbare Änderung pro App erzeugt sonst schleichend einen Evolutionsstammbaum statt einer einheitlichen Produktionslinie. Die harte Sperre hat sich gegenüber bloßer Anweisung als wirksam erwiesen.
+
+**Quelle:** Albert-Freigabe AF-GM-01, 2026-07-22
+
+---
+
+### AF-PROD-04 — Schmaler Browser-Nachweis, kein Testplattform-Bau
+**Status:** 🟢 ENTSCHIEDEN
+
+**Entscheidung:** AF-GM-02 baut später ausschließlich einen gepinnten Playwright-Chromium-Recorder und Verifizierer für Golden-Master-Spuren. Kein CI, kein Dashboard, keine Browsermatrix und kein zweiter Laufzeitpfad. Die Paketänderung ist selbst ein Shared-Path-AP.
+
+**Begründung:** Browserbeobachtung ist für dynamische Mockups fachlich erforderlich; eine allgemeine Testplattform wäre für einen Solo-Entwickler Überbau.
+
+**Quelle:** Albert-Freigabe AF-GM-01, 2026-07-22 | Sol-Entwurf V6 | Fable-Review V6

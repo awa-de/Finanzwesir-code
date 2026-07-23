@@ -1,4 +1,4 @@
-Stand: 2026-07-19 20:55 | Session: DS-013-Entscheidung | Geändert von: Codex
+Stand: 2026-07-23 | Session: css-altlasten-tokens-janitor-grenze | Geändert von: Claude (vorher: Codex, DS-013-Entscheidung)
 
 # T1 — lokaler Tailwind-Produktionsbuild
 
@@ -68,7 +68,7 @@ verifiziert.
 - `fw-*` ist ein technischer Namespace für Chart-Engine und bestehende
   App-Anker. Theme-Komponenten verwenden beschreibende Namen ohne Präfix.
 - Tailwind gestaltet Layout, Abstände, Flexbox, Grid und Standardradius.
-  `screen.css` enthält nur seine sieben festgelegten Verantwortungsbereiche.
+  `screen.css` enthält nur seine sechs festgelegten Verantwortungsbereiche.
 - Die bestehenden Testseiten behalten bis zum bestandenen Produktions-Gate
   ihren Play-CDN- und Manifest-Mechanismus; T1 entfernt ihn nicht vorzeitig.
 

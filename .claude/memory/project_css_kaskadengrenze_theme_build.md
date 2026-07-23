@@ -1,8 +1,11 @@
 ---
 name: project-css-kaskadengrenze-theme-build
-description: "D-CSS-01 bis D-CSS-04 (01_DECISION_LOG.md): Chart-Fallback-Übergangsoption C, Ghost-Kaskadengrenze via :not(.fw-app *), barer @import als einziger Buildweg für App-Mechanik, viertteiliges Migrations-Gate — plus reale Umsetzung an prokrastinations-preis"
-metadata:
+description: "D-CSS-01 bis D-CSS-04 (01_DECISION_LOG.md): Chart-Fallback-Übergangsoption C, Ghost-Kaskadengrenze via :not(.fw-app *), barer @import als einziger Buildweg für App-Mechanik, viertteiliges Migrations-Gate — plus reale Umsetzung an prokrastinations-preis. Seit 2026-07-23: tokens.css eingebettet + Janitor-Fallback entfernt (P2/P3 geschlossen), Janitor-.fw-app-Grenze ergänzt."
+metadata: 
+  node_type: memory
   type: project
+  originSessionId: 2d4e31d7-d4ed-418b-90be-d36446cb793c
+  modified: 2026-07-23T09:07:53.805Z
 ---
 
 Seit 2026-07-22 (`01_DECISION_LOG.md`, Sektion „CSS-Architektur") vier verbindliche Entscheidungen zur Ghost/Tailwind-CSS-Architektur der App-Fabrik:
@@ -14,8 +17,10 @@ Seit 2026-07-22 (`01_DECISION_LOG.md`, Sektion „CSS-Architektur") vier verbind
 
 **Umgesetzt an `prokrastinations-preis` (2026-07-22):** `Theme/src/css/apps/prokrastinations-preis.css` neu (Card-to-Point-Flug, Rubikon-Overlay, KPI-/Disclaimer-Reveal, Fokus-Kompatibilitätsregel — jeder Selektor auf `.fw-app.fw-app--prokrastinations-preis` begrenzt); `screen.source.css` bekam die reale `@source`-Quelle (`../../assets/js/apps`, ersetzt die gelöschte alte App-Datei) und den baren Import; fünf `.gh-content`-Selektorgruppen erhielten die `:not(.fw-app *)`-Ausnahme; alle Button-Rezepte (inkl. eines zunächst vergessenen Disclosure-Triggers, Hotfix) bekamen `appearance-none`/`border-0`(außer Secondary)/`font-body`. Drei Ghost-Theme-ZIPs erzeugt (`finanzwesir-local-theme-prokrastinations-preis-v1/v2/v3.zip`).
 
-**Offen:** P3 — `tokens.css`-Inlining vs. zweites Runtime-Artefakt (nicht entschieden, in `docs/steering/BACKLOG.md` T1 vermerkt). P2 — Janitor-Fallback (`CSS-KONVENTIONEN.md` §7, leer) unbehandelt. Der Engine-DOM-AP (Option A vs. C) ist nicht terminiert.
+**P2/P3 geschlossen (2026-07-23):** `tokens.css` wird jetzt per barem Import in `screen.css` eingebettet (D-CSS-03 datiert präzisiert, kein zweites Runtime-Artefakt mehr — vorher lief es trotz Doku-Behauptung noch über `@import url(...)`, also faktisch als zweiter Download). Die leere Janitor-Fallback-Sektion (`CSS-KONVENTIONEN.md` §7) wurde ersatzlos entfernt (jetzt 6 statt 7 Abschnitte). Zusätzlich erhielt `fw-janitor.js` eine `.fw-app`-Ausschlussgrenze (`closest()`-basiert, nur isoliert simuliert, kein echter Browsertest). Dabei aufgedeckt: `fw-janitor.js` war nur in `post.hbs` eingebunden, das Projekt nutzt aber nur Ghost-Pages/Homepage, keine Posts — Fix in `page.hbs` ergänzt (siehe [[project_ghost_theme_build]] für den vollen Produktionsfakt). `screen.css` misst danach 31.594 Bytes/6.564 Bytes gzip, über dem 30-KB-Ziel (BACKLOG CSS-6 bleibt dafür offen, bewusst kein Weglass-Gate). Nach dem Fix vom Nutzer bestätigt: Janitor lädt, aber zwei Detailfehler offen (Icons fehlen, rote Kreuze in Listen funktionieren nicht) — an BACKLOG DS-015 vermerkt.
 
-Faden-Chronik: `Archiv/Chroniken/chronist-v1/CHRONIK-2026-07-22-prokrastinations-theme-css-kette.md`.
+**Weiterhin offen:** Der Engine-DOM-AP (Option A vs. C aus D-CSS-01) ist nicht terminiert.
+
+Faden-Chroniken: `Archiv/Chroniken/chronist-v1/CHRONIK-2026-07-22-prokrastinations-theme-css-kette.md`, `Archiv/Chroniken/chronist-v1/CHRONIK-2026-07-23-css-altlasten-janitor-tokens-und-ghost-theme-zip.md`.
 
 Verwandte Memories: [[project_ghost_feed_resolver_vertrag]], [[project_ci_theme_bridge]], [[project_chartengine_chrome_migration]].

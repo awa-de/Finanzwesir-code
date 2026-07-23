@@ -1,5 +1,5 @@
 # CSS-Konventionen — Dauerhafter Arbeitsvertrag
-Stand: 2026-07-22 | Session: css-architektur-formalisierung-c1 | Geändert von: Claude (vorher: Codex, DS-013-Entscheidung)
+Stand: 2026-07-23 | Session: css-altlasten-tokens-janitor-grenze | Geändert von: Claude (vorher: Codex, DS-013-Entscheidung)
 
 > **Status:** Bindend ab 2026-02-19, gilt bis Production-Build.
 > **Scope:** Jede CSS-Änderung im Theme.
@@ -24,10 +24,10 @@ T1 gilt die entschiedene Trennung:
   die Quelle.
 
 Der Build ergänzt Tailwind-Theme und -Utilities ohne Preflight-Reset. Die
-sieben Abschnitte dieses Dokuments strukturieren weiterhin die bearbeitete
+sechs Abschnitte dieses Dokuments strukturieren weiterhin die bearbeitete
 Quelle.
 
-## Die sieben Abschnitte — Zuständigkeiten sind bindend
+## Die sechs Abschnitte — Zuständigkeiten sind bindend
 
 ```
 /* ============================================================
@@ -54,6 +54,8 @@ Quelle.
    4. GHOST CONTENT
    Alles unter .gh-content — Typografie, Links, Tabellen,
    Bilder, Blockquotes. Nur was Ghost ausgibt.
+   Janitor transformiert nur normalen Ghost-Inhalt;
+   .fw-app-Teilbäume sind ausgeschlossen.
    ============================================================ */
 
 /* ============================================================
@@ -67,12 +69,6 @@ Quelle.
    Wiederverwendbare UI-Elemente: .ci-link, .hover-lift,
    Info-Boxen, Call-to-action, Checklisten, Cards.
    Neue Komponenten landen hier.
-   ============================================================ */
-
-/* ============================================================
-   7. JANITOR FALLBACK
-   Nur aktiv wenn Tailwind nicht geladen ist.
-   Klar als Fallback markiert. Minimal halten.
    ============================================================ */
 ```
 

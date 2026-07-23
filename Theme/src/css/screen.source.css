@@ -2,14 +2,13 @@
  * assets/css/screen.css
  * Finanzwesir Ghost Theme — Consolidated Styles
  *
- * Sieben Abschnitte in bindender Reihenfolge (E4):
+ * Sechs Abschnitte in bindender Reihenfolge (E4):
  *   1. TOKENS        — @import aus tokens.css (Single Source of Truth)
  *   2. FONTS         — @font-face, lokal, DSGVO-konform
  *   3. BASE          — Body, HTML, globale Resets
  *   4. GHOST CONTENT — Alles unter .gh-content
  *   5. CHART HOST    — .financial-chart-module
  *   6. COMPONENTS    — ci-link, hover-lift, Boxen, Listen
- *   7. JANITOR FALLBACK — Nur ohne Tailwind
  */
 
 /* ===========================================================================
@@ -17,7 +16,7 @@
    Die Quellenmenge und CI-Bridge folgen in getrennten, prüfbaren T1-Schritten.
    =========================================================================== */
 
-@import url("../../assets/css/tokens.css"); /* NEW — AP-prokrast-16: zentrale Token-Quelle */
+@import "../../assets/css/tokens.css"; /* Build-Quelle, wird eingebettet — AP-prokrast-16: zentrale Token-Quelle */
 @layer theme, utilities;
 @import "tailwindcss/theme.css" layer(theme);
 @import "tailwindcss/utilities.css" layer(utilities) source(none);
@@ -518,19 +517,3 @@ body {
     background-color: color-mix(in srgb, var(--color-purpur-900) 8%, transparent); /* CHANGED — AP-16: -tint entfällt, Alpha per color-mix (pixel-identisch zu rgba(141,2,103,0.08)) */
     border-left: 4px solid var(--color-purpur);
 }
-
-
-/* ==========================================================================
-   7. JANITOR FALLBACK — Nur ohne Tailwind
-   ========================================================================== */
-
-/*
- * Dieser Abschnitt enthält Styles, die normalerweise von Tailwind-Klassen
- * erzeugt werden. Sie dienen als Fallback für den Fall, dass der Tailwind-
- * Build nicht läuft (z.B. in Standalone-Demos oder während der Entwicklung).
- *
- * Wenn Tailwind aktiv ist, werden diese Regeln von den generierten
- * Utility-Klassen überschrieben (höhere Spezifität durch Tailwind-Preflight).
- *
- * Aktuell leer — wird bei Bedarf befüllt wenn Fallback-Styles identifiziert werden.
- */

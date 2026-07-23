@@ -37,3 +37,7 @@ Kanonische Icon-Dateien: `Theme/assets/images/` (nicht hier).
 Das Content-/Website-Design-System wird nach der Janitor-Sanierung (Alt-Klassen `-tint`/`-20`,
 Befund F-07/DS-012) auf Basis von tokens.css + Tailwind-Baukasten **neu aufgebaut** und dann
 wieder hier abgelegt. Bis dahin bleibt dieses Verzeichnis bewusst fast leer.
+
+Der Janitor-Ausschluss für `.fw-app`-Teilbäume ist bereits umgesetzt (CSS-Altlastenabschluss,
+2026-07-23) — die inhaltliche Sanierung der Alt-Klassenrezepte selbst bleibt DS-015 vorbehalten
+und ist keine Voraussetzung der App-Fabrik.

@@ -156,6 +156,10 @@ Bei „jetzt zerlegen" → Skill `/decompose` automatisch starten.
 Bestätigung ausgeben → Full-Gate (immer, keine Ausnahme).
 APP-ARBEIT: Keine Code-, UX-, Daten- oder Spec-Detailarbeit ohne geprüften lokalen App-Steuerungsblock. Der Block gilt als 80%-Entwurf; bei unklarem Zweck, unklarer Barriere oder verletzten Nicht-Zielen stoppen und mit Albert klären. Details regeln App-Spec, Routing und App-Fabrik-Skills.
 
+**APP-FABRIK-PRODUKTION**
+
+Vor jedem Produktions-AP zuerst `docs/spec/APP_FACTORY_PRODUKTIONSSTANDARD.md`, die lokale `Apps/{slug}/APP_SPEC.md` und `.claude/PROTECTED_PATHS.json` lesen. Der Produktionsstandard regelt Golden Master, Eingabepaket, Herstellungsprozess und Shared-Path-Schutz; die lokale APP_SPEC regelt die Fachlichkeit. Bei Widerspruch gilt die Quellenordnung im Produktionsstandard. Kein AP darf diese Regeln in einer zweiten Kurzfassung neu erfinden.
+
 \---
 
 **CSS / DESIGN**
@@ -421,4 +425,3 @@ Schicht 2 (Lernregeln) = Schwanz — opferbar, wächst nach.
 Schicht 1 (Strukturregeln) + eigentliche Arbeit = Eidechse — niemals.
 Geopferte Lernschleifen werden beim nächsten Abschluss-Ritual nachgeholt.
 Nichts geht verloren — es wird verschoben.
-

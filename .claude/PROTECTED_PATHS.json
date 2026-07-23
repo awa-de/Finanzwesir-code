@@ -1,6 +1,6 @@
 {
-  "purpose": "LLM guardrail file. Claude must read this before file operations and refuse unsafe edits unless Albert explicitly overrides.",
-  "version": "1.1",
+  "purpose": "LLM guardrail file. Claude must read this before file operations and refuse unsafe edits unless Albert explicitly changes the path status in this file.",
+  "version": "1.2",
   "protected_paths": [
     {
       "path": "Active Campaign Liste/",
@@ -20,7 +20,7 @@
     {
       "path": "Theme/assets/js/fw-chart-engine/data/CSVParser.js",
       "level": "forbidden",
-      "reason": "Layer 1 / TABU — CSV-Ingestion. Niemals ändern. (War 2026-07-20 für APP-DATA-02 kurzzeitig auf 'protected' herabgestuft, Extraktion abgeschlossen und verifiziert, Sperre auf Alberts Anweisung wieder auf 'forbidden' zurückgestuft.)"
+      "reason": "Layer 1 / TABU — CSV-Ingestion. Niemals ändern."
     },
     {
       "path": "Theme/assets/js/fw-chart-engine/core/FwDateUtils.js",
@@ -36,6 +36,91 @@
       "path": "Theme/assets/js/fw-chart-engine/core/FwRenderer.js",
       "level": "protected",
       "reason": "Zentrale Rendering-Schicht. Änderungen nur mit expliziter Begründung und Regressionstest."
+    },
+    {
+      "path": ".claude/PROTECTED_PATHS.json",
+      "level": "protected",
+      "reason": "Schutzprofil der App-Fabrik. Eine Statusänderung ist ein eigener Unlock- oder Relock-AP mit Albert-Freigabe."
+    },
+    {
+      "path": ".claude/hooks/check-protected-paths.ps1",
+      "level": "forbidden",
+      "reason": "Mechanische Durchsetzung des Schutzprofils. Nur ein eigener Sicherheits-AP darf den Hook ändern."
+    },
+    {
+      "path": ".claude/CLAUDE.md",
+      "level": "forbidden",
+      "reason": "Projektverfassung und Einstiegspfad. Kein App-AP darf sie still ändern."
+    },
+    {
+      "path": "NAVIGATION.md",
+      "level": "forbidden",
+      "reason": "Projektweiter Router. Änderungen nur als eigener Routing-AP."
+    },
+    {
+      "path": "docs/spec/APP_FACTORY_PRODUKTIONSSTANDARD.md",
+      "level": "forbidden",
+      "reason": "Kanonische Produktionslinie. Änderungen nur als eigener Architektur-AP."
+    },
+    {
+      "path": "docs/spec/APP-INTERFACE.md",
+      "level": "forbidden",
+      "reason": "Bindender App- und Datenvertrag. Änderungen nur als eigener Spec-AP."
+    },
+    {
+      "path": "docs/App-Fabrik/MOCKUP-VERTRAG.md",
+      "level": "forbidden",
+      "reason": "Bindende Werkstatt-/Golden-Master-Grenze. Änderungen nur als eigener Architektur-AP."
+    },
+    {
+      "path": "docs/App-Fabrik/01_DECISION_LOG.md",
+      "level": "forbidden",
+      "reason": "Formale Architekturentscheidungen. Änderungen nur durch einen ausdrücklich freigegebenen Entscheidungs-AP."
+    },
+    {
+      "path": "Theme/assets/js/apps/index.js",
+      "level": "forbidden",
+      "reason": "Einziger produktiver App-Bootstrapper und Registry. App-Migrationen dürfen ihn nicht still verändern."
+    },
+    {
+      "path": "Theme/default.hbs",
+      "level": "forbidden",
+      "reason": "Gemeinsamer Theme-Einstieg. App-Migrationen dürfen ihn nicht still verändern."
+    },
+    {
+      "path": "Theme/src/css/screen.source.css",
+      "level": "forbidden",
+      "reason": "Gemeinsamer CSS-Build-Einstieg und Ghost-Kaskadengrenze. Nur ein Shared-CSS-AP darf ihn ändern."
+    },
+    {
+      "path": "Theme/assets/css/tokens.css",
+      "level": "forbidden",
+      "reason": "Gemeinsame Token-Wahrheit. App-Migrationen verwenden Tokens, sie ändern sie nicht."
+    },
+    {
+      "path": "Theme/assets/css/screen.css",
+      "level": "forbidden",
+      "reason": "Build-Artefakt. Nie direkt bearbeiten; nur als erwartetes Ergebnis eines freigegebenen Shared-CSS-APs erzeugen."
+    },
+    {
+      "path": "Theme/assets/js/fw-chart-engine/",
+      "level": "forbidden",
+      "reason": "Gemeinsame Chart-, Daten- und Plugin-Engine. Änderungen nur in einem separaten Engine-AP mit vollständiger Regression."
+    },
+    {
+      "path": "package.json",
+      "level": "forbidden",
+      "reason": "Gemeinsame Werkzeug- und Buildabhängigkeiten. Neue Abhängigkeiten, etwa Playwright, verlangen einen Unlock-AP."
+    },
+    {
+      "path": "package-lock.json",
+      "level": "forbidden",
+      "reason": "Abgeleitete Paketauflösung. Darf nur aus einem freigegebenen Paket-AP entstehen."
+    },
+    {
+      "path": "tools/check-test-pages.py",
+      "level": "forbidden",
+      "reason": "Gemeinsamer Testseiten-Checker. Änderungen nur mit Negativ- und Regressionsnachweisen in einem eigenen Tool-AP."
     }
   ]
 }

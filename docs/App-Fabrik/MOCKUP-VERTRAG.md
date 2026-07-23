@@ -76,6 +76,20 @@ Mockup-Code ist ein **Wegwerfartefakt**. Er darf ausschließlich abbilden:
 
 Die technische APP_SPEC übernimmt **nur** beobachtetes Verhalten, Gestaltung und Wirkungshypothese. Sie übernimmt **niemals** Mockup-JavaScript, Datenmodell, Modulstruktur, Schnittstellen, Bootstrapper oder Architekturentscheidungen.
 
+### 6.1 Deklarative Golden-Master-Extraktion nach Abnahme
+
+Erst nach Alberts eindeutiger Abnahme **eines** konkreten Mockups darf daraus ein Golden-Master-Eingabepaket entstehen. Die Abnahme benennt mindestens: App-Slug, Werkstattpfad, Variante, SHA-256 des abgenommenen Mockups, Datum und Abnahme-ID. Fehlt einer dieser Werte oder weicht der Hash ab, ist jede Extraktion gesperrt.
+
+Ein späteres deterministisches Werkzeug darf ausschließlich folgende **deklarative Beobachtungen** in das Eingabepaket überführen:
+
+- Wurzelcontainer, semantische DOM-Abschnitte und ihre sichtbare Reihenfolge;
+- beobachtete sichtbare Zustände, Bedienhandlungen und Ergebniszustände aus einer aufgezeichneten Interaktionsspur;
+- wörtliche Tailwind-Klassenrezepte, lokale CSS-Mechanik und `--fw-*`-Variablen;
+- Token-/Schriftrollen, explizite Breakpoints sowie Motion- und Reduced-Motion-Verhalten;
+- statische Texte, Assets und Datenannahmen — jeweils als deklarierte Quelle, nie als still übernommene Implementierung.
+
+Das Werkzeug **übernimmt nie** Mockup-JavaScript, Event-Logik, Berechnungen, Datenmodell, Inline-Daten, Imports, Modulstruktur, Parser, Bootstrapper, Schnittstellen oder Architekturentscheidungen. Es erzeugt Belege für die technische Herstellung, keinen Code-Transfer. Die technische App wird anschließend ausschließlich aus dem verbindlichen Produktionsstandard gebaut.
+
 ## 7. Wirkungsprüfung und Rollentrennung (E-02)
 
 Der bestehende **Vier-Kriterien-Prüfscore** aus dem lokalen Steuerungsblock (Barriere-Abbau, Zielzustand, Nicht-Ziele als KO, Mentorrolle) bleibt die **einzige Skala**. Keine zweite Jury-Matrix, keine modellseitige Freigabe.

@@ -170,3 +170,23 @@ Wird nach /distill ins Jahres-Segment rotiert (Rohlog erhalten). Einträge: [FRI
 ### 2026-07-22 — Kettenabschluss ✅ | RECONCILED: RUBIKON-V4-UEBERNAHME-C1 WINDOWS-KONSOLE-HOTFIX-C1 JSON-EINGABE-TOOL-C3
 
 ### Rubikon-V4-Übernahme ✅ + Windows-Konsolen-Hotfix ✅ + JSON-Eingabe-Tool-Kern C3 ✅ (2026-07-22) — AP-Wechsel
+
+## 2026-07-23 – SESSION START | Fokus: AF-GM-01 App-Fabrik-Fundament ✅ (2026-07-22)
+
+### 2026-07-23 — CSS-Altlasten (tokens.css/Janitor-Grenze): CLAUDE_PROMPT-Auftrag umgesetzt
+- [FRICTION] Full-Gate beantwortet und freigegeben, bevor `PROTECTED_PATHS.json` gegen den geplanten Schreibumfang geprüft wurde — `screen.source.css` und `01_DECISION_LOG.md` standen auf `forbidden`, erster Edit-Versuch blockierte mechanisch. Nach Rückfrage (`AskUserQuestion`, drei Optionen) auf Alberts Wahl beide temporär auf `protected` herabgestuft, Auftrag umgesetzt, sofort danach wieder auf `forbidden` zurückgestuft.
+- [OK] `tokens.css` per barem Import in `screen.css` eingebettet (D-CSS-03 präzisiert, kein neues Entscheidungs-ID), leere JANITOR-FALLBACK-Sektion ersatzlos aus CSS-Quelle und Konventionsdoku entfernt (7→6 Abschnitte), `fw-janitor.js` erhält `.fw-app`-Ausschlussgrenze (nur isoliert simuliert, kein echter Browsertest). `npm run css:build`: `screen.css` misst 31.594 Bytes — Stop-Befund (>30-KB-Ziel) wie im Auftrag vorgesehen gemeldet, nicht optimiert.
+
+### 2026-07-23 — CSS-Altlasten-Nachputz: Schutzpfad/Größenbeleg/Quellenanker korrigiert
+- [OK] Falscher `tokens.css`-Pfad in `PROTECTED_PATHS.json` (`Theme/src/css/` → real `Theme/assets/css/`) korrigiert; `BACKLOG.md` CSS-6/T1 mit realen Bytewerten (31.594 roh/6.564 gzip) wahrheitsgemäß neu formuliert statt harter „< 30 KB"-Aussage; D-CSS-03-Quellenzeile von einem vorläufigen `Archiv/local`-Prompt-Verweis auf stabile Repo-Belege umgestellt.
+
+### 2026-07-23 — Ghost-Theme-ZIP (janitor-tokens-v1) erzeugt
+- [OK] Reine Paketierung aus bereits gebautem `Theme/`-Stand (kein erneuter Build). Manuelles `System.IO.Compression.ZipArchive` mit auf `/` normalisierten Eintragsnamen verwendet (bekanntes `Compress-Archive`/`CreateFromDirectory`-Backslash-Problem vermieden). Alle 8 Strukturchecks, alle 12 Pflichtdateien, Bytegleichheit von `screen.css`/`fw-janitor.js` per SHA-256 bestätigt. Temporäre PowerShell-Skripte nach Gebrauch aus dem Scratchpad gelöscht.
+
+### 2026-07-23 — Durchbruch: Janitor griff nie in Produktion (nur Pages, keine Posts)
+- [WIN] Nutzer meldete, `fw-janitor.js` werde nicht geladen. Gezielte Rückfrage („Post oder Page getestet?") plus Grep über alle `.hbs`-Dateien fand die Ursache direkt: `fw-janitor.js` war nur in `post.hbs` eingebunden, das Projekt nutzt aber ausschließlich Ghost-Pages und die Homepage, keine echten Posts. `default.hbs` (globaler, bereits `apps/index.js` ladender Einstiegspunkt) als zentralere Fix-Stelle erwogen, aber verworfen, weil `default.hbs` `forbidden` ist — stattdessen dieselbe Script-Zeile wie in `post.hbs` nach `page.hbs` dupliziert. Neues ZIP v2 erzeugt, `page.hbs`-Fix im gepackten Artefakt gezielt verifiziert.
+- [QUESTION] Nutzer bestätigte danach: Janitor lädt jetzt, aber zwei Detailfehler bleiben (Icons fehlen bei Boxen, rote Kreuze in Listen funktionieren nicht, grüne Haken schon) — Ursache nicht untersucht, bewusst in BACKLOG DS-015 vermerkt statt sofort behoben (Nutzeranweisung).
+
+### 2026-07-23 — Kettenabschluss ✅ | RECONCILED: CSS-ALTLASTEN-C1 CSS-ALTLASTEN-NACHPUTZ-C1 THEME-ZIP-JANITOR-TOKENS-V1 JANITOR-PAGE-HBS-FIX-C1 THEME-ZIP-JANITOR-TOKENS-V2
+
+### CSS-Altlasten (tokens/Janitor-Grenze) ✅ + Ghost-Theme-ZIP v1/v2 ✅ + Janitor-Page-Fix ✅ (2026-07-23) — AP-Wechsel

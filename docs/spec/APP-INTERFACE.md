@@ -247,9 +247,9 @@ Alle `data-*` Attribute sind untrusted input — keine Ausnahme, auch bei intern
 2. **SafeDOM:** Nutzdaten nie via `innerHTML` — nur `textContent` oder sichere Renderer.
 3. **Whitelist-Prinzip für `data-fw-options` / `data-options`:** Nur bekannte Keys werden verarbeitet, unbekannte stillschweigend ignoriert.
 4. **Slug-Whitelist für `data-fw-app`:** Nur bekannte App-Slugs werden geladen.
-5. **Dateinamenvalidierung:** `data-fw-data` (`^[a-z0-9_-]+\.csv$`) und `data-fw-config` (`^[a-z0-9_-]+\.json$`) gegen die Grammatik prüfen — keine URL, keine Domain, kein Pfad. Zentraler Resolver bildet `/content/files/app-data/<dateiname>`. Fehlschlag → Empty-State, kein Crash.
+5. **Dateinamenvalidierung:** `data-fw-data` (`^[a-z0-9_-]+\.csv$`) und `data-fw-config` (`^[a-z0-9_-]+\.json$`) gegen die Grammatik prüfen — keine URL, keine Domain, kein Pfad. Zentraler Resolver bildet `/content/files/app-data/<dateiname>`. Fehlschlag → Error-State (`role="alert"`), kein Crash.
 6. **CSV/JSON validieren** vor Verwendung: Format, Pflichtfelder, Wertebereich.
-7. **Empty-State statt Crash:** Ungültige oder fehlende Daten führen zu einem sauberen Fehlerzustand, keinem technischen Absturz.
+7. **Fehlerzustand statt Crash:** Ungültige oder fehlende Daten führen zu einem sauberen Error-State, keinem technischen Absturz.
 8. **Keine geheimen Tokens im Frontend.**
 9. **Keine externen CDN-Abhängigkeiten** ohne explizite Architekturentscheidung und Eintrag im DECISION-LOG.
 10. **Kein permanentes `Date.now()` Cache-Busting im Live-Modus** — zerstört Browser- und CDN-Caching.
