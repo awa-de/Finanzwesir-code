@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Werkstatt-Mockup B — Kippbalken | Depot-Kipppunkt</title>
+
+<link rel="stylesheet" href="../../../../../Theme/assets/css/tokens.css">
+
+<script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+<!-- Play-CDN-Theme-Bridge, wortgleich aus docs/testing/templates/app.test.template.html
+     uebernommen (AP-tailwind-02e). Werte kommen ausschliesslich aus tokens.css. -->
+<style type="text/tailwindcss">
+  @theme inline {
+    --color-petrol-50: var(--color-petrol-50);
+    --color-petrol-100: var(--color-petrol-100);
+    --color-petrol-200: var(--color-petrol-200);
+    --color-petrol-300: var(--color-petrol-300);
+    --color-petrol-400: var(--color-petrol-400);
+    --color-petrol-500: var(--color-petrol-500);
+    --color-petrol-600: var(--color-petrol-600);
+    --color-petrol-700: var(--color-petrol-700);
+    --color-petrol-800: var(--color-petrol-800);
+    --color-petrol-900: var(--color-petrol-900);
+    --color-gelb-50: var(--color-gelb-50);
+    --color-gelb-100: var(--color-gelb-100);
+    --color-gelb-200: var(--color-gelb-200);
+    --color-gelb-300: var(--color-gelb-300);
+    --color-gelb-400: var(--color-gelb-400);
+    --color-gelb-500: var(--color-gelb-500);
+    --color-gelb-600: var(--color-gelb-600);
+    --color-gelb-700: var(--color-gelb-700);
+    --color-gelb-800: var(--color-gelb-800);
+    --color-gelb-900: var(--color-gelb-900);
+    --color-purpur-50: var(--color-purpur-50);
+    --color-purpur-100: var(--color-purpur-100);
+    --color-purpur-200: var(--color-purpur-200);
+    --color-purpur-300: var(--color-purpur-300);
+    --color-purpur-400: var(--color-purpur-400);
+    --color-purpur-500: var(--color-purpur-500);
+    --color-purpur-600: var(--color-purpur-600);
+    --color-purpur-700: var(--color-purpur-700);
+    --color-purpur-800: var(--color-purpur-800);
+    --color-purpur-900: var(--color-purpur-900);
+    --color-blau-700: var(--color-blau-700);
+    --color-petrol: var(--color-petrol);
+    --color-gelb: var(--color-gelb);
+    --color-purpur: var(--color-purpur);
+    --color-blau: var(--color-blau);
+    --color-primary: var(--color-primary);
+    --color-link: var(--color-link);
+    --color-surface: var(--color-surface);
+    --color-text: var(--color-text);
+    --color-text-sec: var(--color-text-sec);
+    --color-text-muted: var(--color-text-muted);
+    --color-text-disabled: var(--color-text-disabled);
+    --color-bg: var(--color-bg);
+    --color-bg-faint: var(--color-bg-faint);
+    --color-border: var(--color-border);
+    --color-error-text: var(--color-error-text);
+    --color-error-border: var(--color-error-border);
+    --color-error-bg: var(--color-error-bg);
+    --font-display: var(--font-display);
+    --font-body: var(--font-body);
+    --shadow-soft: var(--shadow-soft);
+    --shadow-hover: var(--shadow-hover);
+  }
+</style>
+</head>
+<body class="bg-bg font-body text-text">
+
+<main class="mx-auto max-w-3xl p-4 md:p-6">
+
+  <p class="mb-6 rounded-lg border border-border bg-bg-faint px-4 py-3 text-sm text-text-sec">
+    <strong class="text-text">Werkstatt-Mockup — Variante B „Kippbalken".</strong>
+    App: Depot-Kipppunkt (<code>depot-kipppunkt</code>). Wirkungshypothese: Der Nutzer erlebt, wie sein Depot
+    die Einheit wechselt — vom Kontostand zum Jahreseinkommen, das schon heute neben dem Gehalt steht.
+    Albert-Entscheidung: B = Gleichstand, dann mehr. Alle Zahlen sind Testwerte. Kein Produktionscode.
+  </p>
+
+  <div class="fw-app relative box-border w-full min-h-48 bg-bg font-body text-text p-4 md:p-6"
+       data-fw-state="content"
+       id="app-b">
+
+    <section class="flex flex-col gap-6" data-screen="1">
+      <div>
+        <h2 class="text-xl font-bold text-text" tabindex="-1" data-screen-headline>Was verdient dein Depot?</h2>
+        <p class="text-sm text-text-muted">Nicht: Wie viel liegt drin. Sondern: Wie viel bringt es pro Jahr.</p>
+      </div>
+
+      <div class="my-4">
+        <div class="flex flex-wrap items-center gap-x-4 gap-y-2 cursor-pointer">
+          <label class="shrink-0 text-sm text-text-muted" for="b-job-netto">Monatliches Netto-Arbeitseinkommen</label>
+          <input class="min-w-0 flex-1 basis-40 cursor-pointer accent-primary" type="range" id="b-job-netto" min="1000" max="6000" step="100" value="2800">
+          <span class="min-w-[7ch] shrink-0 text-right font-bold text-text" data-value="job-netto">2.800 €</span>
+        </div>
+      </div>
+
+      <div class="my-4">
+        <div class="flex flex-wrap items-center gap-x-4 gap-y-2 cursor-pointer">
+          <label class="shrink-0 text-sm text-text-muted" for="b-depotwert">Heutiger Depotwert</label>
+          <input class="min-w-0 flex-1 basis-40 cursor-pointer accent-primary" type="range" id="b-depotwert" min="0" max="100000" step="500" value="15000">
+          <span class="min-w-[7ch] shrink-0 text-right font-bold text-text" data-value="depotwert">15.000 €</span>
+        </div>
+      </div>
+
+      <div class="my-4">
+        <div class="flex flex-wrap items-center gap-x-4 gap-y-2 cursor-pointer">
+          <label class="shrink-0 text-sm text-text-muted" for="b-sparrate">Monatliche Sparrate</label>
+          <input class="min-w-0 flex-1 basis-40 cursor-pointer accent-primary" type="range" id="b-sparrate" min="50" max="1000" step="10" value="400">
+          <span class="min-w-[7ch] shrink-0 text-right font-bold text-text" data-value="sparrate">400 €</span>
+        </div>
+      </div>
+
+      <div class="my-4">
+        <span class="mb-1 block text-sm text-text-muted" id="b-rendite-label">Renditeannahme — keine Prognose</span>
+        <div class="inline-flex rounded-md bg-bg-faint p-0.5 gap-0.5" role="group" aria-labelledby="b-rendite-label" data-rendite-group>
+          <button type="button" class="rounded px-2.5 py-1 text-sm text-text-sec transition-colors motion-reduce:transition-none hover:text-text focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-petrol-500" data-rendite="0.04" aria-pressed="false">4 %</button>
+          <button type="button" class="rounded px-2.5 py-1 text-sm font-semibold bg-bg text-primary shadow-soft focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-petrol-500" data-rendite="0.06" aria-pressed="true">6 %</button>
+          <button type="button" class="rounded px-2.5 py-1 text-sm text-text-sec transition-colors motion-reduce:transition-none hover:text-text focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-petrol-500" data-rendite="0.08" aria-pressed="false">8 %</button>
+        </div>
+      </div>
+
+      <p class="text-xs text-text-muted">Auf dem nächsten Screen sind Sparrate, Rendite und Depotwert verriegelt — dort bewegt ausschließlich die Zeit den Kippbalken.</p>
+
+      <div class="flex flex-wrap gap-3 mt-6">
+        <button type="button" class="inline-flex items-center justify-center rounded-md px-4 py-2 font-bold transition-colors motion-reduce:transition-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-petrol-500 focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none bg-primary text-white hover:bg-petrol-700 active:bg-petrol-800" data-action="weiter">Weiter</button>
+      </div>
+    </section>
+
+    <section class="flex flex-col gap-6" hidden data-screen="2">
+      <div>
+        <h2 class="text-xl font-bold text-text" tabindex="-1" data-screen-headline>Zeit ist der einzige Regler</h2>
+        <p class="text-sm text-text-muted" data-grundlage></p>
+      </div>
+
+      <div class="flex flex-col gap-3 rounded-xl bg-bg-faint p-4 md:p-6">
+        <div class="relative flex h-64 items-end justify-center gap-10" data-stage>
+          <div class="pointer-events-none absolute left-0 right-0 border-t border-dashed border-border" data-mark="25" aria-hidden="true"></div>
+          <div class="pointer-events-none absolute left-0 right-0 border-t border-dashed border-border" data-mark="50" aria-hidden="true"></div>
+          <div class="pointer-events-none absolute left-0 right-0 border-t border-dashed border-border" data-mark="75" aria-hidden="true"></div>
+          <div class="pointer-events-none absolute left-0 right-0 border-t border-border" data-mark="100" aria-hidden="true"></div>
+          <div class="relative h-full w-24">
+            <div class="absolute bottom-0 left-0 w-full rounded-t-md bg-border" data-bar="job" style="height:0px"></div>
+            <div class="absolute left-0 w-full text-center" data-label-anchor="job" style="bottom:0px">
+              <div class="text-lg font-bold text-text" data-value="job-jahr"></div>
+              <div class="text-xs text-text-muted">Ertrag/Jahr</div>
+            </div>
+          </div>
+          <div class="relative h-full w-24">
+            <div class="absolute bottom-0 left-0 w-full rounded-t-md bg-primary transition-[height] motion-reduce:transition-none" data-bar="depot" style="height:0px"></div>
+            <div class="absolute left-0 w-full text-center" data-label-anchor="depot" style="bottom:0px">
+              <div class="text-lg font-bold text-text" data-value="depot-ertrag"></div>
+              <div class="text-xs text-text-muted">Ertrag/Jahr</div>
+              <div class="mt-0.5 text-xs text-text-sec" data-value="depot-koppel"></div>
+            </div>
+          </div>
+          <div class="absolute h-2 w-64 rounded-full bg-text transition-transform motion-reduce:transition-none" data-balken style="bottom:126px;transform:rotate(0deg)"></div>
+        </div>
+      </div>
+
+      <div class="my-4">
+        <div class="flex flex-wrap items-center gap-x-4 gap-y-2 cursor-pointer">
+          <label class="shrink-0 text-sm text-text-muted" for="b-zeitregler">Zeitregler — Jahre</label>
+          <input class="min-w-0 flex-1 basis-40 cursor-pointer accent-primary" type="range" id="b-zeitregler" min="0" max="1" step="1" value="0">
+          <span class="min-w-[7ch] shrink-0 text-right font-bold text-text" data-value="jahr">Jahr 0</span>
+        </div>
+      </div>
+
+      <p class="text-lg font-bold text-text" data-ergebnissatz></p>
+      <p class="text-sm text-text-sec" data-ergebnis-untersatz></p>
+
+      <aside class="border-l-2 border-border pl-4 text-sm text-text-muted">
+        Wir vergleichen dein heutiges Job-Netto mit dem rechnerischen Depot-Ertrag vor Steuern.
+        Das ist keine Prognose, keine Steuerplanung und keine Rentenplanung, sondern eine Standortbestimmung.
+      </aside>
+
+      <div class="flex flex-col gap-3 rounded-xl bg-bg-faint p-4 md:p-6" data-standortkarte>
+        <p class="text-sm text-text-sec" data-value="standort-marke"></p>
+        <p class="text-sm text-text-muted">Der Kipppunkt entsteht nicht durch einen Zaubertrick. Er entsteht, weil viele alte Euros lange genug arbeiten.</p>
+        <div>
+          <button type="button" class="inline-flex items-center justify-center rounded-md px-4 py-2 font-bold transition-colors motion-reduce:transition-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-petrol-500 focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none bg-primary text-white hover:bg-petrol-700 active:bg-petrol-800 w-full sm:w-auto" data-action="cta">Welche Dosis hältst du aus?</button>
+        </div>
+      </div>
+
+      <div class="flex flex-wrap gap-3 mt-6">
+        <button type="button" class="inline-flex items-center justify-center rounded-md px-4 py-2 font-bold transition-colors motion-reduce:transition-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-petrol-500 focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none text-primary hover:bg-petrol-50 active:bg-petrol-100" data-action="zurueck">Zurück zur Eingabe</button>
+      </div>
+    </section>
+
+    <div class="sr-only" aria-live="polite" aria-atomic="true" data-live-region></div>
+  </div>
+
+  <p class="mt-6 text-xs text-text-muted">
+    Werkstatt-Status: GELB — noch nicht real im Browser von Albert abgenommen. Testhinweise siehe README.md im selben Ordner.
+  </p>
+</main>
+
+<script>
+(function () {
+  'use strict';
+
+  var SEG_ACTIVE = 'rounded px-2.5 py-1 text-sm font-semibold bg-bg text-primary shadow-soft focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-petrol-500';
+  var SEG_INACTIVE = 'rounded px-2.5 py-1 text-sm text-text-sec transition-colors motion-reduce:transition-none hover:text-text focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-petrol-500';
+
+  var STAGE_MAX_PX = 160;
+  var LABEL_GAP_PX = 12;
+  var ANGLE_SCALE_DEG = 70;
+  var MAX_ANGLE_DEG = 14;
+
+  var app = document.getElementById('app-b');
+  var screens = app.querySelectorAll('[data-screen]');
+  var liveRegion = app.querySelector('[data-live-region]');
+
+  var state = {
+    jobNetto: 2800,
+    depotwert: 15000,
+    sparrate: 400,
+    rendite: 0.06,
+    kipppunktJahr: 0,
+    sliderMax: 1,
+    scaleFactor: 1
+  };
+
+  function euro(n) {
+    return Math.round(n).toLocaleString('de-DE') + ' €';
+  }
+
+  function setText(selector, text) {
+    var el = app.querySelector(selector);
+    if (el) { el.textContent = text; }
+  }
+
+  function depotwertZuZeitpunkt(depot0, sparrateMonatlich, rendite, jahre) {
+    var sparrateJaehrlich = sparrateMonatlich * 12;
+    if (rendite === 0) { return depot0 + sparrateJaehrlich * jahre; }
+    var zinsfaktor = Math.pow(1 + rendite, jahre);
+    return depot0 * zinsfaktor + sparrateJaehrlich * ((zinsfaktor - 1) / rendite);
+  }
+
+  function depotErtragZuZeitpunkt(depot0, sparrateMonatlich, rendite, jahre) {
+    return depotwertZuZeitpunkt(depot0, sparrateMonatlich, rendite, jahre) * rendite;
+  }
+
+  function findeZieljahr(zielErtrag, depot0, sparrateMonatlich, rendite) {
+    var lo = 0, hi = 200, i;
+    for (i = 0; i < 60; i++) {
+      var mid = (lo + hi) / 2;
+      var ertrag = depotErtragZuZeitpunkt(depot0, sparrateMonatlich, rendite, mid);
+      if (ertrag < zielErtrag) { lo = mid; } else { hi = mid; }
+    }
+    return Math.max(0, Math.round((lo + hi) / 2));
+  }
+
+  function showScreen(n) {
+    screens.forEach(function (s) {
+      var isTarget = s.getAttribute('data-screen') === String(n);
+      s.hidden = !isTarget;
+      if (isTarget) {
+        var h = s.querySelector('[data-screen-headline]');
+        if (h) { h.focus(); }
+      }
+    });
+  }
+
+  // Screen 1 — Eingaben
+  var inputJobNetto = document.getElementById('b-job-netto');
+  var inputDepotwert = document.getElementById('b-depotwert');
+  var inputSparrate = document.getElementById('b-sparrate');
+
+  function renderEingaben() {
+    setText('[data-value="job-netto"]', euro(state.jobNetto));
+    setText('[data-value="depotwert"]', euro(state.depotwert));
+    setText('[data-value="sparrate"]', euro(state.sparrate));
+  }
+
+  inputJobNetto.addEventListener('input', function () {
+    state.jobNetto = Number(inputJobNetto.value);
+    renderEingaben();
+  });
+  inputDepotwert.addEventListener('input', function () {
+    state.depotwert = Number(inputDepotwert.value);
+    renderEingaben();
+  });
+  inputSparrate.addEventListener('input', function () {
+    state.sparrate = Number(inputSparrate.value);
+    renderEingaben();
+  });
+
+  app.querySelectorAll('[data-rendite-group] button').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      state.rendite = Number(btn.getAttribute('data-rendite'));
+      app.querySelectorAll('[data-rendite-group] button').forEach(function (b) {
+        var active = b === btn;
+        b.setAttribute('aria-pressed', String(active));
+        b.className = active ? SEG_ACTIVE : SEG_INACTIVE;
+      });
+    });
+  });
+
+  // Screen 2 — Kippbalken-Interaktion
+  var zeitregler = document.getElementById('b-zeitregler');
+  var barJob = app.querySelector('[data-bar="job"]');
+  var barDepot = app.querySelector('[data-bar="depot"]');
+  var balken = app.querySelector('[data-balken]');
+  var markElements = app.querySelectorAll('[data-mark]');
+  var labelJobAnchor = app.querySelector('[data-label-anchor="job"]');
+  var labelDepotAnchor = app.querySelector('[data-label-anchor="depot"]');
+
+  function renderZeitpunkt(jahr) {
+    var jobJahr = state.jobNetto * 12;
+    var depotErtrag = depotErtragZuZeitpunkt(state.depotwert, state.sparrate, state.rendite, jahr);
+    var amKipppunkt = jahr === state.kipppunktJahr;
+    var nachKipppunkt = jahr > state.kipppunktJahr;
+
+    var jobHeightPx = jobJahr * state.scaleFactor;
+    var depotHeightPx = Math.min(STAGE_MAX_PX, Math.max(6, depotErtrag * state.scaleFactor));
+    barJob.style.height = jobHeightPx + 'px';
+    barDepot.style.height = depotHeightPx + 'px';
+    labelJobAnchor.style.bottom = (jobHeightPx + LABEL_GAP_PX) + 'px';
+    labelDepotAnchor.style.bottom = (depotHeightPx + LABEL_GAP_PX) + 'px';
+    markElements.forEach(function (el) {
+      var pct = Number(el.getAttribute('data-mark'));
+      el.style.bottom = (jobHeightPx * pct / 100) + 'px';
+    });
+
+    var diffRatio = (depotErtrag - jobJahr) / jobJahr;
+    var angle = amKipppunkt ? 0 : -Math.max(-MAX_ANGLE_DEG, Math.min(MAX_ANGLE_DEG, diffRatio * ANGLE_SCALE_DEG));
+    var avgBottom = (jobHeightPx + depotHeightPx) / 2;
+    balken.style.bottom = (avgBottom - 4) + 'px';
+    balken.style.transform = 'rotate(' + angle + 'deg)';
+
+    setText('[data-value="job-jahr"]', euro(jobJahr));
+    setText('[data-value="depot-ertrag"]', euro(depotErtrag));
+    setText('[data-value="jahr"]', 'Jahr ' + jahr);
+
+    var prozent = Math.min(999, Math.round((depotErtrag / jobJahr) * 100));
+
+    if (amKipppunkt) {
+      setText('[data-value="depot-koppel"]', 'Gleichstand erreicht');
+      setText('[data-ergebnissatz]', 'Job und Depot bringen rechnerisch gleich viel Jahresertrag ein.');
+      setText('[data-ergebnis-untersatz]', 'Der Balken steht waagerecht — der nächste Schritt zeigt, was danach kommt.');
+      setText('[data-value="standort-marke"]', 'Gleichstand in Jahr ' + jahr + ' — ein Zeit-Tick weiter kippt der Balken auf die Depotseite.');
+      liveRegion.textContent = 'Gleichstand erreicht: Job und Depot verdienen rechnerisch gleich viel pro Jahr.';
+    } else if (nachKipppunkt) {
+      setText('[data-value="depot-koppel"]', prozent + ' % des Job-Ertrags');
+      setText('[data-ergebnissatz]', 'Ab jetzt bringt dein Depot rechnerisch mehr Jahresertrag als dein heutiger Job.');
+      setText('[data-ergebnis-untersatz]', 'Bis dahin ist es längst kein stilles Guthaben mehr. Es arbeitet mit.');
+      setText('[data-value="standort-marke"]', 'Kipppunkt rechnerisch in Jahr ' + state.kipppunktJahr + ' erreicht — dein Depot bleibt ab hier rechnerisch vorn.');
+      if (jahr === state.kipppunktJahr + 1) {
+        liveRegion.textContent = 'Der Kippbalken hat gewechselt: Das Depot bringt jetzt rechnerisch mehr ein als der Job.';
+      }
+    } else {
+      var naechsteMarke = [25, 50, 75].filter(function (m) { return m > prozent; })[0] || 100;
+      var zielErtrag = (naechsteMarke / 100) * jobJahr;
+      var markJahr = findeZieljahr(zielErtrag, state.depotwert, state.sparrate, state.rendite);
+      setText('[data-value="depot-koppel"]', prozent + ' % · nächste Marke ' + naechsteMarke + ' % · Jahr ' + markJahr);
+      setText('[data-ergebnissatz]', '');
+      setText('[data-ergebnis-untersatz]', '');
+      setText('[data-value="standort-marke"]', 'Deine nächste Marke: ' + naechsteMarke + ' % deines Job-Netto — rechnerisch in Jahr ' + markJahr + '.');
+    }
+  }
+
+  zeitregler.addEventListener('input', function () {
+    renderZeitpunkt(Number(zeitregler.value));
+  });
+
+  app.querySelector('[data-action="weiter"]').addEventListener('click', function () {
+    var jobJahr = state.jobNetto * 12;
+    state.kipppunktJahr = findeZieljahr(jobJahr, state.depotwert, state.sparrate, state.rendite);
+    state.sliderMax = Math.min(120, state.kipppunktJahr + Math.max(10, Math.round(state.kipppunktJahr * 0.4)));
+
+    var depotErtragAmMax = depotErtragZuZeitpunkt(state.depotwert, state.sparrate, state.rendite, state.sliderMax);
+    state.scaleFactor = STAGE_MAX_PX / Math.max(jobJahr, depotErtragAmMax);
+
+    setText('[data-grundlage]', 'Grundlage: ' + euro(state.jobNetto) + '/Monat Job-Netto · ' + euro(state.sparrate) + '/Monat Sparrate (verriegelt) · ' + Math.round(state.rendite * 100) + ' % Rendite (verriegelt) · Start-Depot ' + euro(state.depotwert) + '.');
+
+    zeitregler.min = '0';
+    zeitregler.max = String(state.sliderMax);
+    zeitregler.value = '0';
+
+    showScreen(2);
+    renderZeitpunkt(0);
+  });
+
+  app.querySelector('[data-action="zurueck"]').addEventListener('click', function () {
+    showScreen(1);
+  });
+
+  app.querySelector('[data-action="cta"]').addEventListener('click', function () {
+    liveRegion.textContent = 'Werkstatt-Mockup: „Welche Dosis hältst du aus?" führt im Produkt zu A1 Risiko-Übersetzer. In diesem Duell ohne Funktion.';
+  });
+
+  renderEingaben();
+})();
+</script>
+
+</body>
+</html>

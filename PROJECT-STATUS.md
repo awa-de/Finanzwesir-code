@@ -1,17 +1,17 @@
 <!-- HOOK-META
 Version: 1
 Stand: 2026-07-23
-Fokus-AP: AF-GM-02 + AF-GM-03 ✅ (2026-07-23)
-Nächster-Schritt: AF-GM-04 — ersten ausdrücklich abgenommenen Golden Master mit Sonnet durch die Produktionslinie führen (AF-GM-02 + AF-GM-03 ✅ 2026-07-23)
-Blocker: Kein Golden-Master-Pilot ohne expliziten Abnahmebeleg (Acceptance-ID + Hash); noch kein Mockup von Albert abgenommen.
+Fokus-AP: AF-GM-02c + AF-GM-04-Pilot-Grundlage ✅ (2026-07-23)
+Nächster-Schritt: AF-GM-04 — Eingabepaket und tatsächlichen App-Bau für depot-kipppunkt/b-fable fortsetzen (AF-GM-02c + AF-GM-04-Pilot-Grundlage ✅ 2026-07-23)
+Blocker: Golden-Master-Pilot depot-kipppunkt/b-fable hat Snapshot, Interaktionsspur und Evidenz, aber noch kein Eingabepaket und keine gebaute App; Tailwind-Play-CDN-Ausnahme im Snapshot ist nur befristet (ca. eine Woche ab 2026-07-23) von Albert freigegeben.
 Letzter-Distill: 2026-07-20
 Kassensturz-Datum: 2026-07-20
 -->
-<!-- HOOK-META-SESSION: AF-GM-02+03 Golden-Master-Trace-Recorder + Eingabepaket-Werkzeug, Ketten-Minimalabschluss -->
+<!-- HOOK-META-SESSION: AF-GM-02c Target-Replay + AF-GM-04 Pilot-Snapshot/b-fable-Trace, Voll-Abschluss -->
 
 # PROJECT STATUS — Finanzwesir 2.0
 
-Stand: 2026-07-23 | Session: AF-GM-02+03 Golden-Master-Trace-Recorder + Eingabepaket-Werkzeug | Geändert von: Claude
+Stand: 2026-07-23 | Session: AF-GM-02c Target-Replay + AF-GM-04 Pilot-Snapshot/b-fable-Trace | Geändert von: Claude
 
 **Zweck:** Schneller Wiedereinstieg nach Pausen.
 **Zielgruppe:** Albert und Claude.
@@ -24,15 +24,15 @@ Stand: 2026-07-23 | Session: AF-GM-02+03 Golden-Master-Trace-Recorder + Eingabep
 
 ## 1. Aktueller Fokus
 
-**Nächster Schritt:** **AF-GM-02** und **AF-GM-03** sind abgeschlossen: gepinnter Playwright-Chromium-Recorder/-Verifizierer (`tools/golden-master/`, lokal unter `C:\Tools\finanzwesir-playwright\af-gm-02\browsers`) und deterministisches Eingabepaket-Werkzeug (Generator/Validator/Protected-Diff-Checker/Repo-Leseschutz) stehen mit vollständigen Positiv-/Negativnachweisen. Als nächstes folgt **AF-GM-04**: der erste ausdrücklich von Albert abgenommene Golden Master durch die Produktionslinie — noch kein Mockup abgenommen, keine Gelb-Variante, keine Shared-Änderung im App-AP.
+**Nächster Schritt:** **AF-GM-02c** (Target-Replay-Modus für `verify.mjs`) und die **AF-GM-04-Pilot-Grundlage** (Snapshot, Interaktionsspur, Evidenz für `depot-kipppunkt`/`b-fable`) sind abgeschlossen. Offen bleibt innerhalb **AF-GM-04**: Eingabepaket erstellen und die tatsächliche App bauen — noch keine Gelb-Variante, keine Shared-Änderung im App-AP.
 
 Letzte Meilensteine (je eine Zeile — Volltext in BACKLOG-ARCHIV.md):
+- **AF-GM-02c Target-Replay + AF-GM-04 Pilot-Snapshot/b-fable-Interaktionsspur** (2026-07-23) ✅ `verify.mjs` um `--target-url`-Loopback-Modus erweitert (`GM-ERR-TARGET-URL-NOT-LOCAL`), zwei Nachbesserungen (spawnSync-Event-Loop-Block behoben, P1-Befund zu stillem CLI-Fallback behoben — `GM-ERR-CLI-ARGS-INVALID`). AF-GM-04: erster technischer Pilotsnapshot `depot-kipppunkt`/`b-fable` eingefroren (Hash `855fad37...a27ebe9`), Interaktionsspur nach drei Nachbesserungen (befristete Tailwind-CDN-Ausnahme, stärkerer Zeitreglernachweis, kanonischer `snapshot/`-Unterordner wegen fehlerhafter relativer Pfadauflösung). Acht Patch-Quittungen, Chronik `CHRONIK-2026-07-23-af-gm-02c-und-af-gm-04-pilot.md`. Nicht committed — Freigabe liegt bei Albert
 - **AF-GM-02 + AF-GM-03 Golden-Master-Trace-Recorder + Eingabepaket-Werkzeug** (2026-07-23) ✅ `tools/golden-master/` gebaut: gepinnter Playwright-Chromium lokal unter `C:\Tools\finanzwesir-playwright\af-gm-02\browsers` (bewusst nicht im NAS-Sync-Pfad), `record.mjs`/`verify.mjs` inkl. neuer Aktion `set-input-value` (02b), Eingabepaket-Generator/-Validator/Protected-Diff-Checker/Repo-Leseschutz (03, Inhaltsgate-Nachputz: Trace-Acceptance-Bindung, `..`-Traversal-Schutz, `permitted`-Pflicht, vierteiliger Produktionsplan). Alle Nachweise in `tests/golden-master/evidence/`. Nicht committed — Freigabe liegt bei Albert
 - **CSS-Altlasten (tokens.css/Janitor-Grenze) + Ghost-Theme-ZIP + Janitor-Page-Fix** (2026-07-23) ✅ `tokens.css` per barem Import in `screen.css` eingebettet (D-CSS-03 präzisiert), leere JANITOR-FALLBACK-Sektion ersatzlos entfernt (7→6 Abschnitte); Schutzprofil-Pfadfehler (`tokens.css`) korrigiert, BACKLOG-Größenangaben wahrheitsgemäß (`screen.css` 31.594 Bytes/6.564 Bytes gzip, Ziel <30 KB bleibt unter CSS-6 offen); zwei Ghost-Theme-ZIPs erzeugt (v1/v2) — v2 behebt zusätzlich einen realen Produktionsfund: `fw-janitor.js` war nur in `post.hbs` eingebunden, das Projekt nutzt aber nur Ghost-Pages/Homepage, keine Posts, jetzt auch in `page.hbs`. Von Albert bestätigt: CSS/Apps abgenommen, Janitor eingebunden mit zwei offenen Detailfehlern (Icons, rote Kreuze) — vermerkt in DS-015. Chronik: `Archiv/Chroniken/chronist-v1/CHRONIK-2026-07-23-css-altlasten-janitor-tokens-und-ghost-theme-zip.md`. Nicht committed — Freigabe liegt bei Albert
 - **AF-GM-01 App-Fabrik-Fundament** (2026-07-22) ✅ Kanonischer Produktionsstandard, Golden-Master-/Eingabepaket-Vertrag, formale Entscheidungen AF-PROD-01 bis 04, korrigierter Error-vs.-Empty-Vertrag, Routing und ein strenges Shared-Theme-Profil (`forbidden → protected → forbidden`) formalisiert. Keine Generatoren, keine Playwright-Abhängigkeit und keine Produktions-App verändert. Nächster Strang: AF-GM-02.
 - **Rubikon-V4-Übernahme + JSON-Eingabe-Tool-Kern — Handover C1/C1/C3** (2026-07-22) ✅ Drei Handover-Aufträge exakt ausgeführt: V4-Rubikon-Arbeitsstand kritisch geprüft (nichts korrigiert, alle Nachweise grün); Windows-Konsolen-Encoding-Hotfix für `bearbeite-rubikon-text.ps1`/`.bat` (UTF-8-BOM, `chcp 65001`+`pause`); JSON-Eingabe-Tool in allgemeinen Mechanik-Kern (`json-eingabe-tool-core.psm1`) und Rubikon-Profil getrennt, JS-Blockgrenzenfehler behoben. Dabei zwei reale PowerShell-5.1-Fallstricke gefunden und behoben: `File.Replace($null)` schlägt fehl (atomare Schreiblogik hatte vorher nie geschrieben); `Compress-Archive`/`ZipFile.CreateFromDirectory` erzeugen Backslash- statt Vorwärtsslash-Zip-Pfade. Theme-ZIP v5 erzeugt und verifiziert. Albert bestätigt: „Klappt alles ist grün". Chronik: `Archiv/Chroniken/chronist-v1/CHRONIK-2026-07-22-rubikon-json-eingabe-kern.md`. Nicht committed — Freigabe liegt bei Albert
 - **Theme-Bootstrapper + CSS-Reparatur-Kette — SEC-05 bis Disclosure-Hotfix** (2026-07-22) ✅ Elf verkettete Handover-Aufträge: Runtime-Verlagerung in statischen Theme-Bootstrapper (SEC-05, P1-Korrektur `Object.hasOwn()` gegen Prototype-Pollution); JSON-Offline-Validator (`json-validator.mjs`, Vertragsmodul `prokrastinations-preis-stations-contract.js`); CSS-Architektur formalisiert (D-CSS-01–04: Übergangsoption C, Ghost-Kaskadengrenze, barer `@import`, Migrations-Gate) und umgesetzt (Option B: neue `Theme/src/css/apps/prokrastinations-preis.css`); dabei vorbestehenden Fehlalarm in `tools/check-test-pages.py` gefunden und behoben (`check_app_pflicht()` jetzt Registry- statt ordnerbasiert, `TEST_PAGE_STANDARD.md` v9→v13); drei Ghost-Theme-ZIPs erzeugt (v1–v3, v3 inkl. Disclosure-Button-Fix). Chronik: `Archiv/Chroniken/chronist-v1/CHRONIK-2026-07-22-prokrastinations-theme-css-kette.md`. Nicht committed — Freigabe liegt bei Albert
-- **Ghost-Feed-Dateinamenvertrag — GHOST-05 bis 09** (2026-07-21) ✅ `data-fw-data`/`data-fw-config` als reine Dateinamen + zentraler Resolver formalisiert (SEC-04, Decision Log), Suffix-Widerspruch korrigiert, `AppDataResolver.js`/`JSONParser.js`/`FinanzwesirJsonData.js` neu gebaut (`tests/json-parser.test.mjs` grün), `prokrastinations-preis` migriert (`stations.de.json` → `stations-de.json`), `tools/check-test-pages.py` synchronisiert (repositoryweit grün). Patch-Kette aus 5 Handover-Dokumenten Alberts. Nicht committed — Freigabe liegt bei Albert
 ---
 
 ## 2. Letzter stabiler Stand

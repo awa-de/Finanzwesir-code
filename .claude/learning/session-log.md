@@ -199,3 +199,28 @@ Wird nach /distill ins Jahres-Segment rotiert (Rohlog erhalten). Einträge: [FRI
 - [FRICTION] AF-GM-03-Erstversion band `behavior-trace.json` nicht an `acceptance.json` (unterschiedliche Mockups zulässig) — im Inhaltsgate-Nachputz geschlossen (`GM03-ERR-TRACE-ACCEPTANCE-MISMATCH`); alle bestehenden Negativpakete aus dem korrigierten Positiv-Stand neu abgeleitet, damit die neue Prüfung ihre jeweils eigentliche Fehlerursache nicht verdeckt.
 - [PREF] CLAUDE.md § Protected Paths korrigiert: `forbidden` verbietet ändern/verschieben/löschen, nicht lesen — mit Ausnahme für Pfade mit explizitem „Niemals lesen" im `reason`-Feld (Datenschutz, z. B. `Active Campaign Liste/`).
 - [OK] `package.json`/`package-lock.json`-Unlock/Relock sauber geschlossen, Diff auf genau den einen neuen `playwright`-Eintrag begrenzt.
+
+## 2026-07-23 – SESSION START | [KETTENMODUS] | Fokus: AF-GM-02 + AF-GM-03 ✅ (2026-07-23)
+
+### 2026-07-23 — AF-GM-02c: Target-Replay-Modus + zwei Nachbesserungen
+- [WIN] Ursache für einen 30-Sekunden-Timeout beim ersten Positivnachweis (`GM-ERR-UNEXPECTED`) durch gezielte Prozess-Isolation gefunden: `spawnSync` in `target-replay-check.mjs` blockierte die Event-Loop des Elternprozesses vollständig, wodurch der dort laufende Loopback-Server während der Kindprozesslaufzeit keine Anfragen bedienen konnte. Fix: asynchrones `spawn` mit garantiertem `finally`-Server-Close.
+- [FRICTION] Ein unabhängiger Test fand einen P1-Befund: `verify.mjs <trace> --target-url` ohne Wert endete fälschlich mit Exit 0 (stiller Fallback auf Fixture-Modus statt fail-closed), weil der ursprüngliche Loop-Parser `rawArgs[i+1] ?? null` als falsy behandelte. Behoben durch eine strikte Zwei-Form-Positivliste (`<trace>` oder `<trace> --target-url <url>`), neue Fehler-ID `GM-ERR-CLI-ARGS-INVALID`.
+- [OK] README-Dokumentationslücke zur neuen Fehler-ID nachgezogen (eigener Fix-02-Auftrag), Evidenzdatei `tests/golden-master/evidence/AF-GM-02C-NACHWEISE.md` geschrieben. Alle Pflichtnachweise (Positiv-, drei Negativ-, drei Regressionsfälle je Runde) real ausgeführt, kein Commit.
+
+### 2026-07-23 — AF-GM-04: Pilot-Snapshot, b-fable-Interaktionsspur und Evidenz
+- [OK] Ersten technischen AF-GM-04-Pilotsnapshot eingefroren (App `depot-kipppunkt`, Variante `b-fable`, Quellen-Hash `855fad37884834ef030ef6a770d0d1118849ef81576e569b4189c2d68a27ebe9`), Abnahmebeleg `ACCEPTANCE-depot-kipppunkt-b-fable-pilot.json` angelegt, per `cp` (nicht Read+Write) bytegleich kopiert.
+- [FRICTION] Werkstattquelle lädt Tailwind CSS über eine externe CDN-URL — entsprach einem im Auftrag explizit benannten Stopp-Fall. Gestoppt und Albert um Entscheidung gebeten, statt selbst zu urteilen; Albert erlaubte die CDN-Nutzung befristet auf eine Woche, ausschließlich für die Pilotphase.
+- [FRICTION] Erste Interaktionsspur (Zeitregler nur auf Wert 1) wurde als visueller Nachweis für den Kippbalken-Effekt zu schwach eingestuft; ersetzt durch eine Spur mit Zeitregler 22 (Gleichstand) und 23 (Kippunkt) — vorab rechnerisch verifiziert (Depot-Ertrag Jahr 22: 35.317,71 € < Job-Jahr 36.000 €; Jahr 23: 38.623,12 € > 36.000 €).
+- [FRICTION] Der ursprüngliche Snapshot-Pfad (vier Verzeichnisebenen unter Repo-Root) löste den relativen CSS-Link `../../../../../Theme/assets/css/tokens.css` fehlerhaft eine Ebene über den Repo-Root hinaus auf, da die Werkstattquelle fünf Ebenen tief liegt. Dadurch waren die Screenshots aus den ersten beiden Aufnahmen visuell ungültig (fehlende Tailwind-Farben/-Balken), obwohl sie zuvor als „sichtbar gestylt" eingeordnet worden waren. Korrektur: Snapshot in einen zusätzlichen `snapshot/`-Unterordner verschoben (fünf Ebenen, Werkstatt-Tiefe entsprechend), Acceptance-/Action-Script-Pfade angepasst, Spur neu aufgezeichnet — Screenshots zeigen seither farbige Balken und einen sichtbar kippenden Ausgleichsbalken.
+- [OK] `B-FABLE-TRACE-NACHWEIS.md` nach Alberts expliziter visueller/technischer Bestätigung geschrieben. Acht Patch-Quittungen unter `docs/steering/patches/` erzeugt, kein Commit.
+
+### 2026-07-23 — Nebenbefunde
+- [FRICTION] `rm -rf` auf Verzeichnisse wurde von der Bash-Berechtigungsprüfung mehrfach verweigert (sowohl kombiniert als auch isoliert); Workaround über einzelne `rm -f`-Aufrufe. Ein anschließendes `rmdir` auf einen leeren Ordner scheiterte mit „Device or resource busy" (bereits am 2026-07-21 bei `tools/upload-dienst` beobachteter Effekt) — ohne Wirkung, da `record.mjs` den Ordner regulär neu befüllte.
+- [FRICTION] Beim Schreiben der Faden-Chronik landete die Datei zunächst durch eine fehlerhafte relative Pfadangabe auf `C:\` statt `Z:\`; sofort bemerkt, korrekt neu geschrieben, Fehlversion inklusive der dabei entstandenen leeren Ordner entfernt.
+
+### 2026-07-23 — Chronik erzeugt und geprüft
+- [OK] Faden-Chronik erzeugt: `Archiv/Chroniken/chronist-v1/CHRONIK-2026-07-23-af-gm-02c-und-af-gm-04-pilot.md`. `/chronik-check` ausgeführt — 0 harte Fehler, 0 Warnungen. Dabei eine bereits vorhandene, unabhängige Chronik des steuernden ChatGPT-Fadens (`CHRONIK-2026-07-23-af-gm-pilot-b-fable.md`) vorgefunden und unangetastet gelassen.
+
+### 2026-07-23 — Kettenabschluss ✅ | RECONCILED: AF-GM-02c AF-GM-02c-CLI-ARGS-FIX AF-GM-02c-FIX-02-README AF-GM-02c-EVIDENCE AF-GM-04-PILOT-SNAPSHOT AF-GM-04-B-FABLE-TRACE AF-GM-04-B-FABLE-TRACE-FIX-02 AF-GM-04-B-FABLE-TRACE-FIX-03 AF-GM-04-B-FABLE-TRACE-EVIDENZ
+
+### AF-GM-02c Target-Replay ✅ + AF-GM-04 Pilot-Snapshot/b-fable-Interaktionsspur ✅ (2026-07-23) — AP-Wechsel

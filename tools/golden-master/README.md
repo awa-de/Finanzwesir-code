@@ -1,4 +1,4 @@
-Stand: 2026-07-23 | AF-GM-02 + AF-GM-02b + AF-GM-03 + AF-GM-03-Inhaltsgate-Nachputz | Geändert von: Claude
+Stand: 2026-07-23 | AF-GM-02 + AF-GM-02b + AF-GM-03 + AF-GM-03-Inhaltsgate-Nachputz + AF-GM-02c | Geändert von: Claude
 
 # Golden-Master-Trace-Recorder (AF-GM-02) + Eingabepaket-Werkzeuge (AF-GM-03)
 
@@ -54,7 +54,33 @@ Fail-closed mit stabiler Fehler-ID:
 | `GM-ERR-SELECTOR-NOT-FOUND` | Ein Aktions- oder Endzustand-Selector löst zur Laufzeit nicht auf |
 | `GM-ERR-STATE-MISMATCH` | Beobachteter Zustand weicht vom im Trace hinterlegten Belegwert ab (deckt auch manipulierte Aktionen ab) |
 | `GM-ERR-INPUT-TARGET-INVALID` | `set-input-value`-Selector trifft nicht genau ein Element oder das Element ist kein natives `<input>` (AF-GM-02b) |
+| `GM-ERR-TARGET-URL-NOT-LOCAL` | `--target-url` ist keine gültige lokale Loopback-URL (AF-GM-02c) |
+| `GM-ERR-CLI-ARGS-INVALID` | Aufruf entspricht weder `<trace>` noch `<trace> --target-url <url>` (fehlender Wert, unbekanntes Argument, doppeltes `--target-url`) — bricht vor Hash-Prüfung, Browserstart und Zielnavigation ab (AF-GM-02c-Fix) |
 | `GM-ERR-UNEXPECTED` | Unerwarteter Laufzeitfehler (Auffangnetz, kein Ersatz für die vier obigen) |
+
+## Target-Replay gegen lokale URL (AF-GM-02c)
+
+```bash
+node tools/golden-master/verify.mjs <behavior-trace.json> --target-url <url>
+```
+
+Ohne `--target-url` bleibt das Verhalten bytegleich zum bisherigen `file://`-Fixture-Replay. Mit gesetzter Option wird nach dem unveränderten Hash-Check (immer zuerst gegen `trace.referencePath`) dieselbe Trace-Spur — gleiche Aktionen, gleiche Selector-Auflösung, gleiche beobachteten Werte, gleicher Endzustand — gegen die Ziel-URL statt gegen die Datei abgespielt. Die Ziel-URL ist keine neue Trace-Eigenschaft; Schema und bestehende Spuren bleiben unverändert.
+
+**Lokalitätsgrenze:** ausschließlich `http:` mit Host exakt `localhost`, `127.0.0.1` oder `[::1]` (ein Port ist erlaubt, kein Userinfo). Geprüft über `new URL()` und eine feste Whitelist, nicht über einen Regex auf dem rohen String. Jede Abweichung — anderes Schema, anderer Host, Zugangsdaten, ungültige Syntax — bricht mit `GM-ERR-TARGET-URL-NOT-LOCAL` ab, **bevor** ein Browser gestartet oder eine Navigation ausgelöst wird.
+
+**Testhilfe.** `tests/golden-master/local-target-server.mjs` liefert Dateien aus einem festen lokalen Ordner über `node:http` auf einem dynamisch vergebenen `127.0.0.1`-Port aus (kein neues Paket, kein Dauerprozess). `tests/golden-master/target-replay-check.mjs` ist ein deterministischer Treiber, der den Server startet, `verify.mjs` mit `--target-url` als Kindprozess ausführt, den Server danach garantiert schließt (auch bei Fehlern) und den Kindprozess-Exit-Code weiterreicht:
+
+```bash
+node tests/golden-master/target-replay-check.mjs <serve-dir> <serve-file> <trace-path>
+```
+
+Beispiel Positivlauf (referenziert dieselbe Fixture, die die Spur bereits per Hash-Check gegen die Datei prüft — hier zusätzlich über HTTP ausgeliefert):
+
+```bash
+node tests/golden-master/target-replay-check.mjs tests/fixtures/golden-master-trace fixture.html tests/golden-master/traces/minimal-normal.behavior-trace.json
+```
+
+Für Negativnachweise dienen zwei eigene synthetische Ziel-Fixtures unter `tests/fixtures/golden-master-target-replay/` (`target-state-mismatch.html`, `target-missing-selector.html`), die mit derselben Spur `minimal-normal.behavior-trace.json` abgespielt werden, aber am Ziel abweichende Werte bzw. einen fehlenden Selector liefern.
 
 ## Strukturprüfung ohne Browser
 

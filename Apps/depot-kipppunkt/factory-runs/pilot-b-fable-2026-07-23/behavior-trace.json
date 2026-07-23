@@ -1,0 +1,182 @@
+{
+  "referencePath": "Apps/depot-kipppunkt/factory-runs/pilot-b-fable-2026-07-23/snapshot/mockup.html",
+  "referenceSha256": "855fad37884834ef030ef6a770d0d1118849ef81576e569b4189c2d68a27ebe9",
+  "playwrightVersion": "1.61.1",
+  "chromiumVersion": "149.0.7827.55",
+  "mode": "normal",
+  "recordedAt": "2026-07-23T20:00:23.927Z",
+  "actions": [
+    {
+      "index": 0,
+      "type": "set-input-value",
+      "selector": "#b-job-netto",
+      "attribute": null,
+      "className": null,
+      "value": "3000",
+      "expected": "3000",
+      "relativeTimeMs": 3777,
+      "screenshotPath": "Apps/depot-kipppunkt/factory-runs/pilot-b-fable-2026-07-23/screenshots/b-fable-normal/step-00-set-input-value.png"
+    },
+    {
+      "index": 1,
+      "type": "observe-text",
+      "selector": "[data-value=\"job-netto\"]",
+      "attribute": null,
+      "className": null,
+      "value": null,
+      "expected": "3.000 €",
+      "relativeTimeMs": 4090,
+      "screenshotPath": "Apps/depot-kipppunkt/factory-runs/pilot-b-fable-2026-07-23/screenshots/b-fable-normal/step-01-observe-text.png"
+    },
+    {
+      "index": 2,
+      "type": "set-input-value",
+      "selector": "#b-depotwert",
+      "attribute": null,
+      "className": null,
+      "value": "20000",
+      "expected": "20000",
+      "relativeTimeMs": 4307,
+      "screenshotPath": "Apps/depot-kipppunkt/factory-runs/pilot-b-fable-2026-07-23/screenshots/b-fable-normal/step-02-set-input-value.png"
+    },
+    {
+      "index": 3,
+      "type": "observe-text",
+      "selector": "[data-value=\"depotwert\"]",
+      "attribute": null,
+      "className": null,
+      "value": null,
+      "expected": "20.000 €",
+      "relativeTimeMs": 4460,
+      "screenshotPath": "Apps/depot-kipppunkt/factory-runs/pilot-b-fable-2026-07-23/screenshots/b-fable-normal/step-03-observe-text.png"
+    },
+    {
+      "index": 4,
+      "type": "set-input-value",
+      "selector": "#b-sparrate",
+      "attribute": null,
+      "className": null,
+      "value": "500",
+      "expected": "500",
+      "relativeTimeMs": 4652,
+      "screenshotPath": "Apps/depot-kipppunkt/factory-runs/pilot-b-fable-2026-07-23/screenshots/b-fable-normal/step-04-set-input-value.png"
+    },
+    {
+      "index": 5,
+      "type": "observe-text",
+      "selector": "[data-value=\"sparrate\"]",
+      "attribute": null,
+      "className": null,
+      "value": null,
+      "expected": "500 €",
+      "relativeTimeMs": 4838,
+      "screenshotPath": "Apps/depot-kipppunkt/factory-runs/pilot-b-fable-2026-07-23/screenshots/b-fable-normal/step-05-observe-text.png"
+    },
+    {
+      "index": 6,
+      "type": "click",
+      "selector": "[data-rendite=\"0.08\"]",
+      "attribute": null,
+      "className": null,
+      "value": null,
+      "expected": null,
+      "relativeTimeMs": 5062,
+      "screenshotPath": "Apps/depot-kipppunkt/factory-runs/pilot-b-fable-2026-07-23/screenshots/b-fable-normal/step-06-click.png"
+    },
+    {
+      "index": 7,
+      "type": "observe-attribute",
+      "selector": "[data-rendite=\"0.08\"]",
+      "attribute": "aria-pressed",
+      "className": null,
+      "value": null,
+      "expected": "true",
+      "relativeTimeMs": 5219,
+      "screenshotPath": "Apps/depot-kipppunkt/factory-runs/pilot-b-fable-2026-07-23/screenshots/b-fable-normal/step-07-observe-attribute.png"
+    },
+    {
+      "index": 8,
+      "type": "click",
+      "selector": "[data-action=\"weiter\"]",
+      "attribute": null,
+      "className": null,
+      "value": null,
+      "expected": null,
+      "relativeTimeMs": 5393,
+      "screenshotPath": "Apps/depot-kipppunkt/factory-runs/pilot-b-fable-2026-07-23/screenshots/b-fable-normal/step-08-click.png"
+    },
+    {
+      "index": 9,
+      "type": "observe-text",
+      "selector": "[data-grundlage]",
+      "attribute": null,
+      "className": null,
+      "value": null,
+      "expected": "Grundlage: 3.000 €/Monat Job-Netto · 500 €/Monat Sparrate (verriegelt) · 8 % Rendite (verriegelt) · Start-Depot 20.000 €.",
+      "relativeTimeMs": 5636,
+      "screenshotPath": "Apps/depot-kipppunkt/factory-runs/pilot-b-fable-2026-07-23/screenshots/b-fable-normal/step-09-observe-text.png"
+    },
+    {
+      "index": 10,
+      "type": "set-input-value",
+      "selector": "#b-zeitregler",
+      "attribute": null,
+      "className": null,
+      "value": "22",
+      "expected": "22",
+      "relativeTimeMs": 5819,
+      "screenshotPath": "Apps/depot-kipppunkt/factory-runs/pilot-b-fable-2026-07-23/screenshots/b-fable-normal/step-10-set-input-value.png"
+    },
+    {
+      "index": 11,
+      "type": "observe-text",
+      "selector": "[data-value=\"depot-koppel\"]",
+      "attribute": null,
+      "className": null,
+      "value": null,
+      "expected": "Gleichstand erreicht",
+      "relativeTimeMs": 5994,
+      "screenshotPath": "Apps/depot-kipppunkt/factory-runs/pilot-b-fable-2026-07-23/screenshots/b-fable-normal/step-11-observe-text.png"
+    },
+    {
+      "index": 12,
+      "type": "set-input-value",
+      "selector": "#b-zeitregler",
+      "attribute": null,
+      "className": null,
+      "value": "23",
+      "expected": "23",
+      "relativeTimeMs": 6224,
+      "screenshotPath": "Apps/depot-kipppunkt/factory-runs/pilot-b-fable-2026-07-23/screenshots/b-fable-normal/step-12-set-input-value.png"
+    },
+    {
+      "index": 13,
+      "type": "observe-text",
+      "selector": "[data-ergebnissatz]",
+      "attribute": null,
+      "className": null,
+      "value": null,
+      "expected": "Ab jetzt bringt dein Depot rechnerisch mehr Jahresertrag als dein heutiger Job.",
+      "relativeTimeMs": 6425,
+      "screenshotPath": "Apps/depot-kipppunkt/factory-runs/pilot-b-fable-2026-07-23/screenshots/b-fable-normal/step-13-observe-text.png"
+    },
+    {
+      "index": 14,
+      "type": "observe-text",
+      "selector": "[data-value=\"jahr\"]",
+      "attribute": null,
+      "className": null,
+      "value": null,
+      "expected": "Jahr 23",
+      "relativeTimeMs": 6592,
+      "screenshotPath": "Apps/depot-kipppunkt/factory-runs/pilot-b-fable-2026-07-23/screenshots/b-fable-normal/step-14-observe-text.png"
+    }
+  ],
+  "expectedEndState": {
+    "selector": "[data-value=\"jahr\"]",
+    "kind": "text",
+    "attribute": null,
+    "className": null,
+    "expected": "Jahr 23"
+  }
+}

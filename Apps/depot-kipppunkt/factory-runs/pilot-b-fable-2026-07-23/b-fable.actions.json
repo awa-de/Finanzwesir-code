@@ -1,0 +1,20 @@
+{
+  "fixturePath": "Apps/depot-kipppunkt/factory-runs/pilot-b-fable-2026-07-23/snapshot/mockup.html",
+  "actions": [
+    { "type": "set-input-value", "selector": "#b-job-netto", "value": "3000" },
+    { "type": "observe-text", "selector": "[data-value=\"job-netto\"]" },
+    { "type": "set-input-value", "selector": "#b-depotwert", "value": "20000" },
+    { "type": "observe-text", "selector": "[data-value=\"depotwert\"]" },
+    { "type": "set-input-value", "selector": "#b-sparrate", "value": "500" },
+    { "type": "observe-text", "selector": "[data-value=\"sparrate\"]" },
+    { "type": "click", "selector": "[data-rendite=\"0.08\"]" },
+    { "type": "observe-attribute", "selector": "[data-rendite=\"0.08\"]", "attribute": "aria-pressed" },
+    { "type": "click", "selector": "[data-action=\"weiter\"]" },
+    { "type": "observe-text", "selector": "[data-grundlage]" },
+    { "type": "set-input-value", "selector": "#b-zeitregler", "value": "22" },
+    { "type": "observe-text", "selector": "[data-value=\"depot-koppel\"]" },
+    { "type": "set-input-value", "selector": "#b-zeitregler", "value": "23" },
+    { "type": "observe-text", "selector": "[data-ergebnissatz]" },
+    { "type": "observe-text", "selector": "[data-value=\"jahr\"]" }
+  ]
+}

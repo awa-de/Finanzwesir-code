@@ -1,0 +1,18 @@
+{
+  "acceptanceId": "depot-kipppunkt-b-fable-pilot",
+  "appSlug": "depot-kipppunkt",
+  "acceptedBy": "Albert",
+  "acceptedAt": "2026-07-23",
+  "mockupPath": "Apps/depot-kipppunkt/factory-runs/pilot-b-fable-2026-07-23/snapshot/mockup.html",
+  "mockupVariant": "b-fable",
+  "mockupSha256": "855fad37884834ef030ef6a770d0d1118849ef81576e569b4189c2d68a27ebe9",
+  "scope": "Technischer AF-GM-04-Pilot: sichtbarer Happy Path, beobachtbare Interaktion und Gestalt des eingefrorenen b-fable-Mockups.",
+  "knownNonGoals": [
+    "fachliche Produktfreigabe",
+    "Ghost-Release",
+    "finale Texte",
+    "finale Anordnung und Gestaltung",
+    "Finanzmathematik",
+    "Launch-Reife"
+  ]
+}
