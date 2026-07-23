@@ -1,0 +1,103 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "behavior-trace.schema.json",
+  "title": "Golden Master Behavior Trace",
+  "description": "Deklarativer Nachweis einer aufgezeichneten Browser-Spur. Enthält kein ausführbares JavaScript.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "referencePath",
+    "referenceSha256",
+    "playwrightVersion",
+    "chromiumVersion",
+    "mode",
+    "recordedAt",
+    "actions",
+    "expectedEndState"
+  ],
+  "properties": {
+    "referencePath": {
+      "type": "string",
+      "description": "Projektrelativer Pfad zur referenzierten Fixture."
+    },
+    "referenceSha256": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$",
+      "description": "SHA-256 des Fixture-Dateiinhalts zum Aufnahmezeitpunkt."
+    },
+    "playwrightVersion": {
+      "type": "string"
+    },
+    "chromiumVersion": {
+      "type": "string"
+    },
+    "mode": {
+      "type": "string",
+      "enum": ["normal", "reduced"]
+    },
+    "recordedAt": {
+      "type": "string",
+      "description": "ISO-8601-Zeitstempel der Aufnahme."
+    },
+    "actions": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["index", "type", "selector", "relativeTimeMs", "screenshotPath"],
+        "properties": {
+          "index": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "type": {
+            "type": "string",
+            "enum": ["click", "observe-text", "observe-attribute", "observe-class", "set-input-value"]
+          },
+          "selector": {
+            "type": "string",
+            "minLength": 1
+          },
+          "attribute": {
+            "type": ["string", "null"],
+            "description": "Nur bei type=observe-attribute."
+          },
+          "className": {
+            "type": ["string", "null"],
+            "description": "Nur bei type=observe-class."
+          },
+          "value": {
+            "type": ["string", "null"],
+            "description": "Angeforderter Wert; nur bei type=set-input-value nichtleerer String, sonst null."
+          },
+          "expected": {
+            "type": ["string", "null"],
+            "description": "Bei der Aufnahme beobachteter Belegwert; null bei type=click. Bei type=set-input-value der tatsächliche input.value nach dem input-Event."
+          },
+          "relativeTimeMs": {
+            "type": "integer",
+            "minimum": 0,
+            "description": "Zeitbezug relativ zum Start der Aufnahme in Millisekunden."
+          },
+          "screenshotPath": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      }
+    },
+    "expectedEndState": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["selector", "kind", "expected"],
+      "properties": {
+        "selector": { "type": "string", "minLength": 1 },
+        "kind": { "type": "string", "enum": ["text", "attribute", "class"] },
+        "attribute": { "type": ["string", "null"] },
+        "className": { "type": ["string", "null"] },
+        "expected": { "type": "string" }
+      }
+    }
+  }
+}

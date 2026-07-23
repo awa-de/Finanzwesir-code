@@ -1,0 +1,20 @@
+{
+  "assumptions": [
+    {
+      "id": "A1",
+      "text": "Zaehler startet bei 0",
+      "origin": "synthetic-mockup.html Quelltext",
+      "status": "blocked",
+      "owner": "Claude",
+      "resolution": "kein weiterer Klaerungsbedarf"
+    },
+    {
+      "id": "A2",
+      "text": "Reduced-Motion-Zustand wird ueber data-motion-state sichtbar gemacht",
+      "origin": "AF-GM-02-Recorder, frisch gegen synthetic-mockup.html aufgezeichnet",
+      "status": "observed",
+      "owner": "Claude",
+      "resolution": "kein weiterer Klaerungsbedarf"
+    }
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "sources": [
+    {
+      "path": "tests/golden-master/fixtures/af-gm-03-synthetic-package/synthetic-mockup.html",
+      "sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+      "role": "Referenz-Mockup (synthetisch)",
+      "permitted": true
+    },
+    {
+      "path": "tests/golden-master/fixtures/af-gm-03-synthetic-package/synthetic-icon.svg",
+      "sha256": "1654fa67e18a9db8004c2a33103177ace536726c59859cc21e224a7fe0472781",
+      "role": "Asset-Quelle (synthetisch)",
+      "permitted": true
+    },
+    {
+      "path": "tests/golden-master/fixtures/af-gm-03-synthetic-package/synthetic-data.csv",
+      "sha256": "cf87aadb10093fd56df76a2eaec06ae8e7454c918bbd29a7c3960faf87ed7138",
+      "role": "Daten-Quelle (synthetisch)",
+      "permitted": true
+    }
+  ]
+}

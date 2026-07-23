@@ -1,0 +1,116 @@
+{
+  "acceptance": {
+    "acceptanceId": "af-gm-03-synthetic-a1",
+    "appSlug": "af-gm-03-synthetic",
+    "acceptedBy": "Albert",
+    "acceptedAt": "2026-07-23",
+    "mockupPath": "tests/golden-master/fixtures/af-gm-03-synthetic-package/synthetic-mockup.html",
+    "mockupVariant": "synthetic",
+    "scope": "Rein technischer Werkzeugnachweis fuer AF-GM-03 - kein echtes Produkt, kein Werkstatt-Mockup, kein realer Golden Master.",
+    "knownNonGoals": [
+      "Keine echte Fachlichkeit",
+      "Kein Ghost-Upload",
+      "Kein Produktions-AP"
+    ]
+  },
+  "sources": [
+    {
+      "path": "tests/golden-master/fixtures/af-gm-03-synthetic-package/synthetic-mockup.html",
+      "role": "Referenz-Mockup (synthetisch)",
+      "permitted": false
+    },
+    {
+      "path": "tests/golden-master/fixtures/af-gm-03-synthetic-package/synthetic-icon.svg",
+      "role": "Asset-Quelle (synthetisch)",
+      "permitted": true
+    },
+    {
+      "path": "tests/golden-master/fixtures/af-gm-03-synthetic-package/synthetic-data.csv",
+      "role": "Daten-Quelle (synthetisch)",
+      "permitted": true
+    }
+  ],
+  "behaviorTracePath": "tests/golden-master/traces/af-gm-03-synthetic.behavior-trace.json",
+  "blueprint": {
+    "rootContainer": {
+      "selector": ".fw-app--af-gm-03-synthetic",
+      "tag": "div"
+    },
+    "domSections": [
+      {
+        "name": "counter-display",
+        "selector": "#counter",
+        "order": 1
+      },
+      {
+        "name": "increment-control",
+        "selector": "#increment-btn",
+        "order": 2
+      }
+    ],
+    "classRecipes": [
+      {
+        "selector": "#increment-btn",
+        "classes": [
+          "btn"
+        ]
+      }
+    ],
+    "tokens": [
+      "--color-text"
+    ],
+    "breakpoints": [
+      375,
+      768,
+      1280
+    ],
+    "motion": [
+      {
+        "selector": "body",
+        "property": "data-motion-state",
+        "reducedMotionAware": true
+      }
+    ]
+  },
+  "assumptions": [
+    {
+      "id": "A1",
+      "text": "Zaehler startet bei 0",
+      "origin": "synthetic-mockup.html Quelltext",
+      "status": "observed",
+      "owner": "Claude",
+      "resolution": "kein weiterer Klaerungsbedarf"
+    },
+    {
+      "id": "A2",
+      "text": "Reduced-Motion-Zustand wird ueber data-motion-state sichtbar gemacht",
+      "origin": "AF-GM-02-Recorder, frisch gegen synthetic-mockup.html aufgezeichnet",
+      "status": "observed",
+      "owner": "Claude",
+      "resolution": "kein weiterer Klaerungsbedarf"
+    }
+  ],
+  "assets": [
+    {
+      "path": "tests/golden-master/fixtures/af-gm-03-synthetic-package/synthetic-icon.svg",
+      "kind": "icon",
+      "licenseStatus": "intern erstellt, keine Lizenzfrage",
+      "targetPath": "content/files/app-data/synthetic-icon.svg"
+    }
+  ],
+  "data": [
+    {
+      "class": "A0",
+      "path": "tests/golden-master/fixtures/af-gm-03-synthetic-package/synthetic-data.csv",
+      "validator": "CSVParser.js (nicht ausgefuehrt, nur deklariert)",
+      "cacheStatus": "statisch, kein Refresh noetig",
+      "ghostFileName": "synthetic-data.csv"
+    }
+  ],
+  "productionPlan": {
+    "apReihenfolge": "Kein echter Produktions-AP. Dieses Paket ist ausschliesslich ein AF-GM-03-Werkzeugnachweis, keine reale AP-Kette.",
+    "erlaubtePfade": "Keine - rein diagnostisch, ausschliesslich unter tests/golden-master/.",
+    "tests": "generate_package.py (Erzeugung) + validate_package.py (Validierung), beide unter tools/golden-master/.",
+    "manuelleGhostAbnahme": "Entfaellt - kein Ghost-Upload, kein echtes Produkt."
+  }
+}

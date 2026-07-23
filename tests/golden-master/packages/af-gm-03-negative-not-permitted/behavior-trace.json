@@ -1,0 +1,77 @@
+{
+  "referencePath": "tests/golden-master/fixtures/af-gm-03-synthetic-package/synthetic-mockup.html",
+  "referenceSha256": "7d2716a6f54892078dee97e5f468b244fa4e01b994b85d32d87d4ab5cfea441b",
+  "playwrightVersion": "1.61.1",
+  "chromiumVersion": "149.0.7827.55",
+  "mode": "normal",
+  "recordedAt": "2026-07-23T13:03:51.293Z",
+  "actions": [
+    {
+      "index": 0,
+      "type": "observe-text",
+      "selector": "#counter",
+      "attribute": null,
+      "className": null,
+      "expected": "0",
+      "relativeTimeMs": 360,
+      "screenshotPath": "tests/golden-master/screenshots/af-gm-03-synthetic/step-00-observe-text.png"
+    },
+    {
+      "index": 1,
+      "type": "observe-attribute",
+      "selector": "body",
+      "attribute": "data-motion-state",
+      "className": null,
+      "expected": "normal",
+      "relativeTimeMs": 622,
+      "screenshotPath": "tests/golden-master/screenshots/af-gm-03-synthetic/step-01-observe-attribute.png"
+    },
+    {
+      "index": 2,
+      "type": "observe-class",
+      "selector": "#increment-btn",
+      "attribute": null,
+      "className": "is-clicked",
+      "expected": "false",
+      "relativeTimeMs": 903,
+      "screenshotPath": "tests/golden-master/screenshots/af-gm-03-synthetic/step-02-observe-class.png"
+    },
+    {
+      "index": 3,
+      "type": "click",
+      "selector": "#increment-btn",
+      "attribute": null,
+      "className": null,
+      "expected": null,
+      "relativeTimeMs": 1202,
+      "screenshotPath": "tests/golden-master/screenshots/af-gm-03-synthetic/step-03-click.png"
+    },
+    {
+      "index": 4,
+      "type": "observe-text",
+      "selector": "#counter",
+      "attribute": null,
+      "className": null,
+      "expected": "1",
+      "relativeTimeMs": 1536,
+      "screenshotPath": "tests/golden-master/screenshots/af-gm-03-synthetic/step-04-observe-text.png"
+    },
+    {
+      "index": 5,
+      "type": "observe-class",
+      "selector": "#increment-btn",
+      "attribute": null,
+      "className": "is-clicked",
+      "expected": "true",
+      "relativeTimeMs": 1816,
+      "screenshotPath": "tests/golden-master/screenshots/af-gm-03-synthetic/step-05-observe-class.png"
+    }
+  ],
+  "expectedEndState": {
+    "selector": "#increment-btn",
+    "kind": "class",
+    "attribute": null,
+    "className": "is-clicked",
+    "expected": "true"
+  }
+}

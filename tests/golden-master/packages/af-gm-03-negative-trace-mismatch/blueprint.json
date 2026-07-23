@@ -1,0 +1,41 @@
+{
+  "rootContainer": {
+    "selector": ".fw-app--af-gm-03-synthetic",
+    "tag": "div"
+  },
+  "domSections": [
+    {
+      "name": "counter-display",
+      "selector": "#counter",
+      "order": 1
+    },
+    {
+      "name": "increment-control",
+      "selector": "#increment-btn",
+      "order": 2
+    }
+  ],
+  "classRecipes": [
+    {
+      "selector": "#increment-btn",
+      "classes": [
+        "btn"
+      ]
+    }
+  ],
+  "tokens": [
+    "--color-text"
+  ],
+  "breakpoints": [
+    375,
+    768,
+    1280
+  ],
+  "motion": [
+    {
+      "selector": "body",
+      "property": "data-motion-state",
+      "reducedMotionAware": true
+    }
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "assets": [
+    {
+      "path": "tests/golden-master/fixtures/af-gm-03-synthetic-package/synthetic-icon.svg",
+      "sha256": "1654fa67e18a9db8004c2a33103177ace536726c59859cc21e224a7fe0472781",
+      "kind": "icon",
+      "licenseStatus": "intern erstellt, keine Lizenzfrage",
+      "targetPath": "content/files/app-data/synthetic-icon.svg"
+    }
+  ]
+}

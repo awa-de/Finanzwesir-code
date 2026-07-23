@@ -190,3 +190,12 @@ Wird nach /distill ins Jahres-Segment rotiert (Rohlog erhalten). Einträge: [FRI
 ### 2026-07-23 — Kettenabschluss ✅ | RECONCILED: CSS-ALTLASTEN-C1 CSS-ALTLASTEN-NACHPUTZ-C1 THEME-ZIP-JANITOR-TOKENS-V1 JANITOR-PAGE-HBS-FIX-C1 THEME-ZIP-JANITOR-TOKENS-V2
 
 ### CSS-Altlasten (tokens/Janitor-Grenze) ✅ + Ghost-Theme-ZIP v1/v2 ✅ + Janitor-Page-Fix ✅ (2026-07-23) — AP-Wechsel
+
+### AF-GM-01 App-Fabrik-Fundament ✅ (2026-07-22) — AP-Wechsel
+
+### 2026-07-23 — AF-GM-02 (Preflight, Unlock/Werkzeug/Relock, Browserpfad-Nachputz, 02b Eingaben/Slider) + AF-GM-03 (Eingabepaket, Inhaltsgate-Nachputz) ✅
+- [OK] Golden-Master-Trace-Recorder/-Verifizierer + Eingabepaket-Werkzeuge (`tools/golden-master/`) gebaut, alle Positiv-/Negativnachweise grün (Hash-Mismatch, fehlender Selector, manipulierte Aktion, Trace-Acceptance-Bindung, Pfad-Traversal, `permitted:false`, unvollständiger Produktionsplan, neue Aktion `set-input-value`).
+- [FRICTION] Erster Chromium-Install-Versuch via `powershell.exe -Command "$env:..."` über das Bash-Tool: Git Bash verschluckte `$env:`, Browser landete kurz im globalen `ms-playwright`-Cache — per Zeitstempel-Beleg als vollständig neu erkannt und entfernt. Fix: `.ps1`-Datei + `powershell.exe -File` statt Inline-`-Command` für Windows-Env-Var-Setzungen über das Bash-Tool.
+- [FRICTION] AF-GM-03-Erstversion band `behavior-trace.json` nicht an `acceptance.json` (unterschiedliche Mockups zulässig) — im Inhaltsgate-Nachputz geschlossen (`GM03-ERR-TRACE-ACCEPTANCE-MISMATCH`); alle bestehenden Negativpakete aus dem korrigierten Positiv-Stand neu abgeleitet, damit die neue Prüfung ihre jeweils eigentliche Fehlerursache nicht verdeckt.
+- [PREF] CLAUDE.md § Protected Paths korrigiert: `forbidden` verbietet ändern/verschieben/löschen, nicht lesen — mit Ausnahme für Pfade mit explizitem „Niemals lesen" im `reason`-Feld (Datenschutz, z. B. `Active Campaign Liste/`).
+- [OK] `package.json`/`package-lock.json`-Unlock/Relock sauber geschlossen, Diff auf genau den einen neuen `playwright`-Eintrag begrenzt.

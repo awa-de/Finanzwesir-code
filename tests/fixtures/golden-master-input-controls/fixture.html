@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <title>Golden Master Input-Controls Fixture</title>
+</head>
+<body>
+  <div>
+    <label>Betrag <input id="amount" type="number" min="0" max="100" value="10"></label>
+    <output id="amount-output">10</output>
+  </div>
+  <div>
+    <label>Intensität <input id="intensity" type="range" min="0" max="10" value="5"></label>
+    <output id="intensity-output">5</output>
+  </div>
+  <script>
+    (function () {
+      document.getElementById('amount').addEventListener('input', function (e) {
+        document.getElementById('amount-output').textContent = e.target.value;
+      });
+      document.getElementById('intensity').addEventListener('input', function (e) {
+        document.getElementById('intensity-output').textContent = e.target.value;
+      });
+    })();
+  </script>
+</body>
+</html>

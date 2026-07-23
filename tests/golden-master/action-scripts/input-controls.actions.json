@@ -1,0 +1,10 @@
+{
+  "fixturePath": "tests/fixtures/golden-master-input-controls/fixture.html",
+  "actions": [
+    { "type": "observe-text", "selector": "#amount-output" },
+    { "type": "set-input-value", "selector": "#amount", "value": "42" },
+    { "type": "observe-text", "selector": "#amount-output" },
+    { "type": "set-input-value", "selector": "#intensity", "value": "7" },
+    { "type": "observe-text", "selector": "#intensity-output" }
+  ]
+}

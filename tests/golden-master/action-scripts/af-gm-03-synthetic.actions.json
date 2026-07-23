@@ -1,0 +1,11 @@
+{
+  "fixturePath": "tests/golden-master/fixtures/af-gm-03-synthetic-package/synthetic-mockup.html",
+  "actions": [
+    { "type": "observe-text", "selector": "#counter" },
+    { "type": "observe-attribute", "selector": "body", "attribute": "data-motion-state" },
+    { "type": "observe-class", "selector": "#increment-btn", "className": "is-clicked" },
+    { "type": "click", "selector": "#increment-btn" },
+    { "type": "observe-text", "selector": "#counter" },
+    { "type": "observe-class", "selector": "#increment-btn", "className": "is-clicked" }
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "acceptanceId": "af-gm-03-synthetic-a1",
+  "appSlug": "af-gm-03-synthetic",
+  "acceptedBy": "Albert",
+  "acceptedAt": "2026-07-23",
+  "mockupPath": "tests/golden-master/fixtures/af-gm-03-synthetic-package/synthetic-mockup.html",
+  "mockupVariant": "synthetic",
+  "scope": "Rein technischer Werkzeugnachweis fuer AF-GM-03 - kein echtes Produkt, kein Werkstatt-Mockup, kein realer Golden Master.",
+  "knownNonGoals": [
+    "Keine echte Fachlichkeit",
+    "Kein Ghost-Upload",
+    "Kein Produktions-AP"
+  ],
+  "mockupSha256": "7d2716a6f54892078dee97e5f468b244fa4e01b994b85d32d87d4ab5cfea441b"
+}

@@ -1,0 +1,72 @@
+{
+  "referencePath": "tests/fixtures/golden-master-input-controls/fixture.html",
+  "referenceSha256": "5467e6a92180f98d331995828983e54aa4b28c69283778702479cfe921d8d331",
+  "playwrightVersion": "1.61.1",
+  "chromiumVersion": "149.0.7827.55",
+  "mode": "normal",
+  "recordedAt": "2026-07-23T13:55:07.083Z",
+  "actions": [
+    {
+      "index": 0,
+      "type": "observe-text",
+      "selector": "#amount-output",
+      "attribute": null,
+      "className": null,
+      "value": null,
+      "expected": "10",
+      "relativeTimeMs": 611,
+      "screenshotPath": "tests/golden-master/screenshots/input-controls-normal/step-00-observe-text.png"
+    },
+    {
+      "index": 1,
+      "type": "set-input-value",
+      "selector": "#amount-output",
+      "attribute": null,
+      "className": null,
+      "value": "42",
+      "expected": "42",
+      "relativeTimeMs": 898,
+      "screenshotPath": "tests/golden-master/screenshots/input-controls-normal/step-01-set-input-value.png"
+    },
+    {
+      "index": 2,
+      "type": "observe-text",
+      "selector": "#amount-output",
+      "attribute": null,
+      "className": null,
+      "value": null,
+      "expected": "42",
+      "relativeTimeMs": 1161,
+      "screenshotPath": "tests/golden-master/screenshots/input-controls-normal/step-02-observe-text.png"
+    },
+    {
+      "index": 3,
+      "type": "set-input-value",
+      "selector": "#intensity",
+      "attribute": null,
+      "className": null,
+      "value": "7",
+      "expected": "7",
+      "relativeTimeMs": 1457,
+      "screenshotPath": "tests/golden-master/screenshots/input-controls-normal/step-03-set-input-value.png"
+    },
+    {
+      "index": 4,
+      "type": "observe-text",
+      "selector": "#intensity-output",
+      "attribute": null,
+      "className": null,
+      "value": null,
+      "expected": "7",
+      "relativeTimeMs": 1760,
+      "screenshotPath": "tests/golden-master/screenshots/input-controls-normal/step-04-observe-text.png"
+    }
+  ],
+  "expectedEndState": {
+    "selector": "#intensity-output",
+    "kind": "text",
+    "attribute": null,
+    "className": null,
+    "expected": "7"
+  }
+}

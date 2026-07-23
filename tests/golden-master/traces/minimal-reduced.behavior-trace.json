@@ -1,0 +1,77 @@
+{
+  "referencePath": "tests/fixtures/golden-master-trace/fixture.html",
+  "referenceSha256": "226b2fe4f8c185fbc7c68f15d05fe033e1760f98642c16dbc28874f6d215b14b",
+  "playwrightVersion": "1.61.1",
+  "chromiumVersion": "149.0.7827.55",
+  "mode": "reduced",
+  "recordedAt": "2026-07-23T11:23:10.422Z",
+  "actions": [
+    {
+      "index": 0,
+      "type": "observe-text",
+      "selector": "#counter",
+      "attribute": null,
+      "className": null,
+      "expected": "0",
+      "relativeTimeMs": 197,
+      "screenshotPath": "tests/golden-master/screenshots/minimal-reduced/step-00-observe-text.png"
+    },
+    {
+      "index": 1,
+      "type": "observe-attribute",
+      "selector": "body",
+      "attribute": "data-motion-state",
+      "className": null,
+      "expected": "reduced",
+      "relativeTimeMs": 522,
+      "screenshotPath": "tests/golden-master/screenshots/minimal-reduced/step-01-observe-attribute.png"
+    },
+    {
+      "index": 2,
+      "type": "observe-class",
+      "selector": "#increment-btn",
+      "attribute": null,
+      "className": "is-clicked",
+      "expected": "false",
+      "relativeTimeMs": 800,
+      "screenshotPath": "tests/golden-master/screenshots/minimal-reduced/step-02-observe-class.png"
+    },
+    {
+      "index": 3,
+      "type": "click",
+      "selector": "#increment-btn",
+      "attribute": null,
+      "className": null,
+      "expected": null,
+      "relativeTimeMs": 1077,
+      "screenshotPath": "tests/golden-master/screenshots/minimal-reduced/step-03-click.png"
+    },
+    {
+      "index": 4,
+      "type": "observe-text",
+      "selector": "#counter",
+      "attribute": null,
+      "className": null,
+      "expected": "1",
+      "relativeTimeMs": 1387,
+      "screenshotPath": "tests/golden-master/screenshots/minimal-reduced/step-04-observe-text.png"
+    },
+    {
+      "index": 5,
+      "type": "observe-class",
+      "selector": "#increment-btn",
+      "attribute": null,
+      "className": "is-clicked",
+      "expected": "true",
+      "relativeTimeMs": 1667,
+      "screenshotPath": "tests/golden-master/screenshots/minimal-reduced/step-05-observe-class.png"
+    }
+  ],
+  "expectedEndState": {
+    "selector": "#increment-btn",
+    "kind": "class",
+    "attribute": null,
+    "className": "is-clicked",
+    "expected": "true"
+  }
+}

@@ -1,6 +1,6 @@
 # CLAUDE.md – Finanzwesir 2.0
 
-Stand: 2026-06-25 | v2.1.3 | Geändert von: Claude
+Stand: 2026-07-23 | v2.1.4 | Geändert von: Claude
 
 \---
 
@@ -337,7 +337,7 @@ Keine Einzelfall-Regeln. Keine temporären Workarounds. Keine issue-spezifischen
 
 Vor Dateioperationen `.claude/PROTECTED\_PATHS.json` beachten:
 
-* `forbidden`: nicht lesen, ändern, verschieben oder löschen
+* `forbidden`: nicht ändern, verschieben oder löschen. Lesen ist erlaubt, sofern der `reason`-Eintrag der Datei kein explizites Leseverbot nennt (Beispiel: `Active Campaign Liste/` — „Niemals lesen" bleibt wegen Datenschutz in Kraft).
 * `protected`: nur mit Begründung, Gate und Albert-Freigabe
 * Datei nicht lesbar oder fehlend: MODUS A — stoppen, beschreiben, Alberts Entscheidung einholen.
 

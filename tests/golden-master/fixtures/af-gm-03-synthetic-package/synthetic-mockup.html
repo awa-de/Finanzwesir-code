@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <title>AF-GM-03 Synthetischer Vertrags-Stand-in (kein Werkstatt-Mockup)</title>
+</head>
+<body data-motion-state="unknown">
+  <!-- Rein synthetischer Stand-in für den AF-GM-03-Werkzeugnachweis.
+       Kein echtes Produkt, kein Werkstatt-Mockup, kein realer Golden Master. -->
+  <div class="fw-app fw-app--af-gm-03-synthetic">
+    <p id="counter">0</p>
+    <button id="increment-btn" type="button" class="btn">+1</button>
+  </div>
+  <script>
+    (function () {
+      var counter = document.getElementById('counter');
+      var btn = document.getElementById('increment-btn');
+      var n = 0;
+      btn.addEventListener('click', function () {
+        n += 1;
+        counter.textContent = String(n);
+        btn.classList.add('is-clicked');
+      });
+      var mql = window.matchMedia('(prefers-reduced-motion: reduce)');
+      document.body.setAttribute('data-motion-state', mql.matches ? 'reduced' : 'normal');
+    })();
+  </script>
+</body>
+</html>
