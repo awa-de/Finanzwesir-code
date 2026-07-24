@@ -18,6 +18,9 @@ node_modules/
 
 .DS_Store
 
+
+# Lokal erzeugter Python-Bytecode
+__pycache__/
 # Content-Dateien (gehören ins spätere Finanzwesir-Content-Repo)
 content/
 Inhalte alte Site/
