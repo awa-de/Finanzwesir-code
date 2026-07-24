@@ -163,7 +163,7 @@ Nach Abschluss: `/abschluss-ritual`.
 1. docs/spec/APP-INTERFACE.md                     ← Vertrag Ghost-HTML ↔ App-JS (Pflicht)
 2. docs/steering/audits/SECURITY-BASELINE.md      ← Pflicht vor App-Arbeit
 3. docs/steering/design/CSS-KONVENTIONEN.md       ← Klassen-Naming
-4. docs/spec/APP_FACTORY_PRODUKTIONSSTANDARD.md   ← verbindliche Produktionslinie: Golden Master, Eingabepaket, Shared-Path-Schutz, Belege
+4. docs/spec/APP_FACTORY_PRODUKTIONSSTANDARD.md   ← verbindliche Produktionslinie: Golden Master, Eingabepaket, Shared-Path-Schutz, Belege (AF-PROD-01: Werkstatt-/Produktionsgrenze, §1)
 5. docs/steering/design/TAILWIND-APP-BAUKASTEN_KONZEPT_V0-1.md ← App-Primitiven/Klassenrezepte (FREIGEGEBEN 2026-07-12, verbindlicher Vertrag); Icons: docs/design-system/spec/05 + Theme/assets/images/
 6. docs/App-Fabrik/APP_INVENTORY.md               ← Alle 25 App-Ordner, Datenbedarf, offene Klärungen
 7. docs/App-Fabrik/03_APP_FACTORY_STANDARD_DRAFT.md ← historischer Entwurf; nur Kontext, nie gegen den Produktionsstandard

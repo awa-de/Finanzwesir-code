@@ -96,3 +96,40 @@ def require_permitted(entry_path, permitted_value):
             "GM03-ERR-SOURCE-NOT-PERMITTED",
             f"Quelle '{entry_path}' hat permitted={permitted_value!r}, erwartet ausschließlich True",
         )
+
+
+# AF-PROD-01: Werkstatt-/Produktionsgrenze — Verbraucherrolle je Quelle.
+# "tool-only": nur für Golden-Master-Werkzeuge (Hash/Aufnahme/Trace) lesbar, für das
+# Produktions-LLM gesperrt. "production-llm": zusätzlich für das Produktions-LLM lesbar.
+ALLOWED_CONSUMER_ROLES = {"tool-only", "production-llm"}
+
+
+def require_valid_consumer_role(entry_path, consumer_role_value):
+    """consumerRole muss exakt einer der beiden erlaubten Werte sein; sonst
+    GM03-ERR-SOURCE-CONSUMER-ROLE-INVALID."""
+    if consumer_role_value not in ALLOWED_CONSUMER_ROLES:
+        raise GmPackageError(
+            "GM03-ERR-SOURCE-CONSUMER-ROLE-INVALID",
+            f"Quelle '{entry_path}' hat consumerRole={consumer_role_value!r}, "
+            f"erlaubt: {sorted(ALLOWED_CONSUMER_ROLES)}",
+        )
+
+
+def is_workshop_or_raw_snapshot_path(rel_path, mockup_path):
+    """True, wenn rel_path die Werkstatt (tests/scratch/**) oder der rohe,
+    hashgebundene Golden-Master-Snapshot selbst (acceptance.mockupPath) ist."""
+    normalized = _normalize(rel_path)
+    if normalized == _normalize(mockup_path):
+        return True
+    return normalized.startswith("tests/scratch/")
+
+
+def require_llm_source_not_raw(entry_path, consumer_role_value, mockup_path):
+    """Werkstatt- oder roher Snapshot-Pfad darf nie consumerRole=production-llm
+    tragen; sonst GM03-ERR-SOURCE-LLM-FORBIDDEN (AF-PROD-01)."""
+    if consumer_role_value == "production-llm" and is_workshop_or_raw_snapshot_path(entry_path, mockup_path):
+        raise GmPackageError(
+            "GM03-ERR-SOURCE-LLM-FORBIDDEN",
+            f"Quelle '{entry_path}' ist Werkstatt-/roher Golden-Master-Pfad und darf "
+            "nicht consumerRole=production-llm tragen (AF-PROD-01)",
+        )

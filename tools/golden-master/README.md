@@ -127,8 +127,17 @@ Fail-closed mit stabiler Fehler-ID:
 | `GM03-ERR-SOURCE-READ-FORBIDDEN` | Ein Quellpfad ist laut `reason`-Feld in `.claude/PROTECTED_PATHS.json` explizit lesegesperrt (Beispiel: `Active Campaign Liste/`) |
 | `GM03-ERR-SOURCE-NOT-PERMITTED` | Eine Quelle hat `permitted` ≠ Boolean `true` — stoppt Generator **und** Validator |
 | `GM03-ERR-PRODUCTION-PLAN-INCOMPLETE` | `production-plan.md` fehlt eine der vier Pflichtüberschriften (`## AP-Reihenfolge`, `## Erlaubte Pfade`, `## Tests`, `## Manuelle Ghost-Abnahme`) |
+| `GM03-ERR-SOURCE-CONSUMER-ROLE-INVALID` | Ein Quelleneintrag hat kein `consumerRole` oder einen Wert außerhalb von `tool-only`/`production-llm` (AF-PROD-01) |
+| `GM03-ERR-SOURCE-LLM-FORBIDDEN` | Eine Quelle unter `tests/scratch/**` oder der rohe Golden-Master-Snapshot (`acceptance.json.mockupPath`) trägt `consumerRole: "production-llm"` — Werkstatt/roher Snapshot dürfen den Werkzeugen dienen, aber nie automatisch Produktionsquelle des LLMs sein (AF-PROD-01) |
 
 **Trace-Bindung:** Der Validator vergleicht nach der Trace-Strukturprüfung `behavior-trace.json.referencePath`/`referenceSha256` exakt gegen `acceptance.json.mockupPath`/`mockupSha256`. Die Positivfixture verwendet dafür einen Trace, der real mit `record.mjs` gegen ihr eigenes `synthetic-mockup.html` aufgezeichnet wurde (`tests/golden-master/action-scripts/af-gm-03-synthetic.actions.json` → `tests/golden-master/traces/af-gm-03-synthetic.behavior-trace.json`) — kein erfundener und kein von einer anderen Fixture kopierter Trace.
+
+**Verbraucherrolle je Quelle (AF-PROD-01, `docs/spec/APP_FACTORY_PRODUKTIONSSTANDARD.md` §1):** Jeder Eintrag in `source-manifest.json` trägt zusätzlich zu `path`/`sha256`/`role`/`permitted` ein Pflichtfeld `consumerRole` mit genau einem von zwei Werten. Alle Manifestquellen werden ohnehin von den Prüfwerkzeugen (Generator/Validator, Hash-/Trace-Recorder) gelesen — `consumerRole` regelt zusätzlich, ob die Quelle auch für das Produktions-LLM lesbar ist:
+
+- `production-llm` — zusätzlich für das Produktions-LLM lesbar.
+- `tool-only` — für das Produktions-LLM gesperrt; nur die Werkzeuge selbst greifen darauf zu.
+
+Generator und Validator lehnen fail-closed ab, wenn `consumerRole` fehlt oder keinen der beiden Werte trägt (`GM03-ERR-SOURCE-CONSUMER-ROLE-INVALID`), und wenn eine Quelle unter `tests/scratch/**` oder der rohe, hashgebundene Golden-Master-Snapshot selbst (`acceptance.json.mockupPath`) mit `consumerRole: "production-llm"` deklariert wird (`GM03-ERR-SOURCE-LLM-FORBIDDEN`) — Werkstatt und roher Snapshot dürfen den Werkzeugen dienen, sind aber nie automatisch eine Produktionsquelle des LLMs.
 
 **Quellenfreigabe:** Jede Spec-Quelle trägt jetzt explizit `"permitted": true`. Der Generator übernimmt den Wert, statt ihn stillschweigend zu setzen; jeder andere Wert stoppt Generator und Validator mit `GM03-ERR-SOURCE-NOT-PERMITTED`.
 

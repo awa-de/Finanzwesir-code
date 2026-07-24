@@ -18,7 +18,7 @@
       "path": "tests/golden-master/fixtures/af-gm-03-synthetic-package/synthetic-mockup.html",
       "role": "Referenz-Mockup (synthetisch)",
       "permitted": true,
-      "consumerRole": "tool-only"
+      "consumerRole": "production-llm"
     },
     {
       "path": "tests/golden-master/fixtures/af-gm-03-synthetic-package/synthetic-icon.svg",

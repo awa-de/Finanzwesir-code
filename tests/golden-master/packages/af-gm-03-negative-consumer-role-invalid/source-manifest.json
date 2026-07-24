@@ -4,8 +4,8 @@
       "path": "tests/golden-master/fixtures/af-gm-03-synthetic-package/synthetic-mockup.html",
       "sha256": "7d2716a6f54892078dee97e5f468b244fa4e01b994b85d32d87d4ab5cfea441b",
       "role": "Referenz-Mockup (synthetisch)",
-      "permitted": false,
-      "consumerRole": "tool-only"
+      "permitted": true,
+      "consumerRole": "produktions-llm-tippfehler"
     },
     {
       "path": "tests/golden-master/fixtures/af-gm-03-synthetic-package/synthetic-icon.svg",

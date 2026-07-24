@@ -16,6 +16,33 @@ Nicht Gegenstand dieses Standards sind Produktfindung, psychologische Bewertung,
 **Ockham:** Eine Produktionslinie hat einen Golden Master, einen Eingabevertrag und einen Auslieferungsweg. Mehr Parallelmodelle erhöhen nur Drift.  
 **Via Negativa:** Kein Kopieren von Mockup-Code, keine zweite Laufzeit, keine zweite CSS-Wahrheit, keine stillen Änderungen an gemeinsamem Theme-Code.
 
+### AF-PROD-01 — Werkstatt-/Produktionsgrenze
+
+**Leitsatz**
+
+Wir trennen die Freiheit zum Irren von der Pflicht, korrekt zu liefern.
+
+**Pflicht**
+
+1. `tests/scratch/**` ist eine nicht autoritative Werkstatt.
+2. Ein Produktions-AP arbeitet ausschließlich aus einem vollständig validierten Golden-Master-Eingabepaket und den bindenden Produktions-Specs.
+3. Aus dem Mockup dürfen ausschließlich deklarierte Beobachtungen übernommen werden: sichtbare Struktur, Gestaltung, Texte, Zustände und Verhalten.
+4. Jede verwendete Information benötigt eine deklarierte Quelle, Rolle und Zulässigkeit.
+
+**Verbot**
+
+Mockup-JavaScript, Datenmodell, Berechnungen, Modulstruktur, Schnittstellen, Bootstrapper und improvisierte CSS-Architektur sind keine Produktionsquellen. Sie dürfen weder kopiert noch adaptiert noch sinngemäß als Architektur übernommen werden.
+
+**Stop**
+
+Kein Produktions-AP beginnt, wenn:
+
+- das Eingabepaket fehlt oder nicht aktuell erfolgreich validiert wurde;
+- Abnahme, Hash und Interaktionsspur nicht übereinstimmen;
+- eine benötigte Quelle nicht freigegeben ist;
+- eine Annahme `blocked` ist;
+- das Produktions-LLM zur Umsetzung rohen Werkstattcode lesen müsste.
+
 ## 2. Verbindlichkeits- und Quellenordnung
 
 Bei Widerspruch gilt in dieser Reihenfolge:

@@ -22,7 +22,13 @@ import json
 import sys
 from pathlib import Path
 
-from repo_path_guard import GmPackageError, require_permitted, safe_repo_path
+from repo_path_guard import (
+    GmPackageError,
+    require_llm_source_not_raw,
+    require_permitted,
+    require_valid_consumer_role,
+    safe_repo_path,
+)
 
 REQUIRED_ACCEPTANCE_FIELDS = [
     "acceptanceId", "appSlug", "acceptedBy", "acceptedAt",
@@ -49,14 +55,18 @@ def build_acceptance(spec):
 
 
 def build_source_manifest(spec):
+    mockup_path = spec["acceptance"]["mockupPath"]
     entries = []
     for src in spec["sources"]:
         require_permitted(src.get("path"), src.get("permitted"))
+        require_valid_consumer_role(src.get("path"), src.get("consumerRole"))
+        require_llm_source_not_raw(src.get("path"), src.get("consumerRole"), mockup_path)
         entries.append({
             "path": src["path"],
             "sha256": sha256_of(src["path"]),
             "role": src["role"],
             "permitted": True,
+            "consumerRole": src["consumerRole"],
         })
     return {"sources": entries}
 

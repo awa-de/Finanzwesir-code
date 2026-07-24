@@ -20,7 +20,12 @@ TOOL_DIR = Path(__file__).resolve().parent
 sys.path.insert(0, str(TOOL_DIR))
 import validate_schema  # noqa: E402  (AF-GM-02-Vertrag für behavior-trace.json wiederverwendet)
 from repo_path_guard import GmPackageError as ValidationFail  # noqa: E402
-from repo_path_guard import require_permitted, safe_repo_path  # noqa: E402
+from repo_path_guard import (  # noqa: E402
+    require_llm_source_not_raw,
+    require_permitted,
+    require_valid_consumer_role,
+    safe_repo_path,
+)
 
 ACCEPTANCE_ID_RE = re.compile(r"^[a-z0-9][a-z0-9-]{2,31}$")
 SHA256_RE = re.compile(r"^[a-f0-9]{64}$")
@@ -91,7 +96,7 @@ def check_acceptance(pkg_dir):
     return acceptance
 
 
-def check_source_manifest(pkg_dir):
+def check_source_manifest(pkg_dir, mockup_path):
     manifest = load_json(pkg_dir, "source-manifest.json")
     sources = manifest.get("sources")
     if not isinstance(sources, list) or not sources:
@@ -99,10 +104,12 @@ def check_source_manifest(pkg_dir):
 
     declared_paths = set()
     for entry in sources:
-        for field in ("path", "sha256", "role", "permitted"):
+        for field in ("path", "sha256", "role", "permitted", "consumerRole"):
             if field not in entry:
                 raise ValidationFail("GM03-ERR-MISSING-FIELD", f"source-manifest.json: Eintrag ohne '{field}'")
         require_permitted(entry["path"], entry["permitted"])
+        require_valid_consumer_role(entry["path"], entry["consumerRole"])
+        require_llm_source_not_raw(entry["path"], entry["consumerRole"], mockup_path)
         if not SHA256_RE.match(str(entry["sha256"])):
             raise ValidationFail("GM03-ERR-INVALID-GRAMMAR", f"source-manifest.json: sha256 für '{entry['path']}' ist kein 64-stelliger Hex-Hash")
         real_hash = real_sha256(entry["path"])
@@ -218,7 +225,7 @@ def check_production_plan(pkg_dir):
 def validate_package(pkg_dir):
     check_required_files(pkg_dir)
     acceptance = check_acceptance(pkg_dir)
-    declared_paths = check_source_manifest(pkg_dir)
+    declared_paths = check_source_manifest(pkg_dir, acceptance["mockupPath"])
     check_declared(declared_paths, acceptance["mockupPath"], "acceptance.json")
     check_blueprint(pkg_dir)
     trace = check_behavior_trace(pkg_dir)

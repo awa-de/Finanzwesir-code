@@ -17,17 +17,20 @@
     {
       "path": "tests/golden-master/fixtures/af-gm-03-synthetic-package/synthetic-mockup.html",
       "role": "Referenz-Mockup (synthetisch)",
-      "permitted": false
+      "permitted": false,
+      "consumerRole": "tool-only"
     },
     {
       "path": "tests/golden-master/fixtures/af-gm-03-synthetic-package/synthetic-icon.svg",
       "role": "Asset-Quelle (synthetisch)",
-      "permitted": true
+      "permitted": true,
+      "consumerRole": "tool-only"
     },
     {
       "path": "tests/golden-master/fixtures/af-gm-03-synthetic-package/synthetic-data.csv",
       "role": "Daten-Quelle (synthetisch)",
-      "permitted": true
+      "permitted": true,
+      "consumerRole": "tool-only"
     }
   ],
   "behaviorTracePath": "tests/golden-master/traces/af-gm-03-synthetic.behavior-trace.json",
