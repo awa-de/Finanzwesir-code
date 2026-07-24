@@ -2,7 +2,7 @@
 
 **Status:** verbindlich  
 **Version:** 1.0.0  
-**Stand:** 2026-07-22  
+**Stand:** 2026-07-24  
 **Entscheidungsgrundlage:** Albert, AF-GM-01; Sol-Entwurf V6 und unabhängiges Fable-Review V6
 
 ## 1. Auftrag und Grenze
@@ -104,9 +104,13 @@ Ein `blocked`-Eintrag stoppt den betroffenen AP. Ein `simulated`- oder `editoria
 
 Zeitgatter, Rundenlogik und Zustandsverzweigungen werden nicht aus Mockup-JavaScript erraten. Das Eingabepaket benötigt eine aufgezeichnete, versionsgebundene Browser-Spur. Sie ist der Nachweis des beobachteten Verhaltens, nicht ein Test-Framework.
 
-**AF-GM-02, noch nicht umgesetzt:** ein schmaler Recorder und Verifizierer auf gepinntem Playwright-Chromium. Zulässig sind nur eigener JSON-Trace, Screenshots und bei Fehlerdiagnosen Playwright-Trace-Artefakte. Nicht zulässig sind Testplattform, CI-Pipeline, Dashboard, Cross-Browser-Matrix oder ein zweiter Produktiv-Laufzeitpfad.
+### 6.1 Visueller Aufnahme-Preflight und Wirkungsnachweis
 
-Bis AF-GM-02 existiert, ist eine neue Golden-Master-Fabrikproduktion gesperrt. Eine manuell beschriebene Klickfolge ersetzt die maschinenlesbare Spur nicht.
+Vor einer Aufnahme prueft der Produktions-AP, dass die fuer die beabsichtigte Referenzansicht erforderlichen lokalen Ressourcen vom tatsaechlichen Pfad des hashgebundenen Snapshots aus aufloesen und real vorhanden sind. Kann eine benoetigte Gestaltung nicht geladen werden oder weicht die Aufnahme sichtbar von der Referenzansicht ab, stoppt der AP; eine gruene DOM-, Schema- oder Replay-Pruefung ersetzt diesen Befund nicht.
+
+Behauptet der Happy Path einen sichtbaren Zustandswechsel, bestimmt der Aufnahmeauftrag die Nachweisbilder vor dem Wechsel, am Wirkungs- oder Schwellenzustand und nach dem Wechsel. Slider- und Eingabewerte werden so gewaehlt, dass der behauptete Wechsel sichtbar wird; eine lediglich ausgeloeste Eingabeaktion ist kein visueller Nachweis. Funktionaler Trace-Nachweis und Sichtnachweis bleiben getrennte Belege; beide muessen vor der Evidenz gruen sein.
+
+AF-GM-02, AF-GM-02b und AF-GM-02c haben den schmalen, gepinnten Playwright-Chromium-Recorder und Verifizierer für JSON-Trace und Screenshots umgesetzt; die Spur ersetzt weiterhin keine manuell beschriebene Klickfolge und bleibt kein Test-Framework, keine CI, kein Dashboard, keine Browsermatrix und kein zweiter Produktiv-Laufzeitpfad.
 
 ## 7. Deterministische Herstellungsregeln
 
@@ -148,7 +152,7 @@ Eine verbale Freigabe oder ein Satz im Auftrag ist kein Ersatz für die Statusä
 
 Zu den Shared Paths gehören mindestens Bootstrapper/Registry, Theme-Einstieg, CSS-Build-Einstieg, Tokens, gebautes `screen.css`, Chart-/Datenengine, Paketverwaltung, Strukturchecker und die kanonischen Fabrikverträge. Das konkrete Profil steht in `.claude/PROTECTED_PATHS.json`.
 
-**AF-GM-03, noch nicht umgesetzt:** ein deterministischer Shared-Regression- und Protected-Diff-Checker. Bis dahin ist jede Shared-Änderung ein eigener, explizit freigegebener AP; ein Produktions-App-AP bleibt app-lokal.
+AF-GM-03 hat Pack-Generator, Paket-Validator sowie Protected-Diff-Checker umgesetzt. Der Checker prueft nur; Unlock, Shared-AP mit Regression und Relock bleiben unveraendert Pflicht.
 
 ## 10. Abnahme und Auslieferung
 
@@ -159,7 +163,7 @@ Pflichtbelege vor einem Theme-ZIP:
 1. Eingabepaket vollständig und Hashes konsistent;
 2. App-spezifische Syntax-, Vertrags- und Strukturtests grün;
 3. CSS-Build reproduzierbar; lokale Mechanik und benötigte Tailwind-Rezepte im Artefakt nachweisbar;
-4. Trace-Verifizierung grün, sobald AF-GM-02 existiert;
+4. Trace-Verifizierung grün;
 5. keine unerlaubte Shared-Path-Änderung;
 6. ZIP aus `Theme/` erzeugt, ohne verschachteltes ZIP oder `Theme/`-Präfix, direkt unter `Theme/` abgelegt.
 
@@ -180,13 +184,13 @@ Sonnet ist für die Produktionslinie ausreichend, wenn Pack, Gates und Write-Sco
 
 ## 12. Reifegrad und nächste Schritte
 
-| Baustein | Stand nach AF-GM-01 |
+| Baustein | Aktueller Stand |
 |---|---|
 | Kanon, Quellenordnung, Golden-Master-Gate, Pack-Form, Schutzprofil | umgesetzt |
-| Playwright-Chromium-Recorder und Trace-Verifizierer | AF-GM-02, offen |
-| Pack-Generator, JSON-Schemas und Factory-Eval | AF-GM-03, offen |
-| erster Golden-Master-Pilot mit Sonnet | AF-GM-04, gesperrt bis AF-GM-02/03 grün |
-| Shared-Regression-/Protected-Diff-Checker | AF-GM-05, offen |
+| Playwright-Chromium-Recorder und Trace-Verifizierer | AF-GM-02, AF-GM-02b und AF-GM-02c umgesetzt |
+| Pack-Generator, JSON-Schemas und Factory-Eval | AF-GM-03 umgesetzt |
+| erster Golden-Master-Pilot mit Sonnet | AF-GM-04 als technischer b-fable-Pilot umgesetzt; keine Produkt-, Ghost- oder Launch-Freigabe |
+| Shared-Regression-Checker | AF-GM-05, offen (Protected-Diff-Checker: AF-GM-03 umgesetzt) |
 
-Der erste Pilot beginnt nicht mit einer bestehenden Gelb-Variante. Der Golden Master muss zuvor explizit abgenommen sein. Jeder Pilot erweitert die Fabrik nur über einen separaten, dokumentierten Shared-AP; app-lokale Verbesserungen werden nicht in den Kanon zurückgeschrieben.
+Jeder Pilot beginnt nicht mit einer bestehenden Gelb-Variante. Der Golden Master muss zuvor explizit abgenommen sein. Jeder Pilot erweitert die Fabrik nur über einen separaten, dokumentierten Shared-AP; app-lokale Verbesserungen werden nicht in den Kanon zurückgeschrieben.
 
